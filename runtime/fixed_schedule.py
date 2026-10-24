@@ -55,3 +55,19 @@ def customer_success_in_slot(name, finished_at, day):
     except (ValueError, TypeError):
         return False
     return stamp.date() == day.date() and stamp.hour >= hour
+
+
+def customer_duty_user_accepted(name, now):
+    if name not in CUSTOMER_DUTY_HOURS:
+        return False
+    import json
+    from pathlib import Path
+    record = Path(__file__).resolve().parent / 'state' / ('customer-duty-user-acceptance-' + now.strftime('%Y%m%d') + '.json')
+    try:
+        data = json.loads(record.read_text(encoding='utf-8'))
+    except (OSError, ValueError):
+        return False
+    return (data.get('date') == now.strftime('%Y-%m-%d') and data.get('accepted') is True
+            and data.get('scope') == 'customer-final-duty'
+            and data.get('source') == 'explicit-user-confirmation'
+            and data.get('newDeliveryClaimed') is False)

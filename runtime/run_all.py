@@ -878,6 +878,9 @@ def run_one(data: dict, name: str, interpreters: dict) -> dict:
     skill = next((s for s in data["skills"] if s["name"] == name), None)
     if skill is None:
         raise SystemExit("manifest 无此 skill: %s" % name)
+    if fixed_schedule.customer_duty_user_accepted(name, datetime.now()):
+        return {'skill':name,'status':'USER_ACCEPTED_DUTY','category':'USER_ACCEPTED_DUTY',
+                'finished_at':'','detail':'user-accepted-duty-no-new-delivery'}
     if fixed_schedule.customer_slot_superseded(name, datetime.now()):
         print('[skip] %s 历史客服档不补跑，等待当前最新档' % name)
         return {'skill':name,'status':'SKIPPED_SUPERSEDED','category':'SKIPPED_SUPERSEDED',
@@ -1032,7 +1035,9 @@ def build_ledger_rows(data: dict, records_by_skill: dict) -> list:
     for r in data.get("ledger_template", []):
         sk = r.get("skill")
         rec = records_by_skill.get(sk) if sk else None
-        if rec and rec.get("category") == sr.CAT_SUCCESS:
+        if fixed_schedule.customer_duty_user_accepted(sk, datetime.now()) and not fixed_schedule.customer_slot_superseded(sk, datetime.now()):
+            done, exec_time, note = '是', '', '用户确认当天客服完成；本次未发送'
+        elif rec and rec.get("category") == sr.CAT_SUCCESS:
             done = "是"
             exec_time = rec.get("finished_at", "")
             note = "当日已跑成功"
@@ -1391,6 +1396,8 @@ def _cadence_gate(skill: dict, now: datetime) -> tuple:
     铁律（2026-10-02 大同定）：**只有当天的成功才算成功**。历史 / 昨日的成功一律作废，
     既不能作为本日"已完成"的依据，也不能生成 SUCCESS 伪记录（消灭虚高 SUCCESS）。
     """
+    if fixed_schedule.customer_duty_user_accepted(skill['name'], now):
+        return True, 'customer_duty_user_accepted'
     if fixed_schedule.customer_slot_superseded(skill['name'], now):
         return True, 'superseded_customer_slot'
     earliest = skill.get("earliest_hour", 0)
@@ -1544,7 +1551,7 @@ def daemon_cycle(data: dict, interpreters: dict, do_send: bool, force_all: bool 
     for s in enabled:
         name = s["name"]
         skip, reason = _cadence_gate(s, datetime.now())
-        if reason == 'superseded_customer_slot' or (not force_all and name not in forced and skip):
+        if reason in ('superseded_customer_slot', 'customer_duty_user_accepted') or (not force_all and name not in forced and skip):
             if reason == "done_today":
                 print("[skip] %s 当日已成功（cadence 内），本周期跳过" % name)
                 records[name] = _pseudo_record(s)

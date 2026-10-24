@@ -118,6 +118,9 @@ def main(date_str: str) -> int:
     a_list, b_list, ok_list = [], [], []
     for s in sorted(enabled, key=lambda x: x.get("order", 99)):
         name = s["name"]
+        if fixed_schedule.customer_duty_user_accepted(name, check_day):
+            ok_list.append({'skill':name,'runs':len(records.get(name,[])), 'userAcceptedDuty':True, 'newDeliveryClaimed':False})
+            continue
         cadence = s.get("cadence_hours", 24)
         rs = records.get(name, [])
         succ = [r for r in rs if _is_success_equivalent(r, date_str)
@@ -160,6 +163,7 @@ def main(date_str: str) -> int:
                                ("via_e5_idempotent_evidence", r.get("via_e5_idempotent_evidence")))}
             for r in ok_list
         ],
+        "customer_user_acceptances": [r for r in ok_list if r.get("userAcceptedDuty")],
         "D_nonenabled_records": extra_fails,
         "rule": "A 非空→不发台账；B 逐条定性（防重拦截/真故障）后才可发",
     }

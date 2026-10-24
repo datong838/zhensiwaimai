@@ -6,6 +6,10 @@ import run_all
 import daily_progress
 
 class CustomerDutyTests(unittest.TestCase):
+    def setUp(self):
+        self.acceptance = patch.object(fixed, "customer_duty_user_accepted", return_value=False)
+        self.acceptance.start()
+        self.addCleanup(self.acceptance.stop)
     def at(self, clock):
         return datetime.fromisoformat('2026-10-24T' + clock + ':00')
 
@@ -63,6 +67,30 @@ class CustomerDutyTests(unittest.TestCase):
         self.assertEqual(len(old),2)
         self.assertTrue(all(not row['done'] for row in old))
         self.assertNotIn('未完成跟进',daily_progress.render_md(result))
+
+    def test_user_acceptance_is_scoped_and_expires(self):
+        import json
+        self.acceptance.stop()
+        record={'date':'2026-10-24','accepted':True,'scope':'customer-final-duty',
+                'source':'explicit-user-confirmation','newDeliveryClaimed':False}
+        with patch('pathlib.Path.read_text',return_value=json.dumps(record)):
+            self.assertTrue(fixed.customer_duty_user_accepted('meituan-intelligent-customer-service',self.at('18:00')))
+            self.assertFalse(fixed.customer_duty_user_accepted('other-flow',self.at('18:00')))
+            self.assertFalse(fixed.customer_duty_user_accepted('meituan-intelligent-customer-service',datetime(2026,10,25,18)))
+        record['newDeliveryClaimed']=True
+        with patch('pathlib.Path.read_text',return_value=json.dumps(record)):
+            self.assertFalse(fixed.customer_duty_user_accepted('meituan-intelligent-customer-service',self.at('18:00')))
+
+    def test_user_acceptance_stops_manual_send_without_success_claim(self):
+        name='meituan-intelligent-customer-service'
+        skill={'name':name,'steps':[{'cmd':['never']}]}
+        with patch.object(fixed,'customer_duty_user_accepted',return_value=True), \
+             patch.object(run_all.sr,'run_skill') as execute:
+            self.assertEqual(run_all._cadence_gate(skill,self.at('18:00')),(True,'customer_duty_user_accepted'))
+            result=run_all.run_one({'skills':[skill]},name,{})
+        execute.assert_not_called()
+        self.assertEqual(result['status'],'USER_ACCEPTED_DUTY')
+        self.assertEqual(result['finished_at'],'')
 
 if __name__ == '__main__':
     unittest.main()

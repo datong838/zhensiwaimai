@@ -175,6 +175,10 @@ def build(now: dt.datetime | None = None) -> dict:
         if superseded:
             state, mark = '历史档·不补跑', '⏭️'
             reason = '保留历史记录；当前最新客服档承担全量值班'
+        elif fixed_schedule.customer_duty_user_accepted(name, now):
+            done = True
+            state, mark = '用户确认完成·本次未发送', '✅'
+            reason = '用户确认今天客服完成；保留原发送异常，不再补跑'
         elif done:
             ev = bool(rec and rec.get("_has_delivery_evidence"))
             if ev:
@@ -210,7 +214,7 @@ def build(now: dt.datetime | None = None) -> dict:
             "mark": mark,
             "state": state,
             "reason": reason,
-            "last_success": ls or "",
+            "last_success": "" if (not superseded and fixed_schedule.customer_duty_user_accepted(name, now)) else (ls or ""),
             "consecutive_failures": fw.get("consecutive_failures", 0),
             "last_cycle_status": (last_cycle.get("skills", {}).get(name) or {}).get("status", ""),
             "record": rec,
