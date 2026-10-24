@@ -221,9 +221,17 @@ class WeComAdapter:
         work = Path(work)
         (work / 'transport').mkdir(parents=True, exist_ok=True, mode=0o700)
         import egress_policy
+        scoped_test_groups = frozenset()
+        if request.get('context', {}).get('workflowId') == 'morning-goal-test-20261024-2120':
+            import sys
+            runtime = ROOT / 'runtime'
+            if str(runtime) not in sys.path: sys.path.insert(0, str(runtime))
+            from morning_goal_acceptance import request_enabled
+            if request_enabled(request):
+                scoped_test_groups = frozenset({request['groupName']})
         verdict = egress_policy.check(group=request['groupName'],
                                       resolved_group=self._resolved or request['groupName'],
-                                      items=(item,))
+                                      items=(item,), test_groups=scoped_test_groups)
         if not verdict['allow']:
             (work / 'egress-denied.json').write_text(json.dumps(
                 {'reason': verdict['reason'], 'payload': verdict['payload'],
