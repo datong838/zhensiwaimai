@@ -126,3 +126,5 @@ manifest 顶层 `interpreters` 默认用 PATH 上的 `node` + 项目 venv python
 
 - 生成 xlsx 需 `openpyxl`（`pip install openpyxl`）；缺失时 `run_all` 自动降级 csv 并告警。
 - 调度层纯逻辑（分类/锁/prune/manifest/dry-run）仅用标准库。
+
+项目级文件与图片大小约束：复用docs/operations/文件与图片大小统一约束.md及file_size_policy.py；显示取整保留一个显示精度单位余量，真实上传上限预留至少5%，禁止把88K/89K显示值硬编码成上传门槛。

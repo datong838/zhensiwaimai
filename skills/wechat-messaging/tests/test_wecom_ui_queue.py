@@ -59,3 +59,13 @@ class CustomerFileTests(unittest.TestCase):
   for key,value in [('visibleFileName','other.xlsx'),('visibleFileSize','7K'),('inputEmpty',False),('newMessageVisible',False)]:
    changed=copy.deepcopy(r);changed['result']['observations'][1][key]=value
    with self.assertRaises(ValueError):validate_response(t,changed)
+
+class FileSizeRoundingTests(unittest.TestCase):
+ def test_actual_contract_rounding_and_legacy_floor(self):
+  t={'taskId':'f','binding':'b','stage':'send','request':{'groupName':'g'},'item':{'type':'file','sha256':'source','name':'contract.png','size':90735}}
+  for sizes,valid in [(['89K','89K'],True),(['88K','88K'],True),(['88K','89K'],False),(['87K','87K'],False),(['90K','90K'],False)]:
+   frames=[{'groupName':'g','inputEmpty':True,'newMessageVisible':True,'visibleFileName':'contract.png','visibleFileSize':size} for size in sizes]
+   r={'taskId':'f','binding':'b','result':{'status':'verified','sendAttempts':1,'resolvedGroup':'g','sha256':'source','observations':frames}}
+   if valid:self.assertEqual(validate_response(t,r)['verificationLevel'],'wecom-ui-tree-file-name-size')
+   else:
+    with self.assertRaises(ValueError):validate_response(t,r)

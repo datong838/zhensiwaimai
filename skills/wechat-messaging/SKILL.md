@@ -119,3 +119,7 @@ python scripts/executor.py reconcile --request /absolute/request.json --authoriz
 
 ## 2026-10-24可迁移纯UI策略
 静态config/ui-execution-policy.json与原.runtime/UI_TREE_ONLY.json任一存在即禁止旧注入发送；适配器按本文件推导仓库与队列位置，不依赖某个模型产品目录。原流程可提交差评长图、新商家文本和受限客服Excel任务给具备界面树/可见操作能力的岗位。其他路由未接通仍阻断，不能删除策略回退旧发送。详情见项目docs/operations/20261024-机制运行规范与客户迁移交接.md。
+
+项目级文件与图片大小约束：复用docs/operations/文件与图片大小统一约束.md及file_size_policy.py；显示取整保留一个显示精度单位余量，真实上传上限预留至少5%，禁止把88K/89K显示值硬编码成上传门槛。
+
+项目统一呈现约束：截图/长图必须用image并在群里直接展示内容；Excel/文档用file卡。岗位发送前核对真实草稿，PNG附件卡不许当截图发送。新task.expectedPresentation=inline-image时，两次实际观察均须presentation=inline-image及visibleImageContent；禁止将源内容复制为观察、禁止拿文件卡冒充。用户撤回后有效交付为否，旧发送事实保留，不自动重发。

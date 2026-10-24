@@ -189,6 +189,10 @@ class WeComAdapter:
                 'attempts': []}
 
     def send_one(self, request, item, work, grant, deadline):
+        from presentation_policy import violation
+        error = violation(item)
+        if error:
+            return {'status':'blocked','sendAttempts':0,'reason':error}
         from ledger import atomic_json
         destination = Path(work) / 'transport' / 'delivery-receipt.json'
         try:

@@ -11,7 +11,7 @@ from zoneinfo import ZoneInfo
 ROOT = Path(__file__).resolve().parent.parent
 GROUP = '上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰'
 AUTH = 'user-20261024-three-supplements-once'
-ALLOWED = {'daily-new-stores-opening-to-wechat':'text', 'daily-store-task-completion-ops':'image', 'contract-termination-ops':'file'}
+ALLOWED = {'daily-new-stores-opening-to-wechat':'text', 'daily-store-task-completion-ops':'image', 'contract-termination-ops':'image'}
 
 def table():
     day = datetime.now(ZoneInfo('Asia/Shanghai')).strftime('%Y%m%d')
@@ -75,7 +75,28 @@ def deliver_once(workflow, run_dir, *, adapter=None):
                 raise ValueError('supplement-journal-binding-conflict')
             if prior.get('state') == 'verified':
                 return {'status':'already_verified','sendAttempts':0,'supplementReceipt':str(journal)}
-            return {'status':'unknown','sendAttempts':0,'reason':'supplement-prior-attempt-no-resend','supplementReceipt':str(journal)}
+            retry_file = journal.with_suffix('.explicit-retry.json')
+            if not retry_file.exists():
+                return {'status':'unknown','sendAttempts':0,'reason':'supplement-prior-attempt-no-resend','supplementReceipt':str(journal)}
+            retry = json.loads(retry_file.read_text())
+            if (workflow != 'contract-termination-ops' or retry.get('source') != 'explicit-user-cleared-draft-and-retry'
+                    or retry.get('priorJournalSha256') != hashlib.sha256(journal.read_bytes()).hexdigest()
+                    or retry.get('payloadSha256') != grant['item']['sha256']):
+                raise ValueError('supplement-explicit-retry-invalid')
+            reply_path = Path(retry['responsePath'])
+            reply = json.loads(reply_path.read_text())
+            result = reply['result']
+            if (reply['taskId'] != retry['taskId'] or result.get('actualSuccessfulFinalActions') != 0
+                    or result.get('inputEmpty') is not True or result.get('newMessageVisible') is not False
+                    or result.get('resolvedGroup') != GROUP or result.get('sha256') != grant['item']['sha256']):
+                raise ValueError('supplement-zero-action-proof-invalid')
+            audit = journal.parent / 'explicit-retry-audit' / str(time.time_ns())
+            audit.mkdir(parents=True, mode=0o700)
+            (audit / 'original-journal.json').write_bytes(journal.read_bytes())
+            (audit / 'original-response.json').write_bytes(reply_path.read_bytes())
+            (audit / 'user-authorization.json').write_bytes(retry_file.read_bytes())
+            retry_file.replace(audit / 'consumed-authorization.json')
+
         deadline = min(time.time() + 840, json.loads(table().read_text())['expiresAt'])
         request = {'schemaVersion':1,'groupName':GROUP,'items':[grant['item']],
                    'context':{'workflowId':workflow,'eventId':grant['eventId'],'accountAlias':'main-wechat',

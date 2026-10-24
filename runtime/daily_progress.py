@@ -169,6 +169,10 @@ def build(now: dt.datetime | None = None) -> dict:
         done = bool(ls_dt and ls_dt.date() == now.date()
                     and (not earliest or ls_dt.hour * 60 + ls_dt.minute >= threshold))
         due = now.hour * 60 + now.minute >= threshold
+        if 'schedule_times' in s:
+            _, slot_reason = fixed_schedule.gate(s, now, ls)
+            done = slot_reason == 'done_today'
+            due = slot_reason != 'not_due'
         fw = failure_watch.get(name, {})
         rec = _latest_record(name, day)
         superseded = fixed_schedule.customer_slot_superseded(name, now)

@@ -11,6 +11,8 @@ ALLOWED = {'negative-reviews-summary'}
 
 def enabled(request):
     context = request.get('context', {})
+    from presentation_policy import violation
+    if any(violation(item) for item in request.get('items', [])): return False
     if context.get('supplementAuthorization'):
         import sys
         runtime = Path(__file__).resolve().parents[3] / 'runtime'
@@ -50,12 +52,15 @@ def validate_response(task, reply):
                   or f.get('inputEmpty') is not True or f.get('newMessageVisible') is not True for f in frames)):
             raise ValueError('ui-post-send-evidence-invalid')
         kind = task['item']['type']
+        if task.get('expectedPresentation') == 'inline-image':
+            if any(f.get('presentation') != 'inline-image' or not str(f.get('visibleImageContent','')).strip() for f in frames):
+                raise ValueError('ui-post-inline-image-not-proven')
         if kind == 'text' and any(f.get('visibleTextSha256') != task['item']['sha256'] for f in frames):
             raise ValueError('ui-post-text-readback-invalid')
         if kind == 'file':
-            import math
-            expected_size = str(math.floor(task['item']['size'] / 1024)) + 'K'
-            if any(f.get('visibleFileName') != task['item']['name'] or f.get('visibleFileSize') != expected_size for f in frames):
+            from file_size_policy import displayed_size_matches
+            if (len({f.get('visibleFileSize') for f in frames}) != 1
+                    or any(f.get('visibleFileName') != task['item']['name'] or not displayed_size_matches(task['item']['size'], f.get('visibleFileSize')) for f in frames)):
                 raise ValueError('ui-post-file-card-invalid')
         level = {'text':'wecom-ui-tree-text', 'image':'wecom-ui-tree-image', 'file':'wecom-ui-tree-file-name-size'}[kind]
         result = result | {'verificationLevel': level,
@@ -75,6 +80,9 @@ def exchange(stage, request, item=None, *, queue=QUEUE):
     queue.mkdir(parents=True, exist_ok=True, mode=0o700)
     task = {'taskId': str(uuid.uuid4()), 'stage': stage, 'request': request,
             'item': item, 'deadlineAt': request['context']['deadlineAt'] - 15}
+    if item is not None:
+        from presentation_policy import expected_presentation
+        task['expectedPresentation'] = expected_presentation(item)
     task['binding'] = hashlib.sha256(json.dumps(task, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
     folder = queue / task['taskId']; folder.mkdir(mode=0o700)
     atomic_json(folder / 'task.json', task)

@@ -152,7 +152,7 @@ def deliver(images: list, run_dir: Path, day: str) -> dict:
     from contract import Rejected
     deadline = int(time.time()) + 300
     request = {"schemaVersion": 1, "groupName": GROUP,
-               "items": [{"itemId": f"contract-termination-p{i + 1}", "type": "file", "path": f}
+               "items": [{"itemId": f"contract-termination-p{i + 1}", "type": "image", "path": f}
                          for i, f in enumerate(images)],
                "context": {"workflowId": WORKFLOW_ID, "eventId": event,
                            "accountAlias": "main-wechat", "channel": "desktop", "deadlineAt": deadline}}

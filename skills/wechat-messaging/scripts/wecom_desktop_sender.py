@@ -1840,8 +1840,8 @@ def file_card_matches(item, text):
     match = re.fullmatch(re.escape(item['name']) + r"\s+([0-9]+(?:\.[0-9]+)?)\s*([KMG]?)B?", text.strip(), re.I)
     if not match:
         return False
-    scale = {'': 1, 'K': 1024, 'M': 1024**2, 'G': 1024**3}[match[2].upper()]
-    return abs(float(match[1]) * scale - item['size']) < scale
+    from file_size_policy import displayed_size_matches
+    return displayed_size_matches(item['size'], match[1] + match[2])
 
 
 def visible_file_cards(not_before=None):
