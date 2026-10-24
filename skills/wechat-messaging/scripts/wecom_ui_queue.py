@@ -8,9 +8,29 @@ from ledger import atomic_json
 
 QUEUE = Path(__file__).resolve().parents[1] / '.runtime/ui-post-queue'
 ALLOWED = {'negative-reviews-summary'}
+NO_RESEND_STATE = Path(__file__).resolve().parents[3] / 'runtime/state'
+
+def user_no_resend_today(workflow, *, now=None, state=None):
+    from datetime import datetime
+    from zoneinfo import ZoneInfo
+    now = now or datetime.now(ZoneInfo('Asia/Shanghai'))
+    day = now.strftime('%Y%m%d')
+    record = (state or NO_RESEND_STATE) / f'user-no-resend-{day}-opening-taskrate.json'
+    if not record.exists():
+        return False
+    try:
+        data = json.loads(record.read_text(encoding='utf-8'))
+    except (OSError, ValueError):
+        return workflow in ('daily-new-stores-opening-to-wechat', 'daily-store-task-completion-ops')
+    return (data.get('date') == now.strftime('%Y-%m-%d')
+            and data.get('source') == 'explicit-user-instruction'
+            and data.get('noMoreSendsToday') is True
+            and workflow in data.get('workflows', []))
 
 def enabled(request):
     context = request.get('context', {})
+    if user_no_resend_today(context.get('workflowId')):
+        return False
     from presentation_policy import violation
     if any(violation(item) for item in request.get('items', [])): return False
     if context.get('supplementAuthorization'):
@@ -22,6 +42,21 @@ def enabled(request):
     if context.get('workflowId') in ALLOWED:
         return True
     import re
+    workflow = context.get('workflowId')
+    if workflow in ('daily-new-stores-opening-to-wechat', 'daily-store-task-completion-ops'):
+        if request.get('groupName') != '上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰':
+            return False
+        items = request.get('items', [])
+        event = context.get('eventId', '')
+        if workflow == 'daily-new-stores-opening-to-wechat':
+            return (re.fullmatch(r'\d{4}-\d{2}-\d{2}', event) is not None
+                    and len(items) == 1 and items[0].get('itemId') == 'new-stores'
+                    and items[0].get('type') == 'text' and bool(items[0].get('text')))
+        return (re.fullmatch(r'\d{4}-\d{2}-\d{2}-taobao-store-task-detail', event) is not None
+                and len(items) == 2
+                and {i.get('itemId'): i.get('type') for i in items}
+                    == {'store-task-detail': 'file', 'store-task-stats': 'image'}
+                and all(str(i.get('path', '')).lower().endswith('.xlsx' if i['type'] == 'file' else '.png') for i in items))
     if context.get('workflowId') == 'meituan-customer-reply-daily':
         items = request.get('items', [])
         return (request.get('groupName') == '上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰'
