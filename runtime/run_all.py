@@ -1343,21 +1343,28 @@ def append_alert(skill: str, category: str, detail: str, log_path: str = None,
 
 
 def pop_forced_runs() -> tuple:
-    """读 control.json：返回 (force_run 列表, reset_circuit 目标)。消费后删除文件。"""
+    """仅消费 force_run/reset_circuit，保留立即请求及其他控制字段。"""
     if not CONTROL_FILE.exists():
         return [], None
     try:
         data = json.loads(CONTROL_FILE.read_text(encoding="utf-8"))
     except (OSError, ValueError):
         return [], None
-    forced = data.get("force_run", [])
+    if not isinstance(data, dict) or not any(key in data for key in ('force_run', 'reset_circuit')):
+        return [], None
+    forced = data.pop("force_run", [])
     if isinstance(forced, str):
         forced = [forced]
-    reset = data.get("reset_circuit")
+    reset = data.pop("reset_circuit", None)
     try:
-        CONTROL_FILE.unlink()
+        if data:
+            tmp = CONTROL_FILE.with_suffix('.json.tmp')
+            tmp.write_text(json.dumps(data, ensure_ascii=False), encoding='utf-8')
+            tmp.replace(CONTROL_FILE)
+        else:
+            CONTROL_FILE.unlink()
     except OSError:
-        pass
+        return [], None
     return list(forced), reset
 
 
