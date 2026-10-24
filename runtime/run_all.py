@@ -1174,8 +1174,12 @@ def send_ledger_via_wechat(path: Path) -> bool:
     员工群/运营群/电销+直播攻坚组/品牌·门店专属群），详见 docs/operations/工作流-落群对照表.md。
     需真实环境与登录态；默认不自动调用（仅 --send 才真发）。
     """
-    print("[dry] 发送门：active 全绿，待发送 -> %s（真实发送需代理确认 --send）" % path)
-    return False
+    from authorized_supplement import load_grant, deliver_once
+    grant = load_grant('daily-work-ledger')
+    if not grant or Path(grant['item']['path']).resolve() != path.resolve():
+        return False
+    outcome = deliver_once('daily-work-ledger', path.parent)
+    return bool(outcome and outcome.get('status') in ('verified', 'already_verified'))
 
 
 # ---------------------------------------------------------------- 防睡 (P3-2)
@@ -1618,9 +1622,9 @@ def _maybe_send_ledger(path: Path, all_green: bool, do_send: bool, date_str: str
         print("[info] 今日已发送台账，跳过重复发送。")
         return
     if do_send:
-        send_ledger_via_wechat(path)
-        sent[date_str] = _now_iso()
-        SENT_TODAY.write_text(json.dumps(sent, ensure_ascii=False, indent=2), encoding="utf-8")
+        if send_ledger_via_wechat(path):
+            sent[date_str] = _now_iso()
+            SENT_TODAY.write_text(json.dumps(sent, ensure_ascii=False, indent=2), encoding="utf-8")
     else:
         print("[info] active 全绿，但未加 --send：仅落盘，发送待代理确认。")
 

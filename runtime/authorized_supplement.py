@@ -11,7 +11,7 @@ from zoneinfo import ZoneInfo
 ROOT = Path(__file__).resolve().parent.parent
 GROUP = '上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰'
 AUTH = 'user-20261024-three-supplements-once'
-ALLOWED = {'daily-new-stores-opening-to-wechat':'text', 'daily-store-task-completion-ops':'image', 'contract-termination-ops':'image'}
+ALLOWED = {'daily-new-stores-opening-to-wechat':'text', 'daily-store-task-completion-ops':'image', 'contract-termination-ops':'image', 'daily-work-ledger':'file'}
 
 def table():
     day = datetime.now(ZoneInfo('Asia/Shanghai')).strftime('%Y%m%d')
