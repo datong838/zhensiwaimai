@@ -32,6 +32,25 @@ function assertWorkbenchUrl(value) {
   }
 }
 
+export function isFraudAcknowledgement(text) {
+  const t = normalized(text).replace(/\s+/g, "");
+  return t.includes("会话疑似存在欺诈风险")
+    && t.includes("请勿脱离平台交易或向未核实身份者转账")
+    && t.endsWith("我知道了")
+    && !/登录|验证码|滑块|身份验证|重新认证|授权登录/.test(t);
+}
+
+export async function dismissFraudAcknowledgement(page) {
+  const modal = page.locator('.roo-modal-dialog[class*="riskControlModal"]').filter({hasText:"会话疑似存在欺诈风险"});
+  if (await modal.count() !== 1 || !await modal.isVisible()) return false;
+  if (!isFraudAcknowledgement(await modal.innerText())) return false;
+  const button = modal.getByText("我知道了", {exact:true});
+  if (await button.count() !== 1) return false;
+  await button.click({timeout:4000});
+  await modal.waitFor({state:"hidden",timeout:4000});
+  return true;
+}
+
 /**
  * 2026-10-12 站点新增弹窗消解：「多个工作台同时打开」roo-modal 全屏拦截所有 tab 点击，
  * 导致 12/15 档连败（locator.click timeout, subtree intercepts pointer events）。
@@ -41,6 +60,7 @@ function assertWorkbenchUrl(value) {
  * 返回 true=已消解（页面已刷新并等回 tab 渲染）；false=无白名单弹窗（原样继续）。
  */
 export async function dismissWorkbenchModal(page) {
+  if (await dismissFraudAcknowledgement(page)) return true;
   const text = await page.evaluate(() => {
     const m = document.querySelector(".roo-modal");
     if (!m) return null;

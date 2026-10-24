@@ -10,7 +10,7 @@ import { resolve } from "node:path";
 import fs from "node:fs/promises";
 import { connectToPost } from "../../../posts/meituan-post/scripts/connect.mjs";
 import { acquirePostLease, releasePostLease } from "../../../posts/meituan-post/scripts/lease.mjs";
-import { runWithUnansweredQueue } from "./ensure_unanswered_queue.mjs";
+import { runWithUnansweredQueue, dismissFraudAcknowledgement } from "./ensure_unanswered_queue.mjs";
 
 const TARGET_HOST = "waimaie.meituan.com";
 const TARGET_PATH = "/imworkbench/";
@@ -194,6 +194,10 @@ async function processCards(page, identities, receipt, now, done, view = "未回
     }
     await card.click({ timeout: 5000 });
     await page.waitForTimeout(1000);
+    if (await dismissFraudAcknowledgement(page)) {
+      receipt.decisions.push({session:maskSession(identity),qualify:false,reason:"platform-fraud-warning"});
+      continue;
+    }
     const messages = await readConversation(page);
     const decision = judge(identity, messages, now);
     decision.session = maskSession(identity);
