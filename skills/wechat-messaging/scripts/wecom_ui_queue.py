@@ -43,6 +43,13 @@ def enabled(request):
         return True
     import re
     workflow = context.get('workflowId')
+    if workflow == 'contract-termination-ops':
+        items = request.get('items', [])
+        return (request.get('groupName') == '上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰'
+                and re.fullmatch(r'\d{4}-\d{2}-\d{2}-contract-termination-ops', context.get('eventId', '')) is not None
+                and bool(items)
+                and all(item.get('type') == 'image' and item.get('itemId') == f'contract-termination-p{index+1}'
+                        and str(item.get('path', '')).lower().endswith('.png') for index, item in enumerate(items)))
     if workflow in ('daily-new-stores-opening-to-wechat', 'daily-store-task-completion-ops'):
         if request.get('groupName') != '上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰':
             return False

@@ -177,24 +177,39 @@ def deliver(images: list, run_dir: Path, day: str) -> dict:
                         "sendAttempts": 0}
             atomic_json(marker, {"state": "attempted", "event": event, "sha256": file_sha,
                                  "groupName": GROUP, "images": [Path(f).name for f in images], "sendAttempts": None})
+            page_receipts = []
             try:
-                result = adapter.send_one(request, request["items"][0], run_dir / "windows-send", grant, deadline)
+                for index, item in enumerate(request['items']):
+                    page = adapter.send_one(request, item, run_dir / 'windows-send' / f'p{index + 1}', grant, deadline)
+                    page_receipts.append({'itemId': item['itemId'], 'result': page})
+                    current = json.loads(marker.read_text(encoding='utf-8'))
+                    atomic_json(marker, current | {'pageReceipts': page_receipts})
+                    if page.get('status') != 'verified':
+                        break
+                counts = [p['result'].get('sendAttempts') for p in page_receipts]
+                attempts = sum(counts) if all(isinstance(n, int) and not isinstance(n, bool) for n in counts) else None
+                complete = len(page_receipts) == len(images) and all(p['result'].get('status') == 'verified' for p in page_receipts)
+                result = {'status': 'verified' if complete else 'unknown', 'sendAttempts': attempts,
+                          'verificationLevel': page_receipts[-1]['result'].get('verificationLevel'),
+                          'evidence': {'pageReceipts': page_receipts},
+                          'reason': None if complete else page_receipts[-1]['result'].get('reason') or 'page-delivery-not-verified'}
             except Exception as error:  # noqa: BLE001
                 atomic_json(marker, {"state": "unknown", "event": event, "sha256": file_sha,
                                      "groupName": GROUP, "images": [Path(f).name for f in images],
-                                     "reason": str(error), "sendAttempts": None})
+                                     "reason": str(error), "sendAttempts": None, 'pageReceipts': page_receipts})
                 return {"status": "unknown", "reason": f"windows-execution-error:{error}", "sendAttempts": None}
     except Rejected as error:
         return {"status": "blocked", "reason": str(error), "sendAttempts": 0}
     if result.get("status") == "verified":
         atomic_json(marker, {"state": "verified", "event": event, "sha256": file_sha, "groupName": GROUP,
                              "images": [Path(f).name for f in images], "sendAttempts": result.get("sendAttempts"),
-                             "verificationLevel": result.get("verificationLevel"), "evidence": result.get("evidence")})
+                             "verificationLevel": result.get("verificationLevel"), "evidence": result.get("evidence"),
+                             'pageReceipts': page_receipts})
         return {"status": "verified", "sendAttempts": result.get("sendAttempts"), "event": event,
                 "verificationLevel": result.get("verificationLevel")}
     atomic_json(marker, {"state": "unknown", "event": event, "sha256": file_sha, "groupName": GROUP,
                          "images": [Path(f).name for f in images], "sendAttempts": result.get("sendAttempts"),
-                         "reason": result.get("reason")})
+                         "reason": result.get("reason"), 'pageReceipts': page_receipts})
     return {"status": "unknown", "reason": result.get("reason"),
             "sendAttempts": result.get("sendAttempts"), "event": event}
 

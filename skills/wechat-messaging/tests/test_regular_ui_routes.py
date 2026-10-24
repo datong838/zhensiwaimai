@@ -30,7 +30,10 @@ class RegularRoutes(unittest.TestCase):
         for request in self.requests():
             with patch('wecom_ui_queue.exchange',return_value={'ok':True,'resolvedGroup':GROUP,'inputEmpty':True}) as queued, patch.object(WeComAdapter,'_run_sender',side_effect=AssertionError('legacy transport')):
                 self.assertTrue(WeComAdapter().preflight(request,'unused')['ok']);queued.assert_called_once()
-    def test_contract_is_not_enabled_before_multi_page_fix(self):
-        self.assertFalse(enabled({'groupName':GROUP,'context':{'workflowId':'contract-termination-ops'},'items':[{'itemId':'contract-termination-p1','type':'image','path':'p1.png'}]}))
+    def test_contract_requires_contiguous_image_pages(self):
+        request={'groupName':GROUP,'context':{'workflowId':'contract-termination-ops','eventId':'2026-10-25-contract-termination-ops'},'items':[{'itemId':f'contract-termination-p{i}','type':'image','path':f'p{i}.png'} for i in (1,2)]}
+        self.assertTrue(enabled(request))
+        for change in [{'groupName':'wrong'},{'items':[]},{'items':request['items'][::-1]},{'items':[request['items'][0]|{'type':'file'}]}]:
+            self.assertFalse(enabled(request|change))
 
 if __name__=='__main__':unittest.main()
