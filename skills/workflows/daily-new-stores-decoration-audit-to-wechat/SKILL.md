@@ -85,3 +85,6 @@ description: 读取当天完整的新店机器收据，仅对淘宝新店逐店�
 - **skipped/unknown 店不动表**（避免用数据缺口污染跟踪结论）。
 - 单测 5/5（新增 alerted / 未发 pending-alert / 康复 healed / 超期 escalation-due / skipped 不动表）；真机 dry 联动通过：updated 3 家、零外发。
 - 初始化依据：2026-10-12 更正事件（correction，verified）已向群内告知缺失的 3 家，`alertRef` 记录该事件可追溯。
+
+## 2026-10-24 夜间选店修正（覆盖旧店名span进入描述）
+搜索有防抖，旧完整店铺树也可能已有目标；必须等可见结果均匹配本次搜索，再点击唯一店名的可见容器，不对被tooltipMask覆盖的span派发事件。头部店名切换不代表URL已切换；必要时点击原商家首页，再核对目标shop ID和店名。原采集器老张→山城跨店真实只读通过；不保存装修设置。旧已发/unknown提醒仍不重发。参见夜间遗留问题收口方案。

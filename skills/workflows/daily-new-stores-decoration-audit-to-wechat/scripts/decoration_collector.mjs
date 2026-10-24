@@ -26,8 +26,25 @@ const normName = (s) => String(s ?? '').replace(/\s+/g, '');
 export async function enterShopFromResult(li) {
   const name = li.locator('span[class^="itemShopName__"]');
   if (await name.count() !== 1) throw new Error('shop-entry-name-not-unique');
-  // The name is the entry control; verify URL and heading after navigation.
-  await name.dispatchEvent('click');
+  // Click the visible name container; the name span is covered by a tooltip mask.
+  await li.locator('div[class^="itemShopNameContainer__"]').click({ timeout: 5000 });
+}
+
+export function shopSearchResultsSettled(want) {
+  const rows = [...document.querySelectorAll('li.cook-cascader-menu-item')]
+    .filter(el => el.getBoundingClientRect().width > 0 && el.getBoundingClientRect().height > 0);
+  return rows.length > 0 && rows.every(el => (el.innerText || '').replace(/\s+/g, '').includes(want));
+}
+
+// Header selection does not navigate the current SPA route; use the existing home menu.
+export async function settleSelectedShopRoute(page, targetId) {
+  if (!targetId) throw new Error('selected-shop-id-missing');
+  if (!page.url().includes(`/app/shop/${targetId}/`)) {
+    const home = page.getByText('商家首页', { exact: true });
+    if (await home.count() !== 1) throw new Error('shop-home-menu-not-unique');
+    await home.click({ timeout: 5000 });
+  }
+  await page.waitForFunction(id => location.href.includes(`/app/shop/${id}/`), targetId, { timeout: 15000 });
 }
 
 // 2026-10-10 根因修复：品牌商后台会弹出「绑定手机号提醒」ant-modal，覆盖在搜索框之上，
@@ -84,6 +101,9 @@ async function selectShop(page, requestedName) {
       if (await emptyLi.isVisible().catch(() => false)) throw new Error('shop-not-found:未搜索到店铺');
       throw new Error('shop-search-timeout');
     }
+    // The old full tree still contains the target during debounced search.
+    // Do not click it before the filtered result has replaced that tree.
+    await page.waitForFunction(shopSearchResultsSettled, normName(requestedName), { timeout: 8000 });
     await waitSpinnerGone(page);
     const dataValue = await li.getAttribute('data-value').catch(() => null);
     const targetId = dataValue?.match(/SHOP:(\d+)/)?.[1];
@@ -100,12 +120,6 @@ async function selectShop(page, requestedName) {
     selectionEvidence.chosenHtml = chosenHtml;
     process.stderr.write(`[selection-evidence] ${JSON.stringify({requestedName,targetId,...selectionEvidence})}\n`);
     const waitSettled = async () => {
-      if (targetId) {
-        await page.waitForFunction(
-          (id) => location.href.includes(`/app/shop/${id}/`),
-          targetId, { timeout: 20000 },
-        );
-      }
       await page.waitForFunction(
         (want) => {
           const t = document.querySelector('span[class^="shop-name__"]')?.innerText || '';
@@ -113,6 +127,7 @@ async function selectShop(page, requestedName) {
         },
         normName(requestedName), { timeout: 15000 },
       );
+      await settleSelectedShopRoute(page, targetId);
     };
     try {
       await waitSettled();
