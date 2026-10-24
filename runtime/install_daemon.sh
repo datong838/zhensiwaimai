@@ -32,6 +32,11 @@ MANIFEST="$RUNTIME_DIR/skills_manifest.json"
 if [ -f "$MANIFEST" ] && [ -n "$PYTHON_BIN" ]; then
   NODE_BIN="$("$PYTHON_BIN" -c 'import json,sys;v=(json.load(open(sys.argv[1])).get("interpreters") or {}).get("node","");print(v if v.startswith("/") else "")' "$MANIFEST" 2>/dev/null || true)"
 fi
+# A foreign-machine absolute path can be nonempty but unusable.
+if [ -n "$NODE_BIN" ] && { [ ! -f "$NODE_BIN" ] || [ ! -x "$NODE_BIN" ]; }; then
+  echo "[warn] manifest node 不可执行，继续查找本机 node" >&2
+  NODE_BIN=""
+fi
 if [ -z "$NODE_BIN" ]; then
   NODE_BIN="$(command -v node 2>/dev/null || true)"
 fi
