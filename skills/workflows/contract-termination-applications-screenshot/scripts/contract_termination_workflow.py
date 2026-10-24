@@ -120,6 +120,12 @@ def deliver(images: list, run_dir: Path, day: str) -> dict:
     gate = arm_state()
     if not gate["armed"]:
         return {"status": "blocked", "reason": "send-disarmed", "sendAttempts": 0}
+    runtime_path = str(Path(__file__).resolve().parents[4] / 'runtime')
+    if runtime_path not in sys.path: sys.path.insert(0, runtime_path)
+    from authorized_supplement import deliver_once
+    supplement = deliver_once(WORKFLOW_ID, run_dir)
+    if supplement is not None:
+        return supplement
     file_sha = files_sha(images)
     event = f"{day}-contract-termination-ops"
     if not EVENTS.is_dir():

@@ -419,6 +419,12 @@ def deliver(report: dict, run_dir: Path, day: str, adapter=None) -> dict:
     gate = arm_state()
     if not gate["armed"]:
         return {"status": "blocked", "reason": "send-disarmed", "sendAttempts": 0}
+    runtime_path = str(Path(__file__).resolve().parents[4] / 'runtime')
+    if runtime_path not in sys.path: sys.path.insert(0, runtime_path)
+    from authorized_supplement import deliver_once
+    supplement = deliver_once(WORKFLOW_ID, run_dir) if adapter is None else None
+    if supplement is not None:
+        return supplement
     # 首跑时 events 目录还不存在是**正常现象**（曾在此误闸 blocked，daemon 首跑必栽）——
     # 账本路径是技能内固定位置、无歧义，直接补建即可，写 marker 时还会再兜一次。
     EVENTS.mkdir(parents=True, exist_ok=True)

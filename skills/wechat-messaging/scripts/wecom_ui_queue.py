@@ -11,6 +11,12 @@ ALLOWED = {'negative-reviews-summary'}
 
 def enabled(request):
     context = request.get('context', {})
+    if context.get('supplementAuthorization'):
+        import sys
+        runtime = Path(__file__).resolve().parents[3] / 'runtime'
+        if str(runtime) not in sys.path: sys.path.insert(0, str(runtime))
+        from authorized_supplement import request_enabled
+        return request_enabled(request)
     if context.get('workflowId') in ALLOWED:
         return True
     import re

@@ -266,6 +266,12 @@ def run_send(hits: list[dict], day: str, run_dir: Path) -> dict:
     任何封印文件），用本技能 .runtime 下的「日级 + 载荷 sha256」去重台账保证幂等，落 receipt
     即视为已发送，后续同日本轮重跑不会再发。
     """
+    runtime_path = str(Path(__file__).resolve().parents[4] / 'runtime')
+    if runtime_path not in sys.path: sys.path.insert(0, runtime_path)
+    from authorized_supplement import deliver_once
+    supplement = deliver_once(WORKFLOW_ID, run_dir)
+    if supplement is not None:
+        return supplement | {'status': '已验证发送' if supplement.get('status') in ('verified','already_verified') else supplement.get('status','unknown')}
     text = message_body(hits)
     digest = hashlib.sha256(text.encode("utf-8")).hexdigest()
     ledger = SKILL / ".runtime" / "new-stores-send-ledger"
