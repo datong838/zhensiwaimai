@@ -21,8 +21,9 @@ try {
  channel:'control-background-dedicated-chrome',runId,mode:'execute',groupName,businessDate,
  uploadDecision:{store:'uploaded-complete',review:'uploaded-complete'},images}};
  await fs.writeFile(path.join(dir,'receipt.json'),JSON.stringify(receipt));
+ const copies=[];for(const image of images){const dest=path.join(tmp,path.basename(image.path));await fs.copyFile(image.path,dest);copies.push(dest);}
  const evidence={groupName,authorization:'authorized UI delivery',channel:'cua-visible-ui',originalMarkerPreserved:true,
- status:'both-visible-delivery-confirmed',items:images.map(i=>({source:i.path,sha256:i.sha256,state:'visible-delivery-confirmed',
+ status:'both-visible-delivery-confirmed',items:images.map((i,index)=>({source:copies[index],sha256:i.sha256,state:'visible-delivery-confirmed',
  sendAttempts:1,at:'2026-10-24T12:49:00+08:00',verification:'actual visible new image'}))};
  const args={root,ledger,businessDate,policyVersion,evidenceFile};
  const run=async(e=evidence)=>{await fs.writeFile(evidenceFile,JSON.stringify(e));return inspectHistoricalUIDelivery(args);};
@@ -41,6 +42,8 @@ try {
  await fs.writeFile(path.join(ledger,'unknown.json'),JSON.stringify(marker));
  assert.equal((await run()).reason,'historical-ui-unsettled-original-event');
  await fs.rm(path.join(ledger,'unknown.json'));
- await fs.writeFile(images[0].path,'changed');assert.equal((await run()).kind,'blocked');
- console.log(JSON.stringify({ok:true,checks:11,newSendAttempts:0}));
+ await fs.writeFile(copies[0],'changed');assert.equal((await run()).reason,'historical-ui-copy-drift');
+ await fs.copyFile(images[0].path,copies[0]);
+ await fs.writeFile(images[0].path,'changed');assert.equal((await run()).reason,'historical-ui-original-drift');
+ console.log(JSON.stringify({ok:true,checks:12,newSendAttempts:0}));
 } finally {await fs.rm(tmp,{recursive:true,force:true});}
