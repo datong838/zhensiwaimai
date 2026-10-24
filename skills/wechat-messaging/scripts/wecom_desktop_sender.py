@@ -1935,8 +1935,9 @@ def cmd_verify_file(args):
 
 
 def ui_tree_only_blocks(command, policy=None):
-    policy = Path(policy) if policy is not None else Path(__file__).resolve().parent.parent / '.runtime/UI_TREE_ONLY.json'
-    return command in ('send', 'send-image', 'send-file') and policy.exists()
+    base = Path(__file__).resolve().parent.parent
+    required = Path(policy).exists() if policy is not None else ((base / '.runtime/UI_TREE_ONLY.json').exists() or (base / 'config/ui-execution-policy.json').exists())
+    return command in ('send', 'send-image', 'send-file') and required
 
 
 def main():

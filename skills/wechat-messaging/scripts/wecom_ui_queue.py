@@ -6,15 +6,20 @@ import uuid
 from pathlib import Path
 from ledger import atomic_json
 
-QUEUE = Path('/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/.runtime/ui-post-queue')
+QUEUE = Path(__file__).resolve().parents[1] / '.runtime/ui-post-queue'
 ALLOWED = {'negative-reviews-summary'}
 
 def enabled(request):
     context = request.get('context', {})
     if context.get('workflowId') in ALLOWED:
         return True
-    # User-authorized half-hour empty notice only; merchant-detail migration is separate.
     import re
+    if context.get('workflowId') == 'meituan-customer-reply-daily':
+        items = request.get('items', [])
+        return (request.get('groupName') == '上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰'
+                and len(items) == 1 and items[0].get('type') == 'file'
+                and re.fullmatch(r'美团客户回复记录-\d{4}-\d{2}-\d{2}\.xlsx', Path(items[0].get('path', '')).name) is not None)
+    # Merchant details and fixed half-hour notice retain their original scope.
     items = request.get('items', [])
     name = Path(context.get('eventId', '')).name
     return (context.get('workflowId') == 'merchants' and request.get('groupName') == '电销+直播攻坚组'
@@ -41,8 +46,14 @@ def validate_response(task, reply):
         kind = task['item']['type']
         if kind == 'text' and any(f.get('visibleTextSha256') != task['item']['sha256'] for f in frames):
             raise ValueError('ui-post-text-readback-invalid')
-        result = result | {'verificationLevel': 'wecom-ui-tree-text' if kind == 'text' else 'wecom-ui-tree-image',
-                           'evidence': {'method':'wecom-ui-tree-text' if kind == 'text' else 'wecom-ui-tree-image',
+        if kind == 'file':
+            import math
+            expected_size = str(math.floor(task['item']['size'] / 1024)) + 'K'
+            if any(f.get('visibleFileName') != task['item']['name'] or f.get('visibleFileSize') != expected_size for f in frames):
+                raise ValueError('ui-post-file-card-invalid')
+        level = {'text':'wecom-ui-tree-text', 'image':'wecom-ui-tree-image', 'file':'wecom-ui-tree-file-name-size'}[kind]
+        result = result | {'verificationLevel': level,
+                           'evidence': {'method':level,
                                         'resolvedGroup':task['request']['groupName'],'sha256':task['item']['sha256'],
                                         'observations':frames},
                            'transport':{'kind':kind,'sendAttempts':result['sendAttempts'],

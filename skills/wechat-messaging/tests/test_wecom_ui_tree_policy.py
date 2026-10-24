@@ -21,3 +21,14 @@ class UITreePolicy(unittest.TestCase):
    out=Path(t)/'uncreated';result=WeComAdapter().preflight({'groupName':'电销+直播攻坚组'},out)
    self.assertEqual(result['sendAttempts'],0);self.assertEqual(result['reason'],'ui-tree-only-required');self.assertFalse(out.exists())
 if __name__=='__main__':unittest.main()
+
+class PortablePolicyTests(unittest.TestCase):
+ def test_static_policy_without_runtime_flag(self):
+  import wecom_adapter as adapter
+  with tempfile.TemporaryDirectory() as t,patch.object(adapter,'ROOT',Path(t)):
+   self.assertFalse(adapter.ui_tree_only_required())
+   p=Path(t)/'skills/wechat-messaging/config/ui-execution-policy.json';p.parent.mkdir(parents=True);p.write_text('{}')
+   self.assertTrue(adapter.ui_tree_only_required())
+   with patch.object(adapter.WeComAdapter,'_run_sender',side_effect=AssertionError('no injected UI')):
+    result=adapter.WeComAdapter().preflight({'groupName':'g'},Path(t)/'out')
+    self.assertEqual(result['sendAttempts'],0)

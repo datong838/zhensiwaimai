@@ -265,7 +265,7 @@
       "earliest_hour": 12,
       "note": "2026-09-30 大同授权启用：CLI 已实证可用（ensure_unanswered_queue.mjs CDP 只读门禁，9233 Chrome 在线、自带测试 7 项过、真跑 {ok:true}），原「无 CLI 需适配层」备注过时。只读队列检查，无发送动作。｜2026-10-02 大同指令：每小时代价过大，改为每日12:00/15:00/17:00三次（拆3条entry承载，零改daemon）；17:00那轮结束后准备发文档（具体动作待大同确认，暂未挂步骤）。｜2026-10-03 大同授权(b)并痛批15:00档漏做：每轮闭环=①只读队列门禁 ②reply_unanswered_sessions.mjs 全新逐条检查→符合规则的在美团真实回复(政策承接型兜底,确定性保守判定,[AI客服]/平台通知不算人工接管)→回显核验→当场写当日临时台账 ③compile ④send；Excel外发当天当次数据、不限次数、没有重复门禁(marker每轮唯一含时分秒)。",
       "cwd": "skills/workflows/meituan-intelligent-customer-service",
-      "timeout_seconds": 300,
+      "timeout_seconds": 1000,
       "max_retries": 0,
       "cooldown_seconds": 0,
       "steps": [
@@ -309,7 +309,7 @@
       "earliest_hour": 15,
       "note": "2026-09-30 大同授权启用：CLI 已实证可用（ensure_unanswered_queue.mjs CDP 只读门禁，9233 Chrome 在线、自带测试 7 项过、真跑 {ok:true}），原「无 CLI 需适配层」备注过时。只读队列检查，无发送动作。｜2026-10-02 大同指令：每小时代价过大，改为每日12:00/15:00/17:00三次（拆3条entry承载，零改daemon）；17:00那轮结束后准备发文档（具体动作待大同确认，暂未挂步骤）。｜2026-10-03 大同授权(b)并痛批15:00档漏做：每轮闭环=①只读队列门禁 ②reply_unanswered_sessions.mjs 全新逐条检查→符合规则的在美团真实回复(政策承接型兜底,确定性保守判定,[AI客服]/平台通知不算人工接管)→回显核验→当场写当日临时台账 ③compile ④send；Excel外发当天当次数据、不限次数、没有重复门禁(marker每轮唯一含时分秒)。",
       "cwd": "skills/workflows/meituan-intelligent-customer-service",
-      "timeout_seconds": 300,
+      "timeout_seconds": 1000,
       "max_retries": 0,
       "cooldown_seconds": 0,
       "steps": [
@@ -353,7 +353,7 @@
       "earliest_hour": 17,
       "note": "2026-09-30 大同授权启用：CLI 已实证可用（ensure_unanswered_queue.mjs CDP 只读门禁，9233 Chrome 在线、自带测试 7 项过、真跑 {ok:true}），原「无 CLI 需适配层」备注过时。只读队列检查，无发送动作。｜2026-10-02 大同指令：每小时代价过大，改为每日12:00/15:00/17:00三次（拆3条entry承载，零改daemon）；17:00那轮结束后准备发文档。2026-10-02 已落地：step2 compile_daily_reply_xlsx.mjs 汇总 records/美团客户回复记录-<日期>.xlsx，step3 send_daily_reply_xlsx_to_wechat.mjs 经 workflow_bridge_windows.py（meituan-customer-reply-daily）落群 上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰，已走受控再封印（依赖清单已更新）。｜2026-10-03 大同授权(b)并痛批15:00档漏做：每轮闭环=①只读队列门禁 ②reply_unanswered_sessions.mjs 全新逐条检查→符合规则的在美团真实回复(政策承接型兜底,确定性保守判定,[AI客服]/平台通知不算人工接管)→回显核验→当场写当日临时台账 ③compile ④send；Excel外发当天当次数据、不限次数、没有重复门禁(marker每轮唯一含时分秒)。",
       "cwd": "skills/workflows/meituan-intelligent-customer-service",
-      "timeout_seconds": 300,
+      "timeout_seconds": 1000,
       "max_retries": 0,
       "cooldown_seconds": 0,
       "steps": [

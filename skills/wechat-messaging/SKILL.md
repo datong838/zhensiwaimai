@@ -116,3 +116,6 @@ python scripts/executor.py reconcile --request /absolute/request.json --authoriz
 ## 已注册业务入口
 
 业务总入口委托 scripts/workflow_bridge.py（固定workflow-id、群、类型、数量、原授权及账本），预检委托 scripts/workflow_preflight.py。桥接门禁使用各业务已有授权，不读取臻肆测试群的验收策略；不得把它当任意群发送CLI。它调用同一deliver/desktop_adapter，不另写微信操作逻辑。原业务总入口仍是唯一运行入口，尤其商家封板和金鲨阶段权限不能跳过。
+
+## 2026-10-24可迁移纯UI策略
+静态config/ui-execution-policy.json与原.runtime/UI_TREE_ONLY.json任一存在即禁止旧注入发送；适配器按本文件推导仓库与队列位置，不依赖某个模型产品目录。原流程可提交差评长图、新商家文本和受限客服Excel任务给具备界面树/可见操作能力的岗位。其他路由未接通仍阻断，不能删除策略回退旧发送。详情见项目docs/operations/20261024-机制运行规范与客户迁移交接.md。

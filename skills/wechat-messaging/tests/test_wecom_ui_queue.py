@@ -43,3 +43,19 @@ class AdapterTests(unittest.TestCase):
   with patch('wecom_ui_queue.exchange',return_value={'ok':True,'resolvedGroup':'target','inputEmpty':True}) as queued, patch.object(WeComAdapter,'_run_sender',side_effect=AssertionError('legacy sender invoked')):
    self.assertTrue(WeComAdapter().preflight(request,'unused')['ok']);queued.assert_called_once()
 if __name__=='__main__':unittest.main()
+
+class CustomerFileTests(unittest.TestCase):
+ def request(self):
+  return {'groupName':'上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰','context':{'workflowId':'meituan-customer-reply-daily'},'items':[{'type':'file','path':'/reports/美团客户回复记录-2026-10-24.xlsx'}]}
+ def test_narrow_route(self):
+  r=self.request();self.assertTrue(enabled(r))
+  for change in [{'groupName':'电销+直播攻坚组'},{'items':[]},{'items':[{'type':'file','path':'/reports/other.xlsx'}]},{'items':[{'type':'image','path':'/reports/美团客户回复记录-2026-10-24.xlsx'}]},{'context':{'workflowId':'other'}}]:
+   self.assertFalse(enabled(r|change))
+ def test_two_file_card_observations(self):
+  t={'taskId':'f','binding':'b','stage':'send','request':{'groupName':'g'},'item':{'type':'file','sha256':'source','name':'report.xlsx','size':6761}}
+  frames=[{'groupName':'g','inputEmpty':True,'newMessageVisible':True,'visibleFileName':'report.xlsx','visibleFileSize':'6K'} for _ in range(2)]
+  r={'taskId':'f','binding':'b','result':{'status':'verified','sendAttempts':1,'resolvedGroup':'g','sha256':'source','observations':frames}}
+  self.assertEqual(validate_response(t,r)['verificationLevel'],'wecom-ui-tree-file-name-size')
+  for key,value in [('visibleFileName','other.xlsx'),('visibleFileSize','7K'),('inputEmpty',False),('newMessageVisible',False)]:
+   changed=copy.deepcopy(r);changed['result']['observations'][1][key]=value
+   with self.assertRaises(ValueError):validate_response(t,changed)

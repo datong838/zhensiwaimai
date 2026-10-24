@@ -24,11 +24,16 @@ from pathlib import Path
 
 import workflow_bridge
 
-ROOT = Path('/Users/ddt/work/projects/ai_agent/zhensi_waimai_back')
+ROOT = Path(__file__).resolve().parents[3]
 SENDER = ROOT / 'skills/wechat-messaging/scripts/wecom_desktop_sender.py'
-PY = '/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python'
+PY = sys.executable
 LOCK_PATH = ROOT / 'skills/wechat-messaging/.runtime/wecom-transport.lock'
 SEND_TIMEOUT = 300.0
+
+
+def ui_tree_only_required():
+    base = ROOT / 'skills/wechat-messaging'
+    return (base / '.runtime/UI_TREE_ONLY.json').exists() or (base / 'config/ui-execution-policy.json').exists()
 
 
 def target_preflight_verified(preflight, group):
@@ -68,7 +73,7 @@ class WeComAdapter:
             # Capture the actually active app, not NSWorkspace's sometimes stale
             # frontmostApplication value. Keep recovery inside the transport lock.
             try:
-                if (ROOT / 'skills/wechat-messaging/.runtime/UI_TREE_ONLY.json').exists():
+                if ui_tree_only_required():
                     raise ImportError('UI post owns foreground; no native activation')
                 from AppKit import NSWorkspace
                 previous_app = next((app for app in NSWorkspace.sharedWorkspace().runningApplications()
@@ -92,7 +97,7 @@ class WeComAdapter:
     def _run_sender(self, mode_args, timeout=SEND_TIMEOUT):
         cmd = [PY, str(SENDER)] + mode_args
         env = {'PATH': '/usr/bin:/bin:/usr/sbin:/sbin', 'PYTHONPATH': '',
-               'HOME': os.environ.get('HOME', '/Users/ddt')}
+               'HOME': os.environ.get('HOME', str(Path.home()))}
         # 2026-10-24 测试群覆盖透传：本 env 是白名单式构造（刻意不继承
         # os.environ 防代理变量污染），但 WECHAT_TEST_GROUP / WECHAT_TEST_GROUPS
         # 必须到达发送器子进程——否则覆盖静默失效、落群掉回各流写死的生产群
@@ -118,7 +123,7 @@ class WeComAdapter:
 
     def preflight(self, request, output):
         """Locate + open the target group via search; write preflight proof."""
-        if (ROOT / 'skills/wechat-messaging/.runtime/UI_TREE_ONLY.json').exists():
+        if ui_tree_only_required():
             from wecom_ui_queue import enabled, exchange
             if enabled(request):
                 proof = exchange('preflight', request)
@@ -225,7 +230,7 @@ class WeComAdapter:
             return {'status': 'blocked', 'sendAttempts': 0,
                     'reason': 'deadline-expired', 'transport': {'sendAttempts': 0}}
 
-        if (ROOT / 'skills/wechat-messaging/.runtime/UI_TREE_ONLY.json').exists():
+        if ui_tree_only_required():
             from wecom_ui_queue import enabled, exchange
             if enabled(request):
                 return exchange('send', request, item)

@@ -44,7 +44,7 @@ function args() {
   return [bridge, "--workflow-id", workflowId, "--group", group, "--payload-type", "file",
     "--authorization", authorization, "--ledger", ledger, "--marker-name", marker,
     "--output-dir", outputDir, "--item", report,
-    "--deadline-unix", String(Math.floor(Date.now() / 1000) + 180), "--execute"];
+    "--deadline-unix", String(Math.floor(Date.now() / 1000) + 840), "--execute"];
 }
 
 // 读取「当日记录」表实际数据行数（A5 起，有效行 = B/C 列任一非空）。
@@ -102,7 +102,7 @@ async function main() {
     return;
   }
 
-  const { stdout } = await run(python, args(), { timeout: 240_000, maxBuffer: 16 * 1024 * 1024 });
+  const { stdout } = await run(python, args(), { timeout: 900_000, maxBuffer: 16 * 1024 * 1024 });
   console.log(stdout.trim());
 }
 
