@@ -22,6 +22,7 @@
   - 日定时技能（cadence_hours>1）同样只要求当日至少一档成功等价（防重拦截
     造成的当日后段 FAILED 不算缺口，由看护按 B 清单定性）。
 """
+import fixed_schedule
 import glob
 import json
 import os
@@ -101,6 +102,9 @@ def main(date_str: str) -> int:
         skills = list(skills.values())
     enabled = [s for s in skills if s.get("enabled") and s.get("dev_state") == "active"]
 
+    check_day = datetime.fromisoformat(date_str + 'T23:59:59') if date_str != now.strftime('%Y-%m-%d') else now
+    enabled = [s for s in enabled if not fixed_schedule.customer_slot_superseded(s['name'], check_day)]
+
     records = {}
     for p in sorted(glob.glob(os.path.join(ROOT, "runtime", "run_history", date_str, "*--record.json"))):
         name = os.path.basename(p).replace("--record.json", "")
@@ -116,7 +120,8 @@ def main(date_str: str) -> int:
         name = s["name"]
         cadence = s.get("cadence_hours", 24)
         rs = records.get(name, [])
-        succ = [r for r in rs if _is_success_equivalent(r, date_str)]
+        succ = [r for r in rs if _is_success_equivalent(r, date_str)
+                and fixed_schedule.customer_success_in_slot(name, r.get('finished_at'), check_day)]
         fails = [r for r in rs if str(r.get("status", "")).upper() == "FAILED"]
         row = {
             "skill": name,

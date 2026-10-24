@@ -31,3 +31,27 @@ def next_boundary(skills, after):
         times=sorted(set(skill['schedule_times']+skill.get('retry_check_times',[])))
         upcoming.extend(slot for slot in boundaries({'schedule_times':times},after) if slot>after)
     return min(upcoming) if upcoming else None
+
+
+CUSTOMER_DUTY_HOURS = {
+    'meituan-intelligent-customer-service-12': 12,
+    'meituan-intelligent-customer-service-15': 15,
+    'meituan-intelligent-customer-service': 17,
+}
+
+def customer_slot_superseded(name, now):
+    hour = CUSTOMER_DUTY_HOURS.get(name)
+    if hour is None:
+        return False
+    due = [value for value in CUSTOMER_DUTY_HOURS.values() if value <= now.hour]
+    return bool(due and hour < max(due))
+
+def customer_success_in_slot(name, finished_at, day):
+    hour = CUSTOMER_DUTY_HOURS.get(name)
+    if hour is None:
+        return True
+    try:
+        stamp = datetime.fromisoformat(finished_at or '')
+    except (ValueError, TypeError):
+        return False
+    return stamp.date() == day.date() and stamp.hour >= hour

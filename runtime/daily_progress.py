@@ -12,6 +12,7 @@
 """
 from __future__ import annotations
 
+import fixed_schedule
 import datetime as dt
 import json
 import sys
@@ -170,7 +171,11 @@ def build(now: dt.datetime | None = None) -> dict:
         due = now.hour * 60 + now.minute >= threshold
         fw = failure_watch.get(name, {})
         rec = _latest_record(name, day)
-        if done:
+        superseded = fixed_schedule.customer_slot_superseded(name, now)
+        if superseded:
+            state, mark = '历史档·不补跑', '⏭️'
+            reason = '保留历史记录；当前最新客服档承担全量值班'
+        elif done:
             ev = bool(rec and rec.get("_has_delivery_evidence"))
             if ev:
                 # 真外发证据在案
@@ -200,6 +205,7 @@ def build(now: dt.datetime | None = None) -> dict:
             "earliest_hour": earliest,
             "target_group": s.get("target_group", ""),
             "done": done,
+            "superseded": superseded,
             "due": due,
             "mark": mark,
             "state": state,
@@ -210,8 +216,8 @@ def build(now: dt.datetime | None = None) -> dict:
             "record": rec,
         })
     rows.sort(key=lambda r: (r["order"], r["earliest_hour"], r["name"]))
-    total = len(rows)
-    done_n = sum(1 for r in rows if r["done"])
+    total = sum(1 for r in rows if not r["superseded"])
+    done_n = sum(1 for r in rows if r["done"] and not r["superseded"])
     return {
         "generated_at": now.isoformat(timespec="seconds"),
         "date": day,
@@ -236,7 +242,7 @@ def render_md(d: dict) -> str:
             i, r["mark"], r["state"], r["ledger_name"], r["schedule"],
             (r["last_success"][11:19] if r["done"] and r["last_success"] else "—"),
             r["reason"]))
-    pend = [r for r in d["rows"] if not r["done"]]
+    pend = [r for r in d["rows"] if not r["done"] and not r.get("superseded")]
     out.append("")
     if not pend:
         out.append("### 未完成：无（当日全部完成）")

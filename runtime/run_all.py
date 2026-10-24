@@ -878,6 +878,10 @@ def run_one(data: dict, name: str, interpreters: dict) -> dict:
     skill = next((s for s in data["skills"] if s["name"] == name), None)
     if skill is None:
         raise SystemExit("manifest 无此 skill: %s" % name)
+    if fixed_schedule.customer_slot_superseded(name, datetime.now()):
+        print('[skip] %s 历史客服档不补跑，等待当前最新档' % name)
+        return {'skill':name,'status':'SKIPPED_SUPERSEDED','category':'SKIPPED_SUPERSEDED',
+                'finished_at':'','detail':'superseded_customer_slot'}
     if not skill.get("steps"):
         print("[skip] %s 无 steps（lib/纯库），不执行" % name)
         return {}
@@ -1038,6 +1042,8 @@ def build_ledger_rows(data: dict, records_by_skill: dict) -> list:
             done = "是"
             exec_time = rec.get("finished_at", "")
             note = "当日已外发（幂等保护·外发证据已核实）"
+        elif fixed_schedule.customer_slot_superseded(sk, datetime.now()):
+            done, exec_time, note = '不补跑', '', '历史客服档保留记录，由最新档值班'
         elif r["dev_state"] == "active":
             if sk and skill_by_name.get(sk, {}).get("needs_adapter"):
                 done = "否"
@@ -1072,6 +1078,7 @@ def build_ledger_rows(data: dict, records_by_skill: dict) -> list:
             "done": done,
             "exec_time": exec_time,
             "note": note,
+            "superseded": fixed_schedule.customer_slot_superseded(sk, datetime.now()),
             "dev_state": r["dev_state"],
         })
     return rows
@@ -1110,8 +1117,8 @@ def write_ledger_xlsx(rows: list, out_path: Path, date_str: str) -> bool:
         cell.font = header_font
         cell.alignment = Alignment(horizontal="center", vertical="center")
 
-    active_total = sum(1 for r in rows if r["dev_state"] == "active")
-    active_done = sum(1 for r in rows if r["dev_state"] == "active" and r["done"] == "是")
+    active_total = sum(1 for r in rows if r["dev_state"] == "active" and not r.get("superseded"))
+    active_done = sum(1 for r in rows if r["dev_state"] == "active" and not r.get("superseded") and r["done"] == "是")
     # 2026-10-21 大同指令：台账是给客户看的，**没完成的一律不进表**（已暂停/阻塞/
     # 待开发/当日未跑成功都不出现）。计数仍按全量 rows 算，口径不变、不虚增。
     for r in [x for x in rows if x["done"] == "是"]:
@@ -1140,8 +1147,8 @@ def write_ledger_xlsx(rows: list, out_path: Path, date_str: str) -> bool:
 
 
 def write_ledger_csv(rows: list, out_path: Path, date_str: str) -> bool:
-    active_total = sum(1 for r in rows if r["dev_state"] == "active")
-    active_done = sum(1 for r in rows if r["dev_state"] == "active" and r["done"] == "是")
+    active_total = sum(1 for r in rows if r["dev_state"] == "active" and not r.get("superseded"))
+    active_done = sum(1 for r in rows if r["dev_state"] == "active" and not r.get("superseded") and r["done"] == "是")
     out_path.parent.mkdir(parents=True, exist_ok=True)
     with out_path.open("w", encoding="utf-8") as f:
         f.write("臻肆工作台账,%s\n" % date_str)
@@ -1384,6 +1391,8 @@ def _cadence_gate(skill: dict, now: datetime) -> tuple:
     铁律（2026-10-02 大同定）：**只有当天的成功才算成功**。历史 / 昨日的成功一律作废，
     既不能作为本日"已完成"的依据，也不能生成 SUCCESS 伪记录（消灭虚高 SUCCESS）。
     """
+    if fixed_schedule.customer_slot_superseded(skill['name'], now):
+        return True, 'superseded_customer_slot'
     earliest = skill.get("earliest_hour", 0)
     earliest_minute = skill.get("earliest_minute", 0)
     if now.hour < earliest or (now.hour == earliest and now.minute < earliest_minute):
@@ -1534,8 +1543,8 @@ def daemon_cycle(data: dict, interpreters: dict, do_send: bool, force_all: bool 
                      key=lambda x: x.get("order", 999))
     for s in enabled:
         name = s["name"]
-        skip, reason = _cadence_gate(s, now)
-        if not force_all and name not in forced and skip:
+        skip, reason = _cadence_gate(s, datetime.now())
+        if reason == 'superseded_customer_slot' or (not force_all and name not in forced and skip):
             if reason == "done_today":
                 print("[skip] %s 当日已成功（cadence 内），本周期跳过" % name)
                 records[name] = _pseudo_record(s)
