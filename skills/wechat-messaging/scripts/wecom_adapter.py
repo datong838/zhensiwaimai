@@ -206,7 +206,8 @@ class WeComAdapter:
     def _send_one(self, request, item, work, grant, deadline):
         # Direct workflow callers may supply only type/path; bind the file
         # BEFORE any possible external effect, without overriding contradictions.
-        if item.get('type') == 'file' and str(item.get('path','')).lower().endswith('.xlsx'):
+        if (item.get('type') == 'image' or
+                (item.get('type') == 'file' and str(item.get('path','')).lower().endswith('.xlsx'))):
             import hashlib
             source = Path(item['path'])
             data = source.read_bytes()
