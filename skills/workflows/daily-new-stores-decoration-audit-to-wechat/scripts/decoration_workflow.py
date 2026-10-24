@@ -104,6 +104,17 @@ def message(receipt: dict, expected_name: str) -> str | None:
     return "     ".join(("淘宝闪购", f"店铺：{receipt['shopName']}", f"店铺装修缺失：{'、'.join(missing)}", "请尽快配置"))
 
 
+def collector_failure_reason(stderr: str) -> str:
+    for line in reversed((stderr or '').splitlines()):
+        try:
+            payload = json.loads(line)
+        except ValueError:
+            continue
+        if isinstance(payload, dict) and isinstance(payload.get('reason'), str) and payload['reason']:
+            return payload['reason'][:1200]
+    return (stderr or '')[-250:]
+
+
 def collect(run_dir: Path, shop_name: str) -> dict:
     path = run_dir / "decoration-collection.json"
     env = dict(os.environ, NODE_PATH=NODE_MODULES)
@@ -125,7 +136,7 @@ def collect(run_dir: Path, shop_name: str) -> dict:
         m = re.search(r'"reason":"((?:shop-not-operating|shop-not-found|shop-search-timeout)[^"]*)"', result.stdout or "")
         if m:
             raise RuntimeError(f"decoration-collection-skipped:{m.group(1)}")
-        raise RuntimeError(f"decoration-collection-unknown:{(result.stderr or '')[-250:]}")
+        raise RuntimeError(f"decoration-collection-unknown:{collector_failure_reason(result.stderr)}")
     receipt = json.loads(path.read_text(encoding="utf-8"))
     validate_receipt(receipt, shop_name)
     return receipt
