@@ -57,6 +57,7 @@ async function dismissBindModal(page) {
 // shop-search-timeout skip 语义、跨店回切精确等 URL。
 async function selectShop(page, requestedName) {
   assertAuthenticated(page.url());
+  await ensureShopSelectorReady(page);
   await dismissBindModal(page);
   const current = page.locator('span[class^="shop-name__"]').first();
   // 2026-10-12 dry-run 实况：chain home 页顶部店名恰为目标店时（默认店），原逻辑跳过搜索，
@@ -153,6 +154,16 @@ export async function waitSpinnerGone(page, timeoutMs = 20000) {
     if (Date.now() >= deadline) return false;
     await page.waitForTimeout(300);
   }
+}
+
+// 切店控件被全页加载态禁用时，先恢复同一页；不绕过遮罩点击。
+export async function ensureShopSelectorReady(page, timeoutMs = 20000) {
+  assertAuthenticated(page.url());
+  if (await waitSpinnerGone(page, timeoutMs)) return { reloaded: false };
+  await page.reload({ waitUntil: 'domcontentloaded', timeout: 30000 });
+  assertAuthenticated(page.url());
+  if (!await waitSpinnerGone(page, timeoutMs)) throw new Error('shop-selector-loading-timeout');
+  return { reloaded: true };
 }
 
 // ===== 装修页 DOM 校准常量（2026-10-12 现场探查实证钉死）=====
