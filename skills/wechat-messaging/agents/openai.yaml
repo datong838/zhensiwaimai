@@ -1,0 +1,6 @@
+interface:
+  display_name: "微信收发"
+  short_description: "统一普通微信群收发入口，优先发送文字、图片与文件，含防重与内容复核"
+  default_prompt: "使用 $wechat-messaging 将已明确授权的内容发送到指定普通微信群，并展示逐项核验结果。"
+policy:
+  allow_implicit_invocation: true

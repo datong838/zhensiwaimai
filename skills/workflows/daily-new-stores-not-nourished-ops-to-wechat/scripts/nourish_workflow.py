@@ -1,0 +1,311 @@
+#!/usr/bin/env python3
+"""淘宝闪购「新店未养活」运营分配：采集两页 → 按门店ID关联运营人 → 发运营群。
+
+数据源（9231 服务商平台 open.shop.ele.me，非参考流的 9230）：
+  1) 运营效果分析（问题类型=新店未养活）→ 数据下载 → CSV（含 门店ID）
+  2) 门店分配（外卖店/已分配门店/选公司级根角色）→ 下载数据 → XLSX（含 门店ID、运营人）
+关联：以 门店ID 为键，把「运营人」并入运营效果数据，产出一份 Excel。
+发送：经 Windows 网关把该 Excel 发到「上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰」（与活动巡检流同群）。
+"""
+from __future__ import annotations
+
+import csv
+import hashlib
+import io
+import json
+import os
+import re
+import subprocess
+import sys
+import time
+from datetime import datetime
+from pathlib import Path
+from zoneinfo import ZoneInfo
+
+SKILL = Path(__file__).resolve().parents[1]
+RUNTIME = SKILL / ".runtime" / "nourish"
+EVENTS = RUNTIME / "events"
+RUNS = RUNTIME / "runs"
+COLLECTOR = Path(__file__).with_name("nourish_collector.mjs")
+NODE = Path("/Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node")
+NODE_MODULES = "/Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules"
+WINDOWS_SCRIPTS = Path("/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts")
+
+GROUP = "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰"
+WORKFLOW_ID = "daily-new-stores-not-nourished-ops"
+AUTHORIZATION_REF = "user-20261012-daily-new-stores-not-nourished-ops-windows-gateway"
+LOCAL_TZ = ZoneInfo("Asia/Shanghai")
+ARM_FILE = RUNTIME / "SEND_ARMED.json"        # 显式放行（当日有效）
+DISARM_FILE = RUNTIME / "SEND_DISARMED.json"  # 制动文件：存在即禁止外发
+
+
+def atomic_json(path: Path, value: dict) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+    temporary = path.with_name(f".{path.name}.{os.getpid()}.tmp")
+    with temporary.open("x", encoding="utf-8") as stream:
+        os.chmod(temporary, 0o600)
+        json.dump(value, stream, ensure_ascii=False, indent=2)
+        stream.flush()
+        os.fsync(stream.fileno())
+    temporary.replace(path)
+
+
+def arm_state() -> dict:
+    """发送闸：默认放行；存在 SEND_DISARMED.json 则制动（零外发）。"""
+    if DISARM_FILE.exists():
+        return {"armed": False, "mode": "disarmed"}
+    return {"armed": True, "mode": "default-auto"}
+
+
+def set_arm(armed: bool) -> dict:
+    ARM_FILE.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+    if armed:
+        DISARM_FILE.unlink(missing_ok=True)
+        atomic_json(ARM_FILE, {"armed": True, "at": datetime.now(LOCAL_TZ).isoformat(timespec="seconds")})
+        return {"armed": True, "mode": "armed"}
+    ARM_FILE.unlink(missing_ok=True)
+    atomic_json(DISARM_FILE, {"armed": False, "at": datetime.now(LOCAL_TZ).isoformat(timespec="seconds")})
+    return {"armed": False, "mode": "disarmed"}
+
+
+def collect(run_dir: Path) -> dict:
+    outdir = run_dir / "downloads"
+    outdir.mkdir(parents=True, exist_ok=True, mode=0o700)
+    env = dict(os.environ, NODE_PATH=NODE_MODULES)
+    proc = subprocess.run([str(NODE), str(COLLECTOR), str(outdir)], env=env,
+                          capture_output=True, text=True, timeout=240, check=False)
+    out = (proc.stdout or "").strip().splitlines()
+    payload = {}
+    for line in reversed(out):
+        try:
+            payload = json.loads(line)
+            break
+        except ValueError:
+            continue
+    if proc.returncode or payload.get("status") != "complete":
+        code = payload.get("code") or "nourish-collect-unknown"
+        reason = payload.get("reason") or (proc.stderr or "")[-250:]
+        raise RuntimeError(f"{code}:{reason}")
+    return payload
+
+
+def _norm_id(value) -> str:
+    return str(value).strip().strip('"').strip()
+
+
+def read_effect(path: Path) -> tuple[list[str], list[dict]]:
+    raw = path.read_bytes()
+    text = None
+    for enc in ("utf-8-sig", "gbk", "utf-16"):
+        try:
+            text = raw.decode(enc)
+            break
+        except UnicodeDecodeError:
+            continue
+    if text is None:
+        raise ValueError("effect-decode-failed")
+    rows = list(csv.reader(io.StringIO(text)))
+    if not rows:
+        raise ValueError("effect-empty")
+    header = [h.strip().strip('"') for h in rows[0]]
+    id_col = "门店ID"
+    if id_col not in header:
+        raise ValueError("effect-missing-shop-id-column")
+    data = [dict(zip(header, r)) for r in rows[1:] if any(str(c).strip() for c in r)]
+    return header, data
+
+
+def read_alloc(path: Path) -> dict:
+    import openpyxl
+    wb = openpyxl.load_workbook(path, data_only=True)
+    ws = wb[wb.sheetnames[0]]
+    it = ws.iter_rows(values_only=True)
+    header = [str(h).strip() if h is not None else "" for h in next(it)]
+    if "门店ID" not in header or "运营人" not in header:
+        raise ValueError("alloc-missing-required-columns")
+    i_id, i_op = header.index("门店ID"), header.index("运营人")
+    mapping: dict[str, str] = {}
+    for r in it:
+        if not r or r[i_id] is None:
+            continue
+        mapping[_norm_id(r[i_id])] = (str(r[i_op]).strip() if r[i_op] is not None else "")
+    return mapping
+
+
+def build_report(run_dir: Path, day: str) -> dict:
+    eff_path = run_dir / "downloads" / "effect.csv"
+    if not eff_path.exists():
+        cands = list((run_dir / "downloads").glob("effect.*"))
+        if not cands:
+            raise ValueError("effect-download-missing")
+        eff_path = cands[0]
+    alloc_cands = list((run_dir / "downloads").glob("alloc.*"))
+    if not alloc_cands:
+        raise ValueError("alloc-download-missing")
+    header, data = read_effect(eff_path)
+    alloc = read_alloc(alloc_cands[0])
+    if not data:
+        return {"rows": 0, "matched": 0, "unmatched": 0, "path": None}
+
+    out_header = list(header)
+    pos = out_header.index("门店名称") + 1 if "门店名称" in out_header else 1
+    out_header.insert(pos, "运营人")
+    matched = 0
+    out_rows = []
+    unmatched_shops = []
+    for row in data:
+        sid = _norm_id(row.get("门店ID"))
+        op = alloc.get(sid, "")
+        if op:
+            matched += 1
+        else:
+            unmatched_shops.append(row.get("门店名称", sid))
+        values = [row.get(h, "") for h in header]
+        values.insert(pos, op or "未分配")
+        out_rows.append(values)
+
+    import openpyxl
+    from openpyxl.styles import Font, PatternFill, Alignment
+    out_name = f"新店未养活运营分配_{day}.xlsx"
+    out_path = run_dir / out_name
+    wb = openpyxl.Workbook()
+    ws = wb.active
+    ws.title = "新店未养活运营分配"
+    ws.append(out_header)
+    for c in range(1, len(out_header) + 1):
+        cell = ws.cell(row=1, column=c)
+        cell.font = Font(bold=True, color="FFFFFF")
+        cell.fill = PatternFill("solid", fgColor="4F81BD")
+        cell.alignment = Alignment(vertical="center")
+    for r in out_rows:
+        ws.append(r)
+    ws.freeze_panes = "A2"
+    wb.save(out_path)
+    return {"rows": len(out_rows), "matched": matched, "unmatched": len(out_rows) - matched,
+            "unmatchedShops": unmatched_shops[:20], "path": str(out_path), "name": out_name,
+            "header": out_header}
+
+
+def deliver(report: dict, run_dir: Path, day: str) -> dict:
+    path = report.get("path")
+    if not path or report.get("rows", 0) == 0:
+        return {"status": "no-report", "sendAttempts": 0}
+    gate = arm_state()
+    if not gate["armed"]:
+        return {"status": "blocked", "reason": "send-disarmed", "sendAttempts": 0}
+    file_sha = hashlib.sha256(Path(path).read_bytes()).hexdigest()
+    event = f"{day}-taobao-not-nourished-ops"
+    if not EVENTS.is_dir():
+        return {"status": "blocked", "reason": "canonical-nourish-ledger-unavailable", "sendAttempts": 0}
+    marker = EVENTS / f"{event}.json"
+    if marker.exists():
+        prior = json.loads(marker.read_text(encoding="utf-8"))
+        if prior.get("sha256") != file_sha:
+            # 当日已 verified 但产物字节变了（xlsx/png 内嵌时间戳等）：一事一发的正确语义是
+            # 「当日已发、不重发」，记为 already_verified；绝不可重发（重复外发），也不可记
+            # UNKNOWN 故障（2026-10-20 实战：nourish 11:40 档因此被判 FAILED/UNKNOWN，误导看护）。
+            if prior.get("state") == "verified":
+                return {"status": "already_verified", "sendAttempts": 0, "event": event,
+                        "reason": "verified-earlier-today-payload-changed-no-resend"}
+            return {"status": "blocked", "reason": "same-event-payload-conflict", "sendAttempts": 0}
+        if prior.get("state") == "verified":
+            return {"status": "already_verified", "sendAttempts": 0, "event": event}
+        return {"status": "unknown", "reason": "prior-attempt-requires-read-only-reconciliation",
+                "sendAttempts": 0, "event": event}
+
+    if str(WINDOWS_SCRIPTS) not in sys.path:
+        sys.path.insert(0, str(WINDOWS_SCRIPTS))
+    from wecom_adapter import WeComAdapter as WindowsAdapter, target_preflight_verified  # 2026-10-23 channel switch
+    from contract import Rejected
+    deadline = int(time.time()) + 300
+    request = {"schemaVersion": 1, "groupName": GROUP,
+               "items": [{"itemId": "not-nourished-ops", "type": "file", "path": path}],
+               "context": {"workflowId": WORKFLOW_ID, "eventId": event,
+                           "accountAlias": "main-wechat", "channel": "desktop", "deadlineAt": deadline}}
+    grant = {"schemaVersion": 1, "accountAlias": "main-wechat", "groupName": GROUP,
+             "channel": "desktop", "expiresAt": deadline, "authorizationRef": AUTHORIZATION_REF}
+    try:
+        adapter = WindowsAdapter()
+        with adapter.session(request):
+            if marker.exists():
+                prior = json.loads(marker.read_text(encoding="utf-8"))
+                if prior.get("sha256") != file_sha:
+                    if prior.get("state") == "verified":
+                        return {"status": "already_verified", "sendAttempts": 0, "event": event,
+                                "reason": "verified-earlier-today-payload-changed-no-resend"}
+                    return {"status": "blocked", "reason": "same-event-payload-conflict", "sendAttempts": 0}
+                return {"status": "already_verified" if prior.get("state") == "verified" else "unknown",
+                        "reason": None if prior.get("state") == "verified" else "prior-attempt-requires-read-only-reconciliation",
+                        "sendAttempts": 0, "event": event}
+            preflight = adapter.preflight(request, run_dir / "windows-preflight")
+            if not target_preflight_verified(preflight, GROUP):
+                return {"status": "blocked", "reason": preflight.get("reason") or "target-group-not-exactly-listed",
+                        "sendAttempts": 0}
+            atomic_json(marker, {"state": "attempted", "event": event, "sha256": file_sha,
+                                 "groupName": GROUP, "name": report.get("name"), "sendAttempts": None})
+            try:
+                result = adapter.send_one(request, request["items"][0], run_dir / "windows-send", grant, deadline)
+            except Exception as error:  # noqa: BLE001
+                atomic_json(marker, {"state": "unknown", "event": event, "sha256": file_sha,
+                                     "groupName": GROUP, "name": report.get("name"),
+                                     "reason": str(error), "sendAttempts": None})
+                return {"status": "unknown", "reason": f"windows-execution-error:{error}", "sendAttempts": None}
+    except Rejected as error:
+        return {"status": "blocked", "reason": str(error), "sendAttempts": 0}
+    if result.get("status") == "verified":
+        atomic_json(marker, {"state": "verified", "event": event, "sha256": file_sha, "groupName": GROUP,
+                             "name": report.get("name"), "sendAttempts": result.get("sendAttempts"),
+                             "verificationLevel": result.get("verificationLevel"), "evidence": result.get("evidence")})
+        return {"status": "verified", "sendAttempts": result.get("sendAttempts"), "event": event,
+                "verificationLevel": result.get("verificationLevel")}
+    atomic_json(marker, {"state": "unknown", "event": event, "sha256": file_sha, "groupName": GROUP,
+                         "name": report.get("name"), "sendAttempts": result.get("sendAttempts"),
+                         "reason": result.get("reason")})
+    return {"status": "unknown", "reason": result.get("reason"),
+            "sendAttempts": result.get("sendAttempts"), "event": event}
+
+
+def main() -> None:
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--execute", action="store_true", help="允许发群（否则只采集+生成 Excel）")
+    parser.add_argument("--arm", action="store_true", help="解除发送制动")
+    parser.add_argument("--disarm", action="store_true", help="制动发送（写 SEND_DISARMED.json）")
+    parser.add_argument("--reconcile-run", metavar="RUN_DIR", help="仅核对原文件送达，不采集不发送")
+    args = parser.parse_args()
+    if args.reconcile_run:
+        if str(WINDOWS_SCRIPTS) not in sys.path:
+            sys.path.insert(0,str(WINDOWS_SCRIPTS))
+        from wecom_file_reconcile import reconcile_run
+        result=reconcile_run(args.reconcile_run,runs=RUNS,events=EVENTS,group=GROUP,
+                             event_suffix='taobao-not-nourished-ops',whole_flow=True)
+        print(json.dumps(result,ensure_ascii=False))
+        if result.get('status') not in ('verified','already_verified','detail-verified-image-pending'):
+            raise SystemExit(1)
+        return
+    if args.arm or args.disarm:
+        print(json.dumps(set_arm(bool(args.arm)), ensure_ascii=False))
+        return
+    day = datetime.now(LOCAL_TZ).date().isoformat()
+    run_dir = RUNS / f"{day}-{time.time_ns()}"
+    run_dir.mkdir(parents=True, mode=0o700)
+    try:
+        collected = collect(run_dir)
+        report = build_report(run_dir, day)
+        result = (deliver(report, run_dir, day) if args.execute
+                  else {"status": "ready" if report.get("rows") else "no-report", "sendAttempts": 0})
+        result.update({"day": day, "rows": report.get("rows"), "matched": report.get("matched"),
+                       "report": report.get("name"), "reportPath": report.get("path"),
+                       "runDir": str(run_dir), "armState": arm_state(),
+                       "collected": {"effect": collected.get("effect", {}).get("size"),
+                                     "alloc": collected.get("alloc", {}).get("tableTotal")}})
+    except Exception as error:  # noqa: BLE001
+        result = {"status": "unknown", "reason": str(error), "sendAttempts": 0, "runDir": str(run_dir), "day": day}
+    atomic_json(run_dir / "summary.json", result)
+    print(json.dumps(result, ensure_ascii=False))
+    if result["status"] not in ("verified", "already_verified", "ready", "no-report"):
+        raise SystemExit(1)
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "description": "P0-2 落群路由外置（仅 group/kind/count；授权串与防重台账路径留在封印代码 workflow_bridge.py 内，绝不外置）",
+  "updatedAt": "2026-10-24",
+  "updatedBy": "用户明确旧员工群不存在，统一运营群",
+  "reason": "原员工群业务生产落群统一运营群；电销群不变，历史回执保留。",
+  "routes": {
+    "merchants": {
+      "group": "电销+直播攻坚组",
+      "kind": "text",
+      "count": 1,
+      "channel": "wecom"
+    },
+    "top10": {
+      "group": "JINSHA_GROUP",
+      "kind": "image",
+      "count": 1,
+      "channel": "wecom"
+    },
+    "taobao-evidence": {
+      "group": "JINSHA_GROUP",
+      "kind": "image",
+      "count": [
+        1,
+        2
+      ],
+      "channel": "wecom"
+    },
+    "jinsha-reports": {
+      "group": "JINSHA_GROUP",
+      "kind": "file",
+      "count": 2,
+      "channel": "wecom"
+    },
+    "jinsha-reports-taobao-repair-20260917": {
+      "group": "JINSHA_GROUP",
+      "kind": "file",
+      "count": 1,
+      "channel": "wecom"
+    },
+    "negative-reviews": {
+      "group": "JINSHA_GROUP",
+      "kind": "file",
+      "count": 1,
+      "channel": "wecom"
+    },
+    "negative-reviews-summary": {
+      "group": "JINSHA_GROUP",
+      "kind": "image",
+      "count": 1,
+      "channel": "wecom"
+    },
+    "taobao-flash-appeals": {
+      "group": "JINSHA_GROUP",
+      "kind": "file",
+      "count": 1,
+      "channel": "wecom"
+    },
+    "meituan-waimai-appeals": {
+      "group": "JINSHA_GROUP",
+      "kind": "file",
+      "count": 1,
+      "channel": "wecom"
+    },
+    "meituan-customer-reply-daily": {
+      "group": "JINSHA_GROUP",
+      "kind": "file",
+      "count": 1,
+      "channel": "wecom"
+    },
+    "negative-feedback-appeals": {
+      "group": "JINSHA_GROUP",
+      "kind": "file",
+      "count": 2,
+      "channel": "wecom"
+    },
+    "taobao-flash-appeals-summary": {
+      "group": "JINSHA_GROUP",
+      "kind": "image",
+      "count": 1,
+      "channel": "wecom"
+    },
+    "meituan-waimai-appeals-summary": {
+      "group": "JINSHA_GROUP",
+      "kind": "image",
+      "count": 1,
+      "channel": "wecom"
+    },
+    "jinsha-reports-taobao-repair-20261023": {
+      "group": "JINSHA_GROUP",
+      "kind": "file",
+      "count": 1,
+      "channel": "wecom"
+    }
+  }
+}

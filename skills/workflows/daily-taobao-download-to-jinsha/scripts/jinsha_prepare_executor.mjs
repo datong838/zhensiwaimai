@@ -1,0 +1,717 @@
+import { execFile as execFileCallback } from "node:child_process";
+import crypto from "node:crypto";
+import fs from "node:fs/promises";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { promisify } from "node:util";
+
+function rejectLegacyExecution() {
+  throw new Error('legacy-executor-disabled-use-installed-entrypoint');
+}
+
+const execFile = promisify(execFileCallback);
+const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));
+const OCR_BIN = path.join(SCRIPT_DIR, "ocr_vision");
+
+export function expectedMapping(type) {
+  if (type === "store") return { reportKey: "store", tab: "数据上传", body: "上传数据" };
+  if (type === "review") return { reportKey: "review", tab: "评价上传", body: "上传评价" };
+  throw new Error(`unsupported-report-type:${type}`);
+}
+
+function reportPattern(type, businessDate) {
+  const compact = businessDate.replaceAll("-", "");
+  const prefix = type === "store" ? "门店下载" : type === "review" ? "评价下载" : null;
+  if (!prefix) throw new Error(`unsupported-report-type:${type}`);
+  return new RegExp(`^${prefix}_${compact}_全部门店_\\d+_\\d{17}(?: \\(\\d+\\))?\\.xlsx$`);
+}
+
+async function sha256File(file) {
+  const digest = crypto.createHash("sha256");
+  digest.update(await fs.readFile(file));
+  return digest.digest("hex");
+}
+
+async function validateXlsx(file) {
+  const { stdout } = await execFile("/usr/bin/unzip", ["-Z1", file], { maxBuffer: 8 * 1024 * 1024 });
+  const names = new Set(stdout.split("\n"));
+  if (!names.has("[Content_Types].xml") || !names.has("xl/workbook.xml")) {
+    throw new Error("xlsx-structure-invalid");
+  }
+}
+
+export async function loadTargetFromReceipt(type, receiptFile = "/tmp/zhensi_daily_download/download_receipt.json") {
+  const mapping = expectedMapping(type);
+  const receipt = JSON.parse(await fs.readFile(receiptFile, "utf8"));
+  if (receipt.ok !== true || !/^\d{4}-\d{2}-\d{2}$/.test(receipt.businessDate ?? "")) {
+    throw new Error("download-receipt-not-ready");
+  }
+  const item = receipt[mapping.reportKey];
+  if (!item?.file || !item?.sha256) throw new Error(`${type}-receipt-entry-missing`);
+  const file = path.resolve(item.file);
+  const name = path.basename(file);
+  if (!reportPattern(type, receipt.businessDate).test(name)) throw new Error(`${type}-filename-contract-failed`);
+  const stat = await fs.stat(file);
+  if (!stat.isFile() || stat.size !== item.size) throw new Error(`${type}-file-size-changed`);
+  await validateXlsx(file);
+  const hash = await sha256File(file);
+  if (hash !== item.sha256) throw new Error(`${type}-file-hash-changed`);
+  return { type, businessDate: receipt.businessDate, file, name, size: stat.size, sha256: hash, mapping };
+}
+
+export function findSelectedFile(text) {
+  const lines = text.split("\n");
+  const names = [];
+  for (let index = 0; index < lines.length; index += 1) {
+    const row = lines[index].match(/^(\s*)\d+ row \(selected\)/);
+    if (!row) continue;
+    const indent = row[1].length;
+    for (let cursor = index + 1; cursor < lines.length; cursor += 1) {
+      const currentIndent = lines[cursor].match(/^\s*/)?.[0].length ?? 0;
+      if (currentIndent <= indent) break;
+      const file = lines[cursor].match(/文本栏 .*Value: (.+?\.xlsx)(?:, Secondary Actions:|, URL:|$)/);
+      if (file) names.push(file[1]);
+    }
+  }
+  return names.length === 1 ? names[0] : null;
+}
+
+export function completedUploadForDate(text, type, businessDate, exactName = null) {
+  const compact = businessDate.replaceAll("-", "");
+  const prefix = type === "store" ? "门店下载" : type === "review" ? "评价下载" : null;
+  if (!prefix) throw new Error(`unsupported-report-type:${type}`);
+  const escapedName = exactName?.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const dateName = new RegExp(`${prefix}_${compact}(?:至${compact})?_全部门店_\\d+_\\d{17}(?: \\(\\d+\\))?\\.xlsx`);
+  const rows = text.split(/(?=^\s*\d+ row(?:\s|$))/m);
+  for (const row of rows) {
+    if (!row.includes("上传完成")) continue;
+    const name = exactName
+      ? row.match(new RegExp(escapedName))?.[0]
+      : row.match(dateName)?.[0];
+    if (name) return { name, status: "上传完成" };
+  }
+  return null;
+}
+
+function todayInShanghai(now = new Date()) {
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Shanghai", year: "numeric", month: "2-digit", day: "2-digit",
+  }).format(now);
+}
+
+function assertTodayUploadLog(text) {
+  const today = todayInShanghai();
+  if (!text.includes(`选择时间: ${today}`)) throw new Error(`jinsha-today-log-not-selected:${today}`);
+}
+
+function openButtonIndex(text) {
+  const line = text.split("\n").find((value) => value.includes("ID: OKButton") && value.includes("按钮"));
+  const match = line?.match(/(\d+) 按钮/);
+  return match ? Number(match[1]) : null;
+}
+
+export function pendingUploadMatches(text, target) {
+  if (text.includes("ID: open-panel")) return false;
+  const compact = target.businessDate.replaceAll("-", "");
+  const stamp = target.name.match(/_(\d{17})(?: \(\d+\))?\.xlsx$/)?.[1];
+  const prefix = target.type === "store" ? "门店下载" : target.type === "review" ? "评价下载" : null;
+  if (!prefix || !stamp) return false;
+  return text.includes(prefix) && text.includes(compact) && text.includes(`${stamp.slice(-7)}.xlsx`);
+}
+
+export function locateWebUploadFromOcr(entries) {
+  const matches = entries.filter((entry) => compactOcr(entry.text) === "上传");
+  if (matches.length !== 1) return null;
+  return {
+    x: matches[0].x + Math.round(matches[0].width / 2),
+    y: matches[0].y + Math.round(matches[0].height / 2),
+  };
+}
+
+async function waitForPendingUpload(sky, app, target, { maxAttempts = 20, intervalMs = 200 } = {}) {
+  for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
+    const state = await sky.get_app_state({ app, disableDiff: true });
+    if (pendingUploadMatches(state.text, target)) return state;
+    if (attempt + 1 < maxAttempts && intervalMs > 0) await new Promise((resolve) => setTimeout(resolve, intervalMs));
+  }
+  return null;
+}
+
+async function clickWebUploadOnce(sky, app, state, target) {
+  if (!pendingUploadMatches(state.text, target)) throw new Error("pending-upload-file-mismatch");
+  for (let attempt = 0; attempt < 3; attempt += 1) {
+    const frame = await sky.get_screenshot_state({ app, disableDiff: true });
+    if (!pendingUploadMatches(frame.text, target)) throw new Error("pending-upload-file-drifted");
+    const entries = await ocrEntries(fileURLToPath(frame.screenshot.url));
+    const button = locateWebUploadFromOcr(entries);
+    if (button) {
+      await sky.click({ app, x: button.x, y: button.y });
+      return frame;
+    }
+  }
+  throw new Error("jinsha-web-upload-ocr-missing-or-ambiguous");
+}
+
+async function waitForCompletedUpload(sky, app, target, { timeoutMs = 120_000, intervalMs = 500 } = {}) {
+  const deadline = performance.now() + timeoutMs;
+  do {
+    const state = await sky.get_app_state({ app, disableDiff: true });
+    if (!state.text.includes("ID: open-panel")) {
+      const completed = completedUploadForDate(state.text, target.type, target.businessDate, target.name);
+      if (completed) return { state, completed };
+    }
+    if (performance.now() >= deadline) break;
+    await new Promise((resolve) => setTimeout(resolve, intervalMs));
+  } while (true);
+  return null;
+}
+
+async function resolveRunningJinshaApp() {
+  const { stdout } = await execFile("/bin/ps", ["-axo", "command="], {
+    env: { LC_ALL: "en_US.UTF-8", LANG: "en_US.UTF-8" },
+  });
+  const applications = stdout.split("\n").flatMap((line) => {
+    const match = line.trim().match(/^(.*?\.app)\/Contents\/MacOS\/jinsha(?:\s|$)/);
+    return match ? [match[1]] : [];
+  });
+  const running = applications.find((value) => value.includes("AppTranslocation")) ?? applications[0];
+  if (!running) throw new Error("jinsha-process-not-running");
+  return running;
+}
+
+async function ocrEntries(file) {
+  const { stdout } = await execFile(OCR_BIN, [file, "zh-Hans"], { maxBuffer: 4 * 1024 * 1024 });
+  return stdout.split("\n").flatMap((line) => {
+    const [box, confidence, text] = line.split("\t", 3);
+    if (!box || !text) return [];
+    const [x, y, width, height] = box.split(",").map(Number);
+    return [{ x, y, width, height, confidence: Number(confidence), text: text.trim() }];
+  });
+}
+
+function compactOcr(text) {
+  return text.replace(/\s+/g, "");
+}
+
+export function locateAnnouncementCloseFromOcr(entries) {
+  const matches = entries.filter((entry) => compactOcr(entry.text) === "关闭");
+  if (matches.length !== 1) return null;
+  return {
+    x: matches[0].x + Math.round(matches[0].width / 2),
+    y: matches[0].y + Math.round(matches[0].height / 2),
+  };
+}
+
+async function dismissKnownAnnouncement(sky, app, state, receipt) {
+  if (!state.text.includes("新功能上线") || !state.text.includes("/js_upload.png")) return state;
+  await sky.perform_secondary_action({ app, element_index: 0, action: "Raise" });
+  state = await sky.get_screenshot_state({ app, disableDiff: true });
+  const entries = await ocrEntries(fileURLToPath(state.screenshot.url));
+  const target = locateAnnouncementCloseFromOcr(entries);
+  if (!target) throw new Error("jinsha-announcement-close-ocr-missing-or-ambiguous");
+  await sky.click({ app, x: target.x, y: target.y });
+  for (let attempt = 0; attempt < 15; attempt += 1) {
+    state = await sky.get_app_state({ app, disableDiff: true });
+    if (!state.text.includes("/js_upload.png")) {
+      receipt.announcementDismissed += 1;
+      return state;
+    }
+    if (attempt < 14) await new Promise((resolve) => setTimeout(resolve, 200));
+  }
+  throw new Error("jinsha-announcement-not-dismissed");
+}
+
+export async function waitForUploadSurface(sky, app, { timeoutMs = 12_000, intervalMs = 200 } = {}) {
+  const deadline = performance.now() + timeoutMs;
+  let state = null;
+  do {
+    state = await sky.get_app_state({ app, disableDiff: true });
+    if (state.text.includes("#/uploadData/uploadData")
+      && (state.text.includes("上传数据") || /^\s*\d+ text 数据上传 评价上传$/m.test(state.text))) return state;
+    if (performance.now() >= deadline) break;
+    if (intervalMs > 0) await new Promise((resolve) => setTimeout(resolve, intervalMs));
+  } while (true);
+  return state;
+}
+
+export function locateUploadTabFromOcr(entries, expected) {
+  const compact = entries.map((entry) => ({ ...entry, compact: compactOcr(entry.text) }));
+  const unique = (items, fraction = 0.5) => items.length === 1 ? {
+    x: items[0].x + Math.round(items[0].width * fraction),
+    y: items[0].y + Math.round(items[0].height / 2),
+    mode: fraction === 0.5 ? "single" : "combined",
+  } : null;
+  const exact = unique(compact.filter((entry) => entry.compact === expected));
+  if (exact) return exact;
+  const containing = unique(compact.filter((entry) => entry.compact.includes(expected)
+    && !(entry.compact.includes("数据上传") && entry.compact.includes("评价上传"))));
+  if (containing) return containing;
+  const combined = compact.filter((entry) => entry.compact.includes("数据上传") && entry.compact.includes("评价上传"));
+  return unique(combined, expected === "数据上传" ? 0.25 : 0.75);
+}
+
+async function selectTopTabByOcr(sky, app, state, expected, receipt) {
+  await sky.perform_secondary_action({ app, element_index: 0, action: "Raise" });
+  state = await sky.get_screenshot_state({ app, disableDiff: true });
+  let entries = await ocrEntries(fileURLToPath(state.screenshot.url));
+  let joined = entries.map((entry) => compactOcr(entry.text)).join("\n");
+  if (expected === "评价上传" && joined.includes("上传评价")) {
+    receipt.verifiedUploadTab = expected;
+    receipt.tabLocatedBy = "current-screenshot-ocr";
+    return state;
+  }
+  if (expected === "数据上传" && joined.includes("上传评价")) {
+    const downloadLink = dataDownloadPageLinkIndex(state.text);
+    if (downloadLink == null) throw new Error("jinsha-data-download-page-link-missing");
+    await sky.click({ app, element_index: downloadLink });
+    for (let attempt = 0; attempt < 8; attempt += 1) {
+      state = await sky.get_app_state({ app, disableDiff: true });
+      if (state.text.includes("#/reportDownload")) break;
+    }
+    const uploadLink = uploadPageLinkIndex(state.text);
+    if (uploadLink == null) throw new Error("jinsha-upload-page-link-missing-after-reset");
+    await sky.click({ app, element_index: uploadLink });
+    for (let attempt = 0; attempt < 8; attempt += 1) {
+      state = await sky.get_app_state({ app, disableDiff: true });
+      if (state.text.includes("#/uploadData/uploadData")) break;
+    }
+    state = await sky.get_screenshot_state({ app, disableDiff: true });
+    entries = await ocrEntries(fileURLToPath(state.screenshot.url));
+    joined = entries.map((entry) => compactOcr(entry.text)).join("\n");
+    receipt.dataTabResetBy = "sidebar-route";
+  }
+  if (expected === "评价上传" && !joined.includes("上传评价")) {
+    const reviewTab = locateUploadTabFromOcr(entries, expected);
+    if (!reviewTab) throw new Error("jinsha-review-tab-ocr-count:0-or-ambiguous");
+    await sky.click({
+      app,
+      x: reviewTab.x,
+      y: reviewTab.y,
+    });
+    state = await sky.get_screenshot_state({ app, disableDiff: true });
+    entries = await ocrEntries(fileURLToPath(state.screenshot.url));
+    joined = entries.map((entry) => compactOcr(entry.text)).join("\n");
+  }
+  const verified = expected === "评价上传"
+    ? joined.includes("上传评价")
+    : !joined.includes("上传评价") && entries.some((entry) => compactOcr(entry.text).includes("拖拽文件"));
+  if (!verified) throw new Error(`jinsha-tab-ocr-verification-failed:${expected}`);
+  receipt.verifiedUploadTab = expected;
+  receipt.tabLocatedBy = "current-screenshot-ocr";
+  return state;
+}
+
+async function selectTopTab(sky, app, state, expected, receipt) {
+  const bodyReady = expected === "数据上传" ? state.text.includes("上传数据") : state.text.includes("上传评价");
+  if (bodyReady) {
+    receipt.verifiedUploadTab = expected;
+    receipt.tabLocatedBy = "ax";
+    return state;
+  }
+  if (!/^\s*\d+ text 数据上传 评价上传$/m.test(state.text)) {
+    const uploadLink = uploadPageLinkIndex(state.text);
+    if (uploadLink == null) throw new Error("jinsha-upload-page-link-missing");
+    await sky.click({ app, element_index: uploadLink });
+    state = await waitForUploadSurface(sky, app);
+    if (!state?.text.includes("上传数据") && !/^\s*\d+ text 数据上传 评价上传$/m.test(state?.text ?? "")) {
+      throw new Error("jinsha-upload-surface-not-ready");
+    }
+  }
+  const groupLine = state.text.split("\n").find((line) => /^\s*\d+ text 数据上传 评价上传$/.test(line));
+  const groupIndex = Number(groupLine?.match(/(\d+) text/)?.[1]);
+  if (!Number.isFinite(groupIndex)) return selectTopTabByOcr(sky, app, state, expected, receipt);
+  await sky.click({ app, element_index: groupIndex });
+  state = await sky.get_app_state({ app, disableDiff: true });
+  if (expected === "数据上传" && state.text.includes("上传数据")) {
+    receipt.verifiedUploadTab = expected;
+    receipt.tabLocatedBy = "ax";
+    return state;
+  }
+  if (expected !== "评价上传" || !state.text.includes("上传数据")) {
+    throw new Error(`jinsha-tab-semantic-reset-failed:${expected}`);
+  }
+  await sky.perform_secondary_action({ app, element_index: 0, action: "Raise" });
+  state = await sky.get_app_state({ app, disableDiff: true });
+  await new Promise((resolve) => setTimeout(resolve, 300));
+  let target = null;
+  for (let frame = 0; frame < 3 && !target; frame += 1) {
+    state = await sky.get_screenshot_state({ app, disableDiff: true });
+    if (!state.screenshot) continue;
+    const entries = await ocrEntries(fileURLToPath(state.screenshot.url));
+    target = locateUploadTabFromOcr(entries, expected);
+  }
+  if (!target) throw new Error(`jinsha-tab-ocr-missing:${expected}`);
+  try {
+    await sky.click({ app, x: target.x, y: target.y });
+  } catch (error) {
+    if (!String(error).includes("noWindowsAvailable") || receipt.retryCount !== 0) throw error;
+    receipt.retryCount += 1;
+    await sky.perform_secondary_action({ app, element_index: 0, action: "Raise" });
+    state = await sky.get_app_state({ app, disableDiff: true });
+    await new Promise((resolve) => setTimeout(resolve, 300));
+    if (!state.screenshot) throw error;
+    const retryEntries = await ocrEntries(fileURLToPath(state.screenshot.url));
+    const retryTarget = locateUploadTabFromOcr(retryEntries, expected);
+    if (!retryTarget) throw error;
+    await sky.click({ app, x: retryTarget.x, y: retryTarget.y });
+  }
+  const wantedBody = expected === "数据上传" ? "上传数据" : "上传评价";
+  for (let attempt = 0; attempt < 8; attempt += 1) {
+    state = await sky.get_app_state({ app, disableDiff: true });
+    if (state.text.includes(wantedBody)) {
+      receipt.verifiedUploadTab = expected;
+      receipt.tabLocatedBy = "ax+ocr";
+      return state;
+    }
+  }
+  throw new Error(`jinsha-tab-not-ready:${expected}`);
+}
+
+export function uploadPageLinkIndex(text) {
+  const matches = text.split("\n").filter((line) => /^\s*\d+ link Description: 数据上传, Value: .*\/#\/uploadData\/uploadData$/.test(line));
+  if (matches.length !== 1) return null;
+  const match = matches[0].match(/(\d+) link Description: 数据上传/);
+  return match ? Number(match[1]) : null;
+}
+
+export function dataDownloadPageLinkIndex(text) {
+  const matches = text.split("\n").filter((line) => /^\s*\d+ link Description: 数据下载, Value: .*\/#\/reportDownload$/.test(line));
+  if (matches.length !== 1) return null;
+  const match = matches[0].match(/(\d+) link Description: 数据下载/);
+  return match ? Number(match[1]) : null;
+}
+
+function exactUploadAreaIndex(text) {
+  const line = text.split("\n").find((value) => /^\s*\d+ container 点击或拖拽文件到此区域/.test(value));
+  const match = line?.match(/(\d+) container 点击或拖拽文件到此区域/);
+  return match ? Number(match[1]) : null;
+}
+
+async function openNativePickerByKeyboard(sky, app, state) {
+  const uploadLink = uploadPageLinkIndex(state.text);
+  if (uploadLink == null) throw new Error("jinsha-upload-keyboard-anchor-missing");
+  await sky.click({ app, element_index: uploadLink });
+  for (let step = 0; step < 11; step += 1) await sky.press_key({ app, key: "Tab" });
+  await sky.press_key({ app, key: "Return" });
+  const opened = await sky.get_app_state({ app, disableDiff: true });
+  if (!opened.text.includes("ID: open-panel")) throw new Error("jinsha-upload-keyboard-open-failed");
+  return opened;
+}
+
+function pathFieldIndex(text) {
+  const line = text.split("\n").find((value) => value.includes("ID: PathTextField") && value.includes("文本栏"));
+  const match = line?.match(/(\d+) 文本栏/);
+  return match ? Number(match[1]) : null;
+}
+
+export async function waitForNativeOpenPanel(sky, app, { maxAttempts = 15, intervalMs = 200 } = {}) {
+  for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
+    const state = await sky.get_app_state({ app, disableDiff: true });
+    if (state.text.includes("ID: open-panel")) return state;
+    if (attempt + 1 < maxAttempts && intervalMs > 0) {
+      await new Promise((resolve) => setTimeout(resolve, intervalMs));
+    }
+  }
+  return null;
+}
+
+async function writeReceipt(file, receipt) {
+  await fs.mkdir(path.dirname(file), { recursive: true });
+  const temporary = `${file}.${Date.now()}.tmp`;
+  await fs.writeFile(temporary, `${JSON.stringify(receipt, null, 2)}\n`, { mode: 0o600 });
+  await fs.rename(temporary, file);
+}
+
+async function captureCompletionEvidence(sky, app, target, state, outputDir = "/tmp/zhensi_daily_download/evidence") {
+  const completed = completedUploadForDate(state.text, target.type, target.businessDate);
+  if (!completed) throw new Error(`${target.type}-completion-evidence-missing`);
+  const capture = await sky.get_screenshot_state({ app, disableDiff: true });
+  if (!completedUploadForDate(capture.text, target.type, target.businessDate)) {
+    throw new Error(`${target.type}-completion-evidence-drifted`);
+  }
+  await fs.mkdir(outputDir, { recursive: true });
+  const file = path.join(outputDir, `${target.type}_${target.businessDate.replaceAll("-", "")}_upload_completed.png`);
+  await fs.copyFile(fileURLToPath(capture.screenshot.url), file);
+  return { file, sha256: await sha256File(file), completedFile: completed.name };
+}
+
+export function verifyWechatSendResult(manifest, sent) {
+  const expectedHashes = manifest.images.map((item) => item.sha256);
+  const returnedHashes = Array.isArray(sent?.imageSha256) ? sent.imageSha256 : [];
+  return sent?.ok === true
+    && sent?.groupName === manifest.groupName
+    && expectedHashes.length === returnedHashes.length
+    && expectedHashes.every((hash, index) => hash === returnedHashes[index]);
+}
+
+export async function runJinshaPrepareExecutor({
+  sky,
+  type,
+  downloadReceipt = "/tmp/zhensi_daily_download/download_receipt.json",
+  outputReceipt = `/tmp/zhensi_daily_download/jinsha_prepare_${type}.json`,
+  uploadMode = "stop-before-open",
+  evidenceDir = "/tmp/zhensi_daily_download/evidence",
+} = {}) {
+  rejectLegacyExecution();
+  if (!sky) throw new Error("sky-is-required");
+  if (!new Set(["stop-before-open", "dedup-upload"]).has(uploadMode)) throw new Error(`unsupported-upload-mode:${uploadMode}`);
+  const started = performance.now();
+  const target = await loadTargetFromReceipt(type, downloadReceipt);
+  const app = await resolveRunningJinshaApp();
+  const receipt = {
+    ok: false,
+    executor: "jinsha-prepare",
+    type,
+    businessDate: target.businessDate,
+    mapping: target.mapping.tab,
+    file: target.file,
+    name: target.name,
+    size: target.size,
+    sha256: target.sha256,
+    openClicked: false,
+    nativeOpenClicked: false,
+    webUploadClicked: false,
+    uploadOccurred: false,
+    uploadMode,
+    skippedExisting: false,
+    retryCount: 0,
+    announcementDismissed: 0,
+    stage: "preflight",
+    stageMs: {},
+  };
+  const timed = async (name, action) => {
+    receipt.stage = name;
+    const stageStarted = performance.now();
+    try { return await action(); }
+    finally { receipt.stageMs[name] = Math.round(performance.now() - stageStarted); }
+  };
+  try {
+    let state = await timed("preflight", async () => {
+      let current = await sky.get_app_state({ app, disableDiff: true });
+      if (current.text.includes("ID: open-panel")) {
+        await sky.press_key({ app, key: "Escape" });
+        current = await sky.get_app_state({ app, disableDiff: true });
+      }
+      if (/^\s*0 .*Secondary Actions: Raise/m.test(current.text)) {
+        await sky.perform_secondary_action({ app, element_index: 0, action: "Raise" });
+        current = await sky.get_app_state({ app, disableDiff: true });
+      }
+      current = await dismissKnownAnnouncement(sky, app, current, receipt);
+      return current;
+    });
+    state = await timed("select_upload_tab", () => selectTopTab(sky, app, state, target.mapping.tab, receipt));
+    if (!state.text.includes(target.mapping.body) && receipt.verifiedUploadTab !== target.mapping.tab) throw new Error(`${type}-upload-page-mismatch`);
+
+    if (uploadMode === "dedup-upload") {
+      const existing = await timed("check_today_upload_log", async () => {
+        assertTodayUploadLog(state.text);
+        return completedUploadForDate(state.text, type, target.businessDate);
+      });
+      if (existing) {
+        receipt.evidence = await timed("capture_completion_evidence", () => captureCompletionEvidence(sky, app, target, state, evidenceDir));
+        receipt.ok = true;
+        receipt.stage = "skipped_existing_completed";
+        receipt.skippedExisting = true;
+        receipt.existingCompletedFile = existing.name;
+        receipt.stopReason = "already-uploaded-completed";
+        receipt.elapsedMs = Math.round(performance.now() - started);
+        await writeReceipt(outputReceipt, receipt);
+        return receipt;
+      }
+    }
+
+    state = await timed("open_native_picker", async () => {
+      const uploadArea = exactUploadAreaIndex(state.text);
+      if (uploadArea == null) {
+        receipt.uploadAreaLocatedBy = "keyboard-focus-sequence";
+        return openNativePickerByKeyboard(sky, app, state);
+      }
+      receipt.uploadAreaLocatedBy = "ax";
+      await sky.click({ app, element_index: uploadArea });
+      const opened = await waitForNativeOpenPanel(sky, app);
+      if (!opened) throw new Error("native-open-panel-not-open");
+      return opened;
+    });
+
+    state = await timed("select_exact_file", async () => {
+      await sky.press_key({ app, key: "super+shift+g" });
+      let current = await sky.get_app_state({ app, disableDiff: true });
+      const field = pathFieldIndex(current.text);
+      if (field == null) throw new Error("native-path-field-not-found");
+      await sky.set_value({ app, element_index: field, value: target.file });
+      await sky.press_key({ app, key: "Return" });
+      await sky.press_key({ app, key: "super+2" });
+      return sky.get_app_state({ app, disableDiff: true });
+    });
+
+    const selected = findSelectedFile(state.text);
+    if (selected !== target.name) throw new Error(`native-selected-file-mismatch:${selected ?? "none"}`);
+    if (!state.text.includes("ID: OKButton")) throw new Error("native-open-button-missing");
+    receipt.selectedFile = selected;
+    receipt.openButtonReportedEnabled = !/按钮 \(disabled\) 打开, ID: OKButton/.test(state.text);
+    if (uploadMode === "dedup-upload") {
+      state = await timed("open_selected_file_once", async () => {
+        const button = openButtonIndex(state.text);
+        if (button == null) throw new Error("native-open-button-index-missing");
+        receipt.openClicked = true;
+        receipt.nativeOpenClicked = true;
+        await sky.click({ app, element_index: button });
+        const pending = await waitForPendingUpload(sky, app, target);
+        if (!pending) throw new Error("pending-upload-result-unknown");
+        return pending;
+      });
+      state = await timed("submit_web_upload_once", async () => {
+        const submitted = await clickWebUploadOnce(sky, app, state, target);
+        receipt.webUploadClicked = true;
+        return submitted;
+      });
+      const completed = await timed("verify_upload_completed", () => waitForCompletedUpload(sky, app, target));
+      if (!completed) throw new Error("upload-result-unknown");
+      receipt.uploadOccurred = true;
+      receipt.evidence = await timed("capture_completion_evidence", () => captureCompletionEvidence(sky, app, target, completed.state, evidenceDir));
+      receipt.ok = true;
+      receipt.stage = "upload_completed";
+      receipt.completedUploadFile = completed.completed.name;
+      receipt.stopReason = "uploaded-completed";
+    } else {
+      receipt.ok = true;
+      receipt.stage = "stopped_before_open";
+      receipt.stopReason = "stopped-before-open";
+    }
+    receipt.elapsedMs = Math.round(performance.now() - started);
+    await writeReceipt(outputReceipt, receipt);
+    return receipt;
+  } catch (error) {
+    receipt.error = String(error?.message ?? error);
+    receipt.elapsedMs = Math.round(performance.now() - started);
+    await writeReceipt(outputReceipt, receipt);
+    throw error;
+  }
+}
+
+export async function runJinshaPrepareSequence(options = {}) {
+  rejectLegacyExecution();
+  const started = performance.now();
+  const store = await runJinshaPrepareExecutor({ ...options, type: "store" });
+  const review = await runJinshaPrepareExecutor({ ...options, type: "review" });
+  const result = {
+    ok: store.ok === true && review.ok === true,
+    executor: "jinsha-prepare-sequence",
+    store,
+    review,
+    finalState: options.uploadMode === "dedup-upload" ? "store-and-review-completed-or-skipped" : "review-selected-before-open",
+    openClicked: store.openClicked || review.openClicked,
+    uploadOccurred: store.uploadOccurred || review.uploadOccurred,
+    elapsedMs: Math.round(performance.now() - started),
+  };
+  if (options.uploadMode === "dedup-upload") {
+    const manifest = {
+      ok: result.ok,
+      executor: "jinsha-upload-wechat-evidence",
+      businessDate: store.businessDate,
+      groupName: "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+      images: [store.evidence, review.evidence],
+      sendRequiresActionTimeConfirmation: true,
+      sendAttempted: false,
+      uploadMustNotRepeatOnSendFailure: true,
+    };
+    const manifestFile = "/tmp/zhensi_daily_download/wechat_evidence_manifest.json";
+    await writeReceipt(manifestFile, manifest);
+    result.wechatEvidenceManifest = manifestFile;
+    result.wechat = {
+      status: "awaiting_action_time_confirmation",
+      sendAttempted: false,
+      groupName: manifest.groupName,
+      images: manifest.images,
+    };
+    if (options.wechatSendAuthorized === true) {
+      if (typeof options.sendWechatEvidence !== "function") throw new Error("wechat-sender-required-after-authorization");
+      result.wechat.sendAttempted = true;
+      const sent = await options.sendWechatEvidence(manifest);
+      const verified = verifyWechatSendResult(manifest, sent);
+      if (!verified) {
+        result.wechat.status = "send-result-unknown";
+        throw new Error("wechat-send-result-unknown");
+      }
+      result.wechat.status = "sent-verified";
+      result.wechat.sent = sent;
+      manifest.sendAttempted = true;
+      manifest.sendVerified = true;
+      manifest.sentReceipt = sent;
+      await writeReceipt(manifestFile, manifest);
+    }
+  }
+  return result;
+}
+
+export async function selfTestJinshaPrepareExecutor() {
+  const failures = [];
+  const expect = (condition, name) => { if (!condition) failures.push(name); };
+  expect(expectedMapping("store").tab === "数据上传", "store-mapping");
+  expect(expectedMapping("review").tab === "评价上传", "review-mapping");
+  expect(findSelectedFile("48 row (selected)\n  51 文本栏 (settable) Value: 正确.xlsx, URL: file:///tmp/x") === "正确.xlsx", "selected-file");
+  expect(findSelectedFile("51 文本栏 (settable) Value: 未选.xlsx") === null, "unselected-file");
+  const completedStore = "96 row\n  97 单元格\n    98 文本 门店下载_20260906至20260906_全部门店_5296218123_20260907151000000.xlsx\n  99 单元格\n    100 文本 上传完成";
+  const completedReview = "96 row\n  97 单元格\n    98 文本 评价下载_20260906_全部门店_5296218123_20260907151000000.xlsx\n  99 单元格\n    100 文本 上传完成";
+  expect(completedUploadForDate(completedStore, "store", "2026-09-06")?.status === "上传完成", "completed-store-range-date");
+  expect(completedUploadForDate(completedReview, "review", "2026-09-06")?.status === "上传完成", "completed-review-single-date");
+  expect(completedUploadForDate(completedStore.replace("上传完成", "上传失败"), "store", "2026-09-06") === null, "failed-upload-not-completed");
+  expect(completedUploadForDate(completedStore, "review", "2026-09-06") === null, "cross-type-not-completed");
+  expect(uploadPageLinkIndex("51 link Description: 数据上传, Value: data.guoshuyufen.com/#/uploadData/uploadData") === 51, "upload-page-link");
+  expect(uploadPageLinkIndex("51 link Description: 数据下载, Value: data.guoshuyufen.com/#/reportDownload") === null, "wrong-upload-page-link");
+  expect(dataDownloadPageLinkIndex("61 link Description: 数据下载, Value: data.guoshuyufen.com/#/reportDownload") === 61, "download-page-link");
+  expect(dataDownloadPageLinkIndex("61 link Description: 数据上传, Value: data.guoshuyufen.com/#/uploadData/uploadData") === null, "wrong-download-page-link");
+  const exactTab = locateUploadTabFromOcr([{ x: 100, y: 20, width: 80, height: 20, text: "评价上传" }], "评价上传");
+  const containingTab = locateUploadTabFromOcr([{ x: 100, y: 20, width: 100, height: 20, text: " 评价 上传 按钮 " }], "评价上传");
+  const combinedTab = locateUploadTabFromOcr([{ x: 100, y: 20, width: 200, height: 20, text: "数据上传 评价上传" }], "评价上传");
+  expect(exactTab?.x === 140 && exactTab.mode === "single", "exact-ocr-tab");
+  expect(containingTab?.x === 150 && containingTab.mode === "single", "containing-ocr-tab");
+  expect(combinedTab?.x === 250 && combinedTab.mode === "combined", "combined-ocr-tab");
+  expect(locateUploadTabFromOcr([
+    { x: 100, y: 20, width: 80, height: 20, text: "评价上传" },
+    { x: 300, y: 20, width: 80, height: 20, text: "评价上传" },
+  ], "评价上传") === null, "ambiguous-ocr-tab");
+  expect(locateAnnouncementCloseFromOcr([{ x: 100, y: 20, width: 60, height: 20, text: "关闭" }])?.x === 130, "announcement-close-ocr");
+  expect(locateAnnouncementCloseFromOcr([
+    { x: 100, y: 20, width: 60, height: 20, text: "关闭" },
+    { x: 300, y: 20, width: 60, height: 20, text: "关闭" },
+  ]) === null, "announcement-close-ambiguous");
+  const pendingTarget = {
+    type: "review",
+    businessDate: "2026-09-06",
+    name: "评价下载_20260906_全部门店_5296218123_20260907183225739.xlsx",
+  };
+  expect(pendingUploadMatches("301 文本 评价下载_20260906_全...3225739.xlsx\n304 text 上传 上传日志", pendingTarget), "pending-upload-match");
+  expect(!pendingUploadMatches("ID: open-panel\n301 文本 评价下载_20260906_全...3225739.xlsx", pendingTarget), "pending-upload-reject-open-panel");
+  expect(locateWebUploadFromOcr([{ x: 10, y: 20, width: 30, height: 20, text: "上传" }])?.x === 25, "web-upload-ocr");
+  expect(locateWebUploadFromOcr([
+    { x: 10, y: 20, width: 30, height: 20, text: "上传" },
+    { x: 50, y: 20, width: 30, height: 20, text: "上传" },
+  ]) === null, "web-upload-ocr-ambiguous");
+  const sendManifest = { groupName: "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰", images: [{ sha256: "a" }, { sha256: "b" }] };
+  expect(verifyWechatSendResult(sendManifest, { ok: true, groupName: sendManifest.groupName, imageSha256: ["a", "b"] }), "wechat-send-verified");
+  expect(!verifyWechatSendResult(sendManifest, { ok: true, groupName: "错误群", imageSha256: ["a", "b"] }), "wechat-wrong-group-rejected");
+  expect(!verifyWechatSendResult(sendManifest, { ok: true, groupName: sendManifest.groupName, imageSha256: ["b", "a"] }), "wechat-wrong-images-rejected");
+  const delayedSurfaceStates = ["URL: data.guoshuyufen.com/#/uploadData/uploadData", "URL: data.guoshuyufen.com/#/uploadData/uploadData\n73 text 数据上传 评价上传"];
+  let delayedSurfaceReads = 0;
+  const delayedSurface = await waitForUploadSurface({
+    get_app_state: async () => ({ text: delayedSurfaceStates[delayedSurfaceReads++] ?? delayedSurfaceStates.at(-1) }),
+  }, "test-app", { timeoutMs: 50, intervalMs: 0 });
+  expect(delayedSurface?.text.includes("数据上传 评价上传") && delayedSurfaceReads === 2, "delayed-upload-surface");
+  const delayedStates = ["page", "page", "ID: open-panel"];
+  let delayedReads = 0;
+  const delayedPanel = await waitForNativeOpenPanel({
+    get_app_state: async () => ({ text: delayedStates[delayedReads++] ?? "page" }),
+  }, "test-app", { maxAttempts: 4, intervalMs: 0 });
+  expect(delayedPanel?.text.includes("ID: open-panel") && delayedReads === 3, "delayed-native-open-panel");
+  let missingReads = 0;
+  const missingPanel = await waitForNativeOpenPanel({
+    get_app_state: async () => { missingReads += 1; return { text: "page" }; },
+  }, "test-app", { maxAttempts: 3, intervalMs: 0 });
+  expect(missingPanel === null && missingReads === 3, "missing-native-open-panel-bounded");
+  let unsupported = false;
+  try { expectedMapping("order"); } catch { unsupported = true; }
+  expect(unsupported, "unsupported-type");
+  if (failures.length) throw new Error(`self-test-failed:${failures.join(",")}`);
+  return { ok: true, tests: 29 };
+}

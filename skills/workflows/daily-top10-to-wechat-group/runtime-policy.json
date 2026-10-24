@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "policyId": "daily-top10-desktop-v1",
+  "browserProfile": "taobao-brand",
+  "browserPort": 9230,
+  "wechatChannel": "desktop",
+  "targetGroup": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+  "runtimeModelDecisions": 0,
+  "files": {
+    "runtime_guard": {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/scripts/runtime_guard.py",
+      "sha256": "2340768c7636e358fd8304009c4ce446332baa3b19c03594867ab29fa5b469df"
+    },
+    "workflow_executor": {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/scripts/workflow_executor.py",
+      "sha256": "3d2e094c6c4a86218a107541022e7f2a1c62441e346c9ebb4cfd03ed9a584a8b"
+    },
+    "background_executor": {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/scripts/desktop_background_executor.mjs",
+      "sha256": "4f67281d1620b65f290a947de2ab3b38d88c357da54ecadcaf922789f956cf6a"
+    },
+    "desktop_sender": {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/workflow_bridge_windows.py",
+      "sha256": "f7d843eeca265edc12e9c9475fdd996114d29f68953c10e56b5dc3323319da4d"
+    },
+    "desktop_preflight": {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/workflow_preflight.py",
+      "sha256": "6340a77b63f400216460ba1aaded0556238a77d54ff3e655b9cd87985c162d58"
+    },
+    "wechat_interaction_lock": {
+      "path": "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/scripts/wechat_interaction_lock.py",
+      "sha256": "3119492475903a3deb417e841ea73ca6ddc458a7f4bcf155f2a5ce3355f126e0"
+    },
+    "messaging_dependencies": {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/dependencies.json",
+      "sha256": "17de2b7ecdeb44ae8a8a948758348f7c74f56ec3e928af473727cccd0deb4bd8"
+    }
+  },
+  "_comment": "2026-10-20 大同指令：目标群 FEIBING NEO AI数字员工 → 上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰；runtime_guard.py 同步改 CANONICAL_TARGET_GROUP 并重绑 sha256（受控再封印，#31）。 2026-10-22 09:58 受控重绑 background_executor sha256（4d3fa3c6→4f67281d）：capture_self_check 增加同裁剪表头带 OCR 并集，修 Apple Vision 整图版面漏识「营业额/商圈收入排名」导致的 08:02/08:45/09:27 三连假失败。",
+  "rebindHistory": [
+    {
+      "at": "2026-10-24T01:31:06+08:00",
+      "file": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/scripts/workflow_executor.py",
+      "reason": "受控再封印：企微测试群扫描所需的 fail-safe 单点翻转（WECHAT_TEST_GROUP 测试群覆盖 + WECOM_AUTOSWEEP 焦点锁定守卫 + WECOM_TEST_ROOT 标记林隔离）均为运行期环境变量驱动、无环境变量时行为与原版完全一致；本重绑仅刷新摘要，不改动运行期语义。另含 10-23 企微通道迁移后未同步的既有漂移补绑。",
+      "oldSha256": "0baf49b0e5837527943606bfb5e091654a6d4dd4c5fb9d14da52959cad52b955",
+      "newSha256": "3d2e094c6c4a86218a107541022e7f2a1c62441e346c9ebb4cfd03ed9a584a8b"
+    },
+    {
+      "at": "2026-10-24T01:31:06+08:00",
+      "file": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/workflow_bridge_windows.py",
+      "reason": "受控再封印：企微测试群扫描所需的 fail-safe 单点翻转（WECHAT_TEST_GROUP 测试群覆盖 + WECOM_AUTOSWEEP 焦点锁定守卫 + WECOM_TEST_ROOT 标记林隔离）均为运行期环境变量驱动、无环境变量时行为与原版完全一致；本重绑仅刷新摘要，不改动运行期语义。另含 10-23 企微通道迁移后未同步的既有漂移补绑。",
+      "oldSha256": "6fa054e0a8d2d77051ca0ad141a4384794f0d2836f5dbfd799ca3c20abba9a39",
+      "newSha256": "f7d843eeca265edc12e9c9475fdd996114d29f68953c10e56b5dc3323319da4d"
+    },
+    {
+      "at": "2026-10-24T01:31:06+08:00",
+      "file": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/dependencies.json",
+      "reason": "受控再封印：企微测试群扫描所需的 fail-safe 单点翻转（WECHAT_TEST_GROUP 测试群覆盖 + WECOM_AUTOSWEEP 焦点锁定守卫 + WECOM_TEST_ROOT 标记林隔离）均为运行期环境变量驱动、无环境变量时行为与原版完全一致；本重绑仅刷新摘要，不改动运行期语义。另含 10-23 企微通道迁移后未同步的既有漂移补绑。",
+      "oldSha256": "bdab30b3d4aafb459ba928f7bd280ea1d3171b6b765d751bfa109ea0e17a2956",
+      "newSha256": "17de2b7ecdeb44ae8a8a948758348f7c74f56ec3e928af473727cccd0deb4bd8"
+    }
+  ]
+}

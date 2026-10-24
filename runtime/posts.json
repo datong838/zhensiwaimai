@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-01",
+  "note": "岗位实体化登记表（W1/L2）。工位→岗位→使用流水线→互斥组。daemon 派班前查表取互斥组锁（W2）。",
+  "posts": {
+    "jinsha-business": {
+      "port": 9232,
+      "role": "金鲨岗",
+      "platform": "金鲨 SaaS（美团+淘宝双平台数据）",
+      "mutexGroup": "jinsha-9232",
+      "lockPath": "runtime/state/locks/jinsha-9232.lock",
+      "postModule": "skills/posts/jinsha-post/scripts/lease.mjs",
+      "usedBy": [
+        "daily-negative-reviews",
+        "brand-negative-review-appeal-followup",
+        "daily-jinsha-reports-to-business-wechat",
+        "daily-new-stores-opening-to-wechat",
+        "daily-new-stores-activity-audit-to-wechat",
+        "daily-taobao-download-to-jinsha",
+        "negative-review-appeal-reporting",
+        "negative-feedback-list-appeals-0930",
+        "negative-feedback-list-appeals-1230"
+      ]
+    },
+    "taobao-brand": {
+      "port": 9230,
+      "role": "淘宝品牌商岗",
+      "platform": "淘宝闪购商家版（EGO TACO 单店 1364123817）",
+      "mutexGroup": "taobao-brand-9230",
+      "lockPath": "runtime/state/locks/taobao-brand-9230.lock",
+      "postModule": "skills/posts/taobao-brand-post/scripts/lease.mjs",
+      "usedBy": [
+        "daily-new-stores-opening-to-wechat",
+        "daily-new-stores-activity-audit-to-wechat",
+        "daily-new-stores-decoration-audit-to-wechat",
+        "daily-top10-to-wechat-group",
+        "daily-store-metrics-rotation-to-wechat"
+      ]
+    },
+    "taobao-agent-service": {
+      "port": 9231,
+      "role": "淘宝服务商岗",
+      "platform": "淘宝闪购服务商平台（代运营-意向商户管理）",
+      "mutexGroup": "taobao-svc-9231",
+      "lockPath": "runtime/state/locks/taobao-svc-9231.lock",
+      "postModule": "skills/posts/taobao-svc-post/scripts/lease.mjs",
+      "usedBy": [
+        "daily-agent-new-merchants-to-wechat",
+        "daily-new-stores-not-nourished-ops-to-wechat",
+        "daily-store-task-completion-ops-to-wechat",
+        "daily-store-basic-diagnosis-to-wechat",
+        "contract-termination-applications-screenshot"
+      ]
+    },
+    "meituan-merchant": {
+      "port": 9233,
+      "role": "美团岗",
+      "platform": "美团商家端（隔离客服工作台）",
+      "mutexGroup": "meituan-9233",
+      "lockPath": "runtime/state/locks/meituan-9233.lock",
+      "postModule": "skills/posts/meituan-post/scripts/lease.mjs",
+      "usedBy": [
+        "meituan-intelligent-customer-service",
+        "store-inspection"
+      ]
+    },
+    "video-cluster": {
+      "port": 9222,
+      "role": "视频发布岗（一簇）",
+      "platform": "抖音/快手/视频号/小红书 创作者中心",
+      "mutexGroup": "video-publish",
+      "lockPath": "runtime/state/locks/video-publish.lock",
+      "note": "抖音9222/快手9224/视频号9225/小红书9226 各独立端口，互斥组统一为 video-publish（同簇不并发发布）",
+      "usedBy": [
+        "daily-wechat-video-publish"
+      ]
+    },
+    "wechat-messaging": {
+      "type": "sender",
+      "role": "发微信岗",
+      "platform": "微信（Windows网关/手机adb；Mac桌面微信已于2026-09-30停用，禁止使用）",
+      "note": "发送班本体（32 文件 sha256 封印）。幂等靠身份账本+回读验证，不占 daemon 工位互斥组（无 port 字段，resolve_mutex_group 跳过）。",
+      "usedBy": []
+    }
+  }
+}

@@ -1,0 +1,11 @@
+import path from 'node:path';
+import { buildFullAppealReport } from './appeal_report_builder.mjs';
+
+// 2026-10-06 跨树整改（大同授权）：旧树 zhensi_waimai → 线上树 zhensi_waimai_back。
+const root = '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back';
+const shanghaiDay = (date = new Date()) => new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Shanghai', year: 'numeric', month: '2-digit', day: '2-digit' }).format(date);
+const runDate = shanghaiDay();
+const yesterday = new Date(`${runDate}T00:00:00+08:00`); yesterday.setUTCDate(yesterday.getUTCDate() - 1);
+const businessDate = shanghaiDay(yesterday);
+const outputDir = path.join(root, 'outputs', `meituan-waimai-negative-review-appeals-${runDate.replaceAll('-', '')}`);
+console.log(JSON.stringify(await buildFullAppealReport({ channelLabel: '美团外卖', contextLabel: '美团', platformValue: '1', businessDate, recordDir: path.join(root, 'records', 'meituan-waimai-negative-review-appeals', businessDate), outputDir, outputPath: path.join(outputDir, `美团外卖差评申诉汇总-${businessDate}.xlsx`), previewPath: path.join(outputDir, `美团外卖差评申诉汇总-${businessDate}.png`) })));
