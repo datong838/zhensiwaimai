@@ -60,6 +60,26 @@ def _validate_acceptance(acceptance: dict, metadata: dict) -> None:
     for key, expected in required.items():
         if acceptance.get(key) != expected:
             raise IntegrityError(f"executor-lock-acceptance-{key}-mismatch")
+    ui_items = [row for row in (acceptance.get("commonReceipt") or {}).get("items", [])
+                if row.get("verificationLevel") == "wecom-ui-tree-text"]
+    if ui_items:
+        from runtime_contract import verify_delivery
+        payloads = acceptance.get("payloads") or []
+        if (len(ui_items) != 1 or len(payloads) != 1
+                or len((acceptance.get("commonReceipt") or {}).get("items", [])) != 1
+                or (acceptance.get("commonReceipt") or {}).get("status") != "verified"
+                or ui_items[0].get("status") != "verified" or ui_items[0].get("sendAttempts") != 1
+                or acceptance.get("postSendInputCleared") != [True, True]):
+            raise IntegrityError("executor-lock-acceptance-ui-evidence-invalid")
+        try:
+            verify_delivery(acceptance, "电销+直播攻坚组", {
+                "merchantId": metadata.get("merchantId"),
+                "sha256": metadata.get("messageSha256"),
+                "text": payloads[0].get("text", ""),
+            })
+        except (RuntimeError, KeyError, TypeError) as error:
+            raise IntegrityError("executor-lock-acceptance-ui-evidence-invalid") from error
+        return
     # 2026-09-30 大同授权：Windows 驱动服务通道的对等验收证据——服务端读回
     # 锚点（text-exact 且位于会话尾部，文本 sha256 与凭据一致）替代 Mac 原生
     # 两帧输入框清空/复制读回；证据缺失时回落原 fail-closed 契约。
@@ -430,7 +450,7 @@ def seal_from_nonempty_acceptance(result: dict, output_dir: Path,
         "receiptSha256": sha256(receipt_path),
         "merchantId": accepted.get("merchantId"),
         "messageSha256": receipt.get("messageSha256"),
-        "verification": "desktop-bubble-copy-exact-two-frame",
+        "verification": ("wecom-ui-tree-text" if any(row.get("verificationLevel") == "wecom-ui-tree-text" for row in (receipt.get("commonReceipt") or {}).get("items", [])) else "desktop-bubble-copy-exact-two-frame"),
     }
     _validate_acceptance(receipt, metadata)
     final_cursor = result["finalCursor"]

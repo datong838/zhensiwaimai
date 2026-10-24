@@ -21,7 +21,7 @@ def validate(task,reply,intent):
  if result.get('status')!='verified' or result.get('sendAttempts')!=1:raise ValueError('response-not-verified')
  if any(intent.get(k)!=v for k,v in {'taskId':task['taskId'],'binding':task['binding'],'sha256':item['sha256'],'groupName':req['groupName'],'sendAttempts':1}.items()):raise ValueError('intent-binding-invalid')
  times=[intent.get('createdAt')]+[f.get('observedAt') for f in result['observations']]+[task['deadlineAt']]
- if any(type(t) not in (int,float) or not math.isfinite(t) for t in times) or not times[0]<=times[1]<times[2]<=times[3]:raise ValueError('evidence-time-invalid')
+ if any(type(t) not in (int,float) or not math.isfinite(t) for t in times) or not (times[0]<=times[1]<=times[3] and times[1]<times[2]<=times[3]+120):raise ValueError('evidence-time-invalid')
  return result
 
 def reconcile(folder,apply=False):

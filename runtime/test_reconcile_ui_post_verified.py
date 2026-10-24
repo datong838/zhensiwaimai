@@ -17,4 +17,11 @@ class EvidenceTests(unittest.TestCase):
  def test_tampered_task(self):
   t=copy.deepcopy(self.t);t['request']['context']['workflowId']='other'
   with self.assertRaises(ValueError):validate(t,self.r,self.i)
+class LateReadOnlyFrameTests(EvidenceTests):
+ def test_second_readonly_frame_may_follow_deadline(self):
+  self.r['result']['observations'][1]['observedAt']=40
+  self.assertEqual(validate(self.t,self.r,self.i)['status'],'verified')
+ def test_second_frame_budget_exceeded(self):
+  self.r['result']['observations'][1]['observedAt']=151
+  with self.assertRaises(ValueError):validate(self.t,self.r,self.i)
 if __name__=='__main__':unittest.main()
