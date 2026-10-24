@@ -22,6 +22,8 @@ class WeComRecoveryTests(unittest.TestCase):
         policy_root = patch('wecom_adapter.ROOT', Path(self.tmp.name))
         policy_root.start()
         self.addCleanup(policy_root.stop)
+        self.image = Path(self.tmp.name) / 'business.png'
+        self.image.write_bytes(b'image fixture')
         self.adapter = WeComAdapter()
         self.request = {'groupName': '指定业务群'}
         self.inactive = dict(result='not-frontmost', axTrusted=True, pid=42,
@@ -83,10 +85,10 @@ class WeComRecoveryTests(unittest.TestCase):
     def test_single_command_and_unknown_is_not_retried(self):
         with patch('egress_policy.check', return_value={'allow': True}), \
                 patch.object(self.adapter, '_run_sender', return_value=result(result='sent-tail-unconfirmed')) as sender:
-            receipt = self.adapter.send_one(self.request, {'type': 'image', 'path': '/tmp/business.png'},
+            receipt = self.adapter.send_one(self.request, {'type': 'image', 'path': str(self.image)},
                                             self.tmp.name, None, float('inf'))
         sender.assert_called_once()
-        self.assertEqual(sender.call_args.args[0], ['send-image', '--image', '/tmp/business.png', '--group', '指定业务群'])
+        self.assertEqual(sender.call_args.args[0], ['send-image', '--image', str(self.image), '--group', '指定业务群'])
         self.assertEqual(receipt['status'], 'unknown')
         self.assertEqual(receipt['sendAttempts'], 1)
 
@@ -156,7 +158,7 @@ class WeComRecoveryTests(unittest.TestCase):
         failed = result(result='send-fail', steps=[{'send_attempts': [{'try': 'enter', 'input_clean': False}]}])
         with patch('egress_policy.check', return_value={'allow': True}), \
                 patch.object(self.adapter, '_run_sender', return_value=failed) as sender:
-            receipt = self.adapter.send_one(self.request, {'type': 'image', 'path': '/tmp/business.png'},
+            receipt = self.adapter.send_one(self.request, {'type': 'image', 'path': str(self.image)},
                                             self.tmp.name, None, float('inf'))
         sender.assert_called_once()
         self.assertEqual(receipt['status'], 'unknown')
