@@ -20,5 +20,11 @@
       "observedAt": 1792826422.519
     }
   ],
-  "limitation": "UI evidence returned after sender deadline; original flow reconciliation remains required. Purple window indicator present during successful delivery."
+  "limitation": "Original command timed out; ledger later reconciled from timely UI observations without another send. Historical failed run is preserved.",
+  "reconciliation": {
+    "status": "verified",
+    "newSendAttempts": 0,
+    "method": "original-ledger-timely-ui-evidence-returned-late",
+    "originalRecordsBackedUp": true
+  }
 }
