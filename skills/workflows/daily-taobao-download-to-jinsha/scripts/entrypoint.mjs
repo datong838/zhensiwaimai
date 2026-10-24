@@ -50,7 +50,7 @@ const WECHAT_SOURCE = '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skil
 const WECHAT_SHA256 = '89452236f34d39924b47bc3a732b33cf3f3c8a900c63ca38b7b805d0b3f6680e';
 const RECOVERY_SOURCE = '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-taobao-download-to-jinsha/scripts/scheduled_evidence_recovery.mjs';
 // 2026-10-03 受控重绑（大同授权「方案 B」）：recovery 改为逐图 union 语义（部分补发）。
-const RECOVERY_SHA256 = '870f19cf419b593b68d9b190498fbfc575f665f84489680894a3778f21a26fe6';
+const RECOVERY_SHA256 = '28601e9a6679eb868ed4672e8a0614dcd837044efda723599e7bc49bdf6747bd';
 const EVIDENCE_ROOT = '/tmp/zhensi_daily_download/background-browser';
 const WECHAT_LEDGER = '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/taobao-jinsha-wechat-evidence-attempts';
 const CONTROL_POLICY_VERSION = 'daily-taobao-jinsha-code-enforced-2026-09-28';
@@ -186,7 +186,11 @@ export async function preflight() {
     const wechatSelfTest = sender.selfTest();
     if (wechatSelfTest.ok !== true) throw new Error('wechat-sender-self-test-failed');
     const recovery = await evidenceRecovery();
-    const pendingEvidence = await recovery.inspectPendingEvidence({
+    let pendingEvidence = await recovery.inspectHistoricalUIDelivery({
+      root:EVIDENCE_ROOT,ledger:WECHAT_LEDGER,businessDate:yesterdayShanghai(),policyVersion:CONTROL_POLICY_VERSION,
+      evidenceFile:`/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/jinsha-upload-ui-delivery-${new Date().toLocaleDateString('en-CA',{timeZone:'Asia/Shanghai'}).replaceAll('-','')}.json`,
+    });
+    if (pendingEvidence.kind === 'none') pendingEvidence = await recovery.inspectPendingEvidence({
       root: EVIDENCE_ROOT, ledger: WECHAT_LEDGER, businessDate: yesterdayShanghai(),
       policyVersion: CONTROL_POLICY_VERSION,
     });
@@ -410,8 +414,14 @@ export async function runScheduled(...args) {
     const readiness = await preflight();
     if (!readiness.ok) throw new Error(`daily-flow-environment-not-ready:${JSON.stringify(readiness)}`);
     const recovery = await evidenceRecovery();
-    pending = await recovery.inspectPendingEvidence({
-      root: EVIDENCE_ROOT, ledger: WECHAT_LEDGER, businessDate: yesterdayShanghai(),
+    const productionDay = yesterdayShanghai();
+    pending = await recovery.inspectHistoricalUIDelivery({
+      root: EVIDENCE_ROOT, ledger: WECHAT_LEDGER, businessDate: productionDay,
+      policyVersion: CONTROL_POLICY_VERSION,
+      evidenceFile: `/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/jinsha-upload-ui-delivery-${new Date().toLocaleDateString('en-CA',{timeZone:'Asia/Shanghai'}).replaceAll('-','')}.json`,
+    });
+    if (pending.kind === 'none') pending = await recovery.inspectPendingEvidence({
+      root: EVIDENCE_ROOT, ledger: WECHAT_LEDGER, businessDate: productionDay,
       policyVersion: CONTROL_POLICY_VERSION,
     });
   } catch (error) {
@@ -423,6 +433,17 @@ export async function runScheduled(...args) {
       sendResult: null, workflowAttempts: Object.freeze(workflowAttempts), controlDecision: decision,
       completionDisposition, runReview: failed.runReview, sendReview: [],
       reviewSummary: { workflow: failed.reviewSummary, wechat: null } });
+  }
+  if (pending.kind === 'historical-ui-completed') {
+    workflowReceipt = await loadCompletedReceipt(pending.receiptFile);
+    const completionDisposition = Object.freeze({kind:'completed',mayEndTurn:true,
+      retryExternalEffect:false,requiredAction:'report-completion-review',reason:'historical-ui-delivery-reconciled'});
+    return Object.freeze({ok:true,stage:'completed',workflowReceipt,
+      sendResult:{ok:true,reusedExisting:true,newSendAttempts:0,receipt:pending.historicalUIDelivery},
+      workflowAttempts:Object.freeze([workflowAttempt(1,workflowReceipt,stopDecision('historical-ui-delivery-reconciled'))]),
+      controlDecision:codeDecision('complete','historical-ui-delivery-reconciled'),completionDisposition,
+      runReview:workflowReceipt.runReview,sendReview:[],
+      reviewSummary:{workflow:workflowReceipt.reviewSummary,wechat:{result:'reconciled-historical-ui',newSendAttempts:0}}});
   }
   if (pending.kind === 'blocked') {
     const failed = pending.receipt || workflowExceptionReceipt(new Error(pending.reason), 0);

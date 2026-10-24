@@ -22,13 +22,13 @@ async function payloadBoundToRun(payload, manifest, directory) {
   return payload.size === bytes.length && sha256(bytes) === image.sha256;
 }
 
-function completedReceipt(receipt, businessDate, policyVersion, directory) {
+function completedReceipt(receipt, businessDate, policyVersion, directory, sourceGroup = GROUP) {
   const manifest = receipt?.evidenceManifest;
   return receipt?.ok === true && receipt.stage === 'completed' && receipt.phase === 'completed'
     && receipt.cleanupStatus === 'completed' && Array.isArray(receipt.runReview)
     && receipt.reviewSummary?.controlPolicyVersion === policyVersion
     && receipt.businessDate === businessDate && manifest?.businessDate === businessDate
-    && receipt.runId === manifest.runId && manifest.groupName === GROUP
+    && receipt.runId === manifest.runId && manifest.groupName === sourceGroup
     && manifest.executor === 'background-browser-executor'
     && manifest.channel === 'control-background-dedicated-chrome'
     && ['execute', 'verify-idempotency-only'].includes(manifest.mode)
@@ -176,4 +176,65 @@ export async function inspectPendingEvidence({ root, ledger, businessDate, polic
       marker: resumeCandidate.marker, markerFile: resumeCandidate.markerFile };
   }
   return { kind: 'none' };
+}
+
+
+// 历史UI交付独立证据：只读核对，不改旧marker，不冒充附件像素回读。
+export async function inspectHistoricalUIDelivery({ root, ledger, businessDate, policyVersion, evidenceFile }) {
+  if (!evidenceFile) return { kind: 'none' };
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(businessDate || '') || !root || !ledger || !policyVersion) throw Error('historical-ui-input-invalid');
+  let evidence;
+  try { evidence = JSON.parse(await fs.readFile(evidenceFile, 'utf8')); }
+  catch (error) { if (error.code === 'ENOENT') return { kind: 'none' }; throw Error('historical-ui-evidence-invalid'); }
+  const deny = (reason) => ({ kind: 'blocked', reason: `historical-ui-${reason}` });
+  if (evidence.groupName !== GROUP || evidence.channel !== 'cua-visible-ui'
+      || evidence.originalMarkerPreserved !== true || evidence.status !== 'both-visible-delivery-confirmed'
+      || typeof evidence.authorization !== 'string' || !evidence.authorization.trim()
+      || evidence.items?.length !== 2) return deny('scope-invalid');
+  for (const item of evidence.items) {
+    const sent = new Date(item.at);
+    const dayAfter = new Date(`${businessDate}T12:00:00+08:00`); dayAfter.setUTCDate(dayAfter.getUTCDate()+1);
+    if (Number.isNaN(sent.getTime()) || sent.toLocaleDateString('en-CA',{timeZone:'Asia/Shanghai'})
+        !== dayAfter.toLocaleDateString('en-CA',{timeZone:'Asia/Shanghai'})
+        || item.state !== 'visible-delivery-confirmed' || item.sendAttempts !== 1
+        || !/^[a-f0-9]{64}$/.test(item.sha256 || '') || !item.verification) return deny('item-invalid');
+    try { if (sha256(await fs.readFile(item.source)) !== item.sha256) return deny('copy-drift'); }
+    catch { return deny('copy-unavailable'); }
+  }
+  const matches = [];
+  for (const entry of await fs.readdir(root, { withFileTypes:true })) {
+    if (!entry.isDirectory() || !new RegExp(`^${businessDate}-${RUN_ID}$`).test(entry.name)) continue;
+    const directory=path.join(root,entry.name), receiptFile=path.join(directory,'receipt.json');
+    let receipt; try { receipt=JSON.parse(await fs.readFile(receiptFile,'utf8')); } catch { continue; }
+    const sourceGroup=receipt?.evidenceManifest?.groupName;
+    // 用户已明确将原FEIBING结果迁运营群；保留原收据群名，绝不改写历史。
+    if (![GROUP,'FEIBING NEO AI数字员工'].includes(sourceGroup)
+        || !completedReceipt(receipt,businessDate,policyVersion,directory,sourceGroup)) continue;
+    const images=receipt.evidenceManifest.images;
+    if (!images.every((image,index)=>path.basename(image.path)===IMAGE_NAMES[index]
+        && image.sha256===evidence.items[index].sha256)) continue;
+    for (const image of images) {
+      try { if (path.dirname(await fs.realpath(image.path))!==await fs.realpath(directory)
+          || sha256(await fs.readFile(image.path))!==image.sha256) return deny('original-drift'); }
+      catch { return deny('original-unavailable'); }
+    }
+    matches.push({receipt,receiptFile});
+  }
+  if (matches.length !== 1) return deny('production-match-not-unique');
+  // 历史UI证据不得掩盖其他原事件的未知发送。
+  for (const entry of await fs.readdir(ledger,{withFileTypes:true})) {
+    if (!entry.isFile() || !entry.name.endsWith('.json')) continue;
+    let marker;try {marker=JSON.parse(await fs.readFile(path.join(ledger,entry.name),'utf8'));}catch{return deny('ledger-invalid');}
+    if (!marker.payloads?.some(payload=>path.basename(path.dirname(payload.path||'')).startsWith(`${businessDate}-`))) continue;
+    if (![GROUP,'FEIBING NEO AI数字员工'].includes(marker.groupName) || marker.bridgeVersion !== 1 || marker.payloadType !== 'image') return deny('ledger-scope-invalid');
+    if (previouslyVerified(marker)) continue;
+    if (marker.state !== 'blocked' || marker.sendAttempts !== 0 || marker.newSendAttempts !== 0
+        || marker.commonReceipt?.status !== 'blocked' || marker.commonReceipt?.items?.length !== 0)
+      return deny('unsettled-original-event');
+  }
+  return {kind:'historical-ui-completed',...matches[0],
+    historicalUIDelivery:{status:'reconciled-historical-ui',verification:'historical-visible-ui-observation',
+      evidenceFile,evidenceSha256:sha256(await fs.readFile(evidenceFile)),
+      sourceHashes:evidence.items.map(item=>item.sha256),newSendAttempts:0,
+      limitation:'Historical visible delivery observation; not attachment pixel or byte readback.'}};
 }
