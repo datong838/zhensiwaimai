@@ -26,6 +26,12 @@ class RegisteredRoutes(unittest.TestCase):
     def test_repair_scope_not_opened(self):
         for workflow in ['jinsha-reports-taobao-repair-20261023','unregistered']:
             self.assertFalse(allowed({'context':{'workflowId':workflow}}))
+    def test_summary_cannot_reuse_excel_ledger(self):
+        requests = {r['context']['workflowId']: r for r in self.requests()}
+        for workflow in ('taobao-flash-appeals', 'meituan-waimai-appeals'):
+            request = copy.deepcopy(requests[workflow + '-summary'])
+            request['context']['eventId'] = requests[workflow]['context']['eventId']
+            self.assertFalse(allowed(request))
     def test_adapter_preflight_uses_ui_only(self):
         for request in self.requests():
             with patch('wecom_ui_queue.exchange',return_value={'ok':True,'resolvedGroup':request['groupName'],'inputEmpty':True}) as queue,patch.object(WeComAdapter,'_run_sender',side_effect=AssertionError('legacy')):
