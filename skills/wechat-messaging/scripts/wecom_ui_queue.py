@@ -90,6 +90,7 @@ def validate_response(task, reply):
     if task['stage'] == 'preflight':
         if result.get('ok') is not True or result.get('inputEmpty') is not True:
             raise ValueError('ui-post-preflight-not-verified')
+        result = result | {'verificationLevel': 'wecom-ui-tree-target'}
     elif result.get('status') == 'verified':
         frames = result.get('observations', [])
         if (result.get('sendAttempts') != (0 if task['stage'] == 'readback' else 1) or result.get('sha256') != task['item']['sha256']

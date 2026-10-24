@@ -37,9 +37,11 @@ def ui_tree_only_required():
 
 
 def target_preflight_verified(preflight, group):
-    """Accept either legacy exact-list proof or exact WeCom search/title proof."""
+    """Accept legacy target proof or a validated UI-post preflight receipt."""
     return (preflight.get('ok') is True and preflight.get('resolvedGroup') == group
-            and (preflight.get('sessionListVerified') is True
+            and ((preflight.get('verificationLevel') == 'wecom-ui-tree-target'
+                  and preflight.get('inputEmpty') is True)
+                 or preflight.get('sessionListVerified') is True
                  or (preflight.get('candidateStrategy') == 'wecom-prefix-search'
                      and preflight.get('targetIdentityVerified') is True
                      and preflight.get('groupTypeProof') == 'wecom-search-open-title-evidence')))
