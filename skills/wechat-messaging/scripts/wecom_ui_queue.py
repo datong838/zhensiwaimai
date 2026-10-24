@@ -41,8 +41,8 @@ def enabled(request):
         return request_enabled(request)
     if context.get('workflowId') in ALLOWED:
         return True
-    from registered_ui_routes import allowed as registered_route_allowed
-    if registered_route_allowed(request):
+    from registered_ui_routes import allowed as registered_route_allowed, allowed_direct
+    if registered_route_allowed(request) or allowed_direct(request):
         return True
     import re
     workflow = context.get('workflowId')

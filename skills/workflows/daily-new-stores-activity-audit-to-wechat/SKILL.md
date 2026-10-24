@@ -5,7 +5,7 @@ description: 读取当天完整的新店机器收据，仅对淘宝新店逐店�
 
 # 淘宝新店活动缺项巡检与提醒
 
-本 Skill 是 `daily-new-stores-to-wechat` 拆出的**独立工作流**（与 `daily-new-stores-opening-to-wechat` 开业通知流并列，非同一任务）。它读取开业流当天产出的新店机器收据，仅对其中淘宝新店逐店核验三项活动，缺项时向「FEIBING NEO AI数字员工」发送提醒。执行前阅读统一 [wechat-messaging](../../wechat-messaging/SKILL.md) 的输入/恢复合同。
+本 Skill 是 `daily-new-stores-to-wechat` 拆出的**独立工作流**（与 `daily-new-stores-opening-to-wechat` 开业通知流并列，非同一任务）。它读取开业流当天产出的新店机器收据，仅对其中淘宝新店逐店核验三项活动，缺项时向「上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰」发送提醒。执行前阅读统一 [wechat-messaging](../../wechat-messaging/SKILL.md) 的输入/恢复合同。
 
 ## 运行入口
 
@@ -22,7 +22,7 @@ description: 读取当天完整的新店机器收据，仅对淘宝新店逐店�
 
 ## 三项活动阶段
 
-淘宝品牌商 `taobao-brand:9230` 的活动阶段通过 `scripts/activity_daily.py` 读取当天完整的新店机器收据，仅对其中淘宝新店逐店核验；若当天无完整收据，先运行开业流的 `workflow.py --collect-only` 一次，只读刷新新店名单，不发送开业天数通知。`scripts/activity_workflow.py --shop-name <完整店名>` 可单店只读采集，加 `--execute` 才允许按完整收据向「FEIBING NEO AI数字员工」发送缺项提醒。
+淘宝品牌商 `taobao-brand:9230` 的活动阶段通过 `scripts/activity_daily.py` 读取当天完整的新店机器收据，仅对其中淘宝新店逐店核验；若当天无完整收据，先运行开业流的 `workflow.py --collect-only` 一次，只读刷新新店名单，不发送开业天数通知。`scripts/activity_workflow.py --shop-name <完整店名>` 可单店只读采集，加 `--execute` 才允许按完整收据向「上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰」发送缺项提醒。
 
 逐项精确核对「减配送费」「新阶梯红包」「店铺满减」；「阶梯爆涨红包」不自动等同于「新阶梯红包」。页面登录、门店身份、清单状态、总数、分页、名称和门店绑定有歧义时阻断。
 
