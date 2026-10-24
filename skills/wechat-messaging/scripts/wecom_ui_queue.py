@@ -41,6 +41,9 @@ def enabled(request):
         return request_enabled(request)
     if context.get('workflowId') in ALLOWED:
         return True
+    from registered_ui_routes import allowed as registered_route_allowed
+    if registered_route_allowed(request):
+        return True
     import re
     workflow = context.get('workflowId')
     if workflow == 'contract-termination-ops':
