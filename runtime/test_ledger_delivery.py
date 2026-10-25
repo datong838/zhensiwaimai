@@ -23,6 +23,38 @@ class LedgerDeliveryTests(unittest.TestCase):
             path=Path(folder)/'sent.json'
             with patch.object(run_all,'SENT_TODAY',path):run_all._maybe_send_ledger(Path(folder)/'report.xlsx',True,True,'2026-10-24')
             self.assertTrue(path.exists())
+class CustomerLedgerViewTests(unittest.TestCase):
+    def rows(self):
+        return [{'name': str(i), 'exec_time': '', 'note': '旧技术异常或历史说明', 'done': done,
+                 'dev_state': 'paused' if done=='已合并' else 'active', 'superseded':done=='不补跑'}
+                for i,done in enumerate(['是','已合并','不补跑'])]
+    def test_tomorrow_uses_yes_and_only_current_day_notes(self):
+        rows=self.rows();before=[dict(r) for r in rows]
+        shown,total,done=run_all.customer_ledger_view(rows,'2026-10-26')
+        self.assertEqual([r['done'] for r in shown],['是']*3)
+        self.assertEqual([r['note'] for r in shown],['当日已完成','已随当日申诉完成','由当日末班覆盖'])
+        self.assertEqual((total,done),(3,3));self.assertEqual(rows,before)
+    def test_today_retains_original_presentation(self):
+        rows=self.rows();shown,total,done=run_all.customer_ledger_view(rows,'2026-10-25')
+        self.assertEqual(shown,rows);self.assertEqual((total,done),(1,1))
+    def test_unfinished_stays_unfinished_in_gate(self):
+        rows=self.rows()+[{'name':'pending','done':'否','dev_state':'active','note':'未完成','exec_time':''}]
+        shown,total,done=run_all.customer_ledger_view(rows,'2026-10-26')
+        self.assertEqual(len(shown),3);self.assertEqual((total,done),(4,3))
+    def test_excel_and_csv_customer_columns_match(self):
+        from openpyxl import load_workbook
+        with tempfile.TemporaryDirectory() as folder:
+            csv=Path(folder)/'test.csv';xlsx=Path(folder)/'test.xlsx';rows=self.rows()
+            run_all.write_ledger_csv(rows,csv,'2026-10-26')
+            run_all.write_ledger_xlsx(rows,xlsx,'2026-10-26')
+            text=csv.read_text();self.assertNotIn('旧技术异常',text)
+            self.assertIn('应执行数量,3',text);self.assertIn('已完成数量,3',text)
+            w=load_workbook(xlsx,read_only=True,data_only=True)
+            actual=list(w.active.iter_rows(min_row=4,max_row=6,values_only=True));w.close()
+            self.assertTrue(all(r[2]=='是' for r in actual))
+            self.assertEqual([r[3] for r in actual],['当日已完成','已随当日申诉完成','由当日末班覆盖'])
+
+
 class LedgerScheduleDisplayTests(unittest.TestCase):
     def test_current_manifest_retains_exact_original_twenty_one(self):
         import json

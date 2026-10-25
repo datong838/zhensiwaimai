@@ -13,11 +13,11 @@
     },
     "workflow_executor": {
       "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/scripts/workflow_executor.py",
-      "sha256": "3d2e094c6c4a86218a107541022e7f2a1c62441e346c9ebb4cfd03ed9a584a8b"
+      "sha256": "7c3d688f45abdbdba09f55e45dd7d7d42d17b18a25e907690c2b82fc06381af7"
     },
     "background_executor": {
       "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/scripts/desktop_background_executor.mjs",
-      "sha256": "4f67281d1620b65f290a947de2ab3b38d88c357da54ecadcaf922789f956cf6a"
+      "sha256": "4e5cb1ccd75106c676607a74efc4f7dd7f4104c66fa9abb7ba518eb349de47e4"
     },
     "desktop_sender": {
       "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/workflow_bridge_windows.py",
@@ -33,7 +33,7 @@
     },
     "messaging_dependencies": {
       "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/dependencies.json",
-      "sha256": "fba2bee00e73ac26008f7246c58ca2d443437bfc8c6829277cd025782544f868"
+      "sha256": "0581d829a4a65fcfbb31ec1d999bd6d1f4fba558eecc5b16b4ce384ff8bd6f0f"
     }
   },
   "_comment": "2026-10-20 大同指令：目标群 FEIBING NEO AI数字员工 → 上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰；runtime_guard.py 同步改 CANONICAL_TARGET_GROUP 并重绑 sha256（受控再封印，#31）。 2026-10-22 09:58 受控重绑 background_executor sha256（4d3fa3c6→4f67281d）：capture_self_check 增加同裁剪表头带 OCR 并集，修 Apple Vision 整图版面漏识「营业额/商圈收入排名」导致的 08:02/08:45/09:27 三连假失败。",
@@ -58,6 +58,22 @@
       "reason": "受控再封印：企微测试群扫描所需的 fail-safe 单点翻转（WECHAT_TEST_GROUP 测试群覆盖 + WECOM_AUTOSWEEP 焦点锁定守卫 + WECOM_TEST_ROOT 标记林隔离）均为运行期环境变量驱动、无环境变量时行为与原版完全一致；本重绑仅刷新摘要，不改动运行期语义。另含 10-23 企微通道迁移后未同步的既有漂移补绑。",
       "oldSha256": "bdab30b3d4aafb459ba928f7bd280ea1d3171b6b765d751bfa109ea0e17a2956",
       "newSha256": "17de2b7ecdeb44ae8a8a948758348f7c74f56ec3e928af473727cccd0deb4bd8"
+    },
+    {
+      "at": "2026-10-25",
+      "authorization": "用户今晚修复遗留并去掉执行倒计时",
+      "file": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/scripts/workflow_executor.py",
+      "oldSha256": "3d2e094c6c4a86218a107541022e7f2a1c62441e346c9ebb4cfd03ed9a584a8b",
+      "newSha256": "7c3d688f45abdbdba09f55e45dd7d7d42d17b18a25e907690c2b82fc06381af7",
+      "plan": "docs/solutions/20261025-Top10执行倒计时清理.md"
+    },
+    {
+      "at": "2026-10-25",
+      "authorization": "用户今晚修复遗留并去掉执行倒计时",
+      "file": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/scripts/desktop_background_executor.mjs",
+      "oldSha256": "4f67281d1620b65f290a947de2ab3b38d88c357da54ecadcaf922789f956cf6a",
+      "newSha256": "4e5cb1ccd75106c676607a74efc4f7dd7f4104c66fa9abb7ba518eb349de47e4",
+      "plan": "docs/solutions/20261025-Top10执行倒计时清理.md"
     }
   ]
 }

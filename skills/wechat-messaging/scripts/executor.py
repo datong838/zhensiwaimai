@@ -104,6 +104,13 @@ def deliver(request, grant, root, adapter, *, reconcile=False, rebind_event=Fals
     """Internal engine; CLI enforces release policy before constructing live adapter."""
     started = time.monotonic()
     owner_lifetime = getattr(adapter, 'owner_lifetime', False) is True
+    def pending_image(item, state):
+        return (owner_lifetime and item['type'] == 'image' and state
+                and state.get('status') == 'unknown' and state.get('sendAttempts') == 1
+                and state.get('resolvedGroup') == request['groupName']
+                and state.get('inputEmpty') is True
+                and state.get('backend') == 'system-events-ui-tree'
+                and state.get('reason') == 'native-ui-inline-image-not-exposed')
     result = {'ok': False, 'status': 'blocked', 'groupName': request['groupName'],
               'channel': request['context']['channel'], 'requestDigest': request_digest(request),
               'runtimeModelDecisions': 0, 'items': [], 'review': []}
@@ -136,12 +143,19 @@ def deliver(request, grant, root, adapter, *, reconcile=False, rebind_event=Fals
             if all(p and p.get('status') == 'verified' for _,_,p in prepared):
                 result.update(ok=True, status='already_verified', items=[p for _,_,p in prepared])
                 return result
-            if any(p and p.get('status') in ('attempted','unknown') for _,_,p in prepared) and not reconcile:
+            if any(p and p.get('status') in ('attempted','unknown') and not pending_image(i,p)
+                   for i,_,p in prepared) and not reconcile:
                 result['review'].append({'stage':'deduplication','status':'blocked',
                                          'elapsedMs':0,
                                          'pitfalls':['existing-attempt-reconcile-only']})
                 result.update(status='unknown', reason='existing-attempt-reconcile-only',
                               items=[p for _,_,p in prepared if p])
+                return result
+            if not reconcile and all(p and (p.get('status') == 'verified' or pending_image(i,p)) for i,_,p in prepared):
+                result.update(status='partial' if any(p['status']=='verified' for _,_,p in prepared) else 'unknown',
+                              items=[p for _,_,p in prepared], executionComplete=True,
+                              verificationPending=[i['itemId'] for i,_,p in prepared if pending_image(i,p)],
+                              reason='image-submission-awaits-read-only-verification')
                 return result
             with (nullcontext() if owner_lifetime else deadline(request['context']['deadlineAt'])), adapter.session(request):
                 preflight = stage('preflight', lambda: adapter.preflight(request, directory/'preflight'))
@@ -149,6 +163,8 @@ def deliver(request, grant, root, adapter, *, reconcile=False, rebind_event=Fals
                     raise Rejected(preflight.get('reason','preflight-failed'))
                 for item,work,prior in prepared:
                     if prior and prior.get('status') == 'verified':
+                        result['items'].append(prior); continue
+                    if not reconcile and pending_image(item,prior):
                         result['items'].append(prior); continue
                     if reconcile and not prior:
                         raise Rejected('reconcile-no-attempt')
@@ -178,11 +194,18 @@ def deliver(request, grant, root, adapter, *, reconcile=False, rebind_event=Fals
                         raise
                     atomic_json(work/'delivery.json', current)
                     result['items'].append(current)
-                    if current['status'] != 'verified':
+                    if current['status'] != 'verified' and not (not reconcile and pending_image(item,current)):
                         result.update(status='partial' if any(x['status']=='verified' for x in result['items']) else current['status'],
                                       reason=current.get('reason'))
                         return result
-                result.update(ok=True, status='verified')
+                pending = [i['itemId'] for i,_,_ in prepared
+                           if any(r.get('itemId') == i['itemId'] and pending_image(i,r) for r in result['items'])]
+                if pending:
+                    result.update(status='partial' if any(x['status']=='verified' for x in result['items']) else 'unknown',
+                                  executionComplete=True, verificationPending=pending,
+                                  reason='image-submission-awaits-read-only-verification')
+                else:
+                    result.update(ok=True, status='verified')
     except Exception as error:
         result['reason'] = str(error)
         if any(i['status']=='verified' for i in result['items']):

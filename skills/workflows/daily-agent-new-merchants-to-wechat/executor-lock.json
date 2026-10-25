@@ -45,11 +45,11 @@
     },
     "messaging_dependencies": {
       "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/dependencies.json",
-      "sha256": "76b4df365ccbd15f21d866114e18d4d48e64629611564e5ff1b65c30df5c0e5f"
+      "sha256": "0581d829a4a65fcfbb31ec1d999bd6d1f4fba558eecc5b16b4ce384ff8bd6f0f"
     },
     "messaging_dependency_maintenance": {
       "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/dependency_maintenance.py",
-      "sha256": "0cbfc767ac13cdd274cdd0ad42fa84fe30e4bbb434dfe957b2c74d566760f008"
+      "sha256": "78121366f7211e2377eca0e9fbcd586beb9196693a85ff1aeed72b9c93fe484c"
     },
     "workflow_executor": {
       "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-agent-new-merchants-to-wechat/scripts/workflow_executor.py",
@@ -209,12 +209,12 @@
   "unsealedAcceptance": {
     "authorization": "user-20260916-production-hardening",
     "authorizedAt": "2026-10-24T14:14:09.846682+08:00",
-    "expiresAt": "2026-10-26T12:00:00+08:00",
+    "expiresAt": "2026-10-31T20:01:19+08:00",
     "scope": "Code-owned maintenance candidate; next real nonempty merchant send; automatic reseal only",
     "userInstruction": "允许新增代码化维护执行器，并将生产锁切换为验收态，等待下一家真实商家自动重新封板。",
-    "userInstructionSha256": "58213feee0c4506c398ce05174cb2338c50e0c48813a214252940240cb23ba8e",
-    "maintenanceAuthorization": "user-20261025-no-workflow-countdown",
-    "maintenanceReceiptPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/merchant-owner-wrapper-20261025/maintenance-receipt.json",
-    "maintenanceReceiptSha256": "517fa5417c2a223201bd486fde5cc50125454fd91eeda293d96c92229d7f5734"
+    "userInstructionSha256": "b671e190e7db45c601f3bc1221a84670af584ac31d7faf7bb9896e2e5ec704b1",
+    "maintenanceAuthorization": "user-20261005-sealed-dependency-resync",
+    "maintenanceReceiptPath": "/private/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/seal-repair-xi_y2cid/output/maintenance-receipt.json",
+    "maintenanceReceiptSha256": "bb8a9ec6169a96171934ac8805e732b87a80408d5969908f9684cf6068ae1267"
   }
 }

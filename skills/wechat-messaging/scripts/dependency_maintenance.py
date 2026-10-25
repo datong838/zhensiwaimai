@@ -446,6 +446,7 @@ MEITUAN_BRIDGE_BACK_TREE_ALLOWED_AFTER = {
         "cd71c7dc54055f2a83d054000646d8844c04b1ff6faeb74bc6886607a0d6cc40",
 }
 MAINTENANCE_AUTHORIZATIONS = {
+    'user-20261025-pending-image-continue': {'instructionSha256': 'cb4e3f301ab836e49183049acc1da46992342dc41c3edc1c3514b32c0e336149', 'allowedChangePaths': {SELF_KEY, 'scripts/executor.py'}, 'allowedAfterSha256': {'scripts/executor.py': '8ac898329e252cf44b6ea96693f6c0eafa2efde9ac5fe8aff7b546a30c3a4522'}},
     'user-20261025-ui-no-wall-clock': {"instructionSha256": '6b18bd5262a9a9e0533d983c60dce4cbb755881a1333e3c630469199a891b5f5', "allowedChangePaths": {SELF_KEY, "scripts/contract.py", "scripts/executor.py"}, "allowedAfterSha256": {'scripts/contract.py': 'c37b410fb4d98ff9745dde3a95dc4098ae23e4d9913725ef5ca5e7c208cb7393', 'scripts/executor.py': '8a900b25e79aca47eb9ae077e94dc374f9c66a3358694c3fc5979399d4741461'}},
     MAINTENANCE_AUTHORIZATION: {
         "instructionSha256": USER_INSTRUCTION_SHA256,
@@ -879,6 +880,10 @@ def prepare(authorization: str, expires_at: str, output_dir: Path,
                        change["after"] != approved.get(change["path"])
                        for change in changes):
                     raise MaintenanceError("meituan-bridge-back-tree-unreviewed-dependency-bytes")
+            if authorization == 'user-20261025-pending-image-continue':
+                approved = authorization_profile['allowedAfterSha256']
+                if any(change['path'] != SELF_KEY and change['after'] != approved.get(change['path']) for change in changes):
+                    raise MaintenanceError('pending-image-unreviewed-dependency-bytes')
             if authorization == 'user-20261025-ui-no-wall-clock':
                 approved = authorization_profile['allowedAfterSha256']
                 if any(change['path'] != SELF_KEY and change['after'] != approved.get(change['path']) for change in changes):

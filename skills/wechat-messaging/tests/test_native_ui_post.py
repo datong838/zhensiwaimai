@@ -62,4 +62,15 @@ class NativePostTests(unittest.TestCase):
    with patch.object(post,'QUEUE',Path(d)),patch.object(post,'owner_active',return_value=True),patch.object(post,'read_anchor',side_effect=anchor),patch.object(post,'message_rows',return_value=[]),patch.object(post,'execute',side_effect=ui),patch.object(post.subprocess,'run'),patch.object(post,'validate_response'),patch.object(post.time,'sleep'):
     r=post.send_text(p)
    self.assertEqual(r['result']['sendAttempts'],0);self.assertEqual(r['result']['status'],'blocked');self.assertTrue((p/'send-intent.json').exists());self.assertFalse(any(a.get('key')=='return' for a in calls))
+ def test_typing_arrives_after_focus_does_not_paste_or_send(self):
+  with tempfile.TemporaryDirectory() as d:
+   p,t=self.task(Path(d));calls=[];reads={'composer':0}
+   def anchor(name):
+    if name=='composer':
+     reads['composer']+=1;return {},{'value':'' if reads['composer']==1 else 'user typing'}
+    return {},{'value':'电销+直播攻坚组'}
+   def ui(actions=(),**kw):calls.extend(actions);return {'nodes':[]}
+   with patch.object(post,'QUEUE',Path(d)),patch.object(post,'owner_active',return_value=True),patch.object(post,'read_anchor',side_effect=anchor),patch.object(post,'message_rows',return_value=[]),patch.object(post,'execute',side_effect=ui),patch.object(post.subprocess,'run') as clipboard,patch.object(post,'validate_response'),patch.object(post.time,'sleep'):
+    r=post.send_text(p)
+   self.assertEqual(r['result']['sendAttempts'],0);self.assertEqual(r['result']['status'],'blocked');clipboard.assert_not_called();self.assertFalse(any(a['type']=='paste' or a.get('key')=='return' for a in calls))
 if __name__=='__main__':unittest.main()

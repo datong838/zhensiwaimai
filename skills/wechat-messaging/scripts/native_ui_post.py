@@ -142,6 +142,11 @@ def send_text(folder):
             raise RuntimeError('native-ui-owner-not-active')
         execute([{'type': 'activate'}, named_action('click', 'composer')], max_depth=0)
         time.sleep(0.2)  # Native focus settles asynchronously; the guard remains mandatory.
+        _, focused_title = read_anchor('conversationTitle')
+        _, focused_draft = read_anchor('composer')
+        if (focused_title['value'] != task['request']['groupName']
+                or focused_draft['value'] != ''):
+            raise RuntimeError('native-ui-focused-draft-not-empty-or-target-changed')
         subprocess.run(['/usr/bin/pbcopy'], input=text.encode('utf-8'), check=True)
         if owner_active(task['owner']) is not True:
             raise RuntimeError('native-ui-owner-not-active')
@@ -262,18 +267,16 @@ def send_media(folder):
         action(ui_action('click', chat_path + [9, 0, 8 if kind == 'file' else 6],
                          {'role': 'AXButton', 'description': '按钮'}), max_depth=0)
         label = '选取文件' if kind == 'file' else '选取图片'
-        sheet = execute(root_path=[4], max_depth=2)['nodes']
-        if not any(n['path'] == [4, 0, 9] and n.get('name') == label for n in sheet):
-            raise RuntimeError('native-ui-media-selector-semantic-mismatch')
-        action(ui_action('key', [4], {'role': 'AXSheet', 'description': '打开'}, key='goto'), max_depth=0)
+        sheet_path, select_path = wait_media_selector(label, live)
+        action(ui_action('key', sheet_path, {'role': 'AXSheet', 'description': '打开'}, key='goto'), max_depth=0)
         subprocess.run(['/usr/bin/pbcopy'], input=str(source).encode(), check=True)
         target = {'role': 'AXTextField', 'description': '文本栏'}
-        action(ui_action('paste', [4, 1, 2], target), max_depth=0)
-        actual = execute(root_path=[4, 1, 2], max_depth=0)['nodes'][0]
+        action(ui_action('paste', sheet_path + [1, 2], target), max_depth=0)
+        actual = execute(root_path=sheet_path + [1, 2], max_depth=0)['nodes'][0]
         if actual['value'] != str(source):
             raise RuntimeError('native-ui-source-path-mismatch')
-        action(ui_action('key', [4, 1, 2], target, key='return'), max_depth=0)
-        selected = execute(root_path=[4, 0, 2, 0], max_depth=4)['nodes']
+        action(ui_action('key', sheet_path + [1, 2], target, key='return'), max_depth=0)
+        selected = execute(root_path=sheet_path + [0, 2, 0], max_depth=4)['nodes']
         if not any(n.get('role') == 'AXTextField' and n.get('value') == task['item']['name'] for n in selected):
             raise RuntimeError('native-ui-selected-file-mismatch')
         live()
@@ -283,21 +286,12 @@ def send_media(folder):
         # The selector normally prepares a draft; failures here remain unknown.
         live()
         submitted = True
-        execute([ui_action('click', [4, 0, 9], {'role': 'AXButton', 'name': label})], max_depth=0)
+        execute([ui_action('click', select_path, {'role': 'AXButton', 'name': label})], max_depth=0)
         _, title = read_anchor('conversationTitle')
         if title['value'] != task['request']['groupName']:
             raise RuntimeError('native-ui-target-changed')
         if kind == 'file':
-            preview = execute(root_path=[4], max_depth=2)['nodes']
-            if not any(n.get('value') == task['item']['name'] for n in preview):
-                raise RuntimeError('native-ui-file-preview-mismatch')
-            buttons = [n for n in preview if n.get('name') == '使用原文件' and n['role'] == 'AXButton']
-            if len(buttons) != 1:
-                raise RuntimeError('native-ui-original-file-confirmation-missing')
-            submitted = False  # A real unsent confirmation sheet is now proven.
-            live()
-            submitted = True
-            execute([ui_action('click', buttons[0]['path'], {'role': 'AXButton', 'name': '使用原文件'})], max_depth=0)
+            confirm_selected_file(task, baseline_count, live)
         else:
             _, draft = read_anchor('composer')
             if draft['value'] != '\ufffc':
@@ -318,6 +312,55 @@ def send_media(folder):
     validate_response(task, reply)
     atomic_json(folder / 'response.json', reply)
     return reply
+
+
+def wait_media_selector(label, live):
+    """Wait on real native state, not a fixed execution deadline or coordinates."""
+    while True:
+        live()
+        roots = execute(max_depth=1)['nodes']
+        sheets = [n for n in roots if n.get('role') == 'AXSheet' and n.get('description') == '打开']
+        if len(sheets) > 1:
+            raise RuntimeError('native-ui-media-selector-not-unique')
+        if sheets:
+            path = sheets[0]['path']
+            nodes = execute(root_path=path, max_depth=2)['nodes']
+            buttons = [n for n in nodes if n.get('role') == 'AXButton' and n.get('name') == label]
+            if len(buttons) == 1:
+                return path, buttons[0]['path']
+            if len(buttons) > 1 or any(n.get('name') in ('选取文件', '选取图片') for n in nodes):
+                raise RuntimeError('native-ui-media-selector-semantic-mismatch')
+        time.sleep(0.15)  # UI animation settling, not an execution expiry.
+
+
+def confirm_selected_file(task, baseline_count, live):
+    """Only called after exact file/SHA selection and original intent persisted."""
+    _, title = read_anchor('conversationTitle')
+    _, draft = read_anchor('composer')
+    if title['value'] != task['request']['groupName']:
+        raise RuntimeError('native-ui-target-changed')
+    if draft['value'] == '\ufffc':
+        # The native file picker can prepare an attachment instead of a preview.
+        # Exact filename and source were already verified in that picker.
+        live()
+        execute([named_action('key', 'composer', key='return')], max_depth=0)
+        return
+    if draft['value'] != '':
+        raise RuntimeError('native-ui-file-draft-mismatch')
+    try:
+        media_observation(task, baseline_count)
+        return  # Selector already sent: never click/Return a second time.
+    except RuntimeError as error:
+        if str(error) not in ('native-ui-no-new-message-row', 'native-ui-file-card-not-confirmed'):
+            raise
+    preview = execute(root_path=[4], max_depth=2)['nodes']
+    if not any(n.get('value') == task['item']['name'] for n in preview):
+        raise RuntimeError('native-ui-file-preview-mismatch')
+    buttons = [n for n in preview if n.get('name') == '使用原文件' and n['role'] == 'AXButton']
+    if len(buttons) != 1:
+        raise RuntimeError('native-ui-original-file-confirmation-missing')
+    live()
+    execute([ui_action('click', buttons[0]['path'], {'role': 'AXButton', 'name': '使用原文件'})], max_depth=0)
 
 
 def dispatch(folder):

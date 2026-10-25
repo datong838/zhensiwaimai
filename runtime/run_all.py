@@ -1098,6 +1098,27 @@ def build_ledger_rows(data: dict, records_by_skill: dict) -> list:
     return rows
 
 
+def customer_ledger_view(rows: list, date_str: str):
+    """Customer presentation only; never changes execution or original row facts."""
+    modern = date_str >= '2026-10-26'
+    displayed = []
+    for row in rows:
+        if row['done'] not in ('是', '已合并', '不补跑'):
+            continue
+        shown = dict(row)
+        if modern:
+            shown['done'] = '是'
+            shown['note'] = {'已合并': '已随当日申诉完成', '不补跑': '由当日末班覆盖'}.get(row['done'], '当日已完成')
+        displayed.append(shown)
+    active = [r for r in rows if r['dev_state'] == 'active' and not r.get('superseded')]
+    total, done = len(active), sum(r['done'] == '是' for r in active)
+    if modern:
+        covered = sum(r['done'] == '已合并' or r.get('superseded', False) for r in rows)
+        total += covered
+        done += sum(r['done'] == '已合并' or (r.get('superseded', False) and r['done'] in ('是', '不补跑')) for r in rows)
+    return displayed, total, done
+
+
 def write_ledger_xlsx(rows: list, out_path: Path, date_str: str) -> bool:
     try:
         from openpyxl import Workbook
@@ -1133,9 +1154,8 @@ def write_ledger_xlsx(rows: list, out_path: Path, date_str: str) -> bool:
 
     active_total = sum(1 for r in rows if r["dev_state"] == "active" and not r.get("superseded"))
     active_done = sum(1 for r in rows if r["dev_state"] == "active" and not r.get("superseded") and r["done"] == "是")
-    # 客户版不展示未完成业务；保留原21项中已合并、由客服末班覆盖的身份。
-    # 合并不冒充独立执行成功，覆盖档不额外补跑。未完成仍不进客户表。
-    for r in [x for x in rows if x["done"] in ("是", "已合并", "不补跑")]:
+    displayed, customer_total, customer_done = customer_ledger_view(rows, date_str)
+    for r in displayed:
         ws.append([r["name"], r["exec_time"], r["done"], r["note"]])
         cell = ws.cell(row=ws.max_row, column=3)
         if r["done"] == "是":
@@ -1146,8 +1166,8 @@ def write_ledger_xlsx(rows: list, out_path: Path, date_str: str) -> bool:
     ws.append([])
     # 2026-10-21 大同指令：客户版台账不出现内部话术（(active)/发送口径/总控等），
     # 「使用注明」行整行撤除。
-    ws.append(["应执行数量", active_total])
-    ws.append(["已完成数量", active_done])
+    ws.append(["应执行数量", customer_total])
+    ws.append(["已完成数量", customer_done])
     ws.append(["汇总", "全部完成" if active_done == active_total else "未全绿-不发送"])
 
     widths = [42, 20, 14, 40]
@@ -1163,14 +1183,15 @@ def write_ledger_xlsx(rows: list, out_path: Path, date_str: str) -> bool:
 def write_ledger_csv(rows: list, out_path: Path, date_str: str) -> bool:
     active_total = sum(1 for r in rows if r["dev_state"] == "active" and not r.get("superseded"))
     active_done = sum(1 for r in rows if r["dev_state"] == "active" and not r.get("superseded") and r["done"] == "是")
+    displayed, customer_total, customer_done = customer_ledger_view(rows, date_str)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     with out_path.open("w", encoding="utf-8") as f:
         f.write("臻肆工作台账,%s\n" % date_str)
         f.write("工作流名称,执行时间,当日是否完成,备注\n")
-        for r in [x for x in rows if x["done"] in ("是", "已合并", "不补跑")]:
+        for r in displayed:
             f.write("%s,%s,%s,%s\n" % (r["name"], r["exec_time"], r["done"], r["note"]))
-        f.write("\n应执行数量,%d\n" % active_total)
-        f.write("已完成数量,%d\n" % active_done)
+        f.write("\n应执行数量,%d\n" % customer_total)
+        f.write("已完成数量,%d\n" % customer_done)
     print("[ok] 台账 csv 已生成: %s (active %d/%d)" % (out_path, active_done, active_total))
     return active_done == active_total
 
@@ -1544,6 +1565,29 @@ def _pending_record(skill: dict, reason: str) -> dict:
     }
 
 
+def merchant_priority_checkpoint(data, interpreters, records, attempted_slots, now=None):
+    """At a safe flow boundary, serve a newly due merchant slot first."""
+    now = now or datetime.now()
+    merchant = next((s for s in data.get('skills', [])
+                     if s.get('enabled') and s['name'] == 'daily-agent-new-merchants-to-wechat'), None)
+    if merchant is None or not merchant.get('schedule_times'):
+        return
+    skip, _ = _cadence_gate(merchant, now)
+    if skip:
+        return
+    due = [s for s in fixed_schedule.boundaries(merchant, now) if s <= now]
+    if not due:
+        return
+    slot = due[-1].isoformat()
+    if slot in attempted_slots:
+        return
+    attempted_slots.add(slot)
+    rec = run_one(data, merchant['name'], interpreters)
+    if rec:
+        records[merchant['name']] = rec
+        record_outcome(merchant['name'], rec.get('category'), _now_iso())
+
+
 def daemon_cycle(data: dict, interpreters: dict, do_send: bool, force_all: bool = False,
                  forced_extra: set | None = None) -> bool:
     date_str = time.strftime("%Y-%m-%d")
@@ -1576,8 +1620,11 @@ def daemon_cycle(data: dict, interpreters: dict, do_send: bool, force_all: bool 
         print("[warn] 群一致性机检失败(不影响主链路): %r" % e)
     enabled = sorted([s for s in data.get("skills", []) if s.get("enabled")],
                      key=lambda x: x.get("order", 999))
+    merchant_attempted_slots = set()
     for s in enabled:
         name = s["name"]
+        if name != 'daily-agent-new-merchants-to-wechat':
+            merchant_priority_checkpoint(data, interpreters, records, merchant_attempted_slots)
         skip, reason = _cadence_gate(s, datetime.now())
         if reason in ('superseded_customer_slot', 'customer_duty_user_accepted', 'business_delivery_observed') or (not force_all and name not in forced and skip):
             if reason == "done_today":
@@ -1596,11 +1643,17 @@ def daemon_cycle(data: dict, interpreters: dict, do_send: bool, force_all: bool 
         # 现场维护（2026-10-02 取代原 W4 熔断）：**失败绝不停排**。
         # 每个周期照常排程本流水线；失败明细（含日志路径）进告警流，由看护代理
         # 查代码 → 修复 → 测试 → 直到当日真实成功。
+        if name == 'daily-agent-new-merchants-to-wechat' and s.get('schedule_times'):
+            at = datetime.now()
+            due = [slot for slot in fixed_schedule.boundaries(s, at) if slot <= at]
+            if due:
+                merchant_attempted_slots.add(due[-1].isoformat())
         rec = run_one(data, name, interpreters)
         if rec:
             records[name] = rec
             record_outcome(name, rec.get("category"), _now_iso())
 
+    merchant_priority_checkpoint(data, interpreters, records, merchant_attempted_slots)
     rows = build_ledger_rows(data, records)
     ledger_out = REPO_ROOT / data.get("ledger_output_dir", "work") / (
         "%s臻肆工作台账.xlsx" % date_str)

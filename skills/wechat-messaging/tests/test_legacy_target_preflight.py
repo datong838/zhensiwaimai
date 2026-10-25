@@ -16,8 +16,11 @@ class LegacyPreflightTests(unittest.TestCase):
         for mutation in [lambda r:r.update(groupName='其他群'),lambda r:r.update(items=[]),lambda r:r['context'].update(workflowId='top10'),lambda r:r['context'].update(searchGroupName='其他')]:
             r=self.request();mutation(r);self.assertFalse(preflight_enabled(r))
     def test_bad_deadline(self):
-        for value in [time.time()-1,time.time()+600,float('inf'),float('nan'),True,'later']:
+        for value in [0,-1,float('inf'),float('nan'),True,'later']:
             r=self.request();r['context']['deadlineAt']=value;self.assertFalse(preflight_enabled(r))
+    def test_original_owner_lifecycle_does_not_use_remaining_seconds(self):
+        for value in [time.time()-1,time.time()+600]:
+            r=self.request();r['context']['deadlineAt']=value;self.assertTrue(preflight_enabled(r))
     def test_send_and_readback_do_not_enqueue(self):
         with tempfile.TemporaryDirectory() as tmp:
             for stage in ['send','readback']:

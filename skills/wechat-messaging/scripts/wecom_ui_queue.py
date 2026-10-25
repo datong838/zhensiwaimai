@@ -9,6 +9,7 @@ from pathlib import Path
 from ledger import atomic_json
 
 QUEUE = Path(__file__).resolve().parents[1] / '.runtime/ui-post-queue'
+EXECUTION_POLICY = Path(__file__).resolve().parents[1] / 'config/ui-execution-policy.json'
 ALLOWED = {'negative-reviews-summary'}
 NO_RESEND_STATE = Path(__file__).resolve().parents[3] / 'runtime/state'
 
@@ -31,6 +32,12 @@ def user_no_resend_today(workflow, *, now=None, state=None):
 
 def enabled(request):
     context = request.get('context', {})
+    if context.get('workflowId') == 'native-ui-acceptance-20261025':
+        import sys
+        runtime = Path(__file__).resolve().parents[3] / 'runtime'
+        if str(runtime) not in sys.path: sys.path.insert(0, str(runtime))
+        from native_ui_acceptance import request_enabled
+        return request_enabled(request)
     if context.get('workflowId') == 'morning-goal-test-20261024-2120':
         import sys
         runtime = Path(__file__).resolve().parents[3] / 'runtime'
@@ -106,7 +113,7 @@ def preflight_enabled(request):
             and set(context) == {'searchGroupName', 'deadlineAt'}
             and context.get('searchGroupName') is None
             and isinstance(deadline, (int, float)) and not isinstance(deadline, bool)
-            and math.isfinite(deadline) and 15 < deadline - time.time() <= 300)
+            and math.isfinite(deadline) and deadline > 0)
 
 def validate_response(task, reply):
     if reply.get('taskId') != task['taskId'] or reply.get('binding') != task['binding']:
@@ -168,6 +175,36 @@ def owner_active(owner):
         return None  # observation failure is not evidence that the owner exited
 
 
+def native_dispatch_enabled():
+    try:
+        policy = json.loads(EXECUTION_POLICY.read_text(encoding='utf-8'))
+        return (policy.get('nativeDispatch') is True
+                and policy.get('transport') == 'visible-ui-tree-only'
+                and policy.get('legacyInjectedSendAllowed') is False)
+    except (OSError, ValueError):
+        return False
+
+
+def dispatch_original_task(folder):
+    """Same queue, owner and intent; no model handoff or fallback transport."""
+    from native_ui_post import dispatch
+    try:
+        dispatch(folder)
+    except Exception as error:
+        # A native transport may have persisted its outcome before raising.
+        if (folder / 'response.json').exists():
+            return
+        task = json.loads((folder / 'task.json').read_text(encoding='utf-8'))
+        attempted = (folder / 'send-intent.json').exists()
+        result = {'status': 'unknown' if attempted else 'blocked',
+                  'ok': False, 'sendAttempts': 1 if attempted else 0,
+                  'resolvedGroup': task['request']['groupName'],
+                  'inputEmpty': False, 'backend': 'system-events-ui-tree',
+                  'reason': 'native-ui-dispatch-failed:' + str(error)}
+        atomic_json(folder / 'response.json', {
+            'taskId': task['taskId'], 'binding': task['binding'], 'result': result})
+
+
 def exchange(stage, request, item=None, *, queue=QUEUE, owner_lifetime=False):
     if not (preflight_enabled(request) if stage == 'preflight' else enabled(request)):
         raise ValueError('ui-post-workflow-not-enabled')
@@ -186,6 +223,9 @@ def exchange(stage, request, item=None, *, queue=QUEUE, owner_lifetime=False):
     task['binding'] = hashlib.sha256(json.dumps(task, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
     folder = queue / task['taskId']; folder.mkdir(mode=0o700)
     atomic_json(folder / 'task.json', task)
+    if (owner_lifetime and queue.resolve() == QUEUE.resolve()
+            and native_dispatch_enabled() and not (folder / 'response.json').exists()):
+        dispatch_original_task(folder)
     while (owner_active(task['owner']) is not False) if owner_lifetime else time.time() < task['deadlineAt']:
         reply = folder / 'response.json'
         if reply.exists():

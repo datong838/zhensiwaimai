@@ -64,7 +64,7 @@ def physical_devices() -> list[dict[str, str]]:
     return devices
 
 
-def load_receipt(path: Path, *, for_training: bool = False) -> tuple[dict, Path]:
+def load_receipt(path: Path, *, for_training: bool = False, enforce_expiry: bool = True) -> tuple[dict, Path]:
     if not path.is_file():
         raise StopRun("desktop-receipt-missing")
     receipt = json.loads(path.read_text(encoding="utf-8"))
@@ -76,7 +76,7 @@ def load_receipt(path: Path, *, for_training: bool = False) -> tuple[dict, Path]
     if not re.fullmatch(r"[a-f0-9-]{36}", str(receipt.get("runId", ""))):
         raise StopRun("desktop-run-id-missing")
     now_ms = time.time() * 1000
-    if not for_training and (not 0 <= now_ms - receipt.get("startedAt", 0) < 180000 or not now_ms < receipt.get("deadlineAt", 0) <= receipt.get("startedAt", 0) + 180000):
+    if enforce_expiry and not for_training and (not 0 <= now_ms - receipt.get("startedAt", 0) < 180000 or not now_ms < receipt.get("deadlineAt", 0) <= receipt.get("startedAt", 0) + 180000):
         raise StopRun("desktop-receipt-expired")
     image = Path(str(receipt.get("file", ""))).resolve()
     if not image.is_file() or image.suffix.lower() != ".png":

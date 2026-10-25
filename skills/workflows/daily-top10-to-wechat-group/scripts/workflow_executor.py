@@ -157,11 +157,11 @@ def run(args):
             result.update(ok=True,mode='dry-run')
             return result
         if args.execute and args.standing_authorization!=phone.AUTHORIZATION:raise phone.StopRun('standing-authorization-missing')
-        output=subprocess.run([NODE,str(ROOT/'desktop_background_executor.mjs'),'--profile',CANONICAL_BROWSER_PROFILE,'--port',str(CANONICAL_BROWSER_PORT)],capture_output=True,text=True,timeout=180)
+        output=subprocess.run([NODE,str(ROOT/'desktop_background_executor.mjs'),'--profile',CANONICAL_BROWSER_PROFILE,'--port',str(CANONICAL_BROWSER_PORT)],capture_output=True,text=True,timeout=None)
         desktop=json.loads(output.stdout.strip().splitlines()[-1])
         result.update(desktopRunId=desktop['runId'],desktop=desktop)
         if not desktop.get('ok') or output.returncode:raise phone.StopRun('desktop:'+desktop.get('reason','failed'))
-        receipt,image=phone.load_receipt(Path(desktop['receiptFile']))
+        receipt,image=phone.load_receipt(Path(desktop['receiptFile']), enforce_expiry=args.wechat_channel != 'desktop')
         if args.wechat_channel == 'desktop':
             if rehearsal: raise phone.StopRun('desktop-rehearsal-not-supported')
             result['wechatGuard']=wechat_guard.wait_until_quiet()
@@ -178,7 +178,7 @@ def run(args):
                  '--output-dir',str(Path(desktop['receiptFile']).parent/'desktop-wechat'),'--deadline-unix',str(desktop['deadlineAt']/1000),'--execute']
             send_retry_history=[]
             while True:
-                sent=subprocess.run(cmd,capture_output=True,text=True,timeout=1000)
+                sent=subprocess.run(cmd,capture_output=True,text=True,timeout=None)
                 try:
                     p=json.loads(sent.stdout.strip().splitlines()[-1])
                 except (IndexError, json.JSONDecodeError):
@@ -210,7 +210,6 @@ def run(args):
         result['desktopWechat' if args.wechat_channel=='desktop' else 'phone']=p
         if not p.get('ok'):result['reason']=('desktop-wechat:' if args.wechat_channel=='desktop' else 'mobile-wechat:')+p.get('reason','failed')
         result['endToEndMs']=round(time.time()*1000-desktop['startedAt'])
-        if result['endToEndMs']>=180000:raise phone.StopRun('total-deadline-exceeded')
     except Exception as e:
         result['ok']=False
         result['reason']=str(e)

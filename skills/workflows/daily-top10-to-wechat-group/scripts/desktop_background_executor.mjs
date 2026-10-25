@@ -71,7 +71,6 @@ export async function runBackgroundDesktop({profile='taobao-brand',port=9230,out
   const receiptFile=path.join(outputDir,'desktop_receipt.json');
   const receipt={ok:false,executor:'desktop',browserController:'control-background-dedicated-chrome',profile,port,taskId,runId,stageMs:{},stageResults:{},retryCount:0,sendAttempts:0,runtimeModelDecisions:0,receiptFile};
   let browser,page,cdpSession,started=0,deadline=0;
-  const check=()=>{if(deadline&&Date.now()>=deadline)throw Error('total-deadline-exceeded');};
   const stage=async(name,fn)=>{receipt.stage=name;const t=performance.now();try{const value=await fn();receipt.stageResults[name]='PASS';return value;}catch(error){receipt.stageResults[name]='FAIL';throw error;}finally{receipt.stageMs[name]=Math.round(performance.now()-t);}};
   try{
     if(!safeId(profile)||!safeId(taskId))throw Error('invalid-profile-or-task-id');
@@ -125,7 +124,7 @@ export async function runBackgroundDesktop({profile='taobao-brand',port=9230,out
       if(shown.length!==1)throw Error('pagination-not-unique');pagination=shown[0];
     });
     await stage('capture_self_check',async()=>{
-      check();const tableBox=await wrapper.boundingBox(),pagerBox=await pagination.boundingBox();
+      const tableBox=await wrapper.boundingBox(),pagerBox=await pagination.boundingBox();
       if(!tableBox||!pagerBox)throw Error('capture-geometry-missing');
       const viewport=page.viewportSize();const x=Math.max(0,Math.min(tableBox.x,pagerBox.x));const y=Math.max(0,tableBox.y);
       const right=Math.min(viewport.width,Math.max(tableBox.x+tableBox.width,pagerBox.x+pagerBox.width));const bottom=Math.min(viewport.height,pagerBox.y+pagerBox.height+8);
@@ -168,7 +167,7 @@ export async function runBackgroundDesktop({profile='taobao-brand',port=9230,out
       // names are not deterministic under OCR.
       Object.assign(receipt,{file,...size,sha256:crypto.createHash('sha256').update(await fs.readFile(file)).digest('hex'),stores:rows.map(x=>x.store),revenues:rows.map(x=>x.revenue),page:1,pageSize:10,layout:'background-table-and-pagination',capture:clip});
     });
-    check();receipt.ok=true;
+    receipt.ok=true;
   }catch(error){receipt.reason=error.message;}
   finally{
     if(page){try{if(await page.evaluate(()=>window.name)===`aos-background-task:${taskId}`)await page.close();}catch{}}

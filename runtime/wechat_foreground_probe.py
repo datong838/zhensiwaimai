@@ -184,6 +184,11 @@ def diagnose(row: dict) -> tuple:
 
 
 def probe(skill: str | None = None, *, activate: bool = True) -> dict:
+    native_scripts = Path(__file__).resolve().parents[1] / 'skills/wechat-messaging/scripts'
+    base = native_scripts.parent
+    if ((base / 'config/ui-execution-policy.json').exists()
+            or (base / '.runtime/UI_TREE_ONLY.json').exists()):
+        return native_probe(skill, native_scripts)
     if str(SHARED) not in sys.path:
         sys.path.insert(0, str(SHARED))
     record: dict = {"at": time.strftime("%Y-%m-%dT%H:%M:%S"),
@@ -211,6 +216,28 @@ def probe(skill: str | None = None, *, activate: bool = True) -> dict:
     if "after" in record:
         record["contendedAfterActivate"] = record["after"]["contended"]
     record["captureUnavailable"], record["diagnosis"] = diagnose(record["before"])
+    return record
+
+
+def native_probe(skill, scripts):
+    """Read-only native anchors; background is valid, no screen capture needed."""
+    if str(scripts) not in sys.path:
+        sys.path.insert(0, str(scripts))
+    record = {'at': time.strftime('%Y-%m-%dT%H:%M:%S'), 'skill': skill,
+              'python': sys.version.split()[0], 'activated': False,
+              'backend': 'system-events-ui-tree', 'screenCapture': False,
+              'captureUnavailable': False}
+    try:
+        from native_ui_tree import read_anchor
+        _, window = read_anchor('main')
+        _, title = read_anchor('conversationTitle')
+        _, composer = read_anchor('composer')
+        ready = (window.get('role') == 'AXWindow' and bool(title.get('value'))
+                 and composer.get('value') == '')
+        record.update(contended=not ready, inputEmpty=composer.get('value') == '',
+                      diagnosis='ok' if ready else 'native-ui-window-or-draft-not-ready')
+    except Exception as error:
+        record.update(contended=True, diagnosis='native-ui-read-unavailable:' + str(error))
     return record
 
 

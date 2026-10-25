@@ -78,6 +78,11 @@ class SafetyTests(unittest.TestCase):
                 startedAt=now,deadlineAt=now+170000,
                 dataDate=(datetime.now(ZoneInfo('Asia/Shanghai')).date()-timedelta(days=1)).isoformat())
             file.write_text(json.dumps(valid)); p.load_receipt(file)
+            # Native desktop delivery follows its original live owner, not age.
+            file.write_text(json.dumps(valid | dict(startedAt=now-600000,deadlineAt=now-1)))
+            p.load_receipt(file, enforce_expiry=False)
+            file.write_text(json.dumps(valid | dict(sha256='invalid')))
+            with self.assertRaises(p.StopRun):p.load_receipt(file, enforce_expiry=False)
             for change in [dict(dataDate='2000-01-01'),dict(deadlineAt=now-1),dict(runId=''),dict(width=1600),dict(revenues=list(range(10))),dict(pageSize=20),dict(ok=False),dict(sha256='x')]:
                 with self.subTest(change=change):
                     file.write_text(json.dumps(valid|change))

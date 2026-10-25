@@ -30,9 +30,8 @@ LOG_FILE = REPO / "runtime" / "logs" / "run_now_watcher.log"
 RUN_ALL = REPO / "runtime" / "run_all.py"
 PYTHON = sys.executable
 
-# 互斥锁等待预算：daemon 周期单技能最长约 10-12 分钟（今日实测 619s），
-# 锁等待给足余量后仍失败才降级写回。
-ONCE_TIMEOUT_SECONDS = 900
+# UI delivery follows the original live process; elapsed time is not a failure.
+ONCE_TIMEOUT_SECONDS = None
 
 
 def log(msg: str) -> None:
