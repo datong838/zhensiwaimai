@@ -98,5 +98,23 @@ class PredispatchTests(unittest.TestCase):
         self.assertTrue(Path(proof['proof']).exists())
 
 
+    def test_feedback_pair_requires_scope_and_all_zero(self):
+        from unittest.mock import patch
+        self.marker = self.root / 'state/negative-feedback-list-appeals/wechat-attempts/event.json'
+        self.event = self.marker.parent / '.wechat-messaging/events' / ('a' * 64)
+        payloads = [self.payload, dict(self.payload, name='second.xlsx')]
+        prior = dict(self.receipt, payloads=payloads, attemptMarker=str(self.marker))
+        binding = dict(groupName='g', accountAlias='main-wechat', items=[dict(itemId=str(i), type='file', **{k:p[k] for k in ('name','size','sha256')}) for i,p in enumerate(payloads)])
+        self.write(self.event / 'binding.json', {'digest':hashlib.sha256(json.dumps(binding,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()})
+        self.write(self.marker,prior);self.write(self.source,prior)
+        self.write(self.event / 'first/delivery.json',{'status':'blocked','sendAttempts':0,'transport':{'sent':False,'sendAttempts':0}})
+        with patch('reconcile_predispatch.ROOT',self.root/'project'):
+            self.assertTrue(self.run_reconcile('blocked-zero-refreeze')['ok'])
+            self.write(self.event / 'second/delivery.json',{'status':'unknown','sendAttempts':1})
+            with self.assertRaisesRegex(ValueError,'nonzero-or-unknown'):
+                self.run_reconcile('blocked-zero-refreeze')
+        with self.assertRaisesRegex(ValueError,'unsupported'):
+            self.run_reconcile('blocked-zero-refreeze')
+
 if __name__ == '__main__':
     unittest.main()

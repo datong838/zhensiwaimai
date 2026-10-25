@@ -36,8 +36,8 @@
       "earliest_hour": 8,
       "cwd": "skills/workflows/daily-top10-to-wechat-group",
       "timeout_seconds": 1800,
-      "max_retries": 2,
-      "cooldown_seconds": 300,
+      "max_retries": 0,
+      "cooldown_seconds": 0,
       "needs_adapter": false,
       "steps": [
         {
@@ -50,7 +50,8 @@
           ]
         }
       ],
-      "latest_hour": 18
+      "latest_hour": 18,
+      "note": "UI岗位失败交监理经原control恢复，不在主任串行循环内等待五分钟重试，以免阻塞其他到点任务。unknown仍只读对账。"
     },
     {
       "name": "daily-negative-reviews",

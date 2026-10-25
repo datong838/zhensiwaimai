@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { validateManifest, validateReportRows } from './deliver_batch.mjs';
+import { validateManifest, validateReportRows, buildArgs } from './deliver_batch.mjs';
 import { ROOT, FLOW_ID, PLATFORMS, businessDate, shanghaiDay, recentRange } from './jinsha.mjs';
 import { previewLastRow } from './report_builder.mjs';
 const business = businessDate();
@@ -19,4 +19,6 @@ assert.equal(previewLastRow(8,8),8);
 assert.equal(previewLastRow(8,12),12);
 assert.equal(previewLastRow(8,28),28);
 assert.equal(previewLastRow(8,600),28);
-console.log(JSON.stringify({ok:true,tests:20,sendAttempts:0}));
+const before=Math.floor(Date.now()/1000),args=buildArgs({items:['a.xlsx','b.xlsx']}),deadline=Number(args[args.indexOf('--deadline-unix')+1]);
+assert.ok(deadline-before>=900 && deadline-before<=901);
+console.log(JSON.stringify({ok:true,tests:21,sendAttempts:0}));

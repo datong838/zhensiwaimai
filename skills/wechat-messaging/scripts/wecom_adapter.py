@@ -126,8 +126,8 @@ class WeComAdapter:
     def preflight(self, request, output):
         """Locate + open the target group via search; write preflight proof."""
         if ui_tree_only_required():
-            from wecom_ui_queue import enabled, exchange
-            if enabled(request):
+            from wecom_ui_queue import preflight_enabled, exchange
+            if preflight_enabled(request):
                 proof = exchange('preflight', request)
                 if proof.get('ok') is True:
                     self._resolved = request['groupName']

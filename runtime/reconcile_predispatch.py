@@ -38,12 +38,15 @@ def check(marker, source, event, mode):
             or prior.get('payloads') != receipt.get('payloads')
             or receipt.get('attemptMarker') != str(marker)):
         raise ValueError('receipt-binding-mismatch')
-    if prior.get('payloadType') not in ('image', 'file') or len(prior.get('payloads', [])) != 1:
+    payloads = prior.get('payloads', [])
+    feedback_pair = (prior.get('payloadType') == 'file' and len(payloads) == 2
+                     and marker.parent.resolve() == (ROOT.parent / 'state/negative-feedback-list-appeals/wechat-attempts').resolve())
+    if prior.get('payloadType') not in ('image', 'file') or not (len(payloads) == 1 or feedback_pair):
         raise ValueError('unsupported-reconciliation-scope')
-    payload = prior['payloads'][0]
     binding = {'groupName': prior['groupName'], 'accountAlias': 'main-wechat',
-               'items': [{'itemId': '0', 'type': prior['payloadType'],
-                          **{k: payload[k] for k in ('name', 'size', 'sha256')}}]}
+               'items': [{'itemId': str(index), 'type': prior['payloadType'],
+                          **{k: payload[k] for k in ('name', 'size', 'sha256')}}
+                         for index, payload in enumerate(payloads)]}
     expected = hashlib.sha256(json.dumps(binding, ensure_ascii=False, sort_keys=True,
                                         separators=(',', ':')).encode()).hexdigest()
     if read(event / 'binding.json') != {'digest': expected}:

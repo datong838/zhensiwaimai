@@ -70,7 +70,7 @@ export function buildArgs({ items = [], markerSuffix = '', auth = authorization 
     '--marker-name', `${FLOW_ID}-${business}${markerSuffix}.json`,
     '--output-dir', path.join(reportDir, 'wechat-delivery', ...(markerSuffix ? [markerSuffix] : [])),
     ...items.flatMap(item => ['--item', item]),
-    '--deadline-unix', String(Math.floor(Date.now() / 1000) + 180),
+    '--deadline-unix', String(Math.floor(Date.now() / 1000) + 900),
     ...(items.length ? ['--execute'] : []),
   ];
 }
@@ -109,7 +109,7 @@ export async function main(argv = process.argv.slice(2)) {
     process.exitCode = 1;
     return;
   }
-  const { stdout } = await run(python, buildArgs({ items }), { timeout: 240_000, maxBuffer: 16 * 1024 * 1024 });
+  const { stdout } = await run(python, buildArgs({ items }), { timeout: 960_000, maxBuffer: 16 * 1024 * 1024 });
   console.log(stdout.trim());
 }
 

@@ -87,6 +87,19 @@ def enabled(request):
                  or (re.fullmatch(r'empty-\d{12}\.json', name) is not None
                      and items[0].get('text') == '当前无新增意向商家')))
 
+def preflight_enabled(request):
+    if enabled(request):
+        return True
+    import math
+    context = request.get('context', {})
+    deadline = context.get('deadlineAt')
+    return (set(request) == {'groupName', 'context'}
+            and request.get('groupName') == '上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰'
+            and set(context) == {'searchGroupName', 'deadlineAt'}
+            and context.get('searchGroupName') is None
+            and isinstance(deadline, (int, float)) and not isinstance(deadline, bool)
+            and math.isfinite(deadline) and 15 < deadline - time.time() <= 300)
+
 def validate_response(task, reply):
     if reply.get('taskId') != task['taskId'] or reply.get('binding') != task['binding']:
         raise ValueError('ui-post-response-binding-mismatch')
@@ -127,7 +140,7 @@ def validate_response(task, reply):
     return result
 
 def exchange(stage, request, item=None, *, queue=QUEUE):
-    if not enabled(request):
+    if not (preflight_enabled(request) if stage == 'preflight' else enabled(request)):
         raise ValueError('ui-post-workflow-not-enabled')
     queue.mkdir(parents=True, exist_ok=True, mode=0o700)
     task = {'taskId': str(uuid.uuid4()), 'stage': stage, 'request': request,
