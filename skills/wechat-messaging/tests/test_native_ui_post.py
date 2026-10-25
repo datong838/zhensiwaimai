@@ -4,6 +4,24 @@ from unittest.mock import patch
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
 import native_ui_post as post
 class NativePostTests(unittest.TestCase):
+ def test_final_submit_binds_exact_group_and_draft(self):
+  action=post.composer_submit_action('完整目标群','完整正文')
+  self.assertEqual(action['key'],'return');self.assertEqual(action['expected']['value'],'完整正文')
+  self.assertEqual(action['guards'][0]['expected']['value'],'完整目标群')
+  self.assertEqual(action['expected']['role'],'AXTextArea')
+ def test_final_context_rejection_records_zero_without_a_second_submit(self):
+  with tempfile.TemporaryDirectory() as d:
+   p,t=self.task(Path(d));calls=[]
+   def ui(actions=(),**kw):
+    calls.extend(actions)
+    if any(a.get('guards') for a in actions):raise post.NativeUIActionRejected('changed-after-paste')
+    return {'nodes':[]}
+   def anchor(n):return {},{'value':'电销+直播攻坚组' if n=='conversationTitle' else ''}
+   with patch.object(post,'QUEUE',Path(d)),patch.object(post,'owner_active',return_value=True),patch.object(post,'read_anchor',side_effect=anchor),patch.object(post,'message_rows',return_value=[]),patch.object(post,'execute',side_effect=ui),patch.object(post.subprocess,'run'),patch.object(post,'validate_response'),patch.object(post.time,'sleep'):
+    r=post.send_text(p)
+   self.assertEqual(r['result']['sendAttempts'],0);self.assertEqual(r['result']['status'],'blocked')
+   self.assertEqual(sum(a.get('key')=='return' for a in calls),1)
+   self.assertTrue((p/'send-intent.json').exists())
  def test_preflight_reuses_exact_group_result_without_second_precheck(self):
   with tempfile.TemporaryDirectory() as d:
    p,t=self.task(Path(d));t['stage']='preflight';t.pop('binding');t['binding']=post.text_hash(json.dumps(t,sort_keys=True,ensure_ascii=False));(p/'task.json').write_text(json.dumps(t))

@@ -11,6 +11,10 @@ function run(argv) {
  function focused(e){try{return e.attributes.byName('AXFocused').value()===true;}catch(_){return false;}}
  const results=[];
  for(const a of cfg.actions||[]){
+  if(a.guards){
+   try{for(const guard of a.guards)check(guard);check(a);}
+   catch(error){return JSON.stringify({backend:'system-events-ui-tree',actionRejected:true,error:String(error),results:results,screenCapture:false});}
+  }
   if(a.type==='activate'){Application('com.tencent.WeWorkMac').activate();p.frontmost=true;p.windows.byName('企业微信').actions.byName('AXRaise').perform();delay(0.15);}
   else if(a.type==='click'){if(!p.frontmost())throw Error('native-ui-not-frontmost');if(a.modifier)throw Error('native-ui-modifier-not-allowed');se.click(check(a));}
   else if(a.type==='key'||a.type==='paste'){

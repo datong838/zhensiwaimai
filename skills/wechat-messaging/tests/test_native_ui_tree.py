@@ -2,12 +2,29 @@ import json
 import sys
 import unittest
 import tempfile
+from types import SimpleNamespace
 from pathlib import Path
 from unittest.mock import patch
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
 import native_ui_tree as ui
 
 class NativeTreeTests(unittest.TestCase):
+    def test_only_explicit_zero_action_rejection_is_safe_to_classify_zero(self):
+        output={'actionRejected':True,'results':[],'error':'changed'}
+        with patch.object(ui.subprocess,'run',return_value=SimpleNamespace(returncode=0,stdout=json.dumps(output))):
+            with self.assertRaises(ui.NativeUIActionRejected):ui.execute(max_depth=0)
+        output['results']=[{'type':'key','ok':True}]
+        with patch.object(ui.subprocess,'run',return_value=SimpleNamespace(returncode=0,stdout=json.dumps(output))):
+            with self.assertRaises(RuntimeError) as failure:ui.execute(max_depth=0)
+        self.assertNotIsInstance(failure.exception,ui.NativeUIActionRejected)
+
+    def test_context_guard_cannot_contain_actions(self):
+        action={'type':'key','key':'return','path':[0],'expected':{'role':'AXTextArea'},
+                'guards':[{'type':'click','path':[0],'expected':{'role':'AXTextField'}}]}
+        with patch.object(ui.subprocess,'run') as run:
+            with self.assertRaisesRegex(ValueError,'context-guard-invalid'):ui.execute([action])
+        run.assert_not_called()
+
     def test_batch_read_is_one_exact_read_only_call(self):
         anchors=json.loads(ui.SELECTORS.read_text())['anchors']
         names=('conversationTitle','composer')

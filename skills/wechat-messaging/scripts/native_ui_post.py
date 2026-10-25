@@ -8,7 +8,8 @@ import sys
 import time
 from pathlib import Path
 from ledger import atomic_json
-from native_ui_tree import read_anchor, read_anchors, execute, named_action, SELECTORS
+from native_ui_tree import (read_anchor, read_anchors, execute, named_action,
+                            SELECTORS, NativeUIActionRejected)
 from wecom_ui_queue import QUEUE, owner_active, validate_response
 
 
@@ -73,6 +74,14 @@ def preflight(folder):
 
 def text_hash(text):
     return hashlib.sha256(text.encode('utf-8')).hexdigest()
+
+
+def composer_submit_action(group, value):
+    anchors = json.loads(SELECTORS.read_text())['anchors']
+    composer, title = anchors['composer'], anchors['conversationTitle']
+    return {'type': 'key', 'key': 'return', 'path': composer['path'],
+            'expected': composer['expected'] | {'value': value},
+            'guards': [{'path': title['path'], 'expected': title['expected'] | {'value': group}}]}
 
 
 def current_input_empty():
@@ -147,20 +156,18 @@ def send_text(folder):
         if owner_active(task['owner']) is not True:
             raise RuntimeError('native-ui-owner-not-active')
         execute([named_action('paste', 'composer')], max_depth=0)
-        _, draft = read_anchor('composer')
-        _, title = read_anchor('conversationTitle')
-        if draft['value'] != text or title['value'] != task['request']['groupName']:
-            raise RuntimeError('native-ui-draft-mismatch')
         if owner_active(task['owner']) is not True:
             raise RuntimeError('native-ui-owner-not-active')
         # A thrown final action has an unknown physical outcome; never retry it.
         submitted = True
-        execute([named_action('key', 'composer', key='return')], max_depth=0)
+        execute([composer_submit_action(task['request']['groupName'], text)], max_depth=0)
         observations = [latest_text_observation(task, baseline_count), latest_text_observation(task, baseline_count)]
         result = {'status': 'verified', 'sendAttempts': 1, 'resolvedGroup': title['value'],
                   'sha256': task['item']['sha256'], 'observations': observations,
                   'backend': 'system-events-ui-tree'}
     except Exception as exc:
+        if isinstance(exc, NativeUIActionRejected):
+            submitted = False
         result = {'status': 'unknown' if submitted else 'blocked', 'sendAttempts': 1 if submitted else 0,
                   'resolvedGroup': title['value'], 'inputEmpty': current_input_empty(),
                   'reason': str(exc), 'backend': 'system-events-ui-tree'}
@@ -295,12 +302,14 @@ def send_media(folder):
             submitted = False  # The selected object is proven to remain in composer.
             live()
             submitted = True
-            execute([named_action('key', 'composer', key='return')], max_depth=0)
+            execute([composer_submit_action(task['request']['groupName'], '\ufffc')], max_depth=0)
         observations = [media_observation(task, baseline_count), media_observation(task, baseline_count)]
         result = {'status': 'verified', 'sendAttempts': 1, 'resolvedGroup': title['value'],
                   'sha256': task['item']['sha256'], 'observations': observations,
                   'backend': 'system-events-ui-tree'}
     except Exception as exc:
+        if isinstance(exc, NativeUIActionRejected):
+            submitted = False
         result = {'status': 'unknown' if submitted else 'blocked', 'sendAttempts': 1 if submitted else 0,
                   'resolvedGroup': title['value'], 'inputEmpty': current_input_empty(), 'reason': str(exc),
                   'backend': 'system-events-ui-tree'}
@@ -339,7 +348,7 @@ def confirm_selected_file(task, baseline_count, live):
         # The native file picker can prepare an attachment instead of a preview.
         # Exact filename and source were already verified in that picker.
         live()
-        execute([named_action('key', 'composer', key='return')], max_depth=0)
+        execute([composer_submit_action(task['request']['groupName'], '\ufffc')], max_depth=0)
         return
     if draft['value'] != '':
         raise RuntimeError('native-ui-file-draft-mismatch')

@@ -7,6 +7,11 @@ SELECTORS = SCRIPT.parents[1] / 'config/native-ui-selectors.json'
 ALLOWED = {'activate', 'click', 'key', 'paste'}
 KEYS = {'return','escape','down','up','tab','backspace','search','goto','selectall'}
 
+
+class NativeUIActionRejected(RuntimeError):
+    """The native interpreter proved no action in this invocation was performed."""
+
+
 def execute(actions=(), *, max_depth=2, root_path=(), root_paths=None):
     if root_paths is not None:
         if actions or max_depth != 0 or not root_paths:
@@ -15,6 +20,11 @@ def execute(actions=(), *, max_depth=2, root_path=(), root_paths=None):
                for path in root_paths):
             raise ValueError('native-ui-path-invalid')
     for action in actions:
+        for guard in action.get('guards', []):
+            if (set(guard) != {'path', 'expected'} or not guard['expected']
+                    or not isinstance(guard['path'], list)
+                    or any(type(i) is not int or i < 0 for i in guard['path'])):
+                raise ValueError('native-ui-context-guard-invalid')
         if action.get('modifier'):
             raise ValueError('native-ui-modifier-not-allowed')
         if action.get('type') == 'key' and action.get('key') not in KEYS:
@@ -34,7 +44,12 @@ def execute(actions=(), *, max_depth=2, root_path=(), root_paths=None):
                             capture_output=True, text=True, check=False)
     if result.returncode:
         raise RuntimeError(result.stderr.strip() or 'native-ui-failed')
-    return json.loads(result.stdout)
+    decoded = json.loads(result.stdout)
+    if decoded.get('actionRejected') is True:
+        if decoded.get('results') == []:
+            raise NativeUIActionRejected(decoded.get('error', 'native-ui-action-rejected'))
+        raise RuntimeError('native-ui-rejected-after-prior-actions')
+    return decoded
 
 
 def read_anchors(*names):
