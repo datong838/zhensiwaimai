@@ -70,4 +70,69 @@ class BusinessFactTests(unittest.TestCase):
         self.write();self.assertIsNone(facts.read_fact(facts.FLOW,self.now))
 
 
+class UserImageFactTests(unittest.TestCase):
+    def setUp(self):
+        self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup)
+        self.root=Path(self.tmp.name);p=patch.object(facts,'ROOT',self.root)
+        p.start();self.addCleanup(p.stop)
+        self.now=datetime(2026,10,25,18,tzinfo=ZoneInfo('Asia/Shanghai'))
+        self.queue=self.root/'skills/wechat-messaging/.runtime/ui-post-queue'
+        self.tasks=[]
+        for index,name in enumerate(['jinsha-store-final.png','jinsha-review-final.png']):
+            folder=self.queue/str(index);folder.mkdir(parents=True)
+            image=folder/name;image.write_bytes(('synthetic-'+name).encode())
+            sha=hashlib.sha256(image.read_bytes()).hexdigest()
+            item={'type':'image','name':name,'path':str(image),'sha256':sha}
+            task={'taskId':str(index),'stage':'send','item':item,'request':{
+                'groupName':facts.GROUP,'items':[item],'context':{'workflowId':'taobao-evidence'}}}
+            task['binding']=hashlib.sha256(json.dumps(task,sort_keys=True,ensure_ascii=False).encode()).hexdigest()
+            reply={'taskId':str(index),'binding':task['binding'],'result':{
+                'status':'unknown','sendAttempts':1,'resolvedGroup':facts.GROUP}}
+            intent={'taskId':str(index),'binding':task['binding'],'sha256':sha,'at':self.now.timestamp()-60}
+            hashes={}
+            for filename,value in [('task.json',task),('response.json',reply),('send-intent.json',intent)]:
+                raw=json.dumps(value,ensure_ascii=False).encode();(folder/filename).write_bytes(raw)
+                hashes[filename]=hashlib.sha256(raw).hexdigest()
+            self.tasks.append((folder,task,hashes))
+        screenshot=self.root/'runtime/state/ui-user-evidence/20261025/first.png'
+        screenshot.parent.mkdir(parents=True);screenshot.write_bytes(b'user-attached-evidence-fixture')
+        self.receipt=self.root/'upload-receipt.json'
+        self.receipt.write_text(json.dumps({'ok':True,'phase':'completed','cleanupStatus':'completed',
+            'businessDate':'2026-10-24','evidenceManifest':{'businessDate':'2026-10-24',
+            'images':[{'sha256':task['item']['sha256']} for _,task,_ in self.tasks]}}))
+        self.prefix=self.root/'runtime/state/taobao-image-user-prefix-2026-10-24.json'
+        self.prefix.write_text(json.dumps({'source':'explicit-user-business-confirmation','businessDate':'2026-10-24',
+            'groupName':facts.GROUP,'confirmation':'上传金鲨 这个 还差一个 图片 。','screenshot':str(screenshot),
+            'screenshotSha256':hashlib.sha256(screenshot.read_bytes()).hexdigest(),
+            'taskDirectory':str(self.tasks[0][0]),'sha256':self.tasks[0][1]['item']['sha256'],
+            'receiptFile':str(self.receipt)}))
+        folder,task,hashes=self.tasks[1]
+        self.acceptance=self.root/'runtime/state/user-confirmed-deliveries/20261025-taobao-jinsha-second-image.json'
+        self.acceptance.parent.mkdir(parents=True)
+        self.acceptance.write_text(json.dumps({'source':'explicit-user-confirmation','businessAccepted':True,
+            'date':'2026-10-25','groupName':facts.GROUP,'userQuote':'能看到第二张图',
+            'firstImageAcceptance':str(self.prefix),'taskId':task['taskId'],'binding':task['binding'],
+            'item':task['item'],'sourceFiles':hashes}))
+    def test_explicit_acceptance_is_separate_and_read_only(self):
+        before={p:p.read_bytes() for p in self.root.rglob('*') if p.is_file()}
+        result=facts.read_fact(facts.TAOBAO_IMAGES,self.now)
+        self.assertTrue(result['businessDelivered'])
+        self.assertEqual(result['basis'],'explicit-user-confirmation')
+        self.assertEqual(result['technicalStatusPreserved'],'unknown')
+        self.assertEqual(before,{p:p.read_bytes() for p in self.root.rglob('*') if p.is_file()})
+    def test_absent_confirmation_cannot_infer_from_submit(self):
+        self.acceptance.unlink();self.assertIsNone(facts.read_fact(facts.TAOBAO_IMAGES,self.now))
+    def test_other_day_does_not_inherit_acceptance(self):
+        self.assertIsNone(facts.read_fact(facts.TAOBAO_IMAGES,self.now.replace(day=26)))
+    def test_changed_frozen_image_reject(self):
+        Path(self.tasks[1][1]['item']['path']).write_bytes(b'changed')
+        self.assertIsNone(facts.read_fact(facts.TAOBAO_IMAGES,self.now))
+    def test_noncompleted_upload_cannot_be_accepted(self):
+        data=json.loads(self.receipt.read_text());data['phase']='failed'
+        self.receipt.write_text(json.dumps(data));self.assertIsNone(facts.read_fact(facts.TAOBAO_IMAGES,self.now))
+    def test_explicit_rejection_is_not_acceptance(self):
+        data=json.loads(self.acceptance.read_text());data['userQuote']='只看到第一张图'
+        self.acceptance.write_text(json.dumps(data));self.assertIsNone(facts.read_fact(facts.TAOBAO_IMAGES,self.now))
+
+
 if __name__=='__main__':unittest.main()

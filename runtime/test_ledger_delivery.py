@@ -42,7 +42,8 @@ class LedgerScheduleDisplayTests(unittest.TestCase):
     def rows(self, skill, record=None):
         data={'skills':[skill], 'ledger_template':[{'row':1,'skill':skill['name'],
             'ledger_name':'业务任务','schedule':'旧时间','dev_state':'active'}]}
-        return run_all.build_ledger_rows(data, {skill['name']:record} if record else {})
+        with patch('business_delivery_facts.read_fact',return_value=None):
+            return run_all.build_ledger_rows(data, {skill['name']:record} if record else {})
     def test_current_schedule_is_authoritative(self):
         row=self.rows({'name':'daily-negative-reviews','enabled':True,'schedule':'每日08:30'})[0]
         self.assertEqual(row['schedule'],'每日08:30')
