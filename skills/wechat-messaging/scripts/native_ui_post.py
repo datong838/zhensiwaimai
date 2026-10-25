@@ -55,12 +55,8 @@ def preflight(folder):
         return json.loads((folder / 'response.json').read_text())
     if task.get('lifetime') != 'owner-process' or owner_active(task['owner']) is not True:
         raise ValueError('native-ui-owner-not-active')
-    ensure_group(task['request']['groupName'], task['owner'])
-    # Read only the previously discovered precise anchors, not the full UI tree.
-    _, title = read_anchor('conversationTitle')
-    _, composer = read_anchor('composer')
-    if title['value'] != task['request']['groupName'] or composer['value'] != '':
-        raise ValueError('native-ui-target-or-draft-mismatch')
+    # ensure_group already verified exact title + empty input on both paths.
+    resolved_group = ensure_group(task['request']['groupName'], task['owner'])
     if owner_active(task['owner']) is not True:
         raise ValueError('native-ui-owner-not-active')
     claim = folder / 'claim.json'
@@ -68,7 +64,7 @@ def preflight(folder):
         with claim.open('x') as f:
             json.dump({'worker': 'native-system-ui-post', 'pid': os.getpid(), 'at': time.time()}, f)
     reply = {'taskId': task['taskId'], 'binding': binding,
-             'result': {'ok': True, 'resolvedGroup': title['value'], 'inputEmpty': True,
+             'result': {'ok': True, 'resolvedGroup': resolved_group, 'inputEmpty': True,
                         'backend': 'system-events-ui-tree', 'observedAt': time.time()}}
     validate_response(task, reply)
     atomic_json(folder / 'response.json', reply)

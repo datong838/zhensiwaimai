@@ -4,7 +4,9 @@
 // 规程来源：大同 2026-10-03 立——每天发完当日工作台账后，把美团 IM 页面关掉重新打开，保障次日智能客服流环境可用
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import pw from '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/posts/meituan-post/scripts/node_modules/playwright-core/index.js';
+import { createRequire } from 'node:module';
+const nativeRequire = createRequire(import.meta.url);
+const pw = nativeRequire('../skills/posts/meituan-post/scripts/node_modules/playwright-core/index.js');
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 // 权威 URL：与 runtime/auth_keepalive.mjs TARGETS[9233] 保持一致（唯一权威源）
@@ -14,8 +16,8 @@ function isMeituanIM(value) {
   try { const u = new URL(value); return u.hostname === 'waimaie.meituan.com' && u.pathname.startsWith('/imworkbench/'); }
   catch { return false; }
 }
-if (process.argv.includes('--selftest')) {
-  const assert = (await import('node:assert/strict')).default;
+if (typeof process !== 'undefined' && process.argv.includes('--selftest')) {
+  const assert = nativeRequire('node:assert/strict');
   assert.equal(isMeituanIM(TARGET), true);
   for (const u of ['https://example.com/imworkbench/home', 'https://waimaie.meituan.com.example.com/imworkbench/home', 'https://waimaie.meituan.com/login', 'invalid']) assert.equal(isMeituanIM(u), false);
   console.log(JSON.stringify({ok:true,tests:5,browserConnections:0}));
@@ -96,7 +98,6 @@ try { await b.close(); } catch {}
 return {ok:imPages.length === 1, closed, remainingIMPages:imPages.length};
 }
 
-if (fileURLToPath(import.meta.url) === path.resolve(process.argv[1] || '')) {
- const result = await resetIM();
- process.exitCode = result.ok ? 0 : 1;
+if (typeof process !== 'undefined' && fileURLToPath(import.meta.url) === path.resolve(process.argv[1] || '')) {
+ resetIM().then(result => { process.exitCode = result.ok ? 0 : 1; }).catch(error => { console.error(error); process.exitCode = 1; });
 }

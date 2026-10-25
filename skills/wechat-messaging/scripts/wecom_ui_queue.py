@@ -187,8 +187,8 @@ def native_dispatch_enabled():
 
 def dispatch_original_task(folder):
     """Same queue, owner and intent; no model handoff or fallback transport."""
-    from native_ui_post import dispatch
     try:
+        from native_ui_post import dispatch
         dispatch(folder)
     except Exception as error:
         # A native transport may have persisted its outcome before raising.
@@ -208,6 +208,8 @@ def dispatch_original_task(folder):
 def exchange(stage, request, item=None, *, queue=QUEUE, owner_lifetime=False):
     if not (preflight_enabled(request) if stage == 'preflight' else enabled(request)):
         raise ValueError('ui-post-workflow-not-enabled')
+    if owner_lifetime and queue.resolve() == QUEUE.resolve() and not native_dispatch_enabled():
+        raise ValueError('ui-post-native-dispatch-not-ready')
     queue.mkdir(parents=True, exist_ok=True, mode=0o700)
     task = {'taskId': str(uuid.uuid4()), 'stage': stage, 'request': request,
             'item': item, 'deadlineAt': request['context']['deadlineAt'] - 15}

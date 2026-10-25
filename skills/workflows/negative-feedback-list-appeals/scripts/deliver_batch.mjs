@@ -109,7 +109,7 @@ export async function main(argv = process.argv.slice(2)) {
     process.exitCode = 1;
     return;
   }
-  const { stdout } = await run(python, buildArgs({ items }), { timeout: 960_000, maxBuffer: 16 * 1024 * 1024 });
+  const { stdout } = await run(python, buildArgs({ items }), { maxBuffer: 16 * 1024 * 1024 });
   console.log(stdout.trim());
 }
 

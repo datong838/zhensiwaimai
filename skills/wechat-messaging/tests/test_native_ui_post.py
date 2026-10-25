@@ -4,6 +4,12 @@ from unittest.mock import patch
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
 import native_ui_post as post
 class NativePostTests(unittest.TestCase):
+ def test_preflight_reuses_exact_group_result_without_second_precheck(self):
+  with tempfile.TemporaryDirectory() as d:
+   p,t=self.task(Path(d));t['stage']='preflight';t.pop('binding');t['binding']=post.text_hash(json.dumps(t,sort_keys=True,ensure_ascii=False));(p/'task.json').write_text(json.dumps(t))
+   with patch.object(post,'QUEUE',Path(d)),patch.object(post,'owner_active',return_value=True),patch.object(post,'ensure_group',return_value='电销+直播攻坚组') as locate,patch.object(post,'read_anchor',side_effect=AssertionError('repeated-precheck')):
+    result=post.preflight(p)
+   locate.assert_called_once();self.assertTrue(result['result']['ok'])
  def test_same_group_preflight_does_not_navigate(self):
   with patch.object(post,'read_anchor',side_effect=[({}, {'value':'群'}),({}, {'value':''})]),patch.object(post,'execute') as ui:
    self.assertEqual(post.ensure_group('群'),'群');ui.assert_not_called()

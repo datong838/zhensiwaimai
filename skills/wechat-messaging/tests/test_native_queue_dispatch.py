@@ -9,6 +9,15 @@ import wecom_ui_queue as queue
 
 
 class NativeQueueDispatchTests(unittest.TestCase):
+    def test_production_owner_cannot_silently_wait_for_manual_consumer(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            with patch.object(queue,'QUEUE',root),patch.object(queue,'preflight_enabled',return_value=True), \
+                 patch.object(queue,'native_dispatch_enabled',return_value=False),patch.object(queue,'dispatch_original_task') as dispatch:
+                with self.assertRaisesRegex(ValueError,'native-dispatch-not-ready'):
+                    queue.exchange('preflight',{'groupName':'test','context':{'deadlineAt':1}},queue=root,owner_lifetime=True)
+            self.assertEqual(list(root.iterdir()),[])
+            dispatch.assert_not_called()
     def test_owner_exchange_dispatches_same_frozen_task_without_poll_wait(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
