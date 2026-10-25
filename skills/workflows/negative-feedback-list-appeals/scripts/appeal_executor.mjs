@@ -147,18 +147,7 @@ async function advancePage(cdp, previousPage) {
 async function verifyAfterConfirm(cdp, target, beforeTotal, gate, mode) {
   let after = null;
   const attempts = mode === 'status' ? 24 : 10;
-  // 确认点击可能未注册（弹窗仍开 = 提交确定未发生）：此时补点一次「确定」是安全的。
-  try {
-    const reclicked = await cdp.eval(`(()=>{
-      const dlg = [...document.querySelectorAll('.appeal-custom-dialog')].filter(d => d.offsetParent !== null)[0];
-      if (!dlg) return 'dialog-closed';
-      const btns = [...dlg.querySelectorAll('.dialog-footer button, .dialog-footer .el-button')]
-        .filter(b => b.offsetParent !== null && String(b.innerText).replace(/\\s+/g, '') === '确定');
-      if (btns.length === 1) { btns[0].click(); return 'reclicked'; }
-      return 'no-confirm-button';
-    })()`);
-    if (reclicked === 'reclicked') await sleep(1200);
-  } catch { /* 页面跳转中，忽略 */ }
+  // 提交后只读回查；未知结果不能再次点击确认。
   for (let attempt = 0; attempt < attempts; attempt++) {
     await sleep(800);
     try {
@@ -223,16 +212,16 @@ async function processPlatform(cdp, platformKey, window, receipt) {
       const key = stableRecordKey({ platform: platformKey, store: target.store, date: target.date, orderNo: target.orderNo, category: target.category });
       if (doneThisRun.has(key)) continue;
 
-      // 跨日账本去重：已终态 / 已进入 submitted_once 的键禁止再次提交。
-      // 例外：prior === 'unknown' 不跳过 —— 候选本就取自当前「未申诉」页且卡片仍带
-      // 「立即申诉」按钮，页面实时状态证明前次未提交成功（页面即权威回读），允许安全重试。
+      // 既有记录只读复用；unknown保持未知，禁止自动再次提交。
       const prior = await existingStatusAnyDate(key);
-      if (prior && prior !== 'unknown') {
-        if (prior === 'verified_submitted') receipt.verified_submitted.push(key);
+      if (prior) {
+        if (prior === 'unknown') receipt.unknown.push(key);
+        else if (prior === 'verified_submitted') receipt.verified_submitted.push(key);
         else if (prior === 'blocked') receipt.blocked.push(key);
         else receipt.skipped.push(key); // submitted_once 等
         receipt.platforms[platformKey].candidates.push({ key, store: target.store, outcome: prior });
         doneThisRun.add(key);
+        if (prior === 'unknown') break;
         continue;
       }
 
@@ -242,8 +231,8 @@ async function processPlatform(cdp, platformKey, window, receipt) {
         preAppeal: target.preAppeal, passRate: target.passRate, createdAt: now(),
       };
 
-      // ① 点击前落 prepared（unknown 重试时注明依据）
-      const retryNote = prior === 'unknown' ? '前次结果 unknown；本条当前仍在未申诉列表（页面证据=未提交成功），按页面权威语义安全重试。' : '已创建临时记录，尚未打开申诉弹窗。';
+      // ① 首次提交前落prepared；既有未知记录不会进入此路径。
+      const retryNote = '已创建临时记录，尚未打开申诉弹窗。';
       await atomicWrite(recordFile(business, key), buildMarkdown({ ...record, verification: retryNote, status: 'prepared' }));
       await clickAppeal(cdp, target);
       const dialog = await readStableDialog(cdp);

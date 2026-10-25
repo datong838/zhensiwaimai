@@ -255,4 +255,11 @@ const {excludedPlatforms}=await import('./appeal_executor.mjs');
 assert.deepEqual(excludedPlatforms(['meituan']).taobao,{execution:'not_requested',submitted:false,reason:'user-20261025-no-taobao-feedback-submit-entry'});
 assert.deepEqual(excludedPlatforms(['meituan','taobao']),{});
 tests += 7;
+// Regression: readback must not issue another business confirmation.
+const executorSource=await (await import('node:fs/promises')).readFile(new URL('./appeal_executor.mjs',import.meta.url),'utf8');
+const readbackSource=executorSource.slice(executorSource.indexOf('async function verifyAfterConfirm('),executorSource.indexOf('async function processPlatform('));
+assert.ok(!readbackSource.includes('.click(')&&!readbackSource.includes('confirmDialog('));
+assert.ok(!executorSource.includes("prior && prior !== 'unknown'"));
+assert.ok(executorSource.includes("if (prior === 'unknown') receipt.unknown.push(key)"));
+tests+=3;
 console.log(JSON.stringify({ ok: true, tests, runtimeModelDecisions: 0 }));
