@@ -22,7 +22,7 @@ export function shiftPlan(platform,date=new Date()) {
 }
 async function originalCli(step) {
   const cwd=path.join(root,'skills/workflows',step.flow);
-  const {stdout}=await exec(process.execPath,[path.join(cwd,'scripts',step.script),...step.args],{cwd,timeout:1500000,maxBuffer:16*1024*1024});
+  const {stdout}=await exec(process.execPath,[path.join(cwd,'scripts',step.script),...step.args],{cwd,maxBuffer:16*1024*1024});
   const line=stdout.trim().split('\n').findLast(value=>value.startsWith('{'));
   if (!line) throw Error(`missing-${step.stage}-receipt`);
   return JSON.parse(line);

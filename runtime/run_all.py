@@ -1421,6 +1421,9 @@ def _cadence_gate(skill: dict, now: datetime) -> tuple:
     铁律（2026-10-02 大同定）：**只有当天的成功才算成功**。历史 / 昨日的成功一律作废，
     既不能作为本日"已完成"的依据，也不能生成 SUCCESS 伪记录（消灭虚高 SUCCESS）。
     """
+    from business_delivery_facts import read_fact
+    if read_fact(skill['name'], now):
+        return True, 'business_delivery_observed'
     if fixed_schedule.customer_duty_user_accepted(skill['name'], now):
         return True, 'customer_duty_user_accepted'
     if fixed_schedule.customer_slot_superseded(skill['name'], now):
@@ -1576,7 +1579,7 @@ def daemon_cycle(data: dict, interpreters: dict, do_send: bool, force_all: bool 
     for s in enabled:
         name = s["name"]
         skip, reason = _cadence_gate(s, datetime.now())
-        if reason in ('superseded_customer_slot', 'customer_duty_user_accepted') or (not force_all and name not in forced and skip):
+        if reason in ('superseded_customer_slot', 'customer_duty_user_accepted', 'business_delivery_observed') or (not force_all and name not in forced and skip):
             if reason == "done_today":
                 print("[skip] %s 当日已成功（cadence 内），本周期跳过" % name)
                 records[name] = _pseudo_record(s)

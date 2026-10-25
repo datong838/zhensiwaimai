@@ -32,6 +32,8 @@ class DailyLedgerTests(unittest.TestCase):
         self.patch = patch.object(daily, 'ROOT', self.root)
         self.patch.start()
         self.addCleanup(self.patch.stop)
+        facts_patch = patch('business_delivery_facts.read_fact', return_value=None)
+        facts_patch.start(); self.addCleanup(facts_patch.stop)
         self.now = datetime(2026, 10, 25, 19, tzinfo=ZoneInfo('Asia/Shanghai'))
         self.skills = [{'name': n, 'enabled': True, 'dev_state': 'active'} for n in daily.FINAL]
         self.skills.append({'name':'meituan-intelligent-customer-service','enabled':True,'dev_state':'active'})

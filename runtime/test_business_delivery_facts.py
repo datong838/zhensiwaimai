@@ -10,6 +10,24 @@ import business_delivery_facts as facts
 
 
 class BusinessFactTests(unittest.TestCase):
+    def test_closing_without_user_confirmation_stays_unresolved(self):
+        for flow in facts.CLOSING:
+            self.assertIsNone(facts.read_fact(flow,self.now))
+    def test_closing_rejection_does_not_prove_delivery(self):
+        p=self.root/'runtime/state/user-confirmed-deliveries/20261025-appeal-closing-images.json'
+        p.parent.mkdir(parents=True)
+        p.write_text(json.dumps({'source':'explicit-user-confirmation','businessAccepted':True,
+            'date':'2026-10-25','groupName':facts.GROUP,'userQuote':'只看到其中一张'}))
+        for flow in facts.CLOSING:
+            self.assertIsNone(facts.read_fact(flow,self.now))
+    def test_closing_unbound_user_text_does_not_prove_delivery(self):
+        p=self.root/'runtime/state/user-confirmed-deliveries/20261025-appeal-closing-images.json'
+        p.parent.mkdir(parents=True)
+        p.write_text(json.dumps({'source':'explicit-user-confirmation','businessAccepted':True,
+            'date':'2026-10-25','groupName':facts.GROUP,'userQuote':'两张图都能看到',
+            'platforms':{'meituan':{},'taobao':{}}}))
+        for flow in facts.CLOSING:
+            self.assertIsNone(facts.read_fact(flow,self.now))
     def setUp(self):
         self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup)
         self.root=Path(self.tmp.name)

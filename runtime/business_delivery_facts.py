@@ -1,6 +1,7 @@
 """Read independently bound business facts without rewriting technical outcomes."""
 import hashlib
 import json
+import sys
 from datetime import datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -9,9 +10,11 @@ ROOT = Path(__file__).resolve().parent.parent
 GROUP = '上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰'
 FLOW = 'daily-new-stores-decoration-audit-to-wechat'
 TAOBAO_IMAGES = 'daily-taobao-download-to-jinsha'
+CLOSING = {'meituan-waimai-negative-review-appeals-11': ('meituan', 'meituan-waimai-appeals', '美团外卖'),
+           'taobao-flash-sale-negative-review-appeals': ('taobao', 'taobao-flash-appeals', '淘宝闪购')}
 
 
-def _image_original(folder, name, sha, now):
+def _image_original(folder, name, sha, now, workflow='taobao-evidence'):
     folder = Path(folder).resolve()
     if folder.parent != (ROOT / 'skills/wechat-messaging/.runtime/ui-post-queue').resolve():
         raise ValueError('image-task-out-of-scope')
@@ -22,7 +25,7 @@ def _image_original(folder, name, sha, now):
                                         sort_keys=True, ensure_ascii=False).encode()).hexdigest()
     item = task['item']
     observed_day = datetime.fromtimestamp(intent['at'], ZoneInfo('Asia/Shanghai')).date()
-    if not (task['stage']=='send' and task['request']['context']['workflowId']=='taobao-evidence'
+    if not (task['stage']=='send' and task['request']['context']['workflowId']==workflow
             and task['request']['groupName']==GROUP and reply['result']['resolvedGroup']==GROUP
             and binding==task['binding']==reply['binding']==intent['binding']
             and task['taskId']==reply['taskId']==intent['taskId']
@@ -33,6 +36,69 @@ def _image_original(folder, name, sha, now):
             and observed_day==now.date() and intent['at']<=now.timestamp()):
         raise ValueError('image-original-binding-invalid')
     return task
+
+
+def _closing_fact(flow, now):
+    platform, route, label = CLOSING[flow]
+    day=now.strftime('%Y-%m-%d');business_day=(now-timedelta(days=1)).strftime('%Y-%m-%d')
+    path=ROOT/'runtime/state/user-confirmed-deliveries'/(now.strftime('%Y%m%d')+'-appeal-closing-images.json')
+    try:
+        acceptance=json.loads(path.read_text())
+        if not (acceptance['source']=='explicit-user-confirmation' and acceptance['businessAccepted'] is True
+                and acceptance['date']==day and acceptance['groupName']==GROUP
+                and acceptance['userQuote']=='两张图都能看到'):
+            return None
+        proof=acceptance['platforms'][platform]
+        record_path=Path(proof['runRecord']).resolve();log_path=Path(proof['runLog']).resolve()
+        history=(ROOT/'runtime/run_history'/day).resolve()
+        if record_path.parent!=history or log_path.parent!=history:
+            return None
+        if (hashlib.sha256(record_path.read_bytes()).hexdigest()!=proof['runRecordSha256']
+                or hashlib.sha256(log_path.read_bytes()).hexdigest()!=proof['runLogSha256']):
+            return None
+        record=json.loads(record_path.read_text())
+        started=datetime.fromisoformat(record['started_at'])
+        if (record['skill']!=flow or started.strftime('%Y-%m-%d')!=day
+                or (started.hour,started.minute)<(18,30) or str(log_path) not in record['logs']):
+            return None
+        receipts=[]
+        for line in log_path.read_text().splitlines():
+            try: receipts.append(json.loads(line))
+            except ValueError: continue
+        closing=next(r for r in reversed(receipts) if r.get('platform')==platform and r.get('slot')=='18:30')
+        stages={s['stage']:s['receipt'] for s in closing['results']}
+        if not (stages['appeal']['ok'] is True and stages['build']['ok'] is True
+                and stages['appeal']['businessDate']==business_day and stages['build']['businessDate']==business_day
+                and not stages['appeal'].get('unknown') and not stages['appeal'].get('blocked')):
+            return None
+        queue=ROOT/'skills/wechat-messaging/.runtime/ui-post-queue'
+        for kind in ('file','image'):
+            folder=queue/proof[kind]['taskId']
+            for name in ('task.json','response.json','send-intent.json'):
+                if hashlib.sha256((folder/name).read_bytes()).hexdigest()!=proof[kind]['sources'][name]:
+                    return None
+        image=_image_original(queue/proof['image']['taskId'],label+'差评申诉台账-'+business_day+'.png',
+                              proof['image']['sha256'],now,workflow=route+'-summary')
+        folder=queue/proof['file']['taskId'];task=json.loads((folder/'task.json').read_text())
+        reply=json.loads((folder/'response.json').read_text());intent=json.loads((folder/'send-intent.json').read_text())
+        binding=hashlib.sha256(json.dumps({k:v for k,v in task.items() if k!='binding'},sort_keys=True,ensure_ascii=False).encode()).hexdigest()
+        if not (task['stage']=='send' and task['request']['context']['workflowId']==route
+                and task['request']['groupName']==GROUP and task['item']['type']=='file'
+                and task['item']['name']==label+'差评申诉汇总-'+business_day+'.xlsx'
+                and binding==task['binding']==reply['binding']==intent['binding']
+                and task['taskId']==reply['taskId']==intent['taskId']
+                and task['item']['sha256']==proof['file']['sha256']==intent['sha256']
+                and hashlib.sha256(Path(task['item']['path']).read_bytes()).hexdigest()==task['item']['sha256']
+                and reply['result']['status']=='verified' and reply['result']['sendAttempts']==1):
+            return None
+        scripts=ROOT/'skills/wechat-messaging/scripts'
+        if str(scripts) not in sys.path:sys.path.insert(0,str(scripts))
+        from wecom_ui_queue import validate_response
+        validate_response(task,reply)
+        return {'businessDelivered':True,'basis':'explicit-user-confirmation','source':str(path),
+                'taskIds':[task['taskId'],image['taskId']],'technicalStatusPreserved':'unknown','newSendAttempts':0}
+    except (OSError, ValueError, KeyError, TypeError, IndexError, StopIteration):
+        return None
 
 
 def _user_image_fact(now):
@@ -81,6 +147,8 @@ def read_fact(flow, now=None):
     now = now or datetime.now(ZoneInfo('Asia/Shanghai'))
     if flow == TAOBAO_IMAGES:
         return _user_image_fact(now)
+    if flow in CLOSING:
+        return _closing_fact(flow, now)
     if flow != FLOW:
         return None
     day = now.strftime('%Y-%m-%d')

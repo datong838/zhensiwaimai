@@ -4,6 +4,12 @@ from pathlib import Path
 from unittest.mock import patch
 import run_all
 class LedgerDeliveryTests(unittest.TestCase):
+    def test_business_fact_skips_without_rewriting_success(self):
+        from datetime import datetime
+        with patch('business_delivery_facts.read_fact',return_value={'businessDelivered':True}),patch.object(run_all,'_persist_done_today_record') as persist:
+            self.assertEqual(run_all._cadence_gate({'name':'confirmed-flow'},datetime.now()),
+                             (True,'business_delivery_observed'))
+            persist.assert_not_called()
     def test_failed_delivery_never_marks_sent(self):
         with tempfile.TemporaryDirectory() as folder,patch.object(run_all,'send_ledger_via_wechat',return_value=False):
             path=Path(folder)/'sent.json'
