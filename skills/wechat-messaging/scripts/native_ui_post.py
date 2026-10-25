@@ -8,7 +8,7 @@ import sys
 import time
 from pathlib import Path
 from ledger import atomic_json
-from native_ui_tree import read_anchor, execute, named_action, SELECTORS
+from native_ui_tree import read_anchor, read_anchors, execute, named_action, SELECTORS
 from wecom_ui_queue import QUEUE, owner_active, validate_response
 
 
@@ -184,8 +184,8 @@ def latest_text_observation(task, baseline_count):
     texts = [re.sub(r'\[(\d+)\]\(tel:\d+\)', r'\1', n.get('value') or '')
              for n in nodes if n['role'] == 'AXTextArea']
     matches = [s for s in texts if text_hash(s) == task['item']['sha256']]
-    _, title = read_anchor('conversationTitle')
-    _, composer = read_anchor('composer')
+    _, state = read_anchors('conversationTitle', 'composer')
+    title, composer = state['conversationTitle'], state['composer']
     if title['value'] != task['request']['groupName'] or composer['value'] != '' or not matches:
         raise RuntimeError('native-ui-message-not-confirmed')
     return {'groupName': title['value'], 'inputEmpty': True, 'newMessageVisible': True,
@@ -203,8 +203,8 @@ def media_observation(task, baseline_count):
         raise RuntimeError('native-ui-no-new-message-row')
     tree = execute(root_path=rows[-1], max_depth=3)
     nodes = tree['nodes']
-    _, title = read_anchor('conversationTitle')
-    _, composer = read_anchor('composer')
+    _, state = read_anchors('conversationTitle', 'composer')
+    title, composer = state['conversationTitle'], state['composer']
     if title['value'] != task['request']['groupName'] or composer['value'] != '':
         raise RuntimeError('native-ui-target-or-draft-mismatch')
     result = {'groupName': title['value'], 'inputEmpty': True, 'newMessageVisible': True,

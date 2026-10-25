@@ -25,7 +25,7 @@ class NativePostTests(unittest.TestCase):
    self.assertEqual(r['result']['sendAttempts'],0);self.assertIn('unsupported',r['result']['reason']);ui.assert_not_called();send.assert_not_called()
  def test_latest_text_reads_real_new_row_and_normalizes_phone(self):
   actual='联系：[123456](tel:123456)';t={'item':{'sha256':post.text_hash('联系：123456')},'request':{'groupName':'群'}}
-  with patch.object(post,'message_rows',return_value=[[0],[1]]),patch.object(post,'execute',return_value={'nodes':[{'role':'AXTextArea','value':actual}]}),patch.object(post,'read_anchor',side_effect=[({}, {'value':'群'}),({}, {'value':''})]):
+  with patch.object(post,'message_rows',return_value=[[0],[1]]),patch.object(post,'execute',return_value={'nodes':[{'role':'AXTextArea','value':actual}]}),patch.object(post,'read_anchors',return_value=({}, {'conversationTitle':{'value':'群'},'composer':{'value':''}})):
    r=post.latest_text_observation(t,1)
   self.assertEqual(r['visibleText'],'联系：123456');self.assertEqual(r['messagePath'],[1])
  def test_latest_text_rejects_old_row(self):
@@ -40,7 +40,7 @@ class NativePostTests(unittest.TestCase):
     ui.assert_not_called()
  def test_image_without_real_image_role_is_not_verified(self):
   t={'item':{'type':'image'},'request':{'groupName':'群'}}
-  with patch.object(post,'message_rows',return_value=[[0],[1]]),patch.object(post,'execute',return_value={'nodes':[{'role':'AXUnknown'}]}),patch.object(post,'read_anchor',side_effect=[({}, {'value':'群'}),({}, {'value':''})]):
+  with patch.object(post,'message_rows',return_value=[[0],[1]]),patch.object(post,'execute',return_value={'nodes':[{'role':'AXUnknown'}]}),patch.object(post,'read_anchors',return_value=({}, {'conversationTitle':{'value':'群'},'composer':{'value':''}})):
    with self.assertRaisesRegex(RuntimeError,'image-not-exposed'):post.media_observation(t,1)
  def test_old_media_row_cannot_prove_new_delivery(self):
   with patch.object(post,'message_rows',return_value=[[0]]),patch.object(post,'execute') as ui:

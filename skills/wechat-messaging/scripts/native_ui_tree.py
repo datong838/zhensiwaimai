@@ -7,7 +7,13 @@ SELECTORS = SCRIPT.parents[1] / 'config/native-ui-selectors.json'
 ALLOWED = {'activate', 'click', 'key', 'paste'}
 KEYS = {'return','escape','down','up','tab','backspace','search','goto','selectall'}
 
-def execute(actions=(), *, max_depth=2, root_path=()):
+def execute(actions=(), *, max_depth=2, root_path=(), root_paths=None):
+    if root_paths is not None:
+        if actions or max_depth != 0 or not root_paths:
+            raise ValueError('native-ui-multi-anchor-read-only')
+        if any(not isinstance(path, list) or any(type(i) is not int or i < 0 for i in path)
+               for path in root_paths):
+            raise ValueError('native-ui-path-invalid')
     for action in actions:
         if action.get('modifier'):
             raise ValueError('native-ui-modifier-not-allowed')
@@ -20,12 +26,33 @@ def execute(actions=(), *, max_depth=2, root_path=()):
                 raise ValueError('native-ui-target-required')
             if any(type(i) is not int or i < 0 for i in action['path']):
                 raise ValueError('native-ui-path-invalid')
-    payload = json.dumps({'actions': list(actions), 'maxDepth': max_depth, 'rootPath': list(root_path)}, ensure_ascii=False)
+    config = {'actions': list(actions), 'maxDepth': max_depth, 'rootPath': list(root_path)}
+    if root_paths is not None:
+        config['rootPaths'] = root_paths
+    payload = json.dumps(config, ensure_ascii=False)
     result = subprocess.run(['/usr/bin/osascript', '-l', 'JavaScript', str(SCRIPT), payload],
                             capture_output=True, text=True, check=False)
     if result.returncode:
         raise RuntimeError(result.stderr.strip() or 'native-ui-failed')
     return json.loads(result.stdout)
+
+
+def read_anchors(*names):
+    """One read-only UI call for exact cached anchors; no activation or input."""
+    if not names or len(set(names)) != len(names):
+        raise ValueError('native-ui-anchor-names-invalid')
+    for attempt in range(2):
+        anchors = json.loads(SELECTORS.read_text(encoding='utf-8'))['anchors']
+        selected = [anchors[name] for name in names]
+        result = execute(root_paths=[anchor['path'] for anchor in selected], max_depth=0)
+        nodes = {tuple(node.get('path', [])): node for node in result['nodes']}
+        values = [nodes.get(tuple(anchor['path'])) for anchor in selected]
+        if all(node and all(node.get(k) == v for k, v in anchor['expected'].items())
+               for anchor, node in zip(selected, values)):
+            return result, dict(zip(names, values))
+        if not attempt and 'main' not in names:
+            refresh_chat_cache()
+    raise RuntimeError('native-ui-anchor-changed:batch')
 
 def read_anchor(name):
     anchor = json.loads(SELECTORS.read_text(encoding='utf-8'))['anchors'][name]

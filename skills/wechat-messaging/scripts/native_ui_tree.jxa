@@ -1,6 +1,8 @@
 /* System Events UI scripting only. No capture, coordinates or AXValue writes. */
 function run(argv) {
- const cfg=JSON.parse(argv[0]), se=Application('System Events');
+ const cfg=JSON.parse(argv[0]);
+ if(cfg.rootPaths!==undefined&&((cfg.actions||[]).length||cfg.maxDepth!==0||!Array.isArray(cfg.rootPaths)||!cfg.rootPaths.length))throw Error('native-ui-multi-anchor-read-only');
+ const se=Application('System Events');
  const p=se.processes.byName('企业微信');
  if (!p.exists() || p.bundleIdentifier()!=='com.tencent.WeWorkMac') throw Error('native-ui-app-mismatch');
  function at(path){let e=p.windows.byName('企业微信');for(const i of path)e=e.uiElements[i];return e;}
@@ -43,6 +45,9 @@ function run(argv) {
    else {const leaf={path:cp,role:role,name:names[i]||null,value:values[i]===undefined?null:values[i],description:descs[i]||null};if(role==='AXImage'){try{leaf.size=e.uiElements[i].size();}catch(_){leaf.size=null;}}rows.push(leaf);}
   }
  }
- scan(at(cfg.rootPath||[]),cfg.rootPath||[],0);
+ if(cfg.rootPaths!==undefined){
+  if((cfg.actions||[]).length||maxDepth!==0||!Array.isArray(cfg.rootPaths)||!cfg.rootPaths.length)throw Error('native-ui-multi-anchor-read-only');
+  for(const path of cfg.rootPaths)scan(at(path),path,0);
+ }else scan(at(cfg.rootPath||[]),cfg.rootPath||[],0);
  return JSON.stringify({backend:'system-events-ui-tree',screenCapture:false,frontmost:p.frontmost(),results:results,nodes:rows});
 }

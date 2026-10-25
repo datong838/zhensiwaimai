@@ -8,6 +8,29 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
 import native_ui_tree as ui
 
 class NativeTreeTests(unittest.TestCase):
+    def test_batch_read_is_one_exact_read_only_call(self):
+        anchors=json.loads(ui.SELECTORS.read_text())['anchors']
+        names=('conversationTitle','composer')
+        nodes=[dict(anchors[n]['expected'],path=anchors[n]['path'],value='') for n in names]
+        with patch.object(ui,'execute',return_value={'nodes':nodes}) as run:
+            _, result=ui.read_anchors(*names)
+        self.assertEqual(set(result),set(names))
+        run.assert_called_once_with(root_paths=[anchors[n]['path'] for n in names],max_depth=0)
+
+    def test_batch_missing_anchor_is_not_old_proof(self):
+        with patch.object(ui,'execute',return_value={'nodes':[]}),patch.object(ui,'refresh_chat_cache') as refresh:
+            with self.assertRaisesRegex(RuntimeError,'anchor-changed:batch'):
+                ui.read_anchors('conversationTitle','composer')
+        refresh.assert_called_once()
+
+    def test_batch_rejects_actions_and_deep_scan_before_ui(self):
+        with patch.object(ui.subprocess,'run') as run:
+            with self.assertRaisesRegex(ValueError,'read-only'):
+                ui.execute([{'type':'activate'}],root_paths=[[0]],max_depth=0)
+            with self.assertRaisesRegex(ValueError,'read-only'):
+                ui.execute(root_paths=[[0]],max_depth=1)
+        run.assert_not_called()
+
     def test_local_cache_refresh_validates_unique_container(self):
         with tempfile.TemporaryDirectory() as d:
             selectors=Path(d)/'selectors.json'
