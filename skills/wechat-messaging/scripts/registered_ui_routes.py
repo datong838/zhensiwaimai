@@ -1,7 +1,7 @@
 """UI transport scope for existing registered business contracts; no effects."""
 from pathlib import Path
 
-WORKFLOWS = {'top10', 'jinsha-reports', 'negative-feedback-appeals', 'taobao-evidence',
+WORKFLOWS = {'negative-reviews', 'top10', 'jinsha-reports', 'negative-feedback-appeals', 'taobao-evidence',
              'taobao-flash-appeals', 'meituan-waimai-appeals',
              'taobao-flash-appeals-summary', 'meituan-waimai-appeals-summary'}
 GROUP = '上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰'

@@ -5,7 +5,7 @@ import {
   businessDate, clean, eligible, parsePassRate, recentRange, shanghaiDay, stableRecordKey,
 } from './jinsha.mjs';
 import { assertState, candidateSignature } from './page_state.mjs';
-import { buildMarkdown } from './appeal_executor.mjs';
+import { buildMarkdown, DEFAULT_EXECUTION_PLATFORMS, assertConfirmationAvailable } from './appeal_executor.mjs';
 import { assertSnapshot, isCoherentSnapshot, snapshotSignature } from './all_feedback_collector.mjs';
 import { buildArgs } from './deliver_batch.mjs';
 
@@ -245,4 +245,14 @@ const ok = (cond, name) => { assert.ok(cond, name); tests++; };
   tests += 2;
 }
 
+
+
+assert.deepEqual(DEFAULT_EXECUTION_PLATFORMS,['meituan']);
+assert.doesNotThrow(()=>assertConfirmationAvailable({buttons:['取消','确 定']},'meituan'));
+for(const buttons of [['取消','复制'],['确定','确定'],[]])assert.throws(()=>assertConfirmationAvailable({buttons},'taobao'),/submit-control-unavailable/);
+
+const {excludedPlatforms}=await import('./appeal_executor.mjs');
+assert.deepEqual(excludedPlatforms(['meituan']).taobao,{execution:'not_requested',submitted:false,reason:'user-20261025-no-taobao-feedback-submit-entry'});
+assert.deepEqual(excludedPlatforms(['meituan','taobao']),{});
+tests += 7;
 console.log(JSON.stringify({ ok: true, tests, runtimeModelDecisions: 0 }));

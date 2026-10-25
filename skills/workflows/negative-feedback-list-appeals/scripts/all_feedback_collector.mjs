@@ -43,11 +43,11 @@ export async function selectStatusStable(cdp, gate, status, { attempts = 20, int
   throw Error(`feedback-status-not-stable:${status}` + (lastCause ? ` (cause: ${lastCause.message})` : ''));
 }
 
-async function nextPage(cdp, gate, previousPage, previousFirstKey) {
+export async function nextPage(cdp, gate, previousPage, previousFirstKey, { pause = sleep, read = readState } = {}) {
   await cdp.eval(`(()=>{const n=[...document.querySelectorAll('.el-pagination .btn-next')].filter(x=>x.offsetParent!==null);if(n.length!==1||n[0].classList.contains('disabled')||n[0].getAttribute('disabled')!==null)throw Error('pagination-next-unavailable');n[0].click();return true})()`);
   for (let attempt = 0; attempt < 20; attempt++) {
-    await sleep(400);
-    const state = await readState(cdp);
+    await pause(400);
+    const state = await read(cdp);
     const page = state.pageActive;
     if (page !== previousPage + 1 || state.cards.length === 0) continue;
     // 页码前进不够——内容必须真的换页（防「页码动了、列表还是旧页」的渲染竞态）：
@@ -64,7 +64,6 @@ async function nextPage(cdp, gate, previousPage, previousFirstKey) {
 async function collectCurrentPages(cdp, gate) {
   let state = await readState(cdp);
   const total = state.totalNumber, rows = [], seen = new Set();
-  let firstKey = null;
   while (true) {
     const page = state.pageActive || (total === 0 ? 1 : 0);
     if (!page || seen.has(page)) {
@@ -83,9 +82,10 @@ async function collectCurrentPages(cdp, gate) {
       }
       return { rows, total };
     }
+    const card = state.cards[0];
+    const firstKey = card ? stableRecordKey({ platform: gate.platformKey, store: card.store, date: card.date, orderNo: card.orderNo, category: card.category }) : null;
     const next = await nextPage(cdp, gate, page, firstKey);
     state = next.state;
-    firstKey = next.firstKey;
   }
 }
 

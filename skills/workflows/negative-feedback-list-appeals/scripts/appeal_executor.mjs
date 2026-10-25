@@ -263,6 +263,8 @@ async function processPlatform(cdp, platformKey, window, receipt) {
         continue;
       }
 
+      assertConfirmationAvailable(dialog, platformKey);
+
       // ② 弹窗内容稳定后落 ready
       await atomicWrite(recordFile(business, key), buildMarkdown({
         ...record, dialogText: dialog.text, charCount: dialog.count,
@@ -327,15 +329,21 @@ async function processPlatform(cdp, platformKey, window, receipt) {
   return receipt;
 }
 
-// 2026-10-06 大同拍板：淘宝申诉「先放弃」——淘宝弹窗无「确定」（只有 取消/换一个/复制），
-// 金鲨站内无提交口，真正提交需去淘宝闪购商家后台。故申诉执行默认仅美团；
-// 淘宝只进报表做状态快照（all_feedback_collector 不受此影响）。
-export async function execute({ platforms = ['meituan'], window } = {}) {
+// User decision 2026-10-25: Taobao has no submit entry; reports still include both platforms.
+export const DEFAULT_EXECUTION_PLATFORMS = ['meituan'];
+export function excludedPlatforms(platforms) {
+  return platforms.includes('taobao') ? {} : {taobao: {execution: 'not_requested', submitted: false, reason: 'user-20261025-no-taobao-feedback-submit-entry'}};
+}
+export function assertConfirmationAvailable(dialog, platform) {
+  if ((dialog?.buttons || []).filter(text => clean(text).replace(/\s+/g, '') === '确定').length !== 1)
+    throw Error(`feedback-submit-control-unavailable:${platform}`);
+}
+export async function execute({ platforms = DEFAULT_EXECUTION_PLATFORMS, window } = {}) {
   const { Cdp, navigate, HOME, recentRange } = await import('./jinsha.mjs');
   const win = window || recentRange();
   const receipt = {
     ok: false, businessDate: businessDate(), window: win, endpoint: 'http://127.0.0.1:9232',
-    verified_submitted: [], skipped: [], blocked: [], unknown: [], warnings: [], platforms: {},
+    verified_submitted: [], skipped: [], blocked: [], unknown: [], warnings: [], platforms: excludedPlatforms(platforms),
     runtimeModelDecisions: 0, startedAt: now(),
   };
   const cdp = await Cdp.open();
