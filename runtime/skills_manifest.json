@@ -52,7 +52,10 @@
         }
       ],
       "latest_hour": 18,
-      "note": "UI岗位失败交监理经原control恢复，不在主任串行循环内等待五分钟重试，以免阻塞其他到点任务。unknown仍只读对账。"
+      "note": "UI岗位失败交监理经原control恢复，不在主任串行循环内等待五分钟重试，以免阻塞其他到点任务。unknown仍只读对账。",
+      "schedule_times": [
+        "08:00"
+      ]
     },
     {
       "name": "daily-negative-reviews",
@@ -111,7 +114,10 @@
         }
       ],
       "latest_hour": 18,
-      "note": "2026-10-20 大同指令新建（与 top10 同形态）：服务商平台(9231) 客户管理→合同解约申请，任务状态=处理中，任务列表表格原图截图（表头+全部数据行，10条/页超页自动翻页 p1/p2），经 Windows 网关发运营群。0 行不产不发；防重 marker=.runtime/contract-termination/events/<day>-contract-termination-ops.json；发送闸=默认放行+--disarm 制动；工位忙退出码4=skipped-busy 可恢复跳过。"
+      "note": "2026-10-20 大同指令新建（与 top10 同形态）：服务商平台(9231) 客户管理→合同解约申请，任务状态=处理中，任务列表表格原图截图（表头+全部数据行，10条/页超页自动翻页 p1/p2），经 Windows 网关发运营群。0 行不产不发；防重 marker=.runtime/contract-termination/events/<day>-contract-termination-ops.json；发送闸=默认放行+--disarm 制动；工位忙退出码4=skipped-busy 可恢复跳过。",
+      "schedule_times": [
+        "09:00"
+      ]
     },
     {
       "name": "brand-negative-review-appeal-followup",
