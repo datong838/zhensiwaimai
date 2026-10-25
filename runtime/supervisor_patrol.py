@@ -32,6 +32,7 @@ import time
 import urllib.request
 from datetime import datetime, timedelta
 from pathlib import Path
+from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parent.parent
 STATE = ROOT / "runtime" / "state"
@@ -90,6 +91,30 @@ def cdp_pages(port: int, timeout: float = 3.0):
         return [t for t in data if t.get("type") == "page"], None
     except Exception as exc:  # noqa: BLE001
         return [], f"{type(exc).__name__}: {exc}"
+
+
+def login_page_urls(port: int, pages: list[dict]) -> tuple[list[str], list[str]]:
+    """Return business login candidates and ignored unrelated /login pages.
+
+    9233 can contain WorkBuddy helper tabs. Those tabs are not Meituan session
+    evidence and must never trigger a Meituan-login RED.
+    """
+    urls = [p.get("url", "") or "" for p in pages]
+    if port != 9233:
+        return [url for url in urls if "/login" in url], []
+    matched: list[str] = []
+    ignored: list[str] = []
+    for url in urls:
+        lowered = url.lower()
+        has_auth_marker = "/login" in lowered or "nopermission" in lowered
+        if not has_auth_marker:
+            continue
+        host = (urlsplit(url).hostname or "").lower()
+        if host == "meituan.com" or host.endswith(".meituan.com") or host.endswith(".dianping.com"):
+            matched.append(url)
+        elif "/login" in lowered:
+            ignored.append(url)
+    return matched, ignored
 
 
 def finding(level: str, area: str, code: str, detail: str, suggest: str = "") -> dict:
@@ -195,10 +220,12 @@ def check_chrome(phase: str) -> tuple[dict, list]:
     snap: dict = {"ports": {}}
     for port, name in CHROME_PORTS.items():
         pages, err = cdp_pages(port)
-        login = [p.get("url", "") for p in pages if "/login" in (p.get("url") or "")]
+        login, ignored_login = login_page_urls(port, pages)
         entry = {"name": name, "page_count": len(pages),
                  "login_pages": len(login), "error": err,
                  "urls": [(p.get("url") or "")[:100] for p in pages[:6]]}
+        if port == 9233:
+            entry["ignored_non_business_login_pages"] = len(ignored_login)
         snap["ports"][str(port)] = entry
         if err:
             lvl = "INFO" if phase == "night" else "YELLOW"
@@ -208,7 +235,7 @@ def check_chrome(phase: str) -> tuple[dict, list]:
             continue
         if login:
             out.append(finding("RED", "chrome", f"login-page-present:{port}",
-                               f"{name}(:{port}) 存在 {len(login)} 个 /login 页 "
+                               f"{name}(:{port}) 存在 {len(login)} 个业务域登录/无权限页 "
                                f"（流程扫全量 page，会整轮 fail-closed）",
                                "让大同重登后**关掉登录页**；下次遇 *-login-expired 先枚举全部 page 再叫人"))
         biz: dict = {}
