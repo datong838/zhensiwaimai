@@ -42,7 +42,7 @@ def send_empty_notice(collection, group, output_dir):
     output_dir.mkdir(parents=True, exist_ok=True, mode=0o700)
     bridge = Path(__file__).resolve().parents[3] / 'wechat-messaging/scripts/workflow_bridge_windows.py'
     proc = subprocess.run([sys.executable, str(bridge), *argv, '--output-dir', str(output_dir)],
-                          capture_output=True, text=True, timeout=900)
+                          capture_output=True, text=True, timeout=None)
     try:
         receipt = json.loads(proc.stdout.strip().splitlines()[-1])
     except (ValueError, IndexError):

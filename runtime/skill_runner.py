@@ -321,7 +321,7 @@ def _tail_of(path: Path, limit: int = LOG_TAIL_CHARS) -> str:
     return data[-limit:]
 
 
-def run_step(argv: List[str], cwd: Path, timeout_seconds: int, log_path: Path,
+def run_step(argv: List[str], cwd: Path, timeout_seconds: Optional[int], log_path: Path,
              env: Optional[Dict[str, str]] = None) -> StepResult:
     """执行单步：进程组隔离 + 全局看门狗（SIGTERM→10s→SIGKILL）+ 日志落盘。"""
     log_path = Path(log_path)
@@ -373,7 +373,7 @@ def run_skill(entry: Dict, history_dir: Optional[Path] = None,
 
     重试语义：总尝试次数 <= 1 + max_retries；仅 RECOVERABLE 重试；
     NEEDS_LOGIN / UNKNOWN 不重试（交看护代理处理）。
-    超时语义：per-step 看门狗（每步独立 timeout_seconds 预算）。
+    超时语义：timeout_seconds=None等待真实进程结束，不按总时长中断UI交付；显式数值保留旧看门狗兼容。
 
     run_source（2026-10-20 SRE 首轮成功率口径）：本 run 的触发来源，
     "daemon"（自动调度）| "manual"（manual_run_once / 人工直跑），随 record

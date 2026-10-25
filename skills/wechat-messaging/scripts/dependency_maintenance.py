@@ -446,6 +446,7 @@ MEITUAN_BRIDGE_BACK_TREE_ALLOWED_AFTER = {
         "cd71c7dc54055f2a83d054000646d8844c04b1ff6faeb74bc6886607a0d6cc40",
 }
 MAINTENANCE_AUTHORIZATIONS = {
+    'user-20261025-ui-no-wall-clock': {"instructionSha256": '6b18bd5262a9a9e0533d983c60dce4cbb755881a1333e3c630469199a891b5f5', "allowedChangePaths": {SELF_KEY, "scripts/contract.py", "scripts/executor.py"}, "allowedAfterSha256": {'scripts/contract.py': 'c37b410fb4d98ff9745dde3a95dc4098ae23e4d9913725ef5ca5e7c208cb7393', 'scripts/executor.py': '8a900b25e79aca47eb9ae077e94dc374f9c66a3358694c3fc5979399d4741461'}},
     MAINTENANCE_AUTHORIZATION: {
         "instructionSha256": USER_INSTRUCTION_SHA256,
         "allowedChangePaths": None,
@@ -878,6 +879,10 @@ def prepare(authorization: str, expires_at: str, output_dir: Path,
                        change["after"] != approved.get(change["path"])
                        for change in changes):
                     raise MaintenanceError("meituan-bridge-back-tree-unreviewed-dependency-bytes")
+            if authorization == 'user-20261025-ui-no-wall-clock':
+                approved = authorization_profile['allowedAfterSha256']
+                if any(change['path'] != SELF_KEY and change['after'] != approved.get(change['path']) for change in changes):
+                    raise MaintenanceError('ui-owner-lifetime-unreviewed-dependency-bytes')
             if authorization == MERCHANT_MAINTENANCE_AUTHORIZATION:
                 locator_changed = MERCHANT_SHARED_LOCATOR_PATH in changed_paths
                 if locator_changed:

@@ -8,8 +8,8 @@ const rows=[
 ];
 const selected=stableIncremental(rows,{merchantId:'1',recommendTime:'2026-09-10 10:00:00'},'2026-09-10');
 assert.deepEqual(selected.map(row=>row.merchantId),['3']);
-assert.equal(messageFor({city:'上海市',contact:'姚，13800000000',merchantName:'店',address:'地址',merchantId:'1338580316'}),'城市：上海市  ；  联系人：姚，13800000000  ；  店铺：店  ；  地址：地址  ；  商家ID：1338580316');
-assert.equal(messageFor({city:'多\n行城市',contact:'姚，13800000000',merchantName:'店',address:'地址',merchantId:'1338580316'}),'城市：多 行城市  ；  联系人：姚，13800000000  ；  店铺：店  ；  地址：地址  ；  商家ID：1338580316');
+assert.equal(messageFor({city:'上海市',contact:'姚，18014000718',merchantName:'店',address:'地址',merchantId:'1338580316'}),'城市：上海市  ；  联系人：姚，18014000718  ；  店铺：店  ；  地址：地址  ；  商家ID：1338580316');
+assert.equal(messageFor({city:'多\n行城市',contact:'姚，18014000718',merchantName:'店',address:'地址',merchantId:'1338580316'}),'城市：多 行城市  ；  联系人：姚，18014000718  ；  店铺：店  ；  地址：地址  ；  商家ID：1338580316');
 assert.doesNotMatch(messageFor({city:'多\n行城市',contact:'',merchantName:'',address:'',merchantId:''}),/\n/);
 assert.match(messageFor({city:'',contact:'',merchantName:'',address:'',merchantId:''}),/城市字段缺失/);
 // 2026-10-22：游标行被运营处理移出「待处理」队列（matches=0）⇒ 降级为时间水位，不阻塞当天增量、不重发

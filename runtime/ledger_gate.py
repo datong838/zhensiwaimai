@@ -95,6 +95,7 @@ def _is_success_equivalent(record: dict, date_str: str) -> bool:
 
 
 def main(date_str: str) -> int:
+    from business_delivery_facts import read_fact
     now = datetime.now()
     manifest = json.load(open(MANIFEST))
     skills = manifest.get("skills") or []
@@ -118,6 +119,11 @@ def main(date_str: str) -> int:
     a_list, b_list, ok_list = [], [], []
     for s in sorted(enabled, key=lambda x: x.get("order", 99)):
         name = s["name"]
+        fact = read_fact(name, check_day)
+        if fact:
+            ok_list.append({'skill': name, 'runs': len(records.get(name, [])),
+                            'businessDeliveryFact': fact, 'technicalUnknownPreserved': True})
+            continue
         if fixed_schedule.customer_duty_user_accepted(name, check_day):
             ok_list.append({'skill':name,'runs':len(records.get(name,[])), 'userAcceptedDuty':True, 'newDeliveryClaimed':False})
             continue
@@ -164,6 +170,7 @@ def main(date_str: str) -> int:
             for r in ok_list
         ],
         "customer_user_acceptances": [r for r in ok_list if r.get("userAcceptedDuty")],
+        "business_delivery_facts": [r for r in ok_list if r.get("businessDeliveryFact")],
         "D_nonenabled_records": extra_fails,
         "rule": "A 非空→不发台账；B 逐条定性（防重拦截/真故障）后才可发",
     }

@@ -8,7 +8,7 @@ import shutil
 import signal
 import sys
 import time
-from contextlib import contextmanager
+from contextlib import contextmanager, nullcontext
 from pathlib import Path
 from contract import (Rejected, check_grant, digest, event_key, file_hash, item_key,
                       normalize, request_digest)
@@ -103,6 +103,7 @@ def review_summary(review, total_elapsed_ms, status):
 def deliver(request, grant, root, adapter, *, reconcile=False, rebind_event=False):
     """Internal engine; CLI enforces release policy before constructing live adapter."""
     started = time.monotonic()
+    owner_lifetime = getattr(adapter, 'owner_lifetime', False) is True
     result = {'ok': False, 'status': 'blocked', 'groupName': request['groupName'],
               'channel': request['context']['channel'], 'requestDigest': request_digest(request),
               'runtimeModelDecisions': 0, 'items': [], 'review': []}
@@ -117,7 +118,7 @@ def deliver(request, grant, root, adapter, *, reconcile=False, rebind_event=Fals
         finally:
             row['elapsedMs'] = round((time.monotonic()-t)*1000)
     try:
-        stage('authorization', lambda: check_grant(request, grant))
+        stage('authorization', lambda: check_grant(request, grant, enforce_expiry=not owner_lifetime))
         if request['context']['channel'] != adapter.channel or any(i['type'] not in adapter.supported for i in request['items']):
             raise Rejected('unsupported-channel-or-type')
         with event_lock(root, request, rebind=rebind_event) as directory:
@@ -142,7 +143,7 @@ def deliver(request, grant, root, adapter, *, reconcile=False, rebind_event=Fals
                 result.update(status='unknown', reason='existing-attempt-reconcile-only',
                               items=[p for _,_,p in prepared if p])
                 return result
-            with deadline(request['context']['deadlineAt']), adapter.session(request):
+            with (nullcontext() if owner_lifetime else deadline(request['context']['deadlineAt'])), adapter.session(request):
                 preflight = stage('preflight', lambda: adapter.preflight(request, directory/'preflight'))
                 if preflight.get('ok') is not True:
                     raise Rejected(preflight.get('reason','preflight-failed'))
@@ -160,7 +161,7 @@ def deliver(request, grant, root, adapter, *, reconcile=False, rebind_event=Fals
                         if reconcile:
                             outcome = stage('reconcile:'+item['itemId'], lambda: adapter.reconcile(request,item,work,prior))
                         else:
-                            check_grant(request, grant)
+                            check_grant(request, grant, enforce_expiry=not owner_lifetime)
                             outcome = stage('send:'+item['itemId'], lambda: adapter.send_one(request,item,work,grant,request['context']['deadlineAt']))
                         current = (prior if reconcile else claim) | outcome
                         if current.get('status') == 'verified':

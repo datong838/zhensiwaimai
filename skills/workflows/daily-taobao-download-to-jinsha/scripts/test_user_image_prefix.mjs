@@ -1,0 +1,30 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+import os from 'node:os';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import {userImagePrefix} from './user_image_prefix.mjs';
+const root=await fs.mkdtemp(path.join(os.tmpdir(),'native-prefix-test-'));
+const H=x=>crypto.createHash('sha256').update(x).digest('hex');
+const J=x=>Array.isArray(x)?'['+x.map(J).join(', ')+']':x&&typeof x==='object'?'{'+Object.keys(x).sort().map(k=>JSON.stringify(k)+': '+J(x[k])).join(', ')+'}':JSON.stringify(x);
+const group='上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰',day='2026-10-24';
+const put=async(p,x)=>{await fs.mkdir(path.dirname(p),{recursive:true});await fs.writeFile(p,JSON.stringify(x));};
+try{
+ assert.equal(await userImagePrefix(day,{root}),null);
+ const img=path.join(root,'img'),pic=path.join(root,'pic');await fs.writeFile(img,'original image');await fs.writeFile(pic,'user screenshot');
+ const q=path.join(root,'queue'),marker=path.join(root,'ledger/marker.json'),receipt=path.join(root,'receipt.json');
+ const item={name:'jinsha-store-final.png',type:'image',sha256:H('original image')},second={name:'jinsha-review-final.png',sha256:H('unattempted second')};
+ const task={taskId:'original',stage:'send',request:{groupName:group,context:{workflowId:'taobao-evidence',eventId:marker}},item};task.binding=H(J(task));
+ const reply={taskId:'original',binding:task.binding,result:{status:'unknown',sendAttempts:1,resolvedGroup:group}};
+ await put(path.join(q,'task.json'),task);await put(path.join(q,'response.json'),reply);
+ const m={groupName:group,payloadType:'image',payloads:[item,second],commonReceipt:{eventKey:'e'.repeat(64),items:[{status:'unknown',sha256:item.sha256}]}};
+ await put(marker,m);await fs.mkdir(path.join(root,'ledger/.wechat-messaging/events','e'.repeat(64)),{recursive:true});
+ await put(receipt,{ok:true,phase:'completed',cleanupStatus:'completed',evidenceManifest:{businessDate:day,images:[item,second]}});
+ const a={source:'explicit-user-business-confirmation',businessDate:day,groupName:group,name:item.name,sha256:item.sha256,sourcePath:img,taskDirectory:q,receiptFile:receipt,confirmation:'上传金鲨 这个 还差一个 图片 。',screenshot:pic,screenshotSha256:H('user screenshot')};
+ const af=path.join(root,'runtime/state',`taobao-image-user-prefix-${day}.json`);await put(af,a);
+ assert.equal((await userImagePrefix(day,{root})).name,item.name);
+ await fs.writeFile(img,'changed');await assert.rejects(userImagePrefix(day,{root}),/evidence-invalid/);await fs.writeFile(img,'original image');
+ reply.result.sendAttempts=0;await put(path.join(q,'response.json'),reply);await assert.rejects(userImagePrefix(day,{root}),/evidence-invalid/);reply.result.sendAttempts=1;await put(path.join(q,'response.json'),reply);
+ m.commonReceipt.items.push({status:'attempted',sha256:second.sha256});await put(marker,m);await assert.rejects(userImagePrefix(day,{root}),/evidence-invalid/);
+ console.log(JSON.stringify({ok:true,checks:5,sendAttempts:0}));
+}finally{await fs.rm(root,{recursive:true,force:true});}

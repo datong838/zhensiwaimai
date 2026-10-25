@@ -1,3 +1,4 @@
+import { userImagePrefix } from './user_image_prefix.mjs';
 import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -87,6 +88,8 @@ export async function inspectPendingEvidence({ root, ledger, businessDate, polic
   if (!/^\d{4}-\d{2}-\d{2}$/.test(businessDate || '') || !root || !ledger || !policyVersion) {
     throw new Error('scheduled-evidence-recovery-input-invalid');
   }
+  const prefix=await userImagePrefix(businessDate);
+  if(prefix){const receipt=JSON.parse(await fs.readFile(prefix.receiptFile,'utf8'));return {kind:'resume',receipt,receiptFile:prefix.receiptFile,userAcceptedNames:[prefix.name]};}
   const runDirectoryPattern = new RegExp(`^${businessDate}-${RUN_ID}$`);
   let entries;
   try {

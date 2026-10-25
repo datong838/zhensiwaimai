@@ -120,7 +120,7 @@ def item_key(request, item):
     return digest([event_key(request), item['itemId']])
 
 
-def check_grant(request, grant, now=None):
+def check_grant(request, grant, now=None, *, enforce_expiry=True):
     now = time.time() if now is None else now
     fields = ('schemaVersion', 'requestDigest', 'accountAlias', 'groupName', 'channel',
               'expiresAt', 'authorizationRef')
@@ -133,6 +133,7 @@ def check_grant(request, grant, now=None):
         if grant[k] != expected:
             raise Rejected('authorization-' + k + '-mismatch')
     nonempty(grant['authorizationRef'], 'authorization-reference')
-    if not now < timestamp(grant['expiresAt'], 'authorization-expiry') or not now < c['deadlineAt']:
+    expiry = timestamp(grant['expiresAt'], 'authorization-expiry')
+    if enforce_expiry and (not now < expiry or not now < c['deadlineAt']):
         raise Rejected('authorization-or-request-expired')
     return grant

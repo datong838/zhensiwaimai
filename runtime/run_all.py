@@ -1030,12 +1030,21 @@ def build_ledger_rows(data: dict, records_by_skill: dict) -> list:
     """按 ledger_template 生成 17 行台账数据；完成状态来自当天 record 或 last_success。
     2026-10-20 18:35 大同指令：台账恢复原有格式（四列），「首轮」列撤销——
     内部 SRE 指标绝不出现在客户可见的台账里。first_attempt_outcomes 保留供内部巡检。"""
+    from business_delivery_facts import read_fact
     skill_by_name = {s["name"]: s for s in data.get("skills", [])}
     rows = []
     for r in data.get("ledger_template", []):
         sk = r.get("skill")
         rec = records_by_skill.get(sk) if sk else None
-        if fixed_schedule.customer_duty_user_accepted(sk, datetime.now()) and not fixed_schedule.customer_slot_superseded(sk, datetime.now()):
+        current_skill = skill_by_name.get(sk, {})
+        current_schedule = current_skill.get("schedule") or r["schedule"]
+        merged = (current_skill.get("enabled") is False
+                  and current_schedule.startswith("已合并"))
+        if merged:
+            done, exec_time, note = '已合并', '', current_schedule
+        elif read_fact(sk):
+            done, exec_time, note = '是', '', '原送达证据已核对；旧技术异常保留'
+        elif fixed_schedule.customer_duty_user_accepted(sk, datetime.now()) and not fixed_schedule.customer_slot_superseded(sk, datetime.now()):
             done, exec_time, note = '是', '', '用户确认当天客服完成；本次未发送'
         elif rec and rec.get("category") == sr.CAT_SUCCESS:
             done = "是"
@@ -1079,12 +1088,12 @@ def build_ledger_rows(data: dict, records_by_skill: dict) -> list:
         rows.append({
             "row": r["row"],
             "name": r["ledger_name"],
-            "schedule": r["schedule"],
+            "schedule": current_schedule,
             "done": done,
             "exec_time": exec_time,
             "note": note,
             "superseded": fixed_schedule.customer_slot_superseded(sk, datetime.now()),
-            "dev_state": r["dev_state"],
+            "dev_state": "paused" if merged else r["dev_state"],
         })
     return rows
 
@@ -1124,9 +1133,9 @@ def write_ledger_xlsx(rows: list, out_path: Path, date_str: str) -> bool:
 
     active_total = sum(1 for r in rows if r["dev_state"] == "active" and not r.get("superseded"))
     active_done = sum(1 for r in rows if r["dev_state"] == "active" and not r.get("superseded") and r["done"] == "是")
-    # 2026-10-21 大同指令：台账是给客户看的，**没完成的一律不进表**（已暂停/阻塞/
-    # 待开发/当日未跑成功都不出现）。计数仍按全量 rows 算，口径不变、不虚增。
-    for r in [x for x in rows if x["done"] == "是"]:
+    # 客户版不展示未完成业务；保留原21项中已合并、由客服末班覆盖的身份。
+    # 合并不冒充独立执行成功，覆盖档不额外补跑。未完成仍不进客户表。
+    for r in [x for x in rows if x["done"] in ("是", "已合并", "不补跑")]:
         ws.append([r["name"], r["exec_time"], r["done"], r["note"]])
         cell = ws.cell(row=ws.max_row, column=3)
         if r["done"] == "是":
@@ -1158,7 +1167,7 @@ def write_ledger_csv(rows: list, out_path: Path, date_str: str) -> bool:
     with out_path.open("w", encoding="utf-8") as f:
         f.write("臻肆工作台账,%s\n" % date_str)
         f.write("工作流名称,执行时间,当日是否完成,备注\n")
-        for r in [x for x in rows if x["done"] == "是"]:
+        for r in [x for x in rows if x["done"] in ("是", "已合并", "不补跑")]:
             f.write("%s,%s,%s,%s\n" % (r["name"], r["exec_time"], r["done"], r["note"]))
         f.write("\n应执行数量,%d\n" % active_total)
         f.write("已完成数量,%d\n" % active_done)
@@ -1174,6 +1183,11 @@ def send_ledger_via_wechat(path: Path) -> bool:
     员工群/运营群/电销+直播攻坚组/品牌·门店专属群），详见 docs/operations/工作流-落群对照表.md。
     需真实环境与登录态；默认不自动调用（仅 --send 才真发）。
     """
+    from daily_ledger_delivery import deliver_once as deliver_daily, local_now
+    expected = REPO_ROOT / 'work' / (local_now().strftime('%Y-%m-%d') + '臻肆工作台账.xlsx')
+    if path.resolve() == expected.resolve():
+        outcome = deliver_daily(path)
+        return outcome.get('status') in ('verified', 'already_verified')
     from authorized_supplement import load_grant, deliver_once
     grant = load_grant('daily-work-ledger')
     if not grant or Path(grant['item']['path']).resolve() != path.resolve():
@@ -1588,7 +1602,7 @@ def daemon_cycle(data: dict, interpreters: dict, do_send: bool, force_all: bool 
     ledger_out = REPO_ROOT / data.get("ledger_output_dir", "work") / (
         "%s臻肆工作台账.xlsx" % date_str)
     all_green = write_ledger_xlsx(rows, ledger_out, date_str)
-    _maybe_send_ledger(ledger_out, all_green, do_send, date_str)
+    _maybe_send_ledger(ledger_out, all_green, do_send or data.get("daemon", {}).get("send_daily_ledger", False), date_str)
     write_last_cycle(records, all_green)
     # P0-3：每周期执行一次告警老化（resolved 且超过窗口 → 归档）
     if alert_store is not None:

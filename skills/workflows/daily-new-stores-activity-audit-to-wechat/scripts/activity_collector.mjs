@@ -84,6 +84,10 @@ async function selectShop(page, requestedName) {
     // 切店后精确 waitForURL 到该店。原实现只等「店名 span 变更 + URL 离开旧址」，在跨店回切
     // 场景（云之彩从 EGO TACO 回切）会因「nested-loading 挂起 / URL 滞后」卡满 15s 超时。
     // 改用「已知目标 shopId → 精确等 URL」为主、店名双确认为辅，reload 兜底一次。
+    await page.waitForFunction(want => {
+      const rows = [...document.querySelectorAll('li.cook-cascader-menu-item')].filter(el => el.getBoundingClientRect().height > 0);
+      return rows.length > 0 && rows.every(el => (el.innerText || '').replace(/\s+/g, '').includes(want));
+    }, normName(requestedName), { timeout: 8000 });
     const dataValue = await li.getAttribute('data-value').catch(() => null);
     const targetId = dataValue?.match(/SHOP:(\d+)/)?.[1];
     // 2026-10-11 根因（遇见家厨·湖里店）：站点拒绝切入「暂停营业/已下线」门店——点击后 URL

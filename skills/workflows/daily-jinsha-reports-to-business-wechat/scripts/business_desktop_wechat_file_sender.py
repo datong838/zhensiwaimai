@@ -107,7 +107,7 @@ def main() -> int:
         if args.deadline_unix:cmd.extend(['--deadline-unix',args.deadline_unix])
         for item in items:cmd.extend(['--item',str(item['file'])])
         try:
-            proc=subprocess.CompletedProcess(cmd,0 if recovered.get('verified') else 1,json.dumps(recovered),'') if recovered is not None else subprocess.run(cmd,capture_output=True,text=True,timeout=900)
+            proc=subprocess.CompletedProcess(cmd,0 if recovered.get('verified') else 1,json.dumps(recovered),'') if recovered is not None else subprocess.run(cmd,capture_output=True,text=True,timeout=None)
         except subprocess.TimeoutExpired:
             result={'ok':False,'groupName':args.group,'sent':[],'channel':'desktop','desktopWechatPreflight':desktop_preflight,'reason':'desktop-send-timeout'}
             Path(args.send_receipt).write_text(json.dumps(result,ensure_ascii=False,indent=2));print(json.dumps(result,ensure_ascii=False));return 1

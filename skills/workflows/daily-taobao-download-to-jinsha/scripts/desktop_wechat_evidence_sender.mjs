@@ -1,3 +1,4 @@
+import { userImagePrefix } from './user_image_prefix.mjs';
 import crypto from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import fs from 'node:fs/promises';
@@ -52,6 +53,8 @@ export function challengeFor(items, groupName, businessDate) {
 // 归属同一业务日期 run 目录，即认定该图当日已交付。只读，不修改任何台账文件。
 async function deliveredEvidenceNames(businessDate) {
   const delivered = new Set();
+  const accepted=await userImagePrefix(businessDate);
+  if(accepted)delivered.add(accepted.name);
   const scan = async (dir) => {
     let entries;
     try { entries = await fs.readdir(dir, { withFileTypes: true }); } catch { return; }
@@ -122,8 +125,8 @@ async function invokeSender(python, args) {
   try {
     // 2026-10-03：发多张证据图要「上传 + 服务端 GUI 发送 + 回读验证」，原 190s 会在
     // 服务端仍处理时提前杀掉子进程，导致消息可能已送达但回执失败（与 #10 同款超时）。
-    // 放宽到 600s；仅延长等待窗口，不改变连接方式。
-    const { stdout } = await exec(python, args, { maxBuffer: 4 * 1024 * 1024, timeout: 600_000 });
+    // 2026-10-25：等待真实UI任务结束，不按执行倒计时杀进程。
+    const { stdout } = await exec(python, args, { maxBuffer: 4 * 1024 * 1024 });
     return parseReceipt(stdout);
   } catch (error) {
     if (error?.stdout) return parseReceipt(error.stdout);

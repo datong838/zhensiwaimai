@@ -47,10 +47,10 @@ const EXECUTOR_SHA256 = 'f07a7ac055adcfe60a1a81ce6158fb30a00c1ac5317c287cea211f2
 const WECHAT_SOURCE = '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-taobao-download-to-jinsha/scripts/desktop_wechat_evidence_sender.mjs';
 // 2026-10-03 受控重绑：desktop_wechat_evidence_sender.mjs 放宽发送等待窗口后字节变更。
 // 2026-10-03 受控重绑（大同授权「方案 B」）：sender 增加逐图已交付核验与只补缺失图路径。
-const WECHAT_SHA256 = '89452236f34d39924b47bc3a732b33cf3f3c8a900c63ca38b7b805d0b3f6680e';
+const WECHAT_SHA256 = 'da64f1b13e4f8f7557037e811763ed0c51fbfc1e0c64a84e815248567c4d80d5';
 const RECOVERY_SOURCE = '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-taobao-download-to-jinsha/scripts/scheduled_evidence_recovery.mjs';
 // 2026-10-03 受控重绑（大同授权「方案 B」）：recovery 改为逐图 union 语义（部分补发）。
-const RECOVERY_SHA256 = '28601e9a6679eb868ed4672e8a0614dcd837044efda723599e7bc49bdf6747bd';
+const RECOVERY_SHA256 = 'd3ffec2efd075817684a158c53a607f81d885a5f61e679f3f2c755b7865b481c';
 const EVIDENCE_ROOT = '/tmp/zhensi_daily_download/background-browser';
 const WECHAT_LEDGER = '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/taobao-jinsha-wechat-evidence-attempts';
 const CONTROL_POLICY_VERSION = 'daily-taobao-jinsha-code-enforced-2026-09-28';

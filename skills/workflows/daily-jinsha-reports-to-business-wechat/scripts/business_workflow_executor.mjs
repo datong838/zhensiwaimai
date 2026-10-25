@@ -56,7 +56,7 @@ async function block(config,state,status,reason){state.status=status;state.nextA
 
 async function runInternalStage(config,mode){
   assertProductionConfig(config,path.join(path.dirname(config.workflowState),'config.json'));await assertFrozenCoreHashes();
-  try{return {ok:true,...await execFile(process.execPath,[PIPELINE,path.join(path.dirname(config.workflowState),'config.json'),mode],{env:{...process.env,JINSHA_WORKFLOW_INTERNAL:INTERNAL_INVOCATION},timeout:300000,maxBuffer:16*1024*1024})};}
+  try{return {ok:true,...await execFile(process.execPath,[PIPELINE,path.join(path.dirname(config.workflowState),'config.json'),mode],{env:{...process.env,JINSHA_WORKFLOW_INTERNAL:INTERNAL_INVOCATION},maxBuffer:16*1024*1024})};}
   catch(error){return {ok:false,stdout:error.stdout||'',stderr:error.stderr||'',error};}
 }
 

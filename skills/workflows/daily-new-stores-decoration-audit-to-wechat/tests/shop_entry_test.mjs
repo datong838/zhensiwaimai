@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {enterShopFromResult,settleSelectedShopRoute,shopSearchResultsSettled} from '../scripts/decoration_collector.mjs';
 let count=1,entered=0;
-const li={locator(selector){if(selector.startsWith('span'))return {count:async()=>count};assert.equal(selector,'div[class^="itemShopNameContainer__"]');return {click:async()=>{entered++;}};}};
+const li={locator(selector){assert.ok(selector.startsWith('span'));return {count:async()=>count};},click:async()=>{entered++;}};
 await enterShopFromResult(li);assert.equal(entered,1);
 for(count of [0,2]) {await assert.rejects(()=>enterShopFromResult(li),/not-unique/);assert.equal(entered,1);}
 let url='https://melody.shop.ele.me/app/chain/1/stats', clicks=0, menus=1;

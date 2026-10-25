@@ -54,6 +54,10 @@ class WeComAdapter:
     def __init__(self):
         self._resolved = None
 
+    @property
+    def owner_lifetime(self):
+        return ui_tree_only_required()
+
     # ---------- session ownership (Mac WeCom UI is a single physical channel) ----------
 
     @contextlib.contextmanager
@@ -69,7 +73,7 @@ class WeComAdapter:
                     fcntl.flock(handle, fcntl.LOCK_EX | fcntl.LOCK_NB)
                     break
                 except BlockingIOError:
-                    if time.time() >= end:
+                    if not ui_tree_only_required() and time.time() >= end:
                         raise workflow_bridge.Rejected('wecom-transport-busy')
                     time.sleep(1.0)
             # Capture the actually active app, not NSWorkspace's sometimes stale
@@ -128,7 +132,7 @@ class WeComAdapter:
         if ui_tree_only_required():
             from wecom_ui_queue import preflight_enabled, exchange
             if preflight_enabled(request):
-                proof = exchange('preflight', request)
+                proof = exchange('preflight', request, owner_lifetime=True)
                 if proof.get('ok') is True:
                     self._resolved = request['groupName']
                 return proof
@@ -241,14 +245,14 @@ class WeComAdapter:
                     'reason': 'egress-denied:' + str(verdict['reason']),
                     'transport': {'denied': True, 'reason': verdict['reason'],
                                   'sendAttempts': 0}}
-        if time.time() >= deadline:
+        if not ui_tree_only_required() and time.time() >= deadline:
             return {'status': 'blocked', 'sendAttempts': 0,
                     'reason': 'deadline-expired', 'transport': {'sendAttempts': 0}}
 
         if ui_tree_only_required():
             from wecom_ui_queue import enabled, exchange
             if enabled(request):
-                return exchange('send', request, item)
+                return exchange('send', request, item, owner_lifetime=True)
             return {'status':'blocked','sendAttempts':0,'reason':'ui-tree-only-required'}
 
         # 2026-10-23 事故修复：dict 字面量三支表达式会全部求值 —— text 载荷

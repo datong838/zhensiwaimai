@@ -644,7 +644,7 @@ def self_test() -> dict:
             "merchantName": "御京荷北京烤鸭",
             "recommendTime": "2026-09-02 19:16:10",
             "tableOrder": 1,
-            "text": "聊城市\n韩，13800000000\n御京荷北京烤鸭\n测试地址",
+            "text": "聊城市\n韩，15811127835\n御京荷北京烤鸭\n测试地址",
             "sha256": "",
         }],
     }
@@ -660,10 +660,10 @@ def self_test() -> dict:
     if normalize("韩， 158") != normalize("韩,158"):
         raise AssertionError("message-normalization-test")
     features = message_features(sample["messages"][0]["text"])
-    if features[1] != "13800000000" or features[2] != "御京荷北京烤鸭":
+    if features[1] != "15811127835" or features[2] != "御京荷北京烤鸭":
         raise AssertionError("ocr-feature-test")
     fake_entries = [{"x": 1, "y": 500, "text": text, "w": 1, "h": 1, "confidence": 1.0}
-                    for text in ("聊城市", "韩，13800000000", "御京荷北京烤鸭", "测试地址")]
+                    for text in ("聊城市", "韩，15811127835", "御京荷北京烤鸭", "测试地址")]
     if not verify_message_ocr(fake_entries, sample["messages"][0]["text"], y_min=0, y_max=1000,
                               required_count=3)["ok"]:
         raise AssertionError("ocr-verification-test")

@@ -102,7 +102,7 @@ async function main() {
     return;
   }
 
-  const { stdout } = await run(python, args(), { timeout: 900_000, maxBuffer: 16 * 1024 * 1024 });
+  const { stdout } = await run(python, args(), { maxBuffer: 16 * 1024 * 1024 });
   console.log(stdout.trim());
 }
 

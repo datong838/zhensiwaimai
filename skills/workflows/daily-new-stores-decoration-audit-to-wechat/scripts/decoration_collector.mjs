@@ -26,8 +26,8 @@ const normName = (s) => String(s ?? '').replace(/\s+/g, '');
 export async function enterShopFromResult(li) {
   const name = li.locator('span[class^="itemShopName__"]');
   if (await name.count() !== 1) throw new Error('shop-entry-name-not-unique');
-  // Click the visible name container; the name span is covered by a tooltip mask.
-  await li.locator('div[class^="itemShopNameContainer__"]').click({ timeout: 5000 });
+  // The selectable result row owns navigation; nested tooltip containers may swallow the click.
+  await li.click({ timeout: 5000 });
 }
 
 export function shopSearchResultsSettled(want) {

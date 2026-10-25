@@ -1,6 +1,8 @@
 """Original adapter transport handoff to the authorized visible-UI post."""
 import hashlib
 import json
+import os
+import subprocess
 import time
 import uuid
 from pathlib import Path
@@ -44,6 +46,12 @@ def enabled(request):
         runtime = Path(__file__).resolve().parents[3] / 'runtime'
         if str(runtime) not in sys.path: sys.path.insert(0, str(runtime))
         from authorized_supplement import request_enabled
+        return request_enabled(request)
+    if context.get('dailyLedgerContract'):
+        import sys
+        runtime = Path(__file__).resolve().parents[3] / 'runtime'
+        if str(runtime) not in sys.path: sys.path.insert(0, str(runtime))
+        from daily_ledger_delivery import request_enabled
         return request_enabled(request)
     if context.get('workflowId') in ALLOWED:
         return True
@@ -139,19 +147,46 @@ def validate_response(task, reply):
         raise ValueError('ui-post-outcome-invalid')
     return result
 
-def exchange(stage, request, item=None, *, queue=QUEUE):
+def process_identity(pid):
+    try:
+        row = subprocess.run(['ps', '-p', str(pid), '-o', 'stat=,lstart='],
+                             capture_output=True, text=True, timeout=5, check=False)
+        value = row.stdout.strip()
+        if row.returncode or not value or value.split()[0].startswith('Z'):
+            return None
+        return ' '.join(value.split()[1:])
+    except (OSError, subprocess.TimeoutExpired) as error:
+        raise RuntimeError('ui-post-owner-observation-unavailable') from error
+
+def owner_active(owner):
+    if not owner.get('identity') or not owner.get('parentIdentity'):
+        return False
+    try:
+        return (process_identity(owner['pid']) == owner['identity']
+                and process_identity(owner['parentPid']) == owner['parentIdentity'])
+    except RuntimeError:
+        return None  # observation failure is not evidence that the owner exited
+
+
+def exchange(stage, request, item=None, *, queue=QUEUE, owner_lifetime=False):
     if not (preflight_enabled(request) if stage == 'preflight' else enabled(request)):
         raise ValueError('ui-post-workflow-not-enabled')
     queue.mkdir(parents=True, exist_ok=True, mode=0o700)
     task = {'taskId': str(uuid.uuid4()), 'stage': stage, 'request': request,
             'item': item, 'deadlineAt': request['context']['deadlineAt'] - 15}
+    if owner_lifetime:
+        owner = {'pid': os.getpid(), 'parentPid': os.getppid()}
+        owner.update(identity=process_identity(owner['pid']), parentIdentity=process_identity(owner['parentPid']))
+        if owner_active(owner) is not True:
+            raise ValueError('ui-post-owner-not-active')
+        task.update(deadlineAt=None, lifetime='owner-process', owner=owner)
     if item is not None:
         from presentation_policy import expected_presentation
         task['expectedPresentation'] = expected_presentation(item)
     task['binding'] = hashlib.sha256(json.dumps(task, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
     folder = queue / task['taskId']; folder.mkdir(mode=0o700)
     atomic_json(folder / 'task.json', task)
-    while time.time() < task['deadlineAt']:
+    while (owner_active(task['owner']) is not False) if owner_lifetime else time.time() < task['deadlineAt']:
         reply = folder / 'response.json'
         if reply.exists():
             return validate_response(task, json.loads(reply.read_text()))

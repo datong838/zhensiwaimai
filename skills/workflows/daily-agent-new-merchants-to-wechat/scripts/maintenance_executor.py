@@ -195,6 +195,12 @@ GATE_REUSE_FIX_INSTRUCTION_SHA256 = hashlib.sha256(
     GATE_REUSE_FIX_INSTRUCTION.encode("utf-8")).hexdigest()
 GATE_REUSE_FIX_LABELS = {"desktop_adapter", "runtime_contract", "maintenance_executor"}
 
+UI_PREFLIGHT_OWNER_AUTHORIZATION = "user-20261025-no-workflow-countdown"
+UI_PREFLIGHT_OWNER_INSTRUCTION = "你要去掉流程里的一切倒计时"
+UI_PREFLIGHT_OWNER_INSTRUCTION_SHA256 = hashlib.sha256(UI_PREFLIGHT_OWNER_INSTRUCTION.encode("utf-8")).hexdigest()
+UI_PREFLIGHT_OWNER_LABELS = {"desktop_adapter", "workflow_executor", "maintenance_executor"}
+UI_PREFLIGHT_OWNER_CANDIDATE_SHA256 = {'desktop_adapter': '1226e39b19ea28939a3dbd0d9d5bc9c7bb09413a25bfd0efee18e5270b10a410', 'workflow_executor': '48d2fd5b026c6b005f8e3e1a6fe8fe724e8832f781131f4238923d2a83f80ee4'}
+
 # 2026-10-21 大同授权：每小时意向商家流消息文本追加「商家ID」字段（列表页/详情页均
 # 有该字段，最小改动）。涉及 background_collector / background_selftest /
 # structured_collector / 本维护器自身摘要重钉，不改验收语义与发送能力。
@@ -658,6 +664,7 @@ def refresh_unsealed(authorization: str, output_dir: Path, expires_at: str,
                                                    PACKAGE_MIGRATION_RESYNC_AUTHORIZATION,
                                                    MERCHANT_ID_SHAPE_FIX_AUTHORIZATION,
                                                    GATE_REUSE_FIX_AUTHORIZATION,
+                                                   UI_PREFLIGHT_OWNER_AUTHORIZATION,
                                                    MERCHANT_ID_MESSAGE_AUTHORIZATION,
                                                    RESUMABLE_ZERO_SEND_AUTHORIZATION,
                                                    CURSOR_WATERMARK_AUTHORIZATION,
@@ -669,6 +676,7 @@ def refresh_unsealed(authorization: str, output_dir: Path, expires_at: str,
         package_migration = authorization == PACKAGE_MIGRATION_RESYNC_AUTHORIZATION
         merchant_id_shape = authorization == MERCHANT_ID_SHAPE_FIX_AUTHORIZATION
         gate_reuse = authorization == GATE_REUSE_FIX_AUTHORIZATION
+        ui_preflight_owner = authorization == UI_PREFLIGHT_OWNER_AUTHORIZATION
         merchant_id_message = authorization == MERCHANT_ID_MESSAGE_AUTHORIZATION
         resumable_zero_send = authorization == RESUMABLE_ZERO_SEND_AUTHORIZATION
         cursor_watermark = authorization == CURSOR_WATERMARK_AUTHORIZATION
@@ -678,6 +686,7 @@ def refresh_unsealed(authorization: str, output_dir: Path, expires_at: str,
                               PACKAGE_MIGRATION_RESYNC_AUTHORIZATION,
                               MERCHANT_ID_SHAPE_FIX_AUTHORIZATION,
                               GATE_REUSE_FIX_AUTHORIZATION,
+                                                   UI_PREFLIGHT_OWNER_AUTHORIZATION,
                               MERCHANT_ID_MESSAGE_AUTHORIZATION,
                               RESUMABLE_ZERO_SEND_AUTHORIZATION,
                               CURSOR_WATERMARK_AUTHORIZATION,
@@ -695,6 +704,7 @@ def refresh_unsealed(authorization: str, output_dir: Path, expires_at: str,
                 "maintenanceAuthorization": authorization,
                 "runtimeAuthorization": RUNTIME_ACCEPTANCE_AUTHORIZATION,
                 "userInstruction": (PACKAGE_MIGRATION_RESYNC_INSTRUCTION if package_migration
+                                    else UI_PREFLIGHT_OWNER_INSTRUCTION if ui_preflight_owner
                                     else GATE_REUSE_FIX_INSTRUCTION if gate_reuse
                                     else MERCHANT_ID_SHAPE_FIX_INSTRUCTION if merchant_id_shape
                                     else MERCHANT_ID_MESSAGE_INSTRUCTION if merchant_id_message
@@ -703,6 +713,7 @@ def refresh_unsealed(authorization: str, output_dir: Path, expires_at: str,
                                     else SELECTION_AUDIT_RECONCILE_INSTRUCTION if selection_audit_reconcile
                                     else SEALED_DEPENDENCY_RESYNC_INSTRUCTION),
                 "userInstructionSha256": (PACKAGE_MIGRATION_RESYNC_INSTRUCTION_SHA256 if package_migration
+                                          else UI_PREFLIGHT_OWNER_INSTRUCTION_SHA256 if ui_preflight_owner
                                           else GATE_REUSE_FIX_INSTRUCTION_SHA256 if gate_reuse
                                           else MERCHANT_ID_SHAPE_FIX_INSTRUCTION_SHA256 if merchant_id_shape
                                           else MERCHANT_ID_MESSAGE_INSTRUCTION_SHA256 if merchant_id_message
@@ -769,6 +780,7 @@ def refresh_unsealed(authorization: str, output_dir: Path, expires_at: str,
             # 只允许上游共享封印件（含各授权通道自身扩门禁的 maintenance_executor）摘要漂移，
             # 业务运行时文件一律不得借本通道改动。
             allowed_labels = (PACKAGE_MIGRATION_RESYNC_LABELS if package_migration
+                              else UI_PREFLIGHT_OWNER_LABELS if ui_preflight_owner
                               else GATE_REUSE_FIX_LABELS if gate_reuse
                               else MERCHANT_ID_MESSAGE_LABELS if merchant_id_message
                               else RESUMABLE_ZERO_SEND_LABELS if resumable_zero_send
@@ -776,6 +788,8 @@ def refresh_unsealed(authorization: str, output_dir: Path, expires_at: str,
                               else SELECTION_AUDIT_RECONCILE_LABELS if selection_audit_reconcile
                               else MERCHANT_ID_SHAPE_FIX_LABELS if merchant_id_shape
                               else SEALED_DEPENDENCY_RESYNC_LABELS)
+            if ui_preflight_owner and any(candidate[label]["sha256"] != value for label, value in UI_PREFLIGHT_OWNER_CANDIDATE_SHA256.items()):
+                raise MaintenanceError("ui-preflight-owner-candidate-mismatch")
             if not mismatch_labels or not mismatch_labels <= allowed_labels:
                 raise MaintenanceError("sealed-resync-drift-out-of-scope")
             shared_dependency_receipt = stage("共享封印件依赖回执", lambda:
@@ -834,6 +848,8 @@ def refresh_unsealed(authorization: str, output_dir: Path, expires_at: str,
             if authorization == ZERO_SEND_DRAFT_AUTHORIZATION
             else PACKAGE_MIGRATION_RESYNC_INSTRUCTION_SHA256
             if authorization == PACKAGE_MIGRATION_RESYNC_AUTHORIZATION
+            else UI_PREFLIGHT_OWNER_INSTRUCTION_SHA256
+            if authorization == UI_PREFLIGHT_OWNER_AUTHORIZATION
             else GATE_REUSE_FIX_INSTRUCTION_SHA256
             if authorization == GATE_REUSE_FIX_AUTHORIZATION
             else MERCHANT_ID_MESSAGE_INSTRUCTION_SHA256

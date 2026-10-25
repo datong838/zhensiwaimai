@@ -21,7 +21,8 @@
       "UNKNOWN"
     ],
     "sent_dedup_per_day": true,
-    "preflight_adb": true
+    "preflight_adb": true,
+    "send_daily_ledger": true
   },
   "skills": [
     {
@@ -35,7 +36,7 @@
       "cadence_hours": 24,
       "earliest_hour": 8,
       "cwd": "skills/workflows/daily-top10-to-wechat-group",
-      "timeout_seconds": 1800,
+      "timeout_seconds": null,
       "max_retries": 0,
       "cooldown_seconds": 0,
       "needs_adapter": false,
@@ -64,7 +65,7 @@
       "cadence_hours": 24,
       "earliest_hour": 8,
       "cwd": "skills/workflows/daily-negative-reviews",
-      "timeout_seconds": 3600,
+      "timeout_seconds": null,
       "max_retries": 0,
       "cooldown_seconds": 0,
       "needs_adapter": false,
@@ -96,7 +97,7 @@
       "earliest_hour": 9,
       "earliest_minute": 0,
       "cwd": "skills/workflows/contract-termination-applications-screenshot",
-      "timeout_seconds": 1000,
+      "timeout_seconds": null,
       "max_retries": 2,
       "cooldown_seconds": 300,
       "needs_adapter": false,
@@ -156,7 +157,7 @@
       "cadence_hours": 24,
       "earliest_hour": 11,
       "cwd": "skills/workflows/daily-jinsha-reports-to-business-wechat",
-      "timeout_seconds": 300,
+      "timeout_seconds": null,
       "max_retries": 2,
       "cooldown_seconds": 300,
       "needs_adapter": false,
@@ -184,7 +185,7 @@
       "earliest_hour": 13,
       "note": "runScheduled 适配层已落地（entrypoint.mjs L365）。2026-10-02 只读预检：/Users/ddt/.codex 安装镜像与仓库 SKILL.md+entrypoint.mjs sha256 全 MATCH，executor/wechat/recovery 三枚钉 MATCH，preflight() ok=true（executor 85 项/wechat 12 项/taobao 启动 4 项/经验回放 14 项自测全过），pendingEvidence=none。needs_adapter 已改 false：失败时台账不再误报「待 Phase 2 适配」，会如实报「当日未跑成功」。待 13:00 真实跑通验收。",
       "cwd": "skills/workflows/daily-taobao-download-to-jinsha",
-      "timeout_seconds": 1260,
+      "timeout_seconds": null,
       "max_retries": 0,
       "cooldown_seconds": 0,
       "steps": [
@@ -210,7 +211,7 @@
       "earliest_hour": 8,
       "earliest_minute": 30,
       "cwd": "skills/workflows/daily-agent-new-merchants-to-wechat",
-      "timeout_seconds": 3600,
+      "timeout_seconds": null,
       "max_retries": 0,
       "cooldown_seconds": 0,
       "needs_adapter": false,
@@ -266,7 +267,7 @@
       "earliest_hour": 12,
       "note": "2026-09-30 大同授权启用：CLI 已实证可用（ensure_unanswered_queue.mjs CDP 只读门禁，9233 Chrome 在线、自带测试 7 项过、真跑 {ok:true}），原「无 CLI 需适配层」备注过时。只读队列检查，无发送动作。｜2026-10-02 大同指令：每小时代价过大，改为每日12:00/15:00/17:00三次（拆3条entry承载，零改daemon）；17:00那轮结束后准备发文档（具体动作待大同确认，暂未挂步骤）。｜2026-10-03 大同授权(b)并痛批15:00档漏做：每轮闭环=①只读队列门禁 ②reply_unanswered_sessions.mjs 全新逐条检查→符合规则的在美团真实回复(政策承接型兜底,确定性保守判定,[AI客服]/平台通知不算人工接管)→回显核验→当场写当日临时台账 ③compile ④send；Excel外发当天当次数据、不限次数、没有重复门禁(marker每轮唯一含时分秒)。",
       "cwd": "skills/workflows/meituan-intelligent-customer-service",
-      "timeout_seconds": 1000,
+      "timeout_seconds": null,
       "max_retries": 0,
       "cooldown_seconds": 0,
       "steps": [
@@ -310,7 +311,7 @@
       "earliest_hour": 15,
       "note": "2026-09-30 大同授权启用：CLI 已实证可用（ensure_unanswered_queue.mjs CDP 只读门禁，9233 Chrome 在线、自带测试 7 项过、真跑 {ok:true}），原「无 CLI 需适配层」备注过时。只读队列检查，无发送动作。｜2026-10-02 大同指令：每小时代价过大，改为每日12:00/15:00/17:00三次（拆3条entry承载，零改daemon）；17:00那轮结束后准备发文档（具体动作待大同确认，暂未挂步骤）。｜2026-10-03 大同授权(b)并痛批15:00档漏做：每轮闭环=①只读队列门禁 ②reply_unanswered_sessions.mjs 全新逐条检查→符合规则的在美团真实回复(政策承接型兜底,确定性保守判定,[AI客服]/平台通知不算人工接管)→回显核验→当场写当日临时台账 ③compile ④send；Excel外发当天当次数据、不限次数、没有重复门禁(marker每轮唯一含时分秒)。",
       "cwd": "skills/workflows/meituan-intelligent-customer-service",
-      "timeout_seconds": 1000,
+      "timeout_seconds": null,
       "max_retries": 0,
       "cooldown_seconds": 0,
       "steps": [
@@ -354,7 +355,7 @@
       "earliest_hour": 17,
       "note": "2026-09-30 大同授权启用：CLI 已实证可用（ensure_unanswered_queue.mjs CDP 只读门禁，9233 Chrome 在线、自带测试 7 项过、真跑 {ok:true}），原「无 CLI 需适配层」备注过时。只读队列检查，无发送动作。｜2026-10-02 大同指令：每小时代价过大，改为每日12:00/15:00/17:00三次（拆3条entry承载，零改daemon）；17:00那轮结束后准备发文档。2026-10-02 已落地：step2 compile_daily_reply_xlsx.mjs 汇总 records/美团客户回复记录-<日期>.xlsx，step3 send_daily_reply_xlsx_to_wechat.mjs 经 workflow_bridge_windows.py（meituan-customer-reply-daily）落群 上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰，已走受控再封印（依赖清单已更新）。｜2026-10-03 大同授权(b)并痛批15:00档漏做：每轮闭环=①只读队列门禁 ②reply_unanswered_sessions.mjs 全新逐条检查→符合规则的在美团真实回复(政策承接型兜底,确定性保守判定,[AI客服]/平台通知不算人工接管)→回显核验→当场写当日临时台账 ③compile ④send；Excel外发当天当次数据、不限次数、没有重复门禁(marker每轮唯一含时分秒)。",
       "cwd": "skills/workflows/meituan-intelligent-customer-service",
-      "timeout_seconds": 1000,
+      "timeout_seconds": null,
       "max_retries": 0,
       "cooldown_seconds": 0,
       "steps": [
@@ -397,7 +398,7 @@
       "earliest_hour": 13,
       "latest_hour": 19,
       "cwd": "skills/workflows/taobao-flash-sale-negative-review-appeals",
-      "timeout_seconds": 1800,
+      "timeout_seconds": null,
       "max_retries": 0,
       "cooldown_seconds": 0,
       "needs_adapter": false,
@@ -432,7 +433,7 @@
       "cadence_hours": 24,
       "earliest_hour": 10,
       "cwd": "skills/workflows/daily-new-stores-opening-to-wechat",
-      "timeout_seconds": 1000,
+      "timeout_seconds": null,
       "max_retries": 0,
       "cooldown_seconds": 0,
       "needs_adapter": false,
@@ -458,7 +459,7 @@
       "cadence_hours": 24,
       "earliest_hour": 11,
       "cwd": "skills/workflows/daily-new-stores-activity-audit-to-wechat",
-      "timeout_seconds": 300,
+      "timeout_seconds": null,
       "max_retries": 0,
       "cooldown_seconds": 0,
       "needs_adapter": false,
@@ -485,7 +486,7 @@
       "earliest_hour": 13,
       "note": "2026-10-24用户最新裁定：双平台下午四档统一。前三档执行申诉，18:30查漏后汇总；原事件账本防重，上午强制补跑也由业务入口拒绝。",
       "cwd": "skills/workflows/meituan-waimai-negative-review-appeals",
-      "timeout_seconds": 1800,
+      "timeout_seconds": null,
       "max_retries": 0,
       "cooldown_seconds": 0,
       "needs_adapter": false,
@@ -564,7 +565,7 @@
       "earliest_minute": 20,
       "note": "2026-10-24用户要求预留10分钟修复。08:22/08:25/08:28复查恢复；成功不重发，unknown只读对账。",
       "cwd": "skills/workflows/negative-feedback-list-appeals",
-      "timeout_seconds": 3600,
+      "timeout_seconds": null,
       "max_retries": 0,
       "cooldown_seconds": 0,
       "needs_adapter": false,
@@ -601,7 +602,7 @@
       "earliest_minute": 20,
       "note": "2026-10-24用户要求预留10分钟修复。08:22/08:25/08:28复查恢复；成功不重发，unknown只读对账。",
       "cwd": "skills/workflows/negative-feedback-list-appeals",
-      "timeout_seconds": 1800,
+      "timeout_seconds": null,
       "max_retries": 0,
       "cooldown_seconds": 0,
       "needs_adapter": false,
@@ -721,7 +722,7 @@
       "cadence_hours": 24,
       "earliest_hour": 11,
       "cwd": "skills/workflows/daily-new-stores-decoration-audit-to-wechat",
-      "timeout_seconds": 900,
+      "timeout_seconds": null,
       "max_retries": 0,
       "cooldown_seconds": 0,
       "needs_adapter": false,
@@ -748,7 +749,7 @@
       "cadence_hours": 24,
       "earliest_hour": 11,
       "cwd": "skills/workflows/daily-new-stores-not-nourished-ops-to-wechat",
-      "timeout_seconds": 360,
+      "timeout_seconds": null,
       "max_retries": 0,
       "cooldown_seconds": 0,
       "needs_adapter": false,
@@ -775,7 +776,7 @@
       "cadence_hours": 24,
       "earliest_hour": 12,
       "cwd": "skills/workflows/daily-store-task-completion-ops-to-wechat",
-      "timeout_seconds": 1000,
+      "timeout_seconds": null,
       "max_retries": 0,
       "cooldown_seconds": 0,
       "needs_adapter": false,
@@ -802,7 +803,7 @@
       "cadence_hours": 24,
       "earliest_hour": 11,
       "cwd": "skills/workflows/daily-store-basic-diagnosis-to-wechat",
-      "timeout_seconds": 900,
+      "timeout_seconds": null,
       "max_retries": 0,
       "cooldown_seconds": 0,
       "needs_adapter": false,
@@ -906,211 +907,150 @@
   "ledger_template": [
     {
       "row": 1,
+      "ledger_name": "淘宝新增商家增量通知（每30分钟）",
+      "schedule": "每30分钟 08:30–18:30；19:00停止；有新增发商家信息，无新增发当前无新增意向商家",
+      "dev_state": "active",
+      "skill": "daily-agent-new-merchants-to-wechat"
+    },
+    {
+      "row": 2,
       "ledger_name": "昨日门店Top10截图发运营群（每日08:00）",
       "schedule": "每日08:00",
       "dev_state": "active",
       "skill": "daily-top10-to-wechat-group"
     },
     {
-      "ledger_name": "合同解约申请·处理中任务列表截图（每日09:00）",
-      "schedule": "每日09:00",
+      "row": 3,
+      "ledger_name": "负反馈列表申诉·双平台执行（每日08:30）",
+      "schedule": "每日08:20执行，08:30前交付",
       "dev_state": "active",
-      "skill": "contract-termination-applications-screenshot",
-      "row": 2
+      "skill": "negative-feedback-list-appeals-0930"
     },
     {
-      "row": 3,
+      "row": 4,
+      "ledger_name": "负反馈列表申诉·双平台 Excel 汇总发群（每日08:30·申诉后即发）",
+      "schedule": "每日08:20执行，08:30前交付",
+      "dev_state": "active",
+      "skill": "negative-feedback-list-appeals-1230"
+    },
+    {
+      "row": 5,
       "ledger_name": "昨日差评分析（每日08:40）",
-      "schedule": "每日08:40",
+      "schedule": "每日08:30",
       "dev_state": "active",
       "skill": "daily-negative-reviews"
     },
     {
-      "row": 4,
-      "ledger_name": "品牌差评申诉跟进（每日17:00）",
-      "schedule": "每日17:00（单档）",
-      "dev_state": "paused",
-      "skill": "brand-negative-review-appeal-followup",
-      "note": "暂停中"
-    },
-    {
-      "row": 5,
-      "ledger_name": "金鲨昨日双平台日报发运营群（每日11:00）",
-      "schedule": "每日11:00",
+      "ledger_name": "合同解约申请·处理中任务列表截图（每日09:00）",
+      "schedule": "每日09:00",
       "dev_state": "active",
-      "skill": "daily-jinsha-reports-to-business-wechat"
-    },
-    {
-      "row": 6,
-      "ledger_name": "淘宝昨日报表下载上传金鲨（每日13:00）",
-      "schedule": "每日13:00",
-      "dev_state": "active",
-      "skill": "daily-taobao-download-to-jinsha"
+      "skill": "contract-termination-applications-screenshot",
+      "row": 6
     },
     {
       "row": 7,
-      "ledger_name": "淘宝新增商家增量通知（每30分钟）",
-      "schedule": "每30分钟（08:30-19:00）",
-      "dev_state": "active",
-      "skill": "daily-agent-new-merchants-to-wechat"
-    },
-    {
-      "row": 8,
-      "ledger_name": "美团商家中心智能客服（17:00·备发文档）",
-      "schedule": "每日17:00",
-      "dev_state": "active",
-      "skill": "meituan-intelligent-customer-service"
-    },
-    {
-      "row": 9,
-      "ledger_name": "淘宝闪购自动差评申诉并企微反馈（每2小时·13:00起）",
-      "schedule": "每2小时（13-17档）",
-      "dev_state": "active",
-      "skill": "taobao-flash-sale-negative-review-appeals"
-    },
-    {
-      "row": 10,
-      "ledger_name": "企微视频下载与四视频平台发布（群监控按需）",
-      "schedule": "群监控按需",
-      "dev_state": "blocked",
-      "skill": "daily-wechat-video-publish"
-    },
-    {
-      "row": 11,
-      "ledger_name": "视频评价回复（群监控按需）",
-      "schedule": "群监控按需",
-      "dev_state": "blocked",
-      "skill": null,
-      "note": "依附视频三件套，同受接口权限与风控封号约束；不进自动看护。"
-    },
-    {
-      "row": 12,
-      "ledger_name": "每周外卖巡店（每周）",
-      "schedule": "每周",
-      "dev_state": "blocked",
-      "skill": "store-inspection"
-    },
-    {
-      "row": 13,
-      "ledger_name": "淘宝增量增加到企微汇总表（每小时）",
-      "schedule": "每小时",
-      "dev_state": "blocked",
-      "skill": null,
-      "note": "淘宝增量商家已经每小时发运营群里了，这里不急需且需企业微信账号；不进自动看护。"
-    },
-    {
-      "row": 14,
-      "ledger_name": "群监控“建店/重开”汇总企微建店表（每小时）",
-      "schedule": "每小时",
-      "dev_state": "blocked",
-      "skill": null,
-      "note": "需企业微信账号进群取数；不进自动看护。"
-    },
-    {
-      "row": 15,
-      "ledger_name": "建店需求（阻塞·待建店新资料）",
-      "schedule": "—",
-      "dev_state": "blocked",
-      "skill": null,
-      "note": "待建店新资料（老资料不可复用）；不进自动看护。"
-    },
-    {
-      "row": 16,
       "ledger_name": "新店开业识别与通知（每日10:50）",
       "schedule": "每日10:50",
       "dev_state": "active",
       "skill": "daily-new-stores-opening-to-wechat"
     },
     {
-      "row": 17,
+      "row": 8,
+      "ledger_name": "金鲨昨日双平台日报发运营群（每日11:00）",
+      "schedule": "每日11:00",
+      "dev_state": "active",
+      "skill": "daily-jinsha-reports-to-business-wechat"
+    },
+    {
+      "row": 9,
       "ledger_name": "淘宝新店活动缺项巡检与提醒（每日11:00）",
       "schedule": "每日11:00",
       "dev_state": "active",
       "skill": "daily-new-stores-activity-audit-to-wechat"
     },
     {
-      "row": 18,
-      "ledger_name": "淘宝新店装修缺失巡检与提醒（每日11:30）",
-      "schedule": "每日11:30",
-      "dev_state": "active",
-      "skill": "daily-new-stores-decoration-audit-to-wechat"
-    },
-    {
-      "row": 19,
-      "ledger_name": "淘宝新店未养活运营分配（每日11:40）",
-      "schedule": "每日11:40",
-      "dev_state": "active",
-      "skill": "daily-new-stores-not-nourished-ops-to-wechat"
-    },
-    {
-      "row": 20,
+      "row": 10,
       "ledger_name": "门店商户运营问题诊断（每日11:18）",
       "schedule": "每日11:18",
       "dev_state": "active",
       "skill": "daily-store-basic-diagnosis-to-wechat"
     },
     {
-      "row": 21,
-      "ledger_name": "美团商家中心智能客服（12:00）",
-      "schedule": "每日12:00",
+      "row": 11,
+      "ledger_name": "淘宝闪购差评申诉（每日11:20）",
+      "schedule": "已合并到下午四档，不单独排班",
       "dev_state": "active",
-      "skill": "meituan-intelligent-customer-service-12"
+      "skill": "taobao-shangou-negative-review-appeals"
     },
     {
-      "row": 22,
-      "ledger_name": "美团商家中心智能客服（15:00）",
-      "schedule": "每日15:00",
+      "row": 12,
+      "ledger_name": "淘宝新店装修缺失巡检与提醒（每日11:30）",
+      "schedule": "每日11:30",
       "dev_state": "active",
-      "skill": "meituan-intelligent-customer-service-15"
+      "skill": "daily-new-stores-decoration-audit-to-wechat"
     },
     {
-      "row": 23,
-      "ledger_name": "金鲨美团外卖差评申诉（每日13:08）",
-      "schedule": "每日13:08",
+      "row": 13,
+      "ledger_name": "淘宝新店未养活运营分配（每日11:40）",
+      "schedule": "每日11:40",
       "dev_state": "active",
-      "skill": "meituan-waimai-negative-review-appeals-11"
+      "skill": "daily-new-stores-not-nourished-ops-to-wechat"
     },
     {
-      "row": 24,
-      "ledger_name": "金鲨美团外卖差评申诉（每日14:25）",
-      "schedule": "每日14:25",
-      "dev_state": "active",
-      "skill": "meituan-waimai-negative-review-appeals-1425"
-    },
-    {
-      "row": 25,
-      "ledger_name": "负反馈列表申诉·双平台执行（每日08:30）",
-      "schedule": "每日08:30",
-      "dev_state": "active",
-      "skill": "negative-feedback-list-appeals-0930"
-    },
-    {
-      "row": 26,
-      "ledger_name": "负反馈列表申诉·双平台 Excel 汇总发群（每日08:30·申诉后即发）",
-      "schedule": "每日08:30（申诉完成后即发）",
-      "dev_state": "active",
-      "skill": "negative-feedback-list-appeals-1230"
-    },
-    {
-      "row": 27,
+      "row": 14,
       "ledger_name": "淘宝闪购门店经营任务完成率小组统计（每日12:00）",
       "schedule": "每日12:00",
       "dev_state": "active",
       "skill": "daily-store-task-completion-ops-to-wechat"
     },
     {
-      "row": 28,
-      "ledger_name": "20项运营指标全店铺互动反馈",
-      "schedule": "待确定首发日期",
-      "dev_state": "pending",
-      "skill": "daily-store-metrics-rotation-to-wechat"
+      "row": 15,
+      "ledger_name": "美团商家中心智能客服（12:00）",
+      "schedule": "每日12:00",
+      "dev_state": "active",
+      "skill": "meituan-intelligent-customer-service-12"
     },
     {
-      "row": 29,
-      "ledger_name": "淘宝闪购差评申诉（每日11:20）",
-      "schedule": "每日11:20",
+      "row": 16,
+      "ledger_name": "淘宝闪购自动差评申诉并企微反馈（每2小时·13:00起）",
+      "schedule": "每日13:00/15:00/17:00申诉；18:30收口汇总",
       "dev_state": "active",
-      "skill": "taobao-shangou-negative-review-appeals"
+      "skill": "taobao-flash-sale-negative-review-appeals"
+    },
+    {
+      "row": 17,
+      "ledger_name": "淘宝昨日报表下载上传金鲨（每日13:00）",
+      "schedule": "每日13:00",
+      "dev_state": "active",
+      "skill": "daily-taobao-download-to-jinsha"
+    },
+    {
+      "row": 18,
+      "ledger_name": "金鲨美团外卖差评申诉（每日13:08）",
+      "schedule": "每日13:00/15:00/17:00申诉；18:30收口汇总",
+      "dev_state": "active",
+      "skill": "meituan-waimai-negative-review-appeals-11"
+    },
+    {
+      "row": 19,
+      "ledger_name": "金鲨美团外卖差评申诉（每日14:25）",
+      "schedule": "已合并到下午四档，不单独排班",
+      "dev_state": "active",
+      "skill": "meituan-waimai-negative-review-appeals-1425"
+    },
+    {
+      "row": 20,
+      "ledger_name": "美团商家中心智能客服（15:00）",
+      "schedule": "每日15:00",
+      "dev_state": "active",
+      "skill": "meituan-intelligent-customer-service-15"
+    },
+    {
+      "row": 21,
+      "ledger_name": "美团商家中心智能客服（17:00·备发文档）",
+      "schedule": "每日17:00（17:00结束后准备发文档）",
+      "dev_state": "active",
+      "skill": "meituan-intelligent-customer-service"
     }
   ]
 }

@@ -1,0 +1,62 @@
+import json
+import sys
+import unittest
+import tempfile
+from pathlib import Path
+from unittest.mock import patch
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
+import native_ui_tree as ui
+
+class NativeTreeTests(unittest.TestCase):
+    def test_local_cache_refresh_validates_unique_container(self):
+        with tempfile.TemporaryDirectory() as d:
+            selectors=Path(d)/'selectors.json'
+            selectors.write_text(json.dumps({'anchors':{'conversationTitle':{'path':[0,23,5],'expected':{'role':'AXTextField'}},'composer':{'path':[0,23,9,0,2,0],'expected':{'role':'AXTextArea'}}}}))
+            def observe(*,root_path,max_depth):
+                if root_path==[0]:return {'nodes':[{'path':[0,25],'role':'AXSplitGroup'}]}
+                if root_path==[0,25]:return {'nodes':[{'path':[0,25,i],'role':r} for i,r in [(1,'AXTextField'),(5,'AXTextField'),(9,'AXSplitGroup')]]}
+                return {'nodes':[{'role':'AXTextArea' if root_path[-1]==0 else 'AXTextField'}]}
+            with patch.object(ui,'SELECTORS',selectors),patch.object(ui,'execute',side_effect=observe) as run:
+                ui.refresh_chat_cache()
+            self.assertEqual(json.loads(selectors.read_text())['anchors']['composer']['path'],[0,25,9,0,2,0])
+            self.assertTrue(all(c.kwargs['max_depth']<=1 for c in run.call_args_list))
+    def test_reject_modifier_before_any_ui_execution(self):
+        with patch.object(ui.subprocess, 'run') as run:
+            with self.assertRaisesRegex(ValueError,'modifier-not-allowed'):
+                ui.execute([{'type':'click','path':[0],'expected':{'role':'AXCell'},'modifier':'control'}])
+            run.assert_not_called()
+    def test_reject_literal_key_before_any_ui_execution(self):
+        with patch.object(ui.subprocess, 'run') as run:
+            with self.assertRaisesRegex(ValueError,'key-not-allowed'):
+                ui.execute([{'type':'key','path':[0],'expected':{'role':'AXTextField'},'key':'control'}])
+            run.assert_not_called()
+    def test_no_raw_keydown_or_keyup_backend(self):
+        source=ui.SCRIPT.read_text()
+        self.assertNotIn('se.keyDown(',source)
+        self.assertNotIn('se.keyUp(',source)
+
+    def test_reject_coordinate_action_before_any_execution(self):
+        with patch.object(ui.subprocess, 'run') as run:
+            with self.assertRaises(ValueError): ui.execute([{'type':'screenshot'}])
+            run.assert_not_called()
+    def test_reject_unbound_click(self):
+        with patch.object(ui.subprocess, 'run') as run:
+            with self.assertRaises(ValueError): ui.execute([{'type':'click','path':[0]}])
+            run.assert_not_called()
+    def test_cached_anchor_reads_only_exact_path(self):
+        anchor=json.loads(ui.SELECTORS.read_text())['anchors']['composer']
+        with patch.object(ui,'execute',return_value={'nodes':[dict(anchor['expected'], value='')]}) as run:
+            ui.read_anchor('composer')
+            run.assert_called_once_with(root_path=anchor['path'],max_depth=0)
+    def test_stale_anchor_is_not_clicked(self):
+        with patch.object(ui,'execute',return_value={'nodes':[{'role':'AXButton'}]}):
+            with self.assertRaisesRegex(RuntimeError,'anchor-changed'): ui.read_anchor('composer')
+    def test_native_backend_has_no_capture_or_injection_api(self):
+        source=ui.SCRIPT.read_text()
+        for forbidden in ['CGEvent','Quartz','getScreenshot','getState(', 'AXValue=','AXValue =']:
+            self.assertNotIn(forbidden,source)
+        self.assertIn("windows.byName('企业微信')",source)
+        self.assertNotIn('keyDown(',source)
+        self.assertNotIn('keyUp(',source)
+
+if __name__=='__main__': unittest.main()

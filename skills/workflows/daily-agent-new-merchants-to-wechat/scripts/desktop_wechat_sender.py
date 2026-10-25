@@ -334,7 +334,7 @@ def _reconcile_unknown(marker: Path, group: str, item: dict, output_dir: Path) -
         "--authorization", runtime_contract.PRODUCTION_AUTHORIZATION,
         "--ledger", str(marker.parent), "--marker-name", marker.name,
         "--output-dir", str(output_dir), "--reconcile"]
-    proc = subprocess.run(command, capture_output=True, text=True, timeout=180)
+    proc = subprocess.run(command, capture_output=True, text=True, timeout=None)
     try: receipt = json.loads(proc.stdout.strip().splitlines()[-1])
     except (ValueError, IndexError):
         return {"ok":False,"reason":"common-reconcile-no-receipt","sendAttempts":None}
@@ -359,6 +359,7 @@ def _windows_preflight_once(group, output_dir, pending_item, marker, resume_text
     """
     import workflow_bridge as bridge
     from executor import deadline
+    from contextlib import nullcontext
     from wecom_adapter import WeComAdapter as WindowsAdapter
     args = bridge.argparse.Namespace(
         workflow_id="merchants", group=group, payload_type="text",
@@ -371,7 +372,8 @@ def _windows_preflight_once(group, output_dir, pending_item, marker, resume_text
         reconcile=False, execute=False)
     request, _grant = bridge.prepare(args)
     adapter = WindowsAdapter()
-    with deadline(request["context"]["deadlineAt"]), adapter.session(request):
+    with (nullcontext() if getattr(adapter, "owner_lifetime", False) is True
+          else deadline(request["context"]["deadlineAt"])), adapter.session(request):
         return adapter.preflight(request, output_dir)
 
 
@@ -512,7 +514,7 @@ def run(collection_path: Path, group: str, authorization: str, output_dir: Path,
                     if marker.exists() and not safe_blocked:
                         return {"ok": False, "reason": "already-attempted-result-unknown", "sendAttempts": 1}
                     try:
-                        completed = subprocess.run(command, capture_output=True, text=True, timeout=900)
+                        completed = subprocess.run(command, capture_output=True, text=True, timeout=None)
                         value = json.loads(completed.stdout.strip().splitlines()[-1])
                     except (subprocess.TimeoutExpired, json.JSONDecodeError, IndexError):
                         return {"ok": False, "reason": "desktop-send-invalid-receipt",
