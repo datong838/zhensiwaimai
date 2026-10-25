@@ -25,6 +25,9 @@ assert.equal(isZeroSendWechatDriverBlocked({phase:'report_built',status:'recover
 assert.equal(isZeroSendWechatDriverBlocked({phase:'report_built',status:'recoverable'},{...driverBlockedReceipt,reason:"No module named 'AppKit'"}),false);
 const allocation={phase:'created',status:'active',reviewItems:[]};
 assert.equal(assertAllocatedStatePreEffect(allocation),true);
+const initialRecovery={allowed:true,stage:'browser_collect',priorFailures:0,nextAttempt:1};
+assert.equal(assertAllocatedStatePreEffect({...allocation,lastRecovery:initialRecovery}),true);
+for(const mutation of [{allowed:false},{stage:'wechat_send'},{priorFailures:1},{nextAttempt:2},{extra:true}])assert.throws(()=>assertAllocatedStatePreEffect({...allocation,lastRecovery:{...initialRecovery,...mutation}}),/not-allocated-pre-effect/);
 assert.equal(assertAllocatedStatePreEffect({...allocation,status:'recoverable'}),true);
 for(const bad of [{phase:'report_built'},{status:'unknown'},{reviewItems:[{stage:'download'}]},{attempted:true},{unknown:true},{sendAttempts:0},{reason:'unclassified-failure'},{recovery:{stage:'browser_collect'}}])assert.throws(()=>assertAllocatedStatePreEffect({...allocation,...bad}),/not-allocated-pre-effect/);
 await assert.rejects(currentRunIsAllocatedPreEffect({}),/production-config-mismatch/);

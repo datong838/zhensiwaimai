@@ -35,8 +35,9 @@ function acceptanceBusinessDate(now,acceptedBusinessDate){const current=buildCon
 async function absent(file){try{await fs.access(file);return false;}catch(error){if(error.code==='ENOENT')return true;throw error;}}
 async function currentRunIsAbsentPreEffect(config){for(const file of [config.config,config.state,config.browserReceipt,config.raw,config.report,config.sendReceipt,path.join(FIXED.sendLedger,config.sendMarker)])if(!await absent(file))throw Error('current-business-run-has-effect-artifact');return true;}
 function assertAllocatedStatePreEffect(state){
-  const allowed=new Set(['policyVersion','businessDate','phase','status','startedAt','updatedAt','reviewItems','runtimeModelDecisions']);
+  const allowed=new Set(['policyVersion','businessDate','phase','status','startedAt','updatedAt','reviewItems','runtimeModelDecisions','lastRecovery']);
   if(Object.keys(state||{}).some(key=>!allowed.has(key)))throw Error('current-business-run-not-allocated-pre-effect');
+  if(state?.lastRecovery!==undefined){const value=state.lastRecovery;if(!value||Object.keys(value).sort().join(',')!=='allowed,nextAttempt,priorFailures,stage'||value.allowed!==true||value.stage!=='browser_collect'||value.priorFailures!==0||value.nextAttempt!==1)throw Error('current-business-run-not-allocated-pre-effect');}
   if(state?.phase!=='created'||!['active','recoverable'].includes(state?.status)||!Array.isArray(state?.reviewItems)||state.reviewItems.length!==0||state.attempted||state.unknown||state.sendAttempts!=null||state.reason||state.recoveryReason||state.recovery)throw Error('current-business-run-not-allocated-pre-effect');
   return true;
 }

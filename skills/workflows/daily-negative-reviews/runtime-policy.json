@@ -1,10 +1,22 @@
 {
   "schemaVersion": 1,
-  "status": "SEALED",
+  "status": "UNSEALED_ACCEPTANCE",
   "authorizationRef": "zhensi-negative-review-main-wechat-shanghai-zhensi-operations-ding-fandang-v1-user-20260918",
-  "dependencyDigest": "bb26956c8dc91524172e59c34b748a14820a8d3664974b2b7c6029499b8cf9f6",
-  "acceptedBusinessDate": "2026-10-23",
-  "acceptedAt": "2026-10-24T05:58:12.399Z",
-  "acceptedSummary": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/daily-negative-reviews/20261023/workflow-summary.json",
-  "acceptedReportSha256": "2c5a83291f5de3d5656186d34463b8b74e53369d2dff9180bbd536a23f7a496c"
+  "candidateDependencyDigest": "f8f88c8145453fa202bac8bd3518be9a1d46d6bcda387d73614126faa44b3a86",
+  "allowedBusinessDate": "2026-10-24",
+  "preparedAt": "2026-10-25T00:54:10.729Z",
+  "maintenance": {
+    "authorization": "user-20260920-negative-review-dependency-maintenance",
+    "publicManifestSha256": "fba2bee00e73ac26008f7246c58ca2d443437bfc8c6829277cd025782544f868",
+    "publicInspect": {
+      "candidateFileCount": 32,
+      "sendAttempts": 0,
+      "runtimeModelDecisions": 0
+    },
+    "tests": {
+      "tests": 7
+    },
+    "sendAttempts": 0,
+    "runtimeModelDecisions": 0
+  }
 }
