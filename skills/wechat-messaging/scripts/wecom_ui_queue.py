@@ -32,7 +32,8 @@ def user_no_resend_today(workflow, *, now=None, state=None):
 
 def enabled(request):
     context = request.get('context', {})
-    if context.get('workflowId') == 'native-ui-acceptance-20261025':
+    import re
+    if re.fullmatch(r'native-ui-acceptance-\d{8}', context.get('workflowId', '')):
         import sys
         runtime = Path(__file__).resolve().parents[3] / 'runtime'
         if str(runtime) not in sys.path: sys.path.insert(0, str(runtime))
@@ -65,7 +66,6 @@ def enabled(request):
     from registered_ui_routes import allowed as registered_route_allowed, allowed_direct
     if registered_route_allowed(request) or allowed_direct(request):
         return True
-    import re
     workflow = context.get('workflowId')
     if workflow == 'contract-termination-ops':
         items = request.get('items', [])

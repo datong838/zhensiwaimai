@@ -6,17 +6,23 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parent.parent
-SCOPE = ROOT / 'runtime/state/native-ui-acceptance-20261025'
-WORKFLOW = 'native-ui-acceptance-20261025'
 GROUP = '临时测试群请忽略 💰发财精英荟💰'
+WORKFLOW_PREFIX = 'native-ui-acceptance-'
 
 
-def request_enabled(request):
+def binding_for_day(day):
+    iso_day = day.isoformat()
+    return (ROOT / f'runtime/state/native-ui-acceptance-{iso_day}',
+            WORKFLOW_PREFIX + iso_day.replace('-', ''))
+
+
+def request_enabled(request, *, now=None):
     try:
-        manifest = json.loads((SCOPE / 'manifest.json').read_text(encoding='utf-8'))
-        return (datetime.now(ZoneInfo('Asia/Shanghai')).date().isoformat() == '2026-10-25'
-                and request == manifest['request'] and request['groupName'] == GROUP
-                and request['context']['workflowId'] == WORKFLOW
+        current = now or datetime.now(ZoneInfo('Asia/Shanghai'))
+        scope, workflow = binding_for_day(current.astimezone(ZoneInfo('Asia/Shanghai')).date())
+        manifest = json.loads((scope / 'manifest.json').read_text(encoding='utf-8'))
+        return (request == manifest['request'] and request['groupName'] == GROUP
+                and request['context']['workflowId'] == workflow
                 and manifest['grant']['groupName'] == GROUP)
     except (OSError, ValueError, KeyError):
         return False
@@ -27,11 +33,12 @@ def execute():
     from executor import deliver
     from wecom_adapter import WeComAdapter
     from ledger import atomic_json
-    data = json.loads((SCOPE / 'manifest.json').read_text(encoding='utf-8'))
+    scope, _ = binding_for_day(datetime.now(ZoneInfo('Asia/Shanghai')).date())
+    data = json.loads((scope / 'manifest.json').read_text(encoding='utf-8'))
     if not request_enabled(data['request']):
         raise ValueError('native-acceptance-scope-invalid')
-    result = deliver(data['request'], data['grant'], SCOPE / 'delivery-ledger', WeComAdapter())
-    atomic_json(SCOPE / 'delivery-receipt.json', result)
+    result = deliver(data['request'], data['grant'], scope / 'delivery-ledger', WeComAdapter())
+    atomic_json(scope / 'delivery-receipt.json', result)
     return result
 
 

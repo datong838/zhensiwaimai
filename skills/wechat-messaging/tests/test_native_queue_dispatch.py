@@ -1,14 +1,31 @@
 import json
+import types
 import tempfile
 import unittest
 from pathlib import Path
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
 import wecom_ui_queue as queue
 
 
 class NativeQueueDispatchTests(unittest.TestCase):
+    def test_current_day_acceptance_route_uses_strict_validator(self):
+        request = {'groupName': 'test', 'context': {'workflowId': 'native-ui-acceptance-20261026'}}
+        validator = Mock(return_value=True)
+        module = types.SimpleNamespace(request_enabled=validator)
+        with patch.dict(sys.modules, {'native_ui_acceptance': module}):
+            self.assertTrue(queue.enabled(request))
+        validator.assert_called_once_with(request)
+
+    def test_malformed_acceptance_workflow_is_not_routed_to_validator(self):
+        request = {'groupName': 'test', 'context': {'workflowId': 'native-ui-acceptance-current'}}
+        validator = Mock(return_value=True)
+        module = types.SimpleNamespace(request_enabled=validator)
+        with patch.dict(sys.modules, {'native_ui_acceptance': module}):
+            self.assertFalse(queue.enabled(request))
+        validator.assert_not_called()
+
     def test_production_owner_cannot_silently_wait_for_manual_consumer(self):
         with tempfile.TemporaryDirectory() as td:
             root=Path(td)
