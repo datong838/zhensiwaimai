@@ -38,9 +38,9 @@ export function aggregate(state){
  const stores=state.stores||[],completed=stores.filter(s=>s.state==='completed'),checked=stores.filter(s=>s.state==='checked_no_action');
  const unknown=stores.filter(s=>['unknown','attempted'].includes(s.state)),errors=stores.filter(s=>s.state==='blocked');
  const ok=state.scopeFinished===true&&unknown.length===0&&errors.length===0;
- return {ok,total:stores.length,completed:completed.length,checkedNoAction:checked.length,handled:completed.length+checked.length,
+ return {ok,total:stores.length,completed:completed.length,optimized:completed.length,checkedNoAction:checked.length,handled:completed.length+checked.length,
   pending:state.scopeFinished?0:1,unknown:unknown.length,errors:errors.length,round:state.cursor?.round||1,
-  observedPlatformTotal:state.latestTotal??null,text:ok&&completed.length?notification(completed.length):null};
+  observedPlatformTotal:state.latestTotal??null,text:ok?notification(completed.length+checked.length):null};
 }
 export function shanghaiClock(now=Date.now()){
  const parts=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Shanghai',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'}).formatToParts(new Date(now));

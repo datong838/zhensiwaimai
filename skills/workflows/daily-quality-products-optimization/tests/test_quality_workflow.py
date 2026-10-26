@@ -41,6 +41,16 @@ class Tests(unittest.TestCase):
     def test_no_normal_confirmation_never_claims_success(self):
         state=copy.deepcopy(self.original);state['stores'][0]['operation']['confirmed']=False;self.write(state)
         with self.assertRaisesRegex(ValueError,'not-observed'):self.run_flow()
+    def test_read_only_resolved_unknown_is_not_counted_as_optimized(self):
+        state=copy.deepcopy(self.original);store=state['stores'][0];store['state']='checked_no_action';store['technicalStatusPreserved']='unknown';store['submission']={'day':'2026-10-26','shopId':store['shopId'],'state':'attempted'}
+        sha=hashlib.sha256(json.dumps(store['submission'],ensure_ascii=False,separators=(',',':')).encode()).hexdigest();store['reconciliation']={'mode':'read-only','resolved':True,'submissionSha256':sha};self.write(state);self.optimizer.return_value={'ok':True,'summary':{'completed':0}}
+        a=Adapter();self.assertTrue(self.run_flow(a)['ok']);self.assertEqual(a.calls[-1]['text'],w.notice(1));proof=json.loads((self.folder/'completion.json').read_text());self.assertIn('原提交结果未确认',proof['records'][0]['execution']);self.assertEqual(store['submission']['state'],'attempted')
+    def test_notice_count_includes_optimized_and_checked_and_matches_excel_rows(self):
+        state=copy.deepcopy(self.original);state['stores'].append({'state':'checked_no_action','shopId':'520411538','name':'无需优化示例门店'});self.write(state)
+        a=Adapter();self.assertTrue(self.run_flow(a)['ok']);self.assertEqual(a.calls[-1]['text'],w.notice(2));proof=json.loads((self.folder/'completion.json').read_text());self.assertEqual((proof['optimized'],proof['checkedNoAction'],proof['handled']),(1,1,2));self.assertEqual(len(proof['records']),2)
+    def test_unbound_read_only_fact_is_rejected(self):
+        state=copy.deepcopy(self.original);state['stores'][0].update({'state':'checked_no_action','technicalStatusPreserved':'unknown','reconciliation':{'mode':'read-only','resolved':True,'submissionSha256':'wrong'}});self.write(state);self.optimizer.return_value={'ok':True,'summary':{'completed':0}}
+        with self.assertRaisesRegex(ValueError,'reconciliation-binding-invalid'):self.run_flow()
     def test_preflight_zero_send_resume_same_completion(self):
         a=Adapter(ready=False);self.assertFalse(self.run_flow(a)['ok']);self.assertFalse((self.folder/'delivery.json').exists());a.ready=True;self.assertTrue(self.run_flow(a)['ok']);self.assertEqual(len(a.calls),2)
     def test_busy_ui_does_not_wait_or_send(self):

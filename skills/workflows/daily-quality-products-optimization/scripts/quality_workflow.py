@@ -68,11 +68,15 @@ def completion(day,folder,result):
     for store in stores:
         if store['state']=='completed' and not all(store.get('operation',{}).get(k) is True for k in ['confirmed','popoverClosed','uiStable']):raise ValueError('quality-normal-operation-not-observed')
         label='已优化类目详情' if store['state']=='completed' else '已检查，无可优化项目'
+        if store.get('technicalStatusPreserved')=='unknown':
+            reconciliation=store.get('reconciliation',{});expected=hashlib.sha256(json.dumps(store.get('submission'),ensure_ascii=False,separators=(',',':')).encode()).hexdigest()
+            if not (reconciliation.get('mode')=='read-only' and reconciliation.get('resolved') is True and reconciliation.get('submissionSha256')==expected):raise ValueError('quality-read-only-reconciliation-binding-invalid')
+            label='已只读核对，当前无可优化项；原提交结果未确认'
         if store.get('skipCount',0):label+='；当日已执行，后续已跳过'
         records.append({'shopId':store['shopId'],'name':store['name'],'execution':label})
-    payload={'day':day,'workflowId':FLOW,'accountName':'zhangyanru188','groupName':GROUP,'completed':len(optimized),'checkedNoAction':len(checked),
+    payload={'day':day,'workflowId':FLOW,'accountName':'zhangyanru188','groupName':GROUP,'completed':len(optimized),'optimized':len(optimized),'checkedNoAction':len(checked),'handled':len(stores),
              'stateSha256':hashlib.sha256(source.read_bytes()).hexdigest(),'completedShopIds':[s['shopId'] for s in optimized],
-             'handledShopIds':[s['shopId'] for s in stores],'records':records,'text':notice(len(optimized)),'observedAt':datetime.now(ZoneInfo('Asia/Shanghai')).isoformat()}
+             'handledShopIds':[s['shopId'] for s in stores],'records':records,'text':notice(len(stores)),'observedAt':datetime.now(ZoneInfo('Asia/Shanghai')).isoformat()}
     target=folder/'completion.json'
     if target.exists():
         saved=json.loads(target.read_text())
