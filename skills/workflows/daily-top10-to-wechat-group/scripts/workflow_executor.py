@@ -108,6 +108,41 @@ def ensure_screen_ready(d,serial):
             time.sleep(.1)
     if d.screenshot().size!=(1080,2340):raise phone.StopRun('phone-screen-not-ready')
 
+def send_income_label(data_date, output, *, adapter=None, label_dir=None):
+    """Fixed daily text node. Original image event and its ledger remain unchanged."""
+    shared=ROOT.parents[2]/'wechat-messaging/scripts'
+    if str(shared) not in sys.path:sys.path.insert(0,str(shared))
+    from ledger import atomic_json
+    from wecom_adapter import WeComAdapter, target_preflight_verified
+    label_dir=Path(label_dir) if label_dir else ROOT.parent/'.runtime'/'income-labels'
+    label_dir.mkdir(parents=True,exist_ok=True,mode=0o700)
+    marker=label_dir/(data_date+'.json')
+    if marker.exists():
+        prior=json.loads(marker.read_text())
+        return {'status':'already_verified' if prior.get('state')=='verified' else 'unknown','sendAttempts':0}
+    text='淘宝闪购门店收入top10'
+    item={'itemId':'taobao-income-label','type':'text','text':text,'sha256':hashlib.sha256(text.encode()).hexdigest()}
+    deadline=time.time()+300
+    request={'schemaVersion':1,'groupName':CANONICAL_TARGET_GROUP,'items':[item],
+             'context':{'workflowId':'top10-income-label','eventId':data_date+'-taobao-income-top10-label',
+                        'accountAlias':'main-wechat','channel':'desktop','deadlineAt':deadline}}
+    transport=adapter or WeComAdapter()
+    with transport.session(request):
+        if marker.exists():
+            prior=json.loads(marker.read_text())
+            return {'status':'already_verified' if prior.get('state')=='verified' else 'unknown','sendAttempts':0}
+        preflight=transport.preflight(request,Path(output)/'preflight')
+        if not target_preflight_verified(preflight,CANONICAL_TARGET_GROUP):
+            return {'status':'blocked','sendAttempts':0,'reason':preflight.get('reason','income-label-preflight-failed')}
+        atomic_json(marker,{'state':'attempted','sha256':item['sha256'],'sendAttempts':None})
+        try:
+            result=transport.send_one(request,item,Path(output)/'send',{'schemaVersion':1,'accountAlias':'main-wechat','groupName':CANONICAL_TARGET_GROUP,'channel':'desktop','authorizationRef':'user-20261026-platform-top10-labels','expiresAt':deadline},deadline)
+        except BaseException:
+            atomic_json(marker,{'state':'unknown','sha256':item['sha256'],'sendAttempts':None});raise
+        atomic_json(marker,{'state':'verified' if result.get('status')=='verified' else 'unknown','sha256':item['sha256'],'result':result,'sendAttempts':result.get('sendAttempts')})
+        return result
+
+
 def run(args):
     workflow_run_id=str(uuid.uuid4())
     workflow_dir=ROOT.parent/'.runtime'/'workflow-runs'/workflow_run_id
@@ -174,6 +209,9 @@ def run(args):
             suffix=f'-repeat-{repeat_id}' if repeat_id else ''
             marker=f"{receipt['dataDate']}-main-{group_key}{suffix}.json"
             ledger=ROOT.parent/'.runtime'/'send-ledger'
+            if (ledger/marker).exists():raise phone.StopRun('desktop-send-already-attempted')
+            result['incomeLabel']=send_income_label(receipt['dataDate'],workflow_dir/'income-label')
+            if result['incomeLabel'].get('status') not in ('verified','already_verified'):raise phone.StopRun('income-label:'+str(result['incomeLabel'].get('reason') or result['incomeLabel'].get('status')))
             cmd=[sys.executable,str(DESKTOP_SENDER), "--workflow-id", "top10",'--group',phone.TARGET_GROUP,'--payload-type','image','--item',str(image),
                  '--authorization',args.standing_authorization,'--ledger',str(ledger),'--marker-name',marker,
                  '--output-dir',str(Path(desktop['receiptFile']).parent/'desktop-wechat'),'--deadline-unix',str(desktop['deadlineAt']/1000),'--execute']

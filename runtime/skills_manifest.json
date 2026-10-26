@@ -939,6 +939,36 @@
         }
       ],
       "note": "2026-10-26用户明确新增，9231原岗位完整区块原图，经企业微信原生UI队列单日一次；unknown只读不重发。"
+    },
+    {
+      "name": "daily-meituan-income-top10-to-wechat",
+      "target_group": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+      "ledger_name": "美团外卖昨日门店收入Top10",
+      "schedule": "每日08:00，与淘宝Top10串行",
+      "dev_state": "active",
+      "enabled": true,
+      "order": 1,
+      "cadence_hours": 24,
+      "earliest_hour": 8,
+      "latest_hour": 19,
+      "schedule_times": [
+        "08:00"
+      ],
+      "cwd": "skills/workflows/daily-meituan-income-top10-to-wechat",
+      "timeout_seconds": null,
+      "max_retries": 0,
+      "cooldown_seconds": 0,
+      "needs_adapter": false,
+      "steps": [
+        {
+          "argv": [
+            "{python}",
+            "scripts/income_workflow.py",
+            "--execute"
+          ]
+        }
+      ],
+      "note": "2026-10-26用户明确新增，按订单收入/数值降序截图前10，固定说明与图片连续原UI队列单日一次；监理不手动代跑，unknown不重发。"
     }
   ],
   "ledger_template": [
@@ -1095,6 +1125,13 @@
       "schedule": "每日10:00",
       "dev_state": "active",
       "skill": "daily-service-market-ranking-to-wechat"
+    },
+    {
+      "row": 23,
+      "ledger_name": "美团外卖昨日门店收入Top10",
+      "schedule": "每日08:00",
+      "dev_state": "active",
+      "skill": "daily-meituan-income-top10-to-wechat"
     }
   ]
 }

@@ -37,7 +37,49 @@ def service_ranking_allowed(request, *, root=None, day=None):
         return False
 
 
+def top10_label_allowed(request, *, day=None):
+    from datetime import datetime, timedelta
+    from zoneinfo import ZoneInfo
+    day=day or (datetime.now(ZoneInfo('Asia/Shanghai')).date()-timedelta(days=1)).isoformat()
+    context=request.get('context',{});items=request.get('items',[])
+    return (request.get('groupName')==GROUP and context.get('workflowId')=='top10-income-label'
+            and context.get('eventId')==day+'-taobao-income-top10-label'
+            and context.get('accountAlias')=='main-wechat' and context.get('channel')=='desktop'
+            and len(items)==1 and items[0].get('itemId')=='taobao-income-label'
+            and items[0].get('type')=='text' and items[0].get('text')=='淘宝闪购门店收入top10')
+
+
+def meituan_income_allowed(request, *, root=None, day=None):
+    import hashlib
+    from datetime import datetime, timedelta
+    from zoneinfo import ZoneInfo
+    root=Path(root) if root is not None else Path(__file__).resolve().parents[3]
+    day=day or datetime.now(ZoneInfo('Asia/Shanghai')).strftime('%Y-%m-%d')
+    data_date=(datetime.fromisoformat(day).date()-timedelta(days=1)).isoformat()
+    context=request.get('context',{});items=request.get('items',[])
+    if not (request.get('groupName')==GROUP and context.get('workflowId')=='daily-meituan-income-top10-ops'
+            and context.get('eventId')==day+'-meituan-income-top10' and context.get('accountAlias')=='main-wechat'
+            and context.get('channel')=='desktop' and len(items)==2):
+        return False
+    label,image=items
+    expected=root/'skills/workflows/daily-meituan-income-top10-to-wechat/.runtime/days'/day/(data_date+'-美团外卖门店收入top10.png')
+    try:
+        return (label.get('itemId')=='meituan-income-label' and label.get('type')=='text'
+                and label.get('text')=='美团外卖门店收入top10'
+                and label.get('sha256')==hashlib.sha256('美团外卖门店收入top10'.encode()).hexdigest()
+                and image.get('itemId')=='meituan-income-top10' and image.get('type')=='image'
+                and Path(image.get('path','')).resolve()==expected.resolve() and image.get('name')==expected.name
+                and image.get('size')==expected.stat().st_size
+                and image.get('sha256')==hashlib.sha256(expected.read_bytes()).hexdigest())
+    except (OSError,ValueError,TypeError):
+        return False
+
+
 def allowed_direct(request):
+    if request.get('context',{}).get('workflowId')=='daily-meituan-income-top10-ops':
+        return meituan_income_allowed(request)
+    if request.get('context', {}).get('workflowId') == 'top10-income-label':
+        return top10_label_allowed(request)
     if request.get('context', {}).get('workflowId') == 'daily-service-market-ranking-ops':
         return service_ranking_allowed(request)
     import re
