@@ -60,12 +60,13 @@ class LedgerScheduleDisplayTests(unittest.TestCase):
         import json
         data=json.loads((Path(__file__).parent/'skills_manifest.json').read_text())
         names=[r['skill'] for r in data['ledger_template']]
-        self.assertEqual(len(names),23)
-        self.assertEqual(len(set(names)),23)
+        self.assertEqual(len(names),24)
+        self.assertEqual(len(set(names)),24)
         self.assertEqual(names[0],'daily-agent-new-merchants-to-wechat')
         self.assertEqual(names[20],'meituan-intelligent-customer-service')
         self.assertEqual(names[21],'daily-service-market-ranking-to-wechat')
         self.assertEqual(names[22],'daily-meituan-income-top10-to-wechat')
+        self.assertEqual(names[23],'daily-quality-products-optimization')
         self.assertIn('taobao-shangou-negative-review-appeals',names)
         self.assertIn('meituan-waimai-negative-review-appeals-1425',names)
     def test_csv_retains_merge_but_not_uncompleted_business(self):

@@ -75,7 +75,43 @@ def meituan_income_allowed(request, *, root=None, day=None):
         return False
 
 
+def quality_optimization_allowed(request, *, root=None, day=None):
+    import hashlib
+    import json
+    from datetime import datetime
+    from zoneinfo import ZoneInfo
+    root=Path(root) if root is not None else Path(__file__).resolve().parents[3]
+    day=day or datetime.now(ZoneInfo('Asia/Shanghai')).strftime('%Y-%m-%d')
+    context=request.get('context',{});items=request.get('items',[])
+    if not (request.get('groupName')==GROUP and context.get('workflowId')=='daily-quality-products-optimization'
+            and context.get('eventId')==day+'-quality-optimization-completed' and context.get('accountAlias')=='main-wechat'
+            and context.get('channel')=='desktop' and len(items)==1):return False
+    folder=root/'skills/workflows/daily-quality-products-optimization/.runtime/days'/day
+    try:
+        proof=json.loads((folder/'completion.json').read_text());raw=(folder/'state.json').read_bytes();state=json.loads(raw)
+        stores=state['stores'];count=len(stores);text=f'淘宝闪购 优质商品率低 店铺全部店铺优化完成 （今日执行了 {count} 家）'
+        observed=datetime.fromisoformat(proof['observedAt'])
+        if not (proof['day']==state['day']==day and proof['workflowId']==state['workflowId']=='daily-quality-products-optimization'
+                and proof['accountName']=='zhangyanru188' and state['accountLabel']=='zhangyanru188:全部门店'
+                and proof['groupName']==GROUP and proof['stateSha256']==hashlib.sha256(raw).hexdigest()
+                and type(state['total']) is int and state['total']==count and type(proof['completed']) is int and proof['completed']==count and count>0
+                and state['snapshotComplete'] is True and state['finalReconciled'] is True
+                and proof['completedShopIds']==[s['shopId'] for s in stores]
+                and len(set(proof['completedShopIds']))==count and all(str(s['shopId']).isdigit() for s in stores)
+                and all(s['state']=='completed' for s in stores) and proof['text']==text
+                and observed.tzinfo is not None and observed.astimezone(ZoneInfo('Asia/Shanghai')).strftime('%Y-%m-%d')==day):return False
+        for store in stores:
+            before=store.get('before',{});after=store.get('after',{})
+            if not ((before.get('total')==0 and before.get('products')==[]) or
+                    ((store.get('submission',{}).get('state')=='observed' or (store.get('reconciliation',{}).get('mode')=='read-only' and store.get('reconciliation',{}).get('state')=='completed' and store.get('reconciliation',{}).get('submissionKey')==store.get('submission',{}).get('key'))) and after.get('total')==0 and after.get('products')==[])):return False
+        return (items[0].get('itemId')=='quality-optimization-completed' and items[0].get('type')=='text'
+                and items[0].get('text')==text and items[0].get('sha256')==hashlib.sha256(text.encode()).hexdigest())
+    except (OSError,ValueError,KeyError,TypeError):return False
+
+
 def allowed_direct(request):
+    if request.get('context',{}).get('workflowId')=='daily-quality-products-optimization':
+        return quality_optimization_allowed(request)
     if request.get('context',{}).get('workflowId')=='daily-meituan-income-top10-ops':
         return meituan_income_allowed(request)
     if request.get('context', {}).get('workflowId') == 'top10-income-label':
