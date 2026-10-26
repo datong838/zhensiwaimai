@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {FLOW,COMPANY,METRIC,compact,digest,validateMerchants,validateProducts,submissionKey,reconcileProducts,maySubmit,aggregate,segmentDeadline,canStartStore,priorSubmission,shanghaiClock,safeRetryEligible} from './quality_core.mjs';
+import {FLOW,COMPANY,METRIC,compact,digest,validateMerchants,validateProducts,submissionKey,reconcileProducts,maySubmit,aggregate,segmentDeadline,canStartStore,shanghaiClock,safeRetryEligible} from './quality_core.mjs';
 const BASE=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const ROOT=path.resolve(BASE,'../../..');
 const HOME='https://open.shop.ele.me/manager/base/home';
@@ -54,28 +54,47 @@ import crypto from 'node:crypto';
 const cryptoHash=b=>crypto.createHash('sha256').update(b).digest('hex');
 function budget(deadline,maximum=8000){const ms=Math.min(maximum,deadline-Date.now());if(ms<1000)throw Error('quality-segment-yield');return ms;}
 async function bounded(promise,deadline,reason='quality-ui-stage-timeout'){let timer;try{return await Promise.race([promise,new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error(reason)),Math.max(1,deadline-Date.now()));})]);}finally{clearTimeout(timer);}}
-async function stable(subject,fn,deadline,{previousPage=null,previousSignature=null}={}){
+const rowSignature=v=>JSON.stringify(v.rows||v.products||[]);
+async function stable(subject,fn,deadline,{previousPage=null,previousSignature=null,previousRowsSignature=null}={}){
  let last='';
  while(Date.now()<deadline){
   const v=await bounded(subject.evaluate(fn),Math.min(deadline,Date.now()+5000));const signature=JSON.stringify(v);
-  if(!v.loading&&v.page!==previousPage&&signature!==previousSignature&&signature===last)return v;
+  if(!v.loading&&v.page!==previousPage&&signature!==previousSignature&&rowSignature(v)!==previousRowsSignature&&signature===last)return v;
   last=signature;await new Promise(r=>setTimeout(r,250));
  }
  throw Error('quality-ui-stage-timeout');
 }
-async function goFirst(subject,deadline){
+export async function changePage(subject,locator,fn,deadline,before){
+ const owner=typeof subject.page==='function'?subject.page():subject;
+ const frame=owner===subject?owner.mainFrame():subject;
+ const responseP=owner.waitForResponse(response=>{
+  if(fn===merchantDom)return response.url().includes('pageQueryOpenTaskMerchantList');
+  try{
+   const request=response.request(),url=new URL(response.url());
+   return request.frame()===frame&&['xhr','fetch'].includes(request.resourceType())
+    &&(/(^|\.)ele\.me$/.test(url.hostname)||/(^|\.)taobao\.com$/.test(url.hostname))
+    &&String(response.headers()['content-type']||'').includes('json');
+  }catch{return false;}
+ },{timeout:budget(deadline,15000)});
+ responseP.catch(()=>{});
+ await locator.click({timeout:budget(deadline)});
+ const response=await responseP;if(response.status()!==200)throw Error('quality-pagination-response-not-ok');
+ await bounded(response.finished(),Math.min(deadline,Date.now()+15000));
+ return await stable(subject,fn,Math.min(deadline,Date.now()+15000),{previousPage:before.page,previousRowsSignature:rowSignature(before)});
+}
+async function goFirst(subject,deadline,fn){
+ const before=await stable(subject,fn,Math.min(deadline,Date.now()+15000));
  const first=subject.locator('ul.ant-pagination li.ant-pagination-item[title="1"]');
- if(await first.count()&&!(await first.getAttribute('class')).includes('ant-pagination-item-active'))await first.click({timeout:budget(deadline)});
+ if(await first.count()&&!(await first.getAttribute('class')).includes('ant-pagination-item-active'))return await changePage(subject,first,fn,deadline,before);
+ return before;
 }
 export async function allPages(subject,fn,deadline,validate){
- await goFirst(subject,deadline);let page=await stable(subject,fn,Math.min(deadline,Date.now()+15000));let rows=[];const totals=[];const visited=new Set();
+ let page=await goFirst(subject,deadline,fn);let rows=[];const totals=[];const visited=new Set();
  for(let n=0;n<1000;n++){
   if(visited.has(page.page))throw Error('quality-pagination-cycle');visited.add(page.page);totals.push(page.total);
   rows.push(...(page.rows||page.products));
   if(!page.hasNext)break;
-  const previousPage=page.page;
-  await subject.locator('ul.ant-pagination li.ant-pagination-next:not(.ant-pagination-disabled)').click({timeout:budget(deadline)});
-  page=await stable(subject,fn,Math.min(deadline,Date.now()+15000),{previousPage});
+  page=await changePage(subject,subject.locator('ul.ant-pagination li.ant-pagination-next:not(.ant-pagination-disabled)'),fn,deadline,page);
   if(n===999)throw Error('quality-pagination-limit');
  }
  if(new Set(totals).size!==1)throw Error('quality-list-changed-during-pagination');
@@ -105,14 +124,14 @@ async function navigate(page,deadline){
  return accountLabel;
 }
 async function openStore(page,store,deadline){
- await goFirst(page,deadline);let current=await stable(page,merchantDom,Math.min(deadline,Date.now()+15000));
+ let current=await goFirst(page,deadline,merchantDom);
  for(let n=0;n<1000;n++){
   const rows=await page.locator('tbody tr.ant-table-row').evaluateAll(es=>es.map(e=>e.querySelector('td')?.textContent?.trim()));
   const indexes=rows.flatMap((name,i)=>compact(name)===compact(store.name)?[i]:[]);
   if(indexes.length>1)throw Error('quality-store-identity-ambiguous');
   if(indexes.length===1){const row=page.locator('tbody tr.ant-table-row').nth(indexes[0]);const popup=page.waitForEvent('popup',{timeout:budget(deadline,10000)});await row.getByRole('button',{name:'去完成',exact:true}).click({timeout:budget(deadline)});return await popup;}
   if(!current.hasNext)return null;
-  const previousPage=current.page;await page.locator('ul.ant-pagination li.ant-pagination-next:not(.ant-pagination-disabled)').click({timeout:budget(deadline)});current=await stable(page,merchantDom,Math.min(deadline,Date.now()+15000),{previousPage});
+  current=await changePage(page,page.locator('ul.ant-pagination li.ant-pagination-next:not(.ant-pagination-disabled)'),merchantDom,deadline,current);
  }
  throw Error('quality-store-search-limit');
 }
@@ -140,68 +159,69 @@ export async function acquireSegmentLease(acquire,runId){
  try{return await acquire(runId);}catch(error){if(/(?:post[-:]9231[-:]lease[-:]busy|post-lease-busy|service-post-busy)/.test(String(error.message||error)))return null;throw error;}
 }
 export async function runSegment({execute=false}={}){
- const codeVersion=await integrity();const day=dayNow();const folder=path.join(BASE,'.runtime/days',day),stateFile=path.join(folder,'state.json');
- let state;try{state=JSON.parse(await fs.readFile(stateFile,'utf8'));}catch(e){if(e.code!=='ENOENT')throw e;state={schemaVersion:1,day,workflowId:FLOW,snapshotComplete:false,stores:[],total:null,finalReconciled:false};}
+ const codeVersion=await integrity(),day=dayNow(),folder=path.join(BASE,'.runtime/days',day),stateFile=path.join(folder,'state.json');
+ let state;try{state=JSON.parse(await fs.readFile(stateFile,'utf8'));}catch(e){if(e.code!=='ENOENT')throw e;state={schemaVersion:2,day,workflowId:FLOW,stores:[],scopeFinished:false,cursor:{round:1,page:1,row:0,newShops:0,rowsVisited:0,noNewRounds:0}};}
  if(state.day!==day||state.workflowId!==FLOW)throw Error('quality-state-binding-invalid');
+ if(!state.cursor)throw Error('quality-old-state-requires-read-only-migration');
  if(!execute)return {ok:true,mode:'inspect-state-only',summary:aggregate(state),browserActions:0,sendAttempts:0};
- const clock=shanghaiClock();if(clock.hour<17)return {ok:false,reason:'quality-not-due',sendAttempts:0};const closingPriority=clock.hour===18&&clock.minute>=30&&clock.minute<35;
- const deadline=segmentDeadline();if(closingPriority||!canStartStore(deadline))return {ok:false,reason:'quality-yield-to-fixed-duty',continuation:true,summary:aggregate(state),sendAttempts:0};
+ const clock=shanghaiClock();if(clock.hour<17)return {ok:false,reason:'quality-not-due',sendAttempts:0};
+ const deadline=segmentDeadline(),closingPriority=clock.hour===18&&clock.minute>=30&&clock.minute<35;
+ if(closingPriority||!canStartStore(deadline))return {ok:false,reason:'quality-yield-to-fixed-duty',continuation:true,summary:aggregate(state),sendAttempts:0};
  if(aggregate(state).ok)return {ok:true,summary:aggregate(state),stateFile,runtimeModelDecisions:0,sendAttempts:0};
  const {acquirePostLease,releasePostLease}=await import(path.join(POST,'scripts/lease.mjs'));
- const lease=await acquireSegmentLease(acquirePostLease,'quality-segment-'+crypto.randomUUID());if(!lease)return {ok:false,reason:'quality-post-busy',continuation:true,sendAttempts:0};
+ const lease=await acquireSegmentLease(acquirePostLease,'quality-segment-'+crypto.randomUUID());if(!lease)return {ok:false,reason:'quality-post-busy',continuation:true,summary:aggregate(state),sendAttempts:0};
  let browser,page,originalUrl,detail;
+ const save=()=>atomic(stateFile,state);
  try{
   const conn=await(await import(path.join(POST,'scripts/connect.mjs'))).connectToPost();browser=conn.browser;
-  const pages=conn.context.pages().filter(p=>p.url().startsWith('https://open.shop.ele.me/manager/'));
-  if(pages.length!==1)throw Error('quality-service-page-not-unique');page=pages[0];originalUrl=page.url();
-  const accountLabel=await navigate(page,deadline);
-  if(state.accountLabel&&state.accountLabel!==accountLabel)throw Error('quality-account-scope-changed');state.accountLabel=accountLabel;
-  if(!state.snapshotComplete){const snapshot=await allPages(page,merchantDom,deadline,validateMerchants);state={...state,snapshotComplete:true,total:snapshot.total,snapshotAt:new Date().toISOString(),stores:snapshot.rows.map(s=>({...s,state:'pending'}))};await atomic(stateFile,state);}
-  let count=0;
-  const candidates=[...state.stores.filter(s=>safeRetryEligible(s,codeVersion)).sort((a,b)=>(a.state==='pending'?0:1)-(b.state==='pending'?0:1)),...state.stores.filter(s=>s.state==='unknown'&&s.submission).sort((a,b)=>(a.lastCheckedAt||'').localeCompare(b.lastCheckedAt||''))];
-  for(const store of candidates){
-   if(count>=20||!canStartStore(deadline))break;
-   const storeDeadline=Math.min(deadline,Date.now()+60000);count++;
-   if(!store.submission){store.attemptCount=(store.attemptCount||0)+1;store.attemptsForVersion=store.lastAttemptVersion===codeVersion?(store.attemptsForVersion||0)+1:1;store.lastAttemptVersion=codeVersion;store.lastAttemptAt=new Date().toISOString();await atomic(stateFile,state);}
+  const pages=conn.context.pages().filter(p=>p.url().startsWith('https://open.shop.ele.me/manager/'));if(pages.length!==1)throw Error('quality-service-page-not-unique');page=pages[0];originalUrl=page.url();
+  const label=await navigate(page,deadline);if(state.accountLabel&&state.accountLabel!==label)throw Error('quality-account-scope-changed');state.accountLabel=label;
+  let current=await goFirst(page,deadline,merchantDom);
+  while(current.page<state.cursor.page&&current.hasNext)current=await changePage(page,page.locator('ul.ant-pagination li.ant-pagination-next:not(.ant-pagination-disabled)'),merchantDom,deadline,current);
+  if(current.page!==state.cursor.page){state.cursor.page=current.page;state.cursor.row=0;}
+  let visited=0;
+  while(canStartStore(deadline)&&visited<40&&!state.scopeFinished){
+   state.latestTotal=current.total;if(state.firstTotal===undefined)state.firstTotal=current.total;
+   if(state.cursor.row>=current.rows.length){
+    if(current.hasNext){current=await changePage(page,page.locator('ul.ant-pagination li.ant-pagination-next:not(.ant-pagination-disabled)'),merchantDom,deadline,current);state.cursor.page=current.page;state.cursor.row=0;await save();continue;}
+    state.rounds=state.rounds||[];state.rounds.push({round:state.cursor.round,newShops:state.cursor.newShops,rowsVisited:state.cursor.rowsVisited,platformTotal:current.total,finishedAt:new Date().toISOString()});
+    state.cursor.noNewRounds=state.cursor.newShops===0?state.cursor.noNewRounds+1:0;
+    const handled=aggregate(state).handled,reference=Math.min(state.firstTotal??current.total,current.total);
+    if(state.cursor.noNewRounds>0&&(handled>=reference||state.cursor.noNewRounds>=2)){state.scopeFinished=true;state.finishedAt=new Date().toISOString();await save();break;}
+    if(state.cursor.round>=20){state.roundLimitReached=true;await save();break;}
+    state.cursor={...state.cursor,round:state.cursor.round+1,page:1,row:0,newShops:0,rowsVisited:0};current=await goFirst(page,deadline,merchantDom);await save();continue;
+   }
+   const rowIndex=state.cursor.row,expected=current.rows[rowIndex];visited++;let store;
+   const storeDeadline=Math.min(deadline,Date.now()+60000);
    try{
-    detail=await openStore(page,store,storeDeadline);if(!detail){store.state='blocked';store.reason='merchant-no-longer-in-unfinished-list';continue;}
-    const frame=await productFrame(detail,store,storeDeadline);await noModal(frame);
-    const current=await allPages(frame,productDom,storeDeadline,validateProducts);
-    if(store.submission){
-     const verdict=reconcileProducts(store.before,current);store.after=current;store.state=verdict.state;store.reason=verdict.reason;store.remaining=verdict.remaining;store.lastCheckedAt=new Date().toISOString();store.reconciliation={mode:'read-only',submissionKey:store.submission.key,observedAt:store.lastCheckedAt,state:verdict.state};if(verdict.state==='completed')store.completedAt=store.lastCheckedAt;continue;
-    }
-    const before=current;store.before=before;
-    const submissionsDir=path.join(BASE,'.runtime/submissions');await fs.mkdir(submissionsDir,{recursive:true,mode:0o700});
-    const history=[];for(const filename of await fs.readdir(submissionsDir)){if(filename.startsWith(store.shopId+'-')&&filename.endsWith('.json'))history.push(JSON.parse(await fs.readFile(path.join(submissionsDir,filename),'utf8')));}
-    const prior=priorSubmission(history,store.shopId,current);
-    if(prior){store.before=prior.before;store.submission={state:'unknown',key:prior.key,at:prior.at,taskIds:prior.taskIds,sourceFile:path.join(submissionsDir,store.shopId+'-'+prior.key+'.json')};const verdict=reconcileProducts(prior.before,current);store.after=current;store.state=verdict.state;store.reason='prior-day-or-prior-segment-submission-read-only:'+verdict.reason;store.lastCheckedAt=new Date().toISOString();store.reconciliation={mode:'read-only',submissionKey:prior.key,observedAt:store.lastCheckedAt,state:verdict.state};continue;}
-    if(before.total===0){store.state='completed';store.reason='platform-has-no-product-problems';store.completedAt=new Date().toISOString();continue;}
-    if(before.products.every(p=>!p.hasSuggestion)){store.state='manual_required';store.reason='no-platform-suggestion';store.remaining=before.total;continue;}
-    await goFirst(frame,storeDeadline);
+    const row=page.locator('tbody tr.ant-table-row').nth(rowIndex);const popup=page.waitForEvent('popup',{timeout:budget(storeDeadline,10000)});await row.getByRole('button',{name:'去完成',exact:true}).click({timeout:budget(storeDeadline)});detail=await popup;
+    const identity={name:expected.name};const frame=await productFrame(detail,identity,storeDeadline);
+    store=state.stores.find(s=>s.shopId===identity.shopId);
+    if(store&&!safeRetryEligible(store,codeVersion))continue;
+    if(!store){store={shopId:identity.shopId,name:identity.name,state:'pending',firstSeenAt:new Date().toISOString()};state.stores.push(store);state.cursor.newShops++;}
+    const intentFile=path.join(folder,'intents',store.shopId+'.json');
+    try{const prior=JSON.parse(await fs.readFile(intentFile,'utf8'));if(prior.day!==day||prior.shopId!==store.shopId)throw Error('quality-day-intent-conflict');store.submission=prior;store.state='unknown';store.reason='same-day-prior-intent-read-only';continue;}catch(e){if(e.code!=='ENOENT')throw e;}
+    store.attemptCount=(store.attemptCount||0)+1;store.attemptsForVersion=store.lastAttemptVersion===codeVersion?(store.attemptsForVersion||0)+1:1;store.lastAttemptVersion=codeVersion;
+    await noModal(frame);const before=await stable(frame,productDom,Math.min(storeDeadline,Date.now()+10000));store.before={total:before.total,visibleProducts:before.products.length};
+    const action=frame.getByRole('button',{name:'一键优化类目详情',exact:true});
+    if(before.total===0||await action.count()===0||await action.isDisabled()){store.state='checked_no_action';store.reason='no-available-platform-optimization';store.completedAt=new Date().toISOString();continue;}
     await frame.locator('label').filter({hasText:'全选本页'}).locator('input[type=checkbox]').check({timeout:budget(storeDeadline)});
-    await frame.getByRole('button',{name:'一键优化类目详情',exact:true}).click({timeout:budget(storeDeadline)});
-    const pop=frame.locator('.ant-popover.ant-popconfirm:visible');await pop.waitFor({state:'visible',timeout:budget(storeDeadline)});
-    const text=compact(await pop.innerText());if(!text.includes('优化全部类目详情问题')||!text.includes('优化后，有建议的类目详情将自动采纳平台建议信息，其余的请手动优化'))throw Error('quality-optimization-confirmation-scope-invalid');
-    if(!maySubmit(store))throw Error('quality-submission-already-attempted');
-    store.submission={state:'attempted',key:submissionKey(store.shopId,before),at:new Date().toISOString(),taskIds:before.products.map(p=>p.taskId)};
-    const intentFile=path.join(submissionsDir,store.shopId+'-'+store.submission.key+'.json');
-    await atomic(intentFile,{schemaVersion:1,day,shopId:store.shopId,before,...store.submission});store.submission.sourceFile=intentFile;await atomic(stateFile,state);
-    await pop.getByRole('button',{name:'确认优化',exact:true}).click({timeout:budget(storeDeadline)});
-    await pop.waitFor({state:'hidden',timeout:budget(storeDeadline,15000)});
-    let after=await allPages(frame,productDom,storeDeadline,validateProducts),verdict=reconcileProducts(before,after);
-    while(verdict.state==='unknown'&&Date.now()<storeDeadline-1500){await new Promise(r=>setTimeout(r,500));after=await allPages(frame,productDom,storeDeadline,validateProducts);verdict=reconcileProducts(before,after);}
-    store.after=after;store.state=verdict.state;store.reason=verdict.reason;store.remaining=verdict.remaining;store.submission.state=verdict.state==='completed'||verdict.state==='manual_required'?'observed':'unknown';store.completedAt=verdict.state==='completed'?new Date().toISOString():null;
-   }catch(e){store.state=store.submission?'unknown':'blocked';store.reason=String(e.message||e).slice(0,250);store.errors=store.errors||[];store.errors.push({at:new Date().toISOString(),reason:store.reason,attempt:store.attemptCount||0,codeVersion});if(!store.submission)store.retryAt=Date.now()+600000;}
-   finally{if(detail){await bounded(detail.close(),Date.now()+5000).catch(()=>{});detail=null;}await atomic(stateFile,state);}
+    await action.click({timeout:budget(storeDeadline)});const pop=frame.locator('.ant-popover.ant-popconfirm:visible');await pop.waitFor({state:'visible',timeout:budget(storeDeadline)});
+    const prompt=compact(await pop.innerText());if(!prompt.includes('优化全部类目详情问题')||!prompt.includes('优化后，有建议的类目详情将自动采纳平台建议信息，其余的请手动优化'))throw Error('quality-optimization-confirmation-scope-invalid');
+    store.submission={day,shopId:store.shopId,state:'attempted',eventId:day+'-quality-'+store.shopId,at:new Date().toISOString()};await fs.mkdir(path.dirname(intentFile),{recursive:true,mode:0o700});await fs.writeFile(intentFile,JSON.stringify(store.submission,null,2),{flag:'wx',mode:0o600});await save();
+    await pop.getByRole('button',{name:'确认优化',exact:true}).click({timeout:budget(storeDeadline)});await pop.waitFor({state:'hidden',timeout:budget(storeDeadline,15000)});
+    const after=await stable(frame,productDom,Math.min(storeDeadline,Date.now()+10000));
+    const errors=await frame.locator('.ant-message-error:visible,.ant-notification-notice-error:visible,.ant-alert-error:visible').allTextContents();if(errors.length)throw Error('quality-platform-operation-error');
+    store.after={total:after.total,visibleProducts:after.products.length};store.operation={confirmed:true,popoverClosed:true,uiStable:true,observedAt:new Date().toISOString()};store.state='completed';store.completedAt=store.operation.observedAt;
+   }catch(e){
+    if(!store){state.rowErrors=state.rowErrors||[];state.rowErrors.push({round:state.cursor.round,page:state.cursor.page,row:rowIndex,reason:String(e.message||e).slice(0,250),at:new Date().toISOString()});}
+    else{store.state=store.submission?'unknown':'blocked';store.reason=String(e.message||e).slice(0,250);store.errors=store.errors||[];store.errors.push({at:new Date().toISOString(),reason:store.reason,attempt:store.attemptCount||0,codeVersion});if(!store.submission)store.retryAt=Date.now()+600000;}
+   }finally{
+    if(detail){await bounded(detail.close(),Date.now()+5000).catch(()=>{});detail=null;}
+    state.cursor.row++;state.cursor.rowsVisited++;await save();
+   }
   }
-  if(state.stores.every(s=>s.state==='completed')){
-   const remaining=await refreshFinalRoster(page,deadline,state.accountLabel);
-   const known=new Set(state.stores.map(s=>compact(s.name)));
-   const added=remaining.rows.filter(s=>!known.has(compact(s.name)));
-   if(added.length){state.stores.push(...added.map(s=>({...s,state:'pending'})));state.total=state.stores.length;state.finalReconciled=false;}
-   else{state.finalReconciled=true;state.finalReconciledAt=new Date().toISOString();}
-  }
-  await atomic(stateFile,state);return {ok:aggregate(state).ok,continuation:state.stores.some(s=>['pending','unknown'].includes(s.state)),summary:aggregate(state),stateFile,runtimeModelDecisions:0,sendAttempts:0};
+  await save();const summary=aggregate(state);return {ok:summary.ok,continuation:!state.scopeFinished&&!state.roundLimitReached,summary,stateFile,runtimeModelDecisions:0,sendAttempts:0};
  }finally{
   try{if(detail)await bounded(detail.close(),Date.now()+5000).catch(()=>{});if(page&&originalUrl&&!page.isClosed()&&page.url()!==originalUrl)await page.goto(originalUrl,{waitUntil:'domcontentloaded',timeout:10000}).catch(()=>{});}
   finally{if(browser)await bounded(browser.close(),Date.now()+5000).catch(()=>{});await releasePostLease(lease);}

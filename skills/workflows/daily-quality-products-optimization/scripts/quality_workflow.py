@@ -29,7 +29,7 @@ def notice(count):return f'淘宝闪购 优质商品率低 店铺全部店铺优
 def integrity():
     policy=json.loads((BASE/'runtime-policy.json').read_text())
     if (policy.get('workflowId')!=FLOW or policy.get('browserPort')!=9231 or policy.get('accountName')!='zhangyanru188'
-            or policy.get('groupName')!=GROUP or set(policy.get('files',{}))!={'scripts/quality_core.mjs','scripts/quality_optimizer.mjs','scripts/quality_workflow.py'}):
+            or policy.get('groupName')!=GROUP or set(policy.get('files',{}))!={'scripts/quality_core.mjs','scripts/quality_optimizer.mjs','scripts/quality_workflow.py','scripts/quality_report.mjs'}):
         raise ValueError('quality-policy-scope-invalid')
     for name,sha in policy['files'].items():
         if hashlib.sha256((BASE/name).read_bytes()).hexdigest()!=sha:raise ValueError('quality-code-integrity-drift:'+name)
@@ -57,27 +57,44 @@ def immediate_ui_session():
 
 def completion(day,folder,result):
     source=folder/'state.json';state=json.loads(source.read_text());stores=state.get('stores',[])
-    if not (state.get('day')==day and state.get('workflowId')==FLOW and state.get('snapshotComplete') is True
-            and state.get('finalReconciled') is True and state.get('accountLabel')=='zhangyanru188:全部门店'
-            and type(state.get('total')) is int and state['total']==len(stores)
-            and all(s.get('state')=='completed' and str(s.get('shopId','')).isdigit() for s in stores)
+    optimized=[s for s in stores if s.get('state')=='completed'];checked=[s for s in stores if s.get('state')=='checked_no_action']
+    if not (state.get('day')==day and state.get('workflowId')==FLOW and state.get('scopeFinished') is True
+            and state.get('accountLabel')=='zhangyanru188:全部门店'
+            and all(s.get('state') in ('completed','checked_no_action') and str(s.get('shopId','')).isdigit() for s in stores)
             and len({s['shopId'] for s in stores})==len(stores)
-            and result.get('ok') is True and result.get('summary',{}).get('completed')==len(stores)):
-        raise ValueError('quality-all-stores-completion-not-proven')
+            and result.get('ok') is True and result.get('summary',{}).get('completed')==len(optimized)):
+        raise ValueError('quality-daily-execution-not-complete')
+    records=[]
     for store in stores:
-        before=store.get('before',{});after=store.get('after',{})
-        if not ((before.get('total')==0 and before.get('products')==[])
-                or ((store.get('submission',{}).get('state')=='observed' or (store.get('reconciliation',{}).get('mode')=='read-only' and store.get('reconciliation',{}).get('state')=='completed' and store.get('reconciliation',{}).get('submissionKey')==store.get('submission',{}).get('key'))) and after.get('total')==0 and after.get('products')==[])):
-            raise ValueError('quality-remaining-product-problems')
-    payload={'day':day,'workflowId':FLOW,'accountName':'zhangyanru188','groupName':GROUP,'completed':len(stores),
-             'stateSha256':hashlib.sha256(source.read_bytes()).hexdigest(),'completedShopIds':[s['shopId'] for s in stores],
-             'text':notice(len(stores)),'observedAt':datetime.now(ZoneInfo('Asia/Shanghai')).isoformat()}
+        if store['state']=='completed' and not all(store.get('operation',{}).get(k) is True for k in ['confirmed','popoverClosed','uiStable']):raise ValueError('quality-normal-operation-not-observed')
+        label='已优化类目详情' if store['state']=='completed' else '已检查，无可优化项目'
+        if store.get('skipCount',0):label+='；当日已执行，后续已跳过'
+        records.append({'shopId':store['shopId'],'name':store['name'],'execution':label})
+    payload={'day':day,'workflowId':FLOW,'accountName':'zhangyanru188','groupName':GROUP,'completed':len(optimized),'checkedNoAction':len(checked),
+             'stateSha256':hashlib.sha256(source.read_bytes()).hexdigest(),'completedShopIds':[s['shopId'] for s in optimized],
+             'handledShopIds':[s['shopId'] for s in stores],'records':records,'text':notice(len(optimized)),'observedAt':datetime.now(ZoneInfo('Asia/Shanghai')).isoformat()}
     target=folder/'completion.json'
     if target.exists():
         saved=json.loads(target.read_text())
         if any(saved.get(k)!=v for k,v in payload.items() if k!='observedAt'):raise ValueError('quality-completion-binding-changed')
         return saved
     atomic_json(target,payload);return payload
+
+
+def build_report(folder,proof):
+    destination=folder/'report.json';target=folder/(proof['day']+'淘宝闪购商品整改执行台账.xlsx')
+    if destination.exists():
+        saved=json.loads(destination.read_text())
+        if (Path(saved['file']).resolve()!=target.resolve() or saved['sourceSha256']!=hashlib.sha256((folder/'completion.json').read_bytes()).hexdigest()
+                or saved['sha256']!=hashlib.sha256(target.read_bytes()).hexdigest() or saved['size']!=target.stat().st_size):raise ValueError('quality-frozen-report-binding-invalid')
+        return saved
+    node='/Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node'
+    process=subprocess.run([node,str(BASE/'scripts/quality_report.mjs'),'--proof',str(folder/'completion.json'),'--output',str(folder)],capture_output=True,text=True,check=False)
+    lines=[x for x in process.stdout.splitlines() if x.startswith('{')]
+    if not lines:raise ValueError('quality-report-no-receipt')
+    result=json.loads(lines[-1])
+    if process.returncode or result.get('ok') is not True:raise ValueError(result.get('reason','quality-report-failed'))
+    return result
 
 
 def schedule_continuation(result,now=None):
@@ -103,7 +120,7 @@ def schedule_continuation(result,now=None):
     atomic_json(control,data);return True
 
 
-def run(*,execute=False,optimizer=optimize,adapter=None,session=immediate_ui_session):
+def run(*,execute=False,optimizer=optimize,adapter=None,session=immediate_ui_session,exporter=build_report):
     integrity();day=day_now();folder=STATE/'days'/day;folder.mkdir(parents=True,exist_ok=True,mode=0o700)
     with (folder/'run.lock').open('a+') as lock:
         fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
@@ -117,24 +134,28 @@ def run(*,execute=False,optimizer=optimize,adapter=None,session=immediate_ui_ses
             result['continuationScheduled']=schedule_continuation(result)
             return result
         proof=completion(day,folder,result)
-        if proof['completed']==0:return {'ok':True,'status':'no-unfinished-stores','sendAttempts':0,'runtimeModelDecisions':0}
-        text=proof['text'];item={'itemId':'quality-optimization-completed','type':'text','text':text,'sha256':hashlib.sha256(text.encode()).hexdigest()}
+        report=exporter(folder,proof)
+        text=proof['text'];caption={'itemId':'quality-optimization-completed','type':'text','text':text,'sha256':hashlib.sha256(text.encode()).hexdigest()}
+        item={'itemId':'quality-execution-ledger','type':'file','path':report['file'],'name':report['name'],'size':report['size'],'sha256':report['sha256']}
         deadline=int(time.time())+180
-        request={'schemaVersion':1,'groupName':GROUP,'items':[item],'context':{'workflowId':FLOW,'eventId':day+'-quality-optimization-completed','accountAlias':'main-wechat','channel':'desktop','deadlineAt':deadline}}
-        atomic_json(folder/'request.json',request);transport=adapter or WeComAdapter()
+        request={'schemaVersion':1,'groupName':GROUP,'items':[item,caption],'context':{'workflowId':FLOW,'eventId':day+'-quality-optimization-completed','accountAlias':'main-wechat','channel':'desktop','deadlineAt':deadline}}
+        atomic_json(folder/'request.json',request);transport=adapter or WeComAdapter();deliveries=[]
         try:
             with session():
                 preflight=transport.preflight(request,folder/'preflight')
                 if not target_preflight_verified(preflight,GROUP):return {'ok':False,'stage':'preflight','reason':preflight.get('reason','quality-target-not-verified'),'sendAttempts':0}
-                atomic_json(marker,{'state':'attempted','eventId':request['context']['eventId'],'sha256':item['sha256'],'sendAttempts':None})
                 grant={'schemaVersion':1,'accountAlias':'main-wechat','groupName':GROUP,'channel':'desktop','expiresAt':deadline,'authorizationRef':'user-20261026-quality-products-all-stores-optimization-and-notice'}
-                try:receipt=transport.send_one(request,item,folder/'send',grant,deadline)
-                except BaseException as error:
-                    atomic_json(marker,{'state':'unknown','eventId':request['context']['eventId'],'sha256':item['sha256'],'sendAttempts':None,'reason':str(error)});raise
+                for index,payload in enumerate(request['items']):
+                    atomic_json(marker,{'state':'attempted','eventId':request['context']['eventId'],'currentItem':payload['itemId'],'deliveries':deliveries,'sendAttempts':None})
+                    try:receipt=transport.send_one(request,payload,folder/('send-'+str(index)),grant,deadline)
+                    except BaseException as error:
+                        atomic_json(marker,{'state':'unknown','eventId':request['context']['eventId'],'currentItem':payload['itemId'],'deliveries':deliveries,'sendAttempts':None,'reason':str(error)});raise
+                    deliveries.append({'itemId':payload['itemId'],'receipt':receipt})
+                    if receipt.get('status')!='verified':break
         except BlockingIOError:return {'ok':False,'stage':'preflight','reason':'quality-ui-post-busy','sendAttempts':0}
-        verified=receipt.get('status')=='verified'
-        atomic_json(marker,{'state':'verified' if verified else 'unknown','eventId':request['context']['eventId'],'sha256':item['sha256'],'sendAttempts':receipt.get('sendAttempts'),'receipt':receipt})
-        return {'ok':verified,'stage':'notification','summary':result['summary'],'delivery':receipt,'sendAttempts':receipt.get('sendAttempts'),'runtimeModelDecisions':0}
+        verified=len(deliveries)==2 and all(d['receipt'].get('status')=='verified' for d in deliveries);attempts=sum(d['receipt'].get('sendAttempts') or 0 for d in deliveries)
+        atomic_json(marker,{'state':'verified' if verified else 'unknown','eventId':request['context']['eventId'],'deliveries':deliveries,'sendAttempts':attempts})
+        return {'ok':verified,'stage':'notification','summary':result['summary'],'deliveries':deliveries,'sendAttempts':attempts,'runtimeModelDecisions':0}
 
 
 def main():

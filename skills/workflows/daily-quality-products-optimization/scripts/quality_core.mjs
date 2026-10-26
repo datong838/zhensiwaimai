@@ -35,11 +35,12 @@ export function reconcileProducts(before,after){
 }
 export function maySubmit(store){return !store.submission && !['completed','unknown','manual_required'].includes(store.state);}
 export function aggregate(state){
- const stores=state.stores||[];const complete=stores.filter(s=>s.state==='completed');
- const all=state.snapshotComplete===true&&stores.length===state.total&&complete.length===stores.length&&state.finalReconciled===true;
- return {ok:all,total:stores.length,completed:complete.length,pending:stores.filter(s=>s.state==='pending').length,
-   unknown:stores.filter(s=>s.state==='unknown').length,manualRequired:stores.filter(s=>s.state==='manual_required').length,
-   errors:stores.filter(s=>s.state==='blocked').length,text:all?notification(complete.length):null};
+ const stores=state.stores||[],completed=stores.filter(s=>s.state==='completed'),checked=stores.filter(s=>s.state==='checked_no_action');
+ const unknown=stores.filter(s=>['unknown','attempted'].includes(s.state)),errors=stores.filter(s=>s.state==='blocked');
+ const ok=state.scopeFinished===true&&unknown.length===0&&errors.length===0;
+ return {ok,total:stores.length,completed:completed.length,checkedNoAction:checked.length,handled:completed.length+checked.length,
+  pending:state.scopeFinished?0:1,unknown:unknown.length,errors:errors.length,round:state.cursor?.round||1,
+  observedPlatformTotal:state.latestTotal??null,text:ok&&completed.length?notification(completed.length):null};
 }
 export function shanghaiClock(now=Date.now()){
  const parts=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Shanghai',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'}).formatToParts(new Date(now));
@@ -50,13 +51,6 @@ export function segmentDeadline(now=Date.now(),budgetMs=120000){
  return Math.min(now+budgetMs,next-10000);
 }
 export function canStartStore(deadline,now=Date.now()){return deadline-now>=65000;}
-export function priorSubmission(records,shopId,current){
- validateProducts(current);const ids=new Set(current.products.map(p=>p.taskId));
- const overlapping=records.filter(r=>r.shopId===shopId&&Array.isArray(r.taskIds)&&r.taskIds.some(id=>ids.has(id)));
- if(overlapping.length>1)throw Error('quality-prior-submission-conflict');
- if(overlapping.length===1){const r=overlapping[0];if(r.key!==submissionKey(shopId,r.before))throw Error('quality-prior-submission-binding-invalid');return r;}
- return null;
-}
 export function safeRetryEligible(store,codeVersion,now=Date.now()){
  if(store.submission)return false;
  if(store.state==='pending')return true;

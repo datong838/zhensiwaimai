@@ -85,27 +85,27 @@ def quality_optimization_allowed(request, *, root=None, day=None):
     context=request.get('context',{});items=request.get('items',[])
     if not (request.get('groupName')==GROUP and context.get('workflowId')=='daily-quality-products-optimization'
             and context.get('eventId')==day+'-quality-optimization-completed' and context.get('accountAlias')=='main-wechat'
-            and context.get('channel')=='desktop' and len(items)==1):return False
+            and context.get('channel')=='desktop' and len(items)==2):return False
     folder=root/'skills/workflows/daily-quality-products-optimization/.runtime/days'/day
     try:
-        proof=json.loads((folder/'completion.json').read_text());raw=(folder/'state.json').read_bytes();state=json.loads(raw)
-        stores=state['stores'];count=len(stores);text=f'淘宝闪购 优质商品率低 店铺全部店铺优化完成 （今日执行了 {count} 家）'
-        observed=datetime.fromisoformat(proof['observedAt'])
+        proof=json.loads((folder/'completion.json').read_text());raw=(folder/'state.json').read_bytes();state=json.loads(raw);report=json.loads((folder/'report.json').read_text())
+        stores=state['stores'];optimized=[s for s in stores if s['state']=='completed'];count=len(optimized);text=f'淘宝闪购 优质商品率低 店铺全部店铺优化完成 （今日执行了 {count} 家）'
         if not (proof['day']==state['day']==day and proof['workflowId']==state['workflowId']=='daily-quality-products-optimization'
                 and proof['accountName']=='zhangyanru188' and state['accountLabel']=='zhangyanru188:全部门店'
                 and proof['groupName']==GROUP and proof['stateSha256']==hashlib.sha256(raw).hexdigest()
-                and type(state['total']) is int and state['total']==count and type(proof['completed']) is int and proof['completed']==count and count>0
-                and state['snapshotComplete'] is True and state['finalReconciled'] is True
-                and proof['completedShopIds']==[s['shopId'] for s in stores]
-                and len(set(proof['completedShopIds']))==count and all(str(s['shopId']).isdigit() for s in stores)
-                and all(s['state']=='completed' for s in stores) and proof['text']==text
-                and observed.tzinfo is not None and observed.astimezone(ZoneInfo('Asia/Shanghai')).strftime('%Y-%m-%d')==day):return False
-        for store in stores:
-            before=store.get('before',{});after=store.get('after',{})
-            if not ((before.get('total')==0 and before.get('products')==[]) or
-                    ((store.get('submission',{}).get('state')=='observed' or (store.get('reconciliation',{}).get('mode')=='read-only' and store.get('reconciliation',{}).get('state')=='completed' and store.get('reconciliation',{}).get('submissionKey')==store.get('submission',{}).get('key'))) and after.get('total')==0 and after.get('products')==[])):return False
-        return (items[0].get('itemId')=='quality-optimization-completed' and items[0].get('type')=='text'
-                and items[0].get('text')==text and items[0].get('sha256')==hashlib.sha256(text.encode()).hexdigest())
+                and type(proof['completed']) is int and proof['completed']==count and state['scopeFinished'] is True
+                and proof['completedShopIds']==[s['shopId'] for s in optimized]
+                and proof['handledShopIds']==[s['shopId'] for s in stores] and len(set(proof['handledShopIds']))==len(stores)
+                and all(s['state'] in ('completed','checked_no_action') for s in stores) and proof['text']==text):return False
+        for store in optimized:
+            if not all(store.get('operation',{}).get(k) is True for k in ['confirmed','popoverClosed','uiStable']):return False
+        file,label=items;expected=folder/(day+'淘宝闪购商品整改执行台账.xlsx')
+        if not (file.get('itemId')=='quality-execution-ledger' and file.get('type')=='file' and Path(file.get('path','')).resolve()==expected.resolve()
+                and file.get('name')==expected.name and file.get('sha256')==hashlib.sha256(expected.read_bytes()).hexdigest()==report['sha256']
+                and file.get('size')==expected.stat().st_size==report['size'] and report['rows']==len(stores)
+                and report['sourceSha256']==hashlib.sha256((folder/'completion.json').read_bytes()).hexdigest()):return False
+        return (label.get('itemId')=='quality-optimization-completed' and label.get('type')=='text'
+                and label.get('text')==text and label.get('sha256')==hashlib.sha256(text.encode()).hexdigest())
     except (OSError,ValueError,KeyError,TypeError):return False
 
 

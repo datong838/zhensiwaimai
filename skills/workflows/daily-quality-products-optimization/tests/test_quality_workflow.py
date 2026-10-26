@@ -17,14 +17,16 @@ class Tests(unittest.TestCase):
     def setUp(self):
         self.t=tempfile.TemporaryDirectory();self.addCleanup(self.t.cleanup);self.root=Path(self.t.name);self.state=self.root/'skills/workflows/daily-quality-products-optimization/.runtime';self.folder=self.state/'days/2026-10-26';self.folder.mkdir(parents=True)
         for p in [patch.object(w,'STATE',self.state),patch.object(w,'integrity'),patch.object(w,'day_now',return_value='2026-10-26')]:p.start();self.addCleanup(p.stop)
-        self.original={'day':'2026-10-26','workflowId':w.FLOW,'snapshotComplete':True,'finalReconciled':True,'accountLabel':'zhangyanru188:全部门店','total':1,'stores':[{'state':'completed','shopId':'546721968','before':{'total':1,'products':[{'taskId':'12'}]},'after':{'total':0,'products':[]},'submission':{'state':'observed'}}]}
+        self.original={'day':'2026-10-26','workflowId':w.FLOW,'scopeFinished':True,'accountLabel':'zhangyanru188:全部门店','stores':[{'state':'completed','shopId':'546721968','name':'示例门店','operation':{'confirmed':True,'popoverClosed':True,'uiStable':True},'skipCount':2}]}
         self.result={'ok':True,'summary':{'ok':True,'completed':1}}
         self.optimizer=Mock(return_value=self.result)
         self.write(self.original)
     def write(self,state):self.original=state;(self.folder/'state.json').write_text(json.dumps(state,ensure_ascii=False))
-    def run_flow(self,adapter=None,session=contextlib.nullcontext):return w.run(execute=True,optimizer=self.optimizer,adapter=adapter or Adapter(),session=session)
+    def export(self,folder,proof):
+        f=folder/(proof['day']+'淘宝闪购商品整改执行台账.xlsx');f.write_bytes(b'fixture-xlsx');result={'ok':True,'file':str(f),'name':f.name,'size':f.stat().st_size,'sha256':hashlib.sha256(f.read_bytes()).hexdigest(),'rows':len(proof['records']),'sourceSha256':hashlib.sha256((folder/'completion.json').read_bytes()).hexdigest()};(folder/'report.json').write_text(json.dumps(result));return result
+    def run_flow(self,adapter=None,session=contextlib.nullcontext):return w.run(execute=True,optimizer=self.optimizer,adapter=adapter or Adapter(),session=session,exporter=self.export)
     def test_complete_text_once_then_no_optimizer_or_resend(self):
-        a=Adapter();r=self.run_flow(a);self.assertTrue(r['ok']);r=self.run_flow(a);self.assertEqual(r['status'],'already_verified');self.assertEqual(len(a.calls),1);self.assertEqual(self.optimizer.call_count,1);self.assertEqual(a.calls[0]['text'],w.notice(1))
+        a=Adapter();r=self.run_flow(a);self.assertTrue(r['ok']);r=self.run_flow(a);self.assertEqual(r['status'],'already_verified');self.assertEqual(len(a.calls),2);self.assertEqual(self.optimizer.call_count,1);self.assertEqual([i['type'] for i in a.calls],['file','text']);self.assertEqual(a.calls[1]['text'],w.notice(1))
     def test_unknown_notice_never_retries(self):
         a=Adapter(status='unknown');self.assertFalse(self.run_flow(a)['ok']);self.assertEqual(self.run_flow(a)['status'],'unknown');self.assertEqual(len(a.calls),1);self.assertEqual(self.optimizer.call_count,1)
     def test_pending_segment_never_opens_notification(self):
@@ -32,25 +34,28 @@ class Tests(unittest.TestCase):
     def test_manual_unknown_blocked_never_full_completion(self):
         for value in ['manual_required','unknown','blocked','pending']:
             state=copy.deepcopy(self.original);state['stores'][0]['state']=value;self.write(state)
-            with self.assertRaisesRegex(ValueError,'not-proven'):self.run_flow()
-    def test_missing_after_products_never_completed(self):
-        state=copy.deepcopy(self.original);state['stores'][0]['after']={'total':1,'products':[{'taskId':'12'}]};self.write(state)
-        with self.assertRaisesRegex(ValueError,'remaining-product'):self.run_flow()
+            with self.assertRaisesRegex(ValueError,'not-complete'):self.run_flow()
+    def test_remaining_problems_do_not_block_normal_daily_action(self):
+        state=copy.deepcopy(self.original);state['stores'][0]['after']={'total':8,'visibleProducts':8};self.write(state)
+        self.assertTrue(self.run_flow()['ok'])
+    def test_no_normal_confirmation_never_claims_success(self):
+        state=copy.deepcopy(self.original);state['stores'][0]['operation']['confirmed']=False;self.write(state)
+        with self.assertRaisesRegex(ValueError,'not-observed'):self.run_flow()
     def test_preflight_zero_send_resume_same_completion(self):
-        a=Adapter(ready=False);self.assertFalse(self.run_flow(a)['ok']);self.assertFalse((self.folder/'delivery.json').exists());a.ready=True;self.assertTrue(self.run_flow(a)['ok']);self.assertEqual(len(a.calls),1)
+        a=Adapter(ready=False);self.assertFalse(self.run_flow(a)['ok']);self.assertFalse((self.folder/'delivery.json').exists());a.ready=True;self.assertTrue(self.run_flow(a)['ok']);self.assertEqual(len(a.calls),2)
     def test_busy_ui_does_not_wait_or_send(self):
         @contextlib.contextmanager
         def busy():raise BlockingIOError();yield
         a=Adapter();r=self.run_flow(a,session=busy);self.assertEqual(r['reason'],'quality-ui-post-busy');self.assertEqual(a.calls,[]);self.assertFalse((self.folder/'delivery.json').exists())
     def request(self):
-        proof=w.completion('2026-10-26',self.folder,self.result);text=proof['text'];return {'groupName':w.GROUP,'context':{'workflowId':w.FLOW,'eventId':'2026-10-26-quality-optimization-completed','accountAlias':'main-wechat','channel':'desktop'},'items':[{'itemId':'quality-optimization-completed','type':'text','text':text,'sha256':hashlib.sha256(text.encode()).hexdigest()}]}
+        proof=w.completion('2026-10-26',self.folder,self.result);report=self.export(self.folder,proof);text=proof['text'];return {'groupName':w.GROUP,'context':{'workflowId':w.FLOW,'eventId':'2026-10-26-quality-optimization-completed','accountAlias':'main-wechat','channel':'desktop'},'items':[{'itemId':'quality-execution-ledger','type':'file','path':report['file'],'name':report['name'],'size':report['size'],'sha256':report['sha256']},{'itemId':'quality-optimization-completed','type':'text','text':text,'sha256':hashlib.sha256(text.encode()).hexdigest()}]}
     def test_route_requires_frozen_all_completed_binding(self):
         request=self.request();self.assertTrue(quality_optimization_allowed(request,root=self.root,day='2026-10-26'))
         for bad in [request|{'groupName':'wrong'},request|{'items':[]},request|{'context':request['context']|{'eventId':'2026-10-27-quality-optimization-completed'}}]:self.assertFalse(quality_optimization_allowed(bad,root=self.root,day='2026-10-26'))
         self.assertFalse(quality_optimization_allowed(request,root=self.root,day='2026-10-27'))
-        self.write(self.original|{'finalReconciled':False});self.assertFalse(quality_optimization_allowed(request,root=self.root,day='2026-10-26'))
+        self.write(self.original|{'scopeFinished':False});self.assertFalse(quality_optimization_allowed(request,root=self.root,day='2026-10-26'))
     def test_route_does_not_trust_changed_count_or_text(self):
-        request=self.request();request['items'][0]['text']=w.notice(251);self.assertFalse(quality_optimization_allowed(request,root=self.root,day='2026-10-26'))
+        request=self.request();request['items'][1]['text']=w.notice(251);self.assertFalse(quality_optimization_allowed(request,root=self.root,day='2026-10-26'))
     def test_schedule_is_customer_then_new_flow_without_success_dependency(self):
         data=json.loads((Path(__file__).resolve().parents[4]/'runtime/skills_manifest.json').read_text());skills={s['name']:s for s in data['skills']};new=skills[w.FLOW];customer=skills['meituan-intelligent-customer-service'];appeal=skills['meituan-waimai-negative-review-appeals-11']
         self.assertEqual(new['ledger_name'],'淘宝闪购低优质商品的全部门店商品整改优化');self.assertEqual(new['schedule_times'],['17:00']);self.assertLess(customer['order'],new['order']);self.assertLess(new['order'],appeal['order']);self.assertEqual(new.get('depends_on',[]),[]);self.assertEqual((new['max_retries'],new['cooldown_seconds']),(0,0));self.assertEqual(customer['max_retries'],0)
