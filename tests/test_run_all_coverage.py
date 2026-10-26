@@ -66,6 +66,16 @@ class RunAllCoverageTest(unittest.TestCase):
         ra.DAEMON_HEARTBEAT = cls.state / "daemon.json"
         ra.LAST_CYCLE = cls.state / "last_cycle.json"
         ra.ALERTS_LOG = cls.state / "alerts.jsonl"
+        cls.alert_store_paths = (
+            ra.alert_store.STATE_DIR,
+            ra.alert_store.ALERTS_RAW,
+            ra.alert_store.ALERTS_SUMMARY,
+            ra.alert_store.ALERTS_ARCHIVE,
+        )
+        ra.alert_store.STATE_DIR = cls.state
+        ra.alert_store.ALERTS_RAW = cls.state / "alerts.jsonl"
+        ra.alert_store.ALERTS_SUMMARY = cls.state / "alerts_summary.json"
+        ra.alert_store.ALERTS_ARCHIVE = cls.state / "alerts_archive.jsonl"
         ra.SCREEN_GATE = cls.state / "screen_recording_gate.json"
         # 干净一份 posts.json：把 s-active 映射到 9232 互斥组；
         # 另含一个无 port 的岗（wechat-messaging），用于覆盖 resolve_mutex_group 的
@@ -94,6 +104,10 @@ class RunAllCoverageTest(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
+        (ra.alert_store.STATE_DIR,
+         ra.alert_store.ALERTS_RAW,
+         ra.alert_store.ALERTS_SUMMARY,
+         ra.alert_store.ALERTS_ARCHIVE) = cls.alert_store_paths
         shutil.rmtree(cls.tmp, ignore_errors=True)
 
     # ---- W1 / 登记表 ----
