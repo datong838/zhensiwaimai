@@ -431,13 +431,14 @@
     {
       "name": "daily-new-stores-opening-to-wechat",
       "target_group": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
-      "ledger_name": "新店开业识别与通知（每日10:50）",
-      "schedule": "每日10:50",
+      "ledger_name": "新店开业识别与通知（每日10:00）",
+      "schedule": "每日10:00",
       "dev_state": "active",
       "enabled": true,
       "order": -91,
       "cadence_hours": 24,
       "earliest_hour": 10,
+      "earliest_minute": 0,
       "cwd": "skills/workflows/daily-new-stores-opening-to-wechat",
       "timeout_seconds": null,
       "max_retries": 0,
@@ -955,8 +956,8 @@
     },
     {
       "row": 7,
-      "ledger_name": "新店开业识别与通知（每日10:50）",
-      "schedule": "每日10:50",
+      "ledger_name": "新店开业识别与通知（每日10:00）",
+      "schedule": "每日10:00",
       "dev_state": "active",
       "skill": "daily-new-stores-opening-to-wechat"
     },
