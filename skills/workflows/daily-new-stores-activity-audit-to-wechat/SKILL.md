@@ -29,7 +29,7 @@ description: 读取当天完整的新店机器收据，仅对淘宝新店逐店�
 ## 与开业流的关系与数据复用
 
 - 本流**不重新采集**新店名单：直接读开业流 `daily-new-stores-opening-to-wechat/scripts/workflow.py` 产出的当天新店机器收据（跨目录复用其 collection 结果）。`activity_daily.py` 通过把开业流 `scripts/` 加入 `sys.path` 后 `import workflow as new_stores` 读取，并在缺收据时以子进程调用其 `--collect-only`。
-- 本流只检查淘宝新店的活动配置，不代替 10:50 的开业通知任务。
+- 本流只检查淘宝新店的活动配置，不代替每日 10:00 的开业通知任务。
 
 ## 活动提醒去重台账（自包含）
 
