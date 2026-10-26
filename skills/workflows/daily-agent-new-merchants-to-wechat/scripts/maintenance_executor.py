@@ -147,6 +147,13 @@ SEALED_DEPENDENCY_RESYNC_LABELS = {
     "messaging_bridge", "messaging_dependencies", "messaging_dependency_maintenance",
     "maintenance_executor",
 }
+BUSINESS_STORAGE_BRIDGE_AUTHORIZATION = "user-20261027-business-storage-bridge-gate"
+BUSINESS_STORAGE_BRIDGE_INSTRUCTION_SHA256 = "c6e6e6d031fdb1a60357cdae84304df0363cb29aef3bdfbf2fa0b50fce2ec5ea"
+BUSINESS_STORAGE_BRIDGE_ALLOWED_CHANGES = {
+    "scripts/workflow_bridge.py",
+    "scripts/dependency_maintenance.py",
+    "../../runtime/business_storage.py",
+}
 # 2026-10-05 整包迁移通道：技能包迁入 skills/workflows/ 后，包内运行时文件的绝对路径整体
 # 下移一层，且根计算常量（SKILL_ROOT.parent → parents[1] 等）必须同步修正，
 # 因此锁内「本包运行时文件」的 path 与 sha256 会同时变化。本授权开放「SEALED 锁 +
@@ -339,13 +346,16 @@ def _validate_dependency_maintenance_receipt(path: Path | None, expected_sha256:
         else ZERO_SEND_DRAFT_INSTRUCTION_SHA256
         if receipt_authorization == ZERO_SEND_DRAFT_AUTHORIZATION
         else PATH_MIGRATION_INSTRUCTION_SHA256
-        if receipt_authorization == PATH_MIGRATION_AUTHORIZATION else None)
+        if receipt_authorization == PATH_MIGRATION_AUTHORIZATION
+        else BUSINESS_STORAGE_BRIDGE_INSTRUCTION_SHA256
+        if receipt_authorization == BUSINESS_STORAGE_BRIDGE_AUTHORIZATION else None)
     checks = (
         receipt.get("action") == "prepare",
         receipt.get("status") == "prepared",
         receipt_authorization in (SHARED_DEPENDENCY_MAINTENANCE_AUTHORIZATION,
                                   ZERO_SEND_DRAFT_AUTHORIZATION,
-                                  PATH_MIGRATION_AUTHORIZATION),
+                                  PATH_MIGRATION_AUTHORIZATION,
+                                  BUSINESS_STORAGE_BRIDGE_AUTHORIZATION),
         receipt.get("userInstructionSha256") == expected_instruction_hash,
         receipt.get("sendAttempts") == 0,
         receipt.get("runtimeModelDecisions") == 0,
@@ -379,6 +389,7 @@ def _validate_dependency_maintenance_receipt(path: Path | None, expected_sha256:
                      and before_manifest == receipt.get("dependencyManifestAfterSha256"))
     stale_digest_receipt = (zero_draft_receipt
                             or receipt_authorization == PATH_MIGRATION_AUTHORIZATION
+                            or receipt_authorization == BUSINESS_STORAGE_BRIDGE_AUTHORIZATION
                             or clean_receipt)
     if stale_digest_receipt:
         # The old unsealed lock can legitimately carry the previous manifest
@@ -405,6 +416,8 @@ def _validate_dependency_maintenance_receipt(path: Path | None, expected_sha256:
                    AUTHORIZED_SHARED_SENDER_PATH, *AUTHORIZED_SHARED_COMPAT_SHA256}
     elif receipt_authorization == PATH_MIGRATION_AUTHORIZATION:
         allowed = PATH_MIGRATION_ALLOWED_CHANGE_PATHS
+    elif receipt_authorization == BUSINESS_STORAGE_BRIDGE_AUTHORIZATION:
+        allowed = BUSINESS_STORAGE_BRIDGE_ALLOWED_CHANGES
     else:
         allowed = AUTHORIZED_ZERO_SEND_DRAFT_PATHS
     if set(by_path) - allowed:

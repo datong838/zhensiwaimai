@@ -301,6 +301,50 @@ class MaintenanceExecutorTests(unittest.TestCase):
                     dependency_receipt, maintenance.sha256(dependency_receipt), lock_manifest,
                     {"shared_desktop_locator": {"path": locator, "sha256": actual}})
 
+    def test_business_storage_bridge_receipt_is_exactly_scoped_and_zero_send(self):
+        directory = tempfile.TemporaryDirectory(); self.addCleanup(directory.cleanup)
+        root = Path(directory.name); scripts = root / "scripts"; scripts.mkdir()
+        locator = root / "desktop.py"; locator.write_text("locator")
+        bridge = scripts / "workflow_bridge.py"; bridge.write_text("bridge")
+        maint = scripts / "dependency_maintenance.py"; maint.write_text("maint")
+        dependency = root / "dependencies.json"
+        files = {
+            str(locator): maintenance.sha256(locator),
+            "scripts/workflow_bridge.py": maintenance.sha256(bridge),
+            "scripts/dependency_maintenance.py": maintenance.sha256(maint),
+            "../../runtime/business_storage.py": "3" * 64,
+        }
+        dependency.write_text(json.dumps({"schemaVersion": 1, "files": files}))
+        lock_manifest = {"files": {
+            "shared_desktop_locator": {"path": str(locator), "sha256": maintenance.sha256(locator)},
+            "messaging_dependencies": {"path": str(dependency.resolve()), "sha256": "1" * 64},
+        }}
+        receipt = root / "receipt.json"
+        changes = [{"path": name, "before": "0" * 64, "after": digest}
+                   for name, digest in files.items() if name != str(locator)]
+        receipt.write_text(json.dumps({
+            "action": "prepare", "status": "prepared",
+            "authorization": maintenance.BUSINESS_STORAGE_BRIDGE_AUTHORIZATION,
+            "userInstructionSha256": maintenance.BUSINESS_STORAGE_BRIDGE_INSTRUCTION_SHA256,
+            "dependencyManifestPath": str(dependency.resolve()),
+            "dependencyManifestBeforeSha256": "2" * 64,
+            "dependencyManifestAfterSha256": maintenance.sha256(dependency),
+            "changes": changes, "tests": {"ok": True, "testCount": 1},
+            "capabilityCheck": {"ok": True}, "sendAttempts": 0,
+            "runtimeModelDecisions": 0,
+        }))
+        candidate = {"shared_desktop_locator": {"path": str(locator),
+                     "sha256": maintenance.sha256(locator)}}
+        with patch.object(maintenance, "WECHAT_ROOT", root), \
+             patch.object(maintenance, "DEPENDENCY_MANIFEST", dependency), \
+             patch.object(maintenance, "DEPENDENCY_MAINTENANCE", maint), \
+             patch.object(maintenance, "AUTHORIZED_SHARED_LOCATOR_PATH", str(locator)), \
+             patch.object(maintenance.executor_integrity, "RUNTIME_FILES", {"shared_desktop_locator": locator}):
+            verified = maintenance._validate_dependency_maintenance_receipt(
+                receipt, maintenance.sha256(receipt), lock_manifest, candidate)
+        self.assertEqual({row["path"] for row in verified["changes"]},
+                         maintenance.BUSINESS_STORAGE_BRIDGE_ALLOWED_CHANGES)
+
     def test_zero_send_recovery_binds_clean_receipt_to_registered_manifest_path(self):
         directory = tempfile.TemporaryDirectory(); self.addCleanup(directory.cleanup)
         root = Path(directory.name); locator = root / "desktop.py"; locator.write_text("current")
