@@ -159,6 +159,14 @@ class CodeConsolidationTests(unittest.TestCase):
         unresolved=[r for r in references if r['category'].startswith('unmapped-active-')]
         self.assertEqual(2,len(unresolved),unresolved)
         self.assertTrue(all(not r['covered'] for r in unresolved))
+    def test_current_prepare_source_has_no_unresolved_self_references(self):
+        actual_root=Path(tool.__file__).resolve().parents[1]
+        references=tool.scan_code_coverage(actual_root,tool.load_catalog())['references']
+        own=[r for r in references if r['path']=='runtime/prepare_code_consolidation.py']
+        unresolved=[r for r in own if r['category'].startswith('unmapped-active-')]
+        self.assertEqual([],unresolved)
+        self.assertEqual(4,len([r for r in own if r['category']=='scanner-self-evidence']))
+        self.assertTrue(all(r['covered'] for r in own if r['category']=='scanner-self-evidence'))
     def test_materialize_only_assets_preserves_runtime_logic_and_state(self):
         original=(self.root/self.guard).read_bytes();cursor=(self.root/'state/cursor.json').read_bytes();package=self.prepare()
         tool.materialize_assets(package,root=self.root,idle_check=lambda _:None)

@@ -49,6 +49,16 @@ MIGRATION_SOURCE_REFERENCES={
 def reference_evidence_category(relative,line,reference):
     """仅识别归位工具自身的精确扫描/迁移证据语句，不放宽普通绝对路径。"""
     stripped=line.strip()
+    if relative=='runtime/prepare_code_consolidation.py':
+        if any(stripped.startswith(repr(key)+':') and reference==expected
+               for key,expected in MIGRATION_SOURCE_REFERENCES.items()):
+            return 'scanner-self-evidence'
+        if ('reference.startswith(' in line and
+                reference.startswith('/Users'+'/ddt/[')):
+            return 'scanner-self-evidence'
+        if ('reference==' in line and
+                reference in MIGRATION_SOURCE_REFERENCES.values()):
+            return 'scanner-self-evidence'
     if (relative in SCANNER_SOURCE_FILES and 're.finditer(' in line and
             reference.startswith('/Users/ddt/[')):
         return 'scanner-pattern-evidence'
