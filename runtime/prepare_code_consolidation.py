@@ -428,7 +428,7 @@ def install_skill_shim(package,*,root,idle_check=assert_idle):
         item=p['assets']['installed-skill'];original=Path(item['source'])
         if snapshot(original)!=item['inventory']:raise ValueError('consolidation-installed-skill-changed')
         entry='skills/workflows/daily-taobao-download-to-jinsha/scripts/entrypoint.mjs'
-        expected=next((i['newSha256'] for i in proof['patches'] if i['path']==entry),None)
+        expected=next((i['newSha256'] for i in proof['patches'] if i['path']==entry),p['baseline'].get(entry))
         if not expected or file_sha(root/entry)!=expected:raise ValueError('consolidation-canonical-code-not-reviewed-or-activated')
         mirrored=root/'vendor/installed-taobao-skill/scripts/entrypoint.mjs'
         if not mirrored.is_file() or file_sha(mirrored)!=expected:raise ValueError('consolidation-internal-install-mirror-missing')

@@ -222,6 +222,13 @@ class CodeConsolidationTests(unittest.TestCase):
         self.assertIn('export * from',(original/'scripts/entrypoint.mjs').read_text())
         saved=self.root/('archive/installed-skill-original-'+package.name);self.assertEqual(tool.snapshot(saved),before)
         tool.undo_skill_shim(package,root=self.root,idle_check=lambda _:None);self.assertEqual(tool.snapshot(original),before)
+    def test_skill_shim_accepts_fresh_plan_after_canonical_activation(self):
+        first=self.prepare();tool.materialize_assets(first,root=self.root,idle_check=lambda _:None)
+        shutil.copy2(first/'patches'/self.entry,self.root/self.entry)
+        second=self.prepare(self.plan())
+        self.assertFalse(any(item['path']==self.entry for item in json.loads((second/'prepared.json').read_text())['patches']))
+        tool.install_skill_shim(second,root=self.root,idle_check=lambda _:None)
+        self.assertIn('export * from',(Path(self.config['assets']['installed-skill']['source'])/'scripts/entrypoint.mjs').read_text())
     def test_skill_shim_new_write_blocks_rollback(self):
         package=self.prepare();tool.materialize_assets(package,root=self.root,idle_check=lambda _:None)
         shutil.copy2(package/'patches'/self.entry,self.root/self.entry)
