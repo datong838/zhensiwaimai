@@ -59,7 +59,7 @@ export async function closeDrawer(page) {
   if (count !== 1) throw Error(`drawer-overlay-count:${count}`);
   await overlay.evaluate((element) => element.click());
   await page.waitForFunction(
-    /* c8 ignore next */ () => !document.querySelector('.app-wrapper')?.classList.contains('openSidebar'), // 该谓词仅在真实浏览器 waitForFunction 中由 playwright 调用，单测 fake page 不触发
+    () => !document.querySelector('.app-wrapper')?.classList.contains('openSidebar'),
     null,
     {timeout: 3000},
   );

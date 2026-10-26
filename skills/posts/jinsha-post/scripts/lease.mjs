@@ -12,7 +12,7 @@ const DEFAULT_LEASE_TTL_MS = 30 * 60 * 1000;
 
 export async function acquireJinshaLease(runId, leasePath = DEFAULT_LEASE_PATH, ttlMs = DEFAULT_LEASE_TTL_MS) {
   const now = Date.now();
-  /* c8 ignore next */ const payload = {runId, pid: typeof process === 'undefined' ? null : process.pid, acquiredAt: now}; // pid 三元：Node 中 process 恒存在，`=== 'undefined'` 分支不可达（防御性）
+  const payload = {runId, pid: typeof process === 'undefined' ? null : process.pid, acquiredAt: now};
   for (let attempt = 0; attempt < 2; attempt++) {
     try {
       const handle = await fs.open(leasePath, 'wx', 0o600);
@@ -31,7 +31,7 @@ export async function acquireJinshaLease(runId, leasePath = DEFAULT_LEASE_PATH, 
       throw Error('jinsha-lease-busy:' + String(existing?.runId || 'unknown'));
     }
   }
-  /* c8 ignore next */ throw Error('jinsha-lease-acquire-failed'); // 双次重试后仍互斥：输入空间不可达（acquire 仅 busy/其他错误/过期重试三条路径）
+  throw Error('jinsha-lease-acquire-failed');
 }
 
 export async function releaseJinshaLease(lease) {
