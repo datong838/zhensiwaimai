@@ -89,11 +89,20 @@ def load_receipt(path: Path, *, for_training: bool = False, enforce_expiry: bool
     actual_hash = sha256_file(image)
     if actual_hash != receipt.get("sha256"):
         raise StopRun("desktop-image-hash-mismatch")
-    if len(receipt.get("revenues", [])) != 10 or len(receipt.get("stores", [])) != 10:
+    metric = receipt.get("sortMetric")
+    if metric == "income-amount":
+        header = re.sub(r"\s+", "", str(receipt.get("incomeHeader", ""))).replace("(元)", "（元）")
+        if not re.fullmatch(r"(?:预计收入|收入)(?:（元）)?", header) or receipt.get("sortDirection") != "descending":
+            raise StopRun("desktop-income-contract-failed")
+        amounts = receipt.get("incomes", [])
+    elif metric is None:
+        amounts = receipt.get("revenues", [])
+    else:
+        raise StopRun("desktop-sort-metric-invalid")
+    if len(amounts) != 10 or len(receipt.get("stores", [])) != 10:
         raise StopRun("desktop-top10-contract-failed")
-    revenues = receipt["revenues"]
-    if any(not isinstance(v, (int, float)) or not math.isfinite(v) or v < 0 for v in revenues) or any(a < b for a, b in zip(revenues, revenues[1:])):
-        raise StopRun("desktop-revenue-order-invalid")
+    if any(isinstance(v, bool) or not isinstance(v, (int, float)) or not math.isfinite(v) or v < 0 for v in amounts) or any(a < b for a, b in zip(amounts, amounts[1:])):
+        raise StopRun("desktop-income-order-invalid" if metric else "desktop-revenue-order-invalid")
     if receipt.get("page") != 1 or receipt.get("pageSize") != 10:
         raise StopRun("desktop-pagination-invalid")
     return receipt, image

@@ -78,6 +78,12 @@ class SafetyTests(unittest.TestCase):
                 startedAt=now,deadlineAt=now+170000,
                 dataDate=(datetime.now(ZoneInfo('Asia/Shanghai')).date()-timedelta(days=1)).isoformat())
             file.write_text(json.dumps(valid)); p.load_receipt(file)
+            income = valid | dict(sortMetric='income-amount', incomeHeader='预计收入', sortDirection='descending', incomes=list(range(10,0,-1)), revenues=list(range(10)))
+            file.write_text(json.dumps(income)); p.load_receipt(file)
+            for change in [dict(incomes=list(range(10))),dict(incomeHeader='商圈收入排名'),dict(sortDirection='ascending'),dict(sortMetric='unknown'),dict(incomes=[True]*10)]:
+                file.write_text(json.dumps(income | change))
+                with self.assertRaises(p.StopRun): p.load_receipt(file)
+            file.write_text(json.dumps(valid))
             # Native desktop delivery follows its original live owner, not age.
             file.write_text(json.dumps(valid | dict(startedAt=now-600000,deadlineAt=now-1)))
             p.load_receipt(file, enforce_expiry=False)

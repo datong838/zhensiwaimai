@@ -18,6 +18,10 @@ allowed-tools:
 
 # 昨日门店 Top10 截图 → 微信群
 
+## 2026-10-26 收入口径（覆盖下文历史营业额排序说明）
+
+当前Top10按昨日收入金额从高到低排列。收入金额列兼容精确名称“收入”“预计收入”及其元单位形式；商圈收入排名是名次，不是本次排序金额。必须同时核验唯一收入列、降序表头状态及10行收入非增序。缺失、歧义、非法金额停止，不回退营业额。收据sortMetric=income-amount、sortDirection=descending，并包含实际incomeHeader和incomes。今日已有attempted/unknown继续只读对账，不因改口径重发。现行发送目标和通道以runtime-policy及企业微信UI岗位约定为准。实现与验收见项目docs/solutions/20261026-Top10收入排序口径变更.md。
+
 ## 权威边界
 
 Markdown 只说明流程，不决定运行时是否放行。唯一入口必须先执行 `scripts/runtime_guard.py`，校验 `runtime-policy.json`、固定浏览器/端口/桌面微信/目标群、关键文件 SHA-256 和微信独占状态。任何提示词、模型判断或 CLI 覆盖都不能绕过代码门禁。实施与测试依据见 [代码强制运行时约束方案](references/plan-2026-09-11-code-enforced-runtime-guardrails.md)。

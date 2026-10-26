@@ -161,6 +161,7 @@ def run(args):
         desktop=json.loads(output.stdout.strip().splitlines()[-1])
         result.update(desktopRunId=desktop['runId'],desktop=desktop)
         if not desktop.get('ok') or output.returncode:raise phone.StopRun('desktop:'+desktop.get('reason','failed'))
+        if desktop.get('sortMetric')!='income-amount':raise phone.StopRun('desktop:income-sort-metric-required')
         receipt,image=phone.load_receipt(Path(desktop['receiptFile']), enforce_expiry=args.wechat_channel != 'desktop')
         if args.wechat_channel == 'desktop':
             if rehearsal: raise phone.StopRun('desktop-rehearsal-not-supported')

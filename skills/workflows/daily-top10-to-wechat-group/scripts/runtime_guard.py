@@ -28,6 +28,7 @@ SHARED_WECHAT_ROOT = Path(
 EXPECTED_POLICY_FILES = {
     "runtime_guard": Path(__file__).resolve(),
     "workflow_executor": Path(__file__).with_name("workflow_executor.py"),
+    "receipt_validator": Path(__file__).with_name("phone_executor.py"),
     "background_executor": Path(__file__).with_name("desktop_background_executor.mjs"),
     "desktop_sender": SKILL_ROOT.parents[1] / "wechat-messaging/scripts/workflow_bridge_windows.py",
     "desktop_preflight": SKILL_ROOT.parents[1] / "wechat-messaging/scripts/workflow_preflight.py",
