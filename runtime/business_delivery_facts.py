@@ -10,6 +10,8 @@ ROOT = Path(__file__).resolve().parent.parent
 GROUP = '上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰'
 FLOW = 'daily-new-stores-decoration-audit-to-wechat'
 TAOBAO_IMAGES = 'daily-taobao-download-to-jinsha'
+SERVICE_RANKING = 'daily-service-market-ranking-to-wechat'
+SERVICE_RANKING_QUOTE = '今天这个已经发了就算值班过了，今天的 日报台账里应该有它，明天继续'
 CLOSING = {'meituan-waimai-negative-review-appeals-11': ('meituan', 'meituan-waimai-appeals', '美团外卖'),
            'taobao-flash-sale-negative-review-appeals': ('taobao', 'taobao-flash-appeals', '淘宝闪购')}
 
@@ -143,8 +145,54 @@ def _user_image_fact(now):
         return None
 
 
+def _service_ranking_fact(now):
+    day = now.strftime('%Y-%m-%d')
+    path = ROOT/'runtime/state/user-confirmed-deliveries'/(now.strftime('%Y%m%d')+'-service-market-ranking.json')
+    base = ROOT/'skills/workflows/daily-service-market-ranking-to-wechat/.runtime/days'/day
+    try:
+        acceptance = json.loads(path.read_text())
+        if not (acceptance['source']=='explicit-user-confirmation' and acceptance['businessAccepted'] is True
+                and acceptance['date']==day and acceptance['groupName']==GROUP
+                and acceptance['userQuote']==SERVICE_RANKING_QUOTE):
+            return None
+        queue = ROOT/'skills/wechat-messaging/.runtime/ui-post-queue'
+        folder = queue/acceptance['taskId']
+        if folder.resolve().parent != queue.resolve():
+            return None
+        for name in ('task.json','response.json','send-intent.json'):
+            if hashlib.sha256((folder/name).read_bytes()).hexdigest()!=acceptance['sourceFiles'][name]:
+                return None
+        for name in ('frozen.json','delivery.json'):
+            if hashlib.sha256((base/name).read_bytes()).hexdigest()!=acceptance['originalFiles'][name]:
+                return None
+        frozen = json.loads((base/'frozen.json').read_text())
+        marker = json.loads((base/'delivery.json').read_text())
+        item = frozen['item']
+        name = day+'-服务市场排名与考核指标.png'
+        task = _image_original(folder,name,item['sha256'],now,workflow='daily-service-market-ranking-ops')
+        result = json.loads((folder/'response.json').read_text())['result']
+        collected = datetime.fromisoformat(frozen['collection']['collectedAt'].replace('Z','+00:00'))
+        if not (frozen['day']==day and frozen['collection']['ok'] is True
+                and frozen['collection']['browserPort']==9231
+                and collected.astimezone(ZoneInfo('Asia/Shanghai')).strftime('%Y-%m-%d')==day
+                and len(frozen['collection']['metrics'])>=8
+                and item==task['item'] and task['request']['items']==[item]
+                and Path(item['path']).resolve()==(base/name).resolve()
+                and task['request']['context']['eventId']==day+'-service-market-ranking'
+                and marker['eventId']==day+'-service-market-ranking' and marker['groupName']==GROUP
+                and marker['state']=='unknown' and marker['sendAttempts']==1 and marker['sha256']==item['sha256']
+                and result['backend']=='system-events-ui-tree' and result['inputEmpty'] is True):
+            return None
+        return {'businessDelivered':True,'basis':'explicit-user-confirmation','source':str(path),
+                'taskIds':[task['taskId']],'technicalStatusPreserved':'unknown','newSendAttempts':0}
+    except (OSError,ValueError,KeyError,TypeError,IndexError):
+        return None
+
+
 def read_fact(flow, now=None):
     now = now or datetime.now(ZoneInfo('Asia/Shanghai'))
+    if flow == SERVICE_RANKING:
+        return _service_ranking_fact(now)
     if flow == TAOBAO_IMAGES:
         return _user_image_fact(now)
     if flow in CLOSING:

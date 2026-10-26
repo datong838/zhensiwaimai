@@ -153,4 +153,53 @@ class UserImageFactTests(unittest.TestCase):
         self.acceptance.write_text(json.dumps(data));self.assertIsNone(facts.read_fact(facts.TAOBAO_IMAGES,self.now))
 
 
+
+class ServiceRankingFactTests(unittest.TestCase):
+    def setUp(self):
+        self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup)
+        self.root=Path(self.tmp.name);p=patch.object(facts,'ROOT',self.root);p.start();self.addCleanup(p.stop)
+        self.now=datetime(2026,10,26,14,10,tzinfo=ZoneInfo('Asia/Shanghai'))
+        self.base=self.root/'skills/workflows/daily-service-market-ranking-to-wechat/.runtime/days/2026-10-26'
+        self.base.mkdir(parents=True);image=self.base/'2026-10-26-服务市场排名与考核指标.png';image.write_bytes(b'fixture')
+        sha=hashlib.sha256(image.read_bytes()).hexdigest()
+        item={'itemId':'service-ranking','type':'image','name':image.name,'path':str(image),'size':7,'sha256':sha}
+        self.folder=self.root/'skills/wechat-messaging/.runtime/ui-post-queue/original-rank'
+        self.folder.mkdir(parents=True)
+        self.task={'taskId':'original-rank','stage':'send','item':item,'request':{'groupName':facts.GROUP,'items':[item],'context':{'workflowId':'daily-service-market-ranking-ops','eventId':'2026-10-26-service-market-ranking'}}}
+        self.task['binding']=hashlib.sha256(json.dumps(self.task,sort_keys=True,ensure_ascii=False).encode()).hexdigest()
+        self.reply={'taskId':'original-rank','binding':self.task['binding'],'result':{'status':'unknown','sendAttempts':1,'resolvedGroup':facts.GROUP,'inputEmpty':True,'backend':'system-events-ui-tree'}}
+        intent={'taskId':'original-rank','binding':self.task['binding'],'sha256':sha,'at':self.now.timestamp()-60}
+        self.hashes={}
+        for name,data in [('task.json',self.task),('response.json',self.reply),('send-intent.json',intent)]:
+            raw=json.dumps(data,ensure_ascii=False).encode();(self.folder/name).write_bytes(raw);self.hashes[name]=hashlib.sha256(raw).hexdigest()
+        self.frozen={'day':'2026-10-26','item':item,'collection':{'ok':True,'browserPort':9231,'collectedAt':'2026-10-26T05:34:18Z','metrics':[{}]*10}}
+        self.marker={'state':'unknown','sendAttempts':1,'eventId':'2026-10-26-service-market-ranking','groupName':facts.GROUP,'sha256':sha}
+        self.originals={}
+        for name,data in [('frozen.json',self.frozen),('delivery.json',self.marker)]:
+            raw=json.dumps(data).encode();(self.base/name).write_bytes(raw);self.originals[name]=hashlib.sha256(raw).hexdigest()
+        self.acceptance=self.root/'runtime/state/user-confirmed-deliveries/20261026-service-market-ranking.json'
+        self.acceptance.parent.mkdir(parents=True)
+        self.accept={'source':'explicit-user-confirmation','businessAccepted':True,'date':'2026-10-26','groupName':facts.GROUP,'userQuote':facts.SERVICE_RANKING_QUOTE,'taskId':'original-rank','sourceFiles':self.hashes,'originalFiles':self.originals}
+        self.acceptance.write_text(json.dumps(self.accept))
+    def test_bound_acceptance_preserves_originals(self):
+        before={p:p.read_bytes() for p in self.root.rglob('*') if p.is_file()}
+        result=facts.read_fact(facts.SERVICE_RANKING,self.now)
+        self.assertTrue(result['businessDelivered']);self.assertEqual(result['technicalStatusPreserved'],'unknown')
+        self.assertEqual(before,{p:p.read_bytes() for p in self.root.rglob('*') if p.is_file()})
+    def test_missing_confirmation_reject(self):
+        self.acceptance.unlink();self.assertIsNone(facts.read_fact(facts.SERVICE_RANKING,self.now))
+    def test_wrong_quote_reject(self):
+        self.accept['userQuote']='还没发';self.acceptance.write_text(json.dumps(self.accept));self.assertIsNone(facts.read_fact(facts.SERVICE_RANKING,self.now))
+    def test_tomorrow_does_not_inherit(self):
+        self.assertIsNone(facts.read_fact(facts.SERVICE_RANKING,self.now.replace(day=27)))
+    def test_changed_original_bytes_reject(self):
+        (self.folder/'response.json').write_text('{}');self.assertIsNone(facts.read_fact(facts.SERVICE_RANKING,self.now))
+    def test_changed_image_reject(self):
+        Path(self.frozen['item']['path']).write_bytes(b'changed');self.assertIsNone(facts.read_fact(facts.SERVICE_RANKING,self.now))
+    def test_no_original_send_reject_even_with_updated_hash(self):
+        self.reply['result']['sendAttempts']=0;raw=json.dumps(self.reply).encode();(self.folder/'response.json').write_bytes(raw)
+        self.accept['sourceFiles']['response.json']=hashlib.sha256(raw).hexdigest();self.acceptance.write_text(json.dumps(self.accept))
+        self.assertIsNone(facts.read_fact(facts.SERVICE_RANKING,self.now))
+
+
 if __name__=='__main__':unittest.main()
