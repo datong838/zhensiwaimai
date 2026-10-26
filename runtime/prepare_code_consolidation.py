@@ -39,6 +39,29 @@ CODE_SUFFIXES={'.py','.mjs','.js','.sh','.json'}
 FROZEN_PREFIX='skills/.daily-jinsha-reports-core/'
 WRAPPER_FILE='skills/workflows/daily-jinsha-reports-to-business-wechat/scripts/business_exam_pipeline.mjs'
 MAINTENANCE_CATALOGS={'runtime/business_storage_catalog.json','runtime/code_consolidation_catalog.json'}
+SCANNER_SOURCE_FILES={'runtime/audit_source_consolidation.py','runtime/prepare_code_consolidation.py'}
+MIGRATION_SOURCE_REFERENCES={
+    "'jinsha-reports':":'/Users/ddt/work/臻肆/报表',
+    "'video-assets':":'/Users/ddt/work/臻肆/视频',
+}
+
+
+def reference_evidence_category(relative,line,reference):
+    """仅识别归位工具自身的精确扫描/迁移证据语句，不放宽普通绝对路径。"""
+    stripped=line.strip()
+    if (relative in SCANNER_SOURCE_FILES and 're.finditer(' in line and
+            reference.startswith('/Users/ddt/[')):
+        return 'scanner-pattern-evidence'
+    if relative=='runtime/migrate_business_storage.py':
+        for key,expected in MIGRATION_SOURCE_REFERENCES.items():
+            if stripped.startswith(key) and reference==expected:
+                return 'migration-source-evidence'
+    if (relative=='runtime/prepare_code_consolidation.py' and
+            "known=ref['path']==FROZEN_PREFIX+'scripts/build_reports.mjs'" in line and
+            "ref['reference'].startswith(" in line and
+            reference=='/Users/ddt/work/臻肆/报表'):
+        return 'scanner-resolution-evidence'
+    return None
 
 
 def snapshot(root):
@@ -107,6 +130,10 @@ def scan_code_coverage(root,config):
                         for match in re.finditer(r'/Users/ddt/[^\s\"\'`]+',line):
                             reference=match.group()
                             if reference==str(root) or reference.startswith(str(root)+'/'):continue
+                            evidence=reference_evidence_category(relative,line,reference)
+                            if evidence:
+                                audit.append({'path':relative,'line':number,'reference':reference,'category':evidence,'covered':True})
+                                continue
                             host=any(v in reference for v in ('/.venvs/','/node_modules/','/.codex-runtimes/','/.cache/codex-runtimes/','/.workbuddy/binaries/','/.nvm/','/Library/Application'))
                             historical=current_json_files is not None and reference not in current_json_files
                             kind='host-runtime' if host else 'historical-json-metadata' if historical else category

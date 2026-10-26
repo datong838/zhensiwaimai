@@ -133,6 +133,32 @@ class CodeConsolidationTests(unittest.TestCase):
         self.write('runtime/new_external.py',"CALLER='/Users/ddt/work/projects/ai_agent/unrelated/script.py'\n")
         coverage=tool.scan_code_coverage(self.root,self.config)
         self.assertTrue(any(r['category']=='unmapped-active-project-reference' and r['path']=='runtime/new_external.py' for r in coverage['references']))
+    def test_scanner_and_migration_source_literals_are_covered_evidence(self):
+        self.write('runtime/audit_source_consolidation.py',
+                   'for match in re.finditer(r"[\\\"\'](/Users/ddt/[^\\\"\'\\n]+)[\\\"\']", text): pass\n')
+        self.write('runtime/prepare_code_consolidation.py',
+                   "for match in re.finditer(r'/Users/ddt/[^\\s\\\"\\\'`]+',line): pass\n"
+                   "for match in re.finditer(r'/Users/ddt/[^\\s\\\"\\\'`]+',line): pass\n"
+                   "known=ref['path']==FROZEN_PREFIX+'scripts/build_reports.mjs' and ref['reference'].startswith('/Users/ddt/work/臻肆/报表')\n")
+        self.write('runtime/migrate_business_storage.py',
+                   "APPROVED_SOURCE_LINKS = {\n"
+                   " 'jinsha-reports': ('/Users/ddt/work/臻肆/报表', '/Volumes/NVME2T/work/臻肆/报表'),\n"
+                   " 'video-assets': ('/Users/ddt/work/臻肆/视频', '/Volumes/NVME2T/work/臻肆/视频'),\n}\n")
+        references=tool.scan_code_coverage(self.root,self.config)['references']
+        evidence=[r for r in references if r['category'] in {
+            'scanner-pattern-evidence','migration-source-evidence','scanner-resolution-evidence'}]
+        self.assertEqual(6,len(evidence),evidence)
+        self.assertTrue(all(r['covered'] for r in evidence))
+        self.assertFalse(any(r['category'].startswith('unmapped-active-') for r in references))
+    def test_same_external_literals_outside_exact_evidence_shape_remain_unresolved(self):
+        self.write('runtime/migrate_business_storage.py',
+                   "LIVE='/Users/ddt/work/臻肆/报表'\n")
+        self.write('runtime/prepare_code_consolidation.py',
+                   "ACTIVE='/Users/ddt/work/projects/ai_agent/unrelated/script.py'\n")
+        references=tool.scan_code_coverage(self.root,self.config)['references']
+        unresolved=[r for r in references if r['category'].startswith('unmapped-active-')]
+        self.assertEqual(2,len(unresolved),unresolved)
+        self.assertTrue(all(not r['covered'] for r in unresolved))
     def test_materialize_only_assets_preserves_runtime_logic_and_state(self):
         original=(self.root/self.guard).read_bytes();cursor=(self.root/'state/cursor.json').read_bytes();package=self.prepare()
         tool.materialize_assets(package,root=self.root,idle_check=lambda _:None)
