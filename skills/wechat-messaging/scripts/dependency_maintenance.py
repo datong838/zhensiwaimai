@@ -23,6 +23,8 @@ HEARTBEAT_RECOVERY_KEY = "scripts/heartbeat_recovery.py"
 DESKTOP_ADAPTER_KEY = "scripts/desktop_adapter.py"
 POLICY_REGISTRATION_KEY = "scripts/policy_registration.py"
 EGRESS_POLICY_KEY = "scripts/egress_policy.py"
+ANDROID_WECOM_CHANNEL_KEY = "scripts/android_wecom_channel.py"
+ANDROID_WECOM_ACCEPTANCE_KEY = "scripts/android_wecom_acceptance.py"
 # 2026-09-29 `_back` 重指路径迁移导致的依赖摘要漂移。
 # 授权话术（大同原话）：「我授权 你修改到能确实 验收通过」
 # 白名单严格限定为本次已核对 diff 的三个文件：两个各只改 1 行硬编码路径
@@ -567,6 +569,16 @@ MAINTENANCE_AUTHORIZATIONS = {
         "allowedChangePaths": {SELF_KEY, *MEITUAN_BRIDGE_BACK_TREE_ALLOWED_AFTER},
         "allowedAfterSha256": MEITUAN_BRIDGE_BACK_TREE_ALLOWED_AFTER,
     },
+    "user-20261025-android-enterprise-wecom-channel": {
+        "instructionSha256": hashlib.sha256((
+            "OK 就在你的新分区里做开发： 他现有的这个是 桌面mac版企业微信 ，我要你 新增加一个android 手机版的企业微信发送通道，"
+            "你参考一下/Users/os/work/projects/app-controler 或者 /Users/os/work/projects/phone-harness 你新写一个 手机版的企业微信发送通道。"
+            "请注意不要改动现有的 桌面mac版企业微信 ，以后 2个通道要同时用的；我已经链接好了数据线 接通了 手机 你看下"
+        ).encode("utf-8")).hexdigest(),
+        "allowedChangePaths": {SELF_KEY, "scripts/contract.py", "scripts/executor.py",
+                               ANDROID_WECOM_CHANNEL_KEY, ANDROID_WECOM_ACCEPTANCE_KEY},
+        "skipExternalDependencies": True,
+    },
 }
 MAX_AUTHORIZATION_AGE = timedelta(days=7)
 
@@ -629,7 +641,8 @@ def _validate_expiry(value: str, now: datetime | None = None) -> datetime:
     return expiry
 
 
-def _candidate(manifest: dict, root: Path = ROOT) -> tuple[dict, list[dict]]:
+def _candidate(manifest: dict, root: Path = ROOT, *, skip_external_dependencies: bool = False,
+               include_android_wecom: bool = False) -> tuple[dict, list[dict]]:
     candidate = copy.deepcopy(manifest)
     files = candidate["files"]
     for legacy_key, current_key in WORKFLOWS_KEY_MIGRATIONS.items():
@@ -648,12 +661,17 @@ def _candidate(manifest: dict, root: Path = ROOT) -> tuple[dict, list[dict]]:
     # (test payloads may only ever enter test groups / test scripts may not drive
     # production business logic), so it must be digest-covered like the executor.
     files.setdefault(EGRESS_POLICY_KEY, "0" * 64)
+    if include_android_wecom:
+        files.setdefault(ANDROID_WECOM_CHANNEL_KEY, "0" * 64)
+        files.setdefault(ANDROID_WECOM_ACCEPTANCE_KEY, "0" * 64)
     changes = []
     for name in sorted(files):
         expected = files[name]
         if not isinstance(name, str) or not re.fullmatch(r"[0-9a-f]{64}", str(expected)):
             raise MaintenanceError(f"dependency-entry-invalid:{name}")
         path = _resolve(name, root)
+        if skip_external_dependencies and Path(name).is_absolute() and not path.is_relative_to(root):
+            continue
         if not path.is_file():
             raise MaintenanceError(f"dependency-file-missing:{path}")
         actual = sha256(path)
@@ -663,9 +681,11 @@ def _candidate(manifest: dict, root: Path = ROOT) -> tuple[dict, list[dict]]:
     return candidate, changes
 
 
-def inspect(manifest_path: Path = MANIFEST_PATH, root: Path = ROOT) -> dict:
+def inspect(manifest_path: Path = MANIFEST_PATH, root: Path = ROOT, *,
+            skip_external_dependencies: bool = False) -> dict:
     _, manifest = _read_manifest(manifest_path)
-    candidate, changes = _candidate(manifest, root)
+    candidate, changes = _candidate(manifest, root,
+                                    skip_external_dependencies=skip_external_dependencies)
     return {
         "ok": True,
         "action": "inspect",
@@ -693,6 +713,19 @@ def _run(command: list[str], cwd: Path = WORKSPACE_ROOT, timeout: int = 300) -> 
         "elapsedMs": round((time.monotonic() - started) * 1000),
         "testCount": int(match.group(1)) if match else None,
     }
+
+
+def _run_android_wecom_regressions(root: Path) -> dict:
+    """Run Android plus shared-engine tests without importing legacy Mac UI modules."""
+    started = time.monotonic()
+    total = 0
+    for pattern in ("test_android_wecom_channel.py", "test_dependency_maintenance.py",
+                    "test_policy.py", "test_egress_policy.py", "test_mobile.py"):
+        result = _run([sys.executable, "-m", "unittest", "discover", "-s",
+                       str(root / "tests"), "-p", pattern])
+        total += result.get("testCount") or 0
+    return {"ok": True, "elapsedMs": round((time.monotonic() - started) * 1000),
+            "testCount": total}
 
 
 def _review(result: dict) -> dict:
@@ -746,7 +779,11 @@ def prepare(authorization: str, expires_at: str, output_dir: Path,
         ))
         expiry = stage("授权有效期", lambda: _validate_expiry(expires_at))
         original, manifest = stage("读取依赖清单", lambda: _read_manifest(manifest_path))
-        candidate, changes = stage("计算候选摘要", lambda: _candidate(manifest, root))
+        candidate, changes = stage("计算候选摘要", lambda: _candidate(
+            manifest, root,
+            skip_external_dependencies=authorization_profile.get("skipExternalDependencies", False),
+            include_android_wecom=authorization == "user-20261025-android-enterprise-wecom-channel",
+        ))
         def validate_change_scope():
             allowed = authorization_profile["allowedChangePaths"]
             if not changes or allowed is None:
@@ -926,17 +963,25 @@ def prepare(authorization: str, expires_at: str, output_dir: Path,
             return True
 
         stage("授权范围", validate_change_scope)
-        tests = stage("统一微信完整离线测试", lambda: run_command([
-            sys.executable, "-m", "unittest", "discover", "-s",
-            str(root / "tests"), "-p", "test_*.py",
-        ]))
+        if authorization == "user-20261025-android-enterprise-wecom-channel":
+            tests = stage("Android企微与共享执行器离线回归", lambda: _run_android_wecom_regressions(root))
+        else:
+            tests = stage("统一微信完整离线测试", lambda: run_command([
+                sys.executable, "-m", "unittest", "discover", "-s",
+                str(root / "tests"), "-p", "test_*.py",
+            ]))
         stage("原子写入依赖清单", lambda: _atomic_bytes(manifest_path, _json_bytes(candidate)))
         wrote = True
-        verified = stage("依赖清单回读", lambda: inspect(manifest_path, root))
+        verified = stage("依赖清单回读", lambda: inspect(
+            manifest_path, root,
+            skip_external_dependencies=authorization_profile.get("skipExternalDependencies", False),
+        ))
         if verified["status"] != "clean":
             raise MaintenanceError("dependency-manifest-postwrite-drift")
         capability = stage("统一入口完整性回读", lambda: run_command([
             sys.executable, str(root / "scripts/executor.py"), "capabilities",
+            *( ["--channel", "mobile-wecom"]
+               if authorization == "user-20261025-android-enterprise-wecom-channel" else [] ),
         ]))
         result.update(
             ok=True,
