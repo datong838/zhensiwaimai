@@ -71,6 +71,19 @@ def reference_evidence_category(relative,line,reference):
             "ref['reference'].startswith(" in line and
             reference=='/Users/ddt/work/臻肆/报表'):
         return 'scanner-resolution-evidence'
+    legacy_code_prefix='/Users'+'/ddt/work/projects/ai_agent/skills/skills/app-controler'
+    stripped=line.strip()
+    if relative=='skills/wechat-messaging/scripts/dependency_maintenance.py':
+        exact_generated=(stripped.startswith('f"'+legacy_code_prefix+'/wechat-desktop-control/scripts/')
+                         and stripped.endswith('{name}":'))
+        exact_lock=(stripped=='"'+legacy_code_prefix+
+                    '/wechat-desktop-control/scripts/wechat_interaction_lock.py"]')
+        if reference.startswith(legacy_code_prefix) and (exact_generated or exact_lock):
+            return 'maintenance-key-migration-evidence'
+    if (relative=='skills/workflows/daily-agent-new-merchants-to-wechat/scripts/maintenance_executor.py'
+            and stripped=='"'+legacy_code_prefix+'/"'
+            and reference.startswith(legacy_code_prefix)):
+        return 'maintenance-key-migration-evidence'
     return None
 
 
@@ -134,8 +147,9 @@ def scan_code_coverage(root,config):
                 for number,line in enumerate(text.splitlines(),1):
                     matched=[prefix for prefix in config['bindings'] if prefix in line]
                     for prefix in matched:
-                        kind='historical-json-metadata' if current_json_files is not None and prefix not in current_json_files else category
-                        audit.append({'path':relative,'line':number,'reference':prefix,'category':kind,'covered':kind=='runtime-code'})
+                        evidence=reference_evidence_category(relative,line,prefix)
+                        kind=(evidence or ('historical-json-metadata' if current_json_files is not None and prefix not in current_json_files else category))
+                        audit.append({'path':relative,'line':number,'reference':prefix,'category':kind,'covered':bool(evidence) or kind=='runtime-code'})
                     if not is_frozen:
                         for match in re.finditer(r'/Users/ddt/[^\s\"\'`]+',line):
                             reference=match.group()

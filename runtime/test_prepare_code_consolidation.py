@@ -161,6 +161,23 @@ class CodeConsolidationTests(unittest.TestCase):
         unresolved=[r for r in references if r['category'].startswith('unmapped-active-')]
         self.assertEqual(2,len(unresolved),unresolved)
         self.assertTrue(all(not r['covered'] for r in unresolved))
+    def test_only_exact_maintenance_legacy_keys_are_evidence(self):
+        legacy='/Users/ddt/work/projects/ai_agent/skills/skills/app-controler'
+        self.config['bindings'][legacy]='vendor/legacy-app-controler'
+        self.write('skills/wechat-messaging/scripts/dependency_maintenance.py',
+                   'CODE_CONSOLIDATION_KEY_MIGRATIONS = {\n'
+                   ' f"'+legacy+'/wechat-desktop-control/scripts/{name}":\n  "internal"\n}\n'
+                   'CODE_CONSOLIDATION_LOCK = CODE_CONSOLIDATION_KEY_MIGRATIONS[\n'
+                   ' "'+legacy+'/wechat-desktop-control/scripts/wechat_interaction_lock.py"]\n')
+        self.write('skills/workflows/daily-agent-new-merchants-to-wechat/scripts/maintenance_executor.py',
+                   'CODE_CONSOLIDATION_LEGACY_LOCATOR = (\n "'+legacy+'/"\n "wechat-desktop-control/scripts/wechat_desktop.py")\n')
+        self.write('runtime/ordinary_live_reference.py',"LIVE='"+legacy+"/live.py'\n")
+        references=tool.scan_code_coverage(self.root,self.config)['references']
+        evidence=[r for r in references if r['category']=='maintenance-key-migration-evidence']
+        self.assertEqual(6,len(evidence),evidence)
+        active=[r for r in references if r['path']=='runtime/ordinary_live_reference.py']
+        self.assertEqual(2,len(active),active)
+        self.assertTrue(all(r['category']=='runtime-code' for r in active))
     def test_current_prepare_source_has_no_unresolved_self_references(self):
         actual_root=Path(tool.__file__).resolve().parents[1]
         references=tool.scan_code_coverage(actual_root,tool.load_catalog())['references']
