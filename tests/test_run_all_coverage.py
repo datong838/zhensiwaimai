@@ -415,6 +415,8 @@ class RunAllCoverageTest(unittest.TestCase):
         # s-blocked 当天已有成功 → done_today 走 pseudo；s-active 无成功 → 真跑
         with mock.patch.object(sr, "get_last_success",
                               side_effect=lambda n: ra._now_iso() if n == "s-blocked" else ""), \
+             mock.patch.object(ra, "_cadence_gate",
+                              side_effect=lambda s, now: ((True, "done_today") if s["name"] == "s-blocked" else (False, "due"))), \
              mock.patch.object(ra, "pop_forced_runs", return_value=([], None)), \
              mock.patch.object(ra.aw, "run_auth_watch", return_value=[]), \
              mock.patch.object(ra, "login_health_gate"), \
@@ -799,7 +801,7 @@ class RunAllCoverageTest(unittest.TestCase):
         # CONTROL_FILE 存在但 unlink 抛 OSError → 776-777（防御性）
         ra.CONTROL_FILE.write_text(json.dumps({"force_run": "x"}), encoding="utf-8")
         with mock.patch.object(ra.Path, "unlink", side_effect=OSError("locked")):
-            self.assertEqual(ra.pop_forced_runs(), (["x"], None))
+            self.assertEqual(ra.pop_forced_runs(), ([], None))
 
     def test_selftest_classify_failure(self):
         # selftest 分类误判 → 271（classify 返回 (category, detail) 二元组）

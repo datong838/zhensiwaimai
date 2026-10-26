@@ -66,11 +66,14 @@ def _extract_expiries(obj, path: str = "", out: list = None) -> list:
         out = []
     if isinstance(obj, dict):
         has_current = "unsealedAcceptance" in obj
+        sealed = obj.get("status") == "SEALED"
         for k, v in obj.items():
             if k == "expiresAt":
                 ts = _parse_expiry(v)
                 if ts is not None:
                     out.append((path, ts))
+            elif sealed and k in {"unsealedAcceptance", "lastUnsealedAcceptance"}:
+                continue  # SEALED 运行门不消费这两段历史验收窗口。
             elif k == "lastUnsealedAcceptance" and has_current:
                 continue  # 历史快照：被当前 unsealedAcceptance 取代，跳过
             else:
