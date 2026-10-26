@@ -878,6 +878,8 @@ def run_one(data: dict, name: str, interpreters: dict) -> dict:
     skill = next((s for s in data["skills"] if s["name"] == name), None)
     if skill is None:
         raise SystemExit("manifest 无此 skill: %s" % name)
+    if top10_delivery_pending(skill, datetime.now()):
+        return _pending_record(skill, 'delivery_verification_pending')
     if fixed_schedule.customer_duty_user_accepted(name, datetime.now()):
         return {'skill':name,'status':'USER_ACCEPTED_DUTY','category':'USER_ACCEPTED_DUTY',
                 'finished_at':'','detail':'user-accepted-duty-no-new-delivery'}
@@ -1430,6 +1432,38 @@ def pop_force_run_now() -> list:
     return list(names)
 
 
+def top10_delivery_pending(skill: dict, now: datetime) -> bool:
+    """Read only the current business-day original marker; never certify delivery."""
+    if skill.get('name') != 'daily-top10-to-wechat-group':
+        return False
+    import hashlib
+    import re
+    group = skill.get('target_group')
+    if not isinstance(group, str) or not group:
+        return False
+    day = (now - timedelta(days=1)).strftime('%Y-%m-%d')
+    group_key = hashlib.sha256(group.encode()).hexdigest()[:12]
+    marker = (REPO_ROOT / 'skills/workflows/daily-top10-to-wechat-group/.runtime'
+              / 'send-ledger' / f'{day}-main-{group_key}.json')
+    try:
+        value = json.loads(marker.read_text(encoding='utf-8'))
+    except (OSError, ValueError):
+        return False
+    if not isinstance(value, dict):
+        return False
+    attempts = value.get('sendAttempts')
+    payloads = value.get('payloads')
+    return (value.get('bridgeVersion') == 1 and value.get('groupName') == group
+            and value.get('payloadType') == 'image'
+            and value.get('state') in ('attempted', 'unknown')
+            and type(attempts) is int and attempts > 0
+            and isinstance(payloads, list) and len(payloads) == 1
+            and isinstance(payloads[0], dict)
+            and payloads[0].get('name') == f'{day}_top10seller.png'
+            and isinstance(payloads[0].get('sha256'), str)
+            and re.fullmatch(r'[0-9a-f]{64}', payloads[0]['sha256']) is not None)
+
+
 def _cadence_gate(skill: dict, now: datetime) -> tuple:
     """是否跳过 + 跳过原因。返回 (skip: bool, reason: str)。
 
@@ -1445,6 +1479,8 @@ def _cadence_gate(skill: dict, now: datetime) -> tuple:
     from business_delivery_facts import read_fact
     if read_fact(skill['name'], now):
         return True, 'business_delivery_observed'
+    if top10_delivery_pending(skill, now):
+        return True, 'delivery_verification_pending'
     if fixed_schedule.customer_duty_user_accepted(skill['name'], now):
         return True, 'customer_duty_user_accepted'
     if fixed_schedule.customer_slot_superseded(skill['name'], now):
@@ -1561,6 +1597,7 @@ def _pending_record(skill: dict, reason: str) -> dict:
         "finished_at": "",
         "detail": reason,
         "note": ("本日尚未到执行时点" if reason == "not_due" else
+                 "图片已单次提交，等待只读核验；不重发" if reason == "delivery_verification_pending" else
                  "等待前置任务当日成功" if reason == "dependency_pending" else "不自动调度（oneshot）"),
     }
 
@@ -1626,7 +1663,7 @@ def daemon_cycle(data: dict, interpreters: dict, do_send: bool, force_all: bool 
         if name != 'daily-agent-new-merchants-to-wechat':
             merchant_priority_checkpoint(data, interpreters, records, merchant_attempted_slots)
         skip, reason = _cadence_gate(s, datetime.now())
-        if reason in ('superseded_customer_slot', 'customer_duty_user_accepted', 'business_delivery_observed') or (not force_all and name not in forced and skip):
+        if reason in ('superseded_customer_slot', 'customer_duty_user_accepted', 'business_delivery_observed', 'delivery_verification_pending') or (not force_all and name not in forced and skip):
             if reason == "done_today":
                 print("[skip] %s 当日已成功（cadence 内），本周期跳过" % name)
                 records[name] = _pseudo_record(s)
