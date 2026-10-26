@@ -69,8 +69,62 @@ def recorded_unknown(store,day,folder):
     except (OSError,KeyError,TypeError,ValueError):return False
 
 
+SINGLE_PASS='single-pass-per-day-v1'
+
+
+def single_pass_notice(handled,unconfirmed=0,failed=0,row_errors=0):
+    if failed or row_errors:return f'淘宝闪购 优质商品率低 门店整改流程已按顺序执行完毕（今日记录了 {handled} 家门店；{failed} 家未能执行，{unconfirmed} 家结果未确认，另有 {row_errors} 条访问异常，详见Excel）'
+    return notice(handled,unconfirmed)
+
+
+def real_daily_intent(store,day,folder):
+    try:
+        sub=store['submission'];shop=str(store['shopId'])
+        if not (shop.isdigit() and sub['day']==day and sub['shopId']==shop and sub['eventId']==day+'-quality-'+shop):return False
+        return json.loads((folder/'intents'/(shop+'.json')).read_text())==sub
+    except (OSError,ValueError,KeyError,TypeError):return False
+
+
+def single_pass_records(state,day,folder):
+    records=[];optimized=[];checked=[];unconfirmed=[];failed=[]
+    for store in state.get('stores',[]):
+        if store.get('state')=='completed' and all(store.get('operation',{}).get(k) is True for k in ['confirmed','popoverClosed','uiStable']):
+            optimized.append(store);label='已优化类目详情'
+        elif store.get('state')=='checked_no_action':checked.append(store);label='已检查，无可优化项目'
+        elif store.get('state') in ('unknown','attempted') and real_daily_intent(store,day,folder):unconfirmed.append(store);label='已发起优化，结果未确认；今日未重复提交'
+        else:
+            failed.append(store);label=('商品整改页面未能加载，未执行优化' if 'loading-timeout' in store.get('reason','') else '本次操作未能完成，今日未重复尝试')
+        if store.get('operationError'):label+='；平台提示：'+'；'.join(str(x).strip() for x in store['operationError'])[:200]
+        if store.get('skipCount') and store not in unconfirmed:label+='；当日重复记录已跳过'
+        records.append({'shopId':store.get('shopId'),'name':store.get('name') or '门店名称未读取','execution':label})
+    for error in state.get('rowErrors',[]):
+        records.append({'shopId':None,'name':error.get('name') or f"门店名称未读取（第{error.get('page','?')}页第{error.get('row',0)+1}行）",'execution':'未能打开商品整改页面，未执行优化；今日未重复尝试'})
+    return records,optimized,checked,unconfirmed,failed
+
+
+def single_pass_completion(day,folder,result,state):
+    basis=state.get('scopeFinishBasis',{});stores=state.get('stores',[])
+    if not (state.get('day')==day and state.get('workflowId')==FLOW and state.get('executionPolicy')==SINGLE_PASS and state.get('scopeFinished') is True
+            and state.get('accountLabel')=='zhangyanru188:全部门店' and state.get('cursor',{}).get('round')==1
+            and basis.get('kind')=='single-sequential-pass-reached-last-page' and basis.get('round')==1 and basis.get('fromPage')==1 and basis.get('lastPage')==state['cursor']['page'] and basis.get('lastPageHasNext') is False
+            and len({s['shopId'] for s in stores})==len(stores) and all(str(s['shopId']).isdigit() for s in stores) and result.get('ok') is True):raise ValueError('quality-single-pass-not-at-last-page')
+    records,optimized,checked,unconfirmed,failed=single_pass_records(state,day,folder)
+    payload={'executionPolicy':SINGLE_PASS,'day':day,'workflowId':FLOW,'accountName':'zhangyanru188','groupName':GROUP,'completed':len(optimized),'optimized':len(optimized),
+             'checkedNoAction':len(checked),'attemptedUnconfirmed':len(unconfirmed),'failed':len(failed),'rowErrorCount':len(state.get('rowErrors',[])),
+             'handled':len(stores),'recordRows':len(records),'stateSha256':hashlib.sha256((folder/'state.json').read_bytes()).hexdigest(),
+             'completedShopIds':[s['shopId'] for s in optimized],'handledShopIds':[s['shopId'] for s in stores],'records':records,
+             'text':single_pass_notice(len(stores),len(unconfirmed),len(failed),len(state.get('rowErrors',[]))),'observedAt':datetime.now(ZoneInfo('Asia/Shanghai')).isoformat()}
+    target=folder/'completion.json'
+    if target.exists():
+        saved=json.loads(target.read_text())
+        if any(saved.get(k)!=v for k,v in payload.items() if k!='observedAt'):raise ValueError('quality-completion-binding-changed')
+        return saved
+    atomic_json(target,payload);return payload
+
+
 def completion(day,folder,result):
     source=folder/'state.json';state=json.loads(source.read_text());stores=state.get('stores',[])
+    if state.get('executionPolicy')==SINGLE_PASS:return single_pass_completion(day,folder,result,state)
     optimized=[s for s in stores if s.get('state')=='completed'];checked=[s for s in stores if s.get('state')=='checked_no_action'];unconfirmed=[s for s in stores if recorded_unknown(s,day,folder)]
     if not (state.get('day')==day and state.get('workflowId')==FLOW and state.get('scopeFinished') is True
             and state.get('accountLabel')=='zhangyanru188:全部门店'
@@ -142,7 +196,12 @@ def schedule_continuation(result,now=None):
 
 
 def run(*,execute=False,optimizer=optimize,adapter=None,session=immediate_ui_session,exporter=build_report):
-    integrity();day=day_now();folder=STATE/'days'/day;folder.mkdir(parents=True,exist_ok=True,mode=0o700)
+    day=day_now();folder=STATE/'days'/day
+    early_marker=folder/'delivery.json'
+    if early_marker.exists():
+        prior=json.loads(early_marker.read_text())
+        if prior.get('state')=='verified':return {'ok':True,'status':'already_verified','newSendAttempts':0,'sendAttempts':0}
+    integrity();folder.mkdir(parents=True,exist_ok=True,mode=0o700)
     with (folder/'run.lock').open('a+') as lock:
         fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
         marker=folder/'delivery.json'
@@ -176,7 +235,7 @@ def run(*,execute=False,optimizer=optimize,adapter=None,session=immediate_ui_ses
         except BlockingIOError:return {'ok':False,'stage':'preflight','reason':'quality-ui-post-busy','sendAttempts':0}
         verified=len(deliveries)==2 and all(d['receipt'].get('status')=='verified' for d in deliveries);attempts=sum(d['receipt'].get('sendAttempts') or 0 for d in deliveries)
         atomic_json(marker,{'state':'verified' if verified else 'unknown','eventId':request['context']['eventId'],'deliveries':deliveries,'sendAttempts':attempts})
-        return {'ok':verified,'stage':'notification','summary':result['summary'],'businessNote':(str(proof['attemptedUnconfirmed'])+'家结果未确认，详见执行台账' if proof['attemptedUnconfirmed'] else '当日执行完成'),'deliveries':deliveries,'sendAttempts':attempts,'runtimeModelDecisions':0}
+        return {'ok':verified,'stage':'notification','summary':result['summary'],'businessNote':(f"{proof.get('failed',0)}家未能执行，{proof['attemptedUnconfirmed']}家结果未确认，{proof.get('rowErrorCount',0)}条访问异常，详见执行台账" if proof['attemptedUnconfirmed'] or proof.get('failed') or proof.get('rowErrorCount') else '当日执行完成'),'deliveries':deliveries,'sendAttempts':attempts,'runtimeModelDecisions':0}
 
 
 def main():

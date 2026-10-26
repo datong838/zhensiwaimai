@@ -75,6 +75,42 @@ def meituan_income_allowed(request, *, root=None, day=None):
         return False
 
 
+def _quality_single_pass_allowed(folder,day,items,proof,state,report,raw):
+    import hashlib
+    import json
+    stores=state.get('stores',[]);errors=state.get('rowErrors',[]);basis=state.get('scopeFinishBasis',{})
+    def real_intent(store):
+        try:
+            sub=store['submission'];shop=str(store['shopId'])
+            return shop.isdigit() and sub['day']==day and sub['shopId']==shop and sub['eventId']==day+'-quality-'+shop and json.loads((folder/'intents'/(shop+'.json')).read_text())==sub
+        except (OSError,KeyError,ValueError,TypeError):return False
+    optimized=[s for s in stores if s.get('state')=='completed' and all(s.get('operation',{}).get(k) is True for k in ['confirmed','popoverClosed','uiStable'])]
+    checked=[s for s in stores if s.get('state')=='checked_no_action'];unknown=[s for s in stores if s.get('state') in ('unknown','attempted') and real_intent(s)]
+    failed=len(stores)-len(optimized)-len(checked)-len(unknown);handled=len(stores)
+    if failed or errors:text=f'淘宝闪购 优质商品率低 门店整改流程已按顺序执行完毕（今日记录了 {handled} 家门店；{failed} 家未能执行，{len(unknown)} 家结果未确认，另有 {len(errors)} 条访问异常，详见Excel）'
+    elif unknown:text=f'淘宝闪购 优质商品率低 门店整改流程已按顺序执行完毕（今日执行了 {handled} 家；其中 {len(unknown)} 家结果未确认，详见Excel）'
+    else:text=f'淘宝闪购 优质商品率低 店铺全部店铺优化完成 （今日执行了 {handled} 家）'
+    if not (proof.get('executionPolicy')==state.get('executionPolicy')=='single-pass-per-day-v1' and proof['day']==state['day']==day
+            and proof['workflowId']==state['workflowId']=='daily-quality-products-optimization' and proof['groupName']==GROUP
+            and proof['accountName']=='zhangyanru188' and state['accountLabel']=='zhangyanru188:全部门店' and state.get('scopeFinished') is True
+            and state['cursor']['round']==1 and basis.get('kind')=='single-sequential-pass-reached-last-page' and basis.get('round')==1 and basis.get('fromPage')==1 and basis.get('lastPage')==state['cursor']['page'] and basis.get('lastPageHasNext') is False
+            and proof['stateSha256']==hashlib.sha256(raw).hexdigest() and proof['optimized']==len(optimized) and proof['checkedNoAction']==len(checked)
+            and proof['attemptedUnconfirmed']==len(unknown) and proof['failed']==failed and proof['rowErrorCount']==len(errors) and proof['handled']==handled
+            and proof['recordRows']==len(proof['records'])==handled+len(errors) and proof['handledShopIds']==[s['shopId'] for s in stores]
+            and len(set(proof['handledShopIds']))==handled and proof['completedShopIds']==[s['shopId'] for s in optimized] and proof['text']==text):return False
+    if [r['name'] for r in proof['records'][:handled]]!=[s.get('name') or '门店名称未读取' for s in stores]:return False
+    for index,error in enumerate(errors):
+        if error.get('name') and proof['records'][handled+index]['name']!=error['name']:return False
+        if proof['records'][handled+index].get('shopId') is not None:return False
+    file,label=items;expected=folder/(day+'淘宝闪购商品整改执行台账.xlsx')
+    return (file.get('itemId')=='quality-execution-ledger' and file.get('type')=='file' and Path(file.get('path','')).resolve()==expected.resolve()
+            and file.get('name')==expected.name and file.get('sha256')==hashlib.sha256(expected.read_bytes()).hexdigest()==report['sha256']
+            and file.get('size')==expected.stat().st_size==report['size'] and report['rows']==len(proof['records'])
+            and report['sourceSha256']==hashlib.sha256((folder/'completion.json').read_bytes()).hexdigest()
+            and label.get('itemId')=='quality-optimization-completed' and label.get('type')=='text' and label.get('text')==text
+            and label.get('sha256')==hashlib.sha256(text.encode()).hexdigest())
+
+
 def quality_optimization_allowed(request, *, root=None, day=None):
     import hashlib
     import json
@@ -89,6 +125,7 @@ def quality_optimization_allowed(request, *, root=None, day=None):
     folder=root/'skills/workflows/daily-quality-products-optimization/.runtime/days'/day
     try:
         proof=json.loads((folder/'completion.json').read_text());raw=(folder/'state.json').read_bytes();state=json.loads(raw);report=json.loads((folder/'report.json').read_text())
+        if state.get('executionPolicy')=='single-pass-per-day-v1':return _quality_single_pass_allowed(folder,day,items,proof,state,report,raw)
         def recorded_unknown(store):
             try:
                 sub=store['submission'];rec=store['reconciliation'];fact=store['executionRecord'];canonical=lambda value:hashlib.sha256(json.dumps(value,ensure_ascii=False,separators=(',',':')).encode()).hexdigest()

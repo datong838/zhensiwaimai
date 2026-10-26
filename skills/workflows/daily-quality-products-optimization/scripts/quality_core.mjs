@@ -43,7 +43,29 @@ export function recordedUnknown(store,day){
   &&rec?.mode==='read-only'&&rec.submissionSha256===r.submissionSha256&&rec.observedAt===r.readonlyObservedAt
   &&Number.isSafeInteger(rec.currentTotal)&&rec.currentTotal>=0;
 }
+export const SINGLE_PASS='single-pass-per-day-v1';
+export function singlePassNotice(handled,unconfirmed=0,failed=0,rowErrors=0){
+ if(failed||rowErrors)return `淘宝闪购 优质商品率低 门店整改流程已按顺序执行完毕（今日记录了 ${handled} 家门店；${failed} 家未能执行，${unconfirmed} 家结果未确认，另有 ${rowErrors} 条访问异常，详见Excel）`;
+ return executionNotice(handled,unconfirmed);
+}
+export function singlePassSummary(state){
+ const stores=state.stores||[],optimized=stores.filter(s=>s.state==='completed'&&['confirmed','popoverClosed','uiStable'].every(k=>s.operation?.[k]===true)).length;
+ const checked=stores.filter(s=>s.state==='checked_no_action').length;
+ const unconfirmed=stores.filter(s=>['unknown','attempted'].includes(s.state)&&s.submission?.day===state.day&&s.submission?.shopId===s.shopId&&s.submission?.eventId===state.day+'-quality-'+s.shopId).length;
+ const failed=stores.length-optimized-checked-unconfirmed,rowErrors=(state.rowErrors||[]).length;
+ return {ok:state.scopeFinished===true,total:stores.length,completed:optimized,optimized,checkedNoAction:checked,attemptedUnconfirmed:unconfirmed,failed,rowErrorCount:rowErrors,
+  handled:stores.length,recordRows:stores.length+rowErrors,pending:state.scopeFinished?0:1,unknown:unconfirmed,errors:failed+rowErrors,round:1,
+  observedPlatformTotal:state.latestTotal??null,text:state.scopeFinished?singlePassNotice(stores.length,unconfirmed,failed,rowErrors):null};
+}
+export function finishSinglePass(state,current){
+ if(state.executionPolicy!==SINGLE_PASS||state.cursor?.round!==1||current.hasNext!==false||current.page!==state.cursor.page||state.cursor.row<current.rows.length)return false;
+ if(state.scopeFinished)return true;
+ const ended=new Date().toISOString(),entry={round:1,fromPage:1,lastPage:current.page,lastPageHasNext:false,rowsVisited:state.cursor.rowsVisited,platformTotal:current.total,
+  newShops:state.cursor.newShops,rowErrors:(state.rowErrors||[]).length,independentStores:state.stores.length,finishedAt:ended};
+ state.rounds=[entry];state.scopeFinished=true;state.finishedAt=ended;state.scopeFinishBasis={kind:'single-sequential-pass-reached-last-page',...entry};return true;
+}
 export function aggregate(state){
+ if(state.executionPolicy===SINGLE_PASS)return singlePassSummary(state);
  const stores=state.stores||[],completed=stores.filter(s=>s.state==='completed'),checked=stores.filter(s=>s.state==='checked_no_action');
  const unknown=stores.filter(s=>['unknown','attempted'].includes(s.state)),recorded=unknown.filter(s=>recordedUnknown(s,state.day)),errors=stores.filter(s=>s.state==='blocked');
  const ok=state.scopeFinished===true&&unknown.length===recorded.length&&errors.length===0,handled=completed.length+checked.length+recorded.length;
@@ -68,4 +90,18 @@ export function safeRetryEligible(store,codeVersion,now=Date.now()){
  return (store.attemptsForVersion||0)<2&&Number.isFinite(store.retryAt)&&now>=store.retryAt;
 }
 
-export function normalRoundComplete(noNewRounds,handled,firstTotal,currentTotal){return noNewRounds>0&&handled>=Math.min(firstTotal??currentTotal,currentTotal);}
+export function scopeCompletionProof(state){
+ if(!Array.isArray(state.rounds)||!Array.isArray(state.stores)||state.cursor?.newShops>0)return null;
+ if(state.stores.some(s=>!['completed','checked_no_action'].includes(s.state)&&!recordedUnknown(s,state.day)))return null;
+ if(new Set(state.stores.map(s=>s.shopId)).size!==state.stores.length)return null;
+ for(let i=state.rounds.length-1;i>=0;i--){
+  const round=state.rounds[i];
+  if(round.newShops!==0||!Number.isSafeInteger(round.rowsVisited)||!Number.isSafeInteger(round.platformTotal)||round.rowsVisited<round.platformTotal||!Number.isFinite(Date.parse(round.finishedAt)))continue;
+  if((state.rowErrors||[]).some(e=>e.round===round.round))continue;
+  if(state.rounds.slice(i+1).some(r=>r.newShops>0))continue;
+  return {kind:'complete-normal-sequential-round-no-new-daily-shops',sourceRound:round.round,rowsVisited:round.rowsVisited,platformTotal:round.platformTotal,
+   newShops:0,rowErrors:0,independentStores:state.stores.length,sourceFinishedAt:round.finishedAt,roundRecordSha256:digest(round)};
+ }
+ return null;
+}
+export function normalRoundComplete(state){return scopeCompletionProof(state)!==null;}

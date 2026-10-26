@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {FLOW,COMPANY,METRIC,compact,digest,validateMerchants,validateProducts,submissionKey,reconcileProducts,maySubmit,aggregate,segmentDeadline,canStartStore,shanghaiClock,safeRetryEligible,recordedUnknown,normalRoundComplete} from './quality_core.mjs';
+import {FLOW,COMPANY,METRIC,compact,digest,validateMerchants,validateProducts,submissionKey,reconcileProducts,maySubmit,aggregate,segmentDeadline,canStartStore,shanghaiClock,recordedUnknown,SINGLE_PASS,finishSinglePass} from './quality_core.mjs';
 const BASE=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const ROOT=path.resolve(BASE,'../../..');
 const HOME='https://open.shop.ele.me/manager/base/home';
@@ -163,8 +163,7 @@ async function openStore(page,store,deadline){
 export function shopIdFromUrl(value){try{const u=new URL(value);return u.origin==='https://melody.shop.ele.me'?(u.pathname.match(/^\/app\/shop\/(\d+)\/food-rectify$/)?.[1]||null):null;}catch{return null;}}
 export function skipBeforeFrame(store,codeVersion,now=Date.now()){
  if(!store)return false;
- if(store.state==='unknown'&&store.submission)return !!store.lastReconciledAt&&now-store.lastReconciledAt<60000;
- return !safeRetryEligible(store,codeVersion,now);
+ return store.state!=='pending'||!!store.submission;
 }
 async function popupShopId(detail,deadline){while(Date.now()<deadline){const id=shopIdFromUrl(detail.url());if(id)return id;await new Promise(r=>setTimeout(r,100));}throw Error('quality-store-identity-loading-timeout');}
 export async function productFrame(detail,store,deadline){
@@ -278,13 +277,16 @@ export function segmentContinuation(processedRows,ok,scopeFinished,roundLimitRea
  const noProgress=processedRows===0&&!ok;
  return {reason:noProgress?'quality-no-progress-segment-parked':undefined,continuation:!noProgress&&!scopeFinished&&!roundLimitReached};
 }
+export function newDailyState(day){return {schemaVersion:3,executionPolicy:SINGLE_PASS,day,workflowId:FLOW,stores:[],scopeFinished:false,cursor:{round:1,page:1,row:0,newShops:0,rowsVisited:0}};}
 export async function runSegment({execute=false}={}){
- const codeVersion=await integrity(),day=dayNow(),folder=path.join(BASE,'.runtime/days',day),stateFile=path.join(folder,'state.json');
- let state;try{state=JSON.parse(await fs.readFile(stateFile,'utf8'));}catch(e){if(e.code!=='ENOENT')throw e;state={schemaVersion:2,day,workflowId:FLOW,stores:[],scopeFinished:false,cursor:{round:1,page:1,row:0,newShops:0,rowsVisited:0,noNewRounds:0}};}
+ const day=dayNow(),folder=path.join(BASE,'.runtime/days',day),stateFile=path.join(folder,'state.json');
+ if(execute){try{const prior=JSON.parse(await fs.readFile(path.join(folder,'delivery.json'),'utf8'));if(prior.state==='verified'&&prior.eventId===day+'-quality-optimization-completed')return {ok:true,status:'already_verified',browserActions:0,sendAttempts:0};}catch(error){if(error.code!=='ENOENT')throw error;}}
+ const codeVersion=await integrity();
+ let state;try{state=JSON.parse(await fs.readFile(stateFile,'utf8'));}catch(e){if(e.code!=='ENOENT')throw e;state=newDailyState(day);}
  if(state.day!==day||state.workflowId!==FLOW)throw Error('quality-state-binding-invalid');
  if(!state.cursor)throw Error('quality-old-state-requires-read-only-migration');
- if(execute&&await recordUnknownExecutions(state,folder))await atomic(stateFile,state);
- if(execute&&state.scopeFinished&&state.stores.some(s=>(s.state==='unknown'&&!recordedUnknown(s,state.day)&&s.submission&&(!s.lastReconciledAt||Date.now()-s.lastReconciledAt>=600000))||(s.state==='blocked'&&safeRetryEligible(s,codeVersion)))){state.scopeFinished=false;state.cursor={round:1,page:1,row:0,newShops:0,rowsVisited:0,noNewRounds:0};state.reconciliationSweepStartedAt=new Date().toISOString();}
+ if(execute&&state.executionPolicy!==SINGLE_PASS)throw Error('quality-legacy-day-state-preserved-no-replay');
+ if(execute&&state.cursor.round!==1)throw Error('quality-single-pass-cursor-round-invalid');
  if(!execute)return {ok:true,mode:'inspect-state-only',summary:aggregate(state),browserActions:0,sendAttempts:0};
  const clock=shanghaiClock();if(clock.hour<17)return {ok:false,reason:'quality-not-due',sendAttempts:0};
  const deadline=segmentDeadline(Date.now(),180000),closingPriority=clock.hour===18&&clock.minute>=30&&clock.minute<35;
@@ -306,23 +308,17 @@ export async function runSegment({execute=false}={}){
    state.latestTotal=current.total;if(state.firstTotal===undefined)state.firstTotal=current.total;
    if(state.cursor.row>=current.rows.length){
     if(current.hasNext){current=await changePage(page,page.locator('ul.ant-pagination li.ant-pagination-next:not(.ant-pagination-disabled)'),merchantDom,deadline,current);state.cursor.page=current.page;state.cursor.row=0;await save();continue;}
-    state.rounds=state.rounds||[];state.rounds.push({round:state.cursor.round,newShops:state.cursor.newShops,rowsVisited:state.cursor.rowsVisited,platformTotal:current.total,finishedAt:new Date().toISOString()});
-    state.cursor.noNewRounds=state.cursor.newShops===0?state.cursor.noNewRounds+1:0;
-    const handled=aggregate(state).handled,reference=Math.min(state.firstTotal??current.total,current.total);
-    if(normalRoundComplete(state.cursor.noNewRounds,handled,state.firstTotal,current.total)){state.scopeFinished=true;state.finishedAt=new Date().toISOString();await save();break;}
-    if(state.cursor.round>=20){state.roundLimitReached=true;await save();break;}
-    state.cursor={...state.cursor,round:state.cursor.round+1,page:1,row:0,newShops:0,rowsVisited:0};current=await goFirst(page,deadline,merchantDom);await save();continue;
+    finishSinglePass(state,current);await save();break;
    }
-   const rowIndex=state.cursor.row,expected=current.rows[rowIndex];visited++;let store;
+   const rowIndex=state.cursor.row,expected=current.rows[rowIndex];visited++;let store,rowName=expected.name||'门店名称未读取';
    const storeDeadline=Math.min(deadline,Date.now()+60000);
    try{
-    const row=page.locator('tbody tr.ant-table-row').nth(rowIndex);const clickedName=(await row.locator('td').first().innerText({timeout:budget(storeDeadline,3000)})).trim();const popup=page.waitForEvent('popup',{timeout:budget(storeDeadline,10000)});await row.getByRole('button',{name:'去完成',exact:true}).click({timeout:budget(storeDeadline)});detail=await popup;
+    const row=page.locator('tbody tr.ant-table-row').nth(rowIndex);const clickedName=(await row.locator('td').first().innerText({timeout:budget(storeDeadline,3000)})).trim();rowName=clickedName||rowName;const popup=page.waitForEvent('popup',{timeout:budget(storeDeadline,10000)});await row.getByRole('button',{name:'去完成',exact:true}).click({timeout:budget(storeDeadline)});detail=await popup;
     const openedShopId=await popupShopId(detail,storeDeadline);store=state.stores.find(s=>s.shopId===openedShopId);
     if(skipBeforeFrame(store,codeVersion)){store.skipCount=(store.skipCount||0)+1;continue;}
     const identity={name:clickedName,shopId:openedShopId};const frame=await productFrame(detail,identity,storeDeadline);
     store=state.stores.find(s=>s.shopId===identity.shopId);
-    if(store?.state==='unknown'&&store.submission){if(!store.lastReconciledAt||Date.now()-store.lastReconciledAt>=60000)await reconcileAttempted(frame,store,storeDeadline);continue;}
-    if(store&&!safeRetryEligible(store,codeVersion))continue;
+    if(store&&store.state!=='pending')continue;
     if(!store){store={shopId:identity.shopId,name:identity.name,clickedRowName:identity.clickedRowName,state:'pending',firstSeenAt:new Date().toISOString()};state.stores.push(store);state.cursor.newShops++;}
     const intentFile=path.join(folder,'intents',store.shopId+'.json');
     try{const prior=JSON.parse(await fs.readFile(intentFile,'utf8'));if(prior.day!==day||prior.shopId!==store.shopId)throw Error('quality-day-intent-conflict');store.submission=prior;store.state='unknown';store.reason='same-day-prior-intent-read-only';continue;}catch(e){if(e.code!=='ENOENT')throw e;}
@@ -339,14 +335,14 @@ export async function runSegment({execute=false}={}){
     const errors=await frame.locator('.ant-message-error:visible,.ant-notification-notice-error:visible,.ant-alert-error:visible').allTextContents();if(errors.length){store.operationError=errors.slice(0,5).map(text=>String(text).trim().slice(0,500));throw Error('quality-platform-operation-error');}
     store.after={total:after.total,visibleProducts:after.products.length};store.operation={confirmed:true,popoverClosed:true,uiStable:true,observedAt:new Date().toISOString()};store.state='completed';store.completedAt=store.operation.observedAt;
    }catch(e){
-    if(!store){state.rowErrors=state.rowErrors||[];state.rowErrors.push({round:state.cursor.round,page:state.cursor.page,row:rowIndex,reason:String(e.message||e).slice(0,250),at:new Date().toISOString()});}
-    else{store.state=store.submission?'unknown':'blocked';store.reason=String(e.message||e).slice(0,250);store.errors=store.errors||[];store.errors.push({at:new Date().toISOString(),reason:store.reason,attempt:store.attemptCount||0,codeVersion});if(!store.submission)store.retryAt=Date.now()+600000;}
+    if(!store){state.rowErrors=state.rowErrors||[];state.rowErrors.push({name:rowName,round:state.cursor.round,page:state.cursor.page,row:rowIndex,reason:String(e.message||e).slice(0,250),at:new Date().toISOString()});}
+    else{store.state=store.submission?'unknown':'blocked';store.reason=String(e.message||e).slice(0,250);store.errors=store.errors||[];store.errors.push({at:new Date().toISOString(),reason:store.reason,attempt:store.attemptCount||0,codeVersion});}
    }finally{
     if(detail){await bounded(detail.close(),Date.now()+5000).catch(()=>{});detail=null;}
     state.cursor.row++;state.cursor.rowsVisited++;await save();
    }
   }
-  await recordUnknownExecutions(state,folder);state.lastSegmentTiming.processedRows=visited;state.lastSegmentTiming.elapsedMs=Date.now()-navigationStarted;await save();const summary=aggregate(state);return {ok:summary.ok,...segmentContinuation(visited,summary.ok,state.scopeFinished,state.roundLimitReached),summary,timing:state.lastSegmentTiming,pageRestore:state.lastPageRestore,stateFile,runtimeModelDecisions:0,sendAttempts:0};
+  finishSinglePass(state,current);state.lastSegmentTiming.processedRows=visited;state.lastSegmentTiming.elapsedMs=Date.now()-navigationStarted;await save();const summary=aggregate(state);return {ok:summary.ok,...segmentContinuation(visited,summary.ok,state.scopeFinished,state.roundLimitReached),summary,timing:state.lastSegmentTiming,pageRestore:state.lastPageRestore,stateFile,runtimeModelDecisions:0,sendAttempts:0};
  }finally{
   try{if(detail)await bounded(detail.close(),Date.now()+5000).catch(()=>{});if(page&&originalUrl&&!page.isClosed()&&page.url()!==originalUrl)await page.goto(originalUrl,{waitUntil:'domcontentloaded',timeout:10000}).catch(()=>{});}
   finally{if(browser)await bounded(browser.close(),Date.now()+5000).catch(()=>{});await releasePostLease(lease);}

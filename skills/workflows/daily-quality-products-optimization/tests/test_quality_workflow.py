@@ -57,6 +57,30 @@ class Tests(unittest.TestCase):
         a=Adapter();self.assertTrue(self.run_flow(a)['ok']);self.assertEqual(a.calls[-1]['text'],w.notice(1,1));proof=json.loads((self.folder/'completion.json').read_text());self.assertEqual((proof['optimized'],proof['attemptedUnconfirmed'],proof['handled']),(0,1,1));self.assertEqual(proof['records'][0]['execution'],'已发起优化，结果未确认；今日未重复提交')
         self.assertEqual(json.loads((self.folder/'state.json').read_text())['stores'][0]['state'],'unknown');self.assertEqual(intent.read_bytes(),raw)
         request=json.loads((self.folder/'request.json').read_text());self.assertTrue(quality_optimization_allowed(request,root=self.root,day='2026-10-26'));intent.write_text('{}');self.assertFalse(quality_optimization_allowed(request,root=self.root,day='2026-10-26'))
+    def single_pass_state(self):
+        state=copy.deepcopy(self.original);state.update({'executionPolicy':w.SINGLE_PASS,'cursor':{'round':1,'page':26,'row':1},'scopeFinishBasis':{'kind':'single-sequential-pass-reached-last-page','round':1,'fromPage':1,'lastPage':26,'lastPageHasNext':False}});return state
+    def test_single_pass_errors_are_honest_notes_and_do_not_block_delivery(self):
+        state=self.single_pass_state();state['stores'].append({'shopId':'999','name':'失败示例门店','state':'blocked','reason':'quality-store-rectify-loading-timeout'})
+        state['rowErrors']=[{'name':'打开前可见门店名称','page':12,'row':3,'reason':'click-timeout'}];self.write(state)
+        a=Adapter();self.assertTrue(self.run_flow(a)['ok']);proof=json.loads((self.folder/'completion.json').read_text());self.assertEqual((proof['optimized'],proof['failed'],proof['rowErrorCount'],proof['handled'],proof['recordRows']),(1,1,1,2,3));self.assertEqual(len(proof['records']),3);self.assertEqual(proof['records'][2]['name'],'打开前可见门店名称');self.assertIsNone(proof['records'][2]['shopId']);self.assertIn('未执行优化',proof['records'][2]['execution']);self.assertNotIn('全部店铺优化完成',a.calls[-1]['text'])
+        request=json.loads((self.folder/'request.json').read_text());self.assertTrue(quality_optimization_allowed(request,root=self.root,day='2026-10-26'))
+    def test_single_pass_attempt_does_not_require_reconciliation_or_fake_success(self):
+        state=self.single_pass_state();store=state['stores'][0];store['state']='unknown';store['submission']={'day':'2026-10-26','shopId':store['shopId'],'eventId':'2026-10-26-quality-'+store['shopId'],'state':'attempted'}
+        (self.folder/'intents').mkdir();intent=self.folder/'intents'/(store['shopId']+'.json');intent.write_text(json.dumps(store['submission']));self.write(state);self.optimizer.return_value={'ok':True,'summary':{'completed':0}}
+        a=Adapter();self.assertTrue(self.run_flow(a)['ok']);proof=json.loads((self.folder/'completion.json').read_text());self.assertEqual(proof['attemptedUnconfirmed'],1);self.assertEqual(proof['optimized'],0);self.assertIn('未确认',a.calls[-1]['text']);self.assertEqual(json.loads((self.folder/'state.json').read_text())['stores'][0]['state'],'unknown')
+    def test_single_pass_partial_never_builds_completion(self):
+        state=self.single_pass_state();state['scopeFinished']=False;self.write(state)
+        with self.assertRaisesRegex(ValueError,'not-at-last-page'):self.run_flow()
+    def test_verified_notification_skips_integrity_browser_and_preserves_day_files(self):
+        a=Adapter();self.assertTrue(self.run_flow(a)['ok']);before={str(p):p.read_bytes() for p in self.folder.rglob('*') if p.is_file()}
+        with patch.object(w,'integrity',side_effect=AssertionError('must not inspect dependencies after verified')):
+            result=self.run_flow(a)
+        self.assertEqual(result['status'],'already_verified');self.assertEqual(result['sendAttempts'],0);self.assertEqual(before,{str(p):p.read_bytes() for p in self.folder.rglob('*') if p.is_file()});self.assertEqual(self.optimizer.call_count,1)
+    def test_next_business_day_uses_new_folder_and_does_not_replay_old_event(self):
+        self.assertTrue(self.run_flow()['ok']);before=(self.folder/'delivery.json').read_bytes();self.optimizer.return_value={'ok':False,'continuation':False,'summary':{'pending':1}}
+        with patch.object(w,'day_now',return_value='2026-10-27'):
+            result=self.run_flow()
+        self.assertFalse(result['ok']);self.assertEqual(self.optimizer.call_count,2);self.assertEqual((self.folder/'delivery.json').read_bytes(),before);self.assertFalse((self.state/'days/2026-10-27/delivery.json').exists())
     def test_unbound_read_only_fact_is_rejected(self):
         state=copy.deepcopy(self.original);state['stores'][0].update({'state':'checked_no_action','technicalStatusPreserved':'unknown','reconciliation':{'mode':'read-only','resolved':True,'submissionSha256':'wrong'}});self.write(state);self.optimizer.return_value={'ok':True,'summary':{'completed':0}}
         with self.assertRaisesRegex(ValueError,'reconciliation-binding-invalid'):self.run_flow()

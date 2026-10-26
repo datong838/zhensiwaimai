@@ -53,7 +53,7 @@ assert.equal(shopIdFromUrl('https://melody.shop.ele.me/app/shop/520411538/food-r
 assert.equal(shopIdFromUrl('https://outside.example/app/shop/520411538/food-rectify'),null);tests++;
 assert.equal(shopIdFromUrl('https://melody.shop.ele.me/auth'),null);tests++;
 for(const state of ['completed','checked_no_action','attempted']){assert.equal(skipBeforeFrame({state,submission:{state:'attempted'}},'v1'),true);tests++;}
-assert.equal(skipBeforeFrame({state:'unknown',submission:{state:'attempted'}},'v1'),false);tests++;
+assert.equal(skipBeforeFrame({state:'unknown',submission:{state:'attempted'}},'v1'),true);tests++;
 assert.equal(skipBeforeFrame({state:'unknown',submission:{state:'attempted'},lastReconciledAt:1000},'v1',1100),true);tests++;
 assert.equal(skipBeforeFrame({state:'pending'},'v1'),false);tests++;
 console.log(JSON.stringify({ok:true,allTests:tests,fastDailySkipTests:9,browserActions:0,sendAttempts:0}));
@@ -83,9 +83,7 @@ try{
  assert.equal(aggregate({...metadataState,scopeFinished:false}).ok,false);tests++;
  assert.equal(recordedUnknown(unknownStore,'2026-10-27'),false);tests++;
 }finally{await factFs.rm(factFolder,{recursive:true,force:true});}
-assert.equal(normalRoundComplete(0,251,251,251),false);tests++;
-assert.equal(normalRoundComplete(2,245,251,251),false);tests++;
-assert.equal(normalRoundComplete(1,251,251,251),true);tests++;
+// Scope completion is tested below using actual terminal-round records, not a panel/unique-count equality.
 console.log(JSON.stringify({ok:true,allTests:tests,recordedExecutionAndNormalRoundTests:8,browserActions:0,sendAttempts:0}));
 var lateRestoreStart=Date.parse('2026-10-26T20:10:00+08:00');assert.equal(canStartStore(segmentDeadline(lateRestoreStart,120000),lateRestoreStart+90000),false);assert.equal(canStartStore(segmentDeadline(lateRestoreStart,180000),lateRestoreStart+90000),true);tests++;
 var beforeBoundary=Date.parse('2026-10-26T20:29:00+08:00');assert.equal(segmentDeadline(beforeBoundary,180000)-beforeBoundary,50000);assert.equal(canStartStore(segmentDeadline(beforeBoundary,180000),beforeBoundary),false);tests++;
@@ -102,3 +100,25 @@ console.log(JSON.stringify({ok:true,allTests:tests,directPageResumeTests:6,brows
 const {segmentContinuation}=await import('../scripts/quality_optimizer.mjs');assert.deepEqual(segmentContinuation(0,false,false,false),{reason:'quality-no-progress-segment-parked',continuation:false});tests++;
 assert.equal(segmentContinuation(1,false,false,false).continuation,true);tests++;
 console.log(JSON.stringify({ok:true,allTests:tests,zeroProgressParkingTests:2,browserActions:0,sendAttempts:0}));
+
+const {scopeCompletionProof}=await import('../scripts/quality_core.mjs');
+var completedDay={day:'2026-10-26',cursor:{round:8,page:7,row:0,newShops:0},stores:Array.from({length:249},(_,i)=>({shopId:String(i+1),state:'completed'})),rounds:[{round:6,newShops:0,rowsVisited:251,platformTotal:251,finishedAt:'2026-10-26T13:06:28Z'},{round:7,newShops:0,rowsVisited:251,platformTotal:251,finishedAt:'2026-10-26T13:12:43Z'}],rowErrors:[{round:7,page:19,row:6}]};
+var originalRound=JSON.stringify(completedDay.rounds);var scope=scopeCompletionProof(completedDay);assert.equal(scope.sourceRound,6);assert.equal(scope.independentStores,249);assert.equal(scope.rowsVisited,251);assert.equal(JSON.stringify(completedDay.rounds),originalRound);tests++;
+assert.equal(scopeCompletionProof({...completedDay,rounds:[{...completedDay.rounds[0],rowsVisited:245}]}),null);tests++;
+assert.equal(scopeCompletionProof({...completedDay,rounds:[{...completedDay.rounds[0],finishedAt:undefined}]}),null);tests++;
+assert.equal(scopeCompletionProof({...completedDay,rowErrors:[{round:6},{round:7}]}),null);tests++;
+assert.equal(scopeCompletionProof({...completedDay,cursor:{...completedDay.cursor,newShops:1}}),null);tests++;
+assert.equal(scopeCompletionProof({...completedDay,rounds:[completedDay.rounds[0],{...completedDay.rounds[1],newShops:1}]}),null);tests++;
+assert.equal(scopeCompletionProof({...completedDay,stores:[...completedDay.stores,{shopId:'999',state:'pending'}]}),null);tests++;
+assert.equal(scopeCompletionProof({...completedDay,stores:[...completedDay.stores,{shopId:'999',state:'unknown'}]}),null);tests++;
+console.log(JSON.stringify({ok:true,allTests:tests,completeNormalHistoricalRoundTests:8,browserActions:0,sendAttempts:0}));
+const {SINGLE_PASS,finishSinglePass,singlePassSummary}=await import('../scripts/quality_core.mjs');
+const {newDailyState}=await import('../scripts/quality_optimizer.mjs');
+var onePass=newDailyState('2026-10-27');onePass.stores=Array.from({length:170},(_,i)=>({shopId:String(i+1),state:'checked_no_action'}));onePass.cursor={round:1,page:26,row:1,newShops:170,rowsVisited:251};
+assert.equal(finishSinglePass(onePass,{page:26,hasNext:false,rows:[{}],total:251}),true);assert.equal(onePass.scopeFinished,true);assert.equal(onePass.cursor.round,1);assert.equal(onePass.rounds.length,1);assert.equal(onePass.scopeFinishBasis.independentStores,170);assert.equal(singlePassSummary(onePass).ok,true);assert.equal(singlePassSummary(onePass).handled,170);tests++;
+assert.equal(finishSinglePass(onePass,{page:26,hasNext:false,rows:[{}],total:251}),true);assert.equal(onePass.rounds.length,1);tests++;
+var partialPass=newDailyState('2026-10-28');partialPass.cursor={round:1,page:18,row:2,newShops:0,rowsVisited:172};assert.equal(finishSinglePass(partialPass,{page:18,hasNext:true,rows:Array(10),total:251}),false);assert.equal(partialPass.cursor.page,18);assert.equal(partialPass.cursor.row,2);assert.equal(partialPass.cursor.round,1);tests++;
+var erroredPass=newDailyState('2026-10-28');erroredPass.cursor={round:1,page:1,row:2,newShops:1,rowsVisited:2};erroredPass.stores=[{shopId:'123',name:'失败店',state:'blocked',reason:'loading-timeout'}];erroredPass.rowErrors=[{name:'无法读取ID的门店',page:1,row:1,reason:'click-timeout'}];assert.equal(finishSinglePass(erroredPass,{page:1,hasNext:false,rows:[{},{}],total:2}),true);var failedSummary=singlePassSummary(erroredPass);assert.equal(failedSummary.ok,true);assert.equal(failedSummary.failed,1);assert.equal(failedSummary.rowErrorCount,1);assert.ok(failedSummary.text.includes('未能执行'));assert.ok(!failedSummary.text.includes('全部店铺优化完成'));tests++;
+var tomorrow=newDailyState('2026-10-29');assert.equal(tomorrow.cursor.page,1);assert.equal(tomorrow.cursor.round,1);assert.equal(tomorrow.stores.length,0);assert.equal(onePass.stores.length,170);tests++;
+assert.equal(skipBeforeFrame({state:'blocked'},'new-code-version'),true);assert.equal(skipBeforeFrame({state:'unknown',submission:{state:'attempted'}},'new-code-version'),true);tests++;
+console.log(JSON.stringify({ok:true,allTests:tests,singlePassPerDayTests:6,browserActions:0,sendAttempts:0}));

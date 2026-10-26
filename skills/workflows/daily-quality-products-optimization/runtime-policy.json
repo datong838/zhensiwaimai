@@ -8,10 +8,11 @@
   "authorizationRef": "user-20261026-quality-products-all-stores-optimization-and-notice",
   "runtimeModelDecisions": 0,
   "files": {
-    "scripts/quality_core.mjs": "e6677a936107dbd23e0067b2f7b193093a5c23a5c5337c4cf6c904d2756e6bca",
-    "scripts/quality_optimizer.mjs": "c6f2cffd1ca434c9ad85843a91bc2503a35c140be4837a7e158f2185aa45f9af",
-    "scripts/quality_workflow.py": "588a10648a3007c1a016b8e48f9a1c42c8f10603e966ab1ff412ad380cf53ad4",
+    "scripts/quality_core.mjs": "b1fda09d1b460241e4a4952ace3f849e98c51db6cb4acb238226273790f72930",
+    "scripts/quality_optimizer.mjs": "a9a85d9fecd96499f796ec0b9d45179a3f81ad84c940d295ced5fd2f835a4bf1",
+    "scripts/quality_workflow.py": "c6bb3950277b0f6a12bc580e4c8b0de6896844896cc5e35b17f184fb3b19c9b0",
     "scripts/quality_report.mjs": "22dc059d783ee1e8cd49fe925b71224201635eda5b85661e7da85fb31bc5e042"
   },
-  "validation": "schema2 sequential daily shopId execution; frozen two-column Artifact Tool Excel plus text; actual production receipts separate"
+  "validation": "single pass per day; stop at last page; errors recorded honestly; legacy verified delivery returns zero actions",
+  "executionPolicy": "single-pass-per-day-v1"
 }
