@@ -96,6 +96,7 @@ class CodeConsolidationTests(unittest.TestCase):
         self.assertIn('skills/.daily-jinsha-reports-core/BASELINE.md',p['coverage']['frozenHashes'])
         patched=(package/'patches'/tool.WRAPPER_FILE).read_text()
         for field in ['customer','meituanReference','taobaoTemplate']:self.assertIn(field+':path.join(FIXED.outputRoot,',patched)
+        self.assertEqual(patched,tool.render_wrapper_injection(tool.WRAPPER_FILE,patched))
         self.assertTrue(any(r['category']=='frozen-opaque-default' for r in p['coverage']['references']))
     def test_actual_shared_inspector_is_clean_against_projected_candidate_tree(self):
         import importlib.util

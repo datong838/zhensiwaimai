@@ -183,6 +183,8 @@ def render_wrapper_injection(name,text):
     updated="import { FIXED, assertFrozenCoreHashes, assertInternalInvocation, assertProductionConfig, assertStagePermission } from './business_workflow_policy.mjs';"
     call="runBuildReports({receipt:c.downloadReceipt,buildReceipt:c.buildReceipt,outputDir:c.outputDir,filenameSuffix:'',titleSuffix:''})"
     injected="runBuildReports({receipt:c.downloadReceipt,buildReceipt:c.buildReceipt,outputDir:c.outputDir,customer:path.join(FIXED.outputRoot,'客户表最新.xlsx'),meituanReference:path.join(FIXED.outputRoot,'美团全部_2026-08-25至2026-08-25.xlsx'),taobaoTemplate:path.join(FIXED.outputRoot,'淘宝闪购_模版2026-08-24至2026-08-24.xlsx'),filenameSuffix:'',titleSuffix:''})"
+    if updated in text and injected in text:
+        return text
     if start not in text or call not in text:raise ValueError('consolidation-frozen-wrapper-shape-unverified')
     return text.replace(start,updated,1).replace(call,injected,1)
 
