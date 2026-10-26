@@ -14,6 +14,7 @@
 """
 from __future__ import annotations
 
+import ctypes
 import fcntl
 import json
 import os
@@ -21,6 +22,7 @@ import re
 import shutil
 import signal
 import subprocess
+import sys
 import time
 from dataclasses import dataclass, field
 from datetime import datetime
@@ -127,6 +129,9 @@ class StepResult:
     log_path: str
     stdout_tail: str = ""
     stderr_tail: str = ""
+    process_group_leak: bool = False
+    cleanup_uncertain: bool = False
+    cleanup_detail: str = ""
 
 
 # ---------------------------------------------------------------- 失败分类
@@ -216,18 +221,242 @@ class RunnerLock:
 
 # ---------------------------------------------------------------- 步骤执行
 
-def _killpg(proc: subprocess.Popen) -> None:
-    try:
-        os.killpg(os.getpgid(proc.pid), signal.SIGTERM)
-    except (ProcessLookupError, PermissionError):
-        return
+PROCESS_GROUP_TERM_GRACE_SECONDS = 10.0
+PROCESS_GROUP_KILL_GRACE_SECONDS = 2.0
+PROCESS_GROUP_POLL_SECONDS = 0.05
 
 
-def _killpg_force(proc: subprocess.Popen) -> None:
+class _DarwinProcBsdInfo(ctypes.Structure):
+    """macOS <sys/proc_info.h> 的 struct proc_bsdinfo（SDK当前大小136）。"""
+    _fields_ = [
+        ("pbi_flags", ctypes.c_uint32), ("pbi_status", ctypes.c_uint32),
+        ("pbi_xstatus", ctypes.c_uint32), ("pbi_pid", ctypes.c_uint32),
+        ("pbi_ppid", ctypes.c_uint32), ("pbi_uid", ctypes.c_uint32),
+        ("pbi_gid", ctypes.c_uint32), ("pbi_ruid", ctypes.c_uint32),
+        ("pbi_rgid", ctypes.c_uint32), ("pbi_svuid", ctypes.c_uint32),
+        ("pbi_svgid", ctypes.c_uint32), ("rfu_1", ctypes.c_uint32),
+        ("pbi_comm", ctypes.c_char * 16), ("pbi_name", ctypes.c_char * 32),
+        ("pbi_nfiles", ctypes.c_uint32), ("pbi_pgid", ctypes.c_uint32),
+        ("pbi_pjobc", ctypes.c_uint32), ("e_tdev", ctypes.c_uint32),
+        ("e_tpgid", ctypes.c_uint32), ("pbi_nice", ctypes.c_int32),
+        ("pbi_start_tvsec", ctypes.c_uint64),
+        ("pbi_start_tvusec", ctypes.c_uint64),
+    ]
+
+
+_DARWIN_LIBPROC = None
+if sys.platform == "darwin":
     try:
-        os.killpg(os.getpgid(proc.pid), signal.SIGKILL)
-    except (ProcessLookupError, PermissionError):
-        return
+        _DARWIN_LIBPROC = ctypes.CDLL("/usr/lib/libproc.dylib", use_errno=True)
+        _DARWIN_LIBPROC.proc_pidinfo.argtypes = [
+            ctypes.c_int, ctypes.c_int, ctypes.c_uint64,
+            ctypes.c_void_p, ctypes.c_int,
+        ]
+        _DARWIN_LIBPROC.proc_pidinfo.restype = ctypes.c_int
+    except OSError:
+        _DARWIN_LIBPROC = None
+
+
+def _process_birth_token(pid: int, ps_started: str = "") -> str:
+    """Darwin优先取微秒启动时间；其他宿主退回ps lstart。"""
+    if _DARWIN_LIBPROC is not None:
+        info = _DarwinProcBsdInfo()
+        size = ctypes.sizeof(info)
+        read = _DARWIN_LIBPROC.proc_pidinfo(
+            pid, 3, 0, ctypes.byref(info), size)  # PROC_PIDTBSDINFO=3
+        if read == size and info.pbi_pid == pid:
+            return "darwin:%d:%06d" % (
+                info.pbi_start_tvsec, info.pbi_start_tvusec)
+    return ("ps:" + ps_started) if ps_started else ""
+
+
+@dataclass(frozen=True)
+class ProcessGroupIdentity:
+    pgid: int
+    sid: int
+    leader_pid: int
+    leader_started: str
+
+
+@dataclass(frozen=True)
+class _ProcessInfo:
+    pid: int
+    pgid: int
+    state: str
+    started: str
+
+
+@dataclass(frozen=True)
+class ProcessGroupSnapshot:
+    live_pids: Tuple[int, ...] = ()
+    zombie_pids: Tuple[int, ...] = ()
+    uncertain: bool = False
+    detail: str = ""
+
+
+@dataclass(frozen=True)
+class ProcessGroupCleanup:
+    cleaned: bool
+    uncertain: bool
+    had_live_members: bool
+    detail: str
+
+
+def _read_process_table() -> List[_ProcessInfo]:
+    """读取最小进程身份表；禁止从命令文本猜测归属。"""
+    output = subprocess.check_output(
+        ["ps", "-axo", "pid=,pgid=,stat=,lstart="],
+        text=True, stderr=subprocess.DEVNULL,
+    )
+    rows: List[_ProcessInfo] = []
+    for line in output.splitlines():
+        parts = line.strip().split(None, 3)
+        if len(parts) != 4:
+            continue
+        try:
+            pid, pgid = int(parts[0]), int(parts[1])
+        except ValueError:
+            continue
+        rows.append(_ProcessInfo(pid, pgid, parts[2], parts[3].strip()))
+    return rows
+
+
+def _capture_process_group_identity(proc: subprocess.Popen) -> ProcessGroupIdentity:
+    """捕获 start_new_session=True 创建的本步会话身份。"""
+    pgid = os.getpgid(proc.pid)
+    sid = os.getsid(proc.pid)
+    if pgid != proc.pid or sid != proc.pid:
+        raise RuntimeError(
+            "runner-process-group-identity-invalid pid=%s pgid=%s sid=%s" %
+            (proc.pid, pgid, sid))
+    birth = _process_birth_token(proc.pid)
+    if not birth:
+        leader = next((row for row in _read_process_table() if row.pid == proc.pid), None)
+        if leader is None:
+            raise RuntimeError("runner-process-group-leader-not-observable pid=%s" % proc.pid)
+        birth = _process_birth_token(proc.pid, leader.started)
+    if not birth:
+        raise RuntimeError("runner-process-group-birth-unavailable pid=%s" % proc.pid)
+    return ProcessGroupIdentity(pgid, sid, proc.pid, birth)
+
+
+def _snapshot_process_group(identity: ProcessGroupIdentity) -> ProcessGroupSnapshot:
+    try:
+        members = [row for row in _read_process_table() if row.pgid == identity.pgid]
+    except (OSError, subprocess.SubprocessError) as exc:
+        return ProcessGroupSnapshot(
+            uncertain=True, detail="runner-process-table-unavailable: %s" % exc)
+    if not members:
+        return ProcessGroupSnapshot(detail="process-group-empty")
+    if not identity.leader_started:
+        return ProcessGroupSnapshot(
+            uncertain=True,
+            detail="runner-process-group-birth-unavailable pgid=%s" % identity.pgid)
+    live: List[int] = []
+    zombies: List[int] = []
+    for member in members:
+        try:
+            sid = os.getsid(member.pid)
+        except ProcessLookupError:
+            continue
+        except PermissionError as exc:
+            return ProcessGroupSnapshot(
+                uncertain=True,
+                detail="runner-process-session-unavailable pid=%s: %s" %
+                       (member.pid, exc))
+        if sid != identity.sid:
+            return ProcessGroupSnapshot(
+                uncertain=True,
+                detail="runner-process-group-identity-mismatch pid=%s sid=%s expected=%s" %
+                       (member.pid, sid, identity.sid))
+        if member.pid == identity.leader_pid:
+            current_birth = _process_birth_token(member.pid, member.started)
+            if not current_birth or current_birth != identity.leader_started:
+                return ProcessGroupSnapshot(
+                    uncertain=True,
+                    detail="runner-process-group-birth-mismatch pid=%s" % member.pid)
+        if member.state.upper().startswith("Z"):
+            zombies.append(member.pid)
+        else:
+            live.append(member.pid)
+    return ProcessGroupSnapshot(
+        live_pids=tuple(sorted(live)), zombie_pids=tuple(sorted(zombies)),
+        detail="live=%s zombies=%s" % (sorted(live), sorted(zombies)))
+
+
+def _signal_owned_group(identity: ProcessGroupIdentity,
+                        sig: signal.Signals) -> Tuple[bool, ProcessGroupSnapshot]:
+    """仅在当前快照仍能证明归属时向原进程组发信号。"""
+    snapshot = _snapshot_process_group(identity)
+    if snapshot.uncertain or not snapshot.live_pids:
+        return False, snapshot
+    try:
+        os.killpg(identity.pgid, sig)
+    except ProcessLookupError:
+        return False, _snapshot_process_group(identity)
+    except PermissionError as exc:
+        return False, ProcessGroupSnapshot(
+            live_pids=snapshot.live_pids, zombie_pids=snapshot.zombie_pids,
+            uncertain=True,
+            detail="runner-process-group-signal-denied sig=%s: %s" % (sig, exc))
+    return True, snapshot
+
+
+def _wait_process_group(identity: ProcessGroupIdentity,
+                        seconds: float) -> ProcessGroupSnapshot:
+    deadline = time.monotonic() + max(0.0, seconds)
+    while True:
+        snapshot = _snapshot_process_group(identity)
+        if snapshot.uncertain or not snapshot.live_pids:
+            return snapshot
+        if time.monotonic() >= deadline:
+            return snapshot
+        time.sleep(PROCESS_GROUP_POLL_SECONDS)
+
+
+def _cleanup_process_group(
+        identity: ProcessGroupIdentity,
+        term_grace: Optional[float] = None,
+        kill_grace: Optional[float] = None,
+) -> ProcessGroupCleanup:
+    """核验归属后 TERM→KILL，并以整个进程组清空作为成功条件。"""
+    term_grace = (PROCESS_GROUP_TERM_GRACE_SECONDS if term_grace is None
+                  else term_grace)
+    kill_grace = (PROCESS_GROUP_KILL_GRACE_SECONDS if kill_grace is None
+                  else kill_grace)
+    initial = _snapshot_process_group(identity)
+    if initial.uncertain:
+        return ProcessGroupCleanup(False, True, bool(initial.live_pids), initial.detail)
+    if not initial.live_pids:
+        return ProcessGroupCleanup(True, False, False, initial.detail)
+
+    signalled, term_snapshot = _signal_owned_group(identity, signal.SIGTERM)
+    if term_snapshot.uncertain:
+        return ProcessGroupCleanup(False, True, True, term_snapshot.detail)
+    if not signalled and term_snapshot.live_pids:
+        return ProcessGroupCleanup(
+            False, True, True, "runner-process-group-term-not-sent")
+    after_term = _wait_process_group(identity, term_grace)
+    if after_term.uncertain:
+        return ProcessGroupCleanup(False, True, True, after_term.detail)
+    if not after_term.live_pids:
+        return ProcessGroupCleanup(True, False, True, "process-group-clean-after-term")
+
+    signalled, kill_snapshot = _signal_owned_group(identity, signal.SIGKILL)
+    if kill_snapshot.uncertain:
+        return ProcessGroupCleanup(False, True, True, kill_snapshot.detail)
+    if not signalled and kill_snapshot.live_pids:
+        return ProcessGroupCleanup(
+            False, True, True, "runner-process-group-kill-not-sent")
+    after_kill = _wait_process_group(identity, kill_grace)
+    if after_kill.uncertain:
+        return ProcessGroupCleanup(False, True, True, after_kill.detail)
+    if after_kill.live_pids:
+        return ProcessGroupCleanup(
+            False, True, True,
+            "runner-process-group-still-live pids=%s" %
+            (list(after_kill.live_pids),))
+    return ProcessGroupCleanup(True, False, True, "process-group-clean-after-kill")
 
 
 # --------------------------------------------------------- 步骤进程的遗骸登记
@@ -251,12 +480,15 @@ def _pgid_alive(pgid: int) -> bool:
     return True
 
 
-def _register_step(proc: subprocess.Popen, argv: List[str]) -> Optional[Path]:
+def _register_step(proc: subprocess.Popen, argv: List[str],
+                   identity: ProcessGroupIdentity) -> Optional[Path]:
     try:
         LIVE_STEPS_DIR.mkdir(parents=True, exist_ok=True)
-        record = LIVE_STEPS_DIR / ("%d.json" % os.getpgid(proc.pid))
+        record = LIVE_STEPS_DIR / ("%d.json" % identity.pgid)
         record.write_text(json.dumps({
-            "pgid": os.getpgid(proc.pid), "pid": proc.pid, "argv": list(argv),
+            "pgid": identity.pgid, "sid": identity.sid,
+            "pid": proc.pid, "leader_started": identity.leader_started,
+            "argv": list(argv),
             "at": datetime.now().isoformat(timespec="seconds"),
         }, ensure_ascii=False), encoding="utf-8")
         return record
@@ -274,38 +506,37 @@ def _unregister_step(record: Optional[Path]) -> None:
 
 
 def kill_live_steps(reason: str = "", grace: float = 5.0) -> List[dict]:
-    """SIGTERM→(grace)→SIGKILL 收割所有已登记的步骤进程组，并清空登记。"""
+    """按出生锚点核验后收割已登记步骤；无法证明归属时保留登记。"""
     records = sorted(LIVE_STEPS_DIR.glob("*.json")) if LIVE_STEPS_DIR.exists() else []
-    victims: List[Tuple[int, dict]] = []
+    reaped: List[dict] = []
     for record in records:
         try:
             data = json.loads(record.read_text(encoding="utf-8"))
         except (OSError, ValueError):
             data = {}
-        pgid = data.get("pgid")
-        if isinstance(pgid, int) and _pgid_alive(pgid):
-            victims.append((pgid, data))
-        _unregister_step(record)
-    for pgid, _ in victims:
         try:
-            os.killpg(pgid, signal.SIGTERM)
-        except (ProcessLookupError, PermissionError):
-            pass
-    if victims and grace > 0:
-        deadline = time.time() + grace
-        while time.time() < deadline and any(_pgid_alive(p) for p, _ in victims):
-            time.sleep(0.25)
-    for pgid, _ in victims:
-        if _pgid_alive(pgid):
-            try:
-                os.killpg(pgid, signal.SIGKILL)
-            except (ProcessLookupError, PermissionError):
-                pass
-    for pgid, data in victims:
-        print("[reap%s] 终止遗留步骤进程组 pgid=%s argv=%s" % (
-            (":" + reason) if reason else "", pgid,
-            " ".join(data.get("argv") or [])[:160]))
-    return [{"pgid": pgid, "argv": data.get("argv")} for pgid, data in victims]
+            identity = ProcessGroupIdentity(
+                int(data["pgid"]), int(data["sid"]), int(data["pid"]),
+                str(data["leader_started"] or ""))
+        except (KeyError, TypeError, ValueError):
+            print("[reap%s] 保留无身份锚点登记 path=%s" % (
+                (":" + reason) if reason else "", record))
+            continue
+        outcome = _cleanup_process_group(
+            identity, term_grace=grace,
+            kill_grace=PROCESS_GROUP_KILL_GRACE_SECONDS)
+        if outcome.cleaned and not outcome.uncertain:
+            _unregister_step(record)
+            if outcome.had_live_members:
+                print("[reap%s] 终止遗留步骤进程组 pgid=%s argv=%s" % (
+                    (":" + reason) if reason else "", identity.pgid,
+                    " ".join(data.get("argv") or [])[:160]))
+                reaped.append({"pgid": identity.pgid, "argv": data.get("argv")})
+        else:
+            print("[reap%s] 保留身份不明登记 pgid=%s detail=%s" % (
+                (":" + reason) if reason else "", identity.pgid,
+                outcome.detail))
+    return reaped
 
 
 def reap_stale_steps() -> List[dict]:
@@ -334,30 +565,59 @@ def run_step(argv: List[str], cwd: Path, timeout_seconds: Optional[int], log_pat
     full_env.update(local_network_env(full_env))
     start = time.time()
     timed_out = False
+    process_group_leak = False
+    cleanup_uncertain = False
+    cleanup_detail = ""
+    can_unregister = False
     with open(log_path, "w", encoding="utf-8") as log:
         proc = subprocess.Popen(
             argv, cwd=str(cwd), stdout=log, stderr=subprocess.STDOUT,
             start_new_session=True, env=full_env,
         )
-        record = _register_step(proc, argv)
+        try:
+            identity = _capture_process_group_identity(proc)
+        except (OSError, RuntimeError, subprocess.SubprocessError) as exc:
+            # 短命且已退出的普通命令可在后续空组快照中确认安全；若组仍活，
+            # 缺少出生锚点就必须 fail-closed，不向该组发送信号。
+            identity = ProcessGroupIdentity(proc.pid, proc.pid, proc.pid, "")
+            cleanup_detail = "runner-process-group-capture-failed: %s" % exc
+        record = _register_step(proc, argv, identity)
         try:
             proc.wait(timeout=timeout_seconds)
         except subprocess.TimeoutExpired:
             timed_out = True
-            _killpg(proc)
-            try:
-                proc.wait(timeout=10)
-            except subprocess.TimeoutExpired:
-                _killpg_force(proc)
-                proc.wait()
+            outcome = _cleanup_process_group(identity)
+            cleanup_uncertain = outcome.uncertain or not outcome.cleaned
+            cleanup_detail = outcome.detail
+        else:
+            snapshot = _snapshot_process_group(identity)
+            if snapshot.uncertain:
+                cleanup_uncertain = True
+                cleanup_detail = snapshot.detail
+            elif snapshot.live_pids:
+                process_group_leak = True
+                outcome = _cleanup_process_group(identity)
+                cleanup_uncertain = outcome.uncertain or not outcome.cleaned
+                cleanup_detail = outcome.detail
         finally:
-            _unregister_step(record)
+            # poll() 同时回收已退出 leader；清理不确定时绝不无限等待。
+            proc.poll()
+            final_snapshot = _snapshot_process_group(identity)
+            can_unregister = not final_snapshot.uncertain and not final_snapshot.live_pids
+            if can_unregister:
+                _unregister_step(record)
     duration = round(time.time() - start, 2)
     tail = _tail_of(log_path)
+    exit_code = proc.returncode
+    if (process_group_leak or cleanup_uncertain) and exit_code in (0, None):
+        exit_code = 70
     return StepResult(
-        argv=list(argv), cwd=str(cwd), exit_code=proc.returncode,
+        argv=list(argv), cwd=str(cwd), exit_code=exit_code,
         timed_out=timed_out, duration_seconds=duration,
         log_path=str(log_path), stdout_tail=tail, stderr_tail="",
+        process_group_leak=process_group_leak,
+        cleanup_uncertain=cleanup_uncertain,
+        cleanup_detail=cleanup_detail,
     )
 
 
@@ -422,7 +682,8 @@ def run_skill(entry: Dict, history_dir: Optional[Path] = None,
                 shutil.copyfile(slog, run_dir / ("step%d.log" % i))
             except OSError:
                 pass
-            if sr.exit_code != 0 or sr.timed_out:
+            if (sr.exit_code != 0 or sr.timed_out or sr.process_group_leak or
+                    sr.cleanup_uncertain):
                 failed = True
                 break
 
@@ -432,9 +693,17 @@ def run_skill(entry: Dict, history_dir: Optional[Path] = None,
         last = step_results[-1]
         # P0-1：收据优先分类——detail 必含可读故障码（stage/reason/error-code）
         # P0-1b：传 workdir 以便对 legacy-marker-* 做「当日 verified 外发」证据裁决
+        diagnostic = "\n".join(combined_tail)
+        if last.process_group_leak or last.cleanup_uncertain:
+            diagnostic += "\nrunner-process-group-cleanup: %s" % last.cleanup_detail
         category, detail, fail_signal = classify_with_receipt(
-            "\n".join(combined_tail), last.exit_code, last.timed_out, last.log_path,
+            diagnostic, last.exit_code, last.timed_out, last.log_path,
             workdir=str(cwd))
+        if last.process_group_leak or last.cleanup_uncertain:
+            category = CAT_UNKNOWN
+            detail = "步骤进程组异常，禁止同轮重试: %s" % last.cleanup_detail
+        if last.timed_out or last.process_group_leak or last.cleanup_uncertain:
+            break
         if category != CAT_RECOVERABLE or attempts > retries:
             break
         if cool > 0:
