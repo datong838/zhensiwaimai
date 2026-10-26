@@ -216,6 +216,8 @@ def _request_image_matches(candidate, item):
 
 
 def _executed_images_user_fact(flow, now):
+    if now.tzinfo is None:
+        now = now.replace(tzinfo=ZoneInfo('Asia/Shanghai'))
     if flow not in EXECUTED_IMAGE_FLOWS or now.strftime('%Y-%m-%d') != '2026-10-26':
         return None
     path = ROOT/'runtime/state/user-confirmed-deliveries/20261026-executed-image-submissions-173035.json'

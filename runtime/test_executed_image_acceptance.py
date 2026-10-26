@@ -55,6 +55,8 @@ class ExecutedImageAcceptanceTests(unittest.TestCase):
             d=json.loads((self.folder/name).read_text());d['binding']=binding;self.dump(name,d)
         self.acceptance['items'][0]['sources']=self.hashes();self.save()
         self.assertTrue(self.fact()['businessDelivered'])
+    def test_original_director_naive_local_time_is_supported(self):
+        self.assertTrue(facts.read_fact(self.flow,self.now.replace(tzinfo=None))['businessDelivered'])
     def test_next_day_and_future_slots_not_accepted(self):
         self.assertIsNone(facts.read_fact(self.flow,self.now.replace(day=27)))
         self.assertIsNone(facts.read_fact('taobao-flash-sale-negative-review-appeals',self.now))
