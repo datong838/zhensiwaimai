@@ -189,8 +189,85 @@ def _service_ranking_fact(now):
         return None
 
 
+# One dated user acceptance, separate from transport receipts and future duties.
+EXECUTED_IMAGE_FLOWS = {
+    'daily-top10-to-wechat-group': ('top10', 1),
+    'daily-negative-reviews': ('negative-reviews-summary', 1),
+    'daily-store-task-completion-ops-to-wechat': ('daily-store-task-completion-ops', 1),
+    'contract-termination-applications-screenshot': ('contract-termination-ops', 1),
+    'daily-taobao-download-to-jinsha': ('taobao-evidence', 2),
+    'daily-meituan-income-top10-to-wechat': ('daily-meituan-income-top10-ops', 1),
+}
+EXECUTED_IMAGE_QUOTES = [
+    '今天所有已经执行的任务流的图片提交 我都看了没有问题 只是有个通病；回执待确认/unknow 等',
+    '是的 今天已经执行的任务流 都执行成功了 没有 遗漏和错过的',
+]
+
+
+def _request_image_matches(candidate, item):
+    if (candidate.get('type') != 'image' or candidate.get('itemId') != item.get('itemId')
+            or candidate.get('name', Path(candidate.get('path', '')).name) != item['name']):
+        return False
+    if candidate.get('sha256') is not None:
+        return (candidate['sha256'] == item['sha256']
+                and candidate.get('size', item.get('size')) == item.get('size'))
+    source = Path(candidate.get('path', ''))
+    return source.is_file() and hashlib.sha256(source.read_bytes()).hexdigest() == item['sha256']
+
+
+def _executed_images_user_fact(flow, now):
+    if flow not in EXECUTED_IMAGE_FLOWS or now.strftime('%Y-%m-%d') != '2026-10-26':
+        return None
+    path = ROOT/'runtime/state/user-confirmed-deliveries/20261026-executed-image-submissions-173035.json'
+    try:
+        acceptance = json.loads(path.read_text())
+        cutoff = datetime.fromisoformat(acceptance['recordedAt'])
+        if not (acceptance['source'] == 'explicit-user-confirmation'
+                and acceptance['businessAccepted'] is True and acceptance['date'] == '2026-10-26'
+                and acceptance['userQuotes'] == EXECUTED_IMAGE_QUOTES
+                and cutoff.date() == now.date() and cutoff <= now):
+            return None
+        route, count = EXECUTED_IMAGE_FLOWS[flow]
+        selected = [i for i in acceptance['items'] if i['workflowId'] == route]
+        if len(selected) != count or len({i['taskId'] for i in selected}) != count:
+            return None
+        queue = ROOT/'skills/wechat-messaging/.runtime/ui-post-queue'
+        for proof in selected:
+            folder = queue/proof['taskId']
+            for name in ('task.json', 'response.json', 'send-intent.json'):
+                if hashlib.sha256((folder/name).read_bytes()).hexdigest() != proof['sources'][name]:
+                    return None
+            task = _image_original(folder, proof['name'], proof['sha256'], cutoff, workflow=route)
+            result = json.loads((folder/'response.json').read_text())['result']
+            if not (proof['groupName'] == GROUP
+                    and task['request']['context']['eventId'] == proof['eventId']
+                    and sum(_request_image_matches(candidate, task['item']) for candidate in task['request']['items']) == 1
+                    and result['backend'] == 'system-events-ui-tree' and result['inputEmpty'] is True):
+                return None
+        if flow == 'daily-meituan-income-top10-to-wechat':
+            base = ROOT/'skills/workflows/daily-meituan-income-top10-to-wechat/.runtime/days/2026-10-26'
+            marker = json.loads((base/'delivery.json').read_text())
+            frozen = json.loads((base/'frozen.json').read_text())
+            label = marker['deliveries'][0]
+            if not (marker['state'] == 'unknown' and marker['eventId'] == '2026-10-26-meituan-income-top10'
+                    and marker['groupName'] == GROUP and marker['sha256'] == selected[0]['sha256']
+                    and frozen['day'] == '2026-10-26' and frozen['collection']['dataDate'] == '2026-10-25'
+                    and frozen['item'] == task['item'] and len(task['request']['items']) == 2
+                    and task['request']['items'][0]['text'] == '美团外卖门店收入top10'
+                    and label['itemId'] == 'meituan-income-label' and label['receipt']['status'] == 'verified'):
+                return None
+        return {'businessDelivered': True, 'basis': 'explicit-user-confirmation', 'source': str(path),
+                'taskIds': [i['taskId'] for i in selected], 'technicalStatusPreserved': 'unknown',
+                'newSendAttempts': 0}
+    except (OSError, ValueError, KeyError, TypeError, IndexError):
+        return None
+
+
 def read_fact(flow, now=None):
     now = now or datetime.now(ZoneInfo('Asia/Shanghai'))
+    accepted = _executed_images_user_fact(flow, now)
+    if accepted:
+        return accepted
     if flow == SERVICE_RANKING:
         return _service_ranking_fact(now)
     if flow == TAOBAO_IMAGES:
