@@ -113,6 +113,24 @@ python scripts/executor.py reconcile --request /absolute/request.json --authoriz
 
 运行前读取harmonyos3-phone-control和wechat-mobile-control规程及本技能恢复规则。业务提供群名与对象，通道内部完成主实例核验、精确定位、原文复制/大图/文件回读、输入法恢复和通知遮挡处理。移动reconcile尚未实现，不能因测试群曾允许重发就对生产unknown重发。
 
+## Android 企业微信入口（独立通道）
+
+`context.channel=mobile-wecom` 使用 `scripts/android_wecom_channel.py`，只控制 Android 上的
+`com.tencent.wework`。它与 `mobile`（个人微信 `com.tencent.mm`）和 `desktop`（桌面发送）
+分别路由；既有桌面默认值和个人手机路径不变。调用 `executor.py execute` 时仍传
+`--device-serial-file`，但设备身份、运行许可和包名从单独的
+`mobile-wecom-runtime-policy.json` 读取。该策略默认 `offline`；必须有单独、短时、精确绑定
+群名和请求摘要的 acceptance 才能真机发送。禁止借用个人微信策略或在门禁失败后改投其他通道。
+
+适配器只用 Android accessibility UI 树查找群、附件入口、系统文件选择器和发送控件；
+图片必须来自本轮唯一命名相册且只选择一个项目，文件选择器必须唯一命中文件名，企微转发
+确认页必须再次核对目标群和文件名。发送后按文字全文、图片消息节点或新文件卡回读；
+一次发送动作后的异常记为 `unknown`，只能 reconcile，不能自动重发。
+
+练习与真机验收脚本为 `scripts/android_wecom_acceptance.py`，只对唯一注册测试群发送合成数据；
+它每轮生成全新文字、图片和 Excel，依次搜索群、发送三种载荷并读取 UI 树结果。脚本不截图、
+不使用 OCR，也不使用个人微信或桌面发送模块。
+
 ## 已注册业务入口
 
 业务总入口委托 scripts/workflow_bridge.py（固定workflow-id、群、类型、数量、原授权及账本），预检委托 scripts/workflow_preflight.py。桥接门禁使用各业务已有授权，不读取臻肆测试群的验收策略；不得把它当任意群发送CLI。它调用同一deliver/desktop_adapter，不另写微信操作逻辑。原业务总入口仍是唯一运行入口，尤其商家封板和金鲨阶段权限不能跳过。
