@@ -3,12 +3,18 @@ import fcntl, hashlib, json, sys, time
 from pathlib import Path
 from contextlib import ExitStack
 ROOT=Path(__file__).resolve().parent.parent
+from business_storage import business_path,catalog,internal_path
 sys.path.insert(0,str(ROOT/'skills/wechat-messaging/scripts'))
 from contract import event_key,content_binding,digest
 from ledger import atomic_json
 from wecom_ui_queue import QUEUE,validate_response
 GROUP='上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰'
-LEDGER=ROOT.parent/'state/negative-feedback-list-appeals/wechat-attempts'
+
+def feedback_ledger(root=ROOT):
+ active=business_path('negative-feedback',root=root)
+ expected=internal_path(root,catalog(root)['negative-feedback']['target'])
+ if Path(active).resolve()!=expected.resolve():raise ValueError('business-storage-not-activated')
+ return expected/'wechat-attempts'
 
 def check_zero_evidence(task,reply,*,claimed,intent):
  raw={k:v for k,v in task.items() if k!='binding'}
@@ -22,13 +28,13 @@ def check_zero_evidence(task,reply,*,claimed,intent):
      or type(result.get('actualSendActions')) is not int or result['actualSendActions']!=0 or result.get('inputEmpty') is not True):raise ValueError('zero-not-proven')
  return True
 
-def reconcile(folder,apply=False):
+def reconcile(folder,apply=False,*,root=ROOT):
  folder=Path(folder).resolve()
  if folder.parent!=QUEUE.resolve():raise ValueError('task-root-invalid')
  task=json.loads((folder/'task.json').read_text());reply=json.loads((folder/'response.json').read_text())
  check_zero_evidence(task,reply,claimed=(folder/'claim.json').exists(),intent=(folder/'send-intent.json').exists())
  request=task['request'];marker=Path(request['context']['eventId']).resolve()
- if marker.parent!=LEDGER.resolve() or marker.suffix!='.json':raise ValueError('marker-scope-invalid')
+ if marker.parent!=feedback_ledger(root).resolve() or marker.suffix!='.json':raise ValueError('marker-scope-invalid')
  event=marker.parent/'.wechat-messaging/events'/event_key(request)
  if json.loads((event/'binding.json').read_text())!={'digest':digest(content_binding(request))}:raise ValueError('event-binding-invalid')
  files=list(event.glob('*/delivery.json'))

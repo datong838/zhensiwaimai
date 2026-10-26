@@ -3,7 +3,9 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
+import reconcile_predispatch as module
 from reconcile_predispatch import reconcile
 
 
@@ -99,7 +101,6 @@ class PredispatchTests(unittest.TestCase):
 
 
     def test_feedback_pair_requires_scope_and_all_zero(self):
-        from unittest.mock import patch
         self.marker = self.root / 'state/negative-feedback-list-appeals/wechat-attempts/event.json'
         self.event = self.marker.parent / '.wechat-messaging/events' / ('a' * 64)
         payloads = [self.payload, dict(self.payload, name='second.xlsx')]
@@ -108,13 +109,24 @@ class PredispatchTests(unittest.TestCase):
         self.write(self.event / 'binding.json', {'digest':hashlib.sha256(json.dumps(binding,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()})
         self.write(self.marker,prior);self.write(self.source,prior)
         self.write(self.event / 'first/delivery.json',{'status':'blocked','sendAttempts':0,'transport':{'sent':False,'sendAttempts':0}})
-        with patch('reconcile_predispatch.ROOT',self.root/'project'):
+        with patch.object(module,'feedback_ledger',return_value=self.marker.parent):
             self.assertTrue(self.run_reconcile('blocked-zero-refreeze')['ok'])
             self.write(self.event / 'second/delivery.json',{'status':'unknown','sendAttempts':1})
             with self.assertRaisesRegex(ValueError,'nonzero-or-unknown'):
                 self.run_reconcile('blocked-zero-refreeze')
-        with self.assertRaisesRegex(ValueError,'unsupported'):
-            self.run_reconcile('blocked-zero-refreeze')
+        with patch.object(module,'feedback_ledger',return_value=self.root/'other-ledger'):
+            with self.assertRaisesRegex(ValueError,'unsupported'):
+                self.run_reconcile('blocked-zero-refreeze')
+
+    def test_feedback_ledger_rejects_unactivated_external_root(self):
+        expected=self.root/'state/shared/negative-feedback-list-appeals'
+        with patch.object(module,'catalog',return_value={'negative-feedback':{'target':'state/shared/negative-feedback-list-appeals'}}), \
+             patch.object(module,'business_path',return_value=expected):
+            self.assertEqual(module.feedback_ledger(self.root),(expected/'wechat-attempts').resolve())
+        with patch.object(module,'catalog',return_value={'negative-feedback':{'target':'state/shared/negative-feedback-list-appeals'}}), \
+             patch.object(module,'business_path',return_value=self.root.parent/'state/negative-feedback-list-appeals'):
+            with self.assertRaisesRegex(ValueError,'not-activated'):
+                module.feedback_ledger(self.root)
 
 if __name__ == '__main__':
     unittest.main()

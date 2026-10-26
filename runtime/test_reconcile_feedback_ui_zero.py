@@ -1,4 +1,7 @@
-import copy,hashlib,json,unittest
+import copy,hashlib,json,tempfile,unittest
+from pathlib import Path
+from unittest.mock import patch
+import reconcile_feedback_ui_zero as module
 from reconcile_feedback_ui_zero import check_zero_evidence,GROUP
 class Tests(unittest.TestCase):
  def fixture(self):
@@ -24,4 +27,11 @@ class Tests(unittest.TestCase):
  def test_binding_rejected(self):
   t,r=self.fixture();r['binding']='wrong'
   with self.assertRaises(ValueError):check_zero_evidence(t,r,claimed=False,intent=False)
+ def test_feedback_ledger_requires_activated_internal_root(self):
+  with tempfile.TemporaryDirectory() as td:
+   root=Path(td);expected=root/'state/shared/negative-feedback-list-appeals'
+   with patch.object(module,'catalog',return_value={'negative-feedback':{'target':'state/shared/negative-feedback-list-appeals'}}),patch.object(module,'business_path',return_value=expected):
+    self.assertEqual(module.feedback_ledger(root),(expected/'wechat-attempts').resolve())
+   with patch.object(module,'catalog',return_value={'negative-feedback':{'target':'state/shared/negative-feedback-list-appeals'}}),patch.object(module,'business_path',return_value=root.parent/'state/negative-feedback-list-appeals'):
+    with self.assertRaisesRegex(ValueError,'not-activated'):module.feedback_ledger(root)
 if __name__=='__main__':unittest.main()

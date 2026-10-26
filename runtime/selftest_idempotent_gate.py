@@ -97,15 +97,13 @@ def main() -> int:
                                                  classify_fallback=SR.classify, workdir=str(cwd))
         check("T4 workdir兜底⇒SKIPPED", cat4 == "SKIPPED_IDEMPOTENT", "%s | %s" % (cat4, detail4))
 
-        # ---------- T5 负对照：真实仓库真故障 marker ----------
-        real = Path("/Users/ddt/work/projects/ai_agent/state/taobao-flash-sale-negative-review-appeals/"
-                    "wechat-attempts/taobao-flash-appeals-2026-10-04.voided-20261005-124410.json")
-        if real.is_file():
-            ev = R.idempotent_evidence('"attemptMarker": "%s"' % real, None)
-            check("T5 真实真故障 marker⇒verified=False", bool(ev) and ev["verified"] is False,
-                  str(ev))
-        else:
-            print("  SKIP T5 真故障 marker 样本不存在（非本机）")
+        # ---------- T5 负对照：临时fixture中的真故障 marker ----------
+        real = tmp / "taobao-flash-appeals-2026-10-04.voided-fixture.json"
+        _write(real, {"bridgeVersion": 1, "state": "blocked", "verified": False,
+                      "ok": False, "sendAttempts": 0, "reason": "fixture-failure"})
+        ev = R.idempotent_evidence('"attemptMarker": "%s"' % real, None)
+        check("T5 真故障fixture⇒verified=False", bool(ev) and ev["verified"] is False,
+              str(ev))
 
         # ---------- T6 裸 classify() 不得静音 ----------
         cat6, detail6 = SR.classify("legacy-marker-binding-mismatch", 1, False)

@@ -14,6 +14,15 @@ from datetime import datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+from business_storage import business_path, catalog, internal_path
+
+
+def feedback_ledger(root=ROOT):
+    active = business_path('negative-feedback', root=root)
+    expected = internal_path(root, catalog(root)['negative-feedback']['target'])
+    if Path(active).resolve() != expected.resolve():
+        raise ValueError('business-storage-not-activated')
+    return expected / 'wechat-attempts'
 
 
 def read(path):
@@ -32,7 +41,7 @@ def zero(value):
             and value.get('physicalSendAttempts', 0) == 0)
 
 
-def check(marker, source, event, mode):
+def check(marker, source, event, mode, *, business_root=ROOT):
     prior, receipt = read(marker), read(source)
     if (prior.get('groupName') != receipt.get('groupName')
             or prior.get('payloads') != receipt.get('payloads')
@@ -40,7 +49,7 @@ def check(marker, source, event, mode):
         raise ValueError('receipt-binding-mismatch')
     payloads = prior.get('payloads', [])
     feedback_pair = (prior.get('payloadType') == 'file' and len(payloads) == 2
-                     and marker.parent.resolve() == (ROOT.parent / 'state/negative-feedback-list-appeals/wechat-attempts').resolve())
+                     and marker.parent.resolve() == feedback_ledger(business_root).resolve())
     if prior.get('payloadType') not in ('image', 'file') or not (len(payloads) == 1 or feedback_pair):
         raise ValueError('unsupported-reconciliation-scope')
     binding = {'groupName': prior['groupName'], 'accountAlias': 'main-wechat',
@@ -86,7 +95,7 @@ def check(marker, source, event, mode):
     return prior, receipt, directories
 
 
-def reconcile(marker, source, mode, *, apply=False, root=ROOT):
+def reconcile(marker, source, mode, *, apply=False, root=ROOT, business_root=ROOT):
     marker, source, root = Path(marker).absolute(), Path(source).absolute(), Path(root).resolve()
     if marker.is_symlink() or source.is_symlink() or not marker.resolve().is_relative_to(root):
         raise ValueError('unsafe-marker-path')
@@ -101,7 +110,8 @@ def reconcile(marker, source, mode, *, apply=False, root=ROOT):
         for path in [marker.with_suffix('.bridge.lock'), event / '.lock']:
             handle = stack.enter_context(path.open('a+'))
             fcntl.flock(handle, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        prior, receipt, directories = check(marker, source, event, mode)
+        prior, receipt, directories = check(marker, source, event, mode,
+                                            business_root=business_root)
         proof = {'ok': True, 'mode': mode, 'applied': apply, 'sendAttempts': 0,
                  'marker': str(marker), 'sourceReceipt': str(source),
                  'markerSha256': sha(marker), 'sourceReceiptSha256': sha(source),

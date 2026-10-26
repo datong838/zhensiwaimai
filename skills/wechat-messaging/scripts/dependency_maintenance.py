@@ -25,6 +25,7 @@ POLICY_REGISTRATION_KEY = "scripts/policy_registration.py"
 EGRESS_POLICY_KEY = "scripts/egress_policy.py"
 ANDROID_WECOM_CHANNEL_KEY = "scripts/android_wecom_channel.py"
 ANDROID_WECOM_ACCEPTANCE_KEY = "scripts/android_wecom_acceptance.py"
+BUSINESS_STORAGE_KEY = "../../runtime/business_storage.py"
 # 2026-09-29 `_back` 重指路径迁移导致的依赖摘要漂移。
 # 授权话术（大同原话）：「我授权 你修改到能确实 验收通过」
 # 白名单严格限定为本次已核对 diff 的三个文件：两个各只改 1 行硬编码路径
@@ -447,6 +448,20 @@ MEITUAN_BRIDGE_BACK_TREE_ALLOWED_AFTER = {
     "scripts/workflow_bridge.py":
         "cd71c7dc54055f2a83d054000646d8844c04b1ff6faeb74bc6886607a0d6cc40",
 }
+BUSINESS_STORAGE_BRIDGE_AUTHORIZATION = "user-20261027-business-storage-bridge-gate"
+BUSINESS_STORAGE_BRIDGE_INSTRUCTION = (
+    "授权最小修复共享workflow bridge与负反馈维护工具：业务台账必须经business_storage resolver"
+    "绑定已激活仓内目录，坏证据fail-closed，并按共享依赖维护规则准备摘要重绑；不部署、不发送。"
+)
+BUSINESS_STORAGE_BRIDGE_INSTRUCTION_SHA256 = hashlib.sha256(
+    BUSINESS_STORAGE_BRIDGE_INSTRUCTION.encode("utf-8")
+).hexdigest()
+BUSINESS_STORAGE_BRIDGE_ALLOWED_AFTER = {
+    "scripts/workflow_bridge.py":
+        "d2f92dc26761edc1bfceff5c22b04da9d419eb87353b3fa9c7a2ceec82e65b44",
+    BUSINESS_STORAGE_KEY:
+        "42e1a1b0b821d2f9eed5082f0748966aad15c651bdd0cbd62fecbc462cdfcaee",
+}
 MAINTENANCE_AUTHORIZATIONS = {
     'user-20261025-pending-image-continue': {'instructionSha256': 'cb4e3f301ab836e49183049acc1da46992342dc41c3edc1c3514b32c0e336149', 'allowedChangePaths': {SELF_KEY, 'scripts/executor.py'}, 'allowedAfterSha256': {'scripts/executor.py': '8ac898329e252cf44b6ea96693f6c0eafa2efde9ac5fe8aff7b546a30c3a4522'}},
     'user-20261025-ui-no-wall-clock': {"instructionSha256": '6b18bd5262a9a9e0533d983c60dce4cbb755881a1333e3c630469199a891b5f5', "allowedChangePaths": {SELF_KEY, "scripts/contract.py", "scripts/executor.py"}, "allowedAfterSha256": {'scripts/contract.py': 'c37b410fb4d98ff9745dde3a95dc4098ae23e4d9913725ef5ca5e7c208cb7393', 'scripts/executor.py': '8a900b25e79aca47eb9ae077e94dc374f9c66a3358694c3fc5979399d4741461'}},
@@ -569,6 +584,11 @@ MAINTENANCE_AUTHORIZATIONS = {
         "allowedChangePaths": {SELF_KEY, *MEITUAN_BRIDGE_BACK_TREE_ALLOWED_AFTER},
         "allowedAfterSha256": MEITUAN_BRIDGE_BACK_TREE_ALLOWED_AFTER,
     },
+    BUSINESS_STORAGE_BRIDGE_AUTHORIZATION: {
+        "instructionSha256": BUSINESS_STORAGE_BRIDGE_INSTRUCTION_SHA256,
+        "allowedChangePaths": {SELF_KEY, *BUSINESS_STORAGE_BRIDGE_ALLOWED_AFTER},
+        "allowedAfterSha256": BUSINESS_STORAGE_BRIDGE_ALLOWED_AFTER,
+    },
     "user-20261025-android-enterprise-wecom-channel": {
         "instructionSha256": hashlib.sha256((
             "OK 就在你的新分区里做开发： 他现有的这个是 桌面mac版企业微信 ，我要你 新增加一个android 手机版的企业微信发送通道，"
@@ -642,7 +662,8 @@ def _validate_expiry(value: str, now: datetime | None = None) -> datetime:
 
 
 def _candidate(manifest: dict, root: Path = ROOT, *, skip_external_dependencies: bool = False,
-               include_android_wecom: bool = False) -> tuple[dict, list[dict]]:
+               include_android_wecom: bool = False,
+               include_business_storage: bool = False) -> tuple[dict, list[dict]]:
     candidate = copy.deepcopy(manifest)
     files = candidate["files"]
     for legacy_key, current_key in WORKFLOWS_KEY_MIGRATIONS.items():
@@ -664,6 +685,8 @@ def _candidate(manifest: dict, root: Path = ROOT, *, skip_external_dependencies:
     if include_android_wecom:
         files.setdefault(ANDROID_WECOM_CHANNEL_KEY, "0" * 64)
         files.setdefault(ANDROID_WECOM_ACCEPTANCE_KEY, "0" * 64)
+    if include_business_storage:
+        files.setdefault(BUSINESS_STORAGE_KEY, "0" * 64)
     changes = []
     for name in sorted(files):
         expected = files[name]
@@ -783,6 +806,7 @@ def prepare(authorization: str, expires_at: str, output_dir: Path,
             manifest, root,
             skip_external_dependencies=authorization_profile.get("skipExternalDependencies", False),
             include_android_wecom=authorization == "user-20261025-android-enterprise-wecom-channel",
+            include_business_storage=authorization == BUSINESS_STORAGE_BRIDGE_AUTHORIZATION,
         ))
         def validate_change_scope():
             allowed = authorization_profile["allowedChangePaths"]
@@ -917,6 +941,12 @@ def prepare(authorization: str, expires_at: str, output_dir: Path,
                        change["after"] != approved.get(change["path"])
                        for change in changes):
                     raise MaintenanceError("meituan-bridge-back-tree-unreviewed-dependency-bytes")
+            if authorization == BUSINESS_STORAGE_BRIDGE_AUTHORIZATION:
+                approved = authorization_profile["allowedAfterSha256"]
+                if any(change["path"] != SELF_KEY and
+                       change["after"] != approved.get(change["path"])
+                       for change in changes):
+                    raise MaintenanceError("business-storage-bridge-unreviewed-dependency-bytes")
             if authorization == 'user-20261025-pending-image-continue':
                 approved = authorization_profile['allowedAfterSha256']
                 if any(change['path'] != SELF_KEY and change['after'] != approved.get(change['path']) for change in changes):

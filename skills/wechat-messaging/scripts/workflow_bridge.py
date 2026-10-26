@@ -22,6 +22,8 @@ from ledger import atomic_json, read_json
 SKILLS = Path(__file__).resolve().parents[2]
 PROJECT = SKILLS.parent
 WORKSPACE = PROJECT.parent
+sys.path.insert(0, str(PROJECT / 'runtime'))
+from business_storage import business_path, catalog, internal_path
 GROUP = 'FEIBING NEO AI数字员工'
 JINSHA_GROUP = '上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰'
 NEGATIVE_REVIEW_GROUP_SEARCH = '上海臻肆外卖运营-盯个盯'
@@ -113,6 +115,20 @@ _REGISTRY_AUTHORIZATIONS = {
     'meituan-customer-reply-daily': 'user-20261001-meituan-customer-reply-daily',
     'negative-feedback-appeals': 'user-20261006-negative-feedback-list-appeals',
 }
+_BUSINESS_LEDGER_BINDINGS = {
+    'taobao-flash-appeals': ('taobao-appeals', 'wechat-attempts'),
+    'meituan-waimai-appeals': ('meituan-appeals', 'wechat-attempts'),
+    'taobao-flash-appeals-summary': ('taobao-appeals', 'summary-attempts'),
+    'meituan-waimai-appeals-summary': ('meituan-appeals', 'summary-attempts'),
+    'negative-feedback-appeals': ('negative-feedback', 'wechat-attempts'),
+}
+
+
+def _expected_business_ledger(workflow_id):
+    key, leaf = _BUSINESS_LEDGER_BINDINGS[workflow_id]
+    return internal_path(PROJECT, catalog(PROJECT)[key]['target']) / leaf
+
+
 _REGISTRY_LEDGERS = {
     'merchants': PROJECT/'state/taobao-agent-new-merchants/send-attempts',
     'top10': SKILLS/'daily-top10-to-wechat-group/.runtime/send-ledger',
@@ -122,12 +138,12 @@ _REGISTRY_LEDGERS = {
     'jinsha-reports-taobao-repair-20261023': PROJECT/'.local/state/jinsha-report-send-shanghai-zhensi-operations-ding-fandang-taobao-repair-20261023-v3.desktop-attempts',
     'negative-reviews': PROJECT/'.local/state/negative-review-send-shanghai-zhensi-operations-ding-fandang-v1.desktop-attempts',
     'negative-reviews-summary': PROJECT/'.local/state/negative-review-summary-send-shanghai-zhensi-operations-ding-fandang-v1.desktop-attempts',
-    'taobao-flash-appeals': WORKSPACE/'state/taobao-flash-sale-negative-review-appeals/wechat-attempts',
-    'meituan-waimai-appeals': WORKSPACE/'state/meituan-waimai-negative-review-appeals/wechat-attempts',
-    'taobao-flash-appeals-summary': WORKSPACE/'state/taobao-flash-sale-negative-review-appeals/summary-attempts',
-    'meituan-waimai-appeals-summary': WORKSPACE/'state/meituan-waimai-negative-review-appeals/summary-attempts',
+    'taobao-flash-appeals': _expected_business_ledger('taobao-flash-appeals'),
+    'meituan-waimai-appeals': _expected_business_ledger('meituan-waimai-appeals'),
+    'taobao-flash-appeals-summary': _expected_business_ledger('taobao-flash-appeals-summary'),
+    'meituan-waimai-appeals-summary': _expected_business_ledger('meituan-waimai-appeals-summary'),
     'meituan-customer-reply-daily': PROJECT/'state/meituan-customer-reply-daily/wechat-attempts',
-    'negative-feedback-appeals': WORKSPACE/'state/negative-feedback-list-appeals/wechat-attempts',
+    'negative-feedback-appeals': _expected_business_ledger('negative-feedback-appeals'),
 }
 
 
@@ -176,6 +192,23 @@ def _registry_entry(wid):
 REGISTRY = {wid: _registry_entry(wid) for wid in _BUILTIN_ROUTES}
 
 
+def registry_ledger(workflow_id):
+    ledger = Path(REGISTRY[workflow_id][4])
+    binding = _BUSINESS_LEDGER_BINDINGS.get(workflow_id)
+    if binding is None:
+        return ledger
+    key, leaf = binding
+    try:
+        active_root = business_path(key, root=PROJECT)
+    except (OSError, ValueError, KeyError, json.JSONDecodeError) as error:
+        raise Rejected('business-storage-activation-invalid') from error
+    expected = _expected_business_ledger(workflow_id)
+    resolved = Path(active_root) / leaf
+    if resolved.resolve() != expected.resolve() or not resolved.resolve().is_relative_to(PROJECT.resolve()):
+        raise Rejected('business-storage-not-activated')
+    return resolved
+
+
 def taobao_flash_appeals_scope(now=None):
     current = now or datetime.now(ZoneInfo('Asia/Shanghai'))
     if current.tzinfo is None:
@@ -195,8 +228,8 @@ def meituan_waimai_appeals_scope(now=None):
 def prepare(args):
     if args.workflow_id not in REGISTRY:
         raise Rejected('workflow-not-registered')
-    group, kind, count, authorization, ledger = REGISTRY[args.workflow_id]
-    ledger = Path(ledger)
+    group, kind, count, authorization, _ = REGISTRY[args.workflow_id]
+    ledger = registry_ledger(args.workflow_id)
     ledger_redirected = _apply_test_root(ledger)
     # 2026-10-03 受控维护（大同授权「方案 B：开搞」）：count 允许 int 或 (min,max) 区间，
     # taobao-evidence 改为 (1,2) 支持当日已交付图的「只补缺失」部分重发；其余条目语义不变。

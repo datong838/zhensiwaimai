@@ -226,6 +226,17 @@ class DependencyMaintenanceTests(unittest.TestCase):
         self.assertEqual(result.get("rollback"), "restored")
         self.assertEqual(manifest.read_bytes(), before)
 
+    def test_business_storage_bridge_authorization_binds_reviewed_source_bytes(self):
+        profile=maintenance.MAINTENANCE_AUTHORIZATIONS[maintenance.BUSINESS_STORAGE_BRIDGE_AUTHORIZATION]
+        self.assertEqual(profile['instructionSha256'],
+                         maintenance.BUSINESS_STORAGE_BRIDGE_INSTRUCTION_SHA256)
+        for name,digest in maintenance.BUSINESS_STORAGE_BRIDGE_ALLOWED_AFTER.items():
+            self.assertEqual(maintenance.sha256(maintenance._resolve(name)),digest)
+            self.assertIn(name,profile['allowedChangePaths'])
+        manifest={'schemaVersion':1,'files':{}}
+        candidate,_=maintenance._candidate(manifest,include_business_storage=True)
+        self.assertIn(maintenance.BUSINESS_STORAGE_KEY,candidate['files'])
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -2,7 +2,7 @@ import sys, tempfile, unittest, json, hashlib
 from contextlib import contextmanager
 from pathlib import Path
 from types import SimpleNamespace
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
 import workflow_bridge as b
 from contract import Rejected
@@ -27,8 +27,59 @@ class Bridge(unittest.TestCase):
         self.args=SimpleNamespace(workflow_id='merchants',group='电销+直播攻坚组',payload_type='text',item=['hello'],
             authorization='user-20260915-production-hourly',ledger=str(self.root/'ledger'),marker_name='event.json',output_dir=str(self.root/'out'),execute=True,reconcile=False)
         original=b.REGISTRY['merchants'];self.registry=patch.dict(b.REGISTRY,{'merchants':(*original[:4],self.root/'ledger')});self.registry.start()
+        self.real_registry_ledger=b.registry_ledger
+        self.ledger_resolver=patch.object(b,'registry_ledger',side_effect=lambda workflow_id:Path(b.REGISTRY[workflow_id][4]));self.ledger_resolver.start()
         self.verify=patch.object(b,'verify_dependencies',return_value=True);self.verify.start()
-    def tearDown(self):self.verify.stop();self.registry.stop();self.tmp.cleanup()
+    def tearDown(self):self.verify.stop();self.ledger_resolver.stop();self.registry.stop();self.tmp.cleanup()
+
+    def test_business_ledgers_use_three_activated_keys_for_five_registry_entries(self):
+        expected={
+            'taobao-flash-appeals':('taobao-appeals','wechat-attempts'),
+            'taobao-flash-appeals-summary':('taobao-appeals','summary-attempts'),
+            'meituan-waimai-appeals':('meituan-appeals','wechat-attempts'),
+            'meituan-waimai-appeals-summary':('meituan-appeals','summary-attempts'),
+            'negative-feedback-appeals':('negative-feedback','wechat-attempts'),
+        }
+        roots={key:b.PROJECT/'state/shared'/name for key,name in {
+            'taobao-appeals':'taobao-flash-sale-negative-review-appeals',
+            'meituan-appeals':'meituan-waimai-negative-review-appeals',
+            'negative-feedback':'negative-feedback-list-appeals'}.items()}
+        with patch.object(b,'business_path',side_effect=lambda key,root:roots[key]) as resolve:
+            for workflow_id,(key,leaf) in expected.items():
+                self.assertEqual(self.real_registry_ledger(workflow_id),roots[key]/leaf)
+        self.assertEqual([call.args[0] for call in resolve.call_args_list],
+                         [value[0] for value in expected.values()])
+
+    def test_prepare_accepts_activated_internal_ledger_and_rejects_external_ledger(self):
+        workflow='taobao-flash-appeals';day='2026-09-21';run_key='20260922'
+        internal=b.PROJECT/'state/shared/taobao-flash-sale-negative-review-appeals'
+        ledger=internal/'wechat-attempts';name=f'淘宝闪购差评申诉汇总-{day}.xlsx'
+        report=b.PROJECT/'outputs'/f'taobao-flash-sale-negative-review-appeals-{run_key}'/name
+        report.parent.mkdir(parents=True,exist_ok=True);created=not report.exists()
+        if created:report.write_bytes(b'fixture')
+        args=SimpleNamespace(workflow_id=workflow,group=b.REGISTRY[workflow][0],payload_type='file',
+            item=[str(report)],authorization=b.REGISTRY[workflow][3],ledger=str(ledger),
+            marker_name=f'taobao-flash-appeals-{day}.json',output_dir=str(self.root/'out'),
+            execute=True,reconcile=False,deadline_unix=None,correction_v1=False)
+        try:
+            with patch.object(b,'registry_ledger',side_effect=self.real_registry_ledger), \
+                 patch.object(b,'business_path',return_value=internal), \
+                 patch.object(b,'taobao_flash_appeals_scope',return_value=(day,run_key)):
+                self.assertEqual(b.prepare(args)[0]['context']['workflowId'],workflow)
+                args.ledger=str(b.WORKSPACE/'state/taobao-flash-sale-negative-review-appeals/wechat-attempts')
+                with self.assertRaisesRegex(Rejected,'ledger-mismatch'):b.prepare(args)
+        finally:
+            if created:report.unlink()
+
+    def test_bad_activation_fails_before_adapter(self):
+        workflow='taobao-flash-appeals';self.args.workflow_id=workflow
+        self.args.group=b.REGISTRY[workflow][0];self.args.payload_type='file';self.args.item=['missing.xlsx']
+        self.args.authorization=b.REGISTRY[workflow][3];self.args.ledger=str(b.REGISTRY[workflow][4])
+        adapter=Mock(side_effect=AssertionError('adapter must not run'))
+        with patch.object(b,'registry_ledger',side_effect=self.real_registry_ledger), \
+             patch.object(b,'business_path',side_effect=ValueError('storage-activation-proof-invalid')):
+            with self.assertRaisesRegex(Rejected,'activation-invalid'):b.execute(self.args,adapter_factory=adapter)
+        adapter.assert_not_called()
     def test_taobao_repair_registry_is_one_file_new_group_only(self):
         group,kind,count,authorization,ledger=b.REGISTRY['jinsha-reports-taobao-repair-20260917']
         self.assertEqual(group,b.JINSHA_GROUP)
@@ -419,9 +470,11 @@ class Bridge(unittest.TestCase):
         self.args.marker_name='../event.json'
         with self.assertRaisesRegex(Rejected,'marker'):self.run_bridge()
     def test_unknown_blocks_replay(self):
-        f=Fake(['unknown']);self.assertFalse(self.run_bridge(f)['ok']);self.assertFalse(self.run_bridge(f)['ok']);self.assertEqual(f.calls,1)
+        f=Fake(['unknown']);self.assertFalse(self.run_bridge(f)['ok']);second=self.run_bridge(f)
+        self.assertFalse(second['ok']);self.assertEqual(second['newSendAttempts'],0);self.assertEqual(f.calls,1)
     def test_crash_blocks_replay(self):
-        f=Fake(['crash']);self.assertFalse(self.run_bridge(f)['ok']);self.assertFalse(self.run_bridge(f)['ok']);self.assertEqual(f.calls,1)
+        f=Fake(['crash']);self.assertFalse(self.run_bridge(f)['ok']);second=self.run_bridge(f)
+        self.assertFalse(second['ok']);self.assertEqual(second['newSendAttempts'],0);self.assertEqual(f.calls,1)
     def test_confirmed_zero_attempt_can_retry_with_fresh_lookup(self):
         f=Fake(['blocked','verified']);self.assertFalse(self.run_bridge(f)['ok']);self.assertTrue(self.run_bridge(f)['ok']);self.assertEqual(f.lookups,2)
     def test_no_execute_rejects(self):
