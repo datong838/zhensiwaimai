@@ -1,5 +1,6 @@
 import contextlib
 import importlib.util
+import io
 import json
 import sys
 import tempfile
@@ -51,4 +52,35 @@ class DeliveryTests(unittest.TestCase):
     def test_single_page_remains_compatible(self):
         result=self.execute(self.images[:1],Adapter([OK]))
         self.assertEqual(result['status'],'verified');self.assertEqual(result['sendAttempts'],1)
+    def pending_marker(self, day, **changes):
+        data={'event':day+'-contract-termination-ops','state':'unknown','groupName':subject.GROUP,
+              'sha256':'a'*64,'images':[day+'_合同解约申请_处理中_p1.png']}
+        data.update(changes)
+        path=self.events/(day+'-contract-termination-ops.json')
+        path.write_text(json.dumps(data));return path
+    def test_pending_main_never_collects_or_creates_run(self):
+        day=subject.datetime.now(subject.LOCAL_TZ).date().isoformat()
+        for state in ('attempted','unknown'):
+            path=self.pending_marker(day,state=state);before=path.read_bytes()
+            with patch.object(sys,'argv',['entry','--execute']), patch.object(subject,'shot') as shot, patch.object(subject,'deliver') as send, patch.object(subject,'RUNS',self.root/'new-runs'), contextlib.redirect_stdout(io.StringIO()) as output:
+                with self.assertRaises(SystemExit) as caught:subject.main()
+            self.assertEqual(caught.exception.code,1)
+            self.assertEqual(json.loads(output.getvalue())['sendAttempts'],0)
+            shot.assert_not_called();send.assert_not_called()
+            self.assertFalse((self.root/'new-runs').exists());self.assertEqual(before,path.read_bytes())
+    def test_pending_requires_exact_current_binding(self):
+        day='2026-10-26'
+        for change in ({'event':'old'},{'state':'verified'},{'groupName':'wrong'},
+                       {'sha256':'bad'},{'images':[]},{'images':['2026-10-25_合同解约申请_处理中_p1.png']}):
+            self.pending_marker(day,**change);self.assertIsNone(subject.pending_today(day))
+        self.pending_marker(day);self.assertIsNone(subject.pending_today('2026-10-27'))
+        (self.events/(day+'-contract-termination-ops.json')).write_text('{')
+        self.assertIsNone(subject.pending_today(day))
+    def test_capture_and_deliver_run_keep_original_paths(self):
+        for args in ([],['--execute','--deliver-run',str(self.root)]):
+            with patch.object(sys,'argv',['entry']+args), patch.object(subject,'pending_today') as guard, patch.object(subject,'shot',return_value={}) as shot, patch.object(subject,'RUNS',self.root/'runs'), patch.object(subject,'find_run_images',return_value=self.images[:1]), patch.object(subject,'deliver',return_value={'status':'verified'}) as send, contextlib.redirect_stdout(io.StringIO()):
+                subject.main()
+            guard.assert_not_called()
+            if args:shot.assert_not_called();send.assert_called_once()
+            else:shot.assert_called_once();send.assert_not_called()
 if __name__=='__main__':unittest.main()

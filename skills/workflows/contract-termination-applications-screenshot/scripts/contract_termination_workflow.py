@@ -223,6 +223,27 @@ def find_run_images(run_dir: Path) -> list:
     return [str(p.resolve()) for p in files]
 
 
+def pending_today(day: str) -> dict | None:
+    """Read a bound original attempt before collecting a changing page again."""
+    event = f"{day}-contract-termination-ops"
+    try:
+        prior = json.loads((EVENTS / f"{event}.json").read_text(encoding="utf-8"))
+        if (not isinstance(prior, dict) or prior.get("event") != event
+                or prior.get("groupName") != GROUP
+                or prior.get("state") not in ("attempted", "unknown")
+                or not isinstance(prior.get("sha256"), str)
+                or not re.fullmatch(r"[0-9a-f]{64}", prior["sha256"])
+                or not isinstance(prior.get("images"), list) or not prior["images"]
+                or not all(isinstance(name, str) and re.fullmatch(
+                    re.escape(day) + r"_合同解约申请_处理中_p[1-9][0-9]*\.png", name)
+                    for name in prior["images"])):
+            return None
+    except (OSError, ValueError, TypeError):
+        return None
+    return {"status": "unknown", "reason": "prior-attempt-requires-read-only-reconciliation",
+            "sendAttempts": 0, "event": event, "day": day}
+
+
 def main() -> None:
     import argparse
     parser = argparse.ArgumentParser()
@@ -236,6 +257,11 @@ def main() -> None:
         print(json.dumps(set_arm(bool(args.arm)), ensure_ascii=False))
         return
     day = datetime.now(LOCAL_TZ).date().isoformat()
+    if args.execute and not args.deliver_run:
+        pending = pending_today(day)
+        if pending is not None:
+            print(json.dumps(pending, ensure_ascii=False))
+            raise SystemExit(1)
     EVENTS.mkdir(parents=True, exist_ok=True, mode=0o700)  # 防重台账目录必须先建（#74）
     if args.deliver_run:
         run_dir = Path(args.deliver_run).resolve()
