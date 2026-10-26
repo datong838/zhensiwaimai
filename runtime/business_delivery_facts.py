@@ -327,3 +327,23 @@ def read_fact(flow, now=None):
                 'observedAt': frames[-1]['observedAt']}
     except (OSError, ValueError, KeyError, TypeError, IndexError):
         return None
+
+
+def read_execution_note(flow, now=None):
+    if flow != 'daily-quality-products-optimization':
+        return None
+    now = now or datetime.now(ZoneInfo('Asia/Shanghai'))
+    day = now.strftime('%Y-%m-%d')
+    base = ROOT/'skills/workflows/daily-quality-products-optimization/.runtime/days'/day
+    try:
+        proof = json.loads((base/'completion.json').read_text())
+        delivery = json.loads((base/'delivery.json').read_text())
+        count = proof.get('attemptedUnconfirmed', 0)
+        if not (proof['day'] == day and proof['workflowId'] == flow and proof['groupName'] == GROUP
+                and type(count) is int and 0 < count <= proof['handled']
+                and delivery['state'] == 'verified' and len(delivery['deliveries']) == 2
+                and all(item['receipt']['status'] == 'verified' for item in delivery['deliveries'])):
+            return None
+        return f'已执行，{count}家结果待确认'
+    except (OSError,ValueError,KeyError,TypeError):
+        return None

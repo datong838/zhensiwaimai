@@ -73,3 +73,31 @@ class ExecutedImageAcceptanceTests(unittest.TestCase):
         self.assertIsNone(facts.read_fact('native-ui-acceptance-20261026',self.now))
 
 if __name__=='__main__':unittest.main()
+
+class ExecutionNoteTests(unittest.TestCase):
+    def setUp(self):
+        self.temp=tempfile.TemporaryDirectory();self.addCleanup(self.temp.cleanup)
+        self.root=Path(self.temp.name);p=patch.object(facts,'ROOT',self.root);p.start();self.addCleanup(p.stop)
+        self.now=datetime(2026,10,26,21,tzinfo=ZoneInfo('Asia/Shanghai'))
+        self.base=self.root/'skills/workflows/daily-quality-products-optimization/.runtime/days/2026-10-26';self.base.mkdir(parents=True)
+        self.proof={'day':'2026-10-26','workflowId':'daily-quality-products-optimization','groupName':facts.GROUP,'attemptedUnconfirmed':1,'handled':251}
+        self.delivery={'state':'verified','deliveries':[{'receipt':{'status':'verified'}},{'receipt':{'status':'verified'}}]}
+        self.save()
+    def save(self):
+        (self.base/'completion.json').write_text(json.dumps(self.proof))
+        (self.base/'delivery.json').write_text(json.dumps(self.delivery))
+    def test_note_preserves_unconfirmed_execution_without_editing_receipts(self):
+        before=(self.base/'delivery.json').read_bytes()
+        self.assertEqual(facts.read_execution_note('daily-quality-products-optimization',self.now),'已执行，1家结果待确认')
+        self.assertEqual(before,(self.base/'delivery.json').read_bytes())
+    def test_no_note_before_both_deliveries_verified(self):
+        self.delivery['deliveries'][1]['receipt']['status']='unknown';self.save()
+        self.assertIsNone(facts.read_execution_note('daily-quality-products-optimization',self.now))
+    def test_no_cross_day_note(self):
+        self.assertIsNone(facts.read_execution_note('daily-quality-products-optimization',self.now.replace(day=27)))
+    def test_customer_view_keeps_explicit_note_and_original_default(self):
+        import run_all
+        rows=[{'name':'整改','done':'是','note':'internal','customer_note':'已执行，1家结果待确认','dev_state':'active'},
+              {'name':'原任务','done':'是','note':'internal','dev_state':'active'}]
+        shown,_,_=run_all.customer_ledger_view(rows,'2026-10-26')
+        self.assertEqual([r['note'] for r in shown],['已执行，1家结果待确认','当日已完成'])

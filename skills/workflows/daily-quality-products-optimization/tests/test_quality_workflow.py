@@ -48,6 +48,15 @@ class Tests(unittest.TestCase):
     def test_notice_count_includes_optimized_and_checked_and_matches_excel_rows(self):
         state=copy.deepcopy(self.original);state['stores'].append({'state':'checked_no_action','shopId':'520411538','name':'无需优化示例门店'});self.write(state)
         a=Adapter();self.assertTrue(self.run_flow(a)['ok']);self.assertEqual(a.calls[-1]['text'],w.notice(2));proof=json.loads((self.folder/'completion.json').read_text());self.assertEqual((proof['optimized'],proof['checkedNoAction'],proof['handled']),(1,1,2));self.assertEqual(len(proof['records']),2)
+    def test_attempted_unconfirmed_is_execution_record_not_optimization_success(self):
+        state=copy.deepcopy(self.original);store=state['stores'][0];store['state']='unknown';store['submission']={'day':'2026-10-26','shopId':store['shopId'],'eventId':'2026-10-26-quality-'+store['shopId'],'state':'attempted'}
+        raw=json.dumps(store['submission'],ensure_ascii=False).encode();(self.folder/'intents').mkdir();intent=self.folder/'intents'/(store['shopId']+'.json');intent.write_bytes(raw)
+        sha=hashlib.sha256(json.dumps(store['submission'],ensure_ascii=False,separators=(',',':')).encode()).hexdigest();store['reconciliation']={'mode':'read-only','resolved':False,'submissionSha256':sha,'currentTotal':3,'observedAt':'2026-10-26T12:00:00+08:00'}
+        store['executionRecorded']=True;store['executionRecord']={'day':'2026-10-26','kind':'attempted-unconfirmed','submissionSha256':sha,'intentSha256':hashlib.sha256(raw).hexdigest(),'readonlyObservedAt':store['reconciliation']['observedAt']};self.write(state)
+        self.result={'ok':True,'summary':{'completed':0}};self.optimizer.return_value=self.result
+        a=Adapter();self.assertTrue(self.run_flow(a)['ok']);self.assertEqual(a.calls[-1]['text'],w.notice(1,1));proof=json.loads((self.folder/'completion.json').read_text());self.assertEqual((proof['optimized'],proof['attemptedUnconfirmed'],proof['handled']),(0,1,1));self.assertEqual(proof['records'][0]['execution'],'已发起优化，结果未确认；今日未重复提交')
+        self.assertEqual(json.loads((self.folder/'state.json').read_text())['stores'][0]['state'],'unknown');self.assertEqual(intent.read_bytes(),raw)
+        request=json.loads((self.folder/'request.json').read_text());self.assertTrue(quality_optimization_allowed(request,root=self.root,day='2026-10-26'));intent.write_text('{}');self.assertFalse(quality_optimization_allowed(request,root=self.root,day='2026-10-26'))
     def test_unbound_read_only_fact_is_rejected(self):
         state=copy.deepcopy(self.original);state['stores'][0].update({'state':'checked_no_action','technicalStatusPreserved':'unknown','reconciliation':{'mode':'read-only','resolved':True,'submissionSha256':'wrong'}});self.write(state);self.optimizer.return_value={'ok':True,'summary':{'completed':0}}
         with self.assertRaisesRegex(ValueError,'reconciliation-binding-invalid'):self.run_flow()

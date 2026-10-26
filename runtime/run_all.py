@@ -1032,7 +1032,7 @@ def build_ledger_rows(data: dict, records_by_skill: dict) -> list:
     """按 ledger_template 生成 17 行台账数据；完成状态来自当天 record 或 last_success。
     2026-10-20 18:35 大同指令：台账恢复原有格式（四列），「首轮」列撤销——
     内部 SRE 指标绝不出现在客户可见的台账里。first_attempt_outcomes 保留供内部巡检。"""
-    from business_delivery_facts import read_fact
+    from business_delivery_facts import read_fact, read_execution_note
     skill_by_name = {s["name"]: s for s in data.get("skills", [])}
     rows = []
     for r in data.get("ledger_template", []):
@@ -1094,6 +1094,7 @@ def build_ledger_rows(data: dict, records_by_skill: dict) -> list:
             "done": done,
             "exec_time": exec_time,
             "note": note,
+            "customer_note": read_execution_note(sk) if done == "是" else None,
             "superseded": fixed_schedule.customer_slot_superseded(sk, datetime.now()),
             "dev_state": "paused" if merged else r["dev_state"],
         })
@@ -1110,7 +1111,7 @@ def customer_ledger_view(rows: list, date_str: str):
         shown = dict(row)
         if modern:
             shown['done'] = '是'
-            shown['note'] = {'已合并': '已随当日申诉完成', '不补跑': '由当日末班覆盖'}.get(row['done'], '当日已完成')
+            shown['note'] = row.get('customer_note') or {'已合并': '已随当日申诉完成', '不补跑': '由当日末班覆盖'}.get(row['done'], '当日已完成')
         displayed.append(shown)
     active = [r for r in rows if r['dev_state'] == 'active' and not r.get('superseded')]
     total, done = len(active), sum(r['done'] == '是' for r in active)

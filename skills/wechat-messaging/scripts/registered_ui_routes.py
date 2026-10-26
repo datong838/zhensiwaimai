@@ -89,18 +89,30 @@ def quality_optimization_allowed(request, *, root=None, day=None):
     folder=root/'skills/workflows/daily-quality-products-optimization/.runtime/days'/day
     try:
         proof=json.loads((folder/'completion.json').read_text());raw=(folder/'state.json').read_bytes();state=json.loads(raw);report=json.loads((folder/'report.json').read_text())
-        stores=state['stores'];optimized=[s for s in stores if s['state']=='completed'];count=len(optimized);handled=len(stores);text=f'淘宝闪购 优质商品率低 店铺全部店铺优化完成 （今日执行了 {handled} 家）'
+        def recorded_unknown(store):
+            try:
+                sub=store['submission'];rec=store['reconciliation'];fact=store['executionRecord'];canonical=lambda value:hashlib.sha256(json.dumps(value,ensure_ascii=False,separators=(',',':')).encode()).hexdigest()
+                if not (store['state']=='unknown' and store.get('executionRecorded') is True and fact['day']==day and fact['kind']=='attempted-unconfirmed' and str(store['shopId']).isdigit()
+                        and sub['day']==day and sub['shopId']==store['shopId'] and sub['eventId']==day+'-quality-'+store['shopId'] and fact['submissionSha256']==canonical(sub)==rec['submissionSha256']
+                        and rec['mode']=='read-only' and fact['readonlyObservedAt']==rec['observedAt'] and type(rec['currentTotal']) is int and rec['currentTotal']>=0):return False
+                intent=(folder/'intents'/(store['shopId']+'.json')).read_bytes()
+                return hashlib.sha256(intent).hexdigest()==fact['intentSha256'] and canonical(json.loads(intent))==canonical(sub)
+            except (OSError,KeyError,TypeError,ValueError):return False
+        stores=state['stores'];optimized=[s for s in stores if s['state']=='completed'];unconfirmed=[s for s in stores if recorded_unknown(s)];count=len(optimized);handled=len(stores)
+        text=(f'淘宝闪购 优质商品率低 门店整改流程已按顺序执行完毕（今日执行了 {handled} 家；其中 {len(unconfirmed)} 家结果未确认，详见Excel）' if unconfirmed else f'淘宝闪购 优质商品率低 店铺全部店铺优化完成 （今日执行了 {handled} 家）')
         if not (proof['day']==state['day']==day and proof['workflowId']==state['workflowId']=='daily-quality-products-optimization'
                 and proof['accountName']=='zhangyanru188' and state['accountLabel']=='zhangyanru188:全部门店'
                 and proof['groupName']==GROUP and proof['stateSha256']==hashlib.sha256(raw).hexdigest()
-                and type(proof['completed']) is int and proof['completed']==proof['optimized']==count and type(proof['handled']) is int and proof['handled']==handled and state['scopeFinished'] is True
+                and type(proof['completed']) is int and proof['completed']==proof['optimized']==count and type(proof['handled']) is int and proof['handled']==handled and proof['attemptedUnconfirmed']==len(unconfirmed) and state['scopeFinished'] is True
                 and proof['completedShopIds']==[s['shopId'] for s in optimized]
                 and proof['handledShopIds']==[s['shopId'] for s in stores] and len(set(proof['handledShopIds']))==len(stores)
-                and all(s['state'] in ('completed','checked_no_action') for s in stores) and proof['text']==text):return False
+                and all(s['state'] in ('completed','checked_no_action') or recorded_unknown(s) for s in stores) and proof['text']==text):return False
         for store in optimized:
             if not all(store.get('operation',{}).get(k) is True for k in ['confirmed','popoverClosed','uiStable']):return False
         for store in stores:
-            if store.get('technicalStatusPreserved')=='unknown':
+            if store['state']=='unknown':
+                if not recorded_unknown(store):return False
+            elif store.get('technicalStatusPreserved')=='unknown':
                 reconciliation=store.get('reconciliation',{});expected=hashlib.sha256(json.dumps(store.get('submission'),ensure_ascii=False,separators=(',',':')).encode()).hexdigest()
                 if not (reconciliation.get('mode')=='read-only' and reconciliation.get('resolved') is True and reconciliation.get('submissionSha256')==expected):return False
         file,label=items;expected=folder/(day+'淘宝闪购商品整改执行台账.xlsx')

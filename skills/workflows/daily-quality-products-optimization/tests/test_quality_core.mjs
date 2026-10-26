@@ -57,3 +57,48 @@ assert.equal(skipBeforeFrame({state:'unknown',submission:{state:'attempted'}},'v
 assert.equal(skipBeforeFrame({state:'unknown',submission:{state:'attempted'},lastReconciledAt:1000},'v1',1100),true);tests++;
 assert.equal(skipBeforeFrame({state:'pending'},'v1'),false);tests++;
 console.log(JSON.stringify({ok:true,allTests:tests,fastDailySkipTests:9,browserActions:0,sendAttempts:0}));
+const {directedCandidates,directedReadOnly}=await import('../scripts/quality_optimizer.mjs');
+const knownUnknown=id=>({shopId:id,name:'未知门店'+id,state:'unknown',submission:{day:'2026-10-26',shopId:id,eventId:'2026-10-26-quality-'+id,state:'attempted'},reason:'original-error',errors:[{reason:'original-error'}]});
+var directedState={day:'2026-10-26',stores:[knownUnknown('1356051667'),knownUnknown('520411538')]};
+assert.equal(directedCandidates(directedState,1000).length,2);tests++;
+directedState.stores[0].lastDirectedReconciledAt=1000;assert.equal(directedCandidates(directedState,1100).length,1);tests++;
+assert.equal(directedCandidates({day:'2026-10-27',stores:directedState.stores},1100).length,0);tests++;
+var created=[],closed=[],routes=[],saves=0;const context={newPage:async()=>{const page={id:created.length+1,goto:async route=>routes.push(route),isClosed:()=>false,close:async()=>closed.push(page.id)};created.push(page);return page},newCDPSession:async page=>({send:async()=>({targetInfo:{targetId:'target-'+page.id}})})};
+directedState={day:'2026-10-26',stores:[knownUnknown('1356051667')]};var submissionBefore=JSON.stringify(directedState.stores[0].submission),errorsBefore=JSON.stringify(directedState.stores[0].errors);
+await directedReadOnly(context,directedState,Date.now()+50000,{save:async()=>saves++,inspect:async(_page,identity)=>{assert.equal(identity.shopId,'1356051667');return readonlyFrame},reconcile:reconcileAttempted});
+assert.deepEqual(routes,['https://melody.shop.ele.me/app/shop/1356051667/food-rectify']);assert.deepEqual(closed,[1]);assert.equal(directedState.stores[0].state,'checked_no_action');assert.equal(JSON.stringify(directedState.stores[0].submission),submissionBefore);assert.equal(JSON.stringify(directedState.stores[0].errors),errorsBefore);assert.ok(saves>=2);tests++;
+var second=await directedReadOnly(context,{day:'2026-10-26',stores:[{...knownUnknown('520411538'),lastDirectedReconciledAt:Date.now()}]},Date.now()+50000);assert.equal(second.inspected,0);assert.equal(created.length,1);tests++;
+console.log(JSON.stringify({ok:true,allTests:tests,directedReadOnlyTests:5,browserActions:0,sendAttempts:0}));
+const {digest,recordedUnknown,executionNotice,normalRoundComplete}=await import('../scripts/quality_core.mjs');
+const {recordUnknownExecutions}=await import('../scripts/quality_optimizer.mjs');
+var factFs=await import('node:fs/promises'),factOs=await import('node:os'),factPath=await import('node:path');
+var factFolder=await factFs.mkdtemp(factPath.join(factOs.tmpdir(),'quality-execution-fact-'));
+try{
+ var unknownStore=knownUnknown('520411538');unknownStore.reconciliation={mode:'read-only',resolved:false,submissionSha256:digest(unknownStore.submission),currentTotal:3,observedAt:'2026-10-26T12:00:00+08:00'};
+ var metadataState={day:'2026-10-26',scopeFinished:true,stores:[unknownStore]};var beforeIntent=JSON.stringify(unknownStore.submission),beforeError=JSON.stringify(unknownStore.errors);
+ assert.equal(await recordUnknownExecutions(metadataState,factFolder),false);tests++;
+ await factFs.mkdir(factPath.join(factFolder,'intents'));await factFs.writeFile(factPath.join(factFolder,'intents/520411538.json'),JSON.stringify(unknownStore.submission,null,2));
+ assert.equal(await recordUnknownExecutions(metadataState,factFolder),true);assert.equal(unknownStore.state,'unknown');assert.equal(JSON.stringify(unknownStore.submission),beforeIntent);assert.equal(JSON.stringify(unknownStore.errors),beforeError);assert.equal(recordedUnknown(unknownStore,'2026-10-26'),true);tests++;
+ var summary=aggregate(metadataState);assert.equal(summary.ok,true);assert.equal(summary.optimized,0);assert.equal(summary.attemptedUnconfirmed,1);assert.equal(summary.handled,1);assert.equal(summary.text,executionNotice(1,1));assert.ok(!summary.text.includes('全部店铺优化完成'));tests++;
+ assert.equal(aggregate({...metadataState,scopeFinished:false}).ok,false);tests++;
+ assert.equal(recordedUnknown(unknownStore,'2026-10-27'),false);tests++;
+}finally{await factFs.rm(factFolder,{recursive:true,force:true});}
+assert.equal(normalRoundComplete(0,251,251,251),false);tests++;
+assert.equal(normalRoundComplete(2,245,251,251),false);tests++;
+assert.equal(normalRoundComplete(1,251,251,251),true);tests++;
+console.log(JSON.stringify({ok:true,allTests:tests,recordedExecutionAndNormalRoundTests:8,browserActions:0,sendAttempts:0}));
+var lateRestoreStart=Date.parse('2026-10-26T20:10:00+08:00');assert.equal(canStartStore(segmentDeadline(lateRestoreStart,120000),lateRestoreStart+90000),false);assert.equal(canStartStore(segmentDeadline(lateRestoreStart,180000),lateRestoreStart+90000),true);tests++;
+var beforeBoundary=Date.parse('2026-10-26T20:29:00+08:00');assert.equal(segmentDeadline(beforeBoundary,180000)-beforeBoundary,50000);assert.equal(canStartStore(segmentDeadline(beforeBoundary,180000),beforeBoundary),false);tests++;
+console.log(JSON.stringify({ok:true,allTests:tests,latePageRecoveryBudgetTests:2,browserActions:0,sendAttempts:0}));
+const {closestVisiblePage,restoreMerchantPage}=await import('../scripts/quality_optimizer.mjs');
+assert.equal(closestVisiblePage(1,18,[1,2,3,4,5,26]),26);tests++;
+assert.equal(closestVisiblePage(26,18,[1,22,23,24,25,26]),22);tests++;
+assert.equal(closestVisiblePage(20,18,[1,18,19,20,21,22,26]),18);tests++;
+function pagerFake(start){let current=start;const clicks=[];const visible=()=>[...new Set([1,26,...Array.from({length:5},(_,i)=>Math.max(1,Math.min(22,current-2))+i)])].sort((a,b)=>a-b);return {clicks,mainFrame:()=>({}),waitForResponse:async()=>({status:()=>200,finished:async()=>null}),evaluate:async()=>({page:current,total:251,rows:[{name:'page-'+current}],loading:false,hasNext:current<26}),locator:selector=>({evaluateAll:async()=>visible(),count:async()=>1,isVisible:async()=>true,click:async()=>{const match=selector.match(/title="(\d+)"/);current=match?Number(match[1]):current+(selector.includes('-next')?1:-1);clicks.push(current);}})};}
+var fastPager=pagerFake(1),restore=await restoreMerchantPage(fastPager,18,Date.now()+6000);assert.equal(restore.current.page,18);assert.deepEqual(fastPager.clicks,[26,22,20,18]);assert.equal(restore.trace.jumps.length,4);tests++;
+fastPager=pagerFake(16);restore=await restoreMerchantPage(fastPager,18,Date.now()+3000);assert.deepEqual(fastPager.clicks,[18]);tests++;
+fastPager=pagerFake(18);restore=await restoreMerchantPage(fastPager,18,Date.now()+3000);assert.deepEqual(fastPager.clicks,[]);assert.equal(restore.current.page,18);tests++;
+console.log(JSON.stringify({ok:true,allTests:tests,directPageResumeTests:6,browserActions:0,sendAttempts:0}));
+const {segmentContinuation}=await import('../scripts/quality_optimizer.mjs');assert.deepEqual(segmentContinuation(0,false,false,false),{reason:'quality-no-progress-segment-parked',continuation:false});tests++;
+assert.equal(segmentContinuation(1,false,false,false).continuation,true);tests++;
+console.log(JSON.stringify({ok:true,allTests:tests,zeroProgressParkingTests:2,browserActions:0,sendAttempts:0}));

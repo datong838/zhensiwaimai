@@ -34,13 +34,22 @@ export function reconcileProducts(before,after){
  return {state:'unknown',reason:'submitted-product-tasks-still-pending',remaining:after.total};
 }
 export function maySubmit(store){return !store.submission && !['completed','unknown','manual_required'].includes(store.state);}
+export function executionNotice(handled,unconfirmed=0){return unconfirmed?`淘宝闪购 优质商品率低 门店整改流程已按顺序执行完毕（今日执行了 ${handled} 家；其中 ${unconfirmed} 家结果未确认，详见Excel）`:notification(handled);}
+export function recordedUnknown(store,day){
+ const r=store.executionRecord,sub=store.submission,rec=store.reconciliation;
+ return store.state==='unknown'&&store.executionRecorded===true&&r?.day===day&&r?.kind==='attempted-unconfirmed'
+  &&sub?.day===day&&sub?.shopId===store.shopId&&sub?.eventId===day+'-quality-'+store.shopId
+  &&r.submissionSha256===digest(sub)&&/^[a-f0-9]{64}$/.test(r.intentSha256||'')
+  &&rec?.mode==='read-only'&&rec.submissionSha256===r.submissionSha256&&rec.observedAt===r.readonlyObservedAt
+  &&Number.isSafeInteger(rec.currentTotal)&&rec.currentTotal>=0;
+}
 export function aggregate(state){
  const stores=state.stores||[],completed=stores.filter(s=>s.state==='completed'),checked=stores.filter(s=>s.state==='checked_no_action');
- const unknown=stores.filter(s=>['unknown','attempted'].includes(s.state)),errors=stores.filter(s=>s.state==='blocked');
- const ok=state.scopeFinished===true&&unknown.length===0&&errors.length===0;
- return {ok,total:stores.length,completed:completed.length,optimized:completed.length,checkedNoAction:checked.length,handled:completed.length+checked.length,
-  pending:state.scopeFinished?0:1,unknown:unknown.length,errors:errors.length,round:state.cursor?.round||1,
-  observedPlatformTotal:state.latestTotal??null,text:ok?notification(completed.length+checked.length):null};
+ const unknown=stores.filter(s=>['unknown','attempted'].includes(s.state)),recorded=unknown.filter(s=>recordedUnknown(s,state.day)),errors=stores.filter(s=>s.state==='blocked');
+ const ok=state.scopeFinished===true&&unknown.length===recorded.length&&errors.length===0,handled=completed.length+checked.length+recorded.length;
+ return {ok,total:stores.length,completed:completed.length,optimized:completed.length,checkedNoAction:checked.length,attemptedUnconfirmed:recorded.length,handled,
+  pending:state.scopeFinished?0:1,unknown:unknown.length,unrecordedUnknown:unknown.length-recorded.length,errors:errors.length,round:state.cursor?.round||1,
+  observedPlatformTotal:state.latestTotal??null,text:ok?executionNotice(handled,recorded.length):null};
 }
 export function shanghaiClock(now=Date.now()){
  const parts=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Shanghai',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'}).formatToParts(new Date(now));
@@ -58,3 +67,5 @@ export function safeRetryEligible(store,codeVersion,now=Date.now()){
  if(store.lastAttemptVersion!==codeVersion)return true;
  return (store.attemptsForVersion||0)<2&&Number.isFinite(store.retryAt)&&now>=store.retryAt;
 }
+
+export function normalRoundComplete(noNewRounds,handled,firstTotal,currentTotal){return noNewRounds>0&&handled>=Math.min(firstTotal??currentTotal,currentTotal);}

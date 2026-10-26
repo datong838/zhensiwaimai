@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {FLOW,COMPANY,METRIC,compact,digest,validateMerchants,validateProducts,submissionKey,reconcileProducts,maySubmit,aggregate,segmentDeadline,canStartStore,shanghaiClock,safeRetryEligible} from './quality_core.mjs';
+import {FLOW,COMPANY,METRIC,compact,digest,validateMerchants,validateProducts,submissionKey,reconcileProducts,maySubmit,aggregate,segmentDeadline,canStartStore,shanghaiClock,safeRetryEligible,recordedUnknown,normalRoundComplete} from './quality_core.mjs';
 const BASE=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const ROOT=path.resolve(BASE,'../../..');
 const HOME='https://open.shop.ele.me/manager/base/home';
@@ -81,6 +81,31 @@ export async function changePage(subject,locator,fn,deadline,before){
  const response=await responseP;if(response.status()!==200)throw Error('quality-pagination-response-not-ok');
  await bounded(response.finished(),Math.min(deadline,Date.now()+15000));
  return await stable(subject,fn,Math.min(deadline,Date.now()+15000),{previousPage:before.page,previousRowsSignature:rowSignature(before)});
+}
+export function closestVisiblePage(current,target,visible){
+ const candidates=visible.filter(n=>Number.isInteger(n)&&n>0&&n!==current&&Math.abs(n-target)<Math.abs(current-target));
+ return candidates.sort((a,b)=>Math.abs(a-target)-Math.abs(b-target))[0]??null;
+}
+export async function restoreMerchantPage(page,requested,deadline){
+ if(!Number.isInteger(requested)||requested<1)throw Error('quality-cursor-page-invalid');
+ const started=Date.now(),trace={requestedPage:requested,jumps:[],durationMs:0};
+ try{
+  let current=await stable(page,merchantDom,Math.min(deadline,Date.now()+15000));trace.fromPage=current.page;
+  for(let step=0;step<64;step++){
+   if(current.page===requested){trace.toPage=current.page;return {current,trace};}
+   const visible=await page.locator('ul.ant-pagination li.ant-pagination-item[title]').evaluateAll(nodes=>nodes.filter(e=>e.getClientRects().length>0).map(e=>Number(e.getAttribute('title'))).filter(n=>Number.isInteger(n)&&n>0));
+   const target=Math.min(requested,Math.max(current.page,...visible));
+   if(current.page===target){trace.toPage=current.page;return {current,trace};}
+   let next=closestVisiblePage(current.page,target,visible),control,via;
+   if(next!==null){control=page.locator('ul.ant-pagination li.ant-pagination-item[title="'+next+'"]');via='visible-number';}
+   else{next=current.page+(target>current.page?1:-1);control=page.locator('ul.ant-pagination li.ant-pagination-'+(target>current.page?'next':'prev')+':not(.ant-pagination-disabled)');via=target>current.page?'next':'previous';}
+   if(await control.count()!==1||!await control.isVisible())throw Error('quality-cursor-page-control-unavailable');
+   const before=current.page;current=await changePage(page,control,merchantDom,deadline,current);trace.jumps.push({from:before,to:current.page,via});
+   if(Math.abs(current.page-target)>=Math.abs(before-target))throw Error('quality-cursor-page-no-progress');
+  }
+  throw Error('quality-cursor-page-jump-budget');
+ }catch(error){trace.error=String(error.message||error);error.restoreTrace=trace;throw error;}
+ finally{trace.durationMs=Date.now()-started;}
 }
 async function goFirst(subject,deadline,fn){
  const before=await stable(subject,fn,Math.min(deadline,Date.now()+15000));
@@ -205,15 +230,64 @@ export async function reconcileAttempted(frame,store,deadline){
  if(verdict.resolved){store.technicalStatusPreserved='unknown';store.state='checked_no_action';store.businessNote='已只读核对，当前无可优化项；原提交结果未确认';store.completedAt=record.observedAt;}
  return record;
 }
+export function directedCandidates(state,now=Date.now()){
+ return state.stores.filter(store=>store.state==='unknown'&&/^\d+$/.test(String(store.shopId))
+  &&store.submission?.day===state.day&&store.submission?.shopId===store.shopId
+  &&store.submission?.eventId===state.day+'-quality-'+store.shopId
+  &&(!store.lastDirectedReconciledAt||now-store.lastDirectedReconciledAt>=600000))
+  .sort((a,b)=>(a.lastDirectedReconciledAt||0)-(b.lastDirectedReconciledAt||0)).slice(0,2);
+}
+export async function directedReadOnly(context,state,deadline,{save=async()=>{},inspect=productFrame,reconcile=reconcileAttempted}={}){
+ let inspected=0;
+ for(const store of directedCandidates(state)){
+  if(deadline-Date.now()<40000)break;
+  const limit=Math.min(deadline-5000,Date.now()+35000);store.lastDirectedReconciledAt=Date.now();
+  const entry={mode:'read-only',route:'https://melody.shop.ele.me/app/shop/'+store.shopId+'/food-rectify',at:new Date().toISOString(),state:'started'};
+  store.directedReconciliations=store.directedReconciliations||[];store.directedReconciliations.push(entry);await save();
+  let detail,session,targetId;
+  try{
+   detail=await context.newPage();session=await context.newCDPSession(detail);targetId=(await bounded(session.send('Target.getTargetInfo'),Math.min(limit,Date.now()+3000))).targetInfo.targetId;entry.targetId=targetId;
+   await detail.goto(entry.route,{waitUntil:'domcontentloaded',timeout:budget(limit,15000)});
+   const identity={shopId:store.shopId,name:store.name};const frame=await inspect(detail,identity,limit);
+   if(identity.shopId!==store.shopId)throw Error('quality-directed-shop-identity-changed');
+   const result=await reconcile(frame,store,limit);entry.state='observed';entry.resolved=result.resolved;entry.basis=result.basis;inspected++;
+  }catch(error){
+   let body='';try{if(detail&&!detail.isClosed())body=await detail.locator('body').innerText({timeout:1500});}catch{}
+   entry.state='blocked';entry.reason=/扫码登录|验证码登录|登录已失效|立即登录|账号密码/.test(body)?'service-login-required':/无权限|暂无权限|没有权限/.test(body)?'quality-shop-read-only-permission-required':/风险验证|安全验证/.test(body)?'quality-shop-risk-verification-required':String(error.message||error).replace(/https?:\/\/\S+/g,'[url]').slice(0,250);
+  }finally{
+   try{if(detail&&!detail.isClosed()&&session&&targetId&&(await bounded(session.send('Target.getTargetInfo'),Date.now()+2000)).targetInfo.targetId===targetId)await bounded(detail.close(),Date.now()+3000);}catch{entry.closePending=true;}
+   await save();
+  }
+ }
+ return {inspected};
+}
+export async function recordUnknownExecutions(state,folder){
+ let changed=false;
+ for(const store of state.stores){
+  const rec=store.reconciliation,sub=store.submission;
+  if(store.state!=='unknown'||!sub||rec?.mode!=='read-only'||!Number.isSafeInteger(rec.currentTotal)||rec.currentTotal<0
+    ||sub.day!==state.day||sub.shopId!==store.shopId||sub.eventId!==state.day+'-quality-'+store.shopId||rec.submissionSha256!==digest(sub))continue;
+  if(recordedUnknown(store,state.day))continue;
+  const observed=Date.parse(rec.observedAt);if(!Number.isFinite(observed)||new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Shanghai'}).format(new Date(observed))!==state.day)continue;
+  let raw;try{raw=await fs.readFile(path.join(folder,'intents',store.shopId+'.json'));if(digest(JSON.parse(raw))!==digest(sub))continue;}catch{continue;}
+  store.executionRecorded=true;store.executionRecord={day:state.day,kind:'attempted-unconfirmed',recordedAt:new Date().toISOString(),submissionSha256:digest(sub),intentSha256:cryptoHash(raw),readonlyObservedAt:rec.observedAt};changed=true;
+ }
+ return changed;
+}
+export function segmentContinuation(processedRows,ok,scopeFinished,roundLimitReached){
+ const noProgress=processedRows===0&&!ok;
+ return {reason:noProgress?'quality-no-progress-segment-parked':undefined,continuation:!noProgress&&!scopeFinished&&!roundLimitReached};
+}
 export async function runSegment({execute=false}={}){
  const codeVersion=await integrity(),day=dayNow(),folder=path.join(BASE,'.runtime/days',day),stateFile=path.join(folder,'state.json');
  let state;try{state=JSON.parse(await fs.readFile(stateFile,'utf8'));}catch(e){if(e.code!=='ENOENT')throw e;state={schemaVersion:2,day,workflowId:FLOW,stores:[],scopeFinished:false,cursor:{round:1,page:1,row:0,newShops:0,rowsVisited:0,noNewRounds:0}};}
  if(state.day!==day||state.workflowId!==FLOW)throw Error('quality-state-binding-invalid');
  if(!state.cursor)throw Error('quality-old-state-requires-read-only-migration');
- if(execute&&state.scopeFinished&&state.stores.some(s=>(s.state==='unknown'&&s.submission&&(!s.lastReconciledAt||Date.now()-s.lastReconciledAt>=600000))||(s.state==='blocked'&&safeRetryEligible(s,codeVersion)))){state.scopeFinished=false;state.cursor={round:1,page:1,row:0,newShops:0,rowsVisited:0,noNewRounds:0};state.reconciliationSweepStartedAt=new Date().toISOString();}
+ if(execute&&await recordUnknownExecutions(state,folder))await atomic(stateFile,state);
+ if(execute&&state.scopeFinished&&state.stores.some(s=>(s.state==='unknown'&&!recordedUnknown(s,state.day)&&s.submission&&(!s.lastReconciledAt||Date.now()-s.lastReconciledAt>=600000))||(s.state==='blocked'&&safeRetryEligible(s,codeVersion)))){state.scopeFinished=false;state.cursor={round:1,page:1,row:0,newShops:0,rowsVisited:0,noNewRounds:0};state.reconciliationSweepStartedAt=new Date().toISOString();}
  if(!execute)return {ok:true,mode:'inspect-state-only',summary:aggregate(state),browserActions:0,sendAttempts:0};
  const clock=shanghaiClock();if(clock.hour<17)return {ok:false,reason:'quality-not-due',sendAttempts:0};
- const deadline=segmentDeadline(),closingPriority=clock.hour===18&&clock.minute>=30&&clock.minute<35;
+ const deadline=segmentDeadline(Date.now(),180000),closingPriority=clock.hour===18&&clock.minute>=30&&clock.minute<35;
  if(closingPriority||!canStartStore(deadline))return {ok:false,reason:'quality-yield-to-fixed-duty',continuation:true,summary:aggregate(state),sendAttempts:0};
  if(aggregate(state).ok)return {ok:true,summary:aggregate(state),stateFile,runtimeModelDecisions:0,sendAttempts:0};
  const {acquirePostLease,releasePostLease}=await import(path.join(POST,'scripts/lease.mjs'));
@@ -223,9 +297,9 @@ export async function runSegment({execute=false}={}){
  try{
   const conn=await(await import(path.join(POST,'scripts/connect.mjs'))).connectToPost();browser=conn.browser;
   const pages=conn.context.pages().filter(p=>p.url().startsWith('https://open.shop.ele.me/manager/'));if(pages.length!==1)throw Error('quality-service-page-not-unique');page=pages[0];originalUrl=page.url();
-  const label=await navigate(page,deadline);if(state.accountLabel&&state.accountLabel!==label)throw Error('quality-account-scope-changed');state.accountLabel=label;
-  let current=await goFirst(page,deadline,merchantDom);
-  while(current.page<state.cursor.page&&current.hasNext)current=await changePage(page,page.locator('ul.ant-pagination li.ant-pagination-next:not(.ant-pagination-disabled)'),merchantDom,deadline,current);
+  const navigationStarted=Date.now();const label=await navigate(page,deadline);if(state.accountLabel&&state.accountLabel!==label)throw Error('quality-account-scope-changed');state.accountLabel=label;
+  state.lastSegmentTiming={startedAt:new Date(navigationStarted).toISOString(),navigationMs:Date.now()-navigationStarted};
+  let current;try{const restored=await restoreMerchantPage(page,state.cursor.page,deadline);current=restored.current;state.lastPageRestore=restored.trace;state.lastSegmentTiming.pageRestoreMs=restored.trace.durationMs;await save();}catch(error){state.lastPageRestore=error.restoreTrace||{requestedPage:state.cursor.page,error:String(error.message||error)};await save();throw error;}
   if(current.page!==state.cursor.page){state.cursor.page=current.page;state.cursor.row=0;}
   let visited=0;
   while(canStartStore(deadline)&&visited<40&&!state.scopeFinished){
@@ -235,7 +309,7 @@ export async function runSegment({execute=false}={}){
     state.rounds=state.rounds||[];state.rounds.push({round:state.cursor.round,newShops:state.cursor.newShops,rowsVisited:state.cursor.rowsVisited,platformTotal:current.total,finishedAt:new Date().toISOString()});
     state.cursor.noNewRounds=state.cursor.newShops===0?state.cursor.noNewRounds+1:0;
     const handled=aggregate(state).handled,reference=Math.min(state.firstTotal??current.total,current.total);
-    if(state.cursor.noNewRounds>0&&(handled>=reference||state.cursor.noNewRounds>=2)){state.scopeFinished=true;state.finishedAt=new Date().toISOString();await save();break;}
+    if(normalRoundComplete(state.cursor.noNewRounds,handled,state.firstTotal,current.total)){state.scopeFinished=true;state.finishedAt=new Date().toISOString();await save();break;}
     if(state.cursor.round>=20){state.roundLimitReached=true;await save();break;}
     state.cursor={...state.cursor,round:state.cursor.round+1,page:1,row:0,newShops:0,rowsVisited:0};current=await goFirst(page,deadline,merchantDom);await save();continue;
    }
@@ -272,7 +346,7 @@ export async function runSegment({execute=false}={}){
     state.cursor.row++;state.cursor.rowsVisited++;await save();
    }
   }
-  await save();const summary=aggregate(state);return {ok:summary.ok,continuation:!state.scopeFinished&&!state.roundLimitReached,summary,stateFile,runtimeModelDecisions:0,sendAttempts:0};
+  await recordUnknownExecutions(state,folder);state.lastSegmentTiming.processedRows=visited;state.lastSegmentTiming.elapsedMs=Date.now()-navigationStarted;await save();const summary=aggregate(state);return {ok:summary.ok,...segmentContinuation(visited,summary.ok,state.scopeFinished,state.roundLimitReached),summary,timing:state.lastSegmentTiming,pageRestore:state.lastPageRestore,stateFile,runtimeModelDecisions:0,sendAttempts:0};
  }finally{
   try{if(detail)await bounded(detail.close(),Date.now()+5000).catch(()=>{});if(page&&originalUrl&&!page.isClosed()&&page.url()!==originalUrl)await page.goto(originalUrl,{waitUntil:'domcontentloaded',timeout:10000}).catch(()=>{});}
   finally{if(browser)await bounded(browser.close(),Date.now()+5000).catch(()=>{});await releasePostLease(lease);}

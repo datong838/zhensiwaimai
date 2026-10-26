@@ -24,7 +24,8 @@ from wecom_adapter import WeComAdapter,target_preflight_verified,LOCK_PATH,ui_tr
 
 def day_now():return datetime.now(ZoneInfo('Asia/Shanghai')).strftime('%Y-%m-%d')
 
-def notice(count):return f'淘宝闪购 优质商品率低 店铺全部店铺优化完成 （今日执行了 {count} 家）'
+def notice(count,unconfirmed=0):
+    return (f'淘宝闪购 优质商品率低 门店整改流程已按顺序执行完毕（今日执行了 {count} 家；其中 {unconfirmed} 家结果未确认，详见Excel）' if unconfirmed else f'淘宝闪购 优质商品率低 店铺全部店铺优化完成 （今日执行了 {count} 家）')
 
 def integrity():
     policy=json.loads((BASE/'runtime-policy.json').read_text())
@@ -55,12 +56,25 @@ def immediate_ui_session():
         finally:fcntl.flock(handle,fcntl.LOCK_UN)
 
 
+def recorded_unknown(store,day,folder):
+    try:
+        sub=store['submission'];rec=store['reconciliation'];fact=store['executionRecord']
+        canonical=lambda value:hashlib.sha256(json.dumps(value,ensure_ascii=False,separators=(',',':')).encode()).hexdigest()
+        if not (store['state']=='unknown' and store.get('executionRecorded') is True and fact['day']==day and fact['kind']=='attempted-unconfirmed'
+                and str(store['shopId']).isdigit() and sub['day']==day and sub['shopId']==store['shopId'] and sub['eventId']==day+'-quality-'+store['shopId']
+                and fact['submissionSha256']==canonical(sub)==rec['submissionSha256'] and rec['mode']=='read-only' and fact['readonlyObservedAt']==rec['observedAt']
+                and type(rec['currentTotal']) is int and rec['currentTotal']>=0):return False
+        raw=(folder/'intents'/(store['shopId']+'.json')).read_bytes()
+        return hashlib.sha256(raw).hexdigest()==fact['intentSha256'] and canonical(json.loads(raw))==canonical(sub)
+    except (OSError,KeyError,TypeError,ValueError):return False
+
+
 def completion(day,folder,result):
     source=folder/'state.json';state=json.loads(source.read_text());stores=state.get('stores',[])
-    optimized=[s for s in stores if s.get('state')=='completed'];checked=[s for s in stores if s.get('state')=='checked_no_action']
+    optimized=[s for s in stores if s.get('state')=='completed'];checked=[s for s in stores if s.get('state')=='checked_no_action'];unconfirmed=[s for s in stores if recorded_unknown(s,day,folder)]
     if not (state.get('day')==day and state.get('workflowId')==FLOW and state.get('scopeFinished') is True
             and state.get('accountLabel')=='zhangyanru188:全部门店'
-            and all(s.get('state') in ('completed','checked_no_action') and str(s.get('shopId','')).isdigit() for s in stores)
+            and all((s.get('state') in ('completed','checked_no_action') or recorded_unknown(s,day,folder)) and str(s.get('shopId','')).isdigit() for s in stores)
             and len({s['shopId'] for s in stores})==len(stores)
             and result.get('ok') is True and result.get('summary',{}).get('completed')==len(optimized)):
         raise ValueError('quality-daily-execution-not-complete')
@@ -68,15 +82,18 @@ def completion(day,folder,result):
     for store in stores:
         if store['state']=='completed' and not all(store.get('operation',{}).get(k) is True for k in ['confirmed','popoverClosed','uiStable']):raise ValueError('quality-normal-operation-not-observed')
         label='已优化类目详情' if store['state']=='completed' else '已检查，无可优化项目'
-        if store.get('technicalStatusPreserved')=='unknown':
+        if store['state']=='unknown':
+            if not recorded_unknown(store,day,folder):raise ValueError('quality-unconfirmed-execution-binding-invalid')
+            label='已发起优化，结果未确认；今日未重复提交'
+        elif store.get('technicalStatusPreserved')=='unknown':
             reconciliation=store.get('reconciliation',{});expected=hashlib.sha256(json.dumps(store.get('submission'),ensure_ascii=False,separators=(',',':')).encode()).hexdigest()
             if not (reconciliation.get('mode')=='read-only' and reconciliation.get('resolved') is True and reconciliation.get('submissionSha256')==expected):raise ValueError('quality-read-only-reconciliation-binding-invalid')
             label='已只读核对，当前无可优化项；原提交结果未确认'
-        if store.get('skipCount',0):label+='；当日已执行，后续已跳过'
+        if store['state']!='unknown' and store.get('skipCount',0):label+='；当日已执行，后续已跳过'
         records.append({'shopId':store['shopId'],'name':store['name'],'execution':label})
-    payload={'day':day,'workflowId':FLOW,'accountName':'zhangyanru188','groupName':GROUP,'completed':len(optimized),'optimized':len(optimized),'checkedNoAction':len(checked),'handled':len(stores),
+    payload={'day':day,'workflowId':FLOW,'accountName':'zhangyanru188','groupName':GROUP,'completed':len(optimized),'optimized':len(optimized),'checkedNoAction':len(checked),'attemptedUnconfirmed':len(unconfirmed),'handled':len(stores),
              'stateSha256':hashlib.sha256(source.read_bytes()).hexdigest(),'completedShopIds':[s['shopId'] for s in optimized],
-             'handledShopIds':[s['shopId'] for s in stores],'records':records,'text':notice(len(stores)),'observedAt':datetime.now(ZoneInfo('Asia/Shanghai')).isoformat()}
+             'handledShopIds':[s['shopId'] for s in stores],'records':records,'text':notice(len(stores),len(unconfirmed)),'observedAt':datetime.now(ZoneInfo('Asia/Shanghai')).isoformat()}
     target=folder/'completion.json'
     if target.exists():
         saved=json.loads(target.read_text())
@@ -159,7 +176,7 @@ def run(*,execute=False,optimizer=optimize,adapter=None,session=immediate_ui_ses
         except BlockingIOError:return {'ok':False,'stage':'preflight','reason':'quality-ui-post-busy','sendAttempts':0}
         verified=len(deliveries)==2 and all(d['receipt'].get('status')=='verified' for d in deliveries);attempts=sum(d['receipt'].get('sendAttempts') or 0 for d in deliveries)
         atomic_json(marker,{'state':'verified' if verified else 'unknown','eventId':request['context']['eventId'],'deliveries':deliveries,'sendAttempts':attempts})
-        return {'ok':verified,'stage':'notification','summary':result['summary'],'deliveries':deliveries,'sendAttempts':attempts,'runtimeModelDecisions':0}
+        return {'ok':verified,'stage':'notification','summary':result['summary'],'businessNote':(str(proof['attemptedUnconfirmed'])+'家结果未确认，详见执行台账' if proof['attemptedUnconfirmed'] else '当日执行完成'),'deliveries':deliveries,'sendAttempts':attempts,'runtimeModelDecisions':0}
 
 
 def main():
