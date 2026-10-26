@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import {selectExistingJinshaTarget,assertSelectedJinshaTarget} from '../../../posts/jinsha-post/scripts/existing_owned_target.mjs';
 // meituan-waimai-negative-review-appeals 标准工作流 · 金鲨岗位 · 自动差评申诉执行器
 //
 // 归属：金鲨岗位（美团外卖商家后台 data.guoshuyufen.com）。
@@ -51,9 +52,8 @@ class Cdp {
   constructor(ws) { this.ws = ws; this.next = 0; this.pending = new Map(); }
   static async open() {
     const targets = await (await fetch(`${ENDPOINT}/json/list`)).json();
-    const pages = targets.filter(x => x.type === 'page' && x.url.startsWith(ORIGIN));
-    if (pages.length !== 1) throw Error(`jinsha-page-count:${pages.length}`);
-    const ws = new WebSocket(pages[0].webSocketDebuggerUrl);
+    const selected = await selectExistingJinshaTarget(targets);
+    const ws = new WebSocket(selected.webSocketDebuggerUrl);
     await new Promise((resolve, reject) => {
       const timer = setTimeout(() => reject(Error('cdp-connect-timeout')), 20000);
       ws.addEventListener('open', () => { clearTimeout(timer); resolve(); }, { once: true });
@@ -61,6 +61,7 @@ class Cdp {
     });
     const cdp = new Cdp(ws);
     ws.addEventListener('message', event => { const m = JSON.parse(event.data); const done = cdp.pending.get(m.id); if (done) { cdp.pending.delete(m.id); m.error ? done.reject(Error(m.error.message)) : done.resolve(m.result); } });
+    try { await assertSelectedJinshaTarget(cdp,selected); } catch(error) { cdp.close(); throw error; }
     return cdp;
   }
   call(method, params = {}, timeoutMs = 45000) {

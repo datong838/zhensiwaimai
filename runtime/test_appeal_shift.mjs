@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {shiftPlan,runShift} from './appeal_shift.mjs';
+import {shiftPlan,runShift,parseOriginalReceipt} from './appeal_shift.mjs';
 const date=time=>new Date(`2026-10-24T${time}:00+08:00`);
 let tests=0;
 for(const platform of ['taobao','meituan']) {
@@ -16,4 +16,8 @@ for(const platform of ['taobao','meituan']) {
  assert.equal(failed.ok,false);assert.equal(failed.results.length,0);tests++;
 }
 assert.throws(()=>shiftPlan('other',date('13:00')),/unsupported/);tests++;
+const originalFailure=await runShift('meituan',{date:date('13:00'),runner:async()=>({ok:false,error:'jinsha-page-count:2'})});assert.equal(originalFailure.reason,'jinsha-page-count:2');tests++;
+assert.equal(parseOriginalReceipt('log\n'+JSON.stringify({ok:false,error:'jinsha-page-count:2'}),1).error,'jinsha-page-count:2');tests++;
+assert.throws(()=>parseOriginalReceipt(JSON.stringify({ok:true}),1),/conflict/);tests++;
+assert.throws(()=>parseOriginalReceipt('no-json',1),/missing/);tests++;
 console.log(JSON.stringify({ok:true,tests,sendAttempts:0}));

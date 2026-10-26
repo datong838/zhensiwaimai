@@ -20,12 +20,23 @@ export function shiftPlan(platform,date=new Date()) {
   if (slot==='18:30') steps.push({stage:'build',flow:spec.report,script:spec.build,args:[]},{stage:'deliver',flow:spec.report,script:'deliver_batch.mjs',args:['--execute']});
   return {platform,slot,steps};
 }
+export function parseOriginalReceipt(stdout,exitCode=0) {
+  const line=String(stdout||'').trim().split('\n').findLast(value=>value.startsWith('{'));
+  if(!line)throw Error('missing-original-stage-receipt');
+  const receipt=JSON.parse(line);
+  if(!receipt||typeof receipt.ok!=='boolean')throw Error('invalid-original-stage-receipt');
+  if(exitCode!==0&&receipt.ok===true)throw Error('original-stage-exit-receipt-conflict');
+  return receipt;
+}
 async function originalCli(step) {
   const cwd=path.join(root,'skills/workflows',step.flow);
-  const {stdout}=await exec(process.execPath,[path.join(cwd,'scripts',step.script),...step.args],{cwd,maxBuffer:16*1024*1024});
-  const line=stdout.trim().split('\n').findLast(value=>value.startsWith('{'));
-  if (!line) throw Error(`missing-${step.stage}-receipt`);
-  return JSON.parse(line);
+  try {
+    const {stdout}=await exec(process.execPath,[path.join(cwd,'scripts',step.script),...step.args],{cwd,maxBuffer:16*1024*1024});
+    return parseOriginalReceipt(stdout);
+  } catch(error) {
+    if(typeof error.stdout==='string'&&error.stdout.trim())return parseOriginalReceipt(error.stdout,error.code??1);
+    throw error;
+  }
 }
 export async function runShift(platform,{date=new Date(),runner=originalCli}={}) {
   const plan=shiftPlan(platform,date),results=[];
@@ -35,7 +46,7 @@ export async function runShift(platform,{date=new Date(),runner=originalCli}={})
     catch(error) {return {ok:false,platform,slot:plan.slot,stage:step.stage,reason:String(error.message||error),results};}
     results.push({stage:step.stage,receipt});
     if (receipt?.ok!==true || (step.stage==='deliver' && receipt.verified!==true)) {
-      return {ok:false,platform,slot:plan.slot,stage:step.stage,reason:'original-stage-not-complete',results};
+      return {ok:false,platform,slot:plan.slot,stage:step.stage,reason:String(receipt?.reason||receipt?.error||'original-stage-not-complete'),results};
     }
   }
   return {ok:true,platform,slot:plan.slot,status:plan.slot==='18:30'?'closing-complete':'appeal-round-complete',results,runtimeModelDecisions:0};

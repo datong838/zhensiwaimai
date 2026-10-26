@@ -1,3 +1,4 @@
+import {selectExistingJinshaTarget,assertSelectedJinshaTarget} from './existing_owned_target.mjs';
 import crypto from 'node:crypto';
 
 const ENDPOINT = 'http://127.0.0.1:9232';
@@ -101,12 +102,12 @@ class Cdp {
   constructor(ws) { this.ws = ws; this.next = 0; this.pending = new Map(); }
   static async open() {
     const targets = await (await fetch(`${ENDPOINT}/json/list`)).json();
-    const pages = targets.filter(target => target.type === 'page' && target.url.startsWith(ORIGIN));
-    if (pages.length !== 1) throw Error(`jinsha-page-count:${pages.length}`);
-    const ws = new WebSocket(pages[0].webSocketDebuggerUrl);
+    const selected = await selectExistingJinshaTarget(targets);
+    const ws = new WebSocket(selected.webSocketDebuggerUrl);
     await new Promise((resolve, reject) => { ws.addEventListener('open', resolve, { once: true }); ws.addEventListener('error', reject, { once: true }); });
     const cdp = new Cdp(ws);
     ws.addEventListener('message', event => { const message = JSON.parse(event.data); const pending = cdp.pending.get(message.id); if (pending) { cdp.pending.delete(message.id); message.error ? pending.reject(Error(message.error.message)) : pending.resolve(message.result); } });
+    try { await assertSelectedJinshaTarget(cdp,selected); } catch(error) { cdp.close(); throw error; }
     return cdp;
   }
   call(method, params = {}) { return new Promise((resolve, reject) => { const id = ++this.next; this.pending.set(id, { resolve, reject }); this.ws.send(JSON.stringify({ id, method, params })); }); }
