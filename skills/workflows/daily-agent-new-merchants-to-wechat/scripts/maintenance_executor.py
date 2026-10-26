@@ -154,6 +154,17 @@ BUSINESS_STORAGE_BRIDGE_ALLOWED_CHANGES = {
     "scripts/dependency_maintenance.py",
     "../../runtime/business_storage.py",
 }
+CODE_CONSOLIDATION_AUTHORIZATION = "user-20261027-external-code-consolidation"
+CODE_CONSOLIDATION_INSTRUCTION_SHA256 = "007b269e78d3bd0e3201e63e31066118b37d74bea28c7e648af99711066d3857"
+CODE_CONSOLIDATION_ALLOWED_CHANGES = {
+    "scripts/dependency_maintenance.py",
+    "scripts/desktop_text_readback.py",
+    "scripts/windows_adapter.py",
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/legacy-app-controler/wechat-desktop-control/scripts/wechat_interaction_lock.py",
+}
+CODE_CONSOLIDATION_LEGACY_LOCATOR = (
+    "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/"
+    "wechat-desktop-control/scripts/wechat_desktop.py")
 # 2026-10-05 整包迁移通道：技能包迁入 skills/workflows/ 后，包内运行时文件的绝对路径整体
 # 下移一层，且根计算常量（SKILL_ROOT.parent → parents[1] 等）必须同步修正，
 # 因此锁内「本包运行时文件」的 path 与 sha256 会同时变化。本授权开放「SEALED 锁 +
@@ -348,14 +359,17 @@ def _validate_dependency_maintenance_receipt(path: Path | None, expected_sha256:
         else PATH_MIGRATION_INSTRUCTION_SHA256
         if receipt_authorization == PATH_MIGRATION_AUTHORIZATION
         else BUSINESS_STORAGE_BRIDGE_INSTRUCTION_SHA256
-        if receipt_authorization == BUSINESS_STORAGE_BRIDGE_AUTHORIZATION else None)
+        if receipt_authorization == BUSINESS_STORAGE_BRIDGE_AUTHORIZATION
+        else CODE_CONSOLIDATION_INSTRUCTION_SHA256
+        if receipt_authorization == CODE_CONSOLIDATION_AUTHORIZATION else None)
     checks = (
         receipt.get("action") == "prepare",
         receipt.get("status") == "prepared",
         receipt_authorization in (SHARED_DEPENDENCY_MAINTENANCE_AUTHORIZATION,
                                   ZERO_SEND_DRAFT_AUTHORIZATION,
                                   PATH_MIGRATION_AUTHORIZATION,
-                                  BUSINESS_STORAGE_BRIDGE_AUTHORIZATION),
+                                  BUSINESS_STORAGE_BRIDGE_AUTHORIZATION,
+                                  CODE_CONSOLIDATION_AUTHORIZATION),
         receipt.get("userInstructionSha256") == expected_instruction_hash,
         receipt.get("sendAttempts") == 0,
         receipt.get("runtimeModelDecisions") == 0,
@@ -376,7 +390,12 @@ def _validate_dependency_maintenance_receipt(path: Path | None, expected_sha256:
     original_files = manifest.get("files") or {}
     original_locator = original_files.get("shared_desktop_locator") or {}
     original_dependencies = original_files.get("messaging_dependencies") or {}
-    if original_locator.get("path") != locator:
+    locator_pre_registered = original_locator.get("path") == locator
+    locator_key_migration = (
+        receipt_authorization == CODE_CONSOLIDATION_AUTHORIZATION
+        and original_locator.get("path") == CODE_CONSOLIDATION_LEGACY_LOCATOR
+        and original_locator.get("sha256") == current_locator_hash)
+    if not (locator_pre_registered or locator_key_migration):
         raise MaintenanceError("refresh-shared-locator-was-not-pre-registered")
     zero_draft_receipt = receipt_authorization == ZERO_SEND_DRAFT_AUTHORIZATION
     # 0929 路径迁移回执同理：锁在回执签发后经历过重封，manifest 摘要已前滚，
@@ -390,6 +409,7 @@ def _validate_dependency_maintenance_receipt(path: Path | None, expected_sha256:
     stale_digest_receipt = (zero_draft_receipt
                             or receipt_authorization == PATH_MIGRATION_AUTHORIZATION
                             or receipt_authorization == BUSINESS_STORAGE_BRIDGE_AUTHORIZATION
+                            or receipt_authorization == CODE_CONSOLIDATION_AUTHORIZATION
                             or clean_receipt)
     if stale_digest_receipt:
         # The old unsealed lock can legitimately carry the previous manifest
@@ -418,6 +438,8 @@ def _validate_dependency_maintenance_receipt(path: Path | None, expected_sha256:
         allowed = PATH_MIGRATION_ALLOWED_CHANGE_PATHS
     elif receipt_authorization == BUSINESS_STORAGE_BRIDGE_AUTHORIZATION:
         allowed = BUSINESS_STORAGE_BRIDGE_ALLOWED_CHANGES
+    elif receipt_authorization == CODE_CONSOLIDATION_AUTHORIZATION:
+        allowed = CODE_CONSOLIDATION_ALLOWED_CHANGES
     else:
         allowed = AUTHORIZED_ZERO_SEND_DRAFT_PATHS
     if set(by_path) - allowed:

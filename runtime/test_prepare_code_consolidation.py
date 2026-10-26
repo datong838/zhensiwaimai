@@ -118,7 +118,9 @@ class CodeConsolidationTests(unittest.TestCase):
         for name,raw in candidates.items():file=project/name;file.parent.mkdir(parents=True,exist_ok=True);file.write_bytes(raw)
         shutil.copytree(payload/'vendor',project/'vendor')
         spec=importlib.util.spec_from_file_location('projected_actual_dependency_maintenance',shared/'scripts/dependency_maintenance.py');module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
-        result=module.inspect();self.assertEqual(result['status'],'clean');self.assertEqual(result['sendAttempts'],0)
+        fixture_lock=old_prefix+'/wechat-desktop-control/scripts/wechat_interaction_lock.py'
+        module.CODE_CONSOLIDATION_KEY_MIGRATIONS={fixture_lock:str(project/target/'wechat_interaction_lock.py')}
+        result=module.inspect();self.assertEqual(result['status'],'clean',result);self.assertEqual(result['sendAttempts'],0)
         self.assertTrue(all(not k.startswith(old_prefix) for k in module.NEW_STORES_ALLOWED_AFTER))
     def test_actual_guard_dispatcher_does_not_accept_drift_or_execute_business(self):
         calls=[]

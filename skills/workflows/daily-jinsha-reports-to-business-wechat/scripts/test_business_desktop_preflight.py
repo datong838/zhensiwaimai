@@ -10,11 +10,12 @@ from business_desktop_wechat_file_sender import TARGET_GROUP  # noqa: E402
 import business_desktop_wechat_file_sender as sender  # noqa: E402
 
 # 《测试隔离契约》：测试必须能在全离线下通过、不得驱动真实 Windows 驱动通道，
-# 因此 WindowsAdapter 一律打桩到真实接缝（preflight 在内部 `from windows_adapter import WindowsAdapter`）。
+# 因此 WeComAdapter 一律打桩到真实接缝（preflight 在内部
+# `from wecom_adapter import WeComAdapter as WindowsAdapter`）。
 _WM_SCRIPTS = Path(__file__).resolve().parents[3] / "wechat-messaging" / "scripts"
 if str(_WM_SCRIPTS) not in sys.path:
     sys.path.insert(0, str(_WM_SCRIPTS))
-import windows_adapter  # noqa: E402  (仅用于打桩，绝不构造其真实实例)
+import wecom_adapter  # noqa: E402  (仅用于打桩，绝不构造其真实实例)
 
 
 class DesktopPreflightTests(unittest.TestCase):
@@ -41,7 +42,7 @@ class DesktopPreflightTests(unittest.TestCase):
                 return {"ok": True, "action": "open-group",
                         "group": TARGET_GROUP,
                         "header": TARGET_GROUP + "（18）", "note": None}
-        with patch.object(windows_adapter, "WindowsAdapter", return_value=_FakeAdapter()):
+        with patch.object(wecom_adapter, "WeComAdapter", return_value=_FakeAdapter()):
             receipt = sender.preflight(TARGET_GROUP)
         self.assertTrue(receipt["ok"])
         self.assertEqual(receipt["group"], TARGET_GROUP)
@@ -50,7 +51,7 @@ class DesktopPreflightTests(unittest.TestCase):
         class _FakeAdapter:
             def preflight(self, request, output):
                 return {"ok": False, "reason": "blocked-login"}
-        with patch.object(windows_adapter, "WindowsAdapter", return_value=_FakeAdapter()):
+        with patch.object(wecom_adapter, "WeComAdapter", return_value=_FakeAdapter()):
             with self.assertRaisesRegex(RuntimeError, "windows-wechat-blocked-login"):
                 sender.preflight(TARGET_GROUP)
 

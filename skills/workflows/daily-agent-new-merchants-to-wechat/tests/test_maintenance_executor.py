@@ -345,6 +345,17 @@ class MaintenanceExecutorTests(unittest.TestCase):
         self.assertEqual({row["path"] for row in verified["changes"]},
                          maintenance.BUSINESS_STORAGE_BRIDGE_ALLOWED_CHANGES)
 
+    def test_code_consolidation_receipt_registration_is_exact(self):
+        self.assertEqual(maintenance.CODE_CONSOLIDATION_AUTHORIZATION,
+                         "user-20261027-external-code-consolidation")
+        self.assertEqual(maintenance.CODE_CONSOLIDATION_INSTRUCTION_SHA256,
+                         "007b269e78d3bd0e3201e63e31066118b37d74bea28c7e648af99711066d3857")
+        self.assertEqual(maintenance.CODE_CONSOLIDATION_ALLOWED_CHANGES, {
+            "scripts/dependency_maintenance.py", "scripts/desktop_text_readback.py",
+            "scripts/windows_adapter.py",
+            "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/legacy-app-controler/wechat-desktop-control/scripts/wechat_interaction_lock.py",
+        })
+
     def test_zero_send_recovery_binds_clean_receipt_to_registered_manifest_path(self):
         directory = tempfile.TemporaryDirectory(); self.addCleanup(directory.cleanup)
         root = Path(directory.name); locator = root / "desktop.py"; locator.write_text("current")
