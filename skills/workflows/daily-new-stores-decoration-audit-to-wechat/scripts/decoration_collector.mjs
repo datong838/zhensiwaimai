@@ -6,6 +6,7 @@ import { createRequire } from 'node:module';
 import { connectToPost } from '../../../posts/taobao-brand-post/scripts/connect.mjs';
 import { acquirePostLease, releasePostLease } from '../../../posts/taobao-brand-post/scripts/lease.mjs';
 import { assertAuthenticated } from '../../../posts/taobao-brand-post/scripts/auth.mjs';
+import { selectExistingBrandPage, restoreSelectedBrandPage } from '../../../../shared/browser_precise_ops/js/brand_page_selector.mjs';
 const require = createRequire(import.meta.url);
 const fs = require('node:fs');
 
@@ -372,25 +373,29 @@ async function main() {
     return;
   }
   let browser;
+  let selectedPage, restoreUrl;
   let payload = null;
   try {
     process.stderr.write(`[dryrun] ${new Date().toISOString()} acquiring lease...\n`);
     const conn = await connectToPost();
     process.stderr.write(`[dryrun] connected\n`);
     browser = conn.browser;
-    const pages = browser.contexts().flatMap(c => c.pages()).filter(p => p.url().startsWith('https://melody.shop.ele.me/'));
-    process.stderr.write(`[dryrun] melody pages: ${pages.length} url=${pages[0]?.url?.().slice(0, 80)}\n`);
-    if (pages.length !== 1) throw new Error('brand-tab-not-unique');
-    const shopId = await selectShop(pages[0], requestedName);
+    const allPages = browser.contexts().flatMap(c => c.pages());
+    const page = selectExistingBrandPage(allPages);
+    selectedPage = page;
+    if (allPages.filter(p => p.url().startsWith('https://melody.shop.ele.me/')).length > 1) restoreUrl = page.url();
+    process.stderr.write(`[dryrun] selected existing melody page: ${page.url().slice(0, 80)}\n`);
+    const shopId = await selectShop(page, requestedName);
     process.stderr.write(`[dryrun] selectShop ok: ${shopId}\n`);
-    const receipt = await readDecoration(pages[0], shopId, requestedName);
+    const receipt = await readDecoration(page, shopId, requestedName);
     process.stderr.write(`[dryrun] readDecoration ok: ${JSON.stringify(receipt.targetStatus)}\n`);
     fs.mkdirSync(require('node:path').dirname(output), { recursive: true, mode: 0o700 });
     fs.writeFileSync(output, JSON.stringify(receipt, null, 2), { flag: 'wx', mode: 0o600 });
     payload = { status: receipt.status, shopId: receipt.shopId, targetStatus: receipt.targetStatus, output };
   } finally {
     // 严禁 browser.close()：connectOverCDP 的 close 会杀掉整个 9230 岗位实例。只释放 lease。
-    if (lease) await releasePostLease(lease).catch(() => {});
+    try { await restoreSelectedBrandPage(selectedPage, restoreUrl); }
+    finally { if (lease) await releasePostLease(lease).catch(() => {}); }
   }
   // 2026-10-12 根因修复：不 close 浏览器 ⇒ CDP WebSocket 句柄保持事件循环非空 ⇒
   //   node 永不自行退出，上层 subprocess(timeout=120) 把「已成功落盘」误判成超时 unknown

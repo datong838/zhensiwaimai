@@ -4,6 +4,7 @@ import { createRequire } from 'node:module';
 import { connectToPost } from '../../../posts/taobao-brand-post/scripts/connect.mjs';
 import { acquirePostLease, releasePostLease } from '../../../posts/taobao-brand-post/scripts/lease.mjs';
 import { assertAuthenticated } from '../../../posts/taobao-brand-post/scripts/auth.mjs';
+import { selectExistingBrandPage, restoreSelectedBrandPage } from '../../../../shared/browser_precise_ops/js/brand_page_selector.mjs';
 const require = createRequire(import.meta.url);
 const fs = require('node:fs');
 
@@ -291,17 +292,23 @@ async function main() {
     return;
   }
   let browser;
+  let selectedPage, restoreUrl;
   try {
     const conn = await connectToPost();
     browser = conn.browser;
-    const pages = browser.contexts().flatMap(c => c.pages()).filter(p => p.url().startsWith('https://melody.shop.ele.me/'));
-    if (pages.length !== 1) throw new Error('brand-tab-not-unique');
-    const shopId = await selectShop(pages[0], requestedName);
-    const receipt = await collect(pages[0], shopId, requestedName);
+    const allPages = browser.contexts().flatMap(c => c.pages());
+    const page = selectExistingBrandPage(allPages);
+    selectedPage = page;
+    if (allPages.filter(p => p.url().startsWith('https://melody.shop.ele.me/')).length > 1) restoreUrl = page.url();
+    const shopId = await selectShop(page, requestedName);
+    const receipt = await collect(page, shopId, requestedName);
     fs.mkdirSync(require('node:path').dirname(output), { recursive: true, mode: 0o700 });
     fs.writeFileSync(output, JSON.stringify(receipt, null, 2), { flag: 'wx', mode: 0o600 });
     console.log(JSON.stringify({ status: receipt.status, shopId: receipt.shopId, targetStatus: receipt.targetStatus, output }));
-  } finally { await browser?.close().catch(() => {}); if (lease) await releasePostLease(lease).catch(() => {}); }
+  } finally {
+    try { await restoreSelectedBrandPage(selectedPage, restoreUrl); }
+    finally { await browser?.close().catch(() => {}); if (lease) await releasePostLease(lease).catch(() => {}); }
+  }
 }
 if (process.argv[1] && import.meta.url === `file://${process.argv[1]}`) {
   main().catch(e => {

@@ -73,12 +73,18 @@ class ActivityWorkflowTests(unittest.TestCase):
             self.assertEqual(result["status"], "already_verified")
             self.assertEqual(result["sendAttempts"], 0)
 
-    def test_existing_event_text_conflict_blocks(self):
+    def test_verified_event_text_change_never_resends(self):
         with tempfile.TemporaryDirectory() as directory:
             event_dir = Path(directory)
             day = datetime.now(WORKFLOW.LOCAL_TZ).date().isoformat()
             marker = event_dir / f"{day}-taobao-1364123817-activity-reminder.json"
             marker.write_text(json.dumps({"state": "verified", "sha256": "different"}))
+            with patch.object(WORKFLOW, "EVENTS", event_dir):
+                result = WORKFLOW.deliver(self.receipt, event_dir)
+            self.assertEqual(result["status"], "already_verified")
+            self.assertEqual(result["reason"], "verified-earlier-today-payload-changed-no-resend")
+            self.assertEqual(result["sendAttempts"], 0)
+            marker.write_text(json.dumps({"state": "unknown", "sha256": "different"}))
             with patch.object(WORKFLOW, "EVENTS", event_dir):
                 result = WORKFLOW.deliver(self.receipt, event_dir)
             self.assertEqual(result["status"], "blocked")
