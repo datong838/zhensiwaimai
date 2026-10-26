@@ -118,4 +118,88 @@ class BusinessStorageTests(unittest.TestCase):
         (self.root/'state/shared/appeals').symlink_to('/missing/outside')
         with self.assertRaisesRegex(ValueError,'symlink'):self.path()
 
+class SourceAliasMigrationTests(unittest.TestCase):
+    def setUp(self):
+        import os
+        self.t=tempfile.TemporaryDirectory();self.addCleanup(self.t.cleanup)
+        base=Path(self.t.name).resolve();self.root=base/'repo';(self.root/'runtime').mkdir(parents=True)
+        self.entry=base/'reports-entry';self.real=base/'nvme-reports';self.real.mkdir();self.entry.symlink_to(self.real,target_is_directory=True)
+        self.original=b'{"state":"unknown","eventId":"old-event","sendAttempts":1}\n';(self.real/'marker.json').write_bytes(self.original)
+        self.key='jinsha-reports';self.target='data/reports/jinsha'
+        (self.root/'runtime/business_storage_catalog.json').write_text(json.dumps({'schemaVersion':1,'objects':{self.key:{'legacy':str(self.entry),'target':self.target}}}))
+        allowed=patch.object(migration,'APPROVED_SOURCE_LINKS',{self.key:(str(self.entry),str(self.real))});allowed.start();self.addCleanup(allowed.stop)
+    def plan(self):return migration.make_plan(self.root,[self.key])
+    def apply(self,p,idle=lambda _:None):return migration.apply_plan(p,root=self.root,idle_check=idle)
+    def test_only_approved_entry_and_target_are_bound_in_read_only_plan(self):
+        import os
+        before=self.entry.lstat();raw=os.readlink(self.entry);p=self.plan();binding=p['objects'][self.key]['sourceBinding']
+        self.assertEqual(binding['entry'],str(self.entry));self.assertEqual(binding['resolvedSource'],str(self.real));self.assertEqual(binding['linkTarget'],raw)
+        self.assertEqual(self.entry.lstat().st_ino,before.st_ino);self.assertEqual((self.real/'marker.json').read_bytes(),self.original)
+        self.assertFalse((self.root/storage.LAYOUT).exists())
+    def test_apply_copies_real_directory_preserving_original_link_and_bytes(self):
+        import os
+        p=self.plan();ino=self.entry.lstat().st_ino;raw=os.readlink(self.entry);copy=shutil.copytree
+        with patch.object(migration.shutil,'copytree',wraps=copy) as called:self.apply(p)
+        self.assertEqual(called.call_args.args[0],str(self.real));self.assertTrue(self.entry.is_symlink());self.assertEqual(self.entry.lstat().st_ino,ino);self.assertEqual(os.readlink(self.entry),raw)
+        self.assertEqual((self.real/'marker.json').read_bytes(),self.original);self.assertEqual((self.root/self.target/'marker.json').read_bytes(),self.original)
+        proof=json.loads((self.root/'runtime/state/storage-migrations'/p['id']/'activation.json').read_text())
+        self.assertEqual(proof['objects'][self.key]['sourceBinding'],p['objects'][self.key]['sourceBinding'])
+    def test_wrong_key_or_entry_remains_rejected(self):
+        with patch.object(migration,'APPROVED_SOURCE_LINKS',{}):
+            with self.assertRaisesRegex(ValueError,'not-approved'):self.plan()
+        with patch.object(migration,'APPROVED_SOURCE_LINKS',{self.key:(str(self.entry)+'-other',str(self.real))}):
+            with self.assertRaisesRegex(ValueError,'not-approved'):self.plan()
+    def test_other_target_or_link_chain_is_not_approved(self):
+        other=self.root.parent/'other';other.mkdir();self.entry.unlink();self.entry.symlink_to(other)
+        with self.assertRaisesRegex(ValueError,'target-mismatch'):self.plan()
+        self.entry.unlink();middle=self.root.parent/'middle';middle.symlink_to(self.real);self.entry.symlink_to(middle)
+        with self.assertRaisesRegex(ValueError,'target-mismatch'):self.plan()
+    def test_entry_recreated_or_retargeted_after_plan_is_rejected(self):
+        p=self.plan();self.entry.rename(self.entry.with_name('old-entry'));self.entry.symlink_to(self.real)
+        with self.assertRaisesRegex(ValueError,'binding-changed'):self.apply(p)
+        self.assertFalse((self.root/storage.LAYOUT).exists())
+    def test_real_directory_replacement_after_plan_is_rejected(self):
+        p=self.plan();saved=self.real.with_name('original-real');self.real.rename(saved);shutil.copytree(saved,self.real)
+        with self.assertRaisesRegex(ValueError,'binding-changed'):self.apply(p)
+        self.assertFalse((self.root/storage.LAYOUT).exists())
+    def test_missing_binding_cannot_follow_an_old_unbound_link_plan(self):
+        p=self.plan();p['objects'][self.key].pop('sourceBinding')
+        with self.assertRaisesRegex(ValueError,'binding-changed'):self.apply(p)
+    def test_nested_links_and_linked_real_target_are_still_refused(self):
+        (self.real/'nested').symlink_to('/nonexistent/outside')
+        with self.assertRaisesRegex(ValueError,'symlink|nonregular'):self.plan()
+        (self.real/'nested').unlink();saved=self.real.with_name('saved-real');self.real.rename(saved);self.real.symlink_to(saved)
+        with self.assertRaisesRegex(ValueError,'not-canonical'):self.plan()
+    def test_idle_check_is_not_bypassed_for_approved_link(self):
+        from unittest.mock import Mock
+        p=self.plan();idle=Mock(side_effect=ValueError('writer-still-active'))
+        with self.assertRaisesRegex(ValueError,'writer-still-active'):self.apply(p,idle)
+        idle.assert_called_once_with(self.root);self.assertFalse((self.root/self.target).exists())
+    def test_real_source_file_lock_is_preserved_and_blocks_copy(self):
+        import fcntl
+        lock=self.real/'sender.lock';lock.write_bytes(b'');p=self.plan()
+        with lock.open('rb') as held:
+            fcntl.flock(held,fcntl.LOCK_EX|fcntl.LOCK_NB)
+            with self.assertRaises(BlockingIOError):self.apply(p)
+        self.assertFalse((self.root/storage.LAYOUT).exists());self.assertTrue(self.entry.is_symlink())
+    def test_idle_writer_detection_includes_approved_real_source_arguments(self):
+        from types import SimpleNamespace
+        exists=Path.exists
+        def check(path):return False if str(path).startswith('/tmp/zhensi-post-') else exists(path)
+        with patch.object(migration.subprocess,'run',return_value=SimpleNamespace(returncode=1)),patch.object(migration.subprocess,'check_output',return_value='555 other-writer --output '+str(self.real)),patch.object(Path,'exists',check):
+            with self.assertRaisesRegex(ValueError,'writer-process-present'):migration.assert_idle(self.root)
+    def test_link_retarget_during_copy_never_activates(self):
+        p=self.plan();other=self.real.with_name('wrong-target');other.mkdir();(other/'marker.json').write_bytes(b'wrong');real_copy=shutil.copytree
+        def switch(source,*args,**kwargs):
+            result=real_copy(source,*args,**kwargs);self.entry.rename(self.entry.with_name('saved-entry'));self.entry.symlink_to(other);return result
+        with patch.object(migration.shutil,'copytree',side_effect=switch):
+            with self.assertRaisesRegex(ValueError,'target-mismatch|binding-changed'):self.apply(p)
+        self.assertFalse((self.root/storage.LAYOUT).exists());self.assertEqual((self.real/'marker.json').read_bytes(),self.original)
+    def test_rollback_restores_authority_without_changing_source_link(self):
+        import os
+        p=self.plan();self.apply(p);raw=os.readlink(self.entry);ino=self.entry.lstat().st_ino
+        migration.rollback(p['id'],root=self.root,idle_check=lambda _:None)
+        self.assertEqual(storage.business_path(self.key,root=self.root),self.entry);self.assertEqual(os.readlink(self.entry),raw);self.assertEqual(self.entry.lstat().st_ino,ino)
+
+
 if __name__=='__main__':unittest.main()

@@ -17,6 +17,44 @@ from pathlib import Path
 from business_storage import REPO_ROOT, LAYOUT, business_path, catalog, internal_path
 
 
+# Only these verified entry -> real-directory aliases may be followed, exactly one hop.
+APPROVED_SOURCE_LINKS = {
+    'jinsha-reports': ('/Users/ddt/work/臻肆/报表', '/Volumes/NVME2T/work/臻肆/报表'),
+    'video-assets': ('/Users/ddt/work/臻肆/视频', '/Volumes/NVME2T/work/臻肆/视频'),
+}
+
+
+def source_location(key, item):
+    entry = Path(item['legacy'])
+    if not entry.is_symlink():
+        return entry, None
+    approved = APPROVED_SOURCE_LINKS.get(key)
+    if approved is None or entry != Path(approved[0]):
+        raise ValueError('storage-source-link-not-approved:' + key)
+    real = Path(approved[1])
+    link_text = os.readlink(entry)
+    direct = Path(link_text) if Path(link_text).is_absolute() else entry.parent/link_text
+    if Path(os.path.abspath(direct)) != real:
+        raise ValueError('storage-source-link-target-mismatch:' + key)
+    try:
+        if real.is_symlink() or not real.is_dir() or real.resolve(strict=True) != real or entry.resolve(strict=True) != real:
+            raise ValueError('storage-approved-source-not-canonical-directory:' + key)
+        alias_stat = entry.lstat(); source_stat = real.stat()
+    except OSError as error:
+        raise ValueError('storage-approved-source-unavailable:' + key) from error
+    binding = {'entry': str(entry), 'linkTarget': link_text, 'resolvedSource': str(real),
+               'entryIdentity': {'device': alias_stat.st_dev, 'inode': alias_stat.st_ino},
+               'sourceIdentity': {'device': source_stat.st_dev, 'inode': source_stat.st_ino}}
+    return real, binding
+
+
+def validated_source(key, item):
+    source, binding = source_location(key, item)
+    if binding != item.get('sourceBinding'):
+        raise ValueError('storage-source-binding-changed:' + key)
+    return source
+
+
 def encoded(value):
     return (json.dumps(value, ensure_ascii=False, sort_keys=True, indent=2) + '\n').encode()
 
@@ -66,7 +104,10 @@ def assert_idle(root):
         raise ValueError('storage-post-lease-present')
     process_list = subprocess.check_output(['/bin/ps','-axo','pid=,command='], text=True)
     needles = [str(root/'runtime/run_all.py'),str(root/'skills/.daily-jinsha-reports-core'),
-               *[item['legacy'] for item in catalog(root).values()], *[str(root/'skills/workflows'/name) for name in (
+               *[item['legacy'] for item in catalog(root).values()],
+               *[real for key,(entry,real) in APPROVED_SOURCE_LINKS.items()
+                 if catalog(root).get(key,{}).get('legacy') == entry],
+               *[str(root/'skills/workflows'/name) for name in (
         'meituan-waimai-negative-review-appeals','taobao-flash-sale-negative-review-appeals',
         'negative-feedback-list-appeals','daily-jinsha-reports-to-business-wechat','daily-wechat-video-publish')]]
     for line in process_list.splitlines():
@@ -90,8 +131,11 @@ def make_plan(root=REPO_ROOT, keys=None):
         item = objects[key]; target = internal_path(root,item['target'])
         if target.exists(): raise ValueError('storage-target-collision:'+key)
         if business_path(key,root=root) != Path(item['legacy']): raise ValueError('storage-already-active:'+key)
-        snapshot = inventory(Path(item['legacy']))
+        source, binding = source_location(key, item)
+        if target == source or target.is_relative_to(source): raise ValueError('storage-source-contains-target:' + key)
+        snapshot = inventory(source)
         plan['objects'][key] = dict(item, inventory=snapshot)
+        if binding is not None: plan['objects'][key]['sourceBinding'] = binding
     return plan
 
 
@@ -103,18 +147,21 @@ def validate_plan(root, plan):
     for key, item in plan['objects'].items():
         if key not in objects or any(item.get(k) != objects[key][k] for k in ('legacy','target')):
             raise ValueError('storage-plan-scope-invalid')
-        internal_path(root,item['target'])
-        if inventory(Path(item['legacy'])) != item['inventory']: raise ValueError('storage-source-changed:'+key)
+        target = internal_path(root,item['target'])
+        source = validated_source(key,item)
+        if target == source or target.is_relative_to(source): raise ValueError('storage-source-contains-target:' + key)
+        if inventory(source) != item['inventory']: raise ValueError('storage-source-changed:'+key)
 
 
 def apply_plan(plan, *, root=REPO_ROOT, idle_check=assert_idle):
     root = Path(root).resolve()
     with maintenance_lock(root), contextlib.ExitStack() as source_guards:
         idle_check(root); validate_plan(root,plan)
-        for item in plan['objects'].values():
+        for key,item in plan['objects'].items():
+            source = validated_source(key,item)
             for file in item['inventory']['files']:
                 if file['path'].endswith('.lock'):
-                    handle=source_guards.enter_context((Path(item['legacy'])/file['path']).open('rb'))
+                    handle=source_guards.enter_context((source/file['path']).open('rb'))
                     fcntl.flock(handle,fcntl.LOCK_EX|fcntl.LOCK_NB)
         layout_path = internal_path(root,LAYOUT)
         previous_bytes = layout_path.read_bytes() if layout_path.exists() else None
@@ -131,10 +178,11 @@ def apply_plan(plan, *, root=REPO_ROOT, idle_check=assert_idle):
                 if target.exists(): raise ValueError('storage-target-collision:'+key)
                 target.parent.mkdir(parents=True,exist_ok=True)
                 stage = target.with_name('.'+target.name+'.migration-'+plan['id'])
-                shutil.copytree(item['legacy'],stage,copy_function=shutil.copy2,symlinks=True)
+                source = validated_source(key,item)
+                shutil.copytree(str(source),stage,copy_function=shutil.copy2,symlinks=True)
                 if inventory(stage) != item['inventory']: raise ValueError('storage-copy-mismatch:'+key)
                 idle_check(root)
-                if inventory(Path(item['legacy'])) != item['inventory']: raise ValueError('storage-source-changed:'+key)
+                if inventory(validated_source(key,item)) != item['inventory']: raise ValueError('storage-source-changed:'+key)
                 if target.exists(): raise ValueError('storage-target-collision:'+key)
                 stage.rename(target); renamed.append(key)
                 atomic_json(tx/'progress.json',{'phase':'copied','keys':renamed})
@@ -145,7 +193,9 @@ def apply_plan(plan, *, root=REPO_ROOT, idle_check=assert_idle):
                 raise ValueError('storage-layout-changed-during-copy')
             proof={'schemaVersion':1,'phase':'activated','id':plan['id'],'root':str(root),
                    'activatedAt':datetime.now(timezone.utc).isoformat(),
-                   'objects':{key:{'target':item['target'],'inventory':item['inventory']} for key,item in plan['objects'].items()}}
+                   'objects':{key:{'target':item['target'],'inventory':item['inventory'],
+                                   **({'sourceBinding':item['sourceBinding']} if 'sourceBinding' in item else {})}
+                              for key,item in plan['objects'].items()}}
             proof_path=tx/'activation.json'; atomic_json(proof_path,proof)
             updated=dict(previous['objects'])
             for key,item in plan['objects'].items():
