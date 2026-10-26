@@ -624,10 +624,77 @@ export function jinshaReusePageDecision(urls) {
   return Object.freeze({ ok: true, url: sameOrigin[0] });
 }
 
-async function reuseExistingJinshaPage(context, spec, marker) {
-  const decision = jinshaReusePageDecision(context.pages().map((page) => page.url()));
+export function completedJinshaOwnerMarker(receipt, livePid) {
+  const profile = receipt?.profiles?.jinsha;
+  if (!Number.isInteger(livePid) || livePid <= 0 || receipt?.executor !== 'background-browser-executor'
+    || receipt.ok !== true || receipt.stage !== 'completed' || receipt.phase !== 'completed'
+    || receipt.cleanupStatus !== 'completed' || receipt.jinshaTaskStrategy !== 'reused-existing-work-target'
+    || profile?.profile !== FIXED.jinsha.profile || profile.port !== FIXED.jinsha.port || profile.pid !== livePid
+    || !/^\d{4}-\d{2}-\d{2}$/.test(receipt.businessDate || '')
+    || !/^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/i.test(receipt.runId || '')) return null;
+  return `aos-background-task:taobao-jinsha-${receipt.runId.toLowerCase().slice(0, 30)}`;
+}
+
+export function ownedJinshaPageDecision(pages, proofs, livePid, processStartedAt) {
+  if (!Number.isFinite(processStartedAt) || processStartedAt <= 0)
+    return { ok: false, code: 'jinsha-existing-owner-process-start-missing' };
+  const candidates = [];
+  for (let index = 0; index < pages.length; index++) {
+    const page = pages[index];
+    if (!String(page.url || '').startsWith(FIXED.jinsha.prefix)) continue;
+    const owners = proofs.filter(proof => {
+      const marker = completedJinshaOwnerMarker(proof.receipt, livePid);
+      return marker && Number.isFinite(proof.createdAt) && proof.createdAt >= processStartedAt
+        && proof.createdAt <= Date.now() && isOwnedName(page.marker, marker);
+    });
+    if (owners.length === 1) candidates.push({ index, url: page.url, owner: owners[0] });
+    else if (owners.length > 1) return { ok: false, code: 'jinsha-existing-owner-proof-not-unique' };
+  }
+  return candidates.length === 1 ? { ok: true, ...candidates[0] }
+    : { ok: false, code: `jinsha-existing-owned-page-not-unique:${candidates.length}` };
+}
+
+async function completedJinshaOwnerProofs(livePid) {
+  let entries;
+  try { entries = await fsp.readdir(DEFAULT_OUTPUT, { withFileTypes: true }); } catch { return []; }
+  const proofs = [];
+  for (const entry of entries) {
+    if (!entry.isDirectory() || entry.isSymbolicLink()) continue;
+    const file = path.join(DEFAULT_OUTPUT, entry.name, 'receipt.json');
+    try {
+      const stat = await fsp.lstat(file);
+      if (!stat.isFile() || stat.isSymbolicLink()) continue;
+      const data = await fsp.readFile(file); const receipt = JSON.parse(data.toString());
+      if (entry.name !== `${receipt.businessDate}-${receipt.runId}` || !completedJinshaOwnerMarker(receipt, livePid)) continue;
+      proofs.push({ receipt, file, createdAt: stat.birthtimeMs, sha256: crypto.createHash('sha256').update(data).digest('hex') });
+    } catch { /* An unreadable historical receipt is not ownership proof. */ }
+  }
+  return proofs;
+}
+
+async function reuseExistingJinshaPage(context, spec, marker, receipt) {
+  const pages = context.pages();
+  let decision = jinshaReusePageDecision(pages.map((page) => page.url()));
+  let page;
+  if (!decision.ok && pages.filter(candidate => candidate.url().startsWith(spec.prefix)).length > 1) {
+    const livePid = receipt.profiles?.jinsha?.pid;
+    const started = await execFile('/bin/ps', ['-p', String(livePid), '-o', 'lstart=']);
+    const processStartedAt = Date.parse(started.stdout.trim());
+    const descriptors = [];
+    for (const candidate of pages) descriptors.push({ url: candidate.url(), marker: candidate.url().startsWith(spec.prefix)
+      ? await candidate.evaluate(() => window.name) : '' });
+    decision = ownedJinshaPageDecision(descriptors, await completedJinshaOwnerProofs(livePid), livePid, processStartedAt);
+    if (decision.ok) {
+      page = pages[decision.index];
+      const originalMarker = completedJinshaOwnerMarker(decision.owner.receipt, livePid);
+      if (page.url() !== decision.url || !isOwnedName(await page.evaluate(() => window.name), originalMarker))
+        throw new Error('jinsha-existing-owned-page-binding-changed');
+      receipt.jinshaExistingOwnerProof = { runId: decision.owner.receipt.runId, receiptFile: decision.owner.file,
+        receiptSha256: decision.owner.sha256, profilePid: livePid, processStartedAt, marker: originalMarker };
+    }
+  }
   if (!decision.ok) throw new Error(decision.code);
-  const page = context.pages().find((candidate) => candidate.url() === decision.url);
+  page ||= pages.find((candidate) => candidate.url() === decision.url);
   if (!page) throw new Error('jinsha-no-existing-origin-page');
   if (page.url().includes('#/login')) throw new Error('jinsha-login-expired');
   const currentMarker = await page.evaluate(() => window.name);
@@ -704,7 +771,7 @@ async function openOwnedTask(spec, taskId, receipt) {
         // 直接从左侧菜单页做不行吗」）：金鲨工位严禁 context.newPage() 新开标签——新标签
         // 首次加载会弹上传教程浮层（.zzc 遮罩），挡住菜单/上传点击且执行器无法稳定关闭，
         // 10-18 七连败根因。一律复用工位已开着的同源页面，经左侧菜单 SPA 导航。
-        page = await reuseExistingJinshaPage(context, spec, marker);
+        page = await reuseExistingJinshaPage(context, spec, marker, receipt);
         reusedJinsha = true;
         receipt.jinshaTaskStrategy = 'reused-existing-work-target';
       } else {

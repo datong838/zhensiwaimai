@@ -43,7 +43,7 @@ const INSTALLED_SKILL = '/Users/ddt/.codex/skills/daily-taobao-download-to-jinsh
 //   实弹 uploadData↔realTimeData 往返验证通过）；金鲨序列 7 个点击点全部接入（恢复轨菜单/
 //   平台切换/主菜单/兜底菜单/tab 切换/上传按钮）。点击后原有 hash/语义/class 后验门全保留
 //   （fail-closed 不放松）。字节变更故重钉摘要。
-const EXECUTOR_SHA256 = 'f07a7ac055adcfe60a1a81ce6158fb30a00c1ac5317c287cea211f23688ae095';
+const EXECUTOR_SHA256 = '5a2955b755d0813f48e10e5c81c1b638abca821256402e2cb153889ba191c3bd';
 const WECHAT_SOURCE = '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-taobao-download-to-jinsha/scripts/desktop_wechat_evidence_sender.mjs';
 // 2026-10-03 受控重绑：desktop_wechat_evidence_sender.mjs 放宽发送等待窗口后字节变更。
 // 2026-10-03 受控重绑（大同授权「方案 B」）：sender 增加逐图已交付核验与只补缺失图路径。
