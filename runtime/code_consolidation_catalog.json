@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "assets": {
+    "desktop-tools": {"source": "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/scripts", "target": "vendor/legacy-app-controler/wechat-desktop-control/scripts", "originalArchive": "archive/external-code-originals/desktop-tools"},
+    "chrome-controller": {"source": "/Users/ddt/work/projects/ai_agent/multimedia/mediacrawler/browser_control/control-background-dedicated-chrome", "target": "vendor/dedicated-chrome-controller", "originalArchive": "archive/external-code-originals/chrome-controller"},
+    "installed-skill": {"source": "/Users/ddt/.codex/skills/daily-taobao-download-to-jinsha", "target": "archive/installed-skill"},
+    "windows-driver": {"source": "/Users/ddt/work/projects/ai_agent/wechat-windows-driver", "target": "archive/compat/wechat-windows-driver"}
+  },
+  "bindings": {
+    "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler": "vendor/legacy-app-controler",
+    "/Users/ddt/work/projects/ai_agent/multimedia/mediacrawler/browser_control/control-background-dedicated-chrome": "vendor/dedicated-chrome-controller",
+    "/Users/ddt/.codex/skills/daily-taobao-download-to-jinsha": "vendor/installed-taobao-skill",
+    "/Users/ddt/work/projects/ai_agent/wechat-windows-driver": "archive/compat/wechat-windows-driver"
+  }
+}

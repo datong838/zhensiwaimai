@@ -1,3 +1,4 @@
+import { businessPath } from '../../../../runtime/business_storage.mjs';
 import { pathToFileURL } from "node:url";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
@@ -12,7 +13,7 @@ const bridge = "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wech
 const group = "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰";
 const SUMMARY_WORKFLOW = "meituan-waimai-appeals-summary";
 const SUMMARY_AUTH = "user-20261022-appeals-summary-card";
-const summaryLedger = "/Users/ddt/work/projects/ai_agent/state/meituan-waimai-negative-review-appeals/summary-attempts";
+const summaryLedger = path.join(businessPath('meituan-appeals'), 'summary-attempts');
 const cardScript = "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/appeals_summary_card.py";
 const authorization = "user-20260923-meituan-waimai-appeals-fixed-delivery";
 const shanghaiDay = (date = new Date()) => new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Shanghai", year: "numeric", month: "2-digit", day: "2-digit" }).format(date);
@@ -21,12 +22,12 @@ const businessDateValue = new Date(`${runDate}T00:00:00+08:00`);
 businessDateValue.setUTCDate(businessDateValue.getUTCDate() - 1);
 const businessDate = shanghaiDay(businessDateValue);
 // 2026-10-06 跨树整改（大同授权）：旧树 zhensi_waimai → 线上树 zhensi_waimai_back。
-// ledger 仍保留 ai_agent/state/<flow>/wechat-attempts（与 taobao-flash 同构的共享账本区，刻意不动）。
+// 账本路径只由受控目录激活凭证切换；旧marker、eventId与回执保持原字节。
 const root = "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back";
 const reportDir = path.join(root, "outputs", `meituan-waimai-negative-review-appeals-${runDate.replaceAll("-", "")}`);
 const report = path.join(reportDir, `美团外卖差评申诉汇总-${businessDate}.xlsx`);
 const summaryCard = path.join(reportDir, `美团外卖差评申诉台账-${businessDate}.png`);
-const ledger = "/Users/ddt/work/projects/ai_agent/state/meituan-waimai-negative-review-appeals/wechat-attempts";
+const ledger = path.join(businessPath('meituan-appeals'), 'wechat-attempts');
 
 function args(correction = false) {
   return [bridge, "--workflow-id", "meituan-waimai-appeals", "--group", group, "--payload-type", "file",

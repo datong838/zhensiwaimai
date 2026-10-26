@@ -16,7 +16,8 @@ from xml.etree import ElementTree as ET
 SCRIPTS = Path(__file__).resolve().parent
 sys.path.insert(0, str(SCRIPTS))
 
-ROOT = Path('/Users/ddt/work/臻肆/视频')
+from lib.storage_paths import video_root
+ROOT = video_root()
 MAPPING = ROOT / '微信群-店铺名-店铺地址.xlsx'
 RUN_ID_RE = re.compile(r'^(\d{8})-(\d{2})$')
 NS = {'m': 'http://schemas.openxmlformats.org/spreadsheetml/2006/main',

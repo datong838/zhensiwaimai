@@ -6,7 +6,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-DEFAULT_INDEX = Path('/Users/ddt/work/臻肆/视频/processed_index.json')
+from .storage_paths import video_root
+DEFAULT_INDEX = video_root() / 'processed_index.json'
 
 
 def load_index(path: Path = DEFAULT_INDEX) -> dict[str, Any]:

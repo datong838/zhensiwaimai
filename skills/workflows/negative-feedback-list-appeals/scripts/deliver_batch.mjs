@@ -1,3 +1,4 @@
+import { businessPath } from '../../../../runtime/business_storage.mjs';
 // 负反馈列表申诉汇总 · 固定投递器（双平台非空文件）
 //
 // 固定三要素：workflow-id / 完整群名 / 单一 marker。复用统一微信收发 Skill 的
@@ -17,7 +18,7 @@ const bridge = '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wech
 const runDate = shanghaiDay();
 const business = businessDate();
 const reportDir = path.join(ROOT, 'outputs', `${FLOW_ID}-${runDate.replaceAll('-', '')}`);
-const ledger = `/Users/ddt/work/projects/ai_agent/state/${FLOW_ID}/wechat-attempts`;
+const ledger = path.join(businessPath('negative-feedback'), 'wechat-attempts');
 // workflow-id/授权串必须与桥 REGISTRY 注册值逐字一致（2026-10-06 受控再封印登记）：
 // 桥 key = negative-feedback-appeals；台账路径独立（state/negative-feedback-list-appeals）。
 const BRIDGE_WORKFLOW_ID = 'negative-feedback-appeals';

@@ -1,3 +1,4 @@
+import { businessPath } from '../../../../runtime/business_storage.mjs';
 import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -15,7 +16,7 @@ const FIXED={
   wechatChannel:'desktop',group:'上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰',authorization:'zhensi-business-main-wechat-shanghai-zhensi-operations-ding-fandang-daily-v2-reauthorized-20260917',
   python:'/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python',
   runsRoot:path.join(PROJECT_ROOT,'.local/runs/jinsha-business-production'),
-  outputRoot:'/Users/ddt/work/臻肆/报表',
+  outputRoot:businessPath('jinsha-reports'),
 };
 const PLATFORMS=['meituan','taobao'];
 const ALLOWED_CONFIG_KEYS=new Set(['runId','businessDate','jinshaChannel','wechatChannel','group','authorization','raw','downloadUiReceipt','downloadReceipt','buildReceipt','preflightReceipt','sendReceipt','verifyReceipt','examReceipt','workflowState','workflowSummary','outputDir','sendNames','python','resumeDownload']);

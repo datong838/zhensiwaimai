@@ -6,7 +6,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-CHECKPOINT_FILE = Path('/Users/ddt/work/臻肆/视频/scan_checkpoint.json')
+from .storage_paths import video_root
+CHECKPOINT_FILE = video_root() / 'scan_checkpoint.json'
 
 
 def key(group: str, sender: str) -> str:

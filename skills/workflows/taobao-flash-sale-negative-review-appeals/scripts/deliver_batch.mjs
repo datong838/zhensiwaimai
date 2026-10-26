@@ -1,3 +1,4 @@
+import { businessPath } from '../../../../runtime/business_storage.mjs';
 import { pathToFileURL } from "node:url";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
@@ -12,7 +13,7 @@ const bridge = "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wech
 const group = "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰";
 const SUMMARY_WORKFLOW = "taobao-flash-appeals-summary";
 const SUMMARY_AUTH = "user-20261022-appeals-summary-card";
-const summaryLedger = "/Users/ddt/work/projects/ai_agent/state/taobao-flash-sale-negative-review-appeals/summary-attempts";
+const summaryLedger = path.join(businessPath('taobao-appeals'), 'summary-attempts');
 const cardScript = "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/appeals_summary_card.py";
 const shanghaiDay = (date = new Date()) => new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Shanghai", year: "numeric", month: "2-digit", day: "2-digit" }).format(date);
 const runDate = shanghaiDay();
@@ -20,7 +21,7 @@ const businessDateValue = new Date(`${runDate}T00:00:00+08:00`);
 businessDateValue.setUTCDate(businessDateValue.getUTCDate() - 1);
 const businessDate = shanghaiDay(businessDateValue);
 const authorization = "automation-3-taobao-flash-appeals-daily-authorized";
-const ledger = "/Users/ddt/work/projects/ai_agent/state/taobao-flash-sale-negative-review-appeals/wechat-attempts";
+const ledger = path.join(businessPath('taobao-appeals'), 'wechat-attempts');
 const reportDir = path.join("/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/outputs", `taobao-flash-sale-negative-review-appeals-${runDate.replaceAll("-", "")}`);
 const outputDir = path.join(reportDir, "wechat-delivery");
 const report = path.join(reportDir, `淘宝闪购差评申诉汇总-${businessDate}.xlsx`);

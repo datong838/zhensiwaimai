@@ -1,3 +1,4 @@
+import { businessPath } from '../../../../runtime/business_storage.mjs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { buildFullAppealReport } from './full_appeal_report_builder.mjs';
@@ -11,7 +12,7 @@ const businessDate = shanghaiDay(yesterday);
 // 不再重采线上数据（申诉状态白天会演变，重建的文件与已投递载荷不一致），
 // 也不给下游投递步骤制造内容漂移。SKILL.md 约定业务日期为唯一事件键，
 // verified 即该日终态；确需更新内容走 --correction-v1 通道（不受此守卫限制）。
-const markerPath = `/Users/ddt/work/projects/ai_agent/state/taobao-flash-sale-negative-review-appeals/wechat-attempts/taobao-flash-appeals-${businessDate}.json`;
+const markerPath = path.join(businessPath('taobao-appeals'), 'wechat-attempts', `taobao-flash-appeals-${businessDate}.json`);
 try {
   const marker = JSON.parse(await fs.readFile(markerPath, 'utf8'));
   if (marker && marker.ok === true && marker.verified === true && marker.state === 'verified') {
