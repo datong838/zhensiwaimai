@@ -35,6 +35,13 @@ class NativePostTests(unittest.TestCase):
   with patch.object(post,'read_anchor',side_effect=[({}, {'value':'旧群'}),({}, {'value':'草稿'})]),patch.object(post,'execute') as ui:
    with self.assertRaisesRegex(RuntimeError,'do-not-overwrite'):post.ensure_group('新群')
    ui.assert_not_called()
+ def test_search_batches_exact_control_focus_paste_and_guarded_return(self):
+  def named(kind,name,**extra):return {'type':kind,'path':[1],'expected':{'role':'AXTextField'},**extra}
+  with patch.object(post,'read_anchor',side_effect=[({}, {'value':'旧群'}),({}, {'value':''}),({}, {'value':''}),({}, {'value':'新群'}),({}, {'value':''})]),patch.object(post,'named_action',side_effect=named),patch.object(post,'execute') as ui,patch.object(post.subprocess,'run'):
+   self.assertEqual(post.ensure_group('新群'),'新群')
+  actions=ui.call_args_list[-1].args[0]
+  self.assertEqual([a['type'] for a in actions],['click','key','paste','key'])
+  self.assertEqual(actions[-1]['key'],'return');self.assertEqual(actions[-1]['expected']['value'],'新群')
  def test_readback_dispatch_never_sends(self):
   with tempfile.TemporaryDirectory() as d:
    p,t=self.task(Path(d));t['stage']='readback';t.pop('binding');t['binding']=post.text_hash(json.dumps(t,sort_keys=True,ensure_ascii=False));(p/'task.json').write_text(json.dumps(t))

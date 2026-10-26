@@ -9,16 +9,39 @@ function run(argv) {
  function info(e){const x={};for(const k of ['role','name','description','value']){try{x[k]=e[k]();}catch(_){x[k]=null;}}try{x.focused=e.attributes.byName('AXFocused').value();}catch(_){x.focused=null;}return x;}
  function check(a){const e=at(a.path);const x=info(e);for(const k of ['role','name','value','description'])if(a.expected&&k in a.expected&&x[k]!==a.expected[k])throw Error('native-ui-target-changed:'+k);return e;}
  function focused(e){try{return e.attributes.byName('AXFocused').value()===true;}catch(_){return false;}}
+ function foreground(force){
+  if(!force&&p.frontmost())return;
+  Application('com.tencent.WeWorkMac').activate();p.frontmost=true;if(force)p.windows.byName('企业微信').actions.byName('AXRaise').perform();
+  for(let i=0;i<20;i++){if(p.frontmost())return;delay(0.05);}
+  throw Error('native-ui-not-frontmost');
+ }
+ function readyInput(a){
+  for(let i=0;i<20;i++){
+   if(!p.frontmost())throw Error('native-ui-not-frontmost');
+   for(const guard of a.guards||[])check(guard);
+   const e=check(a);if(focused(e))return e;
+   delay(0.05);
+  }
+  throw Error('native-ui-focus-mismatch');
+ }
+ function readyValue(a){
+  if(a.waitForValue!==true)return check(a);
+  for(let i=0;i<20;i++){
+   try{return check(a);}catch(error){if(String(error)!=='Error: native-ui-target-changed:value')throw error;}
+   delay(0.05);
+  }
+  throw Error('native-ui-target-value-not-ready');
+ }
  const results=[];
  for(const a of cfg.actions||[]){
   if(a.guards){
    try{for(const guard of a.guards)check(guard);check(a);}
    catch(error){return JSON.stringify({backend:'system-events-ui-tree',actionRejected:true,error:String(error),results:results,screenCapture:false});}
   }
-  if(a.type==='activate'){Application('com.tencent.WeWorkMac').activate();p.frontmost=true;p.windows.byName('企业微信').actions.byName('AXRaise').perform();delay(0.15);}
-  else if(a.type==='click'){if(!p.frontmost())throw Error('native-ui-not-frontmost');if(a.modifier)throw Error('native-ui-modifier-not-allowed');se.click(check(a));}
+  if(a.type==='activate'){foreground(true);}
+  else if(a.type==='click'){check(a);foreground(false);if(a.modifier)throw Error('native-ui-modifier-not-allowed');for(const guard of a.guards||[])check(guard);se.click(check(a));}
   else if(a.type==='key'||a.type==='paste'){
-   if(!p.frontmost())throw Error('native-ui-not-frontmost');
+   readyValue(a);foreground(false);
    const e=check(a);
    if(a.type==='key'&&a.key==='search'){
     if(a.path.length!==0)throw Error('native-ui-search-main-required');
@@ -29,7 +52,7 @@ function run(argv) {
     const z=info(e);if(z.role!=='AXSheet'||z.description!=='打开')throw Error('native-ui-open-sheet-required');
     se.keystroke('g',{using:['command down','shift down']});delay(0.15);
    }else{
-   if(!focused(e))throw Error('native-ui-focus-mismatch');
+   readyInput(a);
    if(a.type==='paste')se.keystroke('v',{using:'command down'});
    else if(a.key==='selectall')se.keystroke('a',{using:'command down'});
    else {const keys={return:36,escape:53,down:125,up:126,tab:48,backspace:51};if(!(a.key in keys))throw Error('native-ui-key-not-allowed');se.keyCode(keys[a.key]);}

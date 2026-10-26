@@ -9,6 +9,15 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
 import native_ui_tree as ui
 
 class NativeTreeTests(unittest.TestCase):
+    def test_value_wait_only_allows_exact_search_text_before_return(self):
+        base={'type':'key','key':'return','path':[0],'expected':{'role':'AXTextField','value':'精确群名'},'waitForValue':True}
+        for changes in ({'type':'paste'},{'key':'tab'},{'waitForValue':False},{'expected':{'role':'AXTextArea','value':'草稿'}},{'expected':{'role':'AXTextField'}}):
+            with patch.object(ui.subprocess,'run') as run:
+                with self.assertRaisesRegex(ValueError,'value-wait-scope-invalid'):ui.execute([base|changes])
+                run.assert_not_called()
+        with patch.object(ui.subprocess,'run',return_value=SimpleNamespace(returncode=0,stdout='{}')) as run:
+            ui.execute([base]);run.assert_called_once()
+
     def test_only_explicit_zero_action_rejection_is_safe_to_classify_zero(self):
         output={'actionRejected':True,'results':[],'error':'changed'}
         with patch.object(ui.subprocess,'run',return_value=SimpleNamespace(returncode=0,stdout=json.dumps(output))):

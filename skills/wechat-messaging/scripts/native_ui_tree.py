@@ -20,6 +20,11 @@ def execute(actions=(), *, max_depth=2, root_path=(), root_paths=None):
                for path in root_paths):
             raise ValueError('native-ui-path-invalid')
     for action in actions:
+        if 'waitForValue' in action and (action['waitForValue'] is not True
+                or action.get('type') != 'key' or action.get('key') != 'return'
+                or action.get('expected', {}).get('role') != 'AXTextField'
+                or not action.get('expected', {}).get('value')):
+            raise ValueError('native-ui-value-wait-scope-invalid')
         for guard in action.get('guards', []):
             if (set(guard) != {'path', 'expected'} or not guard['expected']
                     or not isinstance(guard['path'], list)

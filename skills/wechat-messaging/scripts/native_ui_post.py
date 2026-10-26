@@ -26,16 +26,15 @@ def ensure_group(group, owner=None):
         return title['value']
     live()
     execute([{'type': 'activate'}, named_action('key', 'main', key='search')], max_depth=0)
-    live()
-    execute([named_action('key', 'search', key='selectall')], max_depth=0)
+    read_anchor('search')  # Search animation can move the cached chat container.
     subprocess.run(['/usr/bin/pbcopy'], input=group.encode('utf-8'), check=True)
     live()
-    execute([named_action('paste', 'search')], max_depth=0)
-    _, search = read_anchor('search')
-    if search['value'] != group:
-        raise RuntimeError('native-ui-search-value-mismatch')
-    live()
-    execute([named_action('key', 'search', key='return')], max_depth=0)
+    submit = named_action('key', 'search', key='return')
+    submit['expected'] = dict(submit['expected'], value=group)
+    submit['waitForValue'] = True
+    execute([named_action('click', 'search'),
+             named_action('key', 'search', key='selectall'),
+             named_action('paste', 'search'), submit], max_depth=0)
     _, title = read_anchor('conversationTitle')
     _, composer = read_anchor('composer')
     if title['value'] != group or composer['value'] != '':
@@ -266,6 +265,9 @@ def send_media(folder):
     submitted = False
     try:
         action({'type': 'activate'}, max_depth=0)
+        _, current = read_anchors('conversationTitle', 'composer')
+        if current['conversationTitle']['value'] != task['request']['groupName'] or current['composer']['value'] != '':
+            raise RuntimeError('native-ui-target-or-draft-mismatch')
         chat_path = json.loads(SELECTORS.read_text())['anchors']['conversationTitle']['path'][:-1]
         action(ui_action('click', chat_path + [9, 0, 8 if kind == 'file' else 6],
                          {'role': 'AXButton', 'description': '按钮'}), max_depth=0)
