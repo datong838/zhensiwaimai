@@ -909,6 +909,36 @@
         }
       ],
       "consolidated_into": "taobao-flash-sale-negative-review-appeals"
+    },
+    {
+      "name": "daily-service-market-ranking-to-wechat",
+      "target_group": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+      "ledger_name": "淘宝闪购服务市场排名与本月考核指标",
+      "schedule": "每日10:00（首次上线当日补执行一次）",
+      "dev_state": "active",
+      "enabled": true,
+      "order": -79,
+      "cadence_hours": 24,
+      "earliest_hour": 10,
+      "latest_hour": 19,
+      "schedule_times": [
+        "10:00"
+      ],
+      "cwd": "skills/workflows/daily-service-market-ranking-to-wechat",
+      "timeout_seconds": null,
+      "max_retries": 0,
+      "cooldown_seconds": 0,
+      "needs_adapter": false,
+      "steps": [
+        {
+          "argv": [
+            "{python}",
+            "scripts/ranking_workflow.py",
+            "--execute"
+          ]
+        }
+      ],
+      "note": "2026-10-26用户明确新增，9231原岗位完整区块原图，经企业微信原生UI队列单日一次；unknown只读不重发。"
     }
   ],
   "ledger_template": [
@@ -1058,6 +1088,13 @@
       "schedule": "每日17:00（17:00结束后准备发文档）",
       "dev_state": "active",
       "skill": "meituan-intelligent-customer-service"
+    },
+    {
+      "row": 22,
+      "ledger_name": "淘宝闪购服务市场排名与本月考核指标",
+      "schedule": "每日10:00",
+      "dev_state": "active",
+      "skill": "daily-service-market-ranking-to-wechat"
     }
   ]
 }

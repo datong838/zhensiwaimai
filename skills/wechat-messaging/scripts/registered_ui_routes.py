@@ -12,7 +12,34 @@ DIRECT = {
     'daily-new-stores-not-nourished-ops': ('not-nourished-ops', 'file', 'taobao-not-nourished-ops'),
 }
 
+def service_ranking_allowed(request, *, root=None, day=None):
+    import hashlib
+    import re
+    from datetime import datetime
+    from zoneinfo import ZoneInfo
+    root = Path(root) if root is not None else Path(__file__).resolve().parents[3]
+    day = day or datetime.now(ZoneInfo('Asia/Shanghai')).strftime('%Y-%m-%d')
+    context = request.get('context', {})
+    items = request.get('items', [])
+    if (request.get('groupName') != GROUP or context.get('workflowId') != 'daily-service-market-ranking-ops'
+            or context.get('eventId') != day + '-service-market-ranking' or len(items) != 1
+            or context.get('accountAlias') != 'main-wechat' or context.get('channel') != 'desktop'):
+        return False
+    item = items[0]
+    expected = root / 'skills/workflows/daily-service-market-ranking-to-wechat/.runtime/days' / day / (day + '-服务市场排名与考核指标.png')
+    try:
+        return (item.get('itemId') == 'service-ranking' and item.get('type') == 'image'
+                and Path(item.get('path', '')).resolve() == expected.resolve()
+                and item.get('name') == expected.name and expected.is_file()
+                and item.get('size') == expected.stat().st_size
+                and item.get('sha256') == hashlib.sha256(expected.read_bytes()).hexdigest())
+    except (OSError, ValueError, TypeError):
+        return False
+
+
 def allowed_direct(request):
+    if request.get('context', {}).get('workflowId') == 'daily-service-market-ranking-ops':
+        return service_ranking_allowed(request)
     import re
     context = request.get('context', {})
     scope = DIRECT.get(context.get('workflowId'))
