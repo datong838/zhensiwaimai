@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "jinsha-business-code-enforced-v1",
+  "runId": "jinsha-business-production-20260930-02",
+  "businessDate": "2026-09-29",
+  "status": "needs-maintenance",
+  "phase": "created",
+  "nextAction": null,
+  "totalElapsedMs": 3697,
+  "nodes": [
+    {
+      "name": "download",
+      "attempts": 3,
+      "startedAt": 1790735678035,
+      "finishedAt": 1790735681669,
+      "elapsedMs": 3634,
+      "complete": false
+    }
+  ],
+  "pitfalls": [
+    {
+      "at": 1790735679446,
+      "stage": "download",
+      "type": "recovery",
+      "detail": "retry-download",
+      "reason": "jinsha-background-process-binding-invalid"
+    },
+    {
+      "at": 1790735680497,
+      "stage": "download",
+      "type": "recovery",
+      "detail": "retry-download",
+      "reason": "jinsha-background-process-binding-invalid"
+    },
+    {
+      "at": 1790735681647,
+      "stage": "download",
+      "type": "recovery",
+      "detail": "retry-download",
+      "reason": "jinsha-background-process-binding-invalid"
+    },
+    {
+      "at": 1790735681669,
+      "stage": "created",
+      "type": "blocked",
+      "detail": "download-retry-limit-exceeded"
+    }
+  ],
+  "codeEnforced": true,
+  "reviewItems": [
+    {
+      "name": "download",
+      "attempts": 3,
+      "startedAt": 1790735678035,
+      "finishedAt": 1790735681669,
+      "elapsedMs": 3634,
+      "complete": false,
+      "pitfalls": [
+        {
+          "at": 1790735679446,
+          "stage": "download",
+          "type": "recovery",
+          "detail": "retry-download",
+          "reason": "jinsha-background-process-binding-invalid"
+        },
+        {
+          "at": 1790735680497,
+          "stage": "download",
+          "type": "recovery",
+          "detail": "retry-download",
+          "reason": "jinsha-background-process-binding-invalid"
+        },
+        {
+          "at": 1790735681647,
+          "stage": "download",
+          "type": "recovery",
+          "detail": "retry-download",
+          "reason": "jinsha-background-process-binding-invalid"
+        }
+      ]
+    }
+  ],
+  "runtimeModelDecisions": 0,
+  "generatedAt": 1790735681669
+}

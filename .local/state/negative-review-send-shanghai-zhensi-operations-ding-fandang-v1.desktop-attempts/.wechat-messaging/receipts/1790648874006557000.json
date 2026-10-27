@@ -1,0 +1,49 @@
+{
+  "ok": false,
+  "status": "blocked",
+  "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+  "channel": "desktop",
+  "requestDigest": "0fdbc9ee28a157b0f48b860cb7f90ff6dde82941f834d5a02e1625a43e931490",
+  "runtimeModelDecisions": 0,
+  "items": [],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "failed",
+      "pitfalls": [
+        "wechat-unexpected-secondary-window"
+      ],
+      "elapsedMs": 131
+    }
+  ],
+  "reason": "wechat-unexpected-secondary-window",
+  "elapsedMs": 132,
+  "eventKey": "c4c0711db552dae80096da369d6ffdea57c3cd030bdb63d6ff4465efff510759",
+  "reviewSummary": {
+    "totalElapsedMs": 132,
+    "result": "blocked",
+    "stageCount": 3,
+    "completedStages": 2,
+    "failedStages": [
+      {
+        "stage": "preflight",
+        "status": "failed",
+        "pitfalls": [
+          "wechat-unexpected-secondary-window"
+        ]
+      }
+    ]
+  }
+}

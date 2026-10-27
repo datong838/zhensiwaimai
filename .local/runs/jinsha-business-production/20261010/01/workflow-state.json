@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "jinsha-business-code-enforced-v1",
+  "runId": "jinsha-business-production-20261010-01",
+  "businessDate": "2026-10-09",
+  "phase": "created",
+  "status": "needs-maintenance",
+  "nextAction": null,
+  "runtimeModelDecisions": 0,
+  "attempts": {
+    "download": 3,
+    "send": 0,
+    "verify": 0
+  },
+  "events": [
+    {
+      "at": 1791602294641,
+      "type": "executor-start",
+      "phase": "created"
+    },
+    {
+      "at": 1791602294642,
+      "type": "attempt",
+      "stage": "download",
+      "number": 1
+    },
+    {
+      "at": 1791602326131,
+      "type": "decision",
+      "stage": "download",
+      "decision": "retry-download",
+      "reason": "browserType.connectOverCDP: Timeout 30000ms exceeded.\nCall log:\n  - <ws preparing> retrieving websocket url from http://127.0.0.1:9232\n  - <ws connecting> ws://127.0.0.1:9232/devtools/browser/0b03652d-51ff-466a-882b-efcaca9d5cb9\n  - <ws connected> ws://127.0.0.1:9232/devtools/browser/0b03652d-51ff-466a-882b-efcaca9d5cb9\n"
+    },
+    {
+      "at": 1791602326131,
+      "type": "attempt",
+      "stage": "download",
+      "number": 2
+    },
+    {
+      "at": 1791602357116,
+      "type": "decision",
+      "stage": "download",
+      "decision": "retry-download",
+      "reason": "browserType.connectOverCDP: Timeout 30000ms exceeded.\nCall log:\n  - <ws preparing> retrieving websocket url from http://127.0.0.1:9232\n  - <ws connecting> ws://127.0.0.1:9232/devtools/browser/0b03652d-51ff-466a-882b-efcaca9d5cb9\n  - <ws connected> ws://127.0.0.1:9232/devtools/browser/0b03652d-51ff-466a-882b-efcaca9d5cb9\n"
+    },
+    {
+      "at": 1791602357116,
+      "type": "attempt",
+      "stage": "download",
+      "number": 3
+    },
+    {
+      "at": 1791602388282,
+      "type": "decision",
+      "stage": "download",
+      "decision": "retry-download",
+      "reason": "browserType.connectOverCDP: Timeout 30000ms exceeded.\nCall log:\n  - <ws preparing> retrieving websocket url from http://127.0.0.1:9232\n  - <ws connecting> ws://127.0.0.1:9232/devtools/browser/0b03652d-51ff-466a-882b-efcaca9d5cb9\n  - <ws connected> ws://127.0.0.1:9232/devtools/browser/0b03652d-51ff-466a-882b-efcaca9d5cb9\n"
+    },
+    {
+      "at": 1791602388282,
+      "type": "blocked",
+      "phase": "created",
+      "reason": "download-retry-limit-exceeded"
+    }
+  ],
+  "config": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/jinsha-business-production/20261010/01/config.json",
+  "createdAt": 1791602294635,
+  "updatedAt": 1791602388282
+}

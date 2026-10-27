@@ -1,0 +1,155 @@
+{
+  "bridgeVersion": 1,
+  "ok": false,
+  "verified": false,
+  "payloadType": "file",
+  "state": "blocked",
+  "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+  "payloads": [
+    {
+      "path": "/Volumes/NVME2T/work/臻肆/报表/2026-10-19-业务发布-production01/美团外卖日报_2026-10-19.xlsx",
+      "name": "美团外卖日报_2026-10-19.xlsx",
+      "size": 124404,
+      "sha256": "fd0ab7b4301d17b8b27a1ccaccc419413568c4b12d301d0e20a2950f17a12c90"
+    },
+    {
+      "path": "/Volumes/NVME2T/work/臻肆/报表/2026-10-19-业务发布-production01/淘宝闪购日报_2026-10-19.xlsx",
+      "name": "淘宝闪购日报_2026-10-19.xlsx",
+      "size": 112585,
+      "sha256": "f63108e90b608cc0f56f8101a2e26c305b4bf1245d9c42e9d82e712219f6ae2c"
+    }
+  ],
+  "sendAttempts": 0,
+  "newSendAttempts": 0,
+  "reason": "windows-send-rejected:HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题='李知恒- AllenLi'，目标='上海臻肆外卖运营-盯个盯-饭敢当'\"}",
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": false,
+    "status": "blocked",
+    "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "channel": "desktop",
+    "requestDigest": "805f944da503f9a0d0512bbd6599c75e42baa88f01f076522f13af9b69c1266e",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "fd0ab7b4301d17b8b27a1ccaccc419413568c4b12d301d0e20a2950f17a12c90",
+        "type": "file",
+        "status": "blocked",
+        "claimedAt": 1792465323.814859,
+        "sendAttempts": 0,
+        "reason": "windows-send-rejected:HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题='李知恒- AllenLi'，目标='上海臻肆外卖运营-盯个盯-饭敢当'\"}",
+        "transport": {
+          "ok": false,
+          "error": "HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题='李知恒- AllenLi'，目标='上海臻肆外卖运营-盯个盯-饭敢当'\"}",
+          "route": "relay",
+          "direct_error": "[Errno 65] No route to host",
+          "direct_local_network_blocked": true,
+          "sendAttempts": 0
+        },
+        "attemptErrors": [
+          "HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题='李知恒- AllenLi'，目标='上海臻肆外卖运营-盯个盯-饭敢当'\"}",
+          "HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题='李知恒- AllenLi'，目标='上海臻肆外卖运营-盯个盯-饭敢当'\"}",
+          "HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题='李知恒- AllenLi'，目标='上海臻肆外卖运营-盯个盯-饭敢当'\"}"
+        ]
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:1",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 9224
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 147219
+      }
+    ],
+    "reason": "windows-send-rejected:HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题='李知恒- AllenLi'，目标='上海臻肆外卖运营-盯个盯-饭敢当'\"}",
+    "elapsedMs": 156450,
+    "eventKey": "ca9151029a1aa89781a8d840bafb096ea4a3c6a06e193e15522fb4fc98fe6cac",
+    "reviewSummary": {
+      "totalElapsedMs": 156450,
+      "result": "blocked",
+      "stageCount": 5,
+      "completedStages": 5,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/jinsha-report-send-shanghai-zhensi-operations-ding-fandang-reauthorized-20260917-v2.desktop-attempts/7094525386486cb913f98150a35b8d256499a81f1348f2b8171207ac5d282a03.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "freeze:1",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 3,
+      "label": "freeze:1"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 9224,
+      "item": 4,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "failed",
+      "pitfalls": [
+        {
+          "code": "messaging-stage",
+          "reason": "windows-send-rejected:HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题='李知恒- AllenLi'，目标='上海臻肆外卖运营-盯个盯-饭敢当'\"}"
+        }
+      ],
+      "elapsedMs": 147219,
+      "item": 5,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 156450,
+  "reviewSummary": {
+    "totalElapsedMs": 156450,
+    "itemCount": 5,
+    "pitfallCount": 1,
+    "result": "failed"
+  }
+}

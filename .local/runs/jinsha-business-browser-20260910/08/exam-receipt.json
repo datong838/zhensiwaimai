@@ -1,0 +1,172 @@
+{
+  "ok": true,
+  "runId": "jinsha-business-browser-20260910-08",
+  "groupName": "FEIBING NEO AI数字员工",
+  "startedAt": 1789054820802,
+  "deadline": 1789055000802,
+  "stage": "verified",
+  "nodes": [
+    {
+      "name": "build",
+      "startedAt": 1789054835848,
+      "finishedAt": 1789054843107,
+      "elapsedMs": 7259,
+      "ok": true,
+      "llmIntervention": false
+    },
+    {
+      "name": "desktop",
+      "startedAt": 1789054843614,
+      "finishedAt": 1789054846132,
+      "elapsedMs": 2518,
+      "ok": false,
+      "llmIntervention": false
+    },
+    {
+      "name": "desktop",
+      "startedAt": 1789055385234,
+      "finishedAt": 1789055388067,
+      "elapsedMs": 2833,
+      "ok": true,
+      "llmIntervention": false
+    },
+    {
+      "name": "desktop-verify",
+      "startedAt": 1789055388525,
+      "finishedAt": 1789055390829,
+      "elapsedMs": 2304,
+      "ok": true,
+      "llmIntervention": false
+    }
+  ],
+  "desktop": {
+    "ok": true,
+    "runId": "jinsha-business-browser-20260910-08",
+    "startedAt": 1789054820802,
+    "deadline": 1789055000802,
+    "executor": "jinsha-browser-download",
+    "browserController": "control-background-dedicated-chrome",
+    "profile": "jinsha-business",
+    "port": 9232,
+    "businessDate": "2026-09-09",
+    "runtimeModelDecisions": 0,
+    "clicks": {
+      "meituan": 1,
+      "taobao": 1
+    },
+    "files": {
+      "meituan": {
+        "name": "美团原始数据_2026-09-09_业务browser08.xlsx",
+        "file": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/runs/jinsha-business-browser-20260910/08/美团原始数据_2026-09-09_业务browser08.xlsx",
+        "size": 105626,
+        "sha256": "a0f37e967960add1f39d404ffe91e7d8e9ae95a377f4acf5335f202ae60d9647",
+        "downloadStartedAt": 1789054831447,
+        "savedAt": 1789054832645
+      },
+      "taobao": {
+        "name": "淘宝闪购原始数据_2026-09-09_业务browser08.xlsx",
+        "file": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/runs/jinsha-business-browser-20260910/08/淘宝闪购原始数据_2026-09-09_业务browser08.xlsx",
+        "size": 108007,
+        "sha256": "761794de109ee53dfd7853dac63bf43bc18f340524c7e0845e1d32ff776bfaa1",
+        "downloadStartedAt": 1789054834669,
+        "savedAt": 1789054835200
+      }
+    },
+    "stage": "complete",
+    "nodes": [
+      {
+        "name": "background_preflight",
+        "elapsedMs": 228,
+        "ok": true,
+        "llmIntervention": false
+      },
+      {
+        "name": "task_page",
+        "elapsedMs": 1925,
+        "ok": true,
+        "llmIntervention": false
+      },
+      {
+        "name": "navigation",
+        "elapsedMs": 3760,
+        "ok": true,
+        "llmIntervention": false
+      },
+      {
+        "name": "known_overlay",
+        "elapsedMs": 2648,
+        "ok": true,
+        "llmIntervention": false
+      },
+      {
+        "name": "meituan.download",
+        "elapsedMs": 3110,
+        "ok": true,
+        "llmIntervention": false
+      },
+      {
+        "name": "taobao.download",
+        "elapsedMs": 2555,
+        "ok": true,
+        "llmIntervention": false
+      }
+    ],
+    "frontmostBefore": "com.tencent.xinWeChat",
+    "lease": {
+      "path": "/tmp/zhensi-jinsha-cua-exam.lock",
+      "acquiredAt": 1789054820973,
+      "released": true,
+      "releasedAt": 1789054835208
+    },
+    "jinshaResourceReleased": true,
+    "jinshaReleasedAt": 1789054835200,
+    "receiptIssuedAt": 1789054835200,
+    "url": "https://data.guoshuyufen.com/#/reportDownload",
+    "elapsedMs": 14406,
+    "efficiencyExceeded": false,
+    "frontmostAfter": "com.tencent.xinWeChat"
+  },
+  "preflight": {
+    "ok": true,
+    "runId": "jinsha-business-browser-20260910-08",
+    "groupName": "FEIBING NEO AI数字员工",
+    "businessDate": "2026-09-09",
+    "authorization": "zhensi-business-main-wechat-feibing-neo-ai-daily-v1",
+    "files": {
+      "meituan": {
+        "name": "美团外卖日报_2026-09-09.xlsx",
+        "path": "/Users/ddt/work/臻肆/报表/2026-09-09-业务发布-browser08/美团外卖日报_2026-09-09.xlsx",
+        "size": 121591,
+        "sha256": "def007916cc03be24756f0e55a5018e74bc3909a17543b3e73ccfec41bbb4daa"
+      },
+      "taobao": {
+        "name": "淘宝闪购日报_2026-09-09.xlsx",
+        "path": "/Users/ddt/work/臻肆/报表/2026-09-09-业务发布-browser08/淘宝闪购日报_2026-09-09.xlsx",
+        "size": 123805,
+        "sha256": "1051553de2ed2041dabf5991230c74f74278cd32fadecabab48c7c6b98f80a4b"
+      }
+    },
+    "preparedAt": 1789054843108
+  },
+  "elapsedMs": 570027,
+  "businessCompleted": true,
+  "efficiencyStatus": "效率未达标",
+  "efficiencyPassed": false,
+  "wechatChannel": "desktop",
+  "sent": [
+    {
+      "platform": "meituan",
+      "file": "/Users/ddt/work/臻肆/报表/2026-09-09-业务发布-browser08/美团外卖日报_2026-09-09.xlsx",
+      "name": "美团外卖日报_2026-09-09.xlsx",
+      "size": 121591,
+      "sha256": "def007916cc03be24756f0e55a5018e74bc3909a17543b3e73ccfec41bbb4daa"
+    },
+    {
+      "platform": "taobao",
+      "file": "/Users/ddt/work/臻肆/报表/2026-09-09-业务发布-browser08/淘宝闪购日报_2026-09-09.xlsx",
+      "name": "淘宝闪购日报_2026-09-09.xlsx",
+      "size": 123805,
+      "sha256": "1051553de2ed2041dabf5991230c74f74278cd32fadecabab48c7c6b98f80a4b"
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "ok": true,
+  "groupName": "FEIBING NEO AI数字员工",
+  "sent": [
+    {
+      "platform": "meituan",
+      "file": "/Users/ddt/work/臻肆/报表/2026-09-10-业务发布-browser06/美团外卖日报_2026-09-10.xlsx",
+      "name": "美团外卖日报_2026-09-10.xlsx",
+      "size": 122097,
+      "sha256": "95441f5c71bc259a3bbd71eb33fbcc3e21726cb153fdbfc16c3c6bb23f8388f9"
+    },
+    {
+      "platform": "taobao",
+      "file": "/Users/ddt/work/臻肆/报表/2026-09-10-业务发布-browser06/淘宝闪购日报_2026-09-10.xlsx",
+      "name": "淘宝闪购日报_2026-09-10.xlsx",
+      "size": 122887,
+      "sha256": "eb1b492e5d13069c39c9bd1129e444cef5b19a26a44c4a4247903caa2233f152"
+    }
+  ],
+  "channel": "desktop",
+  "desktopWechatPreflight": {
+    "ok": true,
+    "action": "open-group",
+    "group": "FEIBING NEO AI数字员工",
+    "header": "FEIBING NEO AI数字员工（18）",
+    "note": null
+  },
+  "desktop": {
+    "ok": true,
+    "executor": "wechat-desktop-sender",
+    "channel": "desktop",
+    "groupName": "FEIBING NEO AI数字员工",
+    "payloadType": "file",
+    "sendAttempts": 1,
+    "runtimeModelDecisions": 0,
+    "stageMs": {
+      "locate_group": 2222,
+      "prepare_payload": 7618,
+      "claim_and_send": 138,
+      "post_send_verify": 14862
+    },
+    "payloadIdentity": "4b01e4b46ea9e9e584a032ff84ec1ac26a68ef3861dc56724ca27cb0a88c1b81",
+    "payloads": [
+      {
+        "path": "/Users/ddt/work/臻肆/报表/2026-09-10-业务发布-browser06/美团外卖日报_2026-09-10.xlsx",
+        "name": "美团外卖日报_2026-09-10.xlsx",
+        "size": 122097,
+        "sha256": "95441f5c71bc259a3bbd71eb33fbcc3e21726cb153fdbfc16c3c6bb23f8388f9"
+      },
+      {
+        "path": "/Users/ddt/work/臻肆/报表/2026-09-10-业务发布-browser06/淘宝闪购日报_2026-09-10.xlsx",
+        "name": "淘宝闪购日报_2026-09-10.xlsx",
+        "size": 122887,
+        "sha256": "eb1b492e5d13069c39c9bd1129e444cef5b19a26a44c4a4247903caa2233f152"
+      }
+    ],
+    "preparedInputChangedPixels": 103017,
+    "preparedFileObjectCount": 2,
+    "preparedFilePrefixesVerified": true,
+    "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/state/jinsha-report-send-feibing-neo-ai.desktop-attempts/c4b8b7867e58c41d421f62b36533bac957ae393a2b1faa9911b730831a9a25f6.json",
+    "postSendInputCleared": [
+      true,
+      true
+    ],
+    "verified": true,
+    "state": "verified",
+    "elapsedMs": 25518
+  }
+}

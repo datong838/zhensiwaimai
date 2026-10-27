@@ -1,0 +1,115 @@
+{
+  "ok": false,
+  "status": "unknown",
+  "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+  "channel": "desktop",
+  "requestDigest": "174efd47eb3ed07ee3410ae2ea2ae8bed8762a02cb5fd81e72066fbc9dbc4c44",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "4de728bd23ae344df3dbc32ab4c8e417789f42da13758755bb495e4469cff4f0",
+      "type": "file",
+      "status": "unknown",
+      "claimedAt": 1792804756.198733,
+      "sendAttempts": 1,
+      "reason": "wecom-tail-unconfirmed",
+      "evidence": {
+        "tail_hit": false,
+        "media_marker_hit": false,
+        "sent": true,
+        "tail1": [
+          "近7日美团食安负反馈申诉记录..xlsx",
+          "由微信用户创建的外部群，含45位外部联系人 | 群主: 李知恒- AllenLi@微信",
+          "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+          "250.0"
+        ]
+      },
+      "transport": {
+        "kind": "file",
+        "sendAttempts": 1,
+        "sent": true,
+        "receipt": {
+          "result": "sent-tail-unconfirmed",
+          "verify": {
+            "tail_hit": false,
+            "media_marker_hit": false,
+            "sent": true,
+            "tail1": [
+              "近7日美团食安负反馈申诉记录..xlsx",
+              "由微信用户创建的外部群，含45位外部联系人 | 群主: 李知恒- AllenLi@微信",
+              "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+              "250.0"
+            ]
+          },
+          "steps": [
+            {
+              "navigate": "chat-title-verified:'上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰'"
+            },
+            {
+              "title_gate": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰"
+            },
+            {
+              "paste": true,
+              "try": 1
+            },
+            {
+              "title_gate_final": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰"
+            },
+            {
+              "send_attempts": [
+                {
+                  "try": "enter",
+                  "input_clean": true
+                }
+              ],
+              "sent": true
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:1",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 14523
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 29664
+    }
+  ],
+  "reason": "wecom-tail-unconfirmed",
+  "elapsedMs": 44284,
+  "eventKey": "ebac6a55d4faecc0bae983f82859ddc256f807852a2cc24b550027fb007b3a2c",
+  "reviewSummary": {
+    "totalElapsedMs": 44284,
+    "result": "unknown",
+    "stageCount": 5,
+    "completedStages": 5,
+    "failedStages": []
+  }
+}

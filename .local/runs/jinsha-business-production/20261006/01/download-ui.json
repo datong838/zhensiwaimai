@@ -1,0 +1,53 @@
+{
+  "ok": false,
+  "runId": "jinsha-business-production-20261006-01",
+  "startedAt": 1791255817612,
+  "deadline": 1791255997612,
+  "executor": "jinsha-browser-download",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "jinsha-business",
+  "port": 9232,
+  "businessDate": "2026-10-05",
+  "runtimeModelDecisions": 0,
+  "clicks": {
+    "meituan": 0,
+    "taobao": 0
+  },
+  "files": {},
+  "stage": "navigation",
+  "nodes": [
+    {
+      "name": "background_preflight",
+      "elapsedMs": 38,
+      "ok": true,
+      "llmIntervention": false
+    },
+    {
+      "name": "task_page",
+      "elapsedMs": 201,
+      "ok": true,
+      "llmIntervention": false
+    },
+    {
+      "name": "navigation",
+      "elapsedMs": 12005,
+      "ok": false,
+      "llmIntervention": false
+    }
+  ],
+  "frontmostBefore": "com.tencent.workbuddy.mac",
+  "lease": {
+    "path": "/tmp/zhensi-jinsha-cua-exam.lock",
+    "acquiredAt": 1791255817731,
+    "released": true,
+    "releasedAt": 1791255830045
+  },
+  "browserProcess": {
+    "pid": 7546,
+    "command": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome --user-data-dir=/Users/ddt/Library/Application Support/AOS Background Chrome/jinsha-business --no-first-run --no-default-browser-check --remote-debugging-address=127.0.0.1 --remote-debugging-port=9232 https://data.guoshuyufen.com/#/businessData/realTimeData"
+  },
+  "reason": "jinsha-shell-not-ready:assertJinshaLoginGate is not defined",
+  "elapsedMs": 12433,
+  "efficiencyExceeded": false,
+  "frontmostAfter": "com.tencent.workbuddy.mac"
+}

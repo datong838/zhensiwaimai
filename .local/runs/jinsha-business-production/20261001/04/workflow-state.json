@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "jinsha-business-code-enforced-v1",
+  "runId": "jinsha-business-production-20261001-04",
+  "businessDate": "2026-09-30",
+  "phase": "prepared",
+  "status": "needs-resume",
+  "nextAction": null,
+  "runtimeModelDecisions": 0,
+  "attempts": {
+    "download": 1,
+    "send": 4,
+    "verify": 0
+  },
+  "events": [
+    {
+      "at": 1790831070170,
+      "type": "executor-start",
+      "phase": "created"
+    },
+    {
+      "at": 1790831070170,
+      "type": "attempt",
+      "stage": "download",
+      "number": 1
+    },
+    {
+      "at": 1790831085557,
+      "type": "decision",
+      "stage": "download",
+      "decision": "downloaded"
+    },
+    {
+      "at": 1790831085558,
+      "type": "transition",
+      "from": "created",
+      "to": "downloaded",
+      "evidence": {
+        "receipt": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/jinsha-business-production/20261001/04/download-ui.json"
+      }
+    },
+    {
+      "at": 1790831085558,
+      "type": "attempt",
+      "stage": "prepare",
+      "number": 1
+    },
+    {
+      "at": 1790831111782,
+      "type": "transition",
+      "from": "downloaded",
+      "to": "prepared",
+      "evidence": {
+        "receipt": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/jinsha-business-production/20261001/04/send-preflight.json"
+      }
+    },
+    {
+      "at": 1790831111782,
+      "type": "decision",
+      "stage": "send",
+      "decision": "retry-send",
+      "marker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/jinsha-report-send-shanghai-zhensi-operations-ding-fandang-reauthorized-20260917-v2.desktop-attempts/103ae5558337135e641aa8e53883df44c15b9a2b1dce5c558703c3bbeb386f75.json"
+    },
+    {
+      "at": 1790831111783,
+      "type": "attempt",
+      "stage": "send",
+      "number": 1
+    },
+    {
+      "at": 1790831117323,
+      "type": "decision",
+      "stage": "send",
+      "decision": "retry-send",
+      "marker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/jinsha-report-send-shanghai-zhensi-operations-ding-fandang-reauthorized-20260917-v2.desktop-attempts/103ae5558337135e641aa8e53883df44c15b9a2b1dce5c558703c3bbeb386f75.json"
+    },
+    {
+      "at": 1790831117324,
+      "type": "attempt",
+      "stage": "send",
+      "number": 2
+    },
+    {
+      "at": 1790831122850,
+      "type": "decision",
+      "stage": "send",
+      "decision": "retry-send",
+      "marker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/jinsha-report-send-shanghai-zhensi-operations-ding-fandang-reauthorized-20260917-v2.desktop-attempts/103ae5558337135e641aa8e53883df44c15b9a2b1dce5c558703c3bbeb386f75.json"
+    },
+    {
+      "at": 1790831122851,
+      "type": "attempt",
+      "stage": "send",
+      "number": 3
+    },
+    {
+      "at": 1790831128376,
+      "type": "decision",
+      "stage": "send",
+      "decision": "retry-send",
+      "marker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/jinsha-report-send-shanghai-zhensi-operations-ding-fandang-reauthorized-20260917-v2.desktop-attempts/103ae5558337135e641aa8e53883df44c15b9a2b1dce5c558703c3bbeb386f75.json"
+    },
+    {
+      "at": 1790831128377,
+      "type": "attempt",
+      "stage": "send",
+      "number": 4
+    },
+    {
+      "at": 1790831128905,
+      "type": "blocked",
+      "phase": "prepared",
+      "reason": "desktop-preflight-retry-limit-exceeded"
+    }
+  ],
+  "config": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/jinsha-business-production/20261001/04/config.json",
+  "createdAt": 1790831070164,
+  "updatedAt": 1790831128905
+}

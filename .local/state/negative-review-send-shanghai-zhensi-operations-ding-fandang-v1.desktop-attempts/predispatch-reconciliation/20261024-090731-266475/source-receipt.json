@@ -1,0 +1,98 @@
+{
+  "bridgeVersion": 1,
+  "ok": false,
+  "verified": false,
+  "payloadType": "file",
+  "state": "blocked",
+  "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+  "payloads": [
+    {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/outputs/yesterday-negative-20261023/差评分析数据_2026-10-23_2026-10-23.xlsx",
+      "name": "差评分析数据_2026-10-23_2026-10-23.xlsx",
+      "size": 18940,
+      "sha256": "2c5a83291f5de3d5656186d34463b8b74e53369d2dff9180bbd536a23f7a496c"
+    }
+  ],
+  "sendAttempts": 0,
+  "newSendAttempts": 0,
+  "reason": "wecom-preflight-failed:sender-exit-143",
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": false,
+    "status": "blocked",
+    "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "channel": "desktop",
+    "requestDigest": "44966ec31b833fa3c28ef8a886c8dd847f3eb5b77d586a1582da7dd7d95a0ec2",
+    "runtimeModelDecisions": 0,
+    "items": [],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 132690
+      }
+    ],
+    "reason": "wecom-preflight-failed:sender-exit-143",
+    "elapsedMs": 132837,
+    "eventKey": "940e91bbb022b3ac491561f46f5d0cb908897975e97fb1cae953fff4e90e6e3b",
+    "reviewSummary": {
+      "totalElapsedMs": 132837,
+      "result": "blocked",
+      "stageCount": 3,
+      "completedStages": 3,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/negative-review-send-shanghai-zhensi-operations-ding-fandang-v1.desktop-attempts/negative-review-2026-10-23.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "failed",
+      "pitfalls": [
+        {
+          "code": "messaging-stage",
+          "reason": "wecom-preflight-failed:sender-exit-143"
+        }
+      ],
+      "elapsedMs": 132690,
+      "item": 3,
+      "label": "preflight"
+    }
+  ],
+  "elapsedMs": 132837,
+  "reviewSummary": {
+    "totalElapsedMs": 132837,
+    "itemCount": 3,
+    "pitfallCount": 1,
+    "result": "failed"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "voidedAt": "2026-10-06T14:48:16+08:00",
+  "authorizedBy": "大同 · 2026-10-06 会话内勾选「旧 marker 1ce712cc 作废留痕」",
+  "ledger": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/taobao-jinsha-wechat-evidence-attempts",
+  "voidedMarker": "1ce712cc66974c3fc7b11bcb4a30c1c4ddabc82ab3cdf594816afb599485c3d2.json",
+  "voidedMarkerSha256": "93359435c2853b6babf7263c7ace1bf26dcdfa97ae8becb6263e7d696b91171b",
+  "originalState": {
+    "bridgeVersion": 1,
+    "state": "attempted",
+    "verified": false,
+    "sendAttempts": null,
+    "payloadType": "image",
+    "groupName": "FEIBING NEO AI数字员工"
+  },
+  "payloads": [
+    {
+      "name": "jinsha-store-final.png",
+      "sha256": "24296b75d6d9f4872eb1670bf0922b1b4320bc32a6c34c54c5e1ba7dcaf82582",
+      "path": "/private/tmp/zhensi_daily_download/background-browser/2026-10-05-e94325ad-39f5-48c7-b5cd-b9ae21aad1dd/jinsha-store-final.png"
+    },
+    {
+      "name": "jinsha-review-final.png",
+      "sha256": "69abfb01347421a6ea0a5c858da1d4a4bd77c154736a42b1ba6dc24512cfd9c3",
+      "path": "/private/tmp/zhensi_daily_download/background-browser/2026-10-05-e94325ad-39f5-48c7-b5cd-b9ae21aad1dd/jinsha-review-final.png"
+    }
+  ],
+  "businessDate": "2026-10-05",
+  "why": "该 marker 是 2026-10-05 13:51 一次发送尝试的 claim（state=attempted / sendAttempts=null / 无 commonReceipt），发送进程其后被中继 8 秒静默丢响应事故中断，收据从未落盘；同一证据图已由 5b42e8b7 于 14:26 verified 送达，故本件为被取代的纯孤儿。",
+  "hazardIfLeftInPlace": "工作流 bridge（skills/wechat-messaging/scripts/workflow_bridge.py:491-495）对 attempted 且非 blocked/sendAttempts!=0 的既有 marker 返回 existing-attempt-reconcile-only（ok=false）且不重发；若将来重下载出与其字节完全相同的证据图，marker 名（sha256(group\\nbusinessDate\\nhashes)）将碰撞，该图将被永久拒绝外发。归档后同内容重跑即可正常发送。",
+  "notDeleted": true,
+  "reversible": true,
+  "reverseCommand": "mv \"/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/taobao-jinsha-wechat-evidence-attempts/.voided-20261006-1448/1ce712cc66974c3fc7b11bcb4a30c1c4ddabc82ab3cdf594816afb599485c3d2.json\" \"/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/taobao-jinsha-wechat-evidence-attempts/1ce712cc66974c3fc7b11bcb4a30c1c4ddabc82ab3cdf594816afb599485c3d2.json\"  # 并同步移回 .bridge.lock",
+  "convention": "沿用本台账既有 .voided-<yyyymmdd-HHMM>/ 归档目录；扫描器 desktop_wechat_evidence_sender.mjs:60 显式递归扫描 .voided-*。",
+  "moved": [
+    [
+      "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/taobao-jinsha-wechat-evidence-attempts/1ce712cc66974c3fc7b11bcb4a30c1c4ddabc82ab3cdf594816afb599485c3d2.json",
+      "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/taobao-jinsha-wechat-evidence-attempts/.voided-20261006-1448/1ce712cc66974c3fc7b11bcb4a30c1c4ddabc82ab3cdf594816afb599485c3d2.json",
+      698
+    ],
+    [
+      "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/taobao-jinsha-wechat-evidence-attempts/1ce712cc66974c3fc7b11bcb4a30c1c4ddabc82ab3cdf594816afb599485c3d2.bridge.lock",
+      "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/taobao-jinsha-wechat-evidence-attempts/.voided-20261006-1448/1ce712cc66974c3fc7b11bcb4a30c1c4ddabc82ab3cdf594816afb599485c3d2.bridge.lock",
+      0
+    ]
+  ],
+  "voidDirName": ".voided-20261006-1448",
+  "voidDirNameFixNote": "归档目录名初次生成时因 HH:MM 切片下标写错为 -1481，已同盘改名为合法 -1448；所有引用同步修正。"
+}

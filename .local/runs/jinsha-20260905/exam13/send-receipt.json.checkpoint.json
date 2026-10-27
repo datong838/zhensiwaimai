@@ -1,0 +1,118 @@
+{
+  "group": "臻肆测试群",
+  "hashes": {
+    "meituan": "d7b6bad9c252ae3ea7096538a1d1682f701c59f9c64854646e0b6185398aa8c4",
+    "taobao": "8ee23cbb44ed643b60ee64a0b96474405ecf0d47fc6e57b6c6810b8402a2bc0b"
+  },
+  "events": [
+    {
+      "platform": "meituan",
+      "startedAt": 1788608854.226423,
+      "action": "locate",
+      "llmIntervention": false,
+      "page": "home",
+      "ok": true,
+      "finishedAt": 1788608877.226439,
+      "elapsedMs": 23000
+    },
+    {
+      "platform": "meituan",
+      "startedAt": 1788608877.227154,
+      "action": "panel",
+      "llmIntervention": false,
+      "page": "group",
+      "ok": true,
+      "finishedAt": 1788608884.0583591,
+      "elapsedMs": 6831
+    },
+    {
+      "platform": "meituan",
+      "startedAt": 1788608884.059364,
+      "action": "select",
+      "llmIntervention": false,
+      "page": "file_selector",
+      "ok": false,
+      "reason": "exact-filename-not-unique",
+      "retry": 1,
+      "backoffMs": 500,
+      "finishedAt": 1788608894.334185,
+      "elapsedMs": 10275
+    },
+    {
+      "platform": "meituan",
+      "startedAt": 1788608894.3375301,
+      "action": "choose",
+      "llmIntervention": false,
+      "page": "picker",
+      "ok": false,
+      "reason": "(-32001, 'androidx.test.uiautomator.UiObjectNotFoundException', ({'mask': 2113536, 'childOrSibling': [], 'childOrSiblingSelector': [], 'resourceId': 'com.android.documentsui:id/dir_list', 'scrollable': True}, True, 30))",
+      "finishedAt": 1788608899.506496,
+      "elapsedMs": 5169
+    },
+    {
+      "platform": "meituan",
+      "startedAt": 1788609040.501804,
+      "action": "choose",
+      "llmIntervention": false,
+      "page": "picker",
+      "ok": true,
+      "finishedAt": 1788609044.622234,
+      "elapsedMs": 4120
+    },
+    {
+      "platform": "meituan",
+      "startedAt": 1788609044.623842,
+      "action": "send",
+      "llmIntervention": false,
+      "page": "selected",
+      "ok": true,
+      "finishedAt": 1788609055.475793,
+      "elapsedMs": 10852
+    },
+    {
+      "platform": "taobao",
+      "startedAt": 1788609055.476174,
+      "action": "panel",
+      "llmIntervention": false,
+      "page": "group",
+      "ok": true,
+      "finishedAt": 1788609062.358,
+      "elapsedMs": 6882
+    },
+    {
+      "platform": "taobao",
+      "startedAt": 1788609062.3613708,
+      "action": "select",
+      "llmIntervention": false,
+      "page": "file_selector",
+      "ok": true,
+      "finishedAt": 1788609069.1399622,
+      "elapsedMs": 6779
+    },
+    {
+      "platform": "taobao",
+      "startedAt": 1788609069.141711,
+      "action": "send",
+      "llmIntervention": false,
+      "page": "selected",
+      "ok": true,
+      "finishedAt": 1788609075.975331,
+      "elapsedMs": 6834
+    }
+  ],
+  "createdAt": 1788608854.2257411,
+  "current": {
+    "platform": "taobao",
+    "startedAt": 1788609069.141711,
+    "action": "send",
+    "llmIntervention": false,
+    "page": "selected",
+    "ok": true,
+    "finishedAt": 1788609075.975331,
+    "elapsedMs": 6834
+  },
+  "groupVerified": true,
+  "activeHash": "8ee23cbb44ed643b60ee64a0b96474405ecf0d47fc6e57b6c6810b8402a2bc0b",
+  "businessCompleted": true,
+  "finishedAt": 1788609137.480546
+}

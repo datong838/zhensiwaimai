@@ -1,0 +1,95 @@
+{
+  "ok": true,
+  "runId": "jinsha-business-production-20260923-01",
+  "startedAt": 1790132590218,
+  "deadline": 1790132770218,
+  "executor": "jinsha-browser-download",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "jinsha-business",
+  "port": 9232,
+  "businessDate": "2026-09-22",
+  "runtimeModelDecisions": 0,
+  "clicks": {
+    "meituan": 1,
+    "taobao": 1
+  },
+  "files": {
+    "meituan": {
+      "name": "美团原始数据_2026-09-22_production01.xlsx",
+      "suggestedFilename": "美团全部_2026-09-22至2026-09-22.xlsx",
+      "file": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/runs/jinsha-business-production/20260923/01/美团原始数据_2026-09-22_production01.xlsx",
+      "size": 108704,
+      "sha256": "36a4e3f51ec57a49aecba62a9230e91ce03e3f29440372c4d922042753a3114b",
+      "downloadStartedAt": 1790132600712,
+      "savedAt": 1790132603766,
+      "captureMode": "task-page-staging-recovery"
+    },
+    "taobao": {
+      "name": "淘宝闪购原始数据_2026-09-22_production01.xlsx",
+      "suggestedFilename": "淘宝闪购_2026-09-22至2026-09-22.xlsx",
+      "file": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/runs/jinsha-business-production/20260923/01/淘宝闪购原始数据_2026-09-22_production01.xlsx",
+      "size": 98668,
+      "sha256": "6d0ffb832a0918d45dafa7ac7339f568276ec281249a22a608193a662e07b5db",
+      "downloadStartedAt": 1790132606279,
+      "savedAt": 1790132607123,
+      "captureMode": "task-page-staging-recovery"
+    }
+  },
+  "stage": "complete",
+  "nodes": [
+    {
+      "name": "background_preflight",
+      "elapsedMs": 52,
+      "ok": true,
+      "llmIntervention": false
+    },
+    {
+      "name": "task_page",
+      "elapsedMs": 2552,
+      "ok": true,
+      "llmIntervention": false
+    },
+    {
+      "name": "navigation",
+      "elapsedMs": 2463,
+      "ok": true,
+      "llmIntervention": false
+    },
+    {
+      "name": "known_overlay",
+      "elapsedMs": 2525,
+      "ok": true,
+      "llmIntervention": false
+    },
+    {
+      "name": "meituan.download",
+      "elapsedMs": 5425,
+      "ok": true,
+      "llmIntervention": false
+    },
+    {
+      "name": "taobao.download",
+      "elapsedMs": 3358,
+      "ok": true,
+      "llmIntervention": false
+    }
+  ],
+  "frontmostBefore": "com.google.Chrome",
+  "lease": {
+    "path": "/tmp/zhensi-jinsha-cua-exam.lock",
+    "acquiredAt": 1790132590667,
+    "released": true,
+    "releasedAt": 1790132607173
+  },
+  "browserProcess": {
+    "pid": 20502,
+    "command": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome --user-data-dir=/Users/ddt/Library/Application Support/AOS Background Chrome/jinsha-business --no-first-run --no-default-browser-check --remote-debugging-address=127.0.0.1 --remote-debugging-port=9232 https://data.guoshuyufen.com/#/businessData/realTimeData"
+  },
+  "jinshaResourceReleased": true,
+  "jinshaReleasedAt": 1790132607128,
+  "receiptIssuedAt": 1790132607128,
+  "url": "https://data.guoshuyufen.com/#/reportDownload",
+  "elapsedMs": 16955,
+  "efficiencyExceeded": false,
+  "frontmostAfter": "com.google.Chrome"
+}

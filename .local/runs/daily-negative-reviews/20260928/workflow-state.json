@@ -1,0 +1,306 @@
+{
+  "policyVersion": "daily-negative-reviews-code-enforced-v1",
+  "businessDate": "2026-09-28",
+  "phase": "report_built",
+  "status": "recoverable",
+  "startedAt": 1790646343679,
+  "updatedAt": 1790679331860,
+  "reviewItems": [
+    {
+      "stage": "browser_collect",
+      "label": "金鲨采集",
+      "attempts": 1,
+      "elapsedMs": 47231,
+      "status": "failed",
+      "pitfalls": [
+        "jinsha-context-menu-not-unique"
+      ]
+    },
+    {
+      "stage": "browser_validate",
+      "label": "连接并唯一定位金鲨页面",
+      "attempts": 1,
+      "elapsedMs": 13647,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "route_and_date",
+      "label": "核验淘宝外卖入口并设置昨日日期",
+      "attempts": 1,
+      "elapsedMs": 8745,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "download",
+      "label": "下载全部平台差评",
+      "attempts": 1,
+      "elapsedMs": 9761,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "browser_collect",
+      "label": "金鲨采集",
+      "attempts": 1,
+      "elapsedMs": 72491,
+      "status": "failed",
+      "pitfalls": [
+        "locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('.el-select-dropdown__item:visible').filter({ hasText: '200条/页' }).first()\n    - locator resolved to <li class=\"el-select-dropdown__item\">…</li>\n  - attempting click action\n    - waiting for element to be visible, enabled and stable\n    - element is not stable\n  - retrying click action\n    - waiting for element to be visible, enabled and stable\n    - element is not visible\n  - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n      - waiting 100ms\n    11 × waiting for element to be visible, enabled and stable\n       - element is not visible\n     - retrying click action\n       - waiting 500ms\n    - waiting for element to be visible, enabled and stable\n"
+      ]
+    },
+    {
+      "stage": "browser_collect",
+      "label": "金鲨采集",
+      "attempts": 1,
+      "elapsedMs": 60898,
+      "status": "failed",
+      "pitfalls": [
+        "locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('.el-select-dropdown__item:visible').filter({ hasText: '200条/页' }).first()\n    - locator resolved to <li class=\"el-select-dropdown__item\">…</li>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n      - waiting 100ms\n    11 × waiting for element to be visible, enabled and stable\n       - element is not visible\n     - retrying click action\n       - waiting 500ms\n"
+      ]
+    },
+    {
+      "stage": "extract_platforms",
+      "label": "读取三平台页面列表",
+      "attempts": 1,
+      "elapsedMs": 7629,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "reconcile",
+      "label": "下载与页面逐条对账",
+      "attempts": 1,
+      "elapsedMs": 403,
+      "status": "failed",
+      "pitfalls": [
+        "Command failed: /Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/daily-negative-reviews/scripts/reconcile.py /Users/ddt/work/projects/ai_agent/.local/runs/daily-negative-reviews/20260928/config.json\nTraceback (most recent call last):\n  File \"/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/daily-negative-reviews/scripts/reconcile.py\", line 58, in <module>\n    if __name__=='__main__': main()\n                             ^^^^^^\n  File \"/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/daily-negative-reviews/scripts/reconcile.py\", line 56, in main\n    config=json.loads(Path(sys.argv[1]).read_text());print(json.dumps(reconcile(config),ensure_ascii=False))\n                                                                      ^^^^^^^^^^^^^^^^^\n  File \"/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/daily-negative-reviews/scripts/reconcile.py\", line 30, in reconcile\n    if len(raw)!=len(ui['rows']) or len(raw)!=sum(ui['counts'].values()): raise ValueError('record-count-mismatch')\n                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: record-count-mismatch\n"
+      ]
+    },
+    {
+      "stage": "browser_refresh",
+      "label": "复用已下载文件并刷新三平台页面列表",
+      "attempts": 1,
+      "elapsedMs": 24446,
+      "status": "completed",
+      "pitfalls": [
+        "首份下载后源数据变动，已归档首份文件并受控替换下载一次"
+      ]
+    },
+    {
+      "stage": "reconcile",
+      "label": "下载与页面逐条对账",
+      "attempts": 1,
+      "elapsedMs": 307,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "build_report",
+      "label": "生成并验收固定格式Excel",
+      "attempts": 1,
+      "elapsedMs": 1052,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 5364,
+      "status": "failed",
+      "pitfalls": [
+        "wechat-window-capture-failed"
+      ]
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 196,
+      "status": "failed",
+      "pitfalls": [
+        "wechat-unexpected-secondary-window"
+      ]
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 437,
+      "status": "failed",
+      "pitfalls": [
+        "wechat-main-window-count-not-one"
+      ]
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 87355,
+      "status": "failed",
+      "pitfalls": [
+        "wechat-search-region-contended"
+      ]
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 38,
+      "status": "failed",
+      "pitfalls": [
+        "wechat-search-region-contended"
+      ]
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 45,
+      "status": "failed",
+      "pitfalls": [
+        "wechat-search-region-contended"
+      ]
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 40,
+      "status": "failed",
+      "pitfalls": [
+        "wechat-search-region-contended"
+      ]
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 31023,
+      "status": "failed",
+      "pitfalls": [
+        "wechat-search-region-contended"
+      ]
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 31355,
+      "status": "failed",
+      "pitfalls": [
+        "wechat-search-region-contended"
+      ]
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 30720,
+      "status": "failed",
+      "pitfalls": [
+        "wechat-search-region-contended"
+      ]
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 31306,
+      "status": "failed",
+      "pitfalls": [
+        "wechat-search-region-contended"
+      ]
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 9186,
+      "status": "failed",
+      "pitfalls": [
+        "desktop-wechat-preflight-failed"
+      ]
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 9215,
+      "status": "failed",
+      "pitfalls": [
+        "desktop-wechat-preflight-failed"
+      ]
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 14833,
+      "status": "failed",
+      "pitfalls": [
+        "wechat-main-window-count-not-one"
+      ]
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 9071,
+      "status": "failed",
+      "pitfalls": [
+        "desktop-wechat-preflight-failed"
+      ]
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 5255,
+      "status": "failed",
+      "pitfalls": [
+        "wechat-window-obstructed"
+      ]
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 23852,
+      "status": "failed",
+      "pitfalls": [
+        "desktop-wechat-preflight-failed"
+      ]
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 10352,
+      "status": "failed",
+      "pitfalls": [
+        "desktop-wechat-preflight-failed"
+      ]
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 41,
+      "status": "failed",
+      "pitfalls": [
+        "desktop-wechat-preflight-failed"
+      ]
+    }
+  ],
+  "runtimeModelDecisions": 0,
+  "lastRecovery": {
+    "allowed": true,
+    "stage": "wechat_send",
+    "priorFailures": 18,
+    "nextAttempt": 19
+  },
+  "reason": "desktop-wechat-preflight-failed"
+}

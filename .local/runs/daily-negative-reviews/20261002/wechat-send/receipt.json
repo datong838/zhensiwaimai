@@ -1,0 +1,140 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "file",
+  "state": "verified",
+  "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+  "payloads": [
+    {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/outputs/yesterday-negative-20261002/差评分析数据_2026-10-02_2026-10-02.xlsx",
+      "name": "差评分析数据_2026-10-02_2026-10-02.xlsx",
+      "size": 17273,
+      "sha256": "881eac9521fcf8349c3d4adba72e872bdd3f4287a429979586b4169b1edf0cfe"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "channel": "desktop",
+    "requestDigest": "2adadf59b894124d4b7a6307d5d1c7abb6b950eefcc48fbc6bc0a752cafd076f",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "881eac9521fcf8349c3d4adba72e872bdd3f4287a429979586b4169b1edf0cfe",
+        "type": "file",
+        "status": "verified",
+        "claimedAt": 1790998935.346617,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-file-card",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+          "currentTitle": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+          "messageCount": 48,
+          "anchor": "file-card",
+          "anchorValue": "[文件]",
+          "anchorInTrailingPosition": true,
+          "autoKind": "file",
+          "readbackAt": 1790998966.1029272
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "上海臻肆外卖运营-盯个盯-饭敢当",
+            "path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\差评分析数据_2026-10-02_2026-10-02.xlsx",
+            "kind": "file",
+            "auto": "file",
+            "uploaded_from": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/negative-review-send-shanghai-zhensi-operations-ding-fandang-v1.desktop-attempts/.wechat-messaging/events/8e5fcce26b69eb7fe9e8014365776e09663b2e69e0ec33ffbd970eb811e581e7/bdafbee27e9ff2886195e88eeb2ff7efd7aa5295f1e83a4cba1ada3c766141b5/payload/差评分析数据_2026-10-02_2026-10-02.xlsx",
+            "server_path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\差评分析数据_2026-10-02_2026-10-02.xlsx"
+          },
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 415
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 30756
+      }
+    ],
+    "elapsedMs": 31175,
+    "eventKey": "8e5fcce26b69eb7fe9e8014365776e09663b2e69e0ec33ffbd970eb811e581e7",
+    "reviewSummary": {
+      "totalElapsedMs": 31175,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/negative-review-send-shanghai-zhensi-operations-ding-fandang-v1.desktop-attempts/negative-review-2026-10-02.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 415,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 30756,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 31175,
+  "reviewSummary": {
+    "totalElapsedMs": 31175,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  }
+}

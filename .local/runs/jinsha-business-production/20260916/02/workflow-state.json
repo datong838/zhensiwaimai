@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "jinsha-business-code-enforced-v1",
+  "runId": "jinsha-business-production-20260916-02",
+  "businessDate": "2026-09-15",
+  "phase": "prepared",
+  "status": "needs-resume",
+  "nextAction": null,
+  "runtimeModelDecisions": 0,
+  "attempts": {
+    "download": 1,
+    "send": 4,
+    "verify": 0
+  },
+  "events": [
+    {
+      "at": 1789528506774,
+      "type": "executor-start",
+      "phase": "created"
+    },
+    {
+      "at": 1789528506774,
+      "type": "attempt",
+      "stage": "download",
+      "number": 1
+    },
+    {
+      "at": 1789528519476,
+      "type": "decision",
+      "stage": "download",
+      "decision": "downloaded"
+    },
+    {
+      "at": 1789528519477,
+      "type": "transition",
+      "from": "created",
+      "to": "downloaded",
+      "evidence": {
+        "receipt": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/runs/jinsha-business-production/20260916/02/download-ui.json"
+      }
+    },
+    {
+      "at": 1789528519477,
+      "type": "attempt",
+      "stage": "prepare",
+      "number": 1
+    },
+    {
+      "at": 1789528527513,
+      "type": "transition",
+      "from": "downloaded",
+      "to": "prepared",
+      "evidence": {
+        "receipt": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/runs/jinsha-business-production/20260916/02/send-preflight.json"
+      }
+    },
+    {
+      "at": 1789528527514,
+      "type": "decision",
+      "stage": "send",
+      "decision": "retry-send",
+      "marker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/state/jinsha-report-send-feibing-neo-ai.desktop-attempts/2d8e3481b27645f538fa35514f4ff9fc97328ddbb312e2a232a3b0801af42aa8.json"
+    },
+    {
+      "at": 1789528527515,
+      "type": "attempt",
+      "stage": "send",
+      "number": 1
+    },
+    {
+      "at": 1789528543257,
+      "type": "decision",
+      "stage": "send",
+      "decision": "retry-send",
+      "marker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/state/jinsha-report-send-feibing-neo-ai.desktop-attempts/2d8e3481b27645f538fa35514f4ff9fc97328ddbb312e2a232a3b0801af42aa8.json"
+    },
+    {
+      "at": 1789528543257,
+      "type": "attempt",
+      "stage": "send",
+      "number": 2
+    },
+    {
+      "at": 1789528549489,
+      "type": "decision",
+      "stage": "send",
+      "decision": "retry-send",
+      "marker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/state/jinsha-report-send-feibing-neo-ai.desktop-attempts/2d8e3481b27645f538fa35514f4ff9fc97328ddbb312e2a232a3b0801af42aa8.json"
+    },
+    {
+      "at": 1789528549490,
+      "type": "attempt",
+      "stage": "send",
+      "number": 3
+    },
+    {
+      "at": 1789528555737,
+      "type": "decision",
+      "stage": "send",
+      "decision": "retry-send",
+      "marker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/state/jinsha-report-send-feibing-neo-ai.desktop-attempts/2d8e3481b27645f538fa35514f4ff9fc97328ddbb312e2a232a3b0801af42aa8.json"
+    },
+    {
+      "at": 1789528555737,
+      "type": "attempt",
+      "stage": "send",
+      "number": 4
+    },
+    {
+      "at": 1789528556933,
+      "type": "blocked",
+      "phase": "prepared",
+      "reason": "desktop-preflight-retry-limit-exceeded"
+    },
+    {
+      "at": 1789528659244,
+      "type": "executor-start",
+      "phase": "prepared"
+    },
+    {
+      "at": 1789528659244,
+      "type": "blocked",
+      "phase": "prepared",
+      "reason": "desktop-preflight-retry-limit-exceeded"
+    }
+  ],
+  "config": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/runs/jinsha-business-production/20260916/02/config.json",
+  "createdAt": 1789528506771,
+  "updatedAt": 1789528659244
+}

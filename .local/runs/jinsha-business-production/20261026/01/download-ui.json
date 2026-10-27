@@ -1,0 +1,53 @@
+{
+  "ok": false,
+  "runId": "jinsha-business-production-20261026-01",
+  "startedAt": 1792983740795,
+  "deadline": 1792983920795,
+  "executor": "jinsha-browser-download",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "jinsha-business",
+  "port": 9232,
+  "businessDate": "2026-10-25",
+  "runtimeModelDecisions": 0,
+  "clicks": {
+    "meituan": 0,
+    "taobao": 0
+  },
+  "files": {},
+  "stage": "navigation",
+  "nodes": [
+    {
+      "name": "background_preflight",
+      "elapsedMs": 12689,
+      "ok": true,
+      "llmIntervention": false
+    },
+    {
+      "name": "task_page",
+      "elapsedMs": 254,
+      "ok": true,
+      "llmIntervention": false
+    },
+    {
+      "name": "navigation",
+      "elapsedMs": 12002,
+      "ok": false,
+      "llmIntervention": false
+    }
+  ],
+  "frontmostBefore": "com.google.Chrome",
+  "lease": {
+    "path": "/tmp/zhensi-jinsha-cua-exam.lock",
+    "acquiredAt": 1792983740947,
+    "released": true,
+    "releasedAt": 1792983765971
+  },
+  "browserProcess": {
+    "pid": 89873,
+    "command": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome --no-default-browser-check --no-first-run --no-sandbox --remote-debugging-address=127.0.0.1 --remote-debugging-port=9232 --user-data-dir=/Users/ddt/Library/Application Support/AOS Background Chrome/jinsha-business --window-size=1280,760 --restart"
+  },
+  "reason": "jinsha-shell-not-ready",
+  "elapsedMs": 25176,
+  "efficiencyExceeded": false,
+  "frontmostAfter": "com.google.Chrome"
+}

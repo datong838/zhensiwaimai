@@ -1,0 +1,106 @@
+{
+  "group": "臻肆测试群",
+  "hashes": {
+    "meituan": "b8fb690a2ac9eba5f27d91accbeb04d9725431bc5afba1b01f33436962c65584",
+    "taobao": "ec37c52e38628a5e8252681616c096ef9497b1ba18379dc5f8ce3fd977d2e8ec"
+  },
+  "events": [
+    {
+      "platform": "meituan",
+      "startedAt": 1788536293.414484,
+      "action": "locate",
+      "llmIntervention": false,
+      "page": "home",
+      "ok": true,
+      "finishedAt": 1788536306.9012868,
+      "elapsedMs": 13487
+    },
+    {
+      "platform": "meituan",
+      "startedAt": 1788536306.901825,
+      "action": "panel",
+      "llmIntervention": false,
+      "page": "group",
+      "ok": true,
+      "finishedAt": 1788536313.7092621,
+      "elapsedMs": 6807
+    },
+    {
+      "platform": "meituan",
+      "startedAt": 1788536313.710628,
+      "action": "select",
+      "llmIntervention": false,
+      "page": "file_selector",
+      "ok": false,
+      "reason": "page-not-ready:folder-not-visible:Download",
+      "retry": 1,
+      "backoffMs": 500,
+      "finishedAt": 1788536377.104608,
+      "elapsedMs": 63394
+    },
+    {
+      "platform": "meituan",
+      "startedAt": 1788536377.106375,
+      "action": "choose",
+      "llmIntervention": false,
+      "page": "picker",
+      "ok": false,
+      "reason": "page-not-ready:folder-not-visible:Download",
+      "retry": 2,
+      "backoffMs": 1000,
+      "finishedAt": 1788536434.300792,
+      "elapsedMs": 57194
+    },
+    {
+      "platform": "meituan",
+      "startedAt": 1788536434.3018382,
+      "action": "choose",
+      "llmIntervention": false,
+      "page": "picker",
+      "ok": false,
+      "reason": "page-not-ready:folder-not-visible:Download",
+      "retry": 3,
+      "backoffMs": 2000,
+      "finishedAt": 1788536491.5490198,
+      "elapsedMs": 57247
+    },
+    {
+      "platform": "meituan",
+      "startedAt": 1788536491.551423,
+      "action": "choose",
+      "llmIntervention": false,
+      "page": "picker",
+      "ok": false,
+      "reason": "page-not-ready:folder-not-visible:Download",
+      "retry": 4,
+      "backoffMs": 4000,
+      "finishedAt": 1788536551.766177,
+      "elapsedMs": 60215
+    },
+    {
+      "platform": "meituan",
+      "startedAt": 1788536551.767829,
+      "action": "choose",
+      "llmIntervention": false,
+      "page": "picker",
+      "ok": false,
+      "reason": "('Unknown RPC error: -32001 java.lang.SecurityException', (540, 1804, 540, 1052, 70), 'java.lang.SecurityException: Injecting to another application requires INJECT_EVENTS permission\\n\\tat android.os.Parcel.createException(Parcel.java:2091)\\n\\tat android.os.Parcel.readException(Parcel.java:2059)\\n\\tat android.os.Parcel.readException(Parcel.java:2007)\\n\\tat android.view.IWindowManager$Stub$Proxy.injectInputAfterTransactionsApplied(IWindowManager.java:4912)\\n\\tat android.app.UiAutomationConnection.injectInputEvent(UiAutomationConnection.java:131)\\n\\tat android.app.UiAutomation.injectInputEvent(UiAutomation.java:597)\\n\\tat androidx.test.uiautomator.InteractionController.injectEventSync(InteractionController.java:494)\\n\\tat androidx.test.uiautomator.InteractionController.touchMove(InteractionController.java:259)\\n\\tat androidx.test.uiautomator.InteractionController.swipe(InteractionController.java:334)\\n\\tat androidx.test.uiautomator.InteractionController.swipe(InteractionController.java:303)\\n\\tat androidx.test.uiautomator.UiDevice.swipe(UiDevice.java:631)\\n\\tat com.wetest.uia2.stub.AutomatorServiceImpl.swipe(AutomatorServiceImpl.java:232)\\n\\tat java.lang.reflect.Method.invoke(Native Method)\\n\\tat com.googlecode.jsonrpc4j.JsonRpcBasicServer.invoke(JsonRpcBasicServer.java:467)\\n\\tat com.googlecode.jsonrpc4j.JsonRpcBasicServer.handleObject(JsonRpcBasicServer.java:352)\\n\\tat com.googlecode.jsonrpc4j.JsonRpcBasicServer.handleJsonNodeRequest(JsonRpcBasicServer.java:283)\\n\\tat com.googlecode.jsonrpc4j.JsonRpcBasicServer.handleRequest(JsonRpcBasicServer.java:251)\\n\\tat com.wetest.uia2.stub.AutomatorHttpServer.serve(AutomatorHttpServer.java:103)\\n\\tat fi.iki.elonen.NanoHTTPD.serve(NanoHTTPD.java:2244)\\n\\tat fi.iki.elonen.NanoHTTPD$HTTPSession.execute(NanoHTTPD.java:945)\\n\\tat fi.iki.elonen.NanoHTTPD$ClientHandler.run(NanoHTTPD.java:192)\\n\\tat java.lang.Thread.run(Thread.java:929)\\nCaused by: android.os.RemoteException: Remote stack trace:\\n\\tat com.android.server.input.InputManagerService.injectInputEventInternal(libmapleservices.so:5158616)\\n\\tat com.android.server.wm.WindowManagerService.injectInputAfterTransactionsApplied(libmapleservices.so:8326488)\\n\\tat android.view.IWindowManager$Stub.onTransact(libmapleframework.so:5270424)\\n\\tat com.android.server.wm.WindowManagerService.onTransact(libmapleservices.so:6741832)\\n\\tat com.android.server.wm.HwWindowManagerService.onTransact(libmaplehwServices.so:2350496)\\ncallee: null 1840/6575\\n\\n')",
+      "finishedAt": 1788536591.467742,
+      "elapsedMs": 39700
+    }
+  ],
+  "createdAt": 1788536293.414079,
+  "current": {
+    "platform": "meituan",
+    "startedAt": 1788536551.767829,
+    "action": "choose",
+    "llmIntervention": false,
+    "page": "picker",
+    "ok": false,
+    "reason": "('Unknown RPC error: -32001 java.lang.SecurityException', (540, 1804, 540, 1052, 70), 'java.lang.SecurityException: Injecting to another application requires INJECT_EVENTS permission\\n\\tat android.os.Parcel.createException(Parcel.java:2091)\\n\\tat android.os.Parcel.readException(Parcel.java:2059)\\n\\tat android.os.Parcel.readException(Parcel.java:2007)\\n\\tat android.view.IWindowManager$Stub$Proxy.injectInputAfterTransactionsApplied(IWindowManager.java:4912)\\n\\tat android.app.UiAutomationConnection.injectInputEvent(UiAutomationConnection.java:131)\\n\\tat android.app.UiAutomation.injectInputEvent(UiAutomation.java:597)\\n\\tat androidx.test.uiautomator.InteractionController.injectEventSync(InteractionController.java:494)\\n\\tat androidx.test.uiautomator.InteractionController.touchMove(InteractionController.java:259)\\n\\tat androidx.test.uiautomator.InteractionController.swipe(InteractionController.java:334)\\n\\tat androidx.test.uiautomator.InteractionController.swipe(InteractionController.java:303)\\n\\tat androidx.test.uiautomator.UiDevice.swipe(UiDevice.java:631)\\n\\tat com.wetest.uia2.stub.AutomatorServiceImpl.swipe(AutomatorServiceImpl.java:232)\\n\\tat java.lang.reflect.Method.invoke(Native Method)\\n\\tat com.googlecode.jsonrpc4j.JsonRpcBasicServer.invoke(JsonRpcBasicServer.java:467)\\n\\tat com.googlecode.jsonrpc4j.JsonRpcBasicServer.handleObject(JsonRpcBasicServer.java:352)\\n\\tat com.googlecode.jsonrpc4j.JsonRpcBasicServer.handleJsonNodeRequest(JsonRpcBasicServer.java:283)\\n\\tat com.googlecode.jsonrpc4j.JsonRpcBasicServer.handleRequest(JsonRpcBasicServer.java:251)\\n\\tat com.wetest.uia2.stub.AutomatorHttpServer.serve(AutomatorHttpServer.java:103)\\n\\tat fi.iki.elonen.NanoHTTPD.serve(NanoHTTPD.java:2244)\\n\\tat fi.iki.elonen.NanoHTTPD$HTTPSession.execute(NanoHTTPD.java:945)\\n\\tat fi.iki.elonen.NanoHTTPD$ClientHandler.run(NanoHTTPD.java:192)\\n\\tat java.lang.Thread.run(Thread.java:929)\\nCaused by: android.os.RemoteException: Remote stack trace:\\n\\tat com.android.server.input.InputManagerService.injectInputEventInternal(libmapleservices.so:5158616)\\n\\tat com.android.server.wm.WindowManagerService.injectInputAfterTransactionsApplied(libmapleservices.so:8326488)\\n\\tat android.view.IWindowManager$Stub.onTransact(libmapleframework.so:5270424)\\n\\tat com.android.server.wm.WindowManagerService.onTransact(libmapleservices.so:6741832)\\n\\tat com.android.server.wm.HwWindowManagerService.onTransact(libmaplehwServices.so:2350496)\\ncallee: null 1840/6575\\n\\n')",
+    "finishedAt": 1788536591.467742,
+    "elapsedMs": 39700
+  },
+  "groupVerified": true,
+  "activeHash": "b8fb690a2ac9eba5f27d91accbeb04d9725431bc5afba1b01f33436962c65584"
+}

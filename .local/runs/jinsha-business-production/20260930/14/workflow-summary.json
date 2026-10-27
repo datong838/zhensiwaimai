@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "jinsha-business-code-enforced-v1",
+  "runId": "jinsha-business-production-20260930-14",
+  "businessDate": "2026-09-29",
+  "status": "needs-maintenance",
+  "phase": "created",
+  "nextAction": null,
+  "totalElapsedMs": 31122,
+  "nodes": [
+    {
+      "name": "download",
+      "attempts": 3,
+      "startedAt": 1790777166929,
+      "finishedAt": 1790777198045,
+      "elapsedMs": 31116,
+      "complete": false
+    }
+  ],
+  "pitfalls": [
+    {
+      "at": 1790777181656,
+      "stage": "download",
+      "type": "recovery",
+      "detail": "retry-download",
+      "reason": "locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for getByText('美团外卖', { exact: true }).first()\n    - locator resolved to <span class=\"el-radio-button__inner\">…</span>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"content\" data-v-8b910fe2=\"\">…</div> from <div class=\"upload\" data-v-8b910fe2=\"\" data-v-05e032cb=\"\">…</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"content\" data-v-8b910fe2=\"\">…</div> from <div class=\"upload\" data-v-8b910fe2=\"\" data-v-05e032cb=\"\">…</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"content\" data-v-8b910fe2=\"\">…</div> from <div class=\"upload\" data-v-8b910fe2=\"\" data-v-05e032cb=\"\">…</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n"
+    },
+    {
+      "at": 1790777195578,
+      "stage": "download",
+      "type": "recovery",
+      "detail": "retry-download",
+      "reason": "locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for getByText('美团外卖', { exact: true }).first()\n    - locator resolved to <span class=\"el-radio-button__inner\">…</span>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"content\" data-v-8b910fe2=\"\">…</div> from <div class=\"upload\" data-v-8b910fe2=\"\" data-v-05e032cb=\"\">…</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"content\" data-v-8b910fe2=\"\">…</div> from <div class=\"upload\" data-v-8b910fe2=\"\" data-v-05e032cb=\"\">…</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"content\" data-v-8b910fe2=\"\">…</div> from <div class=\"upload\" data-v-8b910fe2=\"\" data-v-05e032cb=\"\">…</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n"
+    },
+    {
+      "at": 1790777198044,
+      "stage": "download",
+      "type": "recovery",
+      "detail": "retry-download",
+      "reason": "page.waitForTimeout: Target page, context or browser has been closed"
+    },
+    {
+      "at": 1790777198045,
+      "stage": "created",
+      "type": "blocked",
+      "detail": "download-retry-limit-exceeded"
+    }
+  ],
+  "codeEnforced": true,
+  "reviewItems": [
+    {
+      "name": "download",
+      "attempts": 3,
+      "startedAt": 1790777166929,
+      "finishedAt": 1790777198045,
+      "elapsedMs": 31116,
+      "complete": false,
+      "pitfalls": [
+        {
+          "at": 1790777181656,
+          "stage": "download",
+          "type": "recovery",
+          "detail": "retry-download",
+          "reason": "locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for getByText('美团外卖', { exact: true }).first()\n    - locator resolved to <span class=\"el-radio-button__inner\">…</span>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"content\" data-v-8b910fe2=\"\">…</div> from <div class=\"upload\" data-v-8b910fe2=\"\" data-v-05e032cb=\"\">…</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"content\" data-v-8b910fe2=\"\">…</div> from <div class=\"upload\" data-v-8b910fe2=\"\" data-v-05e032cb=\"\">…</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"content\" data-v-8b910fe2=\"\">…</div> from <div class=\"upload\" data-v-8b910fe2=\"\" data-v-05e032cb=\"\">…</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n"
+        },
+        {
+          "at": 1790777195578,
+          "stage": "download",
+          "type": "recovery",
+          "detail": "retry-download",
+          "reason": "locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for getByText('美团外卖', { exact: true }).first()\n    - locator resolved to <span class=\"el-radio-button__inner\">…</span>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"content\" data-v-8b910fe2=\"\">…</div> from <div class=\"upload\" data-v-8b910fe2=\"\" data-v-05e032cb=\"\">…</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"content\" data-v-8b910fe2=\"\">…</div> from <div class=\"upload\" data-v-8b910fe2=\"\" data-v-05e032cb=\"\">…</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"content\" data-v-8b910fe2=\"\">…</div> from <div class=\"upload\" data-v-8b910fe2=\"\" data-v-05e032cb=\"\">…</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n"
+        },
+        {
+          "at": 1790777198044,
+          "stage": "download",
+          "type": "recovery",
+          "detail": "retry-download",
+          "reason": "page.waitForTimeout: Target page, context or browser has been closed"
+        }
+      ]
+    }
+  ],
+  "runtimeModelDecisions": 0,
+  "generatedAt": 1790777198045
+}

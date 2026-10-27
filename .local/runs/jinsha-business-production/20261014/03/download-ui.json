@@ -1,0 +1,47 @@
+{
+  "ok": false,
+  "runId": "jinsha-business-production-20261014-03",
+  "startedAt": 1791955522678,
+  "deadline": 1791955702678,
+  "executor": "jinsha-browser-download",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "jinsha-business",
+  "port": 9232,
+  "businessDate": "2026-10-13",
+  "runtimeModelDecisions": 0,
+  "clicks": {
+    "meituan": 0,
+    "taobao": 0
+  },
+  "files": {},
+  "stage": "task_page",
+  "nodes": [
+    {
+      "name": "background_preflight",
+      "elapsedMs": 300,
+      "ok": true,
+      "llmIntervention": false
+    },
+    {
+      "name": "task_page",
+      "elapsedMs": 19877,
+      "ok": false,
+      "llmIntervention": false
+    }
+  ],
+  "frontmostBefore": "com.google.Chrome",
+  "lease": {
+    "path": "/tmp/zhensi-jinsha-cua-exam.lock",
+    "acquiredAt": 1791955522825,
+    "released": true,
+    "releasedAt": 1791955543077
+  },
+  "browserProcess": {
+    "pid": 21260,
+    "command": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome --user-data-dir=/Users/ddt/Library/Application Support/AOS Background Chrome/jinsha-business --no-sandbox --no-first-run --no-default-browser-check --remote-debugging-address=127.0.0.1 --remote-debugging-port=9232 --window-size=1280,760 https://data.guoshuyufen.com/#/negativeAnalyse"
+  },
+  "reason": "page.goto: net::ERR_CONNECTION_CLOSED at https://data.guoshuyufen.com/#/businessData/realTimeData\nCall log:\n  - navigating to \"https://data.guoshuyufen.com/#/businessData/realTimeData\", waiting until \"commit\"\n",
+  "elapsedMs": 20399,
+  "efficiencyExceeded": false,
+  "frontmostAfter": "com.google.Chrome"
+}

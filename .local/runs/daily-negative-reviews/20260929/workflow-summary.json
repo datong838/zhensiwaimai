@@ -1,0 +1,130 @@
+{
+  "ok": true,
+  "policyVersion": "daily-negative-reviews-code-enforced-v1",
+  "businessDate": "2026-09-29",
+  "phase": "complete",
+  "status": "complete",
+  "runtimeModelDecisions": 0,
+  "completionReview": {
+    "codeEnforced": true,
+    "totalElapsedMs": 49399,
+    "reviewItems": [
+      {
+        "item": 1,
+        "stage": "browser_validate",
+        "label": "连接并唯一定位金鲨页面",
+        "attempts": 1,
+        "elapsedMs": 11566,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 2,
+        "stage": "route_and_date",
+        "label": "核验淘宝外卖入口并设置昨日日期",
+        "attempts": 1,
+        "elapsedMs": 1056,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 3,
+        "stage": "download",
+        "label": "下载全部平台差评",
+        "attempts": 1,
+        "elapsedMs": 2927,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 4,
+        "stage": "extract_platforms",
+        "label": "读取三平台页面列表",
+        "attempts": 1,
+        "elapsedMs": 6369,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 5,
+        "stage": "reconcile",
+        "label": "下载与页面逐条对账",
+        "attempts": 1,
+        "elapsedMs": 235,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 6,
+        "stage": "build_report",
+        "label": "生成并验收固定格式Excel",
+        "attempts": 1,
+        "elapsedMs": 1067,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 7,
+        "stage": "wechat_send",
+        "label": "唯一群定位、单次发送与双帧校验",
+        "attempts": 4,
+        "elapsedMs": 26176,
+        "status": "completed",
+        "pitfalls": [
+          "Command failed: /Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/workflow_bridge_windows.py --workflow-id negative-reviews --group 上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰 --payload-type file --authorization zhensi-negative-review-main-wechat-shanghai-zhensi-operations-ding-fandang-v1-user-20260918 --ledger /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/negative-review-send-shanghai-zhensi-operations-ding-fandang-v1.desktop-attempts --marker-name negative-review-2026-09-29.json --output-dir /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/daily-negative-reviews/20260929/wechat-send --item /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/outputs/yesterday-negative-20260929/差评分析数据_2026-09-29_2026-09-29.xlsx --deadline-unix 1790751007 --execute\n",
+          "Command failed: /Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/workflow_bridge_windows.py --workflow-id negative-reviews --group 上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰 --payload-type file --authorization zhensi-negative-review-main-wechat-shanghai-zhensi-operations-ding-fandang-v1-user-20260918 --ledger /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/negative-review-send-shanghai-zhensi-operations-ding-fandang-v1.desktop-attempts --marker-name negative-review-2026-09-29.json --output-dir /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/daily-negative-reviews/20260929/wechat-send --item /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/outputs/yesterday-negative-20260929/差评分析数据_2026-09-29_2026-09-29.xlsx --deadline-unix 1790751647 --execute\n",
+          "wechat-proof-invalid"
+        ]
+      },
+      {
+        "item": 8,
+        "stage": "completion_gate",
+        "label": "汇总收据并生成代码化复盘",
+        "attempts": 1,
+        "elapsedMs": 3,
+        "status": "completed",
+        "pitfalls": []
+      }
+    ],
+    "pitfalls": [
+      "Command failed: /Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/workflow_bridge_windows.py --workflow-id negative-reviews --group 上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰 --payload-type file --authorization zhensi-negative-review-main-wechat-shanghai-zhensi-operations-ding-fandang-v1-user-20260918 --ledger /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/negative-review-send-shanghai-zhensi-operations-ding-fandang-v1.desktop-attempts --marker-name negative-review-2026-09-29.json --output-dir /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/daily-negative-reviews/20260929/wechat-send --item /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/outputs/yesterday-negative-20260929/差评分析数据_2026-09-29_2026-09-29.xlsx --deadline-unix 1790751007 --execute\n",
+      "Command failed: /Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/workflow_bridge_windows.py --workflow-id negative-reviews --group 上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰 --payload-type file --authorization zhensi-negative-review-main-wechat-shanghai-zhensi-operations-ding-fandang-v1-user-20260918 --ledger /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/negative-review-send-shanghai-zhensi-operations-ding-fandang-v1.desktop-attempts --marker-name negative-review-2026-09-29.json --output-dir /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/daily-negative-reviews/20260929/wechat-send --item /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/outputs/yesterday-negative-20260929/差评分析数据_2026-09-29_2026-09-29.xlsx --deadline-unix 1790751647 --execute\n",
+      "wechat-proof-invalid"
+    ]
+  },
+  "data": {
+    "sourceRecords": 141,
+    "records": 137,
+    "platforms": {
+      "美团外卖": 57,
+      "淘宝闪购": 75,
+      "京东外卖": 5
+    },
+    "scores": {
+      "1": 71,
+      "2": 24,
+      "3": 42
+    },
+    "scoresAbove3": 0,
+    "excludedAboveThree": 4,
+    "blankBefore": 12,
+    "supplementedFromUi": 12,
+    "blankAfter": 0,
+    "stores": 114
+  },
+  "businessWarnings": [],
+  "report": {
+    "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/outputs/yesterday-negative-20260929/差评分析数据_2026-09-29_2026-09-29.xlsx",
+    "name": "差评分析数据_2026-09-29_2026-09-29.xlsx",
+    "size": 19322,
+    "sha256": "5f210f4ee6120ef6423f7cb1dfa44d3b1c57848442b6e0bb39348e8c04913a45",
+    "rows": 137
+  },
+  "send": {
+    "verified": true,
+    "sendAttempts": 1,
+    "newSendAttempts": 1,
+    "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "verificationLevel": "windows-readback-file-card"
+  }
+}

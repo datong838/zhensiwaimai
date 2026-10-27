@@ -1,0 +1,43 @@
+{
+  "ok": false,
+  "runId": "jinsha-exam11-20260905",
+  "startedAt": 1788584559980,
+  "deadline": 1788584739980,
+  "stage": "build",
+  "stageMs": {
+    "desktop": 1000,
+    "handoff": 491191,
+    "downloads": 492209
+  },
+  "nodes": [
+    {
+      "name": "build",
+      "startedAt": 1788585052189,
+      "finishedAt": 1788585059481,
+      "elapsedMs": 7292,
+      "ok": false,
+      "llmIntervention": false
+    }
+  ],
+  "desktop": {
+    "ok": true,
+    "executor": "jinsha-cua-manual",
+    "businessDate": "2026-09-04",
+    "startedAt": 1788584559980,
+    "deadline": 1788584739980,
+    "clicks": {
+      "meituan": 1,
+      "taobao": 1
+    },
+    "stage": "complete",
+    "nodes": [],
+    "elapsedMs": 1000,
+    "efficiencyExceeded": false
+  },
+  "efficiencyExceeded": true,
+  "reason": "saved-values-mismatch",
+  "elapsedMs": 499501,
+  "businessCompleted": false,
+  "efficiencyPassed": false,
+  "efficiencyStatus": "效率未达标"
+}

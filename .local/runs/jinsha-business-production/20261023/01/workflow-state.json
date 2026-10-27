@@ -1,0 +1,128 @@
+{
+ "schemaVersion": 1,
+ "policyVersion": "jinsha-business-code-enforced-v1",
+ "runId": "jinsha-business-production-20261023-01",
+ "businessDate": "2026-10-22",
+ "phase": "prepared",
+ "status": "complete",
+ "nextAction": null,
+ "runtimeModelDecisions": 0,
+ "attempts": {
+  "download": 1,
+  "send": 1,
+  "verify": 4
+ },
+ "events": [
+  {
+   "at": 1792725615039,
+   "type": "executor-start",
+   "phase": "created"
+  },
+  {
+   "at": 1792725615039,
+   "type": "attempt",
+   "stage": "download",
+   "number": 1
+  },
+  {
+   "at": 1792725632203,
+   "type": "decision",
+   "stage": "download",
+   "decision": "downloaded"
+  },
+  {
+   "at": 1792725632204,
+   "type": "transition",
+   "from": "created",
+   "to": "downloaded",
+   "evidence": {
+    "receipt": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/jinsha-business-production/20261023/01/download-ui.json"
+   }
+  },
+  {
+   "at": 1792725632205,
+   "type": "attempt",
+   "stage": "prepare",
+   "number": 1
+  },
+  {
+   "at": 1792725659182,
+   "type": "transition",
+   "from": "downloaded",
+   "to": "prepared",
+   "evidence": {
+    "receipt": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/jinsha-business-production/20261023/01/send-preflight.json"
+   }
+  },
+  {
+   "at": 1792725659183,
+   "type": "decision",
+   "stage": "send",
+   "decision": "retry-send",
+   "marker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/jinsha-report-send-shanghai-zhensi-operations-ding-fandang-reauthorized-20260917-v2.desktop-attempts/d073ee8f0abee760f01beea88896502b0cde0dbd92727af4dd900629f608dce8.json"
+  },
+  {
+   "at": 1792725659184,
+   "type": "attempt",
+   "stage": "send",
+   "number": 1
+  },
+  {
+   "at": 1792725768959,
+   "type": "attempt",
+   "stage": "verify-only",
+   "number": 1
+  },
+  {
+   "at": 1792725774586,
+   "type": "attempt",
+   "stage": "verify-only",
+   "number": 2
+  },
+  {
+   "at": 1792725780260,
+   "type": "attempt",
+   "stage": "verify-only",
+   "number": 3
+  },
+  {
+   "at": 1792725785953,
+   "type": "attempt",
+   "stage": "verify-only",
+   "number": 4
+  },
+  {
+   "at": 1792725788678,
+   "type": "blocked",
+   "phase": "prepared",
+   "reason": "desktop-send-outcome-unknown"
+  },
+  {
+   "at": 1792727656103,
+   "type": "manual-repair-conclusion",
+   "note": "淘宝日报补发 verified，手工收口；机制零改动（原整批标记保持 unknown 存档）"
+  }
+ ],
+ "config": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/jinsha-business-production/20261023/01/config.json",
+ "createdAt": 1792725615034,
+ "updatedAt": 1792725788678,
+ "manualHandoff": {
+  "reason": "群名当日被改（发财精英荟去emoji）→ 标题证明失败 → 整批 unknown 停在美团之后，淘宝未尝试",
+  "resolution": "大同 11:41 授权按异常处理定点补发；11:45 群名改回原样；11:49 经注册修复通道 jinsha-reports-taobao-repair-20261023 单发淘宝日报",
+  "meituanFile": {
+   "evidence": "11:22 transport.data.sent=true + 大同目视确认到群",
+   "duplicate": false
+  },
+  "taobaoRepairReceipt": {
+   "channel": "workflow_bridge_windows.py / jinsha-reports-taobao-repair-20261023",
+   "file": "淘宝闪购日报_2026-10-22.xlsx",
+   "sha256": "4b534b6a244e1a723de1db07c1901b3b0c8dfe6f68f42f392a5af21c2c48c2ac",
+   "verified": true,
+   "verificationLevel": "windows-readback-file-card",
+   "sendAttempts": 1,
+   "receiptCopy": "/tmp/taobao_repair_receipt.json"
+  },
+  "authorizedBy": "大同 2026-10-23 11:41（收件箱登记）",
+  "concludedAt": "2026-10-23T11:54:16"
+ }
+}

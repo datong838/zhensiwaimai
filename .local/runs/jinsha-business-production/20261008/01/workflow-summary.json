@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "jinsha-business-code-enforced-v1",
+  "runId": "jinsha-business-production-20261008-01",
+  "businessDate": "2026-10-07",
+  "status": "blocked-unknown-send",
+  "phase": "prepared",
+  "nextAction": null,
+  "totalElapsedMs": 248549,
+  "nodes": [
+    {
+      "name": "download",
+      "attempts": 1,
+      "startedAt": 1791429468951,
+      "finishedAt": 1791429489177,
+      "elapsedMs": 20226,
+      "complete": true
+    },
+    {
+      "name": "prepare",
+      "attempts": 1,
+      "startedAt": 1791429489178,
+      "finishedAt": 1791429534996,
+      "elapsedMs": 45818,
+      "complete": true
+    },
+    {
+      "name": "send",
+      "attempts": 1,
+      "startedAt": 1791429534998,
+      "finishedAt": 1791429717494,
+      "elapsedMs": 182496,
+      "complete": false
+    },
+    {
+      "name": "verify",
+      "attempts": 4,
+      "startedAt": 1791429703141,
+      "finishedAt": 1791429717494,
+      "elapsedMs": 14353,
+      "complete": false
+    }
+  ],
+  "pitfalls": [
+    {
+      "at": 1791429717494,
+      "stage": "prepared",
+      "type": "blocked",
+      "detail": "desktop-send-outcome-unknown"
+    },
+    {
+      "at": 1791429717494,
+      "stage": "workflow",
+      "type": "efficiency-budget-exceeded",
+      "detail": "248549>180000"
+    }
+  ],
+  "codeEnforced": true,
+  "reviewItems": [
+    {
+      "name": "download",
+      "attempts": 1,
+      "startedAt": 1791429468951,
+      "finishedAt": 1791429489177,
+      "elapsedMs": 20226,
+      "complete": true,
+      "pitfalls": []
+    },
+    {
+      "name": "prepare",
+      "attempts": 1,
+      "startedAt": 1791429489178,
+      "finishedAt": 1791429534996,
+      "elapsedMs": 45818,
+      "complete": true,
+      "pitfalls": []
+    },
+    {
+      "name": "send",
+      "attempts": 1,
+      "startedAt": 1791429534998,
+      "finishedAt": 1791429717494,
+      "elapsedMs": 182496,
+      "complete": false,
+      "pitfalls": [
+        {
+          "at": 1791429717494,
+          "stage": "prepared",
+          "type": "blocked",
+          "detail": "desktop-send-outcome-unknown"
+        }
+      ]
+    },
+    {
+      "name": "verify",
+      "attempts": 4,
+      "startedAt": 1791429703141,
+      "finishedAt": 1791429717494,
+      "elapsedMs": 14353,
+      "complete": false,
+      "pitfalls": []
+    }
+  ],
+  "runtimeModelDecisions": 0,
+  "generatedAt": 1791429717494
+}

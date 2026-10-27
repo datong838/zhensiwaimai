@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "jinsha-business-code-enforced-v1",
+  "runId": "jinsha-business-production-20261020-02",
+  "businessDate": "2026-10-19",
+  "phase": "prepared",
+  "status": "blocked-unknown-send",
+  "nextAction": null,
+  "runtimeModelDecisions": 0,
+  "attempts": {
+    "download": 1,
+    "send": 1,
+    "verify": 4
+  },
+  "events": [
+    {
+      "at": 1792465761797,
+      "type": "executor-start",
+      "phase": "created"
+    },
+    {
+      "at": 1792465761802,
+      "type": "attempt",
+      "stage": "download",
+      "number": 1
+    },
+    {
+      "at": 1792465779082,
+      "type": "decision",
+      "stage": "download",
+      "decision": "downloaded"
+    },
+    {
+      "at": 1792465779089,
+      "type": "transition",
+      "from": "created",
+      "to": "downloaded",
+      "evidence": {
+        "receipt": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/jinsha-business-production/20261020/02/download-ui.json"
+      }
+    },
+    {
+      "at": 1792465779093,
+      "type": "attempt",
+      "stage": "prepare",
+      "number": 1
+    },
+    {
+      "at": 1792465803410,
+      "type": "transition",
+      "from": "downloaded",
+      "to": "prepared",
+      "evidence": {
+        "receipt": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/jinsha-business-production/20261020/02/send-preflight.json"
+      }
+    },
+    {
+      "at": 1792465803416,
+      "type": "decision",
+      "stage": "send",
+      "decision": "retry-send",
+      "marker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/jinsha-report-send-shanghai-zhensi-operations-ding-fandang-reauthorized-20260917-v2.desktop-attempts/645e1711f22ebd3b065ad9dfdb351c0d761ee6b7c9647b432968419df060435a.json"
+    },
+    {
+      "at": 1792465803419,
+      "type": "attempt",
+      "stage": "send",
+      "number": 1
+    },
+    {
+      "at": 1792465944178,
+      "type": "attempt",
+      "stage": "verify-only",
+      "number": 1
+    },
+    {
+      "at": 1792465948182,
+      "type": "attempt",
+      "stage": "verify-only",
+      "number": 2
+    },
+    {
+      "at": 1792465952109,
+      "type": "attempt",
+      "stage": "verify-only",
+      "number": 3
+    },
+    {
+      "at": 1792465956018,
+      "type": "attempt",
+      "stage": "verify-only",
+      "number": 4
+    },
+    {
+      "at": 1792465956937,
+      "type": "blocked",
+      "phase": "prepared",
+      "reason": "desktop-send-outcome-unknown"
+    }
+  ],
+  "config": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/jinsha-business-production/20261020/02/config.json",
+  "createdAt": 1792465761761,
+  "updatedAt": 1792465956937
+}

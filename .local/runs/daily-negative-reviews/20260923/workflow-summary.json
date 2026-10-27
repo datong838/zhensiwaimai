@@ -1,0 +1,157 @@
+{
+  "ok": true,
+  "policyVersion": "daily-negative-reviews-code-enforced-v1",
+  "businessDate": "2026-09-23",
+  "phase": "complete",
+  "status": "complete",
+  "runtimeModelDecisions": 0,
+  "completionReview": {
+    "codeEnforced": true,
+    "totalElapsedMs": 120593,
+    "reviewItems": [
+      {
+        "item": 1,
+        "stage": "browser_validate",
+        "label": "连接并唯一定位金鲨页面",
+        "attempts": 1,
+        "elapsedMs": 9850,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 2,
+        "stage": "route_and_date",
+        "label": "核验淘宝外卖入口并设置昨日日期",
+        "attempts": 1,
+        "elapsedMs": 1340,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 3,
+        "stage": "download",
+        "label": "下载全部平台差评",
+        "attempts": 1,
+        "elapsedMs": 5197,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 4,
+        "stage": "browser_collect",
+        "label": "金鲨采集",
+        "attempts": 1,
+        "elapsedMs": 24429,
+        "status": "failed",
+        "pitfalls": [
+          "visible-pagination-drift:92:200:1:92"
+        ]
+      },
+      {
+        "item": 5,
+        "stage": "extract_platforms",
+        "label": "读取三平台页面列表",
+        "attempts": 1,
+        "elapsedMs": 7840,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 6,
+        "stage": "reconcile",
+        "label": "下载与页面逐条对账",
+        "attempts": 2,
+        "elapsedMs": 393,
+        "status": "completed",
+        "pitfalls": [
+          "Command failed: /Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 /Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-negative-reviews/scripts/reconcile.py /Users/ddt/work/projects/ai_agent/.local/runs/daily-negative-reviews/20260923/config.json\nTraceback (most recent call last):\n  File \"/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-negative-reviews/scripts/reconcile.py\", line 58, in <module>\n    if __name__=='__main__': main()\n                             ^^^^^^\n  File \"/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-negative-reviews/scripts/reconcile.py\", line 56, in main\n    config=json.loads(Path(sys.argv[1]).read_text());print(json.dumps(reconcile(config),ensure_ascii=False))\n                                                                      ^^^^^^^^^^^^^^^^^\n  File \"/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-negative-reviews/scripts/reconcile.py\", line 30, in reconcile\n    if len(raw)!=len(ui['rows']) or len(raw)!=sum(ui['counts'].values()): raise ValueError('record-count-mismatch')\n                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: record-count-mismatch\n"
+        ]
+      },
+      {
+        "item": 7,
+        "stage": "browser_refresh",
+        "label": "复用已下载文件并刷新三平台页面列表",
+        "attempts": 1,
+        "elapsedMs": 15957,
+        "status": "completed",
+        "pitfalls": [
+          "首份下载后源数据变动，已归档首份文件并受控替换下载一次"
+        ]
+      },
+      {
+        "item": 8,
+        "stage": "build_report",
+        "label": "生成并验收固定格式Excel",
+        "attempts": 1,
+        "elapsedMs": 982,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 9,
+        "stage": "wechat_send",
+        "label": "唯一群定位、单次发送与双帧校验",
+        "attempts": 3,
+        "elapsedMs": 54604,
+        "status": "completed",
+        "pitfalls": [
+          "desktop-wechat-preflight-failed",
+          "desktop-wechat-preflight-failed"
+        ]
+      },
+      {
+        "item": 10,
+        "stage": "completion_gate",
+        "label": "汇总收据并生成代码化复盘",
+        "attempts": 1,
+        "elapsedMs": 1,
+        "status": "completed",
+        "pitfalls": []
+      }
+    ],
+    "pitfalls": [
+      "visible-pagination-drift:92:200:1:92",
+      "Command failed: /Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 /Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-negative-reviews/scripts/reconcile.py /Users/ddt/work/projects/ai_agent/.local/runs/daily-negative-reviews/20260923/config.json\nTraceback (most recent call last):\n  File \"/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-negative-reviews/scripts/reconcile.py\", line 58, in <module>\n    if __name__=='__main__': main()\n                             ^^^^^^\n  File \"/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-negative-reviews/scripts/reconcile.py\", line 56, in main\n    config=json.loads(Path(sys.argv[1]).read_text());print(json.dumps(reconcile(config),ensure_ascii=False))\n                                                                      ^^^^^^^^^^^^^^^^^\n  File \"/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-negative-reviews/scripts/reconcile.py\", line 30, in reconcile\n    if len(raw)!=len(ui['rows']) or len(raw)!=sum(ui['counts'].values()): raise ValueError('record-count-mismatch')\n                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: record-count-mismatch\n",
+      "首份下载后源数据变动，已归档首份文件并受控替换下载一次",
+      "desktop-wechat-preflight-failed",
+      "desktop-wechat-preflight-failed"
+    ]
+  },
+  "data": {
+    "sourceRecords": 159,
+    "records": 155,
+    "platforms": {
+      "美团外卖": 58,
+      "淘宝闪购": 93,
+      "京东外卖": 4
+    },
+    "scores": {
+      "1": 97,
+      "2": 16,
+      "3": 42
+    },
+    "scoresAbove3": 0,
+    "excludedAboveThree": 4,
+    "blankBefore": 15,
+    "supplementedFromUi": 14,
+    "blankAfter": 1,
+    "stores": 131
+  },
+  "businessWarnings": [
+    "您的美团平台当前有29家店铺授权失败 请及时查看"
+  ],
+  "report": {
+    "path": "/Users/ddt/work/projects/ai_agent/outputs/yesterday-negative-20260923/差评分析数据_2026-09-23_2026-09-23.xlsx",
+    "name": "差评分析数据_2026-09-23_2026-09-23.xlsx",
+    "size": 20430,
+    "sha256": "47a55acf75755ad56c79a226251d0d5f5151d63f8bf040ccfb26e1708febe05c",
+    "rows": 155
+  },
+  "send": {
+    "verified": true,
+    "sendAttempts": 1,
+    "newSendAttempts": 1,
+    "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "verificationLevel": "file-name-size-ui"
+  }
+}

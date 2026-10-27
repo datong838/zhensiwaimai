@@ -1,0 +1,107 @@
+{
+  "ok": true,
+  "executor": "wechat-desktop-sender",
+  "channel": "desktop",
+  "groupName": "FEIBING NEO AI数字员工",
+  "payloadType": "file",
+  "sendAttempts": 1,
+  "runtimeModelDecisions": 0,
+  "stage": "completed",
+  "stageMs": {
+    "locate_group": 341,
+    "verify_target_and_input": 6442,
+    "prepare_payload": 2006,
+    "claim_and_send": 3390,
+    "post_send_verify": 14195
+  },
+  "payloadIdentity": "d0bc16953c66cd8662aebcfec434282761046039b649bf16627c30be7a968e6d",
+  "payloads": [
+    {
+      "path": "/Users/ddt/work/臻肆/报表/2026-09-15-业务发布-production03/美团外卖日报_2026-09-15.xlsx",
+      "name": "美团外卖日报_2026-09-15.xlsx",
+      "size": 118728,
+      "sha256": "88e653f6824abaeae8303a78cbc0558f57568916747eadb36ccec30cdfe2d8fa"
+    },
+    {
+      "path": "/Users/ddt/work/臻肆/报表/2026-09-15-业务发布-production03/淘宝闪购日报_2026-09-15.xlsx",
+      "name": "淘宝闪购日报_2026-09-15.xlsx",
+      "size": 111935,
+      "sha256": "f5720e8f2c3feed0a429f1aa8c446b946da08db19c1f4fd04631ff7f38f34ecf"
+    }
+  ],
+  "groupPreflight": {
+    "ok": true,
+    "action": "open-group",
+    "group": "FEIBING NEO AI数字员工",
+    "header": "FEIBING NEO AI数字员工",
+    "note": "ax-current-header",
+    "reason": null,
+    "sendAttempts": 0,
+    "runtimeModelDecisions": 0,
+    "stageMs": {
+      "exact_group_preflight": 341
+    },
+    "artifacts": [],
+    "hardGate": false
+  },
+  "preparedInputChangedPixels": 101136,
+  "preparedInputChangedRatio": 0.273802,
+  "preparedFileObjectCount": 2,
+  "preparedFilePrefixesVerified": true,
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/state/jinsha-report-send-feibing-neo-ai.desktop-attempts/9025e71c806bb196072bb8e9aed90e828f7711c859afd9464493f062966c78c3.json",
+  "postSendInputCleared": [
+    true,
+    true
+  ],
+  "verified": true,
+  "state": "verified",
+  "elapsedMs": 27095,
+  "sendReview": [
+    {
+      "item": 1,
+      "stage": "locate_group",
+      "label": "精确定位目标群",
+      "elapsedMs": 341,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 2,
+      "stage": "verify_target_and_input",
+      "label": "复核目标群与输入框",
+      "elapsedMs": 6442,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 3,
+      "stage": "prepare_payload",
+      "label": "准备并复核发送载荷",
+      "elapsedMs": 2006,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 4,
+      "stage": "claim_and_send",
+      "label": "领取防重账本并单次发送",
+      "elapsedMs": 3390,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 5,
+      "stage": "post_send_verify",
+      "label": "发送后双帧复核",
+      "elapsedMs": 14195,
+      "status": "completed",
+      "pitfalls": []
+    }
+  ],
+  "reviewSummary": {
+    "totalElapsedMs": 27095,
+    "itemCount": 5,
+    "pitfallCount": 0,
+    "result": "success"
+  }
+}

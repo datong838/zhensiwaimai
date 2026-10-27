@@ -1,0 +1,157 @@
+{
+  "ok": true,
+  "runId": "jinsha-exam14-20260905",
+  "startedAt": 1788609259961,
+  "deadline": 1788609439961,
+  "stage": "complete",
+  "stageMs": {
+    "desktop": 17576,
+    "handoff": 107,
+    "downloads": 17700,
+    "build": 7332,
+    "phone": 52584
+  },
+  "nodes": [
+    {
+      "name": "build",
+      "startedAt": 1788609277661,
+      "finishedAt": 1788609284992,
+      "elapsedMs": 7331,
+      "ok": true,
+      "llmIntervention": false
+    },
+    {
+      "name": "phone",
+      "startedAt": 1788609284993,
+      "finishedAt": 1788609337577,
+      "elapsedMs": 52584,
+      "ok": true,
+      "llmIntervention": false
+    }
+  ],
+  "desktop": {
+    "ok": true,
+    "runId": "jinsha-exam14-20260905",
+    "startedAt": 1788609259961,
+    "deadline": 1788609439961,
+    "clicks": {
+      "meituan": 1,
+      "taobao": 1
+    },
+    "files": {
+      "meituan": {
+        "name": "美团原始0904考核14.xlsx",
+        "downloadStartedAt": 1788609267604,
+        "savedAt": 1788609270444
+      },
+      "taobao": {
+        "name": "淘宝原始0904考核14.xlsx",
+        "downloadStartedAt": 1788609274942,
+        "savedAt": 1788609277536
+      }
+    },
+    "stage": "complete",
+    "nodes": [
+      {
+        "name": "meituan.platform",
+        "elapsedMs": 1466
+      },
+      {
+        "name": "meituan.date",
+        "elapsedMs": 1540
+      },
+      {
+        "name": "meituan.plan",
+        "elapsedMs": 1005
+      },
+      {
+        "name": "meituan.metrics",
+        "elapsedMs": 0
+      },
+      {
+        "name": "meituan.download-save",
+        "elapsedMs": 2840
+      },
+      {
+        "name": "taobao.platform",
+        "elapsedMs": 1461
+      },
+      {
+        "name": "taobao.date",
+        "elapsedMs": 1094
+      },
+      {
+        "name": "taobao.plan",
+        "elapsedMs": 971
+      },
+      {
+        "name": "taobao.metrics",
+        "elapsedMs": 972
+      },
+      {
+        "name": "taobao.download-save",
+        "elapsedMs": 2594
+      }
+    ],
+    "lease": {
+      "path": "/tmp/zhensi-jinsha-cua-exam.lock",
+      "acquiredAt": 1788609259961,
+      "released": true,
+      "releasedAt": 1788609277537
+    },
+    "efficiencyExceeded": false,
+    "jinshaResourceReleased": true,
+    "jinshaReleasedAt": 1788609277536,
+    "receiptIssuedAt": 1788609277536,
+    "elapsedMs": 17576
+  },
+  "jinshaResourceReleased": true,
+  "jinshaReleasedAt": 1788609277536,
+  "efficiencyExceeded": false,
+  "sent": [
+    {
+      "name": "美团0904测试14.xlsx",
+      "sha256": "bb42b22386be25ed7ee95d1bd382c01b0ab67de09a2fb569092e802165da65b2",
+      "verification": {
+        "name": "美团0904测试14.xlsx",
+        "size": 122277,
+        "state": "confirmed",
+        "selectionScreenshot": "/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/zhensi-jinsha-wechat-r64jbrg5/selected-file-meituan-stable.png",
+        "attemptedAt": 1788609306.5174139,
+        "filePickerSendClicks": 1,
+        "confirmSendClicks": 0,
+        "confirmedAt": 1788609312.635796,
+        "bubbleScreenshot": "/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/zhensi-jinsha-wechat-r64jbrg5/sent-meituan-stable.png",
+        "fullNameVerified": true,
+        "groupTitleVerified": true,
+        "sizeVerified": true,
+        "uploadPendingFrames": 1
+      },
+      "reused": false
+    },
+    {
+      "name": "淘宝0904测试14.xlsx",
+      "sha256": "164fa1912256d1098a7464f22f1356c98bcac3bc3238badd97bc9fce8dbdd693",
+      "verification": {
+        "name": "淘宝0904测试14.xlsx",
+        "size": 123404,
+        "state": "confirmed",
+        "selectionScreenshot": "/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/zhensi-jinsha-wechat-r64jbrg5/selected-file-taobao-stable.png",
+        "attemptedAt": 1788609334.189049,
+        "filePickerSendClicks": 1,
+        "confirmSendClicks": 0,
+        "confirmedAt": 1788609337.544759,
+        "bubbleScreenshot": "/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/zhensi-jinsha-wechat-r64jbrg5/sent-taobao-stable.png",
+        "fullNameVerified": true,
+        "groupTitleVerified": true,
+        "sizeVerified": true,
+        "uploadPendingFrames": 1
+      },
+      "reused": false
+    }
+  ],
+  "elapsedMs": 77617,
+  "businessCompleted": true,
+  "efficiencyPassed": true,
+  "efficiencyStatus": "效率达标"
+}

@@ -1,0 +1,82 @@
+{
+  "policyVersion": "daily-negative-reviews-code-enforced-v1",
+  "businessDate": "2026-10-01",
+  "phase": "complete",
+  "status": "complete",
+  "startedAt": 1790911583243,
+  "updatedAt": 1790911831961,
+  "reviewItems": [
+    {
+      "stage": "browser_validate",
+      "label": "连接并唯一定位金鲨页面",
+      "attempts": 1,
+      "elapsedMs": 13517,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "route_and_date",
+      "label": "核验淘宝外卖入口并设置昨日日期",
+      "attempts": 1,
+      "elapsedMs": 1315,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "download",
+      "label": "下载全部平台差评",
+      "attempts": 1,
+      "elapsedMs": 2975,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "extract_platforms",
+      "label": "读取三平台页面列表",
+      "attempts": 1,
+      "elapsedMs": 7338,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "reconcile",
+      "label": "下载与页面逐条对账",
+      "attempts": 1,
+      "elapsedMs": 621,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "build_report",
+      "label": "生成并验收固定格式Excel",
+      "attempts": 1,
+      "elapsedMs": 1142,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 30860,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "completion_gate",
+      "label": "汇总收据并生成代码化复盘",
+      "attempts": 1,
+      "elapsedMs": 1,
+      "status": "completed",
+      "pitfalls": []
+    }
+  ],
+  "runtimeModelDecisions": 0,
+  "lastRecovery": {
+    "allowed": true,
+    "stage": "wechat_send",
+    "priorFailures": 0,
+    "nextAttempt": 1
+  },
+  "completedAt": 1790911831961
+}

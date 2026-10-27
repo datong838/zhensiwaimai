@@ -1,0 +1,112 @@
+{
+  "policyVersion": "daily-negative-reviews-code-enforced-v1",
+  "businessDate": "2026-10-02",
+  "phase": "complete",
+  "status": "complete",
+  "startedAt": 1790990966482,
+  "updatedAt": 1790998966136,
+  "reviewItems": [
+    {
+      "stage": "browser_validate",
+      "label": "连接并唯一定位金鲨页面",
+      "attempts": 1,
+      "elapsedMs": 3086,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "route_and_date",
+      "label": "核验淘宝外卖入口并设置昨日日期",
+      "attempts": 1,
+      "elapsedMs": 3002,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "download",
+      "label": "下载全部平台差评",
+      "attempts": 1,
+      "elapsedMs": 3125,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "extract_platforms",
+      "label": "读取三平台页面列表",
+      "attempts": 1,
+      "elapsedMs": 8230,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "reconcile",
+      "label": "下载与页面逐条对账",
+      "attempts": 1,
+      "elapsedMs": 2599,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "build_report",
+      "label": "生成并验收固定格式Excel",
+      "attempts": 1,
+      "elapsedMs": 893,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 56,
+      "status": "failed",
+      "pitfalls": [
+        "Command failed: /Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/workflow_bridge_windows.py --workflow-id negative-reviews --group 上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰 --payload-type file --authorization zhensi-negative-review-main-wechat-shanghai-zhensi-operations-ding-fandang-v1-user-20260918 --ledger /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/negative-review-send-shanghai-zhensi-operations-ding-fandang-v1.desktop-attempts --marker-name negative-review-2026-10-02.json --output-dir /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/daily-negative-reviews/20261002/wechat-send --item /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/outputs/yesterday-negative-20261002/差评分析数据_2026-10-02_2026-10-02.xlsx --deadline-unix 1790991167 --execute\n"
+      ]
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 37,
+      "status": "failed",
+      "pitfalls": [
+        "Command failed: /Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/workflow_bridge_windows.py --workflow-id negative-reviews --group 上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰 --payload-type file --authorization zhensi-negative-review-main-wechat-shanghai-zhensi-operations-ding-fandang-v1-user-20260918 --ledger /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/negative-review-send-shanghai-zhensi-operations-ding-fandang-v1.desktop-attempts --marker-name negative-review-2026-10-02.json --output-dir /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/daily-negative-reviews/20261002/wechat-send --item /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/outputs/yesterday-negative-20261002/差评分析数据_2026-10-02_2026-10-02.xlsx --deadline-unix 1790993790 --execute\n"
+      ]
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 41,
+      "status": "failed",
+      "pitfalls": [
+        "Command failed: /Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/workflow_bridge_windows.py --workflow-id negative-reviews --group 上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰 --payload-type file --authorization zhensi-negative-review-main-wechat-shanghai-zhensi-operations-ding-fandang-v1-user-20260918 --ledger /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/negative-review-send-shanghai-zhensi-operations-ding-fandang-v1.desktop-attempts --marker-name negative-review-2026-10-02.json --output-dir /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/daily-negative-reviews/20261002/wechat-send --item /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/outputs/yesterday-negative-20261002/差评分析数据_2026-10-02_2026-10-02.xlsx --deadline-unix 1790996448 --execute\n"
+      ]
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 31252,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "completion_gate",
+      "label": "汇总收据并生成代码化复盘",
+      "attempts": 1,
+      "elapsedMs": 2,
+      "status": "completed",
+      "pitfalls": []
+    }
+  ],
+  "runtimeModelDecisions": 0,
+  "lastRecovery": {
+    "allowed": true,
+    "stage": "wechat_send",
+    "priorFailures": 3,
+    "nextAttempt": 4
+  },
+  "completedAt": 1790998966136
+}

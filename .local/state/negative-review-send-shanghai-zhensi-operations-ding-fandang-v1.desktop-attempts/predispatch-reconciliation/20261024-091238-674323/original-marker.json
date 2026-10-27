@@ -1,0 +1,162 @@
+{
+  "bridgeVersion": 1,
+  "ok": false,
+  "verified": false,
+  "payloadType": "file",
+  "state": "blocked",
+  "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+  "payloads": [
+    {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/outputs/yesterday-negative-20261023/差评分析数据_2026-10-23_2026-10-23.xlsx",
+      "name": "差评分析数据_2026-10-23_2026-10-23.xlsx",
+      "size": 18940,
+      "sha256": "2c5a83291f5de3d5656186d34463b8b74e53369d2dff9180bbd536a23f7a496c"
+    }
+  ],
+  "sendAttempts": 0,
+  "newSendAttempts": 0,
+  "reason": "wecom-send-failed:send-fail",
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": false,
+    "status": "blocked",
+    "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "channel": "desktop",
+    "requestDigest": "03d27ad34843ed4030bfe10628db796fc88a1ce50ef5006b8486b49b0004cb70",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "2c5a83291f5de3d5656186d34463b8b74e53369d2dff9180bbd536a23f7a496c",
+        "type": "file",
+        "status": "blocked",
+        "claimedAt": 1792804152.353228,
+        "sendAttempts": 0,
+        "reason": "wecom-send-failed:send-fail",
+        "transport": {
+          "kind": "file",
+          "sendAttempts": 0,
+          "sent": false,
+          "receipt": {
+            "result": "send-fail",
+            "steps": [
+              {
+                "navigate": "chat-title-verified:'上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰'"
+              },
+              {
+                "title_gate": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰"
+              },
+              {
+                "paste": true,
+                "try": 1
+              },
+              {
+                "title_gate_final": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰"
+              },
+              {
+                "send_attempts": [
+                  {
+                    "try": "enter",
+                    "input_clean": false
+                  },
+                  {
+                    "try": "ctrl-enter",
+                    "input_clean": false
+                  },
+                  {
+                    "try": "esc-enter",
+                    "input_clean": false
+                  }
+                ],
+                "sent": false
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 1
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 15773
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 24443
+      }
+    ],
+    "reason": "wecom-send-failed:send-fail",
+    "elapsedMs": 40310,
+    "eventKey": "940e91bbb022b3ac491561f46f5d0cb908897975e97fb1cae953fff4e90e6e3b",
+    "reviewSummary": {
+      "totalElapsedMs": 40310,
+      "result": "blocked",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/negative-review-send-shanghai-zhensi-operations-ding-fandang-v1.desktop-attempts/negative-review-2026-10-23.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 1,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 15773,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "failed",
+      "pitfalls": [
+        {
+          "code": "messaging-stage",
+          "reason": "wecom-send-failed:send-fail"
+        }
+      ],
+      "elapsedMs": 24443,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 40310,
+  "reviewSummary": {
+    "totalElapsedMs": 40310,
+    "itemCount": 4,
+    "pitfallCount": 1,
+    "result": "failed"
+  }
+}

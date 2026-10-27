@@ -1,0 +1,152 @@
+{
+  "bridgeVersion": 1,
+  "ok": false,
+  "verified": false,
+  "payloadType": "image",
+  "state": "unknown",
+  "groupName": "FEIBING NEO AI数字员工",
+  "payloads": [
+    {
+      "path": "/private/tmp/zhensi_daily_download/background-browser/2026-10-02-63f23237-d98c-4c85-933e-9c08ebf5b4af/jinsha-store-final.png",
+      "name": "jinsha-store-final.png",
+      "size": 329209,
+      "sha256": "eaae0434261b25e56c9d28196a7d5be562f3c8514168e8fde5f7edca86b1e3b5"
+    },
+    {
+      "path": "/private/tmp/zhensi_daily_download/background-browser/2026-10-02-63f23237-d98c-4c85-933e-9c08ebf5b4af/jinsha-review-final.png",
+      "name": "jinsha-review-final.png",
+      "size": 330791,
+      "sha256": "330cb0ad2948e01ac2379addd9fcad32aebe37dd14ca2fe94ce446a7035d8713"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": "windows-transport-anomaly:deadline-expired",
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": false,
+    "status": "unknown",
+    "groupName": "FEIBING NEO AI数字员工",
+    "channel": "desktop",
+    "requestDigest": "f126c2ede2373648011b115a14f92a4ab0483fc3ff129d417bc15d51481f0e6b",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "eaae0434261b25e56c9d28196a7d5be562f3c8514168e8fde5f7edca86b1e3b5",
+        "type": "image",
+        "status": "unknown",
+        "claimedAt": 1791006671.7296379,
+        "sendAttempts": 1,
+        "reason": "windows-transport-anomaly:deadline-expired",
+        "transport": {
+          "ok": false,
+          "error": "deadline-expired",
+          "error_kind": "connection",
+          "local_network_blocked": false,
+          "sendAttempts": 1
+        },
+        "attemptErrors": [
+          "deadline-expired"
+        ]
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 1
+      },
+      {
+        "stage": "freeze:1",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 1
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 619
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 179338
+      }
+    ],
+    "reason": "windows-transport-anomaly:deadline-expired",
+    "elapsedMs": 179963,
+    "eventKey": "501bb1fc1d2859511bd035c4ee4f1a48d48cdb68842f4737b2cc17b8ffdec35a",
+    "reviewSummary": {
+      "totalElapsedMs": 179963,
+      "result": "unknown",
+      "stageCount": 5,
+      "completedStages": 5,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/taobao-jinsha-wechat-evidence-attempts/92709dd292addaac27c471b512c4645eaf1e0dc4d6aacb72900a7eaa2ccb4a35.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 1,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "freeze:1",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 1,
+      "item": 3,
+      "label": "freeze:1"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 619,
+      "item": 4,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "failed",
+      "pitfalls": [
+        {
+          "code": "messaging-stage",
+          "reason": "windows-transport-anomaly:deadline-expired"
+        }
+      ],
+      "elapsedMs": 179338,
+      "item": 5,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 179963,
+  "reviewSummary": {
+    "totalElapsedMs": 179963,
+    "itemCount": 5,
+    "pitfallCount": 1,
+    "result": "failed"
+  }
+}

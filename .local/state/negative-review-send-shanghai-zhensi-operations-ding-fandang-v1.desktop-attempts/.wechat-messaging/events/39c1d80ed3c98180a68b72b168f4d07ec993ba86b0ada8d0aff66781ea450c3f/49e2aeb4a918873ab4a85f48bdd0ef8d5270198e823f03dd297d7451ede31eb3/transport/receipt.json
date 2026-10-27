@@ -1,0 +1,98 @@
+{
+  "ok": true,
+  "executor": "wechat-desktop-sender",
+  "channel": "desktop",
+  "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+  "payloadType": "file",
+  "sendAttempts": 1,
+  "runtimeModelDecisions": 0,
+  "stage": "completed",
+  "stageMs": {
+    "locate_group": 750,
+    "verify_target_and_input": 2091,
+    "prepare_payload": 2082,
+    "claim_and_send": 4367,
+    "post_send_verify": 6082
+  },
+  "payloadIdentity": "58ea4c4ab2aedb369469da26fa75839c9264df0d6cf99678a72d1c6ecb937932",
+  "payloads": [
+    {
+      "path": "/Users/ddt/work/projects/ai_agent/.local/state/negative-review-send-shanghai-zhensi-operations-ding-fandang-v1.desktop-attempts/.wechat-messaging/events/39c1d80ed3c98180a68b72b168f4d07ec993ba86b0ada8d0aff66781ea450c3f/49e2aeb4a918873ab4a85f48bdd0ef8d5270198e823f03dd297d7451ede31eb3/payload/差评分析数据_2026-09-23_2026-09-23.xlsx",
+      "name": "差评分析数据_2026-09-23_2026-09-23.xlsx",
+      "size": 20430,
+      "sha256": "47a55acf75755ad56c79a226251d0d5f5151d63f8bf040ccfb26e1708febe05c"
+    }
+  ],
+  "groupPreflight": {
+    "ok": true,
+    "reason": null,
+    "sendAttempts": 0,
+    "group": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "header": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰(81)",
+    "note": "ax-current-group-fast-path",
+    "groupTypeVerified": true,
+    "groupTypeProof": "member-count-header",
+    "composerVerifiedEmpty": true,
+    "attempts": []
+  },
+  "preparedInputChangedPixels": 54829,
+  "preparedInputChangedRatio": 0.147791,
+  "preparedFileObjectCount": 1,
+  "preparedFilePrefixesVerified": true,
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/.local/state/negative-review-send-shanghai-zhensi-operations-ding-fandang-v1.desktop-attempts/.wechat-messaging/events/39c1d80ed3c98180a68b72b168f4d07ec993ba86b0ada8d0aff66781ea450c3f/49e2aeb4a918873ab4a85f48bdd0ef8d5270198e823f03dd297d7451ede31eb3/transport-ledger/attempt.json",
+  "postSendInputCleared": [
+    true,
+    true
+  ],
+  "verified": true,
+  "state": "verified",
+  "elapsedMs": 16049,
+  "sendReview": [
+    {
+      "item": 1,
+      "stage": "locate_group",
+      "label": "精确定位目标群",
+      "elapsedMs": 750,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 2,
+      "stage": "verify_target_and_input",
+      "label": "复核目标群与输入框",
+      "elapsedMs": 2091,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 3,
+      "stage": "prepare_payload",
+      "label": "准备并复核发送载荷",
+      "elapsedMs": 2082,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 4,
+      "stage": "claim_and_send",
+      "label": "领取防重账本并单次发送",
+      "elapsedMs": 4367,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 5,
+      "stage": "post_send_verify",
+      "label": "发送后双帧复核",
+      "elapsedMs": 6082,
+      "status": "completed",
+      "pitfalls": []
+    }
+  ],
+  "reviewSummary": {
+    "totalElapsedMs": 16049,
+    "itemCount": 5,
+    "pitfallCount": 0,
+    "result": "success"
+  }
+}

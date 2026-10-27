@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "jinsha-business-code-enforced-v1",
+  "runId": "jinsha-business-production-20260919-01",
+  "businessDate": "2026-09-18",
+  "phase": "created",
+  "status": "needs-maintenance",
+  "nextAction": null,
+  "runtimeModelDecisions": 0,
+  "attempts": {
+    "download": 3,
+    "send": 0,
+    "verify": 0
+  },
+  "events": [
+    {
+      "at": 1789787048812,
+      "type": "executor-start",
+      "phase": "created"
+    },
+    {
+      "at": 1789787048812,
+      "type": "attempt",
+      "stage": "download",
+      "number": 1
+    },
+    {
+      "at": 1789787049716,
+      "type": "decision",
+      "stage": "download",
+      "decision": "retry-download",
+      "reason": "jinsha-background-process-not-alive"
+    },
+    {
+      "at": 1789787049717,
+      "type": "attempt",
+      "stage": "download",
+      "number": 2
+    },
+    {
+      "at": 1789787050396,
+      "type": "decision",
+      "stage": "download",
+      "decision": "retry-download",
+      "reason": "jinsha-background-process-not-alive"
+    },
+    {
+      "at": 1789787050396,
+      "type": "attempt",
+      "stage": "download",
+      "number": 3
+    },
+    {
+      "at": 1789787051069,
+      "type": "decision",
+      "stage": "download",
+      "decision": "retry-download",
+      "reason": "jinsha-background-process-not-alive"
+    },
+    {
+      "at": 1789787051070,
+      "type": "blocked",
+      "phase": "created",
+      "reason": "download-retry-limit-exceeded"
+    }
+  ],
+  "config": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/runs/jinsha-business-production/20260919/01/config.json",
+  "createdAt": 1789787048803,
+  "updatedAt": 1789787051070
+}

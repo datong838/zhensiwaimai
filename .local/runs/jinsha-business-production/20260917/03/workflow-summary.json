@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "jinsha-business-code-enforced-v1",
+  "runId": "jinsha-business-production-20260917-03",
+  "businessDate": "2026-09-16",
+  "status": "blocked-unknown-send",
+  "phase": "prepared",
+  "nextAction": null,
+  "totalElapsedMs": 174272,
+  "nodes": [
+    {
+      "name": "download",
+      "attempts": 2,
+      "startedAt": 1789619962420,
+      "finishedAt": 1789620027358,
+      "elapsedMs": 64938,
+      "complete": true
+    },
+    {
+      "name": "prepare",
+      "attempts": 1,
+      "startedAt": 1789620027359,
+      "finishedAt": 1789620034727,
+      "elapsedMs": 7368,
+      "complete": true
+    },
+    {
+      "name": "send",
+      "attempts": 1,
+      "startedAt": 1789620034728,
+      "finishedAt": 1789620136689,
+      "elapsedMs": 101961,
+      "complete": false
+    },
+    {
+      "name": "verify",
+      "attempts": 4,
+      "startedAt": 1789620076035,
+      "finishedAt": 1789620136689,
+      "elapsedMs": 60654,
+      "complete": false
+    }
+  ],
+  "pitfalls": [
+    {
+      "at": 1789619993530,
+      "stage": "download",
+      "type": "recovery",
+      "detail": "retry-download",
+      "reason": "page.goto: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"https://data.guoshuyufen.com/#/businessData/realTimeData\", waiting until \"domcontentloaded\"\u001b[22m\n"
+    },
+    {
+      "at": 1789620136689,
+      "stage": "prepared",
+      "type": "blocked",
+      "detail": "desktop-send-outcome-unknown"
+    }
+  ],
+  "runtimeModelDecisions": 0,
+  "generatedAt": 1789620136689
+}

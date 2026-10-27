@@ -1,0 +1,74 @@
+{
+  "ok": false,
+  "status": "blocked",
+  "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+  "channel": "desktop",
+  "requestDigest": "e91de6407b369a3aaaeb77881206810a86fac03d266eb06fac3b9aad5707ed65",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "b4de5f556eef2642c87a8c63758b714180cfcdb48ae0fdfc4c602362a1929ab3",
+      "type": "file",
+      "status": "blocked",
+      "claimedAt": 1791958319.6257799,
+      "sendAttempts": 0,
+      "reason": "windows-send-rejected:HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题=' (80)'，目标='上海臻肆外卖运营-盯个盯-饭敢当'\"}",
+      "transport": {
+        "ok": false,
+        "error": "HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题=' (80)'，目标='上海臻肆外卖运营-盯个盯-饭敢当'\"}",
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 0
+      },
+      "attemptErrors": [
+        "HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题=' (80)'，目标='上海臻肆外卖运营-盯个盯-饭敢当'\"}",
+        "HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题=' (80)'，目标='上海臻肆外卖运营-盯个盯-饭敢当'\"}",
+        "HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题=' (80)'，目标='上海臻肆外卖运营-盯个盯-饭敢当'\"}"
+      ]
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:1",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 289
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 143624
+    }
+  ],
+  "reason": "windows-send-rejected:HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题=' (80)'，目标='上海臻肆外卖运营-盯个盯-饭敢当'\"}",
+  "elapsedMs": 143922,
+  "eventKey": "197f90a6c7395b239392fa11e03e0a1f74cdb6023b0bbe498e457a2277c376cf",
+  "reviewSummary": {
+    "totalElapsedMs": 143922,
+    "result": "blocked",
+    "stageCount": 5,
+    "completedStages": 5,
+    "failedStages": []
+  }
+}

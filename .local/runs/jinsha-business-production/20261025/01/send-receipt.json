@@ -1,0 +1,292 @@
+{
+  "ok": true,
+  "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+  "sent": [
+    {
+      "platform": "meituan",
+      "file": "/Volumes/NVME2T/work/臻肆/报表/2026-10-24-业务发布-production01/美团外卖日报_2026-10-24.xlsx",
+      "name": "美团外卖日报_2026-10-24.xlsx",
+      "size": 134205,
+      "sha256": "30e6fd79e8e757f8f1e79f621c67f828d7edf28c52e2a38a905c13ebd16ca57f"
+    },
+    {
+      "platform": "taobao",
+      "file": "/Volumes/NVME2T/work/臻肆/报表/2026-10-24-业务发布-production01/淘宝闪购日报_2026-10-24.xlsx",
+      "name": "淘宝闪购日报_2026-10-24.xlsx",
+      "size": 113685,
+      "sha256": "f7a5bf715f2c5ec49d002850a37d070bd05f37716580d05f6e2e945e398e4ca3"
+    }
+  ],
+  "channel": "desktop",
+  "desktopWechatPreflight": {
+    "ok": true,
+    "resolvedGroup": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "inputEmpty": true,
+    "verificationLevel": "wecom-ui-tree-target"
+  },
+  "desktop": {
+    "bridgeVersion": 1,
+    "ok": true,
+    "verified": true,
+    "payloadType": "file",
+    "state": "verified",
+    "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "payloads": [
+      {
+        "path": "/Volumes/NVME2T/work/臻肆/报表/2026-10-24-业务发布-production01/美团外卖日报_2026-10-24.xlsx",
+        "name": "美团外卖日报_2026-10-24.xlsx",
+        "size": 134205,
+        "sha256": "30e6fd79e8e757f8f1e79f621c67f828d7edf28c52e2a38a905c13ebd16ca57f"
+      },
+      {
+        "path": "/Volumes/NVME2T/work/臻肆/报表/2026-10-24-业务发布-production01/淘宝闪购日报_2026-10-24.xlsx",
+        "name": "淘宝闪购日报_2026-10-24.xlsx",
+        "size": 113685,
+        "sha256": "f7a5bf715f2c5ec49d002850a37d070bd05f37716580d05f6e2e945e398e4ca3"
+      }
+    ],
+    "sendAttempts": 2,
+    "newSendAttempts": 2,
+    "reason": null,
+    "runtimeModelDecisions": 0,
+    "commonReceipt": {
+      "ok": true,
+      "status": "verified",
+      "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+      "channel": "desktop",
+      "requestDigest": "f6eb65507eddd41e3397a36b86ad6418dd961368fd47de146769d74651cc6ed1",
+      "runtimeModelDecisions": 0,
+      "items": [
+        {
+          "itemId": "0",
+          "sha256": "30e6fd79e8e757f8f1e79f621c67f828d7edf28c52e2a38a905c13ebd16ca57f",
+          "type": "file",
+          "status": "verified",
+          "claimedAt": 1792907058.095954,
+          "sendAttempts": 1,
+          "resolvedGroup": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+          "observations": [
+            {
+              "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+              "inputEmpty": true,
+              "newMessageVisible": true,
+              "observedAt": 1792907219.387,
+              "visibleFileName": "美团外卖日报_2026-10-24.xlsx",
+              "visibleFileSize": "131K"
+            },
+            {
+              "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+              "inputEmpty": true,
+              "newMessageVisible": true,
+              "observedAt": 1792907235.71,
+              "visibleFileName": "美团外卖日报_2026-10-24.xlsx",
+              "visibleFileSize": "131K"
+            }
+          ],
+          "evidenceLevel": "wecom-ui-tree-file-name-size",
+          "verificationLevel": "wecom-ui-tree-file-name-size",
+          "evidence": {
+            "method": "wecom-ui-tree-file-name-size",
+            "resolvedGroup": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+            "sha256": "30e6fd79e8e757f8f1e79f621c67f828d7edf28c52e2a38a905c13ebd16ca57f",
+            "observations": [
+              {
+                "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+                "inputEmpty": true,
+                "newMessageVisible": true,
+                "observedAt": 1792907219.387,
+                "visibleFileName": "美团外卖日报_2026-10-24.xlsx",
+                "visibleFileSize": "131K"
+              },
+              {
+                "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+                "inputEmpty": true,
+                "newMessageVisible": true,
+                "observedAt": 1792907235.71,
+                "visibleFileName": "美团外卖日报_2026-10-24.xlsx",
+                "visibleFileSize": "131K"
+              }
+            ]
+          },
+          "transport": {
+            "kind": "file",
+            "sendAttempts": 1,
+            "sent": true,
+            "postSendInputCleared": [
+              true,
+              true
+            ],
+            "stage": "post_send_verify"
+          }
+        },
+        {
+          "itemId": "1",
+          "sha256": "f7a5bf715f2c5ec49d002850a37d070bd05f37716580d05f6e2e945e398e4ca3",
+          "type": "file",
+          "status": "verified",
+          "claimedAt": 1792907247.223955,
+          "sendAttempts": 1,
+          "resolvedGroup": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+          "observations": [
+            {
+              "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+              "inputEmpty": true,
+              "newMessageVisible": true,
+              "observedAt": 1792907484.048,
+              "visibleFileName": "淘宝闪购日报_2026-10-24.xlsx",
+              "visibleFileSize": "111K"
+            },
+            {
+              "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+              "inputEmpty": true,
+              "newMessageVisible": true,
+              "observedAt": 1792907497.823,
+              "visibleFileName": "淘宝闪购日报_2026-10-24.xlsx",
+              "visibleFileSize": "111K"
+            }
+          ],
+          "evidenceLevel": "wecom-ui-tree-file-name-size",
+          "verificationLevel": "wecom-ui-tree-file-name-size",
+          "evidence": {
+            "method": "wecom-ui-tree-file-name-size",
+            "resolvedGroup": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+            "sha256": "f7a5bf715f2c5ec49d002850a37d070bd05f37716580d05f6e2e945e398e4ca3",
+            "observations": [
+              {
+                "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+                "inputEmpty": true,
+                "newMessageVisible": true,
+                "observedAt": 1792907484.048,
+                "visibleFileName": "淘宝闪购日报_2026-10-24.xlsx",
+                "visibleFileSize": "111K"
+              },
+              {
+                "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+                "inputEmpty": true,
+                "newMessageVisible": true,
+                "observedAt": 1792907497.823,
+                "visibleFileName": "淘宝闪购日报_2026-10-24.xlsx",
+                "visibleFileSize": "111K"
+              }
+            ]
+          },
+          "transport": {
+            "kind": "file",
+            "sendAttempts": 1,
+            "sent": true,
+            "postSendInputCleared": [
+              true,
+              true
+            ],
+            "stage": "post_send_verify"
+          }
+        }
+      ],
+      "review": [
+        {
+          "stage": "authorization",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "freeze:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "freeze:1",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 1
+        },
+        {
+          "stage": "preflight",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 63765
+        },
+        {
+          "stage": "send:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 189124
+        },
+        {
+          "stage": "send:1",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 264644
+        }
+      ],
+      "elapsedMs": 517542,
+      "eventKey": "156e0a3249dcf0036c6925b9dd39014f3d845d0d2d4a8f312c912c007e223aae",
+      "reviewSummary": {
+        "totalElapsedMs": 517542,
+        "result": "verified",
+        "stageCount": 6,
+        "completedStages": 6,
+        "failedStages": []
+      }
+    },
+    "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/jinsha-report-send-shanghai-zhensi-operations-ding-fandang-reauthorized-20260917-v2.desktop-attempts/5e6d3a84ca887e001a3822320c942d50845e816b0e48643064d6eb7477455a4a.json",
+    "sendReview": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0,
+        "item": 1,
+        "label": "authorization"
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0,
+        "item": 2,
+        "label": "freeze:0"
+      },
+      {
+        "stage": "freeze:1",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 1,
+        "item": 3,
+        "label": "freeze:1"
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 63765,
+        "item": 4,
+        "label": "preflight"
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 189124,
+        "item": 5,
+        "label": "send:0"
+      },
+      {
+        "stage": "send:1",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 264644,
+        "item": 6,
+        "label": "send:1"
+      }
+    ],
+    "elapsedMs": 517542,
+    "reviewSummary": {
+      "totalElapsedMs": 517542,
+      "itemCount": 6,
+      "pitfallCount": 0,
+      "result": "success"
+    }
+  }
+}

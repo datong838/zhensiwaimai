@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "jinsha-business-code-enforced-v1",
+  "runId": "jinsha-business-production-20260914-01",
+  "businessDate": "2026-09-13",
+  "status": "blocked-unknown-send",
+  "phase": "prepared",
+  "nextAction": null,
+  "totalElapsedMs": 57247,
+  "nodes": [
+    {
+      "name": "download",
+      "attempts": 1,
+      "startedAt": 1789355080911,
+      "finishedAt": 1789355093758,
+      "elapsedMs": 12847,
+      "complete": true
+    },
+    {
+      "name": "prepare",
+      "attempts": 1,
+      "startedAt": 1789355093758,
+      "finishedAt": 1789355101647,
+      "elapsedMs": 7889,
+      "complete": true
+    },
+    {
+      "name": "send",
+      "attempts": 1,
+      "startedAt": 1789355101648,
+      "finishedAt": 1789355138149,
+      "elapsedMs": 36501,
+      "complete": false
+    },
+    {
+      "name": "verify",
+      "attempts": 4,
+      "startedAt": 1789355120455,
+      "finishedAt": 1789355138149,
+      "elapsedMs": 17694,
+      "complete": false
+    }
+  ],
+  "pitfalls": [
+    {
+      "at": 1789355138149,
+      "stage": "prepared",
+      "type": "blocked",
+      "detail": "desktop-send-outcome-unknown"
+    }
+  ],
+  "runtimeModelDecisions": 0,
+  "generatedAt": 1789355138149
+}

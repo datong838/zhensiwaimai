@@ -1,0 +1,100 @@
+{
+  "ok": false,
+  "runId": "jinsha-business-browser-20260910-10",
+  "groupName": "FEIBING NEO AI数字员工",
+  "startedAt": 1789056208669,
+  "deadline": 1789056388669,
+  "stage": "build",
+  "nodes": [],
+  "desktop": {
+    "ok": true,
+    "runId": "jinsha-business-browser-20260910-10",
+    "startedAt": 1789056208669,
+    "deadline": 1789056388669,
+    "executor": "jinsha-browser-download",
+    "browserController": "control-background-dedicated-chrome",
+    "profile": "jinsha-business",
+    "port": 9232,
+    "businessDate": "2026-09-10",
+    "runtimeModelDecisions": 0,
+    "clicks": {
+      "meituan": 1,
+      "taobao": 1
+    },
+    "files": {
+      "meituan": {
+        "name": "美团原始数据_2026-09-10_业务browser10.xlsx",
+        "file": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/runs/jinsha-business-browser-20260910/10/美团原始数据_2026-09-10_业务browser10.xlsx",
+        "size": 7578,
+        "sha256": "baf17705a8443dc9d999d68788c1e0699317dc321242903e10ec0218f36400c7",
+        "downloadStartedAt": 1789056217190,
+        "savedAt": 1789056217533
+      },
+      "taobao": {
+        "name": "淘宝闪购原始数据_2026-09-10_业务browser10.xlsx",
+        "file": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/runs/jinsha-business-browser-20260910/10/淘宝闪购原始数据_2026-09-10_业务browser10.xlsx",
+        "size": 7347,
+        "sha256": "f0d20be8a56a10b0495422a581f96c40785b6af2a304ef03bf7979b7a2297194",
+        "downloadStartedAt": 1789056219558,
+        "savedAt": 1789056219674
+      }
+    },
+    "stage": "complete",
+    "nodes": [
+      {
+        "name": "background_preflight",
+        "elapsedMs": 48,
+        "ok": true,
+        "llmIntervention": false
+      },
+      {
+        "name": "task_page",
+        "elapsedMs": 1937,
+        "ok": true,
+        "llmIntervention": false
+      },
+      {
+        "name": "navigation",
+        "elapsedMs": 1700,
+        "ok": true,
+        "llmIntervention": false
+      },
+      {
+        "name": "known_overlay",
+        "elapsedMs": 2617,
+        "ok": true,
+        "llmIntervention": false
+      },
+      {
+        "name": "meituan.download",
+        "elapsedMs": 2240,
+        "ok": true,
+        "llmIntervention": false
+      },
+      {
+        "name": "taobao.download",
+        "elapsedMs": 2141,
+        "ok": true,
+        "llmIntervention": false
+      }
+    ],
+    "frontmostBefore": "com.tencent.xinWeChat",
+    "lease": {
+      "path": "/tmp/zhensi-jinsha-cua-exam.lock",
+      "acquiredAt": 1789056208990,
+      "released": true,
+      "releasedAt": 1789056219683
+    },
+    "jinshaResourceReleased": true,
+    "jinshaReleasedAt": 1789056219674,
+    "receiptIssuedAt": 1789056219674,
+    "url": "https://data.guoshuyufen.com/#/reportDownload",
+    "elapsedMs": 11014,
+    "efficiencyExceeded": false,
+    "frontmostAfter": "com.tencent.xinWeChat"
+  },
+  "reason": "meituan-download-empty",
+  "elapsedMs": 12635,
+  "businessCompleted": false,
+  "efficiencyStatus": "尚未完成"
+}

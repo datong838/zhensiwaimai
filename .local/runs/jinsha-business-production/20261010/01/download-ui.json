@@ -1,0 +1,41 @@
+{
+  "ok": false,
+  "runId": "jinsha-business-production-20261010-01",
+  "startedAt": 1791602357825,
+  "deadline": 1791602537825,
+  "executor": "jinsha-browser-download",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "jinsha-business",
+  "port": 9232,
+  "businessDate": "2026-10-09",
+  "runtimeModelDecisions": 0,
+  "clicks": {
+    "meituan": 0,
+    "taobao": 0
+  },
+  "files": {},
+  "stage": "background_preflight",
+  "nodes": [
+    {
+      "name": "background_preflight",
+      "elapsedMs": 30019,
+      "ok": false,
+      "llmIntervention": false
+    }
+  ],
+  "frontmostBefore": "com.tencent.workbuddy.mac",
+  "lease": {
+    "path": "/tmp/zhensi-jinsha-cua-exam.lock",
+    "acquiredAt": 1791602357989,
+    "released": true,
+    "releasedAt": 1791602388084
+  },
+  "browserProcess": {
+    "pid": 44608,
+    "command": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome --user-data-dir=/Users/ddt/Library/Application Support/AOS Background Chrome/jinsha-business --no-sandbox --no-first-run --no-default-browser-check --remote-debugging-address=127.0.0.1 --remote-debugging-port=9232 --window-position=2000,200 --window-size=1280,900 https://data.guoshuyufen.com/#/negativeAnalyse"
+  },
+  "reason": "browserType.connectOverCDP: Timeout 30000ms exceeded.\nCall log:\n  - <ws preparing> retrieving websocket url from http://127.0.0.1:9232\n  - <ws connecting> ws://127.0.0.1:9232/devtools/browser/0b03652d-51ff-466a-882b-efcaca9d5cb9\n  - <ws connected> ws://127.0.0.1:9232/devtools/browser/0b03652d-51ff-466a-882b-efcaca9d5cb9\n",
+  "elapsedMs": 30259,
+  "efficiencyExceeded": false,
+  "frontmostAfter": "com.tencent.workbuddy.mac"
+}

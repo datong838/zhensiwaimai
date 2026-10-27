@@ -1,0 +1,37 @@
+{
+  "ok": false,
+  "runId": "jinsha-business-production-20260916-01",
+  "startedAt": 1789527893703,
+  "deadline": 1789528073703,
+  "executor": "jinsha-browser-download",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "jinsha-business",
+  "port": 9232,
+  "businessDate": "2026-09-15",
+  "runtimeModelDecisions": 0,
+  "clicks": {
+    "meituan": 0,
+    "taobao": 0
+  },
+  "files": {},
+  "stage": "start",
+  "nodes": [
+    {
+      "name": "start",
+      "elapsedMs": 1,
+      "ok": false,
+      "llmIntervention": false
+    }
+  ],
+  "frontmostBefore": "com.tencent.xinWeChat",
+  "lease": {
+    "path": "/tmp/zhensi-jinsha-cua-exam.lock",
+    "acquiredAt": 1789527893841,
+    "released": true,
+    "releasedAt": 1789527893842
+  },
+  "reason": "jinsha-background-profile-state-mismatch",
+  "elapsedMs": 139,
+  "efficiencyExceeded": false,
+  "frontmostAfter": "com.tencent.xinWeChat"
+}

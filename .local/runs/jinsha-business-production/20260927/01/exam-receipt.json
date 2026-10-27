@@ -1,0 +1,198 @@
+{
+  "ok": true,
+  "runId": "jinsha-business-production-20260927-01",
+  "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+  "startedAt": 1790478088403,
+  "deadline": 1790478268403,
+  "stage": "verified",
+  "nodes": [
+    {
+      "name": "build",
+      "startedAt": 1790478047085,
+      "finishedAt": 1790478054197,
+      "elapsedMs": 7112,
+      "ok": true,
+      "llmIntervention": false
+    },
+    {
+      "name": "delivery-channel-selection",
+      "startedAt": 1790478054693,
+      "finishedAt": 1790478054693,
+      "elapsedMs": 0,
+      "ok": true,
+      "llmIntervention": false
+    },
+    {
+      "name": "desktop",
+      "startedAt": 1790478054693,
+      "finishedAt": 1790478087930,
+      "elapsedMs": 33237,
+      "ok": true,
+      "llmIntervention": false
+    },
+    {
+      "name": "delivery-channel-selection",
+      "startedAt": 1790478088403,
+      "finishedAt": 1790478088403,
+      "elapsedMs": 0,
+      "ok": true,
+      "llmIntervention": false
+    },
+    {
+      "name": "desktop-verify",
+      "startedAt": 1790478088403,
+      "finishedAt": 1790478089491,
+      "elapsedMs": 1088,
+      "ok": true,
+      "llmIntervention": false
+    }
+  ],
+  "desktop": {
+    "ok": true,
+    "runId": "jinsha-business-production-20260927-01",
+    "startedAt": 1790478027344,
+    "deadline": 1790478207344,
+    "executor": "jinsha-browser-download",
+    "browserController": "control-background-dedicated-chrome",
+    "profile": "jinsha-business",
+    "port": 9232,
+    "businessDate": "2026-09-26",
+    "runtimeModelDecisions": 0,
+    "clicks": {
+      "meituan": 1,
+      "taobao": 1
+    },
+    "files": {
+      "meituan": {
+        "name": "美团原始数据_2026-09-26_production01.xlsx",
+        "suggestedFilename": "美团全部_2026-09-26至2026-09-26.xlsx",
+        "file": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/runs/jinsha-business-production/20260927/01/美团原始数据_2026-09-26_production01.xlsx",
+        "size": 106871,
+        "sha256": "22205fb360bd187f990d6086ae7b42827ea1a2e6b2c714b0d18956a58762a0ed",
+        "downloadStartedAt": 1790478040549,
+        "savedAt": 1790478042892,
+        "captureMode": "task-page-staging-recovery"
+      },
+      "taobao": {
+        "name": "淘宝闪购原始数据_2026-09-26_production01.xlsx",
+        "suggestedFilename": "淘宝闪购_2026-09-26至2026-09-26.xlsx",
+        "file": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/runs/jinsha-business-production/20260927/01/淘宝闪购原始数据_2026-09-26_production01.xlsx",
+        "size": 97223,
+        "sha256": "767262e23dcf6037a20541032754786f5dba7290535c8a8459e0e87f6367ff38",
+        "downloadStartedAt": 1790478045306,
+        "savedAt": 1790478046414,
+        "captureMode": "task-page-staging-recovery"
+      }
+    },
+    "stage": "complete",
+    "nodes": [
+      {
+        "name": "background_preflight",
+        "elapsedMs": 76,
+        "ok": true,
+        "llmIntervention": false
+      },
+      {
+        "name": "task_page",
+        "elapsedMs": 363,
+        "ok": true,
+        "llmIntervention": false
+      },
+      {
+        "name": "navigation",
+        "elapsedMs": 7617,
+        "ok": true,
+        "llmIntervention": false
+      },
+      {
+        "name": "known_overlay",
+        "elapsedMs": 2627,
+        "ok": true,
+        "llmIntervention": false
+      },
+      {
+        "name": "meituan.download",
+        "elapsedMs": 4510,
+        "ok": true,
+        "llmIntervention": false
+      },
+      {
+        "name": "taobao.download",
+        "elapsedMs": 3522,
+        "ok": true,
+        "llmIntervention": false
+      }
+    ],
+    "frontmostBefore": "com.openai.codex",
+    "lease": {
+      "path": "/tmp/zhensi-jinsha-cua-exam.lock",
+      "acquiredAt": 1790478027652,
+      "released": true,
+      "releasedAt": 1790478046443
+    },
+    "browserProcess": {
+      "pid": 5668,
+      "command": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome --user-data-dir=/Users/ddt/Library/Application Support/AOS Background Chrome/jinsha-business --remote-debugging-address=127.0.0.1 --remote-debugging-port=9232 --no-first-run --no-default-browser-check https://data.guoshuyufen.com/#/businessData/realTimeData"
+    },
+    "jinshaResourceReleased": true,
+    "jinshaReleasedAt": 1790478046416,
+    "receiptIssuedAt": 1790478046416,
+    "url": "https://data.guoshuyufen.com/#/reportDownload",
+    "elapsedMs": 19099,
+    "efficiencyExceeded": false,
+    "frontmostAfter": "com.google.Chrome"
+  },
+  "preflight": {
+    "ok": true,
+    "runId": "jinsha-business-production-20260927-01",
+    "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "businessDate": "2026-09-26",
+    "authorization": "zhensi-business-main-wechat-shanghai-zhensi-operations-ding-fandang-daily-v2-reauthorized-20260917",
+    "requestedWechatChannel": "desktop",
+    "wecomEnterprise": "上海臻肆文化传播有限公司",
+    "wecomSpace": "金鲨昨日双平台日报业务群",
+    "wecomAuthorization": "zhensi-business-wecom-jinsha-daily-v1",
+    "files": {
+      "meituan": {
+        "name": "美团外卖日报_2026-09-26.xlsx",
+        "path": "/Users/ddt/work/臻肆/报表/2026-09-26-业务发布-production01/美团外卖日报_2026-09-26.xlsx",
+        "size": 122922,
+        "sha256": "1aadb732e5a792ef7c349c2116457abf46667416a5bb19811ab409603db7522e"
+      },
+      "taobao": {
+        "name": "淘宝闪购日报_2026-09-26.xlsx",
+        "path": "/Users/ddt/work/臻肆/报表/2026-09-26-业务发布-production01/淘宝闪购日报_2026-09-26.xlsx",
+        "size": 112388,
+        "sha256": "53f7cc04400188ca5a5842eee476f41683dfc046e182c56da653776c4ff95748"
+      }
+    },
+    "preparedAt": 1790478054199
+  },
+  "elapsedMs": 1088,
+  "businessCompleted": true,
+  "efficiencyStatus": "效率达标",
+  "deliverySelection": {
+    "requestedChannel": "desktop",
+    "selectedChannel": "desktop",
+    "reason": "verify-pinned-to-send-channel"
+  },
+  "wechatChannel": "desktop",
+  "sent": [
+    {
+      "platform": "meituan",
+      "file": "/Users/ddt/work/臻肆/报表/2026-09-26-业务发布-production01/美团外卖日报_2026-09-26.xlsx",
+      "name": "美团外卖日报_2026-09-26.xlsx",
+      "size": 122922,
+      "sha256": "1aadb732e5a792ef7c349c2116457abf46667416a5bb19811ab409603db7522e"
+    },
+    {
+      "platform": "taobao",
+      "file": "/Users/ddt/work/臻肆/报表/2026-09-26-业务发布-production01/淘宝闪购日报_2026-09-26.xlsx",
+      "name": "淘宝闪购日报_2026-09-26.xlsx",
+      "size": 112388,
+      "sha256": "53f7cc04400188ca5a5842eee476f41683dfc046e182c56da653776c4ff95748"
+    }
+  ],
+  "deliveryTarget": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+  "efficiencyPassed": true
+}

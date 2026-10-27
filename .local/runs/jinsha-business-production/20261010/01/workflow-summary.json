@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "jinsha-business-code-enforced-v1",
+  "runId": "jinsha-business-production-20261010-01",
+  "businessDate": "2026-10-09",
+  "status": "needs-maintenance",
+  "phase": "created",
+  "nextAction": null,
+  "totalElapsedMs": 93647,
+  "nodes": [
+    {
+      "name": "download",
+      "attempts": 3,
+      "startedAt": 1791602294642,
+      "finishedAt": 1791602388282,
+      "elapsedMs": 93640,
+      "complete": false
+    }
+  ],
+  "pitfalls": [
+    {
+      "at": 1791602326131,
+      "stage": "download",
+      "type": "recovery",
+      "detail": "retry-download",
+      "reason": "browserType.connectOverCDP: Timeout 30000ms exceeded.\nCall log:\n  - <ws preparing> retrieving websocket url from http://127.0.0.1:9232\n  - <ws connecting> ws://127.0.0.1:9232/devtools/browser/0b03652d-51ff-466a-882b-efcaca9d5cb9\n  - <ws connected> ws://127.0.0.1:9232/devtools/browser/0b03652d-51ff-466a-882b-efcaca9d5cb9\n"
+    },
+    {
+      "at": 1791602357116,
+      "stage": "download",
+      "type": "recovery",
+      "detail": "retry-download",
+      "reason": "browserType.connectOverCDP: Timeout 30000ms exceeded.\nCall log:\n  - <ws preparing> retrieving websocket url from http://127.0.0.1:9232\n  - <ws connecting> ws://127.0.0.1:9232/devtools/browser/0b03652d-51ff-466a-882b-efcaca9d5cb9\n  - <ws connected> ws://127.0.0.1:9232/devtools/browser/0b03652d-51ff-466a-882b-efcaca9d5cb9\n"
+    },
+    {
+      "at": 1791602388282,
+      "stage": "download",
+      "type": "recovery",
+      "detail": "retry-download",
+      "reason": "browserType.connectOverCDP: Timeout 30000ms exceeded.\nCall log:\n  - <ws preparing> retrieving websocket url from http://127.0.0.1:9232\n  - <ws connecting> ws://127.0.0.1:9232/devtools/browser/0b03652d-51ff-466a-882b-efcaca9d5cb9\n  - <ws connected> ws://127.0.0.1:9232/devtools/browser/0b03652d-51ff-466a-882b-efcaca9d5cb9\n"
+    },
+    {
+      "at": 1791602388282,
+      "stage": "created",
+      "type": "blocked",
+      "detail": "download-retry-limit-exceeded"
+    }
+  ],
+  "codeEnforced": true,
+  "reviewItems": [
+    {
+      "name": "download",
+      "attempts": 3,
+      "startedAt": 1791602294642,
+      "finishedAt": 1791602388282,
+      "elapsedMs": 93640,
+      "complete": false,
+      "pitfalls": [
+        {
+          "at": 1791602326131,
+          "stage": "download",
+          "type": "recovery",
+          "detail": "retry-download",
+          "reason": "browserType.connectOverCDP: Timeout 30000ms exceeded.\nCall log:\n  - <ws preparing> retrieving websocket url from http://127.0.0.1:9232\n  - <ws connecting> ws://127.0.0.1:9232/devtools/browser/0b03652d-51ff-466a-882b-efcaca9d5cb9\n  - <ws connected> ws://127.0.0.1:9232/devtools/browser/0b03652d-51ff-466a-882b-efcaca9d5cb9\n"
+        },
+        {
+          "at": 1791602357116,
+          "stage": "download",
+          "type": "recovery",
+          "detail": "retry-download",
+          "reason": "browserType.connectOverCDP: Timeout 30000ms exceeded.\nCall log:\n  - <ws preparing> retrieving websocket url from http://127.0.0.1:9232\n  - <ws connecting> ws://127.0.0.1:9232/devtools/browser/0b03652d-51ff-466a-882b-efcaca9d5cb9\n  - <ws connected> ws://127.0.0.1:9232/devtools/browser/0b03652d-51ff-466a-882b-efcaca9d5cb9\n"
+        },
+        {
+          "at": 1791602388282,
+          "stage": "download",
+          "type": "recovery",
+          "detail": "retry-download",
+          "reason": "browserType.connectOverCDP: Timeout 30000ms exceeded.\nCall log:\n  - <ws preparing> retrieving websocket url from http://127.0.0.1:9232\n  - <ws connecting> ws://127.0.0.1:9232/devtools/browser/0b03652d-51ff-466a-882b-efcaca9d5cb9\n  - <ws connected> ws://127.0.0.1:9232/devtools/browser/0b03652d-51ff-466a-882b-efcaca9d5cb9\n"
+        }
+      ]
+    }
+  ],
+  "runtimeModelDecisions": 0,
+  "generatedAt": 1791602388282
+}

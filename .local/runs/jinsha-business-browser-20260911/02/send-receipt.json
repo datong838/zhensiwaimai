@@ -1,0 +1,46 @@
+{
+  "ok": false,
+  "channel": "wecom",
+  "targetType": "wedrive-shared-space",
+  "targetName": "金鲨昨日双平台日报业务群",
+  "sent": [],
+  "controller": {
+    "ok": false,
+    "channel": "wecom",
+    "targetType": "wedrive-shared-space",
+    "targetName": "金鲨昨日双平台日报业务群",
+    "reason": "wecom-open-panel-navigation-not-confirmed",
+    "attemptedState": null,
+    "uploadAttempts": 0,
+    "nodes": [
+      {
+        "name": "stale-open-panel-cleanup",
+        "elapsedMs": 158,
+        "ok": true,
+        "llmIntervention": false
+      },
+      {
+        "name": "target-space-locate",
+        "elapsedMs": 569,
+        "ok": true,
+        "llmIntervention": false
+      },
+      {
+        "name": "enterprise-identity",
+        "elapsedMs": 4481,
+        "ok": true,
+        "llmIntervention": false
+      },
+      {
+        "name": "import-two-files",
+        "elapsedMs": 8485,
+        "ok": false,
+        "llmIntervention": false
+      }
+    ],
+    "runtimeModelDecisions": 0
+  },
+  "fileState": null,
+  "uploadAttempts": 0,
+  "reason": "wecom-open-panel-navigation-not-confirmed"
+}

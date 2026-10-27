@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "jinsha-business-code-enforced-v1",
+  "runId": "jinsha-business-production-20261023-01",
+  "businessDate": "2026-10-22",
+  "status": "blocked-unknown-send",
+  "phase": "prepared",
+  "nextAction": null,
+  "totalElapsedMs": 173644,
+  "nodes": [
+    {
+      "name": "download",
+      "attempts": 1,
+      "startedAt": 1792725615039,
+      "finishedAt": 1792725632204,
+      "elapsedMs": 17165,
+      "complete": true
+    },
+    {
+      "name": "prepare",
+      "attempts": 1,
+      "startedAt": 1792725632205,
+      "finishedAt": 1792725659182,
+      "elapsedMs": 26977,
+      "complete": true
+    },
+    {
+      "name": "send",
+      "attempts": 1,
+      "startedAt": 1792725659184,
+      "finishedAt": 1792725788678,
+      "elapsedMs": 129494,
+      "complete": false
+    },
+    {
+      "name": "verify",
+      "attempts": 4,
+      "startedAt": 1792725768959,
+      "finishedAt": 1792725788678,
+      "elapsedMs": 19719,
+      "complete": false
+    }
+  ],
+  "pitfalls": [
+    {
+      "at": 1792725788678,
+      "stage": "prepared",
+      "type": "blocked",
+      "detail": "desktop-send-outcome-unknown"
+    }
+  ],
+  "codeEnforced": true,
+  "reviewItems": [
+    {
+      "name": "download",
+      "attempts": 1,
+      "startedAt": 1792725615039,
+      "finishedAt": 1792725632204,
+      "elapsedMs": 17165,
+      "complete": true,
+      "pitfalls": []
+    },
+    {
+      "name": "prepare",
+      "attempts": 1,
+      "startedAt": 1792725632205,
+      "finishedAt": 1792725659182,
+      "elapsedMs": 26977,
+      "complete": true,
+      "pitfalls": []
+    },
+    {
+      "name": "send",
+      "attempts": 1,
+      "startedAt": 1792725659184,
+      "finishedAt": 1792725788678,
+      "elapsedMs": 129494,
+      "complete": false,
+      "pitfalls": [
+        {
+          "at": 1792725788678,
+          "stage": "prepared",
+          "type": "blocked",
+          "detail": "desktop-send-outcome-unknown"
+        }
+      ]
+    },
+    {
+      "name": "verify",
+      "attempts": 4,
+      "startedAt": 1792725768959,
+      "finishedAt": 1792725788678,
+      "elapsedMs": 19719,
+      "complete": false,
+      "pitfalls": []
+    }
+  ],
+  "runtimeModelDecisions": 0,
+  "generatedAt": 1792725788678
+}

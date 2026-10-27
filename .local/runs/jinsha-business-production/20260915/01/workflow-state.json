@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "jinsha-business-code-enforced-v1",
+  "runId": "jinsha-business-production-20260915-01",
+  "businessDate": "2026-09-14",
+  "phase": "created",
+  "status": "needs-maintenance",
+  "nextAction": null,
+  "runtimeModelDecisions": 0,
+  "attempts": {
+    "download": 3,
+    "send": 0,
+    "verify": 0
+  },
+  "events": [
+    {
+      "at": 1789441502878,
+      "type": "executor-start",
+      "phase": "created"
+    },
+    {
+      "at": 1789441502879,
+      "type": "attempt",
+      "stage": "download",
+      "number": 1
+    },
+    {
+      "at": 1789441503751,
+      "type": "decision",
+      "stage": "download",
+      "decision": "retry-download",
+      "reason": "jinsha-background-profile-state-mismatch"
+    },
+    {
+      "at": 1789441503752,
+      "type": "attempt",
+      "stage": "download",
+      "number": 2
+    },
+    {
+      "at": 1789441504429,
+      "type": "decision",
+      "stage": "download",
+      "decision": "retry-download",
+      "reason": "jinsha-background-profile-state-mismatch"
+    },
+    {
+      "at": 1789441504430,
+      "type": "attempt",
+      "stage": "download",
+      "number": 3
+    },
+    {
+      "at": 1789441505114,
+      "type": "decision",
+      "stage": "download",
+      "decision": "retry-download",
+      "reason": "jinsha-background-profile-state-mismatch"
+    },
+    {
+      "at": 1789441505115,
+      "type": "blocked",
+      "phase": "created",
+      "reason": "download-retry-limit-exceeded"
+    }
+  ],
+  "config": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/runs/jinsha-business-production/20260915/01/config.json",
+  "createdAt": 1789441502872,
+  "updatedAt": 1789441505115
+}

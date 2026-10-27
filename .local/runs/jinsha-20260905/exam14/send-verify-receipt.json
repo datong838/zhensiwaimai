@@ -1,0 +1,85 @@
+{
+  "ok": true,
+  "executor": "wechat-file-sender",
+  "groupName": "臻肆测试群",
+  "sent": [
+    {
+      "name": "美团0904测试14.xlsx",
+      "sha256": "bb42b22386be25ed7ee95d1bd382c01b0ab67de09a2fb569092e802165da65b2",
+      "verification": {
+        "name": "美团0904测试14.xlsx",
+        "size": 122277,
+        "state": "confirmed",
+        "selectionScreenshot": "/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/zhensi-jinsha-wechat-r64jbrg5/selected-file-meituan-stable.png",
+        "attemptedAt": 1788609306.5174139,
+        "filePickerSendClicks": 1,
+        "confirmSendClicks": 0,
+        "confirmedAt": 1788609371.772606,
+        "bubbleScreenshot": "/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/zhensi-jinsha-wechat-w54wsvl6/sent-meituan-stable.png",
+        "fullNameVerified": true,
+        "groupTitleVerified": true,
+        "sizeVerified": true,
+        "uploadPendingFrames": 0
+      }
+    },
+    {
+      "name": "淘宝0904测试14.xlsx",
+      "sha256": "164fa1912256d1098a7464f22f1356c98bcac3bc3238badd97bc9fce8dbdd693",
+      "verification": {
+        "name": "淘宝0904测试14.xlsx",
+        "size": 123404,
+        "state": "confirmed",
+        "selectionScreenshot": "/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/zhensi-jinsha-wechat-r64jbrg5/selected-file-taobao-stable.png",
+        "attemptedAt": 1788609334.189049,
+        "filePickerSendClicks": 1,
+        "confirmSendClicks": 0,
+        "confirmedAt": 1788609374.053247,
+        "bubbleScreenshot": "/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/zhensi-jinsha-wechat-w54wsvl6/sent-taobao-stable.png",
+        "fullNameVerified": true,
+        "groupTitleVerified": true,
+        "sizeVerified": true,
+        "uploadPendingFrames": 0
+      }
+    }
+  ],
+  "sendAttempts": 0,
+  "stage": "complete",
+  "nodes": [
+    {
+      "name": "device_identity",
+      "elapsedMs": 124,
+      "ok": true,
+      "startedAt": 1788609366.432481,
+      "finishedAt": 1788609366.5565178,
+      "llmIntervention": false
+    }
+  ],
+  "device": {
+    "identityHash": "f2724cf436e9",
+    "model": "HLK-AL00",
+    "transport": "usb",
+    "verifiedEndpoints": 1
+  },
+  "files": [
+    {
+      "platform": "meituan",
+      "file": "/Users/ddt/work/臻肆/报表/考核14-20260905/美团0904测试14.xlsx",
+      "name": "美团0904测试14.xlsx",
+      "size": 122277,
+      "sha256": "bb42b22386be25ed7ee95d1bd382c01b0ab67de09a2fb569092e802165da65b2"
+    },
+    {
+      "platform": "taobao",
+      "file": "/Users/ddt/work/臻肆/报表/考核14-20260905/淘宝0904测试14.xlsx",
+      "name": "淘宝0904测试14.xlsx",
+      "size": 123404,
+      "sha256": "164fa1912256d1098a7464f22f1356c98bcac3bc3238badd97bc9fce8dbdd693"
+    }
+  ],
+  "mode": "verify-only",
+  "totalConfirmedFiles": 2,
+  "ledger": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/state/jinsha-report-send.json",
+  "businessCompleted": true,
+  "elapsedMs": 7629,
+  "workDir": "/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/zhensi-jinsha-wechat-w54wsvl6"
+}

@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "jinsha-business-code-enforced-v1",
+  "runId": "jinsha-business-production-20261024-01",
+  "businessDate": "2026-10-23",
+  "status": "complete",
+  "phase": "complete",
+  "nextAction": null,
+  "totalElapsedMs": 7218555,
+  "nodes": [
+    {
+      "name": "download",
+      "attempts": 1,
+      "startedAt": 1792804682478,
+      "finishedAt": 1792804699300,
+      "elapsedMs": 16822,
+      "complete": true
+    },
+    {
+      "name": "prepare",
+      "attempts": 1,
+      "startedAt": 1792804699301,
+      "finishedAt": 1792804725749,
+      "elapsedMs": 26448,
+      "complete": true
+    },
+    {
+      "name": "send",
+      "attempts": 1,
+      "startedAt": 1792804725751,
+      "finishedAt": 1792811901026,
+      "elapsedMs": 7175275,
+      "complete": true
+    },
+    {
+      "name": "verify",
+      "attempts": 9,
+      "startedAt": 1792804785947,
+      "finishedAt": 1792811901026,
+      "elapsedMs": 7115079,
+      "complete": true
+    },
+    {
+      "name": "finalize",
+      "attempts": 1,
+      "startedAt": 1792811901027,
+      "finishedAt": 1792811901027,
+      "elapsedMs": 0,
+      "complete": true
+    }
+  ],
+  "pitfalls": [
+    {
+      "at": 1792804856745,
+      "stage": "prepared",
+      "type": "blocked",
+      "detail": "desktop-send-outcome-unknown"
+    },
+    {
+      "at": 1792805472263,
+      "stage": "send",
+      "type": "recovery",
+      "detail": "verify-only",
+      "reason": null
+    },
+    {
+      "at": 1792811885652,
+      "stage": "send",
+      "type": "recovery",
+      "detail": "verify-only",
+      "reason": null
+    },
+    {
+      "at": 1792811901027,
+      "stage": "workflow",
+      "type": "efficiency-budget-exceeded",
+      "detail": "7218555>180000"
+    }
+  ],
+  "codeEnforced": true,
+  "reviewItems": [
+    {
+      "name": "download",
+      "attempts": 1,
+      "startedAt": 1792804682478,
+      "finishedAt": 1792804699300,
+      "elapsedMs": 16822,
+      "complete": true,
+      "pitfalls": []
+    },
+    {
+      "name": "prepare",
+      "attempts": 1,
+      "startedAt": 1792804699301,
+      "finishedAt": 1792804725749,
+      "elapsedMs": 26448,
+      "complete": true,
+      "pitfalls": []
+    },
+    {
+      "name": "send",
+      "attempts": 1,
+      "startedAt": 1792804725751,
+      "finishedAt": 1792811901026,
+      "elapsedMs": 7175275,
+      "complete": true,
+      "pitfalls": [
+        {
+          "at": 1792804856745,
+          "stage": "prepared",
+          "type": "blocked",
+          "detail": "desktop-send-outcome-unknown"
+        },
+        {
+          "at": 1792805472263,
+          "stage": "send",
+          "type": "recovery",
+          "detail": "verify-only",
+          "reason": null
+        },
+        {
+          "at": 1792811885652,
+          "stage": "send",
+          "type": "recovery",
+          "detail": "verify-only",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "name": "verify",
+      "attempts": 9,
+      "startedAt": 1792804785947,
+      "finishedAt": 1792811901026,
+      "elapsedMs": 7115079,
+      "complete": true,
+      "pitfalls": []
+    },
+    {
+      "name": "finalize",
+      "attempts": 1,
+      "startedAt": 1792811901027,
+      "finishedAt": 1792811901027,
+      "elapsedMs": 0,
+      "complete": true,
+      "pitfalls": []
+    }
+  ],
+  "runtimeModelDecisions": 0,
+  "generatedAt": 1792811901027
+}

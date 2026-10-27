@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "jinsha-business-code-enforced-v1",
+  "runId": "jinsha-business-production-20260916-03",
+  "businessDate": "2026-09-15",
+  "phase": "complete",
+  "status": "complete",
+  "nextAction": null,
+  "runtimeModelDecisions": 0,
+  "attempts": {
+    "download": 2,
+    "send": 1,
+    "verify": 1
+  },
+  "events": [
+    {
+      "at": 1789528935009,
+      "type": "executor-start",
+      "phase": "created"
+    },
+    {
+      "at": 1789528935010,
+      "type": "attempt",
+      "stage": "download",
+      "number": 1
+    },
+    {
+      "at": 1789528949976,
+      "type": "decision",
+      "stage": "download",
+      "decision": "retry-download",
+      "reason": "date-readback-mismatch:开始日期"
+    },
+    {
+      "at": 1789528949976,
+      "type": "attempt",
+      "stage": "download",
+      "number": 2
+    },
+    {
+      "at": 1789528967212,
+      "type": "decision",
+      "stage": "download",
+      "decision": "downloaded"
+    },
+    {
+      "at": 1789528967213,
+      "type": "transition",
+      "from": "created",
+      "to": "downloaded",
+      "evidence": {
+        "receipt": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/runs/jinsha-business-production/20260916/03/download-ui.json"
+      }
+    },
+    {
+      "at": 1789528967213,
+      "type": "attempt",
+      "stage": "prepare",
+      "number": 1
+    },
+    {
+      "at": 1789528974856,
+      "type": "transition",
+      "from": "downloaded",
+      "to": "prepared",
+      "evidence": {
+        "receipt": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/runs/jinsha-business-production/20260916/03/send-preflight.json"
+      }
+    },
+    {
+      "at": 1789528974857,
+      "type": "decision",
+      "stage": "send",
+      "decision": "retry-send",
+      "marker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/state/jinsha-report-send-feibing-neo-ai.desktop-attempts/9025e71c806bb196072bb8e9aed90e828f7711c859afd9464493f062966c78c3.json"
+    },
+    {
+      "at": 1789528974857,
+      "type": "attempt",
+      "stage": "send",
+      "number": 1
+    },
+    {
+      "at": 1789529003071,
+      "type": "transition",
+      "from": "prepared",
+      "to": "sent",
+      "evidence": {
+        "receipt": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/runs/jinsha-business-production/20260916/03/send-receipt.json"
+      }
+    },
+    {
+      "at": 1789529003071,
+      "type": "attempt",
+      "stage": "verify-only",
+      "number": 1
+    },
+    {
+      "at": 1789529003992,
+      "type": "transition",
+      "from": "sent",
+      "to": "verified",
+      "evidence": {
+        "receipt": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/runs/jinsha-business-production/20260916/03/send-verify-receipt.json"
+      }
+    },
+    {
+      "at": 1789529003992,
+      "type": "transition",
+      "from": "verified",
+      "to": "complete",
+      "evidence": {
+        "receipt": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/runs/jinsha-business-production/20260916/03/exam-receipt.json"
+      }
+    },
+    {
+      "at": 1789529003992,
+      "type": "executor-complete"
+    }
+  ],
+  "config": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/runs/jinsha-business-production/20260916/03/config.json",
+  "createdAt": 1789528935000,
+  "updatedAt": 1789529003992,
+  "completedAt": 1789529003992
+}

@@ -1,0 +1,13 @@
+{
+  "status": "PREPARATION_ADB_PERMISSION_BLOCKER",
+  "lastFailedRun": "20260903-01",
+  "nextRun": "20260903-02",
+  "timedRunStarted": false,
+  "newDownloadAttempts": 0,
+  "newSendAttempts": 0,
+  "fixes": ["bounded-dependent-plan-poll", "truncated-taobao-option-full-value-verification", "pre-download-platform-plan-check", "deadline-failure-receipt"],
+  "tests": {"desktopAdapterSimulated": 4, "wechatRegression": 8, "pipelineSyntax": "passed"},
+  "liveEvidence": {"desktop": "Authenticated desktop App is reachable at /Users/ddt/Downloads/金鲨数据 2/金鲨数据.app", "phone": "ADB server cannot bind local smart socket in current restricted execution environment", "phoneError": "could not install *smartsocket* listener: Operation not permitted"},
+  "nextSteps": ["Resume with an execution environment that permits the local ADB server", "Verify actual platform plans and date in the desktop App", "Recalibrate changed window layout; old checkbox coordinates invalid", "Run independent full 180-second exam 02", "If failed, save receipt and maintain; if passed, stop loop"],
+  "doesNotProve": ["fixed-live-download", "full-chain-180-second-pass"]
+}

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "jinsha-business-code-enforced-v1",
+  "runId": "jinsha-business-production-20260930-03",
+  "businessDate": "2026-09-29",
+  "status": "needs-maintenance",
+  "phase": "prepared",
+  "nextAction": null,
+  "totalElapsedMs": 533062,
+  "nodes": [
+    {
+      "name": "download",
+      "attempts": 1,
+      "startedAt": 1790735738189,
+      "finishedAt": 1790735757274,
+      "elapsedMs": 19085,
+      "complete": true
+    },
+    {
+      "name": "prepare",
+      "attempts": 1,
+      "startedAt": 1790735757288,
+      "finishedAt": 1790735785736,
+      "elapsedMs": 28448,
+      "complete": true
+    },
+    {
+      "name": "send",
+      "attempts": 3,
+      "startedAt": 1790735785768,
+      "finishedAt": 1790736271176,
+      "elapsedMs": 485408,
+      "complete": false
+    },
+    {
+      "name": "verify",
+      "attempts": 8,
+      "startedAt": 1790735895835,
+      "finishedAt": 1790736271176,
+      "elapsedMs": 375341,
+      "complete": false
+    }
+  ],
+  "pitfalls": [
+    {
+      "at": 1790735909738,
+      "stage": "prepared",
+      "type": "blocked",
+      "detail": "desktop-send-outcome-unknown"
+    },
+    {
+      "at": 1790736063342,
+      "stage": "prepared",
+      "type": "blocked",
+      "detail": "desktop-send-outcome-unknown"
+    },
+    {
+      "at": 1790736271176,
+      "stage": "prepared",
+      "type": "blocked",
+      "detail": "desktop-send-proof-invalid"
+    },
+    {
+      "at": 1790736271176,
+      "stage": "workflow",
+      "type": "efficiency-budget-exceeded",
+      "detail": "533062>180000"
+    }
+  ],
+  "codeEnforced": true,
+  "reviewItems": [
+    {
+      "name": "download",
+      "attempts": 1,
+      "startedAt": 1790735738189,
+      "finishedAt": 1790735757274,
+      "elapsedMs": 19085,
+      "complete": true,
+      "pitfalls": []
+    },
+    {
+      "name": "prepare",
+      "attempts": 1,
+      "startedAt": 1790735757288,
+      "finishedAt": 1790735785736,
+      "elapsedMs": 28448,
+      "complete": true,
+      "pitfalls": []
+    },
+    {
+      "name": "send",
+      "attempts": 3,
+      "startedAt": 1790735785768,
+      "finishedAt": 1790736271176,
+      "elapsedMs": 485408,
+      "complete": false,
+      "pitfalls": [
+        {
+          "at": 1790735909738,
+          "stage": "prepared",
+          "type": "blocked",
+          "detail": "desktop-send-outcome-unknown"
+        },
+        {
+          "at": 1790736063342,
+          "stage": "prepared",
+          "type": "blocked",
+          "detail": "desktop-send-outcome-unknown"
+        },
+        {
+          "at": 1790736271176,
+          "stage": "prepared",
+          "type": "blocked",
+          "detail": "desktop-send-proof-invalid"
+        }
+      ]
+    },
+    {
+      "name": "verify",
+      "attempts": 8,
+      "startedAt": 1790735895835,
+      "finishedAt": 1790736271176,
+      "elapsedMs": 375341,
+      "complete": false,
+      "pitfalls": []
+    }
+  ],
+  "runtimeModelDecisions": 0,
+  "generatedAt": 1790736271176
+}

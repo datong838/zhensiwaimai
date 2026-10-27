@@ -1,0 +1,182 @@
+{
+  "policyVersion": "daily-negative-reviews-code-enforced-v1",
+  "businessDate": "2026-10-13",
+  "phase": "complete",
+  "status": "complete",
+  "startedAt": 1791947413092,
+  "updatedAt": 1791961075919,
+  "reviewItems": [
+    {
+      "stage": "browser_validate",
+      "label": "连接并唯一定位金鲨页面",
+      "attempts": 1,
+      "elapsedMs": 3747,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "route_and_date",
+      "label": "核验淘宝外卖入口并设置昨日日期",
+      "attempts": 1,
+      "elapsedMs": 2150,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "download",
+      "label": "下载全部平台差评",
+      "attempts": 1,
+      "elapsedMs": 3707,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "extract_platforms",
+      "label": "读取三平台页面列表",
+      "attempts": 1,
+      "elapsedMs": 6795,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "reconcile",
+      "label": "下载与页面逐条对账",
+      "attempts": 1,
+      "elapsedMs": 251,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "build_report",
+      "label": "生成并验收固定格式Excel",
+      "attempts": 1,
+      "elapsedMs": 1037,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 4779,
+      "status": "failed",
+      "pitfalls": [
+        "windows-driver-unreachable"
+      ]
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 4765,
+      "status": "failed",
+      "pitfalls": [
+        "windows-driver-unreachable"
+      ]
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 4768,
+      "status": "failed",
+      "pitfalls": [
+        "windows-driver-unreachable"
+      ]
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 4785,
+      "status": "failed",
+      "pitfalls": [
+        "windows-driver-unreachable"
+      ]
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 4808,
+      "status": "failed",
+      "pitfalls": [
+        "windows-driver-unreachable"
+      ]
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 4782,
+      "status": "failed",
+      "pitfalls": [
+        "windows-driver-unreachable"
+      ]
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 33184,
+      "status": "failed",
+      "pitfalls": [
+        "windows-driver-unreachable"
+      ]
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 33177,
+      "status": "failed",
+      "pitfalls": [
+        "windows-driver-unreachable"
+      ]
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 33384,
+      "status": "failed",
+      "pitfalls": [
+        "windows-driver-unreachable"
+      ]
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 129477,
+      "status": "failed",
+      "pitfalls": [
+        "windows-send-rejected:HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题=' (80)'，目标='上海臻肆外卖运营-盯个盯-饭敢当'\"}"
+      ]
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 28950,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "completion_gate",
+      "label": "汇总收据并生成代码化复盘",
+      "attempts": 1,
+      "elapsedMs": 2,
+      "status": "completed",
+      "pitfalls": []
+    }
+  ],
+  "runtimeModelDecisions": 0,
+  "lastRecovery": {
+    "allowed": true,
+    "stage": "wechat_send",
+    "priorFailures": 10,
+    "nextAttempt": 11
+  },
+  "completedAt": 1791961075919
+}

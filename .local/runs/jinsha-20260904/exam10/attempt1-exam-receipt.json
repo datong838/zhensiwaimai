@@ -1,0 +1,93 @@
+{
+  "ok": false,
+  "runId": "jinsha-exam10-20260904",
+  "startedAt": 1788536264790,
+  "deadline": 1788536444790,
+  "stage": "phone",
+  "stageMs": {
+    "desktop": 18351,
+    "handoff": 36,
+    "downloads": 18416,
+    "build": 7354,
+    "phone": 300947
+  },
+  "nodes": [
+    {
+      "name": "build",
+      "startedAt": 1788536283206,
+      "finishedAt": 1788536290560,
+      "elapsedMs": 7354,
+      "ok": true,
+      "llmIntervention": false
+    },
+    {
+      "name": "phone",
+      "startedAt": 1788536290560,
+      "finishedAt": 1788536591507,
+      "elapsedMs": 300947,
+      "ok": false,
+      "llmIntervention": false
+    }
+  ],
+  "desktop": {
+    "ok": true,
+    "startedAt": 1788536264790,
+    "deadline": 1788536444790,
+    "clicks": {
+      "meituan": 1,
+      "taobao": 1
+    },
+    "stage": "complete",
+    "nodes": [
+      {
+        "name": "meituan.platform",
+        "elapsedMs": 1160
+      },
+      {
+        "name": "meituan.date",
+        "elapsedMs": 1718
+      },
+      {
+        "name": "meituan.plan",
+        "elapsedMs": 1483
+      },
+      {
+        "name": "meituan.metrics",
+        "elapsedMs": 0
+      },
+      {
+        "name": "meituan.download-save",
+        "elapsedMs": 4663
+      },
+      {
+        "name": "taobao.platform",
+        "elapsedMs": 1453
+      },
+      {
+        "name": "taobao.date",
+        "elapsedMs": 1442
+      },
+      {
+        "name": "taobao.plan",
+        "elapsedMs": 1301
+      },
+      {
+        "name": "taobao.metrics",
+        "elapsedMs": 962
+      },
+      {
+        "name": "taobao.download-save",
+        "elapsedMs": 3060
+      }
+    ],
+    "efficiencyExceeded": false,
+    "elapsedMs": 18351
+  },
+  "efficiencyExceeded": false,
+  "reason": "Command failed: /Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python /Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-jinsha-reports-to-wechat/scripts/wechat_file_sender.py --build-receipt /Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/runs/jinsha-20260904/exam10/build-receipt.json --send-receipt /Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/runs/jinsha-20260904/exam10/send-receipt.json --execute --keep-work --authorization zhensi-test-main-wechat-jinsha-files-v1 --deadline-unix 1788536444.79\n",
+  "phoneOutput": "{\"ok\": false, \"executor\": \"wechat-file-sender\", \"groupName\": \"臻肆测试群\", \"sent\": [], \"sendAttempts\": 0, \"stage\": \"choose\", \"nodes\": [{\"name\": \"device_identity\", \"elapsedMs\": 403, \"ok\": true, \"startedAt\": 1788536290.772779, \"finishedAt\": 1788536291.176037, \"llmIntervention\": false}, {\"name\": \"locate_group\", \"elapsedMs\": 8197, \"ok\": true, \"startedAt\": 1788536298.7037802, \"finishedAt\": 1788536306.901279, \"llmIntervention\": false}, {\"name\": \"meituan.file_panel\", \"elapsedMs\": 5596, \"ok\": true, \"startedAt\": 1788536308.11363, \"finishedAt\": 1788536313.709246, \"llmIntervention\": false}, {\"name\": \"meituan.select_file\", \"elapsedMs\": 61906, \"ok\": false, \"startedAt\": 1788536314.697093, \"finishedAt\": 1788536376.603318, \"llmIntervention\": false}, {\"name\": \"meituan.choose_file\", \"elapsedMs\": 55849, \"ok\": false, \"startedAt\": 1788536377.4476311, \"finishedAt\": 1788536433.2966669, \"llmIntervention\": false}, {\"name\": \"meituan.choose_file\", \"elapsedMs\": 54860, \"ok\": false, \"startedAt\": 1788536434.683878, \"finishedAt\": 1788536489.543944, \"llmIntervention\": false}, {\"name\": \"meituan.choose_file\", \"elapsedMs\": 55839, \"ok\": false, \"startedAt\": 1788536491.923669, \"finishedAt\": 1788536547.762651, \"llmIntervention\": false}, {\"name\": \"meituan.choose_file\", \"elapsedMs\": 39362, \"ok\": false, \"startedAt\": 1788536552.105224, \"finishedAt\": 1788536591.467684, \"llmIntervention\": false}], \"device\": {\"identityHash\": \"f2724cf436e9\", \"model\": \"HLK-AL00\", \"transport\": \"usb\", \"verifiedEndpoints\": 2}, \"files\": [{\"platform\": \"meituan\", \"file\": \"/Users/ddt/work/臻肆/报表/考核10-20260904/美团0903测试10.xlsx\", \"name\": \"美团0903测试10.xlsx\", \"size\": 121964, \"sha256\": \"b8fb690a2ac9eba5f27d91accbeb04d9725431bc5afba1b01f33436962c65584\"}, {\"platform\": \"taobao\", \"file\": \"/Users/ddt/work/臻肆/报表/考核10-20260904/淘宝0903测试10.xlsx\", \"name\": \"淘宝0903测试10.xlsx\", \"size\": 131922, \"sha256\": \"ec37c52e38628a5e8252681616c096ef9497b1ba18379dc5f8ce3fd977d2e8ec\"}], \"checkpoint\": \"/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/runs/jinsha-20260904/exam10/send-receipt.json.checkpoint.json\", \"panel\": {\"panelScreenshot\": \"/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/zhensi-jinsha-wechat-mu8jh8ok/plus-panel-2b.png\", \"entry\": {\"x\": 166, \"y\": 2090, \"w\": 68, \"h\": 38, \"confidence\": 1.0, \"text\": \"文件\"}, \"music\": {\"x\": 414, \"y\": 2090, \"w\": 68, \"h\": 38, \"confidence\": 1.0, \"text\": \"音乐\"}, \"method\": \"stable-ocr-structural\"}, \"reason\": \"('Unknown RPC error: -32001 java.lang.SecurityException', (540, 1804, 540, 1052, 70), 'java.lang.SecurityException: Injecting to another application requires INJECT_EVENTS permission\\\\n\\\\tat android.os.Parcel.createException(Parcel.java:2091)\\\\n\\\\tat android.os.Parcel.readException(Parcel.java:2059)\\\\n\\\\tat android.os.Parcel.readException(Parcel.java:2007)\\\\n\\\\tat android.view.IWindowManager$Stub$Proxy.injectInputAfterTransactionsApplied(IWindowManager.java:4912)\\\\n\\\\tat android.app.UiAutomationConnection.injectInputEvent(UiAutomationConnection.java:131)\\\\n\\\\tat android.app.UiAutomation.injectInputEvent(UiAutomation.java:597)\\\\n\\\\tat androidx.test.uiautomator.InteractionController.injectEventSync(InteractionController.java:494)\\\\n\\\\tat androidx.test.uiautomator.InteractionController.touchMove(InteractionController.java:259)\\\\n\\\\tat androidx.test.uiautomator.InteractionController.swipe(InteractionController.java:334)\\\\n\\\\tat androidx.test.uiautomator.InteractionController.swipe(InteractionController.java:303)\\\\n\\\\tat androidx.test.uiautomator.UiDevice.swipe(UiDevice.java:631)\\\\n\\\\tat com.wetest.uia2.stub.AutomatorServiceImpl.swipe(AutomatorServiceImpl.java:232)\\\\n\\\\tat java.lang.reflect.Method.invoke(Native Method)\\\\n\\\\tat com.googlecode.jsonrpc4j.JsonRpcBasicServer.invoke(JsonRpcBasicServer.java:467)\\\\n\\\\tat com.googlecode.jsonrpc4j.JsonRpcBasicServer.handleObject(JsonRpcBasicServer.java:352)\\\\n\\\\tat com.googlecode.jsonrpc4j.JsonRpcBasicServer.handleJsonNodeRequest(JsonRpcBasicServer.java:283)\\\\n\\\\tat com.googlecode.jsonrpc4j.JsonRpcBasicServer.handleRequest(JsonRpcBasicServer.java:251)\\\\n\\\\tat com.wetest.uia2.stub.AutomatorHttpServer.serve(AutomatorHttpServer.java:103)\\\\n\\\\tat fi.iki.elonen.NanoHTTPD.serve(NanoHTTPD.java:2244)\\\\n\\\\tat fi.iki.elonen.NanoHTTPD$HTTPSession.execute(NanoHTTPD.java:945)\\\\n\\\\tat fi.iki.elonen.NanoHTTPD$ClientHandler.run(NanoHTTPD.java:192)\\\\n\\\\tat java.lang.Thread.run(Thread.java:929)\\\\nCaused by: android.os.RemoteException: Remote stack trace:\\\\n\\\\tat com.android.server.input.InputManagerService.injectInputEventInternal(libmapleservices.so:5158616)\\\\n\\\\tat com.android.server.wm.WindowManagerService.injectInputAfterTransactionsApplied(libmapleservices.so:8326488)\\\\n\\\\tat android.view.IWindowManager$Stub.onTransact(libmapleframework.so:5270424)\\\\n\\\\tat com.android.server.wm.WindowManagerService.onTransact(libmapleservices.so:6741832)\\\\n\\\\tat com.android.server.wm.HwWindowManagerService.onTransact(libmaplehwServices.so:2350496)\\\\ncallee: null 1840/6575\\\\n\\\\n')\", \"businessCompleted\": false, \"efficiencyExceeded\": true, \"efficiencyStatus\": \"效率未达标\", \"elapsedMs\": 300720, \"workDir\": \"/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/zhensi-jinsha-wechat-mu8jh8ok\"}\n",
+  "elapsedMs": 326717,
+  "businessCompleted": false,
+  "efficiencyPassed": false,
+  "efficiencyStatus": "效率未达标"
+}

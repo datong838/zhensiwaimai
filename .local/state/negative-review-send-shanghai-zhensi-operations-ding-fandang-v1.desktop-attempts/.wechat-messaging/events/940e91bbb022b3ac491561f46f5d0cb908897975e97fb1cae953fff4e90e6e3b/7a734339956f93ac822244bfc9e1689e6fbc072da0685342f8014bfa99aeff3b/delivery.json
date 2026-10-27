@@ -1,0 +1,49 @@
+{
+  "itemId": "0",
+  "sha256": "2c5a83291f5de3d5656186d34463b8b74e53369d2dff9180bbd536a23f7a496c",
+  "type": "file",
+  "status": "unknown",
+  "claimedAt": 1792804152.353228,
+  "sendAttempts": 3,
+  "reason": "send-keys-issued-outcome-unconfirmed",
+  "transport": {
+    "kind": "file",
+    "sendAttempts": 3,
+    "sent": null,
+    "receipt": {
+      "result": "send-fail",
+      "steps": [
+        {
+          "navigate": "chat-title-verified:'上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰'"
+        },
+        {
+          "title_gate": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰"
+        },
+        {
+          "paste": true,
+          "try": 1
+        },
+        {
+          "title_gate_final": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰"
+        },
+        {
+          "send_attempts": [
+            {
+              "try": "enter",
+              "input_clean": false
+            },
+            {
+              "try": "ctrl-enter",
+              "input_clean": false
+            },
+            {
+              "try": "esc-enter",
+              "input_clean": false
+            }
+          ],
+          "sent": false
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "ok": true,
+  "runId": "jinsha-business-browser-20260910-09",
+  "startedAt": 1789055749158,
+  "deadline": 1789055929158,
+  "executor": "jinsha-browser-download",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "jinsha-business",
+  "port": 9232,
+  "businessDate": "2026-09-09",
+  "runtimeModelDecisions": 0,
+  "clicks": {
+    "meituan": 1,
+    "taobao": 1
+  },
+  "files": {
+    "meituan": {
+      "name": "美团原始数据_2026-09-09_业务browser09.xlsx",
+      "file": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/runs/jinsha-business-browser-20260910/09/美团原始数据_2026-09-09_业务browser09.xlsx",
+      "size": 105625,
+      "sha256": "06443fb27160327f2f9e7de693aa763e314fcc025bb3b3274bba0807ec65ee06",
+      "downloadStartedAt": 1789055759992,
+      "savedAt": 1789055760797
+    },
+    "taobao": {
+      "name": "淘宝闪购原始数据_2026-09-09_业务browser09.xlsx",
+      "file": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/runs/jinsha-business-browser-20260910/09/淘宝闪购原始数据_2026-09-09_业务browser09.xlsx",
+      "size": 108007,
+      "sha256": "cf035532ba5a648a788096660c420d9eb930866e342c7e194daa29fbff63fb7a",
+      "downloadStartedAt": 1789055762827,
+      "savedAt": 1789055763340
+    }
+  },
+  "stage": "complete",
+  "nodes": [
+    {
+      "name": "background_preflight",
+      "elapsedMs": 40,
+      "ok": true,
+      "llmIntervention": false
+    },
+    {
+      "name": "task_page",
+      "elapsedMs": 2124,
+      "ok": true,
+      "llmIntervention": false
+    },
+    {
+      "name": "navigation",
+      "elapsedMs": 4000,
+      "ok": true,
+      "llmIntervention": false
+    },
+    {
+      "name": "known_overlay",
+      "elapsedMs": 2501,
+      "ok": true,
+      "llmIntervention": false
+    },
+    {
+      "name": "meituan.download",
+      "elapsedMs": 2718,
+      "ok": true,
+      "llmIntervention": false
+    },
+    {
+      "name": "taobao.download",
+      "elapsedMs": 2543,
+      "ok": true,
+      "llmIntervention": false
+    }
+  ],
+  "frontmostBefore": "com.tencent.xinWeChat",
+  "lease": {
+    "path": "/tmp/zhensi-jinsha-cua-exam.lock",
+    "acquiredAt": 1789055749413,
+    "released": true,
+    "releasedAt": 1789055763348
+  },
+  "jinshaResourceReleased": true,
+  "jinshaReleasedAt": 1789055763340,
+  "receiptIssuedAt": 1789055763340,
+  "url": "https://data.guoshuyufen.com/#/reportDownload",
+  "elapsedMs": 14190,
+  "efficiencyExceeded": false,
+  "frontmostAfter": "com.tencent.xinWeChat"
+}

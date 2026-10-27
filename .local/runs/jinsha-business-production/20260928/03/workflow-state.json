@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "jinsha-business-code-enforced-v1",
+  "runId": "jinsha-business-production-20260928-03",
+  "businessDate": "2026-09-27",
+  "phase": "created",
+  "status": "needs-maintenance",
+  "nextAction": null,
+  "runtimeModelDecisions": 0,
+  "attempts": {
+    "download": 0,
+    "send": 0,
+    "verify": 0
+  },
+  "events": [
+    {
+      "at": 1790610223314,
+      "type": "blocked",
+      "phase": "created",
+      "reason": "frozen-core-hash-mismatch:references/20260905-第13至14轮稳定性维护与复验.md",
+      "unexpected": true
+    }
+  ],
+  "config": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/jinsha-business-production/20260928/03/config.json",
+  "createdAt": 1790610223311,
+  "updatedAt": 1790610223314
+}

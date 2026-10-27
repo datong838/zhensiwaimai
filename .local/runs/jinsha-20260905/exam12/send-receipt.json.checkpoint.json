@@ -1,0 +1,222 @@
+{
+  "group": "臻肆测试群",
+  "hashes": {
+    "meituan": "8ac237caae21f8c7dc88342f1d29ff2961003dfe9d0f39c60a3c72e41f68bd39",
+    "taobao": "8509b934a067b981ecc42c3485100bc385f548972764f186fdd79fbf85df2ed0"
+  },
+  "events": [
+    {
+      "platform": "meituan",
+      "startedAt": 1788606728.502833,
+      "action": "locate",
+      "llmIntervention": false,
+      "page": "home",
+      "ok": false,
+      "reason": "main-wechat-not-foreground",
+      "retry": 1,
+      "backoffMs": 500,
+      "finishedAt": 1788606738.617944,
+      "elapsedMs": 10115
+    },
+    {
+      "platform": "meituan",
+      "startedAt": 1788606738.618624,
+      "action": "wait",
+      "llmIntervention": false,
+      "page": "obscured",
+      "ok": false,
+      "reason": "transient-page-obscured",
+      "retry": 2,
+      "backoffMs": 1000,
+      "finishedAt": 1788606739.9979799,
+      "elapsedMs": 1379
+    },
+    {
+      "platform": "meituan",
+      "startedAt": 1788606739.99917,
+      "action": "wait",
+      "llmIntervention": false,
+      "page": "obscured",
+      "ok": false,
+      "reason": "transient-page-obscured",
+      "retry": 3,
+      "backoffMs": 2000,
+      "finishedAt": 1788606742.378724,
+      "elapsedMs": 2380
+    },
+    {
+      "platform": "meituan",
+      "startedAt": 1788606742.380724,
+      "action": "wait",
+      "llmIntervention": false,
+      "page": "obscured",
+      "ok": false,
+      "reason": "transient-page-obscured",
+      "retry": 4,
+      "backoffMs": 4000,
+      "finishedAt": 1788606746.783724,
+      "elapsedMs": 4403
+    },
+    {
+      "platform": "meituan",
+      "startedAt": 1788606746.7868428,
+      "action": "wait",
+      "llmIntervention": false,
+      "page": "obscured",
+      "ok": false,
+      "reason": "transient-page-obscured",
+      "retry": 5,
+      "backoffMs": 4000,
+      "finishedAt": 1788606751.151256,
+      "elapsedMs": 4364
+    },
+    {
+      "platform": "meituan",
+      "startedAt": 1788606751.152033,
+      "action": "wait",
+      "llmIntervention": false,
+      "page": "obscured",
+      "ok": false,
+      "reason": "transient-page-obscured",
+      "finishedAt": 1788606751.542342,
+      "elapsedMs": 390
+    },
+    {
+      "platform": "meituan",
+      "startedAt": 1788606991.092854,
+      "action": "locate",
+      "llmIntervention": false,
+      "page": "home",
+      "ok": true,
+      "finishedAt": 1788607006.7814221,
+      "elapsedMs": 15689
+    },
+    {
+      "platform": "meituan",
+      "startedAt": 1788607006.782125,
+      "action": "wait",
+      "llmIntervention": false,
+      "page": "obscured",
+      "ok": false,
+      "reason": "transient-page-obscured",
+      "retry": 1,
+      "backoffMs": 500,
+      "finishedAt": 1788607008.488209,
+      "elapsedMs": 1706
+    },
+    {
+      "platform": "meituan",
+      "startedAt": 1788607008.491267,
+      "action": "panel",
+      "llmIntervention": false,
+      "page": "group",
+      "ok": true,
+      "finishedAt": 1788607015.045544,
+      "elapsedMs": 6554
+    },
+    {
+      "platform": "meituan",
+      "startedAt": 1788607015.047245,
+      "action": "select",
+      "llmIntervention": false,
+      "page": "file_selector",
+      "ok": false,
+      "reason": "report-list-not-stable",
+      "retry": 1,
+      "backoffMs": 500,
+      "finishedAt": 1788607030.118196,
+      "elapsedMs": 15071
+    },
+    {
+      "platform": "meituan",
+      "startedAt": 1788607030.1210449,
+      "action": "choose",
+      "llmIntervention": false,
+      "page": "picker",
+      "ok": true,
+      "finishedAt": 1788607034.2445178,
+      "elapsedMs": 4123
+    },
+    {
+      "platform": "meituan",
+      "startedAt": 1788607034.245867,
+      "action": "send",
+      "llmIntervention": false,
+      "page": "selected",
+      "ok": false,
+      "reason": "sent-bubble-not-stable-within-25s",
+      "retry": 1,
+      "backoffMs": 500,
+      "finishedAt": 1788607064.6876009,
+      "elapsedMs": 30442
+    },
+    {
+      "platform": "meituan",
+      "startedAt": 1788607064.689584,
+      "action": "verify",
+      "llmIntervention": false,
+      "page": "obscured",
+      "ok": true,
+      "finishedAt": 1788607085.725775,
+      "elapsedMs": 21036
+    },
+    {
+      "platform": "taobao",
+      "startedAt": 1788607085.7262988,
+      "action": "panel",
+      "llmIntervention": false,
+      "page": "group",
+      "ok": true,
+      "finishedAt": 1788607092.353111,
+      "elapsedMs": 6627
+    },
+    {
+      "platform": "taobao",
+      "startedAt": 1788607092.353933,
+      "action": "select",
+      "llmIntervention": false,
+      "page": "file_selector",
+      "ok": true,
+      "finishedAt": 1788607099.28207,
+      "elapsedMs": 6928
+    },
+    {
+      "platform": "taobao",
+      "startedAt": 1788607099.284023,
+      "action": "wait",
+      "llmIntervention": false,
+      "page": "obscured",
+      "ok": false,
+      "reason": "transient-page-obscured",
+      "retry": 1,
+      "backoffMs": 500,
+      "finishedAt": 1788607101.071767,
+      "elapsedMs": 1788
+    },
+    {
+      "platform": "taobao",
+      "startedAt": 1788607101.073911,
+      "action": "send",
+      "llmIntervention": false,
+      "page": "selected",
+      "ok": true,
+      "finishedAt": 1788607107.7905548,
+      "elapsedMs": 6717
+    }
+  ],
+  "createdAt": 1788606728.502222,
+  "current": {
+    "platform": "taobao",
+    "startedAt": 1788607101.073911,
+    "action": "send",
+    "llmIntervention": false,
+    "page": "selected",
+    "ok": true,
+    "finishedAt": 1788607107.7905548,
+    "elapsedMs": 6717
+  },
+  "groupVerified": true,
+  "activeHash": "8509b934a067b981ecc42c3485100bc385f548972764f186fdd79fbf85df2ed0",
+  "businessCompleted": true,
+  "finishedAt": 1788607228.7766669
+}

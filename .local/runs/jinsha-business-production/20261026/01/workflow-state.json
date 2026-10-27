@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "jinsha-business-code-enforced-v1",
+  "runId": "jinsha-business-production-20261026-01",
+  "businessDate": "2026-10-25",
+  "phase": "created",
+  "status": "needs-maintenance",
+  "nextAction": null,
+  "runtimeModelDecisions": 0,
+  "attempts": {
+    "download": 3,
+    "send": 0,
+    "verify": 0
+  },
+  "events": [
+    {
+      "at": 1792983695526,
+      "type": "executor-start",
+      "phase": "created"
+    },
+    {
+      "at": 1792983695526,
+      "type": "attempt",
+      "stage": "download",
+      "number": 1
+    },
+    {
+      "at": 1792983709314,
+      "type": "decision",
+      "stage": "download",
+      "decision": "retry-download",
+      "reason": "jinsha-shell-not-ready"
+    },
+    {
+      "at": 1792983709315,
+      "type": "attempt",
+      "stage": "download",
+      "number": 2
+    },
+    {
+      "at": 1792983740336,
+      "type": "decision",
+      "stage": "download",
+      "decision": "retry-download",
+      "reason": "page.goto: Timeout 30000ms exceeded.\nCall log:\n  - navigating to \"https://data.guoshuyufen.com/#/businessData/realTimeData\", waiting until \"commit\"\n"
+    },
+    {
+      "at": 1792983740337,
+      "type": "attempt",
+      "stage": "download",
+      "number": 3
+    },
+    {
+      "at": 1792983766195,
+      "type": "decision",
+      "stage": "download",
+      "decision": "retry-download",
+      "reason": "jinsha-shell-not-ready"
+    },
+    {
+      "at": 1792983766196,
+      "type": "blocked",
+      "phase": "created",
+      "reason": "download-retry-limit-exceeded"
+    }
+  ],
+  "config": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/jinsha-business-production/20261026/01/config.json",
+  "createdAt": 1792983695521,
+  "updatedAt": 1792983766196
+}

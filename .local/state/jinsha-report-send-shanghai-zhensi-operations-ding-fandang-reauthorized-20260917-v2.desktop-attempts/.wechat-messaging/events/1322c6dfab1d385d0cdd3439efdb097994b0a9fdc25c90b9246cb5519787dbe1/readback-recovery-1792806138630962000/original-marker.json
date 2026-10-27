@@ -1,0 +1,196 @@
+{
+  "bridgeVersion": 1,
+  "ok": false,
+  "verified": false,
+  "payloadType": "file",
+  "state": "unknown",
+  "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+  "payloads": [
+    {
+      "path": "/Volumes/NVME2T/work/臻肆/报表/2026-10-23-业务发布-production02/美团外卖日报_2026-10-23.xlsx",
+      "name": "美团外卖日报_2026-10-23.xlsx",
+      "size": 133263,
+      "sha256": "d63f925791bedf174d17718221978dd0923c67baeacac5c68f8480bf258e64d9"
+    },
+    {
+      "path": "/Volumes/NVME2T/work/臻肆/报表/2026-10-23-业务发布-production02/淘宝闪购日报_2026-10-23.xlsx",
+      "name": "淘宝闪购日报_2026-10-23.xlsx",
+      "size": 121386,
+      "sha256": "0f4b41a900c8ae7c7d3baa637a54105d8a1f53461485b45459f668a2c9480579"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": "wecom-tail-unconfirmed",
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": false,
+    "status": "unknown",
+    "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "channel": "desktop",
+    "requestDigest": "9ad4d6c220e372d0fcec72aa8edc6531c2b8e6328c92ab3baf1e78648b1a393f",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "d63f925791bedf174d17718221978dd0923c67baeacac5c68f8480bf258e64d9",
+        "type": "file",
+        "status": "unknown",
+        "claimedAt": 1792806036.726911,
+        "sendAttempts": 1,
+        "reason": "wecom-tail-unconfirmed",
+        "evidence": {
+          "tail_hit": false,
+          "media_marker_hit": false,
+          "sent": true,
+          "tail1": [
+            "上午 9:19",
+            "由微信用户创建的外部群，含45位外部联系人 | 群主: 李知恒- AllenLi@微信",
+            "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+            "250.0"
+          ]
+        },
+        "transport": {
+          "kind": "file",
+          "sendAttempts": 1,
+          "sent": true,
+          "receipt": {
+            "result": "sent-tail-unconfirmed",
+            "verify": {
+              "tail_hit": false,
+              "media_marker_hit": false,
+              "sent": true,
+              "tail1": [
+                "上午 9:19",
+                "由微信用户创建的外部群，含45位外部联系人 | 群主: 李知恒- AllenLi@微信",
+                "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+                "250.0"
+              ]
+            },
+            "steps": [
+              {
+                "navigate": "chat-title-verified:'上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰'"
+              },
+              {
+                "title_gate": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰"
+              },
+              {
+                "paste": true,
+                "try": 1
+              },
+              {
+                "title_gate_final": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰"
+              },
+              {
+                "send_attempts": [
+                  {
+                    "try": "enter",
+                    "input_clean": true
+                  }
+                ],
+                "sent": true
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:1",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 14494
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 68594
+      }
+    ],
+    "reason": "wecom-tail-unconfirmed",
+    "elapsedMs": 83197,
+    "eventKey": "1322c6dfab1d385d0cdd3439efdb097994b0a9fdc25c90b9246cb5519787dbe1",
+    "reviewSummary": {
+      "totalElapsedMs": 83197,
+      "result": "unknown",
+      "stageCount": 5,
+      "completedStages": 5,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/jinsha-report-send-shanghai-zhensi-operations-ding-fandang-reauthorized-20260917-v2.desktop-attempts/ad19e138d46d7f9d91f6ed2b5aca8457f01b6e6d64d2d2cb8999a305493ca4ed.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "freeze:1",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 3,
+      "label": "freeze:1"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 14494,
+      "item": 4,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "failed",
+      "pitfalls": [
+        {
+          "code": "messaging-stage",
+          "reason": "wecom-tail-unconfirmed"
+        }
+      ],
+      "elapsedMs": 68594,
+      "item": 5,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 83197,
+  "reviewSummary": {
+    "totalElapsedMs": 83197,
+    "itemCount": 5,
+    "pitfallCount": 1,
+    "result": "failed"
+  }
+}

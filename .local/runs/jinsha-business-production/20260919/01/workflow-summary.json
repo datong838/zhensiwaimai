@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "jinsha-business-code-enforced-v1",
+  "runId": "jinsha-business-production-20260919-01",
+  "businessDate": "2026-09-18",
+  "status": "needs-maintenance",
+  "phase": "created",
+  "nextAction": null,
+  "totalElapsedMs": 2267,
+  "nodes": [
+    {
+      "name": "download",
+      "attempts": 3,
+      "startedAt": 1789787048812,
+      "finishedAt": 1789787051070,
+      "elapsedMs": 2258,
+      "complete": false
+    }
+  ],
+  "pitfalls": [
+    {
+      "at": 1789787049716,
+      "stage": "download",
+      "type": "recovery",
+      "detail": "retry-download",
+      "reason": "jinsha-background-process-not-alive"
+    },
+    {
+      "at": 1789787050396,
+      "stage": "download",
+      "type": "recovery",
+      "detail": "retry-download",
+      "reason": "jinsha-background-process-not-alive"
+    },
+    {
+      "at": 1789787051069,
+      "stage": "download",
+      "type": "recovery",
+      "detail": "retry-download",
+      "reason": "jinsha-background-process-not-alive"
+    },
+    {
+      "at": 1789787051070,
+      "stage": "created",
+      "type": "blocked",
+      "detail": "download-retry-limit-exceeded"
+    }
+  ],
+  "codeEnforced": true,
+  "reviewItems": [
+    {
+      "name": "download",
+      "attempts": 3,
+      "startedAt": 1789787048812,
+      "finishedAt": 1789787051070,
+      "elapsedMs": 2258,
+      "complete": false,
+      "pitfalls": [
+        {
+          "at": 1789787049716,
+          "stage": "download",
+          "type": "recovery",
+          "detail": "retry-download",
+          "reason": "jinsha-background-process-not-alive"
+        },
+        {
+          "at": 1789787050396,
+          "stage": "download",
+          "type": "recovery",
+          "detail": "retry-download",
+          "reason": "jinsha-background-process-not-alive"
+        },
+        {
+          "at": 1789787051069,
+          "stage": "download",
+          "type": "recovery",
+          "detail": "retry-download",
+          "reason": "jinsha-background-process-not-alive"
+        }
+      ]
+    }
+  ],
+  "runtimeModelDecisions": 0,
+  "generatedAt": 1789787051070
+}

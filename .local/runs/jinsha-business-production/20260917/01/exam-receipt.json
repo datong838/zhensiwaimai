@@ -1,0 +1,194 @@
+{
+  "ok": false,
+  "runId": "jinsha-business-production-20260917-01",
+  "groupName": "FEIBING NEO AI数字员工",
+  "startedAt": 1789614118318,
+  "deadline": 1789614298318,
+  "stage": "desktop-verify",
+  "nodes": [
+    {
+      "name": "build",
+      "startedAt": 1789614130856,
+      "finishedAt": 1789614138020,
+      "elapsedMs": 7164,
+      "ok": true,
+      "llmIntervention": false
+    },
+    {
+      "name": "delivery-channel-selection",
+      "startedAt": 1789614138499,
+      "finishedAt": 1789614138500,
+      "elapsedMs": 1,
+      "ok": true,
+      "llmIntervention": false
+    },
+    {
+      "name": "desktop",
+      "startedAt": 1789614138500,
+      "finishedAt": 1789614156953,
+      "elapsedMs": 18453,
+      "ok": false,
+      "llmIntervention": false
+    },
+    {
+      "name": "delivery-channel-selection",
+      "startedAt": 1789614157399,
+      "finishedAt": 1789614158012,
+      "elapsedMs": 613,
+      "ok": false,
+      "llmIntervention": false
+    },
+    {
+      "name": "delivery-channel-selection",
+      "startedAt": 1789614161468,
+      "finishedAt": 1789614162077,
+      "elapsedMs": 609,
+      "ok": false,
+      "llmIntervention": false
+    },
+    {
+      "name": "delivery-channel-selection",
+      "startedAt": 1789614165524,
+      "finishedAt": 1789614166129,
+      "elapsedMs": 605,
+      "ok": false,
+      "llmIntervention": false
+    },
+    {
+      "name": "delivery-channel-selection",
+      "startedAt": 1789614169578,
+      "finishedAt": 1789614170180,
+      "elapsedMs": 602,
+      "ok": false,
+      "llmIntervention": false
+    }
+  ],
+  "desktop": {
+    "ok": true,
+    "runId": "jinsha-business-production-20260917-01",
+    "startedAt": 1789614118318,
+    "deadline": 1789614298318,
+    "executor": "jinsha-browser-download",
+    "browserController": "control-background-dedicated-chrome",
+    "profile": "jinsha-business",
+    "port": 9232,
+    "businessDate": "2026-09-16",
+    "runtimeModelDecisions": 0,
+    "clicks": {
+      "meituan": 1,
+      "taobao": 1
+    },
+    "files": {
+      "meituan": {
+        "name": "美团原始数据_2026-09-16_production01.xlsx",
+        "suggestedFilename": "美团全部_2026-09-16至2026-09-16.xlsx",
+        "file": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/runs/jinsha-business-production/20260917/01/美团原始数据_2026-09-16_production01.xlsx",
+        "size": 103558,
+        "sha256": "a88f83e43817bcd7dcc9f3bd0c6eee5f17be58b8f7fcac90351e5923c575bfa4",
+        "downloadStartedAt": 1789614125758,
+        "savedAt": 1789614127040,
+        "captureMode": "task-page-staging-recovery"
+      },
+      "taobao": {
+        "name": "淘宝闪购原始数据_2026-09-16_production01.xlsx",
+        "suggestedFilename": "淘宝闪购_2026-09-16至2026-09-16.xlsx",
+        "file": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/runs/jinsha-business-production/20260917/01/淘宝闪购原始数据_2026-09-16_production01.xlsx",
+        "size": 95372,
+        "sha256": "f48e147e018d73bc7b6c25e13cca1b46d3061411e9cc4968da9fdb868ec6c5c2",
+        "downloadStartedAt": 1789614129262,
+        "savedAt": 1789614130215,
+        "captureMode": "task-page-staging-recovery"
+      }
+    },
+    "stage": "complete",
+    "nodes": [
+      {
+        "name": "background_preflight",
+        "elapsedMs": 58,
+        "ok": true,
+        "llmIntervention": false
+      },
+      {
+        "name": "task_page",
+        "elapsedMs": 1623,
+        "ok": true,
+        "llmIntervention": false
+      },
+      {
+        "name": "navigation",
+        "elapsedMs": 945,
+        "ok": true,
+        "llmIntervention": false
+      },
+      {
+        "name": "known_overlay",
+        "elapsedMs": 2615,
+        "ok": true,
+        "llmIntervention": false
+      },
+      {
+        "name": "meituan.download",
+        "elapsedMs": 3333,
+        "ok": true,
+        "llmIntervention": false
+      },
+      {
+        "name": "taobao.download",
+        "elapsedMs": 3172,
+        "ok": true,
+        "llmIntervention": false
+      }
+    ],
+    "frontmostBefore": "com.tencent.xinWeChat",
+    "lease": {
+      "path": "/tmp/zhensi-jinsha-cua-exam.lock",
+      "acquiredAt": 1789614118466,
+      "released": true,
+      "releasedAt": 1789614130242
+    },
+    "jinshaResourceReleased": true,
+    "jinshaReleasedAt": 1789614130216,
+    "receiptIssuedAt": 1789614130216,
+    "url": "https://data.guoshuyufen.com/#/reportDownload",
+    "elapsedMs": 11924,
+    "efficiencyExceeded": false,
+    "frontmostAfter": "com.tencent.xinWeChat"
+  },
+  "preflight": {
+    "ok": true,
+    "runId": "jinsha-business-production-20260917-01",
+    "groupName": "FEIBING NEO AI数字员工",
+    "businessDate": "2026-09-16",
+    "authorization": "zhensi-business-main-wechat-feibing-neo-ai-daily-v1",
+    "requestedWechatChannel": "desktop",
+    "wecomEnterprise": "上海臻肆文化传播有限公司",
+    "wecomSpace": "金鲨昨日双平台日报业务群",
+    "wecomAuthorization": "zhensi-business-wecom-jinsha-daily-v1",
+    "files": {
+      "meituan": {
+        "name": "美团外卖日报_2026-09-16.xlsx",
+        "path": "/Users/ddt/work/臻肆/报表/2026-09-16-业务发布-production01/美团外卖日报_2026-09-16.xlsx",
+        "size": 119250,
+        "sha256": "26173c622bf78b10d0d49befa4cc46501733222c32ef2fafaa2a4feda1ba9fbe"
+      },
+      "taobao": {
+        "name": "淘宝闪购日报_2026-09-16.xlsx",
+        "path": "/Users/ddt/work/臻肆/报表/2026-09-16-业务发布-production01/淘宝闪购日报_2026-09-16.xlsx",
+        "size": 111601,
+        "sha256": "d3eae70f2f3abc2f8b7eaf42bc7ef8f978ee04a726fea6ef32b82553e2bf5d65"
+      }
+    },
+    "preparedAt": 1789614138021
+  },
+  "elapsedMs": 51862,
+  "businessCompleted": false,
+  "efficiencyStatus": "尚未完成",
+  "deliverySelection": {
+    "requestedChannel": "desktop",
+    "selectedChannel": "desktop",
+    "reason": "explicit-channel"
+  },
+  "reason": "Command failed: /Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python /Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-jinsha-reports-to-business-wechat/scripts/business_desktop_wechat_file_sender.py --build-receipt /Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/runs/jinsha-business-production/20260917/01/build-receipt.json --send-receipt /Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/runs/jinsha-business-production/20260917/01/send-verify-receipt.json --keep-work --group FEIBING NEO AI数字员工 --verify-only\n",
+  "phoneOutput": "{\"ok\": false, \"groupName\": \"FEIBING NEO AI数字员工\", \"sent\": [], \"channel\": \"desktop\", \"desktopWechatPreflight\": {\"ok\": true, \"action\": \"open-group\", \"group\": \"FEIBING NEO AI数字员工\", \"header\": \"FEIBING NEO AI数字员工\", \"note\": \"ax-current-header\", \"reason\": null, \"sendAttempts\": 0, \"runtimeModelDecisions\": 0, \"stageMs\": {\"exact_group_preflight\": 308}, \"artifacts\": [], \"hardGate\": false, \"groupTypeVerified\": true, \"attempts\": [{\"reason\": null, \"elapsedMs\": {\"exact_group_preflight\": 308}}]}, \"reason\": \"desktop-verified-receipt-missing\"}\n",
+  "efficiencyPassed": false
+}

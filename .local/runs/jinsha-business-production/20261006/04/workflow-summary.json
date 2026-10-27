@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "jinsha-business-code-enforced-v1",
+  "runId": "jinsha-business-production-20261006-04",
+  "businessDate": "2026-10-05",
+  "status": "complete",
+  "phase": "complete",
+  "nextAction": null,
+  "totalElapsedMs": 1632713,
+  "nodes": [
+    {
+      "name": "download",
+      "attempts": 1,
+      "startedAt": 1791259997361,
+      "finishedAt": 1791260011790,
+      "elapsedMs": 14429,
+      "complete": true
+    },
+    {
+      "name": "prepare",
+      "attempts": 1,
+      "startedAt": 1791260011791,
+      "finishedAt": 1791260041335,
+      "elapsedMs": 29544,
+      "complete": true
+    },
+    {
+      "name": "send",
+      "attempts": 5,
+      "startedAt": 1791260041337,
+      "finishedAt": 1791261629131,
+      "elapsedMs": 1587794,
+      "complete": true
+    },
+    {
+      "name": "verify",
+      "attempts": 1,
+      "startedAt": 1791261629135,
+      "finishedAt": 1791261630059,
+      "elapsedMs": 924,
+      "complete": true
+    },
+    {
+      "name": "finalize",
+      "attempts": 1,
+      "startedAt": 1791261630063,
+      "finishedAt": 1791261630066,
+      "elapsedMs": 3,
+      "complete": true
+    }
+  ],
+  "pitfalls": [
+    {
+      "at": 1791260058936,
+      "stage": "prepared",
+      "type": "blocked",
+      "detail": "desktop-preflight-retry-limit-exceeded"
+    },
+    {
+      "at": 1791261630066,
+      "stage": "workflow",
+      "type": "efficiency-budget-exceeded",
+      "detail": "1632713>180000"
+    }
+  ],
+  "codeEnforced": true,
+  "reviewItems": [
+    {
+      "name": "download",
+      "attempts": 1,
+      "startedAt": 1791259997361,
+      "finishedAt": 1791260011790,
+      "elapsedMs": 14429,
+      "complete": true,
+      "pitfalls": []
+    },
+    {
+      "name": "prepare",
+      "attempts": 1,
+      "startedAt": 1791260011791,
+      "finishedAt": 1791260041335,
+      "elapsedMs": 29544,
+      "complete": true,
+      "pitfalls": []
+    },
+    {
+      "name": "send",
+      "attempts": 5,
+      "startedAt": 1791260041337,
+      "finishedAt": 1791261629131,
+      "elapsedMs": 1587794,
+      "complete": true,
+      "pitfalls": [
+        {
+          "at": 1791260058936,
+          "stage": "prepared",
+          "type": "blocked",
+          "detail": "desktop-preflight-retry-limit-exceeded"
+        }
+      ]
+    },
+    {
+      "name": "verify",
+      "attempts": 1,
+      "startedAt": 1791261629135,
+      "finishedAt": 1791261630059,
+      "elapsedMs": 924,
+      "complete": true,
+      "pitfalls": []
+    },
+    {
+      "name": "finalize",
+      "attempts": 1,
+      "startedAt": 1791261630063,
+      "finishedAt": 1791261630066,
+      "elapsedMs": 3,
+      "complete": true,
+      "pitfalls": []
+    }
+  ],
+  "runtimeModelDecisions": 0,
+  "generatedAt": 1791261630066
+}

@@ -1,0 +1,250 @@
+{
+  "ok": true,
+  "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+  "sent": [
+    {
+      "platform": "meituan",
+      "file": "/Volumes/NVME2T/work/臻肆/报表/2026-10-20-业务发布-production01/美团外卖日报_2026-10-20.xlsx",
+      "name": "美团外卖日报_2026-10-20.xlsx",
+      "size": 127847,
+      "sha256": "f8506c6742ba6152e713e60333065a7c7c4ec3c9ced64aa14e333ef6f4bd9b09"
+    },
+    {
+      "platform": "taobao",
+      "file": "/Volumes/NVME2T/work/臻肆/报表/2026-10-20-业务发布-production01/淘宝闪购日报_2026-10-20.xlsx",
+      "name": "淘宝闪购日报_2026-10-20.xlsx",
+      "size": 113809,
+      "sha256": "1e8c211098672791be61026230e78893986a44bb57da9c2b7d12868020c1f9bd"
+    }
+  ],
+  "channel": "desktop",
+  "desktopWechatPreflight": {
+    "ok": true,
+    "reason": null,
+    "sendAttempts": 0,
+    "group": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "resolvedGroup": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "candidateStrategy": "windows-exact",
+    "sessionListVerified": true,
+    "groupTypeVerified": true,
+    "groupTypeProof": "windows-session-list-name",
+    "health": {
+      "ready": true,
+      "logged_in": true
+    },
+    "attempts": []
+  },
+  "desktop": {
+    "bridgeVersion": 1,
+    "ok": true,
+    "verified": true,
+    "payloadType": "file",
+    "state": "verified",
+    "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "payloads": [
+      {
+        "path": "/Volumes/NVME2T/work/臻肆/报表/2026-10-20-业务发布-production01/美团外卖日报_2026-10-20.xlsx",
+        "name": "美团外卖日报_2026-10-20.xlsx",
+        "size": 127847,
+        "sha256": "f8506c6742ba6152e713e60333065a7c7c4ec3c9ced64aa14e333ef6f4bd9b09"
+      },
+      {
+        "path": "/Volumes/NVME2T/work/臻肆/报表/2026-10-20-业务发布-production01/淘宝闪购日报_2026-10-20.xlsx",
+        "name": "淘宝闪购日报_2026-10-20.xlsx",
+        "size": 113809,
+        "sha256": "1e8c211098672791be61026230e78893986a44bb57da9c2b7d12868020c1f9bd"
+      }
+    ],
+    "sendAttempts": 2,
+    "newSendAttempts": 2,
+    "reason": null,
+    "runtimeModelDecisions": 0,
+    "commonReceipt": {
+      "ok": true,
+      "status": "verified",
+      "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+      "channel": "desktop",
+      "requestDigest": "45f11eab97aace678ec467d0042305e0286fa306d43e7616e64e716b3174e887",
+      "runtimeModelDecisions": 0,
+      "items": [
+        {
+          "itemId": "0",
+          "sha256": "f8506c6742ba6152e713e60333065a7c7c4ec3c9ced64aa14e333ef6f4bd9b09",
+          "type": "file",
+          "status": "verified",
+          "claimedAt": 1792553196.015326,
+          "sendAttempts": 1,
+          "verificationLevel": "windows-readback-file-card",
+          "evidence": {
+            "ok": true,
+            "resolvedGroup": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+            "currentTitle": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+            "messageCount": 30,
+            "anchor": "file-card",
+            "anchorValue": "[文件]",
+            "anchorInTrailingPosition": true,
+            "autoKind": "file",
+            "readbackAt": 1792553237.982667
+          },
+          "transport": {
+            "ok": true,
+            "data": {
+              "sent": true,
+              "who": "上海臻肆外卖运营-盯个盯-饭敢当",
+              "path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\美团外卖日报_2026-10-20.xlsx",
+              "kind": "file",
+              "auto": "file",
+              "uploaded_from": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/jinsha-report-send-shanghai-zhensi-operations-ding-fandang-reauthorized-20260917-v2.desktop-attempts/.wechat-messaging/events/0147b6b05f0e798160bc1f31940d02bf40e70d2113b1cf83c173600cae41efb5/f5956227aa6a6d336b9dd4e69403e329735809485a1f5e3f0e7ae2a85cf72da6/payload/美团外卖日报_2026-10-20.xlsx",
+              "server_path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\美团外卖日报_2026-10-20.xlsx"
+            },
+            "route": "relay",
+            "direct_error": "[Errno 65] No route to host",
+            "direct_local_network_blocked": true,
+            "sendAttempts": 1
+          }
+        },
+        {
+          "itemId": "1",
+          "sha256": "1e8c211098672791be61026230e78893986a44bb57da9c2b7d12868020c1f9bd",
+          "type": "file",
+          "status": "verified",
+          "claimedAt": 1792553237.987605,
+          "sendAttempts": 1,
+          "verificationLevel": "windows-readback-file-card",
+          "evidence": {
+            "ok": true,
+            "resolvedGroup": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+            "currentTitle": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+            "messageCount": 31,
+            "anchor": "file-card",
+            "anchorValue": "[文件]",
+            "anchorInTrailingPosition": true,
+            "autoKind": "file",
+            "readbackAt": 1792553279.7526
+          },
+          "transport": {
+            "ok": true,
+            "data": {
+              "sent": true,
+              "who": "上海臻肆外卖运营-盯个盯-饭敢当",
+              "path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\淘宝闪购日报_2026-10-20.xlsx",
+              "kind": "file",
+              "auto": "file",
+              "uploaded_from": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/jinsha-report-send-shanghai-zhensi-operations-ding-fandang-reauthorized-20260917-v2.desktop-attempts/.wechat-messaging/events/0147b6b05f0e798160bc1f31940d02bf40e70d2113b1cf83c173600cae41efb5/a617e2438d55162504e057fe2180368a26a4c9fb1de7c7701300e15da62015ad/payload/淘宝闪购日报_2026-10-20.xlsx",
+              "server_path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\淘宝闪购日报_2026-10-20.xlsx"
+            },
+            "route": "relay",
+            "direct_error": "[Errno 65] No route to host",
+            "direct_local_network_blocked": true,
+            "sendAttempts": 1
+          }
+        }
+      ],
+      "review": [
+        {
+          "stage": "authorization",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "freeze:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "freeze:1",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "preflight",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 9333
+        },
+        {
+          "stage": "send:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 41967
+        },
+        {
+          "stage": "send:1",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 41765
+        }
+      ],
+      "elapsedMs": 93077,
+      "eventKey": "0147b6b05f0e798160bc1f31940d02bf40e70d2113b1cf83c173600cae41efb5",
+      "reviewSummary": {
+        "totalElapsedMs": 93077,
+        "result": "verified",
+        "stageCount": 6,
+        "completedStages": 6,
+        "failedStages": []
+      }
+    },
+    "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/jinsha-report-send-shanghai-zhensi-operations-ding-fandang-reauthorized-20260917-v2.desktop-attempts/06c6965899fc458446832853ba8562a782b155aea0d2670b4ebe954c601798e0.json",
+    "sendReview": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0,
+        "item": 1,
+        "label": "authorization"
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0,
+        "item": 2,
+        "label": "freeze:0"
+      },
+      {
+        "stage": "freeze:1",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0,
+        "item": 3,
+        "label": "freeze:1"
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 9333,
+        "item": 4,
+        "label": "preflight"
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 41967,
+        "item": 5,
+        "label": "send:0"
+      },
+      {
+        "stage": "send:1",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 41765,
+        "item": 6,
+        "label": "send:1"
+      }
+    ],
+    "elapsedMs": 93077,
+    "reviewSummary": {
+      "totalElapsedMs": 93077,
+      "itemCount": 6,
+      "pitfallCount": 0,
+      "result": "success"
+    }
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "jinsha-business-code-enforced-v1",
+  "runId": "jinsha-business-production-20260918-01",
+  "businessDate": "2026-09-17",
+  "phase": "prepared",
+  "status": "needs-maintenance",
+  "nextAction": null,
+  "runtimeModelDecisions": 0,
+  "attempts": {
+    "download": 1,
+    "send": 1,
+    "verify": 0
+  },
+  "events": [
+    {
+      "at": 1789700646519,
+      "type": "executor-start",
+      "phase": "created"
+    },
+    {
+      "at": 1789700646519,
+      "type": "attempt",
+      "stage": "download",
+      "number": 1
+    },
+    {
+      "at": 1789700661981,
+      "type": "decision",
+      "stage": "download",
+      "decision": "downloaded"
+    },
+    {
+      "at": 1789700661983,
+      "type": "transition",
+      "from": "created",
+      "to": "downloaded",
+      "evidence": {
+        "receipt": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/runs/jinsha-business-production/20260918/01/download-ui.json"
+      }
+    },
+    {
+      "at": 1789700661983,
+      "type": "attempt",
+      "stage": "prepare",
+      "number": 1
+    },
+    {
+      "at": 1789700669500,
+      "type": "transition",
+      "from": "downloaded",
+      "to": "prepared",
+      "evidence": {
+        "receipt": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/runs/jinsha-business-production/20260918/01/send-preflight.json"
+      }
+    },
+    {
+      "at": 1789700669501,
+      "type": "decision",
+      "stage": "send",
+      "decision": "retry-send",
+      "marker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/state/jinsha-report-send-shanghai-zhensi-operations-ding-fandang-reauthorized-20260917-v2.desktop-attempts/535855936d3a3ea2661211bf48667d9e28213bb20c523b00569504e754e3c53e.json"
+    },
+    {
+      "at": 1789700669502,
+      "type": "attempt",
+      "stage": "send",
+      "number": 1
+    },
+    {
+      "at": 1789700749146,
+      "type": "blocked",
+      "phase": "prepared",
+      "reason": "desktop-send-proof-invalid",
+      "unexpected": true
+    }
+  ],
+  "config": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/runs/jinsha-business-production/20260918/01/config.json",
+  "createdAt": 1789700646512,
+  "updatedAt": 1789700749146
+}

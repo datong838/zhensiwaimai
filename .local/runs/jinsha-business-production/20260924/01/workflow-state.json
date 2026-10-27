@@ -1,0 +1,205 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "jinsha-business-code-enforced-v1",
+  "runId": "jinsha-business-production-20260924-01",
+  "businessDate": "2026-09-23",
+  "phase": "complete",
+  "status": "complete",
+  "nextAction": null,
+  "runtimeModelDecisions": 0,
+  "attempts": {
+    "download": 1,
+    "send": 3,
+    "verify": 1
+  },
+  "events": [
+    {
+      "at": 1790218850972,
+      "type": "executor-start",
+      "phase": "created"
+    },
+    {
+      "at": 1790218850972,
+      "type": "attempt",
+      "stage": "download",
+      "number": 1
+    },
+    {
+      "at": 1790218900580,
+      "type": "decision",
+      "stage": "download",
+      "decision": "retry-download",
+      "reason": "plan-option-timeout:meituan"
+    },
+    {
+      "at": 1790218900580,
+      "type": "attempt",
+      "stage": "download",
+      "number": 2
+    },
+    {
+      "at": 1790218931794,
+      "type": "decision",
+      "stage": "download",
+      "decision": "retry-download",
+      "reason": "page.goto: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"https://data.guoshuyufen.com/#/businessData/realTimeData\", waiting until \"domcontentloaded\"\u001b[22m\n"
+    },
+    {
+      "at": 1790218931795,
+      "type": "attempt",
+      "stage": "download",
+      "number": 3
+    },
+    {
+      "at": 1790218962904,
+      "type": "decision",
+      "stage": "download",
+      "decision": "retry-download",
+      "reason": "page.goto: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"https://data.guoshuyufen.com/#/businessData/realTimeData\", waiting until \"domcontentloaded\"\u001b[22m\n"
+    },
+    {
+      "at": 1790218962905,
+      "type": "blocked",
+      "phase": "created",
+      "reason": "download-retry-limit-exceeded"
+    },
+    {
+      "at": 1790220109760,
+      "type": "executor-start",
+      "phase": "created"
+    },
+    {
+      "at": 1790220109761,
+      "type": "blocked",
+      "phase": "created",
+      "reason": "download-retry-limit-exceeded"
+    },
+    {
+      "at": 1790220161719,
+      "type": "maintenance-resume-reset",
+      "stage": "download",
+      "reason": "controlled-browser-maintenance-complete"
+    },
+    {
+      "at": 1790220161720,
+      "type": "executor-start",
+      "phase": "created"
+    },
+    {
+      "at": 1790220161721,
+      "type": "attempt",
+      "stage": "download",
+      "number": 1
+    },
+    {
+      "at": 1790220232700,
+      "type": "decision",
+      "stage": "download",
+      "decision": "downloaded"
+    },
+    {
+      "at": 1790220232701,
+      "type": "transition",
+      "from": "created",
+      "to": "downloaded",
+      "evidence": {
+        "receipt": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/runs/jinsha-business-production/20260924/01/download-ui.json"
+      }
+    },
+    {
+      "at": 1790220232702,
+      "type": "attempt",
+      "stage": "prepare",
+      "number": 1
+    },
+    {
+      "at": 1790220240383,
+      "type": "transition",
+      "from": "downloaded",
+      "to": "prepared",
+      "evidence": {
+        "receipt": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/runs/jinsha-business-production/20260924/01/send-preflight.json"
+      }
+    },
+    {
+      "at": 1790220240384,
+      "type": "decision",
+      "stage": "send",
+      "decision": "retry-send",
+      "marker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/state/jinsha-report-send-shanghai-zhensi-operations-ding-fandang-reauthorized-20260917-v2.desktop-attempts/f78c55dc239f9adabb2ac86bb5493b0967c2240b07b8c71e04dcc35761689176.json"
+    },
+    {
+      "at": 1790220240384,
+      "type": "attempt",
+      "stage": "send",
+      "number": 1
+    },
+    {
+      "at": 1790220283506,
+      "type": "decision",
+      "stage": "send",
+      "decision": "retry-send",
+      "marker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/state/jinsha-report-send-shanghai-zhensi-operations-ding-fandang-reauthorized-20260917-v2.desktop-attempts/f78c55dc239f9adabb2ac86bb5493b0967c2240b07b8c71e04dcc35761689176.json"
+    },
+    {
+      "at": 1790220283507,
+      "type": "attempt",
+      "stage": "send",
+      "number": 2
+    },
+    {
+      "at": 1790220322535,
+      "type": "decision",
+      "stage": "send",
+      "decision": "retry-send",
+      "marker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/state/jinsha-report-send-shanghai-zhensi-operations-ding-fandang-reauthorized-20260917-v2.desktop-attempts/f78c55dc239f9adabb2ac86bb5493b0967c2240b07b8c71e04dcc35761689176.json"
+    },
+    {
+      "at": 1790220322539,
+      "type": "attempt",
+      "stage": "send",
+      "number": 3
+    },
+    {
+      "at": 1790220355698,
+      "type": "transition",
+      "from": "prepared",
+      "to": "sent",
+      "evidence": {
+        "receipt": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/runs/jinsha-business-production/20260924/01/send-receipt.json"
+      }
+    },
+    {
+      "at": 1790220355698,
+      "type": "attempt",
+      "stage": "verify-only",
+      "number": 1
+    },
+    {
+      "at": 1790220357191,
+      "type": "transition",
+      "from": "sent",
+      "to": "verified",
+      "evidence": {
+        "receipt": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/runs/jinsha-business-production/20260924/01/send-verify-receipt.json"
+      }
+    },
+    {
+      "at": 1790220357191,
+      "type": "transition",
+      "from": "verified",
+      "to": "complete",
+      "evidence": {
+        "receipt": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/runs/jinsha-business-production/20260924/01/exam-receipt.json"
+      }
+    },
+    {
+      "at": 1790220357192,
+      "type": "executor-complete"
+    }
+  ],
+  "config": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/runs/jinsha-business-production/20260924/01/config.json",
+  "createdAt": 1790218850965,
+  "updatedAt": 1790220357192,
+  "completedAt": 1790220357192
+}

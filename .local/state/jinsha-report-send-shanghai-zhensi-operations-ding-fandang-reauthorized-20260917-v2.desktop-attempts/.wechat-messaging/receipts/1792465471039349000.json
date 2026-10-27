@@ -1,0 +1,74 @@
+{
+  "ok": false,
+  "status": "blocked",
+  "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+  "channel": "desktop",
+  "requestDigest": "805f944da503f9a0d0512bbd6599c75e42baa88f01f076522f13af9b69c1266e",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "fd0ab7b4301d17b8b27a1ccaccc419413568c4b12d301d0e20a2950f17a12c90",
+      "type": "file",
+      "status": "blocked",
+      "claimedAt": 1792465323.814859,
+      "sendAttempts": 0,
+      "reason": "windows-send-rejected:HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题='李知恒- AllenLi'，目标='上海臻肆外卖运营-盯个盯-饭敢当'\"}",
+      "transport": {
+        "ok": false,
+        "error": "HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题='李知恒- AllenLi'，目标='上海臻肆外卖运营-盯个盯-饭敢当'\"}",
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 0
+      },
+      "attemptErrors": [
+        "HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题='李知恒- AllenLi'，目标='上海臻肆外卖运营-盯个盯-饭敢当'\"}",
+        "HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题='李知恒- AllenLi'，目标='上海臻肆外卖运营-盯个盯-饭敢当'\"}",
+        "HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题='李知恒- AllenLi'，目标='上海臻肆外卖运营-盯个盯-饭敢当'\"}"
+      ]
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:1",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 9224
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 147219
+    }
+  ],
+  "reason": "windows-send-rejected:HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题='李知恒- AllenLi'，目标='上海臻肆外卖运营-盯个盯-饭敢当'\"}",
+  "elapsedMs": 156450,
+  "eventKey": "ca9151029a1aa89781a8d840bafb096ea4a3c6a06e193e15522fb4fc98fe6cac",
+  "reviewSummary": {
+    "totalElapsedMs": 156450,
+    "result": "blocked",
+    "stageCount": 5,
+    "completedStages": 5,
+    "failedStages": []
+  }
+}

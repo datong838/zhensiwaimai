@@ -1,0 +1,165 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "jinsha-business-code-enforced-v1",
+  "runId": "jinsha-business-production-20260924-01",
+  "businessDate": "2026-09-23",
+  "status": "complete",
+  "phase": "complete",
+  "nextAction": null,
+  "totalElapsedMs": 1506227,
+  "nodes": [
+    {
+      "name": "download",
+      "attempts": 4,
+      "startedAt": 1790218850972,
+      "finishedAt": 1790220232701,
+      "elapsedMs": 1381729,
+      "complete": true
+    },
+    {
+      "name": "prepare",
+      "attempts": 1,
+      "startedAt": 1790220232702,
+      "finishedAt": 1790220240383,
+      "elapsedMs": 7681,
+      "complete": true
+    },
+    {
+      "name": "send",
+      "attempts": 3,
+      "startedAt": 1790220240384,
+      "finishedAt": 1790220355698,
+      "elapsedMs": 115314,
+      "complete": true
+    },
+    {
+      "name": "verify",
+      "attempts": 1,
+      "startedAt": 1790220355698,
+      "finishedAt": 1790220357191,
+      "elapsedMs": 1493,
+      "complete": true
+    },
+    {
+      "name": "finalize",
+      "attempts": 1,
+      "startedAt": 1790220357191,
+      "finishedAt": 1790220357192,
+      "elapsedMs": 1,
+      "complete": true
+    }
+  ],
+  "pitfalls": [
+    {
+      "at": 1790218900580,
+      "stage": "download",
+      "type": "recovery",
+      "detail": "retry-download",
+      "reason": "plan-option-timeout:meituan"
+    },
+    {
+      "at": 1790218931794,
+      "stage": "download",
+      "type": "recovery",
+      "detail": "retry-download",
+      "reason": "page.goto: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"https://data.guoshuyufen.com/#/businessData/realTimeData\", waiting until \"domcontentloaded\"\u001b[22m\n"
+    },
+    {
+      "at": 1790218962904,
+      "stage": "download",
+      "type": "recovery",
+      "detail": "retry-download",
+      "reason": "page.goto: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"https://data.guoshuyufen.com/#/businessData/realTimeData\", waiting until \"domcontentloaded\"\u001b[22m\n"
+    },
+    {
+      "at": 1790218962905,
+      "stage": "created",
+      "type": "blocked",
+      "detail": "download-retry-limit-exceeded"
+    },
+    {
+      "at": 1790220109761,
+      "stage": "created",
+      "type": "blocked",
+      "detail": "download-retry-limit-exceeded"
+    },
+    {
+      "at": 1790220357192,
+      "stage": "workflow",
+      "type": "efficiency-budget-exceeded",
+      "detail": "1506227>180000"
+    }
+  ],
+  "codeEnforced": true,
+  "reviewItems": [
+    {
+      "name": "download",
+      "attempts": 4,
+      "startedAt": 1790218850972,
+      "finishedAt": 1790220232701,
+      "elapsedMs": 1381729,
+      "complete": true,
+      "pitfalls": [
+        {
+          "at": 1790218900580,
+          "stage": "download",
+          "type": "recovery",
+          "detail": "retry-download",
+          "reason": "plan-option-timeout:meituan"
+        },
+        {
+          "at": 1790218931794,
+          "stage": "download",
+          "type": "recovery",
+          "detail": "retry-download",
+          "reason": "page.goto: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"https://data.guoshuyufen.com/#/businessData/realTimeData\", waiting until \"domcontentloaded\"\u001b[22m\n"
+        },
+        {
+          "at": 1790218962904,
+          "stage": "download",
+          "type": "recovery",
+          "detail": "retry-download",
+          "reason": "page.goto: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"https://data.guoshuyufen.com/#/businessData/realTimeData\", waiting until \"domcontentloaded\"\u001b[22m\n"
+        }
+      ]
+    },
+    {
+      "name": "prepare",
+      "attempts": 1,
+      "startedAt": 1790220232702,
+      "finishedAt": 1790220240383,
+      "elapsedMs": 7681,
+      "complete": true,
+      "pitfalls": []
+    },
+    {
+      "name": "send",
+      "attempts": 3,
+      "startedAt": 1790220240384,
+      "finishedAt": 1790220355698,
+      "elapsedMs": 115314,
+      "complete": true,
+      "pitfalls": []
+    },
+    {
+      "name": "verify",
+      "attempts": 1,
+      "startedAt": 1790220355698,
+      "finishedAt": 1790220357191,
+      "elapsedMs": 1493,
+      "complete": true,
+      "pitfalls": []
+    },
+    {
+      "name": "finalize",
+      "attempts": 1,
+      "startedAt": 1790220357191,
+      "finishedAt": 1790220357192,
+      "elapsedMs": 1,
+      "complete": true,
+      "pitfalls": []
+    }
+  ],
+  "runtimeModelDecisions": 0,
+  "generatedAt": 1790220357192
+}

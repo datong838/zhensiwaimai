@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "jinsha-business-code-enforced-v1",
+  "runId": "jinsha-business-production-20261014-02",
+  "businessDate": "2026-10-13",
+  "status": "needs-resume",
+  "phase": "prepared",
+  "nextAction": null,
+  "totalElapsedMs": 125516,
+  "nodes": [
+    {
+      "name": "download",
+      "attempts": 3,
+      "startedAt": 1791952054112,
+      "finishedAt": 1791952130169,
+      "elapsedMs": 76057,
+      "complete": true
+    },
+    {
+      "name": "prepare",
+      "attempts": 1,
+      "startedAt": 1791952130170,
+      "finishedAt": 1791952157441,
+      "elapsedMs": 27271,
+      "complete": true
+    },
+    {
+      "name": "send",
+      "attempts": 4,
+      "startedAt": 1791952157443,
+      "finishedAt": 1791952179621,
+      "elapsedMs": 22178,
+      "complete": false
+    }
+  ],
+  "pitfalls": [
+    {
+      "at": 1791952068629,
+      "stage": "download",
+      "type": "recovery",
+      "detail": "retry-download",
+      "reason": "jinsha-shell-not-ready"
+    },
+    {
+      "at": 1791952094279,
+      "stage": "download",
+      "type": "recovery",
+      "detail": "retry-download",
+      "reason": "plan-option-timeout:meituan"
+    },
+    {
+      "at": 1791952179621,
+      "stage": "prepared",
+      "type": "blocked",
+      "detail": "desktop-preflight-retry-limit-exceeded"
+    }
+  ],
+  "codeEnforced": true,
+  "reviewItems": [
+    {
+      "name": "download",
+      "attempts": 3,
+      "startedAt": 1791952054112,
+      "finishedAt": 1791952130169,
+      "elapsedMs": 76057,
+      "complete": true,
+      "pitfalls": [
+        {
+          "at": 1791952068629,
+          "stage": "download",
+          "type": "recovery",
+          "detail": "retry-download",
+          "reason": "jinsha-shell-not-ready"
+        },
+        {
+          "at": 1791952094279,
+          "stage": "download",
+          "type": "recovery",
+          "detail": "retry-download",
+          "reason": "plan-option-timeout:meituan"
+        }
+      ]
+    },
+    {
+      "name": "prepare",
+      "attempts": 1,
+      "startedAt": 1791952130170,
+      "finishedAt": 1791952157441,
+      "elapsedMs": 27271,
+      "complete": true,
+      "pitfalls": []
+    },
+    {
+      "name": "send",
+      "attempts": 4,
+      "startedAt": 1791952157443,
+      "finishedAt": 1791952179621,
+      "elapsedMs": 22178,
+      "complete": false,
+      "pitfalls": [
+        {
+          "at": 1791952179621,
+          "stage": "prepared",
+          "type": "blocked",
+          "detail": "desktop-preflight-retry-limit-exceeded"
+        }
+      ]
+    }
+  ],
+  "runtimeModelDecisions": 0,
+  "generatedAt": 1791952179621
+}

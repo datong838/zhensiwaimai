@@ -1,0 +1,124 @@
+{
+  "ok": true,
+  "policyVersion": "daily-negative-reviews-code-enforced-v1",
+  "businessDate": "2026-09-20",
+  "phase": "complete",
+  "status": "complete",
+  "runtimeModelDecisions": 0,
+  "completionReview": {
+    "codeEnforced": true,
+    "totalElapsedMs": 51163,
+    "reviewItems": [
+      {
+        "item": 1,
+        "stage": "browser_validate",
+        "label": "连接并唯一定位金鲨页面",
+        "attempts": 1,
+        "elapsedMs": 8907,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 2,
+        "stage": "route_and_date",
+        "label": "核验淘宝外卖入口并设置昨日日期",
+        "attempts": 1,
+        "elapsedMs": 4409,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 3,
+        "stage": "download",
+        "label": "下载全部平台差评",
+        "attempts": 1,
+        "elapsedMs": 2972,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 4,
+        "stage": "extract_platforms",
+        "label": "读取三平台页面列表",
+        "attempts": 1,
+        "elapsedMs": 5950,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 5,
+        "stage": "reconcile",
+        "label": "下载与页面逐条对账",
+        "attempts": 1,
+        "elapsedMs": 308,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 6,
+        "stage": "build_report",
+        "label": "生成并验收固定格式Excel",
+        "attempts": 1,
+        "elapsedMs": 716,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 7,
+        "stage": "wechat_send",
+        "label": "唯一群定位、单次发送与双帧校验",
+        "attempts": 1,
+        "elapsedMs": 27901,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 8,
+        "stage": "completion_gate",
+        "label": "汇总收据并生成代码化复盘",
+        "attempts": 1,
+        "elapsedMs": 0,
+        "status": "completed",
+        "pitfalls": []
+      }
+    ],
+    "pitfalls": []
+  },
+  "data": {
+    "sourceRecords": 102,
+    "records": 102,
+    "platforms": {
+      "美团外卖": 54,
+      "淘宝闪购": 45,
+      "京东外卖": 3
+    },
+    "scores": {
+      "1": 57,
+      "2": 13,
+      "3": 32
+    },
+    "scoresAbove3": 0,
+    "excludedAboveThree": 0,
+    "blankBefore": 7,
+    "supplementedFromUi": 7,
+    "blankAfter": 0,
+    "stores": 90
+  },
+  "businessWarnings": [
+    "您的美团平台当前有27家店铺授权失败 请及时查看"
+  ],
+  "report": {
+    "path": "/Users/ddt/work/projects/ai_agent/outputs/yesterday-negative-20260920/差评分析数据_2026-09-20_2026-09-20.xlsx",
+    "name": "差评分析数据_2026-09-20_2026-09-20.xlsx",
+    "size": 17348,
+    "sha256": "8d5683f3299a4c579b90ec48e844f49c10db90d2fe53487ae3b568eb2f3ea888",
+    "rows": 102
+  },
+  "send": {
+    "verified": true,
+    "sendAttempts": 1,
+    "newSendAttempts": 1,
+    "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "verificationLevel": "file-name-size-ui"
+  }
+}

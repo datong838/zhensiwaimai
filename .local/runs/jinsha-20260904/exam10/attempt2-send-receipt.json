@@ -1,0 +1,179 @@
+{
+  "ok": false,
+  "executor": "wechat-file-sender",
+  "groupName": "臻肆测试群",
+  "sent": [
+    {
+      "name": "美团0903测试10.xlsx",
+      "sha256": "b8fb690a2ac9eba5f27d91accbeb04d9725431bc5afba1b01f33436962c65584",
+      "verification": {
+        "name": "美团0903测试10.xlsx",
+        "size": 121964,
+        "state": "confirmed",
+        "selectionScreenshot": "/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/zhensi-jinsha-wechat-ch4cds18/selected-file-meituan-stable.png",
+        "attemptedAt": 1788538462.073262,
+        "filePickerSendClicks": 1,
+        "confirmSendClicks": 0,
+        "confirmedAt": 1788538465.542884,
+        "bubbleScreenshot": "/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/zhensi-jinsha-wechat-ch4cds18/sent-meituan-stable.png",
+        "fullNameVerified": true,
+        "groupTitleVerified": true,
+        "sizeVerified": true
+      },
+      "reused": false
+    }
+  ],
+  "sendAttempts": 1,
+  "stage": "choose",
+  "nodes": [
+    {
+      "name": "device_identity",
+      "elapsedMs": 245,
+      "ok": true,
+      "startedAt": 1788538434.6033669,
+      "finishedAt": 1788538434.8480158,
+      "llmIntervention": false
+    },
+    {
+      "name": "locate_group",
+      "elapsedMs": 5991,
+      "ok": true,
+      "startedAt": 1788538438.483413,
+      "finishedAt": 1788538444.474782,
+      "llmIntervention": false
+    },
+    {
+      "name": "meituan.file_panel",
+      "elapsedMs": 5545,
+      "ok": true,
+      "startedAt": 1788538445.608163,
+      "finishedAt": 1788538451.153398,
+      "llmIntervention": false
+    },
+    {
+      "name": "meituan.select_file",
+      "elapsedMs": 5463,
+      "ok": true,
+      "startedAt": 1788538452.170798,
+      "finishedAt": 1788538457.633624,
+      "llmIntervention": false
+    },
+    {
+      "name": "meituan.send",
+      "elapsedMs": 2043,
+      "ok": true,
+      "startedAt": 1788538460.1969368,
+      "finishedAt": 1788538462.23947,
+      "llmIntervention": false
+    },
+    {
+      "name": "meituan.verify",
+      "elapsedMs": 3304,
+      "ok": true,
+      "startedAt": 1788538462.239479,
+      "finishedAt": 1788538465.543472,
+      "llmIntervention": false
+    },
+    {
+      "name": "taobao.file_panel",
+      "elapsedMs": 5856,
+      "ok": true,
+      "startedAt": 1788538466.6717288,
+      "finishedAt": 1788538472.527468,
+      "llmIntervention": false
+    },
+    {
+      "name": "taobao.select_file",
+      "elapsedMs": 11965,
+      "ok": true,
+      "startedAt": 1788538473.52704,
+      "finishedAt": 1788538485.492051,
+      "llmIntervention": false
+    },
+    {
+      "name": "taobao.choose_file",
+      "elapsedMs": 30588,
+      "ok": false,
+      "startedAt": 1788538485.7458801,
+      "finishedAt": 1788538516.334035,
+      "llmIntervention": false
+    },
+    {
+      "name": "taobao.choose_file",
+      "elapsedMs": 9550,
+      "ok": false,
+      "startedAt": 1788538517.192828,
+      "finishedAt": 1788538526.743226,
+      "llmIntervention": false
+    },
+    {
+      "name": "taobao.choose_file",
+      "elapsedMs": 5717,
+      "ok": false,
+      "startedAt": 1788538528.0621161,
+      "finishedAt": 1788538533.779466,
+      "llmIntervention": false
+    }
+  ],
+  "device": {
+    "identityHash": "f2724cf436e9",
+    "model": "HLK-AL00",
+    "transport": "usb",
+    "verifiedEndpoints": 2
+  },
+  "files": [
+    {
+      "platform": "meituan",
+      "file": "/Users/ddt/work/臻肆/报表/考核10-20260904/美团0903测试10.xlsx",
+      "name": "美团0903测试10.xlsx",
+      "size": 121964,
+      "sha256": "b8fb690a2ac9eba5f27d91accbeb04d9725431bc5afba1b01f33436962c65584"
+    },
+    {
+      "platform": "taobao",
+      "file": "/Users/ddt/work/臻肆/报表/考核10-20260904/淘宝0903测试10.xlsx",
+      "name": "淘宝0903测试10.xlsx",
+      "size": 131922,
+      "sha256": "ec37c52e38628a5e8252681616c096ef9497b1ba18379dc5f8ce3fd977d2e8ec"
+    }
+  ],
+  "checkpoint": "zhensi_waimai/.local/runs/jinsha-20260904/exam10/send-receipt.json.checkpoint.json",
+  "panel": {
+    "panelScreenshot": "/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/zhensi-jinsha-wechat-ch4cds18/plus-panel-2b.png",
+    "entry": {
+      "x": 166,
+      "y": 2090,
+      "w": 68,
+      "h": 38,
+      "confidence": 1.0,
+      "text": "文件"
+    },
+    "music": {
+      "x": 414,
+      "y": 2090,
+      "w": 68,
+      "h": 38,
+      "confidence": 1.0,
+      "text": "音乐"
+    },
+    "method": "stable-ocr-structural"
+  },
+  "selection": {
+    "name": "淘宝0903测试10.xlsx",
+    "selector": "UI-tree-exact-text",
+    "bounds": {
+      "bottom": 89,
+      "left": 216,
+      "right": 662,
+      "top": 72
+    },
+    "sha256": "ec37c52e38628a5e8252681616c096ef9497b1ba18379dc5f8ce3fd977d2e8ec",
+    "navigationRoute": "current-report-folder"
+  },
+  "reason": "report-folder-not-verified",
+  "businessCompleted": false,
+  "efficiencyExceeded": true,
+  "efficiencyStatus": "效率未达标",
+  "elapsedMs": 99187,
+  "workDir": "/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/zhensi-jinsha-wechat-ch4cds18"
+}

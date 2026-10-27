@@ -1,0 +1,155 @@
+{
+  "bridgeVersion": 1,
+  "ok": false,
+  "verified": false,
+  "payloadType": "file",
+  "state": "blocked",
+  "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+  "payloads": [
+    {
+      "path": "/Users/ddt/work/臻肆/报表/2026-10-07-业务发布-production02/美团外卖日报_2026-10-07.xlsx",
+      "name": "美团外卖日报_2026-10-07.xlsx",
+      "size": 114301,
+      "sha256": "420a398d6dcf63d4b9a74341789e844cd847edf48621f1b6a06ad8b375b7f89c"
+    },
+    {
+      "path": "/Users/ddt/work/臻肆/报表/2026-10-07-业务发布-production02/淘宝闪购日报_2026-10-07.xlsx",
+      "name": "淘宝闪购日报_2026-10-07.xlsx",
+      "size": 110848,
+      "sha256": "39047d1fd2ec6a535a692ade8b182c4b9877ccdcd18530c907b8cdc36a78d9c4"
+    }
+  ],
+  "sendAttempts": 0,
+  "newSendAttempts": 0,
+  "reason": "windows-send-rejected:HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题='杜昊宇'，目标='上海臻肆外卖运营-盯个盯-饭敢当'\"}",
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": false,
+    "status": "blocked",
+    "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "channel": "desktop",
+    "requestDigest": "0a4ef01bab91b1bbc2d7303e1ba2d589f6d0435663ee17fb2c7578e7e9fb3c43",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "420a398d6dcf63d4b9a74341789e844cd847edf48621f1b6a06ad8b375b7f89c",
+        "type": "file",
+        "status": "blocked",
+        "claimedAt": 1791431647.631417,
+        "sendAttempts": 0,
+        "reason": "windows-send-rejected:HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题='杜昊宇'，目标='上海臻肆外卖运营-盯个盯-饭敢当'\"}",
+        "transport": {
+          "ok": false,
+          "error": "HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题='杜昊宇'，目标='上海臻肆外卖运营-盯个盯-饭敢当'\"}",
+          "route": "relay",
+          "direct_error": "[Errno 65] No route to host",
+          "direct_local_network_blocked": true,
+          "sendAttempts": 0
+        },
+        "attemptErrors": [
+          "HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题='杜昊宇'，目标='上海臻肆外卖运营-盯个盯-饭敢当'\"}",
+          "HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题='杜昊宇'，目标='上海臻肆外卖运营-盯个盯-饭敢当'\"}",
+          "HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题='杜昊宇'，目标='上海臻肆外卖运营-盯个盯-饭敢当'\"}"
+        ]
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:1",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 447
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 166883
+      }
+    ],
+    "reason": "windows-send-rejected:HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题='杜昊宇'，目标='上海臻肆外卖运营-盯个盯-饭敢当'\"}",
+    "elapsedMs": 167337,
+    "eventKey": "e5ab74d8ba11e1dff5451f99e27ba6c5db0a6b04583515b65054cb2d98b84c41",
+    "reviewSummary": {
+      "totalElapsedMs": 167337,
+      "result": "blocked",
+      "stageCount": 5,
+      "completedStages": 5,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/jinsha-report-send-shanghai-zhensi-operations-ding-fandang-reauthorized-20260917-v2.desktop-attempts/f28cb9478fe104318032a3af112137d7806e59849f458b021349785b21305298.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "freeze:1",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 3,
+      "label": "freeze:1"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 447,
+      "item": 4,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "failed",
+      "pitfalls": [
+        {
+          "code": "messaging-stage",
+          "reason": "windows-send-rejected:HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题='杜昊宇'，目标='上海臻肆外卖运营-盯个盯-饭敢当'\"}"
+        }
+      ],
+      "elapsedMs": 166883,
+      "item": 5,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 167337,
+  "reviewSummary": {
+    "totalElapsedMs": 167337,
+    "itemCount": 5,
+    "pitfallCount": 1,
+    "result": "failed"
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "jinsha-business-code-enforced-v1",
+  "runId": "jinsha-business-production-20261006-01",
+  "businessDate": "2026-10-05",
+  "status": "needs-maintenance",
+  "phase": "created",
+  "nextAction": null,
+  "totalElapsedMs": 40582,
+  "nodes": [
+    {
+      "name": "download",
+      "attempts": 3,
+      "startedAt": 1791255789649,
+      "finishedAt": 1791255830223,
+      "elapsedMs": 40574,
+      "complete": false
+    }
+  ],
+  "pitfalls": [
+    {
+      "at": 1791255803443,
+      "stage": "download",
+      "type": "recovery",
+      "detail": "retry-download",
+      "reason": "jinsha-shell-not-ready:assertJinshaLoginGate is not defined"
+    },
+    {
+      "at": 1791255817093,
+      "stage": "download",
+      "type": "recovery",
+      "detail": "retry-download",
+      "reason": "jinsha-shell-not-ready:assertJinshaLoginGate is not defined"
+    },
+    {
+      "at": 1791255830222,
+      "stage": "download",
+      "type": "recovery",
+      "detail": "retry-download",
+      "reason": "jinsha-shell-not-ready:assertJinshaLoginGate is not defined"
+    },
+    {
+      "at": 1791255830223,
+      "stage": "created",
+      "type": "blocked",
+      "detail": "download-retry-limit-exceeded"
+    }
+  ],
+  "codeEnforced": true,
+  "reviewItems": [
+    {
+      "name": "download",
+      "attempts": 3,
+      "startedAt": 1791255789649,
+      "finishedAt": 1791255830223,
+      "elapsedMs": 40574,
+      "complete": false,
+      "pitfalls": [
+        {
+          "at": 1791255803443,
+          "stage": "download",
+          "type": "recovery",
+          "detail": "retry-download",
+          "reason": "jinsha-shell-not-ready:assertJinshaLoginGate is not defined"
+        },
+        {
+          "at": 1791255817093,
+          "stage": "download",
+          "type": "recovery",
+          "detail": "retry-download",
+          "reason": "jinsha-shell-not-ready:assertJinshaLoginGate is not defined"
+        },
+        {
+          "at": 1791255830222,
+          "stage": "download",
+          "type": "recovery",
+          "detail": "retry-download",
+          "reason": "jinsha-shell-not-ready:assertJinshaLoginGate is not defined"
+        }
+      ]
+    }
+  ],
+  "runtimeModelDecisions": 0,
+  "generatedAt": 1791255830223
+}

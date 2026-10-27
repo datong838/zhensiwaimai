@@ -1,0 +1,204 @@
+{
+  "bridgeVersion": 1,
+  "ok": false,
+  "verified": false,
+  "payloadType": "file",
+  "state": "blocked",
+  "groupName": "FEIBING NEO AI数字员工",
+  "payloads": [
+    {
+      "path": "/Users/ddt/work/臻肆/报表/2026-09-16-业务发布-production01/美团外卖日报_2026-09-16.xlsx",
+      "name": "美团外卖日报_2026-09-16.xlsx",
+      "size": 119250,
+      "sha256": "26173c622bf78b10d0d49befa4cc46501733222c32ef2fafaa2a4feda1ba9fbe"
+    },
+    {
+      "path": "/Users/ddt/work/臻肆/报表/2026-09-16-业务发布-production01/淘宝闪购日报_2026-09-16.xlsx",
+      "name": "淘宝闪购日报_2026-09-16.xlsx",
+      "size": 111601,
+      "sha256": "d3eae70f2f3abc2f8b7eaf42bc7ef8f978ee04a726fea6ef32b82553e2bf5d65"
+    }
+  ],
+  "sendAttempts": 0,
+  "newSendAttempts": 0,
+  "reason": "wechat-unexpected-secondary-window",
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": false,
+    "status": "blocked",
+    "groupName": "FEIBING NEO AI数字员工",
+    "channel": "desktop",
+    "requestDigest": "2136534a9f66083976db3bb04e00f2a0a17e4bf2953e85cc2c2dc2ae72c4915f",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "26173c622bf78b10d0d49befa4cc46501733222c32ef2fafaa2a4feda1ba9fbe",
+        "type": "file",
+        "status": "blocked",
+        "claimedAt": 1789614155.603062,
+        "sendAttempts": 0,
+        "reason": "wechat-unexpected-secondary-window",
+        "transport": {
+          "ok": false,
+          "executor": "wechat-desktop-sender",
+          "channel": "desktop",
+          "groupName": "FEIBING NEO AI数字员工",
+          "payloadType": "file",
+          "sendAttempts": 0,
+          "runtimeModelDecisions": 0,
+          "stage": "verify_target_and_input",
+          "stageMs": {
+            "locate_group": 310,
+            "verify_target_and_input": 1001
+          },
+          "payloadIdentity": "e86f45df66900df212fc282c829e0b0f1e632d8db33cb258be277c2239d3d20b",
+          "payloads": [
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/state/jinsha-report-send-feibing-neo-ai.desktop-attempts/.wechat-messaging/events/d7d25d291dcddfadea7190adf4a49e754f7704afa9a8b694c1f69681152d1eea/656261314887a164063ec5ce92115960a6045412fb96b7900a3f658be242d9e8/payload/美团外卖日报_2026-09-16.xlsx",
+              "name": "美团外卖日报_2026-09-16.xlsx",
+              "size": 119250,
+              "sha256": "26173c622bf78b10d0d49befa4cc46501733222c32ef2fafaa2a4feda1ba9fbe"
+            }
+          ],
+          "groupPreflight": {
+            "ok": true,
+            "action": "open-group",
+            "group": "FEIBING NEO AI数字员工",
+            "header": "FEIBING NEO AI数字员工",
+            "note": "ax-current-header",
+            "reason": null,
+            "sendAttempts": 0,
+            "runtimeModelDecisions": 0,
+            "stageMs": {
+              "exact_group_preflight": 310
+            },
+            "artifacts": [],
+            "hardGate": false
+          },
+          "reason": "wechat-unexpected-secondary-window",
+          "elapsedMs": 1311,
+          "sendReview": [
+            {
+              "item": 1,
+              "stage": "locate_group",
+              "label": "精确定位目标群",
+              "elapsedMs": 310,
+              "status": "completed",
+              "pitfalls": []
+            },
+            {
+              "item": 2,
+              "stage": "verify_target_and_input",
+              "label": "复核目标群与输入框",
+              "elapsedMs": 1001,
+              "status": "failed",
+              "pitfalls": [
+                {
+                  "code": "send-failure",
+                  "reason": "wechat-unexpected-secondary-window"
+                }
+              ]
+            }
+          ],
+          "reviewSummary": {
+            "totalElapsedMs": 1311,
+            "itemCount": 2,
+            "pitfallCount": 1,
+            "result": "failed"
+          }
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:1",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 494
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 1312
+      }
+    ],
+    "reason": "wechat-unexpected-secondary-window",
+    "elapsedMs": 8312,
+    "eventKey": "d7d25d291dcddfadea7190adf4a49e754f7704afa9a8b694c1f69681152d1eea"
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/state/jinsha-report-send-feibing-neo-ai.desktop-attempts/0b81685a9c812bd172f4f784b60e05ce0f9179c5e53a31e0226970db192b435d.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "freeze:1",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 3,
+      "label": "freeze:1"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 494,
+      "item": 4,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "failed",
+      "pitfalls": [
+        {
+          "code": "messaging-stage",
+          "reason": "wechat-unexpected-secondary-window"
+        }
+      ],
+      "elapsedMs": 1312,
+      "item": 5,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 8312,
+  "reviewSummary": {
+    "totalElapsedMs": 8312,
+    "itemCount": 5,
+    "pitfallCount": 1,
+    "result": "failed"
+  }
+}

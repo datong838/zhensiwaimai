@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "jinsha-business-code-enforced-v1",
+  "runId": "jinsha-business-production-20261006-01",
+  "businessDate": "2026-10-05",
+  "phase": "created",
+  "status": "needs-maintenance",
+  "nextAction": null,
+  "runtimeModelDecisions": 0,
+  "attempts": {
+    "download": 3,
+    "send": 0,
+    "verify": 0
+  },
+  "events": [
+    {
+      "at": 1791255789648,
+      "type": "executor-start",
+      "phase": "created"
+    },
+    {
+      "at": 1791255789649,
+      "type": "attempt",
+      "stage": "download",
+      "number": 1
+    },
+    {
+      "at": 1791255803443,
+      "type": "decision",
+      "stage": "download",
+      "decision": "retry-download",
+      "reason": "jinsha-shell-not-ready:assertJinshaLoginGate is not defined"
+    },
+    {
+      "at": 1791255803443,
+      "type": "attempt",
+      "stage": "download",
+      "number": 2
+    },
+    {
+      "at": 1791255817093,
+      "type": "decision",
+      "stage": "download",
+      "decision": "retry-download",
+      "reason": "jinsha-shell-not-ready:assertJinshaLoginGate is not defined"
+    },
+    {
+      "at": 1791255817094,
+      "type": "attempt",
+      "stage": "download",
+      "number": 3
+    },
+    {
+      "at": 1791255830222,
+      "type": "decision",
+      "stage": "download",
+      "decision": "retry-download",
+      "reason": "jinsha-shell-not-ready:assertJinshaLoginGate is not defined"
+    },
+    {
+      "at": 1791255830223,
+      "type": "blocked",
+      "phase": "created",
+      "reason": "download-retry-limit-exceeded"
+    }
+  ],
+  "config": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/jinsha-business-production/20261006/01/config.json",
+  "createdAt": 1791255789641,
+  "updatedAt": 1791255830223
+}

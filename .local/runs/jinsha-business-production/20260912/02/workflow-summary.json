@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "jinsha-business-code-enforced-v1",
+  "runId": "jinsha-business-production-20260912-02",
+  "businessDate": "2026-09-11",
+  "status": "complete",
+  "phase": "complete",
+  "nextAction": null,
+  "totalElapsedMs": 28707,
+  "nodes": [
+    {
+      "name": "download",
+      "attempts": 1,
+      "startedAt": 1789182655061,
+      "finishedAt": 1789182673770,
+      "elapsedMs": 18709,
+      "complete": true
+    },
+    {
+      "name": "prepare",
+      "attempts": 1,
+      "startedAt": 1789182673770,
+      "finishedAt": 1789182681589,
+      "elapsedMs": 7819,
+      "complete": true
+    },
+    {
+      "name": "send",
+      "attempts": 1,
+      "startedAt": 1789182681590,
+      "finishedAt": 1789182682807,
+      "elapsedMs": 1217,
+      "complete": true
+    },
+    {
+      "name": "verify",
+      "attempts": 1,
+      "startedAt": 1789182682807,
+      "finishedAt": 1789182683758,
+      "elapsedMs": 951,
+      "complete": true
+    },
+    {
+      "name": "finalize",
+      "attempts": 1,
+      "startedAt": 1789182683758,
+      "finishedAt": 1789182683759,
+      "elapsedMs": 1,
+      "complete": true
+    }
+  ],
+  "pitfalls": [],
+  "runtimeModelDecisions": 0,
+  "generatedAt": 1789182683759
+}

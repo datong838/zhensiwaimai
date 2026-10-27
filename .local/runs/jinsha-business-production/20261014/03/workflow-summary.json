@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "jinsha-business-code-enforced-v1",
+  "runId": "jinsha-business-production-20261014-03",
+  "businessDate": "2026-10-13",
+  "status": "needs-maintenance",
+  "phase": "created",
+  "nextAction": null,
+  "totalElapsedMs": 44146,
+  "nodes": [
+    {
+      "name": "download",
+      "attempts": 3,
+      "startedAt": 1791955499144,
+      "finishedAt": 1791955543284,
+      "elapsedMs": 44140,
+      "complete": false
+    }
+  ],
+  "pitfalls": [
+    {
+      "at": 1791955511247,
+      "stage": "download",
+      "type": "recovery",
+      "detail": "retry-download",
+      "reason": "page.goto: net::ERR_CONNECTION_CLOSED at https://data.guoshuyufen.com/#/businessData/realTimeData\nCall log:\n  - navigating to \"https://data.guoshuyufen.com/#/businessData/realTimeData\", waiting until \"commit\"\n"
+    },
+    {
+      "at": 1791955522204,
+      "stage": "download",
+      "type": "recovery",
+      "detail": "retry-download",
+      "reason": "page.goto: net::ERR_CONNECTION_CLOSED at https://data.guoshuyufen.com/#/businessData/realTimeData\nCall log:\n  - navigating to \"https://data.guoshuyufen.com/#/businessData/realTimeData\", waiting until \"commit\"\n"
+    },
+    {
+      "at": 1791955543283,
+      "stage": "download",
+      "type": "recovery",
+      "detail": "retry-download",
+      "reason": "page.goto: net::ERR_CONNECTION_CLOSED at https://data.guoshuyufen.com/#/businessData/realTimeData\nCall log:\n  - navigating to \"https://data.guoshuyufen.com/#/businessData/realTimeData\", waiting until \"commit\"\n"
+    },
+    {
+      "at": 1791955543284,
+      "stage": "created",
+      "type": "blocked",
+      "detail": "download-retry-limit-exceeded"
+    }
+  ],
+  "codeEnforced": true,
+  "reviewItems": [
+    {
+      "name": "download",
+      "attempts": 3,
+      "startedAt": 1791955499144,
+      "finishedAt": 1791955543284,
+      "elapsedMs": 44140,
+      "complete": false,
+      "pitfalls": [
+        {
+          "at": 1791955511247,
+          "stage": "download",
+          "type": "recovery",
+          "detail": "retry-download",
+          "reason": "page.goto: net::ERR_CONNECTION_CLOSED at https://data.guoshuyufen.com/#/businessData/realTimeData\nCall log:\n  - navigating to \"https://data.guoshuyufen.com/#/businessData/realTimeData\", waiting until \"commit\"\n"
+        },
+        {
+          "at": 1791955522204,
+          "stage": "download",
+          "type": "recovery",
+          "detail": "retry-download",
+          "reason": "page.goto: net::ERR_CONNECTION_CLOSED at https://data.guoshuyufen.com/#/businessData/realTimeData\nCall log:\n  - navigating to \"https://data.guoshuyufen.com/#/businessData/realTimeData\", waiting until \"commit\"\n"
+        },
+        {
+          "at": 1791955543283,
+          "stage": "download",
+          "type": "recovery",
+          "detail": "retry-download",
+          "reason": "page.goto: net::ERR_CONNECTION_CLOSED at https://data.guoshuyufen.com/#/businessData/realTimeData\nCall log:\n  - navigating to \"https://data.guoshuyufen.com/#/businessData/realTimeData\", waiting until \"commit\"\n"
+        }
+      ]
+    }
+  ],
+  "runtimeModelDecisions": 0,
+  "generatedAt": 1791955543284
+}

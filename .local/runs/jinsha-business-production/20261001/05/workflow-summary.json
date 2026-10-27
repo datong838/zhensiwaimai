@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "jinsha-business-code-enforced-v1",
+  "runId": "jinsha-business-production-20261001-05",
+  "businessDate": "2026-09-30",
+  "status": "needs-resume",
+  "phase": "prepared",
+  "nextAction": null,
+  "totalElapsedMs": 61228,
+  "nodes": [
+    {
+      "name": "download",
+      "attempts": 1,
+      "startedAt": 1790833028665,
+      "finishedAt": 1790833046444,
+      "elapsedMs": 17779,
+      "complete": true
+    },
+    {
+      "name": "prepare",
+      "attempts": 1,
+      "startedAt": 1790833046444,
+      "finishedAt": 1790833072746,
+      "elapsedMs": 26302,
+      "complete": true
+    },
+    {
+      "name": "send",
+      "attempts": 4,
+      "startedAt": 1790833072747,
+      "finishedAt": 1790833089887,
+      "elapsedMs": 17140,
+      "complete": false
+    }
+  ],
+  "pitfalls": [
+    {
+      "at": 1790833089887,
+      "stage": "prepared",
+      "type": "blocked",
+      "detail": "desktop-preflight-retry-limit-exceeded"
+    }
+  ],
+  "codeEnforced": true,
+  "reviewItems": [
+    {
+      "name": "download",
+      "attempts": 1,
+      "startedAt": 1790833028665,
+      "finishedAt": 1790833046444,
+      "elapsedMs": 17779,
+      "complete": true,
+      "pitfalls": []
+    },
+    {
+      "name": "prepare",
+      "attempts": 1,
+      "startedAt": 1790833046444,
+      "finishedAt": 1790833072746,
+      "elapsedMs": 26302,
+      "complete": true,
+      "pitfalls": []
+    },
+    {
+      "name": "send",
+      "attempts": 4,
+      "startedAt": 1790833072747,
+      "finishedAt": 1790833089887,
+      "elapsedMs": 17140,
+      "complete": false,
+      "pitfalls": [
+        {
+          "at": 1790833089887,
+          "stage": "prepared",
+          "type": "blocked",
+          "detail": "desktop-preflight-retry-limit-exceeded"
+        }
+      ]
+    }
+  ],
+  "runtimeModelDecisions": 0,
+  "generatedAt": 1790833089887
+}

@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "jinsha-business-code-enforced-v1",
+  "runId": "jinsha-business-production-20261020-04",
+  "businessDate": "2026-10-19",
+  "status": "complete",
+  "phase": "complete",
+  "nextAction": null,
+  "totalElapsedMs": 118346,
+  "nodes": [
+    {
+      "name": "download",
+      "attempts": 2,
+      "startedAt": 1792468025716,
+      "finishedAt": 1792468058337,
+      "elapsedMs": 32621,
+      "complete": true
+    },
+    {
+      "name": "prepare",
+      "attempts": 1,
+      "startedAt": 1792468058341,
+      "finishedAt": 1792468083407,
+      "elapsedMs": 25066,
+      "complete": true
+    },
+    {
+      "name": "send",
+      "attempts": 1,
+      "startedAt": 1792468083421,
+      "finishedAt": 1792468143062,
+      "elapsedMs": 59641,
+      "complete": true
+    },
+    {
+      "name": "verify",
+      "attempts": 1,
+      "startedAt": 1792468143066,
+      "finishedAt": 1792468144025,
+      "elapsedMs": 959,
+      "complete": true
+    },
+    {
+      "name": "finalize",
+      "attempts": 1,
+      "startedAt": 1792468144036,
+      "finishedAt": 1792468144039,
+      "elapsedMs": 3,
+      "complete": true
+    }
+  ],
+  "pitfalls": [
+    {
+      "at": 1792468039901,
+      "stage": "download",
+      "type": "recovery",
+      "detail": "retry-download",
+      "reason": "locator.click: Timeout 5000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('美团外卖', { exact: true }).first()\u001b[22m\n\u001b[2m    - locator resolved to <span class=\"el-radio-button__inner\">…</span>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"content\" data-v-8b910fe2=\"\">…</div> from <div class=\"upload\" data-v-8b910fe2=\"\" data-v-05e032cb=\"\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"content\" data-v-8b910fe2=\"\">…</div> from <div class=\"upload\" data-v-8b910fe2=\"\" data-v-05e032cb=\"\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    9 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"content\" data-v-8b910fe2=\"\">…</div> from <div class=\"upload\" data-v-8b910fe2=\"\" data-v-05e032cb=\"\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n"
+    }
+  ],
+  "codeEnforced": true,
+  "reviewItems": [
+    {
+      "name": "download",
+      "attempts": 2,
+      "startedAt": 1792468025716,
+      "finishedAt": 1792468058337,
+      "elapsedMs": 32621,
+      "complete": true,
+      "pitfalls": [
+        {
+          "at": 1792468039901,
+          "stage": "download",
+          "type": "recovery",
+          "detail": "retry-download",
+          "reason": "locator.click: Timeout 5000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('美团外卖', { exact: true }).first()\u001b[22m\n\u001b[2m    - locator resolved to <span class=\"el-radio-button__inner\">…</span>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"content\" data-v-8b910fe2=\"\">…</div> from <div class=\"upload\" data-v-8b910fe2=\"\" data-v-05e032cb=\"\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"content\" data-v-8b910fe2=\"\">…</div> from <div class=\"upload\" data-v-8b910fe2=\"\" data-v-05e032cb=\"\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    9 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"content\" data-v-8b910fe2=\"\">…</div> from <div class=\"upload\" data-v-8b910fe2=\"\" data-v-05e032cb=\"\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n"
+        }
+      ]
+    },
+    {
+      "name": "prepare",
+      "attempts": 1,
+      "startedAt": 1792468058341,
+      "finishedAt": 1792468083407,
+      "elapsedMs": 25066,
+      "complete": true,
+      "pitfalls": []
+    },
+    {
+      "name": "send",
+      "attempts": 1,
+      "startedAt": 1792468083421,
+      "finishedAt": 1792468143062,
+      "elapsedMs": 59641,
+      "complete": true,
+      "pitfalls": []
+    },
+    {
+      "name": "verify",
+      "attempts": 1,
+      "startedAt": 1792468143066,
+      "finishedAt": 1792468144025,
+      "elapsedMs": 959,
+      "complete": true,
+      "pitfalls": []
+    },
+    {
+      "name": "finalize",
+      "attempts": 1,
+      "startedAt": 1792468144036,
+      "finishedAt": 1792468144039,
+      "elapsedMs": 3,
+      "complete": true,
+      "pitfalls": []
+    }
+  ],
+  "runtimeModelDecisions": 0,
+  "generatedAt": 1792468144039
+}

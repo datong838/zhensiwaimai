@@ -1,0 +1,118 @@
+{
+  "policyVersion": "daily-negative-reviews-code-enforced-v1",
+  "businessDate": "2026-10-24",
+  "phase": "complete",
+  "status": "complete",
+  "startedAt": 1792888610388,
+  "updatedAt": 1792893003044,
+  "reviewItems": [
+    {
+      "stage": "browser_collect",
+      "label": "金鲨采集",
+      "attempts": 1,
+      "elapsedMs": 276,
+      "status": "failed",
+      "pitfalls": [
+        "jinsha-lease-busy:negative-reviews-1792888610585"
+      ]
+    },
+    {
+      "stage": "browser_validate",
+      "label": "连接并唯一定位金鲨页面",
+      "attempts": 1,
+      "elapsedMs": 10606,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "route_and_date",
+      "label": "核验淘宝外卖入口并设置昨日日期",
+      "attempts": 1,
+      "elapsedMs": 1791,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "download",
+      "label": "下载全部平台差评",
+      "attempts": 1,
+      "elapsedMs": 3266,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "extract_platforms",
+      "label": "读取三平台页面列表",
+      "attempts": 1,
+      "elapsedMs": 10958,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "reconcile",
+      "label": "下载与页面逐条对账",
+      "attempts": 1,
+      "elapsedMs": 543,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "build_report",
+      "label": "生成并验收固定格式Excel",
+      "attempts": 1,
+      "elapsedMs": 3825,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 102,
+      "status": "failed",
+      "pitfalls": [
+        "ui-tree-only-required"
+      ]
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 470601,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "screenshot",
+      "label": "渲染整表长图",
+      "attempts": 1,
+      "elapsedMs": 2352,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "screenshot_send",
+      "label": "整表长图单次发送与回读校验",
+      "attempts": 1,
+      "elapsedMs": 572107,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "completion_gate",
+      "label": "汇总收据并生成代码化复盘",
+      "attempts": 1,
+      "elapsedMs": 2,
+      "status": "completed",
+      "pitfalls": []
+    }
+  ],
+  "runtimeModelDecisions": 0,
+  "lastRecovery": {
+    "allowed": true,
+    "stage": "wechat_send",
+    "priorFailures": 1,
+    "nextAttempt": 2
+  },
+  "completedAt": 1792893003044
+}

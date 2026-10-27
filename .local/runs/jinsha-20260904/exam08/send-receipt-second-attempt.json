@@ -1,0 +1,95 @@
+{
+  "ok": false,
+  "executor": "wechat-file-sender",
+  "groupName": "臻肆测试群",
+  "sent": [],
+  "sendAttempts": 0,
+  "stage": "choose",
+  "nodes": [
+    {
+      "name": "device_identity",
+      "elapsedMs": 407,
+      "ok": true,
+      "startedAt": 1788526144.0501409,
+      "finishedAt": 1788526144.4566998,
+      "llmIntervention": false
+    },
+    {
+      "name": "meituan.choose_file",
+      "elapsedMs": 18442,
+      "ok": false,
+      "startedAt": 1788526146.9349298,
+      "finishedAt": 1788526165.37662,
+      "llmIntervention": false
+    },
+    {
+      "name": "meituan.choose_file",
+      "elapsedMs": 17532,
+      "ok": false,
+      "startedAt": 1788526166.3012931,
+      "finishedAt": 1788526183.833075,
+      "llmIntervention": false
+    },
+    {
+      "name": "meituan.choose_file",
+      "elapsedMs": 17385,
+      "ok": false,
+      "startedAt": 1788526185.2538419,
+      "finishedAt": 1788526202.639306,
+      "llmIntervention": false
+    },
+    {
+      "name": "meituan.choose_file",
+      "elapsedMs": 17436,
+      "ok": false,
+      "startedAt": 1788526205.071342,
+      "finishedAt": 1788526222.507659,
+      "llmIntervention": false
+    },
+    {
+      "name": "meituan.choose_file",
+      "elapsedMs": 17716,
+      "ok": false,
+      "startedAt": 1788526226.957033,
+      "finishedAt": 1788526244.673097,
+      "llmIntervention": false
+    },
+    {
+      "name": "meituan.choose_file",
+      "elapsedMs": 17535,
+      "ok": false,
+      "startedAt": 1788526249.084079,
+      "finishedAt": 1788526266.619062,
+      "llmIntervention": false
+    }
+  ],
+  "device": {
+    "identityHash": "f2724cf436e9",
+    "model": "HLK-AL00",
+    "transport": "usb",
+    "verifiedEndpoints": 2
+  },
+  "files": [
+    {
+      "platform": "meituan",
+      "file": "/Users/ddt/work/臻肆/报表/考核8-20260904/美团0903测试8.xlsx",
+      "name": "美团0903测试8.xlsx",
+      "size": 121967,
+      "sha256": "8a831e3d8967563d3a00916d86337886fe47bea6f438e232f4cadef3c40468ff"
+    },
+    {
+      "platform": "taobao",
+      "file": "/Users/ddt/work/臻肆/报表/考核8-20260904/淘宝0903测试8.xlsx",
+      "name": "淘宝0903测试8.xlsx",
+      "size": 131922,
+      "sha256": "7128065a82e671513cfaf1feba3e2bd9de6790a434712dc213254746fdd48b83"
+    }
+  ],
+  "checkpoint": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/runs/jinsha-20260904/exam08/send-receipt.json.checkpoint.json",
+  "reason": "page-not-ready:folder-not-visible:zhensi_reports",
+  "businessCompleted": false,
+  "efficiencyExceeded": true,
+  "efficiencyStatus": "效率未达标",
+  "elapsedMs": 122582,
+  "workDir": "/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/zhensi-jinsha-wechat-tikzt0z1"
+}

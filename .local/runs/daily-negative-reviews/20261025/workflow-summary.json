@@ -1,0 +1,213 @@
+{
+  "ok": false,
+  "policyVersion": "daily-negative-reviews-code-enforced-v1",
+  "businessDate": "2026-10-25",
+  "phase": "sent",
+  "status": "recoverable",
+  "runtimeModelDecisions": 0,
+  "completionReview": {
+    "codeEnforced": true,
+    "totalElapsedMs": 180047,
+    "reviewItems": [
+      {
+        "item": 1,
+        "stage": "browser_validate",
+        "label": "连接并唯一定位金鲨页面",
+        "attempts": 1,
+        "elapsedMs": 3680,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 2,
+        "stage": "route_and_date",
+        "label": "核验淘宝外卖入口并设置昨日日期",
+        "attempts": 1,
+        "elapsedMs": 1460,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 3,
+        "stage": "download",
+        "label": "下载全部平台差评",
+        "attempts": 1,
+        "elapsedMs": 12331,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 4,
+        "stage": "extract_platforms",
+        "label": "读取三平台页面列表",
+        "attempts": 1,
+        "elapsedMs": 16766,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 5,
+        "stage": "reconcile",
+        "label": "下载与页面逐条对账",
+        "attempts": 1,
+        "elapsedMs": 2405,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 6,
+        "stage": "build_report",
+        "label": "生成并验收固定格式Excel",
+        "attempts": 1,
+        "elapsedMs": 945,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 7,
+        "stage": "wechat_send",
+        "label": "唯一群定位、单次发送与双帧校验",
+        "attempts": 1,
+        "elapsedMs": 15147,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 8,
+        "stage": "screenshot",
+        "label": "渲染整表长图",
+        "attempts": 32,
+        "elapsedMs": 55940,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 9,
+        "stage": "screenshot_send",
+        "label": "整表长图单次发送与回读校验",
+        "attempts": 32,
+        "elapsedMs": 71373,
+        "status": "failed",
+        "pitfalls": [
+          "image-submission-awaits-read-only-verification",
+          "image-submission-awaits-read-only-verification",
+          "image-submission-awaits-read-only-verification",
+          "image-submission-awaits-read-only-verification",
+          "image-submission-awaits-read-only-verification",
+          "image-submission-awaits-read-only-verification",
+          "image-submission-awaits-read-only-verification",
+          "image-submission-awaits-read-only-verification",
+          "image-submission-awaits-read-only-verification",
+          "image-submission-awaits-read-only-verification",
+          "image-submission-awaits-read-only-verification",
+          "image-submission-awaits-read-only-verification",
+          "image-submission-awaits-read-only-verification",
+          "image-submission-awaits-read-only-verification",
+          "image-submission-awaits-read-only-verification",
+          "image-submission-awaits-read-only-verification",
+          "image-submission-awaits-read-only-verification",
+          "image-submission-awaits-read-only-verification",
+          "image-submission-awaits-read-only-verification",
+          "image-submission-awaits-read-only-verification",
+          "image-submission-awaits-read-only-verification",
+          "image-submission-awaits-read-only-verification",
+          "image-submission-awaits-read-only-verification",
+          "image-submission-awaits-read-only-verification",
+          "image-submission-awaits-read-only-verification",
+          "image-submission-awaits-read-only-verification",
+          "image-submission-awaits-read-only-verification",
+          "image-submission-awaits-read-only-verification",
+          "image-submission-awaits-read-only-verification",
+          "image-submission-awaits-read-only-verification",
+          "image-submission-awaits-read-only-verification",
+          "image-submission-awaits-read-only-verification"
+        ]
+      }
+    ],
+    "pitfalls": [
+      "image-submission-awaits-read-only-verification",
+      "image-submission-awaits-read-only-verification",
+      "image-submission-awaits-read-only-verification",
+      "image-submission-awaits-read-only-verification",
+      "image-submission-awaits-read-only-verification",
+      "image-submission-awaits-read-only-verification",
+      "image-submission-awaits-read-only-verification",
+      "image-submission-awaits-read-only-verification",
+      "image-submission-awaits-read-only-verification",
+      "image-submission-awaits-read-only-verification",
+      "image-submission-awaits-read-only-verification",
+      "image-submission-awaits-read-only-verification",
+      "image-submission-awaits-read-only-verification",
+      "image-submission-awaits-read-only-verification",
+      "image-submission-awaits-read-only-verification",
+      "image-submission-awaits-read-only-verification",
+      "image-submission-awaits-read-only-verification",
+      "image-submission-awaits-read-only-verification",
+      "image-submission-awaits-read-only-verification",
+      "image-submission-awaits-read-only-verification",
+      "image-submission-awaits-read-only-verification",
+      "image-submission-awaits-read-only-verification",
+      "image-submission-awaits-read-only-verification",
+      "image-submission-awaits-read-only-verification",
+      "image-submission-awaits-read-only-verification",
+      "image-submission-awaits-read-only-verification",
+      "image-submission-awaits-read-only-verification",
+      "image-submission-awaits-read-only-verification",
+      "image-submission-awaits-read-only-verification",
+      "image-submission-awaits-read-only-verification",
+      "image-submission-awaits-read-only-verification",
+      "image-submission-awaits-read-only-verification"
+    ]
+  },
+  "data": {
+    "sourceRecords": 141,
+    "records": 139,
+    "platforms": {
+      "美团外卖": 43,
+      "淘宝闪购": 96
+    },
+    "scores": {
+      "1": 70,
+      "2": 25,
+      "3": 44
+    },
+    "scoresAbove3": 0,
+    "excludedAboveThree": 2,
+    "blankBefore": 15,
+    "supplementedFromUi": 14,
+    "blankAfter": 1,
+    "stores": 122
+  },
+  "businessWarnings": [
+    "您的美团平台当前有36家店铺授权失败 请及时查看"
+  ],
+  "report": {
+    "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/outputs/yesterday-negative-20261025/差评分析数据_2026-10-25_2026-10-25.xlsx",
+    "name": "差评分析数据_2026-10-25_2026-10-25.xlsx",
+    "size": 18240,
+    "sha256": "30e32c3aa3675b946275447518373d4b1a0e93d5d445c64a2afe1116e99faf5e",
+    "rows": 139
+  },
+  "send": {
+    "verified": true,
+    "sendAttempts": 1,
+    "newSendAttempts": 1,
+    "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "verificationLevel": "wecom-ui-tree-file-name-size"
+  },
+  "screenshot": {
+    "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/outputs/yesterday-negative-20261025/差评分析长图_2026-10-25_2026-10-25.jpg",
+    "name": "差评分析长图_2026-10-25_2026-10-25.jpg",
+    "size": 2618241,
+    "sha256": "727fe51a71c6f4a6b5e27013a1b4809007dc51be343d36bb945937b515d1e2ea",
+    "rows": 139,
+    "width": 1200,
+    "height": 9901
+  },
+  "screenshotSend": {
+    "verified": false,
+    "sendAttempts": 1,
+    "newSendAttempts": 1,
+    "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰"
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "jinsha-business-code-enforced-v1",
+  "runId": "jinsha-business-production-20261001-25",
+  "businessDate": "2026-09-30",
+  "status": "needs-resume",
+  "phase": "prepared",
+  "nextAction": null,
+  "totalElapsedMs": 75887,
+  "nodes": [
+    {
+      "name": "download",
+      "attempts": 2,
+      "startedAt": 1790870173348,
+      "finishedAt": 1790870203207,
+      "elapsedMs": 29859,
+      "complete": true
+    },
+    {
+      "name": "prepare",
+      "attempts": 1,
+      "startedAt": 1790870203207,
+      "finishedAt": 1790870231665,
+      "elapsedMs": 28458,
+      "complete": true
+    },
+    {
+      "name": "send",
+      "attempts": 4,
+      "startedAt": 1790870231667,
+      "finishedAt": 1790870249230,
+      "elapsedMs": 17563,
+      "complete": false
+    }
+  ],
+  "pitfalls": [
+    {
+      "at": 1790870187945,
+      "stage": "download",
+      "type": "recovery",
+      "detail": "retry-download",
+      "reason": "jinsha-shell-not-ready"
+    },
+    {
+      "at": 1790870249230,
+      "stage": "prepared",
+      "type": "blocked",
+      "detail": "desktop-preflight-retry-limit-exceeded"
+    }
+  ],
+  "codeEnforced": true,
+  "reviewItems": [
+    {
+      "name": "download",
+      "attempts": 2,
+      "startedAt": 1790870173348,
+      "finishedAt": 1790870203207,
+      "elapsedMs": 29859,
+      "complete": true,
+      "pitfalls": [
+        {
+          "at": 1790870187945,
+          "stage": "download",
+          "type": "recovery",
+          "detail": "retry-download",
+          "reason": "jinsha-shell-not-ready"
+        }
+      ]
+    },
+    {
+      "name": "prepare",
+      "attempts": 1,
+      "startedAt": 1790870203207,
+      "finishedAt": 1790870231665,
+      "elapsedMs": 28458,
+      "complete": true,
+      "pitfalls": []
+    },
+    {
+      "name": "send",
+      "attempts": 4,
+      "startedAt": 1790870231667,
+      "finishedAt": 1790870249230,
+      "elapsedMs": 17563,
+      "complete": false,
+      "pitfalls": [
+        {
+          "at": 1790870249230,
+          "stage": "prepared",
+          "type": "blocked",
+          "detail": "desktop-preflight-retry-limit-exceeded"
+        }
+      ]
+    }
+  ],
+  "runtimeModelDecisions": 0,
+  "generatedAt": 1790870249230
+}

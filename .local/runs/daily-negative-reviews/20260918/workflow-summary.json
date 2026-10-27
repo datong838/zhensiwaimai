@@ -1,0 +1,212 @@
+{
+  "ok": true,
+  "policyVersion": "daily-negative-reviews-code-enforced-v1",
+  "businessDate": "2026-09-18",
+  "phase": "complete",
+  "status": "complete",
+  "runtimeModelDecisions": 0,
+  "completionReview": {
+    "codeEnforced": true,
+    "totalElapsedMs": 168004,
+    "reviewItems": [
+      {
+        "item": 1,
+        "stage": "browser_validate",
+        "label": "连接并唯一定位金鲨页面",
+        "attempts": 1,
+        "elapsedMs": 384,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 2,
+        "stage": "route_and_date",
+        "label": "核验淘宝外卖入口并设置昨日日期",
+        "attempts": 1,
+        "elapsedMs": 4426,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 3,
+        "stage": "browser_collect",
+        "label": "金鲨采集",
+        "attempts": 5,
+        "elapsedMs": 31177,
+        "status": "failed",
+        "pitfalls": [
+          "download.saveAs: ENOENT: no such file or directory, copyfile '/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/playwright-artifacts-w8RXHi/fcf83f6d-d6a4-4d83-bb12-d8b25c27bf0a' -> '/Users/ddt/work/projects/ai_agent/.local/runs/daily-negative-reviews/20260918/raw/差评分析数据_2026-09-18_2026-09-18.xlsx'",
+          "jinsha-waimai-entry-not-selected",
+          "jinsha-waimai-entry-not-selected",
+          "drawer-overlay-count:0",
+          "page-size-option-count:0"
+        ]
+      },
+      {
+        "item": 4,
+        "stage": "download",
+        "label": "下载全部平台差评",
+        "attempts": 1,
+        "elapsedMs": 3058,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 5,
+        "stage": "extract_platforms",
+        "label": "读取三平台页面列表",
+        "attempts": 1,
+        "elapsedMs": 6258,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 6,
+        "stage": "reconcile",
+        "label": "下载与页面逐条对账",
+        "attempts": 1,
+        "elapsedMs": 192,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 7,
+        "stage": "build_report",
+        "label": "生成并验收固定格式Excel",
+        "attempts": 1,
+        "elapsedMs": 806,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 8,
+        "stage": "wechat_send",
+        "label": "唯一群定位、单次发送与双帧校验",
+        "attempts": 5,
+        "elapsedMs": 102643,
+        "status": "completed",
+        "pitfalls": [
+          "exact-group-result-count:0",
+          "exact-group-result-count:0",
+          "desktop-group-title-not-unique:0",
+          "reconcile-evidence-insufficient",
+          "复用已验证发送收据，未再次发送"
+        ]
+      },
+      {
+        "item": 9,
+        "stage": "completion_gate",
+        "label": "汇总收据并生成代码化复盘",
+        "attempts": 1,
+        "elapsedMs": 1,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 10,
+        "stage": "correction_reconcile",
+        "label": "更正1至3星口径并重新对账",
+        "attempts": 2,
+        "elapsedMs": 391,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 11,
+        "stage": "correction_report",
+        "label": "生成并验收更正版Excel",
+        "attempts": 2,
+        "elapsedMs": 1536,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 12,
+        "stage": "correction_send",
+        "label": "更正版单次发送与双帧校验",
+        "attempts": 2,
+        "elapsedMs": 17132,
+        "status": "completed",
+        "pitfalls": [
+          "Command failed: /Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python /Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/scripts/workflow_bridge.py --workflow-id negative-reviews --group 上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰 --payload-type file --authorization zhensi-negative-review-main-wechat-shanghai-zhensi-operations-ding-fandang-v1-user-20260918 --ledger /Users/ddt/work/projects/ai_agent/.local/state/negative-review-send-shanghai-zhensi-operations-ding-fandang-v1.desktop-attempts --marker-name negative-review-2026-09-18-correction-v1.json --output-dir /Users/ddt/work/projects/ai_agent/.local/runs/daily-negative-reviews/20260918/wechat-correction-send --item /Users/ddt/work/projects/ai_agent/outputs/yesterday-negative-20260918/差评分析数据_2026-09-18_2026-09-18_更正.xlsx --deadline-unix 1789783979 --execute\n"
+        ]
+      }
+    ],
+    "pitfalls": [
+      "download.saveAs: ENOENT: no such file or directory, copyfile '/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/playwright-artifacts-w8RXHi/fcf83f6d-d6a4-4d83-bb12-d8b25c27bf0a' -> '/Users/ddt/work/projects/ai_agent/.local/runs/daily-negative-reviews/20260918/raw/差评分析数据_2026-09-18_2026-09-18.xlsx'",
+      "jinsha-waimai-entry-not-selected",
+      "jinsha-waimai-entry-not-selected",
+      "drawer-overlay-count:0",
+      "page-size-option-count:0",
+      "exact-group-result-count:0",
+      "exact-group-result-count:0",
+      "desktop-group-title-not-unique:0",
+      "reconcile-evidence-insufficient",
+      "复用已验证发送收据，未再次发送",
+      "Command failed: /Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python /Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/scripts/workflow_bridge.py --workflow-id negative-reviews --group 上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰 --payload-type file --authorization zhensi-negative-review-main-wechat-shanghai-zhensi-operations-ding-fandang-v1-user-20260918 --ledger /Users/ddt/work/projects/ai_agent/.local/state/negative-review-send-shanghai-zhensi-operations-ding-fandang-v1.desktop-attempts --marker-name negative-review-2026-09-18-correction-v1.json --output-dir /Users/ddt/work/projects/ai_agent/.local/runs/daily-negative-reviews/20260918/wechat-correction-send --item /Users/ddt/work/projects/ai_agent/outputs/yesterday-negative-20260918/差评分析数据_2026-09-18_2026-09-18_更正.xlsx --deadline-unix 1789783979 --execute\n"
+    ]
+  },
+  "data": {
+    "sourceRecords": 177,
+    "records": 176,
+    "platforms": {
+      "美团外卖": 60,
+      "淘宝闪购": 109,
+      "京东外卖": 7
+    },
+    "scores": {
+      "1": 91,
+      "2": 27,
+      "3": 58
+    },
+    "scoresAbove3": 0,
+    "excludedAboveThree": 1,
+    "blankBefore": 18,
+    "supplementedFromUi": 17,
+    "blankAfter": 1,
+    "stores": 155
+  },
+  "businessWarnings": [
+    "您的美团平台当前有36家店铺授权失败 请及时查看"
+  ],
+  "report": {
+    "path": "/Users/ddt/work/projects/ai_agent/outputs/yesterday-negative-20260918/差评分析数据_2026-09-18_2026-09-18_更正.xlsx",
+    "name": "差评分析数据_2026-09-18_2026-09-18_更正.xlsx",
+    "size": 22007,
+    "sha256": "7ab402b7c4fc971ca49c1283e02f15a44cd429b6a5ad3555fbbfaa90450666f4",
+    "rows": 176
+  },
+  "send": {
+    "verified": true,
+    "sendAttempts": 1,
+    "newSendAttempts": 1,
+    "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "verificationLevel": "file-name-size-ui"
+  },
+  "correction": {
+    "completed": true,
+    "of": "negative-review-2026-09-18.json",
+    "originalReport": {
+      "path": "/Users/ddt/work/projects/ai_agent/outputs/yesterday-negative-20260918/差评分析数据_2026-09-18_2026-09-18.xlsx",
+      "name": "差评分析数据_2026-09-18_2026-09-18.xlsx",
+      "size": 22052,
+      "sha256": "ae833c6b8b2131d0ff4b5747f488c297d07c3ba32c6f1b2d85ff1b36335ac088",
+      "rows": 177
+    },
+    "originalSend": {
+      "verified": true,
+      "sendAttempts": 0,
+      "newSendAttempts": 0,
+      "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+      "verificationLevel": "file-name-size-ui"
+    },
+    "excludedAboveThree": [
+      {
+        "店铺名称": "觅湘私菜坊·湖南菜（潍坊三村店）",
+        "平台": "美团外卖",
+        "总分": 4,
+        "差评内容": "口味可以的"
+      }
+    ]
+  }
+}

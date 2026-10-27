@@ -1,0 +1,115 @@
+{
+  "itemId": "0",
+  "sha256": "9e01c1e60ee2013982e5b3c5c2f5eccb95fa31d7195d9688678b11b5e691d470",
+  "type": "file",
+  "status": "verified",
+  "claimedAt": 1790477230.765593,
+  "sendAttempts": 1,
+  "verificationLevel": "file-name-size-ui",
+  "evidence": {
+    "ok": true,
+    "transportVerified": true,
+    "completionFrames": [
+      "/Users/ddt/work/projects/ai_agent/.local/state/negative-review-send-shanghai-zhensi-operations-ding-fandang-v1.desktop-attempts/.wechat-messaging/events/8b53d22f622be361826aba9d3cb8e5188c08b7a9bc16645d6e847c1e02127f10/c4a3a634e9d7bf0397bb6a3e6cb1642dbad0bcc3e7443765ab6092be71d6989a/transport/after-send-1.png",
+      "/Users/ddt/work/projects/ai_agent/.local/state/negative-review-send-shanghai-zhensi-operations-ding-fandang-v1.desktop-attempts/.wechat-messaging/events/8b53d22f622be361826aba9d3cb8e5188c08b7a9bc16645d6e847c1e02127f10/c4a3a634e9d7bf0397bb6a3e6cb1642dbad0bcc3e7443765ab6092be71d6989a/transport/after-send-2.png"
+    ]
+  },
+  "transport": {
+    "ok": true,
+    "executor": "wechat-desktop-sender",
+    "channel": "desktop",
+    "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "payloadType": "file",
+    "sendAttempts": 1,
+    "runtimeModelDecisions": 0,
+    "stage": "completed",
+    "stageMs": {
+      "locate_group": 727,
+      "verify_target_and_input": 2033,
+      "prepare_payload": 2013,
+      "claim_and_send": 3628,
+      "post_send_verify": 6083
+    },
+    "payloadIdentity": "fd34d830e0a95a437a6fcbcab4e32f8cfeb0d0ea80b639ce53b7c450af9e0e18",
+    "payloads": [
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/.local/state/negative-review-send-shanghai-zhensi-operations-ding-fandang-v1.desktop-attempts/.wechat-messaging/events/8b53d22f622be361826aba9d3cb8e5188c08b7a9bc16645d6e847c1e02127f10/c4a3a634e9d7bf0397bb6a3e6cb1642dbad0bcc3e7443765ab6092be71d6989a/payload/差评分析数据_2026-09-26_2026-09-26.xlsx",
+        "name": "差评分析数据_2026-09-26_2026-09-26.xlsx",
+        "size": 19981,
+        "sha256": "9e01c1e60ee2013982e5b3c5c2f5eccb95fa31d7195d9688678b11b5e691d470"
+      }
+    ],
+    "groupPreflight": {
+      "ok": true,
+      "reason": null,
+      "sendAttempts": 0,
+      "group": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+      "header": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰(81)",
+      "note": "ax-current-group-fast-path",
+      "groupTypeVerified": true,
+      "groupTypeProof": "member-count-header",
+      "composerVerifiedEmpty": true,
+      "attempts": []
+    },
+    "preparedInputChangedPixels": 52812,
+    "preparedInputChangedRatio": 0.142976,
+    "preparedFileObjectCount": 1,
+    "preparedFilePrefixesVerified": true,
+    "attemptMarker": "/Users/ddt/work/projects/ai_agent/.local/state/negative-review-send-shanghai-zhensi-operations-ding-fandang-v1.desktop-attempts/.wechat-messaging/events/8b53d22f622be361826aba9d3cb8e5188c08b7a9bc16645d6e847c1e02127f10/c4a3a634e9d7bf0397bb6a3e6cb1642dbad0bcc3e7443765ab6092be71d6989a/transport-ledger/attempt.json",
+    "postSendInputCleared": [
+      true,
+      true
+    ],
+    "verified": true,
+    "state": "verified",
+    "elapsedMs": 15164,
+    "sendReview": [
+      {
+        "item": 1,
+        "stage": "locate_group",
+        "label": "精确定位目标群",
+        "elapsedMs": 727,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 2,
+        "stage": "verify_target_and_input",
+        "label": "复核目标群与输入框",
+        "elapsedMs": 2033,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 3,
+        "stage": "prepare_payload",
+        "label": "准备并复核发送载荷",
+        "elapsedMs": 2013,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 4,
+        "stage": "claim_and_send",
+        "label": "领取防重账本并单次发送",
+        "elapsedMs": 3628,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 5,
+        "stage": "post_send_verify",
+        "label": "发送后双帧复核",
+        "elapsedMs": 6083,
+        "status": "completed",
+        "pitfalls": []
+      }
+    ],
+    "reviewSummary": {
+      "totalElapsedMs": 15164,
+      "itemCount": 5,
+      "pitfallCount": 0,
+      "result": "success"
+    }
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "itemId": "0",
+  "sha256": "544b3a91f0557ef87b9b86edd531c9c4dc43d7de35df3ed670d1f1441987c10d",
+  "type": "image",
+  "status": "verified",
+  "claimedAt": 1790399001.073078,
+  "sendAttempts": 1,
+  "verificationLevel": "image-content-match",
+  "evidence": {
+    "ok": true,
+    "transportVerified": true,
+    "completionFrames": [
+      "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/state/taobao-jinsha-wechat-evidence-attempts/.wechat-messaging/events/917a5d90107280766fb99e1b1e3896cbf798c9a32d6110cb67e598d5df934b63/24f192bc35f7379132179c8e78ed3db1a91461934f8a74388a15a63956f13b3b/transport/after-send-1.png",
+      "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/state/taobao-jinsha-wechat-evidence-attempts/.wechat-messaging/events/917a5d90107280766fb99e1b1e3896cbf798c9a32d6110cb67e598d5df934b63/24f192bc35f7379132179c8e78ed3db1a91461934f8a74388a15a63956f13b3b/transport/after-send-2.png"
+    ]
+  },
+  "transport": {
+    "ok": true,
+    "executor": "wechat-desktop-sender",
+    "channel": "desktop",
+    "groupName": "FEIBING NEO AI数字员工",
+    "payloadType": "image",
+    "sendAttempts": 1,
+    "runtimeModelDecisions": 0,
+    "stage": "completed",
+    "stageMs": {
+      "locate_group": 751,
+      "verify_target_and_input": 1678,
+      "prepare_payload": 1980,
+      "claim_and_send": 3481,
+      "post_send_verify": 6297
+    },
+    "payloadIdentity": "ccdeb486eb24fb3b5bd91eb83e507b4f6e3da28dfd5f470115145d15aa88b792",
+    "payloads": [
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/state/taobao-jinsha-wechat-evidence-attempts/.wechat-messaging/events/917a5d90107280766fb99e1b1e3896cbf798c9a32d6110cb67e598d5df934b63/24f192bc35f7379132179c8e78ed3db1a91461934f8a74388a15a63956f13b3b/payload/jinsha-store-final.png",
+        "name": "jinsha-store-final.png",
+        "size": 217975,
+        "sha256": "544b3a91f0557ef87b9b86edd531c9c4dc43d7de35df3ed670d1f1441987c10d"
+      }
+    ],
+    "groupPreflight": {
+      "ok": true,
+      "reason": null,
+      "sendAttempts": 0,
+      "group": "FEIBING NEO AI数字员工",
+      "header": "FEIBING NEO AI数字员工(19)",
+      "note": "ax-current-group-fast-path",
+      "groupTypeVerified": true,
+      "groupTypeProof": "member-count-header",
+      "composerVerifiedEmpty": true,
+      "attempts": []
+    },
+    "preparedInputChangedPixels": 18985,
+    "preparedInputChangedRatio": 0.051397,
+    "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/state/taobao-jinsha-wechat-evidence-attempts/.wechat-messaging/events/917a5d90107280766fb99e1b1e3896cbf798c9a32d6110cb67e598d5df934b63/24f192bc35f7379132179c8e78ed3db1a91461934f8a74388a15a63956f13b3b/transport-ledger/attempt.json",
+    "postSendInputCleared": [
+      true,
+      true
+    ],
+    "postSendEvidence": [
+      {
+        "chatChangedPixels": 297819,
+        "inputChangedPixels": 2901
+      },
+      {
+        "chatChangedPixels": 297819,
+        "inputChangedPixels": 2901
+      }
+    ],
+    "verified": true,
+    "state": "verified",
+    "elapsedMs": 14188,
+    "sendReview": [
+      {
+        "item": 1,
+        "stage": "locate_group",
+        "label": "精确定位目标群",
+        "elapsedMs": 751,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 2,
+        "stage": "verify_target_and_input",
+        "label": "复核目标群与输入框",
+        "elapsedMs": 1678,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 3,
+        "stage": "prepare_payload",
+        "label": "准备并复核发送载荷",
+        "elapsedMs": 1980,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 4,
+        "stage": "claim_and_send",
+        "label": "领取防重账本并单次发送",
+        "elapsedMs": 3481,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 5,
+        "stage": "post_send_verify",
+        "label": "发送后双帧复核",
+        "elapsedMs": 6297,
+        "status": "completed",
+        "pitfalls": []
+      }
+    ],
+    "reviewSummary": {
+      "totalElapsedMs": 14188,
+      "itemCount": 5,
+      "pitfallCount": 0,
+      "result": "success"
+    }
+  }
+}

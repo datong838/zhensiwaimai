@@ -1,0 +1,66 @@
+{
+  "ok": false,
+  "runId": "jinsha-exam15-20260907",
+  "startedAt": 1788765403613,
+  "deadline": 1788765583613,
+  "clicks": {
+    "meituan": 1,
+    "taobao": 0
+  },
+  "files": {
+    "meituan": {
+      "name": "美团原始0906考核15.xlsx",
+      "downloadStartedAt": 1788765408082,
+      "savedAt": 1788765411825
+    }
+  },
+  "stage": "taobao.metrics",
+  "nodes": [
+    {
+      "name": "meituan.platform",
+      "elapsedMs": 1201
+    },
+    {
+      "name": "meituan.date",
+      "elapsedMs": 1236
+    },
+    {
+      "name": "meituan.plan",
+      "elapsedMs": 1247
+    },
+    {
+      "name": "meituan.metrics",
+      "elapsedMs": 0
+    },
+    {
+      "name": "meituan.download-save",
+      "elapsedMs": 3743
+    },
+    {
+      "name": "taobao.platform",
+      "elapsedMs": 1436
+    },
+    {
+      "name": "taobao.date",
+      "elapsedMs": 1333
+    },
+    {
+      "name": "taobao.plan",
+      "elapsedMs": 1514
+    },
+    {
+      "name": "taobao.metrics",
+      "elapsedMs": 8491,
+      "failed": true
+    }
+  ],
+  "lease": {
+    "path": "/tmp/zhensi-jinsha-cua-exam.lock",
+    "acquiredAt": 1788765403613,
+    "released": true,
+    "releasedAt": 1788765424599
+  },
+  "efficiencyExceeded": false,
+  "reason": "state-not-ready",
+  "elapsedMs": 20986
+}

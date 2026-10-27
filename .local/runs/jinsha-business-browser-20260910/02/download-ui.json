@@ -1,0 +1,49 @@
+{
+  "ok": false,
+  "runId": "jinsha-business-browser-20260910-02",
+  "startedAt": 1789045353163,
+  "deadline": 1789045533163,
+  "executor": "jinsha-browser-download",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "jinsha-business",
+  "port": 9232,
+  "businessDate": "2026-09-09",
+  "runtimeModelDecisions": 0,
+  "clicks": {
+    "meituan": 0,
+    "taobao": 0
+  },
+  "files": {},
+  "stage": "navigation",
+  "nodes": [
+    {
+      "name": "background_preflight",
+      "elapsedMs": 35,
+      "ok": true,
+      "llmIntervention": false
+    },
+    {
+      "name": "task_page",
+      "elapsedMs": 8588,
+      "ok": true,
+      "llmIntervention": false
+    },
+    {
+      "name": "navigation",
+      "elapsedMs": 12093,
+      "ok": false,
+      "llmIntervention": false
+    }
+  ],
+  "frontmostBefore": "com.openai.codex",
+  "lease": {
+    "path": "/tmp/zhensi-jinsha-cua-exam.lock",
+    "acquiredAt": 1789045353473,
+    "released": true,
+    "releasedAt": 1789045374212
+  },
+  "reason": "jinsha-report-page-not-ready:jinsha-login-required",
+  "elapsedMs": 21049,
+  "efficiencyExceeded": false,
+  "frontmostAfter": "com.openai.codex"
+}

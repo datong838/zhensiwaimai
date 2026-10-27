@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "jinsha-business-code-enforced-v1",
+  "runId": "jinsha-business-production-20260928-01",
+  "businessDate": "2026-09-27",
+  "status": "needs-maintenance",
+  "phase": "created",
+  "nextAction": null,
+  "totalElapsedMs": 2021,
+  "nodes": [
+    {
+      "name": "download",
+      "attempts": 3,
+      "startedAt": 1790564571896,
+      "finishedAt": 1790564573910,
+      "elapsedMs": 2014,
+      "complete": false
+    }
+  ],
+  "pitfalls": [
+    {
+      "at": 1790564572597,
+      "stage": "download",
+      "type": "recovery",
+      "detail": "retry-download",
+      "reason": "jinsha-background-profile-state-mismatch"
+    },
+    {
+      "at": 1790564573248,
+      "stage": "download",
+      "type": "recovery",
+      "detail": "retry-download",
+      "reason": "jinsha-background-profile-state-mismatch"
+    },
+    {
+      "at": 1790564573909,
+      "stage": "download",
+      "type": "recovery",
+      "detail": "retry-download",
+      "reason": "jinsha-background-profile-state-mismatch"
+    },
+    {
+      "at": 1790564573910,
+      "stage": "created",
+      "type": "blocked",
+      "detail": "download-retry-limit-exceeded"
+    }
+  ],
+  "codeEnforced": true,
+  "reviewItems": [
+    {
+      "name": "download",
+      "attempts": 3,
+      "startedAt": 1790564571896,
+      "finishedAt": 1790564573910,
+      "elapsedMs": 2014,
+      "complete": false,
+      "pitfalls": [
+        {
+          "at": 1790564572597,
+          "stage": "download",
+          "type": "recovery",
+          "detail": "retry-download",
+          "reason": "jinsha-background-profile-state-mismatch"
+        },
+        {
+          "at": 1790564573248,
+          "stage": "download",
+          "type": "recovery",
+          "detail": "retry-download",
+          "reason": "jinsha-background-profile-state-mismatch"
+        },
+        {
+          "at": 1790564573909,
+          "stage": "download",
+          "type": "recovery",
+          "detail": "retry-download",
+          "reason": "jinsha-background-profile-state-mismatch"
+        }
+      ]
+    }
+  ],
+  "runtimeModelDecisions": 0,
+  "generatedAt": 1790564573910
+}

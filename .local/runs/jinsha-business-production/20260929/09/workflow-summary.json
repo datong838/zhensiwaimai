@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "jinsha-business-code-enforced-v1",
+  "runId": "jinsha-business-production-20260929-09",
+  "businessDate": "2026-09-28",
+  "status": "needs-resume",
+  "phase": "prepared",
+  "nextAction": null,
+  "totalElapsedMs": 185054,
+  "nodes": [
+    {
+      "name": "download",
+      "attempts": 1,
+      "startedAt": 1790665874135,
+      "finishedAt": 1790665889887,
+      "elapsedMs": 15752,
+      "complete": true
+    },
+    {
+      "name": "prepare",
+      "attempts": 1,
+      "startedAt": 1790665889887,
+      "finishedAt": 1790665918572,
+      "elapsedMs": 28685,
+      "complete": true
+    },
+    {
+      "name": "send",
+      "attempts": 4,
+      "startedAt": 1790665918573,
+      "finishedAt": 1790666059184,
+      "elapsedMs": 140611,
+      "complete": false
+    }
+  ],
+  "pitfalls": [
+    {
+      "at": 1790666059184,
+      "stage": "prepared",
+      "type": "blocked",
+      "detail": "desktop-preflight-retry-limit-exceeded"
+    },
+    {
+      "at": 1790666059184,
+      "stage": "workflow",
+      "type": "efficiency-budget-exceeded",
+      "detail": "185054>180000"
+    }
+  ],
+  "codeEnforced": true,
+  "reviewItems": [
+    {
+      "name": "download",
+      "attempts": 1,
+      "startedAt": 1790665874135,
+      "finishedAt": 1790665889887,
+      "elapsedMs": 15752,
+      "complete": true,
+      "pitfalls": []
+    },
+    {
+      "name": "prepare",
+      "attempts": 1,
+      "startedAt": 1790665889887,
+      "finishedAt": 1790665918572,
+      "elapsedMs": 28685,
+      "complete": true,
+      "pitfalls": []
+    },
+    {
+      "name": "send",
+      "attempts": 4,
+      "startedAt": 1790665918573,
+      "finishedAt": 1790666059184,
+      "elapsedMs": 140611,
+      "complete": false,
+      "pitfalls": [
+        {
+          "at": 1790666059184,
+          "stage": "prepared",
+          "type": "blocked",
+          "detail": "desktop-preflight-retry-limit-exceeded"
+        }
+      ]
+    }
+  ],
+  "runtimeModelDecisions": 0,
+  "generatedAt": 1790666059184
+}

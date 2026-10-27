@@ -1,0 +1,183 @@
+{
+  "ok": true,
+  "policyVersion": "daily-negative-reviews-code-enforced-v1",
+  "businessDate": "2026-09-22",
+  "phase": "complete",
+  "status": "complete",
+  "runtimeModelDecisions": 0,
+  "completionReview": {
+    "codeEnforced": true,
+    "totalElapsedMs": 329074,
+    "reviewItems": [
+      {
+        "item": 1,
+        "stage": "browser_collect",
+        "label": "金鲨采集",
+        "attempts": 3,
+        "elapsedMs": 20773,
+        "status": "failed",
+        "pitfalls": [
+          "jinsha-realtime-page-count:0:all=1",
+          "date-input-count:0",
+          "locator.waitFor: Timeout 5000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.el-select-dropdown__item:visible').filter({ hasText: '200条/页' }).first() to be visible\u001b[22m\n"
+        ]
+      },
+      {
+        "item": 2,
+        "stage": "browser_validate",
+        "label": "连接并唯一定位金鲨页面",
+        "attempts": 1,
+        "elapsedMs": 238,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 3,
+        "stage": "route_and_date",
+        "label": "核验淘宝外卖入口并设置昨日日期",
+        "attempts": 1,
+        "elapsedMs": 5132,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 4,
+        "stage": "download",
+        "label": "下载全部平台差评",
+        "attempts": 1,
+        "elapsedMs": 3440,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 5,
+        "stage": "extract_platforms",
+        "label": "读取三平台页面列表",
+        "attempts": 1,
+        "elapsedMs": 5230,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 6,
+        "stage": "reconcile",
+        "label": "下载与页面逐条对账",
+        "attempts": 5,
+        "elapsedMs": 970,
+        "status": "completed",
+        "pitfalls": [
+          "Command failed: /Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 /Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-negative-reviews/scripts/reconcile.py /Users/ddt/work/projects/ai_agent/.local/runs/daily-negative-reviews/20260922/config.json\nTraceback (most recent call last):\n  File \"/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-negative-reviews/scripts/reconcile.py\", line 58, in <module>\n    if __name__=='__main__': main()\n                             ^^^^^^\n  File \"/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-negative-reviews/scripts/reconcile.py\", line 56, in main\n    config=json.loads(Path(sys.argv[1]).read_text());print(json.dumps(reconcile(config),ensure_ascii=False))\n                                                                      ^^^^^^^^^^^^^^^^^\n  File \"/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-negative-reviews/scripts/reconcile.py\", line 30, in reconcile\n    if len(raw)!=len(ui['rows']) or len(raw)!=sum(ui['counts'].values()): raise ValueError('record-count-mismatch')\n                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: record-count-mismatch\n",
+          "Command failed: /Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 /Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-negative-reviews/scripts/reconcile.py /Users/ddt/work/projects/ai_agent/.local/runs/daily-negative-reviews/20260922/config.json\nTraceback (most recent call last):\n  File \"/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-negative-reviews/scripts/reconcile.py\", line 58, in <module>\n    if __name__=='__main__': main()\n                             ^^^^^^\n  File \"/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-negative-reviews/scripts/reconcile.py\", line 56, in main\n    config=json.loads(Path(sys.argv[1]).read_text());print(json.dumps(reconcile(config),ensure_ascii=False))\n                                                                      ^^^^^^^^^^^^^^^^^\n  File \"/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-negative-reviews/scripts/reconcile.py\", line 30, in reconcile\n    if len(raw)!=len(ui['rows']) or len(raw)!=sum(ui['counts'].values()): raise ValueError('record-count-mismatch')\n                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: record-count-mismatch\n",
+          "Command failed: /Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 /Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-negative-reviews/scripts/reconcile.py /Users/ddt/work/projects/ai_agent/.local/runs/daily-negative-reviews/20260922/config.json\nTraceback (most recent call last):\n  File \"/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-negative-reviews/scripts/reconcile.py\", line 58, in <module>\n    if __name__=='__main__': main()\n                             ^^^^^^\n  File \"/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-negative-reviews/scripts/reconcile.py\", line 56, in main\n    config=json.loads(Path(sys.argv[1]).read_text());print(json.dumps(reconcile(config),ensure_ascii=False))\n                                                                      ^^^^^^^^^^^^^^^^^\n  File \"/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-negative-reviews/scripts/reconcile.py\", line 30, in reconcile\n    if len(raw)!=len(ui['rows']) or len(raw)!=sum(ui['counts'].values()): raise ValueError('record-count-mismatch')\n                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: record-count-mismatch\n",
+          "Command failed: /Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 /Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-negative-reviews/scripts/reconcile.py /Users/ddt/work/projects/ai_agent/.local/runs/daily-negative-reviews/20260922/config.json\nTraceback (most recent call last):\n  File \"/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-negative-reviews/scripts/reconcile.py\", line 58, in <module>\n    if __name__=='__main__': main()\n                             ^^^^^^\n  File \"/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-negative-reviews/scripts/reconcile.py\", line 56, in main\n    config=json.loads(Path(sys.argv[1]).read_text());print(json.dumps(reconcile(config),ensure_ascii=False))\n                                                                      ^^^^^^^^^^^^^^^^^\n  File \"/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-negative-reviews/scripts/reconcile.py\", line 30, in reconcile\n    if len(raw)!=len(ui['rows']) or len(raw)!=sum(ui['counts'].values()): raise ValueError('record-count-mismatch')\n                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: record-count-mismatch\n"
+        ]
+      },
+      {
+        "item": 7,
+        "stage": "browser_refresh",
+        "label": "复用已下载文件并刷新三平台页面列表",
+        "attempts": 10,
+        "elapsedMs": 254598,
+        "status": "completed",
+        "pitfalls": [
+          "visible-pagination-next-unavailable",
+          "locator.inputValue: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input.el-range-input').first()\u001b[22m\n",
+          "locator.inputValue: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input.el-range-input').first()\u001b[22m\n",
+          "negative-list-not-stable",
+          "negative-list-not-stable",
+          "negative-list-not-stable",
+          "negative-list-not-stable:171:156",
+          "negative-list-not-stable:171:156",
+          "复用已验证下载文件，未再次下载",
+          "首份下载后源数据变动，已归档首份文件并受控替换下载一次"
+        ]
+      },
+      {
+        "item": 8,
+        "stage": "build_report",
+        "label": "生成并验收固定格式Excel",
+        "attempts": 1,
+        "elapsedMs": 866,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 9,
+        "stage": "wechat_send",
+        "label": "唯一群定位、单次发送与双帧校验",
+        "attempts": 2,
+        "elapsedMs": 37826,
+        "status": "completed",
+        "pitfalls": [
+          "No module named 'AppKit'"
+        ]
+      },
+      {
+        "item": 10,
+        "stage": "completion_gate",
+        "label": "汇总收据并生成代码化复盘",
+        "attempts": 1,
+        "elapsedMs": 1,
+        "status": "completed",
+        "pitfalls": []
+      }
+    ],
+    "pitfalls": [
+      "jinsha-realtime-page-count:0:all=1",
+      "date-input-count:0",
+      "locator.waitFor: Timeout 5000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.el-select-dropdown__item:visible').filter({ hasText: '200条/页' }).first() to be visible\u001b[22m\n",
+      "Command failed: /Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 /Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-negative-reviews/scripts/reconcile.py /Users/ddt/work/projects/ai_agent/.local/runs/daily-negative-reviews/20260922/config.json\nTraceback (most recent call last):\n  File \"/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-negative-reviews/scripts/reconcile.py\", line 58, in <module>\n    if __name__=='__main__': main()\n                             ^^^^^^\n  File \"/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-negative-reviews/scripts/reconcile.py\", line 56, in main\n    config=json.loads(Path(sys.argv[1]).read_text());print(json.dumps(reconcile(config),ensure_ascii=False))\n                                                                      ^^^^^^^^^^^^^^^^^\n  File \"/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-negative-reviews/scripts/reconcile.py\", line 30, in reconcile\n    if len(raw)!=len(ui['rows']) or len(raw)!=sum(ui['counts'].values()): raise ValueError('record-count-mismatch')\n                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: record-count-mismatch\n",
+      "Command failed: /Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 /Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-negative-reviews/scripts/reconcile.py /Users/ddt/work/projects/ai_agent/.local/runs/daily-negative-reviews/20260922/config.json\nTraceback (most recent call last):\n  File \"/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-negative-reviews/scripts/reconcile.py\", line 58, in <module>\n    if __name__=='__main__': main()\n                             ^^^^^^\n  File \"/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-negative-reviews/scripts/reconcile.py\", line 56, in main\n    config=json.loads(Path(sys.argv[1]).read_text());print(json.dumps(reconcile(config),ensure_ascii=False))\n                                                                      ^^^^^^^^^^^^^^^^^\n  File \"/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-negative-reviews/scripts/reconcile.py\", line 30, in reconcile\n    if len(raw)!=len(ui['rows']) or len(raw)!=sum(ui['counts'].values()): raise ValueError('record-count-mismatch')\n                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: record-count-mismatch\n",
+      "Command failed: /Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 /Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-negative-reviews/scripts/reconcile.py /Users/ddt/work/projects/ai_agent/.local/runs/daily-negative-reviews/20260922/config.json\nTraceback (most recent call last):\n  File \"/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-negative-reviews/scripts/reconcile.py\", line 58, in <module>\n    if __name__=='__main__': main()\n                             ^^^^^^\n  File \"/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-negative-reviews/scripts/reconcile.py\", line 56, in main\n    config=json.loads(Path(sys.argv[1]).read_text());print(json.dumps(reconcile(config),ensure_ascii=False))\n                                                                      ^^^^^^^^^^^^^^^^^\n  File \"/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-negative-reviews/scripts/reconcile.py\", line 30, in reconcile\n    if len(raw)!=len(ui['rows']) or len(raw)!=sum(ui['counts'].values()): raise ValueError('record-count-mismatch')\n                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: record-count-mismatch\n",
+      "Command failed: /Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 /Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-negative-reviews/scripts/reconcile.py /Users/ddt/work/projects/ai_agent/.local/runs/daily-negative-reviews/20260922/config.json\nTraceback (most recent call last):\n  File \"/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-negative-reviews/scripts/reconcile.py\", line 58, in <module>\n    if __name__=='__main__': main()\n                             ^^^^^^\n  File \"/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-negative-reviews/scripts/reconcile.py\", line 56, in main\n    config=json.loads(Path(sys.argv[1]).read_text());print(json.dumps(reconcile(config),ensure_ascii=False))\n                                                                      ^^^^^^^^^^^^^^^^^\n  File \"/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-negative-reviews/scripts/reconcile.py\", line 30, in reconcile\n    if len(raw)!=len(ui['rows']) or len(raw)!=sum(ui['counts'].values()): raise ValueError('record-count-mismatch')\n                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: record-count-mismatch\n",
+      "visible-pagination-next-unavailable",
+      "locator.inputValue: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input.el-range-input').first()\u001b[22m\n",
+      "locator.inputValue: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input.el-range-input').first()\u001b[22m\n",
+      "negative-list-not-stable",
+      "negative-list-not-stable",
+      "negative-list-not-stable",
+      "negative-list-not-stable:171:156",
+      "negative-list-not-stable:171:156",
+      "复用已验证下载文件，未再次下载",
+      "首份下载后源数据变动，已归档首份文件并受控替换下载一次",
+      "No module named 'AppKit'"
+    ]
+  },
+  "data": {
+    "sourceRecords": 171,
+    "records": 169,
+    "platforms": {
+      "美团外卖": 65,
+      "淘宝闪购": 100,
+      "京东外卖": 4
+    },
+    "scores": {
+      "1": 94,
+      "2": 27,
+      "3": 48
+    },
+    "scoresAbove3": 0,
+    "excludedAboveThree": 2,
+    "blankBefore": 15,
+    "supplementedFromUi": 15,
+    "blankAfter": 0,
+    "stores": 150
+  },
+  "businessWarnings": [
+    "您的淘宝闪购平台当前有17家店铺授权失败 请及时查看"
+  ],
+  "report": {
+    "path": "/Users/ddt/work/projects/ai_agent/outputs/yesterday-negative-20260922/差评分析数据_2026-09-22_2026-09-22.xlsx",
+    "name": "差评分析数据_2026-09-22_2026-09-22.xlsx",
+    "size": 23297,
+    "sha256": "fb0209e26df3395d023dd5c376a7c388e2c8488a67adffb16e2e6329af9bea7a",
+    "rows": 169
+  },
+  "send": {
+    "verified": true,
+    "sendAttempts": 1,
+    "newSendAttempts": 1,
+    "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "verificationLevel": "file-name-size-ui"
+  }
+}

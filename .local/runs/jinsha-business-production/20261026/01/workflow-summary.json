@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "jinsha-business-code-enforced-v1",
+  "runId": "jinsha-business-production-20261026-01",
+  "businessDate": "2026-10-25",
+  "status": "needs-maintenance",
+  "phase": "created",
+  "nextAction": null,
+  "totalElapsedMs": 70675,
+  "nodes": [
+    {
+      "name": "download",
+      "attempts": 3,
+      "startedAt": 1792983695526,
+      "finishedAt": 1792983766196,
+      "elapsedMs": 70670,
+      "complete": false
+    }
+  ],
+  "pitfalls": [
+    {
+      "at": 1792983709314,
+      "stage": "download",
+      "type": "recovery",
+      "detail": "retry-download",
+      "reason": "jinsha-shell-not-ready"
+    },
+    {
+      "at": 1792983740336,
+      "stage": "download",
+      "type": "recovery",
+      "detail": "retry-download",
+      "reason": "page.goto: Timeout 30000ms exceeded.\nCall log:\n  - navigating to \"https://data.guoshuyufen.com/#/businessData/realTimeData\", waiting until \"commit\"\n"
+    },
+    {
+      "at": 1792983766195,
+      "stage": "download",
+      "type": "recovery",
+      "detail": "retry-download",
+      "reason": "jinsha-shell-not-ready"
+    },
+    {
+      "at": 1792983766196,
+      "stage": "created",
+      "type": "blocked",
+      "detail": "download-retry-limit-exceeded"
+    }
+  ],
+  "codeEnforced": true,
+  "reviewItems": [
+    {
+      "name": "download",
+      "attempts": 3,
+      "startedAt": 1792983695526,
+      "finishedAt": 1792983766196,
+      "elapsedMs": 70670,
+      "complete": false,
+      "pitfalls": [
+        {
+          "at": 1792983709314,
+          "stage": "download",
+          "type": "recovery",
+          "detail": "retry-download",
+          "reason": "jinsha-shell-not-ready"
+        },
+        {
+          "at": 1792983740336,
+          "stage": "download",
+          "type": "recovery",
+          "detail": "retry-download",
+          "reason": "page.goto: Timeout 30000ms exceeded.\nCall log:\n  - navigating to \"https://data.guoshuyufen.com/#/businessData/realTimeData\", waiting until \"commit\"\n"
+        },
+        {
+          "at": 1792983766195,
+          "stage": "download",
+          "type": "recovery",
+          "detail": "retry-download",
+          "reason": "jinsha-shell-not-ready"
+        }
+      ]
+    }
+  ],
+  "runtimeModelDecisions": 0,
+  "generatedAt": 1792983766196
+}

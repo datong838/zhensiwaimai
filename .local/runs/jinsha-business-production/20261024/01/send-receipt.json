@@ -1,0 +1,216 @@
+{
+  "ok": false,
+  "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+  "sent": [],
+  "channel": "desktop",
+  "desktopWechatPreflight": {
+    "ok": true,
+    "reason": null,
+    "sendAttempts": 0,
+    "group": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "resolvedGroup": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "candidateStrategy": "wecom-prefix-search",
+    "sessionListVerified": false,
+    "groupTypeVerified": true,
+    "targetIdentityVerified": true,
+    "groupTypeProof": "wecom-search-open-title-evidence",
+    "attempts": []
+  },
+  "desktop": {
+    "bridgeVersion": 1,
+    "ok": false,
+    "verified": false,
+    "payloadType": "file",
+    "state": "unknown",
+    "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "payloads": [
+      {
+        "path": "/Volumes/NVME2T/work/臻肆/报表/2026-10-23-业务发布-production01/美团外卖日报_2026-10-23.xlsx",
+        "name": "美团外卖日报_2026-10-23.xlsx",
+        "size": 133256,
+        "sha256": "4de728bd23ae344df3dbc32ab4c8e417789f42da13758755bb495e4469cff4f0"
+      },
+      {
+        "path": "/Volumes/NVME2T/work/臻肆/报表/2026-10-23-业务发布-production01/淘宝闪购日报_2026-10-23.xlsx",
+        "name": "淘宝闪购日报_2026-10-23.xlsx",
+        "size": 113110,
+        "sha256": "82db4d135a92ce39ad39187ebc65d42bc4df38dcacbdff649e87712ee2c4fe21"
+      }
+    ],
+    "sendAttempts": 1,
+    "newSendAttempts": 1,
+    "reason": "wecom-tail-unconfirmed",
+    "runtimeModelDecisions": 0,
+    "commonReceipt": {
+      "ok": false,
+      "status": "unknown",
+      "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+      "channel": "desktop",
+      "requestDigest": "174efd47eb3ed07ee3410ae2ea2ae8bed8762a02cb5fd81e72066fbc9dbc4c44",
+      "runtimeModelDecisions": 0,
+      "items": [
+        {
+          "itemId": "0",
+          "sha256": "4de728bd23ae344df3dbc32ab4c8e417789f42da13758755bb495e4469cff4f0",
+          "type": "file",
+          "status": "unknown",
+          "claimedAt": 1792804756.198733,
+          "sendAttempts": 1,
+          "reason": "wecom-tail-unconfirmed",
+          "evidence": {
+            "tail_hit": false,
+            "media_marker_hit": false,
+            "sent": true,
+            "tail1": [
+              "近7日美团食安负反馈申诉记录..xlsx",
+              "由微信用户创建的外部群，含45位外部联系人 | 群主: 李知恒- AllenLi@微信",
+              "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+              "250.0"
+            ]
+          },
+          "transport": {
+            "kind": "file",
+            "sendAttempts": 1,
+            "sent": true,
+            "receipt": {
+              "result": "sent-tail-unconfirmed",
+              "verify": {
+                "tail_hit": false,
+                "media_marker_hit": false,
+                "sent": true,
+                "tail1": [
+                  "近7日美团食安负反馈申诉记录..xlsx",
+                  "由微信用户创建的外部群，含45位外部联系人 | 群主: 李知恒- AllenLi@微信",
+                  "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+                  "250.0"
+                ]
+              },
+              "steps": [
+                {
+                  "navigate": "chat-title-verified:'上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰'"
+                },
+                {
+                  "title_gate": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰"
+                },
+                {
+                  "paste": true,
+                  "try": 1
+                },
+                {
+                  "title_gate_final": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰"
+                },
+                {
+                  "send_attempts": [
+                    {
+                      "try": "enter",
+                      "input_clean": true
+                    }
+                  ],
+                  "sent": true
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "review": [
+        {
+          "stage": "authorization",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "freeze:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "freeze:1",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "preflight",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 14523
+        },
+        {
+          "stage": "send:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 29664
+        }
+      ],
+      "reason": "wecom-tail-unconfirmed",
+      "elapsedMs": 44284,
+      "eventKey": "ebac6a55d4faecc0bae983f82859ddc256f807852a2cc24b550027fb007b3a2c",
+      "reviewSummary": {
+        "totalElapsedMs": 44284,
+        "result": "unknown",
+        "stageCount": 5,
+        "completedStages": 5,
+        "failedStages": []
+      }
+    },
+    "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/jinsha-report-send-shanghai-zhensi-operations-ding-fandang-reauthorized-20260917-v2.desktop-attempts/9734c8fbd3542579bcb40b8d885b685afcefd4dd6804ebaf4fdc00682ee005fe.json",
+    "sendReview": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0,
+        "item": 1,
+        "label": "authorization"
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0,
+        "item": 2,
+        "label": "freeze:0"
+      },
+      {
+        "stage": "freeze:1",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0,
+        "item": 3,
+        "label": "freeze:1"
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 14523,
+        "item": 4,
+        "label": "preflight"
+      },
+      {
+        "stage": "send:0",
+        "status": "failed",
+        "pitfalls": [
+          {
+            "code": "messaging-stage",
+            "reason": "wecom-tail-unconfirmed"
+          }
+        ],
+        "elapsedMs": 29664,
+        "item": 5,
+        "label": "send:0"
+      }
+    ],
+    "elapsedMs": 44284,
+    "reviewSummary": {
+      "totalElapsedMs": 44284,
+      "itemCount": 5,
+      "pitfallCount": 1,
+      "result": "failed"
+    }
+  },
+  "reason": "wecom-tail-unconfirmed"
+}

@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "jinsha-business-code-enforced-v1",
+  "runId": "jinsha-business-production-20260922-01",
+  "businessDate": "2026-09-21",
+  "status": "complete",
+  "phase": "complete",
+  "nextAction": null,
+  "totalElapsedMs": 60332,
+  "nodes": [
+    {
+      "name": "download",
+      "attempts": 1,
+      "startedAt": 1790046258834,
+      "finishedAt": 1790046277854,
+      "elapsedMs": 19020,
+      "complete": true
+    },
+    {
+      "name": "prepare",
+      "attempts": 1,
+      "startedAt": 1790046277854,
+      "finishedAt": 1790046285203,
+      "elapsedMs": 7349,
+      "complete": true
+    },
+    {
+      "name": "send",
+      "attempts": 1,
+      "startedAt": 1790046285204,
+      "finishedAt": 1790046317677,
+      "elapsedMs": 32473,
+      "complete": true
+    },
+    {
+      "name": "verify",
+      "attempts": 1,
+      "startedAt": 1790046317678,
+      "finishedAt": 1790046319157,
+      "elapsedMs": 1479,
+      "complete": true
+    },
+    {
+      "name": "finalize",
+      "attempts": 1,
+      "startedAt": 1790046319158,
+      "finishedAt": 1790046319158,
+      "elapsedMs": 0,
+      "complete": true
+    }
+  ],
+  "pitfalls": [],
+  "codeEnforced": true,
+  "reviewItems": [
+    {
+      "name": "download",
+      "attempts": 1,
+      "startedAt": 1790046258834,
+      "finishedAt": 1790046277854,
+      "elapsedMs": 19020,
+      "complete": true,
+      "pitfalls": []
+    },
+    {
+      "name": "prepare",
+      "attempts": 1,
+      "startedAt": 1790046277854,
+      "finishedAt": 1790046285203,
+      "elapsedMs": 7349,
+      "complete": true,
+      "pitfalls": []
+    },
+    {
+      "name": "send",
+      "attempts": 1,
+      "startedAt": 1790046285204,
+      "finishedAt": 1790046317677,
+      "elapsedMs": 32473,
+      "complete": true,
+      "pitfalls": []
+    },
+    {
+      "name": "verify",
+      "attempts": 1,
+      "startedAt": 1790046317678,
+      "finishedAt": 1790046319157,
+      "elapsedMs": 1479,
+      "complete": true,
+      "pitfalls": []
+    },
+    {
+      "name": "finalize",
+      "attempts": 1,
+      "startedAt": 1790046319158,
+      "finishedAt": 1790046319158,
+      "elapsedMs": 0,
+      "complete": true,
+      "pitfalls": []
+    }
+  ],
+  "runtimeModelDecisions": 0,
+  "generatedAt": 1790046319158
+}

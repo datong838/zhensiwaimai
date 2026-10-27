@@ -1,0 +1,221 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "jinsha-business-code-enforced-v1",
+  "runId": "jinsha-business-production-20260919-02",
+  "businessDate": "2026-09-18",
+  "status": "complete",
+  "phase": "complete",
+  "nextAction": null,
+  "totalElapsedMs": 1446053,
+  "nodes": [
+    {
+      "name": "download",
+      "attempts": 1,
+      "startedAt": 1789790960399,
+      "finishedAt": 1789790983955,
+      "elapsedMs": 23556,
+      "complete": true
+    },
+    {
+      "name": "prepare",
+      "attempts": 1,
+      "startedAt": 1789790983955,
+      "finishedAt": 1789790991959,
+      "elapsedMs": 8004,
+      "complete": true
+    },
+    {
+      "name": "send",
+      "attempts": 6,
+      "startedAt": 1789790991960,
+      "finishedAt": 1789792404936,
+      "elapsedMs": 1412976,
+      "complete": true
+    },
+    {
+      "name": "verify",
+      "attempts": 9,
+      "startedAt": 1789792170514,
+      "finishedAt": 1789792406446,
+      "elapsedMs": 235932,
+      "complete": true
+    },
+    {
+      "name": "finalize",
+      "attempts": 1,
+      "startedAt": 1789792406446,
+      "finishedAt": 1789792406447,
+      "elapsedMs": 1,
+      "complete": true
+    }
+  ],
+  "pitfalls": [
+    {
+      "at": 1789791129472,
+      "stage": "prepared",
+      "type": "blocked",
+      "detail": "desktop-preflight-retry-limit-exceeded"
+    },
+    {
+      "at": 1789791572222,
+      "stage": "prepared",
+      "type": "blocked",
+      "detail": "desktop-preflight-retry-limit-exceeded"
+    },
+    {
+      "at": 1789791693352,
+      "stage": "prepared",
+      "type": "blocked",
+      "detail": "desktop-preflight-retry-limit-exceeded"
+    },
+    {
+      "at": 1789791882279,
+      "stage": "prepared",
+      "type": "blocked",
+      "detail": "desktop-preflight-retry-limit-exceeded"
+    },
+    {
+      "at": 1789791955916,
+      "stage": "prepared",
+      "type": "blocked",
+      "detail": "desktop-preflight-retry-limit-exceeded"
+    },
+    {
+      "at": 1789792075882,
+      "stage": "prepared",
+      "type": "blocked",
+      "detail": "desktop-preflight-retry-limit-exceeded"
+    },
+    {
+      "at": 1789792185435,
+      "stage": "prepared",
+      "type": "blocked",
+      "detail": "desktop-send-outcome-unknown"
+    },
+    {
+      "at": 1789792301251,
+      "stage": "send",
+      "type": "recovery",
+      "detail": "verify-only",
+      "reason": null
+    },
+    {
+      "at": 1789792316414,
+      "stage": "prepared",
+      "type": "blocked",
+      "detail": "desktop-attempt-not-verifiable"
+    },
+    {
+      "at": 1789792406447,
+      "stage": "workflow",
+      "type": "efficiency-budget-exceeded",
+      "detail": "1446053>180000"
+    }
+  ],
+  "codeEnforced": true,
+  "reviewItems": [
+    {
+      "name": "download",
+      "attempts": 1,
+      "startedAt": 1789790960399,
+      "finishedAt": 1789790983955,
+      "elapsedMs": 23556,
+      "complete": true,
+      "pitfalls": []
+    },
+    {
+      "name": "prepare",
+      "attempts": 1,
+      "startedAt": 1789790983955,
+      "finishedAt": 1789790991959,
+      "elapsedMs": 8004,
+      "complete": true,
+      "pitfalls": []
+    },
+    {
+      "name": "send",
+      "attempts": 6,
+      "startedAt": 1789790991960,
+      "finishedAt": 1789792404936,
+      "elapsedMs": 1412976,
+      "complete": true,
+      "pitfalls": [
+        {
+          "at": 1789791129472,
+          "stage": "prepared",
+          "type": "blocked",
+          "detail": "desktop-preflight-retry-limit-exceeded"
+        },
+        {
+          "at": 1789791572222,
+          "stage": "prepared",
+          "type": "blocked",
+          "detail": "desktop-preflight-retry-limit-exceeded"
+        },
+        {
+          "at": 1789791693352,
+          "stage": "prepared",
+          "type": "blocked",
+          "detail": "desktop-preflight-retry-limit-exceeded"
+        },
+        {
+          "at": 1789791882279,
+          "stage": "prepared",
+          "type": "blocked",
+          "detail": "desktop-preflight-retry-limit-exceeded"
+        },
+        {
+          "at": 1789791955916,
+          "stage": "prepared",
+          "type": "blocked",
+          "detail": "desktop-preflight-retry-limit-exceeded"
+        },
+        {
+          "at": 1789792075882,
+          "stage": "prepared",
+          "type": "blocked",
+          "detail": "desktop-preflight-retry-limit-exceeded"
+        },
+        {
+          "at": 1789792185435,
+          "stage": "prepared",
+          "type": "blocked",
+          "detail": "desktop-send-outcome-unknown"
+        },
+        {
+          "at": 1789792301251,
+          "stage": "send",
+          "type": "recovery",
+          "detail": "verify-only",
+          "reason": null
+        },
+        {
+          "at": 1789792316414,
+          "stage": "prepared",
+          "type": "blocked",
+          "detail": "desktop-attempt-not-verifiable"
+        }
+      ]
+    },
+    {
+      "name": "verify",
+      "attempts": 9,
+      "startedAt": 1789792170514,
+      "finishedAt": 1789792406446,
+      "elapsedMs": 235932,
+      "complete": true,
+      "pitfalls": []
+    },
+    {
+      "name": "finalize",
+      "attempts": 1,
+      "startedAt": 1789792406446,
+      "finishedAt": 1789792406447,
+      "elapsedMs": 1,
+      "complete": true,
+      "pitfalls": []
+    }
+  ],
+  "runtimeModelDecisions": 0,
+  "generatedAt": 1789792406447
+}

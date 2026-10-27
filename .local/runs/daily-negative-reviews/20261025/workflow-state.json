@@ -1,0 +1,650 @@
+{
+  "policyVersion": "daily-negative-reviews-code-enforced-v1",
+  "businessDate": "2026-10-25",
+  "phase": "sent",
+  "status": "recoverable",
+  "startedAt": 1792974703263,
+  "updatedAt": 1793007071133,
+  "reviewItems": [
+    {
+      "stage": "browser_validate",
+      "label": "连接并唯一定位金鲨页面",
+      "attempts": 1,
+      "elapsedMs": 3680,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "route_and_date",
+      "label": "核验淘宝外卖入口并设置昨日日期",
+      "attempts": 1,
+      "elapsedMs": 1460,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "download",
+      "label": "下载全部平台差评",
+      "attempts": 1,
+      "elapsedMs": 12331,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "extract_platforms",
+      "label": "读取三平台页面列表",
+      "attempts": 1,
+      "elapsedMs": 16766,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "reconcile",
+      "label": "下载与页面逐条对账",
+      "attempts": 1,
+      "elapsedMs": 2405,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "build_report",
+      "label": "生成并验收固定格式Excel",
+      "attempts": 1,
+      "elapsedMs": 945,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 15147,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "screenshot",
+      "label": "渲染整表长图",
+      "attempts": 1,
+      "elapsedMs": 1813,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "screenshot_send",
+      "label": "整表长图单次发送与回读校验",
+      "attempts": 1,
+      "elapsedMs": 15160,
+      "status": "failed",
+      "pitfalls": [
+        "image-submission-awaits-read-only-verification"
+      ]
+    },
+    {
+      "stage": "screenshot",
+      "label": "渲染整表长图",
+      "attempts": 1,
+      "elapsedMs": 1654,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "screenshot_send",
+      "label": "整表长图单次发送与回读校验",
+      "attempts": 1,
+      "elapsedMs": 1716,
+      "status": "failed",
+      "pitfalls": [
+        "image-submission-awaits-read-only-verification"
+      ]
+    },
+    {
+      "stage": "screenshot",
+      "label": "渲染整表长图",
+      "attempts": 1,
+      "elapsedMs": 1774,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "screenshot_send",
+      "label": "整表长图单次发送与回读校验",
+      "attempts": 1,
+      "elapsedMs": 1851,
+      "status": "failed",
+      "pitfalls": [
+        "image-submission-awaits-read-only-verification"
+      ]
+    },
+    {
+      "stage": "screenshot",
+      "label": "渲染整表长图",
+      "attempts": 1,
+      "elapsedMs": 1713,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "screenshot_send",
+      "label": "整表长图单次发送与回读校验",
+      "attempts": 1,
+      "elapsedMs": 1774,
+      "status": "failed",
+      "pitfalls": [
+        "image-submission-awaits-read-only-verification"
+      ]
+    },
+    {
+      "stage": "screenshot",
+      "label": "渲染整表长图",
+      "attempts": 1,
+      "elapsedMs": 1801,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "screenshot_send",
+      "label": "整表长图单次发送与回读校验",
+      "attempts": 1,
+      "elapsedMs": 1867,
+      "status": "failed",
+      "pitfalls": [
+        "image-submission-awaits-read-only-verification"
+      ]
+    },
+    {
+      "stage": "screenshot",
+      "label": "渲染整表长图",
+      "attempts": 1,
+      "elapsedMs": 1674,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "screenshot_send",
+      "label": "整表长图单次发送与回读校验",
+      "attempts": 1,
+      "elapsedMs": 1738,
+      "status": "failed",
+      "pitfalls": [
+        "image-submission-awaits-read-only-verification"
+      ]
+    },
+    {
+      "stage": "screenshot",
+      "label": "渲染整表长图",
+      "attempts": 1,
+      "elapsedMs": 1825,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "screenshot_send",
+      "label": "整表长图单次发送与回读校验",
+      "attempts": 1,
+      "elapsedMs": 1889,
+      "status": "failed",
+      "pitfalls": [
+        "image-submission-awaits-read-only-verification"
+      ]
+    },
+    {
+      "stage": "screenshot",
+      "label": "渲染整表长图",
+      "attempts": 1,
+      "elapsedMs": 1797,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "screenshot_send",
+      "label": "整表长图单次发送与回读校验",
+      "attempts": 1,
+      "elapsedMs": 1859,
+      "status": "failed",
+      "pitfalls": [
+        "image-submission-awaits-read-only-verification"
+      ]
+    },
+    {
+      "stage": "screenshot",
+      "label": "渲染整表长图",
+      "attempts": 1,
+      "elapsedMs": 1755,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "screenshot_send",
+      "label": "整表长图单次发送与回读校验",
+      "attempts": 1,
+      "elapsedMs": 1821,
+      "status": "failed",
+      "pitfalls": [
+        "image-submission-awaits-read-only-verification"
+      ]
+    },
+    {
+      "stage": "screenshot",
+      "label": "渲染整表长图",
+      "attempts": 1,
+      "elapsedMs": 1692,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "screenshot_send",
+      "label": "整表长图单次发送与回读校验",
+      "attempts": 1,
+      "elapsedMs": 1755,
+      "status": "failed",
+      "pitfalls": [
+        "image-submission-awaits-read-only-verification"
+      ]
+    },
+    {
+      "stage": "screenshot",
+      "label": "渲染整表长图",
+      "attempts": 1,
+      "elapsedMs": 1761,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "screenshot_send",
+      "label": "整表长图单次发送与回读校验",
+      "attempts": 1,
+      "elapsedMs": 1827,
+      "status": "failed",
+      "pitfalls": [
+        "image-submission-awaits-read-only-verification"
+      ]
+    },
+    {
+      "stage": "screenshot",
+      "label": "渲染整表长图",
+      "attempts": 1,
+      "elapsedMs": 1756,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "screenshot_send",
+      "label": "整表长图单次发送与回读校验",
+      "attempts": 1,
+      "elapsedMs": 1824,
+      "status": "failed",
+      "pitfalls": [
+        "image-submission-awaits-read-only-verification"
+      ]
+    },
+    {
+      "stage": "screenshot",
+      "label": "渲染整表长图",
+      "attempts": 1,
+      "elapsedMs": 1706,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "screenshot_send",
+      "label": "整表长图单次发送与回读校验",
+      "attempts": 1,
+      "elapsedMs": 1771,
+      "status": "failed",
+      "pitfalls": [
+        "image-submission-awaits-read-only-verification"
+      ]
+    },
+    {
+      "stage": "screenshot",
+      "label": "渲染整表长图",
+      "attempts": 1,
+      "elapsedMs": 1681,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "screenshot_send",
+      "label": "整表长图单次发送与回读校验",
+      "attempts": 1,
+      "elapsedMs": 1743,
+      "status": "failed",
+      "pitfalls": [
+        "image-submission-awaits-read-only-verification"
+      ]
+    },
+    {
+      "stage": "screenshot",
+      "label": "渲染整表长图",
+      "attempts": 1,
+      "elapsedMs": 1852,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "screenshot_send",
+      "label": "整表长图单次发送与回读校验",
+      "attempts": 1,
+      "elapsedMs": 1920,
+      "status": "failed",
+      "pitfalls": [
+        "image-submission-awaits-read-only-verification"
+      ]
+    },
+    {
+      "stage": "screenshot",
+      "label": "渲染整表长图",
+      "attempts": 1,
+      "elapsedMs": 1627,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "screenshot_send",
+      "label": "整表长图单次发送与回读校验",
+      "attempts": 1,
+      "elapsedMs": 1690,
+      "status": "failed",
+      "pitfalls": [
+        "image-submission-awaits-read-only-verification"
+      ]
+    },
+    {
+      "stage": "screenshot",
+      "label": "渲染整表长图",
+      "attempts": 1,
+      "elapsedMs": 1709,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "screenshot_send",
+      "label": "整表长图单次发送与回读校验",
+      "attempts": 1,
+      "elapsedMs": 1772,
+      "status": "failed",
+      "pitfalls": [
+        "image-submission-awaits-read-only-verification"
+      ]
+    },
+    {
+      "stage": "screenshot",
+      "label": "渲染整表长图",
+      "attempts": 1,
+      "elapsedMs": 1632,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "screenshot_send",
+      "label": "整表长图单次发送与回读校验",
+      "attempts": 1,
+      "elapsedMs": 1693,
+      "status": "failed",
+      "pitfalls": [
+        "image-submission-awaits-read-only-verification"
+      ]
+    },
+    {
+      "stage": "screenshot",
+      "label": "渲染整表长图",
+      "attempts": 1,
+      "elapsedMs": 1755,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "screenshot_send",
+      "label": "整表长图单次发送与回读校验",
+      "attempts": 1,
+      "elapsedMs": 1826,
+      "status": "failed",
+      "pitfalls": [
+        "image-submission-awaits-read-only-verification"
+      ]
+    },
+    {
+      "stage": "screenshot",
+      "label": "渲染整表长图",
+      "attempts": 1,
+      "elapsedMs": 1677,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "screenshot_send",
+      "label": "整表长图单次发送与回读校验",
+      "attempts": 1,
+      "elapsedMs": 1739,
+      "status": "failed",
+      "pitfalls": [
+        "image-submission-awaits-read-only-verification"
+      ]
+    },
+    {
+      "stage": "screenshot",
+      "label": "渲染整表长图",
+      "attempts": 1,
+      "elapsedMs": 1689,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "screenshot_send",
+      "label": "整表长图单次发送与回读校验",
+      "attempts": 1,
+      "elapsedMs": 1749,
+      "status": "failed",
+      "pitfalls": [
+        "image-submission-awaits-read-only-verification"
+      ]
+    },
+    {
+      "stage": "screenshot",
+      "label": "渲染整表长图",
+      "attempts": 1,
+      "elapsedMs": 1798,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "screenshot_send",
+      "label": "整表长图单次发送与回读校验",
+      "attempts": 1,
+      "elapsedMs": 1864,
+      "status": "failed",
+      "pitfalls": [
+        "image-submission-awaits-read-only-verification"
+      ]
+    },
+    {
+      "stage": "screenshot",
+      "label": "渲染整表长图",
+      "attempts": 1,
+      "elapsedMs": 1661,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "screenshot_send",
+      "label": "整表长图单次发送与回读校验",
+      "attempts": 1,
+      "elapsedMs": 1720,
+      "status": "failed",
+      "pitfalls": [
+        "image-submission-awaits-read-only-verification"
+      ]
+    },
+    {
+      "stage": "screenshot",
+      "label": "渲染整表长图",
+      "attempts": 1,
+      "elapsedMs": 1649,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "screenshot_send",
+      "label": "整表长图单次发送与回读校验",
+      "attempts": 1,
+      "elapsedMs": 1713,
+      "status": "failed",
+      "pitfalls": [
+        "image-submission-awaits-read-only-verification"
+      ]
+    },
+    {
+      "stage": "screenshot",
+      "label": "渲染整表长图",
+      "attempts": 1,
+      "elapsedMs": 1746,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "screenshot_send",
+      "label": "整表长图单次发送与回读校验",
+      "attempts": 1,
+      "elapsedMs": 1818,
+      "status": "failed",
+      "pitfalls": [
+        "image-submission-awaits-read-only-verification"
+      ]
+    },
+    {
+      "stage": "screenshot",
+      "label": "渲染整表长图",
+      "attempts": 1,
+      "elapsedMs": 1789,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "screenshot_send",
+      "label": "整表长图单次发送与回读校验",
+      "attempts": 1,
+      "elapsedMs": 1855,
+      "status": "failed",
+      "pitfalls": [
+        "image-submission-awaits-read-only-verification"
+      ]
+    },
+    {
+      "stage": "screenshot",
+      "label": "渲染整表长图",
+      "attempts": 1,
+      "elapsedMs": 1889,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "screenshot_send",
+      "label": "整表长图单次发送与回读校验",
+      "attempts": 1,
+      "elapsedMs": 1963,
+      "status": "failed",
+      "pitfalls": [
+        "image-submission-awaits-read-only-verification"
+      ]
+    },
+    {
+      "stage": "screenshot",
+      "label": "渲染整表长图",
+      "attempts": 1,
+      "elapsedMs": 1793,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "screenshot_send",
+      "label": "整表长图单次发送与回读校验",
+      "attempts": 1,
+      "elapsedMs": 1866,
+      "status": "failed",
+      "pitfalls": [
+        "image-submission-awaits-read-only-verification"
+      ]
+    },
+    {
+      "stage": "screenshot",
+      "label": "渲染整表长图",
+      "attempts": 1,
+      "elapsedMs": 1815,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "screenshot_send",
+      "label": "整表长图单次发送与回读校验",
+      "attempts": 1,
+      "elapsedMs": 1920,
+      "status": "failed",
+      "pitfalls": [
+        "image-submission-awaits-read-only-verification"
+      ]
+    },
+    {
+      "stage": "screenshot",
+      "label": "渲染整表长图",
+      "attempts": 1,
+      "elapsedMs": 1874,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "screenshot_send",
+      "label": "整表长图单次发送与回读校验",
+      "attempts": 1,
+      "elapsedMs": 1948,
+      "status": "failed",
+      "pitfalls": [
+        "image-submission-awaits-read-only-verification"
+      ]
+    },
+    {
+      "stage": "screenshot",
+      "label": "渲染整表长图",
+      "attempts": 1,
+      "elapsedMs": 1799,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "screenshot_send",
+      "label": "整表长图单次发送与回读校验",
+      "attempts": 1,
+      "elapsedMs": 1863,
+      "status": "failed",
+      "pitfalls": [
+        "image-submission-awaits-read-only-verification"
+      ]
+    },
+    {
+      "stage": "screenshot",
+      "label": "渲染整表长图",
+      "attempts": 1,
+      "elapsedMs": 1784,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "screenshot_send",
+      "label": "整表长图单次发送与回读校验",
+      "attempts": 1,
+      "elapsedMs": 1859,
+      "status": "failed",
+      "pitfalls": [
+        "image-submission-awaits-read-only-verification"
+      ]
+    }
+  ],
+  "runtimeModelDecisions": 0,
+  "lastRecovery": {
+    "allowed": true,
+    "stage": "wechat_send",
+    "priorFailures": 0,
+    "nextAttempt": 1
+  },
+  "reason": "image-submission-awaits-read-only-verification"
+}

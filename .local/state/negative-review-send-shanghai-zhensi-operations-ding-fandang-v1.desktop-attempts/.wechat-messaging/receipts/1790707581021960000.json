@@ -1,0 +1,64 @@
+{
+  "ok": false,
+  "status": "blocked",
+  "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+  "channel": "desktop",
+  "requestDigest": "4209883258df31387994894e50fc38c3f22096af36085fabd38e799fb5946a82",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "e0d375f6bf33b0a25d5927a452e2d65e0571c895a468d06bb5f901b74449a0ae",
+      "type": "file",
+      "status": "blocked",
+      "claimedAt": 1790707438.658686,
+      "sendAttempts": 0,
+      "reason": "windows-send-rejected:HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题='文件传输助手'，目标='上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰'\"}",
+      "transport": {
+        "ok": false,
+        "error": "HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题='文件传输助手'，目标='上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰'\"}"
+      },
+      "attemptErrors": [
+        "HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题='文件传输助手'，目标='上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰'\"}",
+        "HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题='文件传输助手'，目标='上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰'\"}",
+        "HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题='文件传输助手'，目标='上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰'\"}"
+      ]
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 312
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 142361
+    }
+  ],
+  "reason": "windows-send-rejected:HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题='文件传输助手'，目标='上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰'\"}",
+  "elapsedMs": 142677,
+  "eventKey": "ba903fd2e857c7b615f8ea8c02bfa4d96cb8b4512c017f6fcfe243e544fed44b",
+  "reviewSummary": {
+    "totalElapsedMs": 142677,
+    "result": "blocked",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

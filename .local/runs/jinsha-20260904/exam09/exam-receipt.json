@@ -1,0 +1,131 @@
+{
+  "ok": true,
+  "runId": "jinsha-exam09-20260904",
+  "startedAt": 1788527033477,
+  "deadline": 1788527213477,
+  "stage": "complete",
+  "stageMs": {
+    "desktop": 16519,
+    "handoff": 33,
+    "downloads": 16565,
+    "build": 7384,
+    "phone": 52277
+  },
+  "nodes": [
+    {
+      "name": "build",
+      "startedAt": 1788527050042,
+      "finishedAt": 1788527057425,
+      "elapsedMs": 7383,
+      "ok": true,
+      "llmIntervention": false
+    },
+    {
+      "name": "phone",
+      "startedAt": 1788527057426,
+      "finishedAt": 1788527109703,
+      "elapsedMs": 52277,
+      "ok": true,
+      "llmIntervention": false
+    }
+  ],
+  "desktop": {
+    "ok": true,
+    "startedAt": 1788527033477,
+    "deadline": 1788527213477,
+    "clicks": {
+      "meituan": 1,
+      "taobao": 1
+    },
+    "stage": "complete",
+    "nodes": [
+      {
+        "name": "meituan.platform",
+        "elapsedMs": 1549
+      },
+      {
+        "name": "meituan.date",
+        "elapsedMs": 1388
+      },
+      {
+        "name": "meituan.plan",
+        "elapsedMs": 968
+      },
+      {
+        "name": "meituan.metrics",
+        "elapsedMs": 0
+      },
+      {
+        "name": "meituan.download-save",
+        "elapsedMs": 3758
+      },
+      {
+        "name": "taobao.platform",
+        "elapsedMs": 1421
+      },
+      {
+        "name": "taobao.date",
+        "elapsedMs": 1314
+      },
+      {
+        "name": "taobao.plan",
+        "elapsedMs": 1185
+      },
+      {
+        "name": "taobao.metrics",
+        "elapsedMs": 1188
+      },
+      {
+        "name": "taobao.download-save",
+        "elapsedMs": 2913
+      }
+    ],
+    "efficiencyExceeded": false,
+    "elapsedMs": 16519
+  },
+  "efficiencyExceeded": false,
+  "sent": [
+    {
+      "name": "美团0903测试9.xlsx",
+      "sha256": "4119a58d0e3eb4fa7ec91bf54b3c1a00df17ad955dd62ba63d2cc126e049b905",
+      "verification": {
+        "name": "美团0903测试9.xlsx",
+        "size": 121966,
+        "state": "confirmed",
+        "selectionScreenshot": "/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/zhensi-jinsha-wechat-d4hhhj9t/selected-file-meituan-stable.png",
+        "attemptedAt": 1788527078.4456909,
+        "filePickerSendClicks": 1,
+        "confirmSendClicks": 0,
+        "confirmedAt": 1788527081.8277051,
+        "bubbleScreenshot": "/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/zhensi-jinsha-wechat-d4hhhj9t/sent-meituan-stable.png",
+        "fullNameVerified": true,
+        "groupTitleVerified": true,
+        "sizeVerified": true
+      },
+      "reused": false
+    },
+    {
+      "name": "淘宝0903测试9.xlsx",
+      "sha256": "6c741bfecc21b723b1b02eb6f840218b2a9e53e8f4646efd3fde09824eecac18",
+      "verification": {
+        "name": "淘宝0903测试9.xlsx",
+        "size": 131920,
+        "state": "confirmed",
+        "selectionScreenshot": "/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/zhensi-jinsha-wechat-d4hhhj9t/selected-file-taobao-stable.png",
+        "attemptedAt": 1788527106.1200058,
+        "filePickerSendClicks": 1,
+        "confirmSendClicks": 0,
+        "confirmedAt": 1788527109.668162,
+        "bubbleScreenshot": "/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/zhensi-jinsha-wechat-d4hhhj9t/sent-taobao-stable.png",
+        "fullNameVerified": true,
+        "groupTitleVerified": true,
+        "sizeVerified": true
+      },
+      "reused": false
+    }
+  ],
+  "elapsedMs": 76226,
+  "businessCompleted": true,
+  "efficiencyPassed": true,
+  "efficiencyStatus": "效率达标"
+}

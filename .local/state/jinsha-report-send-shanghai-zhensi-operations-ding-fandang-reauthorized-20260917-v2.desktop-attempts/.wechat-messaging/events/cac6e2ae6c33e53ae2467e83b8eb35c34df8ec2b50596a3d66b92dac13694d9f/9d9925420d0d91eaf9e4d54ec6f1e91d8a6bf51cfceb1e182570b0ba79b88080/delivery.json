@@ -1,0 +1,115 @@
+{
+  "itemId": "0",
+  "sha256": "95ec3bbde33e60b7149372e49fefb7a2586adb17ab806647a91b5c9d42d95c14",
+  "type": "file",
+  "status": "verified",
+  "claimedAt": 1790046287.8469288,
+  "sendAttempts": 1,
+  "verificationLevel": "file-name-size-ui",
+  "evidence": {
+    "ok": true,
+    "transportVerified": true,
+    "completionFrames": [
+      "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/state/jinsha-report-send-shanghai-zhensi-operations-ding-fandang-reauthorized-20260917-v2.desktop-attempts/.wechat-messaging/events/cac6e2ae6c33e53ae2467e83b8eb35c34df8ec2b50596a3d66b92dac13694d9f/9d9925420d0d91eaf9e4d54ec6f1e91d8a6bf51cfceb1e182570b0ba79b88080/transport/after-send-1.png",
+      "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/state/jinsha-report-send-shanghai-zhensi-operations-ding-fandang-reauthorized-20260917-v2.desktop-attempts/.wechat-messaging/events/cac6e2ae6c33e53ae2467e83b8eb35c34df8ec2b50596a3d66b92dac13694d9f/9d9925420d0d91eaf9e4d54ec6f1e91d8a6bf51cfceb1e182570b0ba79b88080/transport/after-send-2.png"
+    ]
+  },
+  "transport": {
+    "ok": true,
+    "executor": "wechat-desktop-sender",
+    "channel": "desktop",
+    "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "payloadType": "file",
+    "sendAttempts": 1,
+    "runtimeModelDecisions": 0,
+    "stage": "completed",
+    "stageMs": {
+      "locate_group": 727,
+      "verify_target_and_input": 1983,
+      "prepare_payload": 2078,
+      "claim_and_send": 3617,
+      "post_send_verify": 6043
+    },
+    "payloadIdentity": "a6560d6f23f4fc03a4961a1b29575049f181025d8491e6e42a19cc3f69fe4c05",
+    "payloads": [
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/state/jinsha-report-send-shanghai-zhensi-operations-ding-fandang-reauthorized-20260917-v2.desktop-attempts/.wechat-messaging/events/cac6e2ae6c33e53ae2467e83b8eb35c34df8ec2b50596a3d66b92dac13694d9f/9d9925420d0d91eaf9e4d54ec6f1e91d8a6bf51cfceb1e182570b0ba79b88080/payload/美团外卖日报_2026-09-21.xlsx",
+        "name": "美团外卖日报_2026-09-21.xlsx",
+        "size": 124408,
+        "sha256": "95ec3bbde33e60b7149372e49fefb7a2586adb17ab806647a91b5c9d42d95c14"
+      }
+    ],
+    "groupPreflight": {
+      "ok": true,
+      "reason": null,
+      "sendAttempts": 0,
+      "group": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+      "header": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰(81)",
+      "note": "ax-current-group-fast-path",
+      "groupTypeVerified": true,
+      "groupTypeProof": "member-count-header",
+      "composerVerifiedEmpty": true,
+      "attempts": []
+    },
+    "preparedInputChangedPixels": 53256,
+    "preparedInputChangedRatio": 0.144178,
+    "preparedFileObjectCount": 1,
+    "preparedFilePrefixesVerified": true,
+    "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/state/jinsha-report-send-shanghai-zhensi-operations-ding-fandang-reauthorized-20260917-v2.desktop-attempts/.wechat-messaging/events/cac6e2ae6c33e53ae2467e83b8eb35c34df8ec2b50596a3d66b92dac13694d9f/9d9925420d0d91eaf9e4d54ec6f1e91d8a6bf51cfceb1e182570b0ba79b88080/transport-ledger/attempt.json",
+    "postSendInputCleared": [
+      true,
+      true
+    ],
+    "verified": true,
+    "state": "verified",
+    "elapsedMs": 15102,
+    "sendReview": [
+      {
+        "item": 1,
+        "stage": "locate_group",
+        "label": "精确定位目标群",
+        "elapsedMs": 727,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 2,
+        "stage": "verify_target_and_input",
+        "label": "复核目标群与输入框",
+        "elapsedMs": 1983,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 3,
+        "stage": "prepare_payload",
+        "label": "准备并复核发送载荷",
+        "elapsedMs": 2078,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 4,
+        "stage": "claim_and_send",
+        "label": "领取防重账本并单次发送",
+        "elapsedMs": 3617,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 5,
+        "stage": "post_send_verify",
+        "label": "发送后双帧复核",
+        "elapsedMs": 6043,
+        "status": "completed",
+        "pitfalls": []
+      }
+    ],
+    "reviewSummary": {
+      "totalElapsedMs": 15102,
+      "itemCount": 5,
+      "pitfallCount": 0,
+      "result": "success"
+    }
+  }
+}

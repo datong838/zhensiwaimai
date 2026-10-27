@@ -1,0 +1,67 @@
+{
+  "ok": false,
+  "executor": "wechat-file-sender",
+  "groupName": "臻肆测试群",
+  "sent": [
+    {
+      "name": "美团0903测试8.xlsx",
+      "sha256": "8a831e3d8967563d3a00916d86337886fe47bea6f438e232f4cadef3c40468ff",
+      "verification": {
+        "name": "美团0903测试8.xlsx",
+        "size": 121967,
+        "state": "confirmed",
+        "selectionScreenshot": "/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/zhensi-jinsha-wechat-2eoq6uzu/selected-file-meituan-stable.png",
+        "attemptedAt": 1788526349.5078452,
+        "filePickerSendClicks": 1,
+        "confirmSendClicks": 0,
+        "confirmedAt": 1788526489.0146182,
+        "bubbleScreenshot": "/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/zhensi-jinsha-wechat-3xitev_1/sent-meituan-stable.png",
+        "fullNameVerified": true,
+        "groupTitleVerified": true,
+        "sizeVerified": true
+      },
+      "reused": false
+    }
+  ],
+  "sendAttempts": 0,
+  "stage": "wait",
+  "nodes": [
+    {
+      "name": "device_identity",
+      "elapsedMs": 293,
+      "ok": true,
+      "startedAt": 1788526690.541078,
+      "finishedAt": 1788526690.8339179,
+      "llmIntervention": false
+    }
+  ],
+  "device": {
+    "identityHash": "f2724cf436e9",
+    "model": "HLK-AL00",
+    "transport": "usb",
+    "verifiedEndpoints": 2
+  },
+  "files": [
+    {
+      "platform": "meituan",
+      "file": "/Users/ddt/work/臻肆/报表/考核8-20260904/美团0903测试8.xlsx",
+      "name": "美团0903测试8.xlsx",
+      "size": 121967,
+      "sha256": "8a831e3d8967563d3a00916d86337886fe47bea6f438e232f4cadef3c40468ff"
+    },
+    {
+      "platform": "taobao",
+      "file": "/Users/ddt/work/臻肆/报表/考核8-20260904/淘宝0903测试8.xlsx",
+      "name": "淘宝0903测试8.xlsx",
+      "size": 131922,
+      "sha256": "7128065a82e671513cfaf1feba3e2bd9de6790a434712dc213254746fdd48b83"
+    }
+  ],
+  "checkpoint": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/runs/jinsha-20260904/exam08/send-receipt.json.checkpoint.json",
+  "reason": "transient-page-obscured",
+  "businessCompleted": false,
+  "efficiencyExceeded": true,
+  "efficiencyStatus": "效率未达标",
+  "elapsedMs": 21754,
+  "workDir": "/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/zhensi-jinsha-wechat-2rva1069"
+}
