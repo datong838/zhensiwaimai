@@ -1,0 +1,135 @@
+{
+  "total": 8,
+  "pass": 8,
+  "fail": 0,
+  "rows": [
+    {
+      "case": "P1 已配置（moduleIcon 图标）⇒ configured",
+      "expected": {
+        "顶部招牌": "configured",
+        "店内海报": "configured",
+        "门店头像": "missing",
+        "店内橱窗": "missing"
+      },
+      "actual": {
+        "顶部招牌": "configured",
+        "店内海报": "configured",
+        "门店头像": "missing",
+        "店内橱窗": "missing"
+      },
+      "result": "PASS"
+    },
+    {
+      "case": "P2 别名「门店招牌」+ moduleIcon ⇒ configured",
+      "expected": {
+        "顶部招牌": "configured",
+        "店内海报": "missing",
+        "门店头像": "missing",
+        "店内橱窗": "missing"
+      },
+      "actual": {
+        "顶部招牌": "configured",
+        "店内海报": "missing",
+        "门店头像": "missing",
+        "店内橱窗": "missing"
+      },
+      "result": "PASS"
+    },
+    {
+      "case": "P3 已配置卡被选中（active）：图标与「去配置」按钮并存 ⇒ 仍 configured（真机 2026-10-12 实测形态）",
+      "expected": {
+        "顶部招牌": "missing",
+        "店内海报": "configured",
+        "门店头像": "missing",
+        "店内橱窗": "missing"
+      },
+      "actual": {
+        "顶部招牌": "missing",
+        "店内海报": "configured",
+        "门店头像": "missing",
+        "店内橱窗": "missing"
+      },
+      "result": "PASS"
+    },
+    {
+      "case": "N1 未配置：只有「去配置」按钮、无图标 ⇒ missing（顶部招牌真机形态）",
+      "expected": {
+        "顶部招牌": "missing",
+        "店内海报": "missing",
+        "门店头像": "missing",
+        "店内橱窗": "missing"
+      },
+      "actual": {
+        "顶部招牌": "missing",
+        "店内海报": "missing",
+        "门店头像": "missing",
+        "店内橱窗": "missing"
+      },
+      "result": "PASS"
+    },
+    {
+      "case": "N2 「新组件」标签（newTag 图）⇒ missing（图片墙真机形态）",
+      "expected": {
+        "顶部招牌": "missing",
+        "店内海报": "missing",
+        "门店头像": "missing",
+        "店内橱窗": "missing"
+      },
+      "actual": {
+        "顶部招牌": "missing",
+        "店内海报": "missing",
+        "门店头像": "missing",
+        "店内橱窗": "missing"
+      },
+      "result": "PASS"
+    },
+    {
+      "case": "N3 模版无此组件（无图标无按钮）⇒ missing（fail-closed）",
+      "expected": {
+        "顶部招牌": "missing",
+        "店内海报": "missing",
+        "门店头像": "missing",
+        "店内橱窗": "missing"
+      },
+      "actual": {
+        "顶部招牌": "missing",
+        "店内海报": "missing",
+        "门店头像": "missing",
+        "店内橱窗": "missing"
+      },
+      "result": "PASS"
+    },
+    {
+      "case": "N4 图标在别的卡不误判（跨卡隔离）",
+      "expected": {
+        "顶部招牌": "missing",
+        "店内海报": "missing",
+        "门店头像": "configured",
+        "店内橱窗": "missing"
+      },
+      "actual": {
+        "顶部招牌": "missing",
+        "店内海报": "missing",
+        "门店头像": "configured",
+        "店内橱窗": "missing"
+      },
+      "result": "PASS"
+    },
+    {
+      "case": "N5 卡内其它无关 img（非 moduleIcon class）不触发 configured",
+      "expected": {
+        "顶部招牌": "missing",
+        "店内海报": "missing",
+        "门店头像": "missing",
+        "店内橱窗": "missing"
+      },
+      "actual": {
+        "顶部招牌": "missing",
+        "店内海报": "missing",
+        "门店头像": "missing",
+        "店内橱窗": "missing"
+      },
+      "result": "PASS"
+    }
+  ]
+}

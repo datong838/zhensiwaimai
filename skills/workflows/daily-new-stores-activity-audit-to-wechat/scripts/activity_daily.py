@@ -22,6 +22,20 @@ import workflow as new_stores
 SCRIPTS = Path(__file__).resolve().parent
 
 
+def collect_with_search_recovery(run_dir: Path, name: str) -> dict:
+    try:
+        return activity.collect(run_dir, name)
+    except Exception as error:
+        if str(error) != 'activity-collection-skipped:shop-search-timeout':
+            raise
+        retry_dir = run_dir / 'search-retry-1'
+        retry_dir.mkdir(mode=0o700)
+        activity.atomic_json(run_dir / 'search-recovery.json', {
+            'reason': str(error), 'maxCollectionAttempts': 2, 'sendAttempts': 0,
+            'retryDirectory': str(retry_dir)})
+        return activity.collect(retry_dir, name)
+
+
 def todays_source(day: str) -> tuple[Path, list[dict]]:
     candidates: list[tuple[datetime, Path, list[dict]]] = []
     for path in new_stores.RUNTIME.glob(f"{day}-*/collection.json"):
@@ -82,7 +96,7 @@ def run(execute: bool) -> dict:
             run_dir = activity.RUNTIME / "runs" / f"{day}-{time.time_ns()}"
             run_dir.mkdir(parents=True, mode=0o700)
             try:
-                receipt = activity.collect(run_dir, hit["name"])
+                receipt = collect_with_search_recovery(run_dir, hit["name"])
                 body = activity.message(receipt, hit["name"])
                 delivery = (activity.deliver(receipt, run_dir, hit["name"]) if execute
                             else {"status": "ready" if body else "no-missing", "sendAttempts": 0})
@@ -90,11 +104,8 @@ def run(execute: bool) -> dict:
                         "targetStatus": receipt["targetStatus"], "text": body,
                         "runDir": str(run_dir), **delivery}
             except Exception as error:
-                # 2026-10-11 非营业中店（暂停营业/已下线）：采集器显式 skip 语义，不算 unknown——
-                # 暂停营业店无活动巡检意义，也不应中断其余门店的巡检（此前 break 会让一家非营业店
-                # 挡住后面所有店，且每日产生连败告警噪音）。
-                # 2026-10-12 放宽为全部 skipped 前缀（shop-not-operating / shop-not-found /
-                # shop-search-timeout）：店铺树数据缺口（代理商新店未同步）同属业务语义 skip。
+                # Only explicit nonoperating evidence is a completed skip.
+                # Store absence requires its original notice; transient failures remain pending.
                 msg = str(error)
                 if msg == "activity-collection-skipped:shop-not-found:未搜索到店铺":
                     receipt = activity.not_found_receipt(hit, msg)
@@ -105,23 +116,39 @@ def run(execute: bool) -> dict:
                             "inspectionOutcome": receipt["inspectionOutcome"], "recordNote": receipt["recordNote"],
                             "text": body, "runDir": str(run_dir), **delivery}
                     activity.atomic_json(run_dir / "store-not-found.json", receipt)
-                elif msg.startswith("activity-collection-skipped:"):
+                elif msg in ('activity-collection-skipped:shop-not-operating:暂停营业',
+                             'activity-collection-skipped:shop-not-operating:已下线'):
                     shop = {"sourceName": hit["name"], "status": "skipped", "reason": msg,
                             "sendAttempts": 0, "runDir": str(run_dir)}
+                elif msg == 'activity-collection-skipped:shop-search-timeout':
+                    shop = {'sourceName': hit['name'], 'status': 'retry-required', 'reason': msg,
+                            'sendAttempts': 0, 'runDir': str(run_dir)}
+                elif msg == 'activity-collection-skipped:post-lease-busy':
+                    shop = {'sourceName': hit['name'], 'status': 'skipped-busy', 'reason': msg,
+                            'sendAttempts': 0, 'runDir': str(run_dir)}
                 else:
                     shop = {"sourceName": hit["name"], "status": "unknown", "reason": msg,
                             "sendAttempts": 0, "runDir": str(run_dir)}
             activity.atomic_json(run_dir / "summary.json", shop)
             result["shops"].append(shop)
-            if shop["status"] not in ("verified", "already_verified", "ready", "no-missing", "skipped"):
+            if shop["status"] not in ("verified", "already_verified", "ready", "no-missing", "skipped", 'retry-required'):
                 break
     finally:
         # 只要真正驱动过 9230（≥1 店采集）就复位共享岗，避免污染金鲨下载流的 seed 判据。
-        if result["shops"]:
+        stop_reasons = [s.get('reason', '').lower() for s in result['shops']]
+        unsafe_reset = any(any(token in reason for token in ('post-lease-busy', 'login', '验证码', '滑块', '风险', 'risk'))
+                           for reason in stop_reasons)
+        if result["shops"] and not unsafe_reset:
             result["seedReset"] = reset_chain_seed()
     result["status"] = ("complete" if len(result["shops"]) == len(targets)
                         and all(s["status"] in ("verified", "already_verified", "ready", "no-missing", "skipped")
                                 for s in result["shops"]) else "unknown")
+    if result['status'] != 'complete':
+        finished = {s['sourceName'] for s in result['shops']
+            if s['status'] in ('verified', 'already_verified', 'ready', 'no-missing', 'skipped')}
+        result['recoveryRequired'] = [hit['name'] for hit in targets if hit['name'] not in finished]
+        result['reason'] = next((s.get('reason') or 'inspection-not-complete' for s in result['shops']
+            if s['status'] not in ('verified', 'already_verified', 'ready', 'no-missing', 'skipped')), 'inspection-not-complete')
     return result
 
 

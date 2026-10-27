@@ -27,6 +27,20 @@ WATCHLIST = decoration.RUNTIME / "watchlist.json"
 ESCALATION_AFTER_DAYS = 3
 
 
+def collect_with_search_recovery(run_dir: Path, name: str) -> dict:
+    try:
+        return decoration.collect(run_dir, name)
+    except Exception as error:
+        if str(error) != 'decoration-collection-skipped:shop-search-timeout':
+            raise
+        retry_dir = run_dir / 'search-retry-1'
+        retry_dir.mkdir(mode=0o700)
+        decoration.atomic_json(run_dir / 'search-recovery.json', {
+            'reason': str(error), 'maxCollectionAttempts': 2, 'sendAttempts': 0,
+            'retryDirectory': str(retry_dir)})
+        return decoration.collect(retry_dir, name)
+
+
 def load_watchlist() -> dict:
     try:
         data = json.loads(WATCHLIST.read_text(encoding="utf-8"))
@@ -147,7 +161,7 @@ def run(execute: bool) -> dict:
             run_dir = decoration.RUNTIME / "runs" / f"{day}-{time.time_ns()}"
             run_dir.mkdir(parents=True, mode=0o700)
             try:
-                receipt = decoration.collect(run_dir, hit["name"])
+                receipt = collect_with_search_recovery(run_dir, hit["name"])
                 body = decoration.message(receipt, hit["name"])
                 delivery = (decoration.deliver(receipt, run_dir, hit["name"]) if execute
                             else {"status": "ready" if body else "no-missing", "sendAttempts": 0})
@@ -155,9 +169,8 @@ def run(execute: bool) -> dict:
                         "targetStatus": receipt["targetStatus"], "text": body,
                         "runDir": str(run_dir), **delivery}
             except Exception as error:
-                # 2026-10-12 与 activity 流对齐的 skipped 语义：post-lease-busy / shop-not-operating /
-                # shop-not-found / shop-search-timeout 均属业务/工位数据缺口，记 skipped 不算 unknown，
-                # 不中断其余门店巡检。
+                # Only explicit nonoperating evidence is a completed skip.
+                # Busy/timeout cannot be counted as inspection completion.
                 msg = str(error)
                 if msg == "decoration-collection-skipped:shop-not-found:未搜索到店铺":
                     receipt = decoration.not_found_receipt(hit, msg)
@@ -168,25 +181,41 @@ def run(execute: bool) -> dict:
                             "inspectionOutcome": receipt["inspectionOutcome"], "recordNote": receipt["recordNote"],
                             "text": body, "runDir": str(run_dir), **delivery}
                     decoration.atomic_json(run_dir / "store-not-found.json", receipt)
-                elif msg.startswith("decoration-collection-skipped:"):
+                elif msg in ('decoration-collection-skipped:shop-not-operating:暂停营业',
+                             'decoration-collection-skipped:shop-not-operating:已下线'):
                     shop = {"sourceName": hit["name"], "status": "skipped", "reason": msg,
                             "sendAttempts": 0, "runDir": str(run_dir)}
+                elif msg == 'decoration-collection-skipped:shop-search-timeout':
+                    shop = {'sourceName': hit['name'], 'status': 'retry-required', 'reason': msg,
+                            'sendAttempts': 0, 'runDir': str(run_dir)}
+                elif msg == 'decoration-collection-skipped:post-lease-busy':
+                    shop = {'sourceName': hit['name'], 'status': 'skipped-busy', 'reason': msg,
+                            'sendAttempts': 0, 'runDir': str(run_dir)}
                 else:
                     shop = {"sourceName": hit["name"], "status": "unknown", "reason": msg,
                             "sendAttempts": 0, "runDir": str(run_dir)}
             decoration.atomic_json(run_dir / "summary.json", shop)
             result["shops"].append(shop)
-            if shop["status"] not in ("verified", "already_verified", "ready", "no-missing", "skipped"):
+            if shop["status"] not in ("verified", "already_verified", "ready", "no-missing", "skipped", 'retry-required'):
                 break
     finally:
         # 自愈闭环跟踪表（只登记不外发；升级提醒须大同拍板）
         result["watchlist"] = update_watchlist(result["shops"], day)
         # 只要真正驱动过 9230（≥1 店采集）就复位共享岗，避免污染金鲨下载流的 seed 判据。
-        if result["shops"]:
+        stop_reasons = [s.get('reason', '').lower() for s in result['shops']]
+        unsafe_reset = any(any(token in reason for token in ('post-lease-busy', 'login', '验证码', '滑块', '风险', 'risk'))
+                           for reason in stop_reasons)
+        if result["shops"] and not unsafe_reset:
             result["seedReset"] = reset_chain_seed()
     result["status"] = ("complete" if len(result["shops"]) == len(targets)
                         and all(s["status"] in ("verified", "already_verified", "ready", "no-missing", "skipped")
                                 for s in result["shops"]) else "unknown")
+    if result['status'] != 'complete':
+        finished = {s['sourceName'] for s in result['shops']
+            if s['status'] in ('verified', 'already_verified', 'ready', 'no-missing', 'skipped')}
+        result['recoveryRequired'] = [hit['name'] for hit in targets if hit['name'] not in finished]
+        result['reason'] = next((s.get('reason') or 'inspection-not-complete' for s in result['shops']
+            if s['status'] not in ('verified', 'already_verified', 'ready', 'no-missing', 'skipped')), 'inspection-not-complete')
     return result
 
 

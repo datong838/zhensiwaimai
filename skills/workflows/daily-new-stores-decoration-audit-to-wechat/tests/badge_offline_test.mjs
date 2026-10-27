@@ -6,7 +6,7 @@
 import { createRequire } from 'node:module';
 import { readComponentBadges } from '../scripts/decoration_collector.mjs';
 const require = createRequire(import.meta.url);
-const { chromium } = require('playwright'); // ESM 不认 NODE_PATH，走 CJS require
+const { chromium } = require('../../../../vendor/node_modules/playwright');
 
 const COMPS = [
   { key: '顶部招牌', aliases: ['顶部招牌', '门店招牌'] },
@@ -67,16 +67,20 @@ const browser = await chromium.launch({
   executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
   headless: true,
 });
-const page = await browser.newPage();
 let pass = 0;
 const rows = [];
-for (const c of CASES) {
-  await page.setContent(`<div id="panel">${c.html}</div>`);
-  const got = await page.evaluate(readComponentBadges, { comps: COMPS });
-  const ok = JSON.stringify(got) === JSON.stringify(c.expect);
-  if (ok) pass++;
-  rows.push({ case: c.name, expected: c.expect, actual: got, result: ok ? 'PASS' : 'FAIL' });
+try {
+  const page = await browser.newPage();
+  await page.route('**/*', route => route.abort());
+  for (const c of CASES) {
+    await page.setContent(`<div id="panel">${c.html}</div>`);
+    const got = await page.evaluate(readComponentBadges, { comps: COMPS });
+    const ok = JSON.stringify(got) === JSON.stringify(c.expect);
+    if (ok) pass++;
+    rows.push({ case: c.name, expected: c.expect, actual: got, result: ok ? 'PASS' : 'FAIL' });
+  }
+} finally {
+  await browser.close();
 }
-await browser.close();
 console.log(JSON.stringify({ total: CASES.length, pass, fail: CASES.length - pass, rows }, null, 2));
 process.exit(pass === CASES.length ? 0 : 1);
