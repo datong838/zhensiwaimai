@@ -1,0 +1,870 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""外卖运营统一调度薄包裹层 · skill_runner（Phase 1 · runtime/）
+
+设计铁律（docs/architecture/系统架构加固方案-参考三独立系统.md §10）：
+- 零碰 skill 内部逻辑：本层只按 manifest 以命令行方式包裹各 skill 现有入口。
+- 安全门零改动：EXTERNAL_EFFECT fail-closed / 防重账本 / 逐字授权 / ActionResult 收据
+  全在各 skill executor 内部，本层不感知、不绕过。
+- 看护模型：一键启动（run_all.py）+ 代理（WorkBuddy）逐流程看护，非自治 cron。
+- 失败分类：SUCCESS / RECOVERABLE（预算内自动重试）/ NEEDS_LOGIN（@人告警）/ UNKNOWN（升级）。
+
+本模块同时是库（被 run_all.py 调用）与自测载体（--selftest 由 run_all.py 驱动）。
+兼容 Python 3.9+。
+"""
+from __future__ import annotations
+
+import ctypes
+import fcntl
+import json
+import os
+import re
+import shutil
+import signal
+import subprocess
+import sys
+import time
+from dataclasses import dataclass, field
+from datetime import datetime
+from pathlib import Path
+from typing import Dict, List, Optional, Tuple
+
+RUNTIME_DIR = Path(__file__).resolve().parent
+REPO_ROOT = RUNTIME_DIR.parent
+DEFAULT_MANIFEST = RUNTIME_DIR / "skills_manifest.json"
+DEFAULT_HISTORY = RUNTIME_DIR / "run_history"
+LOCK_PATH = RUNTIME_DIR / ".runner.lock"
+STATE_DIR = RUNTIME_DIR / "state"
+LAST_SUCCESS_FILE = STATE_DIR / "last_success.json"
+# 各 skill 的「本轮独立输出目录」根（{run_dir} 占位 → <root>/<skill>/<ts>）
+RUN_DIR_ROOT = STATE_DIR / "runs"
+
+# ---- 本机回环/内网直连豁免（2026-09-30 确立） ----
+# 为什么必须有：WorkBuddy/CI 沙箱会把 HTTP_PROXY/HTTPS_PROXY 注入子进程环境，
+# 而 playwright-core 的自带 httpRequest() 会调用 getProxyForUrl() 读取这些变量
+# （实测 playwright-core 1.62.1 lib/coreBundle.js:8394 `function httpRequest`）。
+# 于是 chromium.connectOverCDP('http://127.0.0.1:9230') 的 DevTools 发现请求被
+# 送到沙箱代理，代理对未白名单的 DevTools 端口一律回 404，特征报错为：
+#   browserType.connectOverCDP: Unexpected status 404 when connecting to
+#   http://127.0.0.1:9230/json/version/.  This does not look like a DevTools server
+# 而同一时刻 `curl http://127.0.0.1:9230/json/version` 是 200 —— 端口本身健康，
+# 纯粹是「代理劫持回环请求」。同一个 9232 恰好被代理放行，所以问题表现为
+# 「时好时坏、按端口挑食」，极难定位。
+# 修法：调度层在 spawn 时为每个 skill 子进程补 NO_PROXY/no_proxy，把本机回环
+# 与局域网内网段排除在代理之外；其余出网流量仍走代理，语义不变。
+# 覆盖 127.0.0.1 / localhost / ::1（CDP、金鲨本地 App）+ 192.168.*（Windows
+# 微信驱动 192.168.110.184:8731 等内网服务）。
+NO_PROXY_REQUIRED = ("127.0.0.1", "localhost", "::1", "192.168.0.0/16")
+
+
+def merge_no_proxy(existing: Optional[str]) -> str:
+    """把必需的回环/内网直连条目并入既有 NO_PROXY，去重保序。
+
+    既有值为 '*' 时直接沿用（全豁免语义），不画蛇添足。
+    """
+    current = str(existing or "").strip()
+    if current == "*":
+        return current
+    parts: List[str] = [p.strip() for p in current.split(",") if p.strip()]
+    for item in NO_PROXY_REQUIRED:
+        if item not in parts:
+            parts.append(item)
+    return ",".join(parts)
+
+
+def local_network_env(env: Optional[Dict[str, str]] = None) -> Dict[str, str]:
+    """返回应注入子进程的 NO_PROXY/no_proxy 覆盖（大小写双写，兼容各家实现）。"""
+    base = env if env is not None else os.environ
+    merged = merge_no_proxy(base.get("NO_PROXY") or base.get("no_proxy"))
+    return {"NO_PROXY": merged, "no_proxy": merged}
+
+# ---- 分类常量 ----
+CAT_SUCCESS = "SUCCESS"
+CAT_RECOVERABLE = "RECOVERABLE"      # 瞬态：预算内自动重试
+CAT_NEEDS_LOGIN = "NEEDS_LOGIN"      # 登录态失效：@人告警，等人工恢复
+CAT_UNKNOWN = "UNKNOWN"              # 真故障：升级，附日志
+CAT_SKIPPED = "SKIPPED_IDEMPOTENT"   # 幂等保护：已核实「当日已 verified 外发」，重算内容被桥拒绝（非故障）
+
+NEXT_ACTION = {
+    CAT_SUCCESS: "无需动作",
+    CAT_RECOVERABLE: "重试预算耗尽：看护代理读日志决定再等冷却重跑或跳过",
+    CAT_NEEDS_LOGIN: "人工恢复登录态（扫码/重登）后由看护代理重跑",
+    CAT_UNKNOWN: "看护代理读日志定位根因后升级处理",
+    CAT_SKIPPED: "当日外发标记幂等保护触发（已核实当日 verified 外发证据）：不重发、不计失败、不告警",
+}
+
+# 分类关键词（小写匹配；NEEDS_LOGIN 优先级高于 RECOVERABLE）
+NEEDS_LOGIN_PATTERNS = [
+    "needs_login", "not logged in", "login required", "please log in",
+    "login expired", "qr code", "scan qr", "未登录", "请登录", "扫码",
+    "二维码", "登录态", "登录失效", "登录过期", "重新登录",
+]
+# 幂等保护（2026-10-05）：优先级最高——桥 check_old() 的同日标记拒发是
+# 防重复外发的设计行为，不是故障。典型场景：top10 payload 是每次截图 sha
+# 都不同的图片，当日 verified 外发后重跑必被拒（跨 3 天累计 30+ 次假 FAILED）。
+IDEMPOTENT_SKIP_PATTERNS = [
+    "legacy-marker-binding-mismatch",
+    "legacy-marker-type-mismatch",
+]
+RECOVERABLE_PATTERNS = [
+    "timed out", "timeout", "etimedout", "econnrefused", "econnreset",
+    "econnaborted", "enotfound", "epipe", "socket hang up", "net::err",
+    "device offline", "adb:", "connection refused", "connection reset",
+    "temporarily", "transient", "超时", "连接失败", "连接超时", "暂时",
+    "临时失败", "服务不可用",
+]
+
+LOG_TAIL_CHARS = 4000
+
+
+# ---------------------------------------------------------------- 数据结构
+
+@dataclass
+class StepResult:
+    argv: List[str]
+    cwd: str
+    exit_code: Optional[int]
+    timed_out: bool
+    duration_seconds: float
+    log_path: str
+    stdout_tail: str = ""
+    stderr_tail: str = ""
+    process_group_leak: bool = False
+    cleanup_uncertain: bool = False
+    cleanup_detail: str = ""
+
+
+# ---------------------------------------------------------------- 失败分类
+
+def classify(text: str, exit_code: Optional[int], timed_out: bool) -> Tuple[str, str]:
+    """按 输出文本 + 退出码 + 是否超时 归类。"""
+    if exit_code == 0 and not timed_out:
+        return CAT_SUCCESS, "全部步骤 exit=0"
+    if timed_out:
+        return CAT_RECOVERABLE, "执行超时（看门狗已终止进程组）"
+    low = (text or "").lower()
+    for p in IDEMPOTENT_SKIP_PATTERNS:
+        if p in low:
+            # P0-1b（2026-10-06）：裸 classify() 没有日志/文件系统上下文，无法核实
+            # 「当日已 verified 外发」，因此**不得静音**。带证据的裁决在
+            # receipt._idempotent_decision() 完成；此处按真故障升级（fail-closed）。
+            return CAT_UNKNOWN, "幂等跳过待核证（无上下文，拒绝静音）: %r" % p
+    for p in NEEDS_LOGIN_PATTERNS:
+        if p in low:
+            return CAT_NEEDS_LOGIN, "命中登录态特征: %r" % p
+    for p in RECOVERABLE_PATTERNS:
+        if p in low:
+            return CAT_RECOVERABLE, "命中瞬态特征: %r" % p
+    return CAT_UNKNOWN, "exit=%r 未命中已知分类" % exit_code
+
+
+# P0-1（2026-10-03）：结构化收据驱动的失败分类。receipt 模块缺失时自动退回
+# 上面的 classify()，库文件缺失不致瘫痪调度层。
+try:  # noqa: SIM105
+    import receipt as _receipt  # type: ignore
+except ImportError:  # pragma: no cover
+    _receipt = None
+
+
+def classify_with_receipt(text: str, exit_code: Optional[int], timed_out: bool,
+                          log_path: Optional[str] = None,
+                          workdir: Optional[str] = None) -> Tuple[str, str, Dict]:
+    """P0-1 主入口：收据优先、文本兜底，语义与 classify() 一致。
+
+    返回 (category, detail, signal)。signal 含 kind/code/phase_last，供
+    record.json、告警聚合（P0-3）与经验索引（P1-2）使用。
+
+    P0-1b：`workdir` 用于定位该工作流的 send-ledger（幂等证据），使
+    `legacy-marker-*` 能区分「当日已 verified 外发（良性）」与「从未发出（真故障）」。
+    """
+    if _receipt is None:
+        category, detail = classify(text, exit_code, timed_out)
+        return category, detail, {}
+    return _receipt.classify_receipt(
+        text, exit_code, timed_out, log_path=log_path, classify_fallback=classify,
+        workdir=workdir)
+
+
+# ---------------------------------------------------------------- 全局锁
+
+class RunnerLock:
+    """fcntl.flock 非阻塞互斥：防止两个 run_all 实例并行操作同一批真机资源。"""
+
+    def __init__(self, path: Path = LOCK_PATH) -> None:
+        self.path = Path(path)
+        self._fh = None
+
+    def acquire(self) -> bool:
+        self._fh = open(self.path, "w")
+        try:
+            fcntl.flock(self._fh.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+            return True
+        except OSError:
+            self._fh.close()
+            self._fh = None
+            return False
+
+    def release(self) -> None:
+        if self._fh is not None:
+            try:
+                fcntl.flock(self._fh.fileno(), fcntl.LOCK_UN)
+            finally:
+                self._fh.close()
+                self._fh = None
+
+    def __enter__(self):
+        return self.acquire()
+
+    def __exit__(self, *exc):
+        self.release()
+
+
+# ---------------------------------------------------------------- 步骤执行
+
+PROCESS_GROUP_TERM_GRACE_SECONDS = 10.0
+PROCESS_GROUP_KILL_GRACE_SECONDS = 2.0
+PROCESS_GROUP_POLL_SECONDS = 0.05
+
+
+class _DarwinProcBsdInfo(ctypes.Structure):
+    """macOS <sys/proc_info.h> 的 struct proc_bsdinfo（SDK当前大小136）。"""
+    _fields_ = [
+        ("pbi_flags", ctypes.c_uint32), ("pbi_status", ctypes.c_uint32),
+        ("pbi_xstatus", ctypes.c_uint32), ("pbi_pid", ctypes.c_uint32),
+        ("pbi_ppid", ctypes.c_uint32), ("pbi_uid", ctypes.c_uint32),
+        ("pbi_gid", ctypes.c_uint32), ("pbi_ruid", ctypes.c_uint32),
+        ("pbi_rgid", ctypes.c_uint32), ("pbi_svuid", ctypes.c_uint32),
+        ("pbi_svgid", ctypes.c_uint32), ("rfu_1", ctypes.c_uint32),
+        ("pbi_comm", ctypes.c_char * 16), ("pbi_name", ctypes.c_char * 32),
+        ("pbi_nfiles", ctypes.c_uint32), ("pbi_pgid", ctypes.c_uint32),
+        ("pbi_pjobc", ctypes.c_uint32), ("e_tdev", ctypes.c_uint32),
+        ("e_tpgid", ctypes.c_uint32), ("pbi_nice", ctypes.c_int32),
+        ("pbi_start_tvsec", ctypes.c_uint64),
+        ("pbi_start_tvusec", ctypes.c_uint64),
+    ]
+
+
+_DARWIN_LIBPROC = None
+if sys.platform == "darwin":
+    try:
+        _DARWIN_LIBPROC = ctypes.CDLL("/usr/lib/libproc.dylib", use_errno=True)
+        _DARWIN_LIBPROC.proc_pidinfo.argtypes = [
+            ctypes.c_int, ctypes.c_int, ctypes.c_uint64,
+            ctypes.c_void_p, ctypes.c_int,
+        ]
+        _DARWIN_LIBPROC.proc_pidinfo.restype = ctypes.c_int
+    except OSError:
+        _DARWIN_LIBPROC = None
+
+
+def _process_birth_token(pid: int, ps_started: str = "") -> str:
+    """Darwin优先取微秒启动时间；其他宿主退回ps lstart。"""
+    if _DARWIN_LIBPROC is not None:
+        info = _DarwinProcBsdInfo()
+        size = ctypes.sizeof(info)
+        read = _DARWIN_LIBPROC.proc_pidinfo(
+            pid, 3, 0, ctypes.byref(info), size)  # PROC_PIDTBSDINFO=3
+        if read == size and info.pbi_pid == pid:
+            return "darwin:%d:%06d" % (
+                info.pbi_start_tvsec, info.pbi_start_tvusec)
+    return ("ps:" + ps_started) if ps_started else ""
+
+
+@dataclass(frozen=True)
+class ProcessGroupIdentity:
+    pgid: int
+    sid: int
+    leader_pid: int
+    leader_started: str
+
+
+@dataclass(frozen=True)
+class _ProcessInfo:
+    pid: int
+    pgid: int
+    state: str
+    started: str
+
+
+@dataclass(frozen=True)
+class ProcessGroupSnapshot:
+    live_pids: Tuple[int, ...] = ()
+    zombie_pids: Tuple[int, ...] = ()
+    uncertain: bool = False
+    detail: str = ""
+
+
+@dataclass(frozen=True)
+class ProcessGroupCleanup:
+    cleaned: bool
+    uncertain: bool
+    had_live_members: bool
+    detail: str
+
+
+def _read_process_table() -> List[_ProcessInfo]:
+    """读取最小进程身份表；禁止从命令文本猜测归属。"""
+    output = subprocess.check_output(
+        ["ps", "-axo", "pid=,pgid=,stat=,lstart="],
+        text=True, stderr=subprocess.DEVNULL,
+    )
+    rows: List[_ProcessInfo] = []
+    for line in output.splitlines():
+        parts = line.strip().split(None, 3)
+        if len(parts) != 4:
+            continue
+        try:
+            pid, pgid = int(parts[0]), int(parts[1])
+        except ValueError:
+            continue
+        rows.append(_ProcessInfo(pid, pgid, parts[2], parts[3].strip()))
+    return rows
+
+
+def _capture_process_group_identity(proc: subprocess.Popen) -> ProcessGroupIdentity:
+    """捕获 start_new_session=True 创建的本步会话身份。"""
+    pgid = os.getpgid(proc.pid)
+    sid = os.getsid(proc.pid)
+    if pgid != proc.pid or sid != proc.pid:
+        raise RuntimeError(
+            "runner-process-group-identity-invalid pid=%s pgid=%s sid=%s" %
+            (proc.pid, pgid, sid))
+    birth = _process_birth_token(proc.pid)
+    if not birth:
+        leader = next((row for row in _read_process_table() if row.pid == proc.pid), None)
+        if leader is None:
+            raise RuntimeError("runner-process-group-leader-not-observable pid=%s" % proc.pid)
+        birth = _process_birth_token(proc.pid, leader.started)
+    if not birth:
+        raise RuntimeError("runner-process-group-birth-unavailable pid=%s" % proc.pid)
+    return ProcessGroupIdentity(pgid, sid, proc.pid, birth)
+
+
+def _snapshot_process_group(identity: ProcessGroupIdentity) -> ProcessGroupSnapshot:
+    try:
+        members = [row for row in _read_process_table() if row.pgid == identity.pgid]
+    except (OSError, subprocess.SubprocessError) as exc:
+        return ProcessGroupSnapshot(
+            uncertain=True, detail="runner-process-table-unavailable: %s" % exc)
+    if not members:
+        return ProcessGroupSnapshot(detail="process-group-empty")
+    if not identity.leader_started:
+        return ProcessGroupSnapshot(
+            uncertain=True,
+            detail="runner-process-group-birth-unavailable pgid=%s" % identity.pgid)
+    live: List[int] = []
+    zombies: List[int] = []
+    for member in members:
+        try:
+            sid = os.getsid(member.pid)
+        except ProcessLookupError:
+            continue
+        except PermissionError as exc:
+            return ProcessGroupSnapshot(
+                uncertain=True,
+                detail="runner-process-session-unavailable pid=%s: %s" %
+                       (member.pid, exc))
+        if sid != identity.sid:
+            return ProcessGroupSnapshot(
+                uncertain=True,
+                detail="runner-process-group-identity-mismatch pid=%s sid=%s expected=%s" %
+                       (member.pid, sid, identity.sid))
+        if member.pid == identity.leader_pid:
+            current_birth = _process_birth_token(member.pid, member.started)
+            if not current_birth or current_birth != identity.leader_started:
+                return ProcessGroupSnapshot(
+                    uncertain=True,
+                    detail="runner-process-group-birth-mismatch pid=%s" % member.pid)
+        if member.state.upper().startswith("Z"):
+            zombies.append(member.pid)
+        else:
+            live.append(member.pid)
+    return ProcessGroupSnapshot(
+        live_pids=tuple(sorted(live)), zombie_pids=tuple(sorted(zombies)),
+        detail="live=%s zombies=%s" % (sorted(live), sorted(zombies)))
+
+
+def _signal_owned_group(identity: ProcessGroupIdentity,
+                        sig: signal.Signals) -> Tuple[bool, ProcessGroupSnapshot]:
+    """仅在当前快照仍能证明归属时向原进程组发信号。"""
+    snapshot = _snapshot_process_group(identity)
+    if snapshot.uncertain or not snapshot.live_pids:
+        return False, snapshot
+    try:
+        os.killpg(identity.pgid, sig)
+    except ProcessLookupError:
+        return False, _snapshot_process_group(identity)
+    except PermissionError as exc:
+        return False, ProcessGroupSnapshot(
+            live_pids=snapshot.live_pids, zombie_pids=snapshot.zombie_pids,
+            uncertain=True,
+            detail="runner-process-group-signal-denied sig=%s: %s" % (sig, exc))
+    return True, snapshot
+
+
+def _wait_process_group(identity: ProcessGroupIdentity,
+                        seconds: float) -> ProcessGroupSnapshot:
+    deadline = time.monotonic() + max(0.0, seconds)
+    while True:
+        snapshot = _snapshot_process_group(identity)
+        if snapshot.uncertain or not snapshot.live_pids:
+            return snapshot
+        if time.monotonic() >= deadline:
+            return snapshot
+        time.sleep(PROCESS_GROUP_POLL_SECONDS)
+
+
+def _cleanup_process_group(
+        identity: ProcessGroupIdentity,
+        term_grace: Optional[float] = None,
+        kill_grace: Optional[float] = None,
+) -> ProcessGroupCleanup:
+    """核验归属后 TERM→KILL，并以整个进程组清空作为成功条件。"""
+    term_grace = (PROCESS_GROUP_TERM_GRACE_SECONDS if term_grace is None
+                  else term_grace)
+    kill_grace = (PROCESS_GROUP_KILL_GRACE_SECONDS if kill_grace is None
+                  else kill_grace)
+    initial = _snapshot_process_group(identity)
+    if initial.uncertain:
+        return ProcessGroupCleanup(False, True, bool(initial.live_pids), initial.detail)
+    if not initial.live_pids:
+        return ProcessGroupCleanup(True, False, False, initial.detail)
+
+    signalled, term_snapshot = _signal_owned_group(identity, signal.SIGTERM)
+    if term_snapshot.uncertain:
+        return ProcessGroupCleanup(False, True, True, term_snapshot.detail)
+    if not signalled and term_snapshot.live_pids:
+        return ProcessGroupCleanup(
+            False, True, True, "runner-process-group-term-not-sent")
+    after_term = _wait_process_group(identity, term_grace)
+    if after_term.uncertain:
+        return ProcessGroupCleanup(False, True, True, after_term.detail)
+    if not after_term.live_pids:
+        return ProcessGroupCleanup(True, False, True, "process-group-clean-after-term")
+
+    signalled, kill_snapshot = _signal_owned_group(identity, signal.SIGKILL)
+    if kill_snapshot.uncertain:
+        return ProcessGroupCleanup(False, True, True, kill_snapshot.detail)
+    if not signalled and kill_snapshot.live_pids:
+        return ProcessGroupCleanup(
+            False, True, True, "runner-process-group-kill-not-sent")
+    after_kill = _wait_process_group(identity, kill_grace)
+    if after_kill.uncertain:
+        return ProcessGroupCleanup(False, True, True, after_kill.detail)
+    if after_kill.live_pids:
+        return ProcessGroupCleanup(
+            False, True, True,
+            "runner-process-group-still-live pids=%s" %
+            (list(after_kill.live_pids),))
+    return ProcessGroupCleanup(True, False, True, "process-group-clean-after-kill")
+
+
+# --------------------------------------------------------- 步骤进程的遗骸登记
+#
+# 每一步都用 start_new_session=True 跑在自己的会话里：好处是超时能整组杀掉，
+# 代价是 **daemon 死掉时它们不会跟着死** —— 被 launchd 收养后继续跑、继续驱动
+# 共享的微信界面，而没人再看它的日志。这正是「占着微信却不工作」的真实形态：
+# daemon 已被杀、技能还活着的孤儿，它会一直重复激活微信直到自己超时。
+#
+# 所以每步出生时登记 <pgid>.json、正常结束时注销；daemon 启动时（此刻独占全局
+# 锁，收割任何遗留进程都是安全的）清理上一轮的遗骸，收到 SIGTERM 时立刻收割
+# 正在跑的步骤，而不是等整个周期跑完。
+LIVE_STEPS_DIR = STATE_DIR / "live_steps"
+
+
+def _pgid_alive(pgid: int) -> bool:
+    try:
+        os.killpg(pgid, 0)
+    except (ProcessLookupError, PermissionError):
+        return False
+    return True
+
+
+def _register_step(proc: subprocess.Popen, argv: List[str],
+                   identity: ProcessGroupIdentity) -> Optional[Path]:
+    try:
+        LIVE_STEPS_DIR.mkdir(parents=True, exist_ok=True)
+        record = LIVE_STEPS_DIR / ("%d.json" % identity.pgid)
+        record.write_text(json.dumps({
+            "pgid": identity.pgid, "sid": identity.sid,
+            "pid": proc.pid, "leader_started": identity.leader_started,
+            "argv": list(argv),
+            "at": datetime.now().isoformat(timespec="seconds"),
+        }, ensure_ascii=False), encoding="utf-8")
+        return record
+    except OSError:
+        return None
+
+
+def _unregister_step(record: Optional[Path]) -> None:
+    if record is None:
+        return
+    try:
+        record.unlink()
+    except OSError:
+        pass
+
+
+def kill_live_steps(reason: str = "", grace: float = 5.0) -> List[dict]:
+    """按出生锚点核验后收割已登记步骤；无法证明归属时保留登记。"""
+    records = sorted(LIVE_STEPS_DIR.glob("*.json")) if LIVE_STEPS_DIR.exists() else []
+    reaped: List[dict] = []
+    for record in records:
+        try:
+            data = json.loads(record.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            data = {}
+        try:
+            identity = ProcessGroupIdentity(
+                int(data["pgid"]), int(data["sid"]), int(data["pid"]),
+                str(data["leader_started"] or ""))
+        except (KeyError, TypeError, ValueError):
+            print("[reap%s] 保留无身份锚点登记 path=%s" % (
+                (":" + reason) if reason else "", record))
+            continue
+        outcome = _cleanup_process_group(
+            identity, term_grace=grace,
+            kill_grace=PROCESS_GROUP_KILL_GRACE_SECONDS)
+        if outcome.cleaned and not outcome.uncertain:
+            _unregister_step(record)
+            if outcome.had_live_members:
+                print("[reap%s] 终止遗留步骤进程组 pgid=%s argv=%s" % (
+                    (":" + reason) if reason else "", identity.pgid,
+                    " ".join(data.get("argv") or [])[:160]))
+                reaped.append({"pgid": identity.pgid, "argv": data.get("argv")})
+        else:
+            print("[reap%s] 保留身份不明登记 pgid=%s detail=%s" % (
+                (":" + reason) if reason else "", identity.pgid,
+                outcome.detail))
+    return reaped
+
+
+def reap_stale_steps() -> List[dict]:
+    """daemon 启动时收割上一轮遗留的步骤进程（崩溃 / SIGKILL 之后的孤儿）。"""
+    return kill_live_steps("startup")
+
+
+def _tail_of(path: Path, limit: int = LOG_TAIL_CHARS) -> str:
+    try:
+        data = path.read_text(encoding="utf-8", errors="replace")
+    except OSError:
+        return ""
+    return data[-limit:]
+
+
+def run_step(argv: List[str], cwd: Path, timeout_seconds: Optional[int], log_path: Path,
+             env: Optional[Dict[str, str]] = None) -> StepResult:
+    """执行单步：进程组隔离 + 全局看门狗（SIGTERM→10s→SIGKILL）+ 日志落盘。"""
+    log_path = Path(log_path)
+    log_path.parent.mkdir(parents=True, exist_ok=True)
+    # 始终显式构造 env：既支持调用方覆盖，也强制注入本机回环/内网直连豁免，
+    # 否则沙箱代理会劫持 CDP 发现请求（详见 NO_PROXY_REQUIRED 注释）。
+    full_env = dict(os.environ)
+    if env:
+        full_env.update(env)
+    full_env.update(local_network_env(full_env))
+    start = time.time()
+    timed_out = False
+    process_group_leak = False
+    cleanup_uncertain = False
+    cleanup_detail = ""
+    can_unregister = False
+    with open(log_path, "w", encoding="utf-8") as log:
+        proc = subprocess.Popen(
+            argv, cwd=str(cwd), stdout=log, stderr=subprocess.STDOUT,
+            start_new_session=True, env=full_env,
+        )
+        try:
+            identity = _capture_process_group_identity(proc)
+        except (OSError, RuntimeError, subprocess.SubprocessError) as exc:
+            # 短命且已退出的普通命令可在后续空组快照中确认安全；若组仍活，
+            # 缺少出生锚点就必须 fail-closed，不向该组发送信号。
+            identity = ProcessGroupIdentity(proc.pid, proc.pid, proc.pid, "")
+            cleanup_detail = "runner-process-group-capture-failed: %s" % exc
+        record = _register_step(proc, argv, identity)
+        try:
+            proc.wait(timeout=timeout_seconds)
+        except subprocess.TimeoutExpired:
+            timed_out = True
+            outcome = _cleanup_process_group(identity)
+            cleanup_uncertain = outcome.uncertain or not outcome.cleaned
+            cleanup_detail = outcome.detail
+        else:
+            snapshot = _snapshot_process_group(identity)
+            if snapshot.uncertain:
+                cleanup_uncertain = True
+                cleanup_detail = snapshot.detail
+            elif snapshot.live_pids:
+                process_group_leak = True
+                outcome = _cleanup_process_group(identity)
+                cleanup_uncertain = outcome.uncertain or not outcome.cleaned
+                cleanup_detail = outcome.detail
+        finally:
+            # poll() 同时回收已退出 leader；清理不确定时绝不无限等待。
+            proc.poll()
+            final_snapshot = _snapshot_process_group(identity)
+            can_unregister = not final_snapshot.uncertain and not final_snapshot.live_pids
+            if can_unregister:
+                _unregister_step(record)
+    duration = round(time.time() - start, 2)
+    tail = _tail_of(log_path)
+    exit_code = proc.returncode
+    if (process_group_leak or cleanup_uncertain) and exit_code in (0, None):
+        exit_code = 70
+    return StepResult(
+        argv=list(argv), cwd=str(cwd), exit_code=exit_code,
+        timed_out=timed_out, duration_seconds=duration,
+        log_path=str(log_path), stdout_tail=tail, stderr_tail="",
+        process_group_leak=process_group_leak,
+        cleanup_uncertain=cleanup_uncertain,
+        cleanup_detail=cleanup_detail,
+    )
+
+
+# ---------------------------------------------------------------- Skill 级执行
+
+def run_skill(entry: Dict, history_dir: Optional[Path] = None,
+              max_retries: Optional[int] = None, timeout_override: Optional[int] = None,
+              cooldown: Optional[int] = None,
+              env: Optional[Dict[str, str]] = None,
+              interpreters: Optional[Dict[str, str]] = None,
+              run_source: str = "daemon") -> Dict:
+    """按 manifest 条目执行一个 skill：逐步执行 + 失败分类 + RECOVERABLE 预算内重试。
+
+    重试语义：总尝试次数 <= 1 + max_retries；仅 RECOVERABLE 重试；
+    NEEDS_LOGIN / UNKNOWN 不重试（交看护代理处理）。
+    超时语义：timeout_seconds=None等待真实进程结束，不按总时长中断UI交付；显式数值保留旧看门狗兼容。
+
+    run_source（2026-10-20 SRE 首轮成功率口径）：本 run 的触发来源，
+    "daemon"（自动调度）| "manual"（manual_run_once / 人工直跑），随 record
+    落盘为 triggered_by 字段。旧 record 无此字段按 daemon 处理（历史多数如此）。
+    """
+    name = entry["name"]
+    history_dir = Path(history_dir) if history_dir else DEFAULT_HISTORY
+    retries = entry.get("max_retries", 2) if max_retries is None else max_retries
+    timeout = entry.get("timeout_seconds", 1800) if timeout_override is None else timeout_override
+    cool = entry.get("cooldown_seconds", 300) if cooldown is None else cooldown
+    cwd = REPO_ROOT / entry.get("cwd", ".")
+    steps = entry["steps"]
+
+    started_at = datetime.now().isoformat(timespec="seconds")
+    t0 = time.time()
+    attempts = 0
+    all_logs = []
+    category, detail = CAT_UNKNOWN, "未执行"
+    fail_signal: Dict[str, str] = {}
+
+    while True:
+        attempts += 1
+        ts = time.strftime("%Y%m%d-%H%M%S")
+        day_dir = history_dir / time.strftime("%Y-%m-%d")
+        day_dir.mkdir(parents=True, exist_ok=True)
+
+        # 本轮独立输出目录：供需要「本次独立输出目录」参数的 skill 使用（{run_dir} 占位）
+        run_dir = RUN_DIR_ROOT / name / ts
+        run_dir.mkdir(parents=True, exist_ok=True)
+        ctx = {"run_dir": str(run_dir), "date": time.strftime("%Y-%m-%d"), "ts": ts}
+
+        step_results: List[StepResult] = []
+        failed = False
+        combined_tail: List[str] = []
+        for i, step in enumerate(steps, 1):
+            slog = day_dir / ("%s--%s--a%d--s%d.log" % (name, ts, attempts, i))
+            resolved = [resolve_token(a, interpreters, ctx) for a in step.get("argv", [])]
+            sr = run_step(resolved, cwd, timeout, slog, env=env)
+            step_results.append(sr)
+            all_logs.append(str(slog))
+            combined_tail.append(sr.stdout_tail or "")
+            # 诊断自包含：把本步日志同步落一份到 {run_dir}/stepN.log。
+            # 否则 skill 早期崩溃时 run_dir 是空目录，看护只能靠猜 —— 实测代价：
+            # 3 条流水线 exit=1 却查不到原因，静默失败 2 天才被发现。
+            try:
+                shutil.copyfile(slog, run_dir / ("step%d.log" % i))
+            except OSError:
+                pass
+            if (sr.exit_code != 0 or sr.timed_out or sr.process_group_leak or
+                    sr.cleanup_uncertain):
+                failed = True
+                break
+
+        if not failed:
+            category, detail = CAT_SUCCESS, "全部 %d 步 exit=0" % len(steps)
+            break
+        last = step_results[-1]
+        # P0-1：收据优先分类——detail 必含可读故障码（stage/reason/error-code）
+        # P0-1b：传 workdir 以便对 legacy-marker-* 做「当日 verified 外发」证据裁决
+        diagnostic = "\n".join(combined_tail)
+        if last.process_group_leak or last.cleanup_uncertain:
+            diagnostic += "\nrunner-process-group-cleanup: %s" % last.cleanup_detail
+        category, detail, fail_signal = classify_with_receipt(
+            diagnostic, last.exit_code, last.timed_out, last.log_path,
+            workdir=str(cwd))
+        if last.process_group_leak or last.cleanup_uncertain:
+            category = CAT_UNKNOWN
+            detail = "步骤进程组异常，禁止同轮重试: %s" % last.cleanup_detail
+        if last.timed_out or last.process_group_leak or last.cleanup_uncertain:
+            break
+        if category != CAT_RECOVERABLE or attempts > retries:
+            break
+        if cool > 0:
+            time.sleep(cool)
+
+    if category == CAT_SUCCESS:
+        status = "SUCCESS"
+    elif category == CAT_SKIPPED:
+        status = "SKIPPED"  # 幂等跳过：已核实「当日已 verified 外发」，非失败（P0-1b）
+    else:
+        status = "FAILED"
+    record = {
+        "skill": name,
+        "ledger_name": entry.get("ledger_name", name),
+        "schedule": entry.get("schedule", ""),
+        "dev_state": entry.get("dev_state", ""),
+        "status": status,
+        "category": category,
+        "detail": detail,
+        "next_action": NEXT_ACTION[category],
+        "attempts": attempts,
+        "max_retries": retries,
+        "duration_seconds": round(time.time() - t0, 2),
+        "started_at": started_at,
+        "finished_at": datetime.now().isoformat(timespec="seconds"),
+        "triggered_by": run_source,
+        "logs": all_logs,
+    }
+    # P0-1/P1-2：结构化故障信号随 record 落盘（供告警聚合、经验索引、P1-1 续跑规划）
+    if fail_signal:
+        record["fail_signal"] = fail_signal
+    rec_path = day_dir / ("%s--%s--record.json" % (name, ts))
+    rec_path.write_text(json.dumps(record, ensure_ascii=False, indent=2), encoding="utf-8")
+    record["record_path"] = str(rec_path)
+    return record
+
+
+# ---------------------------------------------------------------- 历史修剪
+
+def prune_history(history_dir: Optional[Path] = None, keep_days: int = 14) -> int:
+    """删除 run_history 中 mtime 超过 keep_days 的日志/记录，返回删除数。治 runs 堆积。"""
+    history_dir = Path(history_dir) if history_dir else DEFAULT_HISTORY
+    if not history_dir.exists():
+        return 0
+    cutoff = time.time() - keep_days * 86400
+    removed = 0
+    for p in history_dir.rglob("*"):
+        if p.is_file() and p.stat().st_mtime < cutoff:
+            p.unlink()
+            removed += 1
+    for d in sorted(history_dir.rglob("*"), reverse=True):
+        if d.is_dir() and not any(d.iterdir()):
+            d.rmdir()
+    return removed
+
+
+# ---------------------------------------------------------------- Manifest
+
+def load_manifest(path: Optional[Path] = None) -> Dict:
+    path = Path(path) if path else DEFAULT_MANIFEST
+    data = json.loads(path.read_text(encoding="utf-8"))
+    skills = data.get("skills", [])
+    if not skills:
+        raise ValueError("manifest 无 skills 条目: %s" % path)
+    for s in skills:
+        if "name" not in s or "steps" not in s:
+            raise ValueError("manifest 条目缺 name/steps: %r" % (s.get("name"),))
+        cwd = REPO_ROOT / s.get("cwd", ".")
+        if not cwd.exists():
+            raise ValueError("skill %s 的 cwd 不存在: %s" % (s["name"], cwd))
+    return data
+
+
+# ---------------------------------------------------------------- interpreters 解析
+
+def resolve_interpreters(data: Dict, env: Optional[Dict[str, str]] = None) -> Dict[str, str]:
+    """合并 manifest 顶层 interpreters + ZENSI_* env 覆盖，返回 {node/python/python3: 真实路径}。"""
+    env = env or dict(os.environ)
+    overrides = data.get("interpreter_env_overrides", {})
+    out: Dict[str, str] = {}
+    for key, default in data.get("interpreters", {}).items():
+        env_key = overrides.get(key)
+        out[key] = env.get(env_key, default) if env_key else default
+    return out
+
+
+def resolve_token(tok: str, interpreters: Optional[Dict[str, str]],
+                  ctx: Optional[Dict[str, str]] = None) -> str:
+    """argv 占位 → 真实值。
+
+    {node}/{python}/{python3} → 解释器路径；
+    {run_dir} → 本轮独立输出目录（skill 需要「本次独立输出目录」类参数时使用）；
+    {date}/{ts} → 当日日期 / 本轮时间戳。
+    占位符既可整 token 使用，也可内嵌在参数中（如 "{run_dir}/output"）。非占位原样返回。
+    """
+    if tok.startswith("{") and tok.endswith("}") and len(tok) > 2:
+        inner = tok[1:-1]
+        if interpreters and inner in interpreters:
+            return interpreters[inner]
+        if ctx and inner in ctx:
+            return ctx[inner]
+    if interpreters or ctx:
+        def _sub(match) -> str:
+            key = match.group(1)
+            if interpreters and key in interpreters:
+                return interpreters[key]
+            if ctx and key in ctx:
+                return ctx[key]
+            return match.group(0)
+        return re.sub(r"\{(\w+)\}", _sub, tok)
+    return tok
+
+
+# ---------------------------------------------------------------- 当日汇总
+
+def summarize_today(history_dir: Optional[Path] = None, day: Optional[str] = None) -> Dict[str, Dict]:
+    """读 run_history/<day>/ 下各 skill 最新 record.json，返回 {skill: record}（供台账/看护用）。"""
+    history_dir = Path(history_dir) if history_dir else DEFAULT_HISTORY
+    day = day or time.strftime("%Y-%m-%d")
+    day_dir = history_dir / day
+    if not day_dir.exists():
+        return {}
+    result: Dict[str, Dict] = {}
+    for p in sorted(day_dir.glob("*--record.json")):
+        try:
+            rec = json.loads(p.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        sk = rec.get("skill")
+        if sk and (sk not in result or rec.get("finished_at", "") >= result[sk].get("finished_at", "")):
+            result[sk] = rec
+    return result
+
+
+# ---------------------------------------------------------------- 持久成功状态（跨天 cadence 依赖）
+
+def _ensure_state_dir() -> Path:
+    STATE_DIR.mkdir(parents=True, exist_ok=True)
+    return STATE_DIR
+
+
+def update_last_success(name: str, iso: Optional[str] = None) -> None:
+    """记录某 skill 最近一次成功时间（ISO）。cadence 门控与台账"任意一轮成功=是"共用。"""
+    _ensure_state_dir()
+    iso = iso or datetime.now().isoformat(timespec="seconds")
+    data: Dict[str, str] = {}
+    if LAST_SUCCESS_FILE.exists():
+        try:
+            data = json.loads(LAST_SUCCESS_FILE.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            data = {}
+    data[name] = iso
+    LAST_SUCCESS_FILE.write_text(
+        json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def get_last_success(name: str) -> Optional[str]:
+    if not LAST_SUCCESS_FILE.exists():
+        return None
+    try:
+        data = json.loads(LAST_SUCCESS_FILE.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+    return data.get(name)

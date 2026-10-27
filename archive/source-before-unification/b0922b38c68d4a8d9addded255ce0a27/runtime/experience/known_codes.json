@@ -1,0 +1,175 @@
+{
+  "schemaVersion": 2,
+  "updatedAt": "2026-10-06",
+  "owner": "监理（WorkBuddy）· 供 SkillRunner 失败分类读取",
+  "discipline": [
+    "本文件 = 认知层：只提供「处置提示 note」「建议动作 suggestedAction」与包装层前缀，供 detail 增补人类可读诊断。",
+    "本文件【绝不】用于自动静音/降级：把某码改判为 SKIPPED_IDEMPOTENT 属重大安全动作，须大同逐条裁决。",
+    "autoSilenceAllowlist / autoRetryAllowlist 默认【空】= 零行为改变。启用某项须大同逐条批准后把码填入数组（禁止批量自作主张）；启用记录见 activationLog。",
+    "反例（勿自作主张）：zero-replies-no-send / zero-replies-no-aggregate 是 0 条空闸行为，但按铁律 0 条即红灯，必须上报，不得当良性静音。",
+    "新增认知只写本文件，不覆盖 receipt.py / skill_runner.py 源码 —— 可版本化、可回滚（删除本文件即恢复内置默认）。",
+    "回滚：rm runtime/experience/known_codes.json（加载失败自动退回内置默认，行为零变化）。"
+  ],
+  "wrapperReasonPrefixes": [
+    "command failed:",
+    "command failed"
+  ],
+  "tierLegend": {
+    "report-only": "仅提示（默认档）",
+    "auto-retry-candidate": "瞬时/环境类——技术上可考虑自动重试（仍须大同逐条批准后才进 autoRetryAllowlist）",
+    "never-silence": "红灯/安全类——任何情况下都不得静音（哪怕大同批准其它码）"
+  },
+  "autoSilenceAllowlist": [
+    "lock"
+  ],
+  "autoRetryAllowlist": [
+    "windows-driver-unreachable",
+    "windows-wechat:windows-driver-unreachable",
+    "collection",
+    "desktop_wechat",
+    "desktop_wechat_preflight",
+    "wechat-send-failed"
+  ],
+  "activationLog": [
+    {
+      "date": "2026-10-06",
+      "approvedBy": "大同（逐条裁决，首批 2 条）",
+      "enabled": {
+        "autoRetryAllowlist": "windows-driver-unreachable（含 windows-wechat: 前缀变体）——实测「Windows agent 冷启动 503 重试 1-2 次即成」；复用 max_retries+cooldown 既有护栏",
+        "autoSilenceAllowlist": "lock —— 互斥占用天然下一轮自愈，告警属噪音；不进 alerts 主链路，只落 alerts_suppressed.jsonl"
+      },
+      "observationWindow": "2026-10-06 → 2026-10-13（一周复盘，自动化提醒 id 见监理日志）",
+      "remainingCandidates": "collection / workbench-entry-page-missing / send-button-not-enabled / desktop_wechat_preflight / windows-wechat-not-ready / windows-driver-local-network-blocked(含前缀变体) —— 观察这 2 条效果后再逐条裁",
+      "rollback": "从对应数组删除该码即可，零代码改动"
+    },
+    {
+      "date": "2026-10-20",
+      "approvedBy": "大同（13:26 拍板「风险为零你就干」，稳定性方案第二批）",
+      "enabled": {
+        "autoRetryAllowlist": "collection / desktop_wechat / desktop_wechat_preflight / wechat-send-failed 四码——14 天 run_history 实证当天自愈率：collection 101/101=100%、desktop_wechat 62/62=100%、preflight 57/58=98%、wechat-send-failed 57/58=98%；全部复用既有 max_retries(2)+cooldown(300s) 护栏，防重复外发由桥的幂等 marker 兜底（sendAttempts>0 时 marker 记账，重跑会被 legacy-marker-* 拒发）"
+      },
+      "evidenceBase": "run_history 2026-10-06→10-20 全量 record 时序分析（文件名时间戳排序，同流同日失败后是否有 SUCCESS）；activity-collection-unknown 自愈率仅 24% 属真故障，故意不进白名单",
+      "excluded": "desktop-send-outcome-unknown / prior-attempt-still-unknown（重试有重复外发风险，铁律 #26）；executor_integrity / runtime-policy-file-digest-mismatch（封印红灯 never-silence，重试无效）；same-event-payload-conflict（须人工 void）；offline_selftest（自检非生产）",
+      "observationWindow": "2026-10-20 → 2026-10-27（一周后复盘 alerts_suppressed.jsonl + [policy-retry] 命中率与二次成功率）",
+      "rollback": "从 autoRetryAllowlist 删除对应码即可，零代码改动"
+    }
+  ],
+  "codes": {
+    "windows-wechat:windows-driver-local-network-blocked": {
+      "note": "本机→Windows 网关被 macOS「本地网络」权限拦（launchd 上下文必然如此，正解是经中继 127.0.0.1:8732 出去）。若中继也不可达，daemon 无法自愈，须看护代理在 GUI 会话执行 relay-up.sh。",
+      "tier": "auto-retry-candidate"
+    },
+    "windows-driver-local-network-blocked": {
+      "note": "本机→Windows 网关被 macOS「本地网络」权限拦（launchd 上下文必然如此）。正解：经中继 127.0.0.1:8732 出去；中继也不可达则须看护在 GUI 会话执行 relay-up.sh。",
+      "tier": "auto-retry-candidate"
+    },
+    "windows-driver-unreachable": {
+      "note": "Windows 网关不可达（IP 变更 / Windows 重启 / 驱动未起）。查 wechat-windows-driver 接入包连接信息与网关 /health。",
+      "tier": "auto-retry-candidate"
+    },
+    "windows-wechat-not-ready": {
+      "note": "Windows 侧微信未就绪（未登录 / 窗口不可用）。查驱动 /health 的 ready / wechat_running / logged_in 三字段。",
+      "tier": "auto-retry-candidate"
+    },
+    "desktop_wechat_preflight": {
+      "note": "桌面微信前置检查失败（微信未前台 / 未登录 / 目标窗口找不到）。属环境态而非内容错误，先复位窗口再定性。",
+      "tier": "auto-retry-candidate"
+    },
+    "desktop_wechat": {
+      "note": "桌面微信执行阶段失败，结合 phase_last 定位具体子步骤。",
+      "tier": "report-only"
+    },
+    "desktop-preflight-retry-limit-exceeded": {
+      "note": "桌面预检重试耗尽（幂等拉起后仍不可用）⇒ 需人工查看微信窗口状态。",
+      "tier": "report-only"
+    },
+    "collection": {
+      "note": "采集阶段失败（岗位后台 Chrome / CDP / 页面元素）。按铁律先「关页重开」复位再定性站点改版。",
+      "tier": "auto-retry-candidate"
+    },
+    "browser_collect": {
+      "note": "浏览器采集阶段失败。",
+      "tier": "report-only"
+    },
+    "workbench-entry-page-missing": {
+      "note": "岗位工作台入口页缺失（页面被导航走 / 落到登录页 / 未渲染）。按铁律先「关页重开」复位，再判断是否登录态失效。",
+      "tier": "auto-retry-candidate"
+    },
+    "send-button-not-enabled": {
+      "note": "发送按钮未启用（输入未就绪 / 页面态异常）。属页面态，复位后重试；连续出现须查站点改版。",
+      "tier": "auto-retry-candidate"
+    },
+    "lock": {
+      "note": "锁竞争/互斥占用（另一流水线持锁或残留锁）。通常下一轮自愈；持续出现查是否有孤儿进程持锁。",
+      "tier": "auto-retry-candidate"
+    },
+    "payload-file-missing": {
+      "note": "待发送载荷文件不存在（上游构建产物未生成 / 路径漂移）。查上游 step 的产物目录；可能是真丢件，不得静音。",
+      "tier": "never-silence"
+    },
+    "download-retry-limit-exceeded": {
+      "note": "下载重试耗尽（金鲨 / 淘宝导出链路）⇒ 查岗位 Chrome 与页面状态。",
+      "tier": "report-only"
+    },
+    "negative-list-request-failed": {
+      "note": "负向清单请求失败（采集侧网络 / 页面）。",
+      "tier": "report-only"
+    },
+    "daily-rows-not-all-explicitly-reportable": {
+      "note": "部分记录缺显式状态（未读取），属采集口径保守；核对 CSV 是否含「未读取」行。",
+      "tier": "report-only"
+    },
+    "prior-frozen-request-reuse-mode": {
+      "note": "复用既有冻结请求（重算路径），属幂等复用设计；若与当日预期不符再查。",
+      "tier": "report-only"
+    },
+    "legacy-marker-binding-mismatch": {
+      "note": "桥对「同日已 verified 标记」的拒发（幂等保护，非故障）。**必须**由 P0-1b 证据裁决核实当日 verified 外发后，才判 SKIPPED_IDEMPOTENT；证据不足照常告警。",
+      "tier": "report-only"
+    },
+    "legacy-marker-type-mismatch": {
+      "note": "同 legacy-marker-binding-mismatch（类型不符变体），同样须证据裁决。",
+      "tier": "report-only"
+    },
+    "workflow-incomplete": {
+      "note": "工作流未跑完（阶段未收口）。看 phaseHistory 末项定位停在哪一步。",
+      "tier": "report-only"
+    },
+    "wechat-send-failed": {
+      "note": "微信发送阶段失败，结合 phase_last 定位具体子步骤。",
+      "tier": "report-only"
+    },
+    "workflow-ledger-mismatch": {
+      "note": "工作流状态与账本不一致。属一致性红灯，须人工核对，不得静音。",
+      "tier": "never-silence"
+    },
+    "ledger-gap-contradiction": {
+      "note": "账本与队列矛盾（缺号 / 跳号）。属记账一致性红灯，须人工核。",
+      "tier": "never-silence"
+    },
+    "sealed-dependency-digest-mismatch": {
+      "note": "封印依赖摘要失配。禁止直接改文件绕过——必须走受控再封印流程（sealed-dependency-maintenance）。",
+      "tier": "never-silence"
+    },
+    "executor_integrity": {
+      "note": "执行器完整性校验失败（文件被篡改 / 未走封印流程）。红灯，须人工核。",
+      "tier": "never-silence"
+    },
+    "acceptance-business-date-mismatch": {
+      "note": "验收业务日期不匹配（防串日保护触发）。核对业务日与产物日期是否被错配。",
+      "tier": "never-silence"
+    },
+    "offline_selftest": {
+      "note": "离线自检失败（非生产发送动作）。看具体子用例；不涉外发。",
+      "tier": "report-only"
+    },
+    "zero-replies-no-aggregate": {
+      "note": "铁律红灯：汇总为 0 条 ⇒ 不产表、不发送（硬闸已生效）。**必须上报，绝不可当良性静音**。",
+      "tier": "never-silence"
+    },
+    "zero-replies-no-send": {
+      "note": "铁律红灯：汇总为 0 条 ⇒ 不发送（硬闸已生效）。**必须上报，绝不可当良性静音**。",
+      "tier": "never-silence"
+    }
+  }
+}

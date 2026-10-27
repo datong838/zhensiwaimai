@@ -1,0 +1,54 @@
+import assert from 'node:assert/strict';
+import {assertAllocatedStatePreEffect,currentRunIsAllocatedPreEffect,MAINTENANCE_AUTHORIZATION,acceptanceBusinessDate,isZeroSendWechatPreflightBlocked,isZeroSendWechatRuntimeBlocked,isZeroSendWechatDriverBlocked,nextDailyBusinessDate,currentRunIsAbsentPreEffect,currentRunHasReusableDownload,currentRunIsComplete} from './maintenance_executor.mjs';
+import fs from 'node:fs/promises';
+import os from 'node:os';
+import path from 'node:path';
+
+assert.equal(MAINTENANCE_AUTHORIZATION,'user-20260920-negative-review-dependency-maintenance');
+assert.equal(nextDailyBusinessDate(new Date('2026-09-20T00:30:00+08:00')),'2026-09-19');
+assert.equal(nextDailyBusinessDate(new Date('2026-09-20T09:01:00+08:00')),'2026-09-20');
+assert.equal(nextDailyBusinessDate(new Date('2026-12-31T23:00:00+08:00')),'2026-12-31');
+assert.equal(acceptanceBusinessDate(new Date('2026-09-22T09:01:00+08:00'),'2026-09-20'),'2026-09-21');
+assert.equal(acceptanceBusinessDate(new Date('2026-09-22T09:01:00+08:00'),'2026-09-21'),'2026-09-22');
+assert.equal(isZeroSendWechatPreflightBlocked({phase:'report_built',status:'recoverable'},{state:'blocked',verified:false,sendAttempts:0,reason:'exact-group-result-count:0'}),true);
+assert.equal(isZeroSendWechatPreflightBlocked({phase:'report_built',status:'recoverable'},{state:'blocked',verified:false,sendAttempts:null,reason:'exact-group-result-count:0'}),false);
+assert.equal(isZeroSendWechatPreflightBlocked({phase:'report_built',status:'recoverable'},{state:'unknown',verified:false,sendAttempts:0,reason:'exact-group-result-count:0'}),false);
+assert.equal(isZeroSendWechatRuntimeBlocked({phase:'report_built',status:'recoverable'},{state:'blocked',verified:false,sendAttempts:0,newSendAttempts:0,reason:"No module named 'AppKit'"}),true);
+assert.equal(isZeroSendWechatRuntimeBlocked({phase:'report_built',status:'recoverable'},{state:'blocked',verified:false,sendAttempts:1,newSendAttempts:1,reason:"No module named 'AppKit'"}),false);
+assert.equal(isZeroSendWechatRuntimeBlocked({phase:'report_built',status:'recoverable'},{state:'blocked',verified:false,sendAttempts:0,newSendAttempts:0,attempted:true,reason:"No module named 'AppKit'"}),false);
+// 2026-09-30 驱动业务拒绝（零发送）形态
+const driverBlockedReceipt={state:'blocked',verified:false,sendAttempts:0,newSendAttempts:0,reason:"windows-send-rejected:HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题='文件传输助手'，目标='上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰'\"}"};
+assert.equal(isZeroSendWechatDriverBlocked({phase:'report_built',status:'recoverable'},driverBlockedReceipt),true);
+assert.equal(isZeroSendWechatDriverBlocked({phase:'report_built',status:'recoverable'},{...driverBlockedReceipt,sendAttempts:1,newSendAttempts:1}),false);
+assert.equal(isZeroSendWechatDriverBlocked({phase:'report_built',status:'recoverable'},{...driverBlockedReceipt,attempted:true}),false);
+assert.equal(isZeroSendWechatDriverBlocked({phase:'report_built',status:'recoverable'},{...driverBlockedReceipt,state:'unknown'}),false);
+assert.equal(isZeroSendWechatDriverBlocked({phase:'report_built',status:'recoverable'},{...driverBlockedReceipt,reason:"No module named 'AppKit'"}),false);
+const allocation={phase:'created',status:'active',reviewItems:[]};
+assert.equal(assertAllocatedStatePreEffect(allocation),true);
+const initialRecovery={allowed:true,stage:'browser_collect',priorFailures:0,nextAttempt:1};
+assert.equal(assertAllocatedStatePreEffect({...allocation,lastRecovery:initialRecovery}),true);
+for(const mutation of [{allowed:false},{stage:'wechat_send'},{priorFailures:1},{nextAttempt:2},{extra:true}])assert.throws(()=>assertAllocatedStatePreEffect({...allocation,lastRecovery:{...initialRecovery,...mutation}}),/not-allocated-pre-effect/);
+assert.equal(assertAllocatedStatePreEffect({...allocation,status:'recoverable'}),true);
+for(const bad of [{phase:'report_built'},{status:'unknown'},{reviewItems:[{stage:'download'}]},{attempted:true},{unknown:true},{sendAttempts:0},{reason:'unclassified-failure'},{recovery:{stage:'browser_collect'}}])assert.throws(()=>assertAllocatedStatePreEffect({...allocation,...bad}),/not-allocated-pre-effect/);
+await assert.rejects(currentRunIsAllocatedPreEffect({}),/production-config-mismatch/);
+const maintenanceTestDir=await fs.mkdtemp(path.join(os.tmpdir(),'negative-maintenance-'));
+try{
+  const completeState=path.join(maintenanceTestDir,'complete.json');
+  const incompleteState=path.join(maintenanceTestDir,'incomplete.json');
+  await fs.writeFile(completeState,JSON.stringify({phase:'complete',status:'complete'}));
+  await fs.writeFile(incompleteState,JSON.stringify({phase:'report_built',status:'recoverable'}));
+  await currentRunIsComplete({state:completeState});
+  await assert.rejects(currentRunIsComplete({state:incompleteState}),/current-business-run-not-complete/);
+  const absentConfig={config:path.join(maintenanceTestDir,'config.json'),state:path.join(maintenanceTestDir,'state.json'),browserReceipt:path.join(maintenanceTestDir,'browser.json'),raw:path.join(maintenanceTestDir,'raw.xlsx'),report:path.join(maintenanceTestDir,'report.xlsx'),sendReceipt:path.join(maintenanceTestDir,'send.json'),sendMarker:'marker.json'};
+  await currentRunIsAbsentPreEffect(absentConfig);
+  await fs.writeFile(absentConfig.report,'existing artifact');
+  await assert.rejects(currentRunIsAbsentPreEffect(absentConfig),/current-business-run-has-effect-artifact/);
+  await fs.rm(absentConfig.report);
+  const raw=path.join(maintenanceTestDir,'download.xlsx'),bytes=Buffer.from('download');
+  await fs.writeFile(raw,bytes);
+  const downloadConfig={...absentConfig,state:path.join(maintenanceTestDir,'download-state.json'),browserReceipt:path.join(maintenanceTestDir,'download-browser.json'),raw,sendMarker:`test-${process.pid}.json`};
+  await fs.writeFile(downloadConfig.state,JSON.stringify({phase:'created',status:'recoverable'}));
+  await fs.writeFile(downloadConfig.browserReceipt,JSON.stringify({downloadClicks:1,download:{path:raw,size:bytes.length,sha256:(await import('node:crypto')).createHash('sha256').update(bytes).digest('hex')}}));
+  await currentRunHasReusableDownload(downloadConfig);
+}finally{await fs.rm(maintenanceTestDir,{recursive:true,force:true});}
+console.log(JSON.stringify({ok:true,tests:33}));

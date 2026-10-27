@@ -1,0 +1,20 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import { FileBlob, SpreadsheetFile } from '@oai/artifact-tool';
+import { buildFullAppealReport } from './full_appeal_report_builder.mjs';
+
+const root = process.argv[2];
+if (!root) throw Error('test-output-root-required');
+const outputDir = path.join(root, 'out');
+const result = await buildFullAppealReport({ channelLabel: '美团外卖', contextLabel: '美团', platformValue: '1', businessDate: '2026-09-23', recordDir: path.join(root, 'records'), outputDir, outputPath: path.join(outputDir, '美团外卖差评申诉汇总-2026-09-23.xlsx'), previewPath: path.join(outputDir, '美团外卖差评申诉汇总-2026-09-23.png') }, { collect: async () => ({ businessDate: '2026-09-23', channelLabel: '美团外卖', total: 2, counts: { 全部: 2, 申诉成功: 5, 申诉失败: 1, 申诉中: 3, 未申诉: 4 }, rows: [{ key: 'a', store: '门店A', date: '2026-09-23', score: 1, comment: '评价A', status: '全部', auto: '', appealMethod: 'AI申诉', appealTime: '申诉时间:2026-09-24 09:00:00', appealContent: '内容A' }, { key: 'b', store: '门店B', date: '2026-09-23', score: 2, comment: '评价B', status: '全部', auto: '', appealMethod: '商家申诉', appealTime: '申诉时间:2026-09-24 09:01:00', appealContent: '内容B' }] }) });
+assert.equal(result.ok, true); assert.equal(result.recordCount, 2); assert.equal((await fs.stat(result.outputPath)).size > 0, true); assert.equal((await fs.stat(result.previewPath)).size > 0, true);
+const workbook = await SpreadsheetFile.importXlsx(await FileBlob.load(result.outputPath));
+const summary = (await workbook.inspect({ kind: 'table', range: '申诉汇总!A5:J5', include: 'values', tableMaxRows: 1, tableMaxCols: 10 })).ndjson;
+assert.match(summary, /全部/); assert.match(summary, /申诉成功/); assert.match(summary, /申诉失败/); assert.match(summary, /申诉中/); assert.match(summary, /未申诉/); assert.match(summary, /5/); assert.match(summary, /3/); assert.match(summary, /4/);
+const conflictRecords = path.join(root, 'conflict-records');
+const conflictOut = path.join(root, 'conflict-out');
+await fs.mkdir(conflictRecords, { recursive: true });
+await fs.writeFile(path.join(conflictRecords, 'submitted.md'), '- 记录键：submitted-key\n- 记录状态：verified_submitted\n', 'utf8');
+await assert.rejects(buildFullAppealReport({ channelLabel: '淘宝闪购', contextLabel: '淘宝', platformValue: '2', businessDate: '2026-09-23', recordDir: conflictRecords, outputDir: conflictOut, outputPath: path.join(conflictOut, 'must-not-create.xlsx'), previewPath: path.join(conflictOut, 'must-not-create.png') }, { collect: async () => ({ businessDate: '2026-09-23', channelLabel: '淘宝闪购', total: 0, counts: { 全部: 0, 申诉成功: 0, 申诉失败: 0, 申诉中: 0, 未申诉: 0 }, rows: [] }) }), /missing-verified-submissions:1/);
+console.log(JSON.stringify({ ok: true, tests: 13, recordCount: result.recordCount, runtimeModelDecisions: 0 }));

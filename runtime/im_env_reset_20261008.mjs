@@ -16,6 +16,23 @@ function isMeituanIM(value) {
   try { const u = new URL(value); return u.hostname === 'waimaie.meituan.com' && u.pathname.startsWith('/imworkbench/'); }
   catch { return false; }
 }
+async function inspectReception(page) {
+  const text = await page.evaluate(() => document.body.innerText || '').catch(() => '');
+  const norm = text.replace(/\s+/g, '');
+  const hit = MARKERS.find(m => norm.includes(m));
+  const blocked = await page.evaluate(() => {
+    const visible = e => !!e.getClientRects().length && getComputedStyle(e).visibility !== 'hidden' && getComputedStyle(e).display !== 'none';
+    return [...document.querySelectorAll('.riskControlModal, .geetest_panel, [role="dialog"]')]
+      .some(e => visible(e) && (e.matches('.riskControlModal, .geetest_panel') || /验证码|安全验证|登录失效|重新登录/.test(e.innerText || '')));
+  }).catch(() => true);
+  const url = page.url();
+  let reception = false;
+  try { reception = new URL(url).hash === '#/im/page/workbench/reception'; } catch {}
+  return {ok: Boolean(hit && !blocked && reception && isMeituanIM(url)
+      && !/noPermission|\/login/i.test(url)
+      && !/noPermission|登录已失效|登录失效|请重新登录/i.test(norm)),
+    url, textLength: text.length, hit: hit || null, blocked};
+}
 if (typeof process !== 'undefined' && process.argv.includes('--selftest')) {
   const assert = nativeRequire('node:assert/strict');
   assert.equal(isMeituanIM(TARGET), true);
@@ -45,29 +62,16 @@ try {
 
 // ② 等渲染并验证业务特征（SPA 需要 bootstrap 时间）
 await wait(10000);
-let text = '';
-try {
-  text = await page.evaluate(() => document.body.innerText || '');
-} catch (e) {
-  console.log('READ_FAIL=' + e.message);
-}
-const norm = text.replace(/\s+/g, '');
-const hit = MARKERS.find((m) => norm.includes(m));
-const blocked = await page.evaluate(() => {
-  const visible = e => !!e.getClientRects().length && getComputedStyle(e).visibility !== 'hidden' && getComputedStyle(e).display !== 'none';
-  return [...document.querySelectorAll('.riskControlModal, .geetest_panel, [role="dialog"]')]
-    .some(e => visible(e) && (e.matches('.riskControlModal, .geetest_panel') || /验证码|安全验证|登录失效|重新登录/.test(e.innerText || '')))
-    || /登录已失效|登录失效|请重新登录/.test(document.body.innerText || '');
-}).catch(() => true);
+const initialHealth = await inspectReception(page);
 console.log('URL_NOW=' + page.url());
-console.log('TEXT_LEN=' + text.length);
-console.log('HIT=' + (hit || '（无）'));
+console.log('TEXT_LEN=' + initialHealth.textLength);
+console.log('HIT=' + (initialHealth.hit || '（无）'));
 
-if (!gotoOk || !hit || blocked || !isMeituanIM(page.url()) || /noPermission|\/login/i.test(page.url())) {
+if (!gotoOk || !initialHealth.ok) {
   // ③ 失败保护：新页没起来就保留旧页，绝不留 0 页面
   console.log('RESULT=RESET_FAIL（新页未渲染业务特征，旧页保留不动，需人工排查）');
   try { await b.close(); } catch {}
-  return {ok:false, reason:'new-im-not-healthy', oldPagesPreserved:true, closed:0};
+  return {ok:false, reason:'new-im-not-healthy', oldPagesPreserved:true, closed:0, initialHealth};
 }
 console.log('RESET_NEWPAGE_OK');
 
@@ -91,11 +95,13 @@ console.log('CLOSED_COUNT=' + closed);
 // ⑤ 去重核验：应恰好 1 个 imworkbench 页且在渲染
 await wait(2000);
 const imPages = ctx.pages().filter((p) => isMeituanIM(p.url()));
+const finalHealth = await inspectReception(page);
+const ok = imPages.length === 1 && imPages[0] === page && finalHealth.ok;
 console.log('AFTER_IMPAGES=' + imPages.length + ' ' + JSON.stringify(imPages.map((p) => p.url())));
-console.log('RESULT=' + (imPages.length === 1 ? 'RESET_OK' : 'RESET_WARN（imworkbench 页数=' + imPages.length + '，预期 1）'));
+console.log('RESULT=' + (ok ? 'RESET_OK' : 'RESET_WARN（最终IM页数或正文健康检查未通过）'));
 
 try { await b.close(); } catch {}
-return {ok:imPages.length === 1, closed, remainingIMPages:imPages.length};
+return {ok, closed, remainingIMPages:imPages.length, initialHealth, finalHealth};
 }
 
 if (typeof process !== 'undefined' && fileURLToPath(import.meta.url) === path.resolve(process.argv[1] || '')) {

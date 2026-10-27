@@ -1,0 +1,149 @@
+{
+  "kind": "precheck-only",
+  "at": "2026-10-27T20:58:51.739166+08:00",
+  "maintenance2200Completed": false,
+  "browserMutations": 0,
+  "sourceEvidence": "runtime/state/evening-business-precheck-20261027-2050.json",
+  "posts": [
+    {
+      "port": 9232,
+      "leaseOwnerPid": 73302,
+      "originalPhysicalLeaseHeld": true,
+      "browserMutations": 0,
+      "rows": [
+        {
+          "domain": "data.guoshuyufen.com",
+          "path": "/",
+          "hash": "#/businessData/realTimeData",
+          "bodyLength": 142172,
+          "businessMarkers": [
+            "店铺",
+            "门店",
+            "美团",
+            "淘宝"
+          ],
+          "login": false,
+          "verification": false,
+          "noPermission": false,
+          "visibleRiskModal": 0
+        },
+        {
+          "domain": "data.guoshuyufen.com",
+          "path": "/",
+          "hash": "#/negativeAnalyse",
+          "bodyLength": 9616,
+          "businessMarkers": [
+            "店铺",
+            "消息",
+            "客服",
+            "门店",
+            "美团",
+            "淘宝"
+          ],
+          "login": false,
+          "verification": false,
+          "noPermission": false,
+          "visibleRiskModal": 0
+        }
+      ]
+    },
+    {
+      "port": 9230,
+      "leaseOwnerPid": 73304,
+      "originalPhysicalLeaseHeld": true,
+      "browserMutations": 0,
+      "rows": [
+        {
+          "domain": "melody.shop.ele.me",
+          "path": "/app/chain/95708808/stats__center",
+          "hash": "#app.chainshop.stats.center",
+          "bodyLength": 168,
+          "businessMarkers": [
+            "店铺",
+            "门店",
+            "首页"
+          ],
+          "login": false,
+          "verification": false,
+          "noPermission": false,
+          "visibleRiskModal": 0
+        },
+        {
+          "domain": "melody-stats-next.ele.me",
+          "bodyLength": 945,
+          "businessMarkers": [
+            "收入"
+          ],
+          "login": false,
+          "verification": false,
+          "noPermission": false
+        }
+      ]
+    },
+    {
+      "port": 9231,
+      "leaseOwnerPid": 73306,
+      "originalPhysicalLeaseHeld": true,
+      "browserMutations": 0,
+      "rows": [
+        {
+          "domain": "open.shop.ele.me",
+          "path": "/manager/base/home",
+          "hash": "",
+          "bodyLength": 1673,
+          "businessMarkers": [
+            "店铺",
+            "门店",
+            "经营",
+            "代运营",
+            "首页",
+            "淘宝"
+          ],
+          "login": false,
+          "verification": false,
+          "noPermission": false,
+          "visibleRiskModal": 0
+        }
+      ]
+    },
+    {
+      "port": 9233,
+      "leaseOwnerPid": 73308,
+      "originalPhysicalLeaseHeld": true,
+      "browserMutations": 0,
+      "rows": [
+        {
+          "domain": "waimaie.meituan.com",
+          "path": "/imworkbench/home",
+          "hash": "#/im/page/workbench/reception",
+          "bodyLength": 9704,
+          "businessMarkers": [
+            "店铺",
+            "接待",
+            "会话",
+            "消息",
+            "客服",
+            "门店",
+            "美团"
+          ],
+          "login": false,
+          "verification": false,
+          "noPermission": false,
+          "visibleRiskModal": 0
+        }
+      ]
+    }
+  ],
+  "resetOfflineTests": {
+    "scenarios": 12,
+    "originalDomainSelftests": 5,
+    "realBrowserConnections": 0
+  },
+  "pending": [
+    "22:00重新检查launchctl/实时PID/心跳/在途与真实锁",
+    "四岗在原双层租约下正常业务加载与内容复检",
+    "9233一轮一次先建健康完整reception再关精确旧美团IM页",
+    "写真实2200收据，未完成不伪ok"
+  ],
+  "knownAuxiliaryCondition": "9231商家子页上次为登录页，服务商主体健康；22点需单独复核，不把主体误判掉线，不自动登录"
+}

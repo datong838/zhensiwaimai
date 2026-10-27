@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import {nextPage} from './all_feedback_collector.mjs';
+import {stableRecordKey} from './jinsha.mjs';
+const old={store:'A',date:'2026-10-24',orderNo:'order1',category:'service'},fresh={...old,orderNo:'order2'};
+const key=stableRecordKey({platform:'meituan',...old});
+let reads=0,clicks=0;
+const cdp={eval:async()=>{clicks++;return true;}};
+const result=await nextPage(cdp,{platformKey:'meituan'},1,key,{pause:async()=>{},read:async()=>{reads++;return {pageActive:2,cards:[reads<3?old:fresh]};}});
+assert.equal(reads,3);assert.equal(clicks,1);assert.notEqual(result.firstKey,key);
+await assert.rejects(()=>nextPage(cdp,{platformKey:'meituan'},1,key,{pause:async()=>{},read:async()=>({pageActive:2,cards:[old]})}),/readback-mismatch/);
+console.log(JSON.stringify({ok:true,tests:2,sendAttempts:0}));

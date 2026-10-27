@@ -1,0 +1,22 @@
+import assert from 'node:assert/strict';
+import {enterShopFromResult,settleSelectedShopRoute,shopSearchResultsSettled} from '../scripts/decoration_collector.mjs';
+let count=1,entered=0;
+const li={locator(selector){assert.ok(selector.startsWith('span'));return {count:async()=>count};},click:async()=>{entered++;}};
+await enterShopFromResult(li);assert.equal(entered,1);
+for(count of [0,2]) {await assert.rejects(()=>enterShopFromResult(li),/not-unique/);assert.equal(entered,1);}
+let url='https://melody.shop.ele.me/app/chain/1/stats', clicks=0, menus=1;
+const page={url:()=>url,getByText(text,opts){assert.equal(text,'商家首页');assert.equal(opts.exact,true);return {count:async()=>menus,click:async()=>{clicks++;url='https://melody.shop.ele.me/app/shop/123/dashboard';}};},waitForFunction:async(fn,id)=>{assert.equal(id,'123');assert.ok(url.includes('/app/shop/123/'));}};
+await settleSelectedShopRoute(page,'123');assert.equal(clicks,1);
+await settleSelectedShopRoute(page,'123');assert.equal(clicks,1);
+url='https://melody.shop.ele.me/app/shop/456/decorate';menus=2;
+await assert.rejects(()=>settleSelectedShopRoute(page,'123'),/not-unique/);assert.equal(clicks,1);
+await assert.rejects(()=>settleSelectedShopRoute(page,null),/id-missing/);
+let rows=[];
+globalThis.document={querySelectorAll:()=>rows};
+const row=(innerText,visible=true)=>({innerText,getBoundingClientRect:()=>({width:visible?100:0,height:20})});
+rows=[row('全部'),row('目标店营业中')];assert.equal(shopSearchResultsSettled('目标店'),false);
+rows=[row('目标店营业中')];assert.equal(shopSearchResultsSettled('目标店'),true);
+rows=[row('目标店营业中',false)];assert.equal(shopSearchResultsSettled('目标店'),false);
+rows=[row('别家店营业中')];assert.equal(shopSearchResultsSettled('目标店'),false);
+delete globalThis.document;
+console.log(JSON.stringify({ok:true,tests:11,sendAttempts:0}));

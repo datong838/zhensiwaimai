@@ -1,0 +1,775 @@
+{
+ "_readme": [
+  "20 项指标的唯一权威源（single source of truth）。大同每发一条规则，就往 metrics 数组追加一条，",
+  "然后跑 scripts/sync_metrics_catalog.py 把内容同步进台账的『指标字典』sheet（不要手改 xlsx）。",
+  "字段说明：",
+  "  id             M01..M20",
+  "  name           指标名称（对大同汇报用的名字）",
+  "  menu_path      菜单路径（一级 MENU > 二级 MENU），与页面左侧菜单文案完全一致",
+  "  tab            页面内需要停留的 tab / 区块（没有就留 null）",
+  "  route          页面 hash 路由（登录态恢复后实测填写；未取证前写 null，禁止猜）",
+  "  form           指标形态：独立页面 / 页内区块 / 页内卡片",
+  "  shot           截图口径：整页长图 / 区块截图 / 卡片区域 / 视口截图",
+  "  time_range     时间范围口径（★大同 17:39 统一要求：顾客分析页所有模块都选 30 天）",
+  "  sub_indicators 页面上同时呈现的子指标（人看的颗粒度，用于核对截图是否拍全）",
+  "  key_numbers    截图里必须能读到的关键数字/行（采集器用来自检渲染完成，缺一即判未就绪）",
+  "  capture_notes  采集要点（等什么、别点什么、坑在哪）",
+  "  source         规则来源：日期 + 大同原话摘要 + 截图文件名",
+  "  status         已入字典 / 待补"
+ ],
+ "recorded_at": "2026-10-22T01:14:00+08:00",
+ "total_metrics": 15,
+ "global_rules": [
+  "★品牌商系统在 9230（taobao-brand），域名 melody.shop.ele.me",
+  "★★★【2026-10-20 20:30 实测·最高优先级】`#app.shop.customerStats` 的 iframe 有两个作用域：`/single/business-analysis`（单店，6 张卡，有下单热门街区）与 `/chain/business-analysis`（连锁汇总，4 张卡，下单顾客 95,035、门店榜单 1984 行、无热门街区）。只改 hash 的导航浏览器不重载，iframe 会沿用旧作用域 ⇒ **切店/切路由后必须 Page.reload 硬刷新**；出图前必须校验 iframe location 含 `/single/`，否则拒绝出图（exit 9）。contextId 必须按 Page.getFrameTree 的 frameId 绑定（同源有多个 about:blank 上下文，按 origin 取会拿空壳）。",
+  "★★★【2026-10-20 18:00 实测新增·最高优先级】必须先切到**单店**再截：连锁总账号（/app/chain/95708808/）下同一菜单是「连锁汇总」（店均评分 4.1/121 店/明细 112 页），根本没有规则 1 的 5 个 tab，也没有「下单热门街区」。单店 URL 形如 /app/shop/<shopId>/（如 26319），切完必须校验顶部「店名==目标 && 徽标==营业中」",
+  "★路由权威源=`getMenuTree` 接口（shopType=CHAIN|SHOP）：ui-sref=app.shop.comments / app.chainshop.comments；shortPath 即 hash 名",
+  "★页面＝外壳+跨域 iframe：读内容须用 Runtime.executionContextCreated 拿 contextId；截图用主页面 captureScreenshot（iframe 已合成进画面）",
+  "★顾客分析页顶部两个大 tab：『顾客分析』『粉丝分析』——本批 5 项全部停在『顾客分析』",
+  "★大同 2026-10-20 17:39 统一口径：顾客分析页面里所有截图模块的时间选择器都选 30 天（近30日）；示意图里近7日是位置示意不作口径",
+  "★★★【2026-10-20 20:30 修正】单店顾客分析页真·时间控件只有 **5 个 antd select**：顾客分析 / 下单时段 / 下单热门街区 / 顾客画像 / 商圈顾客动态。「下单行为」右上那两个字是**静态标签、默认近30日**；「互动行为」右上也是静态标签、**平台固定近7日、不可切换** ⇒ 该模块只能如实交付 7 日口径，禁止冒充 30 日。切完必须**按元素（data-wb 标记）回读**，不能按同 docY 邻近回读——「下单行为(静态30)」与「下单时段(真控件7)」在同一行，按坐标会读错。",
+  "★截图前统一滚到该模块顶部（sticky 表头会遮住首行）；『商圈顾客动态』『淘宝闪购生意参谋』不入镜",
+  "★★【2026-10-20 18:38 大同拍板·覆盖口径】旧池 486 家 vs 品牌商门店树：精确匹配 19.3%（94/486）、去括号 36.8%（179/486）。`wmPoiId` 在品牌商侧命中 0/30 ⇒ 两套 ID 无交集。口径=搜 ID 搜不到→用店铺名前缀搜→不唯一→用全名匹配搜。搜不到按大同规则备注「闪购品牌商平台搜不到该店铺」→ 直接下一家，不重试不阻塞。",
+  "★★【2026-10-20 20:45 规则7–11】数据中心 › 经营分析是**另一个页面**：外层 `#app.shop.stats.center`（路由 short=`stats__center`），iframe 仍是 melody-stats-next，但 hash 是 `#/single/business-analysis?...&tab=<TAB>`；tab 实测值：overview/flowmeter/goods/service。tab 栏在 **iframe 内**（不是 .ant-tabs-tab），只能按坐标点（1440 宽：总览46 流量310 商品490 服务550，y≈87），点完必须回读 hash 里 tab= 已变。",
+  "★★【服务 tab 例外】规则 11 要求：数据概览选「本周」，营业分析/出餐时效各选「近30日」⇒ 采集器必须支持**分模块设定时间**，不能沿用「整页一律 30 日」的粗暴逻辑。",
+  "★★★【切店搜索降级链】scripts/switch_shop.mjs 逐级：id(wmPoiId) → full(完整店名) → body(去括号主体名) → brand(`·`前第一段品牌词) → brand 截断。每级 sleep(3000) 过搜索去抖。实测「湘霸王·创意湘菜（平凉路店）」前三层全 0 条，退到品牌词「湘霸王」拿到 5 条候选后才命中 ⇒ **品牌词是跨「品类段不同」的唯一出路**。",
+  "★★★【宁可不切，不可错切】判据库 scripts/lib/shop_match.mjs：分店名 `branchKey` = 括号里「以店结尾」的片段（`Espacio（咖啡·西班牙餐厅·通福六区店）` 与 `Espacio(西班牙餐厅·沙拉·咖啡·通福六区店)` 靠它判为同店）。目标有分店名而候选分店名不同 ⇒ branch-conflict **拒绝**（实测拦下 源香山惠南店→九亭店、华三爷七宝店→九亭中心店 两起错切）；候选无分店名而目标有 ⇒ branch-unknown 交人工。错切=A店数据发到B店群，是生产事故。",
+  "✅【2026-10-20 20:02 结案·归因曾错】跨组织切店**不会**踢登录。连切 3 家 acct 各异（300904896/241485501/294161310）全绿，复切昨晚\"肇事\"店 1258934689 仍登录 ⇒ 昨晚是**会话自然到期**（无头跑 66min），不是切店引起。真实约束：放量须每店后置探活，掉登录立即停批报扫码。教训：两个变量同时在场（切店+会话到期）不能凭时间重合归因，必须同条件复现。",
+  "★切换器搜索是**账号级全量**（跨所有运营组织）：搜「孙记稻香世家」返回 11 条，而该组织不在爱鱼爱虾 1992 树内；但「蜜雪冰城」搜 0 条 ⇒ 确有店不在账号内。账号实际横跨 15+ 运营组织，1992 只是其中一个根，**不能当覆盖率分母**。",
+  "★★【切店落点必须显式指定】切店只改 shopId，**hash 会沿用切之前的**：切前停在 chain 首页 ⇒ 切后落到单店首页（iframe=napos-dashboard-pc），按 melody-stats-next 找必然 no ctx。`switch_shop --land <stats__center|customerStats|comments>`；作用域判据按落点分岔（stats 看 /single/，comments 看「非 /chain/」）。",
+  "★★【切店幂等】目标店 == 当前店时跳过点击（否则「店名必须变化」会把自己判 exit 6）。同店连跑多指标必踩。",
+  "★★★【店铺池唯一来源=品牌商运营组织树】2026-10-20 大同拍板废弃旧名单：店铺池只认 9230 切换器弹层里「运营组织」树下状态=营业中的店铺，字段只要 店铺ID+店铺名称。wmPoiId（旧 ID） 与品牌商 shopId 两套 ID 不互通（实测 0/30），混用只会制造永远对不齐的缺口。采集器 `scripts/collect_shop_pool_brand.mjs`。",
+  "★★★【运营组织树采集三坑】① 弹层第 1 列的「顶级单店」`data-value` 直接是 `/ACCOUNT_ROOT:xxx/SHOP:id`，点了等于切店并关闭弹层 ⇒ 只能读不能点；② 弹层在长列表点击后会被误关 ⇒ 每轮开跑前必须 `dropdownOpen()` 兜底重开；③ `mainEval` 表达式是模板字符串，注释里出现反斜杠 n 会被转成真换行 ⇒ 页面 SyntaxError 而 CDP 只回 undefined，极难定位。另：该树无虚拟滚动，展开节点后子节点全渲染（293 家 = 293 个 DOM 行）。",
+  "★★【切换器第 1 列结构】53 项 = 1 个「全部」+ 17 个运营组织(BRANCH) + 35 个顶级单店(SHOP)。实测全账号 1993 家店（营业中 864 / 已下线 870 / 暂停营业 183 / 已打烊 76），与旧 shopTree 快照交叉核对 tree-pool=0，一家不漏。",
+  "★★【台账 6 张表·渲染表禁手改】2026-10-20：说明 / 规则清单 / 店铺池 / 指标字典 / 指标进度 / 当月反馈记录。其中『规则清单』由 `scripts/sync_global_rules.py`、『指标字典』由 `scripts/sync_metrics_catalog.py` 从 metrics_catalog.json 渲染，**手改下次同步必被覆盖**；模板与当月台账两份必须同写（防漂移）。`store_pool_to_ledger.py` 重建后已自动回填这两张表，单独跑 `build_ledger_template.py` 时必须跟跑两个 sync。",
+  "★★★【投递器默认 dry-run + 三态】2026-10-20：`deliver_metric.py` 不带 `--commit` 零网关接触；缺群名／闸门制动／无 `--authorization-ref` 一律 blocked fail-closed，绝不猜群改投；marker 三态 verified（幂等）/unknown（**禁重发**）/blocked（可重试）；同日同店同指标 sha 变了 ⇒ `conflict` exit 4 硬阻断；图 <8KB 判截图失败不发；**只有 verified 才回写台账**。发送一律复用 `WindowsAdapter.send_one`（禁另造发送链路）。离线单测 12 项 `scripts/test_deliver_metric.py`，全程不发消息。",
+  "★★★【排期必须按单店耗时反算，不能按指标数拍脑袋】2026-10-20：单店单指标含「切店降级链+定位模块+渲染截图+发群回读」，按 40/60/90s 三档估，863 家一天需 9.6/14.4/21.6 小时 ⇒ 原「每天全量 1 指标」模型任何一档都跑不完，且占死唯一登录态 9230（掉登录全批停）。放量前必须先定排期方案（S2 组织分批/S3 分批双指标/S4 重点店池 200 家），并在 10 家实测真实单店耗时替换估算值。见 REQUIREMENTS §4.4。"
+ ],
+ "metrics": [
+  {
+   "id": "M01",
+   "name": "顾客评价（综合评分）",
+   "menu_path": "顾客管理 > 顾客评价",
+   "tab": "评价详情",
+   "route": "https://melody.shop.ele.me/app/shop/<shopId>/comments#app.shop.comments",
+   "route_note": "权威源 getMenuTree: ui-sref=app.shop.comments；实测 2026-10-20 18:00 单店 shopId=26319 五 tab 齐全",
+   "form": "独立页面",
+   "shot": "区块截图（评分区至评分明细，排除评价日期及评价正文）",
+   "time_range": "页面自带，无需切（右上显示『更新于 10.20 04:56』，数据每日更新）",
+   "sub_indicators": [
+    "最终评分（4.8）＋领先同城同行百分比（领先93%）＋比昨日持平/涨跌",
+    "商品质量分（4.9，权重占比80%）",
+    "服务体验分（4.5，权重占比20%）",
+    "口味满意度（占比30%）｜指标得分／近60天好评率98.1%",
+    "包装满意度（占比10%）｜近60天好评率98%",
+    "复购率（占比20%）｜近30天复购率34.4%",
+    "食品安全负反馈（占比20%）｜近30天食安事件数0",
+    "消息回复率（占比10%）｜近30天5分钟回复率100%",
+    "服务负反馈（占比10%）｜近30天服务负反馈事件数1"
+   ],
+   "key_numbers": [
+    "最终评分",
+    "商品质量分",
+    "服务体验分"
+   ],
+   "capture_notes": [
+    "★★必须先切到单店（/app/shop/<shopId>/），连锁视角（/app/chain/…）此页只有『顾客评价/评价共享』两个 tab，内容为连锁汇总（店均评分/121家门店/明细112页），与规则 1 口径完全不同。",
+    "★首次进页面可能有『评价共享』引导弹窗遮挡，先点『知道了』关掉再截。",
+    "页面有 5 个 tab：评价详情 / 评价治理 / 评价有礼 / 评价置顶(3/3) / 回复模板 —— 本指标只截『评价详情』，不要误点其它 tab。",
+    "必须等『综合评分』区与『评分明细』6 行全部渲染再截图；判据=key_numbers 三个数字都在，且 6 行明细行数=6。",
+    "评分明细默认展开（右下角显示『收起 ^』即已展开）；若为收起态先点开再截。",
+    "整页高度超过一屏 ⇒ 用 CDP captureBeyondViewport 整页长图，不用视口截图（否则食安/回复率/服务负反馈会被截掉）。",
+    "右上『评分分析 / 评分规则 / 差评实时可见权益 已解锁』是入口链接，不要点。"
+   ],
+   "source": "2026-10-20 17:22 大同规则 1：「该店铺的 顾客管理 菜单组 的 顾客评价 菜单页」＋截图 clipboard-2026-10-20T09-22-38-198Z-bbc0d41d.png",
+   "status": "已入字典",
+   "open_questions": [
+    "Q-A：本项按『评价详情 tab 整页 1 张图』记录。若你要的是 5 个 tab 各一张（=5 张），请示下，我改口径。",
+    "Q-B：『评价置顶(3/3)』括号里是数量，属于动态值，是否要一并截图？默认不截。"
+   ],
+   "route_shop": "https://melody.shop.ele.me/app/shop/<shopId>/comments#app.shop.comments",
+   "route_chain": "https://melody.shop.ele.me/app/chain/<chainId>/comments#app.chainshop.comments",
+   "single_shop_only": true
+  },
+  {
+   "id": "M02",
+   "name": "顾客分析（顾客概览 + 下单顾客趋势）",
+   "menu_path": "顾客管理 > 顾客分析",
+   "tab": "顾客分析（顶部大 tab）｜顾客范围=全部顾客",
+   "route": "https://melody.shop.ele.me/app/shop/<shopId>/customerStats#app.shop.customerStats",
+   "route_note": "权威源 getMenuTree: ui-sref=app.shop.customerStats；业务 iframe=melody-stats-next.ele.me/new/#/",
+   "form": "页内区块（两块合并成一张图）",
+   "shot": "区块截图（顾客概览 5 卡 + 下单顾客趋势折线图，两块一起截，不拆开）",
+   "time_range": "近30日（右上时间选择器；示意图为近7日，非口径）",
+   "sub_indicators": [
+    "下单顾客 426（比商圈同行 +188）",
+    "复购率 22.1%（比商圈同行 +5.7%）",
+    "复购人数 94（比商圈同行 +55）",
+    "下单新客 151（占比 35.4%，比商圈同行 +40）",
+    "下单老客 275（占比 64.6%，比商圈同行 +144）",
+    "下单顾客趋势：本店（蓝线）vs 商圈同行均值（橙线）日折线 + X 轴日期（10-13…10-19）"
+   ],
+   "key_numbers": [
+    "下单顾客",
+    "复购率",
+    "复购人数",
+    "下单新客",
+    "下单老客"
+   ],
+   "capture_notes": [
+    "顶部大 tab 必须停在『顾客分析』，不能是『粉丝分析』。",
+    "顾客范围默认『全部顾客』（橙色选中态）；不要切『新客』『老客』（切了数据就不是全量口径）。",
+    "右上『商圈同行均值 ▾』保持默认，不切换对比维度。",
+    "右上下拉时间切『近30日』。",
+    "『顾客分析』与『下单顾客趋势』两块必须在同一张图里（大同原话：2 部分一起截图），先滚到区块顶部再截。",
+    "趋势图是 canvas：判就绪=折线已画出且 X 轴日期标签可见；空白/只有坐标轴=未就绪，等。"
+   ],
+   "source": "2026-10-20 17:39 大同规则 2：「顾客分析和下单顾客趋势 2部分一起截图」＋截图 …09-39-29-908Z-ec72a079.png",
+   "status": "已入字典",
+   "route_shop": "https://melody.shop.ele.me/app/shop/<shopId>/customerStats#app.shop.customerStats",
+   "route_chain": "https://melody.shop.ele.me/app/chain/<chainId>/customerStats#app.chainshop.customerStats",
+   "single_shop_only": true,
+   "module_anchor": {
+    "scope": "single-only（/single/business-analysis）",
+    "card_class": "customer_analysis",
+    "start_title": null,
+    "end_title": null,
+    "column": "full",
+    "pad_top": 8,
+    "capture_mode": "module-region（按卡片/标题文档坐标裁剪，禁止整页截图）"
+   },
+   "time_control": "antd select（select_date）→ 切 近30日"
+  },
+  {
+   "id": "M03",
+   "name": "顾客分布 · 下单行为（下单频次）",
+   "menu_path": "顾客管理 > 顾客分析 > 顾客分布 > 下单行为",
+   "tab": "下单行为 → 子 tab「下单频次」",
+   "route": "https://melody.shop.ele.me/app/shop/<shopId>/customerStats#app.shop.customerStats",
+   "form": "页内卡片",
+   "shot": "卡片区域截图（含『下单行为』tab 行 + 图例 + 表头 + 3 行数据）",
+   "time_range": "近30日（截图已是近30日，仍需确认选择器为 30 天）",
+   "sub_indicators": [
+    "下单频次 >3单：本店 9.9% / 118 人；商圈同行均值 6.4% / 43 人",
+    "下单频次 2–3单：本店 24.2% / 289 人；商圈同行均值 19.2% / 129 人",
+    "下单频次 1单：本店 65.9% / 785 人；商圈同行均值 74.1% / 499 人"
+   ],
+   "key_numbers": [
+    ">3单",
+    "2–3单",
+    "1单"
+   ],
+   "capture_notes": [
+    "『下单行为』是一个 tab，其下还有三个子 tab：下单频次 / 下单间隔 / 单均实付 —— **本项只截默认的『下单频次』**（Q-C 待确认另两个要不要）。",
+    "图例『本店（蓝）/ 商圈同行均值（橙）』必须在图内，它决定读者能否看懂双条对比。",
+    "三行数据必须齐全：>3单、2–3单、1单；缺行=未渲染完，等。",
+    "右侧时间选择器确认为近30日。",
+    "整卡高度超过一屏时，宁可缩小视口/整块长图，也不要截断第三行。"
+   ],
+   "source": "2026-10-20 17:39 大同规则 3：「顾客分析 页面的 顾客分布 的 下单行为 截图」＋截图 …09-39-29-910Z-8ce964d7.png",
+   "status": "已入字典",
+   "open_questions": [
+    "Q-C：下单行为 下还有『下单间隔』『单均实付』两个子 tab，是否也要各截一张（会变成 +2 张/店）？默认只截『下单频次』。"
+   ],
+   "route_note": "权威源 getMenuTree: ui-sref=app.shop.customerStats；业务 iframe=melody-stats-next.ele.me/new/#/",
+   "route_shop": "https://melody.shop.ele.me/app/shop/<shopId>/customerStats#app.shop.customerStats",
+   "route_chain": "https://melody.shop.ele.me/app/chain/<chainId>/customerStats#app.chainshop.customerStats",
+   "single_shop_only": true,
+   "module_anchor": {
+    "scope": "single-only（/single/business-analysis）",
+    "card_class": "customer_distribution",
+    "start_title": "下单行为",
+    "end_title": "下单热门街区",
+    "column": "left",
+    "pad_top": 20,
+    "capture_mode": "module-region（按卡片/标题文档坐标裁剪，禁止整页截图）"
+   },
+   "time_control": "静态标签，默认近30日，不可切"
+  },
+  {
+   "id": "M04",
+   "name": "顾客分布 · 下单时段",
+   "menu_path": "顾客管理 > 顾客分析 > 顾客分布 > 下单时段",
+   "tab": null,
+   "route": "https://melody.shop.ele.me/app/shop/<shopId>/customerStats#app.shop.customerStats",
+   "form": "页内卡片",
+   "shot": "卡片整块截图（标题 + 图例 + 表头 + 5 行时段）",
+   "time_range": "近30日（示意图为近7日，非口径）",
+   "sub_indicators": [
+    "早餐 04:00–10:00：0.5% / 2 人（商圈 1.7% / 4）",
+    "午餐 10:00–14:00：65.5% / 279 人（商圈 52.5% / 125）",
+    "下午茶 14:00–17:00：15.0% / 64 人（商圈 12.6% / 30）",
+    "晚餐 17:00–20:00：27.0% / 115 人（商圈 28.6% / 68）",
+    "夜宵 20:00–04:00：1.6% / 7 人（商圈 12.2% / 29）"
+   ],
+   "key_numbers": [
+    "早餐",
+    "午餐",
+    "下午茶",
+    "晚餐",
+    "夜宵"
+   ],
+   "capture_notes": [
+    "5 个时段行必须全部在框内（早餐/午餐/下午茶/晚餐/夜宵），缺一行即未渲染完。",
+    "时间选择器切『近30日』（示意图是近7日）。",
+    "图例『本店/商圈同行均值』必须在图内。",
+    "『下单时段』没有子 tab，不要误点上面的『下单行为』。"
+   ],
+   "source": "2026-10-20 17:39 大同规则 4：「顾客分析 页面的 顾客分布 的 下单时段截图」＋截图 …09-39-29-910Z-777f54c4.png",
+   "status": "已入字典",
+   "route_note": "权威源 getMenuTree: ui-sref=app.shop.customerStats；业务 iframe=melody-stats-next.ele.me/new/#/",
+   "route_shop": "https://melody.shop.ele.me/app/shop/<shopId>/customerStats#app.shop.customerStats",
+   "route_chain": "https://melody.shop.ele.me/app/chain/<chainId>/customerStats#app.chainshop.customerStats",
+   "single_shop_only": true,
+   "module_anchor": {
+    "scope": "single-only（/single/business-analysis）",
+    "card_class": "customer_distribution",
+    "start_title": "下单时段",
+    "end_title": "下单热门街区",
+    "column": "right",
+    "pad_top": 20,
+    "capture_mode": "module-region（按卡片/标题文档坐标裁剪，禁止整页截图）"
+   },
+   "time_control": "antd select → 切 近30日"
+  },
+  {
+   "id": "M05",
+   "name": "下单热门街区（热门地标 TOP10）",
+   "menu_path": "顾客管理 > 顾客分析 > 下单热门街区",
+   "tab": null,
+   "route": "https://melody.shop.ele.me/app/shop/<shopId>/customerStats#app.shop.customerStats",
+   "form": "页内区块（左榜 + 右地图，整块一张图）",
+   "shot": "区块截图（左 TOP10 列表 + 右地图带 1–10 序号 pin，两块一起截）",
+   "time_range": "近30日（示意图为近7日，非口径）",
+   "sub_indicators": [
+    "热门地标 TOP10：漕河泾开发区赵巷园区 56／金葫芦新村 55／百联奥特莱斯广场(上海·青浦) 40／简合国际家居 14／珠江国际中心悦公馆 11／网易上海国际文创科技园 9／徐泾北城瑞和锦庭 9／徐泾北城陆家角馨苑 9／金地虹桥峯汇 9／国贸虹桥璟上 6",
+    "每行附商圈同行均值（橙条 + 数字）",
+    "右侧地图：同序号 pin 1–10"
+   ],
+   "key_numbers": [
+    "热门地标TOP10",
+    "下单人数"
+   ],
+   "capture_notes": [
+    "必须等地图瓦片加载完（出现街区路名/绿地色块）；灰底空白=未就绪，等到有瓦片再截。",
+    "hover 气泡（如『网易上海国际文创科技园 排名6 下单人数9 商圈同行均值12』）是鼠标悬停产物，**不追**，截静止态即可。",
+    "TOP10 列表固定 10 行，缺行=未渲染完；列表区滚到底也要保证 10 行都在一张图里。",
+    "地图右下角 copyright（高德地图 © 2026 AutoNavi）会入图，属正常，不要裁掉。",
+    "时间选择器切『近30日』（在区块右上）。"
+   ],
+   "source": "2026-10-20 17:39 大同规则 5：「顾客分析页面的 热门街区」＋截图 …09-39-29-910Z-60378659.png",
+   "status": "已入字典",
+   "route_note": "权威源 getMenuTree: ui-sref=app.shop.customerStats；业务 iframe=melody-stats-next.ele.me/new/#/",
+   "route_shop": "https://melody.shop.ele.me/app/shop/<shopId>/customerStats#app.shop.customerStats",
+   "route_chain": "https://melody.shop.ele.me/app/chain/<chainId>/customerStats#app.chainshop.customerStats",
+   "single_shop_only": true,
+   "module_anchor": {
+    "scope": "single-only（/single/business-analysis）",
+    "card_class": "customer_distribution",
+    "start_title": "下单热门街区",
+    "end_title": null,
+    "column": "full",
+    "pad_top": 20,
+    "capture_mode": "module-region（按卡片/标题文档坐标裁剪，禁止整页截图）"
+   },
+   "note": "★仅单店视角存在；连锁视角无此模块（2026-10-20 18:00 实测确认）。原记录名『热门街区』，页面正式标题为『下单热门街区』",
+   "time_control": "antd select（filter）→ 切 近30日"
+  },
+  {
+   "id": "M06",
+   "name": "顾客特征（互动行为 + 顾客画像）",
+   "menu_path": "顾客管理 > 顾客分析 > 顾客特征",
+   "tab": "顾客画像 → 子 tab「性别占比」（默认）",
+   "route": "https://melody.shop.ele.me/app/shop/<shopId>/customerStats#app.shop.customerStats",
+   "form": "页内区块（左右两卡一起截）",
+   "shot": "区块截图（左『互动行为』6 项 + 右『顾客画像』环形图，同一屏一张图）",
+   "time_range": "左互动行为为平台固定近7日（静态不可切）；右顾客画像近30日；输出必须分别标注",
+   "sub_indicators": [
+    "互动行为：顾客评分（截止昨日）4.9（比前日 持平）",
+    "互动行为：评价顾客 8（比前7日 +5）",
+    "互动行为：未评价顾客 451（占下单人数 98.5%）",
+    "互动行为：差评顾客 0（占下单人数 0.0%）",
+    "互动行为：收藏顾客（截止昨日）4,243（比上周 +51）",
+    "互动行为：下单未收藏顾客 412（占下单人数 90.0%）",
+    "顾客画像：会员占比 / 性别占比 / 年龄占比 / 地点构成 四个 tab，本项停在『性别占比』",
+    "性别占比：男性 748（63.0%，比商圈同行 +5.1%）、女性 444（37.0%，-5.1%）、未知性别 0（0.0%，持平）"
+   ],
+   "key_numbers": [
+    "顾客评分",
+    "收藏顾客",
+    "性别占比"
+   ],
+   "capture_notes": [
+    "左卡『互动行为』右上时间切『近30日』；右卡『顾客画像』右上时间切『近30日』——**两张卡的时间选择器是分开的，必须各切一次**。",
+    "顾客画像停在默认『性别占比』，不要切会员占比/年龄占比/地点构成（Q-D 待确认是否另截）。",
+    "环形图判就绪：圆环已着色且图例『男性/女性/未知性别』三项都在；空环=未渲染。",
+    "左右两卡必须在同一张图里（同一屏宽）。",
+    "『顾客评分（截止昨日）』『收藏顾客（截止昨日）』自带截止日说明，截图保留原标题，不要裁。"
+   ],
+   "source": "2026-10-20 17:39 大同规则 6：「顾客特征」＋截图 …09-39-29-911Z-c93950e2.png",
+   "status": "已入字典",
+   "open_questions": [
+    "Q-D：顾客画像 另有『会员占比』『年龄占比』『地点构成』三个 tab，是否也要各截一张？默认只截『性别占比』。"
+   ],
+   "route_note": "权威源 getMenuTree: ui-sref=app.shop.customerStats；业务 iframe=melody-stats-next.ele.me/new/#/",
+   "route_shop": "https://melody.shop.ele.me/app/shop/<shopId>/customerStats#app.shop.customerStats",
+   "route_chain": "https://melody.shop.ele.me/app/chain/<chainId>/customerStats#app.chainshop.customerStats",
+   "single_shop_only": true,
+   "module_anchor": {
+    "scope": "single-only（/single/business-analysis）",
+    "card_class": "customer_feature",
+    "start_title": null,
+    "end_title": "商圈顾客动态",
+    "column": "full",
+    "pad_top": 8,
+    "capture_mode": "module-region（按卡片/标题文档坐标裁剪，禁止整页截图）"
+   },
+   "time_control": "互动行为=静态固定近7日（不可切）；顾客画像=antd select（time_select）→ 切 近30日"
+  },
+  {
+   "id": "M07",
+   "name": "历史数据概览",
+   "menu_path": "数据中心 > 经营分析 > 总览",
+   "tab": "总览（tab=overview）",
+   "route": "https://melody.shop.ele.me/app/shop/<shopId>/stats__center#app.shop.stats.center",
+   "route_note": "权威源 getMenuTree: sref=app.shop.stats.center / short=stats__center；iframe 与顾客分析共用 melody-stats-next，靠 hash 里的 tab 区分",
+   "form": "一页多模块（总览 tab 内）",
+   "shot": "模块截图（历史数据概览整块）",
+   "time_range": "**近30日**（该模块自带 昨日|近7日|近30日|自定义 单选，默认「昨日 10-19 周一」）",
+   "sub_indicators": [
+    "时间单选：昨日 / 近7日 / 近30日 / 自定义",
+    "已选时间标签（如「已选时间：10-19 周一」）",
+    "对比基准：比上周一（另一处是「比上周二同时段」，属今日实时区）",
+    "订单分析：收入 / 营业额 / 支出 / 有效订单 / 单均实付 / 活动补贴",
+    "流量分析：曝光人数 / 进店转化率 / 下单转化率",
+    "顾客分析：下单老客 等"
+   ],
+   "key_numbers": [
+    "营业额",
+    "有效订单",
+    "单均实付"
+   ],
+   "capture_notes": [
+    "★该模块在「总览」tab；页面还有「今日实时数据」区（比上周二同时段），那是实时口径，不属本指标，不要一起截。",
+    "★时间单选必须切到 **近30日** 并回读「已选时间：…(30日)」文本，不能只看点中态。"
+   ]
+  },
+  {
+   "id": "M08",
+   "name": "流量转化",
+   "menu_path": "数据中心 > 经营分析 > 流量",
+   "tab": "流量（tab=flowmeter）",
+   "route": "https://melody.shop.ele.me/app/shop/<shopId>/stats__center#app.shop.stats.center",
+   "route_note": "tab 值实测为 flowmeter（不是 flow）",
+   "form": "一页多模块（流量 tab 内）",
+   "shot": "模块截图（流量转化整块）",
+   "time_range": "**近30日**（顶部 今日实时|昨日|近7日|近30日|自定义 + 按周|按月）",
+   "sub_indicators": [
+    "曝光人数 / 进店人数 / 下单人数 / 进店转化率 / 下单转化率",
+    "漏斗（曝光→进店→下单）",
+    "店内流量分布（页内 y≈1681，另属一模块）"
+   ],
+   "key_numbers": [
+    "曝光人数",
+    "进店转化率",
+    "下单转化率"
+   ],
+   "capture_notes": [
+    "★★tab 开关在 iframe 内（不是 .ant-tabs-tab），坐标点法：x≈310,y≈87（1440 宽下），点完读 hash 里 tab= 是否变 flowmeter 才算成功。",
+    "★页面另有「资源位」「平台渠道」两个筛选下拉，属分布维度，不要当时间控件切。"
+   ]
+  },
+  {
+   "id": "M09",
+   "name": "自然流量来源",
+   "menu_path": "数据中心 > 经营分析 > 流量",
+   "tab": "流量（tab=flowmeter）",
+   "route": "https://melody.shop.ele.me/app/shop/<shopId>/stats__center#app.shop.stats.center",
+   "route_note": "同 M08 同 tab，属该 tab 下部模块",
+   "form": "一页多模块（流量 tab 内的来源拆分模块）",
+   "shot": "模块截图（自然流量来源整块）",
+   "time_range": "**近30日**（同 M08 的顶部单选，切一次两边共享）",
+   "sub_indicators": [
+    "自然流量来源构成（各来源名称 + 人数/占比）"
+   ],
+   "key_numbers": [
+    "自然流量来源 Top1"
+   ],
+   "capture_notes": [
+    "★★与 M08 同一 tab、同一时间控件：切一次 30 日，两块都生效；但**截图要分两张**（不同日期发不同张）。",
+    "★待补：该模块精确标题在页面实测中未落在我的标题过滤器内（含数字/长文本），需在下一轮用「自然流量」关键字定位并固化锚点。"
+   ]
+  },
+  {
+   "id": "M10",
+   "name": "销售情况",
+   "menu_path": "数据中心 > 经营分析 > 商品",
+   "tab": "商品（tab=goods）",
+   "route": "https://melody.shop.ele.me/app/shop/<shopId>/stats__center#app.shop.stats.center",
+   "route_note": "tab 值实测为 goods",
+   "form": "一页多模块（商品 tab 内）",
+   "shot": "模块截图（销售情况整块）",
+   "time_range": "**近30日**（今日实时|昨日|近7日|近30日|自定义）",
+   "sub_indicators": [
+    "销售额（卡）",
+    "销量（卡）",
+    "商品明细/排行（随 tab 展开）"
+   ],
+   "key_numbers": [
+    "销售额",
+    "销量"
+   ],
+   "capture_notes": [
+    "★商品 tab 页高仅 1409（一屏），模块少；切 30 日后等数字刷新再截。",
+    "★tab 坐标 x≈490,y≈87（1440 宽）。"
+   ]
+  },
+  {
+   "id": "M11",
+   "name": "服务数据（数据概览 + 营业分析 + 出餐时效）",
+   "menu_path": "数据中心 > 经营分析 > 服务",
+   "tab": "服务（tab=service）",
+   "route": "https://melody.shop.ele.me/app/shop/<shopId>/stats__center#app.shop.stats.center",
+   "route_note": "tab 值实测为 service",
+   "form": "一页多模块（服务 tab 内，**三个独立时间口径**）",
+   "shot": "模块截图 ×3（数据概览 / 营业分析 / 出餐时效）",
+   "time_range": "★例外：**数据概览选「本周」**（大同规则 11 明确指定）；**营业分析、出餐时效 各选「近30日」**",
+   "sub_indicators": [
+    "数据概览：订单服务 / 服务异常率 / 出餐上报率",
+    "营业分析：日均营业时长 / 日均高峰营业时长",
+    "出餐时效：平均出餐时长 / 出餐超时预定单 / 出餐超时即时单 / 出餐超时率",
+    "（同 tab 另有 纠纷单分析 / 出餐上报 / 取消单 等，本指标不截；接单分析 / 退单分析 / 评价分析 已单独登记为 M12–M14）"
+   ],
+   "key_numbers": [
+    "服务异常率",
+    "日均营业时长",
+    "平均出餐时长"
+   ],
+   "capture_notes": [
+    "★★★这是全套 20 项里**唯一**与「全部近30日」冲突的指标：数据概览必须「本周」。不要盲目全切 30 日。",
+    "★★三个模块各有独立时间控件（本周|近7日|近30日|自定义），必须分别设置并分别回读。",
+    "★tab 坐标 x≈550,y≈87（1440 宽）。"
+   ]
+  },
+  {
+   "id": "M12",
+   "name": "接单分析（取消单 + 商责取消）",
+   "menu_path": "数据中心 > 经营分析 > 服务",
+   "tab": "服务（tab=service）",
+   "route": "https://melody.shop.ele.me/app/shop/<shopId>/stats__center#app.shop.stats.center",
+   "route_note": "同 M11 路由；模块位于服务 tab 内、出餐时效之后（纠纷单分析附近），精确顺序待采集器实测",
+   "form": "页内区块（服务 tab 内）",
+   "shot": "区块截图：模块标题 + 时间条 + 4 数字卡 + 每卡「比前30日」环比行（环比是数据一部分，禁裁）",
+   "time_range": "近30日（2026-10-22 00:10 大同明确「还是选 30 天」；截图上默认已近30日，仍须回读区间文本）",
+   "sub_indicators": [
+    "取消单（含比前30日环比）",
+    "商责取消单（含环比）",
+    "商责取消率",
+    "商责取消单损失金额"
+   ],
+   "key_numbers": [
+    "取消单",
+    "商责取消单",
+    "商责取消率",
+    "商责取消单损失金额"
+   ],
+   "capture_notes": [
+    "★位于服务 tab 出餐时效之后，起点标题「接单分析」终点「退单分析」（待实测）。",
+    "★时间控件是 texttab 文字式（激活态类名 activated 橙色 rgb(255,98,0)），须回读日期区间文本。",
+    "★右上「查看明细」是入口链接，不点。",
+    "★★条件话术（大同规则 12）：取消单>0 或 商责取消单>0 ⇒ 提醒门店关注结单率；否则 ⇒ 夸商家继续保持。"
+   ],
+   "source": "2026-10-22 00:10 大同发规则 12 + 截图 Clipboard_Screenshot.png",
+   "status": "已入字典"
+  },
+  {
+   "id": "M13",
+   "name": "退单分析（完全/部分退单 + 商责退单）",
+   "menu_path": "数据中心 > 经营分析 > 服务",
+   "tab": "服务（tab=service）",
+   "route": "https://melody.shop.ele.me/app/shop/<shopId>/stats__center#app.shop.stats.center",
+   "route_note": "同 M11 路由；模块位于接单分析之后，精确顺序待采集器实测",
+   "form": "页内区块（服务 tab 内）",
+   "shot": "区块截图：模块标题 + 时间条 + 5 数字卡 + 环比行",
+   "time_range": "近30日（大同规则 13 同规则 12「还是选 30 天」）",
+   "sub_indicators": [
+    "完全退单数（含环比）",
+    "部分退单数（含环比）",
+    "商责退单数（含环比）",
+    "商责退单率",
+    "商责退单损失金额"
+   ],
+   "key_numbers": [
+    "完全退单数",
+    "部分退单数",
+    "商责退单数",
+    "商责退单率",
+    "商责退单损失金额"
+   ],
+   "capture_notes": [
+    "★起点标题「退单分析」终点「评价分析」（待实测）。",
+    "★页内文案「提升服务质量，减少因商责退单产生的损失」；右上「查看明细」不点。",
+    "★★条件话术（大同规则 13）：完全/部分退单数>0 或 商责退单数>0 ⇒ 提醒门店注意商家责任退单；否则 ⇒ 夸商家继续保持。"
+   ],
+   "source": "2026-10-22 00:10 大同发规则 13 + 截图 Clipboard_Screenshot-1.png",
+   "status": "已入字典"
+  },
+  {
+   "id": "M14",
+   "name": "评价分析（满意度/口味/包装差评）",
+   "menu_path": "数据中心 > 经营分析 > 服务",
+   "tab": "服务（tab=service）",
+   "route": "https://melody.shop.ele.me/app/shop/<shopId>/stats__center#app.shop.stats.center",
+   "route_note": "同 M11 路由；模块位于退单分析之后，终点=服务 tab 页尾或下一区块（待实测）",
+   "form": "页内区块（服务 tab 内）",
+   "shot": "区块截图：模块标题 + 时间条 + 3 数字卡 + 环比行",
+   "time_range": "近30日（大同规则 14 同规则 12「还是选 30 天」）",
+   "sub_indicators": [
+    "满意度差评（含环比）",
+    "口味差评（含环比）",
+    "包装差评（含环比）"
+   ],
+   "key_numbers": [
+    "满意度差评",
+    "口味差评",
+    "包装差评"
+   ],
+   "capture_notes": [
+    "★起点标题「评价分析」，终点待实测（服务 tab 最后一个业务区块）。",
+    "★页内文案「关注顾客评价，复盘经营问题」；右上「评价详情」不点。",
+    "★★条件话术（大同规则 14）：三项差评合计=0 ⇒ 夸商家保持；任一项>0 ⇒ 请门店关注差评。"
+   ],
+   "source": "2026-10-22 00:10 大同发规则 14 + 截图 Clipboard_Screenshot-2.png",
+   "status": "已入字典"
+  },
+  {
+   "id": "M15",
+   "name": "店铺分（总分 + 六维度 + 顾客评分）",
+   "menu_path": "成长中心 > 店铺分",
+   "tab": null,
+   "route": "https://melody.shop.ele.me/app/shop/<shopId>/shop-score#app.shop.shop-score（大同 00:36 实证，截图时 shopId=542633444）",
+   "route_note": "★与 M02–M06 的 customerStats 完全同构（同壳应用 /app/shop/<id>/<route>），switch_shop.mjs --land shop-score 即可落点。⚠️E59 铁律适用：Page.navigate 直达只换店名不换数据，切店仍必须走切换器 + 整页 reload，/single/ 判据不可去。",
+   "form": "独立页面（整页）",
+   "shot": "整页全截屏——20 项指标里唯一要求全截的（参考 M01 长图方案；超一屏则滚动拼接）",
+   "time_range": "页面无时间选择器（实时分 + 昨日口径混合），不切时间，按页面默认",
+   "sub_indicators": [
+    "总分 99.7 比昨日持平（大字 + 副文案「店铺分越高，越容易获得曝光」）",
+    "tab 行：推荐任务 / 用户 / 基础 / 营销 / 商品 / 服务（截图时默认停在推荐任务）",
+    "顾客评分区块：昨日数据 4.8｜当前得分 9.7/10分｜比昨日持平｜满分要求「商家评分≥4.9 分，即可获得满分」",
+    "右上角「评分规则」「数据月报」入口链接（不点）"
+   ],
+   "key_numbers": [
+    "总分",
+    "顾客评分·当前得分",
+    "顾客评分·昨日数据"
+   ],
+   "capture_notes": [
+    "★整页全截；大同 00:36 拍板=只截默认 tab（推荐任务）的内容，不含其他五个 tab。",
+    "★截图策略=按文档动态高度全截，禁固化像素值（大同 00:49 纠正：页面会缩放/移动，高度非固定值）：页面代码方式读 document.documentElement.scrollHeight 动态截（CDP captureBeyondViewport），判据=截到页面底部特征元素，禁写死高度。",
+    "「不达标的服务项目」页面上没有独立数字区块，话术按字面不引用具体项。",
+    "「去优化 / 评价评分 / 去学习」「评分规则 / 数据月报」都是入口按钮，不点。",
+    "★固定文案（大同规则 15），非条件话术：95 分及格，店铺分越高越容易获得曝光，不达标的服务项目注意关注。",
+    "★Q-R15b 已拍板（00:49）：总分<95 也一样只发截图，无升级动作，文案照发。"
+   ],
+   "source": "2026-10-22 00:28 大同发规则 15 + 截图 Clipboard_Screenshot.png",
+   "status": "已入字典"
+  }
+ ],
+ "system_architecture": {
+  "host": "9230 taobao-brand",
+  "shell": "https://melody.shop.ele.me/app/chain/95708808/<route>#app.chainshop.<route>",
+  "note": "★外壳 + 跨域 iframe 架构（2026-10-20 17:45 实测）：左侧菜单是壳，业务内容全在 iframe 里；iframe 不是独立 CDP target，读内容必须用 Runtime.executionContextCreated 拿 contextId",
+  "iframes": {
+   "顾客评价": {
+    "id": "app_chainshop_comments",
+    "src": "https://melody-comment.faas.ele.me/?"
+   },
+   "顾客分析": {
+    "id": "app_chainshop_customerStats",
+    "src": "https://melody-stats-next.ele.me/new/#/chain/business-analysis?tab=custom&subTab=&otherParams={\"export\":\"custom\"}"
+   }
+  },
+  "routes_verified": {
+   "comments": "https://melody.shop.ele.me/app/chain/95708808/comments#app.chainshop.comments",
+   "customerStats": "https://melody.shop.ele.me/app/chain/95708808/customerStats#app.chainshop.customerStats"
+  },
+  "routes_negative_control": "`evaluate` 路由不存在：访问 .../evaluate#app.chainshop.evaluate 会被弹回 dashboard（空白无 iframe）",
+  "sidebar_hover_submenu": [
+   "顾客分析",
+   "精准营销",
+   "到店评价",
+   "门店品控",
+   "粉丝群管理",
+   "超客发票"
+  ],
+  "unknown_yet": "顾客评价页默认是『连锁总账号汇总视角』（店均评分 4.1 / 121 家门店 / 门店明细 112 页）；单店视角（规则 1 截图 4.8 + 5 tab）疑需页内『选择门店』控件，待 daemon 空闲后实测"
+ },
+ "verification_20261020_1800": {
+  "shop_checked": "26319 湘霸王创意湘菜(玉田路川湘菜必吃店)",
+  "rules_verified": "M01–M06 全部在单店视角命中；判定表见 REQUIREMENTS §3.6.1",
+  "time_pickers": 6,
+  "blocker": "旧池 486 家与 9230 门店树 1992 家店名精确匹配 20.8%（101）、去括号 40.9%（199）；搜『湘赣李大厨』『33272532』『蜜雪冰城』均 0 结果 ⇒ 需大同定口径"
+ },
+ "verification_20261020_2030": {
+  "purpose": "大同要求「切换一个店铺试试」——验证换店后整条采集链路仍成立",
+  "shop": {
+   "shopId": "694471",
+   "name": "李当家汉派猪蹄饭(一清路店)",
+   "from_scope": "爱鱼爱虾（小连锁）连锁根"
+  },
+  "steps": [
+   "switch_shop.mjs --shop-id 694471 --expect-name … → exit 0，iframe 作用域 /single/business-analysis",
+   "set_all_30.mjs → exit 0，5 个 antd 控件全部近30日；statics=[互动行为 近7日]",
+   "capture_metric.mjs --metric M02..M06 → 5/5 exit 0，truncated=false"
+  ],
+  "artifacts": ".runtime/captures/M0*_shop694471_*.png",
+  "visual_check": "M02 下单顾客248 / M03 1单81.9%203人 / M04 午餐60.1% / M05 东和颐园32 / M06 评分4.7·会员13.0%，数据属该店、口径近30日",
+  "open": "M01 顾客评价在 comments 路由，本轮未跑"
+ },
+ "verification_20261020_1838": {
+  "by": "大同 18:38 拍板 Q-F/Q-G 口径",
+  "samples": "30 家分层（正对照/品牌可定位/品牌无候选 各 10）",
+  "id_tier_hit": "0/30",
+  "prefix_tier_layer2_hit": "2/10（改用品牌词后）",
+  "wrong_match_caught": 2,
+  "note": "wmPoiId 无效已证伪；品牌词有效但有 6/10 仍 miss（账号无该店）"
+ },
+ "verification_20261020_2005": {
+  "by": "统一入口 capture_for_metric 三分支实跑（无头，shop 694471）",
+  "M01": "comments/exit0/153KB/4.4-4.5-4.4",
+  "M05": "customerStats/exit0/5控件全30日",
+  "M09": "stats__center/exit0/SKIP_SWITCH_ALREADY_HERE",
+  "cross_org": "safe（3家acct各异+复切肇事店均未掉登录）"
+ },
+ "user_rules": [
+  {
+   "id": "R01",
+   "metric": "M01",
+   "raw": "顾客管理 > 顾客评价",
+   "page": "单店 comments 页：5 个 tab 全在（评价详情/评价治理/评价有礼/评价置顶 3-3/回复模板）；最终评分 4.9 = 商品质量分 4.9(80%) + 服务体验分 5.0(20%)；评分明细 6 行；右上「更新于 10.20 04:56」",
+   "time": "页面默认（评分明细含 6 项，不切时间）",
+   "verdict": "吻合"
+  },
+  {
+   "id": "R02",
+   "metric": "M02",
+   "raw": "顾客分析 + 下单顾客趋势，两块一起截",
+   "page": "顾客概览 5 卡（下单顾客 319 / 复购率 14.1% / 复购人数 45 / 下单新客 168 / 下单老客 151）+ 紧跟其后的「下单顾客趋势」折线（含商圈同行均值）",
+   "time": "近30日",
+   "verdict": "吻合"
+  },
+  {
+   "id": "R03",
+   "metric": "M03",
+   "raw": "顾客分布 > 下单行为",
+   "page": "子 tab 三个：下单频次（默认选中）/ 下单间隔 / 单均实付；表格 3 行（>3单 6.1% / 2-3单 20.8% / 1单 73.1%）",
+   "time": "近30日（默认已是）",
+   "verdict": "吻合"
+  },
+  {
+   "id": "R04",
+   "metric": "M04",
+   "raw": "顾客分布 > 下单时段",
+   "page": "5 行：早餐 / 午餐 / 下午茶 / 晚餐 / 夜宵；各带占比与单量",
+   "time": "近30日（默认近7日，须切）",
+   "verdict": "吻合"
+  },
+  {
+   "id": "R05",
+   "metric": "M05",
+   "raw": "顾客分析页的 热门街区",
+   "page": "模块正式名「下单热门街区」，内容=热门地标 TOP10 表（本店 / 商圈同行均值两列）；仅在单店视角存在，连锁视角整块没有",
+   "time": "近30日",
+   "verdict": "吻合（名称待对齐）"
+  },
+  {
+   "id": "R06",
+   "metric": "M06",
+   "raw": "顾客特征",
+   "page": "互动行为（顾客评分/评价顾客/未评价顾客/差评顾客/收藏顾客/下单未收藏顾客）+ 顾客画像（会员占比/性别占比/年龄占比/地点构成 4 子 tab）",
+   "time": "近30日（画像区默认近7日，须切）",
+   "verdict": "吻合"
+  },
+  {
+   "id": "R07",
+   "metric": "M07",
+   "raw": "总览 → 历史数据概览",
+   "page": "总览 tab 内、今日实时数据下方；单选 昨日/近7日/近30日/自定义，默认昨日；内含订单分析 + 流量分析 + 顾客分析三块",
+   "time": "近30日（默认昨日，须切）",
+   "verdict": "吻合"
+  },
+  {
+   "id": "R08",
+   "metric": "M08",
+   "raw": "流量 → 流量转化",
+   "page": "流量 tab 内独立模块「流量转化」：左本店漏斗（曝光→进店→下单）+ 右商圈同行均值 + 进店/下单转化率；下方流量趋势与五卡",
+   "time": "近30日（默认今日实时，须切）",
+   "verdict": "吻合"
+  },
+  {
+   "id": "R09",
+   "metric": "M09",
+   "raw": "流量 → 自然流量来源",
+   "page": "流量 tab 下部（流量趋势之后）；与 M08 共用同一个顶部时间条，切一次两块都生效",
+   "time": "近30日（同 M08）",
+   "verdict": "吻合"
+  },
+  {
+   "id": "R10",
+   "metric": "M10",
+   "raw": "商品 → 销售情况",
+   "page": "商品 tab 二级 tab「商品明细」；列=商品/销售额/销量/库存，默认按销售额降序",
+   "time": "近30日（默认今日实时，须切）",
+   "verdict": "吻合"
+  },
+  {
+   "id": "R11",
+   "metric": "M11",
+   "raw": "服务 → 如图；数据概览选本周，营业分析、出餐时效各选 30 天",
+   "page": "服务 tab 二级 tab「履约」；数据概览（服务表现/异常率/出餐上报率）+ 营业分析（日均营业时长）+ 出餐时效（平均出餐时长/超时率）",
+   "time": "数据概览=本周；营业分析=近30日；出餐时效=近30日（须切）",
+   "verdict": "吻合"
+  },
+  {
+   "id": "R12",
+   "metric": "M12",
+   "raw": "数据中心 菜单组 经营分析 菜单页 服务 tab ,还是选 30天 ，规则 12 ：接单分析 截图 + 发文字 （看数据 如果有取消 提醒门店 关注 结单率；如果没 夸商家继续保持）",
+   "page": "服务 tab 内区块「接单分析」：取消单 0（比前30日 ↓3）/ 商责取消单 0 / 商责取消率 0.0% / 商责取消单损失金额 0.00；页内文案「规范接单流程，避免因商家责任而取消订单」，右上「查看明细」",
+   "time": "近30日（2026-09-22 至 2026-10-20）",
+   "verdict": "吻合"
+  },
+  {
+   "id": "R13",
+   "metric": "M13",
+   "raw": "规则13:退单分析 截图 + 发文字 （看数据 如果有退单提醒门店注意商家责任退单；如果没 夸商家继续保持）",
+   "page": "服务 tab 内区块「退单分析」：完全退单数 1（持平）/ 部分退单数 0（比前30日 ↓1）/ 商责退单数 0 / 商责退单率 0.0% / 商责退单损失金额 0.00；页内文案「提升服务质量，减少因商责退单产生的损失」，右上「查看明细」",
+   "time": "近30日（同规则 12「还是选 30 天」）",
+   "verdict": "吻合"
+  },
+  {
+   "id": "R14",
+   "metric": "M14",
+   "raw": "规则14 ：评价分析 截图+ 发文字（话术：0 差评 夸商家保持；有差评 请门店关注 差评）",
+   "page": "服务 tab 内区块「评价分析」：满意度差评 0（比前30日 ↓1）/ 口味差评 1 / 包装差评 1；页内文案「关注顾客评价，复盘经营问题」，右上「评价详情」",
+   "time": "近30日（同规则 12「还是选 30 天」）",
+   "verdict": "吻合"
+  },
+  {
+   "id": "R15",
+   "metric": "M15",
+   "raw": "规则 15 ：成长中心 菜单组下的 店铺分 页面 这页全截屏 发截屏 + 发文字 ： 95 分及格，店铺分越高越容易获得曝光，不达标的服务项目 注意关注",
+   "page": "成长中心 → 店铺分 整页：总分 99.7 比昨日持平；tab=推荐任务/用户/基础/营销/商品/服务；顾客评分=昨日数据 4.8、当前得分 9.7/10分、比昨日持平；满分要求「商家评分≥4.9 分」",
+   "time": "页面无时间选择器（与规则 12「还是选 30 天」不同，本页不切时间）",
+   "verdict": "吻合"
+  }
+ ],
+ "user_rules_note": "大同口述口径原文（逐字摘录，禁改写）。本流共 15 条（R01–R15，全部只读）。R16（发优惠券）已于 2026-10-22 01:13 拆出至独立工作流 coupon-issue-task-flow（发优惠券任务流），不再计入本流；00:49 说过封板、01:07 又发 R16 ⇒ 封板解除，本流封板状态以 rules_sealed 字段为准（当前无该字段=未封板）。工程侧发现写在 global_rules 里，两边不混。",
+ "split_note": "2026-10-22 01:13 大同拍板拆流：R16 耗时结构与只读指标完全不同（7 次表单+创建、真实发券有资金副作用、频率不轮换），单独成流 coupon-issue-task-flow。本流只剩只读指标。",
+ "split_out_metrics": {
+  "M16": {
+   "flow": "coupon-issue-task-flow",
+   "flow_name": "发优惠券任务流",
+   "reason": "唯一带生产副作用（真实发券），耗时结构/放行/频率/台账与只读指标不同（大同 01:13 拍板拆流）"
+  }
+ }
+}

@@ -1,0 +1,30 @@
+{
+  "workflowId": "merchants",
+  "taskId": "affb7264-6648-46ad-8523-d7f0d820f8e6",
+  "stage": "send",
+  "text": "当前无新增意向商家",
+  "status": "verified",
+  "sendAttempts": 1,
+  "sha256": "13785863a9b510209ae4ada2a13b85d721428f4adf293a925e45490c4577bb97",
+  "observations": [
+    {
+      "inputEmpty": true,
+      "newMessageVisible": true,
+      "visibleTextSha256": "13785863a9b510209ae4ada2a13b85d721428f4adf293a925e45490c4577bb97",
+      "observedAt": 1792826373.602
+    },
+    {
+      "inputEmpty": true,
+      "newMessageVisible": true,
+      "visibleTextSha256": "13785863a9b510209ae4ada2a13b85d721428f4adf293a925e45490c4577bb97",
+      "observedAt": 1792826422.519
+    }
+  ],
+  "limitation": "Original command timed out; ledger later reconciled from timely UI observations without another send. Historical failed run is preserved.",
+  "reconciliation": {
+    "status": "verified",
+    "newSendAttempts": 0,
+    "method": "original-ledger-timely-ui-evidence-returned-late",
+    "originalRecordsBackedUp": true
+  }
+}

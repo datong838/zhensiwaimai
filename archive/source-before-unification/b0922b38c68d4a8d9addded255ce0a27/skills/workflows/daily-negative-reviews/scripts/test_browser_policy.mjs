@@ -1,0 +1,67 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+import os from 'node:os';
+import path from 'node:path';
+import {EventEmitter} from 'node:events';
+import {closeDrawer,assertEntryMode,assertVisibleDates,ensureEntryContext,selectTaskPage,prepareEntryPage,waitForDateInputs,ensurePageSize,waitForListQuery,waitReady,choosePlatform,collectPlatform,persistDownload,reusableDownload,reconstructedDownload,shouldReplaceDownload,archiveDownload} from './browser_collect.mjs';
+
+function emitListQuery(bus,update,delay=20){const request={url:()=> 'https://data.guoshuyufen.com/api//comment/page'};bus.emit('request',request);setTimeout(()=>{update();bus.emit('response',{request:()=>request,status:()=>200});bus.emit('requestfinished',request);},delay);}
+const queryBus=new EventEmitter();let queryValue='old';await waitForListQuery(queryBus,async()=>emitListQuery(queryBus,()=>{queryValue='new';},50));assert.equal(queryValue,'new');assert.equal(queryBus.listenerCount('request'),0);
+const platformBus=new EventEmitter();let selectedPlatform='1',platformTotal=62;
+const delayedPlatform={on:platformBus.on.bind(platformBus),off:platformBus.off.bind(platformBus),locator(selector){if(selector==='input[type="radio"][value="2"]')return {count:async()=>1,isChecked:async()=>selectedPlatform==='2',evaluate:async()=>emitListQuery(platformBus,()=>{selectedPlatform='2';platformTotal=92;},80)};if(selector==='input[placeholder="请选择"]:visible')return {count:async()=>1,inputValue:async()=> '200条/页'};if(selector==='.el-pagination__total:visible')return {count:async()=>1,innerText:async()=>`共 ${platformTotal} 条`};if(selector==='.el-pager li.active:visible')return {count:async()=>1,innerText:async()=> '1'};if(selector==='.cryptonym:visible')return {count:async()=>platformTotal};throw Error(`unexpected-delayed-selector:${selector}`);}};
+assert.equal((await choosePlatform(delayedPlatform,'2')).expected,92);
+
+function page(url,body,theme='taoBaoShanGou',dates=[]){let currentUrl=url,reloads=0,reloadOptions=null;const context={外卖:'completa_item complete_active',淘宝:'cutli pitchOn'};const element=label=>({isVisible:async()=>true,getAttribute:async()=>context[label],click:async()=>{context[label]=label==='外卖'?'completa_item complete_active':'cutli pitchOn';}});return {url:()=>currentUrl,title:async()=> '金鲨数据',goto:async next=>{currentUrl=next;},reload:async options=>{reloads++;reloadOptions=options;},reloads:()=>reloads,reloadOptions:()=>reloadOptions,frames:()=>[{getByText:label=>({count:async()=>label in context?1:0,nth:()=>element(label)})}],locator(selector){if(selector==='body')return {innerText:async()=>body};if(selector==='html')return {getAttribute:async()=>theme};if(selector==='.cryptonym:visible')return {evaluateAll:async()=>dates};if(selector==='.hamburger-container:visible')return {count:async()=>0};throw Error('unexpected-selector:'+selector);}};}
+const realtime=page('https://data.guoshuyufen.com/#/businessData/realTimeData','今日实时数据');
+const upload=page('https://data.guoshuyufen.com/#/upload','数据上传');
+const selected=await selectTaskPage({contexts:()=>[{pages:()=>[realtime,upload]}]});assert.equal(selected.page,realtime);
+const blankRealtime=page('https://data.guoshuyufen.com/#/businessData/realTimeData','');
+assert.equal((await selectTaskPage({contexts:()=>[{pages:()=>[blankRealtime,upload]}]})).page,blankRealtime);
+await assert.rejects(()=>selectTaskPage({contexts:()=>[{pages:()=>[realtime,realtime]}]}),/realtime-route-count:2/);
+assert.equal((await selectTaskPage({contexts:()=>[{pages:()=>[upload]}]})).page,upload);
+const body='智能斗金 推广魔方 全站推广列表';assert.deepEqual(await assertEntryMode(page('x',body),body),{theme:'taoBaoShanGou',business:'外卖',channel:'淘宝'});
+await assert.rejects(()=>assertEntryMode(page('x',body,'meiTuan'),body),/taobao-entry-not-selected/);
+let contextClasses={外卖:'completa_item complete_active',淘宝:'cutli',美团:'cutli pitchOn'};const contextPage={frames:()=>[{getByText:label=>({count:async()=>label in contextClasses?1:0,nth:()=>({isVisible:async()=>true,getAttribute:async()=>contextClasses[label],click:async()=>{if(label==='淘宝'){contextClasses.淘宝='cutli pitchOn';contextClasses.美团='cutli';}}})})}],locator:()=>({count:async()=>0})};assert.deepEqual(await ensureEntryContext(contextPage),{business:'外卖',channel:'淘宝'});assert.equal(contextClasses.淘宝,'cutli pitchOn');
+const resumed=page('https://data.guoshuyufen.com/#/negativeAnalyse',body);
+assert.deepEqual((await prepareEntryPage(resumed,async()=>{})).entry,{theme:'taoBaoShanGou',business:'外卖',channel:'淘宝'});
+assert.equal(resumed.url(),'https://data.guoshuyufen.com/#/businessData/realTimeData');
+const delayed=page('https://data.guoshuyufen.com/#/negativeAnalyse',body);let stableAttempts=0;
+await prepareEntryPage(delayed,async()=>{stableAttempts++;if(stableAttempts===1)throw Error('not-ready');});
+assert.equal(stableAttempts,2);assert.equal(delayed.reloads(),1);
+assert.deepEqual(delayed.reloadOptions(),{waitUntil:'commit',timeout:30000});
+let dateInputCounts=[0,0,2];const dateInputs={count:async()=>dateInputCounts.shift()??2};
+assert.equal(await waitForDateInputs({locator:()=>dateInputs},async()=>{}),dateInputs);
+await assert.rejects(()=>waitForDateInputs({locator:()=>({count:async()=>3})},async()=>{}),/date-input-count:3/);
+assert.equal(await assertVisibleDates(page('x','',undefined,['2026-09-17','2026-09-17']),'2026-09-17'),2);
+await assert.rejects(()=>assertVisibleDates(page('x','',undefined,['2026-09-16']),'2026-09-17'),/date-mismatch-before-download/);
+await assert.rejects(()=>assertVisibleDates(page('x','',undefined,[]),'2026-09-17'),/zero-visible-rows/);
+await closeDrawer({locator:selector=>selector==='.app-wrapper'?{getAttribute:async()=> 'app-wrapper openSidebar'}:{count:async()=>0}});
+await assert.rejects(()=>closeDrawer({locator:selector=>selector==='.app-wrapper'?{getAttribute:async()=> 'app-wrapper openSidebar'}:{count:async()=>2}}),/drawer-overlay-count:2/);
+let sizeValue='10条/页',dropdownOpen=false;
+const sizeBus=new EventEmitter();const sizePage={on:sizeBus.on.bind(sizeBus),off:sizeBus.off.bind(sizeBus),locator:selector=>{if(selector==='input[placeholder="请选择"]:visible')return {count:async()=>1,inputValue:async()=>sizeValue,click:async()=>{dropdownOpen=true;}};if(selector==='.el-select-dropdown__item')return {allTextContents:async()=>['200条/页']};if(selector==='.el-select-dropdown__item:visible')return {count:async()=>dropdownOpen?1:0,first:()=>({waitFor:async()=>{},innerText:async()=> '200条/页',click:async()=>emitListQuery(sizeBus,()=>{sizeValue='200条/页';})})};throw Error('unexpected-size-selector:'+selector);},waitForFunction:async()=>{assert.equal(sizeValue,'200条/页');}};
+await ensurePageSize(sizePage);
+assert.equal(sizeValue,'200条/页');
+function paginatedPage(total,pageSize){let current=1;const bus=new EventEmitter(),rows=Array.from({length:total},(_,index)=>({date:'2026-09-22',comment:`评价${index+1}`}));return {on:bus.on.bind(bus),off:bus.off.bind(bus),locator(selector){if(selector==='.el-pagination__total:visible')return {count:async()=>1,innerText:async()=>`共 ${total} 条`};if(selector==='input[placeholder="请选择"]:visible')return {count:async()=>1,inputValue:async()=>`${pageSize}条/页`};if(selector==='.el-pager li.active:visible')return {count:async()=>total?1:0,innerText:async()=>String(current)};if(selector==='.cryptonym:visible')return {count:async()=>rows.slice((current-1)*pageSize,current*pageSize).length,evaluateAll:async(fn,platform)=>rows.slice((current-1)*pageSize,current*pageSize).map(row=>({...row,platform}))};if(selector==='.el-pagination .btn-next:visible')return {count:async()=>1,isDisabled:async()=>current>=Math.ceil(total/pageSize),click:async()=>emitListQuery(bus,()=>{current++;})};throw Error(`unexpected-pagination-selector:${selector}`);},current:()=>current};}
+const twoPages=paginatedPage(171,100);const first=await waitReady(twoPages);assert.deepEqual([first.expected,first.actual,first.totalPages],[171,100,2]);assert.equal((await collectPlatform(twoPages,'美团外卖',first)).length,171);assert.equal(twoPages.current(),2);
+const onePage=paginatedPage(171,200);assert.equal((await collectPlatform(onePage,'美团外卖',await waitReady(onePage))).length,171);assert.equal(onePage.current(),1);
+const zeroPage=paginatedPage(0,200);assert.deepEqual(await collectPlatform(zeroPage,'京东外卖',await waitReady(zeroPage)),[]);
+const temp=await fs.mkdtemp(path.join(os.tmpdir(),'negative-download-test-'));
+const target=path.join(temp,'missing-parent','report.xlsx');
+let verified=false;
+const saved=await persistDownload({suggestedFilename:()=> 'report.xlsx',saveAs:async file=>fs.writeFile(file,'xlsx-bytes'),failure:async()=>null},{raw:target},async file=>{verified=file===target;});
+assert.equal(saved.path,target);assert.equal(saved.size,10);assert.equal(verified,true);assert.equal(await fs.readFile(target,'utf8'),'xlsx-bytes');
+const prior={downloadClicks:1,download:{path:target,size:10,sha256:saved.sha256}};
+await fs.writeFile(path.join(temp,'browser.json'),JSON.stringify(prior));
+assert.deepEqual(await reusableDownload({browserReceipt:path.join(temp,'browser.json'),raw:target}),prior.download);
+const replacementState=path.join(temp,'replacement-state.json'),replacementConfig={state:replacementState,browserReceipt:path.join(temp,'browser.json'),raw:target,report:path.join(temp,'report.xlsx'),sendReceipt:path.join(temp,'send.json'),sendMarker:`replacement-${process.pid}.json`};
+await fs.writeFile(replacementState,JSON.stringify({phase:'downloaded',status:'recoverable',recoveryReason:'record-count-mismatch'}));
+assert.equal(await shouldReplaceDownload(replacementConfig,prior.download),true);
+assert.equal(await fs.readFile(await archiveDownload(replacementConfig,prior.download),'utf8'),'xlsx-bytes');
+const recoveredState=path.join(temp,'recovered-state.json'),recoveredReceipt=path.join(temp,'recovered-browser.json');
+await fs.writeFile(recoveredState,JSON.stringify({phase:'downloaded',status:'recoverable',reviewItems:[{stage:'download',status:'completed'}]}));
+await fs.writeFile(recoveredReceipt,JSON.stringify({downloadClicks:1}));
+await assert.rejects(()=>reusableDownload({state:recoveredState,browserReceipt:recoveredReceipt,raw:target}),/Command failed/);
+await assert.rejects(()=>reconstructedDownload({state:recoveredState,browserReceipt:recoveredReceipt,raw:path.join(temp,'missing.xlsx')}),/ENOENT/);
+await assert.rejects(()=>persistDownload({suggestedFilename:()=> 'report.csv'},{raw:path.join(temp,'bad.xlsx')},async()=>{}),/download-filename-invalid/);
+await fs.rm(temp,{recursive:true,force:true});
+console.log(JSON.stringify({ok:true,tests:16}));

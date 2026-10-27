@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {isFraudAcknowledgement,dismissFraudAcknowledgement} from './ensure_unanswered_queue.mjs';
+const good='会话疑似存在欺诈风险 风险预警：请勿脱离平台交易或向未核实身份者转账。 我知道了';
+assert.equal(isFraudAcknowledgement(good),true);
+for(const bad of ['', '我知道了','会话疑似存在欺诈风险 我知道了',good+' 登录验证',good.replace('请勿脱离平台交易或向未核实身份者转账','验证码'),good.replace('我知道了','继续转账')]) assert.equal(isFraudAcknowledgement(bad),false);
+let clicks=0;
+const modal={count:async()=>1,isVisible:async()=>true,innerText:async()=>good,getByText:()=>({count:async()=>1,click:async()=>{clicks++;}}),waitFor:async()=>{}};
+const page={locator:()=>({filter:()=>modal})};
+assert.equal(await dismissFraudAcknowledgement(page),true);assert.equal(clicks,1);
+modal.innerText=async()=>good+' 身份验证';assert.equal(await dismissFraudAcknowledgement(page),false);assert.equal(clicks,1);
+modal.innerText=async()=>good;modal.getByText=()=>({count:async()=>2,click:async()=>{throw Error('must not click')}});assert.equal(await dismissFraudAcknowledgement(page),false);
+console.log('PASS: notice whitelist, verification rejection, unique acknowledgement; no browser or sends');

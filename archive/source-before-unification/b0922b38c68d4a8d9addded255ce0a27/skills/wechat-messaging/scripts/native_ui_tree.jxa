@@ -1,0 +1,80 @@
+/* System Events UI scripting only. No capture, coordinates or AXValue writes. */
+function run(argv) {
+ const cfg=JSON.parse(argv[0]);
+ if(cfg.rootPaths!==undefined&&((cfg.actions||[]).length||cfg.maxDepth!==0||!Array.isArray(cfg.rootPaths)||!cfg.rootPaths.length))throw Error('native-ui-multi-anchor-read-only');
+ const se=Application('System Events');
+ const p=se.processes.byName('企业微信');
+ if (!p.exists() || p.bundleIdentifier()!=='com.tencent.WeWorkMac') throw Error('native-ui-app-mismatch');
+ function at(path){let e=p.windows.byName('企业微信');for(const i of path)e=e.uiElements[i];return e;}
+ function info(e){const x={};for(const k of ['role','name','description','value']){try{x[k]=e[k]();}catch(_){x[k]=null;}}try{x.focused=e.attributes.byName('AXFocused').value();}catch(_){x.focused=null;}return x;}
+ function check(a){const e=at(a.path);const x=info(e);for(const k of ['role','name','value','description'])if(a.expected&&k in a.expected&&x[k]!==a.expected[k])throw Error('native-ui-target-changed:'+k);return e;}
+ function focused(e){try{return e.attributes.byName('AXFocused').value()===true;}catch(_){return false;}}
+ function foreground(force){
+  if(!force&&p.frontmost())return;
+  Application('com.tencent.WeWorkMac').activate();p.frontmost=true;if(force)p.windows.byName('企业微信').actions.byName('AXRaise').perform();
+  for(let i=0;i<20;i++){if(p.frontmost())return;delay(0.05);}
+  throw Error('native-ui-not-frontmost');
+ }
+ function readyInput(a){
+  for(let i=0;i<20;i++){
+   if(!p.frontmost())throw Error('native-ui-not-frontmost');
+   for(const guard of a.guards||[])check(guard);
+   const e=check(a);if(focused(e))return e;
+   delay(0.05);
+  }
+  throw Error('native-ui-focus-mismatch');
+ }
+ function readyValue(a){
+  if(a.waitForValue!==true)return check(a);
+  for(let i=0;i<20;i++){
+   try{return check(a);}catch(error){if(String(error)!=='Error: native-ui-target-changed:value')throw error;}
+   delay(0.05);
+  }
+  throw Error('native-ui-target-value-not-ready');
+ }
+ const results=[];
+ for(const a of cfg.actions||[]){
+  if(a.guards){
+   try{for(const guard of a.guards)check(guard);check(a);}
+   catch(error){return JSON.stringify({backend:'system-events-ui-tree',actionRejected:true,error:String(error),results:results,screenCapture:false});}
+  }
+  if(a.type==='activate'){foreground(true);}
+  else if(a.type==='click'){check(a);foreground(false);if(a.modifier)throw Error('native-ui-modifier-not-allowed');for(const guard of a.guards||[])check(guard);se.click(check(a));}
+  else if(a.type==='key'||a.type==='paste'){
+   readyValue(a);foreground(false);
+   const e=check(a);
+   if(a.type==='key'&&a.key==='search'){
+    if(a.path.length!==0)throw Error('native-ui-search-main-required');
+    const m=p.menuBars[0].menuBarItems.byName('编辑').menus[0].menuItems.byName('搜索');
+    if(m.attributes.byName('AXMenuItemCmdChar').value()!=='F'||m.attributes.byName('AXMenuItemCmdModifiers').value()!==0)throw Error('native-ui-search-shortcut-changed');
+    se.keystroke('f',{using:'command down'});delay(0.15);
+   }else if(a.type==='key'&&a.key==='goto'){
+    const z=info(e);if(z.role!=='AXSheet'||z.description!=='打开')throw Error('native-ui-open-sheet-required');
+    se.keystroke('g',{using:['command down','shift down']});delay(0.15);
+   }else{
+   readyInput(a);
+   if(a.type==='paste')se.keystroke('v',{using:'command down'});
+   else if(a.key==='selectall')se.keystroke('a',{using:'command down'});
+   else {const keys={return:36,escape:53,down:125,up:126,tab:48,backspace:51};if(!(a.key in keys))throw Error('native-ui-key-not-allowed');se.keyCode(keys[a.key]);}
+   }
+  }else throw Error('native-ui-action-not-allowed');
+  results.push({type:a.type,ok:true});
+ }
+ const rows=[];const maxDepth=cfg.maxDepth===undefined?7:cfg.maxDepth;
+ function scan(e,path,depth){
+  const x=info(e);rows.push(Object.assign({path:path},x));
+  if(depth>=maxDepth||rows.length>=1200)return;
+  let roles;try{roles=e.uiElements.role();}catch(_){return;}
+  let names=[],values=[],descs=[];try{names=e.uiElements.name();}catch(_){}try{values=e.uiElements.value();}catch(_){}try{descs=e.uiElements.description();}catch(_){}
+  for(let i=0;i<roles.length&&rows.length<1200;i++){
+   const cp=path.concat(i), role=roles[i];
+   if(['AXSplitGroup','AXGroup','AXScrollArea','AXTable','AXRow','AXCell','AXOutline','AXSheet','AXToolbar'].includes(role)&&depth+1<maxDepth)scan(e.uiElements[i],cp,depth+1);
+   else {const leaf={path:cp,role:role,name:names[i]||null,value:values[i]===undefined?null:values[i],description:descs[i]||null};if(role==='AXImage'){try{leaf.size=e.uiElements[i].size();}catch(_){leaf.size=null;}}rows.push(leaf);}
+  }
+ }
+ if(cfg.rootPaths!==undefined){
+  if((cfg.actions||[]).length||maxDepth!==0||!Array.isArray(cfg.rootPaths)||!cfg.rootPaths.length)throw Error('native-ui-multi-anchor-read-only');
+  for(const path of cfg.rootPaths)scan(at(path),path,0);
+ }else scan(at(cfg.rootPath||[]),cfg.rootPath||[],0);
+ return JSON.stringify({backend:'system-events-ui-tree',screenCapture:false,frontmost:p.frontmost(),results:results,nodes:rows});
+}

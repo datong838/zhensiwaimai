@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "description": "P0-2 强桌面验证级别白名单外置（fail-closed 语义不变：未知级别一律拒绝）",
+  "updatedAt": "2026-10-03T23:40:00+08:00",
+  "updatedBy": "监理(WorkBuddy)",
+  "reason": "初始外置：与内置默认等价（file-name-size-ui / windows-readback-file-card / native-text-exact），行为零变化",
+  "levels": [
+    "file-name-size-ui",
+    "windows-readback-file-card",
+    "native-text-exact",
+    "wecom-ui-tree-file-name-size"
+  ]
+}

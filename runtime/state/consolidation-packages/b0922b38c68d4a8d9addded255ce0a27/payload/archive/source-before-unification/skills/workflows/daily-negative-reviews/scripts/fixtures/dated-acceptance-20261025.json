@@ -1,0 +1,1404 @@
+{
+  "root": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back",
+  "confirmation": {
+    "schemaVersion": 1,
+    "source": "explicit-user-confirmation",
+    "date": "2026-10-26",
+    "recordedAt": "2026-10-26T17:30:35.080076+08:00",
+    "scope": "already-executed-image-submissions-only; no future slots or unexecuted actions",
+    "userQuotes": [
+      "今天所有已经执行的任务流的图片提交 我都看了没有问题 只是有个通病；回执待确认/unknow 等",
+      "是的 今天已经执行的任务流 都执行成功了 没有 遗漏和错过的"
+    ],
+    "businessAccepted": true,
+    "items": [
+      {
+        "taskId": "51005f93-79f6-44be-b49d-d1cb14157755",
+        "workflowId": "negative-reviews-summary",
+        "eventId": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/negative-review-summary-send-shanghai-zhensi-operations-ding-fandang-v1.desktop-attempts/negative-review-summary-2026-10-25.json",
+        "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+        "name": "差评分析长图_2026-10-25_2026-10-25.jpg",
+        "sha256": "727fe51a71c6f4a6b5e27013a1b4809007dc51be343d36bb945937b515d1e2ea",
+        "submittedAt": "2026-10-26T08:32:46.768538+08:00",
+        "technicalStatusPreserved": "unknown",
+        "sendAttempts": 1,
+        "sources": {
+          "task.json": "f72564b57746e9a18794d71b6860d15816fea1cf754cbac6978063a58b8ba4b6",
+          "response.json": "191bb20dc0053edf0338b482400ea11d8d56afb3f7b906de1ee3770f2485dc16",
+          "send-intent.json": "767daad68d6f884e18ec6ac1551592f40966db290db0eacfc374eca8b79c66e9"
+        }
+      }
+    ],
+    "newSendAttempts": 0,
+    "technicalRecordsModified": false,
+    "note": "Bound evidence inventory only; requires per-flow supported validation before ledger completion, no automatic blanket success."
+  },
+  "config": {
+    "policyVersion": "daily-negative-reviews-code-enforced-v1",
+    "runDay": "2026-10-26",
+    "businessDate": "2026-10-25",
+    "runDir": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/daily-negative-reviews/20261025",
+    "outputDir": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/outputs/yesterday-negative-20261025",
+    "config": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/daily-negative-reviews/20261025/config.json",
+    "raw": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/daily-negative-reviews/20261025/raw/差评分析数据_2026-10-25_2026-10-25.xlsx",
+    "browserReceipt": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/daily-negative-reviews/20261025/browser-receipt.json",
+    "uiStatus": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/daily-negative-reviews/20261025/ui-status.json",
+    "finalData": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/daily-negative-reviews/20261025/final-data.json",
+    "analysis": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/daily-negative-reviews/20261025/analysis.json",
+    "report": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/outputs/yesterday-negative-20261025/差评分析数据_2026-10-25_2026-10-25.xlsx",
+    "reportValidation": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/daily-negative-reviews/20261025/report-validation.json",
+    "sendOutput": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/daily-negative-reviews/20261025/wechat-send",
+    "sendReceipt": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/daily-negative-reviews/20261025/wechat-send/receipt.json",
+    "state": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/daily-negative-reviews/20261025/workflow-state.json",
+    "summary": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/daily-negative-reviews/20261025/workflow-summary.json",
+    "screenshot": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/outputs/yesterday-negative-20261025/差评分析长图_2026-10-25_2026-10-25.jpg",
+    "screenshotReceipt": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/daily-negative-reviews/20261025/screenshot-receipt.json",
+    "screenshotSendOutput": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/daily-negative-reviews/20261025/wechat-screenshot-send",
+    "screenshotSendReceipt": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/daily-negative-reviews/20261025/wechat-screenshot-send/receipt.json",
+    "sendMarker": "negative-review-2026-10-25.json",
+    "screenshotSendMarker": "negative-review-summary-2026-10-25.json"
+  },
+  "state": {
+    "policyVersion": "daily-negative-reviews-code-enforced-v1",
+    "businessDate": "2026-10-25",
+    "phase": "sent",
+    "status": "recoverable",
+    "startedAt": 1792974703263,
+    "updatedAt": 1793007071133,
+    "reviewItems": [
+      {
+        "stage": "browser_validate",
+        "label": "连接并唯一定位金鲨页面",
+        "attempts": 1,
+        "elapsedMs": 3680,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "stage": "route_and_date",
+        "label": "核验淘宝外卖入口并设置昨日日期",
+        "attempts": 1,
+        "elapsedMs": 1460,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "stage": "download",
+        "label": "下载全部平台差评",
+        "attempts": 1,
+        "elapsedMs": 12331,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "stage": "extract_platforms",
+        "label": "读取三平台页面列表",
+        "attempts": 1,
+        "elapsedMs": 16766,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "stage": "reconcile",
+        "label": "下载与页面逐条对账",
+        "attempts": 1,
+        "elapsedMs": 2405,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "stage": "build_report",
+        "label": "生成并验收固定格式Excel",
+        "attempts": 1,
+        "elapsedMs": 945,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "stage": "wechat_send",
+        "label": "唯一群定位、单次发送与双帧校验",
+        "attempts": 1,
+        "elapsedMs": 15147,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "stage": "screenshot",
+        "label": "渲染整表长图",
+        "attempts": 1,
+        "elapsedMs": 1813,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "stage": "screenshot_send",
+        "label": "整表长图单次发送与回读校验",
+        "attempts": 1,
+        "elapsedMs": 15160,
+        "status": "failed",
+        "pitfalls": [
+          "image-submission-awaits-read-only-verification"
+        ]
+      },
+      {
+        "stage": "screenshot",
+        "label": "渲染整表长图",
+        "attempts": 1,
+        "elapsedMs": 1654,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "stage": "screenshot_send",
+        "label": "整表长图单次发送与回读校验",
+        "attempts": 1,
+        "elapsedMs": 1716,
+        "status": "failed",
+        "pitfalls": [
+          "image-submission-awaits-read-only-verification"
+        ]
+      },
+      {
+        "stage": "screenshot",
+        "label": "渲染整表长图",
+        "attempts": 1,
+        "elapsedMs": 1774,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "stage": "screenshot_send",
+        "label": "整表长图单次发送与回读校验",
+        "attempts": 1,
+        "elapsedMs": 1851,
+        "status": "failed",
+        "pitfalls": [
+          "image-submission-awaits-read-only-verification"
+        ]
+      },
+      {
+        "stage": "screenshot",
+        "label": "渲染整表长图",
+        "attempts": 1,
+        "elapsedMs": 1713,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "stage": "screenshot_send",
+        "label": "整表长图单次发送与回读校验",
+        "attempts": 1,
+        "elapsedMs": 1774,
+        "status": "failed",
+        "pitfalls": [
+          "image-submission-awaits-read-only-verification"
+        ]
+      },
+      {
+        "stage": "screenshot",
+        "label": "渲染整表长图",
+        "attempts": 1,
+        "elapsedMs": 1801,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "stage": "screenshot_send",
+        "label": "整表长图单次发送与回读校验",
+        "attempts": 1,
+        "elapsedMs": 1867,
+        "status": "failed",
+        "pitfalls": [
+          "image-submission-awaits-read-only-verification"
+        ]
+      },
+      {
+        "stage": "screenshot",
+        "label": "渲染整表长图",
+        "attempts": 1,
+        "elapsedMs": 1674,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "stage": "screenshot_send",
+        "label": "整表长图单次发送与回读校验",
+        "attempts": 1,
+        "elapsedMs": 1738,
+        "status": "failed",
+        "pitfalls": [
+          "image-submission-awaits-read-only-verification"
+        ]
+      },
+      {
+        "stage": "screenshot",
+        "label": "渲染整表长图",
+        "attempts": 1,
+        "elapsedMs": 1825,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "stage": "screenshot_send",
+        "label": "整表长图单次发送与回读校验",
+        "attempts": 1,
+        "elapsedMs": 1889,
+        "status": "failed",
+        "pitfalls": [
+          "image-submission-awaits-read-only-verification"
+        ]
+      },
+      {
+        "stage": "screenshot",
+        "label": "渲染整表长图",
+        "attempts": 1,
+        "elapsedMs": 1797,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "stage": "screenshot_send",
+        "label": "整表长图单次发送与回读校验",
+        "attempts": 1,
+        "elapsedMs": 1859,
+        "status": "failed",
+        "pitfalls": [
+          "image-submission-awaits-read-only-verification"
+        ]
+      },
+      {
+        "stage": "screenshot",
+        "label": "渲染整表长图",
+        "attempts": 1,
+        "elapsedMs": 1755,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "stage": "screenshot_send",
+        "label": "整表长图单次发送与回读校验",
+        "attempts": 1,
+        "elapsedMs": 1821,
+        "status": "failed",
+        "pitfalls": [
+          "image-submission-awaits-read-only-verification"
+        ]
+      },
+      {
+        "stage": "screenshot",
+        "label": "渲染整表长图",
+        "attempts": 1,
+        "elapsedMs": 1692,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "stage": "screenshot_send",
+        "label": "整表长图单次发送与回读校验",
+        "attempts": 1,
+        "elapsedMs": 1755,
+        "status": "failed",
+        "pitfalls": [
+          "image-submission-awaits-read-only-verification"
+        ]
+      },
+      {
+        "stage": "screenshot",
+        "label": "渲染整表长图",
+        "attempts": 1,
+        "elapsedMs": 1761,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "stage": "screenshot_send",
+        "label": "整表长图单次发送与回读校验",
+        "attempts": 1,
+        "elapsedMs": 1827,
+        "status": "failed",
+        "pitfalls": [
+          "image-submission-awaits-read-only-verification"
+        ]
+      },
+      {
+        "stage": "screenshot",
+        "label": "渲染整表长图",
+        "attempts": 1,
+        "elapsedMs": 1756,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "stage": "screenshot_send",
+        "label": "整表长图单次发送与回读校验",
+        "attempts": 1,
+        "elapsedMs": 1824,
+        "status": "failed",
+        "pitfalls": [
+          "image-submission-awaits-read-only-verification"
+        ]
+      },
+      {
+        "stage": "screenshot",
+        "label": "渲染整表长图",
+        "attempts": 1,
+        "elapsedMs": 1706,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "stage": "screenshot_send",
+        "label": "整表长图单次发送与回读校验",
+        "attempts": 1,
+        "elapsedMs": 1771,
+        "status": "failed",
+        "pitfalls": [
+          "image-submission-awaits-read-only-verification"
+        ]
+      },
+      {
+        "stage": "screenshot",
+        "label": "渲染整表长图",
+        "attempts": 1,
+        "elapsedMs": 1681,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "stage": "screenshot_send",
+        "label": "整表长图单次发送与回读校验",
+        "attempts": 1,
+        "elapsedMs": 1743,
+        "status": "failed",
+        "pitfalls": [
+          "image-submission-awaits-read-only-verification"
+        ]
+      },
+      {
+        "stage": "screenshot",
+        "label": "渲染整表长图",
+        "attempts": 1,
+        "elapsedMs": 1852,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "stage": "screenshot_send",
+        "label": "整表长图单次发送与回读校验",
+        "attempts": 1,
+        "elapsedMs": 1920,
+        "status": "failed",
+        "pitfalls": [
+          "image-submission-awaits-read-only-verification"
+        ]
+      },
+      {
+        "stage": "screenshot",
+        "label": "渲染整表长图",
+        "attempts": 1,
+        "elapsedMs": 1627,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "stage": "screenshot_send",
+        "label": "整表长图单次发送与回读校验",
+        "attempts": 1,
+        "elapsedMs": 1690,
+        "status": "failed",
+        "pitfalls": [
+          "image-submission-awaits-read-only-verification"
+        ]
+      },
+      {
+        "stage": "screenshot",
+        "label": "渲染整表长图",
+        "attempts": 1,
+        "elapsedMs": 1709,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "stage": "screenshot_send",
+        "label": "整表长图单次发送与回读校验",
+        "attempts": 1,
+        "elapsedMs": 1772,
+        "status": "failed",
+        "pitfalls": [
+          "image-submission-awaits-read-only-verification"
+        ]
+      },
+      {
+        "stage": "screenshot",
+        "label": "渲染整表长图",
+        "attempts": 1,
+        "elapsedMs": 1632,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "stage": "screenshot_send",
+        "label": "整表长图单次发送与回读校验",
+        "attempts": 1,
+        "elapsedMs": 1693,
+        "status": "failed",
+        "pitfalls": [
+          "image-submission-awaits-read-only-verification"
+        ]
+      },
+      {
+        "stage": "screenshot",
+        "label": "渲染整表长图",
+        "attempts": 1,
+        "elapsedMs": 1755,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "stage": "screenshot_send",
+        "label": "整表长图单次发送与回读校验",
+        "attempts": 1,
+        "elapsedMs": 1826,
+        "status": "failed",
+        "pitfalls": [
+          "image-submission-awaits-read-only-verification"
+        ]
+      },
+      {
+        "stage": "screenshot",
+        "label": "渲染整表长图",
+        "attempts": 1,
+        "elapsedMs": 1677,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "stage": "screenshot_send",
+        "label": "整表长图单次发送与回读校验",
+        "attempts": 1,
+        "elapsedMs": 1739,
+        "status": "failed",
+        "pitfalls": [
+          "image-submission-awaits-read-only-verification"
+        ]
+      },
+      {
+        "stage": "screenshot",
+        "label": "渲染整表长图",
+        "attempts": 1,
+        "elapsedMs": 1689,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "stage": "screenshot_send",
+        "label": "整表长图单次发送与回读校验",
+        "attempts": 1,
+        "elapsedMs": 1749,
+        "status": "failed",
+        "pitfalls": [
+          "image-submission-awaits-read-only-verification"
+        ]
+      },
+      {
+        "stage": "screenshot",
+        "label": "渲染整表长图",
+        "attempts": 1,
+        "elapsedMs": 1798,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "stage": "screenshot_send",
+        "label": "整表长图单次发送与回读校验",
+        "attempts": 1,
+        "elapsedMs": 1864,
+        "status": "failed",
+        "pitfalls": [
+          "image-submission-awaits-read-only-verification"
+        ]
+      },
+      {
+        "stage": "screenshot",
+        "label": "渲染整表长图",
+        "attempts": 1,
+        "elapsedMs": 1661,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "stage": "screenshot_send",
+        "label": "整表长图单次发送与回读校验",
+        "attempts": 1,
+        "elapsedMs": 1720,
+        "status": "failed",
+        "pitfalls": [
+          "image-submission-awaits-read-only-verification"
+        ]
+      },
+      {
+        "stage": "screenshot",
+        "label": "渲染整表长图",
+        "attempts": 1,
+        "elapsedMs": 1649,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "stage": "screenshot_send",
+        "label": "整表长图单次发送与回读校验",
+        "attempts": 1,
+        "elapsedMs": 1713,
+        "status": "failed",
+        "pitfalls": [
+          "image-submission-awaits-read-only-verification"
+        ]
+      },
+      {
+        "stage": "screenshot",
+        "label": "渲染整表长图",
+        "attempts": 1,
+        "elapsedMs": 1746,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "stage": "screenshot_send",
+        "label": "整表长图单次发送与回读校验",
+        "attempts": 1,
+        "elapsedMs": 1818,
+        "status": "failed",
+        "pitfalls": [
+          "image-submission-awaits-read-only-verification"
+        ]
+      },
+      {
+        "stage": "screenshot",
+        "label": "渲染整表长图",
+        "attempts": 1,
+        "elapsedMs": 1789,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "stage": "screenshot_send",
+        "label": "整表长图单次发送与回读校验",
+        "attempts": 1,
+        "elapsedMs": 1855,
+        "status": "failed",
+        "pitfalls": [
+          "image-submission-awaits-read-only-verification"
+        ]
+      },
+      {
+        "stage": "screenshot",
+        "label": "渲染整表长图",
+        "attempts": 1,
+        "elapsedMs": 1889,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "stage": "screenshot_send",
+        "label": "整表长图单次发送与回读校验",
+        "attempts": 1,
+        "elapsedMs": 1963,
+        "status": "failed",
+        "pitfalls": [
+          "image-submission-awaits-read-only-verification"
+        ]
+      },
+      {
+        "stage": "screenshot",
+        "label": "渲染整表长图",
+        "attempts": 1,
+        "elapsedMs": 1793,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "stage": "screenshot_send",
+        "label": "整表长图单次发送与回读校验",
+        "attempts": 1,
+        "elapsedMs": 1866,
+        "status": "failed",
+        "pitfalls": [
+          "image-submission-awaits-read-only-verification"
+        ]
+      },
+      {
+        "stage": "screenshot",
+        "label": "渲染整表长图",
+        "attempts": 1,
+        "elapsedMs": 1815,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "stage": "screenshot_send",
+        "label": "整表长图单次发送与回读校验",
+        "attempts": 1,
+        "elapsedMs": 1920,
+        "status": "failed",
+        "pitfalls": [
+          "image-submission-awaits-read-only-verification"
+        ]
+      },
+      {
+        "stage": "screenshot",
+        "label": "渲染整表长图",
+        "attempts": 1,
+        "elapsedMs": 1874,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "stage": "screenshot_send",
+        "label": "整表长图单次发送与回读校验",
+        "attempts": 1,
+        "elapsedMs": 1948,
+        "status": "failed",
+        "pitfalls": [
+          "image-submission-awaits-read-only-verification"
+        ]
+      },
+      {
+        "stage": "screenshot",
+        "label": "渲染整表长图",
+        "attempts": 1,
+        "elapsedMs": 1799,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "stage": "screenshot_send",
+        "label": "整表长图单次发送与回读校验",
+        "attempts": 1,
+        "elapsedMs": 1863,
+        "status": "failed",
+        "pitfalls": [
+          "image-submission-awaits-read-only-verification"
+        ]
+      },
+      {
+        "stage": "screenshot",
+        "label": "渲染整表长图",
+        "attempts": 1,
+        "elapsedMs": 1784,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "stage": "screenshot_send",
+        "label": "整表长图单次发送与回读校验",
+        "attempts": 1,
+        "elapsedMs": 1859,
+        "status": "failed",
+        "pitfalls": [
+          "image-submission-awaits-read-only-verification"
+        ]
+      }
+    ],
+    "runtimeModelDecisions": 0,
+    "lastRecovery": {
+      "allowed": true,
+      "stage": "wechat_send",
+      "priorFailures": 0,
+      "nextAttempt": 1
+    },
+    "reason": "image-submission-awaits-read-only-verification"
+  },
+  "fileReceipt": {
+    "bridgeVersion": 1,
+    "ok": true,
+    "verified": true,
+    "payloadType": "file",
+    "state": "verified",
+    "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "payloads": [
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/outputs/yesterday-negative-20261025/差评分析数据_2026-10-25_2026-10-25.xlsx",
+        "name": "差评分析数据_2026-10-25_2026-10-25.xlsx",
+        "size": 18240,
+        "sha256": "30e32c3aa3675b946275447518373d4b1a0e93d5d445c64a2afe1116e99faf5e"
+      }
+    ],
+    "sendAttempts": 1,
+    "newSendAttempts": 1,
+    "reason": null,
+    "runtimeModelDecisions": 0,
+    "commonReceipt": {
+      "ok": true,
+      "status": "verified",
+      "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+      "channel": "desktop",
+      "requestDigest": "5758ae62e09aed51762392aedfa36b9a32d7d3be30a5170779941440a39d4a9c",
+      "runtimeModelDecisions": 0,
+      "items": [
+        {
+          "itemId": "0",
+          "sha256": "30e32c3aa3675b946275447518373d4b1a0e93d5d445c64a2afe1116e99faf5e",
+          "type": "file",
+          "status": "verified",
+          "claimedAt": 1792974741.7669492,
+          "sendAttempts": 1,
+          "resolvedGroup": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+          "observations": [
+            {
+              "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+              "inputEmpty": true,
+              "newMessageVisible": true,
+              "observedAt": 1792974754.236369,
+              "messagePath": [
+                0,
+                25,
+                9,
+                0,
+                0,
+                0,
+                20
+              ],
+              "visibleFileName": "差评分析数据_2026-10-25_2026-10-25.xlsx",
+              "visibleFileSize": "18K"
+            },
+            {
+              "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+              "inputEmpty": true,
+              "newMessageVisible": true,
+              "observedAt": 1792974756.1580749,
+              "messagePath": [
+                0,
+                25,
+                9,
+                0,
+                0,
+                0,
+                20
+              ],
+              "visibleFileName": "差评分析数据_2026-10-25_2026-10-25.xlsx",
+              "visibleFileSize": "18K"
+            }
+          ],
+          "backend": "system-events-ui-tree",
+          "verificationLevel": "wecom-ui-tree-file-name-size",
+          "evidence": {
+            "method": "wecom-ui-tree-file-name-size",
+            "resolvedGroup": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+            "sha256": "30e32c3aa3675b946275447518373d4b1a0e93d5d445c64a2afe1116e99faf5e",
+            "observations": [
+              {
+                "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+                "inputEmpty": true,
+                "newMessageVisible": true,
+                "observedAt": 1792974754.236369,
+                "messagePath": [
+                  0,
+                  25,
+                  9,
+                  0,
+                  0,
+                  0,
+                  20
+                ],
+                "visibleFileName": "差评分析数据_2026-10-25_2026-10-25.xlsx",
+                "visibleFileSize": "18K"
+              },
+              {
+                "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+                "inputEmpty": true,
+                "newMessageVisible": true,
+                "observedAt": 1792974756.1580749,
+                "messagePath": [
+                  0,
+                  25,
+                  9,
+                  0,
+                  0,
+                  0,
+                  20
+                ],
+                "visibleFileName": "差评分析数据_2026-10-25_2026-10-25.xlsx",
+                "visibleFileSize": "18K"
+              }
+            ]
+          },
+          "transport": {
+            "kind": "file",
+            "sendAttempts": 1,
+            "sent": true,
+            "postSendInputCleared": [
+              true,
+              true
+            ],
+            "stage": "post_send_verify"
+          }
+        }
+      ],
+      "review": [
+        {
+          "stage": "authorization",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "freeze:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "preflight",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 658
+        },
+        {
+          "stage": "send:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 14418
+        }
+      ],
+      "elapsedMs": 15079,
+      "eventKey": "89397a769f860583634c21eca748699b3678d8508da44edad7b3cbb8b4b30ea6",
+      "reviewSummary": {
+        "totalElapsedMs": 15079,
+        "result": "verified",
+        "stageCount": 4,
+        "completedStages": 4,
+        "failedStages": []
+      }
+    },
+    "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/negative-review-send-shanghai-zhensi-operations-ding-fandang-v1.desktop-attempts/negative-review-2026-10-25.json",
+    "sendReview": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0,
+        "item": 1,
+        "label": "authorization"
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0,
+        "item": 2,
+        "label": "freeze:0"
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 658,
+        "item": 3,
+        "label": "preflight"
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 14418,
+        "item": 4,
+        "label": "send:0"
+      }
+    ],
+    "elapsedMs": 15079,
+    "reviewSummary": {
+      "totalElapsedMs": 15079,
+      "itemCount": 4,
+      "pitfallCount": 0,
+      "result": "success"
+    }
+  },
+  "imageReceipt": {
+    "bridgeVersion": 1,
+    "ok": false,
+    "verified": false,
+    "payloadType": "image",
+    "state": "unknown",
+    "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "payloads": [
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/outputs/yesterday-negative-20261025/差评分析长图_2026-10-25_2026-10-25.jpg",
+        "name": "差评分析长图_2026-10-25_2026-10-25.jpg",
+        "size": 2618241,
+        "sha256": "727fe51a71c6f4a6b5e27013a1b4809007dc51be343d36bb945937b515d1e2ea"
+      }
+    ],
+    "sendAttempts": 1,
+    "newSendAttempts": 1,
+    "reason": "image-submission-awaits-read-only-verification",
+    "runtimeModelDecisions": 0,
+    "commonReceipt": {
+      "ok": false,
+      "status": "unknown",
+      "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+      "channel": "desktop",
+      "requestDigest": "984da61311769cae52f6c61c855b6bd43ee2a99f2993a801f0f68e2445531b5a",
+      "runtimeModelDecisions": 0,
+      "items": [
+        {
+          "itemId": "0",
+          "sha256": "727fe51a71c6f4a6b5e27013a1b4809007dc51be343d36bb945937b515d1e2ea",
+          "type": "image",
+          "status": "unknown",
+          "claimedAt": 1792974758.717577,
+          "sendAttempts": 1,
+          "resolvedGroup": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+          "inputEmpty": true,
+          "reason": "native-ui-inline-image-not-exposed",
+          "backend": "system-events-ui-tree"
+        }
+      ],
+      "review": [
+        {
+          "stage": "authorization",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "freeze:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 3
+        },
+        {
+          "stage": "preflight",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 646
+        },
+        {
+          "stage": "send:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 12623
+        }
+      ],
+      "executionComplete": true,
+      "verificationPending": [
+        "0"
+      ],
+      "reason": "image-submission-awaits-read-only-verification",
+      "elapsedMs": 13273,
+      "eventKey": "aa939d8c41ea4d9d1b18a71ef8344903db6e5fbd771a98b630debc2f5d047a34",
+      "reviewSummary": {
+        "totalElapsedMs": 13273,
+        "result": "unknown",
+        "stageCount": 4,
+        "completedStages": 4,
+        "failedStages": []
+      }
+    },
+    "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/negative-review-summary-send-shanghai-zhensi-operations-ding-fandang-v1.desktop-attempts/negative-review-summary-2026-10-25.json",
+    "sendReview": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0,
+        "item": 1,
+        "label": "authorization"
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 3,
+        "item": 2,
+        "label": "freeze:0"
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 646,
+        "item": 3,
+        "label": "preflight"
+      },
+      {
+        "stage": "send:0",
+        "status": "failed",
+        "pitfalls": [
+          {
+            "code": "messaging-stage",
+            "reason": "native-ui-inline-image-not-exposed"
+          }
+        ],
+        "elapsedMs": 12623,
+        "item": 4,
+        "label": "send:0"
+      }
+    ],
+    "elapsedMs": 13273,
+    "reviewSummary": {
+      "totalElapsedMs": 13273,
+      "itemCount": 4,
+      "pitfallCount": 1,
+      "result": "failed"
+    }
+  },
+  "fileMarker": {
+    "bridgeVersion": 1,
+    "ok": true,
+    "verified": true,
+    "payloadType": "file",
+    "state": "verified",
+    "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "payloads": [
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/outputs/yesterday-negative-20261025/差评分析数据_2026-10-25_2026-10-25.xlsx",
+        "name": "差评分析数据_2026-10-25_2026-10-25.xlsx",
+        "size": 18240,
+        "sha256": "30e32c3aa3675b946275447518373d4b1a0e93d5d445c64a2afe1116e99faf5e"
+      }
+    ],
+    "sendAttempts": 1,
+    "newSendAttempts": 1,
+    "reason": null,
+    "runtimeModelDecisions": 0,
+    "commonReceipt": {
+      "ok": true,
+      "status": "verified",
+      "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+      "channel": "desktop",
+      "requestDigest": "5758ae62e09aed51762392aedfa36b9a32d7d3be30a5170779941440a39d4a9c",
+      "runtimeModelDecisions": 0,
+      "items": [
+        {
+          "itemId": "0",
+          "sha256": "30e32c3aa3675b946275447518373d4b1a0e93d5d445c64a2afe1116e99faf5e",
+          "type": "file",
+          "status": "verified",
+          "claimedAt": 1792974741.7669492,
+          "sendAttempts": 1,
+          "resolvedGroup": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+          "observations": [
+            {
+              "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+              "inputEmpty": true,
+              "newMessageVisible": true,
+              "observedAt": 1792974754.236369,
+              "messagePath": [
+                0,
+                25,
+                9,
+                0,
+                0,
+                0,
+                20
+              ],
+              "visibleFileName": "差评分析数据_2026-10-25_2026-10-25.xlsx",
+              "visibleFileSize": "18K"
+            },
+            {
+              "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+              "inputEmpty": true,
+              "newMessageVisible": true,
+              "observedAt": 1792974756.1580749,
+              "messagePath": [
+                0,
+                25,
+                9,
+                0,
+                0,
+                0,
+                20
+              ],
+              "visibleFileName": "差评分析数据_2026-10-25_2026-10-25.xlsx",
+              "visibleFileSize": "18K"
+            }
+          ],
+          "backend": "system-events-ui-tree",
+          "verificationLevel": "wecom-ui-tree-file-name-size",
+          "evidence": {
+            "method": "wecom-ui-tree-file-name-size",
+            "resolvedGroup": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+            "sha256": "30e32c3aa3675b946275447518373d4b1a0e93d5d445c64a2afe1116e99faf5e",
+            "observations": [
+              {
+                "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+                "inputEmpty": true,
+                "newMessageVisible": true,
+                "observedAt": 1792974754.236369,
+                "messagePath": [
+                  0,
+                  25,
+                  9,
+                  0,
+                  0,
+                  0,
+                  20
+                ],
+                "visibleFileName": "差评分析数据_2026-10-25_2026-10-25.xlsx",
+                "visibleFileSize": "18K"
+              },
+              {
+                "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+                "inputEmpty": true,
+                "newMessageVisible": true,
+                "observedAt": 1792974756.1580749,
+                "messagePath": [
+                  0,
+                  25,
+                  9,
+                  0,
+                  0,
+                  0,
+                  20
+                ],
+                "visibleFileName": "差评分析数据_2026-10-25_2026-10-25.xlsx",
+                "visibleFileSize": "18K"
+              }
+            ]
+          },
+          "transport": {
+            "kind": "file",
+            "sendAttempts": 1,
+            "sent": true,
+            "postSendInputCleared": [
+              true,
+              true
+            ],
+            "stage": "post_send_verify"
+          }
+        }
+      ],
+      "review": [
+        {
+          "stage": "authorization",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "freeze:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "preflight",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 658
+        },
+        {
+          "stage": "send:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 14418
+        }
+      ],
+      "elapsedMs": 15079,
+      "eventKey": "89397a769f860583634c21eca748699b3678d8508da44edad7b3cbb8b4b30ea6",
+      "reviewSummary": {
+        "totalElapsedMs": 15079,
+        "result": "verified",
+        "stageCount": 4,
+        "completedStages": 4,
+        "failedStages": []
+      }
+    },
+    "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/negative-review-send-shanghai-zhensi-operations-ding-fandang-v1.desktop-attempts/negative-review-2026-10-25.json",
+    "sendReview": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0,
+        "item": 1,
+        "label": "authorization"
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0,
+        "item": 2,
+        "label": "freeze:0"
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 658,
+        "item": 3,
+        "label": "preflight"
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 14418,
+        "item": 4,
+        "label": "send:0"
+      }
+    ],
+    "elapsedMs": 15079,
+    "reviewSummary": {
+      "totalElapsedMs": 15079,
+      "itemCount": 4,
+      "pitfallCount": 0,
+      "result": "success"
+    }
+  },
+  "imageMarker": {
+    "bridgeVersion": 1,
+    "ok": false,
+    "verified": false,
+    "payloadType": "image",
+    "state": "unknown",
+    "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "payloads": [
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/outputs/yesterday-negative-20261025/差评分析长图_2026-10-25_2026-10-25.jpg",
+        "name": "差评分析长图_2026-10-25_2026-10-25.jpg",
+        "size": 2618241,
+        "sha256": "727fe51a71c6f4a6b5e27013a1b4809007dc51be343d36bb945937b515d1e2ea"
+      }
+    ],
+    "sendAttempts": 1,
+    "newSendAttempts": 1,
+    "reason": "image-submission-awaits-read-only-verification",
+    "runtimeModelDecisions": 0,
+    "commonReceipt": {
+      "ok": false,
+      "status": "unknown",
+      "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+      "channel": "desktop",
+      "requestDigest": "984da61311769cae52f6c61c855b6bd43ee2a99f2993a801f0f68e2445531b5a",
+      "runtimeModelDecisions": 0,
+      "items": [
+        {
+          "itemId": "0",
+          "sha256": "727fe51a71c6f4a6b5e27013a1b4809007dc51be343d36bb945937b515d1e2ea",
+          "type": "image",
+          "status": "unknown",
+          "claimedAt": 1792974758.717577,
+          "sendAttempts": 1,
+          "resolvedGroup": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+          "inputEmpty": true,
+          "reason": "native-ui-inline-image-not-exposed",
+          "backend": "system-events-ui-tree"
+        }
+      ],
+      "review": [
+        {
+          "stage": "authorization",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "freeze:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 3
+        },
+        {
+          "stage": "preflight",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 646
+        },
+        {
+          "stage": "send:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 12623
+        }
+      ],
+      "executionComplete": true,
+      "verificationPending": [
+        "0"
+      ],
+      "reason": "image-submission-awaits-read-only-verification",
+      "elapsedMs": 13273,
+      "eventKey": "aa939d8c41ea4d9d1b18a71ef8344903db6e5fbd771a98b630debc2f5d047a34",
+      "reviewSummary": {
+        "totalElapsedMs": 13273,
+        "result": "unknown",
+        "stageCount": 4,
+        "completedStages": 4,
+        "failedStages": []
+      }
+    },
+    "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/negative-review-summary-send-shanghai-zhensi-operations-ding-fandang-v1.desktop-attempts/negative-review-summary-2026-10-25.json",
+    "sendReview": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0,
+        "item": 1,
+        "label": "authorization"
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 3,
+        "item": 2,
+        "label": "freeze:0"
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 646,
+        "item": 3,
+        "label": "preflight"
+      },
+      {
+        "stage": "send:0",
+        "status": "failed",
+        "pitfalls": [
+          {
+            "code": "messaging-stage",
+            "reason": "native-ui-inline-image-not-exposed"
+          }
+        ],
+        "elapsedMs": 12623,
+        "item": 4,
+        "label": "send:0"
+      }
+    ],
+    "elapsedMs": 13273,
+    "reviewSummary": {
+      "totalElapsedMs": 13273,
+      "itemCount": 4,
+      "pitfallCount": 1,
+      "result": "failed"
+    }
+  },
+  "originals": {
+    "task.json": "{\n  \"taskId\": \"51005f93-79f6-44be-b49d-d1cb14157755\",\n  \"stage\": \"send\",\n  \"request\": {\n    \"schemaVersion\": 1,\n    \"operation\": \"send\",\n    \"groupName\": \"上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰\",\n    \"items\": [\n      {\n        \"itemId\": \"0\",\n        \"type\": \"image\",\n        \"path\": \"/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/outputs/yesterday-negative-20261025/差评分析长图_2026-10-25_2026-10-25.jpg\",\n        \"name\": \"差评分析长图_2026-10-25_2026-10-25.jpg\",\n        \"size\": 2618241,\n        \"sha256\": \"727fe51a71c6f4a6b5e27013a1b4809007dc51be343d36bb945937b515d1e2ea\"\n      }\n    ],\n    \"context\": {\n      \"workflowId\": \"negative-reviews-summary\",\n      \"eventId\": \"/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/negative-review-summary-send-shanghai-zhensi-operations-ding-fandang-v1.desktop-attempts/negative-review-summary-2026-10-25.json\",\n      \"accountAlias\": \"main-wechat\",\n      \"channel\": \"desktop\",\n      \"deadlineAt\": 1792975658.0,\n      \"searchGroupName\": \"上海臻肆外卖运营-盯个盯\"\n    }\n  },\n  \"item\": {\n    \"itemId\": \"0\",\n    \"type\": \"image\",\n    \"path\": \"/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/negative-review-summary-send-shanghai-zhensi-operations-ding-fandang-v1.desktop-attempts/.wechat-messaging/events/aa939d8c41ea4d9d1b18a71ef8344903db6e5fbd771a98b630debc2f5d047a34/905d75a3303e95978d3c542de5c0a0a323c01e5822f5cd7548fae81ae723dcaa/payload/差评分析长图_2026-10-25_2026-10-25.jpg\",\n    \"name\": \"差评分析长图_2026-10-25_2026-10-25.jpg\",\n    \"size\": 2618241,\n    \"sha256\": \"727fe51a71c6f4a6b5e27013a1b4809007dc51be343d36bb945937b515d1e2ea\"\n  },\n  \"deadlineAt\": null,\n  \"lifetime\": \"owner-process\",\n  \"owner\": {\n    \"pid\": 87976,\n    \"parentPid\": 87718,\n    \"identity\": \"Mon Oct 26 08:32:38 2026\",\n    \"parentIdentity\": \"Mon Oct 26 08:31:43 2026\"\n  },\n  \"expectedPresentation\": \"inline-image\",\n  \"binding\": \"6ec994d9926f359e791da2420e79f87467f240276a7c25fc4db51b7ecfae264f\"\n}",
+    "response.json": "{\n  \"taskId\": \"51005f93-79f6-44be-b49d-d1cb14157755\",\n  \"binding\": \"6ec994d9926f359e791da2420e79f87467f240276a7c25fc4db51b7ecfae264f\",\n  \"result\": {\n    \"status\": \"unknown\",\n    \"sendAttempts\": 1,\n    \"resolvedGroup\": \"上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰\",\n    \"inputEmpty\": true,\n    \"reason\": \"native-ui-inline-image-not-exposed\",\n    \"backend\": \"system-events-ui-tree\"\n  }\n}",
+    "send-intent.json": "{\"taskId\": \"51005f93-79f6-44be-b49d-d1cb14157755\", \"binding\": \"6ec994d9926f359e791da2420e79f87467f240276a7c25fc4db51b7ecfae264f\", \"sha256\": \"727fe51a71c6f4a6b5e27013a1b4809007dc51be343d36bb945937b515d1e2ea\", \"at\": 1792974766.768538, \"backend\": \"system-events-ui-tree\"}"
+  },
+  "identities": {
+    "file": {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/outputs/yesterday-negative-20261025/差评分析数据_2026-10-25_2026-10-25.xlsx",
+      "name": "差评分析数据_2026-10-25_2026-10-25.xlsx",
+      "size": 18240,
+      "sha256": "30e32c3aa3675b946275447518373d4b1a0e93d5d445c64a2afe1116e99faf5e"
+    },
+    "image": {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/outputs/yesterday-negative-20261025/差评分析长图_2026-10-25_2026-10-25.jpg",
+      "name": "差评分析长图_2026-10-25_2026-10-25.jpg",
+      "size": 2618241,
+      "sha256": "727fe51a71c6f4a6b5e27013a1b4809007dc51be343d36bb945937b515d1e2ea"
+    },
+    "frozen": {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/negative-review-summary-send-shanghai-zhensi-operations-ding-fandang-v1.desktop-attempts/.wechat-messaging/events/aa939d8c41ea4d9d1b18a71ef8344903db6e5fbd771a98b630debc2f5d047a34/905d75a3303e95978d3c542de5c0a0a323c01e5822f5cd7548fae81ae723dcaa/payload/差评分析长图_2026-10-25_2026-10-25.jpg",
+      "name": "差评分析长图_2026-10-25_2026-10-25.jpg",
+      "size": 2618241,
+      "sha256": "727fe51a71c6f4a6b5e27013a1b4809007dc51be343d36bb945937b515d1e2ea"
+    }
+  }
+}

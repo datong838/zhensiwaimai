@@ -1,0 +1,19 @@
+{
+  "_doc": "企业微信智能机器人（长连接）配置 —— 仅供 daily-agent-new-merchants-to-wechat（每30分钟新商家）使用。bot_id/secret 由大同在企微后台「工作台→智能机器人→API模式→使用长连接」创建后填写；target.chatid 由 `wecom_aibot.py capture` 在群里 @ 机器人一次后自动捕获并写入。",
+  "_owner": "daily-agent-new-merchants-to-wechat",
+  "enabled": false,
+  "bot_id": "",
+  "secret": "",
+  "ws_url": "wss://openws.work.weixin.qq.com",
+  "heartbeat_interval_ms": 30000,
+  "request_timeout_ms": 15000,
+  "send_timeout_s": 40,
+  "msgtype": "text",
+  "target": {
+    "chat_name": "电销+直播攻坚组",
+    "chatid": "",
+    "chattype": "group",
+    "captured_at": "",
+    "captured_from_userid": ""
+  }
+}
