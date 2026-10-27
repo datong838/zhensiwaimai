@@ -1,7 +1,7 @@
 # 最新夜间进度交接
 
-当前仍为原10月27完整Goal，active，未完成/未清除。
+原10月27完整Goal仍active，未完成/未清除。
 
-最新完整objective和交接：runtime/state/night-goal-handoff/20261028-monthly-report-progress.json。
+完整objective及已完成/未完成/恢复步骤：runtime/state/night-goal-handoff/20261028-roster-timeout-progress.json。
 
-巡店月表持续刷新接线已完成，三流保持停用；原scope/registry/源/正确工作簿未变。图片同消息只读等待已安装，仍待真实图片验收。其余未完成保持原范围；原主任/浏览器正常，不提前生产，不重发unknown。06点硬截止按官方清理SOP，08/22自动化不变。
+本批补名单子进程超时后的精确自有租约收尾，26测试通过，三流仍停用。37家美团店铺授权失效、9230 PID登记修复和最新门禁事实均已进入交接。此前图片/跨日/月表修复保留，真实业务验收与其余遗留不缩小。原主任、浏览器保持运行；06点按官方清理SOP硬截止，不提前生产或重发unknown，08/22自动化不变。

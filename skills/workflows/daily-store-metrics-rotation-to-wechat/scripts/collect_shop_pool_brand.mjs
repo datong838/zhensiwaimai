@@ -15,6 +15,7 @@ import path from 'node:path';
 import { session, sleep } from './lib/cdp.mjs';
 import crypto from 'node:crypto';
 import {acquirePostLease,releasePostLease} from '../../../posts/taobao-brand-post/scripts/lease.mjs';
+import {validRosterRunId} from './release_roster_lease.mjs';
 
 const arg = (k, d = null) => {
   const i = process.argv.indexOf('--' + k);
@@ -30,7 +31,9 @@ async function main() {
 let lease=null,s;
 try {
  try {const owner=JSON.parse(fs.readFileSync('/tmp/zhensi-post-9230.lock','utf8'));if(!Number.isInteger(owner.pid)||owner.pid<=0)throw Error('post-9230-owner-invalid');try{process.kill(owner.pid,0);throw Error('post-9230-live-owner-busy');}catch(e){if(e.code!=='ESRCH')throw e;}}catch(e){if(e.code!=='ENOENT')throw e;}
- lease=await acquirePostLease('monthly-roster-'+crypto.randomUUID());if(!lease)throw Error('post-9230-lease-busy');
+ const leaseRunId=arg('lease-run-id','monthly-roster-'+crypto.randomUUID());
+ if(!validRosterRunId(leaseRunId))throw Error('roster-lease-run-id-invalid');
+ lease=await acquirePostLease(leaseRunId);if(!lease)throw Error('post-9230-lease-busy');
 s = await session({ port: 9230, width: 0 });
 await s.rearm();
 if(!await s.mainEval(`location.origin==='https://melody.shop.ele.me' && location.pathname.startsWith('/app/') && document.body.innerText.includes('gmfmmZH')`))throw Error('brand-account-not-confirmed');

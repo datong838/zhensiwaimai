@@ -5,11 +5,40 @@ import os
 from pathlib import Path
 import subprocess
 import sys
+import uuid
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[3]
+
+
+def run_collector(command, timeout, cleanup):
+    """Reap the exact child before attempting scoped original lease release."""
+    child = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    try:
+        try:
+            stdout, stderr = child.communicate(timeout=timeout)
+        except subprocess.TimeoutExpired:
+            child.kill()
+            child.communicate()
+            raise
+        return subprocess.CompletedProcess(command, child.returncode, stdout, stderr)
+    finally:
+        # communicate() above has reaped normal, failed and timed-out children.
+        # Unexpected interruption must not release a lease of a still-live child.
+        if child.poll() is not None:
+            cleanup(child.pid)
+
+
+def release_collector_lease(node, run_id, pid):
+    result = subprocess.run([node, str(HERE/'release_roster_lease.mjs'), run_id, str(pid)],
+                            capture_output=True, text=True, timeout=5)
+    if result.returncode:
+        raise ValueError('roster-cleanup-failed:' + result.stderr.strip()[-200:])
+    receipt = json.loads(result.stdout)
+    if receipt['reason'] == 'lease-changed-or-release-failed':
+        raise ValueError('roster-cleanup-release-unconfirmed')
 
 
 def assert_no_live_owner(path):
@@ -41,8 +70,10 @@ def main():
     assert_no_live_owner(Path('/tmp/zhensi-post-9230.lock'))
     from metrics_rotation_daily import brand_lease
     with brand_lease() as check:
-        result = subprocess.run([a.node, str(HERE/'collect_shop_pool_brand.mjs'), '--out', str(out)],
-                                capture_output=True, text=True, timeout=a.timeout)
+        run_id = 'monthly-roster-' + str(uuid.uuid4())
+        result = run_collector(
+            [a.node, str(HERE/'collect_shop_pool_brand.mjs'), '--out', str(out), '--lease-run-id', run_id],
+            a.timeout, lambda pid: release_collector_lease(a.node, run_id, pid))
         check()
         if result.returncode:
             raise ValueError('original-roster-refresh-failed:' + result.stderr.strip()[-200:])
