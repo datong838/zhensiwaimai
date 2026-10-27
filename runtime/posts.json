@@ -81,8 +81,8 @@
     "wechat-messaging": {
       "type": "sender",
       "role": "发微信岗",
-      "platform": "微信（Windows网关/手机adb；Mac桌面微信已于2026-09-30停用，禁止使用）",
-      "note": "发送班本体（32 文件 sha256 封印）。幂等靠身份账本+回读验证，不占 daemon 工位互斥组（无 port 字段，resolve_mutex_group 跳过）。",
+      "platform": "企业微信（macOS System Events原生UI树，原适配器与队列执行）",
+      "note": "现役发送由仓内wechat-messaging原适配器/队列/依赖门禁管理；幂等与送达核验沿原事件。历史普通微信、Windows或手机能力不构成现役切换许可。不占浏览器互斥组，具体许可读取现行登记路由。",
       "usedBy": []
     }
   }
