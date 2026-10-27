@@ -60,3 +60,19 @@ try{
 assert.deepEqual(await fs.readFile(new URL('./fixtures/dated-acceptance-20261025.json',import.meta.url)),fixtureBytes);
 assert.equal(fixture.imageReceipt.state,'unknown');assert.equal(fixture.state.phase,'sent');
 console.log(JSON.stringify({ok:true,negativeCases:cases+2,sendAttempts:0,oldBytesUnchanged:true}));
+
+// New days are isolated from old unknowns, without claiming old delivery.
+const {inspectIndependentBusinessDay,inspectCurrentAcceptedSubmission}=await import('./dated_acceptance_evidence.mjs');
+const independentRoot=await fs.mkdtemp(path.join(os.tmpdir(),'negative-independent-day-'));
+try{
+ const tomorrow=new Date('2026-10-28T08:00:00+08:00');
+ const inspect=()=>inspectIndependentBusinessDay(independentRoot,'2026-10-26','2026-10-27',tomorrow);
+ const result=await inspect();assert.equal(result.oldDeliveryAccepted,false);assert.equal(result.oldRecordsModified,false);assert.equal(result.newSendAttempts,0);
+ for(const [prior,current] of [['2026-10-27','2026-10-27'],['2026-10-26','2026-10-28'],['2026-10-26','2026-10-25'],['2026-02-30','2026-10-27']])await assert.rejects(inspectIndependentBusinessDay(independentRoot,prior,current,tomorrow));
+ const monthEnd=await inspectIndependentBusinessDay(independentRoot,'2026-10-30','2026-10-31',new Date('2026-11-01T08:00:00+08:00'));assert.equal(monthEnd.runDay,'2026-11-01');
+ for(const target of result.checkedAbsentPaths){await fs.mkdir(path.dirname(target),{recursive:true});await fs.writeFile(target,'old evidence must not be overwritten');await assert.rejects(inspect(),/new-run-has-effect/);await fs.unlink(target);}
+ const queue=path.join(independentRoot,'skills/wechat-messaging/.runtime/ui-post-queue/new-task');await fs.mkdir(queue,{recursive:true});
+ await fs.writeFile(path.join(queue,'task.json'),JSON.stringify({request:{context:{eventId:result.checkedAbsentPaths[2]}}}));await assert.rejects(inspect(),/new-event-queue-exists/);
+ await assert.rejects(inspectCurrentAcceptedSubmission({runDir:path.join(independentRoot,'run'),runDay:'2026-10-28',businessDate:'2026-10-27'},'wrong'),/current-acceptance-scope/);
+}finally{await fs.rm(independentRoot,{recursive:true,force:true});}
+console.log(JSON.stringify({ok:true,independentBusinessDayScenarios:12,productionActions:0}));

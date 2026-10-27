@@ -182,12 +182,23 @@ def check_flows() -> tuple[dict, list]:
                     f"daily_progress.py 无法解析：{exc}", "手工核对 last_success.json")]
     snap["all_green"] = data.get("all_green")
     snap["date"] = data.get("date")
-    pending = []
+    pending = None
+    if isinstance(data.get("rows"), list):
+        pending = [row for row in data['rows'] if isinstance(row, dict)
+                   and row.get('done') is not True and row.get('superseded') is not True]
     for key in ("pending", "unfinished", "not_done", "records"):
+        if pending is not None:
+            break
         val = data.get(key)
         if isinstance(val, list):
             pending = val
             break
+    if pending is None:
+        if not data.get('all_green'):
+            return {**snap, 'pending_count': None, 'pending': []}, [
+                finding('YELLOW', 'flows', 'progress-schema-unrecognized',
+                        '当日未全绿，但进度源缺少可识别任务清单', '核对daily_progress输出格式')]
+        pending = []
     snap["pending_count"] = len(pending)
     snap["pending"] = [
         {"name": p.get("name") or p.get("skill"), "reason": (p.get("reason") or "")[:120]}

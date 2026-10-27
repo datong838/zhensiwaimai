@@ -1,45 +1,19 @@
-# Local credentials and production state
+# Actual credentials only; business state and handover data are versioned.
 .env
 .env.*
 !.env.example
-**/.runtime/
-.local/
-.runtime/
-state/
-runs/
-outputs/
-records/
-work/
-artifacts/
-runtime/state/
-runtime/run_history/
-**/node_modules/
-**/__pycache__/
-**/.pytest_cache/
-coverage/
-coverage_html/
-*.pyc
-*.log
-*.xlsx
-*.csv
-*.png
-*.jpg
-*.sqlite*
-*.db
 *.pem
 *.key
-*.bak*
-.DS_Store
 
-# Required static inspection template (not a generated report)
-!skills/workflows/store-inspection/runtime/门店自检表(框架+模板).xlsx
-
-# Business data and preserved source archives after directory consolidation
-data/
-archive/
-
-# Version the standalone libraries required by the consolidated workflows.
+# Installed dependencies (the existing self-contained vendor bundle is versioned).
+**/node_modules
 !vendor/node_modules/
 !vendor/node_modules/**
+
+# Reproducible caches and operating-system metadata, not business records.
+**/__pycache__/
+**/.pytest_cache/
+*.pyc
+.DS_Store
 vendor/node_modules/**/__pycache__/
 vendor/node_modules/**/.DS_Store

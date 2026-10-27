@@ -46,3 +46,8 @@ node --test skills/workflows/daily-store-metrics-rotation-to-wechat/scripts/capt
 本次交付证据见 [开发验收](docs/DEVELOPMENT-ACCEPTANCE.md)。
 
 真机采集复盘见[2026-10-21一店11项](docs/REAL-CAPTURE-ACCEPTANCE-20261021.md)。截图前统一检查已知可选提醒与未知弹窗；M10采用唯一完整时间组定位并回读。captured仅为截图合同通过，页面暂无/空值不代表数据完整或可发送；本轮不构成正式投递验收。
+
+
+## 2026年10月名单与月登记
+
+当前23家范围、全量来源、挂历与停用约束见 [本月工作登记](docs/MONTHLY-PLAN-2026-10.md)。用户明确三个流先不值班执行，名单确认不自动启用。

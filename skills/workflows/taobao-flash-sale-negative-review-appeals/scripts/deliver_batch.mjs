@@ -4,6 +4,7 @@ import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import fs from "node:fs/promises";
 import path from "node:path";
+import {preserveZeroSendSummary} from '../../../../runtime/summary_zero_payload.mjs';
 
 const run = promisify(execFile);
 const python = "/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python";
@@ -85,6 +86,7 @@ async function finishDelivery(receipt, correction) {
 }
 
 async function sendSummaryCard() {
+  let reusedFrozen=false;
   // 2026-10-22 大同要求：Excel 结果表发完后，补发「汇总台账」截图到同一运营群。
   // 独立 marker（summary-attempts）+ 独立 workflow 通道 ⇒ 与 xlsx 投递解耦，可单独补发/幂等跳过。
   try {
@@ -94,8 +96,15 @@ async function sendSummaryCard() {
     if (marker && marker.ok === true && marker.verified === true && marker.state === "verified") {
       return { ok: true, verified: true, status: "already_verified", skipped: true, path: summaryCard };
     }
+    if(marker.state==='blocked'&&marker.sendAttempts===0){
+      try{await preserveZeroSendSummary({marker,markerPath:path.join(summaryLedger,`taobao-flash-appeals-summary-${businessDate}.json`),
+        summaryCard,ledger:summaryLedger,workflow:SUMMARY_WORKFLOW,group,
+        queueRoot:path.join(root,'skills/wechat-messaging/.runtime/ui-post-queue')});}
+      catch(error){throw Error('summary-zero-recovery-proof-failed:'+error.message);}
+      reusedFrozen=true;
+    }
   } catch (error) { if (error.code !== "ENOENT") throw error; }
-  await run(python, [cardScript, "--flow", "taobao", "--business-date", businessDate,
+  if(!reusedFrozen)await run(python, [cardScript, "--flow", "taobao", "--business-date", businessDate,
     "--run-key", runDate.replaceAll("-", ""), "--output", summaryCard],
     { timeout: 120_000, maxBuffer: 8 * 1024 * 1024 });
   const { stdout } = await run(python, [

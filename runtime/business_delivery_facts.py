@@ -14,6 +14,7 @@ SERVICE_RANKING = 'daily-service-market-ranking-to-wechat'
 SERVICE_RANKING_QUOTE = '今天这个已经发了就算值班过了，今天的 日报台账里应该有它，明天继续'
 CLOSING = {'meituan-waimai-negative-review-appeals-11': ('meituan', 'meituan-waimai-appeals', '美团外卖'),
            'taobao-flash-sale-negative-review-appeals': ('taobao', 'taobao-flash-appeals', '淘宝闪购')}
+TAOBAO_CLOSING_QUOTE = '美团外卖差评申诉的台账 图片 没见发出来 ，淘宝闪购的 已经发了'
 
 
 def _image_original(folder, name, sha, now, workflow='taobao-evidence'):
@@ -40,15 +41,65 @@ def _image_original(folder, name, sha, now, workflow='taobao-evidence'):
     return task
 
 
+def closing_stages_valid(closing, business_day, run_day):
+    """Read the actual closing contract; never invent an absent appeal stage."""
+    try:
+        entries = closing['results']
+        names = [entry['stage'] for entry in entries]
+        modern = run_day >= '2026-10-27'
+        if names != (['build', 'deliver'] if modern else ['appeal', 'build', 'deliver']):
+            return False
+        stages = {entry['stage']: entry['receipt'] for entry in entries}
+        build = stages['build']
+        if build.get('ok') is not True or build.get('businessDate') != business_day:
+            return False
+        if modern:
+            count = build.get('recordCount')
+            return type(count) is int and count > 0 and build.get('counts', {}).get('全部') == count
+        appeal = stages['appeal']
+        return (appeal.get('ok') is True and appeal.get('businessDate') == business_day
+                and not appeal.get('unknown') and not appeal.get('blocked'))
+    except (KeyError, TypeError, AttributeError):
+        return False
+
+
+def closing_confirmation_valid(acceptance, platform, now):
+    """Scope explicit business acceptance without promoting technical receipts."""
+    try:
+        day = now.strftime('%Y-%m-%d')
+        if not (acceptance['source'] == 'explicit-user-confirmation'
+                and acceptance['businessAccepted'] is True
+                and acceptance['date'] == day and acceptance['groupName'] == GROUP):
+            return False
+        if acceptance['userQuote'] == '两张图都能看到':
+            return True
+        if not (platform == 'taobao' and acceptance['userQuote'] == TAOBAO_CLOSING_QUOTE
+                and acceptance.get('confirmedPlatforms') == ['taobao']
+                and set(acceptance['platforms']) == {'taobao'}):
+            return False
+        source = ROOT/'runtime/state/user-confirmed-deliveries'/(now.strftime('%Y%m%d')+'-taobao-appeals-summary-user-visible.json')
+        if hashlib.sha256(source.read_bytes()).hexdigest() != acceptance['userConfirmationSha256']:
+            return False
+        evidence = json.loads(source.read_text())
+        stamp = datetime.fromisoformat(evidence['at'])
+        return (stamp.strftime('%Y-%m-%d') == day
+                and stamp.replace(tzinfo=now.tzinfo) <= now
+                and evidence['userQuote'] == TAOBAO_CLOSING_QUOTE
+                and evidence['flow'] == 'taobao-flash-sale-negative-review-appeals'
+                and evidence['businessDate'] == (now-timedelta(days=1)).strftime('%Y-%m-%d'))
+    except (OSError, ValueError, KeyError, TypeError):
+        return False
+
+
 def _closing_fact(flow, now):
     platform, route, label = CLOSING[flow]
     day=now.strftime('%Y-%m-%d');business_day=(now-timedelta(days=1)).strftime('%Y-%m-%d')
     path=ROOT/'runtime/state/user-confirmed-deliveries'/(now.strftime('%Y%m%d')+'-appeal-closing-images.json')
+    if not path.exists() and platform == 'taobao':
+        path=path.with_name(now.strftime('%Y%m%d')+'-appeal-closing-taobao.json')
     try:
         acceptance=json.loads(path.read_text())
-        if not (acceptance['source']=='explicit-user-confirmation' and acceptance['businessAccepted'] is True
-                and acceptance['date']==day and acceptance['groupName']==GROUP
-                and acceptance['userQuote']=='两张图都能看到'):
+        if not closing_confirmation_valid(acceptance, platform, now):
             return None
         proof=acceptance['platforms'][platform]
         record_path=Path(proof['runRecord']).resolve();log_path=Path(proof['runLog']).resolve()
@@ -68,10 +119,7 @@ def _closing_fact(flow, now):
             try: receipts.append(json.loads(line))
             except ValueError: continue
         closing=next(r for r in reversed(receipts) if r.get('platform')==platform and r.get('slot')=='18:30')
-        stages={s['stage']:s['receipt'] for s in closing['results']}
-        if not (stages['appeal']['ok'] is True and stages['build']['ok'] is True
-                and stages['appeal']['businessDate']==business_day and stages['build']['businessDate']==business_day
-                and not stages['appeal'].get('unknown') and not stages['appeal'].get('blocked')):
+        if not closing_stages_valid(closing, business_day, day):
             return None
         queue=ROOT/'skills/wechat-messaging/.runtime/ui-post-queue'
         for kind in ('file','image'):
@@ -202,6 +250,7 @@ EXECUTED_IMAGE_QUOTES = [
     '今天所有已经执行的任务流的图片提交 我都看了没有问题 只是有个通病；回执待确认/unknow 等',
     '是的 今天已经执行的任务流 都执行成功了 没有 遗漏和错过的',
 ]
+EXECUTED_IMAGE_QUOTE_20261027 = '这些图片都有一次提交记录，卡在内容回读，我看到都发送成功了，但是你工作流没拿到回执 事情已经发生了你看如何完善维护，不过 工作流确实执行成功了 可以发台账'
 
 
 def _request_image_matches(candidate, item):
@@ -218,21 +267,43 @@ def _request_image_matches(candidate, item):
 def _executed_images_user_fact(flow, now):
     if now.tzinfo is None:
         now = now.replace(tzinfo=ZoneInfo('Asia/Shanghai'))
-    if flow not in EXECUTED_IMAGE_FLOWS or now.strftime('%Y-%m-%d') != '2026-10-26':
+    day = now.strftime('%Y-%m-%d')
+    current = day == '2026-10-27'
+    flows = dict(EXECUTED_IMAGE_FLOWS)
+    if current:
+        flows.update({SERVICE_RANKING: ('daily-service-market-ranking-ops', 1),
+                      'taobao-flash-sale-negative-review-appeals': ('taobao-flash-appeals-summary', 1),
+                      'meituan-waimai-negative-review-appeals-11': ('meituan-waimai-appeals-summary', 1)})
+    if flow not in flows or day not in ('2026-10-26', '2026-10-27'):
         return None
-    path = ROOT/'runtime/state/user-confirmed-deliveries/20261026-executed-image-submissions-173035.json'
+    filename = '20261027-executed-image-submissions-user-confirmed.json' if current else '20261026-executed-image-submissions-173035.json'
+    path = ROOT/'runtime/state/user-confirmed-deliveries'/filename
     try:
         acceptance = json.loads(path.read_text())
         cutoff = datetime.fromisoformat(acceptance['recordedAt'])
         if not (acceptance['source'] == 'explicit-user-confirmation'
-                and acceptance['businessAccepted'] is True and acceptance['date'] == '2026-10-26'
-                and acceptance['userQuotes'] == EXECUTED_IMAGE_QUOTES
+                and acceptance['businessAccepted'] is True and acceptance['date'] == day
+                and acceptance['userQuotes'] == ([EXECUTED_IMAGE_QUOTE_20261027] if current else EXECUTED_IMAGE_QUOTES)
                 and cutoff.date() == now.date() and cutoff <= now):
             return None
-        route, count = EXECUTED_IMAGE_FLOWS[flow]
+        route, count = flows[flow]
         selected = [i for i in acceptance['items'] if i['workflowId'] == route]
         if len(selected) != count or len({i['taskId'] for i in selected}) != count:
             return None
+        if current:
+            expected_names = {
+                'top10': {'2026-10-26_top10seller.png'},
+                'negative-reviews-summary': {'差评分析长图_2026-10-26_2026-10-26.jpg'},
+                'daily-store-task-completion-ops': {'2026-10-27运营-店铺经营任务完成率.png'},
+                'contract-termination-ops': {'2026-10-27_合同解约申请_处理中_p1.png'},
+                'taobao-evidence': {'jinsha-store-final.png', 'jinsha-review-final.png'},
+                'daily-meituan-income-top10-ops': {'2026-10-26-美团外卖门店收入top10.png'},
+                'daily-service-market-ranking-ops': {'2026-10-27-服务市场排名与考核指标.png'},
+                'taobao-flash-appeals-summary': {'淘宝闪购差评申诉台账-2026-10-26.png'},
+                'meituan-waimai-appeals-summary': {'美团外卖差评申诉台账-2026-10-26.png'},
+            }
+            if {i['name'] for i in selected} != expected_names[route]:
+                return None
         queue = ROOT/'skills/wechat-messaging/.runtime/ui-post-queue'
         for proof in selected:
             folder = queue/proof['taskId']
@@ -247,13 +318,13 @@ def _executed_images_user_fact(flow, now):
                     and result['backend'] == 'system-events-ui-tree' and result['inputEmpty'] is True):
                 return None
         if flow == 'daily-meituan-income-top10-to-wechat':
-            base = ROOT/'skills/workflows/daily-meituan-income-top10-to-wechat/.runtime/days/2026-10-26'
+            base = ROOT/'skills/workflows/daily-meituan-income-top10-to-wechat/.runtime/days'/day
             marker = json.loads((base/'delivery.json').read_text())
             frozen = json.loads((base/'frozen.json').read_text())
             label = marker['deliveries'][0]
-            if not (marker['state'] == 'unknown' and marker['eventId'] == '2026-10-26-meituan-income-top10'
+            if not (marker['state'] == 'unknown' and marker['eventId'] == day+'-meituan-income-top10'
                     and marker['groupName'] == GROUP and marker['sha256'] == selected[0]['sha256']
-                    and frozen['day'] == '2026-10-26' and frozen['collection']['dataDate'] == '2026-10-25'
+                    and frozen['day'] == day and frozen['collection']['dataDate'] == (now-timedelta(days=1)).strftime('%Y-%m-%d')
                     and frozen['item'] == task['item'] and len(task['request']['items']) == 2
                     and task['request']['items'][0]['text'] == '美团外卖门店收入top10'
                     and label['itemId'] == 'meituan-income-label' and label['receipt']['status'] == 'verified'):

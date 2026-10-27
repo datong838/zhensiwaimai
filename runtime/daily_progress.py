@@ -143,6 +143,7 @@ def _latest_record(name: str, day: str):
 
 def build(now: dt.datetime | None = None) -> dict:
     from business_coverage import read_daily_coverage
+    from business_delivery_facts import read_fact
     now = now or dt.datetime.now()
     day = now.strftime("%Y-%m-%d")
     m = _load(MANIFEST, {})
@@ -178,10 +179,15 @@ def build(now: dt.datetime | None = None) -> dict:
         rec = _latest_record(name, day)
         superseded = fixed_schedule.customer_slot_superseded(name, now)
         coverage = read_daily_coverage(name, day, ROOT)
+        accepted_delivery = read_fact(name, now)
         if due and coverage and not coverage['complete']:
             done = False
             state, mark = '未完成·门店未覆盖', '❌'
             reason = coverage['reason']
+        elif accepted_delivery:
+            done = True
+            state, mark = '已完成·业务送达已核对', '✅'
+            reason = '原送达证据与独立业务验收已核对'
         elif superseded:
             state, mark = '历史档·不补跑', '⏭️'
             reason = '保留历史记录；当前最新客服档承担全量值班'

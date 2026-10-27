@@ -9,6 +9,74 @@ from zoneinfo import ZoneInfo
 import business_delivery_facts as facts
 
 
+class ClosingStageContractTests(unittest.TestCase):
+    def modern(self):
+        return {'results': [
+            {'stage': 'build', 'receipt': {'ok': True, 'businessDate': '2026-10-26',
+                                         'recordCount': 53, 'counts': {'全部': 53}}},
+            {'stage': 'deliver', 'receipt': {'ok': False, 'reason': 'image-pending'}},
+        ]}
+
+    def test_new_closing_has_no_appeal_but_still_needs_independent_delivery_proof(self):
+        self.assertTrue(facts.closing_stages_valid(self.modern(), '2026-10-26', '2026-10-27'))
+
+    def test_new_closing_rejects_wrong_date_count_failed_build_and_extra_appeal(self):
+        for change in [{'businessDate': '2026-10-25'}, {'recordCount': 52},
+                       {'recordCount': 0, 'counts': {'全部': 0}}, {'ok': False}]:
+            closing = self.modern();closing['results'][0]['receipt'].update(change)
+            with self.subTest(change=change):
+                self.assertFalse(facts.closing_stages_valid(closing, '2026-10-26', '2026-10-27'))
+        closing = self.modern();closing['results'].insert(0, {'stage': 'appeal', 'receipt': {'ok': True}})
+        self.assertFalse(facts.closing_stages_valid(closing, '2026-10-26', '2026-10-27'))
+
+    def test_legacy_closing_still_requires_original_appeal(self):
+        closing = self.modern()
+        self.assertFalse(facts.closing_stages_valid(closing, '2026-10-26', '2026-10-26'))
+        closing['results'].insert(0, {'stage': 'appeal', 'receipt': {
+            'ok': True, 'businessDate': '2026-10-26', 'unknown': [], 'blocked': []}})
+        self.assertTrue(facts.closing_stages_valid(closing, '2026-10-26', '2026-10-26'))
+        closing['results'][0]['receipt']['unknown'] = ['unconfirmed']
+        self.assertFalse(facts.closing_stages_valid(closing, '2026-10-26', '2026-10-26'))
+
+
+class SinglePlatformClosingConfirmationTests(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup)
+        self.root = Path(self.tmp.name)
+        p = patch.object(facts, 'ROOT', self.root);p.start();self.addCleanup(p.stop)
+        self.now = datetime(2026, 10, 27, 19, tzinfo=ZoneInfo('Asia/Shanghai'))
+        self.source = self.root/'runtime/state/user-confirmed-deliveries/20261027-taobao-appeals-summary-user-visible.json'
+        self.source.parent.mkdir(parents=True)
+        self.source.write_text(json.dumps({'at': '2026-10-27T18:47:20',
+            'userQuote': facts.TAOBAO_CLOSING_QUOTE, 'flow': 'taobao-flash-sale-negative-review-appeals',
+            'businessDate': '2026-10-26'}))
+        self.acceptance = {'source': 'explicit-user-confirmation', 'businessAccepted': True,
+            'date': '2026-10-27', 'groupName': facts.GROUP, 'userQuote': facts.TAOBAO_CLOSING_QUOTE,
+            'confirmedPlatforms': ['taobao'], 'platforms': {'taobao': {}},
+            'userConfirmationSha256': hashlib.sha256(self.source.read_bytes()).hexdigest()}
+
+    def test_taobao_only_and_originals_untouched(self):
+        before = self.source.read_bytes()
+        self.assertTrue(facts.closing_confirmation_valid(self.acceptance, 'taobao', self.now))
+        self.assertFalse(facts.closing_confirmation_valid(self.acceptance, 'meituan', self.now))
+        self.assertEqual(before, self.source.read_bytes())
+
+    def test_wrong_day_quote_or_platform_scope_rejected(self):
+        for changed in [{'date': '2026-10-26'}, {'userQuote': '都发了'},
+                        {'confirmedPlatforms': ['taobao', 'meituan']},
+                        {'platforms': {'taobao': {}, 'meituan': {}}}, {'groupName': 'wrong'}]:
+            with self.subTest(changed=changed):
+                self.assertFalse(facts.closing_confirmation_valid(self.acceptance | changed, 'taobao', self.now))
+        self.assertFalse(facts.closing_confirmation_valid(self.acceptance, 'taobao', self.now.replace(day=28)))
+
+    def test_changed_or_unbound_user_evidence_rejected(self):
+        self.source.write_text('{}')
+        self.assertFalse(facts.closing_confirmation_valid(self.acceptance, 'taobao', self.now))
+
+    def test_legacy_dual_confirmation_still_supported(self):
+        self.assertTrue(facts.closing_confirmation_valid(self.acceptance | {'userQuote': '两张图都能看到'}, 'meituan', self.now))
+
+
 class BusinessFactTests(unittest.TestCase):
     def test_closing_without_user_confirmation_stays_unresolved(self):
         for flow in facts.CLOSING:

@@ -72,6 +72,33 @@ class ExecutedImageAcceptanceTests(unittest.TestCase):
     def test_diagnostic_route_cannot_be_business_acceptance(self):
         self.assertIsNone(facts.read_fact('native-ui-acceptance-20261026',self.now))
 
+    def current_confirmation(self):
+        self.now = self.now.replace(day=27, hour=20)
+        item = self.task['item'];item['name'] = '2026-10-27_合同解约申请_处理中_p1.png'
+        self.task['request']['context']['eventId'] = '2026-10-27-contract'
+        self.task.pop('binding')
+        binding = hashlib.sha256(json.dumps(self.task,sort_keys=True,ensure_ascii=False).encode()).hexdigest()
+        self.task['binding'] = binding;self.dump('task.json',self.task)
+        for name in ['response.json','send-intent.json']:
+            d=json.loads((self.folder/name).read_text());d['binding']=binding
+            if name=='send-intent.json':d['at']=self.now.replace(hour=9).timestamp()
+            self.dump(name,d)
+        proof=self.acceptance['items'][0]
+        proof.update(name=item['name'],eventId='2026-10-27-contract',sources=self.hashes())
+        self.acceptance.update(date='2026-10-27',recordedAt=self.now.replace(hour=19).isoformat(),
+                               userQuotes=[facts.EXECUTED_IMAGE_QUOTE_20261027])
+        self.accept_path=self.accept_path.with_name('20261027-executed-image-submissions-user-confirmed.json');self.save()
+
+    def test_current_explicit_confirmation_does_not_inherit_tomorrow(self):
+        self.current_confirmation();before=self.hashes()
+        self.assertTrue(self.fact()['businessDelivered'])
+        self.assertEqual(before,self.hashes())
+        self.assertIsNone(facts.read_fact(self.flow,self.now.replace(day=28)))
+
+    def test_current_confirmation_rejects_old_business_filename(self):
+        self.current_confirmation();self.acceptance['items'][0]['name']='old.png';self.save()
+        self.assertIsNone(self.fact())
+
 if __name__=='__main__':unittest.main()
 
 class ExecutionNoteTests(unittest.TestCase):

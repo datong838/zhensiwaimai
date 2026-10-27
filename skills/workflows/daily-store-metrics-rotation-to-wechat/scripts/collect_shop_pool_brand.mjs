@@ -13,6 +13,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { session, sleep } from './lib/cdp.mjs';
+import crypto from 'node:crypto';
+import {acquirePostLease,releasePostLease} from '../../../posts/taobao-brand-post/scripts/lease.mjs';
 
 const arg = (k, d = null) => {
   const i = process.argv.indexOf('--' + k);
@@ -24,8 +26,14 @@ const MAX_ORGS = parseInt(arg('max-orgs', '0'), 10);
 const CLICK_WAIT = parseInt(arg('click-wait', '2200'), 10);
 const MAX_DEPTH = 6;
 
-const s = await session({ port: 9230, width: 1440, height: 1600 });
+async function main() {
+let lease=null,s;
+try {
+ try {const owner=JSON.parse(fs.readFileSync('/tmp/zhensi-post-9230.lock','utf8'));if(!Number.isInteger(owner.pid)||owner.pid<=0)throw Error('post-9230-owner-invalid');try{process.kill(owner.pid,0);throw Error('post-9230-live-owner-busy');}catch(e){if(e.code!=='ESRCH')throw e;}}catch(e){if(e.code!=='ENOENT')throw e;}
+ lease=await acquirePostLease('monthly-roster-'+crypto.randomUUID());if(!lease)throw Error('post-9230-lease-busy');
+s = await session({ port: 9230, width: 0 });
 await s.rearm();
+if(!await s.mainEval(`location.origin==='https://melody.shop.ele.me' && location.pathname.startsWith('/app/') && document.body.innerText.includes('gmfmmZH')`))throw Error('brand-account-not-confirmed');
 
 const log = (...a) => console.log(...a);
 
@@ -126,19 +134,23 @@ const parseDv = (dv) => {
 /* ---------- 递归遍历 ---------- */
 
 const shops = new Map();   // shopId -> record
+const failures = [];
 const orgs = [];           // 组织清单
 let clicks = 0;
 
 async function walk(colIdx, ancestors, orgLabel) {
-  if (colIdx > MAX_DEPTH) return;
+  if (colIdx > MAX_DEPTH) {failures.push('maximum-depth');return;}
   const snap = await readCol(colIdx);
-  if (!snap.ok) { log('  !! readCol fail', JSON.stringify(snap)); return; }
+  if (!snap.ok) { failures.push('column-read:'+colIdx);log('  !! readCol fail', JSON.stringify(snap)); return; }
   const rows = snap.rows || [];
   log(`  col${colIdx} rows=${rows.length}`);
 
   for (const row of rows) {
     const dv = parseDv(row.dv);
     if (dv.shopId) {
+      const previous=shops.get(dv.shopId);
+      if(!row.name)failures.push('shop-name-missing:'+dv.shopId);
+      if(previous&&(previous.shopName!==row.name||previous.status!==row.status))failures.push('conflicting-shop-identity:'+dv.shopId);
       if (!shops.has(dv.shopId)) {
         shops.set(dv.shopId, {
           shopId: Number(dv.shopId),
@@ -152,10 +164,11 @@ async function walk(colIdx, ancestors, orgLabel) {
       }
       continue;
     }
+    if (row.arrow && colIdx + 1 > MAX_DEPTH) failures.push('unvisited-depth:'+row.dv);
     if (row.arrow && colIdx + 1 <= MAX_DEPTH) {
       const p = await clickItem(colIdx, row.i);
       clicks++;
-      if (!p.ok) { log('  !! click fail', row.name, JSON.stringify(p)); continue; }
+      if (!p.ok) {failures.push('branch-click:'+row.dv);log('  !! click fail', row.name, JSON.stringify(p)); continue;}
       await walk(colIdx + 1, [...ancestors, row.name], orgLabel);
     }
   }
@@ -167,14 +180,18 @@ await openSwitcher();
 await clearSearch();
 
 const c0 = await readCol(0);
-if (!c0.ok) { log('FATAL first-col', JSON.stringify(c0)); process.exit(4); }
+if (!c0.ok) throw Error('brand-roster-root-column-unavailable');
+const expectedOrgs=c0.rows.filter(r=>!parseDv(r.dv).shopId&&!/^全部$/.test(r.name)).length;
 log('ORG_COUNT=' + c0.rows.length);
 
-const save = (done) => {
+const save = (done, complete=false) => {
   const recs = [...shops.values()];
-  const open = recs.filter((r) => /营业中/.test(r.status));
+  const open = recs.filter((r) => r.status.trim()==='营业中');
   fs.mkdirSync(path.dirname(OUT), { recursive: true });
-  fs.writeFileSync(OUT, JSON.stringify({
+  const destination=complete?OUT:OUT+'.partial.json';
+  const temporary=destination+'.'+process.pid+'.tmp';
+  fs.writeFileSync(temporary, JSON.stringify({
+    complete, account:'gmfmmZH', source:'brand-shop-switcher-organisation-tree', expectedOrgs, failures,
     collectedAt: new Date().toISOString(),
     orgsDone: done,
     clicks,
@@ -182,6 +199,7 @@ const save = (done) => {
     openCount: open.length,
     shops: recs,
   }, null, 1));
+  fs.renameSync(temporary,destination);
   log(`  [save] total=${recs.length} open=${open.length} orgsDone=${done}/${c0.rows.length}`);
 };
 
@@ -217,13 +235,18 @@ for (const org of c0.rows) {
   }
   const p = await clickItem(0, org.i);
   clicks++;
-  if (!p.ok) { log('!! org click fail', JSON.stringify(p)); continue; }
+  if (!p.ok) {failures.push('organisation-click:'+org.dv);log('!! org click fail', JSON.stringify(p));continue;}
   await walk(1, [org.name], org.name);
   done++;
   save(done);
 }
 
-save(done);
-log(`\nDONE orgs=${done} clicks=${clicks} shops=${shops.size} open=${[...shops.values()].filter((r) => /营业中/.test(r.status)).length}`);
-s.cdp.close();
-process.exit(0);
+if(MAX_ORGS||done!==expectedOrgs||failures.length||expectedOrgs<1||shops.size<1)throw Error('brand-roster-incomplete');
+save(done,true);
+log(`\nDONE orgs=${done} clicks=${clicks} shops=${shops.size} open=${[...shops.values()].filter((r) => r.status.trim()==='营业中').length}`);
+} finally {
+ if(s){try{if(await s.mainEval(`(()=>{const d=document.querySelector('.cook-select-dropdown');return !!d&&d.getBoundingClientRect().height>10})()`)){const pos=JSON.parse(await s.mainEval(`(()=>{const e=document.querySelector('[class*=shop-name__]');if(!e)return 'null';const r=e.getBoundingClientRect();return JSON.stringify({x:r.x+r.width/2,y:r.y+r.height/2})})()`));if(pos)await s.clickAt(pos.x,pos.y);}}catch{}s.cdp.close();}
+ if(lease)await releasePostLease(lease);
+}
+}
+main().catch(e=>{console.error(JSON.stringify({ok:false,reason:e.message}));process.exitCode=1;});

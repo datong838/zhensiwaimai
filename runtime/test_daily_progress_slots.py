@@ -29,4 +29,34 @@ class LatestSlotTests(unittest.TestCase):
     def test_single_slot_behavior_preserved(self):
         self.assertTrue(self.row('2026-10-24T18:55','2026-10-24T13:10:00',False)['done'])
 
+    def test_bound_same_day_business_acceptance_is_read_only_completion(self):
+        import business_delivery_facts
+        with patch.object(business_delivery_facts, 'read_fact', return_value={'businessDelivered': True}):
+            row=self.row('2026-10-24T18:55',None,False)
+        self.assertTrue(row['done'])
+        self.assertEqual(row['state'],'已完成·业务送达已核对')
+        self.assertEqual(row['last_success'],'')
+
+    def test_absent_acceptance_preserves_unfinished_and_future_slot(self):
+        import business_delivery_facts
+        with patch.object(business_delivery_facts, 'read_fact', return_value=None):
+            self.assertFalse(self.row('2026-10-24T18:55',None)['done'])
+            self.assertFalse(self.row('2026-10-24T12:55',None)['done'])
+
+    def test_coverage_gap_still_blocks_acceptance(self):
+        import business_delivery_facts, business_coverage
+        with patch.object(business_delivery_facts, 'read_fact', return_value={'businessDelivered': True}), \
+             patch.object(business_coverage, 'read_daily_coverage', return_value={'complete':False,'reason':'missing shop'}):
+            row=self.row('2026-10-24T18:55',None,False)
+        self.assertFalse(row['done'])
+        self.assertEqual(row['reason'],'missing shop')
+
+    def test_prior_day_acceptance_does_not_cover_new_day(self):
+        import business_delivery_facts
+        def accepted(name,now):
+            return {'businessDelivered':True} if now.date().isoformat()=='2026-10-24' else None
+        with patch.object(business_delivery_facts, 'read_fact', side_effect=accepted):
+            self.assertTrue(self.row('2026-10-24T18:55',None,False)['done'])
+            self.assertFalse(self.row('2026-10-25T18:55',None,False)['done'])
+
 if __name__=='__main__': unittest.main()
