@@ -1,0 +1,145 @@
+{
+  "bridgeVersion": 1,
+  "ok": false,
+  "verified": false,
+  "payloadType": "image",
+  "state": "unknown",
+  "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+  "payloads": [
+    {
+      "path": "/private/tmp/zhensi_daily_download/background-browser/2026-10-24-72feab92-68f5-4fea-8e0b-cde84755cf55/jinsha-store-final.png",
+      "name": "jinsha-store-final.png",
+      "size": 491068,
+      "sha256": "d924fee959102206a9d31e5034a2ef1557c563a7d347f7346157b8a84f7a83c3"
+    },
+    {
+      "path": "/private/tmp/zhensi_daily_download/background-browser/2026-10-24-72feab92-68f5-4fea-8e0b-cde84755cf55/jinsha-review-final.png",
+      "name": "jinsha-review-final.png",
+      "size": 492570,
+      "sha256": "fcd1cdc1e8134117287eb2437807dec6387dbf1a841a15191a4d03921a6d9cc0"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": "native-ui-inline-image-not-exposed",
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": false,
+    "status": "unknown",
+    "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "channel": "desktop",
+    "requestDigest": "56d7c95d8ca7b6878e67ad3825b65f65f0300c83bbd2f4eae0d808f614900771",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "d924fee959102206a9d31e5034a2ef1557c563a7d347f7346157b8a84f7a83c3",
+        "type": "image",
+        "status": "unknown",
+        "claimedAt": 1792912874.1278532,
+        "sendAttempts": 1,
+        "resolvedGroup": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+        "inputEmpty": false,
+        "reason": "native-ui-inline-image-not-exposed",
+        "backend": "system-events-ui-tree"
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 1
+      },
+      {
+        "stage": "freeze:1",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 1
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 144557
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 42793
+      }
+    ],
+    "reason": "native-ui-inline-image-not-exposed",
+    "elapsedMs": 187356,
+    "eventKey": "d3664ce9ef91664445cb03f7b2fe06b58dc72c059c5e97ecf44266937611baef",
+    "reviewSummary": {
+      "totalElapsedMs": 187356,
+      "result": "unknown",
+      "stageCount": 5,
+      "completedStages": 5,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/taobao-jinsha-wechat-evidence-attempts/6b21cad2585a4afa09107079f93427f906b757c05fe2abfba6432014f983b06f.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 1,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "freeze:1",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 1,
+      "item": 3,
+      "label": "freeze:1"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 144557,
+      "item": 4,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "failed",
+      "pitfalls": [
+        {
+          "code": "messaging-stage",
+          "reason": "native-ui-inline-image-not-exposed"
+        }
+      ],
+      "elapsedMs": 42793,
+      "item": 5,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 187356,
+  "reviewSummary": {
+    "totalElapsedMs": 187356,
+    "itemCount": 5,
+    "pitfallCount": 1,
+    "result": "failed"
+  }
+}

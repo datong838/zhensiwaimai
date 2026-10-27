@@ -1,0 +1,71 @@
+{
+  "ok": false,
+  "runId": "7e291ce6-eba4-45ff-af9e-8ca10f7beeeb",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "collection": 3384,
+    "audit": 0,
+    "phone": 13761
+  },
+  "stage": "phone",
+  "collection": {
+    "ok": true,
+    "executor": "merchant-collector",
+    "groupName": "FEIBING NEO AI数字员工",
+    "businessDate": "2026-09-08",
+    "stageMs": {
+      "attach": 34,
+      "close_residual_detail": 475,
+      "attach_existing_tab": 20,
+      "read_page_structure": 122,
+      "navigation": 143,
+      "date_filter": 748,
+      "page_1_read": 466,
+      "detail_1327961356": 1427
+    },
+    "runtimeModelDecisions": 0,
+    "createdAt": "2026-09-08T11:26:58.776263+08:00",
+    "cursorSource": "local",
+    "dateFilter": "2026-09-08..2026-09-08",
+    "dateFilterVerified": true,
+    "pages": [
+      {
+        "page": 1,
+        "lastVisiblePage": 1,
+        "nextEnabled": false,
+        "rowCount": 7
+      }
+    ],
+    "paginationComplete": true,
+    "totalRows": 7,
+    "pendingRows": 3,
+    "targetCount": 1,
+    "ascending": true,
+    "detailsVerified": true,
+    "elapsedMs": 3384,
+    "frontmostBefore": "com.google.Chrome",
+    "frontmostAfter": "com.google.Chrome"
+  },
+  "phone": {
+    "ok": false,
+    "executor": "wechat-sender",
+    "groupName": "FEIBING NEO AI数字员工",
+    "sent": 0,
+    "stage": "send",
+    "historySkipped": 0,
+    "businessDate": "2026-09-08",
+    "messageCount": 1,
+    "stageMs": {
+      "locate_group": 4133
+    },
+    "groupTitleVerified": true,
+    "reason": "broadcast ADB_KEYBOARD_CLEAR_TEXT failed: error:Attempt to read from field 'java.lang.CharSequence android.view.inputmethod.ExtractedText.text' on a null object reference",
+    "elapsedMs": 13693,
+    "failedMessageStageMs": {
+      "input_and_verify": 3713
+    },
+    "evidenceDir": "/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/zhensi-merchant-wechat-xu800cbe"
+  },
+  "error": "broadcast ADB_KEYBOARD_CLEAR_TEXT failed: error:Attempt to read from field 'java.lang.CharSequence android.view.inputmethod.ExtractedText.text' on a null object reference",
+  "elapsedMs": 17147
+}

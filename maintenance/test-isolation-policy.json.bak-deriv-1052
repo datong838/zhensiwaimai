@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "policyId": "test-isolation-contract-v1",
+  "datedRule": "2026-09-30",
+  "owner": "大同铁律：所有任务流的测试脚本，不得操控线上数据逻辑和线上群",
+  "comment": [
+    "本文件是《测试隔离契约》的**单一数据源**。修改前先读 docs/solutions/测试隔离契约-2026-09-30.md。",
+    "审计器 maintenance/audit_test_isolation.py 消费本文件；derivations 段用于防止本表与生产配置漂移。"
+  ],
+  "testGroupNames": [
+    "臻肆测试群"
+  ],
+  "onlineGroupNames": [
+    "李老哈（品牌）💰臻肆外卖运营对接群",
+    "FEIBING NEO AI数字员工",
+    "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "电销+直播攻坚组",
+    "红太阳鱼杂王蜀川湘菜店抖音发视频"
+  ],
+  "onlineSearchKeys": [
+    "李老哈",
+    "上海臻肆外卖运营-盯个盯"
+  ],
+  "forbiddenHosts": [
+    "192.168.0.2",
+    "192.168.0.5",
+    "192.168.0.4",
+    "192.168.110.184",
+    "192.168.110.185",
+    ":8731"
+  ],
+  "forbiddenTokens": [
+    "XFVfZHoKwjHaWsZ7EXt2kNvWLSg4TGSvIpMQnvIkCaY"
+  ],
+  "forbiddenAbsolutePathSegments": [
+    "zhensi_waimai_back/records",
+    "zhensi_waimai_back/state",
+    "zhensi_waimai_back/runs",
+    "zhensi_waimai_back/artifacts"
+  ],
+  "businessDataTokens": [
+    "李老哈·东北农家小院",
+    "红太阳鱼杂王·蜀湘川菜",
+    "湘厨士"
+  ],
+  "productionSenders": [
+    "workflow_bridge.py",
+    "workflow_bridge_windows.py",
+    "windows_adapter.py",
+    "desktop_adapter.py",
+    "mobile_adapter.py",
+    "business_desktop_wechat_file_sender.py",
+    "business_wechat_file_sender.py",
+    "business_wecom_shared_space_sender.py",
+    "deliver_batch.mjs",
+    "workflow.py",
+    "activity_workflow.py",
+    "business_workflow_executor.mjs"
+  ],
+  "dangerousFlags": [
+    "--execute",
+    "--deliver"
+  ],
+  "allowedTestGroupNames": [
+    "臻肆测试群"
+  ],
+  "refinements": [
+    {
+      "dated": "2026-10-01",
+      "by": "大同",
+      "rule": "测试脚本不允许执行正规生产流程；测试脚本只允许发到「臻肆测试群」。任何真实业务群、真实发送通道、生产状态目录，测试进程一律物理拒绝（Node 侧由 tests/isolation_guard.mjs 兜底，消费本表 productionSenders/dangerousFlags/forbiddenHosts）。"
+    }
+  ],
+  "derivations": [
+    {
+      "file": "skills/wechat-messaging/runtime-policy.json",
+      "pointer": "groupName"
+    },
+    {
+      "file": "skills/workflows/daily-top10-to-wechat-group/runtime-policy.json",
+      "pointer": "targetGroup"
+    }
+  ],
+  "waivers": [],
+  "frozenOnlineNameOccurrences": {
+    "skills/workflows/daily-agent-new-merchants-to-wechat/tests/test_stability_contract.py": 5,
+    "skills/workflows/daily-jinsha-reports-to-business-wechat/scripts/test_business_wechat_locator.py": 14,
+    "skills/workflows/daily-jinsha-reports-to-business-wechat/scripts/test_business_workflow_policy.mjs": 2,
+    "skills/workflows/daily-negative-reviews/scripts/test_maintenance_executor.mjs": 2,
+    "skills/workflows/daily-negative-reviews/scripts/test_workflow_policy.mjs": 2,
+    "skills/workflows/daily-taobao-download-to-jinsha/scripts/test_scheduled_evidence_recovery.mjs": 1,
+    "skills/workflows/daily-top10-to-wechat-group/scripts/test_executor_safety.py": 3,
+    "skills/workflows/daily-top10-to-wechat-group/scripts/test_runtime_guard.py": 7,
+    "skills/workflows/daily-wechat-video-publish/scripts/test_source_guard.py": 2,
+    "skills/workflows/daily-wechat-video-publish/scripts/test_wechat_scan.py": 8,
+    "skills/wechat-messaging/tests/test_desktop_headers.py": 24,
+    "skills/wechat-messaging/tests/test_desktop_input.py": 16,
+    "skills/wechat-messaging/tests/test_egress_policy.py": 3,
+    "skills/wechat-messaging/tests/test_preview.py": 4,
+    "skills/wechat-messaging/tests/test_runtime.py": 1,
+    "skills/wechat-messaging/tests/test_windows_adapter_anchor.py": 10,
+    "skills/wechat-messaging/tests/test_windows_adapter_egress.py": 2,
+    "skills/wechat-messaging/tests/test_workflow_bridge.py": 9
+  },
+  "auditExemptPaths": [
+    "tests/isolation_guard.py",
+    "tests/isolation_guard.mjs",
+    "tests/unit/test_test_isolation_contract.py",
+    "maintenance/audit_test_isolation.py",
+    "maintenance/test-isolation-policy.json"
+  ]
+}

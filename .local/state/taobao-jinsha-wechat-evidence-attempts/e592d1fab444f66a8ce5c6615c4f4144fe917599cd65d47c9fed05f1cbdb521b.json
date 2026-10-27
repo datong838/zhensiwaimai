@@ -1,0 +1,128 @@
+{
+  "bridgeVersion": 1,
+  "ok": false,
+  "verified": false,
+  "payloadType": "image",
+  "state": "blocked",
+  "groupName": "FEIBING NEO AI数字员工",
+  "payloads": [
+    {
+      "path": "/private/tmp/zhensi_daily_download/background-browser/2026-09-24-821ca6f6-ced4-4b65-8cd6-5df86398707a/jinsha-store-final.png",
+      "name": "jinsha-store-final.png",
+      "size": 204198,
+      "sha256": "0508ffe5f53165d40c844a0bd04a90abf1b4a0abf92a9a26a46a9a53145f8f41"
+    },
+    {
+      "path": "/private/tmp/zhensi_daily_download/background-browser/2026-09-24-821ca6f6-ced4-4b65-8cd6-5df86398707a/jinsha-review-final.png",
+      "name": "jinsha-review-final.png",
+      "size": 205028,
+      "sha256": "6af23a8aed308732bdeb80865f44c47812e5bc1812039c7d512ebeb0aa707513"
+    }
+  ],
+  "sendAttempts": 0,
+  "newSendAttempts": 0,
+  "reason": "deadline-expired",
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": false,
+    "status": "blocked",
+    "groupName": "FEIBING NEO AI数字员工",
+    "channel": "desktop",
+    "requestDigest": "120a62959adf014efa891e9ca03915f7bed2e023c5013258d12544cb30c6f4e7",
+    "runtimeModelDecisions": 0,
+    "items": [],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:1",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "failed",
+        "pitfalls": [
+          "deadline-expired"
+        ],
+        "elapsedMs": 179958
+      }
+    ],
+    "reason": "deadline-expired",
+    "elapsedMs": 179962,
+    "eventKey": "cbc934e5bf377cff7f1df061920a4971d5a878b6ef81d90180e96fe8b8b93adf",
+    "reviewSummary": {
+      "totalElapsedMs": 179962,
+      "result": "blocked",
+      "stageCount": 4,
+      "completedStages": 3,
+      "failedStages": [
+        {
+          "stage": "preflight",
+          "status": "failed",
+          "pitfalls": [
+            "deadline-expired"
+          ]
+        }
+      ]
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/state/taobao-jinsha-wechat-evidence-attempts/e592d1fab444f66a8ce5c6615c4f4144fe917599cd65d47c9fed05f1cbdb521b.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "freeze:1",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 3,
+      "label": "freeze:1"
+    },
+    {
+      "stage": "preflight",
+      "status": "failed",
+      "pitfalls": [
+        {
+          "code": "messaging-stage",
+          "reason": "deadline-expired"
+        }
+      ],
+      "elapsedMs": 179958,
+      "item": 4,
+      "label": "preflight"
+    }
+  ],
+  "elapsedMs": 179962,
+  "reviewSummary": {
+    "totalElapsedMs": 179962,
+    "itemCount": 4,
+    "pitfallCount": 1,
+    "result": "failed"
+  }
+}

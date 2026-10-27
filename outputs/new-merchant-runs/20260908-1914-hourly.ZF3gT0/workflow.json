@@ -1,0 +1,11 @@
+{
+  "ok": false,
+  "runId": "00823089-e996-4e81-a25e-954868087285",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "collection": 5298
+  },
+  "stage": "collection",
+  "error": "Command '['/usr/bin/osascript', '-e', 'tell application \"Google Chrome\"\\nif (count of windows) is 0 then error \"chrome-window-missing\"\\ntell front window to make new tab with properties {URL:\"https://open.shop.ele.me/manager/base/home\"}\\nend tell']' timed out after 5 seconds",
+  "elapsedMs": 5299
+}

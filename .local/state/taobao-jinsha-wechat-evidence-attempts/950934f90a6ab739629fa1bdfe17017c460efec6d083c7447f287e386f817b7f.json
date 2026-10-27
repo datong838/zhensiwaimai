@@ -1,0 +1,118 @@
+{
+  "bridgeVersion": 1,
+  "ok": false,
+  "verified": false,
+  "payloadType": "image",
+  "state": "blocked",
+  "groupName": "FEIBING NEO AI数字员工",
+  "payloads": [
+    {
+      "path": "/private/tmp/zhensi_daily_download/background-browser/2026-09-24-b7ee95f2-a361-46ba-a152-ce751302b75c/jinsha-store-final.png",
+      "name": "jinsha-store-final.png",
+      "size": 201782,
+      "sha256": "085fd635724b457a33e368058867693ab30c2e58ca2a6cfe543072168f841d09"
+    },
+    {
+      "path": "/private/tmp/zhensi_daily_download/background-browser/2026-09-24-b7ee95f2-a361-46ba-a152-ce751302b75c/jinsha-review-final.png",
+      "name": "jinsha-review-final.png",
+      "size": 201223,
+      "sha256": "16a0091e3fbd1c4740118d9cb189a2b844b802683e732616cfa6669a5bd8f66d"
+    }
+  ],
+  "sendAttempts": 0,
+  "newSendAttempts": 0,
+  "reason": "wechat-main-window-count-not-one",
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": false,
+    "status": "blocked",
+    "groupName": "FEIBING NEO AI数字员工",
+    "channel": "desktop",
+    "requestDigest": "71f4807060c20ee5f6edf4080a10b75a6080396412af0e236709399aaf0beede",
+    "runtimeModelDecisions": 0,
+    "items": [],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:1",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 11790
+      }
+    ],
+    "reason": "wechat-main-window-count-not-one",
+    "elapsedMs": 11796,
+    "eventKey": "c879f31dd1915b106b6c6440d5e8eb26849dc6e4284144af1b88a7f63bee4bcf",
+    "reviewSummary": {
+      "totalElapsedMs": 11796,
+      "result": "blocked",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/state/taobao-jinsha-wechat-evidence-attempts/950934f90a6ab739629fa1bdfe17017c460efec6d083c7447f287e386f817b7f.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "freeze:1",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 3,
+      "label": "freeze:1"
+    },
+    {
+      "stage": "preflight",
+      "status": "failed",
+      "pitfalls": [
+        {
+          "code": "messaging-stage",
+          "reason": "wechat-main-window-count-not-one"
+        }
+      ],
+      "elapsedMs": 11790,
+      "item": 4,
+      "label": "preflight"
+    }
+  ],
+  "elapsedMs": 11796,
+  "reviewSummary": {
+    "totalElapsedMs": 11796,
+    "itemCount": 4,
+    "pitfallCount": 1,
+    "result": "failed"
+  }
+}

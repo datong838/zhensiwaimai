@@ -1,0 +1,71 @@
+{
+  "ok": false,
+  "status": "unknown",
+  "groupName": "FEIBING NEO AI数字员工",
+  "channel": "desktop",
+  "requestDigest": "f126c2ede2373648011b115a14f92a4ab0483fc3ff129d417bc15d51481f0e6b",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "eaae0434261b25e56c9d28196a7d5be562f3c8514168e8fde5f7edca86b1e3b5",
+      "type": "image",
+      "status": "unknown",
+      "claimedAt": 1791006671.7296379,
+      "sendAttempts": 1,
+      "reason": "windows-transport-anomaly:deadline-expired",
+      "transport": {
+        "ok": false,
+        "error": "deadline-expired",
+        "error_kind": "connection",
+        "local_network_blocked": false,
+        "sendAttempts": 1
+      },
+      "attemptErrors": [
+        "deadline-expired"
+      ]
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "stage": "freeze:1",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 619
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 179338
+    }
+  ],
+  "reason": "windows-transport-anomaly:deadline-expired",
+  "elapsedMs": 179963,
+  "eventKey": "501bb1fc1d2859511bd035c4ee4f1a48d48cdb68842f4737b2cc17b8ffdec35a",
+  "reviewSummary": {
+    "totalElapsedMs": 179963,
+    "result": "unknown",
+    "stageCount": 5,
+    "completedStages": 5,
+    "failedStages": []
+  }
+}

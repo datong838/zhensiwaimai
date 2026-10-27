@@ -1,0 +1,76 @@
+{
+  "ok": true,
+  "runId": "91d03bf2-d0f1-4c39-9fbf-4079b435f3bc",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "collection": 3496,
+    "audit": 0,
+    "phone": 2,
+    "final_cursor_check": 0
+  },
+  "stage": "complete",
+  "collection": {
+    "ok": true,
+    "executor": "merchant-collector",
+    "groupName": "FEIBING NEO AI数字员工",
+    "businessDate": "2026-09-08",
+    "stageMs": {
+      "attach": 44,
+      "close_residual_detail": 109,
+      "attach_existing_tab": 33,
+      "read_page_structure": 107,
+      "navigation": 140,
+      "date_filter": 1416,
+      "page_1_read": 558,
+      "page_1_next": 197,
+      "page_2_read": 762
+    },
+    "runtimeModelDecisions": 0,
+    "createdAt": "2026-09-08T20:15:48.633136+08:00",
+    "cursorSource": "verified-history",
+    "dateFilter": "2026-09-08..2026-09-08",
+    "dateFilterVerified": true,
+    "pages": [
+      {
+        "page": 1,
+        "lastVisiblePage": 2,
+        "nextEnabled": true,
+        "rowCount": 10
+      },
+      {
+        "page": 2,
+        "lastVisiblePage": 2,
+        "nextEnabled": false,
+        "rowCount": 2
+      }
+    ],
+    "paginationComplete": true,
+    "totalRows": 12,
+    "pendingRows": 1,
+    "targetCount": 0,
+    "ascending": true,
+    "detailsVerified": true,
+    "elapsedMs": 3495,
+    "frontmostBefore": "com.tencent.yuanbao",
+    "frontmostAfter": "com.tencent.yuanbao"
+  },
+  "phone": {
+    "ok": true,
+    "executor": "wechat-sender",
+    "groupName": "FEIBING NEO AI数字员工",
+    "sent": 0,
+    "stage": "contract",
+    "historySkipped": 0,
+    "businessDate": "2026-09-08",
+    "messageCount": 0,
+    "mode": "execute-noop",
+    "elapsedMs": 2,
+    "evidenceDir": "/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/zhensi-merchant-wechat-uw6etjri"
+  },
+  "finalCursor": {
+    "verified": true,
+    "merchantId": "1327961356",
+    "recommendTime": "2026-09-08 10:25:53"
+  },
+  "elapsedMs": 3498
+}

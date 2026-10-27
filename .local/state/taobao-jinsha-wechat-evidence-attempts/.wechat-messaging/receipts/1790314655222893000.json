@@ -1,0 +1,55 @@
+{
+  "ok": false,
+  "status": "blocked",
+  "groupName": "FEIBING NEO AI数字员工",
+  "channel": "desktop",
+  "requestDigest": "120a62959adf014efa891e9ca03915f7bed2e023c5013258d12544cb30c6f4e7",
+  "runtimeModelDecisions": 0,
+  "items": [],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:1",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "failed",
+      "pitfalls": [
+        "deadline-expired"
+      ],
+      "elapsedMs": 179958
+    }
+  ],
+  "reason": "deadline-expired",
+  "elapsedMs": 179962,
+  "eventKey": "cbc934e5bf377cff7f1df061920a4971d5a878b6ef81d90180e96fe8b8b93adf",
+  "reviewSummary": {
+    "totalElapsedMs": 179962,
+    "result": "blocked",
+    "stageCount": 4,
+    "completedStages": 3,
+    "failedStages": [
+      {
+        "stage": "preflight",
+        "status": "failed",
+        "pitfalls": [
+          "deadline-expired"
+        ]
+      }
+    ]
+  }
+}

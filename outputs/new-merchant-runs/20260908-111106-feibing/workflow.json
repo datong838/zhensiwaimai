@@ -1,0 +1,65 @@
+{
+  "ok": false,
+  "runId": "ba246292-1a92-4e7f-afc6-6e0b9de512de",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "collection": 7041,
+    "audit": 0,
+    "phone": 25955
+  },
+  "stage": "phone",
+  "collection": {
+    "ok": true,
+    "executor": "merchant-collector",
+    "groupName": "FEIBING NEO AI数字员工",
+    "businessDate": "2026-09-08",
+    "stageMs": {
+      "attach": 387,
+      "close_residual_detail": 461,
+      "attach_existing_tab": 371,
+      "read_page_structure": 359,
+      "navigation": 730,
+      "date_filter": 1927,
+      "page_1_read": 951,
+      "detail_1327961356": 2518
+    },
+    "runtimeModelDecisions": 0,
+    "createdAt": "2026-09-08T11:11:14.093250+08:00",
+    "cursorSource": "local",
+    "dateFilter": "2026-09-08..2026-09-08",
+    "dateFilterVerified": true,
+    "pages": [
+      {
+        "page": 1,
+        "lastVisiblePage": 1,
+        "nextEnabled": false,
+        "rowCount": 6
+      }
+    ],
+    "paginationComplete": true,
+    "totalRows": 6,
+    "pendingRows": 3,
+    "targetCount": 1,
+    "ascending": true,
+    "detailsVerified": true,
+    "elapsedMs": 7040,
+    "frontmostBefore": "com.todesktop.230313mzl4w4u92",
+    "frontmostAfter": "com.todesktop.230313mzl4w4u92"
+  },
+  "phone": {
+    "ok": false,
+    "executor": "wechat-sender",
+    "groupName": "FEIBING NEO AI数字员工",
+    "sent": 0,
+    "stage": "locate_group",
+    "historySkipped": 0,
+    "businessDate": "2026-09-08",
+    "messageCount": 1,
+    "reason": "group-result-count:0",
+    "elapsedMs": 25873,
+    "failedMessageStageMs": {},
+    "evidenceDir": "/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/zhensi-merchant-wechat-qp48xmbd"
+  },
+  "error": "group-result-count:0",
+  "elapsedMs": 32997
+}

@@ -1,0 +1,125 @@
+{
+  "bridgeVersion": 1,
+  "ok": false,
+  "verified": false,
+  "payloadType": "image",
+  "state": "unknown",
+  "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+  "payloads": [
+    {
+      "path": "/private/tmp/zhensi_daily_download/background-browser/2026-10-24-72feab92-68f5-4fea-8e0b-cde84755cf55/jinsha-review-final.png",
+      "name": "jinsha-review-final.png",
+      "size": 492570,
+      "sha256": "fcd1cdc1e8134117287eb2437807dec6387dbf1a841a15191a4d03921a6d9cc0"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": "native-ui-inline-image-not-exposed",
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": false,
+    "status": "unknown",
+    "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "channel": "desktop",
+    "requestDigest": "8bb61d4c9b81611f3458b680132efbf7ecff906fe73fa4046dc8380bfa0bb898",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "fcd1cdc1e8134117287eb2437807dec6387dbf1a841a15191a4d03921a6d9cc0",
+        "type": "image",
+        "status": "unknown",
+        "claimedAt": 1792915985.002182,
+        "sendAttempts": 1,
+        "resolvedGroup": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+        "inputEmpty": true,
+        "reason": "native-ui-inline-image-not-exposed",
+        "backend": "system-events-ui-tree"
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 1
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 34878
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 77809
+      }
+    ],
+    "reason": "native-ui-inline-image-not-exposed",
+    "elapsedMs": 112699,
+    "eventKey": "8452e53c1698186da90a9fca2ccd439e184609db13dbd299bbde788df646a990",
+    "reviewSummary": {
+      "totalElapsedMs": 112699,
+      "result": "unknown",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/taobao-jinsha-wechat-evidence-attempts/c07c08bd62b0e91494c11287f6e0b7a9f73833eb5ce2091179a983910b496ccf.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 1,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 34878,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "failed",
+      "pitfalls": [
+        {
+          "code": "messaging-stage",
+          "reason": "native-ui-inline-image-not-exposed"
+        }
+      ],
+      "elapsedMs": 77809,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 112699,
+  "reviewSummary": {
+    "totalElapsedMs": 112699,
+    "itemCount": 4,
+    "pitfallCount": 1,
+    "result": "failed"
+  }
+}

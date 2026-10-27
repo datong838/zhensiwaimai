@@ -1,0 +1,43 @@
+{
+  "ok": true,
+  "executor": "wechat-desktop-sender",
+  "channel": "desktop",
+  "groupName": "FEIBING NEO AI数字员工",
+  "payloadType": "image",
+  "sendAttempts": 1,
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "locate_group": 2432,
+    "prepare_payload": 10724,
+    "claim_and_send": 133,
+    "post_send_verify": 22186
+  },
+  "payloadIdentity": "87e7c579622f7b9159cd3bbd97a06284370157275649bb920c2a5be0ac764f54",
+  "payloads": [
+    {
+      "path": "/private/tmp/jinsha-review-final.png",
+      "name": "jinsha-review-final.png",
+      "size": 119778,
+      "sha256": "8e8ad68ccded150aa5657b5771ac57c1333c220b8bc3b468c59f58b2a9a34325"
+    }
+  ],
+  "preparedInputChangedPixels": 16814,
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/.local/state/taobao-jinsha-wechat-evidence-attempts/2026-09-10-review-upload-complete.png.json",
+  "postSendInputCleared": [
+    true,
+    true
+  ],
+  "postSendEvidence": [
+    {
+      "chatChangedPixels": 245071,
+      "inputChangedPixels": 0
+    },
+    {
+      "chatChangedPixels": 245991,
+      "inputChangedPixels": 136
+    }
+  ],
+  "verified": true,
+  "state": "verified",
+  "verifiedAt": 1789113999.506656
+}

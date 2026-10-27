@@ -1,0 +1,60 @@
+微信自动发送服务 · 连接信息（只在你我两台机器之间传，不要外发）
+
+────────────────────────────────────────
+服务地址  http://192.168.110.184:8731   ← ★2026-10-22 15:16 大同告知网络更换（曾切到 188.39）；★2026-10-22 22:2x 大同告知网络切回 192.168.110.184，本址扶正 110.184、188.39 降为漂移兜底。Mac 本机 192.168.110.x、Windows 网关 192.168.110.184。实测 /health logged_in=true ready=true（POST list_sessions 返真实臻肆会话，含「上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰」）。gateway.json candidates 同步置顶 110.184，历史网段（188.39 / 0.3 / 172.16.8.157 / 0.2 / 0.5）全部降为漂移兜底。例程里的 WIN_IP 示例值一并改为 110.184。
+TOKEN     CHANGE_ME_STRONG_TOKEN
+网络      同一局域网（当前 192.168.188.x；历史曾在 192.168.110.x / 192.168.0.x / 172.16.8.x 间漂移，
+          旧网段 IP 保留在 gateway.json 兜底候选尾部，漂移回旧网段时自动探测命中）
+
+★ 候选 IP 配置项（2026-10-10 大同要求）：wechat-windows-driver/gateway.json
+  全部消费方（wxsend / 中继 / relay-up / 体检 / 台账发送）都从它读候选；
+  以后改网关 IP 只需编辑 gateway.json 的 candidates 数组，其余代码零改动。
+  本文件的「服务地址」仅作为候选列表首位参考（人工即时改地址的快捷口）。
+────────────────────────────────────────
+
+【用法一】直接填进 example.py（最简单）
+
+    打开 example.py，改这两行：
+
+        WIN_IP = "192.168.110.184"
+        TOKEN  = "CHANGE_ME_STRONG_TOKEN"
+
+    然后运行：
+        python example.py
+
+【用法二】设环境变量（推荐，token 不用写进代码）
+
+    Mac / Linux：
+        export WIN_IP="192.168.110.184"
+        export WECHAT_AGENT_TOKEN="CHANGE_ME_STRONG_TOKEN"
+
+    Windows PowerShell：
+        $env:WIN_IP="192.168.110.184"
+        $env:WECHAT_AGENT_TOKEN="CHANGE_ME_STRONG_TOKEN"
+
+    之后代码里直接：
+        from client import WeChat
+        wx = WeChat()
+
+【用法三】显式传入
+
+        wx = WeChat("192.168.110.184", "CHANGE_ME_STRONG_TOKEN")
+
+────────────────────────────────────────
+先跑自检确认连通：python example.py
+详细说明见 USAGE.md
+────────────────────────────────────────
+
+【IP 说明 · 2026-10-09 大同改网关至 .3】
+★ 2026-10-09 20:47 大同指令：网关服务地址改为 **192.168.0.3**（实测 /health agent up + 会话身份校验
+通过；旧 .2/.5 从 Mac 侧已不可达）。**消费方一律「候选 + 身份校验」**。
+★ 2026-10-11 21:1x 网关迁到新子网 **192.168.110.184**（实测 /health agent up + sessions 身份校验通过：
+含 FEIBING NEO AI数字员工 / 电销+直播攻坚组 / 上海臻肆外卖运营群）。当前权威候选序见 gateway.json：
+**192.168.110.184 → 192.168.0.3 → 172.16.8.157 → 192.168.0.2 → 192.168.0.5**（旧网段 IP 全部降为漂移兜底）。
+历史背景（2026-10-06 大同确认）：Windows 主机（NetBIOS DESKTOP-TH91SO5）原双网卡 .2(有线)/.5(无线)，
+驱动绑 0.0.0.0:8731；从 Mac 侧可达性会漂移 ⇒ 别当常量：
+  · 直连失败（Errno 65 No route to host 等）时，client.py 会自动回落到本机中继
+    127.0.0.1:8732；
+  · 中继（localhost_relay.py）按 gateway.json 候选列表 **192.168.110.184,192.168.0.3,172.16.8.157,
+    192.168.0.2,192.168.0.5** **探测 + 校验驱动身份**（/health 必须回 "agent up"），谁在就选谁。
+维持中继常驻：bash /Users/ddt/work/projects/ai_agent/wechat-windows-driver/relay-up.sh

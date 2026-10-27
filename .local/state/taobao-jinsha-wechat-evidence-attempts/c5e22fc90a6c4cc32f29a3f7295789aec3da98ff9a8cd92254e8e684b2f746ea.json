@@ -1,0 +1,69 @@
+{
+ "bridgeVersion": 1,
+ "state": "verified",
+ "groupName": "FEIBING NEO AI数字员工",
+ "payloadType": "image",
+ "payloads": [
+  {
+   "path": "/private/tmp/zhensi_daily_download/background-browser/2026-10-07-f2e892bb-13e7-449e-ae2c-938d9b740e70/jinsha-store-final.png",
+   "name": "jinsha-store-final.png",
+   "size": 451825,
+   "sha256": "cb0c8bf1bf5525227378f827a878920960554dbab2af5511eef44d5b1af8fe15"
+  },
+  {
+   "path": "/private/tmp/zhensi_daily_download/background-browser/2026-10-07-f2e892bb-13e7-449e-ae2c-938d9b740e70/jinsha-review-final.png",
+   "name": "jinsha-review-final.png",
+   "size": 454167,
+   "sha256": "dc346ef5a1447eae8c73f28177c5a26c41d513377d633cb17fb796dea8a43b82"
+  }
+ ],
+ "sendAttempts": 1,
+ "verified": true,
+ "ok": true,
+ "physicalSendAttempts": 1,
+ "messageSha256": "cb0c8bf1bf5525227378f827a878920960554dbab2af5511eef44d5b1af8fe15",
+ "runtimeModelDecisions": 0,
+ "reason": null,
+ "commonReceipt": {
+  "ok": true,
+  "status": "verified",
+  "groupName": "FEIBING NEO AI数字员工",
+  "channel": "desktop",
+  "runtimeModelDecisions": 0,
+  "items": [
+   {
+    "itemId": "0",
+    "sha256": "cb0c8bf1bf5525227378f827a878920960554dbab2af5511eef44d5b1af8fe15",
+    "type": "image",
+    "status": "verified",
+    "claimedAt": 1792390109.181626,
+    "sendAttempts": 1,
+    "verificationLevel": "user-confirmed-delivered-manual-void",
+    "evidence": {
+     "ok": true,
+     "basis": "user(大同) verbally confirmed delivered 2026-10-19; readback impossible after 254h; 人工方案 A manual void; no send performed"
+    }
+   }
+  ]
+ },
+ "readbackEvidence": {
+  "ok": true,
+  "basis": "user(大同) verbally confirmed delivered 2026-10-19; readback impossible after 254h; 人工方案 A manual void; no send performed"
+ },
+ "verificationMethod": "user-confirmed-delivered-manual-void",
+ "completionProvenance": {
+  "decision": "manual-void-verified-per-user-confirmation",
+  "tool": "void_deadlock.py (人工方案 A · 双层归档)",
+  "authorizedBy": "大同 (verbal, 2026-10-19: 'FEIBING NEO AI数字员工 群图片 没问题 这个 历史死结 去除')",
+  "recordedAt": "2026-10-19T14:08:29+0800",
+  "recordedBy": "WorkBuddy 监理",
+  "replacedState": "attempted",
+  "evidenceBasis": "用户确认已实际送达；距发生 254h 无法做驱动读回取证；未执行任何发送、未伪造 transport/copyReadback 收据。",
+  "noResendGuarantee": "本次结论化不触发任何发送；流程复用该 verified 收据后仅提交成功历史与游标，不重复外发。",
+  "note": "诚实性：未复现桥真实发送收据。依据用户权威确认置 verified，仅用于解除游标阻塞与死结扫描，不表示机器读回取证通过。"
+ },
+ "_voided": true,
+ "voidedAt": "2026-10-19T14:08:29+0800",
+ "voidedBy": "大同",
+ "voidReason": "historical-deadlock-confirmed-delivered-by-user"
+}

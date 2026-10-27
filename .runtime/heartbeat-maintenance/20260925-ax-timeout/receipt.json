@@ -1,0 +1,82 @@
+{
+  "ok": true,
+  "action": "prepare",
+  "status": "prepared",
+  "review": [
+    {
+      "label": "维护授权",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "授权有效期",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "读取依赖清单",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "计算候选摘要",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 5
+    },
+    {
+      "label": "统一微信完整离线测试",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 3713
+    },
+    {
+      "label": "原子写入依赖清单",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "依赖清单回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "统一入口完整性回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 33
+    }
+  ],
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "authorization": "user-20260918-code-maintenance",
+  "expiresAt": "2026-09-25T14:41:32+08:00",
+  "userInstructionSha256": "c91518a278b43dcab9835dbda5168b9a3adc188ce3c5c8b6d2c0e930a91ea974",
+  "dependencyManifestPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/dependencies.json",
+  "dependencyManifestBeforeSha256": "51789d7005791d248fe6a290992a9f04a8e4d3889575fa6e178cabf88fd8ffc5",
+  "dependencyManifestAfterSha256": "8f2dc6131882a2cc5bbf152a3e805e2ac8571f5e6193081916997c339e36cdeb",
+  "changes": [
+    {
+      "path": "scripts/desktop_input.py",
+      "before": "8f04fd95efdd323bad89be1863c9e70f1f6f7013a3e1572eb9b5d9d09c526793",
+      "after": "0cddd62892845c7fa769a3761f36c8aa90dcfa8d7fa7c6e232d3045e15211c33"
+    }
+  ],
+  "tests": {
+    "ok": true,
+    "elapsedMs": 3713,
+    "testCount": 172
+  },
+  "capabilityCheck": {
+    "ok": true,
+    "elapsedMs": 33,
+    "testCount": null
+  },
+  "candidateFileCount": 29,
+  "elapsedMs": 3754
+}

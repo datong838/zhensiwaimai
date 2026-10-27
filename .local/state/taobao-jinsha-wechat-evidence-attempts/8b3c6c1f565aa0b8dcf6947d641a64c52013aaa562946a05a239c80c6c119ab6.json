@@ -1,0 +1,118 @@
+{
+  "bridgeVersion": 1,
+  "ok": false,
+  "verified": false,
+  "payloadType": "image",
+  "state": "blocked",
+  "groupName": "FEIBING NEO AI数字员工",
+  "payloads": [
+    {
+      "path": "/private/tmp/zhensi_daily_download/background-browser/2026-10-23-b6687aa7-8516-4183-9da8-08d79b2b8b3a/jinsha-store-final.png",
+      "name": "jinsha-store-final.png",
+      "size": 552120,
+      "sha256": "60c6dce1b26570133ae8c88ad4a5b68114de08c39c46617386a6cc1abd8380ba"
+    },
+    {
+      "path": "/private/tmp/zhensi_daily_download/background-browser/2026-10-23-b6687aa7-8516-4183-9da8-08d79b2b8b3a/jinsha-review-final.png",
+      "name": "jinsha-review-final.png",
+      "size": 563957,
+      "sha256": "f7b60da3c95b36e4e81a48968ed0177bcbc92013943626b8009e6c0a88be1962"
+    }
+  ],
+  "sendAttempts": 0,
+  "newSendAttempts": 0,
+  "reason": "wecom-preflight-failed:locate-fail:wrong-conversation:'上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰'",
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": false,
+    "status": "blocked",
+    "groupName": "FEIBING NEO AI数字员工",
+    "channel": "desktop",
+    "requestDigest": "314fa92cdb247b1e59689fbd9da9992a29dae6472c8d381b97c652d9e52fbce1",
+    "runtimeModelDecisions": 0,
+    "items": [],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 1
+      },
+      {
+        "stage": "freeze:1",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 1
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 11098
+      }
+    ],
+    "reason": "wecom-preflight-failed:locate-fail:wrong-conversation:'上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰'",
+    "elapsedMs": 11167,
+    "eventKey": "8271232d2cc6ca77556a77f01d2ff6b67725cf7644654ff859efe88639c9aa3e",
+    "reviewSummary": {
+      "totalElapsedMs": 11167,
+      "result": "blocked",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/taobao-jinsha-wechat-evidence-attempts/8b3c6c1f565aa0b8dcf6947d641a64c52013aaa562946a05a239c80c6c119ab6.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 1,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "freeze:1",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 1,
+      "item": 3,
+      "label": "freeze:1"
+    },
+    {
+      "stage": "preflight",
+      "status": "failed",
+      "pitfalls": [
+        {
+          "code": "messaging-stage",
+          "reason": "wecom-preflight-failed:locate-fail:wrong-conversation:'上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰'"
+        }
+      ],
+      "elapsedMs": 11098,
+      "item": 4,
+      "label": "preflight"
+    }
+  ],
+  "elapsedMs": 11167,
+  "reviewSummary": {
+    "totalElapsedMs": 11167,
+    "itemCount": 4,
+    "pitfallCount": 1,
+    "result": "failed"
+  }
+}

@@ -1,0 +1,129 @@
+{
+  "bridgeVersion": 1,
+  "ok": false,
+  "verified": false,
+  "payloadType": "image",
+  "state": "unknown",
+  "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+  "payloads": [
+    {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/outputs/meituan-waimai-negative-review-appeals-20261027/美团外卖差评申诉台账-2026-10-26.png",
+      "name": "美团外卖差评申诉台账-2026-10-26.png",
+      "size": 122513,
+      "sha256": "0d0ca1a7ca09471f98afca4cac554527d578292134fe07b9319686c6ac57fa5e"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": "image-submission-awaits-read-only-verification",
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": false,
+    "status": "unknown",
+    "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "channel": "desktop",
+    "requestDigest": "1236ed207bca07d0f1addc43be14267dcb792889cfe322ded776cd66fc4eb527",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "0d0ca1a7ca09471f98afca4cac554527d578292134fe07b9319686c6ac57fa5e",
+        "type": "image",
+        "status": "unknown",
+        "claimedAt": 1793098218.00112,
+        "sendAttempts": 1,
+        "resolvedGroup": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+        "inputEmpty": true,
+        "reason": "native-ui-inline-image-not-exposed",
+        "backend": "system-events-ui-tree"
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 783
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 16057
+      }
+    ],
+    "executionComplete": true,
+    "verificationPending": [
+      "0"
+    ],
+    "reason": "image-submission-awaits-read-only-verification",
+    "elapsedMs": 16842,
+    "eventKey": "ad77f719189b38b49f5397c3f1fbfa8d023eb60fbc737efdc8b3452e91d9516b",
+    "reviewSummary": {
+      "totalElapsedMs": 16842,
+      "result": "unknown",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/shared/meituan-waimai-negative-review-appeals/summary-attempts/meituan-waimai-appeals-summary-2026-10-26.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 783,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "failed",
+      "pitfalls": [
+        {
+          "code": "messaging-stage",
+          "reason": "native-ui-inline-image-not-exposed"
+        }
+      ],
+      "elapsedMs": 16057,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 16842,
+  "reviewSummary": {
+    "totalElapsedMs": 16842,
+    "itemCount": 4,
+    "pitfallCount": 1,
+    "result": "failed"
+  }
+}
