@@ -144,3 +144,8 @@
 02:33:38使用现有launchd服务一次空闲重载，主任54029→55035；前后live_steps空、无补跑control、无岗位owner、22原流全部not_due；新PID/启动/心跳/周期输出核验通过，四Chrome12961/3212/89873/7155不变。原manifest/posts/control/四岗登记SHA不变，无生产任务、无新UI队列/发送、无浏览器重启；不重装/改排班。证据runtime/state/director-group-lock-20261028/receipt.json及activation前后文件。后续真实到点验收仍按原主任执行，不能用152测试冒充交付。
 
 只读新鲜环境：9231 open.shop.ele.me/manager/base/home真实服务商/门店分配/经营任务正文正常，无登录验证；另一个melody单店页面确实扫码登录，原from指向shopId1202115550商品整改页。本轮不关闭、不代登录、不把单店登录误判整个服务商主体掉线；商品整改真实到点前需恢复对应原登录。9232两业务页属于实时数据/差评分析不同路由，不能仅origin相同擅自关页。金鲨37店授权、非空验收、图片内容回读及其余24流预检继续未完成。
+
+
+## 基础诊断全14指标完整性（10月28日夜间）
+
+预检发现原collector丢弃接口error/truncated且提前空页也complete，可能缺指标发Excel。保持原9231接口/凭证获取/指标code/1000分页/分配下载与发送不变，新增完整性门：HTTP/接口错、total非严格自然数或漂移、空页缺量、超量/上限、缺指标、错误状态/身份或重复店铺均不发布部分diagnosis.json。真实零行允许。30新Node+8原报告/防重+55任务完成率原回归共93项通过；原10月27来源14指标2282行通过只读校验，SHA5ac283c31395928bcc38d817214635bc2a556eec79a46ad5eb0b3c6b4885526d未变。三流所有原Python、4原post登记及manifest/posts/control未变，本轮浏览器/生产/发送/主任重载0。原主任下一正常子步骤加载；11:18真实采集/Excel/送达仍待。证据runtime/state/basic-diagnosis-completeness-20261028/receipt.json。其他两表流完整来源覆盖继续预检，不能据此称24流全部排障完成。

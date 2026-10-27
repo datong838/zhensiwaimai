@@ -1,0 +1,45 @@
+{
+  "at": "2026-10-28T02:41:45.665628+08:00",
+  "tests": {
+    "sourceGuard": 30,
+    "originalBasicReportAndDelivery": 8,
+    "originalTaskrateReportsAndDelivery": 55,
+    "total": 93
+  },
+  "unchanged": {
+    "skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/basic_diag_workflow.py": "3d068712c0e4641e44cb64ee28dd103aaa54d71fdaea331e2d660d34946699a2",
+    "skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/basic_diag_daily.py": "4cbe919cccf356454f6c3ba65992a5dae46a8f31f7c5be16b318bc26102975cb",
+    "skills/workflows/daily-new-stores-not-nourished-ops-to-wechat/scripts/nourish_workflow.py": "c239d3cd00d9ec9999f093f2b91000976d5dea353b0a3d3f5d7620422cc13c8b",
+    "skills/workflows/daily-new-stores-not-nourished-ops-to-wechat/scripts/nourish_daily.py": "2539a3208ff8f9de2f74293fa43abd661a6b804ae0a067f0bc2fa9b7bfd864ed",
+    "skills/workflows/daily-store-task-completion-ops-to-wechat/scripts/stats_card.py": "2d65356c8663d6c75fe581a09fef87f3196abef3836b543370b1a15eb6dc92e5",
+    "skills/workflows/daily-store-task-completion-ops-to-wechat/scripts/task_workflow.py": "574282053543ea170f593323f13e6327bcae8f8815ee31c242b8f841de3d96b2",
+    "skills/workflows/daily-store-task-completion-ops-to-wechat/scripts/task_daily.py": "9fe8dc6ce78cf2f6aa3dfe9c204cae3394f003327642f546bdbcee5f7fbfb982",
+    "skills/posts/taobao-brand-post/dependencies.json": "ee74830c251ce31707224b47e33c0cba7756e69d3f1d25b01d2b405e4e276ab4",
+    "skills/posts/taobao-svc-post/dependencies.json": "ed810b6d7f518bc2e11b8bad958a1348391a251cd5a81c14516e2a722a2b0ed5",
+    "skills/posts/jinsha-post/dependencies.json": "4f7ff22ceb0bd1c27f96f3103ecd4fdb28bef39154c84465b40c603d3c5b094e",
+    "skills/posts/meituan-post/dependencies.json": "dca7453b782012b5620fe3fc9ffcbd1019816b7f797ef74b34725876e78ea51f",
+    "runtime/skills_manifest.json": "21917feccec65a33e71a44c9cc3b817a9318173a10e63d85bc981cff6996b9dd",
+    "runtime/posts.json": "d723aa967c0959478b767bf6b0e187d097138903e6ffc37e8f6e42a17de56db8",
+    "runtime/state/control.json": "33fa5a919e5cdc3b401292cb03a56bc23bc5e92d0214d07201e943b7d7ac0cb2"
+  },
+  "originalDay27Source": {
+    "source": "skills/workflows/daily-store-basic-diagnosis-to-wechat/.runtime/basic-diag/runs/2026-10-27-1793071084727425000/downloads/diagnosis.json",
+    "sha256": "5ac283c31395928bcc38d817214635bc2a556eec79a46ad5eb0b3c6b4885526d",
+    "metrics": 14,
+    "rows": 2282,
+    "passed": true,
+    "readOnly": true
+  },
+  "sourceGuard": "14指标全量/固定total/非空店铺身份/未完成/无重复；错误/截断不发布diagnosis.json",
+  "productionActions": 0,
+  "sends": 0,
+  "browserActions": 0,
+  "directorReloads": 0,
+  "activation": "原主任下次正常Node采集子步骤自然读取，11:18真实业务待验收",
+  "remaining": "其它两表流完整来源与覆盖预检继续；不能将本批93测试作为24流完成",
+  "rollback": "匹配本批collector当前SHA后恢复originals/basic_diag_collector.mjs，保留原事件/账本/来源",
+  "sourceSha256": {
+    "skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/basic_diag_collector.mjs": "fbbfaeab100581faf3eabb4a3c9cc93bdcfa3b41c63c7e5a4763b830a3d50f42",
+    "skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/diagnosis_source_guard.mjs": "15a9719e92362ab28fe9fd35b35b230df0f1ca3fbb5e0ded78bdcd611c5d204c"
+  }
+}

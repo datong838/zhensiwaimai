@@ -1,0 +1,266 @@
+✔ complete multipage original list succeeds (0.686292ms)
+✔ complete zero list succeeds without extra request (0.084833ms)
+✖ HTTP failure blocks partial diagnosis (0.387917ms)
+✖ API nonzero blocks partial diagnosis (0.092834ms)
+✖ total drift blocks partial diagnosis (0.29675ms)
+✖ early empty page blocks partial diagnosis (0.488042ms)
+✖ page budget exhausted blocks partial diagnosis (0.115834ms)
+✖ count overflow blocks partial diagnosis (0.092708ms)
+✖ nonarray rows blocks partial diagnosis (0.088042ms)
+✖ page exceeds requested size blocks partial diagnosis (0.099375ms)
+✖ invalid total null rejected (0.100917ms)
+✖ invalid total undefined rejected (0.058667ms)
+✖ invalid total 2 rejected (0.047333ms)
+✖ invalid total -1 rejected (0.042ms)
+✖ invalid total 1.5 rejected (0.054792ms)
+✖ invalid total NaN rejected (0.062041ms)
+✖ invalid total true rejected (0.045333ms)
+✔ full metric set including zero metrics accepted (0.044333ms)
+✔ missing metric fails full-set gate (0.060125ms)
+✔ unexpected extra metric fails full-set gate (0.030042ms)
+✔ upstream error fails full-set gate (0.02975ms)
+✔ truncated fails full-set gate (0.029625ms)
+✔ missing rows fails full-set gate (0.031583ms)
+✔ actual count mismatch fails full-set gate (0.03475ms)
+✔ wrong status fails full-set gate (0.037792ms)
+✔ missing identity fails full-set gate (0.038209ms)
+✔ blank shop name fails full-set gate (0.033292ms)
+✔ duplicate shop fails full-set gate (0.032333ms)
+✔ serialized browser function has no module closures (0.409125ms)
+✔ original request scope and metric page settings preserved (0.118ms)
+ℹ tests 30
+ℹ suites 0
+ℹ pass 15
+ℹ fail 15
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 52.319958
+
+✖ failing tests:
+
+test at skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/diagnosis_source_guard.test.mjs:45:3
+✖ HTTP failure blocks partial diagnosis (0.387917ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /diag-http-error/. Input:
+  
+  'TypeError: r.json is not a function'
+  
+      at async withPages (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/diagnosis_source_guard.test.mjs:20:13)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: TypeError: r.json is not a function
+        at evalmachine.<anonymous>:10:27
+        at async waitForActual (node:assert:646:5)
+        at async strict.rejects (node:assert:769:25)
+        at async withPages (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/diagnosis_source_guard.test.mjs:20:13)
+        at async Test.run (node:internal/test_runner/test:1389:7)
+        at async Test.processPendingSubtests (node:internal/test_runner/test:960:7),
+    expected: /diag-http-error/,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/diagnosis_source_guard.test.mjs:45:3
+✖ API nonzero blocks partial diagnosis (0.092834ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async withPages (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/diagnosis_source_guard.test.mjs:20:13)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /diag-response-error/,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/diagnosis_source_guard.test.mjs:45:3
+✖ total drift blocks partial diagnosis (0.29675ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async withPages (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/diagnosis_source_guard.test.mjs:20:13)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /diag-total-drift/,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/diagnosis_source_guard.test.mjs:45:3
+✖ early empty page blocks partial diagnosis (0.488042ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async withPages (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/diagnosis_source_guard.test.mjs:20:13)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /diag-empty-page-before-total/,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/diagnosis_source_guard.test.mjs:45:3
+✖ page budget exhausted blocks partial diagnosis (0.115834ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async withPages (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/diagnosis_source_guard.test.mjs:20:13)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /diag-pagination-incomplete/,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/diagnosis_source_guard.test.mjs:45:3
+✖ count overflow blocks partial diagnosis (0.092708ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async withPages (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/diagnosis_source_guard.test.mjs:20:13)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /diag-count-exceeds-total/,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/diagnosis_source_guard.test.mjs:45:3
+✖ nonarray rows blocks partial diagnosis (0.088042ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async withPages (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/diagnosis_source_guard.test.mjs:20:13)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /diag-page-invalid/,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/diagnosis_source_guard.test.mjs:45:3
+✖ page exceeds requested size blocks partial diagnosis (0.099375ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async withPages (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/diagnosis_source_guard.test.mjs:20:13)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /diag-page-invalid/,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/diagnosis_source_guard.test.mjs:46:57
+✖ invalid total null rejected (0.100917ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async withPages (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/diagnosis_source_guard.test.mjs:20:13)
+      at async TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/diagnosis_source_guard.test.mjs:47:2)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /diag-total-invalid/,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/diagnosis_source_guard.test.mjs:46:57
+✖ invalid total undefined rejected (0.058667ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async withPages (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/diagnosis_source_guard.test.mjs:20:13)
+      at async TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/diagnosis_source_guard.test.mjs:47:2)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /diag-total-invalid/,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/diagnosis_source_guard.test.mjs:46:57
+✖ invalid total 2 rejected (0.047333ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async withPages (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/diagnosis_source_guard.test.mjs:20:13)
+      at async TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/diagnosis_source_guard.test.mjs:47:2)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /diag-total-invalid/,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/diagnosis_source_guard.test.mjs:46:57
+✖ invalid total -1 rejected (0.042ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async withPages (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/diagnosis_source_guard.test.mjs:20:13)
+      at async TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/diagnosis_source_guard.test.mjs:47:2)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /diag-total-invalid/,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/diagnosis_source_guard.test.mjs:46:57
+✖ invalid total 1.5 rejected (0.054792ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async withPages (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/diagnosis_source_guard.test.mjs:20:13)
+      at async TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/diagnosis_source_guard.test.mjs:47:2)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /diag-total-invalid/,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/diagnosis_source_guard.test.mjs:46:57
+✖ invalid total NaN rejected (0.062041ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async withPages (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/diagnosis_source_guard.test.mjs:20:13)
+      at async TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/diagnosis_source_guard.test.mjs:47:2)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /diag-total-invalid/,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/diagnosis_source_guard.test.mjs:46:57
+✖ invalid total true rejected (0.045333ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async withPages (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/diagnosis_source_guard.test.mjs:20:13)
+      at async TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/diagnosis_source_guard.test.mjs:47:2)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /diag-total-invalid/,
+    operator: 'rejects',
+    diff: 'simple'
+  }

@@ -10,6 +10,7 @@
 //      * 签名不覆盖 pageSize/agentCode ⇒ 可换 agentCode 批量拉 14 指标，且 pageSize=1000 一次取全量
 //      * 分页兜底：若 rows < totalCount 则递增 current 继续拉
 import { createRequire } from 'node:module';
+import { collectMetricPages, validateMetricResults } from './diagnosis_source_guard.mjs';
 import { connectToPost } from '../../../posts/taobao-svc-post/scripts/connect.mjs';
 import { acquirePostLease, releasePostLease } from '../../../posts/taobao-svc-post/scripts/lease.mjs';
 import { assertAuthenticated, assertOrigin } from '../../../posts/taobao-svc-post/scripts/auth.mjs';
@@ -94,27 +95,9 @@ async function collectDiagnosis(page) {
   if (!base) throw new Error('diag-credential-capture-failed');
   if (!base.headers || !base.headers.token) throw new Error('diag-token-header-missing');
 
-  const out = await page.evaluate(async ({ rec, metrics, pageSize, maxPages }) => {
-    const result = {};
-    for (const [code, name] of metrics) {
-      const body = JSON.parse(rec.reqBody);
-      body.agentCode = code; body.pageSize = pageSize; body.current = 1; body.shopIdListIn = '';
-      let current = 1, collected = [], total = null;
-      while (current <= maxPages) {
-        body.current = current;
-        const r = await fetch(rec.url, { method: 'POST', headers: { ...rec.headers }, body: JSON.stringify(body), credentials: 'include' });
-        const j = await r.json();
-        if (j.code !== 0) { result[name] = { error: 'code-' + j.code, message: j.message, rows: [] }; break; }
-        if (total === null) total = j.totalCount || 0;
-        const rows = Array.isArray(j.data) ? j.data : [];
-        collected = collected.concat(rows);
-        if (!rows.length || collected.length >= total) { result[name] = { totalCount: total, rows: collected }; break; }
-        current += 1;
-        if (current > maxPages) { result[name] = { totalCount: total, rows: collected, truncated: true }; }
-      }
-    }
-    return result;
-  }, { rec: base, metrics: METRICS, pageSize: PAGE_SIZE, maxPages: MAX_PAGES });
+  const out = await page.evaluate(collectMetricPages,
+    { rec: base, metrics: METRICS, pageSize: PAGE_SIZE, maxPages: MAX_PAGES });
+  validateMetricResults(out, METRICS);
 
   const metrics = {};
   for (const [code, name] of METRICS) {

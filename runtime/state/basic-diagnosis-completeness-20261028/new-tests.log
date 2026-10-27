@@ -1,0 +1,38 @@
+✔ complete multipage original list succeeds (0.644792ms)
+✔ complete zero list succeeds without extra request (0.081ms)
+✔ HTTP failure blocks partial diagnosis (0.17075ms)
+✔ API nonzero blocks partial diagnosis (0.049833ms)
+✔ total drift blocks partial diagnosis (0.068083ms)
+✔ early empty page blocks partial diagnosis (0.255041ms)
+✔ page budget exhausted blocks partial diagnosis (0.077917ms)
+✔ count overflow blocks partial diagnosis (0.062041ms)
+✔ nonarray rows blocks partial diagnosis (0.063291ms)
+✔ page exceeds requested size blocks partial diagnosis (0.135667ms)
+✔ invalid total null rejected (0.098542ms)
+✔ invalid total undefined rejected (0.047041ms)
+✔ invalid total 2 rejected (0.037666ms)
+✔ invalid total -1 rejected (0.04175ms)
+✔ invalid total 1.5 rejected (0.033625ms)
+✔ invalid total NaN rejected (0.032875ms)
+✔ invalid total true rejected (0.02875ms)
+✔ full metric set including zero metrics accepted (0.044416ms)
+✔ missing metric fails full-set gate (0.056375ms)
+✔ unexpected extra metric fails full-set gate (0.03125ms)
+✔ upstream error fails full-set gate (0.027875ms)
+✔ truncated fails full-set gate (0.026625ms)
+✔ missing rows fails full-set gate (0.0255ms)
+✔ actual count mismatch fails full-set gate (0.025166ms)
+✔ wrong status fails full-set gate (0.026834ms)
+✔ missing identity fails full-set gate (0.029833ms)
+✔ blank shop name fails full-set gate (0.037958ms)
+✔ duplicate shop fails full-set gate (0.03775ms)
+✔ serialized browser function has no module closures (0.517292ms)
+✔ original request scope and metric page settings preserved (0.067ms)
+ℹ tests 30
+ℹ suites 0
+ℹ pass 30
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 44.868667
