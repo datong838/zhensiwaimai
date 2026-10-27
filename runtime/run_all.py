@@ -79,7 +79,7 @@ LOGIN_CHECK_MARKER = STATE_DIR / "login_check_last.json"
 # posts.json 把「工位→岗位→使用流水线→互斥组」机器化；daemon 派班前查表取互斥组锁（W2）。
 POSTS_JSON = RUNTIME_DIR / "posts.json"
 POST_GROUP_LOCK_DIR = STATE_DIR / "locks"
-# 同组锁 TTL：单条流水线不应跑超过此时长，超时视为悬挂→覆盖（自愈）。
+# 旧TTL保留供诊断兼容；持锁进程存活或无法确认时永不按年龄覆盖。
 POST_GROUP_LOCK_TTL_SECONDS = 90 * 60
 _posts_cache: dict = {}
 
@@ -113,83 +113,18 @@ def resolve_mutex_group(skill_name: str):
 
 
 def _lock_holder_alive(pid) -> bool:
-    """锁内记录的持锁进程是否还活着。
-
-    保守口径：pid 缺失/非整数/无法判定（PermissionError 等）一律视为「存活」，
-    保持旧行为（等 TTL 自愈），只有**明确** ProcessLookupError 才判死。这样即使
-    pid 复用或权限受限也不会误抢别人的锁。
-    """
-    if not isinstance(pid, int) or pid <= 0:
-        return True
-    try:
-        os.kill(pid, 0)
-    except ProcessLookupError:
-        return False
-    except OSError:
-        return True
-    return True
+    from post_lease_file import alive
+    return alive(pid) is not False
 
 
 def acquire_post_group_lock(group: str, run_id: str):
-    """原子创建互斥组锁（wx 独占）。返回 lease dict；若被同组其它流水线新鲜占用返回 None（SKIPPED_BUSY）。"""
-    POST_GROUP_LOCK_DIR.mkdir(parents=True, exist_ok=True)
-    path = POST_GROUP_LOCK_DIR / ("%s.lock" % group)
-    now_iso = _now_iso()
-    try:
-        fd = os.open(str(path), os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
-        try:
-            os.write(fd, json.dumps({"group": group, "runId": run_id,
-                                     "pid": os.getpid(), "acquiredAt": now_iso},
-                                    ensure_ascii=False).encode("utf-8"))
-        finally:
-            os.close(fd)
-        return {"group": group, "runId": run_id, "path": path}
-    except FileExistsError:
-        # 已存在：判断「新鲜度 + 持锁进程是否还活着」，两者都满足才算真忙。
-        # 2026-10-22 修复（事故原型）：原实现只看 age < TTL(90min) 就判忙。但持锁进程
-        # 被 SIGTERM（launchctl kickstart -k / 手动 kill daemon / daemon 崩溃）时不会
-        # 释放锁 ⇒ 同组流水线在整整 90 分钟里每轮 SKIPPED_BUSY。实测 top10 被**自己**
-        # 10:30:29 创建的锁挡住（pid 34067 早已 DEAD），contract-termination 同因；
-        # 台账上表现为「两条流没跑」，日志却写"被同组流水线新鲜占用"，极易误诊成流坏了。
-        # 现在：未过期 **且** 持锁 pid 仍存活 → 真忙；pid 已死 → 立即覆盖自愈。
-        try:
-            existing = json.loads(Path(path).read_text(encoding="utf-8"))
-            age = time.time() - datetime.fromisoformat(
-                existing.get("acquiredAt", "2000-01-01T00:00:00")).timestamp()
-            if age < POST_GROUP_LOCK_TTL_SECONDS and _lock_holder_alive(existing.get("pid")):
-                return None
-        except (OSError, ValueError):
-            pass
-        try:
-            path.unlink()
-        except OSError:
-            pass
-        try:
-            fd = os.open(str(path), os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
-            try:
-                os.write(fd, json.dumps({"group": group, "runId": run_id,
-                                         "pid": os.getpid(), "acquiredAt": now_iso,
-                                         "recovered": True},
-                                        ensure_ascii=False).encode("utf-8"))
-            finally:
-                os.close(fd)
-            return {"group": group, "runId": run_id, "path": path}
-        except FileExistsError:
-            return None
+    from post_group_lease import acquire
+    return acquire(POST_GROUP_LOCK_DIR, group, run_id)
 
 
 def release_post_group_lock(lease: dict) -> None:
-    if not lease:
-        return
-    path = lease.get("path")
-    if not path:
-        return
-    try:
-        cur = json.loads(Path(path).read_text(encoding="utf-8"))
-        if cur.get("runId") == lease.get("runId"):
-            Path(path).unlink()
-    except (OSError, ValueError):
-        pass
+    from post_group_lease import release
+    release(lease)
 
 
 # ---------------------------------------------------------------- 现场维护（取代 W4 熔断）
@@ -354,41 +289,24 @@ def cmd_selftest() -> int:
         print("  [INFO] daily-negative-reviews -> 互斥组 %s (expect jinsha-9232)" % g)
         ok = ok and (g == "jinsha-9232")
         ok = ok and (resolve_mutex_group("__no_such_skill__") is None)
-        lg = POST_GROUP_LOCK_DIR / "selftest-w2.lock"
-        try:
-            lg.unlink()
-        except OSError:
-            pass
-        lease1 = acquire_post_group_lock("selftest-w2", "A")
-        ok = ok and (lease1 is not None)
-        lease2 = acquire_post_group_lock("selftest-w2", "B")
-        ok = ok and (lease2 is None)
-        release_post_group_lock(lease1)
-        ok = ok and (acquire_post_group_lock("selftest-w2", "C") is not None)
-        release_post_group_lock(acquire_post_group_lock("selftest-w2", "C"))
-        lg.write_text(json.dumps({"group": "selftest-w2", "runId": "old", "pid": 9,
-                                  "acquiredAt": "2000-01-01T00:00:00"}, ensure_ascii=False))
-        ok = ok and (acquire_post_group_lock("selftest-w2", "D") is not None)
-        release_post_group_lock(acquire_post_group_lock("selftest-w2", "D"))
-        # 2026-10-22 新增（正负对照）：未过期但持锁进程已死的「孤儿锁」必须**立即**被
-        # 接管，不得白等 90 分钟 TTL —— 事故原型：top10 被自己 10:30:29 创建的锁
-        # 挡到 12:00，contract-termination 同因，两流当日静默停摆。
-        lg.write_text(json.dumps({"group": "selftest-w2", "runId": "orphan",
-                                  "pid": 999999, "acquiredAt": _now_iso()},
-                                 ensure_ascii=False))
-        orphan_lease = acquire_post_group_lock("selftest-w2", "E")
-        ok = ok and (orphan_lease is not None)
-        ok = ok and (json.loads(lg.read_text(encoding="utf-8")).get("recovered") is True)
-        release_post_group_lock(orphan_lease)
-        # 负对照：新鲜且持锁进程**存活** ⇒ 必须判忙，不能退化成「随便抢」
-        lg.write_text(json.dumps({"group": "selftest-w2", "runId": "alive",
-                                  "pid": os.getpid(), "acquiredAt": _now_iso()},
-                                 ensure_ascii=False))
-        ok = ok and (acquire_post_group_lock("selftest-w2", "F") is None)
-        try:
-            lg.unlink()
-        except OSError:
-            pass
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory() as td, patch.dict(globals(), POST_GROUP_LOCK_DIR=Path(td)):
+            lg = POST_GROUP_LOCK_DIR / "selftest-w2.lock"
+            lease1 = acquire_post_group_lock("selftest-w2", "A")
+            ok = ok and (lease1 is not None)
+            ok = ok and (acquire_post_group_lock("selftest-w2", "B") is None)
+            release_post_group_lock(lease1)
+            lease2 = acquire_post_group_lock("selftest-w2", "C")
+            ok = ok and (lease2 is not None)
+            release_post_group_lock(lease2)
+            lg.write_text(json.dumps({"group": "selftest-w2", "runId": "orphan",
+                                      "pid": 999999999, "acquiredAt": _now_iso()}))
+            orphan = acquire_post_group_lock("selftest-w2", "E")
+            ok = ok and orphan is not None and orphan.get("recovered") is True
+            release_post_group_lock(orphan)
+            lg.write_text(json.dumps({"group": "selftest-w2", "runId": "alive",
+                                      "pid": os.getpid(), "acquiredAt": "2000-01-01T00:00:00"}))
+            ok = ok and (acquire_post_group_lock("selftest-w2", "F") is None)
         print("  [INFO] acquire/busy/release/stale-override 全部通过")
     except Exception as e:  # noqa: BLE001
         print("  [FAIL] 互斥组锁: %r" % e)

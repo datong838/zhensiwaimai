@@ -144,24 +144,23 @@ class RunAllCoverageTest(unittest.TestCase):
         l2 = ra.acquire_post_group_lock(g, "C")
         self.assertIsNotNone(l2)
         ra.release_post_group_lock(l2)
-        # 过期锁 → 覆盖自愈
+        # 确认死亡的过期锁 → 原子回收
         lock = ra.POST_GROUP_LOCK_DIR / ("%s.lock" % g)
-        lock.write_text(json.dumps({"group": g, "runId": "old", "pid": 9,
+        lock.write_text(json.dumps({"group": g, "runId": "old", "pid": 999999999,
                                     "acquiredAt": "2000-01-01T00:00:00"}, ensure_ascii=False),
                         encoding="utf-8")
         l3 = ra.acquire_post_group_lock(g, "D")
         self.assertIsNotNone(l3)
         ra.release_post_group_lock(l3)
 
-    def test_acquire_corrupt_lock_self_heals(self):
+    def test_acquire_corrupt_lock_preserved(self):
         g = "cov-w2-corrupt"
         ra.POST_GROUP_LOCK_DIR.mkdir(parents=True, exist_ok=True)
         lock = ra.POST_GROUP_LOCK_DIR / ("%s.lock" % g)
         lock.write_text("not-json{{", encoding="utf-8")
-        # 损坏锁 → 解析异常(125-126) → 删除(127/129-130) → 重建成功(131-140)
-        l = ra.acquire_post_group_lock(g, "A")
-        self.assertIsNotNone(l)
-        ra.release_post_group_lock(l)
+        # 无法证明旧owner死亡：保留原件，不能按坏JSON抢锁。
+        self.assertIsNone(ra.acquire_post_group_lock(g, "A"))
+        self.assertEqual(lock.read_text(), "not-json{{")
 
     def test_release_variants(self):
         # 空 lease
@@ -427,7 +426,8 @@ class RunAllCoverageTest(unittest.TestCase):
         ra.POSTS_JSON.write_text(json.dumps(posts), encoding="utf-8")
         ra._posts_cache.clear()
         # s-blocked 当天已有成功 → done_today 走 pseudo；s-active 无成功 → 真跑
-        with mock.patch.object(sr, "get_last_success",
+        with mock.patch.object(sr, "DEFAULT_HISTORY", self.state / "run_history"), \
+             mock.patch.object(sr, "get_last_success",
                               side_effect=lambda n: ra._now_iso() if n == "s-blocked" else ""), \
              mock.patch.object(ra, "_cadence_gate",
                               side_effect=lambda s, now: ((True, "done_today") if s["name"] == "s-blocked" else (False, "due"))), \
@@ -792,15 +792,10 @@ class RunAllCoverageTest(unittest.TestCase):
         self.assertEqual(ra.load_failure_watch(), {})
 
     def test_acquire_lock_recreate_race(self):
-        # 重建锁时再次遭遇 FileExistsError（并发抢锁）→ 141-142 返回 None(SKIPPED_BUSY)
-        g = "cov-w2-race"
-        ra.POST_GROUP_LOCK_DIR.mkdir(parents=True, exist_ok=True)
-        lock = ra.POST_GROUP_LOCK_DIR / ("%s.lock" % g)
-        # 合法 json，但 acquiredAt 无法解析 → 触发 125-126；随后重建时 os.open 再次失败 → 141-142
-        lock.write_text(json.dumps({"group": g, "runId": "x", "acquiredAt": "garbage"}),
-                        encoding="utf-8")
-        with mock.patch.object(ra.os, "open", side_effect=FileExistsError("concurrent")):
-            self.assertIsNone(ra.acquire_post_group_lock(g, "A"))
+        # 独占发布发现其它文件已占用：保留原忙语义。
+        import post_group_lease
+        with mock.patch.object(post_group_lease, "publish_exclusive", return_value=False):
+            self.assertIsNone(ra.acquire_post_group_lock("cov-w2-race", "A"))
 
     def test_acquire_corrupt_lock_unlink_fail(self):
         # 损坏锁解析失败(125-126) → unlink 抛 OSError(129-130) → 文件残留→重建仍冲突→返回 None(SKIPPED_BUSY)

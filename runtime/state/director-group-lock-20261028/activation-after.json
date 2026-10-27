@@ -1,0 +1,24 @@
+{
+  "at": "2026-10-28T02:33:39.144963+08:00",
+  "daemon": {
+    "pid": 55035,
+    "started_at": "2026-10-28T02:33:38",
+    "last_cycle_at": "2026-10-28T02:33:38",
+    "status": "running",
+    "next_cycle_at": "2026-10-28T03:03:38"
+  },
+  "launchctl": "gui/501/com.zhensi.waimai.careloop = {\n\tactive count = 1\n\tpath = /Users/ddt/Library/LaunchAgents/com.zhensi.waimai.careloop.plist\n\ttype = LaunchAgent\n\tstate = running\n\n\tprogram = /Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python\n\targuments = {\n\t\t/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python\n\t\t/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_all.py\n\t\t--daemon\n\t}\n\n\tworking directory = /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime\n\n\tstdout path = /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/daemon.out.log\n\tstderr path = /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/daemon.err.log\n\tinherited environment = {\n\t\tSSH_AUTH_SOCK => /var/run/com.apple.launchd.iSpLzDLNDX/Listeners\n\t}\n\n\tdefault environment = {\n\t\tPATH => /usr/bin:/bin:/usr/sbin:/sbin\n\t}\n\n\tenvironment = {\n\t\tOSLogRateLimit => 64\n\t\tPYTHONUNBUFFERED => 1\n\t\tZENSI_NODE => /Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/bin/node\n\t\tPATH => /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin\n\t\tZENSI_ADB_SERIAL => \n\t\tXPC_SERVICE_NAME => com.zhensi.waimai.careloop\n\t}\n\n\tdomain = gui/501 [100022]\n\tasid = 100022\n\tminimum runtime = 30\n\texit timeout = 5\n\truns = 4\n\tpid = 55035\n\timmediate reason = inefficient\n\tforks = 1\n\texecs = 2\n\tinitialized = 1\n\ttrampolined = 1\n\tstarted suspended = 0\n\tproxy started suspended = 0\n\tchecked allocations = 0 (queried = 1)\n\tchecked allocations reason = no host\n\tchecked allocations flags = 0x0\n\tlast exit code = 0\n\n\tresource coalition = {\n\t\tID = 195772\n\t\ttype = resource\n\t\tstate = active\n\t\tactive count = 1\n\t\tname = com.zhensi.waimai.careloop\n\t}\n\n\tjetsam coalition = {\n\t\tID = 195773\n\t\ttype = jetsam\n\t\tstate = active\n\t\tactive count = 1\n\t\tname = com.zhensi.waimai.careloop\n\t}\n\n\tspawn type = daemon (3)\n\tjetsam priority = 40\n\tjetsam memory limit (active) = (unlimited)\n\tjetsam memory limit (inactive) = (unlimited)\n\tjetsamproperties category = daemon\n\tjetsam thread limit = 32\n\tcpumon = default\n\tjob state = running\n\tsanitizer flags = 0x0\n\n\tproperties = keepalive | runatload | inferred program\n}\n",
+  "chromePids": {
+    "9230": "12961",
+    "9231": "3212",
+    "9232": "89873",
+    "9233": "7155"
+  },
+  "protectedUnchanged": true,
+  "testedSourceUnchanged": true,
+  "newQueueTasks": 0,
+  "liveSteps": 0,
+  "reloadCount": 1,
+  "productionJobsRequested": 0,
+  "newDirectorCommand": "55035     1 Wed Oct 28 02:33:37 2026     /opt/homebrew/Cellar/python@3.12/3.12.13_4/Frameworks/Python.framework/Versions/3.12/Resources/Python.app/Contents/MacOS/Python /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_all.py --daemon\n"
+}

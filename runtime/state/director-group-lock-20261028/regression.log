@@ -1,0 +1,51 @@
+test_bad_json_is_preserved (runtime.test_control_consumption.ControlConsumptionTests.test_bad_json_is_preserved) ... ok
+test_consumes_once (runtime.test_control_consumption.ControlConsumptionTests.test_consumes_once) ... ok
+test_only_immediate_is_untouched (runtime.test_control_consumption.ControlConsumptionTests.test_only_immediate_is_untouched) ... ok
+test_preserves_immediate_and_other_fields (runtime.test_control_consumption.ControlConsumptionTests.test_preserves_immediate_and_other_fields) ... ok
+test_write_failure_does_not_dispatch (runtime.test_control_consumption.ControlConsumptionTests.test_write_failure_does_not_dispatch) ... ok
+test_each_step_receives_its_own_timeout (runtime.test_morning_flow_budgets.MorningBudgetTests.test_each_step_receives_its_own_timeout) ... ok
+test_manifest_exact_nine_finite_budgets (runtime.test_morning_flow_budgets.MorningBudgetTests.test_manifest_exact_nine_finite_budgets) ... ok
+test_p0_ignored_term_child_is_killed_and_live_record_cleared (runtime.test_morning_flow_budgets.MorningBudgetTests.test_p0_ignored_term_child_is_killed_and_live_record_cleared) ... ok
+test_recoverable_failure_does_not_retry_or_sleep (runtime.test_morning_flow_budgets.MorningBudgetTests.test_recoverable_failure_does_not_retry_or_sleep) ... ok
+test_timeout_cleans_ordinary_child_and_next_flow_succeeds (runtime.test_morning_flow_budgets.MorningBudgetTests.test_timeout_cleans_ordinary_child_and_next_flow_succeeds) ... ok
+test_dependency_requires_today_after_start (runtime.test_fixed_schedule.FixedScheduleTests.test_dependency_requires_today_after_start) ... ok
+test_four_boundaries_and_success_does_not_cover_next (runtime.test_fixed_schedule.FixedScheduleTests.test_four_boundaries_and_success_does_not_cover_next) ... ok
+test_integration_closes_after_19 (runtime.test_fixed_schedule.FixedScheduleTests.test_integration_closes_after_19) ... ok
+test_invalid_slots (runtime.test_fixed_schedule.FixedScheduleTests.test_invalid_slots) ... ok
+test_morning_recovery_wake_does_not_reopen_completed_slot (runtime.test_fixed_schedule.FixedScheduleTests.test_morning_recovery_wake_does_not_reopen_completed_slot) ... ok
+test_normal_flow_unchanged (runtime.test_fixed_schedule.FixedScheduleTests.test_normal_flow_unchanged) ... ok
+test_critical_entries_have_exact_enabled_slots (runtime.test_morning_fixed_wake.MorningFixedWakeTests.test_critical_entries_have_exact_enabled_slots) ... ok
+test_original_boundary_wakes_at_top10_and_feedback (runtime.test_morning_fixed_wake.MorningFixedWakeTests.test_original_boundary_wakes_at_top10_and_feedback) ... ok
+test_yesterday_success_does_not_complete_new_day (runtime.test_morning_fixed_wake.MorningFixedWakeTests.test_yesterday_success_does_not_complete_new_day) ... ok
+test_daemon_wakes_at_each_slot (runtime.test_midday_schedule_minutes.MiddayScheduleMinuteTests.test_daemon_wakes_at_each_slot) ... ok
+test_every_earlier_minute_and_exact_slot (runtime.test_midday_schedule_minutes.MiddayScheduleMinuteTests.test_every_earlier_minute_and_exact_slot) ... ok
+test_manifest_matches_minutes (runtime.test_midday_schedule_minutes.MiddayScheduleMinuteTests.test_manifest_matches_minutes) ... ok
+test_success_dedup_and_late_window (runtime.test_midday_schedule_minutes.MiddayScheduleMinuteTests.test_success_dedup_and_late_window) ... ok
+test_before_final_slot_never_preflights (runtime.test_daily_ledger_delivery.DailyLedgerTests.test_before_final_slot_never_preflights) ... ok
+test_cadence_pseudo_success_not_evidence (runtime.test_daily_ledger_delivery.DailyLedgerTests.test_cadence_pseudo_success_not_evidence) ... ok
+test_customer_requires_real_final_duty (runtime.test_daily_ledger_delivery.DailyLedgerTests.test_customer_requires_real_final_duty) ... ok
+test_missing_final_schedule_cannot_pass (runtime.test_daily_ledger_delivery.DailyLedgerTests.test_missing_final_schedule_cannot_pass) ... ok
+test_old_slot_or_unknown_never_proves_final (runtime.test_daily_ledger_delivery.DailyLedgerTests.test_old_slot_or_unknown_never_proves_final) ... ok
+test_route_rejects_group_date_and_frozen_drift (runtime.test_daily_ledger_delivery.DailyLedgerTests.test_route_rejects_group_date_and_frozen_drift) ... ok
+test_unknown_never_retries (runtime.test_daily_ledger_delivery.DailyLedgerTests.test_unknown_never_retries) ... ok
+test_verified_one_send_then_idempotent (runtime.test_daily_ledger_delivery.DailyLedgerTests.test_verified_one_send_then_idempotent) ... ok
+test_wrong_path_never_sends (runtime.test_daily_ledger_delivery.DailyLedgerTests.test_wrong_path_never_sends) ... ok
+test_alive_owner_never_taken_even_after_extreme_ttl (runtime.tests.test_post_lease_file.PhysicalLeaseTests.test_alive_owner_never_taken_even_after_extreme_ttl) ... ok
+test_complete_atomic_payload_and_release (runtime.tests.test_post_lease_file.PhysicalLeaseTests.test_complete_atomic_payload_and_release) ... ok
+test_concurrent_brokers_have_only_one_winner (runtime.tests.test_post_lease_file.PhysicalLeaseTests.test_concurrent_brokers_have_only_one_winner) ... ok
+test_confirmed_dead_fresh_owner_recovers_without_ttl_wait (runtime.tests.test_post_lease_file.PhysicalLeaseTests.test_confirmed_dead_fresh_owner_recovers_without_ttl_wait) ... ok
+test_invalid_or_unreadable_owner_is_not_removed (runtime.tests.test_post_lease_file.PhysicalLeaseTests.test_invalid_or_unreadable_owner_is_not_removed) ... ok
+test_kernel_guard_releases_after_holder_process_killed (runtime.tests.test_post_lease_file.PhysicalLeaseTests.test_kernel_guard_releases_after_holder_process_killed) ... ok
+test_legacy_exact_owner_can_release_without_new_nonce (runtime.tests.test_post_lease_file.PhysicalLeaseTests.test_legacy_exact_owner_can_release_without_new_nonce) ... ok
+test_modified_pid_run_or_time_never_releases (runtime.tests.test_post_lease_file.PhysicalLeaseTests.test_modified_pid_run_or_time_never_releases) ... ok
+test_old_lease_cannot_release_reacquired_owner (runtime.tests.test_post_lease_file.PhysicalLeaseTests.test_old_lease_cannot_release_reacquired_owner) ... ok
+test_permission_uncertainty_is_alive (runtime.tests.test_post_lease_file.PhysicalLeaseTests.test_permission_uncertainty_is_alive) ... ok
+test_same_run_requires_same_pid_and_explicit_reentrance (runtime.tests.test_post_lease_file.PhysicalLeaseTests.test_same_run_requires_same_pid_and_explicit_reentrance) ... ok
+test_symlink_payload_or_guard_never_follows_foreign_file (runtime.tests.test_post_lease_file.PhysicalLeaseTests.test_symlink_payload_or_guard_never_follows_foreign_file) ... ok
+test_writer_death_after_publication_leaves_complete_reclaimable_lease (runtime.tests.test_post_lease_file.PhysicalLeaseTests.test_writer_death_after_publication_leaves_complete_reclaimable_lease) ... ok
+test_writer_death_before_publication_leaves_no_empty_lease (runtime.tests.test_post_lease_file.PhysicalLeaseTests.test_writer_death_before_publication_leaves_no_empty_lease) ... ok
+
+----------------------------------------------------------------------
+Ran 46 tests in 14.263s
+
+OK

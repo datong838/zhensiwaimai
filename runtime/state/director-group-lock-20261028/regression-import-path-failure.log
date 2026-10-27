@@ -1,0 +1,103 @@
+test_control_consumption (unittest.loader._FailedTest.test_control_consumption) ... ERROR
+test_morning_flow_budgets (unittest.loader._FailedTest.test_morning_flow_budgets) ... ERROR
+test_fixed_schedule (unittest.loader._FailedTest.test_fixed_schedule) ... ERROR
+test_morning_fixed_wake (unittest.loader._FailedTest.test_morning_fixed_wake) ... ERROR
+test_midday_schedule_minutes (unittest.loader._FailedTest.test_midday_schedule_minutes) ... ERROR
+test_daily_ledger_delivery (unittest.loader._FailedTest.test_daily_ledger_delivery) ... ERROR
+test_alive_owner_never_taken_even_after_extreme_ttl (runtime.tests.test_post_lease_file.PhysicalLeaseTests.test_alive_owner_never_taken_even_after_extreme_ttl) ... ok
+test_complete_atomic_payload_and_release (runtime.tests.test_post_lease_file.PhysicalLeaseTests.test_complete_atomic_payload_and_release) ... ok
+test_concurrent_brokers_have_only_one_winner (runtime.tests.test_post_lease_file.PhysicalLeaseTests.test_concurrent_brokers_have_only_one_winner) ... ok
+test_confirmed_dead_fresh_owner_recovers_without_ttl_wait (runtime.tests.test_post_lease_file.PhysicalLeaseTests.test_confirmed_dead_fresh_owner_recovers_without_ttl_wait) ... ok
+test_invalid_or_unreadable_owner_is_not_removed (runtime.tests.test_post_lease_file.PhysicalLeaseTests.test_invalid_or_unreadable_owner_is_not_removed) ... ok
+test_kernel_guard_releases_after_holder_process_killed (runtime.tests.test_post_lease_file.PhysicalLeaseTests.test_kernel_guard_releases_after_holder_process_killed) ... ok
+test_legacy_exact_owner_can_release_without_new_nonce (runtime.tests.test_post_lease_file.PhysicalLeaseTests.test_legacy_exact_owner_can_release_without_new_nonce) ... ok
+test_modified_pid_run_or_time_never_releases (runtime.tests.test_post_lease_file.PhysicalLeaseTests.test_modified_pid_run_or_time_never_releases) ... ok
+test_old_lease_cannot_release_reacquired_owner (runtime.tests.test_post_lease_file.PhysicalLeaseTests.test_old_lease_cannot_release_reacquired_owner) ... ok
+test_permission_uncertainty_is_alive (runtime.tests.test_post_lease_file.PhysicalLeaseTests.test_permission_uncertainty_is_alive) ... ok
+test_same_run_requires_same_pid_and_explicit_reentrance (runtime.tests.test_post_lease_file.PhysicalLeaseTests.test_same_run_requires_same_pid_and_explicit_reentrance) ... ok
+test_symlink_payload_or_guard_never_follows_foreign_file (runtime.tests.test_post_lease_file.PhysicalLeaseTests.test_symlink_payload_or_guard_never_follows_foreign_file) ... ok
+test_writer_death_after_publication_leaves_complete_reclaimable_lease (runtime.tests.test_post_lease_file.PhysicalLeaseTests.test_writer_death_after_publication_leaves_complete_reclaimable_lease) ... ok
+test_writer_death_before_publication_leaves_no_empty_lease (runtime.tests.test_post_lease_file.PhysicalLeaseTests.test_writer_death_before_publication_leaves_no_empty_lease) ... ok
+
+======================================================================
+ERROR: test_control_consumption (unittest.loader._FailedTest.test_control_consumption)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_control_consumption
+Traceback (most recent call last):
+  File "/opt/homebrew/Cellar/python@3.12/3.12.13_4/Frameworks/Python.framework/Versions/3.12/lib/python3.12/unittest/loader.py", line 137, in loadTestsFromName
+    module = __import__(module_name)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/test_control_consumption.py", line 6, in <module>
+    import run_all as subject
+ModuleNotFoundError: No module named 'run_all'
+
+
+======================================================================
+ERROR: test_morning_flow_budgets (unittest.loader._FailedTest.test_morning_flow_budgets)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_morning_flow_budgets
+Traceback (most recent call last):
+  File "/opt/homebrew/Cellar/python@3.12/3.12.13_4/Frameworks/Python.framework/Versions/3.12/lib/python3.12/unittest/loader.py", line 137, in loadTestsFromName
+    module = __import__(module_name)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/test_morning_flow_budgets.py", line 14, in <module>
+    import skill_runner as runner
+ModuleNotFoundError: No module named 'skill_runner'
+
+
+======================================================================
+ERROR: test_fixed_schedule (unittest.loader._FailedTest.test_fixed_schedule)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_fixed_schedule
+Traceback (most recent call last):
+  File "/opt/homebrew/Cellar/python@3.12/3.12.13_4/Frameworks/Python.framework/Versions/3.12/lib/python3.12/unittest/loader.py", line 137, in loadTestsFromName
+    module = __import__(module_name)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/test_fixed_schedule.py", line 4, in <module>
+    import fixed_schedule as fixed
+ModuleNotFoundError: No module named 'fixed_schedule'
+
+
+======================================================================
+ERROR: test_morning_fixed_wake (unittest.loader._FailedTest.test_morning_fixed_wake)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_morning_fixed_wake
+Traceback (most recent call last):
+  File "/opt/homebrew/Cellar/python@3.12/3.12.13_4/Frameworks/Python.framework/Versions/3.12/lib/python3.12/unittest/loader.py", line 137, in loadTestsFromName
+    module = __import__(module_name)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/test_morning_fixed_wake.py", line 5, in <module>
+    import fixed_schedule
+ModuleNotFoundError: No module named 'fixed_schedule'
+
+
+======================================================================
+ERROR: test_midday_schedule_minutes (unittest.loader._FailedTest.test_midday_schedule_minutes)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_midday_schedule_minutes
+Traceback (most recent call last):
+  File "/opt/homebrew/Cellar/python@3.12/3.12.13_4/Frameworks/Python.framework/Versions/3.12/lib/python3.12/unittest/loader.py", line 137, in loadTestsFromName
+    module = __import__(module_name)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/test_midday_schedule_minutes.py", line 8, in <module>
+    import fixed_schedule
+ModuleNotFoundError: No module named 'fixed_schedule'
+
+
+======================================================================
+ERROR: test_daily_ledger_delivery (unittest.loader._FailedTest.test_daily_ledger_delivery)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_daily_ledger_delivery
+Traceback (most recent call last):
+  File "/opt/homebrew/Cellar/python@3.12/3.12.13_4/Frameworks/Python.framework/Versions/3.12/lib/python3.12/unittest/loader.py", line 137, in loadTestsFromName
+    module = __import__(module_name)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/test_daily_ledger_delivery.py", line 10, in <module>
+    import daily_ledger_delivery as daily
+ModuleNotFoundError: No module named 'daily_ledger_delivery'
+
+
+----------------------------------------------------------------------
+Ran 20 tests in 0.181s
+
+FAILED (errors=6)

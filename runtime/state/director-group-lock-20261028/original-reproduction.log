@@ -1,0 +1,172 @@
+FFEFFFFFEEEEEE
+======================================================================
+ERROR: test_invalid_owner_and_bad_json_remain_busy (runtime.tests.test_post_group_lease.GroupLeaseTests.test_invalid_owner_and_bad_json_remain_busy) (content='[]')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_all.py", line 139, in acquire_post_group_lock
+FileExistsError: [Errno 17] File exists: '/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/tmpmw2qjcta/post.lock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/tests/test_post_group_lease.py", line 66, in test_invalid_owner_and_bad_json_remain_busy
+    self.assertIsNone(self.acquire())
+                      ^^^^^^^^^^^^^^
+  File "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/tests/test_post_group_lease.py", line 46, in acquire
+    return director.acquire_post_group_lock('post', run)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_all.py", line 158, in acquire_post_group_lock
+    - SUCCESS：全部步骤 exit=0；
+               ^^^^^^^^
+AttributeError: 'list' object has no attribute 'get'
+
+======================================================================
+ERROR: test_wrong_owner_cannot_release (runtime.tests.test_post_group_lease.GroupLeaseTests.test_wrong_owner_cannot_release) (field='pid')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/tests/test_post_group_lease.py", line 96, in test_wrong_owner_cannot_release
+    self.assertEqual(self.path.read_bytes(), original)
+                     ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.13_4/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pathlib.py", line 1019, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.13_4/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/tmpc1y_u4ye/post.lock'
+
+======================================================================
+ERROR: test_wrong_owner_cannot_release (runtime.tests.test_post_group_lease.GroupLeaseTests.test_wrong_owner_cannot_release) (field='runId')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/tests/test_post_group_lease.py", line 96, in test_wrong_owner_cannot_release
+    self.assertEqual(self.path.read_bytes(), original)
+                     ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.13_4/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pathlib.py", line 1019, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.13_4/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/tmpc1y_u4ye/post.lock'
+
+======================================================================
+ERROR: test_wrong_owner_cannot_release (runtime.tests.test_post_group_lease.GroupLeaseTests.test_wrong_owner_cannot_release) (field='group')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/tests/test_post_group_lease.py", line 96, in test_wrong_owner_cannot_release
+    self.assertEqual(self.path.read_bytes(), original)
+                     ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.13_4/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pathlib.py", line 1019, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.13_4/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/tmpc1y_u4ye/post.lock'
+
+======================================================================
+ERROR: test_wrong_owner_cannot_release (runtime.tests.test_post_group_lease.GroupLeaseTests.test_wrong_owner_cannot_release) (field='acquiredAt')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/tests/test_post_group_lease.py", line 96, in test_wrong_owner_cannot_release
+    self.assertEqual(self.path.read_bytes(), original)
+                     ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.13_4/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pathlib.py", line 1019, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.13_4/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/tmpc1y_u4ye/post.lock'
+
+======================================================================
+ERROR: test_wrong_owner_cannot_release (runtime.tests.test_post_group_lease.GroupLeaseTests.test_wrong_owner_cannot_release) (field='leaseId')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/tests/test_post_group_lease.py", line 96, in test_wrong_owner_cannot_release
+    self.assertEqual(self.path.read_bytes(), original)
+                     ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.13_4/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pathlib.py", line 1019, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.13_4/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/tmpc1y_u4ye/post.lock'
+
+======================================================================
+ERROR: test_legacy_partial_release_cannot_remove (runtime.tests.test_post_group_lease.GroupLeaseTests.test_legacy_partial_release_cannot_remove)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/tests/test_post_group_lease.py", line 111, in test_legacy_partial_release_cannot_remove
+    self.assertEqual(self.path.read_bytes(), original)
+                     ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.13_4/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pathlib.py", line 1019, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.13_4/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/tmp0b_e8chf/post.lock'
+
+======================================================================
+FAIL: test_expired_live_owner_not_stolen (runtime.tests.test_post_group_lease.GroupLeaseTests.test_expired_live_owner_not_stolen)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/tests/test_post_group_lease.py", line 50, in test_expired_live_owner_not_stolen
+    self.assertIsNone(self.acquire())
+AssertionError: {'group': 'post', 'runId': 'new', 'path': PosixPath('/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/tmp1fnj73l_/post.lock')} is not None
+
+======================================================================
+FAIL: test_invalid_owner_and_bad_json_remain_busy (runtime.tests.test_post_group_lease.GroupLeaseTests.test_invalid_owner_and_bad_json_remain_busy) (content='{')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/tests/test_post_group_lease.py", line 66, in test_invalid_owner_and_bad_json_remain_busy
+    self.assertIsNone(self.acquire())
+AssertionError: {'group': 'post', 'runId': 'new', 'path': PosixPath('/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/tmpmw2qjcta/post.lock')} is not None
+
+======================================================================
+FAIL: test_invalid_owner_and_bad_json_remain_busy (runtime.tests.test_post_group_lease.GroupLeaseTests.test_invalid_owner_and_bad_json_remain_busy) (content='{}')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/tests/test_post_group_lease.py", line 66, in test_invalid_owner_and_bad_json_remain_busy
+    self.assertIsNone(self.acquire())
+AssertionError: {'group': 'post', 'runId': 'new', 'path': PosixPath('/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/tmpmw2qjcta/post.lock')} is not None
+
+======================================================================
+FAIL: test_invalid_owner_and_bad_json_remain_busy (runtime.tests.test_post_group_lease.GroupLeaseTests.test_invalid_owner_and_bad_json_remain_busy) (content='{"pid": true}')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/tests/test_post_group_lease.py", line 66, in test_invalid_owner_and_bad_json_remain_busy
+    self.assertIsNone(self.acquire())
+AssertionError: {'group': 'post', 'runId': 'new', 'path': PosixPath('/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/tmpmw2qjcta/post.lock')} is not None
+
+======================================================================
+FAIL: test_invalid_owner_and_bad_json_remain_busy (runtime.tests.test_post_group_lease.GroupLeaseTests.test_invalid_owner_and_bad_json_remain_busy) (content='{"pid": "12"}')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/tests/test_post_group_lease.py", line 66, in test_invalid_owner_and_bad_json_remain_busy
+    self.assertIsNone(self.acquire())
+AssertionError: {'group': 'post', 'runId': 'new', 'path': PosixPath('/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/tmpmw2qjcta/post.lock')} is not None
+
+======================================================================
+FAIL: test_invalid_owner_and_bad_json_remain_busy (runtime.tests.test_post_group_lease.GroupLeaseTests.test_invalid_owner_and_bad_json_remain_busy) (content='{"pid": -1}')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/tests/test_post_group_lease.py", line 66, in test_invalid_owner_and_bad_json_remain_busy
+    self.assertIsNone(self.acquire())
+AssertionError: {'group': 'post', 'runId': 'new', 'path': PosixPath('/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/tmpmw2qjcta/post.lock')} is not None
+
+======================================================================
+FAIL: test_old_same_run_lease_cannot_release_new_lease (runtime.tests.test_post_group_lease.GroupLeaseTests.test_old_same_run_lease_cannot_release_new_lease)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/tests/test_post_group_lease.py", line 104, in test_old_same_run_lease_cannot_release_new_lease
+    self.assertTrue(self.path.exists())
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.016s
+
+FAILED (failures=7, errors=7)

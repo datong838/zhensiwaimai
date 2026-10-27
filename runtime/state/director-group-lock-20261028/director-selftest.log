@@ -1,0 +1,97 @@
+=== selftest：失败分类 ===
+  [OK] exit0      -> SUCCESS (expect SUCCESS)
+  [OK] timeout    -> RECOVERABLE (expect RECOVERABLE)
+  [OK] login      -> NEEDS_LOGIN (expect NEEDS_LOGIN)
+  [OK] connreset  -> RECOVERABLE (expect RECOVERABLE)
+  [OK] unknown    -> UNKNOWN (expect UNKNOWN)
+
+=== selftest：RunnerLock 互斥 ===
+  [INFO] 首次 acquire = True
+
+=== selftest：prune_history（临时目录）===
+  [INFO] 删除过期文件数 = 1（expect 1）
+
+=== selftest：manifest 加载（含 v1.1 编排字段）===
+  [INFO] 加载 30 skills OK
+  [INFO] 全部 skill 含 order/cadence_hours/earliest_hour
+
+=== selftest：岗位互斥组锁 (W2) ===
+  [INFO] daily-negative-reviews -> 互斥组 jinsha-9232 (expect jinsha-9232)
+  [INFO] acquire/busy/release/stale-override 全部通过
+
+=== selftest：现场维护（取代原熔断 W4 —— 已废除停排）===
+  [INFO] 累计/永不熔断/清零/SKIPPED_BUSY中性 全部通过
+
+=== selftest：只认当天成功（反虚高 SUCCESS）===
+  [INFO] 昨日成功→重跑 / 当日成功→跳过 / 未到点→PENDING / 凌晨成功不顶当日档 全部通过
+
+=== selftest：E5 当日完成类别（SUCCESS + 证据化 SKIPPED 同等待遇）===
+  [INFO] 完成类别判据 7 例执行完毕（SUCCESS/SKIPPED=完成，其余=未完成）
+
+=== selftest：login_health_gate 门控 ===
+  [OK] 非巡检小时调用为 no-op（未写 marker）
+
+=== selftest：P0-1 收据优先 / P0-1c 下钻 / E3 认知层（note+分档+默认零行为）===
+  [OK] 顶层stage stage=wechat-send-failed (receipt:stage) phase_last=b [policy-retry: 认知层白名单允许自动重试] [note: 微信发送阶段失败，结合 phase_last 定位具体子步骤。]
+  [OK] 顶层reason reason=daily-record-key-duplicate (receipt:reason)
+  [OK] 嵌套reason nested-reason=windows-transport-anomaly (receipt:nested_reason)
+  [OK] 收据命中登录态 reason=merchant login required, please re-auth (receipt:reason)
+  [OK] 文本Error码 error-code=channel-context-readback-mismatch (text)
+  [OK] 负例-嵌套反转不得判SUCCESS stage=wechat-send-failed (receipt:stage) [policy-retry: 认知层白名单允许自动重试] [note: 微信发送阶段失败，结合 phase_last 定位具体子步骤。]
+  [OK] 负例-超长单行JSON stage=send:0 (receipt:stage)
+  [OK] 顶层取最后整行JSON 
+  [OK] P0-1c 包装层下钻真码 embedded-reason=windows-driver-local-network-blocked (receipt:embedded_reason) [note: 本机→Windows 网关被
+  [OK] P0-1c 认知层处置提示注入 acOS「本地网络」权限拦（launchd 上下文必然如此）。正解：经中继 127.0.0.1:8732 出去；中继也不可达则须看护在 GUI 会话执行 relay-up.sh。]
+  [OK] P0-1c 负例-有效reason不被覆盖 reason=business-real-code (receipt:reason)
+  [OK] P0-1c 负例-无嵌入时退回包装文案(语义保持) reason=Command failed: python x.py --execute (receipt:reason)
+  [OK] P0-1c 负例-未知码无note 
+  [OK] E3 已知码有 note 
+  [OK] E3 命名空间前缀可查（windows-wechat:...） 
+  [OK] E3 真实码 payload-file-missing 有 note 
+  [OK] E3 分档：瞬时类标 auto-retry-candidate 
+  [OK] E3 分档：封印类标 never-silence 
+  [OK] E3 残余：未入名单的码不许静音 
+  [OK] E3 残余：未入名单的码不许自动重试 
+  [OK] E3 不变量：never-silence 永不放行 
+  [OK] E3b 重试臂：windows-driver-unreachable 已放行 
+  [OK] E3b 静音臂：lock 已放行 
+  [OK] E3b 重试臂生效：UNKNOWN 码升 RECOVERABLE（带 policy-retry 标记） RECOVERABLE|reason=windows-driver-unreachable (receipt:reason) [policy-r
+  [OK] E3b 边界：lock 只静音不重试（分类仍 UNKNOWN） 
+  [OK] E3b 边界：never-silence 档分类不受影响 
+  [INFO] 收据解析用例执行完毕
+
+=== selftest：P0-3 告警聚合/治愈/老化/历史重建 ===
+  [OK] 同键聚合计数 
+  [OK] 不同码分行 
+  [OK] 成功治愈 
+  [OK] 治愈后复发重开 
+  [OK] 老化归档 aged=2
+  [OK] 历史重建可读化 {"total": 1, "readable": 1, "keys": 1, "skills": 1}
+  [OK] 命令行码归一聚合 code=command-failed:taobao-flash-appeals
+  [OK] 不同 workflow-id 分行 
+  [OK] 超长码哈希归一 code=long-reason-94218caa
+  [OK] 空码兜底 
+[alert-suppressed] s3 -> UNKNOWN : reason=lock (receipt:reason) (code=lock)
+  [OK] E3b 静音：lock 不写 alerts.jsonl 
+  [OK] E3b 静音：审计流留痕（suppressed=true） 
+[alert] s3 -> UNKNOWN : reason=windows-driver-unreachable (receipt:reason)
+  [OK] E3b 边界：只重试不静音的码照常告警 
+  [OK] E3b 边界：审计流未被误写第二条 
+[alert] s4 -> UNKNOWN : 无码失败
+  [OK] E3b 边界：无码照常告警（fail-closed） 
+  [INFO] 告警聚合用例执行完毕
+
+=== selftest：看护断言（流程排序判据 / 岗位页匹配判据）===
+  [OK] 正例-顺序成立 ⇒ ALL PASS
+  [OK] 负例-顺序回归 ⇒ FAIL order-regression (brand 未排在全部申诉流之后 ⇒ 违反「先申诉→后汇报」)
+  [OK] 负例-brand缺失 ⇒ FAIL brand-flow-absent (manifest 里找不到 brand-negative-review-appeal-followup，排班被删/改名 ⇒ 无法保证时序)
+assert-flow-order selftest: ALL PASS
+  [OK] 正例-命中目标页
+  [OK] 负例-标题对URL不对
+  [OK] 负例-登录页不误判
+  [OK] 负例-非数组
+  [OK] 负例-空列表
+  [OK] page_titles 只列page
+assert-post-pages selftest: ALL PASS
+
+ALL PASS

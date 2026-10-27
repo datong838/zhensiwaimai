@@ -1,0 +1,1894 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""外卖运营统一调度入口 · run_all（Phase 1 + P3-1B 常驻守护 · runtime/）
+
+看护哲学（docs/architecture/系统架构加固方案-参考三独立系统.md §10 + Phase3 P3-1B）：
+- 一次性看护：本文件是单入口 launcher，代理（WorkBuddy）逐流程看护，非自治 cron。
+- 常驻守护（P3-1B，2026-09-28 拍板）：`--daemon` 模式常驻运行，由 launchd
+  KeepAlive（runtime/com.zhensi.waimai.careloop.plist）崩溃自启，持有真机/微信/浏览器
+  会话不退出，根治诊断根因1（会话冷启动）。daemon 按 manifest 的 order/cadence_hours/
+  earliest_hour 统一编排（agent 掌握），并落状态文件供 agent 看护跟进。
+
+抄 n8n 机制（已核实 n8n 源码）：
+- 重试循环：skill_runner 的 max_retries+cooldown（同构 retryOnFail/maxTries/waitBetweenTries）
+- Error Workflow：每 skill 失败（NEEDS_LOGIN/UNKNOWN）写 state/alerts.jsonl 等价"失败触发告警流"
+- 常驻+restart:unless-stopped：launchd KeepAlive=true 等价
+- EXECUTIONS_DATA_PRUNE：skill_runner.prune_history 已做
+
+安全门零改动：本层只按 manifest 命令行包裹各 skill 现有入口，不感知/不绕过 skill 内部
+EXTERNAL_EFFECT fail-closed / 防重账本 / 逐字授权 / ActionResult 收据。
+
+用法：
+  python3 run_all.py --list            列出 14 条目与 enabled/order/cadence
+  python3 run_all.py --dry-run         打印将执行的计划（不真跑、不生成台账）
+  python3 run_all.py --selftest        跑调度层纯逻辑自测（分类/锁/prune）
+  python3 run_all.py --status          读当天历史 + daemon 状态快照
+  python3 run_all.py --once <name>     手动触发单个 skill（含 oneshot，与 daemon 互斥锁）
+  python3 run_all.py                   真实看护一轮（强制跑全部 enabled → 台账 → 发送门）
+  python3 run_all.py --send            看护一轮 + active 全绿时经微信发群
+  python3 run_all.py --cycle-once      跑一个 daemon 周期（按 cadence 门控，跑完即退，测试用）
+  python3 run_all.py --daemon          常驻守护：按 cadence 循环编排，launchd KeepAlive 崩溃自启
+  python3 run_all.py --auth-watch       P3-3 只读扫描授权到期并告警（不重封，安全门零改动）
+
+依赖：生成 xlsx 需 openpyxl（pip install openpyxl）；缺失时降级 csv 并告警。
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import signal
+import shutil
+import subprocess
+import sys
+import tempfile
+import time
+from datetime import datetime, timedelta
+from pathlib import Path
+
+RUNTIME_DIR = Path(__file__).resolve().parent
+sys.path.insert(0, str(RUNTIME_DIR))
+import skill_runner as sr  # noqa: E402
+import auth_watch as aw  # noqa: E402
+import fixed_schedule  # noqa: E402
+try:  # P0-3：告警聚合与老化；模块缺失时退回纯 append 行为
+    import alert_store  # noqa: E402
+except ImportError:  # pragma: no cover
+    alert_store = None
+try:  # P1-2：经验索引；模块缺失时跳过
+    import experience_index  # noqa: E402
+except ImportError:  # pragma: no cover
+    experience_index = None
+
+REPO_ROOT = sr.REPO_ROOT
+DEFAULT_MANIFEST = RUNTIME_DIR / "skills_manifest.json"
+HISTORY_DIR = sr.DEFAULT_HISTORY
+STATE_DIR = sr.STATE_DIR
+DAEMON_HEARTBEAT = STATE_DIR / "daemon.json"
+LAST_CYCLE = STATE_DIR / "last_cycle.json"
+ALERTS_LOG = STATE_DIR / "alerts.jsonl"
+# E3b（2026-10-06）：被认知层静音的告警只落这条独立审计流（append-only），
+# 不进 alerts.jsonl / 聚合视图 —— 观察周复盘数它；回滚 = 清空白名单。
+ALERTS_SUPPRESSED_LOG = STATE_DIR / "alerts_suppressed.jsonl"
+CONTROL_FILE = STATE_DIR / "control.json"
+SENT_TODAY = STATE_DIR / "sent_today.json"
+LOGIN_CHECK_HOURS = {8, 22}
+LOGIN_CHECK_MARKER = STATE_DIR / "login_check_last.json"
+
+# ---------------------------------------------------------------- 岗位登记表 (W1/L2)
+# posts.json 把「工位→岗位→使用流水线→互斥组」机器化；daemon 派班前查表取互斥组锁（W2）。
+POSTS_JSON = RUNTIME_DIR / "posts.json"
+POST_GROUP_LOCK_DIR = STATE_DIR / "locks"
+# 同组锁 TTL：单条流水线不应跑超过此时长，超时视为悬挂→覆盖（自愈）。
+POST_GROUP_LOCK_TTL_SECONDS = 90 * 60
+_posts_cache: dict = {}
+
+
+def load_posts() -> dict:
+    if "data" in _posts_cache:
+        return _posts_cache["data"]
+    data: dict = {}
+    if POSTS_JSON.exists():
+        try:
+            data = json.loads(POSTS_JSON.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            data = {}
+    _posts_cache["data"] = data
+    return data
+
+
+def resolve_mutex_group(skill_name: str):
+    """查 posts.json：某流水线所属的互斥组（同端口 = 同组 = 同时只有一条当班）。
+
+    仅采集岗（含数字 port 字段）参与 daemon 工位互斥；发送岗（wechat-messaging，
+    无 port）靠身份账本幂等，不占 daemon 互斥组。
+    """
+    posts = load_posts().get("posts", {})
+    for post in posts.values():
+        if "port" not in post:
+            continue
+        if skill_name in post.get("usedBy", []):
+            return post.get("mutexGroup")
+    return None
+
+
+def _lock_holder_alive(pid) -> bool:
+    """锁内记录的持锁进程是否还活着。
+
+    保守口径：pid 缺失/非整数/无法判定（PermissionError 等）一律视为「存活」，
+    保持旧行为（等 TTL 自愈），只有**明确** ProcessLookupError 才判死。这样即使
+    pid 复用或权限受限也不会误抢别人的锁。
+    """
+    if not isinstance(pid, int) or pid <= 0:
+        return True
+    try:
+        os.kill(pid, 0)
+    except ProcessLookupError:
+        return False
+    except OSError:
+        return True
+    return True
+
+
+def acquire_post_group_lock(group: str, run_id: str):
+    """原子创建互斥组锁（wx 独占）。返回 lease dict；若被同组其它流水线新鲜占用返回 None（SKIPPED_BUSY）。"""
+    POST_GROUP_LOCK_DIR.mkdir(parents=True, exist_ok=True)
+    path = POST_GROUP_LOCK_DIR / ("%s.lock" % group)
+    now_iso = _now_iso()
+    try:
+        fd = os.open(str(path), os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
+        try:
+            os.write(fd, json.dumps({"group": group, "runId": run_id,
+                                     "pid": os.getpid(), "acquiredAt": now_iso},
+                                    ensure_ascii=False).encode("utf-8"))
+        finally:
+            os.close(fd)
+        return {"group": group, "runId": run_id, "path": path}
+    except FileExistsError:
+        # 已存在：判断「新鲜度 + 持锁进程是否还活着」，两者都满足才算真忙。
+        # 2026-10-22 修复（事故原型）：原实现只看 age < TTL(90min) 就判忙。但持锁进程
+        # 被 SIGTERM（launchctl kickstart -k / 手动 kill daemon / daemon 崩溃）时不会
+        # 释放锁 ⇒ 同组流水线在整整 90 分钟里每轮 SKIPPED_BUSY。实测 top10 被**自己**
+        # 10:30:29 创建的锁挡住（pid 34067 早已 DEAD），contract-termination 同因；
+        # 台账上表现为「两条流没跑」，日志却写"被同组流水线新鲜占用"，极易误诊成流坏了。
+        # 现在：未过期 **且** 持锁 pid 仍存活 → 真忙；pid 已死 → 立即覆盖自愈。
+        try:
+            existing = json.loads(Path(path).read_text(encoding="utf-8"))
+            age = time.time() - datetime.fromisoformat(
+                existing.get("acquiredAt", "2000-01-01T00:00:00")).timestamp()
+            if age < POST_GROUP_LOCK_TTL_SECONDS and _lock_holder_alive(existing.get("pid")):
+                return None
+        except (OSError, ValueError):
+            pass
+        try:
+            path.unlink()
+        except OSError:
+            pass
+        try:
+            fd = os.open(str(path), os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
+            try:
+                os.write(fd, json.dumps({"group": group, "runId": run_id,
+                                         "pid": os.getpid(), "acquiredAt": now_iso,
+                                         "recovered": True},
+                                        ensure_ascii=False).encode("utf-8"))
+            finally:
+                os.close(fd)
+            return {"group": group, "runId": run_id, "path": path}
+        except FileExistsError:
+            return None
+
+
+def release_post_group_lock(lease: dict) -> None:
+    if not lease:
+        return
+    path = lease.get("path")
+    if not path:
+        return
+    try:
+        cur = json.loads(Path(path).read_text(encoding="utf-8"))
+        if cur.get("runId") == lease.get("runId"):
+            Path(path).unlink()
+    except (OSError, ValueError):
+        pass
+
+
+# ---------------------------------------------------------------- 现场维护（取代 W4 熔断）
+# 2026-10-02 大同拍板：**废除熔断机制**。熔断 = 停工，与"必须完成当日任务"直接冲突
+# （实测代价：3 条流水线连续失败 6 班后被熔断锁死，静默停工 2 天，当日任务无人完成，
+# 而失败原因因 run 目录为空长期无法定位）。
+# 改为现场维护：失败只登记 + 告警（看护代理据此查代码 → 修复 → 测试 → 直到当日真实
+# 成功），**绝不停排** —— 每个周期照常排程该流水线。连续失败仅作告警强度信号，
+# 不再产生任何阻断语义。
+FAILURE_WATCH_FILE = STATE_DIR / "failure_watch.json"
+
+
+def load_failure_watch() -> dict:
+    if FAILURE_WATCH_FILE.exists():
+        try:
+            return json.loads(FAILURE_WATCH_FILE.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            return {}
+    return {}
+
+
+def save_failure_watch(data: dict) -> None:
+    STATE_DIR.mkdir(parents=True, exist_ok=True)
+    FAILURE_WATCH_FILE.write_text(
+        json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def is_done_category(category) -> bool:
+    """E5（2026-10-06）：当日「已完成」的类别集合。
+
+    - SUCCESS：全部步骤 exit=0；
+    - SKIPPED_IDEMPOTENT：**已核实「当日已 verified 外发」**（P0-1b 证据门控），
+      该流当日实质已完成 ⇒ 与 SUCCESS 同等待遇（记账 / cadence 门控 / 告警治愈）。
+    其余（UNKNOWN / NEEDS_LOGIN / RECOVERABLE / SKIPPED_BUSY / PENDING）一律不算完成。
+    """
+    return category in (sr.CAT_SUCCESS, sr.CAT_SKIPPED)
+
+
+def record_outcome(skill: str, category, now_iso: str) -> dict:
+    """登记一次执行结果（纯观测，不阻断）。SUCCESS 清零；SKIPPED_BUSY 中性；其余累加。
+
+    永不置任何「停排 / 熔断」状态：失败只会被看见，不会被停工。
+    """
+    data = load_failure_watch()
+    entry = data.get(skill, {"consecutive_failures": 0, "last_category": None,
+                             "last_failure_at": None})
+    if category == sr.CAT_SUCCESS:
+        entry["consecutive_failures"] = 0
+        entry["last_failure_at"] = None
+    elif category == "SKIPPED_BUSY" or category == sr.CAT_SKIPPED:
+        pass  # 互斥跳过 / 当日外发幂等保护均非失败，不动计数
+    else:
+        entry["consecutive_failures"] = entry.get("consecutive_failures", 0) + 1
+        entry["last_failure_at"] = now_iso
+    entry["last_category"] = category
+    entry["updated_at"] = now_iso
+    data[skill] = entry
+    save_failure_watch(data)
+    return entry
+
+
+def clear_failures(target) -> None:
+    """清空失败计数：target='ALL' 全清；否则按 skill 名移除。"""
+    if target == "ALL":
+        save_failure_watch({})
+        return
+    data = load_failure_watch()
+    data.pop(target, None)
+    save_failure_watch(data)
+
+DAEMON_STARTED_AT = datetime.now().isoformat(timespec="seconds")
+
+
+# ---------------------------------------------------------------- 子命令
+
+def cmd_list(data: dict) -> int:
+    print("=== skills_manifest（%d 条目）===" % len(data.get("skills", [])))
+    for s in sorted(data.get("skills", []), key=lambda x: x.get("order", 999)):
+        flag = "ON " if s.get("enabled", False) else "off"
+        grp = resolve_mutex_group(s["name"]) or "-"
+        print("  [%s] #%-2d %-42s dev=%-10s cad=%sh@%02d adapter=%s grp=%s" % (
+            flag, s.get("order", 0), s["name"], s.get("dev_state", "?"),
+            s.get("cadence_hours", "?"), s.get("earliest_hour", 0),
+            "Y" if s.get("needs_adapter") else "-", grp))
+    tmpl = data.get("ledger_template", [])
+    print("\n=== ledger_template（%d 行客户台账）===" % len(tmpl))
+    for r in tmpl:
+        print("  %2d | %s | %s | %s" % (
+            r["row"], r["dev_state"], r.get("skill") or "(无skill)", r["ledger_name"]))
+    return 0
+
+
+def cmd_dry_run(data: dict, interpreters: dict) -> int:
+    print("=== dry-run：将按序执行的 enabled skill（含 cadence 门控预览）===")
+    any_on = False
+    now = datetime.now()
+    for s in sorted([x for x in data.get("skills", []) if x.get("enabled")],
+                    key=lambda x: x.get("order", 999)):
+        any_on = True
+        skip, reason = _cadence_gate(s, now)
+        tag = ("[skip:%s]" % reason) if skip else "[run]"
+        print("\n● #%d %s %s (dev=%s)" % (s.get("order", 0), tag, s["name"], s.get("dev_state")))
+        for i, step in enumerate(s.get("steps", []), 1):
+            resolved = [sr.resolve_token(a, interpreters) for a in step.get("argv", [])]
+            print("    step%d: cwd=%s" % (i, s.get("cwd", ".")))
+            print("            " + " ".join(resolved))
+    if not any_on:
+        print("（无 enabled skill）")
+    return 0
+
+
+def cmd_selftest() -> int:
+    """调度层纯逻辑自测，不触发任何真实 skill。"""
+    print("=== selftest：失败分类 ===")
+    cases = [
+        ("exit0", "all good", 0, False, sr.CAT_SUCCESS),
+        ("timeout", "x", None, True, sr.CAT_RECOVERABLE),
+        ("login", "please log in 扫码", 1, False, sr.CAT_NEEDS_LOGIN),
+        ("connreset", "connection reset", 1, False, sr.CAT_RECOVERABLE),
+        ("unknown", "weird crash", 1, False, sr.CAT_UNKNOWN),
+    ]
+    ok = True
+    for name, text, code, to, expect in cases:
+        cat, _ = sr.classify(text, code, to)
+        status = "OK" if cat == expect else "FAIL"
+        if cat != expect:
+            ok = False
+        print("  [%s] %-10s -> %s (expect %s)" % (status, name, cat, expect))
+
+    print("\n=== selftest：RunnerLock 互斥 ===")
+    lock = sr.RunnerLock(RUNTIME_DIR / ".selftest.lock")
+    acquired = lock.acquire()
+    print("  [INFO] 首次 acquire = %s" % acquired)
+    ok = ok and acquired
+    lock.release()
+
+    print("\n=== selftest：prune_history（临时目录）===")
+    with tempfile.TemporaryDirectory() as td:
+        old = Path(td) / "old.log"
+        new = Path(td) / "new.log"
+        old.write_text("x"); new.write_text("x")
+        old_atime = time.time() - 30 * 86400
+        os.utime(old, (old_atime, old_atime))
+        removed = sr.prune_history(Path(td), keep_days=14)
+        print("  [INFO] 删除过期文件数 = %d（expect 1）" % removed)
+        ok = ok and removed == 1
+
+    print("\n=== selftest：manifest 加载（含 v1.1 编排字段）===")
+    try:
+        d = sr.load_manifest(DEFAULT_MANIFEST)
+        print("  [INFO] 加载 %d skills OK" % len(d.get("skills", [])))
+        for s in d["skills"]:
+            assert "order" in s and "cadence_hours" in s and "earliest_hour" in s, s["name"]
+        print("  [INFO] 全部 skill 含 order/cadence_hours/earliest_hour")
+    except Exception as e:  # noqa: BLE001
+        print("  [FAIL] manifest 加载异常: %r" % e)
+        ok = False
+
+    print("\n=== selftest：岗位互斥组锁 (W2) ===")
+    try:
+        g = resolve_mutex_group("daily-negative-reviews")
+        print("  [INFO] daily-negative-reviews -> 互斥组 %s (expect jinsha-9232)" % g)
+        ok = ok and (g == "jinsha-9232")
+        ok = ok and (resolve_mutex_group("__no_such_skill__") is None)
+        lg = POST_GROUP_LOCK_DIR / "selftest-w2.lock"
+        try:
+            lg.unlink()
+        except OSError:
+            pass
+        lease1 = acquire_post_group_lock("selftest-w2", "A")
+        ok = ok and (lease1 is not None)
+        lease2 = acquire_post_group_lock("selftest-w2", "B")
+        ok = ok and (lease2 is None)
+        release_post_group_lock(lease1)
+        ok = ok and (acquire_post_group_lock("selftest-w2", "C") is not None)
+        release_post_group_lock(acquire_post_group_lock("selftest-w2", "C"))
+        lg.write_text(json.dumps({"group": "selftest-w2", "runId": "old", "pid": 9,
+                                  "acquiredAt": "2000-01-01T00:00:00"}, ensure_ascii=False))
+        ok = ok and (acquire_post_group_lock("selftest-w2", "D") is not None)
+        release_post_group_lock(acquire_post_group_lock("selftest-w2", "D"))
+        # 2026-10-22 新增（正负对照）：未过期但持锁进程已死的「孤儿锁」必须**立即**被
+        # 接管，不得白等 90 分钟 TTL —— 事故原型：top10 被自己 10:30:29 创建的锁
+        # 挡到 12:00，contract-termination 同因，两流当日静默停摆。
+        lg.write_text(json.dumps({"group": "selftest-w2", "runId": "orphan",
+                                  "pid": 999999, "acquiredAt": _now_iso()},
+                                 ensure_ascii=False))
+        orphan_lease = acquire_post_group_lock("selftest-w2", "E")
+        ok = ok and (orphan_lease is not None)
+        ok = ok and (json.loads(lg.read_text(encoding="utf-8")).get("recovered") is True)
+        release_post_group_lock(orphan_lease)
+        # 负对照：新鲜且持锁进程**存活** ⇒ 必须判忙，不能退化成「随便抢」
+        lg.write_text(json.dumps({"group": "selftest-w2", "runId": "alive",
+                                  "pid": os.getpid(), "acquiredAt": _now_iso()},
+                                 ensure_ascii=False))
+        ok = ok and (acquire_post_group_lock("selftest-w2", "F") is None)
+        try:
+            lg.unlink()
+        except OSError:
+            pass
+        print("  [INFO] acquire/busy/release/stale-override 全部通过")
+    except Exception as e:  # noqa: BLE001
+        print("  [FAIL] 互斥组锁: %r" % e)
+        ok = False
+
+    print("\n=== selftest：现场维护（取代原熔断 W4 —— 已废除停排）===")
+    try:
+        for i in range(5):
+            e = record_outcome("selftest-mw", sr.CAT_UNKNOWN, _now_iso())
+        ok = ok and (e["consecutive_failures"] == 5)
+        # 关键回归：连续失败再多也**不得**产生停排/熔断状态（熔断=停工，已废除）
+        for i in range(10):
+            e = record_outcome("selftest-mw", sr.CAT_UNKNOWN, _now_iso())
+        ok = ok and (e["consecutive_failures"] == 15) and ("state" not in e)
+        e7 = record_outcome("selftest-mw", sr.CAT_SUCCESS, _now_iso())
+        ok = ok and (e7["consecutive_failures"] == 0)
+        e8 = record_outcome("selftest-mw2", "SKIPPED_BUSY", _now_iso())
+        ok = ok and (e8["consecutive_failures"] == 0)
+        clear_failures("selftest-mw")
+        clear_failures("selftest-mw2")
+        print("  [INFO] 累计/永不熔断/清零/SKIPPED_BUSY中性 全部通过")
+    except Exception as e:  # noqa: BLE001
+        print("  [FAIL] 现场维护: %r" % e)
+        ok = False
+
+    print("\n=== selftest：只认当天成功（反虚高 SUCCESS）===")
+    try:
+        orig_get = sr.get_last_success
+        fake: dict = {}
+        sr.get_last_success = lambda n: fake.get(n)
+        sk = {"name": "__selftest_day__", "earliest_hour": 0, "cadence_hours": 24}
+        # 昨天的成功 → 今天必须重跑（不得跳过、不得算本日完成）
+        fake["__selftest_day__"] = (datetime.now() - timedelta(days=1)).isoformat()
+        skip, reason = _cadence_gate(sk, datetime.now())
+        ok = ok and (skip is False) and (reason == "")
+        # 今天的成功 → 才允许跳过并记为完成
+        fake["__selftest_day__"] = datetime.now().isoformat()
+        skip2, reason2 = _cadence_gate(sk, datetime.now())
+        ok = ok and (skip2 is True) and (reason2 == "done_today")
+        # 未到点 → 记 not_due（PENDING），绝不可是 done_today（那正是虚高 SUCCESS）
+        if datetime.now().hour < 23:
+            sk2 = {"name": "__selftest_day__",
+                   "earliest_hour": datetime.now().hour + 1, "cadence_hours": 24}
+            skip3, reason3 = _cadence_gate(sk2, datetime.now())
+            ok = ok and (skip3 is True) and (reason3 == "not_due")
+        # 时段门槛：排班 17 点、凌晨 01:28 那次成功不得顶掉 17 点档（新型假绿）
+        if datetime.now().hour >= 18:
+            sk4 = {"name": "__selftest_day__", "earliest_hour": 17, "cadence_hours": 24}
+            fake["__selftest_day__"] = datetime.now().replace(
+                hour=1, minute=28, second=0, microsecond=0).isoformat()
+            skip4, reason4 = _cadence_gate(sk4, datetime.now())
+            ok = ok and (skip4 is False) and (reason4 == "")
+        sr.get_last_success = orig_get
+        print("  [INFO] 昨日成功→重跑 / 当日成功→跳过 / 未到点→PENDING / 凌晨成功不顶当日档 全部通过")
+    except Exception as e:  # noqa: BLE001
+        print("  [FAIL] 只认当天: %r" % e)
+        ok = False
+
+    print("\n=== selftest：E5 当日完成类别（SUCCESS + 证据化 SKIPPED 同等待遇）===")
+    try:
+        checks = [
+            ("SUCCESS 算完成", sr.CAT_SUCCESS, True),
+            ("SKIPPED_IDEMPOTENT 算完成（已核实当日已外发）", sr.CAT_SKIPPED, True),
+            ("UNKNOWN 不算完成", sr.CAT_UNKNOWN, False),
+            ("NEEDS_LOGIN 不算完成", sr.CAT_NEEDS_LOGIN, False),
+            ("RECOVERABLE 不算完成", sr.CAT_RECOVERABLE, False),
+            ("SKIPPED_BUSY 不算完成（互斥占用非完成）", "SKIPPED_BUSY", False),
+            ("PENDING 不算完成", "PENDING", False),
+        ]
+        for label, cat, want in checks:
+            got = is_done_category(cat)
+            if got != want:
+                print("  [FAIL] %s（期望 %s 实得 %s）" % (label, want, got))
+                ok = False
+        print("  [INFO] 完成类别判据 7 例执行完毕（SUCCESS/SKIPPED=完成，其余=未完成）")
+    except Exception as e:  # noqa: BLE001
+        print("  [FAIL] E5 完成类别自测异常: %r" % e)
+        ok = False
+
+    print("\n=== selftest：login_health_gate 门控 ===")
+    try:
+        marker_before = LOGIN_CHECK_MARKER.exists()
+        login_health_gate(datetime(2026, 1, 1, 9, 0))  # 9 点不在巡检小时(8/22)
+        gate_ok = LOGIN_CHECK_MARKER.exists() == marker_before
+        print("  [%s] 非巡检小时调用为 no-op（未写 marker）" % ("OK" if gate_ok else "FAIL"))
+        ok = ok and gate_ok
+    except Exception as e:  # noqa: BLE001
+        print("  [FAIL] login_health_gate: %r" % e)
+        ok = False
+
+    print("\n=== selftest：P0-1 收据优先 / P0-1c 下钻 / E3 认知层（note+分档+默认零行为）===")
+    try:
+        ok = ok and _selftest_receipt()
+        print("  [INFO] 收据解析用例执行完毕")
+    except Exception as e:  # noqa: BLE001
+        import traceback; traceback.print_exc()
+        print("  [FAIL] P0-1 收据自测异常: %r" % e)
+        ok = False
+
+    print("\n=== selftest：P0-3 告警聚合/治愈/老化/历史重建 ===")
+    try:
+        ok = ok and _selftest_alert_store()
+        print("  [INFO] 告警聚合用例执行完毕")
+    except Exception as e:  # noqa: BLE001
+        import traceback; traceback.print_exc()
+        print("  [FAIL] P0-3 告警自测异常: %r" % e)
+        ok = False
+
+    print("\n=== selftest：看护断言（流程排序判据 / 岗位页匹配判据）===")
+    try:
+        import assert_flow_order as _afo  # noqa: PLC0415
+        import assert_post_pages as _app  # noqa: PLC0415
+        ok = ok and (_afo._selftest() == 0) and (_app._selftest() == 0)
+    except Exception as e:  # noqa: BLE001
+        import traceback; traceback.print_exc()
+        print("  [FAIL] 看护断言自测异常: %r" % e)
+        ok = False
+
+    print("\n%s" % ("ALL PASS" if ok else "HAS FAILURE"))
+    return 0 if ok else 1
+
+
+SCREEN_GATE = STATE_DIR / "screen_recording_gate.json"
+
+
+# ---------------------------------------------------------------- P0-1/P0-3 自测
+
+def _selftest_receipt() -> bool:
+    """P0-1：结构化收据优先 4 正例 + 2 负例（docs/solutions/P0-1-实施细则.md §6）。"""
+    import receipt as rc
+    ok = True
+
+    def check(name, cond, extra=""):
+        nonlocal ok
+        if not cond:
+            ok = False
+        print("  [%s] %s %s" % ("OK" if cond else "FAIL", name, extra))
+
+    with tempfile.TemporaryDirectory() as td:
+        # 正例1：顶层 stage（收据优先于文本关键词——文本里故意埋 "timeout" 诱饵）
+        p1 = Path(td) / "stage.log"
+        p1.write_text('{"ok":false,"stage":"wechat-send-failed",'
+                      '"workflowReceipt":{"ok":true,"phaseHistory":["a","b"]}}\n',
+                      encoding="utf-8")
+        cat, det, sig = sr.classify_with_receipt(
+            "some timeout decoy", 1, False, str(p1))
+        # 2026-10-21 修正：E3b 重试臂已把 wechat-send-failed 放进「认知层白名单」⇒
+        # 分类会由 UNKNOWN 升为 RECOVERABLE（detail 带 [policy-retry]）。本用例真正要验的
+        # 是「收据优先于文本关键词（timeout 诱饵不生效）+ phase_last 解析」，故两种分类都收，
+        # 但必须是「UNKNOWN 未升级」或「升级且带 policy-retry 标记」，不允许静默其它形态。
+        check("顶层stage", cat in ("UNKNOWN", "RECOVERABLE")
+              and "stage=wechat-send-failed" in det
+              and sig.get("phase_last") == "b"
+              and (cat == "UNKNOWN" or "policy-retry" in det), det)
+
+        # 正例2：顶层 reason（无 stage——434 条历史 UNKNOWN 的最大来源）
+        p2 = Path(td) / "reason.log"
+        p2.write_text('{"ok":false,"reason":"daily-record-key-duplicate"}\n',
+                      encoding="utf-8")
+        cat2, det2, sig2 = sr.classify_with_receipt("x", 1, False, str(p2))
+        check("顶层reason", cat2 == "UNKNOWN" and "reason=daily-record-key-duplicate" in det2
+              and sig2.get("kind") == "reason", det2)
+
+        # 正例3：嵌套 reason（send.reason 形态）
+        p3 = Path(td) / "nested.log"
+        p3.write_text('{"ok":false,"send":{"reason":"windows-transport-anomaly"}}\n',
+                      encoding="utf-8")
+        cat3, det3, _ = sr.classify_with_receipt("", 1, False, str(p3))
+        check("嵌套reason", cat3 == "UNKNOWN" and "nested-reason=windows-transport-anomaly" in det3, det3)
+
+        # 正例4：登录态经收据命中 NEEDS_LOGIN（reason 含登录态特征）
+        p4 = Path(td) / "login.log"
+        p4.write_text('{"ok":false,"reason":"merchant login required, please re-auth"}\n',
+                      encoding="utf-8")
+        cat4, det4, _ = sr.classify_with_receipt("", 1, False, str(p4))
+        check("收据命中登录态", cat4 == "NEEDS_LOGIN", det4)
+
+        # 正例5：文本兜底 Error: <code>（Node 崩溃栈，无 JSON）
+        cat5, det5, sig5 = sr.classify_with_receipt(
+            "TypeError: boom\nError: channel-context-readback-mismatch\n", 1, False, None)
+        check("文本Error码", cat5 == "UNKNOWN"
+              and "error-code=channel-context-readback-mismatch" in det5
+              and sig5.get("kind") == "text", det5)
+
+        # 负例1（嵌套反转）：外层 ok:false + 内层 workflowReceipt.ok:true
+        # —— 不得读内层判成 SUCCESS；必须 FAILED 且 detail 报外层 stage
+        p6 = Path(td) / "nested-reversal.log"
+        p6.write_text('{"ok":false,"stage":"wechat-send-failed",'
+                      '"workflowReceipt":{"ok":true,"phase":"completed"}}\n',
+                      encoding="utf-8")
+        cat6, det6, _ = sr.classify_with_receipt("workflowReceipt ok=true", 1, False, str(p6))
+        check("负例-嵌套反转不得判SUCCESS", cat6 != "SUCCESS" and "stage=wechat-send-failed" in det6, det6)
+
+        # 负例2（超长单行 JSON）：>8000B 单行收据必须完整解析（治尾部截断误判）
+        p7 = Path(td) / "long-line.log"
+        long_note = "x" * 12000
+        p7.write_text('{"ok":false,"stage":"send:0","notes":"%s",'
+                      '"reason":"windows-transport-anomaly"}\n' % long_note,
+                      encoding="utf-8")
+        cat7, det7, _ = sr.classify_with_receipt("", 1, False, str(p7))
+        check("负例-超长单行JSON", "stage=send:0" in det7 or "windows-transport" in det7, det7[:80])
+
+        # 顶层取"最后一个整行 JSON"（前面有嵌套对象干扰也不许抓错）
+        p8 = Path(td) / "last-wins.log"
+        p8.write_text('{"reviewSummary":{"wechat":{"totalElapsedMs":1}}}\n'
+                      '{"ok":false,"stage":"workflow-incomplete"}\n', encoding="utf-8")
+        top = rc.parse_top_receipt_log(p8)
+        check("顶层取最后整行JSON", bool(top) and top.get("stage") == "workflow-incomplete")
+
+        # ---- P0-1c（2026-10-06）：嵌入收据下钻 + 认知层处置提示 ----
+        # 正例6：Node 包装层把真收据转义进 stdout 字符串 ⇒ 必须下钻取真码（真数据 15% 命中）
+        p9 = Path(td) / "embedded.log"
+        p9.write_text(json.dumps({
+            "ok": False,
+            "reason": "Command failed: python workflow_bridge_windows.py --execute",
+            "stdout": json.dumps({"ok": False, "verified": False,
+                                  "reason": "windows-driver-local-network-blocked"}) + "\n",
+            "stderr": "",
+        }) + "\n", encoding="utf-8")
+        cat9, det9, sig9 = sr.classify_with_receipt("", 1, False, str(p9))
+        check("P0-1c 包装层下钻真码",
+              sig9.get("kind") == "embedded_reason"
+              and sig9.get("code") == "windows-driver-local-network-blocked"
+              and "windows-driver-local-network-blocked" in det9, det9[:100])
+        # 注：断言与认知层文案解耦（note 是数据、会演进）——只验「该码的 note 被原样注入」
+        check("P0-1c 认知层处置提示注入",
+              "[note:" in det9 and (rc.code_note(sig9.get("code")) or "\x00") in det9, det9[-90:])
+
+        # 负例3：有效业务 reason 不得被下钻覆盖
+        p10 = Path(td) / "no-override.log"
+        p10.write_text(json.dumps({"ok": False, "reason": "business-real-code",
+                                   "stdout": json.dumps({"reason": "另一个码"})}) + "\n",
+                       encoding="utf-8")
+        _c10, d10, s10 = sr.classify_with_receipt("", 1, False, str(p10))
+        check("P0-1c 负例-有效reason不被覆盖",
+              s10.get("kind") == "reason" and s10.get("code") == "business-real-code", d10[:80])
+
+        # 负例4：包装层且无嵌入收据 ⇒ 语义保持，退回包装文案（不得变为 None）
+        p11 = Path(td) / "wrap-only.log"
+        p11.write_text('{"ok":false,"reason":"Command failed: python x.py --execute",'
+                       '"stdout":"","stderr":""}\n', encoding="utf-8")
+        _c11, d11, s11 = sr.classify_with_receipt("", 1, False, str(p11))
+        check("P0-1c 负例-无嵌入时退回包装文案(语义保持)",
+              s11.get("kind") == "reason"
+              and str(s11.get("code", "")).startswith("Command failed"), d11[:80])
+
+        # 负例5：未知码不得凭空造 note（认知层只增已知提示）
+        check("P0-1c 负例-未知码无note", rc.code_note("totally-unknown-code-xyz") is None)
+
+        # E3（2026-10-06）认知层扩容：note 覆盖 + 策略分档 + 默认零行为改变
+        check("E3 已知码有 note", bool(rc.code_note("windows-driver-local-network-blocked")))
+        check("E3 命名空间前缀可查（windows-wechat:...）",
+              bool(rc.code_note("windows-wechat:windows-driver-local-network-blocked")))
+        check("E3 真实码 payload-file-missing 有 note",
+              bool(rc.code_note("payload-file-missing")))
+        pol = rc.code_policy("windows-driver-local-network-blocked")
+        check("E3 分档：瞬时类标 auto-retry-candidate",
+              pol["tier"] == "auto-retry-candidate")
+        pol2 = rc.code_policy("sealed-dependency-digest-mismatch")
+        check("E3 分档：封印类标 never-silence", pol2["tier"] == "never-silence")
+        # 默认零行为改变的残余验证：**未**入白名单的瞬时类码仍不放行
+        check("E3 残余：未入名单的码不许静音", pol["silence_allowed"] is False)
+        check("E3 残余：未入名单的码不许自动重试", pol["retry_allowed"] is False)
+        # 安全不变量：即便码被填进 allowlist，never-silence 档也绝不放行
+        check("E3 不变量：never-silence 永不放行",
+              rc.code_policy("sealed-dependency-digest-mismatch")["silence_allowed"] is False)
+        # E3b（2026-10-06 大同裁决）：首批启用 2 条 —— 观察周 2026-10-06~10-13
+        pol3 = rc.code_policy("windows-driver-unreachable")
+        check("E3b 重试臂：windows-driver-unreachable 已放行", pol3["retry_allowed"] is True)
+        pol4 = rc.code_policy("lock")
+        check("E3b 静音臂：lock 已放行", pol4["silence_allowed"] is True)
+        cat12, det12, _sig12 = sr.classify_with_receipt(
+            '{"ok":false,"reason":"windows-driver-unreachable"}', 1, False)
+        check("E3b 重试臂生效：UNKNOWN 码升 RECOVERABLE（带 policy-retry 标记）",
+              cat12 == "RECOVERABLE" and "[policy-retry" in det12,
+              "%s|%s" % (cat12, det12[:60]))
+        cat13, _det13, _s13 = sr.classify_with_receipt(
+            '{"ok":false,"reason":"lock"}', 1, False)
+        check("E3b 边界：lock 只静音不重试（分类仍 UNKNOWN）", cat13 == "UNKNOWN")
+        cat14, _det14, _s14 = sr.classify_with_receipt(
+            '{"ok":false,"reason":"executor_integrity"}', 1, False)
+        check("E3b 边界：never-silence 档分类不受影响", cat14 == "UNKNOWN")
+    return ok
+
+
+def _selftest_alert_store() -> bool:
+    """P0-3：聚合/计数/治愈/复发/老化/历史重建（临时目录，不碰真实 state）。"""
+    global ALERTS_LOG, ALERTS_SUPPRESSED_LOG  # E3b 静音臂自测需临时替换模块级路径
+    ok = True
+
+    def check(name, cond, extra=""):
+        nonlocal ok
+        if not cond:
+            ok = False
+        print("  [%s] %s %s" % ("OK" if cond else "FAIL", name, extra))
+
+    if alert_store is None:
+        print("  [SKIP] alert_store 不可用")
+        return True
+    with tempfile.TemporaryDirectory() as td:
+        tdp = Path(td)
+        orig = (alert_store.ALERTS_SUMMARY, alert_store.ALERTS_ARCHIVE, alert_store.ALERTS_RAW)
+        alert_store.ALERTS_SUMMARY = tdp / "alerts_summary.json"
+        alert_store.ALERTS_ARCHIVE = tdp / "alerts_archive.jsonl"
+        alert_store.ALERTS_RAW = tdp / "alerts.jsonl"
+        try:
+            e1 = alert_store.record_alert("s1", "UNKNOWN", "stage=wechat-send-failed (receipt:stage)")
+            e2 = alert_store.record_alert("s1", "UNKNOWN", "stage=wechat-send-failed (receipt:stage)")
+            check("同键聚合计数", e2["count"] == 2 and e2["consecutive"] == 2)
+            e3 = alert_store.record_alert("s1", "UNKNOWN", "reason=dependency-drift (receipt:reason)")
+            check("不同码分行", e3["count"] == 1 and len(alert_store.load_summary()) == 2)
+            n = alert_store.mark_skill_resolved("s1")
+            data = alert_store.load_summary()
+            check("成功治愈", n == 2 and all(v.get("resolved_at") for v in data.values()))
+            e4 = alert_store.record_alert("s1", "UNKNOWN", "stage=wechat-send-failed (receipt:stage)")
+            check("治愈后复发重开", e4.get("recurred_at") and e4["consecutive"] == 1)
+            # 老化：把全部条目标记 resolved 且 last_ts 拨老 8 天 → 归档
+            aged_data = alert_store.load_summary()
+            for v in aged_data.values():
+                v["resolved_at"] = v["last_ts"] = "2026-09-01T00:00:00"
+                v["consecutive"] = 0
+            alert_store._atomic_write_json(alert_store.ALERTS_SUMMARY, aged_data)
+            aged = alert_store.age_alerts(resolved_days=7)
+            check("老化归档", aged == 2 and alert_store.ALERTS_ARCHIVE.exists()
+                  and alert_store.load_summary() == {}, "aged=%d" % aged)
+            # 历史重建：legacy detail + 带收据日志 → 真实故障码
+            logp = tdp / "hist.log"
+            logp.write_text('{"ok":false,"stage":"executor_integrity"}\n', encoding="utf-8")
+            alert_store.ALERTS_RAW.write_text(json.dumps({
+                "ts": "2026-10-01T10:00:00", "skill": "s2", "category": "UNKNOWN",
+                "detail": "exit=1 未命中已知分类", "log": str(logp)}) + "\n", encoding="utf-8")
+            stat = alert_store.rebuild_from_raw(alert_store.ALERTS_RAW)
+            rebuilt = alert_store.load_summary()
+            key = "s2|UNKNOWN|executor_integrity"
+            check("历史重建可读化", stat["readable"] == 1 and key in rebuilt
+                  and rebuilt[key]["code"] == "executor_integrity", json.dumps(stat))
+        finally:
+            alert_store.ALERTS_SUMMARY, alert_store.ALERTS_ARCHIVE, alert_store.ALERTS_RAW = orig
+    # 归一化独立作用域（bridge 命令行形态，真实路径：fail_signal.code 显式传入）
+    with tempfile.TemporaryDirectory() as td2:
+        tdp2 = Path(td2)
+        orig2 = (alert_store.ALERTS_SUMMARY, alert_store.ALERTS_ARCHIVE, alert_store.ALERTS_RAW)
+        alert_store.ALERTS_SUMMARY = tdp2 / "alerts_summary.json"
+        alert_store.ALERTS_ARCHIVE = tdp2 / "alerts_archive.jsonl"
+        alert_store.ALERTS_RAW = tdp2 / "alerts.jsonl"
+        try:
+            long_code = ("Command failed: /path/bridge.py --workflow-id taobao-flash-appeals "
+                         "--payload-type file --execute")
+            c1 = alert_store.record_alert("s2", "UNKNOWN", "reason=%s (receipt:reason)" % long_code,
+                                          code=long_code)
+            c2 = alert_store.record_alert("s2", "UNKNOWN", "reason=%s (receipt:reason) " % long_code,
+                                          code=long_code + " ")  # 尾随空格，同源
+            check("命令行码归一聚合", c1["code"] == "command-failed:taobao-flash-appeals"
+                  and c2["code"] == c1["code"] and c2["count"] == 2, "code=%s" % c1["code"])
+            c3 = alert_store.record_alert("s2", "UNKNOWN", "x",
+                                          code=long_code.replace("taobao-flash-appeals", "top10-group"))
+            check("不同 workflow-id 分行", c3["code"] == "command-failed:top10-group" and c3["count"] == 1)
+            c4 = alert_store.record_alert("s2", "UNKNOWN", "reason=%s (receipt:reason)" % ("x" * 200),
+                                          code="x" * 200)
+            check("超长码哈希归一", c4["code"].startswith("long-reason-") and len(c4["code"]) < 32,
+                  "code=%s" % c4["code"])
+            check("空码兜底", alert_store.normalize_code("") == "uncoded"
+                  and alert_store.normalize_code(None) == "uncoded")
+        finally:
+            alert_store.ALERTS_SUMMARY, alert_store.ALERTS_ARCHIVE, alert_store.ALERTS_RAW = orig2
+    # E3b（2026-10-06）：静音臂——silence_allowed 码不进告警主链路，只落独立审计流
+    with tempfile.TemporaryDirectory() as td3:
+        tdp3 = Path(td3)
+        orig3 = (ALERTS_LOG, ALERTS_SUPPRESSED_LOG)
+        orig3_store = (alert_store.ALERTS_SUMMARY, alert_store.ALERTS_ARCHIVE,
+                       alert_store.ALERTS_RAW)
+        ALERTS_LOG = tdp3 / "alerts.jsonl"
+        ALERTS_SUPPRESSED_LOG = tdp3 / "alerts_suppressed.jsonl"
+        alert_store.ALERTS_SUMMARY = tdp3 / "alerts_summary.json"
+        alert_store.ALERTS_ARCHIVE = tdp3 / "alerts_archive.jsonl"
+        alert_store.ALERTS_RAW = tdp3 / "alerts_raw.jsonl"
+        try:
+            append_alert("s3", "UNKNOWN", "reason=lock (receipt:reason)", code="lock")
+            check("E3b 静音：lock 不写 alerts.jsonl", not ALERTS_LOG.exists())
+            sup_lines = ALERTS_SUPPRESSED_LOG.read_text(encoding="utf-8").strip().splitlines()
+            sup_ok = len(sup_lines) == 1 and json.loads(sup_lines[0]).get("suppressed") is True
+            check("E3b 静音：审计流留痕（suppressed=true）", sup_ok)
+            append_alert("s3", "UNKNOWN",
+                         "reason=windows-driver-unreachable (receipt:reason)",
+                         code="windows-driver-unreachable")
+            check("E3b 边界：只重试不静音的码照常告警", ALERTS_LOG.exists())
+            check("E3b 边界：审计流未被误写第二条",
+                  len(ALERTS_SUPPRESSED_LOG.read_text(encoding="utf-8")
+                      .strip().splitlines()) == 1)
+            append_alert("s4", "UNKNOWN", "无码失败", code=None)
+            check("E3b 边界：无码照常告警（fail-closed）", ALERTS_LOG.exists())
+        finally:
+            ALERTS_LOG, ALERTS_SUPPRESSED_LOG = orig3
+            alert_store.ALERTS_SUMMARY, alert_store.ALERTS_ARCHIVE, \
+                alert_store.ALERTS_RAW = orig3_store
+    return ok
+
+
+def probe_wechat_foreground(name: str, interpreters: dict) -> dict:
+    """Record read-only WeChat foreground evidence before a skill takes the lock.
+
+    Desktop skills fail with `wechat-search-region-contended` when the exact
+    main window is missing, obstructed, or does not own the menu bar, and the
+    skill receipts never say which. The probe is strictly read-only, cannot
+    raise, and never blocks a run.
+    """
+    script = RUNTIME_DIR / "wechat_foreground_probe.py"
+    if not script.is_file():
+        return {}
+    python = (interpreters or {}).get("python") or sys.executable
+    # `--read-only`：探针只记录证据，绝不自己激活微信（否则每个技能都会多抢一次
+    # 前台）。输出写文件而不是管道：`subprocess.run(timeout=)` 在子进程留下继承
+    # 管道的孙进程时，超时之后仍会阻塞在通信上 —— 那正是「占着却不动作」的成因。
+    out = STATE_DIR / "wechat_foreground_probe.last.jsonl"
+    try:
+        out.unlink()
+    except OSError:
+        pass
+    try:
+        subprocess.run([python, str(script), name, "--read-only", "--out", str(out)],
+                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=60)
+    except Exception as e:  # noqa: BLE001
+        print("[warn] 微信前台探针未完成（不影响本轮）：%r" % e)
+        return {}
+    try:
+        return json.loads(out.read_text(encoding="utf-8").strip().splitlines()[-1])
+    except (OSError, IndexError, ValueError):
+        return {}
+
+
+def escalate_screen_recording_gate(evidence: dict) -> None:
+    """Emit the real cause when the desktop channel is structurally unusable.
+
+    A failed `screencapture` surfaces from the locator as
+    `wechat-search-region-contended`, i.e. it reads as transient GUI
+    contention. Nobody can win that way: the capture never succeeds, every
+    desktop skill burns its entire retry budget (measured: 12 attempts / 66s)
+    and the cycle gets starved. Recording the diagnosis and alerting once --
+    not once per cycle -- is what makes the failure self-correcting.
+
+    The same treatment covers the second, quieter variant: capture works but the
+    window rectangle contains another app's pixels because WeChat's window is
+    not on the current Space. Every API check reports success in that state, so
+    only the pixel reading names it.
+    """
+    detail = evidence.get("diagnosis") or "unknown"
+    pixels = evidence.get("pixels") if isinstance(evidence.get("pixels"), dict) else {}
+    blocked = bool(evidence.get("captureUnavailable")) or (
+        bool(pixels.get("captured")) and not pixels.get("verified"))
+    previous: dict = {}
+    if SCREEN_GATE.exists():
+        try:
+            previous = json.loads(SCREEN_GATE.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            previous = {}
+    STATE_DIR.mkdir(parents=True, exist_ok=True)
+    SCREEN_GATE.write_text(json.dumps({
+        "at": evidence.get("at"), "blocked": blocked, "diagnosis": detail,
+        "python": evidence.get("python"), "windowId": evidence.get("windowId"),
+        "menuBarCaptureError": (evidence.get("menuBar") or {}).get("captureError"),
+        "pixelHits": pixels.get("hits"),
+        "pixelPreview": pixels.get("textPreview"),
+    }, ensure_ascii=False, indent=2), encoding="utf-8")
+    # Alert on the transition AND whenever the cause changes, so a new failure
+    # mode is never hidden behind an already-open gate.
+    if detail != "ok" and (blocked != previous.get("blocked")
+                           or detail != previous.get("diagnosis")):
+        if evidence.get("captureUnavailable"):
+            fix = ("        修复：给守护进程的解释器授予「屏幕录制」（系统设置 > 隐私与安全性），\n"
+                   "        或临时在有截屏权限的上下文里单跑：\n"
+                   "          launchctl disable gui/%d/com.zhensi.waimai.careloop   # 但 KeepAlive 仍会复活，须配合杀\n"
+                   "          <python> runtime/manual_run_once.py <skill>\n"
+                   "          launchctl enable gui/%d/com.zhensi.waimai.careloop\n" % (os.getuid(), os.getuid()))
+        else:
+            fix = ("        修复：把微信主窗口拉到当前桌面（切 Space / 点 Dock 微信图标）后再跑；\n"
+                   "        注意「菜单栏显示微信」只说明谁是活跃 App，不说明窗口可见。\n")
+        print(
+            "[FATAL] 桌面通道不可用：%s\n"
+            "        这不是微信争用 —— 重试永远不会成功，桌面技能只会白等 60s+ 后报\n"
+            "        wechat-search-region-contended，并拖垮后续技能。\n"
+            "%s"
+            "        诊断详情：%s" % (detail, fix, SCREEN_GATE))
+        append_alert("__desktop_channel__", "NEEDS_USER", detail, str(SCREEN_GATE))
+
+
+def run_one(data: dict, name: str, interpreters: dict) -> dict:
+    skill = next((s for s in data["skills"] if s["name"] == name), None)
+    if skill is None:
+        raise SystemExit("manifest 无此 skill: %s" % name)
+    if top10_delivery_pending(skill, datetime.now()):
+        return _pending_record(skill, 'delivery_verification_pending')
+    if fixed_schedule.customer_duty_user_accepted(name, datetime.now()):
+        return {'skill':name,'status':'USER_ACCEPTED_DUTY','category':'USER_ACCEPTED_DUTY',
+                'finished_at':'','detail':'user-accepted-duty-no-new-delivery'}
+    if fixed_schedule.customer_slot_superseded(name, datetime.now()):
+        print('[skip] %s 历史客服档不补跑，等待当前最新档' % name)
+        return {'skill':name,'status':'SKIPPED_SUPERSEDED','category':'SKIPPED_SUPERSEDED',
+                'finished_at':'','detail':'superseded_customer_slot'}
+    if not skill.get("steps"):
+        print("[skip] %s 无 steps（lib/纯库），不执行" % name)
+        return {}
+    # W2 互斥组锁：同组岗位（同端口）同时只有一条流水线当班，避免互踩页面状态（G1）。
+    group = resolve_mutex_group(name)
+    lease = None
+    if group:
+        lease = acquire_post_group_lock(group, name)
+        if lease is None:
+            print("[skip-busy] %s 互斥组 %s 被同组流水线新鲜占用，本轮跳过（SKIPPED_BUSY）"
+                  % (name, group))
+            return {"skill": name, "status": "SKIPPED_BUSY", "category": "SKIPPED_BUSY",
+                    "finished_at": "", "detail": "mutex-group-busy:%s" % group}
+    print("\n▶ 执行 %s (dev=%s)" % (name, skill.get("dev_state")))
+    try:
+        evidence = probe_wechat_foreground(name, interpreters)
+        if evidence:
+            escalate_screen_recording_gate(evidence)
+        rec = sr.run_skill(
+            skill, history_dir=HISTORY_DIR, interpreters=interpreters,
+            env={"ZENSI_DRY": "0"},
+        )
+        print("  → status=%s category=%s attempts=%d next=%s" % (
+            rec["status"], rec["category"], rec["attempts"], rec["next_action"]))
+        # P1-2：经验索引——每次真实运行（成功/失败）都落一条摘要
+        if experience_index is not None:
+            try:
+                experience_index.record(rec)
+            except Exception as e:  # noqa: BLE001
+                print("[warn] 经验索引写入失败(不影响主链路): %r" % e)
+        # 持久成功状态（跨天 cadence + 台账"任意一轮成功=是"共用）
+        # E5（2026-10-06 大同裁决）：把 SKIPPED_IDEMPOTENT 与 SUCCESS 同等记账。
+        # SKIPPED_IDEMPOTENT = **已核实「当日已 verified 外发」**（P0-1b 证据门控，
+        # 必须读到当日 verified marker 才成立），该流当日实质已完成。原实现只认
+        # SUCCESS ⇒ ① last_success 停在旧日、cadence 门控永不放行 ⇒ 每轮重跑
+        # （top10 当日 15 次 run）；② 台账显示"未完成"；③ 告警不治愈（不 resolve）。
+        # 安全性：任何流的 SUCCESS 本来就会按 cadence 节流，SKIPPED≈"已发出"，
+        # 同待遇不引入新的延迟类别；且 SKIPPED 永远不触发下方告警分支。
+        if is_done_category(rec.get("category")):
+            sr.update_last_success(name, rec.get("finished_at"))
+            # P0-3：成功 / 已核实当日外发（幂等）即治愈——标记该流水线告警 resolved
+            if alert_store is not None:
+                try:
+                    alert_store.mark_skill_resolved(name, rec.get("finished_at"))
+                except Exception as e:  # noqa: BLE001
+                    print("[warn] 告警治愈标记失败(不影响主链路): %r" % e)
+        # 错误工作流（抄 n8n Error Workflow）：失败分类触发告警流
+        elif rec.get("category") in data.get("daemon", {}).get("alert_on",
+                [sr.CAT_NEEDS_LOGIN, sr.CAT_UNKNOWN]):
+            append_alert(name, rec.get("category"), rec.get("detail"),
+                         rec.get("logs", [None])[-1],
+                         code=(rec.get("fail_signal") or {}).get("code"))
+    finally:
+        if lease:
+            release_post_group_lock(lease)
+    return rec
+
+
+def cmd_once(data: dict, name: str, interpreters: dict) -> int:
+    run_one(data, name, interpreters)
+    return 0
+
+
+# ---------------------------------------------------------------- 台账生成
+
+def first_attempt_outcomes(date_str: str = None) -> dict:
+    """SRE 稳定性指标（仅内部巡检用，2026-10-20 18:35 大同指令：**绝不进台账**——
+    台账是给客户看的对外交付物，内部信息不得擅自加入；本函数只供监理/复盘
+    （观察窗口至 10-27）在内部读数，任何台账渲染路径禁止消费它）。
+
+    轴1 首个真实 run 的最终 status（record.status 是整个 run 的最终态——
+        run_skill 预算内自动重试成功也落 SUCCESS，如实反映「系统自愈力」）；
+    轴2 当日是否存在 triggered_by=manual 的 run（人工干预痕迹）。
+
+    判定结果：
+    - "首轮过"   首个 run 即 SUCCESS / SKIPPED_IDEMPOTENT，且全天无 manual run；
+    - "自愈"     首个 run 失败（daemon 自动跑挂），但后续 daemon 周期自动跑成，
+                 全天无 manual run——系统自愈，无人碰过；
+    - "需人工救" 当日出现过 manual run（manual_run_once / 人工直跑）才成功——
+                 即「每天完成但每天出问题」的隐性故障面，本指标要抓的主目标。
+
+    数据源：run_history/<date>/<skill>--<ts>--record.json（文件名含时间戳，排序即执行序）。
+    排除伪记录：_persist_done_today_record 落盘的 cadence 伪 record（detail 含
+    「cadence 内跳过」）不是真实 run。旧 record 无 triggered_by 字段按 daemon 处理。
+    """
+    date_str = date_str or time.strftime("%Y-%m-%d")
+    day_dir = sr.DEFAULT_HISTORY / date_str
+    out: dict = {}
+    if not day_dir.exists():
+        return out
+    files = sorted(day_dir.glob("*--record.json"),
+                   key=lambda p: p.name.split("--")[1] if len(p.name.split("--")) > 1 else "")
+    for p in files:
+        try:
+            d = json.loads(p.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        skill = d.get("skill", "")
+        if not skill:
+            continue
+        detail = str(d.get("detail", ""))
+        if "cadence 内跳过" in detail:
+            continue  # cadence 伪记录（当日早前已真实成功），非真实 run
+        status = str(d.get("status", "")).upper()
+        is_manual = str(d.get("triggered_by", "daemon")) == "manual"
+        if skill not in out:
+            # 轴1：首个真实 run 的最终态
+            if status in ("SUCCESS", "SKIPPED"):
+                out[skill] = {"first_ok": True, "manual_seen": is_manual}
+            else:
+                out[skill] = {"first_ok": False, "manual_seen": is_manual}
+        else:
+            # 轴2：后续 run 只累积 manual 痕迹与「后续是否自动跑成」
+            if is_manual:
+                out[skill]["manual_seen"] = True
+            elif status in ("SUCCESS", "SKIPPED"):
+                out[skill]["auto_recovered"] = True
+    # 翻译为展示口径
+    verdict = {}
+    for skill, s in out.items():
+        if s["first_ok"] and not s["manual_seen"]:
+            verdict[skill] = "首轮过"
+        elif s.get("auto_recovered") and not s["manual_seen"]:
+            verdict[skill] = "自愈"
+        elif s["manual_seen"]:
+            verdict[skill] = "需人工救"
+        else:
+            verdict[skill] = "当日未过"  # 首轮失败且至今无人救、也没自愈
+    # 带外完成收口：无 SUCCESS record 但 last_success=今日 ⇒ 直跑脚本/人工回填完成，
+    # 绕过了运行记录系统——同样属人工干预面，如实标「需人工救」（不美化）。
+    try:
+        ls = json.loads((sr.STATE_DIR / "last_success.json").read_text(encoding="utf-8"))
+        for skill, ts in ls.items():
+            if str(ts).startswith(date_str) and skill in verdict \
+                    and verdict[skill] == "当日未过" and skill in out:
+                verdict[skill] = "需人工救"
+    except (OSError, ValueError):
+        pass
+    return verdict
+
+
+def build_ledger_rows(data: dict, records_by_skill: dict) -> list:
+    """按 ledger_template 生成 17 行台账数据；完成状态来自当天 record 或 last_success。
+    2026-10-20 18:35 大同指令：台账恢复原有格式（四列），「首轮」列撤销——
+    内部 SRE 指标绝不出现在客户可见的台账里。first_attempt_outcomes 保留供内部巡检。"""
+    from business_delivery_facts import read_fact, read_execution_note
+    from business_coverage import read_daily_coverage
+    skill_by_name = {s["name"]: s for s in data.get("skills", [])}
+    rows = []
+    for r in data.get("ledger_template", []):
+        sk = r.get("skill")
+        rec = records_by_skill.get(sk) if sk else None
+        current_skill = skill_by_name.get(sk, {})
+        current_schedule = current_skill.get("schedule") or r["schedule"]
+        merged = (current_skill.get("enabled") is False
+                  and current_schedule.startswith("已合并"))
+        coverage = read_daily_coverage(sk, datetime.now().strftime('%Y-%m-%d'), REPO_ROOT)
+        if merged:
+            done, exec_time, note = '已合并', '', current_schedule
+        elif coverage and not coverage['complete']:
+            done, exec_time, note = '否', '', coverage['reason']
+        elif read_fact(sk):
+            done, exec_time, note = '是', '', '原送达证据已核对；旧技术异常保留'
+        elif fixed_schedule.customer_duty_user_accepted(sk, datetime.now()) and not fixed_schedule.customer_slot_superseded(sk, datetime.now()):
+            done, exec_time, note = '是', '', '用户确认当天客服完成；本次未发送'
+        elif rec and rec.get("category") == sr.CAT_SUCCESS:
+            done = "是"
+            exec_time = rec.get("finished_at", "")
+            note = "当日已跑成功"
+        elif rec and rec.get("category") == sr.CAT_SKIPPED:
+            # P0-1b（2026-10-06）：幂等跳过 = 已核实「当日已 verified 外发」，该流当日
+            # 已实质完成，不计「未完成」、不拖累全绿（否则永远无法全绿、台账永不外发）。
+            done = "是"
+            exec_time = rec.get("finished_at", "")
+            note = "当日已外发（幂等保护·外发证据已核实）"
+        elif fixed_schedule.customer_slot_superseded(sk, datetime.now()):
+            done, exec_time, note = '不补跑', '', '历史客服档保留记录，由最新档值班'
+        elif r["dev_state"] == "active":
+            if sk and skill_by_name.get(sk, {}).get("needs_adapter"):
+                done = "否"
+                exec_time = ""
+                note = "待 Phase 2 适配（needs_adapter）"
+            else:
+                done = "否"
+                exec_time = ""
+                note = "当日未跑成功"
+        elif r["dev_state"] == "blocked":
+            done = "阻塞"
+            exec_time = ""
+            note = r.get("note") or skill_by_name.get(sk, {}).get("note", "阻塞") or "阻塞"
+        elif r["dev_state"] == "paused":
+            # 2026-10-19 大同指令暂时停用（如 brand-negative-review-appeal-followup）：
+            # 停用流不计入 active 分母、不拖累全绿；note 展示停用缘由，恢复即改回 active。
+            done = "已暂停"
+            exec_time = ""
+            note = r.get("note") or skill_by_name.get(sk, {}).get("note", "已暂停") or "已暂停"
+        elif r["dev_state"] == "developing":
+            done = "开发中"
+            exec_time = rec.get("finished_at", "") if rec else ""
+            note = "开发中流程"
+        else:  # pending
+            done = "待开发"
+            exec_time = ""
+            note = r.get("note") or skill_by_name.get(sk, {}).get("note", "待开发") or "待开发"
+        rows.append({
+            "row": r["row"],
+            "name": r["ledger_name"],
+            "schedule": current_schedule,
+            "done": done,
+            "exec_time": exec_time,
+            "note": note,
+            "customer_note": read_execution_note(sk) if done == "是" else None,
+            "superseded": fixed_schedule.customer_slot_superseded(sk, datetime.now()),
+            "dev_state": "paused" if merged else r["dev_state"],
+        })
+    return rows
+
+
+def customer_ledger_view(rows: list, date_str: str):
+    """Customer presentation only; never changes execution or original row facts."""
+    modern = date_str >= '2026-10-26'
+    displayed = []
+    for row in rows:
+        if row['done'] not in ('是', '已合并', '不补跑'):
+            continue
+        shown = dict(row)
+        if modern:
+            shown['done'] = '是'
+            shown['note'] = row.get('customer_note') or {'已合并': '已随当日申诉完成', '不补跑': '由当日末班覆盖'}.get(row['done'], '当日已完成')
+        displayed.append(shown)
+    active = [r for r in rows if r['dev_state'] == 'active' and not r.get('superseded')]
+    total, done = len(active), sum(r['done'] == '是' for r in active)
+    if modern:
+        covered = sum(r['done'] == '已合并' or r.get('superseded', False) for r in rows)
+        total += covered
+        done += sum(r['done'] == '已合并' or (r.get('superseded', False) and r['done'] in ('是', '不补跑')) for r in rows)
+    return displayed, total, done
+
+
+def write_ledger_xlsx(rows: list, out_path: Path, date_str: str) -> bool:
+    try:
+        from openpyxl import Workbook
+        from openpyxl.styles import Font, PatternFill, Alignment
+        from openpyxl.utils import get_column_letter
+    except ImportError:
+        print("[warn] openpyxl 未安装，降级写 csv：%s" % out_path.with_suffix(".csv"))
+        return write_ledger_csv(rows, out_path.with_suffix(".csv"), date_str)
+
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "工作台账"
+    navy = "1F4E78"
+    green = "00B050"
+    red = "C00000"
+    header_fill = PatternFill("solid", fgColor=navy)
+    header_font = Font(color="FFFFFF", bold=True, size=11)
+    title_font = Font(color=navy, bold=True, size=14)
+
+    ws.merge_cells("A1:E1")
+    ws["A1"] = "臻肆工作台账 · %s" % date_str
+    ws["A1"].font = title_font
+    ws["A1"].alignment = Alignment(horizontal="center")
+
+    headers = ["工作流名称", "执行时间", "当日是否完成", "备注"]
+    ws.append([])
+    ws.append(headers)
+    for c in range(1, 5):
+        cell = ws.cell(row=3, column=c)
+        cell.fill = header_fill
+        cell.font = header_font
+        cell.alignment = Alignment(horizontal="center", vertical="center")
+
+    active_total = sum(1 for r in rows if r["dev_state"] == "active" and not r.get("superseded"))
+    active_done = sum(1 for r in rows if r["dev_state"] == "active" and not r.get("superseded") and r["done"] == "是")
+    displayed, customer_total, customer_done = customer_ledger_view(rows, date_str)
+    for r in displayed:
+        ws.append([r["name"], r["exec_time"], r["done"], r["note"]])
+        cell = ws.cell(row=ws.max_row, column=3)
+        if r["done"] == "是":
+            cell.font = Font(color=green, bold=True)
+        elif r["done"] in ("否",):
+            cell.font = Font(color=red, bold=True)
+
+    ws.append([])
+    # 2026-10-21 大同指令：客户版台账不出现内部话术（(active)/发送口径/总控等），
+    # 「使用注明」行整行撤除。
+    ws.append(["应执行数量", customer_total])
+    ws.append(["已完成数量", customer_done])
+    ws.append(["汇总", "全部完成" if active_done == active_total else "未全绿-不发送"])
+
+    widths = [42, 20, 14, 40]
+    for i, w in enumerate(widths, 1):
+        ws.column_dimensions[get_column_letter(i)].width = w
+
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    wb.save(out_path)
+    print("[ok] 台账 xlsx 已生成: %s (active %d/%d)" % (out_path, active_done, active_total))
+    return active_done == active_total
+
+
+def write_ledger_csv(rows: list, out_path: Path, date_str: str) -> bool:
+    active_total = sum(1 for r in rows if r["dev_state"] == "active" and not r.get("superseded"))
+    active_done = sum(1 for r in rows if r["dev_state"] == "active" and not r.get("superseded") and r["done"] == "是")
+    displayed, customer_total, customer_done = customer_ledger_view(rows, date_str)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    with out_path.open("w", encoding="utf-8") as f:
+        f.write("臻肆工作台账,%s\n" % date_str)
+        f.write("工作流名称,执行时间,当日是否完成,备注\n")
+        for r in displayed:
+            f.write("%s,%s,%s,%s\n" % (r["name"], r["exec_time"], r["done"], r["note"]))
+        f.write("\n应执行数量,%d\n" % customer_total)
+        f.write("已完成数量,%d\n" % customer_done)
+    print("[ok] 台账 csv 已生成: %s (active %d/%d)" % (out_path, active_done, active_total))
+    return active_done == active_total
+
+
+def send_ledger_via_wechat(path: Path) -> bool:
+    """经 wechat-messaging 发 AI 员工群（**仅每日汇总台账，给老板看**）。
+
+    重要边界：本函数只发「当日汇总台账」这一个文件到员工群，**绝不代发任何工作流消息**。
+    逐工作流的投递 100% 在 skill 内部、由 wechat-messaging 的 REGISTRY 决定落群（异构：
+    员工群/运营群/电销+直播攻坚组/品牌·门店专属群），详见 docs/operations/工作流-落群对照表.md。
+    需真实环境与登录态；默认不自动调用（仅 --send 才真发）。
+    """
+    from daily_ledger_delivery import deliver_once as deliver_daily, local_now
+    expected = REPO_ROOT / 'work' / (local_now().strftime('%Y-%m-%d') + '臻肆工作台账.xlsx')
+    if path.resolve() == expected.resolve():
+        outcome = deliver_daily(path)
+        return outcome.get('status') in ('verified', 'already_verified')
+    from authorized_supplement import load_grant, deliver_once
+    grant = load_grant('daily-work-ledger')
+    if not grant or Path(grant['item']['path']).resolve() != path.resolve():
+        return False
+    outcome = deliver_once('daily-work-ledger', path.parent)
+    return bool(outcome and outcome.get('status') in ('verified', 'already_verified'))
+
+
+# ---------------------------------------------------------------- 防睡 (P3-2)
+
+def ensure_caffeinate() -> None:
+    """看护期间防止 Mac 睡眠掐断 ADB/微信/浏览器会话（治诊断根因4：睡眠/掉线级联）。
+
+    仅 macOS 生效；spawn 一个跟随本进程的 `caffeinate -w`，看护结束即退出。
+    纯防御增强：不改业务逻辑、不碰安全门；非 macOS 或环境缺失时安全跳过。
+    """
+    if sys.platform != "darwin":
+        return  # pragma: no cover  (非 macOS 分支在本机不可达)
+    try:
+        subprocess.Popen(
+            ["caffeinate", "-ism", "-w", str(os.getpid())],
+            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+        )
+        print("[ok] caffeinate 已启动，看护期间 Mac 不会睡眠（防 ADB/微信/浏览器会话被掐断）")
+    except FileNotFoundError:
+        print("[warn] 未找到 caffeinate，跳过防睡（非 macOS 或环境缺失）")
+
+
+# ---------------------------------------------------------------- 常驻守护状态 (P3-1B)
+
+def _now_iso() -> str:
+    return datetime.now().isoformat(timespec="seconds")
+
+
+def preflight_warmup() -> None:
+    """会话保活（治根因1）：每周期主动校验/重连 ADB，避免冷启动重连失败。非致命。"""
+    if not sr.load_manifest(DEFAULT_MANIFEST).get("daemon", {}).get("preflight_adb", True):
+        return  # pragma: no cover  (manifest 关闭预热时不可达)
+    serial = os.environ.get("ZENSI_ADB_SERIAL")
+    adb = shutil.which("adb")
+    if not adb:
+        return
+    try:
+        st = subprocess.run([adb, "get-state"], capture_output=True, text=True, timeout=10)
+        if "device" not in (st.stdout or "") and serial:
+            r = subprocess.run([adb, "connect", serial], capture_output=True, text=True, timeout=15)
+            print("[warmup] adb connect %s -> %s" % (serial, (r.stdout or "").strip()))
+        else:
+            print("[warmup] adb 状态: %s" % (st.stdout or "").strip())
+    except Exception as e:  # noqa: BLE001
+        print("[warn] preflight_warmup adb 检查失败(非致命): %r" % e)
+
+
+def login_health_gate(now: datetime) -> None:
+    """登录态保活巡检（2026-09-28 拍板）：每日 8:00 / 22:00 各跑一次。
+
+    只读探测桌面微信 + 4 个专用 Chrome profile（CDP 存活 + 目标页登录态），
+    （⚠️ Mac 桌面微信已于 2026-09-30 停用，此「桌面微信」探测项为历史遗留，不得作为发送门/看护门依据；实际微信发送改走 Windows 网关/手机微信）。
+    同一小时最多跑一次（marker 去重）；异常走统一 alerts.jsonl 告警流。
+    本门禁只报告、不自动恢复（不自动登录、不新开浏览器）。
+    """
+    if now.hour not in LOGIN_CHECK_HOURS:
+        return
+    key = now.strftime("%Y-%m-%d-%H")
+    try:
+        marker = (json.loads(LOGIN_CHECK_MARKER.read_text(encoding="utf-8"))
+                  if LOGIN_CHECK_MARKER.exists() else {})
+    except (OSError, ValueError):
+        marker = {}
+    if marker.get("key") == key:
+        return
+    script = RUNTIME_DIR / "login_health_check.py"
+    try:
+        proc = subprocess.run(
+            [sys.executable, str(script)], capture_output=True, text=True, timeout=120
+        )
+        report = json.loads(proc.stdout or "{}")
+    except Exception as e:  # noqa: BLE001
+        append_alert("login_health_check", sr.CAT_UNKNOWN,
+                     "巡检脚本执行失败: %r" % e)
+        return
+    problems = report.get("problems", [])
+    LOGIN_CHECK_MARKER.write_text(json.dumps(
+        {"key": key, "ok": report.get("ok"), "at": _now_iso(), "problems": problems},
+        ensure_ascii=False, indent=2), encoding="utf-8")
+    if report.get("ok"):
+        print("[login-check] %s 全部正常（微信+4专用浏览器）" % _now_iso())
+        # P0-3 补齐（2026-10-21）：巡检恢复即治愈历史登录告警
+        # （9231 10-21 08:00 掉登录告警在大同重登后挂 3h+ 的根因：
+        #  失败会 append_alert，恢复却无人 mark_resolved）
+        if alert_store is not None:
+            try:
+                n = alert_store.mark_skill_resolved("login_health_check")
+                if n:
+                    print("[login-check] 治愈 %d 条历史登录告警" % n)
+            except Exception as e:  # noqa: BLE001
+                print("[warn] 登录告警治愈失败(不影响主链路): %r" % e)
+    else:
+        append_alert("login_health_check", sr.CAT_NEEDS_LOGIN,
+                     "; ".join(problems) or "巡检返回异常（无明细）")
+
+
+def write_daemon_heartbeat(status: str, next_cycle_at: str = None) -> None:
+    STATE_DIR.mkdir(parents=True, exist_ok=True)
+    hb = {
+        "pid": os.getpid(),
+        "started_at": DAEMON_STARTED_AT,
+        "last_cycle_at": _now_iso(),
+        "status": status,
+        "next_cycle_at": next_cycle_at,
+    }
+    DAEMON_HEARTBEAT.write_text(json.dumps(hb, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def write_last_cycle(records: dict, all_green: bool) -> None:
+    STATE_DIR.mkdir(parents=True, exist_ok=True)
+    summary = {
+        "cycle_at": _now_iso(),
+        "all_green": all_green,
+        "skills": {
+            sk: {"status": r.get("status"), "category": r.get("category"),
+                 "finished_at": r.get("finished_at")}
+            for sk, r in records.items()
+        },
+    }
+    LAST_CYCLE.write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def append_alert(skill: str, category: str, detail: str, log_path: str = None,
+                 code: str = None) -> None:
+    """错误工作流（抄 n8n Error Workflow）：失败触发告警事件流，供 agent 看护跟进。
+
+    P0-3（2026-10-03）：原始流 alerts.jsonl 语义不变（append-only）；同时把事件
+    归并进 alerts_summary.json（同键只占一行 + 计数），看护代理读聚合不再刷屏。
+    """
+    STATE_DIR.mkdir(parents=True, exist_ok=True)
+    # E3b（2026-10-06 大同裁决）：认知层 silence_allowed 的码不进告警聚合、
+    # 不刷看护屏，只落独立审计流（观察周复盘数据源）。无 code / 码不在白名单 /
+    # code_policy 不可用 ⇒ 照常告警（fail-closed）。never-silence 档在
+    # code_policy 内恒 silence_allowed=False，白名单也穿不透。
+    if code:
+        try:
+            import receipt as _rc
+            pol = _rc.code_policy(code)
+            if pol["silence_allowed"]:
+                sup = {"ts": _now_iso(), "skill": skill, "category": category,
+                       "detail": detail, "log": log_path, "code": code,
+                       "tier": pol["tier"], "note": pol["note"], "suppressed": True}
+                with ALERTS_SUPPRESSED_LOG.open("a", encoding="utf-8") as f:
+                    f.write(json.dumps(sup, ensure_ascii=False) + "\n")
+                print("[alert-suppressed] %s -> %s : %s (code=%s)"
+                      % (skill, category, detail, code))
+                return
+        except Exception as e:  # noqa: BLE001  判定失败⇒绝不静音，照常告警
+            print("[warn] 静音判定失败(照常告警): %r" % e)
+    evt = {
+        "ts": _now_iso(),
+        "skill": skill,
+        "category": category,
+        "detail": detail,
+        "log": log_path,
+    }
+    with ALERTS_LOG.open("a", encoding="utf-8") as f:
+        f.write(json.dumps(evt, ensure_ascii=False) + "\n")
+    if alert_store is not None:
+        try:
+            alert_store.record_alert(skill, category, detail, log_path, code)
+        except Exception as e:  # noqa: BLE001  聚合失败绝不影响告警主链路
+            print("[warn] 告警聚合失败(不影响告警): %r" % e)
+    print("[alert] %s -> %s : %s" % (skill, category, detail))
+
+
+def pop_forced_runs() -> tuple:
+    """仅消费 force_run/reset_circuit，保留立即请求及其他控制字段。"""
+    if not CONTROL_FILE.exists():
+        return [], None
+    try:
+        data = json.loads(CONTROL_FILE.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return [], None
+    if not isinstance(data, dict) or not any(key in data for key in ('force_run', 'reset_circuit')):
+        return [], None
+    forced = data.pop("force_run", [])
+    if isinstance(forced, str):
+        forced = [forced]
+    reset = data.pop("reset_circuit", None)
+    try:
+        if data:
+            tmp = CONTROL_FILE.with_suffix('.json.tmp')
+            tmp.write_text(json.dumps(data, ensure_ascii=False), encoding='utf-8')
+            tmp.replace(CONTROL_FILE)
+        else:
+            CONTROL_FILE.unlink()
+    except OSError:
+        return [], None
+    return list(forced), reset
+
+
+def pop_force_run_now() -> list:
+    """摘取 control.json 的 force_run_now（大同 2026-10-23 新规：补跑按当前时间，
+    不准等周期）。与 pop_forced_runs 同款原子消费：读后删键、保留其余键。"""
+    if not CONTROL_FILE.exists():
+        return []
+    try:
+        data = json.loads(CONTROL_FILE.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return []
+    raw = data.get("force_run_now")
+    if not raw:
+        return []
+    names = [raw] if isinstance(raw, str) else list(raw)
+    data.pop("force_run_now", None)
+    tmp = CONTROL_FILE.with_suffix(".json.tmp")
+    try:
+        tmp.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
+        tmp.replace(CONTROL_FILE)
+    except OSError:
+        pass
+    return list(names)
+
+
+def top10_delivery_pending(skill: dict, now: datetime) -> bool:
+    """Read only the current business-day original marker; never certify delivery."""
+    if skill.get('name') != 'daily-top10-to-wechat-group':
+        return False
+    import hashlib
+    import re
+    group = skill.get('target_group')
+    if not isinstance(group, str) or not group:
+        return False
+    day = (now - timedelta(days=1)).strftime('%Y-%m-%d')
+    group_key = hashlib.sha256(group.encode()).hexdigest()[:12]
+    marker = (REPO_ROOT / 'skills/workflows/daily-top10-to-wechat-group/.runtime'
+              / 'send-ledger' / f'{day}-main-{group_key}.json')
+    try:
+        value = json.loads(marker.read_text(encoding='utf-8'))
+    except (OSError, ValueError):
+        return False
+    if not isinstance(value, dict):
+        return False
+    attempts = value.get('sendAttempts')
+    payloads = value.get('payloads')
+    return (value.get('bridgeVersion') == 1 and value.get('groupName') == group
+            and value.get('payloadType') == 'image'
+            and value.get('state') in ('attempted', 'unknown')
+            and type(attempts) is int and attempts > 0
+            and isinstance(payloads, list) and len(payloads) == 1
+            and isinstance(payloads[0], dict)
+            and payloads[0].get('name') == f'{day}_top10seller.png'
+            and isinstance(payloads[0].get('sha256'), str)
+            and re.fullmatch(r'[0-9a-f]{64}', payloads[0]['sha256']) is not None)
+
+
+def _cadence_gate(skill: dict, now: datetime) -> tuple:
+    """是否跳过 + 跳过原因。返回 (skip: bool, reason: str)。
+
+    reason 取值：
+      not_due      —— 未到本日 earliest_hour；**不是成功**，台账不得记"是"
+      no_schedule  —— cadence_hours<=0（oneshot），不自动调度；同样不是成功
+      done_today   —— **当天**已成功且仍在 cadence 内（唯一可记"已完成"的跳过）
+      ""           —— 不跳过（无成功记录 / 成功不在今天 / 已超 cadence，必须重跑）
+
+    铁律（2026-10-02 大同定）：**只有当天的成功才算成功**。历史 / 昨日的成功一律作废，
+    既不能作为本日"已完成"的依据，也不能生成 SUCCESS 伪记录（消灭虚高 SUCCESS）。
+    """
+    from business_delivery_facts import read_fact
+    if read_fact(skill['name'], now):
+        return True, 'business_delivery_observed'
+    if top10_delivery_pending(skill, now):
+        return True, 'delivery_verification_pending'
+    if fixed_schedule.customer_duty_user_accepted(skill['name'], now):
+        return True, 'customer_duty_user_accepted'
+    if fixed_schedule.customer_slot_superseded(skill['name'], now):
+        return True, 'superseded_customer_slot'
+    earliest = skill.get("earliest_hour", 0)
+    earliest_minute = skill.get("earliest_minute", 0)
+    if now.hour < earliest or (now.hour == earliest and now.minute < earliest_minute):
+        return True, "not_due"
+    # latest_hour 上限（可选）：到达该小时后不再排程，保证「收口冲刺」前全部收口。
+    # 当日已成功则按 done_today 跳过；未成功也不得在 latest_hour 之后补跑（避免任务流拖到深夜）。
+    latest = skill.get("latest_hour")
+    if latest is not None and now.hour >= latest:
+        ls = sr.get_last_success(skill["name"])
+        if 'schedule_times' in skill:
+            skip_fixed, fixed_reason = fixed_schedule.gate(skill, now, ls)
+            return True, 'done_today' if skip_fixed and fixed_reason == 'done_today' else 'past_latest'
+        if ls and datetime.fromisoformat(ls).date() == now.date():
+            return True, "done_today"
+        return True, "past_latest"
+    if 'schedule_times' in skill:
+        for dependency in skill.get('depends_on', []):
+            last = sr.get_last_success(dependency)
+            try:completed = datetime.fromisoformat(last) if last else None
+            except ValueError:completed = None
+            threshold = fixed_schedule.boundaries(skill, now)[0]
+            if completed is None or completed.date() != now.date() or completed < threshold:
+                return True, 'dependency_pending'
+        return fixed_schedule.gate(skill, now, sr.get_last_success(skill['name']))
+    cadence = skill.get("cadence_hours", 24)
+    if cadence <= 0:
+        return True, "no_schedule"
+    ls = sr.get_last_success(skill["name"])
+    if not ls:
+        return False, ""
+    try:
+        last = datetime.fromisoformat(ls)
+    except ValueError:
+        return False, ""
+    # 只认当天：非今天的成功不算本日完成，必须重跑当日任务。
+    if last.date() != now.date():
+        return False, ""
+    # 时段门槛：早于本日排班时点(earliest_hour[:earliest_minute])的成功**不算本档已完成**。
+    # 典型反例：17:00 档在凌晨 01:28 跑过一次改造前的"每小时只读巡检"，
+    # 若不校验时点，17:00 到点时 (17:00-01:28)=15.5h < 24h 会被判 done_today 跳过，
+    # 当天真正的汇总+发送动作永远不出活——这是"只认当天"引入的新型假绿，必须堵死。
+    if earliest:
+        threshold = earliest * 60 + earliest_minute
+        last_minutes = last.hour * 60 + last.minute
+        if last_minutes < threshold:
+            return False, ""
+    if (now - last) < timedelta(hours=cadence):
+        return True, "done_today"
+    return False, ""
+
+
+def _pseudo_record(skill: dict) -> dict:
+    """当天已成功（cadence 内）：生成 SUCCESS record 供台账显示"是"。仅 done_today 可调用。"""
+    ls = sr.get_last_success(skill["name"]) or ""
+    return {
+        "skill": skill["name"],
+        "status": "SUCCESS",
+        "category": sr.CAT_SUCCESS,
+        "finished_at": ls,
+        "note": "当日已成功（cadence 内跳过）",
+    }
+
+
+def _persist_done_today_record(skill: dict) -> None:
+    """done_today（cadence 内已成功）的 SUCCESS 伪记录落盘到 run_history。
+
+    背景（2026-10-13 定位）：台账 Excel（build_ledger_rows）读 last_success→伪记录显示
+    「已完成」，而 ledger_gate（发送前硬闸门）只读 run_history——两源不一致会致
+    「Excel 全绿但 gate 拦发」（#8 差评申诉因此直到被人工补登才放行）。
+    把完成信号落盘进 run_history，使二者共用同一真源；gate 逻辑零改动、不被弱化。
+
+    幂等：当日该 skill 已有 SUCCESS / 已核实外发的 SKIPPED_IDEMPOTENT 记录则跳过，不重复写。
+    """
+    name = skill["name"]
+    date_str = time.strftime("%Y-%m-%d")
+    day_dir = sr.DEFAULT_HISTORY / date_str
+    if day_dir.exists():
+        for p in sorted(day_dir.glob("%s--*--record.json" % name)):
+            try:
+                d = json.loads(p.read_text(encoding="utf-8"))
+            except Exception:
+                continue
+            if str(d.get("status", "")).upper() == "SUCCESS":
+                return
+            if (str(d.get("category", "")).upper() == "SKIPPED_IDEMPOTENT"
+                    and (d.get("fail_signal") or {}).get("idempotent_evidence")):
+                return
+    rec = _pseudo_record(skill)
+    rec.setdefault("ledger_name", skill.get("ledger_name", name))
+    rec.setdefault("schedule", skill.get("schedule", ""))
+    rec.setdefault("dev_state", skill.get("dev_state", ""))
+    rec.setdefault("detail", "当日已成功（cadence 内跳过），由 daemon 周期落盘至 run_history")
+    rec.setdefault("next_action", "无需动作")
+    rec.setdefault("attempts", 1)
+    rec.setdefault("max_retries", skill.get("max_retries", 2))
+    rec.setdefault("logs", [])
+    ts = time.strftime("%Y%m%d-%H%M%S")
+    day_dir.mkdir(parents=True, exist_ok=True)
+    rec_path = day_dir / ("%s--%s--record.json" % (name, ts))
+    rec_path.write_text(json.dumps(rec, ensure_ascii=False, indent=2), encoding="utf-8")
+    print("[ledger] 已落盘 done_today 成功记录：%s" % rec_path.name)
+
+
+def _pending_record(skill: dict, reason: str) -> dict:
+    """未到点 / 不自动调度：记 PENDING。**绝不可记为 SUCCESS**（反虚高 SUCCESS）。"""
+    return {
+        "skill": skill["name"],
+        "status": "PENDING",
+        "category": "PENDING",
+        "finished_at": "",
+        "detail": reason,
+        "note": ("本日尚未到执行时点" if reason == "not_due" else
+                 "图片已单次提交，等待只读核验；不重发" if reason == "delivery_verification_pending" else
+                 "等待前置任务当日成功" if reason == "dependency_pending" else "不自动调度（oneshot）"),
+    }
+
+
+def merchant_priority_checkpoint(data, interpreters, records, attempted_slots, now=None):
+    """At a safe flow boundary, serve a newly due merchant slot first."""
+    now = now or datetime.now()
+    merchant = next((s for s in data.get('skills', [])
+                     if s.get('enabled') and s['name'] == 'daily-agent-new-merchants-to-wechat'), None)
+    if merchant is None or not merchant.get('schedule_times'):
+        return
+    skip, _ = _cadence_gate(merchant, now)
+    if skip:
+        return
+    due = [s for s in fixed_schedule.boundaries(merchant, now) if s <= now]
+    if not due:
+        return
+    slot = due[-1].isoformat()
+    if slot in attempted_slots:
+        return
+    attempted_slots.add(slot)
+    rec = run_one(data, merchant['name'], interpreters)
+    if rec:
+        records[merchant['name']] = rec
+        record_outcome(merchant['name'], rec.get('category'), _now_iso())
+
+
+def daemon_cycle(data: dict, interpreters: dict, do_send: bool, force_all: bool = False,
+                 forced_extra: set | None = None) -> bool:
+    date_str = time.strftime("%Y-%m-%d")
+    print("\n=== daemon 周期 %s (force_all=%s) ===" % (date_str, force_all))
+    # P3-3 授权到期只读扫描+告警（安全门零改动：只告警，不重封）。
+    # 扫描根限 skills/（与 auth_watch 文档/CLI 默认一致）：state/ 下的历史封存快照
+    # 不是活动门禁，扫进来只会产生无法处理的假警报。
+    for a in aw.run_auth_watch(REPO_ROOT / "skills", STATE_DIR):
+        append_alert(a["key"], a["status"], a["detail"])
+    records: dict = {}
+    forced, reset_target = pop_forced_runs()
+    forced = set(forced) | set(forced_extra or [])  # force_run_now 立即补跑名单（大同 2026-10-23）
+    if reset_target:
+        clear_failures(reset_target)
+        print("[maintenance] 已清空失败计数：%s" % reset_target)
+    now = datetime.now()
+    login_health_gate(now)
+    # P0（2026-10-21）：流目标群「四处同收口」机检（治 top10 漏改第 4 处
+    # registry-routing.json 导致连续 4 轮 workflow-target-or-payload-mismatch）。
+    # 只读校验：不一致即告警（不自动改，改群须人工四处同收口后复验）。
+    try:
+        import group_consistency_check as gcc  # noqa: E402
+        for route, (flow, style) in gcc.ROUTE_FLOWS.items():
+            problems = gcc.check_flow(route, flow, style)
+            if problems:
+                append_alert(flow, sr.CAT_UNKNOWN,
+                             "目标群四处不一致: " + "; ".join(problems),
+                             code="group-consistency-mismatch:%s" % route)
+    except Exception as e:  # noqa: BLE001
+        print("[warn] 群一致性机检失败(不影响主链路): %r" % e)
+    enabled = sorted([s for s in data.get("skills", []) if s.get("enabled")],
+                     key=lambda x: x.get("order", 999))
+    merchant_attempted_slots = set()
+    for s in enabled:
+        name = s["name"]
+        if name != 'daily-agent-new-merchants-to-wechat':
+            merchant_priority_checkpoint(data, interpreters, records, merchant_attempted_slots)
+        skip, reason = _cadence_gate(s, datetime.now())
+        if reason in ('superseded_customer_slot', 'customer_duty_user_accepted', 'business_delivery_observed', 'delivery_verification_pending') or (not force_all and name not in forced and skip):
+            if reason == "done_today":
+                print("[skip] %s 当日已成功（cadence 内），本周期跳过" % name)
+                records[name] = _pseudo_record(s)
+                # 当日已真实成功过 ⇒ 连败计数必须清零。此路径不经过 run_one，
+                # 若不在此补记，record_outcome 的 SUCCESS 清零分支永不触发，
+                # failure_watch 会把已成功流长期挂成「UNKNOWN 连败 xN」，
+                # 污染 triage/dev_backlog 告警与 daily_progress 展示（口径失真）。
+                record_outcome(name, sr.CAT_SUCCESS, _now_iso())
+                _persist_done_today_record(s)  # 落盘完成信号，使 ledger_gate 与 Excel 共用同一真源
+            else:
+                print("[skip] %s %s，本周期跳过" % (name, reason))
+                records[name] = _pending_record(s, reason)
+            continue
+        # 现场维护（2026-10-02 取代原 W4 熔断）：**失败绝不停排**。
+        # 每个周期照常排程本流水线；失败明细（含日志路径）进告警流，由看护代理
+        # 查代码 → 修复 → 测试 → 直到当日真实成功。
+        if name == 'daily-agent-new-merchants-to-wechat' and s.get('schedule_times'):
+            at = datetime.now()
+            due = [slot for slot in fixed_schedule.boundaries(s, at) if slot <= at]
+            if due:
+                merchant_attempted_slots.add(due[-1].isoformat())
+        rec = run_one(data, name, interpreters)
+        if rec:
+            records[name] = rec
+            record_outcome(name, rec.get("category"), _now_iso())
+
+    merchant_priority_checkpoint(data, interpreters, records, merchant_attempted_slots)
+    rows = build_ledger_rows(data, records)
+    ledger_out = REPO_ROOT / data.get("ledger_output_dir", "work") / (
+        "%s臻肆工作台账.xlsx" % date_str)
+    all_green = write_ledger_xlsx(rows, ledger_out, date_str)
+    _maybe_send_ledger(ledger_out, all_green, do_send or data.get("daemon", {}).get("send_daily_ledger", False), date_str)
+    write_last_cycle(records, all_green)
+    # P0-3：每周期执行一次告警老化（resolved 且超过窗口 → 归档）
+    if alert_store is not None:
+        try:
+            aged = alert_store.age_alerts()
+            if aged:
+                print("[alerts] 老化归档 %d 条已解决告警" % aged)
+        except Exception as e:  # noqa: BLE001
+            print("[warn] 告警老化失败(不影响周期): %r" % e)
+    # W6 P2-2：失败自动分诊到待开发清单（连败>=3 才开待办；失败为空时是 no-op）
+    try:
+        import triage  # noqa: PLC0415
+        triage.run_triage(REPO_ROOT)
+    except Exception as e:  # noqa: BLE001
+        print("[warn] 自动分诊失败(不影响周期): %r" % e)
+    return all_green
+
+
+def _maybe_send_ledger(path: Path, all_green: bool, do_send: bool, date_str: str) -> None:
+    print("\n=== 发送门判断 ===")
+    if not all_green:
+        print("[warn] 未全绿（有失败/待适配）：仅落盘 + 告警，不发送 AI 员工群。")
+        return
+    sent = {}
+    if SENT_TODAY.exists():
+        try:
+            sent = json.loads(SENT_TODAY.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            sent = {}
+    if sent.get(date_str):
+        print("[info] 今日已发送台账，跳过重复发送。")
+        return
+    if do_send:
+        if send_ledger_via_wechat(path):
+            sent[date_str] = _now_iso()
+            SENT_TODAY.write_text(json.dumps(sent, ensure_ascii=False, indent=2), encoding="utf-8")
+    else:
+        print("[info] active 全绿，但未加 --send：仅落盘，发送待代理确认。")
+
+
+def daemon_loop(data: dict, interpreters: dict, do_send: bool) -> int:  # pragma: no cover  (常驻无限循环，单测不可达；由 daemon_cycle 单测覆盖其周期逻辑)
+    ensure_caffeinate()
+    STATE_DIR.mkdir(parents=True, exist_ok=True)
+    cycle = data.get("daemon", {}).get("cycle_interval_seconds", 1800)
+    stop = {"v": False}
+
+    def _handler(signum, frame):
+        print("\n[info] daemon 收到信号 %s，准备优雅退出" % signum)
+        stop["v"] = True
+        # 不等周期跑完：正在跑的步骤有自己的会话，放着不管就会变成抓着微信界面的
+        # 孤儿。这里立刻整组收割 —— 被 SIGKILL 的步骤分类为 UNKNOWN，不会触发重试。
+        sr.kill_live_steps("signal-%s" % signum)
+
+    signal.signal(signal.SIGTERM, _handler)
+    signal.signal(signal.SIGINT, _handler)
+
+    write_daemon_heartbeat("starting")
+    # 上一轮 daemon 若被 SIGKILL 掉，技能步会以孤儿身份活下来继续占着微信界面。
+    # 此刻我们独占全局锁，收割它们是安全的，也是让「占着却不工作」自愈的唯一时机。
+    for victim in sr.reap_stale_steps():
+        append_alert("__orphan_step__", "RECOVERABLE",
+                     "已终止上一轮遗留的技能进程 pgid=%s" % victim.get("pgid"), None)
+    print("=== daemon 常驻启动（cycle=%ds, pid=%d）===" % (cycle, os.getpid()))
+    woke_now: list = []  # force_run_now 立即补跑名单（carry 到下轮周期）
+    while not stop["v"]:
+        cycle_started = datetime.now()
+        fixed_wake_at = fixed_schedule.next_boundary(data.get('skills', []), cycle_started)
+        next_at = (datetime.now() + timedelta(seconds=cycle)).isoformat(timespec="seconds")
+        write_daemon_heartbeat("running", next_cycle_at=next_at)
+        try:
+            daemon_cycle(data, interpreters, do_send, force_all=False,
+                         forced_extra=set(woke_now))
+        except Exception as e:  # noqa: BLE001
+            append_alert("__daemon__", sr.CAT_UNKNOWN, "daemon cycle error: %r" % e)
+        woke_now = []
+        # 可中断的休眠（小块 sleep，便于 launchd 终止时快速响应）。
+        # 5s 片间扫 force_run_now：补跑按当前时间、不等整周期（大同 2026-10-23）。
+        for _ in range(max(1, int(cycle // 5))):
+            if stop["v"]:
+                break
+            time.sleep(5)
+            if fixed_wake_at is not None and datetime.now() >= fixed_wake_at:
+                print('[fixed_schedule] 到达固定排班时点，开始下一周期')
+                break
+            woke_now = pop_force_run_now()
+            if woke_now:
+                print("[force_run_now] 立即补跑：%s" % woke_now)
+                break
+    write_daemon_heartbeat("stopped")
+    print("[info] daemon 已停止。")
+    return 0
+
+
+# ---------------------------------------------------------------- CLI
+
+def main() -> int:
+    ap = argparse.ArgumentParser(description="外卖运营统一调度入口")
+    ap.add_argument("--manifest", default=str(DEFAULT_MANIFEST), help="manifest 路径")
+    ap.add_argument("--list", action="store_true", help="列出 14 条目+编排字段")
+    ap.add_argument("--dry-run", action="store_true", help="打印计划不真跑")
+    ap.add_argument("--selftest", action="store_true", help="调度层纯逻辑自测")
+    ap.add_argument("--status", action="store_true", help="当天状态+daemon 状态快照")
+    ap.add_argument("--once", metavar="NAME", help="手动触发单个 skill（与 daemon 互斥锁）")
+    ap.add_argument("--send", action="store_true", help="active 全绿时经微信发群")
+    ap.add_argument("--cycle-once", action="store_true", help="跑一个 daemon 周期(按 cadence)后退出")
+    ap.add_argument("--daemon", action="store_true", help="常驻守护：按 cadence 循环编排(launchd KeepAlive)")
+    ap.add_argument("--auth-watch", action="store_true", help="P3-3 只读扫描授权到期并告警(不重封)")
+    ap.add_argument("--alerts-show", action="store_true", help="P0-3 打印未解决告警聚合视图")
+    ap.add_argument("--alerts-rebuild", action="store_true",
+                    help="P0-3 从 alerts.jsonl 全量重建聚合(含历史 UNKNOWN 可读化)")
+    args = ap.parse_args()
+
+    data = sr.load_manifest(Path(args.manifest))
+    interpreters = sr.resolve_interpreters(data, dict(os.environ))
+
+    if args.list:
+        return cmd_list(data)
+    if args.dry_run:
+        return cmd_dry_run(data, interpreters)
+    if args.selftest:
+        return cmd_selftest()
+    if args.auth_watch:
+        for a in aw.run_auth_watch(REPO_ROOT, STATE_DIR):
+            append_alert(a["key"], a["status"], a["detail"])
+        return 0
+    if args.alerts_show and alert_store is not None:
+        return alert_store._cmd_show()
+    if args.alerts_rebuild and alert_store is not None:
+        stat = alert_store.rebuild_from_raw()
+        print("[ok] 告警聚合重建：%r" % stat)
+        return 0
+    if args.status:
+        recs = sr.summarize_today(HISTORY_DIR)
+        print("=== 当天状态快照（%d 条 record）===" % len(recs))
+        for sk, rec in sorted(recs.items()):
+            print("  %-42s %s/%s" % (sk, rec.get("status"), rec.get("category")))
+        print("\n=== daemon 状态（state/daemon.json）===")
+        if DAEMON_HEARTBEAT.exists():
+            try:
+                print("  " + DAEMON_HEARTBEAT.read_text(encoding="utf-8").replace("\n", "\n  "))
+            except OSError:
+                print("  (无法读取)")
+        else:
+            print("  (无常驻进程状态文件)")
+        return 0
+    if args.once:
+        return _with_lock(lambda: cmd_once(data, args.once, interpreters))
+
+    # 以下三种模式需持有全局锁，防止与常驻 daemon 并发操作同一批真机资源
+    if args.daemon:
+        return _with_lock(lambda: daemon_loop(data, interpreters, args.send))
+    if args.cycle_once:
+        return _with_lock(lambda: (daemon_cycle(data, interpreters, args.send, force_all=False), 0)[1])
+    return _with_lock(lambda: _legacy_careloop(data, interpreters, args.send))
+
+
+def _with_lock(fn) -> int:
+    lock = sr.RunnerLock()
+    if not lock.acquire():
+        print("[error] 已有 run_all 实例持有全局锁（daemon 或另一次看护），拒绝并发。\n"
+              "        如需强制单跑某技能，请写 runtime/state/control.json：{\"force_run\":\"<name>\"}，"
+              "daemon 下个周期会采纳。")
+        return 1
+    try:
+        return fn()
+    finally:
+        lock.release()
+
+
+def _legacy_careloop(data: dict, interpreters: dict, do_send: bool) -> int:
+    """一次性看护（旧行为）：强制跑全部 enabled，不按 cadence 门控。"""
+    ensure_caffeinate()
+    date_str = time.strftime("%Y-%m-%d")
+    print("=== 看护一轮 %s（强制全部 enabled）===" % date_str)
+    records = {}
+    for s in sorted([x for x in data.get("skills", []) if x.get("enabled")],
+                    key=lambda x: x.get("order", 999)):
+        rec = run_one(data, s["name"], interpreters)
+        if rec:
+            records[s["name"]] = rec
+    rows = build_ledger_rows(data, records)
+    ledger_out = REPO_ROOT / data.get("ledger_output_dir", "work") / (
+        "%s臻肆工作台账.xlsx" % date_str)
+    all_green = write_ledger_xlsx(rows, ledger_out, date_str)
+    _maybe_send_ledger(ledger_out, all_green, do_send, date_str)
+    write_last_cycle(records, all_green)
+    return 0
+
+
+if __name__ == "__main__":  # pragma: no cover (仅脚本入口；单测经 unittest 驱动 main())
+    sys.exit(main())
