@@ -1,0 +1,152 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：深圳市  ；  联系人：沈，13535866007  ；  店铺：啊嫲沙茶面·原味粿条汤  ；  地址：坂田街道马安堂社区新河街5-1号107",
+      "sha256": "bdc60537f1a2fc7132d882ae4ff609bf916d38ffbb46c173ae4c5fb70393d3ca"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "c2d0173a74d0c724dd5776531290e107865e2eb441d484a029678a21682ce76e",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "bdc60537f1a2fc7132d882ae4ff609bf916d38ffbb46c173ae4c5fb70393d3ca",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1792083505.01415,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-text-anchor",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "电销+直播攻坚组",
+          "currentTitle": "电销+直播攻坚组",
+          "messageCount": 42,
+          "anchor": "text-exact",
+          "anchorValue": "城市：深圳市  ；  联系人：沈，13535866007  ；  店铺：啊嫲沙茶面·原味粿条汤  ；  地址：坂田街道马安堂社区新河街5-1号107",
+          "anchorInTrailingPosition": true,
+          "autoKind": null,
+          "readbackAt": 1792083531.0880919
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "电销+直播攻坚组",
+            "len": 74
+          },
+          "route": "relay",
+          "direct_error": "[Errno 65] No route to host",
+          "direct_local_network_blocked": true,
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 9550
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 26075
+      }
+    ],
+    "elapsedMs": 35629,
+    "eventKey": "3d8ffc88f27be775ccc496058b7c78f28862fbd04e71260cfbb65e6f9b9099e4",
+    "reviewSummary": {
+      "totalElapsedMs": 35629,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/2358c40638beaf16eeb8b992daa1fe59e99d3685cfd56585e47c504744b57f78.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 9550,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 26075,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 35629,
+  "reviewSummary": {
+    "totalElapsedMs": 35629,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "ok": true,
+    "resolvedGroup": "电销+直播攻坚组",
+    "currentTitle": "电销+直播攻坚组",
+    "messageCount": 42,
+    "anchor": "text-exact",
+    "anchorValue": "城市：深圳市  ；  联系人：沈，13535866007  ；  店铺：啊嫲沙茶面·原味粿条汤  ；  地址：坂田街道马安堂社区新河街5-1号107",
+    "anchorInTrailingPosition": true,
+    "autoKind": null,
+    "readbackAt": 1792083531.0880919
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false
+}

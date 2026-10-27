@@ -1,0 +1,156 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-12",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 118,
+    "task_page": 249,
+    "navigation": 1378,
+    "date_filter": 1554,
+    "page_1_read": 344,
+    "page_1_next": 46,
+    "page_2_read": 566,
+    "selection_audit": 0,
+    "detail_546812895": 809
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "page_1_next": "PASS",
+    "page_2_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_546812895": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "546812895",
+      "merchantName": "马记兰州拉面·拉面·拌饭·饺子",
+      "recommendTime": "2026-10-12 16:54:28",
+      "city": "宁波市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 11,
+      "address": "洞桥镇王家桥村宝积路兰州拉面",
+      "contact": "马，13321348484",
+      "detailVerified": true,
+      "text": "城市：宁波市  ；  联系人：马，13321348484  ；  店铺：马记兰州拉面·拉面·拌饭·饺子  ；  地址：洞桥镇王家桥村宝积路兰州拉面",
+      "sha256": "d8c47490e4cd9d70f91dac0535ae8d7a57ed7f4931df4148b125f7163acdd2f1"
+    }
+  ],
+  "frontmostBefore": "com.tencent.workbuddy.mac",
+  "createdAt": "2026-10-12T09:26:57.340Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-12",
+    "merchantName": "手工大馅水饺盖饭",
+    "merchantId": "1359530815",
+    "recommendTime": "2026-10-12 14:25:30",
+    "tableOrder": 8,
+    "messageSha256": "27d49df6d2d67361d321068b0b58e476882ad760f642681a35cef1eee0fc1628",
+    "sentAt": "2026-10-12T15:23:43+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-12",
+  "filterEndDate": "2026-10-12",
+  "dateFilter": "2026-10-12..2026-10-12",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 10,
+      "nextEnabled": true
+    },
+    {
+      "page": 2,
+      "rowCount": 1,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 11,
+  "pendingRows": 6,
+  "targetCount": 1,
+  "selectionAudit": {
+    "totalRows": 11,
+    "pendingRows": 6,
+    "excludedAtOrBeforeCursor": 8,
+    "excludedAfterCursorNotPending": 2,
+    "targetCount": 1,
+    "rows": [
+      {
+        "merchantId": "546812895",
+        "recommendTime": "2026-10-12 16:54:28",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1359530815",
+        "recommendTime": "2026-10-12 14:25:30",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546526773",
+        "recommendTime": "2026-10-12 13:31:53",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1357544210",
+        "recommendTime": "2026-10-12 11:03:59",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546561996",
+        "recommendTime": "2026-10-12 10:42:27",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1122082877",
+        "recommendTime": "2026-10-12 08:57:42",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "528665610",
+        "recommendTime": "2026-10-12 16:49:55",
+        "status": "处理中(签约中)"
+      },
+      {
+        "merchantId": "545571270",
+        "recommendTime": "2026-10-12 13:04:44",
+        "status": "处理中(签约中)"
+      },
+      {
+        "merchantId": "546200474",
+        "recommendTime": "2026-10-12 09:56:37",
+        "status": "处理中(签约中)"
+      },
+      {
+        "merchantId": "546542516",
+        "recommendTime": "2026-10-12 14:48:02",
+        "status": "完成"
+      },
+      {
+        "merchantId": "546642286",
+        "recommendTime": "2026-10-12 12:17:14",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 6000,
+  "frontmostAfter": "com.tencent.workbuddy.mac",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261012-172650/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261012-172650/output/collection-attempt-1.review.md"
+}

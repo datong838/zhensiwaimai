@@ -1,0 +1,131 @@
+{
+  "ok": true,
+  "status": "already_verified",
+  "groupName": "临时测试群请忽略 💰发财精英荟💰",
+  "channel": "desktop",
+  "requestDigest": "43a33978c0533c78e58032c3d220aa2fe683a925f2e1660e3eab924970ec5bd0",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "excel",
+      "sha256": "081fba0055d82e7d236eb096c34f5d166b54f7cbe4ac1c24724b802ec1b08cac",
+      "type": "file",
+      "status": "verified",
+      "claimedAt": 1792931272.908979,
+      "sendAttempts": 1,
+      "resolvedGroup": "临时测试群请忽略 💰发财精英荟💰",
+      "observations": [
+        {
+          "groupName": "临时测试群请忽略 💰发财精英荟💰",
+          "inputEmpty": true,
+          "newMessageVisible": true,
+          "observedAt": 1792931286.7131782,
+          "messagePath": [
+            0,
+            25,
+            9,
+            0,
+            0,
+            0,
+            9
+          ],
+          "visibleFileName": "NATIVE-20261025-A02.xlsx",
+          "visibleFileSize": "4K"
+        },
+        {
+          "groupName": "临时测试群请忽略 💰发财精英荟💰",
+          "inputEmpty": true,
+          "newMessageVisible": true,
+          "observedAt": 1792931288.807894,
+          "messagePath": [
+            0,
+            25,
+            9,
+            0,
+            0,
+            0,
+            9
+          ],
+          "visibleFileName": "NATIVE-20261025-A02.xlsx",
+          "visibleFileSize": "4K"
+        }
+      ],
+      "backend": "system-events-ui-tree",
+      "verificationLevel": "wecom-ui-tree-file-name-size",
+      "evidence": {
+        "method": "wecom-ui-tree-file-name-size",
+        "resolvedGroup": "临时测试群请忽略 💰发财精英荟💰",
+        "sha256": "081fba0055d82e7d236eb096c34f5d166b54f7cbe4ac1c24724b802ec1b08cac",
+        "observations": [
+          {
+            "groupName": "临时测试群请忽略 💰发财精英荟💰",
+            "inputEmpty": true,
+            "newMessageVisible": true,
+            "observedAt": 1792931286.7131782,
+            "messagePath": [
+              0,
+              25,
+              9,
+              0,
+              0,
+              0,
+              9
+            ],
+            "visibleFileName": "NATIVE-20261025-A02.xlsx",
+            "visibleFileSize": "4K"
+          },
+          {
+            "groupName": "临时测试群请忽略 💰发财精英荟💰",
+            "inputEmpty": true,
+            "newMessageVisible": true,
+            "observedAt": 1792931288.807894,
+            "messagePath": [
+              0,
+              25,
+              9,
+              0,
+              0,
+              0,
+              9
+            ],
+            "visibleFileName": "NATIVE-20261025-A02.xlsx",
+            "visibleFileSize": "4K"
+          }
+        ]
+      },
+      "transport": {
+        "kind": "file",
+        "sendAttempts": 1,
+        "sent": true,
+        "postSendInputCleared": [
+          true,
+          true
+        ],
+        "stage": "post_send_verify"
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:excel",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    }
+  ],
+  "elapsedMs": 2,
+  "eventKey": "929bbbc93e24a13b6d110086ddcc108b423576b204e174d87ac9975a363712bc",
+  "reviewSummary": {
+    "totalElapsedMs": 2,
+    "result": "already_verified",
+    "stageCount": 2,
+    "completedStages": 2,
+    "failedStages": []
+  }
+}

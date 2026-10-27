@@ -1,0 +1,267 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+跨机器调用 wechat-windows-driver 的极简客户端（纯标准库，任何机器/任何 Python 都能用）。
+
+调用方视角只有几个函数，HTTP / token / JSON 全藏在里面：
+
+    from client import WeChat
+    wx = WeChat("192.168.110.185", "<TOKEN>")
+
+    wx.send("群名", "今天的日报")              -> {"ok": True, "data": {...}}
+    wx.send_file("群名", "C:\\docs\\a.pdf")    -> 同上
+    wx.send_image("群名", "C:\\imgs\\b.png")
+    wx.run([{"who":"群名","type":"text","text":"hi"}])   -> 逐条结果 + 汇总
+    wx.current() / wx.read() / wx.sessions() / wx.last()
+
+反馈机制（不用额外搭）：
+  1) 同步：函数返回值就是回执（推荐，绝大多数场景够用）
+  2) 异步兜底：对方机器上随时 wx.last() 查最后一次任务结果
+  3) 落盘：wx.run(..., out="result.json") 把结果写文件，方便共享目录/日志追溯
+
+环境变量（可选，省得每次传）：
+  export WIN_IP="192.168.110.185"
+  export WECHAT_AGENT_TOKEN="..."
+  export WECHAT_AGENT_PORT="8731"   # 可选
+  export WIN_RELAY_HOST="127.0.0.1" # 可选：走本地中继（绕开 launchd 的 Local Network TCC）
+  export WIN_RELAY_PORT="8732"      # 可选：与 localhost_relay.py 监听端口一致
+"""
+import json
+import os
+import socket
+import time
+import urllib.request
+import urllib.error
+
+# Default relay endpoint. A relay listening here lets launchd daemons reach the
+# Windows driver without the "Local Network" TCC grant (see localhost_relay.py).
+RELAY_DISCOVER_HOST = os.environ.get("WIN_RELAY_DISCOVER_HOST", "127.0.0.1")
+RELAY_DISCOVER_PORT = int(os.environ.get("WIN_RELAY_DISCOVER_PORT", "8732"))
+
+
+def _discover_relay(timeout=0.4):
+    """Return (host, port) of a reachable local relay, else (None, None).
+
+    Used so callers don't need to hardcode relay env vars: if a relay is up on
+    the well-known localhost port, route through it automatically. Failures are
+    silent and cheap (a single non-blocking connect probe).
+    """
+    try:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            s.settimeout(timeout)
+            if s.connect_ex((RELAY_DISCOVER_HOST, RELAY_DISCOVER_PORT)) == 0:
+                return RELAY_DISCOVER_HOST, str(RELAY_DISCOVER_PORT)
+    except OSError:
+        pass
+    return None, None
+
+
+def _classify_net_error(exc):
+    """Classify a connection-level failure reaching the Windows driver.
+
+    Crucially, distinguish a *local* network/permission failure from a genuine
+    server-side problem. A macOS launchd daemon lacks the "Local Network" TCC
+    grant, so reaching a LAN host surfaces as `No route to host` /
+    `Network is unreachable` — the Windows service itself can be perfectly
+    healthy. Returning this distinction is what stops `No route to host` from
+    being misread as "the Windows service is down" (it is a caller-context
+    issue, fixed by routing through the localhost relay).
+    """
+    reason = getattr(exc, "reason", None)
+    msg = str(reason) if reason is not None else str(exc)
+    low = msg.lower()
+    local_markers = (
+        "no route to host",            # Errno 65 EHOSTUNREACH (TCC-gated LAN)
+        "network is unreachable",       # Errno 51 ENETUNREACH
+        "ehostunreach",
+        "enetunreach",
+        "permission denied",            # sandbox / TCC deny
+        "nodename nor servname",        # local resolution failure
+        "can't assign requested address",
+    )
+    local_blocked = any(m in low for m in local_markers)
+    return {
+        "ok": False,
+        "error": msg,
+        "error_kind": "connection",
+        "local_network_blocked": local_blocked,
+    }
+
+
+class WeChat:
+    def __init__(self, host=None, token=None, port=None, timeout=180):
+        self.host = host or os.environ.get("WIN_IP", "")
+        self.token = token or os.environ.get("WECHAT_AGENT_TOKEN", "")
+        self.port = str(port or os.environ.get("WECHAT_AGENT_PORT", "8731"))
+        self.timeout = timeout
+        if not self.host or not self.token:
+            raise ValueError("需要 host 和 token（或设置 WIN_IP / WECHAT_AGENT_TOKEN 环境变量）")
+        # Relay routing: a launchd daemon lacks macOS "Local Network" TCC, so it
+        # cannot reach the Windows driver on the LAN (surfaces as No route to
+        # host). A localhost relay, run inside a GUI session that holds the Local
+        # Network grant, forwards to the real driver. localhost is never gated by
+        # TCC, so routing through 127.0.0.1 sidesteps the daemon's TCC gap.
+        # Priority: explicit WIN_RELAY_HOST env > auto-discover a listening relay
+        # on 127.0.0.1:8732 > fall back to the direct LAN host (pre-existing
+        # behavior, will still fail TCC if the daemon is the caller).
+        relay_host = os.environ.get("WIN_RELAY_HOST")
+        if relay_host:
+            self.host = relay_host
+            self.port = str(os.environ.get("WIN_RELAY_PORT", "8732"))
+        else:
+            rh, rp = _discover_relay()
+            if rh:
+                self.host, self.port = rh, rp
+        # Mac 本地适配：绕过系统代理直连局域网（避免被本机翻墙代理截胡返回 502）
+        self._opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
+
+    # ---------- 底层 ----------
+    def _get(self, path):
+        try:
+            with self._opener.open(f"http://{self.host}:{self.port}{path}",
+                                   timeout=30) as r:
+                return json.loads(r.read().decode("utf-8"))
+        except urllib.error.HTTPError as e:
+            return {"ok": False, "error": f"HTTP {e.code}: {e.read().decode('utf-8', 'replace')}"}
+        except (urllib.error.URLError, OSError) as e:
+            return _classify_net_error(e)
+
+    def _post(self, action, params):
+        body = json.dumps({"action": action, "params": params or {}},
+                          ensure_ascii=False).encode("utf-8")
+        req = urllib.request.Request(f"http://{self.host}:{self.port}/",
+                                     data=body, method="POST")
+        req.add_header("Authorization", f"Bearer {self.token}")
+        req.add_header("Content-Type", "application/json")
+        try:
+            with self._opener.open(req, timeout=self.timeout) as r:
+                return json.loads(r.read().decode("utf-8"))
+        except urllib.error.HTTPError as e:
+            return {"ok": False, "error": f"HTTP {e.code}: {e.read().decode('utf-8', 'replace')}"}
+        except (urllib.error.URLError, OSError) as e:
+            return _classify_net_error(e)
+        except Exception as e:
+            return {"ok": False, "error": f"{type(e).__name__}: {e}"}
+
+    # ---------- 业务 ----------
+    def health(self):
+        return self._get("/health")
+
+    def last(self):
+        """最后一次任务结果（异步场景兜底查询）。"""
+        return self._get("/last")
+
+    def current(self):
+        return self._post("current_chat", {})
+
+    def read(self):
+        return self._post("read_messages", {})
+
+    def sessions(self):
+        return self._post("list_sessions", {})
+
+    def send(self, who, text):
+        return self._post("send_message", {"who": who, "text": text})
+
+    def send_file(self, who, path):
+        return self._post("send_file", {"who": who, "path": path})
+
+    def send_image(self, who, path):
+        return self._post("send_image", {"who": who, "path": path})
+
+    def list_dir(self, path=None, pattern="*"):
+        """看看服务端磁盘上有什么（path 省略则看上传目录 inbox）。"""
+        return self._post("list_dir", {"path": path, "pattern": pattern})
+
+    def upload(self, local_path):
+        """
+        把**你自己机器上**的文件传到服务端，返回它在服务端上的路径。
+        这样你完全不用知道对方磁盘长什么样。
+        """
+        import base64
+        with open(local_path, "rb") as f:
+            raw = f.read()
+        res = self._post("upload", {"filename": os.path.basename(local_path),
+                                    "content": base64.b64encode(raw).decode()})
+        return res
+
+    def send_local_file(self, who, local_path):
+        """
+        一步到位：把**你自己机器上**的文件发出去（自动上传 + 自动识别图片/文件）。
+        这是跨机器最省事的用法。
+        """
+        up = self.upload(local_path)
+        if not up.get("ok"):
+            return up
+        server_path = up["data"]["path"]
+        r = self.send_auto(who, server_path)
+        if r.get("ok"):
+            r["data"]["uploaded_from"] = local_path
+            r["data"]["server_path"] = server_path
+        return r
+
+    def send_auto(self, who, content):
+        """
+        自动识别并发送（推荐）：
+          content 是服务端上的图片路径 -> 发图片
+          content 是服务端上的其他文件（xlsx/doc/pdf...）-> 发文件
+          否则 -> 当文字发
+        返回里 data.auto 会说明实际按哪种发的。
+        """
+        return self._post("auto_send", {"who": who, "content": content})
+
+    def run(self, tasks, dry_run=False, stop_on_error=False, interval=1.0, out=None):
+        """批量：tasks = [{who, type: text|file|image, text|path}, ...]，返回逐条结果。"""
+        res = self._post("batch", {"tasks": tasks, "dry_run": dry_run,
+                                   "stop_on_error": stop_on_error, "interval": interval})
+        if out:
+            with open(out, "w", encoding="utf-8") as f:
+                json.dump(res, f, ensure_ascii=False, indent=2)
+        return res
+
+    def wait_ready(self, timeout=300, poll=3.0):
+        """
+        等微信就绪（进程在 + 已登录/主窗口出现）。
+        服务端重启微信后需要扫码登录，这段时间内调用会失败——先等它就绪。
+        返回最后的 health；超时返回 {'ok': False, 'error': '等待超时'}。
+        """
+        deadline = time.time() + timeout
+        last = self.health()
+        while time.time() < deadline:
+            h = self.health()
+            last = h
+            if h.get("ready"):
+                return h
+            time.sleep(poll)
+        return {"ok": False, "error": "等待微信就绪超时（可能未启动或未完成扫码登录）", "last": last}
+
+    def wait_until_idle(self, timeout=300, poll=2.0):
+        """简单等待：轮询 /last，直到状态更新（配合异步调用方使用）。"""
+        start = self.last().get("last", {}).get("at")
+        deadline = time.time() + timeout
+        while time.time() < deadline:
+            time.sleep(poll)
+            cur = self.last().get("last", {}).get("at")
+            if cur and cur != start:
+                return self.last()
+        return {"ok": False, "error": "等待超时"}
+
+
+if __name__ == "__main__":
+    import sys
+    wx = WeChat()
+    cmd = sys.argv[1] if len(sys.argv) > 1 else "health"
+    if cmd == "health":
+        print(json.dumps(wx.health(), ensure_ascii=False, indent=2))
+    elif cmd == "current":
+        print(json.dumps(wx.current(), ensure_ascii=False, indent=2))
+    elif cmd == "read":
+        print(json.dumps(wx.read(), ensure_ascii=False, indent=2))
+    elif cmd == "sessions":
+        print(json.dumps(wx.sessions(), ensure_ascii=False, indent=2))
+    elif cmd == "last":
+        print(json.dumps(wx.last(), ensure_ascii=False, indent=2))
+    elif cmd == "send" and len(sys.argv) >= 4:
+        print(json.dumps(wx.send(sys.argv[2], sys.argv[3]), ensure_ascii=False, indent=2))
+    else:
+        print(__doc__)

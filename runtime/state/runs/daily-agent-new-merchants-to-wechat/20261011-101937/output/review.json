@@ -1,0 +1,1307 @@
+{
+  "schemaVersion": 1,
+  "runId": "7dff9699-4c3c-4142-babd-f6e3386ca86f",
+  "ok": true,
+  "sent": 12,
+  "verifiedNewSends": 12,
+  "verifiedExisting": 0,
+  "unresolvedItems": 0,
+  "completion": {
+    "state": "COMPLETE",
+    "nextAction": "none",
+    "automaticRecoveryAllowed": false,
+    "recoveryAttemptBudget": 0,
+    "reason": "final-cursor-and-history-verified"
+  },
+  "rows": [
+    {
+      "item": 1,
+      "stage": "executor_integrity",
+      "label": "封板完整性",
+      "elapsedMs": 3,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": null
+    },
+    {
+      "item": 2,
+      "stage": "runtime_policy",
+      "label": "授权、群与通道门禁",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": null
+    },
+    {
+      "item": 3,
+      "stage": "offline_selftest",
+      "label": "离线自测",
+      "elapsedMs": 168,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": null
+    },
+    {
+      "item": 4,
+      "stage": "collection",
+      "label": "商家采集",
+      "elapsedMs": 20410,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": null
+    },
+    {
+      "item": 5,
+      "stage": "collection.1.background_preflight",
+      "label": "采集第1次 · 后台浏览器预检",
+      "elapsedMs": 66,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 6,
+      "stage": "collection.1.task_page",
+      "label": "采集第1次 · 建立独立任务页",
+      "elapsedMs": 363,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 7,
+      "stage": "collection.1.navigation",
+      "label": "采集第1次 · 进入意向商户列表",
+      "elapsedMs": 1715,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 8,
+      "stage": "collection.1.date_filter",
+      "label": "采集第1次 · 日期设置与双帧回读",
+      "elapsedMs": 1305,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 9,
+      "stage": "collection.1.page_1_read",
+      "label": "采集第1次 · 第1页采集与稳定核验",
+      "elapsedMs": 436,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 10,
+      "stage": "collection.1.page_1_next",
+      "label": "采集第1次 · 第1页翻页",
+      "elapsedMs": 53,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 11,
+      "stage": "collection.1.page_2_read",
+      "label": "采集第1次 · 第2页采集与稳定核验",
+      "elapsedMs": 671,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 12,
+      "stage": "collection.1.page_2_next",
+      "label": "采集第1次 · 第2页翻页",
+      "elapsedMs": 32,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 13,
+      "stage": "collection.1.page_3_read",
+      "label": "采集第1次 · 第3页采集与稳定核验",
+      "elapsedMs": 624,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 14,
+      "stage": "collection.1.page_3_next",
+      "label": "采集第1次 · 第3页翻页",
+      "elapsedMs": 32,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 15,
+      "stage": "collection.1.page_4_read",
+      "label": "采集第1次 · 第4页采集与稳定核验",
+      "elapsedMs": 605,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 16,
+      "stage": "collection.1.selection_audit",
+      "label": "采集第1次 · selection_audit",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 17,
+      "stage": "collection.1.detail_543287123",
+      "label": "采集第1次 · 商家详情核验 543287123",
+      "elapsedMs": 753,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 18,
+      "stage": "collection.1.detail_1263631869",
+      "label": "采集第1次 · 商家详情核验 1263631869",
+      "elapsedMs": 923,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 19,
+      "stage": "collection.1.detail_2124325628",
+      "label": "采集第1次 · 商家详情核验 2124325628",
+      "elapsedMs": 917,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 20,
+      "stage": "collection.1.detail_1327769553",
+      "label": "采集第1次 · 商家详情核验 1327769553",
+      "elapsedMs": 896,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 21,
+      "stage": "collection.1.detail_1364459701",
+      "label": "采集第1次 · 商家详情核验 1364459701",
+      "elapsedMs": 890,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 22,
+      "stage": "collection.1.detail_1349170816",
+      "label": "采集第1次 · 商家详情核验 1349170816",
+      "elapsedMs": 980,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 23,
+      "stage": "collection.1.detail_545475613",
+      "label": "采集第1次 · 商家详情核验 545475613",
+      "elapsedMs": 945,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 24,
+      "stage": "collection.1.detail_1270294728",
+      "label": "采集第1次 · 商家详情核验 1270294728",
+      "elapsedMs": 984,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 25,
+      "stage": "collection.1.detail_1316456141",
+      "label": "采集第1次 · 商家详情核验 1316456141",
+      "elapsedMs": 908,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 26,
+      "stage": "collection.1.detail_156280223",
+      "label": "采集第1次 · 商家详情核验 156280223",
+      "elapsedMs": 963,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 27,
+      "stage": "collection.1.detail_1357690495",
+      "label": "采集第1次 · 商家详情核验 1357690495",
+      "elapsedMs": 905,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 28,
+      "stage": "collection.1.detail_1362226686",
+      "label": "采集第1次 · 商家详情核验 1362226686",
+      "elapsedMs": 990,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 29,
+      "stage": "audit",
+      "label": "采集合同审计",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": null
+    },
+    {
+      "item": 30,
+      "stage": "desktop_wechat_preflight",
+      "label": "桌面微信预检",
+      "elapsedMs": 4143,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": null
+    },
+    {
+      "item": 31,
+      "stage": "preflight.1",
+      "label": "群定位第1次",
+      "elapsedMs": 4142,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat_preflight"
+    },
+    {
+      "item": 32,
+      "stage": "desktop_wechat",
+      "label": "逐条通知",
+      "elapsedMs": 314932,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": null
+    },
+    {
+      "item": 33,
+      "stage": "merchant.543287123.发送前合同复核",
+      "label": "玖美烤吧 · 发送前合同复核",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 34,
+      "stage": "merchant.543287123.定位、输入与单次发送",
+      "label": "玖美烤吧 · 定位、输入与单次发送",
+      "elapsedMs": 25981,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 35,
+      "stage": "merchant.543287123.authorization",
+      "label": "玖美烤吧 · authorization",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 36,
+      "stage": "merchant.543287123.freeze:0",
+      "label": "玖美烤吧 · freeze:0",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 37,
+      "stage": "merchant.543287123.preflight",
+      "label": "玖美烤吧 · preflight",
+      "elapsedMs": 3308,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 38,
+      "stage": "merchant.543287123.send:0",
+      "label": "玖美烤吧 · send:0",
+      "elapsedMs": 22527,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 39,
+      "stage": "merchant.543287123.双帧与原生复制全文复核",
+      "label": "玖美烤吧 · 双帧与原生复制全文复核",
+      "elapsedMs": 1,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 40,
+      "stage": "merchant.543287123.提交前证据门禁",
+      "label": "玖美烤吧 · 提交前证据门禁",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 41,
+      "stage": "merchant.543287123.成功历史与原子游标提交",
+      "label": "玖美烤吧 · 成功历史与原子游标提交",
+      "elapsedMs": 2,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 42,
+      "stage": "merchant.1263631869.发送前合同复核",
+      "label": "茶百道 · 发送前合同复核",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 43,
+      "stage": "merchant.1263631869.定位、输入与单次发送",
+      "label": "茶百道 · 定位、输入与单次发送",
+      "elapsedMs": 26260,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 44,
+      "stage": "merchant.1263631869.authorization",
+      "label": "茶百道 · authorization",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 45,
+      "stage": "merchant.1263631869.freeze:0",
+      "label": "茶百道 · freeze:0",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 46,
+      "stage": "merchant.1263631869.preflight",
+      "label": "茶百道 · preflight",
+      "elapsedMs": 3333,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 47,
+      "stage": "merchant.1263631869.send:0",
+      "label": "茶百道 · send:0",
+      "elapsedMs": 22811,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 48,
+      "stage": "merchant.1263631869.双帧与原生复制全文复核",
+      "label": "茶百道 · 双帧与原生复制全文复核",
+      "elapsedMs": 2,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 49,
+      "stage": "merchant.1263631869.提交前证据门禁",
+      "label": "茶百道 · 提交前证据门禁",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 50,
+      "stage": "merchant.1263631869.成功历史与原子游标提交",
+      "label": "茶百道 · 成功历史与原子游标提交",
+      "elapsedMs": 1,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 51,
+      "stage": "merchant.2124325628.发送前合同复核",
+      "label": "小两口·刀削面 · 发送前合同复核",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 52,
+      "stage": "merchant.2124325628.定位、输入与单次发送",
+      "label": "小两口·刀削面 · 定位、输入与单次发送",
+      "elapsedMs": 25931,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 53,
+      "stage": "merchant.2124325628.authorization",
+      "label": "小两口·刀削面 · authorization",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 54,
+      "stage": "merchant.2124325628.freeze:0",
+      "label": "小两口·刀削面 · freeze:0",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 55,
+      "stage": "merchant.2124325628.preflight",
+      "label": "小两口·刀削面 · preflight",
+      "elapsedMs": 3260,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 56,
+      "stage": "merchant.2124325628.send:0",
+      "label": "小两口·刀削面 · send:0",
+      "elapsedMs": 22587,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 57,
+      "stage": "merchant.2124325628.双帧与原生复制全文复核",
+      "label": "小两口·刀削面 · 双帧与原生复制全文复核",
+      "elapsedMs": 1,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 58,
+      "stage": "merchant.2124325628.提交前证据门禁",
+      "label": "小两口·刀削面 · 提交前证据门禁",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 59,
+      "stage": "merchant.2124325628.成功历史与原子游标提交",
+      "label": "小两口·刀削面 · 成功历史与原子游标提交",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 60,
+      "stage": "merchant.1327769553.发送前合同复核",
+      "label": "太犇牛手作茶铺 · 发送前合同复核",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 61,
+      "stage": "merchant.1327769553.定位、输入与单次发送",
+      "label": "太犇牛手作茶铺 · 定位、输入与单次发送",
+      "elapsedMs": 26045,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 62,
+      "stage": "merchant.1327769553.authorization",
+      "label": "太犇牛手作茶铺 · authorization",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 63,
+      "stage": "merchant.1327769553.freeze:0",
+      "label": "太犇牛手作茶铺 · freeze:0",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 64,
+      "stage": "merchant.1327769553.preflight",
+      "label": "太犇牛手作茶铺 · preflight",
+      "elapsedMs": 3259,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 65,
+      "stage": "merchant.1327769553.send:0",
+      "label": "太犇牛手作茶铺 · send:0",
+      "elapsedMs": 22708,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 66,
+      "stage": "merchant.1327769553.双帧与原生复制全文复核",
+      "label": "太犇牛手作茶铺 · 双帧与原生复制全文复核",
+      "elapsedMs": 1,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 67,
+      "stage": "merchant.1327769553.提交前证据门禁",
+      "label": "太犇牛手作茶铺 · 提交前证据门禁",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 68,
+      "stage": "merchant.1327769553.成功历史与原子游标提交",
+      "label": "太犇牛手作茶铺 · 成功历史与原子游标提交",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 69,
+      "stage": "merchant.1364459701.发送前合同复核",
+      "label": "川渝·沸腾鲜鱼锅·小龙虾 · 发送前合同复核",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 70,
+      "stage": "merchant.1364459701.定位、输入与单次发送",
+      "label": "川渝·沸腾鲜鱼锅·小龙虾 · 定位、输入与单次发送",
+      "elapsedMs": 26064,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 71,
+      "stage": "merchant.1364459701.authorization",
+      "label": "川渝·沸腾鲜鱼锅·小龙虾 · authorization",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 72,
+      "stage": "merchant.1364459701.freeze:0",
+      "label": "川渝·沸腾鲜鱼锅·小龙虾 · freeze:0",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 73,
+      "stage": "merchant.1364459701.preflight",
+      "label": "川渝·沸腾鲜鱼锅·小龙虾 · preflight",
+      "elapsedMs": 3247,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 74,
+      "stage": "merchant.1364459701.send:0",
+      "label": "川渝·沸腾鲜鱼锅·小龙虾 · send:0",
+      "elapsedMs": 22741,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 75,
+      "stage": "merchant.1364459701.双帧与原生复制全文复核",
+      "label": "川渝·沸腾鲜鱼锅·小龙虾 · 双帧与原生复制全文复核",
+      "elapsedMs": 2,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 76,
+      "stage": "merchant.1364459701.提交前证据门禁",
+      "label": "川渝·沸腾鲜鱼锅·小龙虾 · 提交前证据门禁",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 77,
+      "stage": "merchant.1364459701.成功历史与原子游标提交",
+      "label": "川渝·沸腾鲜鱼锅·小龙虾 · 成功历史与原子游标提交",
+      "elapsedMs": 1,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 78,
+      "stage": "merchant.1349170816.发送前合同复核",
+      "label": "小强东北烧烤 · 发送前合同复核",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 79,
+      "stage": "merchant.1349170816.定位、输入与单次发送",
+      "label": "小强东北烧烤 · 定位、输入与单次发送",
+      "elapsedMs": 27512,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 80,
+      "stage": "merchant.1349170816.authorization",
+      "label": "小强东北烧烤 · authorization",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 81,
+      "stage": "merchant.1349170816.freeze:0",
+      "label": "小强东北烧烤 · freeze:0",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 82,
+      "stage": "merchant.1349170816.preflight",
+      "label": "小强东北烧烤 · preflight",
+      "elapsedMs": 3225,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 83,
+      "stage": "merchant.1349170816.send:0",
+      "label": "小强东北烧烤 · send:0",
+      "elapsedMs": 24203,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 84,
+      "stage": "merchant.1349170816.双帧与原生复制全文复核",
+      "label": "小强东北烧烤 · 双帧与原生复制全文复核",
+      "elapsedMs": 1,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 85,
+      "stage": "merchant.1349170816.提交前证据门禁",
+      "label": "小强东北烧烤 · 提交前证据门禁",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 86,
+      "stage": "merchant.1349170816.成功历史与原子游标提交",
+      "label": "小强东北烧烤 · 成功历史与原子游标提交",
+      "elapsedMs": 1,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 87,
+      "stage": "merchant.545475613.发送前合同复核",
+      "label": "阿震铁板炒饭 · 发送前合同复核",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 88,
+      "stage": "merchant.545475613.定位、输入与单次发送",
+      "label": "阿震铁板炒饭 · 定位、输入与单次发送",
+      "elapsedMs": 25757,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 89,
+      "stage": "merchant.545475613.authorization",
+      "label": "阿震铁板炒饭 · authorization",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 90,
+      "stage": "merchant.545475613.freeze:0",
+      "label": "阿震铁板炒饭 · freeze:0",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 91,
+      "stage": "merchant.545475613.preflight",
+      "label": "阿震铁板炒饭 · preflight",
+      "elapsedMs": 3231,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 92,
+      "stage": "merchant.545475613.send:0",
+      "label": "阿震铁板炒饭 · send:0",
+      "elapsedMs": 22435,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 93,
+      "stage": "merchant.545475613.双帧与原生复制全文复核",
+      "label": "阿震铁板炒饭 · 双帧与原生复制全文复核",
+      "elapsedMs": 1,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 94,
+      "stage": "merchant.545475613.提交前证据门禁",
+      "label": "阿震铁板炒饭 · 提交前证据门禁",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 95,
+      "stage": "merchant.545475613.成功历史与原子游标提交",
+      "label": "阿震铁板炒饭 · 成功历史与原子游标提交",
+      "elapsedMs": 1,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 96,
+      "stage": "merchant.1270294728.发送前合同复核",
+      "label": "易冰室·糖水·炸鸡·炸串 · 发送前合同复核",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 97,
+      "stage": "merchant.1270294728.定位、输入与单次发送",
+      "label": "易冰室·糖水·炸鸡·炸串 · 定位、输入与单次发送",
+      "elapsedMs": 27725,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 98,
+      "stage": "merchant.1270294728.authorization",
+      "label": "易冰室·糖水·炸鸡·炸串 · authorization",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 99,
+      "stage": "merchant.1270294728.freeze:0",
+      "label": "易冰室·糖水·炸鸡·炸串 · freeze:0",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 100,
+      "stage": "merchant.1270294728.preflight",
+      "label": "易冰室·糖水·炸鸡·炸串 · preflight",
+      "elapsedMs": 3241,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 101,
+      "stage": "merchant.1270294728.send:0",
+      "label": "易冰室·糖水·炸鸡·炸串 · send:0",
+      "elapsedMs": 24387,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 102,
+      "stage": "merchant.1270294728.双帧与原生复制全文复核",
+      "label": "易冰室·糖水·炸鸡·炸串 · 双帧与原生复制全文复核",
+      "elapsedMs": 1,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 103,
+      "stage": "merchant.1270294728.提交前证据门禁",
+      "label": "易冰室·糖水·炸鸡·炸串 · 提交前证据门禁",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 104,
+      "stage": "merchant.1270294728.成功历史与原子游标提交",
+      "label": "易冰室·糖水·炸鸡·炸串 · 成功历史与原子游标提交",
+      "elapsedMs": 1,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 105,
+      "stage": "merchant.1316456141.发送前合同复核",
+      "label": "Kyochon1991校村炸鸡 · 发送前合同复核",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 106,
+      "stage": "merchant.1316456141.定位、输入与单次发送",
+      "label": "Kyochon1991校村炸鸡 · 定位、输入与单次发送",
+      "elapsedMs": 25912,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 107,
+      "stage": "merchant.1316456141.authorization",
+      "label": "Kyochon1991校村炸鸡 · authorization",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 108,
+      "stage": "merchant.1316456141.freeze:0",
+      "label": "Kyochon1991校村炸鸡 · freeze:0",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 109,
+      "stage": "merchant.1316456141.preflight",
+      "label": "Kyochon1991校村炸鸡 · preflight",
+      "elapsedMs": 3233,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 110,
+      "stage": "merchant.1316456141.send:0",
+      "label": "Kyochon1991校村炸鸡 · send:0",
+      "elapsedMs": 22579,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 111,
+      "stage": "merchant.1316456141.双帧与原生复制全文复核",
+      "label": "Kyochon1991校村炸鸡 · 双帧与原生复制全文复核",
+      "elapsedMs": 1,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 112,
+      "stage": "merchant.1316456141.提交前证据门禁",
+      "label": "Kyochon1991校村炸鸡 · 提交前证据门禁",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 113,
+      "stage": "merchant.1316456141.成功历史与原子游标提交",
+      "label": "Kyochon1991校村炸鸡 · 成功历史与原子游标提交",
+      "elapsedMs": 1,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 114,
+      "stage": "merchant.156280223.发送前合同复核",
+      "label": "七乐·芝士炸鸡·烤肉饭料理 · 发送前合同复核",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 115,
+      "stage": "merchant.156280223.定位、输入与单次发送",
+      "label": "七乐·芝士炸鸡·烤肉饭料理 · 定位、输入与单次发送",
+      "elapsedMs": 25936,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 116,
+      "stage": "merchant.156280223.authorization",
+      "label": "七乐·芝士炸鸡·烤肉饭料理 · authorization",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 117,
+      "stage": "merchant.156280223.freeze:0",
+      "label": "七乐·芝士炸鸡·烤肉饭料理 · freeze:0",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 118,
+      "stage": "merchant.156280223.preflight",
+      "label": "七乐·芝士炸鸡·烤肉饭料理 · preflight",
+      "elapsedMs": 3260,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 119,
+      "stage": "merchant.156280223.send:0",
+      "label": "七乐·芝士炸鸡·烤肉饭料理 · send:0",
+      "elapsedMs": 22584,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 120,
+      "stage": "merchant.156280223.双帧与原生复制全文复核",
+      "label": "七乐·芝士炸鸡·烤肉饭料理 · 双帧与原生复制全文复核",
+      "elapsedMs": 2,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 121,
+      "stage": "merchant.156280223.提交前证据门禁",
+      "label": "七乐·芝士炸鸡·烤肉饭料理 · 提交前证据门禁",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 122,
+      "stage": "merchant.156280223.成功历史与原子游标提交",
+      "label": "七乐·芝士炸鸡·烤肉饭料理 · 成功历史与原子游标提交",
+      "elapsedMs": 1,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 123,
+      "stage": "merchant.1357690495.发送前合同复核",
+      "label": "沂蒙青花椒临沂炒鸡 · 发送前合同复核",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 124,
+      "stage": "merchant.1357690495.定位、输入与单次发送",
+      "label": "沂蒙青花椒临沂炒鸡 · 定位、输入与单次发送",
+      "elapsedMs": 25846,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 125,
+      "stage": "merchant.1357690495.authorization",
+      "label": "沂蒙青花椒临沂炒鸡 · authorization",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 126,
+      "stage": "merchant.1357690495.freeze:0",
+      "label": "沂蒙青花椒临沂炒鸡 · freeze:0",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 127,
+      "stage": "merchant.1357690495.preflight",
+      "label": "沂蒙青花椒临沂炒鸡 · preflight",
+      "elapsedMs": 3257,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 128,
+      "stage": "merchant.1357690495.send:0",
+      "label": "沂蒙青花椒临沂炒鸡 · send:0",
+      "elapsedMs": 22505,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 129,
+      "stage": "merchant.1357690495.双帧与原生复制全文复核",
+      "label": "沂蒙青花椒临沂炒鸡 · 双帧与原生复制全文复核",
+      "elapsedMs": 1,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 130,
+      "stage": "merchant.1357690495.提交前证据门禁",
+      "label": "沂蒙青花椒临沂炒鸡 · 提交前证据门禁",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 131,
+      "stage": "merchant.1357690495.成功历史与原子游标提交",
+      "label": "沂蒙青花椒临沂炒鸡 · 成功历史与原子游标提交",
+      "elapsedMs": 1,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 132,
+      "stage": "merchant.1362226686.发送前合同复核",
+      "label": "盈夏面馆上海浇头面 · 发送前合同复核",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 133,
+      "stage": "merchant.1362226686.定位、输入与单次发送",
+      "label": "盈夏面馆上海浇头面 · 定位、输入与单次发送",
+      "elapsedMs": 25868,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 134,
+      "stage": "merchant.1362226686.authorization",
+      "label": "盈夏面馆上海浇头面 · authorization",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 135,
+      "stage": "merchant.1362226686.freeze:0",
+      "label": "盈夏面馆上海浇头面 · freeze:0",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 136,
+      "stage": "merchant.1362226686.preflight",
+      "label": "盈夏面馆上海浇头面 · preflight",
+      "elapsedMs": 3234,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 137,
+      "stage": "merchant.1362226686.send:0",
+      "label": "盈夏面馆上海浇头面 · send:0",
+      "elapsedMs": 22536,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 138,
+      "stage": "merchant.1362226686.双帧与原生复制全文复核",
+      "label": "盈夏面馆上海浇头面 · 双帧与原生复制全文复核",
+      "elapsedMs": 1,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 139,
+      "stage": "merchant.1362226686.提交前证据门禁",
+      "label": "盈夏面馆上海浇头面 · 提交前证据门禁",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 140,
+      "stage": "merchant.1362226686.成功历史与原子游标提交",
+      "label": "盈夏面馆上海浇头面 · 成功历史与原子游标提交",
+      "elapsedMs": 1,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 141,
+      "stage": "final_cursor_check",
+      "label": "最终账本与游标复核",
+      "elapsedMs": 4,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": null
+    },
+    {
+      "item": 142,
+      "stage": "reseal",
+      "label": "真实非空验收重封",
+      "elapsedMs": null,
+      "status": "NOOP",
+      "pitfalls": [
+        "已封板运行，无需重封"
+      ],
+      "parent": null
+    },
+    {
+      "item": 143,
+      "stage": "total",
+      "label": "整轮总耗时（含子阶段，不重复相加）",
+      "elapsedMs": 339719,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": null
+    }
+  ]
+}

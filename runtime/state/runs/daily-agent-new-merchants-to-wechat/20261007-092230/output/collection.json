@@ -1,0 +1,154 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-07",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 229,
+    "task_page": 763,
+    "navigation": 1709,
+    "date_filter": 1569,
+    "page_1_read": 321,
+    "selection_audit": 0,
+    "detail_542957171": 774,
+    "detail_1342388590": 2402
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_542957171": "PASS",
+    "detail_1342388590": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "542957171",
+      "merchantName": "寿小卤·潮汕猪脚饭",
+      "recommendTime": "2026-10-07 01:44:14",
+      "city": "重庆市",
+      "status": "待处理",
+      "rowIndex": 1,
+      "sourcePage": 1,
+      "tableOrder": 8,
+      "address": "桃西二支路与桃源西一路交叉口西南80米",
+      "contact": "李柯，15084435531",
+      "detailVerified": true,
+      "text": "城市：重庆市  ；  联系人：李柯，15084435531  ；  店铺：寿小卤·潮汕猪脚饭  ；  地址：桃西二支路与桃源西一路交叉口西南80米",
+      "sha256": "3fa5d8e50b40c69c3bfce9c5770df023a8febbf0a189b22c8dbed848939a68b0"
+    },
+    {
+      "merchantId": "1342388590",
+      "merchantName": "飘香馄饨·石磨肠粉",
+      "recommendTime": "2026-10-07 09:07:48",
+      "city": "长沙市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 9,
+      "address": "湖南湘江新区麓谷街道麓泉社区麓谷大道627号海创科技工业园A-1、A-2栋裙楼101-3号",
+      "contact": "左生，19848088355",
+      "detailVerified": true,
+      "text": "城市：长沙市  ；  联系人：左生，19848088355  ；  店铺：飘香馄饨·石磨肠粉  ；  地址：湖南湘江新区麓谷街道麓泉社区麓谷大道627号海创科技工业园A-1、A-2栋裙楼101-3号",
+      "sha256": "50fe445d79eb0bea231bdfe467a8b1ead8e6addcf32902e065e7e6d52fd564db"
+    }
+  ],
+  "frontmostBefore": "com.tencent.workbuddy.mac",
+  "createdAt": "2026-10-07T01:22:39.601Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-06",
+    "merchantName": "鸭小匠·手撕烤鸭",
+    "merchantId": "546511804",
+    "recommendTime": "2026-10-06 22:04:51",
+    "tableOrder": 7,
+    "messageSha256": "4f01e4ad4cbe6d5f5739891ead9de4e0436332ad407578a913693ea84e7c4007",
+    "sentAt": "2026-10-06T22:07:39+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-06",
+  "filterEndDate": "2026-10-07",
+  "dateFilter": "2026-10-06..2026-10-07",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 9,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 9,
+  "pendingRows": 9,
+  "targetCount": 2,
+  "selectionAudit": {
+    "totalRows": 9,
+    "pendingRows": 9,
+    "excludedAtOrBeforeCursor": 7,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 2,
+    "rows": [
+      {
+        "merchantId": "1342388590",
+        "recommendTime": "2026-10-07 09:07:48",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "542957171",
+        "recommendTime": "2026-10-07 01:44:14",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546511804",
+        "recommendTime": "2026-10-06 22:04:51",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1359515934",
+        "recommendTime": "2026-10-06 21:37:45",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1354172014",
+        "recommendTime": "2026-10-06 17:50:43",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1364094640",
+        "recommendTime": "2026-10-06 16:34:04",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1332435894",
+        "recommendTime": "2026-10-06 15:47:26",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1357327730",
+        "recommendTime": "2026-10-06 14:40:49",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "543338440",
+        "recommendTime": "2026-10-06 12:45:36",
+        "status": "待处理"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 8465,
+  "frontmostAfter": "com.tencent.workbuddy.mac",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261007-092230/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261007-092230/output/collection-attempt-1.review.md"
+}

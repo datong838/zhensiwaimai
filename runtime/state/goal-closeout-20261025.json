@@ -1,0 +1,66 @@
+{
+  "date": "2026-10-25",
+  "auditedAt": "2026-10-25T18:58:24.466748",
+  "businessScopeClosed": true,
+  "ledgerTaskId": "142237ff-3d60-4352-a429-bcacffd333f5",
+  "ledgerSha256": "5ac93ba524364f77a6e69dc5412abc1d9f612d69afa559702f0564104b34c85a",
+  "ledgerSendAttempts": 1,
+  "ledgerVerified": true,
+  "sentToday": "2026-10-25T18:56:21",
+  "originalFinalRuns": [
+    {
+      "flow": "daily-agent-new-merchants-to-wechat",
+      "record": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-25/daily-agent-new-merchants-to-wechat--20261025-183004--record.json",
+      "technicalStatus": "SUCCESS",
+      "startedAt": "2026-10-25T18:30:04",
+      "businessFact": null
+    },
+    {
+      "flow": "meituan-intelligent-customer-service",
+      "record": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-25/meituan-intelligent-customer-service--20261025-170217--record.json",
+      "technicalStatus": "SUCCESS",
+      "startedAt": "2026-10-25T17:02:17",
+      "businessFact": null
+    },
+    {
+      "flow": "meituan-waimai-negative-review-appeals-11",
+      "record": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-25/meituan-waimai-negative-review-appeals-11--20261025-183227--record.json",
+      "technicalStatus": "FAILED",
+      "startedAt": "2026-10-25T18:32:27",
+      "businessFact": {
+        "businessDelivered": true,
+        "basis": "explicit-user-confirmation",
+        "source": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/user-confirmed-deliveries/20261025-appeal-closing-images.json",
+        "taskIds": [
+          "58082b10-cb5f-4055-8b81-d32327f48904",
+          "9feb5b34-edc2-41c1-8d19-e0d1194887f5"
+        ],
+        "technicalStatusPreserved": "unknown",
+        "newSendAttempts": 0
+      }
+    },
+    {
+      "flow": "taobao-flash-sale-negative-review-appeals",
+      "record": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-25/taobao-flash-sale-negative-review-appeals--20261025-183722--record.json",
+      "technicalStatus": "FAILED",
+      "startedAt": "2026-10-25T18:37:22",
+      "businessFact": {
+        "businessDelivered": true,
+        "basis": "explicit-user-confirmation",
+        "source": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/user-confirmed-deliveries/20261025-appeal-closing-images.json",
+        "taskIds": [
+          "70496efc-b175-4adc-8160-cae6edefdd4c",
+          "95e9f7da-ff2e-4651-85bf-0fa6400bc639"
+        ],
+        "technicalStatusPreserved": "unknown",
+        "newSendAttempts": 0
+      }
+    }
+  ],
+  "scopeRows": 21,
+  "completedRows": 17,
+  "mergedRows": 2,
+  "customerCoveredRows": 2,
+  "unknownTechnicalEvidencePreserved": true,
+  "noHistoricalReplay": true
+}

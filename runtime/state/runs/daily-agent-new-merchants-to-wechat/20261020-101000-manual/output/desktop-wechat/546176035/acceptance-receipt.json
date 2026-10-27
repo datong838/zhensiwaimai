@@ -1,0 +1,198 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：深圳市  ；  联系人：黄，15728844148  ；  店铺：JS COFFEE  ；  地址：民治街道民新社区五和南路西侧龙岸花园一期13栋B（小区内）",
+      "sha256": "1f54c7dd7eae92c7fcf36f87e66190a1141f8fbbb30695e00a4797de58a4c424"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "71e3a7631ce8493b4a7f8cc5a2285ea1b265340083267111701216fd870fbb31",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "1f54c7dd7eae92c7fcf36f87e66190a1141f8fbbb30695e00a4797de58a4c424",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1792462161.24625,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-text-anchor",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "电销+直播攻坚组",
+          "currentTitle": "电销+直播攻坚组",
+          "messageCount": 41,
+          "anchor": "text-exact",
+          "anchorValue": "城市：深圳市  ；  联系人：黄，15728844148  ；  店铺：JS COFFEE  ；  地址：民治街道民新社区五和南路西侧龙岸花园一期13栋B（小区内）",
+          "anchorInTrailingPosition": true,
+          "autoKind": null,
+          "readbackAt": 1792462182.792902
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "电销+直播攻坚组",
+            "len": 82
+          },
+          "route": "direct",
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 171
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 21547
+      }
+    ],
+    "elapsedMs": 21720,
+    "eventKey": "4280764163b2e3f54a56a835687da960f5941506ddcb332808ff91fc23efc014",
+    "reviewSummary": {
+      "totalElapsedMs": 21720,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/e7b3b0fd2922221f58f148ebe39917c101aa0d7122b3867f551a033e63f33fc5.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 171,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 21547,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 21720,
+  "reviewSummary": {
+    "totalElapsedMs": 21720,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "ok": true,
+    "resolvedGroup": "电销+直播攻坚组",
+    "currentTitle": "电销+直播攻坚组",
+    "messageCount": 41,
+    "anchor": "text-exact",
+    "anchorValue": "城市：深圳市  ；  联系人：黄，15728844148  ；  店铺：JS COFFEE  ；  地址：民治街道民新社区五和南路西侧龙岸花园一期13栋B（小区内）",
+    "anchorInTrailingPosition": true,
+    "autoKind": null,
+    "readbackAt": 1792462182.792902
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false,
+  "attemptReviews": [
+    {
+      "attempt": 1,
+      "elapsedMs": 21796,
+      "ok": true,
+      "reason": null,
+      "sendAttempts": 1,
+      "sendReview": [
+        {
+          "stage": "authorization",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 1,
+          "label": "authorization"
+        },
+        {
+          "stage": "freeze:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 2,
+          "label": "freeze:0"
+        },
+        {
+          "stage": "preflight",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 171,
+          "item": 3,
+          "label": "preflight"
+        },
+        {
+          "stage": "send:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 21547,
+          "item": 4,
+          "label": "send:0"
+        }
+      ]
+    }
+  ],
+  "contentionRetries": 0,
+  "contentionWaitMs": 0,
+  "contentionEvents": [],
+  "merchantId": "546176035",
+  "messageSha256": "1f54c7dd7eae92c7fcf36f87e66190a1141f8fbbb30695e00a4797de58a4c424"
+}

@@ -1,0 +1,107 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-04",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 52,
+    "task_page": 710,
+    "navigation": 1880,
+    "date_filter": 2157,
+    "page_1_read": 277,
+    "selection_audit": 0,
+    "detail_546516617": 844
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_546516617": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "546516617",
+      "merchantName": "No Er | 一烫人间东北老式麻辣烫炸串",
+      "recommendTime": "2026-10-04 13:42:45",
+      "city": "青岛市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 3,
+      "address": "长江中路90号",
+      "contact": "高，15339997640",
+      "detailVerified": true,
+      "text": "城市：青岛市  ；  联系人：高，15339997640  ；  店铺：No Er | 一烫人间东北老式麻辣烫炸串  ；  地址：长江中路90号",
+      "sha256": "969d3c8700692051558ce5f6d7a1bbe1a836276e94d1cbe769fd3c5dda94c331"
+    }
+  ],
+  "frontmostBefore": "com.tencent.workbuddy.mac",
+  "createdAt": "2026-10-04T06:03:15.015Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-04",
+    "merchantName": "苟先生湘厨小炒",
+    "merchantId": "546133876",
+    "recommendTime": "2026-10-04 11:15:46",
+    "tableOrder": 2,
+    "messageSha256": "27edaaf26a60f338ab5dbe4e9e148c6ac2657c0a2daf65642dc9011fbc5197fd",
+    "sentAt": "2026-10-04T11:53:31+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-04",
+  "filterEndDate": "2026-10-04",
+  "dateFilter": "2026-10-04..2026-10-04",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 3,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 3,
+  "pendingRows": 3,
+  "targetCount": 1,
+  "selectionAudit": {
+    "totalRows": 3,
+    "pendingRows": 3,
+    "excludedAtOrBeforeCursor": 2,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 1,
+    "rows": [
+      {
+        "merchantId": "546516617",
+        "recommendTime": "2026-10-04 13:42:45",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546133876",
+        "recommendTime": "2026-10-04 11:15:46",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "527430085",
+        "recommendTime": "2026-10-04 10:07:25",
+        "status": "待处理"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 6414,
+  "frontmostAfter": "com.tencent.workbuddy.mac",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261004-140307/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261004-140307/output/collection-attempt-1.review.md"
+}

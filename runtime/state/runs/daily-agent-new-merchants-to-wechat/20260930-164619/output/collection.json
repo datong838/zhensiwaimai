@@ -1,0 +1,161 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-09-30",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 46,
+    "task_page": 285,
+    "navigation": 921,
+    "date_filter": 1224,
+    "page_1_read": 265,
+    "selection_audit": 0,
+    "detail_521315008": 771,
+    "detail_1263459850": 937,
+    "detail_546531224": 2370
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_521315008": "PASS",
+    "detail_1263459850": "PASS",
+    "detail_546531224": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "521315008",
+      "merchantName": "贵州遵义羊肉粉（贵州名优小吃）",
+      "recommendTime": "2026-09-30 10:35:21",
+      "city": "东莞市",
+      "status": "待处理",
+      "rowIndex": 2,
+      "sourcePage": 1,
+      "tableOrder": 2,
+      "address": "德隆路六巷17号103室",
+      "contact": "陶，16683914352",
+      "detailVerified": true,
+      "text": "东莞市\n陶，16683914352\n贵州遵义羊肉粉（贵州名优小吃）\n德隆路六巷17号103室",
+      "sha256": "0e1789344fa444b701165b24c230d01762e1836970a336b4d219db11c6473662"
+    },
+    {
+      "merchantId": "1263459850",
+      "merchantName": "续杯CONTINUE TEA",
+      "recommendTime": "2026-09-30 13:26:54",
+      "city": "上海市",
+      "status": "待处理",
+      "rowIndex": 1,
+      "sourcePage": 1,
+      "tableOrder": 4,
+      "address": "西藏北路198号静安大悦城北座5楼520",
+      "contact": "肖，13681960518",
+      "detailVerified": true,
+      "text": "上海市\n肖，13681960518\n续杯CONTINUE TEA\n西藏北路198号静安大悦城北座5楼520",
+      "sha256": "78f10cae12db2458c73935d455363123ee7e469a53e1962b8618d752e545a8ff"
+    },
+    {
+      "merchantId": "546531224",
+      "merchantName": "知香·手撕烤鸭",
+      "recommendTime": "2026-09-30 15:03:10",
+      "city": "苏州市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 6,
+      "address": "花桥镇光明路1359号1号楼52室",
+      "contact": "刘，15936086907",
+      "detailVerified": true,
+      "text": "苏州市\n刘，15936086907\n知香·手撕烤鸭\n花桥镇光明路1359号1号楼52室",
+      "sha256": "4d87744ee22eacf9143fb0a986f7162011989e1484279a760a13477fc5e938e6"
+    }
+  ],
+  "frontmostBefore": "unavailable",
+  "createdAt": "2026-09-30T08:46:27.604Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-09-30",
+    "merchantName": "范大厨下饭菜馆",
+    "merchantId": "543891127",
+    "recommendTime": "2026-09-30 10:28:04",
+    "tableOrder": 17,
+    "messageSha256": "4522c544ce0b3f3de6959658b7ddeda9644028b277a98898b1b49f35873f48c8",
+    "sentAt": "2026-09-30T16:44:21+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-09-30",
+  "filterEndDate": "2026-09-30",
+  "dateFilter": "2026-09-30..2026-09-30",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 7,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 7,
+  "pendingRows": 4,
+  "targetCount": 3,
+  "selectionAudit": {
+    "totalRows": 7,
+    "pendingRows": 4,
+    "excludedAtOrBeforeCursor": 1,
+    "excludedAfterCursorNotPending": 3,
+    "targetCount": 3,
+    "rows": [
+      {
+        "merchantId": "546531224",
+        "recommendTime": "2026-09-30 15:03:10",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1263459850",
+        "recommendTime": "2026-09-30 13:26:54",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "521315008",
+        "recommendTime": "2026-09-30 10:35:21",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "543891127",
+        "recommendTime": "2026-09-30 10:28:04",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1362405258",
+        "recommendTime": "2026-09-30 16:02:53",
+        "status": "完成"
+      },
+      {
+        "merchantId": "1360640820",
+        "recommendTime": "2026-09-30 14:35:56",
+        "status": "完成"
+      },
+      {
+        "merchantId": "1348225171",
+        "recommendTime": "2026-09-30 12:54:03",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 7101,
+  "frontmostAfter": "unavailable",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20260930-164619/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20260930-164619/output/collection-attempt-1.review.md"
+}

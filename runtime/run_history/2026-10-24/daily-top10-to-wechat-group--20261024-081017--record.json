@@ -1,0 +1,23 @@
+{
+  "skill": "daily-top10-to-wechat-group",
+  "ledger_name": "昨日门店Top10截图发运营群（每日08:00）",
+  "schedule": "每日08:00",
+  "dev_state": "active",
+  "status": "FAILED",
+  "category": "UNKNOWN",
+  "detail": "reason=windows-wechat:wecom-preflight-failed:wecom-not-frontmost (receipt:reason)",
+  "next_action": "看护代理读日志定位根因后升级处理",
+  "attempts": 1,
+  "max_retries": 2,
+  "duration_seconds": 0.8,
+  "started_at": "2026-10-24T08:10:17",
+  "finished_at": "2026-10-24T08:10:18",
+  "triggered_by": "daemon",
+  "logs": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-24/daily-top10-to-wechat-group--20261024-081017--a1--s1.log"
+  ],
+  "fail_signal": {
+    "kind": "reason",
+    "code": "windows-wechat:wecom-preflight-failed:wecom-not-frontmost"
+  }
+}

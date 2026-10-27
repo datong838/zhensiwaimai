@@ -1,0 +1,25 @@
+{
+  "skill": "daily-new-stores-not-nourished-ops-to-wechat",
+  "ledger_name": "淘宝新店未养活运营分配（每日11:40）",
+  "schedule": "每日11:40",
+  "dev_state": "active",
+  "status": "FAILED",
+  "category": "RECOVERABLE",
+  "detail": "reason=nourish-collect-failed:locator.click: Timeout 6000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.ant-form-item, [class*=\"form-item\"]').filter({ hasText: '问题类型' }).first().locator('.ant-select').first()\u001b[22m (receipt:reason)",
+  "next_action": "重试预算耗尽：看护代理读日志决定再等冷却重跑或跳过",
+  "attempts": 3,
+  "max_retries": 2,
+  "duration_seconds": 729.22,
+  "started_at": "2026-10-24T03:40:45",
+  "finished_at": "2026-10-24T03:52:54",
+  "triggered_by": "sweep-test",
+  "logs": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-24/daily-new-stores-not-nourished-ops-to-wechat--20261024-034045--a1--s1.log",
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-24/daily-new-stores-not-nourished-ops-to-wechat--20261024-034630--a2--s1.log",
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-24/daily-new-stores-not-nourished-ops-to-wechat--20261024-035216--a3--s1.log"
+  ],
+  "fail_signal": {
+    "kind": "reason",
+    "code": "nourish-collect-failed:locator.click: Timeout 6000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.ant-form-item, [class*=\"form-item\"]').filter({ hasText: '问题类型' }).first().locator('.ant-select').first()\u001b[22m"
+  }
+}

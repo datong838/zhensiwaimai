@@ -1,0 +1,23 @@
+{
+  "skill": "daily-quality-products-optimization",
+  "ledger_name": "淘宝闪购低优质商品的全部门店商品整改优化",
+  "schedule": "每日17:00，美团17点客服后串行；未完成安全分段接续",
+  "dev_state": "active",
+  "status": "FAILED",
+  "category": "RECOVERABLE",
+  "detail": "reason=quality-ui-stage-timeout (receipt:reason)",
+  "next_action": "重试预算耗尽：看护代理读日志决定再等冷却重跑或跳过",
+  "attempts": 1,
+  "max_retries": 0,
+  "duration_seconds": 180.26,
+  "started_at": "2026-10-26T21:03:00",
+  "finished_at": "2026-10-26T21:06:00",
+  "triggered_by": "daemon",
+  "logs": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-26/daily-quality-products-optimization--20261026-210300--a1--s1.log"
+  ],
+  "fail_signal": {
+    "kind": "reason",
+    "code": "quality-ui-stage-timeout"
+  }
+}

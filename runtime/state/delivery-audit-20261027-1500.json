@@ -1,0 +1,44 @@
+{
+  "day": "2026-10-27",
+  "slot": "15:00",
+  "merchant": {
+    "log": "runtime/state/runs/daily-agent-new-merchants-to-wechat/20261027-150006/step1.log",
+    "targetCount": 0,
+    "noticeVerified": true,
+    "sendAttempts": 1
+  },
+  "customer": {
+    "run": "runtime/state/runs/meituan-intelligent-customer-service-15/20261027-150028",
+    "scanned": 121,
+    "candidates": 3,
+    "sentEchoVerified": 3,
+    "failed": 0,
+    "qualificationReasons": [
+      "qualified(12:58诉求超10min,无人工接管)",
+      "qualified(12:14诉求超10min,无人工接管)",
+      "qualified(12:06诉求超10min,无人工接管)"
+    ],
+    "xlsx": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-intelligent-customer-service/records/美团客户回复记录-2026-10-27.xlsx",
+    "xlsxSha256": "7a5e2a8f899c0aec67c932910ac53312622b36ec5474f15662e998a977bafbc8",
+    "fileDeliveryVerified": true,
+    "fileSendAttempts": 1,
+    "nativeObservations": 2,
+    "actualWorkbookRows": 3
+  },
+  "appeals": {
+    "meituan-waimai-negative-review-appeals-11": {
+      "log": "runtime/state/runs/meituan-waimai-negative-review-appeals-11/20261027-150326/step1.log",
+      "businessDate": "2026-10-26",
+      "discovered": 0,
+      "newSubmissions": 0
+    },
+    "taobao-flash-sale-negative-review-appeals": {
+      "log": "runtime/state/runs/taobao-flash-sale-negative-review-appeals/20261027-150407/step1.log",
+      "businessDate": "2026-10-26",
+      "discovered": 0,
+      "newSubmissions": 0
+    }
+  },
+  "originalUnknownPreserved": "050714b3099f not resubmitted",
+  "goal": "active; later original slots still pending"
+}

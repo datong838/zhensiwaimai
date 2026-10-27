@@ -1,0 +1,248 @@
+{
+  "ok": false,
+  "executor": "merchant-desktop-wechat-sender",
+  "channel": "desktop",
+  "sent": 1,
+  "messageCount": 2,
+  "historySkipped": 0,
+  "items": [
+    {
+      "merchantId": "528995168",
+      "merchantName": "山谷Valley·咖啡·手作甜品",
+      "review": [
+        {
+          "stage": "发送前合同复核",
+          "status": "PASS",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "定位、输入与单次发送",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [
+            {
+              "stage": "authorization",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0,
+              "item": 1,
+              "label": "authorization"
+            },
+            {
+              "stage": "freeze:0",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0,
+              "item": 2,
+              "label": "freeze:0"
+            },
+            {
+              "stage": "preflight",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 288,
+              "item": 3,
+              "label": "preflight"
+            },
+            {
+              "stage": "send:0",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 22226,
+              "item": 4,
+              "label": "send:0"
+            }
+          ],
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsedMs": 22864,
+              "ok": true,
+              "reason": null,
+              "sendAttempts": 1,
+              "sendReview": [
+                {
+                  "stage": "authorization",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 0,
+                  "item": 1,
+                  "label": "authorization"
+                },
+                {
+                  "stage": "freeze:0",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 0,
+                  "item": 2,
+                  "label": "freeze:0"
+                },
+                {
+                  "stage": "preflight",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 288,
+                  "item": 3,
+                  "label": "preflight"
+                },
+                {
+                  "stage": "send:0",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 22226,
+                  "item": 4,
+                  "label": "send:0"
+                }
+              ]
+            }
+          ],
+          "elapsedMs": 22870
+        },
+        {
+          "stage": "双帧与原生复制全文复核",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [],
+          "attempts": [],
+          "elapsedMs": 6
+        },
+        {
+          "stage": "提交前证据门禁",
+          "status": "PASS",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "成功历史与原子游标提交",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [],
+          "attempts": [],
+          "elapsedMs": 36
+        }
+      ]
+    },
+    {
+      "merchantId": "1177140742",
+      "merchantName": "芜园烧麦",
+      "review": [
+        {
+          "stage": "发送前合同复核",
+          "status": "PASS",
+          "pitfalls": [],
+          "elapsedMs": 4
+        },
+        {
+          "stage": "定位、输入与单次发送",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [
+            {
+              "stage": "authorization",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0,
+              "item": 1,
+              "label": "authorization"
+            },
+            {
+              "stage": "freeze:0",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0,
+              "item": 2,
+              "label": "freeze:0"
+            },
+            {
+              "stage": "preflight",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 319,
+              "item": 3,
+              "label": "preflight"
+            },
+            {
+              "stage": "send:0",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 22137,
+              "item": 4,
+              "label": "send:0"
+            }
+          ],
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsedMs": 22956,
+              "ok": true,
+              "reason": null,
+              "sendAttempts": 1,
+              "sendReview": [
+                {
+                  "stage": "authorization",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 0,
+                  "item": 1,
+                  "label": "authorization"
+                },
+                {
+                  "stage": "freeze:0",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 0,
+                  "item": 2,
+                  "label": "freeze:0"
+                },
+                {
+                  "stage": "preflight",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 319,
+                  "item": 3,
+                  "label": "preflight"
+                },
+                {
+                  "stage": "send:0",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 22137,
+                  "item": 4,
+                  "label": "send:0"
+                }
+              ]
+            }
+          ],
+          "elapsedMs": 22958
+        },
+        {
+          "stage": "双帧与原生复制全文复核",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [],
+          "attempts": [],
+          "elapsedMs": 2
+        },
+        {
+          "stage": "提交前证据门禁",
+          "status": "PASS",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "成功历史与原子游标提交",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [],
+          "attempts": [],
+          "elapsedMs": 2
+        }
+      ]
+    }
+  ],
+  "contentionRetries": 0,
+  "contentionWaitMs": 0,
+  "contentionEvents": [],
+  "lastMerchantId": "528995168"
+}

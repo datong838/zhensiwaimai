@@ -1,0 +1,24 @@
+{
+  "ok": false,
+  "runId": "27b7fc4d-e024-49ee-ae60-4ef5497ce256",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "executor_integrity": 0
+  },
+  "stageResults": {
+    "executor_integrity": "FAIL"
+  },
+  "stage": "executor_integrity",
+  "wechatChannel": "desktop",
+  "collectionAttempts": [],
+  "error": "executor-lock-unsealed-authorization-expired",
+  "elapsedMs": 0,
+  "completion": {
+    "state": "RECOVERABLE_NO_SEND",
+    "nextAction": "diagnose-repair-test-maintain-retry-once",
+    "automaticRecoveryAllowed": true,
+    "recoveryAttemptBudget": 1,
+    "reason": "executor-lock-unsealed-authorization-expired"
+  },
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20260929-094636/output/review.json"
+}

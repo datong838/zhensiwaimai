@@ -1,0 +1,197 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-14",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 106,
+    "task_page": 603,
+    "navigation": 1219,
+    "date_filter": 1770,
+    "page_1_read": 689,
+    "page_1_next": 91,
+    "page_2_read": 995,
+    "page_2_next": 97,
+    "page_3_read": 781,
+    "selection_audit": 0
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "page_1_next": "PASS",
+    "page_2_read": "PASS",
+    "page_2_next": "PASS",
+    "page_3_read": "PASS",
+    "selection_audit": "PASS"
+  },
+  "messages": [],
+  "frontmostBefore": "com.google.Chrome",
+  "createdAt": "2026-10-13T18:32:53.136Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-14",
+    "merchantName": "叫了只炸鸡（小洋店）",
+    "merchantId": "530070403",
+    "recommendTime": "2026-10-13 23:49:43",
+    "tableOrder": 21,
+    "messageSha256": "8c14f4211db025b59013e72f002b5774d4c85de481fa740bad06f1f7c8cb153a",
+    "sentAt": "2026-10-14T00:29:24+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-13",
+  "filterEndDate": "2026-10-14",
+  "dateFilter": "2026-10-13..2026-10-14",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 10,
+      "nextEnabled": true
+    },
+    {
+      "page": 2,
+      "rowCount": 10,
+      "nextEnabled": true
+    },
+    {
+      "page": 3,
+      "rowCount": 1,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 21,
+  "pendingRows": 9,
+  "targetCount": 0,
+  "selectionAudit": {
+    "totalRows": 21,
+    "pendingRows": 9,
+    "excludedAtOrBeforeCursor": 21,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 0,
+    "rows": [
+      {
+        "merchantId": "530070403",
+        "recommendTime": "2026-10-13 23:49:43",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546865741",
+        "recommendTime": "2026-10-13 23:09:16",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1270311215",
+        "recommendTime": "2026-10-13 21:10:57",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "545353164",
+        "recommendTime": "2026-10-13 20:59:00",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "541567885",
+        "recommendTime": "2026-10-13 20:30:11",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1364029954",
+        "recommendTime": "2026-10-13 20:29:39",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1352233499",
+        "recommendTime": "2026-10-13 20:26:42",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1334811950",
+        "recommendTime": "2026-10-13 19:52:28",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "544086392",
+        "recommendTime": "2026-10-13 08:51:51",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1365146080",
+        "recommendTime": "2026-10-13 16:28:22",
+        "status": "处理中(已退回)"
+      },
+      {
+        "merchantId": "546265985",
+        "recommendTime": "2026-10-13 15:33:59",
+        "status": "处理中(签约中)"
+      },
+      {
+        "merchantId": "1346839417",
+        "recommendTime": "2026-10-13 15:00:43",
+        "status": "处理中(签约中)"
+      },
+      {
+        "merchantId": "1249301198",
+        "recommendTime": "2026-10-13 13:01:58",
+        "status": "处理中(签约中)"
+      },
+      {
+        "merchantId": "1266363481",
+        "recommendTime": "2026-10-13 13:00:18",
+        "status": "处理中(签约中)"
+      },
+      {
+        "merchantId": "546449891",
+        "recommendTime": "2026-10-13 12:46:02",
+        "status": "处理中(已退回)"
+      },
+      {
+        "merchantId": "1348104860",
+        "recommendTime": "2026-10-13 03:47:32",
+        "status": "处理中(签约中)"
+      },
+      {
+        "merchantId": "546880365",
+        "recommendTime": "2026-10-13 02:44:13",
+        "status": "处理中(签约中)"
+      },
+      {
+        "merchantId": "1254581528",
+        "recommendTime": "2026-10-13 01:37:38",
+        "status": "处理中(签约中)"
+      },
+      {
+        "merchantId": "156427679",
+        "recommendTime": "2026-10-13 19:00:25",
+        "status": "完成"
+      },
+      {
+        "merchantId": "1349291112",
+        "recommendTime": "2026-10-13 11:41:02",
+        "status": "完成"
+      },
+      {
+        "merchantId": "1365409584",
+        "recommendTime": "2026-10-13 11:40:57",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 6869,
+  "frontmostAfter": "com.google.Chrome",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261014-023245/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261014-023245/output/collection-attempt-1.review.md"
+}

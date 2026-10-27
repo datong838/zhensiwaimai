@@ -1,0 +1,37 @@
+{
+  "at": "2026-10-27T11:04:28.980922+08:00",
+  "jinsha": {
+    "complete": true,
+    "businessDate": "2026-10-26",
+    "files": [
+      {
+        "name": "美团外卖日报_2026-10-26.xlsx",
+        "size": 130451
+      },
+      {
+        "name": "淘宝闪购日报_2026-10-26.xlsx",
+        "size": 112919
+      }
+    ],
+    "perFileSendAttempts": 1,
+    "backend": "system-events-ui-tree",
+    "rows": {
+      "meituan": 514,
+      "taobao": 636
+    },
+    "scopeLimit": "customer mapping has unmatched and conflicts; original build audit retained, no invented full-customer coverage"
+  },
+  "activity": {
+    "directorStatus": "SUCCESS",
+    "businessCoverage": "not inspected: original brand account returned store not found",
+    "shop": "海上三小姐·甜品·下午茶(河西店)",
+    "originalReason": "activity-collection-skipped:shop-not-found:未搜索到店铺",
+    "sendAttempts": 0,
+    "action": "preserve original record; inspect account/synchronization availability; do not silently exclude or claim inspection completed"
+  },
+  "sources": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/jinsha-business-production/20261027/01",
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-new-stores-activity-audit-to-wechat/.runtime/activity/runs/2026-10-27-1793070020754897000/summary.json"
+  ],
+  "goalStatus": "active"
+}

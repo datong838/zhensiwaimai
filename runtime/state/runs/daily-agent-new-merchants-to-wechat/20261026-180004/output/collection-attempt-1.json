@@ -1,0 +1,127 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-26",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 62,
+    "task_page": 310,
+    "navigation": 1369,
+    "date_filter": 2001,
+    "page_1_read": 410,
+    "selection_audit": 0,
+    "detail_547308768": 1095
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_547308768": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "547308768",
+      "merchantName": "包炒炒浇头面",
+      "recommendTime": "2026-10-26 17:45:52",
+      "city": "南京市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 7,
+      "address": "仙林大学城风华路1号仙林大田悦生活负一楼B09",
+      "contact": "梁全，13276654059",
+      "detailVerified": true,
+      "text": "城市：南京市  ；  联系人：梁全，13276654059  ；  店铺：包炒炒浇头面  ；  地址：仙林大学城风华路1号仙林大田悦生活负一楼B09  ；  商家ID：547308768",
+      "sha256": "10dd31e2ff207b233d344dcdb7551565fb3ac9e4b640c9739d44f25e5fbd6c9a"
+    }
+  ],
+  "frontmostBefore": "com.google.Chrome",
+  "createdAt": "2026-10-26T10:00:11.841Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-26",
+    "merchantName": "赣小厨.盖浇饭(乐平店)",
+    "merchantId": "547032462",
+    "recommendTime": "2026-10-26 16:38:07",
+    "tableOrder": 6,
+    "messageSha256": "045f5928d81fadc433b5f375c4534822161778ca4f47e8c5ea82c7c1626a8cdd",
+    "sentAt": "2026-10-26T17:00:28+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-26",
+  "filterEndDate": "2026-10-26",
+  "dateFilter": "2026-10-26..2026-10-26",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 7,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 7,
+  "pendingRows": 6,
+  "targetCount": 1,
+  "selectionAudit": {
+    "totalRows": 7,
+    "pendingRows": 6,
+    "excludedAtOrBeforeCursor": 6,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 1,
+    "rows": [
+      {
+        "merchantId": "547308768",
+        "recommendTime": "2026-10-26 17:45:52",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "547032462",
+        "recommendTime": "2026-10-26 16:38:07",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1359555169",
+        "recommendTime": "2026-10-26 15:31:55",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546901789",
+        "recommendTime": "2026-10-26 14:33:25",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "538822520",
+        "recommendTime": "2026-10-26 11:50:03",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "544670041",
+        "recommendTime": "2026-10-26 00:56:45",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "547330034",
+        "recommendTime": "2026-10-26 16:25:54",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 5619,
+  "frontmostAfter": "com.google.Chrome",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261026-180004/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261026-180004/output/collection-attempt-1.review.md"
+}

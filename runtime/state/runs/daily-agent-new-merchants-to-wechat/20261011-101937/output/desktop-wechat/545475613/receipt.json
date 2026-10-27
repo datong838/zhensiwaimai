@@ -1,0 +1,152 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：马鞍山市  ；  联系人：张震，15000151413  ；  店铺：阿震铁板炒饭  ；  地址：环峰镇二中对面台湾商城1-103号",
+      "sha256": "418fec4205cee6d77467d7ec99ec791f277e9bf3fe65da112714281935305fd2"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "d2ec6163d2df53bc78a5f9902bd9082873bd15f6ee75d72e2f5f152ac5b1d1f3",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "418fec4205cee6d77467d7ec99ec791f277e9bf3fe65da112714281935305fd2",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1791685364.0160892,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-text-anchor",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "电销+直播攻坚组",
+          "currentTitle": "电销+直播攻坚组",
+          "messageCount": 42,
+          "anchor": "text-exact",
+          "anchorValue": "城市：马鞍山市  ；  联系人：张震，15000151413  ；  店铺：阿震铁板炒饭  ；  地址：环峰镇二中对面台湾商城1-103号",
+          "anchorInTrailingPosition": true,
+          "autoKind": null,
+          "readbackAt": 1791685386.4515991
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "电销+直播攻坚组",
+            "len": 69
+          },
+          "route": "relay",
+          "direct_error": "[Errno 65] No route to host",
+          "direct_local_network_blocked": true,
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 3231
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 22435
+      }
+    ],
+    "elapsedMs": 25671,
+    "eventKey": "2552ca4a3d223523f5a60f9b6f9bd585f20e493cb1cd0919d8476fdc240a4c1a",
+    "reviewSummary": {
+      "totalElapsedMs": 25671,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/87ac59e645527247971070e88cca061b48fe21a007e06c25af3849ffb4dffd65.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 3231,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 22435,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 25671,
+  "reviewSummary": {
+    "totalElapsedMs": 25671,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "ok": true,
+    "resolvedGroup": "电销+直播攻坚组",
+    "currentTitle": "电销+直播攻坚组",
+    "messageCount": 42,
+    "anchor": "text-exact",
+    "anchorValue": "城市：马鞍山市  ；  联系人：张震，15000151413  ；  店铺：阿震铁板炒饭  ；  地址：环峰镇二中对面台湾商城1-103号",
+    "anchorInTrailingPosition": true,
+    "autoKind": null,
+    "readbackAt": 1791685386.4515991
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false
+}

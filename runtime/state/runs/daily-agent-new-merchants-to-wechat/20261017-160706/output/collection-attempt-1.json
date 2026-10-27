@@ -1,0 +1,119 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-17",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 62,
+    "task_page": 327,
+    "navigation": 1386,
+    "date_filter": 2049,
+    "page_1_read": 454,
+    "selection_audit": 0
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS"
+  },
+  "messages": [],
+  "frontmostBefore": "com.todesktop.230313mzl4w4u92",
+  "createdAt": "2026-10-17T08:07:11.599Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-17",
+    "merchantName": "青柠大口茶",
+    "merchantId": "1149360264",
+    "recommendTime": "2026-10-17 14:09:41",
+    "tableOrder": 9,
+    "messageSha256": "0dc8087f96a3833fd314e4c157a17799669500c9448612ea20bcc72ae27c8c65",
+    "sentAt": "2026-10-17T14:57:43+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-17",
+  "filterEndDate": "2026-10-17",
+  "dateFilter": "2026-10-17..2026-10-17",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 9,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 9,
+  "pendingRows": 8,
+  "targetCount": 0,
+  "selectionAudit": {
+    "totalRows": 9,
+    "pendingRows": 8,
+    "excludedAtOrBeforeCursor": 9,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 0,
+    "rows": [
+      {
+        "merchantId": "1149360264",
+        "recommendTime": "2026-10-17 14:09:41",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1352088115",
+        "recommendTime": "2026-10-17 12:49:26",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "507519525",
+        "recommendTime": "2026-10-17 12:27:54",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1359496396",
+        "recommendTime": "2026-10-17 12:14:50",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1366113527",
+        "recommendTime": "2026-10-17 12:08:30",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "525323950",
+        "recommendTime": "2026-10-17 11:47:03",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "531654077",
+        "recommendTime": "2026-10-17 09:56:44",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "535961676",
+        "recommendTime": "2026-10-17 09:27:52",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "545386108",
+        "recommendTime": "2026-10-17 12:38:19",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 4721,
+  "frontmostAfter": "com.todesktop.230313mzl4w4u92",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261017-160706/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261017-160706/output/collection-attempt-1.review.md"
+}

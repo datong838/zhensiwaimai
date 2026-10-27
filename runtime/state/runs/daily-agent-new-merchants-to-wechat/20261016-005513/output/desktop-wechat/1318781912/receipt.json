@@ -1,0 +1,152 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：苏州市  ；  联系人：高，18860458620  ；  店铺：蛙有道·椒盐牛蛙（观前街店）  ；  地址：人民路1331号B1b10",
+      "sha256": "371beb3e720df11e66751d539dd4325c0e7c7131b2e093be539b1e94ce1f51c1"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "98b003be1781aaa081ed96180d8f85ba61e3eebfd78701917ea8f7e1d6ac2bb5",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "371beb3e720df11e66751d539dd4325c0e7c7131b2e093be539b1e94ce1f51c1",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1792083613.776049,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-text-anchor",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "电销+直播攻坚组",
+          "currentTitle": "电销+直播攻坚组",
+          "messageCount": 42,
+          "anchor": "text-exact",
+          "anchorValue": "城市：苏州市  ；  联系人：高，18860458620  ；  店铺：蛙有道·椒盐牛蛙（观前街店）  ；  地址：人民路1331号B1b10",
+          "anchorInTrailingPosition": true,
+          "autoKind": null,
+          "readbackAt": 1792083639.7873511
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "电销+直播攻坚组",
+            "len": 71
+          },
+          "route": "relay",
+          "direct_error": "[Errno 65] No route to host",
+          "direct_local_network_blocked": true,
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 9675
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 26011
+      }
+    ],
+    "elapsedMs": 35690,
+    "eventKey": "c1d8502652944988b2ce9eeea0d8c7beac8f106e2cddaf4ce31d5f0b1c901e3d",
+    "reviewSummary": {
+      "totalElapsedMs": 35690,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/b48ba15c4f4a062e05a087bee05e74deb7490c342c161eb337c35395c6c5db4d.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 9675,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 26011,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 35690,
+  "reviewSummary": {
+    "totalElapsedMs": 35690,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "ok": true,
+    "resolvedGroup": "电销+直播攻坚组",
+    "currentTitle": "电销+直播攻坚组",
+    "messageCount": 42,
+    "anchor": "text-exact",
+    "anchorValue": "城市：苏州市  ；  联系人：高，18860458620  ；  店铺：蛙有道·椒盐牛蛙（观前街店）  ；  地址：人民路1331号B1b10",
+    "anchorInTrailingPosition": true,
+    "autoKind": null,
+    "readbackAt": 1792083639.7873511
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false
+}

@@ -1,0 +1,124 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-11",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 60,
+    "task_page": 449,
+    "navigation": 1539,
+    "date_filter": 1651,
+    "page_1_read": 320,
+    "selection_audit": 0
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS"
+  },
+  "messages": [],
+  "frontmostBefore": "com.tencent.xinWeChat",
+  "createdAt": "2026-10-11T06:46:44.946Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-11",
+    "merchantName": "螺哩螺嗦",
+    "merchantId": "545780513",
+    "recommendTime": "2026-10-11 13:15:34",
+    "tableOrder": 10,
+    "messageSha256": "841319a9a30bd5062f91b7e47cd3306b38780285334831520a04b0f5954e0537",
+    "sentAt": "2026-10-11T13:43:14+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-11",
+  "filterEndDate": "2026-10-11",
+  "dateFilter": "2026-10-11..2026-10-11",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 10,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 10,
+  "pendingRows": 7,
+  "targetCount": 0,
+  "selectionAudit": {
+    "totalRows": 10,
+    "pendingRows": 7,
+    "excludedAtOrBeforeCursor": 10,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 0,
+    "rows": [
+      {
+        "merchantId": "545780513",
+        "recommendTime": "2026-10-11 13:15:34",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1342391202",
+        "recommendTime": "2026-10-11 12:57:56",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1317602476",
+        "recommendTime": "2026-10-11 12:32:18",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "545977903",
+        "recommendTime": "2026-10-11 10:50:52",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1362226686",
+        "recommendTime": "2026-10-11 08:46:54",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1357690495",
+        "recommendTime": "2026-10-11 04:36:43",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "156280223",
+        "recommendTime": "2026-10-11 00:27:37",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "545920607",
+        "recommendTime": "2026-10-11 11:12:48",
+        "status": "完成"
+      },
+      {
+        "merchantId": "522475064",
+        "recommendTime": "2026-10-11 11:02:28",
+        "status": "完成"
+      },
+      {
+        "merchantId": "1354966645",
+        "recommendTime": "2026-10-11 03:02:14",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 4509,
+  "frontmostAfter": "com.tencent.xinWeChat",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261011-144639/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261011-144639/output/collection-attempt-1.review.md"
+}

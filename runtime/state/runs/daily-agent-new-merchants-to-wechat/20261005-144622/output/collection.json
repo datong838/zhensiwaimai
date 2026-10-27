@@ -1,0 +1,89 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-05",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 43,
+    "task_page": 589,
+    "navigation": 2944,
+    "date_filter": 1939,
+    "page_1_read": 254,
+    "selection_audit": 0
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS"
+  },
+  "messages": [],
+  "frontmostBefore": "unavailable",
+  "createdAt": "2026-10-05T06:46:29.627Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-05",
+    "merchantName": "味萃坊虾蟹牛骨馆",
+    "merchantId": "1362271630",
+    "recommendTime": "2026-10-05 13:05:35",
+    "tableOrder": 3,
+    "messageSha256": "2dcafba525255ef96f7f4d2133f5eab04f475b97dc28f18a1b3bfa43314e6934",
+    "sentAt": "2026-10-05T13:34:20+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-05",
+  "filterEndDate": "2026-10-05",
+  "dateFilter": "2026-10-05..2026-10-05",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 3,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 3,
+  "pendingRows": 3,
+  "targetCount": 0,
+  "selectionAudit": {
+    "totalRows": 3,
+    "pendingRows": 3,
+    "excludedAtOrBeforeCursor": 3,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 0,
+    "rows": [
+      {
+        "merchantId": "1362271630",
+        "recommendTime": "2026-10-05 13:05:35",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1332581200",
+        "recommendTime": "2026-10-05 12:52:03",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1341962648",
+        "recommendTime": "2026-10-05 09:49:45",
+        "status": "待处理"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 6327,
+  "frontmostAfter": "unavailable",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261005-144622/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261005-144622/output/collection-attempt-1.review.md"
+}

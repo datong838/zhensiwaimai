@@ -1,0 +1,25 @@
+{
+  "at": "2026-10-27T18:13:20.668159",
+  "authorization": "用户明确：这3个先不要值班执行",
+  "flows": {
+    "coupon-issue-task-flow": {
+      "enabled": false,
+      "dev_state": "pending"
+    },
+    "daily-store-metrics-rotation-to-wechat": {
+      "enabled": false,
+      "dev_state": "pending"
+    },
+    "store-inspection": {
+      "enabled": false,
+      "dev_state": "blocked"
+    }
+  },
+  "resumeCondition": "仅用户后续明确授权启用，不因收到SA名单、维护完成或定时唤醒自动上线",
+  "noForcedDispatch": true,
+  "noInFlightBusinessTask": true,
+  "manifestChanged": false,
+  "manifestSha256": "21917feccec65a33e71a44c9cc3b817a9318173a10e63d85bc981cff6996b9dd",
+  "otherDailyFlowsUnchanged": true,
+  "monthlyRecordsPreserved": true
+}

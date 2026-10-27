@@ -1,0 +1,136 @@
+{
+  "ok": false,
+  "runId": "e8afb1ec-49ca-4b4d-afc1-6f3ccb7831af",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "executor_integrity": 6,
+    "runtime_policy": 0,
+    "offline_selftest": 277,
+    "collection": 22548
+  },
+  "stageResults": {
+    "executor_integrity": "PASS",
+    "runtime_policy": "PASS",
+    "offline_selftest": "PASS",
+    "collection": "FAIL"
+  },
+  "stage": "collection",
+  "wechatChannel": "desktop",
+  "collectionAttempts": [
+    {
+      "ok": false,
+      "executor": "merchant-collector",
+      "browserController": "control-background-dedicated-chrome",
+      "profile": "taobao-agent-service",
+      "port": 9231,
+      "groupName": "电销+直播攻坚组",
+      "businessDate": "2026-10-12",
+      "runtimeModelDecisions": 0,
+      "stageMs": {
+        "background_preflight": 135,
+        "task_page": 676,
+        "navigation": 10183
+      },
+      "stageResults": {
+        "background_preflight": "PASS",
+        "task_page": "PASS",
+        "navigation": "FAIL"
+      },
+      "frontmostBefore": "com.google.Chrome",
+      "error": "service-shell-not-ready",
+      "elapsedMs": 11368,
+      "frontmostAfter": "com.google.Chrome",
+      "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261012-045057/output/collection-attempt-1.review.json",
+      "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261012-045057/output/collection-attempt-1.review.md",
+      "attempt": 1
+    },
+    {
+      "ok": false,
+      "executor": "merchant-collector",
+      "browserController": "control-background-dedicated-chrome",
+      "profile": "taobao-agent-service",
+      "port": 9231,
+      "groupName": "电销+直播攻坚组",
+      "businessDate": "2026-10-12",
+      "runtimeModelDecisions": 0,
+      "stageMs": {
+        "background_preflight": 46,
+        "task_page": 135,
+        "navigation": 10199
+      },
+      "stageResults": {
+        "background_preflight": "PASS",
+        "task_page": "PASS",
+        "navigation": "FAIL"
+      },
+      "frontmostBefore": "com.google.Chrome",
+      "error": "service-shell-not-ready",
+      "elapsedMs": 10534,
+      "frontmostAfter": "com.google.Chrome",
+      "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261012-045057/output/collection-attempt-2.review.json",
+      "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261012-045057/output/collection-attempt-2.review.md",
+      "attempt": 2
+    }
+  ],
+  "executorIntegrity": {
+    "ok": true,
+    "status": "SEALED",
+    "manifestSha256": "452f15c9ae990cb6bc5b68f77bcfeef9ba1babf061f58f3d8f6f969867083504",
+    "fileCount": 19,
+    "acceptanceMerchantId": "2097569711",
+    "acceptanceMessageSha256": "2e4f14d0c5313e9a6fdef5cc389a8dec60437571fd4577aab665ff164b809a53",
+    "runtimeModelDecisions": 0,
+    "maintenanceAcceptance": "desktop-wechat-shared-preflight",
+    "sharedTextAcceptance": "wechat-messaging-desktop-text",
+    "sharedMediaAcceptance": "not-required-by-text-only-merchant-workflow"
+  },
+  "runtimePolicy": {
+    "ok": true,
+    "group": "电销+直播攻坚组",
+    "channel": "desktop",
+    "cursorFile": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/cursor.json",
+    "maxCollectionAttempts": 2,
+    "collectionBudgetSeconds": 180
+  },
+  "selftest": {
+    "ok": true,
+    "senderTests": 5,
+    "browserTests": 39
+  },
+  "collection": {
+    "ok": false,
+    "executor": "merchant-collector",
+    "browserController": "control-background-dedicated-chrome",
+    "profile": "taobao-agent-service",
+    "port": 9231,
+    "groupName": "电销+直播攻坚组",
+    "businessDate": "2026-10-12",
+    "runtimeModelDecisions": 0,
+    "stageMs": {
+      "background_preflight": 46,
+      "task_page": 135,
+      "navigation": 10199
+    },
+    "stageResults": {
+      "background_preflight": "PASS",
+      "task_page": "PASS",
+      "navigation": "FAIL"
+    },
+    "frontmostBefore": "com.google.Chrome",
+    "error": "service-shell-not-ready",
+    "elapsedMs": 10534,
+    "frontmostAfter": "com.google.Chrome",
+    "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261012-045057/output/collection-attempt-2.review.json",
+    "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261012-045057/output/collection-attempt-2.review.md"
+  },
+  "error": "service-shell-not-ready",
+  "elapsedMs": 22831,
+  "completion": {
+    "state": "RECOVERABLE_NO_SEND",
+    "nextAction": "diagnose-repair-test-maintain-retry-once",
+    "automaticRecoveryAllowed": true,
+    "recoveryAttemptBudget": 1,
+    "reason": "service-shell-not-ready"
+  },
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261012-045057/output/review.json"
+}

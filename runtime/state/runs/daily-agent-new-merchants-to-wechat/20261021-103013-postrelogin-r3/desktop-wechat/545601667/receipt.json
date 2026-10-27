@@ -1,0 +1,150 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：成都市  ；  联系人：郑先生，19981242453  ；  店铺：老友烤吧  ；  地址：安靖街道众望街169号",
+      "sha256": "20154a0188ca7183fc0f6a0d5e0635aa71ef7134cccf151ebaf57aa61a0c42b6"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "ab7fb39fe71a125d9717948b9b602672749f53e4087d86066f7db509b430c4b0",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "20154a0188ca7183fc0f6a0d5e0635aa71ef7134cccf151ebaf57aa61a0c42b6",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1792549900.0756211,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-text-anchor",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "电销+直播攻坚组",
+          "currentTitle": "电销+直播攻坚组",
+          "messageCount": 45,
+          "anchor": "text-exact",
+          "anchorValue": "城市：成都市  ；  联系人：郑先生，19981242453  ；  店铺：老友烤吧  ；  地址：安靖街道众望街169号",
+          "anchorInTrailingPosition": true,
+          "autoKind": null,
+          "readbackAt": 1792549921.7584472
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "电销+直播攻坚组",
+            "len": 61
+          },
+          "route": "direct",
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 182
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 21683
+      }
+    ],
+    "elapsedMs": 21866,
+    "eventKey": "8f1d87bd46eb1fbb0ae889bc20ee6511ddec61b169efe81d34a278c648889665",
+    "reviewSummary": {
+      "totalElapsedMs": 21866,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/9191a103bad8d4a904ba15e72acc85af32712d0f978046786ea94b7b2152c0a0.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 182,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 21683,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 21866,
+  "reviewSummary": {
+    "totalElapsedMs": 21866,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "ok": true,
+    "resolvedGroup": "电销+直播攻坚组",
+    "currentTitle": "电销+直播攻坚组",
+    "messageCount": 45,
+    "anchor": "text-exact",
+    "anchorValue": "城市：成都市  ；  联系人：郑先生，19981242453  ；  店铺：老友烤吧  ；  地址：安靖街道众望街169号",
+    "anchorInTrailingPosition": true,
+    "autoKind": null,
+    "readbackAt": 1792549921.7584472
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false
+}

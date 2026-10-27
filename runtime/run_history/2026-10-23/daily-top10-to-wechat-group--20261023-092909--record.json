@@ -1,0 +1,23 @@
+{
+  "skill": "daily-top10-to-wechat-group",
+  "ledger_name": "昨日门店Top10截图发运营群（每日08:00）",
+  "schedule": "每日08:00",
+  "dev_state": "active",
+  "status": "FAILED",
+  "category": "UNKNOWN",
+  "detail": "reason=windows-wechat:windows-wechat-not-ready (receipt:reason) [note: Windows 侧微信未就绪（未登录 / 窗口不可用）。查驱动 /health 的 ready / wechat_running / logged_in 三字段。]",
+  "next_action": "看护代理读日志定位根因后升级处理",
+  "attempts": 1,
+  "max_retries": 2,
+  "duration_seconds": 4.54,
+  "started_at": "2026-10-23T09:29:09",
+  "finished_at": "2026-10-23T09:29:14",
+  "triggered_by": "daemon",
+  "logs": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-23/daily-top10-to-wechat-group--20261023-092909--a1--s1.log"
+  ],
+  "fail_signal": {
+    "kind": "reason",
+    "code": "windows-wechat:windows-wechat-not-ready"
+  }
+}

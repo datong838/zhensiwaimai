@@ -1,0 +1,102 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-27",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 94,
+    "task_page": 638,
+    "navigation": 1186,
+    "date_filter": 1436,
+    "page_1_read": 315,
+    "selection_audit": 1,
+    "detail_1349163544": 805
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_1349163544": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "1349163544",
+      "merchantName": "七分秋甜减糖50%·韩式切块·动物奶油·甜品(柳巷店）",
+      "recommendTime": "2026-10-27 09:54:39",
+      "city": "太原市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 2,
+      "address": "桥东街小环路K3区3号楼7号商铺",
+      "contact": "赵，18903416234",
+      "detailVerified": true,
+      "text": "城市：太原市  ；  联系人：赵，18903416234  ；  店铺：七分秋甜减糖50%·韩式切块·动物奶油·甜品(柳巷店）  ；  地址：桥东街小环路K3区3号楼7号商铺  ；  商家ID：1349163544",
+      "sha256": "d3fe800e7f0b0f1cff4e06106f87567b5110c47f203514e88938e09b1bdc7ec7"
+    }
+  ],
+  "frontmostBefore": "com.openai.codex",
+  "createdAt": "2026-10-27T02:00:13.453Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-27",
+    "merchantName": "口味鸭脖王·热卤",
+    "merchantId": "1366725839",
+    "recommendTime": "2026-10-27 08:06:10",
+    "tableOrder": 9,
+    "messageSha256": "93b8563c4b477dd7ad0fe5204d519548d0827012ff7ab96a10ab8976cb61a1bb",
+    "sentAt": "2026-10-27T08:30:30+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-27",
+  "filterEndDate": "2026-10-27",
+  "dateFilter": "2026-10-27..2026-10-27",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 2,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 2,
+  "pendingRows": 2,
+  "targetCount": 1,
+  "selectionAudit": {
+    "totalRows": 2,
+    "pendingRows": 2,
+    "excludedAtOrBeforeCursor": 1,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 1,
+    "rows": [
+      {
+        "merchantId": "1349163544",
+        "recommendTime": "2026-10-27 09:54:39",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1366725839",
+        "recommendTime": "2026-10-27 08:06:10",
+        "status": "待处理"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 4707,
+  "frontmostAfter": "com.openai.codex",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261027-100007/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261027-100007/output/collection-attempt-1.review.md"
+}

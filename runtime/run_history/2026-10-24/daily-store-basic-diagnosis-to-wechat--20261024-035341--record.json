@@ -1,0 +1,23 @@
+{
+  "skill": "daily-store-basic-diagnosis-to-wechat",
+  "ledger_name": "门店商户运营问题诊断（每日11:18）",
+  "schedule": "每日11:18",
+  "dev_state": "active",
+  "status": "FAILED",
+  "category": "UNKNOWN",
+  "detail": "reason=basic-diag-collect-failed:diag-credential-capture-failed (receipt:reason)",
+  "next_action": "看护代理读日志定位根因后升级处理",
+  "attempts": 1,
+  "max_retries": 2,
+  "duration_seconds": 48.95,
+  "started_at": "2026-10-24T03:53:41",
+  "finished_at": "2026-10-24T03:54:30",
+  "triggered_by": "sweep-test",
+  "logs": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-24/daily-store-basic-diagnosis-to-wechat--20261024-035341--a1--s1.log"
+  ],
+  "fail_signal": {
+    "kind": "reason",
+    "code": "basic-diag-collect-failed:diag-credential-capture-failed"
+  }
+}

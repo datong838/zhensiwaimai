@@ -1,0 +1,1420 @@
+{
+  "ok": true,
+  "executor": "merchant-desktop-wechat-sender",
+  "channel": "desktop",
+  "sent": 12,
+  "messageCount": 12,
+  "historySkipped": 0,
+  "items": [
+    {
+      "merchantId": "543287123",
+      "merchantName": "玖美烤吧",
+      "review": [
+        {
+          "stage": "发送前合同复核",
+          "status": "PASS",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "定位、输入与单次发送",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [
+            {
+              "stage": "authorization",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0,
+              "item": 1,
+              "label": "authorization"
+            },
+            {
+              "stage": "freeze:0",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0,
+              "item": 2,
+              "label": "freeze:0"
+            },
+            {
+              "stage": "preflight",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 3308,
+              "item": 3,
+              "label": "preflight"
+            },
+            {
+              "stage": "send:0",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 22527,
+              "item": 4,
+              "label": "send:0"
+            }
+          ],
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsedMs": 25980,
+              "ok": true,
+              "reason": null,
+              "sendAttempts": 1,
+              "sendReview": [
+                {
+                  "stage": "authorization",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 0,
+                  "item": 1,
+                  "label": "authorization"
+                },
+                {
+                  "stage": "freeze:0",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 0,
+                  "item": 2,
+                  "label": "freeze:0"
+                },
+                {
+                  "stage": "preflight",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 3308,
+                  "item": 3,
+                  "label": "preflight"
+                },
+                {
+                  "stage": "send:0",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 22527,
+                  "item": 4,
+                  "label": "send:0"
+                }
+              ]
+            }
+          ],
+          "elapsedMs": 25981
+        },
+        {
+          "stage": "双帧与原生复制全文复核",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [],
+          "attempts": [],
+          "elapsedMs": 1
+        },
+        {
+          "stage": "提交前证据门禁",
+          "status": "PASS",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "成功历史与原子游标提交",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [],
+          "attempts": [],
+          "elapsedMs": 2
+        }
+      ]
+    },
+    {
+      "merchantId": "1263631869",
+      "merchantName": "茶百道",
+      "review": [
+        {
+          "stage": "发送前合同复核",
+          "status": "PASS",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "定位、输入与单次发送",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [
+            {
+              "stage": "authorization",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0,
+              "item": 1,
+              "label": "authorization"
+            },
+            {
+              "stage": "freeze:0",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0,
+              "item": 2,
+              "label": "freeze:0"
+            },
+            {
+              "stage": "preflight",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 3333,
+              "item": 3,
+              "label": "preflight"
+            },
+            {
+              "stage": "send:0",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 22811,
+              "item": 4,
+              "label": "send:0"
+            }
+          ],
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsedMs": 26259,
+              "ok": true,
+              "reason": null,
+              "sendAttempts": 1,
+              "sendReview": [
+                {
+                  "stage": "authorization",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 0,
+                  "item": 1,
+                  "label": "authorization"
+                },
+                {
+                  "stage": "freeze:0",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 0,
+                  "item": 2,
+                  "label": "freeze:0"
+                },
+                {
+                  "stage": "preflight",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 3333,
+                  "item": 3,
+                  "label": "preflight"
+                },
+                {
+                  "stage": "send:0",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 22811,
+                  "item": 4,
+                  "label": "send:0"
+                }
+              ]
+            }
+          ],
+          "elapsedMs": 26260
+        },
+        {
+          "stage": "双帧与原生复制全文复核",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [],
+          "attempts": [],
+          "elapsedMs": 2
+        },
+        {
+          "stage": "提交前证据门禁",
+          "status": "PASS",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "成功历史与原子游标提交",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [],
+          "attempts": [],
+          "elapsedMs": 1
+        }
+      ]
+    },
+    {
+      "merchantId": "2124325628",
+      "merchantName": "小两口·刀削面",
+      "review": [
+        {
+          "stage": "发送前合同复核",
+          "status": "PASS",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "定位、输入与单次发送",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [
+            {
+              "stage": "authorization",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0,
+              "item": 1,
+              "label": "authorization"
+            },
+            {
+              "stage": "freeze:0",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0,
+              "item": 2,
+              "label": "freeze:0"
+            },
+            {
+              "stage": "preflight",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 3260,
+              "item": 3,
+              "label": "preflight"
+            },
+            {
+              "stage": "send:0",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 22587,
+              "item": 4,
+              "label": "send:0"
+            }
+          ],
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsedMs": 25930,
+              "ok": true,
+              "reason": null,
+              "sendAttempts": 1,
+              "sendReview": [
+                {
+                  "stage": "authorization",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 0,
+                  "item": 1,
+                  "label": "authorization"
+                },
+                {
+                  "stage": "freeze:0",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 0,
+                  "item": 2,
+                  "label": "freeze:0"
+                },
+                {
+                  "stage": "preflight",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 3260,
+                  "item": 3,
+                  "label": "preflight"
+                },
+                {
+                  "stage": "send:0",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 22587,
+                  "item": 4,
+                  "label": "send:0"
+                }
+              ]
+            }
+          ],
+          "elapsedMs": 25931
+        },
+        {
+          "stage": "双帧与原生复制全文复核",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [],
+          "attempts": [],
+          "elapsedMs": 1
+        },
+        {
+          "stage": "提交前证据门禁",
+          "status": "PASS",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "成功历史与原子游标提交",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [],
+          "attempts": [],
+          "elapsedMs": 0
+        }
+      ]
+    },
+    {
+      "merchantId": "1327769553",
+      "merchantName": "太犇牛手作茶铺",
+      "review": [
+        {
+          "stage": "发送前合同复核",
+          "status": "PASS",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "定位、输入与单次发送",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [
+            {
+              "stage": "authorization",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0,
+              "item": 1,
+              "label": "authorization"
+            },
+            {
+              "stage": "freeze:0",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0,
+              "item": 2,
+              "label": "freeze:0"
+            },
+            {
+              "stage": "preflight",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 3259,
+              "item": 3,
+              "label": "preflight"
+            },
+            {
+              "stage": "send:0",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 22708,
+              "item": 4,
+              "label": "send:0"
+            }
+          ],
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsedMs": 26044,
+              "ok": true,
+              "reason": null,
+              "sendAttempts": 1,
+              "sendReview": [
+                {
+                  "stage": "authorization",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 0,
+                  "item": 1,
+                  "label": "authorization"
+                },
+                {
+                  "stage": "freeze:0",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 0,
+                  "item": 2,
+                  "label": "freeze:0"
+                },
+                {
+                  "stage": "preflight",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 3259,
+                  "item": 3,
+                  "label": "preflight"
+                },
+                {
+                  "stage": "send:0",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 22708,
+                  "item": 4,
+                  "label": "send:0"
+                }
+              ]
+            }
+          ],
+          "elapsedMs": 26045
+        },
+        {
+          "stage": "双帧与原生复制全文复核",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [],
+          "attempts": [],
+          "elapsedMs": 1
+        },
+        {
+          "stage": "提交前证据门禁",
+          "status": "PASS",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "成功历史与原子游标提交",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [],
+          "attempts": [],
+          "elapsedMs": 0
+        }
+      ]
+    },
+    {
+      "merchantId": "1364459701",
+      "merchantName": "川渝·沸腾鲜鱼锅·小龙虾",
+      "review": [
+        {
+          "stage": "发送前合同复核",
+          "status": "PASS",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "定位、输入与单次发送",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [
+            {
+              "stage": "authorization",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0,
+              "item": 1,
+              "label": "authorization"
+            },
+            {
+              "stage": "freeze:0",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0,
+              "item": 2,
+              "label": "freeze:0"
+            },
+            {
+              "stage": "preflight",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 3247,
+              "item": 3,
+              "label": "preflight"
+            },
+            {
+              "stage": "send:0",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 22741,
+              "item": 4,
+              "label": "send:0"
+            }
+          ],
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsedMs": 26062,
+              "ok": true,
+              "reason": null,
+              "sendAttempts": 1,
+              "sendReview": [
+                {
+                  "stage": "authorization",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 0,
+                  "item": 1,
+                  "label": "authorization"
+                },
+                {
+                  "stage": "freeze:0",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 0,
+                  "item": 2,
+                  "label": "freeze:0"
+                },
+                {
+                  "stage": "preflight",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 3247,
+                  "item": 3,
+                  "label": "preflight"
+                },
+                {
+                  "stage": "send:0",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 22741,
+                  "item": 4,
+                  "label": "send:0"
+                }
+              ]
+            }
+          ],
+          "elapsedMs": 26064
+        },
+        {
+          "stage": "双帧与原生复制全文复核",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [],
+          "attempts": [],
+          "elapsedMs": 2
+        },
+        {
+          "stage": "提交前证据门禁",
+          "status": "PASS",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "成功历史与原子游标提交",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [],
+          "attempts": [],
+          "elapsedMs": 1
+        }
+      ]
+    },
+    {
+      "merchantId": "1349170816",
+      "merchantName": "小强东北烧烤",
+      "review": [
+        {
+          "stage": "发送前合同复核",
+          "status": "PASS",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "定位、输入与单次发送",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [
+            {
+              "stage": "authorization",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0,
+              "item": 1,
+              "label": "authorization"
+            },
+            {
+              "stage": "freeze:0",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0,
+              "item": 2,
+              "label": "freeze:0"
+            },
+            {
+              "stage": "preflight",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 3225,
+              "item": 3,
+              "label": "preflight"
+            },
+            {
+              "stage": "send:0",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 24203,
+              "item": 4,
+              "label": "send:0"
+            }
+          ],
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsedMs": 27510,
+              "ok": true,
+              "reason": null,
+              "sendAttempts": 1,
+              "sendReview": [
+                {
+                  "stage": "authorization",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 0,
+                  "item": 1,
+                  "label": "authorization"
+                },
+                {
+                  "stage": "freeze:0",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 0,
+                  "item": 2,
+                  "label": "freeze:0"
+                },
+                {
+                  "stage": "preflight",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 3225,
+                  "item": 3,
+                  "label": "preflight"
+                },
+                {
+                  "stage": "send:0",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 24203,
+                  "item": 4,
+                  "label": "send:0"
+                }
+              ]
+            }
+          ],
+          "elapsedMs": 27512
+        },
+        {
+          "stage": "双帧与原生复制全文复核",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [],
+          "attempts": [],
+          "elapsedMs": 1
+        },
+        {
+          "stage": "提交前证据门禁",
+          "status": "PASS",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "成功历史与原子游标提交",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [],
+          "attempts": [],
+          "elapsedMs": 1
+        }
+      ]
+    },
+    {
+      "merchantId": "545475613",
+      "merchantName": "阿震铁板炒饭",
+      "review": [
+        {
+          "stage": "发送前合同复核",
+          "status": "PASS",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "定位、输入与单次发送",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [
+            {
+              "stage": "authorization",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0,
+              "item": 1,
+              "label": "authorization"
+            },
+            {
+              "stage": "freeze:0",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0,
+              "item": 2,
+              "label": "freeze:0"
+            },
+            {
+              "stage": "preflight",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 3231,
+              "item": 3,
+              "label": "preflight"
+            },
+            {
+              "stage": "send:0",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 22435,
+              "item": 4,
+              "label": "send:0"
+            }
+          ],
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsedMs": 25756,
+              "ok": true,
+              "reason": null,
+              "sendAttempts": 1,
+              "sendReview": [
+                {
+                  "stage": "authorization",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 0,
+                  "item": 1,
+                  "label": "authorization"
+                },
+                {
+                  "stage": "freeze:0",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 0,
+                  "item": 2,
+                  "label": "freeze:0"
+                },
+                {
+                  "stage": "preflight",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 3231,
+                  "item": 3,
+                  "label": "preflight"
+                },
+                {
+                  "stage": "send:0",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 22435,
+                  "item": 4,
+                  "label": "send:0"
+                }
+              ]
+            }
+          ],
+          "elapsedMs": 25757
+        },
+        {
+          "stage": "双帧与原生复制全文复核",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [],
+          "attempts": [],
+          "elapsedMs": 1
+        },
+        {
+          "stage": "提交前证据门禁",
+          "status": "PASS",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "成功历史与原子游标提交",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [],
+          "attempts": [],
+          "elapsedMs": 1
+        }
+      ]
+    },
+    {
+      "merchantId": "1270294728",
+      "merchantName": "易冰室·糖水·炸鸡·炸串",
+      "review": [
+        {
+          "stage": "发送前合同复核",
+          "status": "PASS",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "定位、输入与单次发送",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [
+            {
+              "stage": "authorization",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0,
+              "item": 1,
+              "label": "authorization"
+            },
+            {
+              "stage": "freeze:0",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0,
+              "item": 2,
+              "label": "freeze:0"
+            },
+            {
+              "stage": "preflight",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 3241,
+              "item": 3,
+              "label": "preflight"
+            },
+            {
+              "stage": "send:0",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 24387,
+              "item": 4,
+              "label": "send:0"
+            }
+          ],
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsedMs": 27724,
+              "ok": true,
+              "reason": null,
+              "sendAttempts": 1,
+              "sendReview": [
+                {
+                  "stage": "authorization",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 0,
+                  "item": 1,
+                  "label": "authorization"
+                },
+                {
+                  "stage": "freeze:0",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 0,
+                  "item": 2,
+                  "label": "freeze:0"
+                },
+                {
+                  "stage": "preflight",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 3241,
+                  "item": 3,
+                  "label": "preflight"
+                },
+                {
+                  "stage": "send:0",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 24387,
+                  "item": 4,
+                  "label": "send:0"
+                }
+              ]
+            }
+          ],
+          "elapsedMs": 27725
+        },
+        {
+          "stage": "双帧与原生复制全文复核",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [],
+          "attempts": [],
+          "elapsedMs": 1
+        },
+        {
+          "stage": "提交前证据门禁",
+          "status": "PASS",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "成功历史与原子游标提交",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [],
+          "attempts": [],
+          "elapsedMs": 1
+        }
+      ]
+    },
+    {
+      "merchantId": "1316456141",
+      "merchantName": "Kyochon1991校村炸鸡",
+      "review": [
+        {
+          "stage": "发送前合同复核",
+          "status": "PASS",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "定位、输入与单次发送",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [
+            {
+              "stage": "authorization",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0,
+              "item": 1,
+              "label": "authorization"
+            },
+            {
+              "stage": "freeze:0",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0,
+              "item": 2,
+              "label": "freeze:0"
+            },
+            {
+              "stage": "preflight",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 3233,
+              "item": 3,
+              "label": "preflight"
+            },
+            {
+              "stage": "send:0",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 22579,
+              "item": 4,
+              "label": "send:0"
+            }
+          ],
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsedMs": 25911,
+              "ok": true,
+              "reason": null,
+              "sendAttempts": 1,
+              "sendReview": [
+                {
+                  "stage": "authorization",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 0,
+                  "item": 1,
+                  "label": "authorization"
+                },
+                {
+                  "stage": "freeze:0",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 0,
+                  "item": 2,
+                  "label": "freeze:0"
+                },
+                {
+                  "stage": "preflight",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 3233,
+                  "item": 3,
+                  "label": "preflight"
+                },
+                {
+                  "stage": "send:0",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 22579,
+                  "item": 4,
+                  "label": "send:0"
+                }
+              ]
+            }
+          ],
+          "elapsedMs": 25912
+        },
+        {
+          "stage": "双帧与原生复制全文复核",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [],
+          "attempts": [],
+          "elapsedMs": 1
+        },
+        {
+          "stage": "提交前证据门禁",
+          "status": "PASS",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "成功历史与原子游标提交",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [],
+          "attempts": [],
+          "elapsedMs": 1
+        }
+      ]
+    },
+    {
+      "merchantId": "156280223",
+      "merchantName": "七乐·芝士炸鸡·烤肉饭料理",
+      "review": [
+        {
+          "stage": "发送前合同复核",
+          "status": "PASS",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "定位、输入与单次发送",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [
+            {
+              "stage": "authorization",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0,
+              "item": 1,
+              "label": "authorization"
+            },
+            {
+              "stage": "freeze:0",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0,
+              "item": 2,
+              "label": "freeze:0"
+            },
+            {
+              "stage": "preflight",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 3260,
+              "item": 3,
+              "label": "preflight"
+            },
+            {
+              "stage": "send:0",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 22584,
+              "item": 4,
+              "label": "send:0"
+            }
+          ],
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsedMs": 25934,
+              "ok": true,
+              "reason": null,
+              "sendAttempts": 1,
+              "sendReview": [
+                {
+                  "stage": "authorization",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 0,
+                  "item": 1,
+                  "label": "authorization"
+                },
+                {
+                  "stage": "freeze:0",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 0,
+                  "item": 2,
+                  "label": "freeze:0"
+                },
+                {
+                  "stage": "preflight",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 3260,
+                  "item": 3,
+                  "label": "preflight"
+                },
+                {
+                  "stage": "send:0",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 22584,
+                  "item": 4,
+                  "label": "send:0"
+                }
+              ]
+            }
+          ],
+          "elapsedMs": 25936
+        },
+        {
+          "stage": "双帧与原生复制全文复核",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [],
+          "attempts": [],
+          "elapsedMs": 2
+        },
+        {
+          "stage": "提交前证据门禁",
+          "status": "PASS",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "成功历史与原子游标提交",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [],
+          "attempts": [],
+          "elapsedMs": 1
+        }
+      ]
+    },
+    {
+      "merchantId": "1357690495",
+      "merchantName": "沂蒙青花椒临沂炒鸡",
+      "review": [
+        {
+          "stage": "发送前合同复核",
+          "status": "PASS",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "定位、输入与单次发送",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [
+            {
+              "stage": "authorization",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0,
+              "item": 1,
+              "label": "authorization"
+            },
+            {
+              "stage": "freeze:0",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0,
+              "item": 2,
+              "label": "freeze:0"
+            },
+            {
+              "stage": "preflight",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 3257,
+              "item": 3,
+              "label": "preflight"
+            },
+            {
+              "stage": "send:0",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 22505,
+              "item": 4,
+              "label": "send:0"
+            }
+          ],
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsedMs": 25845,
+              "ok": true,
+              "reason": null,
+              "sendAttempts": 1,
+              "sendReview": [
+                {
+                  "stage": "authorization",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 0,
+                  "item": 1,
+                  "label": "authorization"
+                },
+                {
+                  "stage": "freeze:0",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 0,
+                  "item": 2,
+                  "label": "freeze:0"
+                },
+                {
+                  "stage": "preflight",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 3257,
+                  "item": 3,
+                  "label": "preflight"
+                },
+                {
+                  "stage": "send:0",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 22505,
+                  "item": 4,
+                  "label": "send:0"
+                }
+              ]
+            }
+          ],
+          "elapsedMs": 25846
+        },
+        {
+          "stage": "双帧与原生复制全文复核",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [],
+          "attempts": [],
+          "elapsedMs": 1
+        },
+        {
+          "stage": "提交前证据门禁",
+          "status": "PASS",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "成功历史与原子游标提交",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [],
+          "attempts": [],
+          "elapsedMs": 1
+        }
+      ]
+    },
+    {
+      "merchantId": "1362226686",
+      "merchantName": "盈夏面馆上海浇头面",
+      "review": [
+        {
+          "stage": "发送前合同复核",
+          "status": "PASS",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "定位、输入与单次发送",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [
+            {
+              "stage": "authorization",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0,
+              "item": 1,
+              "label": "authorization"
+            },
+            {
+              "stage": "freeze:0",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0,
+              "item": 2,
+              "label": "freeze:0"
+            },
+            {
+              "stage": "preflight",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 3234,
+              "item": 3,
+              "label": "preflight"
+            },
+            {
+              "stage": "send:0",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 22536,
+              "item": 4,
+              "label": "send:0"
+            }
+          ],
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsedMs": 25867,
+              "ok": true,
+              "reason": null,
+              "sendAttempts": 1,
+              "sendReview": [
+                {
+                  "stage": "authorization",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 0,
+                  "item": 1,
+                  "label": "authorization"
+                },
+                {
+                  "stage": "freeze:0",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 0,
+                  "item": 2,
+                  "label": "freeze:0"
+                },
+                {
+                  "stage": "preflight",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 3234,
+                  "item": 3,
+                  "label": "preflight"
+                },
+                {
+                  "stage": "send:0",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 22536,
+                  "item": 4,
+                  "label": "send:0"
+                }
+              ]
+            }
+          ],
+          "elapsedMs": 25868
+        },
+        {
+          "stage": "双帧与原生复制全文复核",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [],
+          "attempts": [],
+          "elapsedMs": 1
+        },
+        {
+          "stage": "提交前证据门禁",
+          "status": "PASS",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "成功历史与原子游标提交",
+          "status": "PASS",
+          "pitfalls": [],
+          "details": [],
+          "attempts": [],
+          "elapsedMs": 1
+        }
+      ]
+    }
+  ],
+  "contentionRetries": 0,
+  "contentionWaitMs": 0,
+  "contentionEvents": [],
+  "lastMerchantId": "1362226686",
+  "verified": true,
+  "mode": "execute"
+}

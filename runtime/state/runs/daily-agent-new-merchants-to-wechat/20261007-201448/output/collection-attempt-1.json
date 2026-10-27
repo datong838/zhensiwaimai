@@ -1,0 +1,132 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-07",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 153,
+    "task_page": 536,
+    "navigation": 3057,
+    "date_filter": 1477,
+    "page_1_read": 314,
+    "selection_audit": 0,
+    "detail_522475064": 758
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_522475064": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "522475064",
+      "merchantName": "口缸米线·米线",
+      "recommendTime": "2026-10-07 19:40:02",
+      "city": "保山市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 8,
+      "address": "永盛街道办事处保山中医药高等专科学校内(小吃街21号商铺)",
+      "contact": "赵，15087573261",
+      "detailVerified": true,
+      "text": "城市：保山市  ；  联系人：赵，15087573261  ；  店铺：口缸米线·米线  ；  地址：永盛街道办事处保山中医药高等专科学校内(小吃街21号商铺)",
+      "sha256": "65f683e54f6bbb2bb87837bde753c6486254d3c9620980da1c9b807455e1f819"
+    }
+  ],
+  "frontmostBefore": "com.tencent.workbuddy.mac",
+  "createdAt": "2026-10-07T12:14:56.041Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-07",
+    "merchantName": "郭郭东北大碗麻辣烫",
+    "merchantId": "546862408",
+    "recommendTime": "2026-10-07 17:16:55",
+    "tableOrder": 7,
+    "messageSha256": "357e66f31e87e21f04ed1167d515cdee04acadd92283b08c51d5f4ef636a3401",
+    "sentAt": "2026-10-07T17:58:50+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-07",
+  "filterEndDate": "2026-10-07",
+  "dateFilter": "2026-10-07..2026-10-07",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 8,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 8,
+  "pendingRows": 8,
+  "targetCount": 1,
+  "selectionAudit": {
+    "totalRows": 8,
+    "pendingRows": 8,
+    "excludedAtOrBeforeCursor": 7,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 1,
+    "rows": [
+      {
+        "merchantId": "522475064",
+        "recommendTime": "2026-10-07 19:40:02",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546862408",
+        "recommendTime": "2026-10-07 17:16:55",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546590794",
+        "recommendTime": "2026-10-07 15:14:06",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1316655046",
+        "recommendTime": "2026-10-07 14:42:25",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1355794675",
+        "recommendTime": "2026-10-07 14:03:59",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "543219931",
+        "recommendTime": "2026-10-07 11:50:25",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1342388590",
+        "recommendTime": "2026-10-07 09:07:48",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "542957171",
+        "recommendTime": "2026-10-07 01:44:14",
+        "status": "待处理"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 6873,
+  "frontmostAfter": "com.tencent.workbuddy.mac",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261007-201448/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261007-201448/output/collection-attempt-1.review.md"
+}

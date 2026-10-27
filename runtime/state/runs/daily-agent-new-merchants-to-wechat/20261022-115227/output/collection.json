@@ -1,0 +1,112 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-22",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 98,
+    "task_page": 459,
+    "navigation": 1466,
+    "date_filter": 1903,
+    "page_1_read": 399,
+    "selection_audit": 1,
+    "detail_1365714960": 869
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_1365714960": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "1365714960",
+      "merchantName": "罐罐食咖",
+      "recommendTime": "2026-10-22 10:53:26",
+      "city": "聊城市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 3,
+      "address": "新区街道东昌西路北、柳园北路西5号楼A区潮玩街区外主题店3-1(一址多照热食类食品制售,自制饮品制售)",
+      "contact": "王，19606355568",
+      "detailVerified": true,
+      "text": "城市：聊城市  ；  联系人：王，19606355568  ；  店铺：罐罐食咖  ；  地址：新区街道东昌西路北、柳园北路西5号楼A区潮玩街区外主题店3-1(一址多照热食类食品制售,自制饮品制售)  ；  商家ID：1365714960",
+      "sha256": "6a3f5b31ed60f734436cd1dac36b0c8a51ff47e7de471e5b7b9bd5d1cad63a83"
+    }
+  ],
+  "frontmostBefore": "com.openai.codex",
+  "createdAt": "2026-10-22T03:52:34.145Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-22",
+    "merchantName": "蜜雪冰城",
+    "merchantId": "524831612",
+    "recommendTime": "2026-10-22 00:49:57",
+    "tableOrder": 19,
+    "messageSha256": "ad38e0a4758c3dc09e20189811cc15def2471f77d342c820d995235f4c3ff20b",
+    "sentAt": "2026-10-22T10:39:09+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-22",
+  "filterEndDate": "2026-10-22",
+  "dateFilter": "2026-10-22..2026-10-22",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 4,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 4,
+  "pendingRows": 3,
+  "targetCount": 1,
+  "selectionAudit": {
+    "totalRows": 4,
+    "pendingRows": 3,
+    "excludedAtOrBeforeCursor": 2,
+    "excludedAfterCursorNotPending": 1,
+    "targetCount": 1,
+    "rows": [
+      {
+        "merchantId": "1365714960",
+        "recommendTime": "2026-10-22 10:53:26",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "524831612",
+        "recommendTime": "2026-10-22 00:49:57",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "545844412",
+        "recommendTime": "2026-10-22 00:00:53",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1362959632",
+        "recommendTime": "2026-10-22 11:08:33",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 5842,
+  "frontmostAfter": "com.openai.codex",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261022-115227/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261022-115227/output/collection-attempt-1.review.md"
+}

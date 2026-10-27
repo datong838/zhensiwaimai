@@ -1,0 +1,47 @@
+{
+  "at": "2026-10-24T00:21:58.754Z",
+  "ok": true,
+  "rows": [
+    {
+      "port": 9230,
+      "role": "taobao-brand",
+      "cdp": true,
+      "state": "unknown",
+      "ok": false,
+      "detail": "无目标域(melody.shop.ele.me)标签页"
+    },
+    {
+      "port": 9231,
+      "role": "taobao-agent-service",
+      "cdp": true,
+      "state": "in",
+      "ok": true,
+      "detail": "API 认证通过（result=false）（HTTP 200）",
+      "http": 200,
+      "url": "https://open.shop.ele.me/manager/base/home"
+    },
+    {
+      "port": 9232,
+      "role": "jinsha-business",
+      "cdp": true,
+      "state": "in",
+      "ok": true,
+      "detail": "页面命中业务特征：数据总览",
+      "url": "https://data.guoshuyufen.com/#/businessData/realTimeData"
+    },
+    {
+      "port": 9233,
+      "role": "meituan-im",
+      "cdp": true,
+      "state": "in",
+      "ok": true,
+      "detail": "页面命中业务特征：顾客消息",
+      "url": "https://waimaie.meituan.com/imworkbench/home?appId=4&clientType=140006#/im/page/workbench/reception"
+    }
+  ],
+  "unknown": [
+    9230
+  ],
+  "lastAlertAt": "2026-10-24T00:01:15.243Z",
+  "openLoginAt": "2026-10-23T07:39:45.594Z"
+}

@@ -1,0 +1,196 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：雅安市  ；  联系人：姚，18080575711  ；  店铺：甜也·鲜切牛肉饭·日式拉面  ；  地址：张家山路189号1楼1号",
+      "sha256": "8c175fca53526777be05294c2b9e493952a6089a0c0350db60f911bac649051c"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "55429ca630e552681da2b484d4a391ed1e44406830cb7545dcd79557cb78a680",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "8c175fca53526777be05294c2b9e493952a6089a0c0350db60f911bac649051c",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1791354652.6227908,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-text-anchor",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "电销+直播攻坚组",
+          "currentTitle": "电销+直播攻坚组",
+          "messageCount": 50,
+          "anchor": "text-exact",
+          "anchorValue": "城市：雅安市  ；  联系人：姚，18080575711  ；  店铺：甜也·鲜切牛肉饭·日式拉面  ；  地址：张家山路189号1楼1号",
+          "anchorInTrailingPosition": true,
+          "autoKind": null,
+          "readbackAt": 1791354674.484096
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "电销+直播攻坚组",
+            "len": 69
+          },
+          "route": "direct",
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 3343
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 21861
+      }
+    ],
+    "elapsedMs": 25208,
+    "eventKey": "dc845402fc27ae8b37e40b273db3013987d3253ef41a1fcc34d4bbeadaa15fbc",
+    "reviewSummary": {
+      "totalElapsedMs": 25208,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/7ba0159d85f0dcca79eed2c00637d50ef82fca15042da6c5b9d5938ee379a18a.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 3343,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 21861,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 25208,
+  "reviewSummary": {
+    "totalElapsedMs": 25208,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "ok": true,
+    "resolvedGroup": "电销+直播攻坚组",
+    "currentTitle": "电销+直播攻坚组",
+    "messageCount": 50,
+    "anchor": "text-exact",
+    "anchorValue": "城市：雅安市  ；  联系人：姚，18080575711  ；  店铺：甜也·鲜切牛肉饭·日式拉面  ；  地址：张家山路189号1楼1号",
+    "anchorInTrailingPosition": true,
+    "autoKind": null,
+    "readbackAt": 1791354674.484096
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false,
+  "attemptReviews": [
+    {
+      "attempt": 1,
+      "elapsedMs": 25313,
+      "ok": true,
+      "reason": null,
+      "sendAttempts": 1,
+      "sendReview": [
+        {
+          "stage": "authorization",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 1,
+          "label": "authorization"
+        },
+        {
+          "stage": "freeze:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 2,
+          "label": "freeze:0"
+        },
+        {
+          "stage": "preflight",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 3343,
+          "item": 3,
+          "label": "preflight"
+        },
+        {
+          "stage": "send:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 21861,
+          "item": 4,
+          "label": "send:0"
+        }
+      ]
+    }
+  ],
+  "contentionRetries": 0,
+  "contentionWaitMs": 0,
+  "contentionEvents": []
+}

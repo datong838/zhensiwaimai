@@ -1,0 +1,112 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-06",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 115,
+    "task_page": 401,
+    "navigation": 1616,
+    "date_filter": 1551,
+    "page_1_read": 296,
+    "selection_audit": 0,
+    "detail_1364094640": 773
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_1364094640": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "1364094640",
+      "merchantName": "忆牛香现炒浇头手擀面",
+      "recommendTime": "2026-10-06 16:34:04",
+      "city": "宁波市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 4,
+      "address": "宝庆路63号1-16",
+      "contact": "吴，18768500888",
+      "detailVerified": true,
+      "text": "城市：宁波市  ；  联系人：吴，18768500888  ；  店铺：忆牛香现炒浇头手擀面  ；  地址：宝庆路63号1-16",
+      "sha256": "7ceb0d4536e7153296c50e361a72ab42e8271a9960fcaafdc95b8bf094b87300"
+    }
+  ],
+  "frontmostBefore": "com.tencent.workbuddy.mac",
+  "createdAt": "2026-10-06T09:29:59.486Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-06",
+    "merchantName": "隆江猪脚饭·猪头汤",
+    "merchantId": "1332435894",
+    "recommendTime": "2026-10-06 15:47:26",
+    "tableOrder": 12,
+    "messageSha256": "e5c97fff64385b1d50ed6895e0fd45cfa133a475ac97fc9aea0791c6ed26ba61",
+    "sentAt": "2026-10-06T16:02:19+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-06",
+  "filterEndDate": "2026-10-06",
+  "dateFilter": "2026-10-06..2026-10-06",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 4,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 4,
+  "pendingRows": 4,
+  "targetCount": 1,
+  "selectionAudit": {
+    "totalRows": 4,
+    "pendingRows": 4,
+    "excludedAtOrBeforeCursor": 3,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 1,
+    "rows": [
+      {
+        "merchantId": "1364094640",
+        "recommendTime": "2026-10-06 16:34:04",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1332435894",
+        "recommendTime": "2026-10-06 15:47:26",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1357327730",
+        "recommendTime": "2026-10-06 14:40:49",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "543338440",
+        "recommendTime": "2026-10-06 12:45:36",
+        "status": "待处理"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 5348,
+  "frontmostAfter": "com.tencent.workbuddy.mac",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261006-172953/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261006-172953/output/collection-attempt-1.review.md"
+}

@@ -1,0 +1,210 @@
+[
+  {
+    "row": 1,
+    "ledger_name": "昨日门店Top10截图发运营群（每日08:00）",
+    "schedule": "每日08:00",
+    "dev_state": "active",
+    "skill": "daily-top10-to-wechat-group"
+  },
+  {
+    "ledger_name": "合同解约申请·处理中任务列表截图（每日09:00）",
+    "schedule": "每日09:00",
+    "dev_state": "active",
+    "skill": "contract-termination-applications-screenshot",
+    "row": 2
+  },
+  {
+    "row": 3,
+    "ledger_name": "昨日差评分析（每日08:40）",
+    "schedule": "每日08:40",
+    "dev_state": "active",
+    "skill": "daily-negative-reviews"
+  },
+  {
+    "row": 4,
+    "ledger_name": "品牌差评申诉跟进（每日17:00）",
+    "schedule": "每日17:00（单档）",
+    "dev_state": "paused",
+    "skill": "brand-negative-review-appeal-followup",
+    "note": "暂停中"
+  },
+  {
+    "row": 5,
+    "ledger_name": "金鲨昨日双平台日报发运营群（每日11:00）",
+    "schedule": "每日11:00",
+    "dev_state": "active",
+    "skill": "daily-jinsha-reports-to-business-wechat"
+  },
+  {
+    "row": 6,
+    "ledger_name": "淘宝昨日报表下载上传金鲨（每日13:00）",
+    "schedule": "每日13:00",
+    "dev_state": "active",
+    "skill": "daily-taobao-download-to-jinsha"
+  },
+  {
+    "row": 7,
+    "ledger_name": "淘宝新增商家增量通知（每30分钟）",
+    "schedule": "每30分钟（08:30-19:00）",
+    "dev_state": "active",
+    "skill": "daily-agent-new-merchants-to-wechat"
+  },
+  {
+    "row": 8,
+    "ledger_name": "美团商家中心智能客服（17:00·备发文档）",
+    "schedule": "每日17:00",
+    "dev_state": "active",
+    "skill": "meituan-intelligent-customer-service"
+  },
+  {
+    "row": 9,
+    "ledger_name": "淘宝闪购自动差评申诉并企微反馈（每2小时·13:00起）",
+    "schedule": "每2小时（13-17档）",
+    "dev_state": "active",
+    "skill": "taobao-flash-sale-negative-review-appeals"
+  },
+  {
+    "row": 10,
+    "ledger_name": "企微视频下载与四视频平台发布（群监控按需）",
+    "schedule": "群监控按需",
+    "dev_state": "blocked",
+    "skill": "daily-wechat-video-publish"
+  },
+  {
+    "row": 11,
+    "ledger_name": "视频评价回复（群监控按需）",
+    "schedule": "群监控按需",
+    "dev_state": "blocked",
+    "skill": null,
+    "note": "依附视频三件套，同受接口权限与风控封号约束；不进自动看护。"
+  },
+  {
+    "row": 12,
+    "ledger_name": "每周外卖巡店（每周）",
+    "schedule": "每周",
+    "dev_state": "blocked",
+    "skill": "store-inspection"
+  },
+  {
+    "row": 13,
+    "ledger_name": "淘宝增量增加到企微汇总表（每小时）",
+    "schedule": "每小时",
+    "dev_state": "blocked",
+    "skill": null,
+    "note": "淘宝增量商家已经每小时发运营群里了，这里不急需且需企业微信账号；不进自动看护。"
+  },
+  {
+    "row": 14,
+    "ledger_name": "群监控“建店/重开”汇总企微建店表（每小时）",
+    "schedule": "每小时",
+    "dev_state": "blocked",
+    "skill": null,
+    "note": "需企业微信账号进群取数；不进自动看护。"
+  },
+  {
+    "row": 15,
+    "ledger_name": "建店需求（阻塞·待建店新资料）",
+    "schedule": "—",
+    "dev_state": "blocked",
+    "skill": null,
+    "note": "待建店新资料（老资料不可复用）；不进自动看护。"
+  },
+  {
+    "row": 16,
+    "ledger_name": "新店开业识别与通知（每日10:50）",
+    "schedule": "每日10:50",
+    "dev_state": "active",
+    "skill": "daily-new-stores-opening-to-wechat"
+  },
+  {
+    "row": 17,
+    "ledger_name": "淘宝新店活动缺项巡检与提醒（每日11:00）",
+    "schedule": "每日11:00",
+    "dev_state": "active",
+    "skill": "daily-new-stores-activity-audit-to-wechat"
+  },
+  {
+    "row": 18,
+    "ledger_name": "淘宝新店装修缺失巡检与提醒（每日11:30）",
+    "schedule": "每日11:30",
+    "dev_state": "active",
+    "skill": "daily-new-stores-decoration-audit-to-wechat"
+  },
+  {
+    "row": 19,
+    "ledger_name": "淘宝新店未养活运营分配（每日11:40）",
+    "schedule": "每日11:40",
+    "dev_state": "active",
+    "skill": "daily-new-stores-not-nourished-ops-to-wechat"
+  },
+  {
+    "row": 20,
+    "ledger_name": "门店商户运营问题诊断（每日11:18）",
+    "schedule": "每日11:18",
+    "dev_state": "active",
+    "skill": "daily-store-basic-diagnosis-to-wechat"
+  },
+  {
+    "row": 21,
+    "ledger_name": "美团商家中心智能客服（12:00）",
+    "schedule": "每日12:00",
+    "dev_state": "active",
+    "skill": "meituan-intelligent-customer-service-12"
+  },
+  {
+    "row": 22,
+    "ledger_name": "美团商家中心智能客服（15:00）",
+    "schedule": "每日15:00",
+    "dev_state": "active",
+    "skill": "meituan-intelligent-customer-service-15"
+  },
+  {
+    "row": 23,
+    "ledger_name": "金鲨美团外卖差评申诉（每日13:08）",
+    "schedule": "每日13:08",
+    "dev_state": "active",
+    "skill": "meituan-waimai-negative-review-appeals-11"
+  },
+  {
+    "row": 24,
+    "ledger_name": "金鲨美团外卖差评申诉（每日14:25）",
+    "schedule": "每日14:25",
+    "dev_state": "active",
+    "skill": "meituan-waimai-negative-review-appeals-1425"
+  },
+  {
+    "row": 25,
+    "ledger_name": "负反馈列表申诉·双平台执行（每日08:30）",
+    "schedule": "每日08:30",
+    "dev_state": "active",
+    "skill": "negative-feedback-list-appeals-0930"
+  },
+  {
+    "row": 26,
+    "ledger_name": "负反馈列表申诉·双平台 Excel 汇总发群（每日08:30·申诉后即发）",
+    "schedule": "每日08:30（申诉完成后即发）",
+    "dev_state": "active",
+    "skill": "negative-feedback-list-appeals-1230"
+  },
+  {
+    "row": 27,
+    "ledger_name": "淘宝闪购门店经营任务完成率小组统计（每日12:00）",
+    "schedule": "每日12:00",
+    "dev_state": "active",
+    "skill": "daily-store-task-completion-ops-to-wechat"
+  },
+  {
+    "row": 28,
+    "ledger_name": "20项运营指标全店铺互动反馈",
+    "schedule": "待确定首发日期",
+    "dev_state": "pending",
+    "skill": "daily-store-metrics-rotation-to-wechat"
+  },
+  {
+    "row": 29,
+    "ledger_name": "淘宝闪购差评申诉（每日11:20）",
+    "schedule": "每日11:20",
+    "dev_state": "active",
+    "skill": "taobao-shangou-negative-review-appeals"
+  }
+]

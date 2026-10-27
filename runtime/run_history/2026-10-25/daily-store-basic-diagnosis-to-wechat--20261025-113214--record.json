@@ -1,0 +1,23 @@
+{
+  "skill": "daily-store-basic-diagnosis-to-wechat",
+  "ledger_name": "门店商户运营问题诊断（每日11:18）",
+  "schedule": "每日11:18",
+  "dev_state": "active",
+  "status": "FAILED",
+  "category": "RECOVERABLE",
+  "detail": "reason=ui-post-result-timeout (receipt:reason)",
+  "next_action": "重试预算耗尽：看护代理读日志决定再等冷却重跑或跳过",
+  "attempts": 1,
+  "max_retries": 0,
+  "duration_seconds": 318.49,
+  "started_at": "2026-10-25T11:32:14",
+  "finished_at": "2026-10-25T11:37:33",
+  "triggered_by": "daemon",
+  "logs": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-25/daily-store-basic-diagnosis-to-wechat--20261025-113214--a1--s1.log"
+  ],
+  "fail_signal": {
+    "kind": "reason",
+    "code": "ui-post-result-timeout"
+  }
+}

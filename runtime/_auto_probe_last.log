@@ -1,0 +1,40 @@
+===== 对时 =====
+Sat Oct 17 12:43:22 CST 2026
+随机等待 344s ...
+===== 等待后开始 =====
+Sat Oct 17 12:49:06 CST 2026
+/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/_auto_probe_run.sh:23: command not found: mapfile
+PORT=8731 RELAYPORT=8732 CAND=
+CHANNEL_STATE=UNREACHABLE (双侧不可达)
+CHANNEL_STATE=UNREACHABLE TARGET_PRESENT=? ALERT_PRESENT=?
+===== 判据自检 =====
+Exception ignored in: <_io.TextIOWrapper name='<stdout>' mode='w' encoding='utf-8'>
+BrokenPipeError: [Errno 32] Broken pipe
+self-test v2 判据表（API + 渲染，正负对照）
+  ✅ API·正 result=true                              want=in      got=in
+  ✅ API·正 result=null 无 error（isMaster 合法返回）       want=in      got=in
+  ✅ API·负 UNAUTHORIZED（curl 无 cookie 实证）           want=out     got=out
+  ✅ API·格式错 ⇒ UNKNOWN 不误判                          want=unknown got=unknown
+  ✅ API·非 JSON ⇒ UNKNOWN                           want=unknown got=unknown
+  ✅ 渲染·正 业务页（今日实测文本）                               want=in      got=in
+  ✅ 渲染·负 登录页（今日实测文本）                               want=out     got=out
+  ✅ 渲染·正 美团工作台（今日实测文本）                             want=in      got=in
+  ✅ 渲染·负 美团登录页                                     want=out     got=out
+  ✅ 渲染·都不命中 ⇒ UNKNOWN 不猜                           want=unknown got=unknown
+self-test: 10 passed, 0 failed
+SELFTEST_PASS=10 SELFTEST_FAIL=0
+SELFTEST_RESULT=OK
+===== 真会话探活 =====
+auth-keepalive v2 2026-10-17T04:49:06.936Z
+  :9230 taobao-brand         ✅ 页面命中业务特征：商家首页  https://melody.shop.ele.me/app/chain/95708808/stats__center#app.chainshop.stats.center
+  :9231 taobao-agent-service ✅ API 认证通过（result=false）（HTTP 200）  https://open.shop.ele.me/manager/base/home
+  :9232 jinsha-business      ✅ 页面命中业务特征：数据总览  https://data.guoshuyufen.com/#/businessData/realTimeData
+  :9233 meituan-im           ✅ 页面命中业务特征：顾客消息  https://waimaie.meituan.com/imworkbench/home?appId=4&clientType=140006#/im/page/workbench/reception
+PROBE_RC=0
+===== 监理闭环看板 =====
+WAR_COUNT 0
+===== 汇总 =====
+CHANNEL_STATE=UNREACHABLE
+SELFTEST_PASS=10 SELFTEST_FAIL=0
+PROBE_RC=0
+DONE

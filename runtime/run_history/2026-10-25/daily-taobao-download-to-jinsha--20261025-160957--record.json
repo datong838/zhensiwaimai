@@ -1,0 +1,23 @@
+{
+  "skill": "daily-taobao-download-to-jinsha",
+  "ledger_name": "淘宝昨日报表下载上传金鲨（每日13:00）",
+  "schedule": "每日13:00",
+  "dev_state": "active",
+  "status": "FAILED",
+  "category": "UNKNOWN",
+  "detail": "error-code=receipt-path-out-of-scope (text)",
+  "next_action": "看护代理读日志定位根因后升级处理",
+  "attempts": 1,
+  "max_retries": 0,
+  "duration_seconds": 0.21,
+  "started_at": "2026-10-25T16:09:57",
+  "finished_at": "2026-10-25T16:09:57",
+  "triggered_by": "daemon",
+  "logs": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-25/daily-taobao-download-to-jinsha--20261025-160957--a1--s1.log"
+  ],
+  "fail_signal": {
+    "kind": "text",
+    "code": "receipt-path-out-of-scope"
+  }
+}

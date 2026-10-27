@@ -1,0 +1,161 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-08",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 67,
+    "task_page": 416,
+    "navigation": 1597,
+    "date_filter": 1602,
+    "page_1_read": 324,
+    "page_1_next": 56,
+    "page_2_read": 542,
+    "selection_audit": 0,
+    "detail_545845110": 804
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "page_1_next": "PASS",
+    "page_2_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_545845110": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "545845110",
+      "merchantName": "赵二两把子肉",
+      "recommendTime": "2026-10-08 18:13:48",
+      "city": "运城市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 12,
+      "address": "北城街道槐中北路建材巷6号第四间门面房餐饮服务",
+      "contact": "李，17634004305",
+      "detailVerified": true,
+      "text": "城市：运城市  ；  联系人：李，17634004305  ；  店铺：赵二两把子肉  ；  地址：北城街道槐中北路建材巷6号第四间门面房餐饮服务",
+      "sha256": "facc7c13dc92898a99be9464c7e78652efba89c0febbcc929286c4a0ab2b7d0d"
+    }
+  ],
+  "frontmostBefore": "com.google.Chrome",
+  "createdAt": "2026-10-08T12:38:08.137Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-08",
+    "merchantName": "襄潮·牛粉",
+    "merchantId": "1343716140",
+    "recommendTime": "2026-10-08 17:18:47",
+    "tableOrder": 11,
+    "messageSha256": "a8725f166ea155ebbca65fac88716b9da6059ea646f191a70d1e5a01808a6c15",
+    "sentAt": "2026-10-08T18:14:12+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-08",
+  "filterEndDate": "2026-10-08",
+  "dateFilter": "2026-10-08..2026-10-08",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 10,
+      "nextEnabled": true
+    },
+    {
+      "page": 2,
+      "rowCount": 2,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 12,
+  "pendingRows": 8,
+  "targetCount": 1,
+  "selectionAudit": {
+    "totalRows": 12,
+    "pendingRows": 8,
+    "excludedAtOrBeforeCursor": 11,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 1,
+    "rows": [
+      {
+        "merchantId": "545845110",
+        "recommendTime": "2026-10-08 18:13:48",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1343716140",
+        "recommendTime": "2026-10-08 17:18:47",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1347208605",
+        "recommendTime": "2026-10-08 16:23:20",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "544806195",
+        "recommendTime": "2026-10-08 14:00:50",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1340910319",
+        "recommendTime": "2026-10-08 13:56:42",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1355498382",
+        "recommendTime": "2026-10-08 11:51:44",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "540991156",
+        "recommendTime": "2026-10-08 01:59:03",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "545462236",
+        "recommendTime": "2026-10-08 01:51:15",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "547015922",
+        "recommendTime": "2026-10-08 16:12:55",
+        "status": "完成"
+      },
+      {
+        "merchantId": "546571451",
+        "recommendTime": "2026-10-08 15:35:14",
+        "status": "完成"
+      },
+      {
+        "merchantId": "1358946098",
+        "recommendTime": "2026-10-08 15:04:19",
+        "status": "完成"
+      },
+      {
+        "merchantId": "1355660185",
+        "recommendTime": "2026-10-08 14:46:30",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 6648,
+  "frontmostAfter": "com.google.Chrome",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261008-203800/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261008-203800/output/collection-attempt-1.review.md"
+}

@@ -1,0 +1,325 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-21",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 53,
+    "task_page": 262,
+    "navigation": 1533,
+    "date_filter": 1418,
+    "page_1_read": 442,
+    "page_1_next": 86,
+    "page_2_read": 738,
+    "page_2_next": 75,
+    "page_3_read": 601,
+    "selection_audit": 0,
+    "detail_1360630774": 862,
+    "detail_1354180916": 2545,
+    "detail_1358915072": 1131,
+    "detail_545601667": 1186,
+    "detail_1364332618": 1191,
+    "detail_1364097356": 1162
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "page_1_next": "PASS",
+    "page_2_read": "PASS",
+    "page_2_next": "PASS",
+    "page_3_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_1360630774": "PASS",
+    "detail_1354180916": "PASS",
+    "detail_1358915072": "PASS",
+    "detail_545601667": "PASS",
+    "detail_1364332618": "PASS",
+    "detail_1364097356": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "1360630774",
+      "merchantName": "披萨星球·披萨·意面·焗饭",
+      "recommendTime": "2026-10-20 19:50:40",
+      "city": "贵阳市",
+      "status": "待处理",
+      "rowIndex": 5,
+      "sourcePage": 1,
+      "tableOrder": 21,
+      "address": "区三都街道花果园彭家湾花果园项目M区第15-16栋L9层24号[兰花都办事处]",
+      "contact": "汤，18208127634",
+      "detailVerified": true,
+      "text": "城市：贵阳市  ；  联系人：汤，18208127634  ；  店铺：披萨星球·披萨·意面·焗饭  ；  地址：区三都街道花果园彭家湾花果园项目M区第15-16栋L9层24号[兰花都办事处]",
+      "sha256": "775f867eabeab78fe48c89c27db78e01709ce5d56d2cfc23ed4be7a7892d6243"
+    },
+    {
+      "merchantId": "1354180916",
+      "merchantName": "多炸乐小吃店",
+      "recommendTime": "2026-10-20 20:40:22",
+      "city": "眉山市",
+      "status": "待处理",
+      "rowIndex": 4,
+      "sourcePage": 1,
+      "tableOrder": 22,
+      "address": "洪川镇城城隍街22号",
+      "contact": "沈艳，15082340094",
+      "detailVerified": true,
+      "text": "城市：眉山市  ；  联系人：沈艳，15082340094  ；  店铺：多炸乐小吃店  ；  地址：洪川镇城城隍街22号",
+      "sha256": "e1246300628e2af86b9dfae540593cfe38c1b91189ddb1b06c7f6a3abb76bb59"
+    },
+    {
+      "merchantId": "1358915072",
+      "merchantName": "湖南益阳麻辣烫",
+      "recommendTime": "2026-10-20 21:32:21",
+      "city": "佛山市",
+      "status": "待处理",
+      "rowIndex": 3,
+      "sourcePage": 1,
+      "tableOrder": 23,
+      "address": "张槎街道村尾村中一惜音庙一楼30号铺",
+      "contact": "郝翔，19021087900",
+      "detailVerified": true,
+      "text": "城市：佛山市  ；  联系人：郝翔，19021087900  ；  店铺：湖南益阳麻辣烫  ；  地址：张槎街道村尾村中一惜音庙一楼30号铺",
+      "sha256": "976d73b7745f9a9b674d4448cd589a7b2c7b32424fe4032c619beea0a0124780"
+    },
+    {
+      "merchantId": "545601667",
+      "merchantName": "老友烤吧",
+      "recommendTime": "2026-10-20 23:18:43",
+      "city": "成都市",
+      "status": "待处理",
+      "rowIndex": 2,
+      "sourcePage": 1,
+      "tableOrder": 24,
+      "address": "安靖街道众望街169号",
+      "contact": "郑先生，19981242453",
+      "detailVerified": true,
+      "text": "城市：成都市  ；  联系人：郑先生，19981242453  ；  店铺：老友烤吧  ；  地址：安靖街道众望街169号",
+      "sha256": "20154a0188ca7183fc0f6a0d5e0635aa71ef7134cccf151ebaf57aa61a0c42b6"
+    },
+    {
+      "merchantId": "1364332618",
+      "merchantName": "渔町寿司",
+      "recommendTime": "2026-10-20 23:21:55",
+      "city": "无锡市",
+      "status": "待处理",
+      "rowIndex": 1,
+      "sourcePage": 1,
+      "tableOrder": 25,
+      "address": "南闸街道白玉路258号",
+      "contact": "李腾飞，13863626572",
+      "detailVerified": true,
+      "text": "城市：无锡市  ；  联系人：李腾飞，13863626572  ；  店铺：渔町寿司  ；  地址：南闸街道白玉路258号",
+      "sha256": "08b7d3019467f8ee787b944ff0c366226f95dcba8f531efd62062a58affa7975"
+    },
+    {
+      "merchantId": "1364097356",
+      "merchantName": "必酱鲜港式卤煮牛杂",
+      "recommendTime": "2026-10-20 23:34:08",
+      "city": "厦门市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 26,
+      "address": "侨英街道孙厝乐安北里113-1-102号",
+      "contact": "江先生，18698312122",
+      "detailVerified": true,
+      "text": "城市：厦门市  ；  联系人：江先生，18698312122  ；  店铺：必酱鲜港式卤煮牛杂  ；  地址：侨英街道孙厝乐安北里113-1-102号",
+      "sha256": "a564766ba3a04eea9c49c6b0ee3f6960da93a88bbc7a85f0fbc19046c3e5a07e"
+    }
+  ],
+  "frontmostBefore": "com.openai.codex",
+  "createdAt": "2026-10-20T18:33:12.301Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-21",
+    "merchantName": "食螺莊柳州螺蛳粉",
+    "merchantId": "546542466",
+    "recommendTime": "2026-10-20 18:51:42",
+    "tableOrder": 20,
+    "messageSha256": "daac68ecca0c1ed0fbc637cfb167165d1c2e5ad82dd14d191f1386f3f2258cdf",
+    "sentAt": "2026-10-21T00:16:49+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-20",
+  "filterEndDate": "2026-10-21",
+  "dateFilter": "2026-10-20..2026-10-21",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 10,
+      "nextEnabled": true
+    },
+    {
+      "page": 2,
+      "rowCount": 10,
+      "nextEnabled": true
+    },
+    {
+      "page": 3,
+      "rowCount": 6,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 26,
+  "pendingRows": 18,
+  "targetCount": 6,
+  "selectionAudit": {
+    "totalRows": 26,
+    "pendingRows": 18,
+    "excludedAtOrBeforeCursor": 20,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 6,
+    "rows": [
+      {
+        "merchantId": "1364097356",
+        "recommendTime": "2026-10-20 23:34:08",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1364332618",
+        "recommendTime": "2026-10-20 23:21:55",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "545601667",
+        "recommendTime": "2026-10-20 23:18:43",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1358915072",
+        "recommendTime": "2026-10-20 21:32:21",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1354180916",
+        "recommendTime": "2026-10-20 20:40:22",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1360630774",
+        "recommendTime": "2026-10-20 19:50:40",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546542466",
+        "recommendTime": "2026-10-20 18:51:42",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "531941820",
+        "recommendTime": "2026-10-20 18:33:21",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1301561857",
+        "recommendTime": "2026-10-20 17:41:32",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "538861132",
+        "recommendTime": "2026-10-20 14:45:21",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1352177972",
+        "recommendTime": "2026-10-20 14:20:27",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "539445066",
+        "recommendTime": "2026-10-20 14:08:31",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1316369838",
+        "recommendTime": "2026-10-20 13:00:35",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1333192713",
+        "recommendTime": "2026-10-20 11:56:57",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1297664786",
+        "recommendTime": "2026-10-20 10:54:22",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546176035",
+        "recommendTime": "2026-10-20 09:08:51",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1274140663",
+        "recommendTime": "2026-10-20 07:30:33",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1239714604",
+        "recommendTime": "2026-10-20 02:54:47",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1347961660",
+        "recommendTime": "2026-10-20 15:16:58",
+        "status": "完成"
+      },
+      {
+        "merchantId": "1362227374",
+        "recommendTime": "2026-10-20 14:07:30",
+        "status": "完成"
+      },
+      {
+        "merchantId": "546721968",
+        "recommendTime": "2026-10-20 13:14:25",
+        "status": "完成"
+      },
+      {
+        "merchantId": "1317602476",
+        "recommendTime": "2026-10-20 13:10:12",
+        "status": "完成"
+      },
+      {
+        "merchantId": "1366725799",
+        "recommendTime": "2026-10-20 11:40:52",
+        "status": "完成"
+      },
+      {
+        "merchantId": "547158340",
+        "recommendTime": "2026-10-20 11:16:20",
+        "status": "完成"
+      },
+      {
+        "merchantId": "1347208092",
+        "recommendTime": "2026-10-20 09:37:16",
+        "status": "完成"
+      },
+      {
+        "merchantId": "1358930862",
+        "recommendTime": "2026-10-20 08:43:12",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 16095,
+  "frontmostAfter": "com.openai.codex",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261021-023255/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261021-023255/output/collection-attempt-1.review.md"
+}

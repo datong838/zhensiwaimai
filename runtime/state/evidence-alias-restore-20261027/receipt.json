@@ -1,0 +1,32 @@
+{
+  "at": "2026-10-27T12:09:16.909966+08:00",
+  "helperSha256": "ba84c386010a0a887f0103da38d170bc145c50a5846caf6d8fe58d26efd758d2",
+  "before": {
+    "skills/workflows/daily-top10-to-wechat-group/scripts/desktop_background_executor.mjs": "a8e72d1df8ada6c48f1c3fad8a42aa8c07e5484b4eb41ffafd7848e88f1d13cf",
+    "skills/workflows/daily-taobao-download-to-jinsha/scripts/background_browser_executor.mjs": "498684177166dfaf09b769ba974ec3afc2c2c055d5d0eeb0e25828775796094b",
+    "skills/workflows/daily-taobao-download-to-jinsha/scripts/desktop_wechat_evidence_sender.mjs": "f2d3c58a837a7740b9f8c5ec2478b4533904f023ce21adb6185b3cb8ac247806",
+    "skills/workflows/daily-taobao-download-to-jinsha/scripts/entrypoint.mjs": "db476b5009bbd875326c4380d7545dbcfff6c4c7c3cd459febc664307933079e",
+    "vendor/installed-taobao-skill/scripts/entrypoint.mjs": "db476b5009bbd875326c4380d7545dbcfff6c4c7c3cd459febc664307933079e",
+    "skills/workflows/daily-top10-to-wechat-group/runtime-policy.json": "46e7ef17e21d0ef7e791cbf7d8a5a596e25eafff808766fbe6eec26ac5a2fc48"
+  },
+  "after": {
+    "skills/workflows/daily-top10-to-wechat-group/scripts/desktop_background_executor.mjs": "2f3d88fd90ee79641cd9766a1fb7ad8fc6a88857dadb5d5dfe797888c68fe85a",
+    "skills/workflows/daily-taobao-download-to-jinsha/scripts/background_browser_executor.mjs": "5f007ecea8361709e56cd8908e75c0144236ecf0b4ce939821aedbf388a63b6b",
+    "skills/workflows/daily-taobao-download-to-jinsha/scripts/desktop_wechat_evidence_sender.mjs": "a83e8858e8d30a39f708f58fd89f485666abfb4373afa2c44f884216f023778d",
+    "skills/workflows/daily-taobao-download-to-jinsha/scripts/entrypoint.mjs": "d65b14cf3b2c61446b075cc29361b412bcebd9b72b2252d423ace615909f4fde",
+    "vendor/installed-taobao-skill/scripts/entrypoint.mjs": "d65b14cf3b2c61446b075cc29361b412bcebd9b72b2252d423ace615909f4fde",
+    "skills/workflows/daily-top10-to-wechat-group/runtime-policy.json": "41118423ec91f3a088ffabb33583a5800d6725315e043cf6fa42460692b75575"
+  },
+  "productionActions": 0,
+  "validation": {
+    "isolatedAliasTests": 6,
+    "top10BackgroundTests": 12,
+    "top10GuardTests": 14,
+    "taobaoExecutorTests": 87,
+    "senderTests": 15,
+    "originalGuards": 5,
+    "actualAliases": "both correct; idempotent inspection passed",
+    "syntax": "pass",
+    "productionActions": 0
+  }
+}

@@ -1,0 +1,251 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：长沙市  ；  联系人：艾力，17599336332  ；  店铺：新疆美味羊肉串  ；  地址：井湾子街道臻和路50号城南故事老味道粉馆旁边  ；  商家ID：506273277",
+      "sha256": "c86f4e6964fc90fcb5a1b78a156f8cf356753d336957a8a41ddd3cf1f139af7a"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "3ebe554841e68adfcbd0b8dba17a092388e7e731d2dd7652657c51be894c0a58",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "c86f4e6964fc90fcb5a1b78a156f8cf356753d336957a8a41ddd3cf1f139af7a",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1792974663.9529889,
+        "sendAttempts": 1,
+        "resolvedGroup": "电销+直播攻坚组",
+        "observations": [
+          {
+            "groupName": "电销+直播攻坚组",
+            "inputEmpty": true,
+            "newMessageVisible": true,
+            "observedAt": 1792974670.032798,
+            "visibleText": "城市：长沙市  ；  联系人：艾力，17599336332  ；  店铺：新疆美味羊肉串  ；  地址：井湾子街道臻和路50号城南故事老味道粉馆旁边  ；  商家ID：506273277",
+            "visibleTextSha256": "c86f4e6964fc90fcb5a1b78a156f8cf356753d336957a8a41ddd3cf1f139af7a",
+            "messagePath": [
+              0,
+              25,
+              9,
+              0,
+              0,
+              0,
+              24
+            ]
+          },
+          {
+            "groupName": "电销+直播攻坚组",
+            "inputEmpty": true,
+            "newMessageVisible": true,
+            "observedAt": 1792974671.835069,
+            "visibleText": "城市：长沙市  ；  联系人：艾力，17599336332  ；  店铺：新疆美味羊肉串  ；  地址：井湾子街道臻和路50号城南故事老味道粉馆旁边  ；  商家ID：506273277",
+            "visibleTextSha256": "c86f4e6964fc90fcb5a1b78a156f8cf356753d336957a8a41ddd3cf1f139af7a",
+            "messagePath": [
+              0,
+              25,
+              9,
+              0,
+              0,
+              0,
+              24
+            ]
+          }
+        ],
+        "backend": "system-events-ui-tree",
+        "verificationLevel": "wecom-ui-tree-text",
+        "evidence": {
+          "method": "wecom-ui-tree-text",
+          "resolvedGroup": "电销+直播攻坚组",
+          "sha256": "c86f4e6964fc90fcb5a1b78a156f8cf356753d336957a8a41ddd3cf1f139af7a",
+          "observations": [
+            {
+              "groupName": "电销+直播攻坚组",
+              "inputEmpty": true,
+              "newMessageVisible": true,
+              "observedAt": 1792974670.032798,
+              "visibleText": "城市：长沙市  ；  联系人：艾力，17599336332  ；  店铺：新疆美味羊肉串  ；  地址：井湾子街道臻和路50号城南故事老味道粉馆旁边  ；  商家ID：506273277",
+              "visibleTextSha256": "c86f4e6964fc90fcb5a1b78a156f8cf356753d336957a8a41ddd3cf1f139af7a",
+              "messagePath": [
+                0,
+                25,
+                9,
+                0,
+                0,
+                0,
+                24
+              ]
+            },
+            {
+              "groupName": "电销+直播攻坚组",
+              "inputEmpty": true,
+              "newMessageVisible": true,
+              "observedAt": 1792974671.835069,
+              "visibleText": "城市：长沙市  ；  联系人：艾力，17599336332  ；  店铺：新疆美味羊肉串  ；  地址：井湾子街道臻和路50号城南故事老味道粉馆旁边  ；  商家ID：506273277",
+              "visibleTextSha256": "c86f4e6964fc90fcb5a1b78a156f8cf356753d336957a8a41ddd3cf1f139af7a",
+              "messagePath": [
+                0,
+                25,
+                9,
+                0,
+                0,
+                0,
+                24
+              ]
+            }
+          ]
+        },
+        "transport": {
+          "kind": "text",
+          "sendAttempts": 1,
+          "sent": true,
+          "postSendInputCleared": [
+            true,
+            true
+          ],
+          "stage": "post_send_verify"
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 658
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 7903
+      }
+    ],
+    "elapsedMs": 8564,
+    "eventKey": "8e4e12c3cec3259233b9ca5285ce870239c110bb530124663ebc2c7a36a75878",
+    "reviewSummary": {
+      "totalElapsedMs": 8564,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/191f7824ced9d144fb82ffb7deb99ee0f722558ac200f2040826c675d33a7e00.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 658,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 7903,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 8564,
+  "reviewSummary": {
+    "totalElapsedMs": 8564,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "method": "wecom-ui-tree-text",
+    "resolvedGroup": "电销+直播攻坚组",
+    "sha256": "c86f4e6964fc90fcb5a1b78a156f8cf356753d336957a8a41ddd3cf1f139af7a",
+    "observations": [
+      {
+        "groupName": "电销+直播攻坚组",
+        "inputEmpty": true,
+        "newMessageVisible": true,
+        "observedAt": 1792974670.032798,
+        "visibleText": "城市：长沙市  ；  联系人：艾力，17599336332  ；  店铺：新疆美味羊肉串  ；  地址：井湾子街道臻和路50号城南故事老味道粉馆旁边  ；  商家ID：506273277",
+        "visibleTextSha256": "c86f4e6964fc90fcb5a1b78a156f8cf356753d336957a8a41ddd3cf1f139af7a",
+        "messagePath": [
+          0,
+          25,
+          9,
+          0,
+          0,
+          0,
+          24
+        ]
+      },
+      {
+        "groupName": "电销+直播攻坚组",
+        "inputEmpty": true,
+        "newMessageVisible": true,
+        "observedAt": 1792974671.835069,
+        "visibleText": "城市：长沙市  ；  联系人：艾力，17599336332  ；  店铺：新疆美味羊肉串  ；  地址：井湾子街道臻和路50号城南故事老味道粉馆旁边  ；  商家ID：506273277",
+        "visibleTextSha256": "c86f4e6964fc90fcb5a1b78a156f8cf356753d336957a8a41ddd3cf1f139af7a",
+        "messagePath": [
+          0,
+          25,
+          9,
+          0,
+          0,
+          0,
+          24
+        ]
+      }
+    ]
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": [
+    true,
+    true
+  ],
+  "stage": "post_send_verify",
+  "reconciledWithoutSend": false
+}

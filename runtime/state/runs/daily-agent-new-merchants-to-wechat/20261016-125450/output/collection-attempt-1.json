@@ -1,0 +1,122 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-16",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 87,
+    "task_page": 647,
+    "navigation": 1146,
+    "date_filter": 1822,
+    "page_1_read": 506,
+    "selection_audit": 0,
+    "detail_533104918": 913
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_533104918": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "533104918",
+      "merchantName": "杨记肠粉",
+      "recommendTime": "2026-10-16 12:27:32",
+      "city": "洛阳市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 6,
+      "address": "义勇北街",
+      "contact": "杨，15036769986",
+      "detailVerified": true,
+      "text": "城市：洛阳市  ；  联系人：杨，15036769986  ；  店铺：杨记肠粉  ；  地址：义勇北街",
+      "sha256": "9750440eae9054d0062585b36ef12311481962284e1b79835b1124aef6ac92c2"
+    }
+  ],
+  "frontmostBefore": "com.google.Chrome",
+  "createdAt": "2026-10-16T04:54:58.167Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-16",
+    "merchantName": "沙县小吃",
+    "merchantId": "536340036",
+    "recommendTime": "2026-10-16 11:41:41",
+    "tableOrder": 5,
+    "messageSha256": "1a981377152858b3324d1dc257e88d8fdb467d8a588315017a3ecf303327d788",
+    "sentAt": "2026-10-16T11:48:20+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-16",
+  "filterEndDate": "2026-10-16",
+  "dateFilter": "2026-10-16..2026-10-16",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 6,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 6,
+  "pendingRows": 6,
+  "targetCount": 1,
+  "selectionAudit": {
+    "totalRows": 6,
+    "pendingRows": 6,
+    "excludedAtOrBeforeCursor": 5,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 1,
+    "rows": [
+      {
+        "merchantId": "533104918",
+        "recommendTime": "2026-10-16 12:27:32",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "536340036",
+        "recommendTime": "2026-10-16 11:41:41",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546295453",
+        "recommendTime": "2026-10-16 09:59:38",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "542707286",
+        "recommendTime": "2026-10-16 09:41:00",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1305054447",
+        "recommendTime": "2026-10-16 09:23:53",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1301551946",
+        "recommendTime": "2026-10-16 08:37:08",
+        "status": "待处理"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 6032,
+  "frontmostAfter": "com.google.Chrome",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261016-125450/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261016-125450/output/collection-attempt-1.review.md"
+}

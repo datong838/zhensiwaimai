@@ -1,0 +1,139 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-27",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 58,
+    "task_page": 376,
+    "navigation": 1334,
+    "date_filter": 1553,
+    "page_1_read": 377,
+    "selection_audit": 0,
+    "detail_544654530": 815,
+    "detail_1366726036": 1014
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_544654530": "PASS",
+    "detail_1366726036": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "544654530",
+      "merchantName": "起源小卤",
+      "recommendTime": "2026-10-27 11:00:44",
+      "city": "杭州市",
+      "status": "待处理",
+      "rowIndex": 1,
+      "sourcePage": 1,
+      "tableOrder": 4,
+      "address": "临浦镇市乐路325号",
+      "contact": "高亚伟，18072806455",
+      "detailVerified": true,
+      "text": "城市：杭州市  ；  联系人：高亚伟，18072806455  ；  店铺：起源小卤  ；  地址：临浦镇市乐路325号  ；  商家ID：544654530",
+      "sha256": "deaddf7fadff1cfb662ca0c385f1aefb21f76463d8e6d14d1fdbef6deb2b9893"
+    },
+    {
+      "merchantId": "1366726036",
+      "merchantName": "9点酸奶铺",
+      "recommendTime": "2026-10-27 11:10:27",
+      "city": "滁州市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 5,
+      "address": "千秋街道园林路22号",
+      "contact": "叶必奎，18226664223",
+      "detailVerified": true,
+      "text": "城市：滁州市  ；  联系人：叶必奎，18226664223  ；  店铺：9点酸奶铺  ；  地址：千秋街道园林路22号  ；  商家ID：1366726036",
+      "sha256": "c95faa582533114c70483933af34759ed8fa7bd49b810022d79147b4f0926b39"
+    }
+  ],
+  "frontmostBefore": "com.openai.codex",
+  "createdAt": "2026-10-27T03:30:12.930Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-27",
+    "merchantName": "七分秋甜减糖50%·韩式切块·动物奶油·甜品(柳巷店）",
+    "merchantId": "1349163544",
+    "recommendTime": "2026-10-27 09:54:39",
+    "tableOrder": 2,
+    "messageSha256": "d3fe800e7f0b0f1cff4e06106f87567b5110c47f203514e88938e09b1bdc7ec7",
+    "sentAt": "2026-10-27T10:00:24+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-27",
+  "filterEndDate": "2026-10-27",
+  "dateFilter": "2026-10-27..2026-10-27",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 6,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 6,
+  "pendingRows": 4,
+  "targetCount": 2,
+  "selectionAudit": {
+    "totalRows": 6,
+    "pendingRows": 4,
+    "excludedAtOrBeforeCursor": 2,
+    "excludedAfterCursorNotPending": 2,
+    "targetCount": 2,
+    "rows": [
+      {
+        "merchantId": "1366726036",
+        "recommendTime": "2026-10-27 11:10:27",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "544654530",
+        "recommendTime": "2026-10-27 11:00:44",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1349163544",
+        "recommendTime": "2026-10-27 09:54:39",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1366725839",
+        "recommendTime": "2026-10-27 08:06:10",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "543895790",
+        "recommendTime": "2026-10-27 11:28:11",
+        "status": "完成"
+      },
+      {
+        "merchantId": "546901789",
+        "recommendTime": "2026-10-27 10:59:27",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 5897,
+  "frontmostAfter": "com.openai.codex",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261027-113005/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261027-113005/output/collection-attempt-1.review.md"
+}

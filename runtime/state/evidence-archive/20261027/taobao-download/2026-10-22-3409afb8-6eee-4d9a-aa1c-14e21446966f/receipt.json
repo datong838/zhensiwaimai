@@ -1,0 +1,346 @@
+{
+  "ok": true,
+  "executor": "background-browser-executor",
+  "channel": "control-background-dedicated-chrome",
+  "fixedProfiles": {
+    "taobao": "taobao-brand:9230",
+    "jinsha": "jinsha-business:9232"
+  },
+  "desktopJinshaAllowed": false,
+  "executionOrder": [
+    "taobao-download",
+    "jinsha-process"
+  ],
+  "runId": "3409afb8-6eee-4d9a-aa1c-14e21446966f",
+  "businessDate": "2026-10-22",
+  "mode": "execute",
+  "phase": "completed",
+  "phaseHistory": [
+    "initialized",
+    "profiles_ready",
+    "taobao_open",
+    "taobao_downloaded",
+    "taobao_closed",
+    "jinsha_open",
+    "jinsha_processed",
+    "completed"
+  ],
+  "stage": "completed",
+  "stageMs": {
+    "control_policy_preflight": 0,
+    "profile_preflight": 19,
+    "taobao_task_open": 241,
+    "taobao_store_download": 17092,
+    "taobao_review_download": 5050,
+    "taobao_download_sequence": 24033,
+    "taobao_task_cleanup": 1134,
+    "jinsha_task_open": 479,
+    "jinsha_store_dedup_upload": 36990,
+    "jinsha_review_dedup_upload": 17118,
+    "jinsha_sequence": 55992,
+    "task_cleanup": 4,
+    "profile_postflight": 8,
+    "completion_contract": 0
+  },
+  "clickAttempts": {
+    "download": {
+      "store": 1,
+      "review": 1
+    },
+    "upload": {
+      "store": 1,
+      "review": 1
+    }
+  },
+  "controlPolicy": {
+    "version": "daily-taobao-jinsha-code-enforced-2026-09-28",
+    "authority": "executor-code-only",
+    "channel": "control-background-dedicated-chrome",
+    "runtimeModelDecisionsAllowed": 0,
+    "clickBudgets": {
+      "download": 1,
+      "upload": 1
+    },
+    "recoveryBudgets": {
+      "taobao-brandNavigation": 1,
+      "jinsha-businessNavigation": 1,
+      "taobaoAuthAnchorRecovery": 1,
+      "taobaoHomeReload": 1,
+      "jinshaLogReload": 1,
+      "jinshaBorrowedLogReload": 1,
+      "jinshaBorrowedLogReadRetry": 1,
+      "jinshaBorrowedStoreLogReadRetry": 1,
+      "jinshaBorrowedReviewLogReadRetry": 1,
+      "jinshaUploadOverlay": 1,
+      "jinshaControllerBindingRecovery": 1,
+      "jinshaBorrowedHomeNavigation": 1,
+      "productionResume": 10
+    },
+    "phaseChain": [
+      "initialized",
+      "profiles_ready",
+      "taobao_open",
+      "taobao_downloaded",
+      "taobao_closed",
+      "jinsha_open",
+      "jinsha_processed",
+      "completed"
+    ],
+    "reviewRequired": true
+  },
+  "uploadDecision": {
+    "store": "uploaded-complete",
+    "review": "uploaded-complete"
+  },
+  "runtimeModelDecisions": 0,
+  "currentAttemptRecovery": {
+    "jinshaLogReload": 1,
+    "jinshaBorrowedLogReload": 0,
+    "jinshaBorrowedLogReadRetry": 0,
+    "jinshaBorrowedStoreLogReadRetry": 0,
+    "jinshaBorrowedReviewLogReadRetry": 0
+  },
+  "recoveryAttempts": {
+    "taobao-brandNavigation": 0,
+    "jinsha-businessNavigation": 0,
+    "taobaoAuthAnchorRecovery": 0,
+    "taobaoHomeReload": 0,
+    "jinshaLogReload": 1,
+    "jinshaBorrowedLogReload": 0,
+    "jinshaBorrowedLogReadRetry": 0,
+    "jinshaBorrowedStoreLogReadRetry": 0,
+    "jinshaBorrowedReviewLogReadRetry": 0,
+    "jinshaUploadOverlay": 0,
+    "jinshaControllerBindingRecovery": 0,
+    "productionResume": 0
+  },
+  "jinshaPlatformDecision": "already-taobao-semantic-gate",
+  "platformSwitchAttempts": 0,
+  "jinshaNavigationPostcondition": "upload-page-semantic-gate",
+  "knownPopupCloseAttempts": 0,
+  "jinshaTaskStrategy": "reused-existing-work-target",
+  "pitfalls": [
+    {
+      "stage": "jinsha_store_dedup_upload",
+      "code": "log-reload",
+      "reason": "completed-log-missing-first-read"
+    }
+  ],
+  "cleanupWarnings": [],
+  "cleanupStatus": "completed",
+  "taskMarkerCleanup": {
+    "taobao": true,
+    "jinsha": true
+  },
+  "profiles": {
+    "taobao": {
+      "profile": "taobao-brand",
+      "port": 9230,
+      "pid": 66718,
+      "statePid": 66718,
+      "mode": "headless",
+      "phase": null
+    },
+    "jinsha": {
+      "profile": "jinsha-business",
+      "port": 9232,
+      "pid": 89873,
+      "statePid": 89873,
+      "mode": "headless",
+      "phase": "TAKEOVER_VERIFIED"
+    }
+  },
+  "files": {
+    "store": {
+      "path": "/tmp/zhensi_daily_download/background-browser/2026-10-22-3409afb8-6eee-4d9a-aa1c-14e21446966f/门店下载_20261022至20261022_全部门店_5296218123_20261023130408261.xlsx",
+      "name": "门店下载_20261022至20261022_全部门店_5296218123_20261023130408261.xlsx",
+      "size": 875645,
+      "sha256": "108f8e65b2c7a4992c44ce5c726794c6a143c2458bee20b38176805d709a8a93"
+    },
+    "review": {
+      "path": "/tmp/zhensi_daily_download/background-browser/2026-10-22-3409afb8-6eee-4d9a-aa1c-14e21446966f/评价下载_20261022至20261022_全部门店_5296218123_20261023130425152.xlsx",
+      "name": "评价下载_20261022至20261022_全部门店_5296218123_20261023130425152.xlsx",
+      "size": 154590,
+      "sha256": "f8da3a5bccf43eb7c64883df22ea424dcc428afc2737458dbb0757e44d1f69f4"
+    }
+  },
+  "jinshaUploadMenuDecision": "already-on-upload-page",
+  "evidence": {
+    "store": {
+      "path": "/tmp/zhensi_daily_download/background-browser/2026-10-22-3409afb8-6eee-4d9a-aa1c-14e21446966f/jinsha-store-final.png",
+      "sha256": "34011005e7f49084916bcd8bf15517bc27fd8d7dc7b65cfc9746e67545c52ac8"
+    },
+    "review": {
+      "path": "/tmp/zhensi_daily_download/background-browser/2026-10-22-3409afb8-6eee-4d9a-aa1c-14e21446966f/jinsha-review-final.png",
+      "sha256": "c93d51c675de9f61ef9b93fca7cfc05bce1da3dc295a4d1598980482964b83c9"
+    }
+  },
+  "evidenceManifest": {
+    "executor": "background-browser-executor",
+    "channel": "control-background-dedicated-chrome",
+    "runId": "3409afb8-6eee-4d9a-aa1c-14e21446966f",
+    "mode": "execute",
+    "groupName": "FEIBING NEO AI数字员工",
+    "businessDate": "2026-10-22",
+    "uploadDecision": {
+      "store": "uploaded-complete",
+      "review": "uploaded-complete"
+    },
+    "images": [
+      {
+        "path": "/tmp/zhensi_daily_download/background-browser/2026-10-22-3409afb8-6eee-4d9a-aa1c-14e21446966f/jinsha-store-final.png",
+        "sha256": "34011005e7f49084916bcd8bf15517bc27fd8d7dc7b65cfc9746e67545c52ac8"
+      },
+      {
+        "path": "/tmp/zhensi_daily_download/background-browser/2026-10-22-3409afb8-6eee-4d9a-aa1c-14e21446966f/jinsha-review-final.png",
+        "sha256": "c93d51c675de9f61ef9b93fca7cfc05bce1da3dc295a4d1598980482964b83c9"
+      }
+    ]
+  },
+  "receiptFile": "/tmp/zhensi_daily_download/background-browser/2026-10-22-3409afb8-6eee-4d9a-aa1c-14e21446966f/receipt.json",
+  "elapsedMs": 81913,
+  "profilePostflight": {
+    "taobao": {
+      "profile": "taobao-brand",
+      "port": 9230,
+      "pid": 66718,
+      "statePid": 66718,
+      "mode": "headless",
+      "phase": null
+    },
+    "jinsha": {
+      "profile": "jinsha-business",
+      "port": 9232,
+      "pid": 89873,
+      "statePid": 89873,
+      "mode": "headless",
+      "phase": "TAKEOVER_VERIFIED"
+    }
+  },
+  "runReview": [
+    {
+      "item": 1,
+      "stage": "control_policy_preflight",
+      "label": "代码控制策略预检",
+      "elapsedMs": 0,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 2,
+      "stage": "profile_preflight",
+      "label": "固定后台浏览器预检",
+      "elapsedMs": 19,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 3,
+      "stage": "taobao_task_open",
+      "label": "淘宝认证锚点与任务页",
+      "elapsedMs": 241,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 4,
+      "stage": "taobao_store_download",
+      "label": "淘宝门店报表下载",
+      "elapsedMs": 17092,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 5,
+      "stage": "taobao_review_download",
+      "label": "淘宝评价报表下载",
+      "elapsedMs": 5050,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 6,
+      "stage": "taobao_download_sequence",
+      "label": "淘宝下载完整序列",
+      "elapsedMs": 24033,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 7,
+      "stage": "taobao_task_cleanup",
+      "label": "淘宝任务页清理",
+      "elapsedMs": 1134,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 8,
+      "stage": "jinsha_task_open",
+      "label": "金鲨任务页打开",
+      "elapsedMs": 479,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 9,
+      "stage": "jinsha_store_dedup_upload",
+      "label": "金鲨门店去重与上传",
+      "elapsedMs": 36990,
+      "status": "completed-with-pitfall",
+      "pitfalls": [
+        {
+          "code": "log-reload",
+          "reason": "completed-log-missing-first-read"
+        }
+      ]
+    },
+    {
+      "item": 10,
+      "stage": "jinsha_review_dedup_upload",
+      "label": "金鲨评价去重与上传",
+      "elapsedMs": 17118,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 11,
+      "stage": "jinsha_sequence",
+      "label": "金鲨处理完整序列",
+      "elapsedMs": 55992,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 12,
+      "stage": "task_cleanup",
+      "label": "任务标签与连接清理",
+      "elapsedMs": 4,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 13,
+      "stage": "profile_postflight",
+      "label": "固定 Profile 后验",
+      "elapsedMs": 8,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 14,
+      "stage": "completion_contract",
+      "label": "完成合同校验",
+      "elapsedMs": 0,
+      "status": "completed",
+      "pitfalls": []
+    }
+  ],
+  "reviewSummary": {
+    "totalElapsedMs": 81913,
+    "itemCount": 14,
+    "pitfallCount": 1,
+    "controlPolicyVersion": "daily-taobao-jinsha-code-enforced-2026-09-28",
+    "result": "success"
+  }
+}

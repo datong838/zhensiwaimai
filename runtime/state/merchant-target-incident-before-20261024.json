@@ -1,0 +1,32 @@
+{
+  "name": "daily-agent-new-merchants-to-wechat",
+  "target_group": "电销+直播攻坚组",
+  "ledger_name": "淘宝新增商家增量通知（每30分钟·发电销+直播攻坚组）",
+  "schedule": "每30分钟（08:30 起，19:00 前停，latest_hour=19）",
+  "dev_state": "active",
+  "enabled": true,
+  "order": 0,
+  "cadence_hours": 0.5,
+  "earliest_hour": 8,
+  "earliest_minute": 30,
+  "cwd": "skills/workflows/daily-agent-new-merchants-to-wechat",
+  "timeout_seconds": 1440,
+  "max_retries": 0,
+  "cooldown_seconds": 0,
+  "needs_adapter": false,
+  "steps": [
+    {
+      "argv": [
+        "{python}",
+        "scripts/workflow_executor.py",
+        "--standing-authorization",
+        "user-20260915-production-hourly",
+        "--unsealed-acceptance-authorization",
+        "user-20260916-production-hardening",
+        "--output-dir",
+        "{run_dir}/output"
+      ]
+    }
+  ],
+  "latest_hour": 19
+}

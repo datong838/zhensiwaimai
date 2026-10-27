@@ -1,0 +1,25 @@
+{
+  "skill": "daily-new-stores-activity-audit-to-wechat",
+  "ledger_name": "淘宝新店活动缺项巡检与提醒（每日11:00）",
+  "schedule": "每日11:00",
+  "dev_state": "active",
+  "status": "FAILED",
+  "category": "RECOVERABLE",
+  "detail": "reason=Command '['/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python', '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-new-stores-opening-to-wechat/scripts/workflow.py', '--collect-only']' timed out after 240 seconds (receipt:reason)",
+  "next_action": "重试预算耗尽：看护代理读日志决定再等冷却重跑或跳过",
+  "attempts": 3,
+  "max_retries": 2,
+  "duration_seconds": 902.9,
+  "started_at": "2026-10-24T03:07:22",
+  "finished_at": "2026-10-24T03:22:25",
+  "triggered_by": "sweep-test",
+  "logs": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-24/daily-new-stores-activity-audit-to-wechat--20261024-030722--a1--s1.log",
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-24/daily-new-stores-activity-audit-to-wechat--20261024-031253--a2--s1.log",
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-24/daily-new-stores-activity-audit-to-wechat--20261024-031825--a3--s1.log"
+  ],
+  "fail_signal": {
+    "kind": "reason",
+    "code": "Command '['/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python', '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-new-stores-opening-to-wechat/scripts/workflow.py', '--collect-only']' timed out after 240 seconds"
+  }
+}

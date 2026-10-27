@@ -1,0 +1,30 @@
+{
+  "daemon": {
+    "pid": 42798,
+    "started_at": "2026-10-24T19:24:18",
+    "last_cycle_at": "2026-10-24T21:19:39",
+    "status": "running",
+    "next_cycle_at": "2026-10-24T21:49:39"
+  },
+  "liveStepCount": 0,
+  "control": {},
+  "trigger": {
+    "automationId": "21-16-goal",
+    "scheduledFor": "2026-10-24T21:20:00+08:00",
+    "heartbeatObservedAt": "2026-10-24T21:22:15.998+08:00",
+    "delaySeconds": 135.998,
+    "source": "actual-heartbeat-user-message"
+  },
+  "goalCreated": true,
+  "goalCreatedBy": "create_goal in heartbeat turn",
+  "productionRunsTriggered": 0,
+  "environmentGate": "four browser business pages checked, no login/verification/visible blockers; original leases released",
+  "testDeliveryRecovery": {
+    "firstResult": "blocked",
+    "sendAttempts": 0,
+    "reason": "egress-denied:egress-sentinel-payload",
+    "resolution": "pass exact manifest-authorized test group to original egress policy",
+    "sameEventContinued": true,
+    "originalBlockedReceipt": "blocked-zero-before-scoped-egress.json"
+  }
+}

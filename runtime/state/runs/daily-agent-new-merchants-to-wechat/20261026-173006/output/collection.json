@@ -1,0 +1,104 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-26",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 54,
+    "task_page": 394,
+    "navigation": 1371,
+    "date_filter": 1829,
+    "page_1_read": 438,
+    "selection_audit": 0
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS"
+  },
+  "messages": [],
+  "frontmostBefore": "com.openai.codex",
+  "createdAt": "2026-10-26T09:30:12.834Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-26",
+    "merchantName": "赣小厨.盖浇饭(乐平店)",
+    "merchantId": "547032462",
+    "recommendTime": "2026-10-26 16:38:07",
+    "tableOrder": 6,
+    "messageSha256": "045f5928d81fadc433b5f375c4534822161778ca4f47e8c5ea82c7c1626a8cdd",
+    "sentAt": "2026-10-26T17:00:28+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-26",
+  "filterEndDate": "2026-10-26",
+  "dateFilter": "2026-10-26..2026-10-26",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 6,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 6,
+  "pendingRows": 5,
+  "targetCount": 0,
+  "selectionAudit": {
+    "totalRows": 6,
+    "pendingRows": 5,
+    "excludedAtOrBeforeCursor": 6,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 0,
+    "rows": [
+      {
+        "merchantId": "547032462",
+        "recommendTime": "2026-10-26 16:38:07",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1359555169",
+        "recommendTime": "2026-10-26 15:31:55",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546901789",
+        "recommendTime": "2026-10-26 14:33:25",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "538822520",
+        "recommendTime": "2026-10-26 11:50:03",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "544670041",
+        "recommendTime": "2026-10-26 00:56:45",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "547330034",
+        "recommendTime": "2026-10-26 16:25:54",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 4354,
+  "frontmostAfter": "com.openai.codex",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261026-173006/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261026-173006/output/collection-attempt-1.review.md"
+}

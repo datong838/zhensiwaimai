@@ -1,0 +1,23 @@
+{
+  "skill": "daily-agent-new-merchants-to-wechat",
+  "ledger_name": "淘宝新增商家增量通知（每30分钟·发电销+直播攻坚组）",
+  "schedule": "每30分钟 08:30–18:30；19:00停止；有新增发商家信息，无新增发当前无新增意向商家",
+  "dev_state": "active",
+  "status": "FAILED",
+  "category": "UNKNOWN",
+  "detail": "stage=empty_notice (receipt:stage)",
+  "next_action": "看护代理读日志定位根因后升级处理",
+  "attempts": 1,
+  "max_retries": 0,
+  "duration_seconds": 5.36,
+  "started_at": "2026-10-27T17:10:02",
+  "finished_at": "2026-10-27T17:10:08",
+  "triggered_by": "daemon",
+  "logs": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-27/daily-agent-new-merchants-to-wechat--20261027-171002--a1--s1.log"
+  ],
+  "fail_signal": {
+    "kind": "stage",
+    "code": "empty_notice"
+  }
+}

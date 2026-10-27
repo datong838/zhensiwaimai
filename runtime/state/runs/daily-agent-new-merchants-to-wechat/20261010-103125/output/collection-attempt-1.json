@@ -1,0 +1,149 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-10",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 1052,
+    "task_page": 3034,
+    "navigation": 2230,
+    "date_filter": 1565,
+    "page_1_read": 327,
+    "selection_audit": 0,
+    "detail_528995168": 770,
+    "detail_1177140742": 1035
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_528995168": "PASS",
+    "detail_1177140742": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "528995168",
+      "merchantName": "山谷Valley·咖啡·手作甜品",
+      "recommendTime": "2026-10-10 09:35:46",
+      "city": "咸宁市",
+      "status": "待处理",
+      "rowIndex": 1,
+      "sourcePage": 1,
+      "tableOrder": 7,
+      "address": "赤马港街道赤马港社区子敬路108号丁关雄私房201室",
+      "contact": "吴，19318024902",
+      "detailVerified": true,
+      "text": "城市：咸宁市  ；  联系人：吴，19318024902  ；  店铺：山谷Valley·咖啡·手作甜品  ；  地址：赤马港街道赤马港社区子敬路108号丁关雄私房201室",
+      "sha256": "6b37070a6a71fe18010f0c9fca516d9986daff26c9a5ff7095f92ceba0e8dae5"
+    },
+    {
+      "merchantId": "1177140742",
+      "merchantName": "芜园烧麦",
+      "recommendTime": "2026-10-10 09:45:18",
+      "city": "湖州市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 8,
+      "address": "昌硕街道芜园东路124号",
+      "contact": "林，15857252696",
+      "detailVerified": true,
+      "text": "城市：湖州市  ；  联系人：林，15857252696  ；  店铺：芜园烧麦  ；  地址：昌硕街道芜园东路124号",
+      "sha256": "f4a60e692511bbb8d70d4bc351cb8621ea22fc12e1133a20b425c288fc6b33b3"
+    }
+  ],
+  "frontmostBefore": "com.tencent.yuanbao",
+  "createdAt": "2026-10-10T02:31:41.203Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-10",
+    "merchantName": "来碗盖浇饭",
+    "merchantId": "547036013",
+    "recommendTime": "2026-10-10 09:10:06",
+    "tableOrder": 29,
+    "messageSha256": "7bfcba64693e1041983ce6c73da00cc5296f4a46cb6a04e2eb8bb45007685948",
+    "sentAt": "2026-10-10T09:25:09+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-10",
+  "filterEndDate": "2026-10-10",
+  "dateFilter": "2026-10-10..2026-10-10",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 8,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 8,
+  "pendingRows": 6,
+  "targetCount": 2,
+  "selectionAudit": {
+    "totalRows": 8,
+    "pendingRows": 6,
+    "excludedAtOrBeforeCursor": 4,
+    "excludedAfterCursorNotPending": 2,
+    "targetCount": 2,
+    "rows": [
+      {
+        "merchantId": "1177140742",
+        "recommendTime": "2026-10-10 09:45:18",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "528995168",
+        "recommendTime": "2026-10-10 09:35:46",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "547036013",
+        "recommendTime": "2026-10-10 09:10:06",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546001729",
+        "recommendTime": "2026-10-10 08:51:40",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1196859991",
+        "recommendTime": "2026-10-10 03:57:23",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546260912",
+        "recommendTime": "2026-10-10 00:18:42",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546569119",
+        "recommendTime": "2026-10-10 09:26:25",
+        "status": "完成"
+      },
+      {
+        "merchantId": "546522557",
+        "recommendTime": "2026-10-10 09:26:00",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 11855,
+  "frontmostAfter": "com.tencent.yuanbao",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261010-103125/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261010-103125/output/collection-attempt-1.review.md"
+}

@@ -1,0 +1,103 @@
+{
+  "ok": true,
+  "action": "prepare",
+  "status": "prepared",
+  "review": [
+    {
+      "label": "维护授权",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "授权有效期",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "读取依赖清单",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "计算候选摘要",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 4
+    },
+    {
+      "label": "授权范围",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "统一微信完整离线测试",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 4261
+    },
+    {
+      "label": "原子写入依赖清单",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "依赖清单回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 2
+    },
+    {
+      "label": "统一入口完整性回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 37
+    }
+  ],
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "authorization": "user-20261027-external-code-consolidation",
+  "expiresAt": "2026-10-27T06:00:00+08:00",
+  "userInstructionSha256": "007b269e78d3bd0e3201e63e31066118b37d74bea28c7e648af99711066d3857",
+  "dependencyManifestPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/dependencies.json",
+  "dependencyManifestBeforeSha256": "2734947eca1658894fece04681bf1cbdd4e078c0acf1d59b709e67f783c8f067",
+  "dependencyManifestAfterSha256": "d9abee072890374c0c60e9119517e1ce889c480de417718e6b04b7f8ecbb5936",
+  "changes": [
+    {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/legacy-app-controler/wechat-desktop-control/scripts/wechat_interaction_lock.py",
+      "before": "3119492475903a3deb417e841ea73ca6ddc458a7f4bcf155f2a5ce3355f126e0",
+      "after": "a70f0e947df2e993ac4aec50995c92582d4f15f9583138a9fcde450396ba3ea2"
+    },
+    {
+      "path": "scripts/dependency_maintenance.py",
+      "before": "bb10c8f1753444cfc1b05a8a3cee706005f31b767f2c275089c810d9ffdefd5a",
+      "after": "1e2f7d49f25b334d0da4ebec8cc5ab6d2673acf34401ca9e710c02279147167e"
+    },
+    {
+      "path": "scripts/desktop_text_readback.py",
+      "before": "aa80f3648414f7eb37561f54c72747d325791175d761a0eb402badbf6c03ff84",
+      "after": "c914a59e903a874608f5d0092e1e0d464b0410556248092b858295658607bfea"
+    },
+    {
+      "path": "scripts/windows_adapter.py",
+      "before": "834ebf6f0f8407e8f4e1159228d20da5a760c9a0b7ca20b7d74094479522c760",
+      "after": "098bf4f0d8ab2bb7f6cbb4f5885ffd3515c32316e23c1b74ca042d6e6cc06e9b"
+    }
+  ],
+  "tests": {
+    "ok": true,
+    "elapsedMs": 4261,
+    "testCount": 412
+  },
+  "capabilityCheck": {
+    "ok": true,
+    "elapsedMs": 37,
+    "testCount": null
+  },
+  "candidateFileCount": 33,
+  "elapsedMs": 4305
+}

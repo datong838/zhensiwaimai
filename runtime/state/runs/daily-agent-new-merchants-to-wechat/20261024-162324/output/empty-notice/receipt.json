@@ -1,0 +1,125 @@
+{
+  "bridgeVersion": 1,
+  "ok": false,
+  "verified": false,
+  "payloadType": "text",
+  "state": "unknown",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "当前无新增意向商家",
+      "sha256": "13785863a9b510209ae4ada2a13b85d721428f4adf293a925e45490c4577bb97"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": "ui-post-result-timeout",
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": false,
+    "status": "unknown",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "8206e5a05c67be629cbeb505a12568dc56db0a2f1c57d51cf47b28a5e4c4cec3",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "13785863a9b510209ae4ada2a13b85d721428f4adf293a925e45490c4577bb97",
+        "type": "text",
+        "status": "unknown",
+        "claimedAt": 1792830595.071479,
+        "sendAttempts": 1,
+        "reason": "ui-post-result-timeout"
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 385720
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 199582
+      }
+    ],
+    "reason": "ui-post-result-timeout",
+    "elapsedMs": 585313,
+    "eventKey": "a9c8f6265dd839c69d77c36c538cdc440ac5c2810fff8f9e79ffbc0a43dcc44f",
+    "reviewSummary": {
+      "totalElapsedMs": 585313,
+      "result": "unknown",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/empty-202610241600.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 385720,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "failed",
+      "pitfalls": [
+        {
+          "code": "messaging-stage",
+          "reason": "ui-post-result-timeout"
+        }
+      ],
+      "elapsedMs": 199582,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 585313,
+  "reviewSummary": {
+    "totalElapsedMs": 585313,
+    "itemCount": 4,
+    "pitfallCount": 1,
+    "result": "failed"
+  },
+  "copyReadback": null,
+  "physicalSendAttempts": null,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false
+}

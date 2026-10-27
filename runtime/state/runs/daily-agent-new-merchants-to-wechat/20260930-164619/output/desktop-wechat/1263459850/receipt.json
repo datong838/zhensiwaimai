@@ -1,0 +1,149 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "上海市\n肖，13681960518\n续杯CONTINUE TEA\n西藏北路198号静安大悦城北座5楼520",
+      "sha256": "78f10cae12db2458c73935d455363123ee7e469a53e1962b8618d752e545a8ff"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "61f97a2db321a67bb48711f38f598f17135660a1ef267a162bb729249da52676",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "78f10cae12db2458c73935d455363123ee7e469a53e1962b8618d752e545a8ff",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1790758008.660852,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-text-anchor",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "电销+直播攻坚组",
+          "currentTitle": "电销+直播攻坚组",
+          "messageCount": 47,
+          "anchor": "text-exact",
+          "anchorValue": "上海市\n肖，13681960518\n续杯CONTINUE TEA\n西藏北路198号静安大悦城北座5楼520",
+          "anchorInTrailingPosition": true,
+          "autoKind": null,
+          "readbackAt": 1790758027.8854
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "电销+直播攻坚组",
+            "len": 53
+          },
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 401
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 19224
+      }
+    ],
+    "elapsedMs": 19627,
+    "eventKey": "7facfd263acd8b57587afc7177521ec648dd5c1d602e9b1d0e6f5a7b85b23960",
+    "reviewSummary": {
+      "totalElapsedMs": 19627,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/859abe0743531fc9a9607d5154e3cdd1c079e098c9406638e07c02d425c14db1.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 401,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 19224,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 19627,
+  "reviewSummary": {
+    "totalElapsedMs": 19627,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "ok": true,
+    "resolvedGroup": "电销+直播攻坚组",
+    "currentTitle": "电销+直播攻坚组",
+    "messageCount": 47,
+    "anchor": "text-exact",
+    "anchorValue": "上海市\n肖，13681960518\n续杯CONTINUE TEA\n西藏北路198号静安大悦城北座5楼520",
+    "anchorInTrailingPosition": true,
+    "autoKind": null,
+    "readbackAt": 1790758027.8854
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false
+}

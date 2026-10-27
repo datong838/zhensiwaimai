@@ -1,0 +1,106 @@
+{
+  "bridgeVersion": 1,
+  "ok": false,
+  "verified": false,
+  "payloadType": "text",
+  "state": "blocked",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "当前无新增意向商家",
+      "sha256": "13785863a9b510209ae4ada2a13b85d721428f4adf293a925e45490c4577bb97"
+    }
+  ],
+  "sendAttempts": 0,
+  "newSendAttempts": 0,
+  "reason": "ui-post-preflight-not-verified",
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": false,
+    "status": "blocked",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "f49405e69bd0de1c1dd89ad431da7fd4378823fbed8b228f8aa4252155051920",
+    "runtimeModelDecisions": 0,
+    "items": [],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "failed",
+        "pitfalls": [
+          "ui-post-preflight-not-verified"
+        ],
+        "elapsedMs": 554
+      }
+    ],
+    "reason": "ui-post-preflight-not-verified",
+    "elapsedMs": 555,
+    "eventKey": "3cf93531edfefaea46e9f6e891d2b85228148bd5f561b22246caf2f8ddf37b6c",
+    "reviewSummary": {
+      "totalElapsedMs": 555,
+      "result": "blocked",
+      "stageCount": 3,
+      "completedStages": 2,
+      "failedStages": [
+        {
+          "stage": "preflight",
+          "status": "failed",
+          "pitfalls": [
+            "ui-post-preflight-not-verified"
+          ]
+        }
+      ]
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/empty-202610271700.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "failed",
+      "pitfalls": [
+        {
+          "code": "messaging-stage",
+          "reason": "ui-post-preflight-not-verified"
+        }
+      ],
+      "elapsedMs": 554,
+      "item": 3,
+      "label": "preflight"
+    }
+  ],
+  "elapsedMs": 555,
+  "reviewSummary": {
+    "totalElapsedMs": 555,
+    "itemCount": 3,
+    "pitfallCount": 1,
+    "result": "failed"
+  }
+}

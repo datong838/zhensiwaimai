@@ -1,0 +1,102 @@
+{
+  "ok": true,
+  "executor": "desktop",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-brand",
+  "port": 9230,
+  "taskId": "top10-60b548a9-ec52-4d78-bca6-06e6cd3d86df",
+  "runId": "60b548a9-ec52-4d78-bca6-06e6cd3d86df",
+  "stageMs": {
+    "background_preflight": 172,
+    "open_home": 1535,
+    "dismiss_known_notice": 418,
+    "navigate_store_analysis": 712,
+    "select_yesterday": 383,
+    "verify_sort": 537,
+    "capture_self_check": 2805
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "open_home": "PASS",
+    "dismiss_known_notice": "PASS",
+    "navigate_store_analysis": "PASS",
+    "select_yesterday": "PASS",
+    "verify_sort": "PASS",
+    "capture_self_check": "PASS"
+  },
+  "retryCount": 0,
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "receiptFile": "/tmp/zhensi_top10/60b548a9-ec52-4d78-bca6-06e6cd3d86df/desktop_receipt.json",
+  "stage": "capture_self_check",
+  "startedAt": 1792720191822,
+  "deadlineAt": 1792720371822,
+  "dataDate": "2026-10-22",
+  "deviceScaleFactor": 2,
+  "homeUrl": "https://melody.shop.ele.me/app/chain/95708808/dashboard#app.chainshop.dashboard",
+  "knownNotice": "DISMISSED",
+  "storeUrl": "https://melody.shop.ele.me/app/chain/95708808/store-analysis#app.chainshop.store-analysis?path=1&dateType=realTime&orderCol=valid_ord_amt&orderType=DESC",
+  "captureGeometry": {
+    "viewport": {
+      "width": 2200,
+      "height": 1800
+    },
+    "tableBox": {
+      "x": 652,
+      "y": 621.421875,
+      "width": 1120,
+      "height": 824.6875
+    },
+    "pagerBox": {
+      "x": 1188.296875,
+      "y": 1462.109375,
+      "width": 583.703125,
+      "height": 32
+    },
+    "clip": {
+      "x": 652,
+      "y": 621,
+      "width": 1120,
+      "height": 880
+    }
+  },
+  "captureScale": 1,
+  "file": "/tmp/zhensi_top10/60b548a9-ec52-4d78-bca6-06e6cd3d86df/2026-10-22_top10seller.png",
+  "width": 2240,
+  "height": 1760,
+  "sha256": "cb08853443932a0653716da5108c01474b7ce90ac0bf6dd9d7348665a07fccb9",
+  "stores": [
+    "味之绝美蛙鱼火锅(周浦万达店)",
+    "味之绝·美蛙鱼头火锅(亚新广场店)",
+    "毛家湘菜馆(人民广场店)",
+    "味之绝热血美蛙鱼头火锅(五角场万达店)",
+    "甬潮·宁波小市(静安大融城店)",
+    "繁花肴(缤谷广场店)",
+    "湘味小厨(活力城店)",
+    "味之绝美蛙鱼头火锅(宝山万达店)",
+    "严二嬢鲜鱼火锅(北蔡店)",
+    "雅位·新上海菜(龙湖天街店)"
+  ],
+  "revenues": [
+    11325.24,
+    10956.4,
+    9731.53,
+    8415.6,
+    7649,
+    7542.8,
+    7511.65,
+    7504.08,
+    7266.22,
+    7143
+  ],
+  "page": 1,
+  "pageSize": 10,
+  "layout": "background-table-and-pagination",
+  "capture": {
+    "x": 652,
+    "y": 621,
+    "width": 1120,
+    "height": 880
+  },
+  "elapsedMs": 6475
+}

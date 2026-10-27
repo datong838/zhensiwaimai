@@ -1,0 +1,379 @@
+{
+  "ok": false,
+  "runId": "af073aed-d689-4ac9-8a1b-4cd37ef23c26",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "executor_integrity": 6,
+    "runtime_policy": 0,
+    "offline_selftest": 209,
+    "collection": 6364,
+    "audit": 0,
+    "desktop_wechat_preflight": 441420,
+    "desktop_wechat": 460028,
+    "final_cursor_check": 2,
+    "reseal": 1
+  },
+  "stageResults": {
+    "executor_integrity": "PASS",
+    "runtime_policy": "PASS",
+    "offline_selftest": "PASS",
+    "collection": "PASS",
+    "audit": "PASS",
+    "desktop_wechat_preflight": "PASS",
+    "desktop_wechat": "PASS",
+    "final_cursor_check": "PASS",
+    "reseal": "FAIL"
+  },
+  "stage": "reseal",
+  "wechatChannel": "desktop",
+  "collectionAttempts": [
+    {
+      "ok": true,
+      "executor": "merchant-collector",
+      "browserController": "control-background-dedicated-chrome",
+      "profile": "taobao-agent-service",
+      "port": 9231,
+      "groupName": "电销+直播攻坚组",
+      "businessDate": "2026-10-24",
+      "runtimeModelDecisions": 0,
+      "stageMs": {
+        "background_preflight": 71,
+        "task_page": 311,
+        "navigation": 1309,
+        "date_filter": 2025,
+        "page_1_read": 439,
+        "selection_audit": 1,
+        "detail_1355654666": 1143
+      },
+      "stageResults": {
+        "background_preflight": "PASS",
+        "task_page": "PASS",
+        "navigation": "PASS",
+        "date_filter": "PASS",
+        "page_1_read": "PASS",
+        "selection_audit": "PASS",
+        "detail_1355654666": "PASS"
+      },
+      "frontmostBefore": "com.openai.codex",
+      "createdAt": "2026-10-24T08:02:54.556Z",
+      "cursorSource": "verified-history",
+      "filterStartDate": "2026-10-24",
+      "filterEndDate": "2026-10-24",
+      "dateFilter": "2026-10-24..2026-10-24",
+      "dateFilterVerified": true,
+      "pages": [
+        {
+          "page": 1,
+          "rowCount": 3,
+          "nextEnabled": false
+        }
+      ],
+      "paginationComplete": true,
+      "totalRows": 3,
+      "pendingRows": 3,
+      "targetCount": 1,
+      "selectionAudit": {
+        "totalRows": 3,
+        "pendingRows": 3,
+        "excludedAtOrBeforeCursor": 2,
+        "excludedAfterCursorNotPending": 0,
+        "targetCount": 1,
+        "rows": [
+          {
+            "merchantId": "1355654666",
+            "recommendTime": "2026-10-24 15:36:00",
+            "status": "待处理"
+          },
+          {
+            "merchantId": "544101544",
+            "recommendTime": "2026-10-24 10:46:20",
+            "status": "待处理"
+          },
+          {
+            "merchantId": "1366726635",
+            "recommendTime": "2026-10-24 09:16:58",
+            "status": "待处理"
+          }
+        ]
+      },
+      "ascending": true,
+      "detailsVerified": true,
+      "url": "https://open.shop.ele.me/manager/agent/home",
+      "elapsedMs": 5988,
+      "frontmostAfter": "com.openai.codex",
+      "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261024-160247/output/collection-attempt-1.review.json",
+      "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261024-160247/output/collection-attempt-1.review.md",
+      "attempt": 1
+    }
+  ],
+  "executorIntegrity": {
+    "ok": true,
+    "status": "UNSEALED_ACCEPTANCE",
+    "manifestSha256": "e7086ee2ed852d213284f92a2bbc2227e7d6c6b78e04bcd09acdcda280ce023e",
+    "fileCount": 19,
+    "authorization": "user-20260916-production-hardening",
+    "runtimeModelDecisions": 0,
+    "maintenanceAcceptance": "desktop-wechat-shared-preflight",
+    "sharedTextAcceptance": "wechat-messaging-desktop-text",
+    "sharedMediaAcceptance": "not-required-by-text-only-merchant-workflow"
+  },
+  "runtimePolicy": {
+    "ok": true,
+    "group": "电销+直播攻坚组",
+    "channel": "desktop",
+    "cursorFile": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/cursor.json",
+    "maxCollectionAttempts": 2,
+    "collectionBudgetSeconds": 180
+  },
+  "selftest": {
+    "ok": true,
+    "senderTests": 5,
+    "browserTests": 39,
+    "selftestAttempts": 1
+  },
+  "collection": {
+    "ok": true,
+    "executor": "merchant-collector",
+    "browserController": "control-background-dedicated-chrome",
+    "profile": "taobao-agent-service",
+    "port": 9231,
+    "groupName": "电销+直播攻坚组",
+    "businessDate": "2026-10-24",
+    "runtimeModelDecisions": 0,
+    "stageMs": {
+      "background_preflight": 71,
+      "task_page": 311,
+      "navigation": 1309,
+      "date_filter": 2025,
+      "page_1_read": 439,
+      "selection_audit": 1,
+      "detail_1355654666": 1143
+    },
+    "stageResults": {
+      "background_preflight": "PASS",
+      "task_page": "PASS",
+      "navigation": "PASS",
+      "date_filter": "PASS",
+      "page_1_read": "PASS",
+      "selection_audit": "PASS",
+      "detail_1355654666": "PASS"
+    },
+    "frontmostBefore": "com.openai.codex",
+    "createdAt": "2026-10-24T08:02:54.556Z",
+    "cursorSource": "verified-history",
+    "filterStartDate": "2026-10-24",
+    "filterEndDate": "2026-10-24",
+    "dateFilter": "2026-10-24..2026-10-24",
+    "dateFilterVerified": true,
+    "pages": [
+      {
+        "page": 1,
+        "rowCount": 3,
+        "nextEnabled": false
+      }
+    ],
+    "paginationComplete": true,
+    "totalRows": 3,
+    "pendingRows": 3,
+    "targetCount": 1,
+    "selectionAudit": {
+      "totalRows": 3,
+      "pendingRows": 3,
+      "excludedAtOrBeforeCursor": 2,
+      "excludedAfterCursorNotPending": 0,
+      "targetCount": 1,
+      "rows": [
+        {
+          "merchantId": "1355654666",
+          "recommendTime": "2026-10-24 15:36:00",
+          "status": "待处理"
+        },
+        {
+          "merchantId": "544101544",
+          "recommendTime": "2026-10-24 10:46:20",
+          "status": "待处理"
+        },
+        {
+          "merchantId": "1366726635",
+          "recommendTime": "2026-10-24 09:16:58",
+          "status": "待处理"
+        }
+      ]
+    },
+    "ascending": true,
+    "detailsVerified": true,
+    "url": "https://open.shop.ele.me/manager/agent/home",
+    "elapsedMs": 5988,
+    "frontmostAfter": "com.openai.codex",
+    "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261024-160247/output/collection-attempt-1.review.json",
+    "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261024-160247/output/collection-attempt-1.review.md"
+  },
+  "desktopWechatPreflight": {
+    "ok": true,
+    "resolvedGroup": "电销+直播攻坚组",
+    "inputEmpty": true,
+    "attemptReviews": [
+      {
+        "attempt": 1,
+        "elapsedMs": 441417,
+        "ok": true,
+        "reason": null,
+        "sendAttempts": 0,
+        "sendReview": []
+      }
+    ],
+    "contentionRetries": 0,
+    "contentionWaitMs": 0,
+    "contentionEvents": []
+  },
+  "wechat": {
+    "ok": true,
+    "executor": "merchant-desktop-wechat-sender",
+    "channel": "desktop",
+    "sent": 1,
+    "messageCount": 1,
+    "historySkipped": 0,
+    "items": [
+      {
+        "merchantId": "1355654666",
+        "merchantName": "鹊堂羽坊·茶饮养生",
+        "review": [
+          {
+            "stage": "发送前合同复核",
+            "status": "PASS",
+            "pitfalls": [],
+            "elapsedMs": 0
+          },
+          {
+            "stage": "定位、输入与单次发送",
+            "status": "PASS",
+            "pitfalls": [],
+            "details": [
+              {
+                "stage": "authorization",
+                "status": "completed",
+                "pitfalls": [],
+                "elapsedMs": 0,
+                "item": 1,
+                "label": "authorization"
+              },
+              {
+                "stage": "freeze:0",
+                "status": "completed",
+                "pitfalls": [],
+                "elapsedMs": 0,
+                "item": 2,
+                "label": "freeze:0"
+              },
+              {
+                "stage": "preflight",
+                "status": "completed",
+                "pitfalls": [],
+                "elapsedMs": 247405,
+                "item": 3,
+                "label": "preflight"
+              },
+              {
+                "stage": "send:0",
+                "status": "completed",
+                "pitfalls": [],
+                "elapsedMs": 212421,
+                "item": 4,
+                "label": "send:0"
+              }
+            ],
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsedMs": 460006,
+                "ok": true,
+                "reason": null,
+                "sendAttempts": 1,
+                "sendReview": [
+                  {
+                    "stage": "authorization",
+                    "status": "completed",
+                    "pitfalls": [],
+                    "elapsedMs": 0,
+                    "item": 1,
+                    "label": "authorization"
+                  },
+                  {
+                    "stage": "freeze:0",
+                    "status": "completed",
+                    "pitfalls": [],
+                    "elapsedMs": 0,
+                    "item": 2,
+                    "label": "freeze:0"
+                  },
+                  {
+                    "stage": "preflight",
+                    "status": "completed",
+                    "pitfalls": [],
+                    "elapsedMs": 247405,
+                    "item": 3,
+                    "label": "preflight"
+                  },
+                  {
+                    "stage": "send:0",
+                    "status": "completed",
+                    "pitfalls": [],
+                    "elapsedMs": 212421,
+                    "item": 4,
+                    "label": "send:0"
+                  }
+                ]
+              }
+            ],
+            "elapsedMs": 460008
+          },
+          {
+            "stage": "双帧与原生复制全文复核",
+            "status": "PASS",
+            "pitfalls": [],
+            "details": [],
+            "attempts": [],
+            "elapsedMs": 1
+          },
+          {
+            "stage": "提交前证据门禁",
+            "status": "PASS",
+            "pitfalls": [],
+            "elapsedMs": 0
+          },
+          {
+            "stage": "成功历史与原子游标提交",
+            "status": "PASS",
+            "pitfalls": [],
+            "details": [],
+            "attempts": [],
+            "elapsedMs": 3
+          }
+        ]
+      }
+    ],
+    "contentionRetries": 0,
+    "contentionWaitMs": 0,
+    "contentionEvents": [],
+    "lastMerchantId": "1355654666",
+    "verified": true,
+    "mode": "execute"
+  },
+  "finalCursor": {
+    "verified": true,
+    "merchantId": "1355654666",
+    "recommendTime": "2026-10-24 15:36:00",
+    "checkedDeliveries": 1,
+    "reconciliationOnly": false
+  },
+  "error": "executor-lock-acceptance-copy-readback-invalid",
+  "elapsedMs": 908152,
+  "completion": {
+    "state": "RECONCILE_ONLY",
+    "nextAction": "native-copy-read-only-reconcile-no-resend",
+    "automaticRecoveryAllowed": true,
+    "recoveryAttemptBudget": 1,
+    "reason": "executor-lock-acceptance-copy-readback-invalid"
+  },
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261024-160247/output/review.json"
+}

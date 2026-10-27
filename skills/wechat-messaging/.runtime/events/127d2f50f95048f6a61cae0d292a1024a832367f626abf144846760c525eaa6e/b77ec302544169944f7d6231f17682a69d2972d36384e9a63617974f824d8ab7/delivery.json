@@ -1,0 +1,119 @@
+{
+  "itemId": "file",
+  "sha256": "bb42b22386be25ed7ee95d1bd382c01b0ab67de09a2fb569092e802165da65b2",
+  "type": "file",
+  "status": "unknown",
+  "claimedAt": 1789564453.3237388,
+  "sendAttempts": 1,
+  "verificationLevel": "insufficient",
+  "reason": "file-name-size-transfer-or-newness-unproven",
+  "evidence": {
+    "ok": false,
+    "reason": "file-name-size-transfer-or-newness-unproven",
+    "completionFrames": [
+      "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/127d2f50f95048f6a61cae0d292a1024a832367f626abf144846760c525eaa6e/b77ec302544169944f7d6231f17682a69d2972d36384e9a63617974f824d8ab7/transport/content-3-1.png",
+      "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/127d2f50f95048f6a61cae0d292a1024a832367f626abf144846760c525eaa6e/b77ec302544169944f7d6231f17682a69d2972d36384e9a63617974f824d8ab7/transport/content-3-2.png"
+    ]
+  },
+  "transport": {
+    "ok": true,
+    "executor": "wechat-desktop-sender",
+    "channel": "desktop",
+    "groupName": "臻肆测试群",
+    "payloadType": "file",
+    "sendAttempts": 1,
+    "runtimeModelDecisions": 0,
+    "stage": "completed",
+    "stageMs": {
+      "locate_group": 290,
+      "verify_target_and_input": 2740,
+      "prepare_payload": 2068,
+      "claim_and_send": 3648,
+      "post_send_verify": 6032
+    },
+    "payloadIdentity": "ed0772e49a7f8ffa36fa6a8918044eff6b0ba2c6835a3138b913d629d3249796",
+    "payloads": [
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/127d2f50f95048f6a61cae0d292a1024a832367f626abf144846760c525eaa6e/b77ec302544169944f7d6231f17682a69d2972d36384e9a63617974f824d8ab7/payload/美团0904测试14.xlsx",
+        "name": "美团0904测试14.xlsx",
+        "size": 122277,
+        "sha256": "bb42b22386be25ed7ee95d1bd382c01b0ab67de09a2fb569092e802165da65b2"
+      }
+    ],
+    "groupPreflight": {
+      "ok": true,
+      "action": "open-group",
+      "group": "臻肆测试群",
+      "header": "臻肆测试群",
+      "note": "ax-current-header",
+      "reason": null,
+      "sendAttempts": 0,
+      "runtimeModelDecisions": 0,
+      "stageMs": {
+        "exact_group_preflight": 290
+      },
+      "artifacts": [],
+      "hardGate": false
+    },
+    "preparedInputChangedPixels": 53256,
+    "preparedInputChangedRatio": 0.144178,
+    "preparedFileObjectCount": 1,
+    "preparedFilePrefixesVerified": true,
+    "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/127d2f50f95048f6a61cae0d292a1024a832367f626abf144846760c525eaa6e/b77ec302544169944f7d6231f17682a69d2972d36384e9a63617974f824d8ab7/transport-ledger/attempt.json",
+    "postSendInputCleared": [
+      true,
+      true
+    ],
+    "verified": true,
+    "state": "verified",
+    "elapsedMs": 15494,
+    "sendReview": [
+      {
+        "item": 1,
+        "stage": "locate_group",
+        "label": "精确定位目标群",
+        "elapsedMs": 290,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 2,
+        "stage": "verify_target_and_input",
+        "label": "复核目标群与输入框",
+        "elapsedMs": 2740,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 3,
+        "stage": "prepare_payload",
+        "label": "准备并复核发送载荷",
+        "elapsedMs": 2068,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 4,
+        "stage": "claim_and_send",
+        "label": "领取防重账本并单次发送",
+        "elapsedMs": 3648,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 5,
+        "stage": "post_send_verify",
+        "label": "发送后双帧复核",
+        "elapsedMs": 6032,
+        "status": "completed",
+        "pitfalls": []
+      }
+    ],
+    "reviewSummary": {
+      "totalElapsedMs": 15494,
+      "itemCount": 5,
+      "pitfallCount": 0,
+      "result": "success"
+    }
+  }
+}

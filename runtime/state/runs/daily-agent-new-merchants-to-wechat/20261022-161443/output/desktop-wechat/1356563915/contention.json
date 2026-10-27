@@ -1,0 +1,198 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：长春市  ；  联系人：马玉婵中式炸鸡，17177549999  ；  店铺：马玉婵·中式炸鸡·拌饭  ；  地址：虎林路东医院家属楼108号房  ；  商家ID：1356563915",
+      "sha256": "2956bb115fb3fe713fb6988d7441e54acfd7aa642093373cad5ad652668f8091"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "3c9b2538c1e682dd442ce8c72a24a494c0cf3fddfab411e522aca4750180c244",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "2956bb115fb3fe713fb6988d7441e54acfd7aa642093373cad5ad652668f8091",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1792656936.059018,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-text-anchor",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "电销+直播攻坚组",
+          "currentTitle": "电销+直播攻坚组",
+          "messageCount": 44,
+          "anchor": "text-exact",
+          "anchorValue": "城市：长春市  ；  联系人：马玉婵中式炸鸡，17177549999  ；  店铺：马玉婵·中式炸鸡·拌饭  ；  地址：虎林路东医院家属楼108号房  ；  商家ID：1356563915",
+          "anchorInTrailingPosition": true,
+          "autoKind": null,
+          "readbackAt": 1792656964.831521
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "电销+直播攻坚组",
+            "len": 95
+          },
+          "route": "relay",
+          "direct_error": "[Errno 65] No route to host",
+          "direct_local_network_blocked": true,
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 19865
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 28772
+      }
+    ],
+    "elapsedMs": 48641,
+    "eventKey": "dab2207197af29e83facf63a903660387ee8d03e7b8209acb9e92c8398e7ed08",
+    "reviewSummary": {
+      "totalElapsedMs": 48641,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/cc1a115230b6d71859437b27b99fb5b0cac8c823dbde6dfde7eff95091002c72.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 19865,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 28772,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 48641,
+  "reviewSummary": {
+    "totalElapsedMs": 48641,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "ok": true,
+    "resolvedGroup": "电销+直播攻坚组",
+    "currentTitle": "电销+直播攻坚组",
+    "messageCount": 44,
+    "anchor": "text-exact",
+    "anchorValue": "城市：长春市  ；  联系人：马玉婵中式炸鸡，17177549999  ；  店铺：马玉婵·中式炸鸡·拌饭  ；  地址：虎林路东医院家属楼108号房  ；  商家ID：1356563915",
+    "anchorInTrailingPosition": true,
+    "autoKind": null,
+    "readbackAt": 1792656964.831521
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false,
+  "attemptReviews": [
+    {
+      "attempt": 1,
+      "elapsedMs": 48809,
+      "ok": true,
+      "reason": null,
+      "sendAttempts": 1,
+      "sendReview": [
+        {
+          "stage": "authorization",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 1,
+          "label": "authorization"
+        },
+        {
+          "stage": "freeze:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 2,
+          "label": "freeze:0"
+        },
+        {
+          "stage": "preflight",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 19865,
+          "item": 3,
+          "label": "preflight"
+        },
+        {
+          "stage": "send:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 28772,
+          "item": 4,
+          "label": "send:0"
+        }
+      ]
+    }
+  ],
+  "contentionRetries": 0,
+  "contentionWaitMs": 0,
+  "contentionEvents": []
+}

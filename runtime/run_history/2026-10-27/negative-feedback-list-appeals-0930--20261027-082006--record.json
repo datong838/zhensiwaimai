@@ -1,0 +1,23 @@
+{
+  "skill": "negative-feedback-list-appeals-0930",
+  "ledger_name": "负反馈列表申诉·双平台执行（每日08:30）",
+  "schedule": "每日08:20执行，08:30前交付",
+  "dev_state": "active",
+  "status": "FAILED",
+  "category": "UNKNOWN",
+  "detail": "reason=jinsha-page-count:2 (receipt:reason)",
+  "next_action": "看护代理读日志定位根因后升级处理",
+  "attempts": 1,
+  "max_retries": 0,
+  "duration_seconds": 0.29,
+  "started_at": "2026-10-27T08:20:06",
+  "finished_at": "2026-10-27T08:20:06",
+  "triggered_by": "daemon",
+  "logs": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-27/negative-feedback-list-appeals-0930--20261027-082006--a1--s1.log"
+  ],
+  "fail_signal": {
+    "kind": "reason",
+    "code": "jinsha-page-count:2"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "skill": "contract-termination-applications-screenshot",
+  "ledger_name": "合同解约申请·处理中任务列表截图（每日09:00）",
+  "schedule": "每日09:00",
+  "dev_state": "active",
+  "status": "FAILED",
+  "category": "UNKNOWN",
+  "detail": "reason=supplement-authorization-invalid-or-expired (receipt:reason)",
+  "next_action": "看护代理读日志定位根因后升级处理",
+  "attempts": 2,
+  "max_retries": 2,
+  "duration_seconds": 560.11,
+  "started_at": "2026-10-24T18:55:36",
+  "finished_at": "2026-10-24T19:04:56",
+  "triggered_by": "daemon",
+  "logs": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-24/contract-termination-applications-screenshot--20261024-185536--a1--s1.log",
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-24/contract-termination-applications-screenshot--20261024-190445--a2--s1.log"
+  ],
+  "fail_signal": {
+    "kind": "reason",
+    "code": "supplement-authorization-invalid-or-expired"
+  }
+}

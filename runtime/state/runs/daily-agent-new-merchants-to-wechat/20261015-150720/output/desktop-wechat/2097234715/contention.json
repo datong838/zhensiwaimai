@@ -1,0 +1,196 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：烟台市  ；  联系人：苗，18354556718  ；  店铺：小胖凉皮·火锅粉.肉夹馍  ；  地址：政府大街346号",
+      "sha256": "560392971bb11d90aba7370469706adeaaec7e91b0140dfbf0c39ed27f88ba7b"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "6697306ef1a876a1fd1cfe9f5599ebbd37f0e9a49bf2fdb4dd18a0a2d83a8bbe",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "560392971bb11d90aba7370469706adeaaec7e91b0140dfbf0c39ed27f88ba7b",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1792048051.7674282,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-text-anchor",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "电销+直播攻坚组",
+          "currentTitle": "电销+直播攻坚组",
+          "messageCount": 36,
+          "anchor": "text-exact",
+          "anchorValue": "城市：烟台市  ；  联系人：苗，18354556718  ；  店铺：小胖凉皮·火锅粉.肉夹馍  ；  地址：政府大街346号",
+          "anchorInTrailingPosition": true,
+          "autoKind": null,
+          "readbackAt": 1792048074.1226602
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "电销+直播攻坚组",
+            "len": 64
+          },
+          "route": "direct",
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 483
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 22355
+      }
+    ],
+    "elapsedMs": 22849,
+    "eventKey": "72198b9eb147f1c301392fd1aff8016ee070f70419996e093fe938442139e492",
+    "reviewSummary": {
+      "totalElapsedMs": 22849,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/b5eb018e5117ad1b17efc2f61bdc45808c71d3bdbc41f3a240e7a1383416a0ab.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 483,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 22355,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 22849,
+  "reviewSummary": {
+    "totalElapsedMs": 22849,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "ok": true,
+    "resolvedGroup": "电销+直播攻坚组",
+    "currentTitle": "电销+直播攻坚组",
+    "messageCount": 36,
+    "anchor": "text-exact",
+    "anchorValue": "城市：烟台市  ；  联系人：苗，18354556718  ；  店铺：小胖凉皮·火锅粉.肉夹馍  ；  地址：政府大街346号",
+    "anchorInTrailingPosition": true,
+    "autoKind": null,
+    "readbackAt": 1792048074.1226602
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false,
+  "attemptReviews": [
+    {
+      "attempt": 1,
+      "elapsedMs": 23024,
+      "ok": true,
+      "reason": null,
+      "sendAttempts": 1,
+      "sendReview": [
+        {
+          "stage": "authorization",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 1,
+          "label": "authorization"
+        },
+        {
+          "stage": "freeze:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 2,
+          "label": "freeze:0"
+        },
+        {
+          "stage": "preflight",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 483,
+          "item": 3,
+          "label": "preflight"
+        },
+        {
+          "stage": "send:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 22355,
+          "item": 4,
+          "label": "send:0"
+        }
+      ]
+    }
+  ],
+  "contentionRetries": 0,
+  "contentionWaitMs": 0,
+  "contentionEvents": []
+}

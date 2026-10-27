@@ -1,0 +1,150 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：阿勒泰地区  ；  联系人：孔先生，17399061555  ；  店铺：煲掌柜明火煲仔饭  ；  地址：新疆恰秀街道迎宾路翰林世家12栋87-205号  ；  商家ID：537020312",
+      "sha256": "c8bf8dfe5b2978e6bd5002eaafa38be40dc33f270d8603251e6852f9c037c3fe"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "42ae1391448f4c1ddededb50bda628b3a2e1c5e9337dff6b09bbed8cf137c8cd",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "c8bf8dfe5b2978e6bd5002eaafa38be40dc33f270d8603251e6852f9c037c3fe",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1792636622.628176,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-text-anchor",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "电销+直播攻坚组",
+          "currentTitle": "电销+直播攻坚组",
+          "messageCount": 43,
+          "anchor": "text-exact",
+          "anchorValue": "城市：阿勒泰地区  ；  联系人：孔先生，17399061555  ；  店铺：煲掌柜明火煲仔饭  ；  地址：新疆恰秀街道迎宾路翰林世家12栋87-205号  ；  商家ID：537020312",
+          "anchorInTrailingPosition": true,
+          "autoKind": null,
+          "readbackAt": 1792636646.664459
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "电销+直播攻坚组",
+            "len": 98
+          },
+          "route": "direct",
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 183
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 24037
+      }
+    ],
+    "elapsedMs": 24225,
+    "eventKey": "c9de2b7801f35aa28ead5ef6058cdc3b63db0f91156cb89155cacf622a8eedab",
+    "reviewSummary": {
+      "totalElapsedMs": 24225,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/e69b98c0ecddf54a96703f49cba92a21871b893fbc70613dc273ab9c702592dd.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 183,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 24037,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 24225,
+  "reviewSummary": {
+    "totalElapsedMs": 24225,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "ok": true,
+    "resolvedGroup": "电销+直播攻坚组",
+    "currentTitle": "电销+直播攻坚组",
+    "messageCount": 43,
+    "anchor": "text-exact",
+    "anchorValue": "城市：阿勒泰地区  ；  联系人：孔先生，17399061555  ；  店铺：煲掌柜明火煲仔饭  ；  地址：新疆恰秀街道迎宾路翰林世家12栋87-205号  ；  商家ID：537020312",
+    "anchorInTrailingPosition": true,
+    "autoKind": null,
+    "readbackAt": 1792636646.664459
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false
+}

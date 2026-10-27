@@ -1,0 +1,24 @@
+{
+  "skill": "meituan-intelligent-customer-service-15",
+  "ledger_name": "美团商家中心智能客服（15:00）",
+  "schedule": "每日15:00",
+  "dev_state": "active",
+  "status": "FAILED",
+  "category": "RECOVERABLE",
+  "detail": "reason=locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator('[class*=\\'sessionListItemContainer\\']').filter({ hasText: '160613789675977 餐品' }).first()\n    - locator resolved to <div class=\"sessionListItemContainer_ZL2hpS\">…</div>\n  - attempting click action\n    2 × waiting for element (receipt:reason)",
+  "next_action": "重试预算耗尽：看护代理读日志决定再等冷却重跑或跳过",
+  "attempts": 1,
+  "max_retries": 0,
+  "duration_seconds": 24.27,
+  "started_at": "2026-10-24T16:00:58",
+  "finished_at": "2026-10-24T16:01:23",
+  "triggered_by": "daemon",
+  "logs": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-24/meituan-intelligent-customer-service-15--20261024-160058--a1--s1.log",
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-24/meituan-intelligent-customer-service-15--20261024-160058--a1--s2.log"
+  ],
+  "fail_signal": {
+    "kind": "reason",
+    "code": "locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator('[class*=\\'sessionListItemContainer\\']').filter({ hasText: '160613789675977 餐品' }).first()\n    - locator resolved to <div class=\"sessionListItemContainer_ZL2hpS\">…</div>\n  - attempting click action\n    2 × waiting for element"
+  }
+}

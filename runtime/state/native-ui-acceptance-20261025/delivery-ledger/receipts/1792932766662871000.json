@@ -1,0 +1,70 @@
+{
+  "ok": false,
+  "status": "blocked",
+  "groupName": "临时测试群请忽略 💰发财精英荟💰",
+  "channel": "desktop",
+  "requestDigest": "e6bce10865b4722188643b068f8a67bce0d0add61b38deb079f796071bcd5d0a",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "text",
+      "sha256": "0b13e4dc53fe7943ea47252bce0aab2769e76e6e6843aa83f67e7340f04db503",
+      "type": "text",
+      "status": "blocked",
+      "claimedAt": 1792932762.3679879,
+      "sendAttempts": 0,
+      "resolvedGroup": "临时测试群请忽略 💰发财精英荟💰",
+      "inputEmpty": false,
+      "reason": "native-ui-draft-mismatch",
+      "backend": "system-events-ui-tree"
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:text",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:image",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:excel",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 2145
+    },
+    {
+      "stage": "send:text",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 4294
+    }
+  ],
+  "reason": "native-ui-draft-mismatch",
+  "elapsedMs": 6443,
+  "eventKey": "be26142fe3f08b077b001adc2ac4918fdb9db6742d5259c1b1e0f30d793ed96d",
+  "reviewSummary": {
+    "totalElapsedMs": 6443,
+    "result": "blocked",
+    "stageCount": 6,
+    "completedStages": 6,
+    "failedStages": []
+  }
+}

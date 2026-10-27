@@ -1,0 +1,127 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-02",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 75,
+    "task_page": 490,
+    "navigation": 1410,
+    "date_filter": 1517,
+    "page_1_read": 318,
+    "selection_audit": 0,
+    "detail_1284700824": 769
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_1284700824": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "1284700824",
+      "merchantName": "喜柿·鲜果茶(琼海中原店)",
+      "recommendTime": "2026-10-02 08:41:23",
+      "city": "琼海市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 7,
+      "address": "中原镇中东老街1号小学路",
+      "contact": "喜柿，13876225291",
+      "detailVerified": true,
+      "text": "琼海市\n喜柿，13876225291\n喜柿·鲜果茶(琼海中原店)\n中原镇中东老街1号小学路",
+      "sha256": "f4515c281c3b7e8657b1efa11263f5dbf07f7959e9f2033058849cb303962251"
+    }
+  ],
+  "frontmostBefore": "com.tencent.workbuddy.mac",
+  "createdAt": "2026-10-02T02:33:32.691Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-01",
+    "merchantName": "焕味私烤（二店铁欣路店）",
+    "merchantId": "1361968459",
+    "recommendTime": "2026-10-01 21:43:06",
+    "tableOrder": 6,
+    "messageSha256": "83600722cbaecc273e98222df8339bff868e6920c2dd0991a92ad222d700dd75",
+    "sentAt": "2026-10-01T23:51:23+0800",
+    "verified": true
+  },
+  "cursorSource": "local",
+  "filterStartDate": "2026-10-01",
+  "filterEndDate": "2026-10-02",
+  "dateFilter": "2026-10-01..2026-10-02",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 7,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 7,
+  "pendingRows": 7,
+  "targetCount": 1,
+  "selectionAudit": {
+    "totalRows": 7,
+    "pendingRows": 7,
+    "excludedAtOrBeforeCursor": 6,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 1,
+    "rows": [
+      {
+        "merchantId": "1284700824",
+        "recommendTime": "2026-10-02 08:41:23",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1361968459",
+        "recommendTime": "2026-10-01 21:43:06",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1343108352",
+        "recommendTime": "2026-10-01 15:33:49",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1362515120",
+        "recommendTime": "2026-10-01 14:24:46",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "545787046",
+        "recommendTime": "2026-10-01 13:02:29",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "545916069",
+        "recommendTime": "2026-10-01 12:13:50",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1193575421",
+        "recommendTime": "2026-10-01 06:48:00",
+        "status": "待处理"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 5067,
+  "frontmostAfter": "com.tencent.workbuddy.mac",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261002-103326/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261002-103326/output/collection-attempt-1.review.md"
+}

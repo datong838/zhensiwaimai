@@ -1,0 +1,196 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：金华市  ；  联系人：吴，18042225895  ；  店铺：林记温州小吃  ；  地址：江东街道下王四区13幢3单元一楼  ；  商家ID：546415903",
+      "sha256": "58da92b299053ba50f9d483b35c8aa5d14d8c62c106eaf6d4d55dceb856fdd31"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "404ef65a1bc601f7feb23b65f1d2488acabd97adb2db9d15d8e41d3047427cd3",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "58da92b299053ba50f9d483b35c8aa5d14d8c62c106eaf6d4d55dceb856fdd31",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1792908147.187978,
+        "sendAttempts": 1,
+        "resolvedGroup": "电销+直播攻坚组",
+        "observations": [
+          {
+            "groupName": "电销+直播攻坚组",
+            "inputEmpty": true,
+            "newMessageVisible": true,
+            "observedAt": 1792908223.25,
+            "visibleTextSha256": "58da92b299053ba50f9d483b35c8aa5d14d8c62c106eaf6d4d55dceb856fdd31",
+            "visibleText": "城市：金华市  ；  联系人：吴，18042225895  ；  店铺：林记温州小吃  ；  地址：江东街道下王四区13幢3单元一楼  ；  商家ID：546415903"
+          },
+          {
+            "groupName": "电销+直播攻坚组",
+            "inputEmpty": true,
+            "newMessageVisible": true,
+            "observedAt": 1792908239.272,
+            "visibleTextSha256": "58da92b299053ba50f9d483b35c8aa5d14d8c62c106eaf6d4d55dceb856fdd31",
+            "visibleText": "城市：金华市  ；  联系人：吴，18042225895  ；  店铺：林记温州小吃  ；  地址：江东街道下王四区13幢3单元一楼  ；  商家ID：546415903"
+          }
+        ],
+        "verificationLevel": "wecom-ui-tree-text",
+        "evidence": {
+          "method": "wecom-ui-tree-text",
+          "resolvedGroup": "电销+直播攻坚组",
+          "sha256": "58da92b299053ba50f9d483b35c8aa5d14d8c62c106eaf6d4d55dceb856fdd31",
+          "observations": [
+            {
+              "groupName": "电销+直播攻坚组",
+              "inputEmpty": true,
+              "newMessageVisible": true,
+              "observedAt": 1792908223.25,
+              "visibleTextSha256": "58da92b299053ba50f9d483b35c8aa5d14d8c62c106eaf6d4d55dceb856fdd31",
+              "visibleText": "城市：金华市  ；  联系人：吴，18042225895  ；  店铺：林记温州小吃  ；  地址：江东街道下王四区13幢3单元一楼  ；  商家ID：546415903"
+            },
+            {
+              "groupName": "电销+直播攻坚组",
+              "inputEmpty": true,
+              "newMessageVisible": true,
+              "observedAt": 1792908239.272,
+              "visibleTextSha256": "58da92b299053ba50f9d483b35c8aa5d14d8c62c106eaf6d4d55dceb856fdd31",
+              "visibleText": "城市：金华市  ；  联系人：吴，18042225895  ；  店铺：林记温州小吃  ；  地址：江东街道下王四区13幢3单元一楼  ；  商家ID：546415903"
+            }
+          ]
+        },
+        "transport": {
+          "kind": "text",
+          "sendAttempts": 1,
+          "sent": true,
+          "postSendInputCleared": [
+            true,
+            true
+          ],
+          "stage": "post_send_verify"
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 46908
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 108729
+      }
+    ],
+    "elapsedMs": 155643,
+    "eventKey": "00ff95fb80bd32926fc8ee67647115e298c4b774b10bfd245b32f8e689163936",
+    "reviewSummary": {
+      "totalElapsedMs": 155643,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/0214a0cc8b8255e51432eee92df0b9a099e50c71843283f9a83e639f7df8247c.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 46908,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 108729,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 155643,
+  "reviewSummary": {
+    "totalElapsedMs": 155643,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "method": "wecom-ui-tree-text",
+    "resolvedGroup": "电销+直播攻坚组",
+    "sha256": "58da92b299053ba50f9d483b35c8aa5d14d8c62c106eaf6d4d55dceb856fdd31",
+    "observations": [
+      {
+        "groupName": "电销+直播攻坚组",
+        "inputEmpty": true,
+        "newMessageVisible": true,
+        "observedAt": 1792908223.25,
+        "visibleTextSha256": "58da92b299053ba50f9d483b35c8aa5d14d8c62c106eaf6d4d55dceb856fdd31",
+        "visibleText": "城市：金华市  ；  联系人：吴，18042225895  ；  店铺：林记温州小吃  ；  地址：江东街道下王四区13幢3单元一楼  ；  商家ID：546415903"
+      },
+      {
+        "groupName": "电销+直播攻坚组",
+        "inputEmpty": true,
+        "newMessageVisible": true,
+        "observedAt": 1792908239.272,
+        "visibleTextSha256": "58da92b299053ba50f9d483b35c8aa5d14d8c62c106eaf6d4d55dceb856fdd31",
+        "visibleText": "城市：金华市  ；  联系人：吴，18042225895  ；  店铺：林记温州小吃  ；  地址：江东街道下王四区13幢3单元一楼  ；  商家ID：546415903"
+      }
+    ]
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": [
+    true,
+    true
+  ],
+  "stage": "post_send_verify",
+  "reconciledWithoutSend": false
+}

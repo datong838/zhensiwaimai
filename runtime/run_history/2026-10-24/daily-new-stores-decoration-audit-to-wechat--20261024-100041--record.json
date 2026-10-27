@@ -1,0 +1,23 @@
+{
+  "skill": "daily-new-stores-decoration-audit-to-wechat",
+  "ledger_name": "淘宝新店装修缺失巡检与提醒（每日11:30）",
+  "schedule": "每日11:30",
+  "dev_state": "active",
+  "status": "FAILED",
+  "category": "UNKNOWN",
+  "detail": "reason=today-new-store-read-only-scan-failed:t/zhensi_waimai_back/skills/workflows/daily-new-stores-opening-to-wechat/.runtime/runs/2026-10-24-1792807241402769000\", \"reportPath\": \"/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/records/new-store-identification/2026-10-24_新开店铺识别.md\", \"reason\": \"duplicate-hit-identity\", \"elapsedMs\": 26858} (receipt:reason)",
+  "next_action": "看护代理读日志定位根因后升级处理",
+  "attempts": 1,
+  "max_retries": 0,
+  "duration_seconds": 26.99,
+  "started_at": "2026-10-24T10:00:41",
+  "finished_at": "2026-10-24T10:01:08",
+  "triggered_by": "daemon",
+  "logs": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-24/daily-new-stores-decoration-audit-to-wechat--20261024-100041--a1--s1.log"
+  ],
+  "fail_signal": {
+    "kind": "reason",
+    "code": "today-new-store-read-only-scan-failed:t/zhensi_waimai_back/skills/workflows/daily-new-stores-opening-to-wechat/.runtime/runs/2026-10-24-1792807241402769000\", \"reportPath\": \"/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/records/new-store-identification/2026-10-24_新开店铺识别.md\", \"reason\": \"duplicate-hit-identity\", \"elapsedMs\": 26858}"
+  }
+}

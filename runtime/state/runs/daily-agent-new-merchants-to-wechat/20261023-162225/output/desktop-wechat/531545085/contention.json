@@ -1,0 +1,182 @@
+{
+  "bridgeVersion": 1,
+  "ok": false,
+  "verified": false,
+  "payloadType": "text",
+  "state": "blocked",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：广元市  ；  联系人：杨女士，15183966658  ；  店铺：蒋大厨居民楼菜馆  ；  地址：嘉陵街道东颖巷24号-26号  ；  商家ID：531545085",
+      "sha256": "39123b05a0c1370532f145dae8460c0a9847b8a23adb46132d677e1d8e156992"
+    }
+  ],
+  "sendAttempts": 0,
+  "newSendAttempts": 0,
+  "reason": "wecom-send-failed:sender-exit-2",
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": false,
+    "status": "blocked",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "39b5b304ec44b7fb721f8ee828ad62aa5c0441f4b5ccba887971bedadfc3eb21",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "39123b05a0c1370532f145dae8460c0a9847b8a23adb46132d677e1d8e156992",
+        "type": "text",
+        "status": "blocked",
+        "claimedAt": 1792743802.237181,
+        "sendAttempts": 0,
+        "reason": "wecom-send-failed:sender-exit-2",
+        "transport": {
+          "kind": "text",
+          "sendAttempts": 0,
+          "sent": false,
+          "receipt": {}
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 47547
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 199
+      }
+    ],
+    "reason": "wecom-send-failed:sender-exit-2",
+    "elapsedMs": 47749,
+    "eventKey": "a08b5d77e9a95baeaa20e225a2310afd17cf10c89413ad7c4ffe3d20f5c79585",
+    "reviewSummary": {
+      "totalElapsedMs": 47749,
+      "result": "blocked",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/06fe1675692d06b4f494ad8f9b4516cf2cad523ca8dd3a24f7e78a7c367d6aae.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 47547,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "failed",
+      "pitfalls": [
+        {
+          "code": "messaging-stage",
+          "reason": "wecom-send-failed:sender-exit-2"
+        }
+      ],
+      "elapsedMs": 199,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 47749,
+  "reviewSummary": {
+    "totalElapsedMs": 47749,
+    "itemCount": 4,
+    "pitfallCount": 1,
+    "result": "failed"
+  },
+  "copyReadback": null,
+  "physicalSendAttempts": 0,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false,
+  "attemptReviews": [
+    {
+      "attempt": 1,
+      "elapsedMs": 47820,
+      "ok": false,
+      "reason": "wecom-send-failed:sender-exit-2",
+      "sendAttempts": 0,
+      "sendReview": [
+        {
+          "stage": "authorization",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 1,
+          "label": "authorization"
+        },
+        {
+          "stage": "freeze:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 2,
+          "label": "freeze:0"
+        },
+        {
+          "stage": "preflight",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 47547,
+          "item": 3,
+          "label": "preflight"
+        },
+        {
+          "stage": "send:0",
+          "status": "failed",
+          "pitfalls": [
+            {
+              "code": "messaging-stage",
+              "reason": "wecom-send-failed:sender-exit-2"
+            }
+          ],
+          "elapsedMs": 199,
+          "item": 4,
+          "label": "send:0"
+        }
+      ]
+    }
+  ],
+  "contentionRetries": 0,
+  "contentionWaitMs": 0,
+  "contentionEvents": []
+}

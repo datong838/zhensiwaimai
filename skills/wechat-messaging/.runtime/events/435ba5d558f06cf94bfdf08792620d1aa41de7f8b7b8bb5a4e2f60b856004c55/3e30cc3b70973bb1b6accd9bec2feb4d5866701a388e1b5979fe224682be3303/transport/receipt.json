@@ -1,0 +1,101 @@
+{
+  "ok": true,
+  "executor": "wechat-desktop-sender",
+  "channel": "desktop",
+  "groupName": "臻肆测试群",
+  "payloadType": "file",
+  "sendAttempts": 1,
+  "runtimeModelDecisions": 0,
+  "stage": "completed",
+  "stageMs": {
+    "locate_group": 297,
+    "verify_target_and_input": 2001,
+    "prepare_payload": 2018,
+    "claim_and_send": 3885,
+    "post_send_verify": 6094
+  },
+  "payloadIdentity": "55b42341215f1d0d81b2c1907f14940233ab082233b8b1a2059ac8d19a8e99e8",
+  "payloads": [
+    {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/435ba5d558f06cf94bfdf08792620d1aa41de7f8b7b8bb5a4e2f60b856004c55/3e30cc3b70973bb1b6accd9bec2feb4d5866701a388e1b5979fe224682be3303/payload/桌面验收确认.xlsx",
+      "name": "桌面验收确认.xlsx",
+      "size": 122277,
+      "sha256": "bb42b22386be25ed7ee95d1bd382c01b0ab67de09a2fb569092e802165da65b2"
+    }
+  ],
+  "groupPreflight": {
+    "ok": true,
+    "action": "open-group",
+    "group": "臻肆测试群",
+    "header": "臻肆测试群",
+    "note": "ax-current-header",
+    "reason": null,
+    "sendAttempts": 0,
+    "runtimeModelDecisions": 0,
+    "stageMs": {
+      "exact_group_preflight": 297
+    },
+    "artifacts": [],
+    "hardGate": false
+  },
+  "preparedInputChangedPixels": 52956,
+  "preparedInputChangedRatio": 0.143366,
+  "preparedFileObjectCount": 1,
+  "preparedFilePrefixesVerified": true,
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/435ba5d558f06cf94bfdf08792620d1aa41de7f8b7b8bb5a4e2f60b856004c55/3e30cc3b70973bb1b6accd9bec2feb4d5866701a388e1b5979fe224682be3303/transport-ledger/attempt.json",
+  "postSendInputCleared": [
+    true,
+    true
+  ],
+  "verified": true,
+  "state": "verified",
+  "elapsedMs": 14978,
+  "sendReview": [
+    {
+      "item": 1,
+      "stage": "locate_group",
+      "label": "精确定位目标群",
+      "elapsedMs": 297,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 2,
+      "stage": "verify_target_and_input",
+      "label": "复核目标群与输入框",
+      "elapsedMs": 2001,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 3,
+      "stage": "prepare_payload",
+      "label": "准备并复核发送载荷",
+      "elapsedMs": 2018,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 4,
+      "stage": "claim_and_send",
+      "label": "领取防重账本并单次发送",
+      "elapsedMs": 3885,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 5,
+      "stage": "post_send_verify",
+      "label": "发送后双帧复核",
+      "elapsedMs": 6094,
+      "status": "completed",
+      "pitfalls": []
+    }
+  ],
+  "reviewSummary": {
+    "totalElapsedMs": 14978,
+    "itemCount": 5,
+    "pitfallCount": 0,
+    "result": "success"
+  }
+}

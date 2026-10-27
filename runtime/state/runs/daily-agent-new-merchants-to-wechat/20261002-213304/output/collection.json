@@ -1,0 +1,134 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-02",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 118,
+    "task_page": 433,
+    "navigation": 7854,
+    "date_filter": 3996,
+    "page_1_read": 320,
+    "selection_audit": 0,
+    "detail_1347861248": 5120,
+    "detail_546627135": 2422
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_1347861248": "PASS",
+    "detail_546627135": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "1347861248",
+      "merchantName": "福鲜砂锅",
+      "recommendTime": "2026-10-02 18:06:10",
+      "city": "陇南市",
+      "status": "待处理",
+      "rowIndex": 1,
+      "sourcePage": 1,
+      "tableOrder": 4,
+      "address": "城关镇娥曼文化旅游街小吃摊位19号",
+      "contact": "福鲜砂锅，13739396431",
+      "detailVerified": true,
+      "text": "陇南市\n福鲜砂锅，13739396431\n福鲜砂锅\n城关镇娥曼文化旅游街小吃摊位19号",
+      "sha256": "aebc7a76253b652866538755ce2ce5ea4bd63dbcf6ce109d5ee2f9b3be23e5a8"
+    },
+    {
+      "merchantId": "546627135",
+      "merchantName": "食焖坊黄焖鸡",
+      "recommendTime": "2026-10-02 21:29:29",
+      "city": "沧州市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 5,
+      "address": "清州镇南环路与104国道交口西北角西数第三间门市二楼",
+      "contact": "杨洋，19331733655",
+      "detailVerified": true,
+      "text": "沧州市\n杨洋，19331733655\n食焖坊黄焖鸡\n清州镇南环路与104国道交口西北角西数第三间门市二楼",
+      "sha256": "39d75106f448ebf368347b8552c45546ff3fdbda3360c7ba89c1a7c3d566dbf5"
+    }
+  ],
+  "frontmostBefore": "com.google.Chrome",
+  "createdAt": "2026-10-02T13:33:25.790Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-02",
+    "merchantName": "毛记和意冒菜",
+    "merchantId": "1355660185",
+    "recommendTime": "2026-10-02 16:32:25",
+    "tableOrder": 3,
+    "messageSha256": "85145d72ba2850fbd7eaba58cecd77d230c2ccbda78ba447d2d81455af01708f",
+    "sentAt": "2026-10-02T16:34:59+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-02",
+  "filterEndDate": "2026-10-02",
+  "dateFilter": "2026-10-02..2026-10-02",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 5,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 5,
+  "pendingRows": 5,
+  "targetCount": 2,
+  "selectionAudit": {
+    "totalRows": 5,
+    "pendingRows": 5,
+    "excludedAtOrBeforeCursor": 3,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 2,
+    "rows": [
+      {
+        "merchantId": "546627135",
+        "recommendTime": "2026-10-02 21:29:29",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1347861248",
+        "recommendTime": "2026-10-02 18:06:10",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1355660185",
+        "recommendTime": "2026-10-02 16:32:25",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1356188182",
+        "recommendTime": "2026-10-02 13:19:30",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1284700824",
+        "recommendTime": "2026-10-02 08:41:23",
+        "status": "待处理"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 20842,
+  "frontmostAfter": "com.tencent.workbuddy.mac",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261002-213304/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261002-213304/output/collection-attempt-1.review.md"
+}

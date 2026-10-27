@@ -1,0 +1,173 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-09-30",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 41,
+    "task_page": 296,
+    "navigation": 1265,
+    "date_filter": 1329,
+    "page_1_read": 368,
+    "page_1_next": 62,
+    "page_2_read": 537,
+    "selection_audit": 0,
+    "detail_543756102": 795,
+    "detail_542232704": 1030
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "page_1_next": "PASS",
+    "page_2_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_543756102": "PASS",
+    "detail_542232704": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "543756102",
+      "merchantName": "悟空烧烤屋（汉口总店）",
+      "recommendTime": "2026-09-30 22:33:47",
+      "city": "武汉市",
+      "status": "待处理",
+      "rowIndex": 1,
+      "sourcePage": 1,
+      "tableOrder": 10,
+      "address": "华生汉口城市广场南区D1栋b单元1-2层3号D571号",
+      "contact": "方，13995518751",
+      "detailVerified": true,
+      "text": "武汉市\n方，13995518751\n悟空烧烤屋（汉口总店）\n华生汉口城市广场南区D1栋b单元1-2层3号D571号",
+      "sha256": "bede3dedda94ecbdbbf34313893c47e191dd54c9ce7ba711cc708af8d74b3af6"
+    },
+    {
+      "merchantId": "542232704",
+      "merchantName": "双焱阁麻辣香锅",
+      "recommendTime": "2026-09-30 22:56:33",
+      "city": "苏州市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 11,
+      "address": "横扇镇大桥路460号",
+      "contact": "双焱阁麻辣香锅，13796333194",
+      "detailVerified": true,
+      "text": "苏州市\n双焱阁麻辣香锅，13796333194\n双焱阁麻辣香锅\n横扇镇大桥路460号",
+      "sha256": "dce58697d5f1cd40b6faed460d4d5e471030ef30dba6e906bb37f1eb1237e0d0"
+    }
+  ],
+  "frontmostBefore": "com.tencent.workbuddy.mac",
+  "createdAt": "2026-09-30T15:15:52.717Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-09-30",
+    "merchantName": "熊先生烤肉拌饭",
+    "merchantId": "540665297",
+    "recommendTime": "2026-09-30 17:45:14",
+    "tableOrder": 9,
+    "messageSha256": "ea3c5a469fcfb29d64ab4df74d3f062f1348eb7664388e921e92691546c39db0",
+    "sentAt": "2026-09-30T18:23:16+0800",
+    "verified": true
+  },
+  "cursorSource": "local",
+  "filterStartDate": "2026-09-30",
+  "filterEndDate": "2026-09-30",
+  "dateFilter": "2026-09-30..2026-09-30",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 10,
+      "nextEnabled": true
+    },
+    {
+      "page": 2,
+      "rowCount": 1,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 11,
+  "pendingRows": 8,
+  "targetCount": 2,
+  "selectionAudit": {
+    "totalRows": 11,
+    "pendingRows": 8,
+    "excludedAtOrBeforeCursor": 9,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 2,
+    "rows": [
+      {
+        "merchantId": "542232704",
+        "recommendTime": "2026-09-30 22:56:33",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "543756102",
+        "recommendTime": "2026-09-30 22:33:47",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "540665297",
+        "recommendTime": "2026-09-30 17:45:14",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "541571894",
+        "recommendTime": "2026-09-30 16:55:39",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546531224",
+        "recommendTime": "2026-09-30 15:03:10",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1263459850",
+        "recommendTime": "2026-09-30 13:26:54",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "521315008",
+        "recommendTime": "2026-09-30 10:35:21",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "543891127",
+        "recommendTime": "2026-09-30 10:28:04",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1362405258",
+        "recommendTime": "2026-09-30 16:02:53",
+        "status": "完成"
+      },
+      {
+        "merchantId": "1360640820",
+        "recommendTime": "2026-09-30 14:35:56",
+        "status": "完成"
+      },
+      {
+        "merchantId": "1348225171",
+        "recommendTime": "2026-09-30 12:54:03",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 6757,
+  "frontmostAfter": "com.tencent.workbuddy.mac",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20260930-231545/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20260930-231545/output/collection-attempt-1.review.md"
+}

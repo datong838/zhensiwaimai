@@ -1,0 +1,276 @@
+{
+  "schemaVersion": 1,
+  "runId": "2a8be9e5-012d-47ed-abc9-f35ebc0359da",
+  "ok": false,
+  "sent": 0,
+  "verifiedNewSends": 0,
+  "verifiedExisting": 0,
+  "unresolvedItems": 0,
+  "completion": {
+    "state": "RECOVERABLE_NO_SEND",
+    "nextAction": "diagnose-repair-test-maintain-retry-once",
+    "automaticRecoveryAllowed": true,
+    "recoveryAttemptBudget": 1,
+    "reason": "windows-driver-unreachable"
+  },
+  "rows": [
+    {
+      "item": 1,
+      "stage": "executor_integrity",
+      "label": "封板完整性",
+      "elapsedMs": 6,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": null
+    },
+    {
+      "item": 2,
+      "stage": "runtime_policy",
+      "label": "授权、群与通道门禁",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": null
+    },
+    {
+      "item": 3,
+      "stage": "offline_selftest",
+      "label": "离线自测",
+      "elapsedMs": 281,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": null
+    },
+    {
+      "item": 4,
+      "stage": "collection",
+      "label": "商家采集",
+      "elapsedMs": 27006,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": null
+    },
+    {
+      "item": 5,
+      "stage": "collection.1.background_preflight",
+      "label": "采集第1次 · 后台浏览器预检",
+      "elapsedMs": 57,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 6,
+      "stage": "collection.1.task_page",
+      "label": "采集第1次 · 建立独立任务页",
+      "elapsedMs": 357,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 7,
+      "stage": "collection.1.navigation",
+      "label": "采集第1次 · 进入意向商户列表",
+      "elapsedMs": 1578,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 8,
+      "stage": "collection.1.date_filter",
+      "label": "采集第1次 · 日期设置与双帧回读",
+      "elapsedMs": 1981,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 9,
+      "stage": "collection.1.page_1_read",
+      "label": "采集第1次 · 第1页采集与稳定核验",
+      "elapsedMs": 486,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 10,
+      "stage": "collection.1.page_1_next",
+      "label": "采集第1次 · 第1页翻页",
+      "elapsedMs": 48,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 11,
+      "stage": "collection.1.page_2_read",
+      "label": "采集第1次 · 第2页采集与稳定核验",
+      "elapsedMs": 721,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 12,
+      "stage": "collection.1.page_2_next",
+      "label": "采集第1次 · 第2页翻页",
+      "elapsedMs": 189,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 13,
+      "stage": "collection.1.page_3_read",
+      "label": "采集第1次 · 第3页采集与稳定核验",
+      "elapsedMs": 697,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 14,
+      "stage": "collection.1.selection_audit",
+      "label": "采集第1次 · selection_audit",
+      "elapsedMs": 1,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 15,
+      "stage": "collection.1.detail_2139538124",
+      "label": "采集第1次 · 商家详情核验 2139538124",
+      "elapsedMs": 4729,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 16,
+      "stage": "collection.1.detail_1359560660",
+      "label": "采集第1次 · 商家详情核验 1359560660",
+      "elapsedMs": 2638,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 17,
+      "stage": "collection.1.detail_1316275371",
+      "label": "采集第1次 · 商家详情核验 1316275371",
+      "elapsedMs": 1861,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 18,
+      "stage": "collection.1.detail_546284989",
+      "label": "采集第1次 · 商家详情核验 546284989",
+      "elapsedMs": 1751,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 19,
+      "stage": "collection.1.detail_1328037806",
+      "label": "采集第1次 · 商家详情核验 1328037806",
+      "elapsedMs": 2292,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 20,
+      "stage": "collection.1.detail_545387050",
+      "label": "采集第1次 · 商家详情核验 545387050",
+      "elapsedMs": 1742,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 21,
+      "stage": "collection.1.detail_1351150120",
+      "label": "采集第1次 · 商家详情核验 1351150120",
+      "elapsedMs": 2318,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 22,
+      "stage": "audit",
+      "label": "采集合同审计",
+      "elapsedMs": 1,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": null
+    },
+    {
+      "item": 23,
+      "stage": "desktop_wechat_preflight",
+      "label": "桌面微信预检",
+      "elapsedMs": 21313,
+      "status": "FAIL",
+      "pitfalls": [
+        "windows-driver-unreachable"
+      ],
+      "parent": null
+    },
+    {
+      "item": 24,
+      "stage": "preflight.1",
+      "label": "群定位第1次",
+      "elapsedMs": 21310,
+      "status": "FAIL",
+      "pitfalls": [
+        "windows-driver-unreachable"
+      ],
+      "parent": "desktop_wechat_preflight"
+    },
+    {
+      "item": 25,
+      "stage": "desktop_wechat",
+      "label": "逐条通知",
+      "elapsedMs": null,
+      "status": "SKIPPED",
+      "pitfalls": [],
+      "parent": null
+    },
+    {
+      "item": 26,
+      "stage": "final_cursor_check",
+      "label": "最终账本与游标复核",
+      "elapsedMs": null,
+      "status": "SKIPPED",
+      "pitfalls": [],
+      "parent": null
+    },
+    {
+      "item": 27,
+      "stage": "reseal",
+      "label": "真实非空验收重封",
+      "elapsedMs": null,
+      "status": "NOOP",
+      "pitfalls": [
+        "无真实新增发送，保持未封板"
+      ],
+      "parent": null
+    },
+    {
+      "item": 28,
+      "stage": "total",
+      "label": "整轮总耗时（含子阶段，不重复相加）",
+      "elapsedMs": 48755,
+      "status": "FAIL",
+      "pitfalls": [],
+      "parent": null
+    }
+  ]
+}

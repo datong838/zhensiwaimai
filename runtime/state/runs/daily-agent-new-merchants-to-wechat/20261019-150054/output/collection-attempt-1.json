@@ -1,0 +1,127 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-19",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 72,
+    "task_page": 256,
+    "navigation": 1394,
+    "date_filter": 2464,
+    "page_1_read": 439,
+    "selection_audit": 0,
+    "detail_546074715": 1070
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_546074715": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "546074715",
+      "merchantName": "沙县小吃(云华路店)",
+      "recommendTime": "2026-10-19 13:57:30",
+      "city": "成都市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 7,
+      "address": "成都高新区云华路333号4栋1单元1楼104号",
+      "contact": "彭，15160620197",
+      "detailVerified": true,
+      "text": "城市：成都市  ；  联系人：彭，15160620197  ；  店铺：沙县小吃(云华路店)  ；  地址：成都高新区云华路333号4栋1单元1楼104号",
+      "sha256": "4b0d610bf2008cec56e717b968a9aa35687f0a6dd6f233079020ef08d066fbfc"
+    }
+  ],
+  "frontmostBefore": "com.tencent.workbuddy.mac",
+  "createdAt": "2026-10-19T07:01:01.223Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-19",
+    "merchantName": "帝王米线麦哆馅饼",
+    "merchantId": "1335014609",
+    "recommendTime": "2026-10-19 13:13:02",
+    "tableOrder": 6,
+    "messageSha256": "1d1746f1c608eceddcb09d528b77b71cb3815fdf17f8615cb6f21b8fb818084e",
+    "sentAt": "2026-10-19T13:55:37+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-19",
+  "filterEndDate": "2026-10-19",
+  "dateFilter": "2026-10-19..2026-10-19",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 7,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 7,
+  "pendingRows": 7,
+  "targetCount": 1,
+  "selectionAudit": {
+    "totalRows": 7,
+    "pendingRows": 7,
+    "excludedAtOrBeforeCursor": 6,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 1,
+    "rows": [
+      {
+        "merchantId": "546074715",
+        "recommendTime": "2026-10-19 13:57:30",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1335014609",
+        "recommendTime": "2026-10-19 13:13:02",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "542834120",
+        "recommendTime": "2026-10-19 12:31:32",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1364102557",
+        "recommendTime": "2026-10-19 10:30:09",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546486813",
+        "recommendTime": "2026-10-19 10:10:02",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "544562101",
+        "recommendTime": "2026-10-19 08:28:03",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1310479636",
+        "recommendTime": "2026-10-19 07:20:25",
+        "status": "待处理"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 6350,
+  "frontmostAfter": "com.tencent.workbuddy.mac",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261019-150054/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261019-150054/output/collection-attempt-1.review.md"
+}

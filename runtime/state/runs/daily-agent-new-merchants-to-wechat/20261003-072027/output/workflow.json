@@ -1,0 +1,263 @@
+{
+  "ok": false,
+  "runId": "4660a140-2274-4a16-b91d-f6a3c7995975",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "executor_integrity": 6,
+    "runtime_policy": 0,
+    "offline_selftest": 193,
+    "collection": 7979,
+    "audit": 0,
+    "desktop_wechat_preflight": 30026
+  },
+  "stageResults": {
+    "executor_integrity": "PASS",
+    "runtime_policy": "PASS",
+    "offline_selftest": "PASS",
+    "collection": "PASS",
+    "audit": "PASS",
+    "desktop_wechat_preflight": "FAIL"
+  },
+  "stage": "desktop_wechat_preflight",
+  "wechatChannel": "desktop",
+  "collectionAttempts": [
+    {
+      "ok": true,
+      "executor": "merchant-collector",
+      "browserController": "control-background-dedicated-chrome",
+      "profile": "taobao-agent-service",
+      "port": 9231,
+      "groupName": "电销+直播攻坚组",
+      "businessDate": "2026-10-03",
+      "runtimeModelDecisions": 0,
+      "stageMs": {
+        "background_preflight": 53,
+        "task_page": 342,
+        "navigation": 1413,
+        "date_filter": 1564,
+        "page_1_read": 464,
+        "selection_audit": 0,
+        "detail_1347861248": 820,
+        "detail_546627135": 2458
+      },
+      "stageResults": {
+        "background_preflight": "PASS",
+        "task_page": "PASS",
+        "navigation": "PASS",
+        "date_filter": "PASS",
+        "page_1_read": "PASS",
+        "selection_audit": "PASS",
+        "detail_1347861248": "PASS",
+        "detail_546627135": "PASS"
+      },
+      "frontmostBefore": "com.tencent.workbuddy.mac",
+      "createdAt": "2026-10-02T23:20:36.110Z",
+      "cursorSource": "verified-history",
+      "filterStartDate": "2026-10-02",
+      "filterEndDate": "2026-10-03",
+      "dateFilter": "2026-10-02..2026-10-03",
+      "dateFilterVerified": true,
+      "pages": [
+        {
+          "page": 1,
+          "rowCount": 5,
+          "nextEnabled": false
+        }
+      ],
+      "paginationComplete": true,
+      "totalRows": 5,
+      "pendingRows": 5,
+      "targetCount": 2,
+      "selectionAudit": {
+        "totalRows": 5,
+        "pendingRows": 5,
+        "excludedAtOrBeforeCursor": 3,
+        "excludedAfterCursorNotPending": 0,
+        "targetCount": 2,
+        "rows": [
+          {
+            "merchantId": "546627135",
+            "recommendTime": "2026-10-02 21:29:29",
+            "status": "待处理"
+          },
+          {
+            "merchantId": "1347861248",
+            "recommendTime": "2026-10-02 18:06:10",
+            "status": "待处理"
+          },
+          {
+            "merchantId": "1355660185",
+            "recommendTime": "2026-10-02 16:32:25",
+            "status": "待处理"
+          },
+          {
+            "merchantId": "1356188182",
+            "recommendTime": "2026-10-02 13:19:30",
+            "status": "待处理"
+          },
+          {
+            "merchantId": "1284700824",
+            "recommendTime": "2026-10-02 08:41:23",
+            "status": "待处理"
+          }
+        ]
+      },
+      "ascending": true,
+      "detailsVerified": true,
+      "url": "https://open.shop.ele.me/manager/agent/home",
+      "elapsedMs": 7674,
+      "frontmostAfter": "com.tencent.workbuddy.mac",
+      "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261003-072027/output/collection-attempt-1.review.json",
+      "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261003-072027/output/collection-attempt-1.review.md",
+      "attempt": 1
+    }
+  ],
+  "executorIntegrity": {
+    "ok": true,
+    "status": "UNSEALED_ACCEPTANCE",
+    "manifestSha256": "94231b2ac257a8df924e92384d3ee968b7a1571966a5cf55c119cf5a2d8c4b2d",
+    "fileCount": 19,
+    "authorization": "user-20260916-production-hardening",
+    "runtimeModelDecisions": 0,
+    "maintenanceAcceptance": "desktop-wechat-shared-preflight",
+    "sharedTextAcceptance": "wechat-messaging-desktop-text",
+    "sharedMediaAcceptance": "not-required-by-text-only-merchant-workflow"
+  },
+  "runtimePolicy": {
+    "ok": true,
+    "group": "电销+直播攻坚组",
+    "channel": "desktop",
+    "cursorFile": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/cursor.json",
+    "maxCollectionAttempts": 2,
+    "collectionBudgetSeconds": 180
+  },
+  "selftest": {
+    "ok": true,
+    "senderTests": 5,
+    "browserTests": 37
+  },
+  "collection": {
+    "ok": true,
+    "executor": "merchant-collector",
+    "browserController": "control-background-dedicated-chrome",
+    "profile": "taobao-agent-service",
+    "port": 9231,
+    "groupName": "电销+直播攻坚组",
+    "businessDate": "2026-10-03",
+    "runtimeModelDecisions": 0,
+    "stageMs": {
+      "background_preflight": 53,
+      "task_page": 342,
+      "navigation": 1413,
+      "date_filter": 1564,
+      "page_1_read": 464,
+      "selection_audit": 0,
+      "detail_1347861248": 820,
+      "detail_546627135": 2458
+    },
+    "stageResults": {
+      "background_preflight": "PASS",
+      "task_page": "PASS",
+      "navigation": "PASS",
+      "date_filter": "PASS",
+      "page_1_read": "PASS",
+      "selection_audit": "PASS",
+      "detail_1347861248": "PASS",
+      "detail_546627135": "PASS"
+    },
+    "frontmostBefore": "com.tencent.workbuddy.mac",
+    "createdAt": "2026-10-02T23:20:36.110Z",
+    "cursorSource": "verified-history",
+    "filterStartDate": "2026-10-02",
+    "filterEndDate": "2026-10-03",
+    "dateFilter": "2026-10-02..2026-10-03",
+    "dateFilterVerified": true,
+    "pages": [
+      {
+        "page": 1,
+        "rowCount": 5,
+        "nextEnabled": false
+      }
+    ],
+    "paginationComplete": true,
+    "totalRows": 5,
+    "pendingRows": 5,
+    "targetCount": 2,
+    "selectionAudit": {
+      "totalRows": 5,
+      "pendingRows": 5,
+      "excludedAtOrBeforeCursor": 3,
+      "excludedAfterCursorNotPending": 0,
+      "targetCount": 2,
+      "rows": [
+        {
+          "merchantId": "546627135",
+          "recommendTime": "2026-10-02 21:29:29",
+          "status": "待处理"
+        },
+        {
+          "merchantId": "1347861248",
+          "recommendTime": "2026-10-02 18:06:10",
+          "status": "待处理"
+        },
+        {
+          "merchantId": "1355660185",
+          "recommendTime": "2026-10-02 16:32:25",
+          "status": "待处理"
+        },
+        {
+          "merchantId": "1356188182",
+          "recommendTime": "2026-10-02 13:19:30",
+          "status": "待处理"
+        },
+        {
+          "merchantId": "1284700824",
+          "recommendTime": "2026-10-02 08:41:23",
+          "status": "待处理"
+        }
+      ]
+    },
+    "ascending": true,
+    "detailsVerified": true,
+    "url": "https://open.shop.ele.me/manager/agent/home",
+    "elapsedMs": 7674,
+    "frontmostAfter": "com.tencent.workbuddy.mac",
+    "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261003-072027/output/collection-attempt-1.review.json",
+    "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261003-072027/output/collection-attempt-1.review.md"
+  },
+  "error": "windows-driver-unreachable",
+  "desktopWechatPreflight": {
+    "ok": false,
+    "reason": "windows-driver-unreachable",
+    "detail": "连不到 Windows 驱动（连接级错误，但非本地网络授权问题）。",
+    "health": {
+      "ok": false,
+      "error": "timed out",
+      "error_kind": "connection",
+      "local_network_blocked": false
+    },
+    "attempts": [],
+    "attemptReviews": [
+      {
+        "attempt": 1,
+        "elapsedMs": 30019,
+        "ok": false,
+        "reason": "windows-driver-unreachable",
+        "sendAttempts": 0,
+        "sendReview": []
+      }
+    ],
+    "contentionRetries": 0,
+    "contentionWaitMs": 0,
+    "contentionEvents": []
+  },
+  "elapsedMs": 38344,
+  "completion": {
+    "state": "RECOVERABLE_NO_SEND",
+    "nextAction": "diagnose-repair-test-maintain-retry-once",
+    "automaticRecoveryAllowed": true,
+    "recoveryAttemptBudget": 1,
+    "reason": "windows-driver-unreachable"
+  },
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261003-072027/output/review.json"
+}

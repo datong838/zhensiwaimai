@@ -1,0 +1,200 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：贵阳市  ；  联系人：张女士，18786256234  ；  店铺：大伿佬·隆江猪脚饭  ；  地址：新华路街道新华巷32号1幢负1层144号",
+      "sha256": "99f937311d004048bc38228ad262f9dc52347cc41916f9a1e757ec8ef7a89e1d"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "fbc90954423ce6c5cc82aca678c8edd35c60b106d4ca6ea137d40bf120fec9fc",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "99f937311d004048bc38228ad262f9dc52347cc41916f9a1e757ec8ef7a89e1d",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1791975352.115503,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-text-anchor",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "电销+直播攻坚组",
+          "currentTitle": "电销+直播攻坚组",
+          "messageCount": 36,
+          "anchor": "text-exact",
+          "anchorValue": "城市：贵阳市  ；  联系人：张女士，18786256234  ；  店铺：大伿佬·隆江猪脚饭  ；  地址：新华路街道新华巷32号1幢负1层144号",
+          "anchorInTrailingPosition": true,
+          "autoKind": null,
+          "readbackAt": 1791975376.026748
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "电销+直播攻坚组",
+            "len": 75
+          },
+          "route": "relay",
+          "direct_error": "[Errno 65] No route to host",
+          "direct_local_network_blocked": true,
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 288
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 23911
+      }
+    ],
+    "elapsedMs": 24203,
+    "eventKey": "fe8181483479e6ddabe1b12a072f39a8a8e02bcab59ccc042dff175ab3d95371",
+    "reviewSummary": {
+      "totalElapsedMs": 24203,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/5804567e23b6ac877fca39751d4387bc7e4146c92966a51be07aa8eacb628d7c.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 288,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 23911,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 24203,
+  "reviewSummary": {
+    "totalElapsedMs": 24203,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "ok": true,
+    "resolvedGroup": "电销+直播攻坚组",
+    "currentTitle": "电销+直播攻坚组",
+    "messageCount": 36,
+    "anchor": "text-exact",
+    "anchorValue": "城市：贵阳市  ；  联系人：张女士，18786256234  ；  店铺：大伿佬·隆江猪脚饭  ；  地址：新华路街道新华巷32号1幢负1层144号",
+    "anchorInTrailingPosition": true,
+    "autoKind": null,
+    "readbackAt": 1791975376.026748
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false,
+  "attemptReviews": [
+    {
+      "attempt": 1,
+      "elapsedMs": 24336,
+      "ok": true,
+      "reason": null,
+      "sendAttempts": 1,
+      "sendReview": [
+        {
+          "stage": "authorization",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 1,
+          "label": "authorization"
+        },
+        {
+          "stage": "freeze:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 2,
+          "label": "freeze:0"
+        },
+        {
+          "stage": "preflight",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 288,
+          "item": 3,
+          "label": "preflight"
+        },
+        {
+          "stage": "send:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 23911,
+          "item": 4,
+          "label": "send:0"
+        }
+      ]
+    }
+  ],
+  "contentionRetries": 0,
+  "contentionWaitMs": 0,
+  "contentionEvents": [],
+  "merchantId": "1363860636",
+  "messageSha256": "99f937311d004048bc38228ad262f9dc52347cc41916f9a1e757ec8ef7a89e1d"
+}

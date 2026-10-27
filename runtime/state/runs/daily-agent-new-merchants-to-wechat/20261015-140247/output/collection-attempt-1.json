@@ -1,0 +1,190 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-15",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 120,
+    "task_page": 910,
+    "navigation": 4785,
+    "date_filter": 1614,
+    "page_1_read": 696,
+    "page_1_next": 80,
+    "page_2_read": 816,
+    "selection_audit": 0,
+    "detail_1365354901": 927,
+    "detail_1359461282": 2694,
+    "detail_546955037": 1309
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "page_1_next": "PASS",
+    "page_2_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_1365354901": "PASS",
+    "detail_1359461282": "PASS",
+    "detail_546955037": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "1365354901",
+      "merchantName": "馋嘴丫·衢州鸭头",
+      "recommendTime": "2026-10-15 12:36:07",
+      "city": "福州市",
+      "status": "待处理",
+      "rowIndex": 2,
+      "sourcePage": 1,
+      "tableOrder": 9,
+      "address": "建新镇金山大道48号花乡明珠B区06号店面",
+      "contact": "韩，19854203102",
+      "detailVerified": true,
+      "text": "城市：福州市  ；  联系人：韩，19854203102  ；  店铺：馋嘴丫·衢州鸭头  ；  地址：建新镇金山大道48号花乡明珠B区06号店面",
+      "sha256": "1cca636971f390dd887db0d8b6a1260e54c3a578ff7b81c31e30c381442ec3ca"
+    },
+    {
+      "merchantId": "1359461282",
+      "merchantName": "老上海馄饨王",
+      "recommendTime": "2026-10-15 13:20:14",
+      "city": "南平市",
+      "status": "待处理",
+      "rowIndex": 1,
+      "sourcePage": 1,
+      "tableOrder": 10,
+      "address": "武夷大道16号顺城综合楼一楼18号档口",
+      "contact": "陈女士，13178052221",
+      "detailVerified": true,
+      "text": "城市：南平市  ；  联系人：陈女士，13178052221  ；  店铺：老上海馄饨王  ；  地址：武夷大道16号顺城综合楼一楼18号档口",
+      "sha256": "398af637ac057b8719de1ae636c71b708a89763d884837eec84d8d2815887ed9"
+    },
+    {
+      "merchantId": "546955037",
+      "merchantName": "面包疆山",
+      "recommendTime": "2026-10-15 14:02:52",
+      "city": "长沙市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 11,
+      "address": "安沙镇毛塘社区毛塘铺组668号食堂101负一楼9号档口",
+      "contact": "陈庚，18674505236",
+      "detailVerified": true,
+      "text": "城市：长沙市  ；  联系人：陈庚，18674505236  ；  店铺：面包疆山  ；  地址：安沙镇毛塘社区毛塘铺组668号食堂101负一楼9号档口",
+      "sha256": "9a064125f911ba9c5628845dd5f5b1b420d833f160d8fc110bbe0df331806592"
+    }
+  ],
+  "frontmostBefore": "com.google.Chrome",
+  "createdAt": "2026-10-15T06:03:04.331Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-15",
+    "merchantName": "蔺州脆蹄泡椒馆",
+    "merchantId": "1364962122",
+    "recommendTime": "2026-10-15 12:13:18",
+    "tableOrder": 8,
+    "messageSha256": "f7be5479cdec01fe889a4342d765f942f92c7b8f13d64bfeae98525d8390e767",
+    "sentAt": "2026-10-15T12:19:54+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-15",
+  "filterEndDate": "2026-10-15",
+  "dateFilter": "2026-10-15..2026-10-15",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 10,
+      "nextEnabled": true
+    },
+    {
+      "page": 2,
+      "rowCount": 1,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 11,
+  "pendingRows": 11,
+  "targetCount": 3,
+  "selectionAudit": {
+    "totalRows": 11,
+    "pendingRows": 11,
+    "excludedAtOrBeforeCursor": 8,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 3,
+    "rows": [
+      {
+        "merchantId": "546955037",
+        "recommendTime": "2026-10-15 14:02:52",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1359461282",
+        "recommendTime": "2026-10-15 13:20:14",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1365354901",
+        "recommendTime": "2026-10-15 12:36:07",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1364962122",
+        "recommendTime": "2026-10-15 12:13:18",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1334976687",
+        "recommendTime": "2026-10-15 11:29:08",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1366143168",
+        "recommendTime": "2026-10-15 11:23:43",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1349800086",
+        "recommendTime": "2026-10-15 11:15:13",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "537080730",
+        "recommendTime": "2026-10-15 11:13:13",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "537911803",
+        "recommendTime": "2026-10-15 10:59:09",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "544900786",
+        "recommendTime": "2026-10-15 09:51:00",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1248699831",
+        "recommendTime": "2026-10-15 09:28:07",
+        "status": "待处理"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 16303,
+  "frontmostAfter": "com.google.Chrome",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261015-140247/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261015-140247/output/collection-attempt-1.review.md"
+}

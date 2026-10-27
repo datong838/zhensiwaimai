@@ -1,0 +1,107 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-24",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 71,
+    "task_page": 311,
+    "navigation": 1309,
+    "date_filter": 2025,
+    "page_1_read": 439,
+    "selection_audit": 1,
+    "detail_1355654666": 1143
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_1355654666": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "1355654666",
+      "merchantName": "鹊堂羽坊·茶饮养生",
+      "recommendTime": "2026-10-24 15:36:00",
+      "city": "临沂市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 3,
+      "address": "盛庄街道悦澜山20号楼107",
+      "contact": "陈先生，13355008653",
+      "detailVerified": true,
+      "text": "城市：临沂市  ；  联系人：陈先生，13355008653  ；  店铺：鹊堂羽坊·茶饮养生  ；  地址：盛庄街道悦澜山20号楼107  ；  商家ID：1355654666",
+      "sha256": "250cb5bcac34ba22d83921a3c9446f3a855536f3935252e5596ac4c11a2b7316"
+    }
+  ],
+  "frontmostBefore": "com.openai.codex",
+  "createdAt": "2026-10-24T08:02:54.556Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-24",
+    "merchantName": "罐里香·罐罐米线·罐罐饭",
+    "merchantId": "544101544",
+    "recommendTime": "2026-10-24 10:46:20",
+    "tableOrder": 2,
+    "messageSha256": "967ca2227eb11a6545d1159e2f73806f35de64bea1168f3fa65eb9eb2a11fe35",
+    "sentAt": "2026-10-24T15:00:12+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-24",
+  "filterEndDate": "2026-10-24",
+  "dateFilter": "2026-10-24..2026-10-24",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 3,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 3,
+  "pendingRows": 3,
+  "targetCount": 1,
+  "selectionAudit": {
+    "totalRows": 3,
+    "pendingRows": 3,
+    "excludedAtOrBeforeCursor": 2,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 1,
+    "rows": [
+      {
+        "merchantId": "1355654666",
+        "recommendTime": "2026-10-24 15:36:00",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "544101544",
+        "recommendTime": "2026-10-24 10:46:20",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1366726635",
+        "recommendTime": "2026-10-24 09:16:58",
+        "status": "待处理"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 5988,
+  "frontmostAfter": "com.openai.codex",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261024-160247/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261024-160247/output/collection-attempt-1.review.md"
+}

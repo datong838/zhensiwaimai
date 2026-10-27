@@ -1,0 +1,134 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-04",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 73,
+    "task_page": 556,
+    "navigation": 1364,
+    "date_filter": 1454,
+    "page_1_read": 348,
+    "selection_audit": 0,
+    "detail_1327975713": 770,
+    "detail_525726023": 2392
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_1327975713": "PASS",
+    "detail_525726023": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "1327975713",
+      "merchantName": "重庆石锅鸡公煲（五道街店）",
+      "recommendTime": "2026-10-04 17:09:53",
+      "city": "天水市",
+      "status": "待处理",
+      "rowIndex": 1,
+      "sourcePage": 1,
+      "tableOrder": 4,
+      "address": "桥南街道五道街C区1-3号商铺",
+      "contact": "张龙龙，15593803726",
+      "detailVerified": true,
+      "text": "城市：天水市  ；  联系人：张龙龙，15593803726  ；  店铺：重庆石锅鸡公煲（五道街店）  ；  地址：桥南街道五道街C区1-3号商铺",
+      "sha256": "7b6a184159bcf12f31c818637e0706f443e7edd75fa41dcb72a48c37d9654ec4"
+    },
+    {
+      "merchantId": "525726023",
+      "merchantName": "武大郎烧饼",
+      "recommendTime": "2026-10-04 18:03:33",
+      "city": "莆田市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 5,
+      "address": "镇海街道东大路295号",
+      "contact": "吴，13036236172",
+      "detailVerified": true,
+      "text": "城市：莆田市  ；  联系人：吴，13036236172  ；  店铺：武大郎烧饼  ；  地址：镇海街道东大路295号",
+      "sha256": "51a008bb7b20f2ccb1d40406139cd0e899e235ef00b76734b022cda7300b413d"
+    }
+  ],
+  "frontmostBefore": "com.tencent.workbuddy.mac",
+  "createdAt": "2026-10-04T10:11:19.224Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-04",
+    "merchantName": "No Er | 一烫人间东北老式麻辣烫炸串",
+    "merchantId": "546516617",
+    "recommendTime": "2026-10-04 13:42:45",
+    "tableOrder": 3,
+    "messageSha256": "969d3c8700692051558ce5f6d7a1bbe1a836276e94d1cbe769fd3c5dda94c331",
+    "sentAt": "2026-10-04T14:04:01+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-04",
+  "filterEndDate": "2026-10-04",
+  "dateFilter": "2026-10-04..2026-10-04",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 5,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 5,
+  "pendingRows": 5,
+  "targetCount": 2,
+  "selectionAudit": {
+    "totalRows": 5,
+    "pendingRows": 5,
+    "excludedAtOrBeforeCursor": 3,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 2,
+    "rows": [
+      {
+        "merchantId": "525726023",
+        "recommendTime": "2026-10-04 18:03:33",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1327975713",
+        "recommendTime": "2026-10-04 17:09:53",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546516617",
+        "recommendTime": "2026-10-04 13:42:45",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546133876",
+        "recommendTime": "2026-10-04 11:15:46",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "527430085",
+        "recommendTime": "2026-10-04 10:07:25",
+        "status": "待处理"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 7502,
+  "frontmostAfter": "com.tencent.workbuddy.mac",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261004-181111/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261004-181111/output/collection-attempt-1.review.md"
+}

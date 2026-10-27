@@ -1,0 +1,37 @@
+{
+  "observedAt": "2026-10-24T13:02:25.154165+08:00",
+  "daemonPid": 51385,
+  "cycleStartedAt": "2026-10-24T13:00:00",
+  "meituanAppeal": {
+    "state": "round-complete",
+    "pid": 65227,
+    "startedAt": "2026-10-24T13:01:51",
+    "source": "live_steps/65227.json; daemon.out.log",
+    "finishedAt": "2026-10-24T13:02:05",
+    "verifiedSubmitted": 0,
+    "discovered": 1,
+    "blocked": 0,
+    "unknown": 0
+  },
+  "taobaoAppeal": {
+    "state": "round-complete",
+    "pid": 65279,
+    "startedAt": "2026-10-24T13:02:07",
+    "finishedAt": "2026-10-24T13:03:42",
+    "executorVerifiedSubmitted": 9,
+    "discovered": 10,
+    "blocked": 0,
+    "unknown": 0,
+    "warnings": [
+      "candidate-no-longer-unappealed:af2eb62a3ae4"
+    ],
+    "verificationScope": "原执行器以条目从未申诉消失且总数同步下降作为提交核验；不等于申诉成功。"
+  },
+  "customerServiceRetry": {
+    "state": "failed-at-attachment",
+    "reason": "ui-tree-only-required",
+    "prior1258AttachmentDeliveredSeparately": true
+  },
+  "completionClaim": false,
+  "remainingIssue": "原eligible仍仅允许自动申诉已关闭条目；用户要求自动开启项也点立即申诉尚需单独维护验收。"
+}

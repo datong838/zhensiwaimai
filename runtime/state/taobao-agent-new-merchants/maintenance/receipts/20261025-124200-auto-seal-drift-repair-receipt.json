@@ -1,0 +1,36 @@
+{
+ "ok": true,
+ "action": "prepare",
+ "status": "prepared",
+ "review": [
+  {
+   "label": "统一微信完整离线测试",
+   "status": "PASS",
+   "pitfalls": [],
+   "elapsedMs": 0
+  }
+ ],
+ "sendAttempts": 0,
+ "runtimeModelDecisions": 0,
+ "authorization": "user-20260918-code-maintenance",
+ "userInstructionSha256": "c91518a278b43dcab9835dbda5168b9a3adc188ce3c5c8b6d2c0e930a91ea974",
+ "expiresAt": "2026-10-25T00:00:00.706449+08:00",
+ "dependencyManifestPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/dependencies.json",
+ "dependencyManifestBeforeSha256": "76b4df365ccbd15f21d866114e18d4d48e64629611564e5ff1b65c30df5c0e5f",
+ "dependencyManifestAfterSha256": "76b4df365ccbd15f21d866114e18d4d48e64629611564e5ff1b65c30df5c0e5f",
+ "changes": [],
+ "tests": {
+  "ok": true,
+  "elapsedMs": 0,
+  "testCount": 355
+ },
+ "capabilityCheck": {
+  "ok": true,
+  "elapsedMs": 0,
+  "testCount": null
+ },
+ "_provenance": {
+  "context": "seal_drift_repair 自动签发：上游 wechat-messaging/dependencies.json 被合法重绑，本流 executor-lock 钉死未同步。clean 回执（本次重钉无上游字节变化）。",
+  "signedAt": "2026-10-25T12:42:00"
+ }
+}

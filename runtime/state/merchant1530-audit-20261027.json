@@ -1,0 +1,87 @@
+{
+  "run": "runtime/state/runs/daily-agent-new-merchants-to-wechat/20261027-153006",
+  "collectionComplete": true,
+  "targetCount": 0,
+  "fixedNoticeVerified": true,
+  "sendAttempts": 1,
+  "group": "电销+直播攻坚组",
+  "nativeObservations": 2,
+  "nextOriginalSchedules": [
+    {
+      "name": "daily-agent-new-merchants-to-wechat",
+      "schedule": "每30分钟 08:30–18:30；19:00停止；有新增发商家信息，无新增发当前无新增意向商家",
+      "order": -1000,
+      "schedule_times": [
+        "08:30",
+        "09:00",
+        "09:30",
+        "10:00",
+        "10:30",
+        "11:00",
+        "11:30",
+        "12:00",
+        "12:30",
+        "13:00",
+        "13:30",
+        "14:00",
+        "14:30",
+        "15:00",
+        "15:30",
+        "16:00",
+        "16:30",
+        "17:00",
+        "17:30",
+        "18:00",
+        "18:30"
+      ],
+      "timeout_seconds": 1200
+    },
+    {
+      "name": "meituan-intelligent-customer-service-15",
+      "schedule": "每日15:00",
+      "order": -97,
+      "schedule_times": null,
+      "timeout_seconds": null
+    },
+    {
+      "name": "meituan-intelligent-customer-service",
+      "schedule": "每日17:00（17:00结束后准备发文档）",
+      "order": -96,
+      "schedule_times": null,
+      "timeout_seconds": null
+    },
+    {
+      "name": "taobao-flash-sale-negative-review-appeals",
+      "schedule": "每日13:00/15:00/17:00申诉；18:30收口汇总",
+      "order": -93,
+      "schedule_times": [
+        "13:00",
+        "15:00",
+        "17:00",
+        "18:30"
+      ],
+      "timeout_seconds": null
+    },
+    {
+      "name": "meituan-waimai-negative-review-appeals-11",
+      "schedule": "每日13:00/15:00/17:00申诉；18:30收口汇总",
+      "order": -95,
+      "schedule_times": [
+        "13:00",
+        "15:00",
+        "17:00",
+        "18:30"
+      ],
+      "timeout_seconds": null
+    },
+    {
+      "name": "daily-quality-products-optimization",
+      "schedule": "每日17:00，美团17点客服后串行；未完成安全分段接续",
+      "order": -95.5,
+      "schedule_times": [
+        "17:00"
+      ],
+      "timeout_seconds": 210
+    }
+  ]
+}

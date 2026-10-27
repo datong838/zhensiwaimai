@@ -1,0 +1,107 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-26",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 58,
+    "task_page": 427,
+    "navigation": 1387,
+    "date_filter": 2454,
+    "page_1_read": 424,
+    "selection_audit": 0,
+    "detail_546901789": 1085
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_546901789": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "546901789",
+      "merchantName": "南稻是鲜碾米铺米乳",
+      "recommendTime": "2026-10-26 14:33:25",
+      "city": "常州市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 3,
+      "address": "茶山街道龙游路5号茶山里园区6号楼6-5-3号",
+      "contact": "屠先生，13915020019",
+      "detailVerified": true,
+      "text": "城市：常州市  ；  联系人：屠先生，13915020019  ；  店铺：南稻是鲜碾米铺米乳  ；  地址：茶山街道龙游路5号茶山里园区6号楼6-5-3号  ；  商家ID：546901789",
+      "sha256": "a49788605717d9ed42b3df926c8936083e08b12cc8ea9cd25ccdc611d9188043"
+    }
+  ],
+  "frontmostBefore": "com.openai.codex",
+  "createdAt": "2026-10-26T07:00:11.319Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-26",
+    "merchantName": "恋人果吧(鲜果榨汁烤烟薯)九堡店",
+    "merchantId": "538822520",
+    "recommendTime": "2026-10-26 11:50:03",
+    "tableOrder": 2,
+    "messageSha256": "b98df47a852073665db9553ed6ec8c8da1fabd8d9bba98c2a5dbf0594bd27712",
+    "sentAt": "2026-10-26T12:24:45+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-26",
+  "filterEndDate": "2026-10-26",
+  "dateFilter": "2026-10-26..2026-10-26",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 3,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 3,
+  "pendingRows": 3,
+  "targetCount": 1,
+  "selectionAudit": {
+    "totalRows": 3,
+    "pendingRows": 3,
+    "excludedAtOrBeforeCursor": 2,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 1,
+    "rows": [
+      {
+        "merchantId": "546901789",
+        "recommendTime": "2026-10-26 14:33:25",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "538822520",
+        "recommendTime": "2026-10-26 11:50:03",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "544670041",
+        "recommendTime": "2026-10-26 00:56:45",
+        "status": "待处理"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 6149,
+  "frontmostAfter": "com.openai.codex",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261026-150004/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261026-150004/output/collection-attempt-1.review.md"
+}

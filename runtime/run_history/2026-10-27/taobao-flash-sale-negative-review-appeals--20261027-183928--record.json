@@ -1,0 +1,23 @@
+{
+  "skill": "taobao-flash-sale-negative-review-appeals",
+  "ledger_name": "淘宝闪购差评申诉（下午四档）",
+  "schedule": "每日13:00/15:00/17:00申诉；18:30收口汇总",
+  "dev_state": "active",
+  "status": "FAILED",
+  "category": "UNKNOWN",
+  "detail": "stage=deliver (receipt:stage)",
+  "next_action": "看护代理读日志定位根因后升级处理",
+  "attempts": 1,
+  "max_retries": 0,
+  "duration_seconds": 0.54,
+  "started_at": "2026-10-27T18:39:28",
+  "finished_at": "2026-10-27T18:39:29",
+  "triggered_by": "daemon",
+  "logs": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-27/taobao-flash-sale-negative-review-appeals--20261027-183928--a1--s1.log"
+  ],
+  "fail_signal": {
+    "kind": "stage",
+    "code": "deliver"
+  }
+}

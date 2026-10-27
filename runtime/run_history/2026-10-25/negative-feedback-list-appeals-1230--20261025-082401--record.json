@@ -1,0 +1,24 @@
+{
+  "skill": "negative-feedback-list-appeals-1230",
+  "ledger_name": "负反馈列表申诉·双平台 Excel 汇总发群（每日08:30·申诉后即发）",
+  "schedule": "每日08:20执行，08:30前交付",
+  "dev_state": "active",
+  "status": "FAILED",
+  "category": "RECOVERABLE",
+  "detail": "embedded-reason=ui-post-result-timeout (receipt:embedded_reason)",
+  "next_action": "重试预算耗尽：看护代理读日志决定再等冷却重跑或跳过",
+  "attempts": 1,
+  "max_retries": 0,
+  "duration_seconds": 193.9,
+  "started_at": "2026-10-25T08:24:01",
+  "finished_at": "2026-10-25T08:27:15",
+  "triggered_by": "daemon",
+  "logs": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-25/negative-feedback-list-appeals-1230--20261025-082401--a1--s1.log",
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-25/negative-feedback-list-appeals-1230--20261025-082401--a1--s2.log"
+  ],
+  "fail_signal": {
+    "kind": "embedded_reason",
+    "code": "ui-post-result-timeout"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "savedAt": "2026-10-27T00:55:02.124962+08:00",
+  "task": "runner P0 process-group cleanup",
+  "sourceRoot": "/Users/ddt/work/projects/ai_agent/zhensiwaimai-source-20261024",
+  "status": "reproduced-and-planned; implementation-not-started",
+  "productionModified": false,
+  "committed": false,
+  "deployed": false,
+  "writerProcessesRemaining": false,
+  "fixtureCleanup": "Only isolated /tmp runner-proof-* own process group used; finally SIGKILL issued to that fixture pgid; TemporaryDirectory removed. No browser/WeCom/production process touched.",
+  "reproduction": {
+    "method": "Original skill_runner.run_step(timeout=1), own parent Python starts descendant ignoring TERM and writing heartbeat every50ms; main exits on TERM.",
+    "result": {
+      "timed_out": true,
+      "child_still_writing_after_return": true,
+      "live_records": 0,
+      "duration_seconds": 1.0
+    },
+    "fixImplemented": false
+  },
+  "sourceFilesChanged": [
+    "/Users/ddt/work/projects/ai_agent/zhensiwaimai-source-20261024/docs/solutions/20261027-步骤超时进程组残留最小修复.md"
+  ],
+  "sourceFilesNotChanged": [
+    "runtime/skill_runner.py",
+    "runtime/test_step_process_cleanup.py (not created)",
+    "runtime/skills_manifest.json (parent-owned; do not edit)"
+  ],
+  "planSha256": "e3a359552e14299d0607ed5c19146a404b16e4637c61c8ad1f381ee6bc8f75ac",
+  "confirmedCodeDefects": [
+    "run_step waits proc.wait only; leader TERM exit bypasses KILL even surviving descendant",
+    "_killpg_force resolves pgid from already reaped leader PID; no surviving leader lookup",
+    "normal leader exit unconditionally unregisters even group survives",
+    "run_skill timed_out classified RECOVERABLE may same-round retry if max_retries>0"
+  ],
+  "requiredNextWork": [
+    "Review independent plan before implementation",
+    "Design minimal original start_new_session group ownership proof with live birth identity; never kill other groups",
+    "TERM grace must cover group rather than leader, then bounded KILL/reap and retain register if identity/cleanup uncertain",
+    "Normal leader exiting while descendants remain must not leave writer silently",
+    "Prevent same-round retry after timeout/cleanup uncertainty without changing business intent/unknown",
+    "Real fixtures: TERM normal, descendant ignoresTERM, early leader exit, next fixture succeeds, max_retries>0 timeout starts once, normal success; identity mismatch sends zero signals"
+  ],
+  "designUnresolved": "Exact robust ownership method not implemented. Consider ps pid/pgid/lstart/stat plus getsid and anchor identity; keep leader unreaped until group ownership captured; avoid trusting bare stale pgid or os.getpgid after proc.wait. Do not claim tests pass before implementing.",
+  "testsRun": [
+    "Original real regression reproduction only (demonstrated failure); no patched runner tests yet"
+  ],
+  "otherCompletedWork": "Earlier negative-review cross-day five-file patch frozen, parent has already deployed and real prepare succeeded allowed26; do not redo. Earlier midday schedule patch parent now owns manifest. Source unrelated migration files parent/other-agent owned."
+}

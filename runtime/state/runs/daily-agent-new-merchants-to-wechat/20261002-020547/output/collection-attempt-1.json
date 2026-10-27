@@ -1,0 +1,29 @@
+{
+  "ok": false,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-02",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 133,
+    "task_page": 597,
+    "navigation": 1363,
+    "date_filter": 1474
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "FAIL"
+  },
+  "messages": [],
+  "frontmostBefore": "com.tencent.workbuddy.mac",
+  "error": "calendar-day-count:2026-09-30:0:evidence=[{\"classes\":[\"ant-picker-cell\",\"ant-picker-cell-end\"],\"panelLabel\":\"2026年10月\"}]",
+  "elapsedMs": 4040,
+  "frontmostAfter": "com.tencent.workbuddy.mac",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261002-020547/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261002-020547/output/collection-attempt-1.review.md"
+}

@@ -1,0 +1,107 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-02",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 117,
+    "task_page": 425,
+    "navigation": 1283,
+    "date_filter": 1450,
+    "page_1_read": 319,
+    "selection_audit": 0,
+    "detail_1355660185": 777
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_1355660185": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "1355660185",
+      "merchantName": "毛记和意冒菜",
+      "recommendTime": "2026-10-02 16:32:25",
+      "city": "成都市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 3,
+      "address": "长荣路66号1栋4层67-82、122-126、128、130-140号",
+      "contact": "徐，15737543211",
+      "detailVerified": true,
+      "text": "成都市\n徐，15737543211\n毛记和意冒菜\n长荣路66号1栋4层67-82、122-126、128、130-140号",
+      "sha256": "85145d72ba2850fbd7eaba58cecd77d230c2ccbda78ba447d2d81455af01708f"
+    }
+  ],
+  "frontmostBefore": "com.tencent.workbuddy.mac",
+  "createdAt": "2026-10-02T08:34:35.640Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-02",
+    "merchantName": "王记秘制烤鸭",
+    "merchantId": "1356188182",
+    "recommendTime": "2026-10-02 13:19:30",
+    "tableOrder": 2,
+    "messageSha256": "3644482b6bb064e57890264bbcd6806ab6cd97562e1178a849fbc47a6f797667",
+    "sentAt": "2026-10-02T14:25:28+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-02",
+  "filterEndDate": "2026-10-02",
+  "dateFilter": "2026-10-02..2026-10-02",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 3,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 3,
+  "pendingRows": 3,
+  "targetCount": 1,
+  "selectionAudit": {
+    "totalRows": 3,
+    "pendingRows": 3,
+    "excludedAtOrBeforeCursor": 2,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 1,
+    "rows": [
+      {
+        "merchantId": "1355660185",
+        "recommendTime": "2026-10-02 16:32:25",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1356188182",
+        "recommendTime": "2026-10-02 13:19:30",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1284700824",
+        "recommendTime": "2026-10-02 08:41:23",
+        "status": "待处理"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 4838,
+  "frontmostAfter": "com.tencent.workbuddy.mac",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261002-163430/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261002-163430/output/collection-attempt-1.review.md"
+}

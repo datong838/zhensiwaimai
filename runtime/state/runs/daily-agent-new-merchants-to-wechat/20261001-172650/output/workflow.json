@@ -1,0 +1,24 @@
+{
+  "ok": false,
+  "runId": "5a2d7bb3-462b-4cfb-86e0-12f6f8218b92",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "executor_integrity": 4
+  },
+  "stageResults": {
+    "executor_integrity": "FAIL"
+  },
+  "stage": "executor_integrity",
+  "wechatChannel": "desktop",
+  "collectionAttempts": [],
+  "error": "executor-lock-digest-mismatch:background_collector",
+  "elapsedMs": 5,
+  "completion": {
+    "state": "RECOVERABLE_NO_SEND",
+    "nextAction": "diagnose-repair-test-maintain-retry-once",
+    "automaticRecoveryAllowed": true,
+    "recoveryAttemptBudget": 1,
+    "reason": "executor-lock-digest-mismatch:background_collector"
+  },
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261001-172650/output/review.json"
+}

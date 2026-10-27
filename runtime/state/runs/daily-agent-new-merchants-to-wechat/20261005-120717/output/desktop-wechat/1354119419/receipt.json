@@ -1,0 +1,149 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：无锡市  ；  联系人：炉上鲜，15251523096  ；  店铺：炉上鲜  ；  地址：顾山镇新舍路3号-1",
+      "sha256": "952cb712f45c81c4aec2b94a682a95cb0f48714d39ba0da8c5114562e8c5429e"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "5655a67fe24de073ca8276f2e1ca608aef0f5c62cf44108f09dca44cf6b3ad20",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "952cb712f45c81c4aec2b94a682a95cb0f48714d39ba0da8c5114562e8c5429e",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1791173246.6438541,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-text-anchor",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "电销+直播攻坚组",
+          "currentTitle": "电销+直播攻坚组",
+          "messageCount": 50,
+          "anchor": "text-exact",
+          "anchorValue": "城市：无锡市  ；  联系人：炉上鲜，15251523096  ；  店铺：炉上鲜  ；  地址：顾山镇新舍路3号-1",
+          "anchorInTrailingPosition": true,
+          "autoKind": null,
+          "readbackAt": 1791173267.7900631
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "电销+直播攻坚组",
+            "len": 59
+          },
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 210
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 21158
+      }
+    ],
+    "elapsedMs": 21403,
+    "eventKey": "9eb4ed857af5c4c84108477bc1e880c15999b6bf54c2c137753d9e392df4feda",
+    "reviewSummary": {
+      "totalElapsedMs": 21403,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/4361e484593d0e5858e17a753ed6d7405ffb21a17673e2c289071d3bd5b3de25.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 210,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 21158,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 21403,
+  "reviewSummary": {
+    "totalElapsedMs": 21403,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "ok": true,
+    "resolvedGroup": "电销+直播攻坚组",
+    "currentTitle": "电销+直播攻坚组",
+    "messageCount": 50,
+    "anchor": "text-exact",
+    "anchorValue": "城市：无锡市  ；  联系人：炉上鲜，15251523096  ；  店铺：炉上鲜  ；  地址：顾山镇新舍路3号-1",
+    "anchorInTrailingPosition": true,
+    "autoKind": null,
+    "readbackAt": 1791173267.7900631
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false
+}

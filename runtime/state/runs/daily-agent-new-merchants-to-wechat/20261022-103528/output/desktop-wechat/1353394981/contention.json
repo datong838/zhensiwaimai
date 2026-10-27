@@ -1,0 +1,196 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：太原市  ；  联系人：张，13269395111  ；  店铺：阿杰骨汤米线  ；  地址：下元街道后王南街3号后王便民综合市集北区L8号商铺  ；  商家ID：1353394981",
+      "sha256": "0f04de0376498e4038e2a8c25de178c51eebe8bd9a5828e8fa245bce601f829b"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "90b733412a9faf33dd73e68527d40b18865c8dbe634be3b0b97b797d98f677ca",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "0f04de0376498e4038e2a8c25de178c51eebe8bd9a5828e8fa245bce601f829b",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1792636572.163491,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-text-anchor",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "电销+直播攻坚组",
+          "currentTitle": "电销+直播攻坚组",
+          "messageCount": 43,
+          "anchor": "text-exact",
+          "anchorValue": "城市：太原市  ；  联系人：张，13269395111  ；  店铺：阿杰骨汤米线  ；  地址：下元街道后王南街3号后王便民综合市集北区L8号商铺  ；  商家ID：1353394981",
+          "anchorInTrailingPosition": true,
+          "autoKind": null,
+          "readbackAt": 1792636596.246379
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "电销+直播攻坚组",
+            "len": 95
+          },
+          "route": "direct",
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 180
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 24083
+      }
+    ],
+    "elapsedMs": 24266,
+    "eventKey": "ad1571bec8bd025af46d4d5781a037390874645c4e99b358245aab9fc062027a",
+    "reviewSummary": {
+      "totalElapsedMs": 24266,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/31cedf9c2cd5abafd50838410cc7340a71b1f676fe0cb078a882239aedc0fbe2.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 180,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 24083,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 24266,
+  "reviewSummary": {
+    "totalElapsedMs": 24266,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "ok": true,
+    "resolvedGroup": "电销+直播攻坚组",
+    "currentTitle": "电销+直播攻坚组",
+    "messageCount": 43,
+    "anchor": "text-exact",
+    "anchorValue": "城市：太原市  ；  联系人：张，13269395111  ；  店铺：阿杰骨汤米线  ；  地址：下元街道后王南街3号后王便民综合市集北区L8号商铺  ；  商家ID：1353394981",
+    "anchorInTrailingPosition": true,
+    "autoKind": null,
+    "readbackAt": 1792636596.246379
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false,
+  "attemptReviews": [
+    {
+      "attempt": 1,
+      "elapsedMs": 24354,
+      "ok": true,
+      "reason": null,
+      "sendAttempts": 1,
+      "sendReview": [
+        {
+          "stage": "authorization",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 1,
+          "label": "authorization"
+        },
+        {
+          "stage": "freeze:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 2,
+          "label": "freeze:0"
+        },
+        {
+          "stage": "preflight",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 180,
+          "item": 3,
+          "label": "preflight"
+        },
+        {
+          "stage": "send:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 24083,
+          "item": 4,
+          "label": "send:0"
+        }
+      ]
+    }
+  ],
+  "contentionRetries": 0,
+  "contentionWaitMs": 0,
+  "contentionEvents": []
+}

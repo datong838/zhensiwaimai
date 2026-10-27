@@ -1,0 +1,303 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-15",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 208,
+    "task_page": 949,
+    "navigation": 1987,
+    "date_filter": 1380,
+    "page_1_read": 445,
+    "page_1_next": 65,
+    "page_2_read": 724,
+    "page_2_next": 50,
+    "page_3_read": 669,
+    "selection_audit": 0,
+    "detail_524476560": 847,
+    "detail_545248079": 991,
+    "detail_541145681": 906,
+    "detail_1350425126": 769,
+    "detail_1248699831": 793
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "page_1_next": "PASS",
+    "page_2_read": "PASS",
+    "page_2_next": "PASS",
+    "page_3_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_524476560": "PASS",
+    "detail_545248079": "PASS",
+    "detail_541145681": "PASS",
+    "detail_1350425126": "PASS",
+    "detail_1248699831": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "524476560",
+      "merchantName": "巴适烤吧·烧烤·海鲜",
+      "recommendTime": "2026-10-14 19:39:00",
+      "city": "常州市",
+      "status": "待处理",
+      "rowIndex": 4,
+      "sourcePage": 1,
+      "tableOrder": 21,
+      "address": "九洲新家园48号",
+      "contact": "陈，15208339398",
+      "detailVerified": true,
+      "text": "城市：常州市  ；  联系人：陈，15208339398  ；  店铺：巴适烤吧·烧烤·海鲜  ；  地址：九洲新家园48号",
+      "sha256": "e83891e31bd4f4456a27ffdd07c8306fad738473d7d68d18d6f9da39686aca47"
+    },
+    {
+      "merchantId": "545248079",
+      "merchantName": "三玖炒鸡",
+      "recommendTime": "2026-10-14 19:39:13",
+      "city": "承德市",
+      "status": "待处理",
+      "rowIndex": 3,
+      "sourcePage": 1,
+      "tableOrder": 22,
+      "address": "兴隆镇西关村(陈志请延续永宅西一间)",
+      "contact": "邵先生，16632434830",
+      "detailVerified": true,
+      "text": "城市：承德市  ；  联系人：邵先生，16632434830  ；  店铺：三玖炒鸡  ；  地址：兴隆镇西关村(陈志请延续永宅西一间)",
+      "sha256": "bc85c23143117700280acf72539bcaab8186a845ccc1408f151f3654e19fdde3"
+    },
+    {
+      "merchantId": "541145681",
+      "merchantName": "哇噻油炸烧烤",
+      "recommendTime": "2026-10-14 23:08:58",
+      "city": "梅州市",
+      "status": "待处理",
+      "rowIndex": 2,
+      "sourcePage": 1,
+      "tableOrder": 23,
+      "address": "水潭西路318号商铺",
+      "contact": "李小姐，17818806506",
+      "detailVerified": true,
+      "text": "城市：梅州市  ；  联系人：李小姐，17818806506  ；  店铺：哇噻油炸烧烤  ；  地址：水潭西路318号商铺",
+      "sha256": "35fc7e19eb5bdea6db7d59fe0084abfbf21472481c9a7cc3eca69cf3e6353e47"
+    },
+    {
+      "merchantId": "1350425126",
+      "merchantName": "浩泰老饭盒大块牛肉饭",
+      "recommendTime": "2026-10-14 23:31:29",
+      "city": "沈阳市",
+      "status": "待处理",
+      "rowIndex": 1,
+      "sourcePage": 1,
+      "tableOrder": 24,
+      "address": "金卡路12甲号(1021)",
+      "contact": "汪，17624060741",
+      "detailVerified": true,
+      "text": "城市：沈阳市  ；  联系人：汪，17624060741  ；  店铺：浩泰老饭盒大块牛肉饭  ；  地址：金卡路12甲号(1021)",
+      "sha256": "3ef5bffdc1db807d6e114fd7efe104d9c5b4e4616418843c3a869d761b5dda7c"
+    },
+    {
+      "merchantId": "1248699831",
+      "merchantName": "牛肉串串·盖浇饭·烧烤·肉夹馍·凉皮",
+      "recommendTime": "2026-10-15 09:28:07",
+      "city": "咸阳市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 25,
+      "address": "底张街道绿地国宝21城二期2号102商铺",
+      "contact": "李先生，17342985175",
+      "detailVerified": true,
+      "text": "城市：咸阳市  ；  联系人：李先生，17342985175  ；  店铺：牛肉串串·盖浇饭·烧烤·肉夹馍·凉皮  ；  地址：底张街道绿地国宝21城二期2号102商铺",
+      "sha256": "fedb5a4b68d123111bdba1afed80eb88e28bf94d80c7209b513800e1c7bbbd7e"
+    }
+  ],
+  "frontmostBefore": "com.tencent.workbuddy.mac",
+  "createdAt": "2026-10-15T01:50:44.782Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-14",
+    "merchantName": "蒲嬢嬢鲜肉烧烤",
+    "merchantId": "544789627",
+    "recommendTime": "2026-10-14 18:29:25",
+    "tableOrder": 39,
+    "messageSha256": "67e1b66461b41fc3c2f56a51f4a5d674f647e6eec374755b4c7075fd784acb51",
+    "sentAt": "2026-10-14T18:57:02+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-14",
+  "filterEndDate": "2026-10-15",
+  "dateFilter": "2026-10-14..2026-10-15",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 10,
+      "nextEnabled": true
+    },
+    {
+      "page": 2,
+      "rowCount": 10,
+      "nextEnabled": true
+    },
+    {
+      "page": 3,
+      "rowCount": 5,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 25,
+  "pendingRows": 20,
+  "targetCount": 5,
+  "selectionAudit": {
+    "totalRows": 25,
+    "pendingRows": 20,
+    "excludedAtOrBeforeCursor": 18,
+    "excludedAfterCursorNotPending": 2,
+    "targetCount": 5,
+    "rows": [
+      {
+        "merchantId": "1248699831",
+        "recommendTime": "2026-10-15 09:28:07",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1350425126",
+        "recommendTime": "2026-10-14 23:31:29",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "541145681",
+        "recommendTime": "2026-10-14 23:08:58",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "545248079",
+        "recommendTime": "2026-10-14 19:39:13",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "524476560",
+        "recommendTime": "2026-10-14 19:39:00",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "544789627",
+        "recommendTime": "2026-10-14 18:29:25",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1298075657",
+        "recommendTime": "2026-10-14 16:03:55",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1363860636",
+        "recommendTime": "2026-10-14 15:48:30",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1360780977",
+        "recommendTime": "2026-10-14 15:38:10",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "545060825",
+        "recommendTime": "2026-10-14 15:01:57",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "545680565",
+        "recommendTime": "2026-10-14 14:06:09",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "542853596",
+        "recommendTime": "2026-10-14 13:47:37",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1354006032",
+        "recommendTime": "2026-10-14 13:40:00",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "525746495",
+        "recommendTime": "2026-10-14 13:21:57",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1282157951",
+        "recommendTime": "2026-10-14 13:19:44",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1296660098",
+        "recommendTime": "2026-10-14 13:09:38",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1361610187",
+        "recommendTime": "2026-10-14 13:01:56",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "543298039",
+        "recommendTime": "2026-10-14 10:06:34",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1352125390",
+        "recommendTime": "2026-10-14 09:25:46",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1365459543",
+        "recommendTime": "2026-10-14 05:05:03",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "2080495494",
+        "recommendTime": "2026-10-14 19:36:00",
+        "status": "完成"
+      },
+      {
+        "merchantId": "545621348",
+        "recommendTime": "2026-10-14 18:41:33",
+        "status": "完成"
+      },
+      {
+        "merchantId": "1362516390",
+        "recommendTime": "2026-10-14 18:22:59",
+        "status": "完成"
+      },
+      {
+        "merchantId": "546150466",
+        "recommendTime": "2026-10-14 14:00:12",
+        "status": "完成"
+      },
+      {
+        "merchantId": "1365735136",
+        "recommendTime": "2026-10-14 07:25:38",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 13494,
+  "frontmostAfter": "com.google.Chrome",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261015-095030/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261015-095030/output/collection-attempt-1.review.md"
+}

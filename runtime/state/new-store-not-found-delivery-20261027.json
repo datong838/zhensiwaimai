@@ -1,0 +1,46 @@
+{
+  "items": [
+    {
+      "workflow": "daily-new-stores-activity-audit-to-wechat",
+      "event": "2026-10-27-taobao-not-found-1c4238a76c7dd5596157fd9c-activity-reminder",
+      "marker": "skills/workflows/daily-new-stores-activity-audit-to-wechat/.runtime/activity/events/2026-10-27-taobao-not-found-1c4238a76c7dd5596157fd9c-activity-reminder.json",
+      "text": "活动配置巡检：海上三小姐·甜品·下午茶(河西店) 新店铺（开业1天）淘宝闪购商家版 查无此店铺",
+      "sha256": "9374cc3b534e9e885763640bf8c2912bc7fcfd3fe38c9caaf6b110154a8b6d0a",
+      "sendAttempts": 1,
+      "state": "verified",
+      "recordNote": "店铺在主账号查不到未能检查",
+      "coverage": {
+        "complete": true,
+        "targets": 1,
+        "uncovered": [],
+        "reason": "当日检查证据完整",
+        "source": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-27/daily-new-stores-activity-audit-to-wechat--20261027-143730--a1--s1.log",
+        "record": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-27/daily-new-stores-activity-audit-to-wechat--20261027-143730--record.json",
+        "finished_at": "2026-10-27T14:37:53"
+      },
+      "independentObservationsVerified": 2
+    },
+    {
+      "workflow": "daily-new-stores-decoration-audit-to-wechat",
+      "event": "2026-10-27-taobao-not-found-1c4238a76c7dd5596157fd9c-decoration-reminder",
+      "marker": "skills/workflows/daily-new-stores-decoration-audit-to-wechat/.runtime/decoration/events/2026-10-27-taobao-not-found-1c4238a76c7dd5596157fd9c-decoration-reminder.json",
+      "text": "店铺装修巡检：海上三小姐·甜品·下午茶(河西店) 新店铺（开业1天）淘宝闪购商家版 查无此店铺",
+      "sha256": "2d58a9b7025cc6cc040fecbdf20b6895c17cf4fe61debcbd4b9439b8357b8743",
+      "sendAttempts": 1,
+      "state": "verified",
+      "recordNote": "店铺在主账号查不到未能检查",
+      "coverage": {
+        "complete": true,
+        "targets": 1,
+        "uncovered": [],
+        "reason": "当日检查证据完整",
+        "source": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-27/daily-new-stores-decoration-audit-to-wechat--20261027-143754--a1--s1.log",
+        "record": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-27/daily-new-stores-decoration-audit-to-wechat--20261027-143754--record.json",
+        "finished_at": "2026-10-27T14:38:13"
+      },
+      "independentObservationsVerified": 2
+    }
+  ],
+  "acceptance": "用户明确授权提示真实送达即任务成功结束；不表示完成店铺配置检查",
+  "originalFullWorkflowRerun": true
+}

@@ -1,0 +1,327 @@
+{
+  "schemaVersion": 1,
+  "runId": "b35e8a8c-cc82-4228-a9bc-37fa4595a343",
+  "ok": false,
+  "sent": 0,
+  "verifiedNewSends": 0,
+  "verifiedExisting": 0,
+  "unresolvedItems": 1,
+  "completion": {
+    "state": "RECONCILE_ONLY",
+    "nextAction": "native-copy-read-only-reconcile-no-resend",
+    "automaticRecoveryAllowed": true,
+    "recoveryAttemptBudget": 1,
+    "reason": "legacy-attempt-reconcile-only"
+  },
+  "rows": [
+    {
+      "item": 1,
+      "stage": "executor_integrity",
+      "label": "封板完整性",
+      "elapsedMs": 6,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": null
+    },
+    {
+      "item": 2,
+      "stage": "runtime_policy",
+      "label": "授权、群与通道门禁",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": null
+    },
+    {
+      "item": 3,
+      "stage": "offline_selftest",
+      "label": "离线自测",
+      "elapsedMs": 311,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": null
+    },
+    {
+      "item": 4,
+      "stage": "collection",
+      "label": "商家采集",
+      "elapsedMs": 18302,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": null
+    },
+    {
+      "item": 5,
+      "stage": "collection.1.background_preflight",
+      "label": "采集第1次 · 后台浏览器预检",
+      "elapsedMs": 105,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 6,
+      "stage": "collection.1.task_page",
+      "label": "采集第1次 · 建立独立任务页",
+      "elapsedMs": 553,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 7,
+      "stage": "collection.1.navigation",
+      "label": "采集第1次 · 进入意向商户列表",
+      "elapsedMs": 1503,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 8,
+      "stage": "collection.1.date_filter",
+      "label": "采集第1次 · 日期设置与双帧回读",
+      "elapsedMs": 1267,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 9,
+      "stage": "collection.1.page_1_read",
+      "label": "采集第1次 · 第1页采集与稳定核验",
+      "elapsedMs": 367,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 10,
+      "stage": "collection.1.page_1_next",
+      "label": "采集第1次 · 第1页翻页",
+      "elapsedMs": 52,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 11,
+      "stage": "collection.1.page_2_read",
+      "label": "采集第1次 · 第2页采集与稳定核验",
+      "elapsedMs": 609,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 12,
+      "stage": "collection.1.page_2_next",
+      "label": "采集第1次 · 第2页翻页",
+      "elapsedMs": 56,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 13,
+      "stage": "collection.1.page_3_read",
+      "label": "采集第1次 · 第3页采集与稳定核验",
+      "elapsedMs": 587,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 14,
+      "stage": "collection.1.selection_audit",
+      "label": "采集第1次 · selection_audit",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 15,
+      "stage": "collection.1.detail_529520233",
+      "label": "采集第1次 · 商家详情核验 529520233",
+      "elapsedMs": 2286,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 16,
+      "stage": "collection.1.detail_1364337844",
+      "label": "采集第1次 · 商家详情核验 1364337844",
+      "elapsedMs": 1069,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 17,
+      "stage": "collection.1.detail_529507609",
+      "label": "采集第1次 · 商家详情核验 529507609",
+      "elapsedMs": 1092,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 18,
+      "stage": "collection.1.detail_2038415796",
+      "label": "采集第1次 · 商家详情核验 2038415796",
+      "elapsedMs": 1008,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 19,
+      "stage": "collection.1.detail_546376532",
+      "label": "采集第1次 · 商家详情核验 546376532",
+      "elapsedMs": 1099,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 20,
+      "stage": "collection.1.detail_545692013",
+      "label": "采集第1次 · 商家详情核验 545692013",
+      "elapsedMs": 1122,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 21,
+      "stage": "collection.1.detail_541776241",
+      "label": "采集第1次 · 商家详情核验 541776241",
+      "elapsedMs": 1154,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 22,
+      "stage": "collection.1.detail_541567943",
+      "label": "采集第1次 · 商家详情核验 541567943",
+      "elapsedMs": 1136,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 23,
+      "stage": "audit",
+      "label": "采集合同审计",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": null
+    },
+    {
+      "item": 24,
+      "stage": "desktop_wechat_preflight",
+      "label": "桌面微信预检",
+      "elapsedMs": null,
+      "status": "SKIPPED",
+      "pitfalls": [],
+      "parent": null
+    },
+    {
+      "item": 25,
+      "stage": "desktop_wechat",
+      "label": "逐条通知",
+      "elapsedMs": 78,
+      "status": "FAIL",
+      "pitfalls": [
+        "legacy-attempt-reconcile-only"
+      ],
+      "parent": null
+    },
+    {
+      "item": 26,
+      "stage": "merchant.529520233.发送前合同复核",
+      "label": "疆麦尔椒麻鸡 · 发送前合同复核",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 27,
+      "stage": "merchant.529520233.已有attempt只读复核",
+      "label": "疆麦尔椒麻鸡 · 已有attempt只读复核",
+      "elapsedMs": 76,
+      "status": "FAIL",
+      "pitfalls": [
+        "legacy-attempt-reconcile-only"
+      ],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 28,
+      "stage": "merchant.529520233.双帧与原生复制全文复核",
+      "label": "疆麦尔椒麻鸡 · 双帧与原生复制全文复核",
+      "elapsedMs": null,
+      "status": "SKIPPED",
+      "pitfalls": [
+        "前置阶段失败，代码禁止继续"
+      ],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 29,
+      "stage": "merchant.529520233.提交前证据门禁",
+      "label": "疆麦尔椒麻鸡 · 提交前证据门禁",
+      "elapsedMs": null,
+      "status": "SKIPPED",
+      "pitfalls": [
+        "前置阶段失败，代码禁止继续"
+      ],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 30,
+      "stage": "merchant.529520233.成功历史与原子游标提交",
+      "label": "疆麦尔椒麻鸡 · 成功历史与原子游标提交",
+      "elapsedMs": null,
+      "status": "SKIPPED",
+      "pitfalls": [
+        "前置阶段失败，代码禁止继续"
+      ],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 31,
+      "stage": "final_cursor_check",
+      "label": "最终账本与游标复核",
+      "elapsedMs": null,
+      "status": "SKIPPED",
+      "pitfalls": [],
+      "parent": null
+    },
+    {
+      "item": 32,
+      "stage": "reseal",
+      "label": "真实非空验收重封",
+      "elapsedMs": null,
+      "status": "NOOP",
+      "pitfalls": [
+        "无真实新增发送，保持未封板"
+      ],
+      "parent": null
+    },
+    {
+      "item": 33,
+      "stage": "total",
+      "label": "整轮总耗时（含子阶段，不重复相加）",
+      "elapsedMs": 18844,
+      "status": "FAIL",
+      "pitfalls": [],
+      "parent": null
+    }
+  ]
+}

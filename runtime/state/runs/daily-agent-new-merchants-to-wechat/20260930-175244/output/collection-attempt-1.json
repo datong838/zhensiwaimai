@@ -1,0 +1,154 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-09-30",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 50,
+    "task_page": 385,
+    "navigation": 1353,
+    "date_filter": 1511,
+    "page_1_read": 360,
+    "selection_audit": 1,
+    "detail_541571894": 773,
+    "detail_540665297": 979
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_541571894": "PASS",
+    "detail_540665297": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "541571894",
+      "merchantName": "金诚炒货板栗·烤红薯·水果果切",
+      "recommendTime": "2026-09-30 16:55:39",
+      "city": "常州市",
+      "status": "待处理",
+      "rowIndex": 1,
+      "sourcePage": 1,
+      "tableOrder": 8,
+      "address": "潞城街道公园壹号花园41号",
+      "contact": "赵先生，18261188065",
+      "detailVerified": true,
+      "text": "常州市\n赵先生，18261188065\n金诚炒货板栗·烤红薯·水果果切\n潞城街道公园壹号花园41号",
+      "sha256": "fd49ef320a475498bd6f7049e62466b0f9c9654918211151efa1e8e9d51cf9aa"
+    },
+    {
+      "merchantId": "540665297",
+      "merchantName": "熊先生烤肉拌饭",
+      "recommendTime": "2026-09-30 17:45:14",
+      "city": "伊犁哈萨克自治州",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 9,
+      "address": "金地中心农贸市场128-42",
+      "contact": "孟，18590542580",
+      "detailVerified": true,
+      "text": "伊犁哈萨克自治州\n孟，18590542580\n熊先生烤肉拌饭\n金地中心农贸市场128-42",
+      "sha256": "ea3c5a469fcfb29d64ab4df74d3f062f1348eb7664388e921e92691546c39db0"
+    }
+  ],
+  "frontmostBefore": "com.openai.codex",
+  "createdAt": "2026-09-30T09:52:50.504Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-09-30",
+    "merchantName": "知香·手撕烤鸭",
+    "merchantId": "546531224",
+    "recommendTime": "2026-09-30 15:03:10",
+    "tableOrder": 6,
+    "messageSha256": "4d87744ee22eacf9143fb0a986f7162011989e1484279a760a13477fc5e938e6",
+    "sentAt": "2026-09-30T16:47:28+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-09-30",
+  "filterEndDate": "2026-09-30",
+  "dateFilter": "2026-09-30..2026-09-30",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 9,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 9,
+  "pendingRows": 6,
+  "targetCount": 2,
+  "selectionAudit": {
+    "totalRows": 9,
+    "pendingRows": 6,
+    "excludedAtOrBeforeCursor": 6,
+    "excludedAfterCursorNotPending": 1,
+    "targetCount": 2,
+    "rows": [
+      {
+        "merchantId": "540665297",
+        "recommendTime": "2026-09-30 17:45:14",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "541571894",
+        "recommendTime": "2026-09-30 16:55:39",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546531224",
+        "recommendTime": "2026-09-30 15:03:10",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1263459850",
+        "recommendTime": "2026-09-30 13:26:54",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "521315008",
+        "recommendTime": "2026-09-30 10:35:21",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "543891127",
+        "recommendTime": "2026-09-30 10:28:04",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1362405258",
+        "recommendTime": "2026-09-30 16:02:53",
+        "status": "完成"
+      },
+      {
+        "merchantId": "1360640820",
+        "recommendTime": "2026-09-30 14:35:56",
+        "status": "完成"
+      },
+      {
+        "merchantId": "1348225171",
+        "recommendTime": "2026-09-30 12:54:03",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 5748,
+  "frontmostAfter": "com.openai.codex",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20260930-175244/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20260930-175244/output/collection-attempt-1.review.md"
+}

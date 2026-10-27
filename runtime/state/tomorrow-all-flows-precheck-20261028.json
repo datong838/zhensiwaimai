@@ -1,0 +1,505 @@
+{
+  "at": "2026-10-27T19:55:44.603737",
+  "runDate": "2026-10-28",
+  "yesterdayBusinessDate": "2026-10-27",
+  "scope": "all enabled active manifest entries; first-slot cadence, entry existence, registered policy hashes and expiry only; not full runtime/logic acceptance",
+  "productionActions": 0,
+  "flows": [
+    {
+      "flow": "daily-top10-to-wechat-group",
+      "schedule": "每日08:00",
+      "nextFirstDue": "2026-10-28T08:00:00",
+      "gateAtFirstDue": {
+        "skip": false,
+        "reason": ""
+      },
+      "dependencies": [],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/scripts/workflow_executor.py",
+          "exists": true
+        }
+      ],
+      "policies": [
+        {
+          "name": "runtime-policy.json",
+          "status": null,
+          "allowedBusinessDate": null,
+          "fileHashesChecked": 8,
+          "drift": []
+        }
+      ],
+      "expiryBeforeNextClose": []
+    },
+    {
+      "flow": "daily-negative-reviews",
+      "schedule": "每日08:30",
+      "nextFirstDue": "2026-10-28T08:30:00",
+      "gateAtFirstDue": {
+        "skip": false,
+        "reason": ""
+      },
+      "dependencies": [],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-negative-reviews/scripts/workflow_executor.mjs",
+          "exists": true
+        }
+      ],
+      "policies": [
+        {
+          "name": "runtime-policy.json",
+          "status": "UNSEALED_ACCEPTANCE",
+          "allowedBusinessDate": "2026-10-26",
+          "fileHashesChecked": 0,
+          "drift": []
+        },
+        {
+          "name": "dependencies.json",
+          "status": null,
+          "allowedBusinessDate": null,
+          "fileHashesChecked": 19,
+          "drift": []
+        }
+      ],
+      "expiryBeforeNextClose": []
+    },
+    {
+      "flow": "contract-termination-applications-screenshot",
+      "schedule": "每日09:00",
+      "nextFirstDue": "2026-10-28T09:00:00",
+      "gateAtFirstDue": {
+        "skip": false,
+        "reason": ""
+      },
+      "dependencies": [],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/contract-termination-applications-screenshot/scripts/contract_termination_daily.py",
+          "exists": true
+        }
+      ],
+      "policies": [
+        {
+          "name": "runtime-policy.json",
+          "status": null,
+          "allowedBusinessDate": null,
+          "fileHashesChecked": 0,
+          "drift": []
+        }
+      ],
+      "expiryBeforeNextClose": []
+    },
+    {
+      "flow": "daily-jinsha-reports-to-business-wechat",
+      "schedule": "每日11:00",
+      "nextFirstDue": "2026-10-28T11:00:00",
+      "gateAtFirstDue": {
+        "skip": false,
+        "reason": ""
+      },
+      "dependencies": [],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-jinsha-reports-to-business-wechat/scripts/business_workflow_executor.mjs",
+          "exists": true
+        }
+      ],
+      "policies": [],
+      "expiryBeforeNextClose": []
+    },
+    {
+      "flow": "daily-taobao-download-to-jinsha",
+      "schedule": "每日13:00",
+      "nextFirstDue": "2026-10-28T13:00:00",
+      "gateAtFirstDue": {
+        "skip": false,
+        "reason": ""
+      },
+      "dependencies": [],
+      "entries": [],
+      "policies": [],
+      "expiryBeforeNextClose": []
+    },
+    {
+      "flow": "daily-agent-new-merchants-to-wechat",
+      "schedule": "每30分钟 08:30–18:30；19:00停止；有新增发商家信息，无新增发当前无新增意向商家",
+      "nextFirstDue": "2026-10-28T08:30:00",
+      "gateAtFirstDue": {
+        "skip": false,
+        "reason": ""
+      },
+      "dependencies": [],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-agent-new-merchants-to-wechat/scripts/workflow_executor.py",
+          "exists": true
+        }
+      ],
+      "policies": [
+        {
+          "name": "executor-lock.json",
+          "status": "SEALED",
+          "allowedBusinessDate": null,
+          "fileHashesChecked": 19,
+          "drift": []
+        }
+      ],
+      "expiryBeforeNextClose": []
+    },
+    {
+      "flow": "meituan-intelligent-customer-service-12",
+      "schedule": "每日12:00",
+      "nextFirstDue": "2026-10-28T12:00:00",
+      "gateAtFirstDue": {
+        "skip": false,
+        "reason": ""
+      },
+      "dependencies": [],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-intelligent-customer-service/scripts/ensure_unanswered_queue.mjs",
+          "exists": true
+        },
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-intelligent-customer-service/scripts/reply_unanswered_sessions.mjs",
+          "exists": true
+        },
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-intelligent-customer-service/scripts/compile_daily_reply_xlsx.mjs",
+          "exists": true
+        },
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-intelligent-customer-service/scripts/send_daily_reply_xlsx_to_wechat.mjs",
+          "exists": true
+        }
+      ],
+      "policies": [],
+      "expiryBeforeNextClose": []
+    },
+    {
+      "flow": "meituan-intelligent-customer-service-15",
+      "schedule": "每日15:00",
+      "nextFirstDue": "2026-10-28T15:00:00",
+      "gateAtFirstDue": {
+        "skip": false,
+        "reason": ""
+      },
+      "dependencies": [],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-intelligent-customer-service/scripts/ensure_unanswered_queue.mjs",
+          "exists": true
+        },
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-intelligent-customer-service/scripts/reply_unanswered_sessions.mjs",
+          "exists": true
+        },
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-intelligent-customer-service/scripts/compile_daily_reply_xlsx.mjs",
+          "exists": true
+        },
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-intelligent-customer-service/scripts/send_daily_reply_xlsx_to_wechat.mjs",
+          "exists": true
+        }
+      ],
+      "policies": [],
+      "expiryBeforeNextClose": []
+    },
+    {
+      "flow": "meituan-intelligent-customer-service",
+      "schedule": "每日17:00（17:00结束后准备发文档）",
+      "nextFirstDue": "2026-10-28T17:00:00",
+      "gateAtFirstDue": {
+        "skip": false,
+        "reason": ""
+      },
+      "dependencies": [],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-intelligent-customer-service/scripts/ensure_unanswered_queue.mjs",
+          "exists": true
+        },
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-intelligent-customer-service/scripts/reply_unanswered_sessions.mjs",
+          "exists": true
+        },
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-intelligent-customer-service/scripts/compile_daily_reply_xlsx.mjs",
+          "exists": true
+        },
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-intelligent-customer-service/scripts/send_daily_reply_xlsx_to_wechat.mjs",
+          "exists": true
+        }
+      ],
+      "policies": [],
+      "expiryBeforeNextClose": []
+    },
+    {
+      "flow": "taobao-flash-sale-negative-review-appeals",
+      "schedule": "每日13:00/15:00/17:00申诉；18:30收口汇总",
+      "nextFirstDue": "2026-10-28T13:00:00",
+      "gateAtFirstDue": {
+        "skip": false,
+        "reason": ""
+      },
+      "dependencies": [],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/taobao-flash-sale-negative-review-appeals/../../../runtime/appeal_shift.mjs",
+          "exists": true
+        }
+      ],
+      "policies": [],
+      "expiryBeforeNextClose": []
+    },
+    {
+      "flow": "daily-new-stores-opening-to-wechat",
+      "schedule": "每日10:00",
+      "nextFirstDue": "2026-10-28T10:00:00",
+      "gateAtFirstDue": {
+        "skip": false,
+        "reason": ""
+      },
+      "dependencies": [],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-new-stores-opening-to-wechat/scripts/workflow.py",
+          "exists": true
+        }
+      ],
+      "policies": [],
+      "expiryBeforeNextClose": []
+    },
+    {
+      "flow": "daily-new-stores-activity-audit-to-wechat",
+      "schedule": "每日11:00",
+      "nextFirstDue": "2026-10-28T11:00:00",
+      "gateAtFirstDue": {
+        "skip": false,
+        "reason": ""
+      },
+      "dependencies": [],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-new-stores-activity-audit-to-wechat/scripts/activity_daily.py",
+          "exists": true
+        }
+      ],
+      "policies": [],
+      "expiryBeforeNextClose": []
+    },
+    {
+      "flow": "meituan-waimai-negative-review-appeals-11",
+      "schedule": "每日13:00/15:00/17:00申诉；18:30收口汇总",
+      "nextFirstDue": "2026-10-28T13:00:00",
+      "gateAtFirstDue": {
+        "skip": false,
+        "reason": ""
+      },
+      "dependencies": [],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-waimai-negative-review-appeals/../../../runtime/appeal_shift.mjs",
+          "exists": true
+        }
+      ],
+      "policies": [],
+      "expiryBeforeNextClose": []
+    },
+    {
+      "flow": "negative-feedback-list-appeals-0930",
+      "schedule": "每日08:20执行，08:30前交付",
+      "nextFirstDue": "2026-10-28T08:20:00",
+      "gateAtFirstDue": {
+        "skip": false,
+        "reason": ""
+      },
+      "dependencies": [],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/negative-feedback-list-appeals/scripts/appeal_executor.mjs",
+          "exists": true
+        }
+      ],
+      "policies": [],
+      "expiryBeforeNextClose": []
+    },
+    {
+      "flow": "negative-feedback-list-appeals-1230",
+      "schedule": "每日08:20执行，08:30前交付",
+      "nextFirstDue": "2026-10-28T08:20:00",
+      "gateAtFirstDue": {
+        "skip": true,
+        "reason": "dependency_pending"
+      },
+      "dependencies": [
+        "negative-feedback-list-appeals-0930"
+      ],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/negative-feedback-list-appeals/scripts/build_report.mjs",
+          "exists": true
+        },
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/negative-feedback-list-appeals/scripts/deliver_batch.mjs",
+          "exists": true
+        }
+      ],
+      "policies": [],
+      "expiryBeforeNextClose": []
+    },
+    {
+      "flow": "daily-new-stores-decoration-audit-to-wechat",
+      "schedule": "每日11:30",
+      "nextFirstDue": "2026-10-28T11:30:00",
+      "gateAtFirstDue": {
+        "skip": false,
+        "reason": ""
+      },
+      "dependencies": [],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-new-stores-decoration-audit-to-wechat/scripts/decoration_daily.py",
+          "exists": true
+        }
+      ],
+      "policies": [],
+      "expiryBeforeNextClose": []
+    },
+    {
+      "flow": "daily-new-stores-not-nourished-ops-to-wechat",
+      "schedule": "每日11:40",
+      "nextFirstDue": "2026-10-28T11:40:00",
+      "gateAtFirstDue": {
+        "skip": false,
+        "reason": ""
+      },
+      "dependencies": [],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-new-stores-not-nourished-ops-to-wechat/scripts/nourish_daily.py",
+          "exists": true
+        }
+      ],
+      "policies": [],
+      "expiryBeforeNextClose": []
+    },
+    {
+      "flow": "daily-store-task-completion-ops-to-wechat",
+      "schedule": "每日12:00",
+      "nextFirstDue": "2026-10-28T12:00:00",
+      "gateAtFirstDue": {
+        "skip": false,
+        "reason": ""
+      },
+      "dependencies": [],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-store-task-completion-ops-to-wechat/scripts/task_daily.py",
+          "exists": true
+        }
+      ],
+      "policies": [],
+      "expiryBeforeNextClose": []
+    },
+    {
+      "flow": "daily-store-basic-diagnosis-to-wechat",
+      "schedule": "每日11:18",
+      "nextFirstDue": "2026-10-28T11:18:00",
+      "gateAtFirstDue": {
+        "skip": false,
+        "reason": ""
+      },
+      "dependencies": [],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/basic_diag_daily.py",
+          "exists": true
+        }
+      ],
+      "policies": [],
+      "expiryBeforeNextClose": []
+    },
+    {
+      "flow": "daily-service-market-ranking-to-wechat",
+      "schedule": "每日10:00（首次上线当日补执行一次）",
+      "nextFirstDue": "2026-10-28T10:00:00",
+      "gateAtFirstDue": {
+        "skip": false,
+        "reason": ""
+      },
+      "dependencies": [],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-service-market-ranking-to-wechat/scripts/ranking_workflow.py",
+          "exists": true
+        }
+      ],
+      "policies": [
+        {
+          "name": "runtime-policy.json",
+          "status": null,
+          "allowedBusinessDate": null,
+          "fileHashesChecked": 2,
+          "drift": []
+        }
+      ],
+      "expiryBeforeNextClose": []
+    },
+    {
+      "flow": "daily-meituan-income-top10-to-wechat",
+      "schedule": "每日08:00，与淘宝Top10串行",
+      "nextFirstDue": "2026-10-28T08:00:00",
+      "gateAtFirstDue": {
+        "skip": false,
+        "reason": ""
+      },
+      "dependencies": [],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-meituan-income-top10-to-wechat/scripts/income_workflow.py",
+          "exists": true
+        }
+      ],
+      "policies": [
+        {
+          "name": "runtime-policy.json",
+          "status": null,
+          "allowedBusinessDate": null,
+          "fileHashesChecked": 2,
+          "drift": []
+        }
+      ],
+      "expiryBeforeNextClose": []
+    },
+    {
+      "flow": "daily-quality-products-optimization",
+      "schedule": "每日17:00，美团17点客服后串行；未完成安全分段接续",
+      "nextFirstDue": "2026-10-28T17:00:00",
+      "gateAtFirstDue": {
+        "skip": false,
+        "reason": ""
+      },
+      "dependencies": [],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-quality-products-optimization/scripts/quality_workflow.py",
+          "exists": true
+        }
+      ],
+      "policies": [
+        {
+          "name": "runtime-policy.json",
+          "status": null,
+          "allowedBusinessDate": null,
+          "fileHashesChecked": 4,
+          "drift": []
+        }
+      ],
+      "expiryBeforeNextClose": []
+    }
+  ]
+}

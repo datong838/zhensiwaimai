@@ -1,0 +1,130 @@
+{
+  "ok": true,
+  "executor": "desktop",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-brand",
+  "port": 9230,
+  "taskId": "top10-income-visible-20261027-0818",
+  "runId": "income-visible-20261027-0818",
+  "stageMs": {
+    "background_preflight": 91,
+    "open_home": 974,
+    "dismiss_known_notice": 3,
+    "navigate_store_analysis": 915,
+    "select_yesterday": 209,
+    "ensure_income_metric": 988,
+    "verify_sort": 380,
+    "capture_self_check": 2638
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "open_home": "PASS",
+    "dismiss_known_notice": "PASS",
+    "navigate_store_analysis": "PASS",
+    "select_yesterday": "PASS",
+    "ensure_income_metric": "PASS",
+    "verify_sort": "PASS",
+    "capture_self_check": "PASS"
+  },
+  "retryCount": 1,
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "receiptFile": "/tmp/zhensi-top10-income-diagnostic-20261027/income-visible-20261027-0818/desktop_receipt.json",
+  "stage": "capture_self_check",
+  "startedAt": 1793060294255,
+  "deadlineAt": 1793060474255,
+  "dataDate": "2026-10-26",
+  "deviceScaleFactor": 2,
+  "homeUrl": "https://melody.shop.ele.me/app/chain/95708808/dashboard#app.chainshop.dashboard",
+  "knownNotice": "ABSENT",
+  "storeUrl": "https://melody.shop.ele.me/app/chain/95708808/store-analysis#app.chainshop.store-analysis?path=1&dateType=realTime&orderCol=valid_ord_amt&orderType=DESC",
+  "incomeMetricSelection": "ADDED_INCOME_ONLY",
+  "incomeHeader": "收入",
+  "sortMetric": "income-amount",
+  "sortDirection": "descending",
+  "incomeVisibility": {
+    "ok": true,
+    "left": 1204.921875,
+    "right": 1311.71875,
+    "visible": {
+      "left": 621,
+      "right": 1328
+    },
+    "scrollLeft": 54
+  },
+  "captureGeometry": {
+    "viewport": {
+      "width": 2200,
+      "height": 1800
+    },
+    "tableBox": {
+      "x": 652,
+      "y": 621.421875,
+      "width": 1120,
+      "height": 826.96875
+    },
+    "pagerBox": {
+      "x": 1188.296875,
+      "y": 1464.390625,
+      "width": 583.703125,
+      "height": 32
+    },
+    "clip": {
+      "x": 652,
+      "y": 621,
+      "width": 1120,
+      "height": 882
+    }
+  },
+  "captureScale": 1,
+  "file": "/tmp/zhensi-top10-income-diagnostic-20261027/income-visible-20261027-0818/2026-10-26_top10seller.png",
+  "width": 2240,
+  "height": 1764,
+  "sha256": "8a25138b499208b3f19bc1cf6f255733be93bd5ddaa7a67bf20ccf5d71c4d3ee",
+  "stores": [
+    "味之绝美蛙鱼火锅(周浦万达店)",
+    "味之绝·美蛙鱼头火锅(亚新广场店)",
+    "甬潮·宁波小市(静安大融城店)",
+    "繁花肴(缤谷广场店)",
+    "雅位·新上海菜（维璟印象城店）",
+    "雅位·新上海菜(龙湖天街店)",
+    "毛家湘菜馆(人民广场店)",
+    "湘味小厨(活力城店)",
+    "甬潮·宁波小市(新邻店)",
+    "味之绝热血美蛙鱼头火锅(五角场万达店)"
+  ],
+  "incomes": [
+    4522.94,
+    4330.81,
+    4006.43,
+    3829.13,
+    3771.41,
+    3688.38,
+    3670.81,
+    3660.65,
+    3097.8,
+    3091.9
+  ],
+  "revenues": [
+    11773.02,
+    10258.2,
+    6053,
+    6745.4,
+    7493.1,
+    7284.1,
+    10228.68,
+    7715.55,
+    5151,
+    6760.6
+  ],
+  "page": 1,
+  "pageSize": 10,
+  "layout": "background-table-and-pagination",
+  "capture": {
+    "x": 652,
+    "y": 621,
+    "width": 1120,
+    "height": 882
+  },
+  "elapsedMs": 6125
+}

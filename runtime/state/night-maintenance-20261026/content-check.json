@@ -1,0 +1,93 @@
+{
+  "checkedAt": "2026-10-26T14:12:15.920Z",
+  "results": [
+    {
+      "port": 9230,
+      "ok": true,
+      "businessPages": 1,
+      "probes": [
+        {
+          "origin": "https://melody.shop.ele.me",
+          "path": "/login",
+          "markers": [],
+          "login": true,
+          "risk": false
+        },
+        {
+          "origin": "https://melody.shop.ele.me",
+          "path": "/app/chain/95708808/stats__center",
+          "markers": [
+            "数据",
+            "门店"
+          ],
+          "login": false,
+          "risk": false
+        }
+      ]
+    },
+    {
+      "port": 9231,
+      "ok": true,
+      "businessPages": 1,
+      "probes": [
+        {
+          "origin": "https://open.shop.ele.me",
+          "path": "/manager/base/abnormal-diagnosis",
+          "markers": [
+            "代运营",
+            "客户管理",
+            "经营任务",
+            "数据中心"
+          ],
+          "login": false,
+          "risk": false
+        }
+      ]
+    },
+    {
+      "port": 9232,
+      "ok": true,
+      "businessPages": 2,
+      "probes": [
+        {
+          "origin": "https://data.guoshuyufen.com",
+          "path": "/",
+          "markers": [
+            "实时数据"
+          ],
+          "login": false,
+          "risk": false
+        },
+        {
+          "origin": "https://data.guoshuyufen.com",
+          "path": "/",
+          "markers": [
+            "实时数据"
+          ],
+          "login": false,
+          "risk": false
+        }
+      ]
+    },
+    {
+      "port": 9233,
+      "ok": true,
+      "businessPages": 1,
+      "probes": [
+        {
+          "origin": "https://waimaie.meituan.com",
+          "path": "/imworkbench/home",
+          "markers": [
+            "顾客消息",
+            "客服管理",
+            "正在接待",
+            "待人工回复",
+            "未回复"
+          ],
+          "login": false,
+          "risk": false
+        }
+      ]
+    }
+  ]
+}

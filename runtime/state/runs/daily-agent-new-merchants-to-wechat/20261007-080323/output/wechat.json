@@ -1,0 +1,87 @@
+{
+  "ok": false,
+  "executor": "merchant-desktop-wechat-sender",
+  "channel": "desktop",
+  "sent": 0,
+  "messageCount": 1,
+  "historySkipped": 0,
+  "items": [
+    {
+      "merchantId": "542957171",
+      "merchantName": "寿小卤·潮汕猪脚饭",
+      "review": [
+        {
+          "stage": "发送前合同复核",
+          "status": "PASS",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "定位、输入与单次发送",
+          "status": "FAIL",
+          "pitfalls": [
+            "desktop-send-invalid-receipt"
+          ],
+          "details": [],
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsedMs": 180011,
+              "ok": false,
+              "reason": "desktop-send-invalid-receipt",
+              "sendAttempts": 1,
+              "sendReview": []
+            }
+          ],
+          "elapsedMs": 180013
+        },
+        {
+          "stage": "双帧与原生复制全文复核",
+          "status": "SKIPPED",
+          "elapsedMs": null,
+          "pitfalls": [
+            "前置阶段失败，代码禁止继续"
+          ]
+        },
+        {
+          "stage": "提交前证据门禁",
+          "status": "SKIPPED",
+          "elapsedMs": null,
+          "pitfalls": [
+            "前置阶段失败，代码禁止继续"
+          ]
+        },
+        {
+          "stage": "成功历史与原子游标提交",
+          "status": "SKIPPED",
+          "elapsedMs": null,
+          "pitfalls": [
+            "前置阶段失败，代码禁止继续"
+          ]
+        }
+      ]
+    }
+  ],
+  "contentionRetries": 0,
+  "contentionWaitMs": 0,
+  "contentionEvents": [],
+  "reason": "desktop-send-invalid-receipt",
+  "desktop": {
+    "ok": false,
+    "reason": "desktop-send-invalid-receipt",
+    "sendAttempts": 1,
+    "attemptReviews": [
+      {
+        "attempt": 1,
+        "elapsedMs": 180011,
+        "ok": false,
+        "reason": "desktop-send-invalid-receipt",
+        "sendAttempts": 1,
+        "sendReview": []
+      }
+    ],
+    "contentionRetries": 0,
+    "contentionWaitMs": 0,
+    "contentionEvents": []
+  }
+}

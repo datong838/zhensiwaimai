@@ -1,0 +1,33 @@
+{
+  "checkedAt": "2026-10-24T16:58:48.179885+08:00",
+  "mode": "read-only-audit",
+  "uiEvidence": "runtime/state/jinsha-upload-ui-delivery-20261024.json",
+  "matchingProductionReceipts": [
+    {
+      "receipt": "/tmp/zhensi_daily_download/background-browser/2026-10-23-b6687aa7-8516-4183-9da8-08d79b2b8b3a/receipt.json",
+      "productionCompleted": true,
+      "images": [
+        {
+          "originalPath": "/tmp/zhensi_daily_download/background-browser/2026-10-23-b6687aa7-8516-4183-9da8-08d79b2b8b3a/jinsha-store-final.png",
+          "sourceExists": true,
+          "originalShaMatches": true,
+          "uiCopyExists": true,
+          "uiCopyShaMatches": true
+        },
+        {
+          "originalPath": "/tmp/zhensi_daily_download/background-browser/2026-10-23-b6687aa7-8516-4183-9da8-08d79b2b8b3a/jinsha-review-final.png",
+          "sourceExists": true,
+          "originalShaMatches": true,
+          "uiCopyExists": true,
+          "uiCopyShaMatches": true
+        }
+      ]
+    }
+  ],
+  "matchingReceiptCount": 1,
+  "disposition": "evidence-bound-original-ledger-reconciliation-required",
+  "newSendAttempts": 0,
+  "ledgerModified": false,
+  "limitation": "UI delivery evidence is historical observation, not attachment pixel or byte readback; original ledger not promoted",
+  "sourceGroupCorrection": "Original production manifest retains FEIBING NEO AI数字员工; visible UI evidence binds current operations group under explicit user migration authorization. Original receipt unchanged."
+}

@@ -1,0 +1,152 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：衢州市  ；  联系人：1，13083946660  ；  店铺：龙门海鲜大排档  ；  地址：思源路30号",
+      "sha256": "172a9a1d096915aa06ec0a33fcc49fd66b7c2a2eca72440c92bef3bf72a358e9"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "203e67ec81830ac2cd3dc8f1c1c8691dfee6076ba5fcbe4c950e84da9a0b7cab",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "172a9a1d096915aa06ec0a33fcc49fd66b7c2a2eca72440c92bef3bf72a358e9",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1791605146.329109,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-text-anchor",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "电销+直播攻坚组",
+          "currentTitle": "电销+直播攻坚组",
+          "messageCount": 37,
+          "anchor": "text-exact",
+          "anchorValue": "城市：衢州市  ；  联系人：1，13083946660  ；  店铺：龙门海鲜大排档  ；  地址：思源路30号",
+          "anchorInTrailingPosition": true,
+          "autoKind": null,
+          "readbackAt": 1791605169.96726
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "电销+直播攻坚组",
+            "len": 57
+          },
+          "route": "relay",
+          "direct_error": "[Errno 65] No route to host",
+          "direct_local_network_blocked": true,
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 281
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 23638
+      }
+    ],
+    "elapsedMs": 23922,
+    "eventKey": "cad5db8616ed816c5ab03b00c33296f87badd7507bf2995acf813363cfdc364e",
+    "reviewSummary": {
+      "totalElapsedMs": 23922,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/f3e8c29f3bb7f5c256e4ae63c21de763242cf88683974c553a38ccb97684c6e6.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 281,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 23638,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 23922,
+  "reviewSummary": {
+    "totalElapsedMs": 23922,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "ok": true,
+    "resolvedGroup": "电销+直播攻坚组",
+    "currentTitle": "电销+直播攻坚组",
+    "messageCount": 37,
+    "anchor": "text-exact",
+    "anchorValue": "城市：衢州市  ；  联系人：1，13083946660  ；  店铺：龙门海鲜大排档  ；  地址：思源路30号",
+    "anchorInTrailingPosition": true,
+    "autoKind": null,
+    "readbackAt": 1791605169.96726
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false
+}

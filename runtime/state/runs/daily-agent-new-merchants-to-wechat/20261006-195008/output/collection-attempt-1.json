@@ -1,0 +1,99 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-06",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 88,
+    "task_page": 402,
+    "navigation": 1637,
+    "date_filter": 1433,
+    "page_1_read": 289,
+    "selection_audit": 0
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS"
+  },
+  "messages": [],
+  "frontmostBefore": "com.tencent.workbuddy.mac",
+  "createdAt": "2026-10-06T11:50:13.337Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-06",
+    "merchantName": "巧星芒·贵州冰浆",
+    "merchantId": "1354172014",
+    "recommendTime": "2026-10-06 17:50:43",
+    "tableOrder": 5,
+    "messageSha256": "4d27b94ad19562351b78ac068d94e733ef6b3e064ad31c20016457a0c2a9b16e",
+    "sentAt": "2026-10-06T18:49:00+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-06",
+  "filterEndDate": "2026-10-06",
+  "dateFilter": "2026-10-06..2026-10-06",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 5,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 5,
+  "pendingRows": 5,
+  "targetCount": 0,
+  "selectionAudit": {
+    "totalRows": 5,
+    "pendingRows": 5,
+    "excludedAtOrBeforeCursor": 5,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 0,
+    "rows": [
+      {
+        "merchantId": "1354172014",
+        "recommendTime": "2026-10-06 17:50:43",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1364094640",
+        "recommendTime": "2026-10-06 16:34:04",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1332435894",
+        "recommendTime": "2026-10-06 15:47:26",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1357327730",
+        "recommendTime": "2026-10-06 14:40:49",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "543338440",
+        "recommendTime": "2026-10-06 12:45:36",
+        "status": "待处理"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 4297,
+  "frontmostAfter": "com.tencent.workbuddy.mac",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261006-195008/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261006-195008/output/collection-attempt-1.review.md"
+}

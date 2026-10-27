@@ -1,0 +1,198 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：南京市  ；  联系人：薛俊琦，19159846869  ；  店铺：麻辣烫·麻辣拌·麻辣香锅  ；  地址：神农路1号南京特殊教育师范学院栖霞校区第一食堂",
+      "sha256": "9e985467959cf86166957a739067395a5b09c51143f4d05886c531dc347baaab"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "f7c672e53b1213bf6bb1c342509d1e4286399bd88f71bf9b4b4497a7a9f5c514",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "9e985467959cf86166957a739067395a5b09c51143f4d05886c531dc347baaab",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1792309625.608194,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-text-anchor",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "电销+直播攻坚组",
+          "currentTitle": "电销+直播攻坚组",
+          "messageCount": 43,
+          "anchor": "text-exact",
+          "anchorValue": "城市：南京市  ；  联系人：薛俊琦，19159846869  ；  店铺：麻辣烫·麻辣拌·麻辣香锅  ；  地址：神农路1号南京特殊教育师范学院栖霞校区第一食堂",
+          "anchorInTrailingPosition": true,
+          "autoKind": null,
+          "readbackAt": 1792309651.721023
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "电销+直播攻坚组",
+            "len": 81
+          },
+          "route": "relay",
+          "direct_error": "[Errno 65] No route to host",
+          "direct_local_network_blocked": true,
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 9214
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 26113
+      }
+    ],
+    "elapsedMs": 35332,
+    "eventKey": "a10d1e33e11e80ca10b0507b1631e12393fc74c6db5d463b7b5ebf09b52794ba",
+    "reviewSummary": {
+      "totalElapsedMs": 35332,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/8da54b9caeb62415bd5462c455091c2a5f55237d761ec92ff5818227780a51d1.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 9214,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 26113,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 35332,
+  "reviewSummary": {
+    "totalElapsedMs": 35332,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "ok": true,
+    "resolvedGroup": "电销+直播攻坚组",
+    "currentTitle": "电销+直播攻坚组",
+    "messageCount": 43,
+    "anchor": "text-exact",
+    "anchorValue": "城市：南京市  ；  联系人：薛俊琦，19159846869  ；  店铺：麻辣烫·麻辣拌·麻辣香锅  ；  地址：神农路1号南京特殊教育师范学院栖霞校区第一食堂",
+    "anchorInTrailingPosition": true,
+    "autoKind": null,
+    "readbackAt": 1792309651.721023
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false,
+  "attemptReviews": [
+    {
+      "attempt": 1,
+      "elapsedMs": 35465,
+      "ok": true,
+      "reason": null,
+      "sendAttempts": 1,
+      "sendReview": [
+        {
+          "stage": "authorization",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 1,
+          "label": "authorization"
+        },
+        {
+          "stage": "freeze:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 2,
+          "label": "freeze:0"
+        },
+        {
+          "stage": "preflight",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 9214,
+          "item": 3,
+          "label": "preflight"
+        },
+        {
+          "stage": "send:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 26113,
+          "item": 4,
+          "label": "send:0"
+        }
+      ]
+    }
+  ],
+  "contentionRetries": 0,
+  "contentionWaitMs": 0,
+  "contentionEvents": []
+}

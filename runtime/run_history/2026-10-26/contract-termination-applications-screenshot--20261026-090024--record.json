@@ -1,0 +1,23 @@
+{
+  "skill": "contract-termination-applications-screenshot",
+  "ledger_name": "合同解约申请·处理中任务列表截图（每日09:00）",
+  "schedule": "每日09:00",
+  "dev_state": "active",
+  "status": "FAILED",
+  "category": "UNKNOWN",
+  "detail": "reason=native-ui-inline-image-not-exposed (receipt:reason)",
+  "next_action": "看护代理读日志定位根因后升级处理",
+  "attempts": 1,
+  "max_retries": 2,
+  "duration_seconds": 29.06,
+  "started_at": "2026-10-26T09:00:24",
+  "finished_at": "2026-10-26T09:00:54",
+  "triggered_by": "daemon",
+  "logs": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-26/contract-termination-applications-screenshot--20261026-090024--a1--s1.log"
+  ],
+  "fail_signal": {
+    "kind": "reason",
+    "code": "native-ui-inline-image-not-exposed"
+  }
+}

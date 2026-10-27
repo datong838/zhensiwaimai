@@ -1,0 +1,23 @@
+{
+  "skill": "daily-store-basic-diagnosis-to-wechat",
+  "ledger_name": "门店商户运营问题诊断（每日11:18）",
+  "schedule": "每日11:18",
+  "dev_state": "active",
+  "status": "FAILED",
+  "category": "UNKNOWN",
+  "detail": "reason=basic-diag-collect-unknown:783:26)\n    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:494:31)\n    at #getOrCreateModuleJobAfterResolve (node:internal/modules/esm/loader:560:36)\n    at afterResolve (node:internal/modules/esm/loader:607:52)\n\nNode.js v24.19.0 (receipt:reason)",
+  "next_action": "看护代理读日志定位根因后升级处理",
+  "attempts": 1,
+  "max_retries": 2,
+  "duration_seconds": 0.17,
+  "started_at": "2026-10-23T20:18:59",
+  "finished_at": "2026-10-23T20:18:59",
+  "triggered_by": "daemon",
+  "logs": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-23/daily-store-basic-diagnosis-to-wechat--20261023-201859--a1--s1.log"
+  ],
+  "fail_signal": {
+    "kind": "reason",
+    "code": "basic-diag-collect-unknown:783:26)\n    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:494:31)\n    at #getOrCreateModuleJobAfterResolve (node:internal/modules/esm/loader:560:36)\n    at afterResolve (node:internal/modules/esm/loader:607:52)\n\nNode.js v24.19.0"
+  }
+}

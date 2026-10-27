@@ -1,0 +1,26 @@
+{
+  "skill": "meituan-intelligent-customer-service",
+  "ledger_name": "美团商家中心智能客服（17:00·备发文档）",
+  "schedule": "每日17:00（17:00结束后准备发文档）",
+  "dev_state": "active",
+  "status": "FAILED",
+  "category": "UNKNOWN",
+  "detail": "embedded-reason=ui-post-preflight-not-verified (receipt:embedded_reason)",
+  "next_action": "看护代理读日志定位根因后升级处理",
+  "attempts": 1,
+  "max_retries": 0,
+  "duration_seconds": 42.92,
+  "started_at": "2026-10-27T17:05:11",
+  "finished_at": "2026-10-27T17:05:54",
+  "triggered_by": "daemon",
+  "logs": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-27/meituan-intelligent-customer-service--20261027-170511--a1--s1.log",
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-27/meituan-intelligent-customer-service--20261027-170511--a1--s2.log",
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-27/meituan-intelligent-customer-service--20261027-170511--a1--s3.log",
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-27/meituan-intelligent-customer-service--20261027-170511--a1--s4.log"
+  ],
+  "fail_signal": {
+    "kind": "embedded_reason",
+    "code": "ui-post-preflight-not-verified"
+  }
+}

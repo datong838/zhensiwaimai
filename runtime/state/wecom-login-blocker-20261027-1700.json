@@ -1,0 +1,65 @@
+{
+  "at": "2026-10-27T17:02:02.518464",
+  "nativeVisibleLoginBlocker": "提示\n你已在手机上退出企业微信",
+  "wecomPid": 95847,
+  "original1700Task": "skills/wechat-messaging/.runtime/ui-post-queue/c2335523-6206-4397-a4de-264b0f14114c",
+  "original1700SendAttempts": 0,
+  "noClaim": true,
+  "noSendIntent": true,
+  "result": {
+    "status": "blocked",
+    "ok": false,
+    "sendAttempts": 0,
+    "resolvedGroup": "电销+直播攻坚组",
+    "inputEmpty": false,
+    "backend": "system-events-ui-tree",
+    "reason": "native-ui-dispatch-failed:native-ui-anchor-changed:chat-container-not-unique"
+  },
+  "action": "等待真人重新登录，独立17点客服/申诉/整改继续原主任，不点击退出弹窗或代办登录，不强制重试。",
+  "prior1650Delivery": "1家新增已verified一次，保持原事实",
+  "customerService1700": {
+    "run": "runtime/state/runs/meituan-intelligent-customer-service/20261027-170011",
+    "scanned": 56,
+    "candidateCount": 0,
+    "sent": [],
+    "failed": [],
+    "xlsxState": "blocked",
+    "xlsxSendAttempts": 0,
+    "xlsxMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/meituan-customer-reply-daily/wechat-attempts/meituan-customer-reply-daily-2026-10-27-170119.json"
+  },
+  "quality1700": {
+    "scopeFinished": true,
+    "completed": 7,
+    "optimized": 7,
+    "checkedNoAction": 10,
+    "attemptedUnconfirmed": 1,
+    "failed": 0,
+    "rowErrorCount": 0,
+    "handled": 18,
+    "recordRows": 18,
+    "delivery": "preflight-blocked-no-delivery-marker",
+    "sendAttempts": 0
+  },
+  "recoveredAt": "2026-10-27T17:26:50.121545",
+  "merchant1700Delivery": "verified-one-send-two-observations",
+  "customerFinalDelivery": {
+    "ok": true,
+    "verified": true,
+    "state": "verified",
+    "sendAttempts": 1
+  },
+  "qualityFinalDelivery": {
+    "state": "verified",
+    "sendAttempts": 2,
+    "items": [
+      [
+        "quality-execution-ledger",
+        "verified"
+      ],
+      [
+        "quality-optimization-completed",
+        "verified"
+      ]
+    ]
+  }
+}

@@ -1,0 +1,178 @@
+{
+  "confirmedAt": "2026-10-27T19:09:52.509946+08:00",
+  "userInstruction": "好 那就先23家吧 本月 没剩下几天了",
+  "month": "2026-10",
+  "count": 23,
+  "executionEnabled": false,
+  "selections": [
+    {
+      "shopId": "1184612665",
+      "name": "渔味妙酸菜鱼·烤鱼(车墩店)"
+    },
+    {
+      "shopId": "1293695520",
+      "name": "渔味妙酸菜鱼·烤鱼·鸡公煲(年吉路店)"
+    },
+    {
+      "shopId": "1301471286",
+      "name": "渔味妙酸菜鱼·烤鱼（恒信家园店）"
+    },
+    {
+      "shopId": "160020068",
+      "name": "渔味妙酸菜鱼烤鱼肥肠鱼(安亭店)"
+    },
+    {
+      "shopId": "161343436",
+      "name": "渔味妙酸菜鱼●烤鱼●鸡公煲(秀文路店)"
+    },
+    {
+      "shopId": "162500284",
+      "name": "渔味妙酸菜鱼·烤鱼·鸡公煲(青年城店)"
+    },
+    {
+      "shopId": "2042444556",
+      "name": "渔味妙酸菜鱼烤鱼(龙茗路店)"
+    },
+    {
+      "shopId": "522594683",
+      "name": "渔味妙酸菜鱼·烤鱼·鸡公煲(浦秀路店)"
+    },
+    {
+      "shopId": "530943798",
+      "name": "渔味妙酸菜鱼烤鱼(虹中路店)"
+    },
+    {
+      "shopId": "538653708",
+      "name": "渔味妙酸菜鱼·烤鱼(延长中路店)"
+    },
+    {
+      "shopId": "538693363",
+      "name": "渔味妙酸菜鱼·肥肠鱼·烤鱼(涞寅路店)"
+    },
+    {
+      "shopId": "544466825",
+      "name": "渔味妙酸菜鱼·烤鱼(丰庄路店)"
+    },
+    {
+      "shopId": "546135893",
+      "name": "渔味妙酸菜鱼烤鱼(棋盘路店)"
+    },
+    {
+      "shopId": "546835175",
+      "name": "渔味妙酸菜鱼·肥肠鱼·烤鱼(浦东大道店)"
+    },
+    {
+      "shopId": "1269769673",
+      "name": "贵福味·遵义羊肉粉·牛肉粉面(南城店)"
+    },
+    {
+      "shopId": "1334380066",
+      "name": "贵福味遵义羊肉粉（沙头店）"
+    },
+    {
+      "shopId": "537386469",
+      "name": "贵福味·遵义羊肉粉·牛肉粉面(清溪三中店)"
+    },
+    {
+      "shopId": "545805367",
+      "name": "贵福味遵义羊肉粉(玉翠店)"
+    },
+    {
+      "shopId": "157807900",
+      "name": "蜀南面馆(莘庄店)"
+    },
+    {
+      "shopId": "510397500",
+      "name": "味之绝美蛙鱼火锅(曹路店)"
+    },
+    {
+      "shopId": "1312747909",
+      "name": "思北村·东北菜(秀沿路店)"
+    },
+    {
+      "shopId": "1353375679",
+      "name": "味之绝·美蛙鱼头火锅(亚新广场店)"
+    },
+    {
+      "shopId": "1528428",
+      "name": "农家坊海鲜馆(芷江中路店)"
+    }
+  ],
+  "flows": [
+    "daily-store-metrics-rotation-to-wechat",
+    "coupon-issue-task-flow"
+  ],
+  "inspectionPlanImported": false,
+  "published": [
+    {
+      "ok": true,
+      "flow": "daily-store-metrics-rotation-to-wechat",
+      "month": "2026-10",
+      "generation": "skills/workflows/daily-store-metrics-rotation-to-wechat/.runtime/monthly/2026-10/968fb6d22bea46f18a49ec4b189cd454",
+      "latestSourceMerchants": 753,
+      "eligible": 753,
+      "planState": "本地计划已登记",
+      "executionEnabled": false,
+      "plannedMerchants": 23,
+      "tasks": 253,
+      "verifiedTasks": 0,
+      "dailyTaskCounts": [
+        {
+          "date": "2026-10-27",
+          "count": 51
+        },
+        {
+          "date": "2026-10-28",
+          "count": 51
+        },
+        {
+          "date": "2026-10-29",
+          "count": 51
+        },
+        {
+          "date": "2026-10-30",
+          "count": 51
+        },
+        {
+          "date": "2026-10-31",
+          "count": 49
+        }
+      ]
+    },
+    {
+      "ok": true,
+      "flow": "coupon-issue-task-flow",
+      "month": "2026-10",
+      "generation": "skills/workflows/coupon-issue-task-flow/.runtime/monthly/2026-10/5e68b131893a4df086d5ce77ce009c51",
+      "latestSourceMerchants": 753,
+      "eligible": 753,
+      "planState": "本地计划已登记",
+      "executionEnabled": false,
+      "plannedMerchants": 23,
+      "tasks": 23,
+      "verifiedTasks": 0,
+      "dailyTaskCounts": [
+        {
+          "date": "2026-10-27",
+          "count": 5
+        },
+        {
+          "date": "2026-10-28",
+          "count": 5
+        },
+        {
+          "date": "2026-10-29",
+          "count": 5
+        },
+        {
+          "date": "2026-10-30",
+          "count": 5
+        },
+        {
+          "date": "2026-10-31",
+          "count": 3
+        }
+      ]
+    }
+  ]
+}

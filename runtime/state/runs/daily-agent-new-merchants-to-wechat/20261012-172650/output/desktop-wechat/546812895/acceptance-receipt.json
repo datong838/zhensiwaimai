@@ -1,0 +1,200 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：宁波市  ；  联系人：马，13321348484  ；  店铺：马记兰州拉面·拉面·拌饭·饺子  ；  地址：洞桥镇王家桥村宝积路兰州拉面",
+      "sha256": "d8c47490e4cd9d70f91dac0535ae8d7a57ed7f4931df4148b125f7163acdd2f1"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "427d32a55830414f78ecdbce369e9e58173138b67d69c045ee33806a6b8d1d32",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "d8c47490e4cd9d70f91dac0535ae8d7a57ed7f4931df4148b125f7163acdd2f1",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1791797241.296536,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-text-anchor",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "电销+直播攻坚组",
+          "currentTitle": "电销+直播攻坚组",
+          "messageCount": 47,
+          "anchor": "text-exact",
+          "anchorValue": "城市：宁波市  ；  联系人：马，13321348484  ；  店铺：马记兰州拉面·拉面·拌饭·饺子  ；  地址：洞桥镇王家桥村宝积路兰州拉面",
+          "anchorInTrailingPosition": true,
+          "autoKind": null,
+          "readbackAt": 1791797269.0629618
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "电销+直播攻坚组",
+            "len": 73
+          },
+          "route": "relay",
+          "direct_error": "[Errno 65] No route to host",
+          "direct_local_network_blocked": true,
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 9211
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 27767
+      }
+    ],
+    "elapsedMs": 36982,
+    "eventKey": "de0991ae552d2274dbe47e5752c2f7d7bf8f3beb80b5a3e19d5752c8dc23fdf7",
+    "reviewSummary": {
+      "totalElapsedMs": 36982,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/2adaa7f9787d2997ff6bf0d5dc2217cca2751e72051b06f2aac57104326ef78e.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 9211,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 27767,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 36982,
+  "reviewSummary": {
+    "totalElapsedMs": 36982,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "ok": true,
+    "resolvedGroup": "电销+直播攻坚组",
+    "currentTitle": "电销+直播攻坚组",
+    "messageCount": 47,
+    "anchor": "text-exact",
+    "anchorValue": "城市：宁波市  ；  联系人：马，13321348484  ；  店铺：马记兰州拉面·拉面·拌饭·饺子  ；  地址：洞桥镇王家桥村宝积路兰州拉面",
+    "anchorInTrailingPosition": true,
+    "autoKind": null,
+    "readbackAt": 1791797269.0629618
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false,
+  "attemptReviews": [
+    {
+      "attempt": 1,
+      "elapsedMs": 37134,
+      "ok": true,
+      "reason": null,
+      "sendAttempts": 1,
+      "sendReview": [
+        {
+          "stage": "authorization",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 1,
+          "label": "authorization"
+        },
+        {
+          "stage": "freeze:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 2,
+          "label": "freeze:0"
+        },
+        {
+          "stage": "preflight",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 9211,
+          "item": 3,
+          "label": "preflight"
+        },
+        {
+          "stage": "send:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 27767,
+          "item": 4,
+          "label": "send:0"
+        }
+      ]
+    }
+  ],
+  "contentionRetries": 0,
+  "contentionWaitMs": 0,
+  "contentionEvents": [],
+  "merchantId": "546812895",
+  "messageSha256": "d8c47490e4cd9d70f91dac0535ae8d7a57ed7f4931df4148b125f7163acdd2f1"
+}

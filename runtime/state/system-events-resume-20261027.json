@@ -1,0 +1,18 @@
+{
+  "at": "2026-10-27T18:20:26.660696",
+  "plan": "原System Events PID31659实进程STAT=T（暂停），同用户501且路径系统原应用；无live_steps，先核原进程身份，仅SIGCONT继续此原进程，不重启、不改变队列/账本，不发送；恢复后只读验证原生界面。",
+  "before": {
+    "pid": 31659,
+    "stat": "T",
+    "started": "Tue Oct 27 18:10:04 2026"
+  },
+  "status": "readonly-recovered",
+  "signal": "SIGCONT",
+  "sentAt": "2026-10-27T18:21:21.202291",
+  "verification": {
+    "nativeReady": true,
+    "composerEmpty": true,
+    "observedAt": "2026-10-27T18:21:56.626051"
+  },
+  "observations": []
+}

@@ -1,0 +1,117 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-03",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 69,
+    "task_page": 1218,
+    "navigation": 1441,
+    "date_filter": 1466,
+    "page_1_read": 341,
+    "selection_audit": 0,
+    "detail_545440640": 793
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_545440640": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "545440640",
+      "merchantName": "有你好果子吃·果汁果切",
+      "recommendTime": "2026-10-03 14:15:27",
+      "city": "无锡市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 5,
+      "address": "中邦城市花园50-108-1",
+      "contact": "王，13982151041",
+      "detailVerified": true,
+      "text": "城市：无锡市  ；  联系人：王，13982151041  ；  店铺：有你好果子吃·果汁果切  ；  地址：中邦城市花园50-108-1",
+      "sha256": "c1ab9b0c9fb2793a43160258e3141cf283501a4b68c114ec65a16053179f473f"
+    }
+  ],
+  "frontmostBefore": "com.tencent.workbuddy.mac",
+  "createdAt": "2026-10-03T07:00:20.706Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-03",
+    "merchantName": "臻果屋·果茶·奶茶",
+    "merchantId": "1343054859",
+    "recommendTime": "2026-10-03 13:32:49",
+    "tableOrder": 4,
+    "messageSha256": "2e2672ab5f84e2d07b0f319467f85e567fdc5be9f18b8e22a6bae5e979f8caa2",
+    "sentAt": "2026-10-03T13:55:26+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-03",
+  "filterEndDate": "2026-10-03",
+  "dateFilter": "2026-10-03..2026-10-03",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 5,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 5,
+  "pendingRows": 5,
+  "targetCount": 1,
+  "selectionAudit": {
+    "totalRows": 5,
+    "pendingRows": 5,
+    "excludedAtOrBeforeCursor": 4,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 1,
+    "rows": [
+      {
+        "merchantId": "545440640",
+        "recommendTime": "2026-10-03 14:15:27",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1343054859",
+        "recommendTime": "2026-10-03 13:32:49",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "543005047",
+        "recommendTime": "2026-10-03 12:58:56",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "542668196",
+        "recommendTime": "2026-10-03 11:50:41",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "2097569711",
+        "recommendTime": "2026-10-03 11:21:56",
+        "status": "待处理"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 5849,
+  "frontmostAfter": "com.tencent.workbuddy.mac",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261003-150014/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261003-150014/output/collection-attempt-1.review.md"
+}

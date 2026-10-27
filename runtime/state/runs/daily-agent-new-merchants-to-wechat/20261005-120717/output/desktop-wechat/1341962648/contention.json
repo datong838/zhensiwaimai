@@ -1,0 +1,195 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：宝鸡市  ；  联系人：陈，15509179299  ；  店铺：聚德烤鸭  ；  地址：高新开发区高新四路2号院22幢一层1号",
+      "sha256": "1d79a3132c3a86c0e6f04f7e78cd09d046d2f6332fa40c2bc312cc39ae353278"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "ead8e8297c718bf92435f07dd4cba758880a914341ff485b512e2d0b29279f00",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "1d79a3132c3a86c0e6f04f7e78cd09d046d2f6332fa40c2bc312cc39ae353278",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1791173268.341985,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-text-anchor",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "电销+直播攻坚组",
+          "currentTitle": "电销+直播攻坚组",
+          "messageCount": 49,
+          "anchor": "text-exact",
+          "anchorValue": "城市：宝鸡市  ；  联系人：陈，15509179299  ；  店铺：聚德烤鸭  ；  地址：高新开发区高新四路2号院22幢一层1号",
+          "anchorInTrailingPosition": true,
+          "autoKind": null,
+          "readbackAt": 1791173289.607819
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "电销+直播攻坚组",
+            "len": 67
+          },
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 254
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 21270
+      }
+    ],
+    "elapsedMs": 21559,
+    "eventKey": "0194ddd99b6c57e9572e94a3a4799b5c49f2b3d2853176b2140b6341e5d26265",
+    "reviewSummary": {
+      "totalElapsedMs": 21559,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/aafbace704a0748cc3a7161ea69feb1f62b722258b3a92025926f1723cd1a2dd.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 254,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 21270,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 21559,
+  "reviewSummary": {
+    "totalElapsedMs": 21559,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "ok": true,
+    "resolvedGroup": "电销+直播攻坚组",
+    "currentTitle": "电销+直播攻坚组",
+    "messageCount": 49,
+    "anchor": "text-exact",
+    "anchorValue": "城市：宝鸡市  ；  联系人：陈，15509179299  ；  店铺：聚德烤鸭  ；  地址：高新开发区高新四路2号院22幢一层1号",
+    "anchorInTrailingPosition": true,
+    "autoKind": null,
+    "readbackAt": 1791173289.607819
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false,
+  "attemptReviews": [
+    {
+      "attempt": 1,
+      "elapsedMs": 21718,
+      "ok": true,
+      "reason": null,
+      "sendAttempts": 1,
+      "sendReview": [
+        {
+          "stage": "authorization",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 1,
+          "label": "authorization"
+        },
+        {
+          "stage": "freeze:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 2,
+          "label": "freeze:0"
+        },
+        {
+          "stage": "preflight",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 254,
+          "item": 3,
+          "label": "preflight"
+        },
+        {
+          "stage": "send:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 21270,
+          "item": 4,
+          "label": "send:0"
+        }
+      ]
+    }
+  ],
+  "contentionRetries": 0,
+  "contentionWaitMs": 0,
+  "contentionEvents": []
+}

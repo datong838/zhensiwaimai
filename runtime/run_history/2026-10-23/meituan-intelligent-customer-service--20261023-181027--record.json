@@ -1,0 +1,24 @@
+{
+  "skill": "meituan-intelligent-customer-service",
+  "ledger_name": "美团商家中心智能客服（17:00·备发文档）",
+  "schedule": "每日17:00（17:00结束后准备发文档）",
+  "dev_state": "active",
+  "status": "FAILED",
+  "category": "UNKNOWN",
+  "detail": "error-code=connect (text)",
+  "next_action": "看护代理读日志定位根因后升级处理",
+  "attempts": 2,
+  "max_retries": 2,
+  "duration_seconds": 303.78,
+  "started_at": "2026-10-23T18:05:23",
+  "finished_at": "2026-10-23T18:10:27",
+  "triggered_by": "daemon",
+  "logs": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-23/meituan-intelligent-customer-service--20261023-180523--a1--s1.log",
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-23/meituan-intelligent-customer-service--20261023-181027--a2--s1.log"
+  ],
+  "fail_signal": {
+    "kind": "text",
+    "code": "connect"
+  }
+}

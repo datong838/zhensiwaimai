@@ -1,0 +1,107 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-08",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 35,
+    "task_page": 361,
+    "navigation": 1610,
+    "date_filter": 1529,
+    "page_1_read": 350,
+    "selection_audit": 0,
+    "detail_1355498382": 823
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_1355498382": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "1355498382",
+      "merchantName": "MLEMON觅一柠",
+      "recommendTime": "2026-10-08 11:51:44",
+      "city": "广州市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 3,
+      "address": "白云街道大沙头二马路44号首层自编02B",
+      "contact": "王先生，15219587371",
+      "detailVerified": true,
+      "text": "城市：广州市  ；  联系人：王先生，15219587371  ；  店铺：MLEMON觅一柠  ；  地址：白云街道大沙头二马路44号首层自编02B",
+      "sha256": "d65beb2220f580d8a652e119dcf3b4c365217d9d5f02fcea843601de0b68e7e0"
+    }
+  ],
+  "frontmostBefore": "com.google.Chrome",
+  "createdAt": "2026-10-08T03:57:16.370Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-08",
+    "merchantName": "兰州牛肉面",
+    "merchantId": "540991156",
+    "recommendTime": "2026-10-08 01:59:03",
+    "tableOrder": 11,
+    "messageSha256": "8d5247c3a892b87f8fe19c4228f758d286d4862907c39f80cfe74f0c361682a1",
+    "sentAt": "2026-10-08T10:46:57+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-08",
+  "filterEndDate": "2026-10-08",
+  "dateFilter": "2026-10-08..2026-10-08",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 3,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 3,
+  "pendingRows": 3,
+  "targetCount": 1,
+  "selectionAudit": {
+    "totalRows": 3,
+    "pendingRows": 3,
+    "excludedAtOrBeforeCursor": 2,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 1,
+    "rows": [
+      {
+        "merchantId": "1355498382",
+        "recommendTime": "2026-10-08 11:51:44",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "540991156",
+        "recommendTime": "2026-10-08 01:59:03",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "545462236",
+        "recommendTime": "2026-10-08 01:51:15",
+        "status": "待处理"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 4983,
+  "frontmostAfter": "com.google.Chrome",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261008-115710/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261008-115710/output/collection-attempt-1.review.md"
+}

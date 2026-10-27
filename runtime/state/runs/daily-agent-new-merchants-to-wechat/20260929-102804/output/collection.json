@@ -1,0 +1,225 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-09-29",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 60,
+    "task_page": 251,
+    "navigation": 1559,
+    "date_filter": 1229,
+    "page_1_read": 387,
+    "page_1_next": 63,
+    "page_2_read": 607,
+    "selection_audit": 0,
+    "detail_546736379": 813,
+    "detail_1362241860": 2418,
+    "detail_1362506075": 1063
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "page_1_next": "PASS",
+    "page_2_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_546736379": "PASS",
+    "detail_1362241860": "PASS",
+    "detail_1362506075": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "546736379",
+      "merchantName": "红烧牛肉面",
+      "recommendTime": "2026-09-28 22:33:42",
+      "city": "上海市",
+      "status": "待处理",
+      "rowIndex": 2,
+      "sourcePage": 1,
+      "tableOrder": 16,
+      "address": "鹿达路28号28幢",
+      "contact": "马，17629285097",
+      "detailVerified": true,
+      "text": "上海市\n马，17629285097\n红烧牛肉面\n鹿达路28号28幢",
+      "sha256": "6febee97df883dbd3d4e5172fe6e548a7218137bb3b3ecef9424ff6f14f8b315"
+    },
+    {
+      "merchantId": "1362241860",
+      "merchantName": "叁食六记卤膳坊·清真",
+      "recommendTime": "2026-09-28 22:34:54",
+      "city": "银川市",
+      "status": "待处理",
+      "rowIndex": 1,
+      "sourcePage": 1,
+      "tableOrder": 17,
+      "address": "长兴花园B区3号楼10号营业房-2",
+      "contact": "禹，15202606183",
+      "detailVerified": true,
+      "text": "银川市\n禹，15202606183\n叁食六记卤膳坊·清真\n长兴花园B区3号楼10号营业房-2",
+      "sha256": "2d83f4dd0c9eab8aef4e503b576908e1ea315439e1337a89d88ca21f09e4c0b2"
+    },
+    {
+      "merchantId": "1362506075",
+      "merchantName": "胖大叔鲜椒捞拌",
+      "recommendTime": "2026-09-28 23:07:47",
+      "city": "鹤壁市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 18,
+      "address": "九州路街道淇河路打柴口北门二圈向东十五门面",
+      "contact": "李，16691913129",
+      "detailVerified": true,
+      "text": "鹤壁市\n李，16691913129\n胖大叔鲜椒捞拌\n九州路街道淇河路打柴口北门二圈向东十五门面",
+      "sha256": "8ed1b9b85f19547ed64c71f1c2a31a72de96c0944bb0f9eea8d6e6bd51204dcd"
+    }
+  ],
+  "frontmostBefore": "com.tencent.xinWeChat",
+  "createdAt": "2026-09-29T02:28:14.862Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-09-28",
+    "merchantName": "每日现卤",
+    "merchantId": "1364449694",
+    "recommendTime": "2026-09-28 20:25:47",
+    "tableOrder": 15,
+    "messageSha256": "459e708e9d157df1e626192889f352fbdab0171744f48a6e1d9e2a37473e96d6",
+    "sentAt": "2026-09-28T20:59:38+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-09-28",
+  "filterEndDate": "2026-09-29",
+  "dateFilter": "2026-09-28..2026-09-29",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 10,
+      "nextEnabled": true
+    },
+    {
+      "page": 2,
+      "rowCount": 8,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 18,
+  "pendingRows": 15,
+  "targetCount": 3,
+  "selectionAudit": {
+    "totalRows": 18,
+    "pendingRows": 15,
+    "excludedAtOrBeforeCursor": 15,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 3,
+    "rows": [
+      {
+        "merchantId": "1362506075",
+        "recommendTime": "2026-09-28 23:07:47",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1362241860",
+        "recommendTime": "2026-09-28 22:34:54",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546736379",
+        "recommendTime": "2026-09-28 22:33:42",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1364449694",
+        "recommendTime": "2026-09-28 20:25:47",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1347496281",
+        "recommendTime": "2026-09-28 19:12:31",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1338957706",
+        "recommendTime": "2026-09-28 18:04:36",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1348244350",
+        "recommendTime": "2026-09-28 17:35:27",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1338043255",
+        "recommendTime": "2026-09-28 16:30:55",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "545651009",
+        "recommendTime": "2026-09-28 14:26:46",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "544351248",
+        "recommendTime": "2026-09-28 13:52:32",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "545754827",
+        "recommendTime": "2026-09-28 13:31:10",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "545013058",
+        "recommendTime": "2026-09-28 13:10:29",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "544737901",
+        "recommendTime": "2026-09-28 12:50:41",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "532400758",
+        "recommendTime": "2026-09-28 12:18:10",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "543171221",
+        "recommendTime": "2026-09-28 10:50:58",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546531097",
+        "recommendTime": "2026-09-28 20:06:32",
+        "status": "完成"
+      },
+      {
+        "merchantId": "544650666",
+        "recommendTime": "2026-09-28 13:39:32",
+        "status": "完成"
+      },
+      {
+        "merchantId": "1358799500",
+        "recommendTime": "2026-09-28 10:08:39",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 9758,
+  "frontmostAfter": "com.tencent.xinWeChat",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20260929-102804/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20260929-102804/output/collection-attempt-1.review.md"
+}

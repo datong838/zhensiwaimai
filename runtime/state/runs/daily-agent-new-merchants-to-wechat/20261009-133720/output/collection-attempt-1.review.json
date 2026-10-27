@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "targetCount": 7,
+  "totalRows": 22,
+  "pendingRows": 15,
+  "rows": [
+    {
+      "item": 1,
+      "stage": "background_preflight",
+      "label": "后台浏览器预检",
+      "elapsedMs": 100,
+      "status": "PASS",
+      "pitfalls": []
+    },
+    {
+      "item": 2,
+      "stage": "task_page",
+      "label": "建立独立任务页",
+      "elapsedMs": 712,
+      "status": "PASS",
+      "pitfalls": []
+    },
+    {
+      "item": 3,
+      "stage": "navigation",
+      "label": "进入意向商户列表",
+      "elapsedMs": 1618,
+      "status": "PASS",
+      "pitfalls": []
+    },
+    {
+      "item": 4,
+      "stage": "date_filter",
+      "label": "日期设置与双帧回读",
+      "elapsedMs": 1246,
+      "status": "PASS",
+      "pitfalls": []
+    },
+    {
+      "item": 5,
+      "stage": "page_1_read",
+      "label": "第1页采集与稳定核验",
+      "elapsedMs": 393,
+      "status": "PASS",
+      "pitfalls": []
+    },
+    {
+      "item": 6,
+      "stage": "page_1_next",
+      "label": "第1页翻页",
+      "elapsedMs": 57,
+      "status": "PASS",
+      "pitfalls": []
+    },
+    {
+      "item": 7,
+      "stage": "page_2_read",
+      "label": "第2页采集与稳定核验",
+      "elapsedMs": 609,
+      "status": "PASS",
+      "pitfalls": []
+    },
+    {
+      "item": 8,
+      "stage": "page_2_next",
+      "label": "第2页翻页",
+      "elapsedMs": 61,
+      "status": "PASS",
+      "pitfalls": []
+    },
+    {
+      "item": 9,
+      "stage": "page_3_read",
+      "label": "第3页采集与稳定核验",
+      "elapsedMs": 567,
+      "status": "PASS",
+      "pitfalls": []
+    },
+    {
+      "item": 10,
+      "stage": "selection_audit",
+      "label": "选择审计（总22/游标及以前12/游标后非待处理3/待发7）",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": []
+    },
+    {
+      "item": 11,
+      "stage": "detail_529520233",
+      "label": "商家详情核验 529520233",
+      "elapsedMs": 794,
+      "status": "PASS",
+      "pitfalls": []
+    },
+    {
+      "item": 12,
+      "stage": "detail_1364337844",
+      "label": "商家详情核验 1364337844",
+      "elapsedMs": 2409,
+      "status": "PASS",
+      "pitfalls": []
+    },
+    {
+      "item": 13,
+      "stage": "detail_529507609",
+      "label": "商家详情核验 529507609",
+      "elapsedMs": 1120,
+      "status": "PASS",
+      "pitfalls": []
+    },
+    {
+      "item": 14,
+      "stage": "detail_2038415796",
+      "label": "商家详情核验 2038415796",
+      "elapsedMs": 1102,
+      "status": "PASS",
+      "pitfalls": []
+    },
+    {
+      "item": 15,
+      "stage": "detail_546376532",
+      "label": "商家详情核验 546376532",
+      "elapsedMs": 1110,
+      "status": "PASS",
+      "pitfalls": []
+    },
+    {
+      "item": 16,
+      "stage": "detail_545692013",
+      "label": "商家详情核验 545692013",
+      "elapsedMs": 1124,
+      "status": "PASS",
+      "pitfalls": []
+    },
+    {
+      "item": 17,
+      "stage": "detail_541776241",
+      "label": "商家详情核验 541776241",
+      "elapsedMs": 1123,
+      "status": "PASS",
+      "pitfalls": []
+    },
+    {
+      "item": 18,
+      "stage": "total",
+      "label": "只读采集总耗时（含子阶段，不重复相加）",
+      "elapsedMs": 16837,
+      "status": "PASS",
+      "pitfalls": []
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "itemId": "appeal-6dea01a6bbe265cf3b6a",
+  "sha256": "058ade818b76445a6ae90b8dd2b5f4adcf6b70b25aded2a89b417f5dbd042f3b",
+  "type": "text",
+  "status": "unknown",
+  "claimedAt": 1790300715.845661,
+  "sendAttempts": 0,
+  "verificationLevel": "native-text-exact",
+  "reason": "desktop-reconcile-copy-menu-not-unique",
+  "evidence": {
+    "ok": false,
+    "groupCount": 1,
+    "composerCount": 1,
+    "composerEmpty": false,
+    "reason": "desktop-reconcile-chat-state-invalid"
+  },
+  "transport": {
+    "ok": false,
+    "executor": "wechat-desktop-sender",
+    "channel": "desktop",
+    "groupName": "李老哈（品牌）💰臻肆外卖运营对接群",
+    "payloadType": "text",
+    "sendAttempts": 1,
+    "runtimeModelDecisions": 0,
+    "stage": "post_send_verify",
+    "stageMs": {
+      "locate_group": 798,
+      "verify_target_and_input": 1976,
+      "prepare_payload": 1742,
+      "claim_and_send": 5608,
+      "post_send_verify": 6237
+    },
+    "payloadIdentity": "15d646013b3c44a20ec1abbed6434ee8f5689bc2e1ae1ee151f6f8c30f28dbdc",
+    "payloads": [
+      {
+        "text": "--- 2026-09-24 差评申诉进度通知 ---\n李老哈·东北农家小院(成山路店)\n【淘宝闪购】\n评价时间: 2026-09-24\n评价等级: 1星\n申诉结果：---未申诉---\n评价内容: 东西不新鲜",
+        "sha256": "058ade818b76445a6ae90b8dd2b5f4adcf6b70b25aded2a89b417f5dbd042f3b"
+      }
+    ],
+    "groupPreflight": {
+      "ok": true,
+      "reason": null,
+      "sendAttempts": 0,
+      "group": "李老哈（品牌）💰臻肆外卖运营对接群",
+      "header": "李老哈（品牌）💰臻肆外卖运营对接群(37)",
+      "note": "ax-current-group-fast-path",
+      "groupTypeVerified": true,
+      "groupTypeProof": "member-count-header",
+      "composerVerifiedEmpty": true,
+      "attempts": []
+    },
+    "textInputVerified": true,
+    "textWriteAttempts": 1,
+    "clipboardClearedBeforeTextWrite": true,
+    "preparedInputChangedPixels": 14381,
+    "preparedInputChangedRatio": 0.038764,
+    "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/2aa59ccfb3dfcd3220cb7bdc45e8eb34c25e0bf2f658355e006313158dc72c41/438595bc43fce683aab1a12b950d43e2228137085ad230e53792f8a27ec3a638/transport-ledger/attempt.json",
+    "postSendInputCleared": [
+      true,
+      true
+    ],
+    "postSendFailureReason": "desktop-post-send-verification-unknown",
+    "reason": "desktop-post-send-verification-unknown",
+    "state": "unknown",
+    "elapsedMs": 16363,
+    "sendReview": [
+      {
+        "item": 1,
+        "stage": "locate_group",
+        "label": "精确定位目标群",
+        "elapsedMs": 798,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 2,
+        "stage": "verify_target_and_input",
+        "label": "复核目标群与输入框",
+        "elapsedMs": 1976,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 3,
+        "stage": "prepare_payload",
+        "label": "准备并复核发送载荷",
+        "elapsedMs": 1742,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 4,
+        "stage": "claim_and_send",
+        "label": "领取防重账本并单次发送",
+        "elapsedMs": 5608,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 5,
+        "stage": "post_send_verify",
+        "label": "发送后双帧复核",
+        "elapsedMs": 6237,
+        "status": "failed",
+        "pitfalls": [
+          {
+            "code": "send-failure",
+            "reason": "desktop-post-send-verification-unknown"
+          }
+        ]
+      }
+    ],
+    "reviewSummary": {
+      "totalElapsedMs": 16363,
+      "itemCount": 5,
+      "pitfallCount": 1,
+      "result": "failed"
+    }
+  },
+  "reconciled": true
+}

@@ -1,0 +1,25 @@
+{
+  "skill": "daily-top10-to-wechat-group",
+  "ledger_name": "昨日门店Top10截图发运营群（每日08:00）",
+  "schedule": "每日08:00",
+  "dev_state": "active",
+  "status": "FAILED",
+  "category": "RECOVERABLE",
+  "detail": "reason=Command '['/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python', '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/wecom_desktop_sender.py', 'send', '--group', '上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰', '--text', '  ', '--dry-run']' timed out after 180.0 seconds (receipt:reason)",
+  "next_action": "重试预算耗尽：看护代理读日志决定再等冷却重跑或跳过",
+  "attempts": 3,
+  "max_retries": 2,
+  "duration_seconds": 1281.83,
+  "started_at": "2026-10-24T02:09:35",
+  "finished_at": "2026-10-24T02:30:56",
+  "triggered_by": "sweep-test",
+  "logs": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-24/daily-top10-to-wechat-group--20261024-020935--a1--s1.log",
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-24/daily-top10-to-wechat-group--20261024-021824--a2--s1.log",
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-24/daily-top10-to-wechat-group--20261024-022718--a3--s1.log"
+  ],
+  "fail_signal": {
+    "kind": "reason",
+    "code": "Command '['/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python', '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/wecom_desktop_sender.py', 'send', '--group', '上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰', '--text', '  ', '--dry-run']' timed out after 180.0 seconds"
+  }
+}

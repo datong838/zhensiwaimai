@@ -1,0 +1,41 @@
+test_ambiguous_files_rejected (test_history.HistoryTests.test_ambiguous_files_rejected) ... ok
+test_flat_image_rejected (test_history.HistoryTests.test_flat_image_rejected) ... ok
+test_prefix_and_other_filename_not_accepted (test_history.HistoryTests.test_prefix_and_other_filename_not_accepted) ... ok
+test_unsupported_before_preflight (test_history.HistoryTests.test_unsupported_before_preflight) ... ok
+test_visible_files_verified_without_sender (test_history.HistoryTests.test_visible_files_verified_without_sender) ... ok
+test_wrong_file_size_rejected (test_history.HistoryTests.test_wrong_file_size_rejected) ... ok
+test_hash_drift_denied_first (test_policy.PolicyTests.test_hash_drift_denied_first) ... ok
+test_offline_denies_all_execute (test_policy.PolicyTests.test_offline_denies_all_execute) ... ok
+test_other_group_cannot_use_test_scope (test_policy.PolicyTests.test_other_group_cannot_use_test_scope) ... ok
+test_copy_requires_exact_hash_and_stability (test_runtime.RuntimeTests.test_copy_requires_exact_hash_and_stability) ... ok
+test_crash_never_resends (test_runtime.RuntimeTests.test_crash_never_resends) ... ok
+test_cross_channel_event_identity (test_runtime.RuntimeTests.test_cross_channel_event_identity) ... ok
+test_deadline_interrupt_retains_attempt (test_runtime.RuntimeTests.test_deadline_interrupt_retains_attempt) ... ok
+test_different_event_may_repeat (test_runtime.RuntimeTests.test_different_event_may_repeat) ... ok
+test_duplicate_item_rejected (test_runtime.RuntimeTests.test_duplicate_item_rejected) ... ok
+test_empty_rejected (test_runtime.RuntimeTests.test_empty_rejected) ... ok
+test_event_lock_conflict (test_runtime.RuntimeTests.test_event_lock_conflict) ... ok
+test_evidence_file_requires_full_name (test_runtime.RuntimeTests.test_evidence_file_requires_full_name) ... ok
+test_expired_before_ui (test_runtime.RuntimeTests.test_expired_before_ui) ... ok
+test_filename_path_movement_same_digest (test_runtime.RuntimeTests.test_filename_path_movement_same_digest) ... ok
+test_freeze_detects_content_changed (test_runtime.RuntimeTests.test_freeze_detects_content_changed) ... ok
+test_grant_content_bound (test_runtime.RuntimeTests.test_grant_content_bound) ... ok
+test_image_discriminates (test_runtime.RuntimeTests.test_image_discriminates) ... ok
+test_interrupt_is_durable (test_runtime.RuntimeTests.test_interrupt_is_durable) ... ok
+test_nonfinite_deadline_rejected (test_runtime.RuntimeTests.test_nonfinite_deadline_rejected) ... ok
+test_partial_stops_remaining (test_runtime.RuntimeTests.test_partial_stops_remaining) ... ok
+test_payload_change_same_event_rejected (test_runtime.RuntimeTests.test_payload_change_same_event_rejected) ... ok
+test_real_engine_idempotent (test_runtime.RuntimeTests.test_real_engine_idempotent) ... ok
+test_reconcile_cannot_send (test_runtime.RuntimeTests.test_reconcile_cannot_send) ... ok
+test_reconcile_preserves_original_transport_proof (test_runtime.RuntimeTests.test_reconcile_preserves_original_transport_proof) ... ok
+test_restart_never_after_attempt (test_runtime.RuntimeTests.test_restart_never_after_attempt) ... ok
+test_retry_whitelist_and_any_ambiguity (test_runtime.RuntimeTests.test_retry_whitelist_and_any_ambiguity) ... ok
+test_unknown_fields_rejected (test_runtime.RuntimeTests.test_unknown_fields_rejected) ... ok
+test_unknown_never_resends (test_runtime.RuntimeTests.test_unknown_never_resends) ... ok
+test_whole_batch_unsupported_before_ui (test_runtime.RuntimeTests.test_whole_batch_unsupported_before_ui) ... ok
+test_wrong_grant_before_ui (test_runtime.RuntimeTests.test_wrong_grant_before_ui) ... ok
+
+----------------------------------------------------------------------
+Ran 36 tests in 0.825s
+
+OK

@@ -1,0 +1,98 @@
+{
+  "bridgeVersion": 1,
+  "ok": false,
+  "verified": false,
+  "payloadType": "image",
+  "state": "blocked",
+  "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+  "payloads": [
+    {
+      "path": "/private/tmp/zhensi_top10/3efc034b-61e3-4b6f-9fe9-ab3b38a8a5b7/2026-10-24_top10seller.png",
+      "name": "2026-10-24_top10seller.png",
+      "size": 366048,
+      "sha256": "98ce19133f2b549dbb9ba64d866f777e507421d56c6e3e5e57cbfa05dbc88610"
+    }
+  ],
+  "sendAttempts": 0,
+  "newSendAttempts": 0,
+  "reason": "ui-post-preflight-timeout",
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": false,
+    "status": "blocked",
+    "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "channel": "desktop",
+    "requestDigest": "c43725b7455ef0fb420d94da5848c535520fab85d2a40384d49cdf1cb37ccc29",
+    "runtimeModelDecisions": 0,
+    "items": [],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 1
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 144730
+      }
+    ],
+    "reason": "ui-post-preflight-timeout",
+    "elapsedMs": 144733,
+    "eventKey": "b5c71b46882c0e76a8641aec5b824c7cf83b1bb3813319666010d998cd555a68",
+    "reviewSummary": {
+      "totalElapsedMs": 144733,
+      "result": "blocked",
+      "stageCount": 3,
+      "completedStages": 3,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/.runtime/send-ledger/2026-10-24-main-cc43d929019d.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 1,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "failed",
+      "pitfalls": [
+        {
+          "code": "messaging-stage",
+          "reason": "ui-post-preflight-timeout"
+        }
+      ],
+      "elapsedMs": 144730,
+      "item": 3,
+      "label": "preflight"
+    }
+  ],
+  "elapsedMs": 144733,
+  "reviewSummary": {
+    "totalElapsedMs": 144733,
+    "itemCount": 3,
+    "pitfallCount": 1,
+    "result": "failed"
+  }
+}

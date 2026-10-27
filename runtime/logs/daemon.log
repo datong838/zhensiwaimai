@@ -1,0 +1,417 @@
+[error] 已有 run_all 实例持有全局锁（daemon 或另一次看护），拒绝并发。
+        如需强制单跑某技能，请写 runtime/state/control.json：{"force_run":"<name>"}，daemon 下个周期会采纳。
+[ok] caffeinate 已启动，看护期间 Mac 不会睡眠（防 ADB/微信/浏览器会话被掐断）
+=== daemon 常驻启动（cycle=1800s, pid=42700）===
+
+=== daemon 周期 2026-10-23 (force_all=False) ===
+[skip] daily-top10-to-wechat-group 当日已成功（cadence 内），本周期跳过
+[skip] daily-negative-reviews 当日已成功（cadence 内），本周期跳过
+[skip] contract-termination-applications-screenshot 当日已成功（cadence 内），本周期跳过
+[skip] daily-jinsha-reports-to-business-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-taobao-download-to-jinsha 当日已成功（cadence 内），本周期跳过
+
+▶ 执行 daily-agent-new-merchants-to-wechat (dev=active)
+  → status=SUCCESS category=SUCCESS attempts=1 next=无需动作
+[skip] meituan-intelligent-customer-service-12 当日已成功（cadence 内），本周期跳过
+[skip] meituan-intelligent-customer-service-15 当日已成功（cadence 内），本周期跳过
+
+▶ 执行 meituan-intelligent-customer-service (dev=active)
+  → status=FAILED category=RECOVERABLE attempts=3 next=重试预算耗尽：看护代理读日志决定再等冷却重跑或跳过
+[skip] meituan-waimai-negative-review-appeals-11 当日已成功（cadence 内），本周期跳过
+[skip] meituan-waimai-negative-review-appeals-1425 当日已成功（cadence 内），本周期跳过
+[skip] taobao-flash-sale-negative-review-appeals 当日已成功（cadence 内），本周期跳过
+[skip] taobao-shangou-negative-review-appeals 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-opening-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-activity-audit-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-decoration-audit-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-not-nourished-ops-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-store-task-completion-ops-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-store-basic-diagnosis-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] negative-feedback-list-appeals-0930 当日已成功（cadence 内），本周期跳过
+[skip] negative-feedback-list-appeals-1230 当日已成功（cadence 内），本周期跳过
+[warn] openpyxl 未安装，降级写 csv：/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/work/2026-10-23臻肆工作台账.csv
+[ok] 台账 csv 已生成: /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/work/2026-10-23臻肆工作台账.csv (active 20/21)
+
+=== 发送门判断 ===
+[warn] 未全绿（有失败/待适配）：仅落盘 + 告警，不发送 AI 员工群。
+[force_run_now] 立即补跑：['daily-agent-new-merchants-to-wechat']
+
+=== daemon 周期 2026-10-23 (force_all=False) ===
+[skip] daily-top10-to-wechat-group 当日已成功（cadence 内），本周期跳过
+[skip] daily-negative-reviews 当日已成功（cadence 内），本周期跳过
+[skip] contract-termination-applications-screenshot 当日已成功（cadence 内），本周期跳过
+[skip] daily-jinsha-reports-to-business-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-taobao-download-to-jinsha 当日已成功（cadence 内），本周期跳过
+
+▶ 执行 daily-agent-new-merchants-to-wechat (dev=active)
+  → status=FAILED category=RECOVERABLE attempts=3 next=重试预算耗尽：看护代理读日志决定再等冷却重跑或跳过
+[skip] meituan-intelligent-customer-service-12 当日已成功（cadence 内），本周期跳过
+[skip] meituan-intelligent-customer-service-15 当日已成功（cadence 内），本周期跳过
+
+▶ 执行 meituan-intelligent-customer-service (dev=active)
+  → status=FAILED category=UNKNOWN attempts=2 next=看护代理读日志定位根因后升级处理
+[alert] meituan-intelligent-customer-service -> UNKNOWN : error-code=connect (text)
+[skip] meituan-waimai-negative-review-appeals-11 当日已成功（cadence 内），本周期跳过
+[skip] meituan-waimai-negative-review-appeals-1425 当日已成功（cadence 内），本周期跳过
+
+▶ 执行 taobao-flash-sale-negative-review-appeals (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] taobao-flash-sale-negative-review-appeals -> UNKNOWN : error-code=connect (text)
+[skip] taobao-shangou-negative-review-appeals 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-opening-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-activity-audit-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-decoration-audit-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-not-nourished-ops-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-store-task-completion-ops-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-store-basic-diagnosis-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] negative-feedback-list-appeals-0930 当日已成功（cadence 内），本周期跳过
+[skip] negative-feedback-list-appeals-1230 当日已成功（cadence 内），本周期跳过
+[warn] openpyxl 未安装，降级写 csv：/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/work/2026-10-23臻肆工作台账.csv
+[ok] 台账 csv 已生成: /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/work/2026-10-23臻肆工作台账.csv (active 18/21)
+
+=== 发送门判断 ===
+[warn] 未全绿（有失败/待适配）：仅落盘 + 告警，不发送 AI 员工群。
+
+=== daemon 周期 2026-10-23 (force_all=False) ===
+[skip] daily-top10-to-wechat-group 当日已成功（cadence 内），本周期跳过
+[skip] daily-negative-reviews 当日已成功（cadence 内），本周期跳过
+[skip] contract-termination-applications-screenshot 当日已成功（cadence 内），本周期跳过
+[skip] daily-jinsha-reports-to-business-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-taobao-download-to-jinsha 当日已成功（cadence 内），本周期跳过
+
+▶ 执行 daily-agent-new-merchants-to-wechat (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] daily-agent-new-merchants-to-wechat -> UNKNOWN : stage=offline_selftest (receipt:stage) [note: 离线自检失败（非生产发送动作）。看具体子用例；不涉外发。]
+[skip] meituan-intelligent-customer-service-12 当日已成功（cadence 内），本周期跳过
+[skip] meituan-intelligent-customer-service-15 当日已成功（cadence 内），本周期跳过
+[skip] meituan-intelligent-customer-service past_latest，本周期跳过
+[skip] meituan-waimai-negative-review-appeals-11 当日已成功（cadence 内），本周期跳过
+[skip] meituan-waimai-negative-review-appeals-1425 当日已成功（cadence 内），本周期跳过
+[skip] taobao-flash-sale-negative-review-appeals 当日已成功（cadence 内），本周期跳过
+[skip] taobao-shangou-negative-review-appeals 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-opening-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-activity-audit-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-decoration-audit-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-not-nourished-ops-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-store-task-completion-ops-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-store-basic-diagnosis-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] negative-feedback-list-appeals-0930 当日已成功（cadence 内），本周期跳过
+[skip] negative-feedback-list-appeals-1230 当日已成功（cadence 内），本周期跳过
+[warn] openpyxl 未安装，降级写 csv：/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/work/2026-10-23臻肆工作台账.csv
+[ok] 台账 csv 已生成: /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/work/2026-10-23臻肆工作台账.csv (active 19/21)[error] 已有 run_all 实例持有全局锁（daemon 或另一次看护），拒绝并发。
+        如需强制单跑某技能，请写 runtime/state/control.json：{"force_run":"<name>"}，daemon 下个周期会采纳。
+
+
+=== 发送门判断 ===
+[warn] 未全绿（有失败/待适配）：仅落盘 + 告警，不发送 AI 员工群。
+[force_run_now] 立即补跑：['daily-agent-new-merchants-to-wechat']
+
+=== daemon 周期 2026-10-23 (force_all=False) ===
+[skip] daily-top10-to-wechat-group 当日已成功（cadence 内），本周期跳过
+[skip] daily-negative-reviews 当日已成功（cadence 内），本周期跳过
+[skip] contract-termination-applications-screenshot 当日已成功（cadence 内），本周期跳过
+[skip] daily-jinsha-reports-to-business-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-taobao-download-to-jinsha 当日已成功（cadence 内），本周期跳过
+
+▶ 执行 daily-agent-new-merchants-to-wechat (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] daily-agent-new-merchants-to-wechat -> UNKNOWN : stage=offline_selftest (receipt:stage) [note: 离线自检失败（非生产发送动作）。看具体子用例；不涉外发。]
+[skip] meituan-intelligent-customer-service-12 当日已成功（cadence 内），本周期跳过
+[skip] meituan-intelligent-customer-service-15 当日已成功（cadence 内），本周期跳过
+[skip] meituan-intelligent-customer-service past_latest，本周期跳过
+[skip] meituan-waimai-negative-review-appeals-11 当日已成功（cadence 内），本周期跳过
+[skip] meituan-waimai-negative-review-appeals-1425 当日已成功（cadence 内），本周期跳过
+[skip] taobao-flash-sale-negative-review-appeals 当日已成功（cadence 内），本周期跳过
+[skip] taobao-shangou-negative-review-appeals 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-opening-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-activity-audit-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-decoration-audit-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-not-nourished-ops-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-store-task-completion-ops-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-store-basic-diagnosis-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] negative-feedback-list-appeals-0930 当日已成功（cadence 内），本周期跳过
+[skip] negative-feedback-list-appeals-1230 当日已成功（cadence 内），本周期跳过
+[warn] openpyxl 未安装，降级写 csv：/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/work/2026-10-23臻肆工作台账.csv
+[ok] 台账 csv 已生成: /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/work/2026-10-23臻肆工作台账.csv (active 19/21)
+
+=== 发送门判断 ===
+[warn] 未全绿（有失败/待适配）：仅落盘 + 告警，不发送 AI 员工群。
+
+[info] daemon 收到信号 15，准备优雅退出
+[info] daemon 已停止。
+[ok] caffeinate 已启动，看护期间 Mac 不会睡眠（防 ADB/微信/浏览器会话被掐断）
+=== daemon 常驻启动（cycle=1800s, pid=58331）===
+
+=== daemon 周期 2026-10-23 (force_all=False) ===
+[skip] daily-top10-to-wechat-group 当日已成功（cadence 内），本周期跳过
+[skip] daily-negative-reviews 当日已成功（cadence 内），本周期跳过
+[skip] contract-termination-applications-screenshot 当日已成功（cadence 内），本周期跳过
+[skip] daily-jinsha-reports-to-business-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-taobao-download-to-jinsha 当日已成功（cadence 内），本周期跳过
+
+▶ 执行 daily-agent-new-merchants-to-wechat (dev=active)
+  → status=FAILED category=UNKNOWN attempts=2 next=看护代理读日志定位根因后升级处理
+[alert] daily-agent-new-merchants-to-wechat -> UNKNOWN : stage=offline_selftest (receipt:stage) [note: 离线自检失败（非生产发送动作）。看具体子用例；不涉外发。]
+[skip] meituan-intelligent-customer-service-12 当日已成功（cadence 内），本周期跳过
+[skip] meituan-intelligent-customer-service-15 当日已成功（cadence 内），本周期跳过
+[skip] meituan-intelligent-customer-service past_latest，本周期跳过
+[skip] meituan-waimai-negative-review-appeals-11 当日已成功（cadence 内），本周期跳过
+[skip] meituan-waimai-negative-review-appeals-1425 当日已成功（cadence 内），本周期跳过
+[skip] taobao-flash-sale-negative-review-appeals 当日已成功（cadence 内），本周期跳过
+[skip] taobao-shangou-negative-review-appeals 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-opening-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-activity-audit-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-decoration-audit-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-not-nourished-ops-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-store-task-completion-ops-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-store-basic-diagnosis-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] negative-feedback-list-appeals-0930 当日已成功（cadence 内），本周期跳过
+[skip] negative-feedback-list-appeals-1230 当日已成功（cadence 内），本周期跳过
+[warn] openpyxl 未安装，降级写 csv：/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/work/2026-10-23臻肆工作台账.csv
+[ok] 台账 csv 已生成: /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/work/2026-10-23臻肆工作台账.csv (active 19/21)
+
+=== 发送门判断 ===
+[warn] 未全绿（有失败/待适配）：仅落盘 + 告警，不发送 AI 员工群。
+[force_run_now] 立即补跑：['daily-agent-new-merchants-to-wechat']
+
+=== daemon 周期 2026-10-23 (force_all=False) ===
+[skip] daily-top10-to-wechat-group 当日已成功（cadence 内），本周期跳过
+[skip] daily-negative-reviews 当日已成功（cadence 内），本周期跳过
+[skip] contract-termination-applications-screenshot 当日已成功（cadence 内），本周期跳过
+[skip] daily-jinsha-reports-to-business-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-taobao-download-to-jinsha 当日已成功（cadence 内），本周期跳过
+
+▶ 执行 daily-agent-new-merchants-to-wechat (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] daily-agent-new-merchants-to-wechat -> UNKNOWN : stage=offline_selftest (receipt:stage) [note: 离线自检失败（非生产发送动作）。看具体子用例；不涉外发。]
+[skip] meituan-intelligent-customer-service-12 当日已成功（cadence 内），本周期跳过
+[skip] meituan-intelligent-customer-service-15 当日已成功（cadence 内），本周期跳过
+
+▶ 执行 meituan-intelligent-customer-service (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] meituan-intelligent-customer-service -> UNKNOWN : error-code=connect (text)
+[skip] meituan-waimai-negative-review-appeals-11 当日已成功（cadence 内），本周期跳过
+[skip] meituan-waimai-negative-review-appeals-1425 当日已成功（cadence 内），本周期跳过
+[skip] taobao-flash-sale-negative-review-appeals 当日已成功（cadence 内），本周期跳过
+[skip] taobao-shangou-negative-review-appeals 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-opening-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-activity-audit-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-decoration-audit-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-not-nourished-ops-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-store-task-completion-ops-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-store-basic-diagnosis-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] negative-feedback-list-appeals-0930 当日已成功（cadence 内），本周期跳过
+[skip] negative-feedback-list-appeals-1230 当日已成功（cadence 内），本周期跳过
+[warn] openpyxl 未安装，降级写 csv：/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/work/2026-10-23臻肆工作台账.csv
+[ok] 台账 csv 已生成: /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/work/2026-10-23臻肆工作台账.csv (active 19/21)
+
+=== 发送门判断 ===
+[warn] 未全绿（有失败/待适配）：仅落盘 + 告警，不发送 AI 员工群。
+
+=== daemon 周期 2026-10-23 (force_all=False) ===
+[skip] daily-top10-to-wechat-group 当日已成功（cadence 内），本周期跳过
+[skip] daily-negative-reviews 当日已成功（cadence 内），本周期跳过
+[skip] contract-termination-applications-screenshot 当日已成功（cadence 内），本周期跳过
+[skip] daily-jinsha-reports-to-business-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-taobao-download-to-jinsha 当日已成功（cadence 内），本周期跳过
+[skip] daily-agent-new-merchants-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] meituan-intelligent-customer-service-12 当日已成功（cadence 内），本周期跳过
+[skip] meituan-intelligent-customer-service-15 当日已成功（cadence 内），本周期跳过
+[skip] meituan-intelligent-customer-service past_latest，本周期跳过
+[skip] meituan-waimai-negative-review-appeals-11 当日已成功（cadence 内），本周期跳过
+[skip] meituan-waimai-negative-review-appeals-1425 当日已成功（cadence 内），本周期跳过
+[skip] taobao-flash-sale-negative-review-appeals 当日已成功（cadence 内），本周期跳过
+[skip] taobao-shangou-negative-review-appeals 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-opening-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-activity-audit-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-decoration-audit-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-not-nourished-ops-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-store-task-completion-ops-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-store-basic-diagnosis-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] negative-feedback-list-appeals-0930 当日已成功（cadence 内），本周期跳过
+[skip] negative-feedback-list-appeals-1230 当日已成功（cadence 内），本周期跳过
+[warn] openpyxl 未安装，降级写 csv：/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/work/2026-10-23臻肆工作台账.csv
+[ok] 台账 csv 已生成: /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/work/2026-10-23臻肆工作台账.csv (active 20/21)
+
+=== 发送门判断 ===
+[warn] 未全绿（有失败/待适配）：仅落盘 + 告警，不发送 AI 员工群。
+[force_run_now] 立即补跑：['meituan-intelligent-customer-service', 'daily-negative-reviews', 'daily-store-basic-diagnosis-to-wechat', 'contract-termination-applications-screenshot']
+
+=== daemon 周期 2026-10-23 (force_all=False) ===
+[skip] daily-top10-to-wechat-group 当日已成功（cadence 内），本周期跳过
+
+▶ 执行 daily-negative-reviews (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] daily-negative-reviews -> UNKNOWN : error-code=connect (text)
+
+▶ 执行 contract-termination-applications-screenshot (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] contract-termination-applications-screenshot -> UNKNOWN : reason=shot-failed:bFromResolveResult (node:internal/modules/esm/loader:343:34)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:311:41)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:664:25)
+
+Node.js v22.22.2 (receipt:reason)
+[skip] daily-jinsha-reports-to-business-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-taobao-download-to-jinsha 当日已成功（cadence 内），本周期跳过
+[skip] daily-agent-new-merchants-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] meituan-intelligent-customer-service-12 当日已成功（cadence 内），本周期跳过
+[skip] meituan-intelligent-customer-service-15 当日已成功（cadence 内），本周期跳过
+
+▶ 执行 meituan-intelligent-customer-service (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] meituan-intelligent-customer-service -> UNKNOWN : error-code=connect (text)
+[skip] meituan-waimai-negative-review-appeals-11 当日已成功（cadence 内），本周期跳过
+[skip] meituan-waimai-negative-review-appeals-1425 当日已成功（cadence 内），本周期跳过
+[skip] taobao-flash-sale-negative-review-appeals 当日已成功（cadence 内），本周期跳过
+[skip] taobao-shangou-negative-review-appeals 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-opening-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-activity-audit-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-decoration-audit-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-not-nourished-ops-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-store-task-completion-ops-to-wechat 当日已成功（cadence 内），本周期跳过
+
+▶ 执行 daily-store-basic-diagnosis-to-wechat (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] daily-store-basic-diagnosis-to-wechat -> UNKNOWN : reason=basic-diag-collect-unknown:783:26)
+    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:494:31)
+    at #getOrCreateModuleJobAfterResolve (node:internal/modules/esm/loader:560:36)
+    at afterResolve (node:internal/modules/esm/loader:607:52)
+
+Node.js v24.19.0 (receipt:reason)
+[skip] negative-feedback-list-appeals-0930 当日已成功（cadence 内），本周期跳过
+[skip] negative-feedback-list-appeals-1230 当日已成功（cadence 内），本周期跳过
+[warn] openpyxl 未安装，降级写 csv：/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/work/2026-10-23臻肆工作台账.csv
+[ok] 台账 csv 已生成: /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/work/2026-10-23臻肆工作台账.csv (active 17/21)
+
+=== 发送门判断 ===
+[warn] 未全绿（有失败/待适配）：仅落盘 + 告警，不发送 AI 员工群。
+
+[info] daemon 收到信号 15，准备优雅退出
+[info] daemon 已停止。
+[ok] caffeinate 已启动，看护期间 Mac 不会睡眠（防 ADB/微信/浏览器会话被掐断）
+=== daemon 常驻启动（cycle=1800s, pid=68339）===
+
+=== daemon 周期 2026-10-23 (force_all=False) ===
+[skip] daily-top10-to-wechat-group 当日已成功（cadence 内），本周期跳过
+[skip] daily-negative-reviews 当日已成功（cadence 内），本周期跳过
+[skip] contract-termination-applications-screenshot 当日已成功（cadence 内），本周期跳过
+[skip] daily-jinsha-reports-to-business-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-taobao-download-to-jinsha 当日已成功（cadence 内），本周期跳过
+[skip] daily-agent-new-merchants-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] meituan-intelligent-customer-service-12 当日已成功（cadence 内），本周期跳过
+[skip] meituan-intelligent-customer-service-15 当日已成功（cadence 内），本周期跳过
+[skip] meituan-intelligent-customer-service past_latest，本周期跳过
+[skip] meituan-waimai-negative-review-appeals-11 当日已成功（cadence 内），本周期跳过
+[skip] meituan-waimai-negative-review-appeals-1425 当日已成功（cadence 内），本周期跳过
+[skip] taobao-flash-sale-negative-review-appeals 当日已成功（cadence 内），本周期跳过
+[skip] taobao-shangou-negative-review-appeals 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-opening-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-activity-audit-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-decoration-audit-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-not-nourished-ops-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-store-task-completion-ops-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-store-basic-diagnosis-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] negative-feedback-list-appeals-0930 当日已成功（cadence 内），本周期跳过
+[skip] negative-feedback-list-appeals-1230 当日已成功（cadence 内），本周期跳过
+[ok] 台账 xlsx 已生成: /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/work/2026-10-23臻肆工作台账.xlsx (active 20/21)
+
+=== 发送门判断 ===
+[warn] 未全绿（有失败/待适配）：仅落盘 + 告警，不发送 AI 员工群。
+[force_run_now] 立即补跑：['meituan-intelligent-customer-service', 'daily-negative-reviews', 'daily-store-basic-diagnosis-to-wechat', 'contract-termination-applications-screenshot']
+
+=== daemon 周期 2026-10-23 (force_all=False) ===
+[skip] daily-top10-to-wechat-group 当日已成功（cadence 内），本周期跳过
+
+▶ 执行 daily-negative-reviews (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] daily-negative-reviews -> UNKNOWN : reason=dependency-hash-mismatch:/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/dependencies.json (receipt:reason)
+
+▶ 执行 contract-termination-applications-screenshot (dev=active)
+  → status=SUCCESS category=SUCCESS attempts=1 next=无需动作
+[skip] daily-jinsha-reports-to-business-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-taobao-download-to-jinsha 当日已成功（cadence 内），本周期跳过
+[skip] daily-agent-new-merchants-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] meituan-intelligent-customer-service-12 当日已成功（cadence 内），本周期跳过
+[skip] meituan-intelligent-customer-service-15 当日已成功（cadence 内），本周期跳过
+
+▶ 执行 meituan-intelligent-customer-service (dev=active)
+  → status=SUCCESS category=SUCCESS attempts=1 next=无需动作
+[skip] meituan-waimai-negative-review-appeals-11 当日已成功（cadence 内），本周期跳过
+[skip] meituan-waimai-negative-review-appeals-1425 当日已成功（cadence 内），本周期跳过
+[skip] taobao-flash-sale-negative-review-appeals 当日已成功（cadence 内），本周期跳过
+[skip] taobao-shangou-negative-review-appeals 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-opening-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-activity-audit-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-decoration-audit-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-not-nourished-ops-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-store-task-completion-ops-to-wechat 当日已成功（cadence 内），本周期跳过
+
+▶ 执行 daily-store-basic-diagnosis-to-wechat (dev=active)
+  → status=SUCCESS category=SUCCESS attempts=1 next=无需动作
+[skip] negative-feedback-list-appeals-0930 当日已成功（cadence 内），本周期跳过
+[skip] negative-feedback-list-appeals-1230 当日已成功（cadence 内），本周期跳过
+[ok] 台账 xlsx 已生成: /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/work/2026-10-23臻肆工作台账.xlsx (active 20/21)
+
+=== 发送门判断 ===
+[warn] 未全绿（有失败/待适配）：仅落盘 + 告警，不发送 AI 员工群。
+[force_run_now] 立即补跑：['daily-negative-reviews']
+
+=== daemon 周期 2026-10-23 (force_all=False) ===
+[skip] daily-top10-to-wechat-group 当日已成功（cadence 内），本周期跳过
+
+▶ 执行 daily-negative-reviews (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] daily-negative-reviews -> UNKNOWN : reason=acceptance-business-date-mismatch (receipt:reason) [note: 验收业务日期不匹配（防串日保护触发）。核对业务日与产物日期是否被错配。]
+[skip] contract-termination-applications-screenshot 当日已成功（cadence 内），本周期跳过
+[skip] daily-jinsha-reports-to-business-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-taobao-download-to-jinsha 当日已成功（cadence 内），本周期跳过
+[skip] daily-agent-new-merchants-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] meituan-intelligent-customer-service-12 当日已成功（cadence 内），本周期跳过
+[skip] meituan-intelligent-customer-service-15 当日已成功（cadence 内），本周期跳过
+[skip] meituan-intelligent-customer-service 当日已成功（cadence 内），本周期跳过
+[skip] meituan-waimai-negative-review-appeals-11 当日已成功（cadence 内），本周期跳过
+[skip] meituan-waimai-negative-review-appeals-1425 当日已成功（cadence 内），本周期跳过
+[skip] taobao-flash-sale-negative-review-appeals 当日已成功（cadence 内），本周期跳过
+[skip] taobao-shangou-negative-review-appeals 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-opening-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-activity-audit-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-decoration-audit-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-not-nourished-ops-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-store-task-completion-ops-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-store-basic-diagnosis-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] negative-feedback-list-appeals-0930 当日已成功（cadence 内），本周期跳过
+[skip] negative-feedback-list-appeals-1230 当日已成功（cadence 内），本周期跳过
+[ok] 台账 xlsx 已生成: /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/work/2026-10-23臻肆工作台账.xlsx (active 20/21)
+
+=== 发送门判断 ===
+[warn] 未全绿（有失败/待适配）：仅落盘 + 告警，不发送 AI 员工群。
+
+=== daemon 周期 2026-10-23 (force_all=False) ===
+[skip] daily-top10-to-wechat-group 当日已成功（cadence 内），本周期跳过
+[skip] daily-negative-reviews 当日已成功（cadence 内），本周期跳过
+[skip] contract-termination-applications-screenshot 当日已成功（cadence 内），本周期跳过
+[skip] daily-jinsha-reports-to-business-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-taobao-download-to-jinsha 当日已成功（cadence 内），本周期跳过
+[skip] daily-agent-new-merchants-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] meituan-intelligent-customer-service-12 当日已成功（cadence 内），本周期跳过
+[skip] meituan-intelligent-customer-service-15 当日已成功（cadence 内），本周期跳过
+[skip] meituan-intelligent-customer-service 当日已成功（cadence 内），本周期跳过
+[skip] meituan-waimai-negative-review-appeals-11 当日已成功（cadence 内），本周期跳过
+[skip] meituan-waimai-negative-review-appeals-1425 当日已成功（cadence 内），本周期跳过
+[skip] taobao-flash-sale-negative-review-appeals 当日已成功（cadence 内），本周期跳过
+[skip] taobao-shangou-negative-review-appeals 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-opening-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-activity-audit-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-decoration-audit-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-not-nourished-ops-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-store-task-completion-ops-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-store-basic-diagnosis-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] negative-feedback-list-appeals-0930 当日已成功（cadence 内），本周期跳过
+[skip] negative-feedback-list-appeals-1230 当日已成功（cadence 内），本周期跳过
+[ok] 台账 xlsx 已生成: /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/work/2026-10-23臻肆工作台账.xlsx (active 21/21)
+
+=== 发送门判断 ===
+[info] active 全绿，但未加 --send：仅落盘，发送待代理确认。
+
+[info] daemon 收到信号 15，准备优雅退出
+[info] daemon 已停止。

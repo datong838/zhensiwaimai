@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "targetCount": 0,
+  "totalRows": 6,
+  "pendingRows": 5,
+  "rows": [
+    {
+      "item": 1,
+      "stage": "background_preflight",
+      "label": "后台浏览器预检",
+      "elapsedMs": 204,
+      "status": "PASS",
+      "pitfalls": []
+    },
+    {
+      "item": 2,
+      "stage": "task_page",
+      "label": "建立独立任务页",
+      "elapsedMs": 627,
+      "status": "PASS",
+      "pitfalls": []
+    },
+    {
+      "item": 3,
+      "stage": "navigation",
+      "label": "进入意向商户列表",
+      "elapsedMs": 1398,
+      "status": "PASS",
+      "pitfalls": []
+    },
+    {
+      "item": 4,
+      "stage": "date_filter",
+      "label": "日期设置与双帧回读",
+      "elapsedMs": 1701,
+      "status": "PASS",
+      "pitfalls": []
+    },
+    {
+      "item": 5,
+      "stage": "page_1_read",
+      "label": "第1页采集与稳定核验",
+      "elapsedMs": 503,
+      "status": "PASS",
+      "pitfalls": []
+    },
+    {
+      "item": 6,
+      "stage": "selection_audit",
+      "label": "选择审计（总6/游标及以前6/游标后非待处理0/待发0）",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": []
+    },
+    {
+      "item": 7,
+      "stage": "total",
+      "label": "只读采集总耗时（含子阶段，不重复相加）",
+      "elapsedMs": 4977,
+      "status": "PASS",
+      "pitfalls": []
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "skill": "daily-top10-to-wechat-group",
+  "ledger_name": "昨日门店Top10截图发运营群（每日08:00）",
+  "schedule": "每日08:00",
+  "dev_state": "active",
+  "status": "FAILED",
+  "category": "RECOVERABLE",
+  "detail": "reason=windows-wechat:ui-post-preflight-timeout (receipt:reason)",
+  "next_action": "重试预算耗尽：看护代理读日志决定再等冷却重跑或跳过",
+  "attempts": 1,
+  "max_retries": 0,
+  "duration_seconds": 105.73,
+  "started_at": "2026-10-25T09:23:37",
+  "finished_at": "2026-10-25T09:25:23",
+  "triggered_by": "daemon",
+  "logs": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-25/daily-top10-to-wechat-group--20261025-092337--a1--s1.log"
+  ],
+  "fail_signal": {
+    "kind": "reason",
+    "code": "windows-wechat:ui-post-preflight-timeout"
+  }
+}

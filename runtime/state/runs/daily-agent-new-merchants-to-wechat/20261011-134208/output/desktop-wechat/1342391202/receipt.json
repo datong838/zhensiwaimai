@@ -1,0 +1,152 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：上海市  ；  联系人：车先生，13817633108  ；  店铺：达卷김밥·紫菜包饭·咖啡  ；  地址：西康路1143号鸿寿坊食集F1层",
+      "sha256": "172f7b45f5b5d209b83425650a0cb5e40f42c9ec34f35975a438156e1d462cb0"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "448495403cf2410bb412b3fc2ce50a46a14d82cb25adf84d73383a4e0338909c",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "172f7b45f5b5d209b83425650a0cb5e40f42c9ec34f35975a438156e1d462cb0",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1791697344.0910301,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-text-anchor",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "电销+直播攻坚组",
+          "currentTitle": "电销+直播攻坚组",
+          "messageCount": 42,
+          "anchor": "text-exact",
+          "anchorValue": "城市：上海市  ；  联系人：车先生，13817633108  ；  店铺：达卷김밥·紫菜包饭·咖啡  ；  地址：西康路1143号鸿寿坊食集F1层",
+          "anchorInTrailingPosition": true,
+          "autoKind": null,
+          "readbackAt": 1791697367.030518
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "电销+直播攻坚组",
+            "len": 74
+          },
+          "route": "relay",
+          "direct_error": "[Errno 65] No route to host",
+          "direct_local_network_blocked": true,
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 3226
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 22939
+      }
+    ],
+    "elapsedMs": 26169,
+    "eventKey": "96e98b8ee5aedd65f0ba7ca21f3c30abb4946bb31af18837ee1ae721277ef1b5",
+    "reviewSummary": {
+      "totalElapsedMs": 26169,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/484b608f76ee50006a27478d1483579a721eb25277dfbfb9ecd4ae0c132b553f.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 3226,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 22939,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 26169,
+  "reviewSummary": {
+    "totalElapsedMs": 26169,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "ok": true,
+    "resolvedGroup": "电销+直播攻坚组",
+    "currentTitle": "电销+直播攻坚组",
+    "messageCount": 42,
+    "anchor": "text-exact",
+    "anchorValue": "城市：上海市  ；  联系人：车先生，13817633108  ；  店铺：达卷김밥·紫菜包饭·咖啡  ；  地址：西康路1143号鸿寿坊食集F1层",
+    "anchorInTrailingPosition": true,
+    "autoKind": null,
+    "readbackAt": 1791697367.030518
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false
+}

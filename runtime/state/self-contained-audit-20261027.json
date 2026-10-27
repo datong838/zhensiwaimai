@@ -1,0 +1,1470 @@
+{
+  "at": "2026-10-27T09:43:16.284776+08:00",
+  "root": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back",
+  "scope": "production source text outside history/test/data; paths require reachability review",
+  "scannedFiles": 605,
+  "referenceCounts": {
+    "external-node-library": 12,
+    "external-temporary-or-lock-path": 81,
+    "external-path-needs-review": 52,
+    "external-skill-reference": 2,
+    "external-python-runtime": 30,
+    "external-business-path-or-legacy-metadata": 15,
+    "external-tool-runtime": 25,
+    "host-installed-program": 3,
+    "external-project-browser-library": 6,
+    "host-browser-profile-do-not-copy-login-data": 5
+  },
+  "externalSymlinks": [
+    {
+      "path": "skills/.daily-jinsha-reports-core/scripts/node_modules",
+      "target": "/Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/node_modules",
+      "exists": true
+    },
+    {
+      "path": "skills/posts/taobao-brand-post/scripts/node_modules",
+      "target": "/Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/node_modules",
+      "exists": true
+    },
+    {
+      "path": "skills/posts/taobao-svc-post/scripts/node_modules",
+      "target": "/Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/node_modules",
+      "exists": true
+    },
+    {
+      "path": "skills/posts/meituan-post/scripts/node_modules",
+      "target": "/Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/node_modules",
+      "exists": true
+    },
+    {
+      "path": "skills/posts/jinsha-post/scripts/node_modules",
+      "target": "/Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/node_modules",
+      "exists": true
+    },
+    {
+      "path": "skills/workflows/negative-feedback-list-appeals/node_modules",
+      "target": "/Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/node_modules",
+      "exists": true
+    },
+    {
+      "path": "skills/workflows/taobao-shangou-negative-review-appeals/node_modules",
+      "target": "/Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/node_modules",
+      "exists": true
+    },
+    {
+      "path": "skills/workflows/meituan-waimai-negative-review-appeals/node_modules",
+      "target": "/Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/node_modules",
+      "exists": true
+    },
+    {
+      "path": "skills/workflows/taobao-flash-sale-negative-review-appeals/node_modules",
+      "target": "/Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/node_modules",
+      "exists": true
+    },
+    {
+      "path": "skills/workflows/daily-negative-reviews/scripts/node_modules",
+      "target": "/Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/node_modules",
+      "exists": true
+    },
+    {
+      "path": "skills/workflows/store-inspection/node_modules",
+      "target": "/Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/node_modules",
+      "exists": true
+    },
+    {
+      "path": "skills/workflows/store-inspection/scripts/node_modules",
+      "target": "/Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/node_modules",
+      "exists": true
+    }
+  ],
+  "references": [
+    {
+      "file": "scripts-gen-posts.py",
+      "line": 6,
+      "path": "/Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules",
+      "category": "external-node-library"
+    },
+    {
+      "file": "scripts-gen-posts.py",
+      "line": 31,
+      "path": "/tmp/zhensi-post-__PORT__.lock",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "runtime/manual_relogin_9231.py",
+      "line": 24,
+      "path": "/tmp/bg-chrome-taobao-agent-service.manual-relogin.log",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "runtime/_auto_run_probe.sh",
+      "line": 95,
+      "path": "/tmp/probe_out.json",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "runtime/manual_relogin_9230.py",
+      "line": 19,
+      "path": "/tmp/bg-chrome-taobao-brand.manual-relogin.log",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "runtime/code_consolidation_catalog.json",
+      "line": 4,
+      "path": "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/scripts",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "runtime/code_consolidation_catalog.json",
+      "line": 5,
+      "path": "/Users/ddt/work/projects/ai_agent/multimedia/mediacrawler/browser_control/control-background-dedicated-chrome",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "runtime/code_consolidation_catalog.json",
+      "line": 6,
+      "path": "/Users/ddt/.codex/skills/daily-taobao-download-to-jinsha",
+      "category": "external-skill-reference"
+    },
+    {
+      "file": "runtime/code_consolidation_catalog.json",
+      "line": 7,
+      "path": "/Users/ddt/work/projects/ai_agent/wechat-windows-driver",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "runtime/code_consolidation_catalog.json",
+      "line": 10,
+      "path": "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "runtime/code_consolidation_catalog.json",
+      "line": 11,
+      "path": "/Users/ddt/work/projects/ai_agent/multimedia/mediacrawler/browser_control/control-background-dedicated-chrome",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "runtime/code_consolidation_catalog.json",
+      "line": 12,
+      "path": "/Users/ddt/.codex/skills/daily-taobao-download-to-jinsha",
+      "category": "external-skill-reference"
+    },
+    {
+      "file": "runtime/code_consolidation_catalog.json",
+      "line": 13,
+      "path": "/Users/ddt/work/projects/ai_agent/wechat-windows-driver",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "runtime/bg-chrome-up.sh",
+      "line": 46,
+      "path": "/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python",
+      "category": "external-python-runtime"
+    },
+    {
+      "file": "runtime/bg-chrome-up.sh",
+      "line": 47,
+      "path": "/tmp/bg-chrome-${PROFILE}.log",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "runtime/close_stray_tabs.mjs",
+      "line": 42,
+      "path": "/tmp/zhensi-post-9230.lock",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "runtime/close_stray_tabs.mjs",
+      "line": 43,
+      "path": "/tmp/zhensi-post-9231.lock",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "runtime/close_stray_tabs.mjs",
+      "line": 44,
+      "path": "/tmp/zhensi-jinsha-cua-exam.lock",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "runtime/close_stray_tabs.mjs",
+      "line": 45,
+      "path": "/tmp/zhensi-post-9233.lock",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "runtime/prepare_code_consolidation.py",
+      "line": 44,
+      "path": "/Users/ddt/work/臻肆/报表",
+      "category": "external-business-path-or-legacy-metadata"
+    },
+    {
+      "file": "runtime/prepare_code_consolidation.py",
+      "line": 45,
+      "path": "/Users/ddt/work/臻肆/视频",
+      "category": "external-business-path-or-legacy-metadata"
+    },
+    {
+      "file": "runtime/prepare_code_consolidation.py",
+      "line": 63,
+      "path": "/Users/ddt/[",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "runtime/prepare_code_consolidation.py",
+      "line": 72,
+      "path": "/Users/ddt/work/臻肆/报表",
+      "category": "external-business-path-or-legacy-metadata"
+    },
+    {
+      "file": "runtime/prepare_code_consolidation.py",
+      "line": 154,
+      "path": "/Users/ddt/[^\\s\\",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "runtime/prepare_code_consolidation.py",
+      "line": 170,
+      "path": "/Users/ddt/[^\\s\\",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "runtime/prepare_code_consolidation.py",
+      "line": 482,
+      "path": "/Users/ddt/work/臻肆/报表",
+      "category": "external-business-path-or-legacy-metadata"
+    },
+    {
+      "file": "runtime/prepare_code_consolidation.py",
+      "line": 492,
+      "path": "/Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "category": "external-tool-runtime"
+    },
+    {
+      "file": "runtime/skills_manifest.json",
+      "line": 7,
+      "path": "/Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "category": "external-tool-runtime"
+    },
+    {
+      "file": "runtime/skills_manifest.json",
+      "line": 8,
+      "path": "/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python",
+      "category": "external-python-runtime"
+    },
+    {
+      "file": "runtime/_auto_run_probe_1300.sh",
+      "line": 144,
+      "path": "/tmp/probe_out1300.json",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "runtime/_auto_run_probe_1300.sh",
+      "line": 186,
+      "path": "/tmp/probe_out1300.json",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "runtime/supervisor_drive.py",
+      "line": 189,
+      "path": "/Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "category": "external-tool-runtime"
+    },
+    {
+      "file": "runtime/supervisor_drive.py",
+      "line": 190,
+      "path": "/Users/ddt/.workbuddy/binaries/node/versions/22.22.2-2/bin/node",
+      "category": "external-tool-runtime"
+    },
+    {
+      "file": "runtime/session_keepalive.mjs",
+      "line": 15,
+      "path": "/tmp/zhensi-jinsha-cua-exam.lock",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "runtime/session_keepalive.mjs",
+      "line": 24,
+      "path": "/tmp/zhensi-post-9230.lock",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "runtime/session_keepalive.mjs",
+      "line": 33,
+      "path": "/tmp/zhensi-post-9231.lock",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "runtime/session_keepalive.mjs",
+      "line": 42,
+      "path": "/tmp/zhensi-post-9233.lock",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "runtime/supervisor_patrol.py",
+      "line": 42,
+      "path": "/Users/ddt/.workbuddy/binaries/node/versions/22.22.2-2/bin/node",
+      "category": "external-tool-runtime"
+    },
+    {
+      "file": "runtime/supervisor_patrol.py",
+      "line": 43,
+      "path": "/Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "category": "external-tool-runtime"
+    },
+    {
+      "file": "runtime/supervisor_patrol.py",
+      "line": 44,
+      "path": "/usr/local/bin/node",
+      "category": "host-installed-program"
+    },
+    {
+      "file": "runtime/supervisor_patrol.py",
+      "line": 45,
+      "path": "/opt/homebrew/bin/node",
+      "category": "host-installed-program"
+    },
+    {
+      "file": "runtime/manual_relogin_9230_v2.py",
+      "line": 22,
+      "path": "/tmp/bg-chrome-taobao-brand.manual-relogin.log",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "runtime/launch_headful_9230.py",
+      "line": 16,
+      "path": "/tmp/bg-chrome-taobao-brand.headful-relogin.log",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "runtime/migrate_business_storage.py",
+      "line": 22,
+      "path": "/Users/ddt/work/臻肆/报表",
+      "category": "external-business-path-or-legacy-metadata"
+    },
+    {
+      "file": "runtime/migrate_business_storage.py",
+      "line": 23,
+      "path": "/Users/ddt/work/臻肆/视频",
+      "category": "external-business-path-or-legacy-metadata"
+    },
+    {
+      "file": "runtime/migrate_business_storage.py",
+      "line": 103,
+      "path": "/tmp/zhensi-post-{port}.lock",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "runtime/seal_drift_repair.py",
+      "line": 50,
+      "path": "/Users/ddt/.workbuddy/binaries/node/versions/22.22.2-2/bin/node",
+      "category": "external-tool-runtime"
+    },
+    {
+      "file": "runtime/seal_drift_repair.py",
+      "line": 51,
+      "path": "/Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "category": "external-tool-runtime"
+    },
+    {
+      "file": "runtime/business_storage_catalog.json",
+      "line": 4,
+      "path": "/Users/ddt/work/projects/ai_agent/state/meituan-waimai-negative-review-appeals",
+      "category": "external-business-path-or-legacy-metadata"
+    },
+    {
+      "file": "runtime/business_storage_catalog.json",
+      "line": 5,
+      "path": "/Users/ddt/work/projects/ai_agent/state/taobao-flash-sale-negative-review-appeals",
+      "category": "external-business-path-or-legacy-metadata"
+    },
+    {
+      "file": "runtime/business_storage_catalog.json",
+      "line": 6,
+      "path": "/Users/ddt/work/projects/ai_agent/state/negative-feedback-list-appeals",
+      "category": "external-business-path-or-legacy-metadata"
+    },
+    {
+      "file": "runtime/business_storage_catalog.json",
+      "line": 7,
+      "path": "/Users/ddt/work/臻肆/报表",
+      "category": "external-business-path-or-legacy-metadata"
+    },
+    {
+      "file": "runtime/business_storage_catalog.json",
+      "line": 8,
+      "path": "/Users/ddt/work/臻肆/视频",
+      "category": "external-business-path-or-legacy-metadata"
+    },
+    {
+      "file": "tests/smoke_wiring.mjs",
+      "line": 25,
+      "path": "/Users/ddt/.workbuddy/binaries/python/versions/3.13.12/bin/python3",
+      "category": "external-python-runtime"
+    },
+    {
+      "file": "tests/shim_loader.mjs",
+      "line": 56,
+      "path": "/tmp/zhensi-test-runs",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "shared/browser_precise_ops/content_guard.py",
+      "line": 41,
+      "path": "/Users/ddt/\\S+|/home/\\w+/\\S+|C:\\\\[\\\\A-Za-z0-9 ._-]+",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "shared/browser_precise_ops/js/browser_precise_ops.mjs",
+      "line": 130,
+      "path": "/tmp/bpo-js-selftest-",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "maintenance/merchant-20260916-production-guard/candidate/scripts/desktop_wechat_sender.py",
+      "line": 17,
+      "path": "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/scripts/desktop_sender.py",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "maintenance/merchant-20260916-production-guard/candidate/scripts/desktop_wechat_sender.py",
+      "line": 22,
+      "path": "/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python",
+      "category": "external-python-runtime"
+    },
+    {
+      "file": "maintenance/merchant-20260916-production-guard/candidate/scripts/wechat_sender_executor.py",
+      "line": 632,
+      "path": "/tmp/zhensi_agent_merchants/collection_receipt.json",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "maintenance/merchant-20260916-production-guard/candidate/scripts/merchant_collector_executor.mjs",
+      "line": 10,
+      "path": "/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python",
+      "category": "external-python-runtime"
+    },
+    {
+      "file": "maintenance/merchant-20260916-production-guard/candidate/scripts/merchant_collector_executor.mjs",
+      "line": 613,
+      "path": "/tmp/zhensi_agent_merchants/collection_receipt.json",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "maintenance/merchant-20260916-production-guard/candidate/scripts/merchant_collector_executor.mjs",
+      "line": 744,
+      "path": "/tmp/zhensi_agent_merchants/collection_receipt.json",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "maintenance/merchant-20260916-production-guard/candidate/scripts/structured_merchant_collector.py",
+      "line": 170,
+      "path": "/Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "category": "external-tool-runtime"
+    },
+    {
+      "file": "maintenance/merchant-20260916-production-guard/candidate/scripts/executor_integrity.py",
+      "line": 14,
+      "path": "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/scripts",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "maintenance/merchant-20260916-production-guard/candidate/scripts/chrome_desktop_bridge.py",
+      "line": 30,
+      "path": "/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python",
+      "category": "external-python-runtime"
+    },
+    {
+      "file": "maintenance/merchant-20260916-production-guard/candidate/scripts/chrome_desktop_bridge.py",
+      "line": 36,
+      "path": "/tmp/zhensi_agent_merchants/collection_receipt.json",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "maintenance/merchant-20260916-production-guard/candidate/scripts/chrome_desktop_bridge.py",
+      "line": 37,
+      "path": "/tmp/zhensi-agent-bridge.png",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "maintenance/merchant-20260916-production-guard/candidate/scripts/background_merchant_collector.mjs",
+      "line": 11,
+      "path": "/Users/ddt/work/projects/ai_agent/aos-platform/plugins/browser/headless-playwright/node_modules/playwright-core",
+      "category": "external-project-browser-library"
+    },
+    {
+      "file": "maintenance/merchant-20260916-production-guard/candidate/scripts/background_merchant_collector.mjs",
+      "line": 13,
+      "path": "/Users/ddt/Library/Application Support/AOS Background Chrome",
+      "category": "host-browser-profile-do-not-copy-login-data"
+    },
+    {
+      "file": "skills/.daily-jinsha-reports-core/scripts/jinsha_cua_exam.js",
+      "line": 3,
+      "path": "/tmp/zhensi-jinsha-cua-exam.lock",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/.daily-jinsha-reports-core/scripts/build_reports.mjs",
+      "line": 9,
+      "path": "/tmp/zhensi_jinsha_reports/download_receipt.json",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/.daily-jinsha-reports-core/scripts/build_reports.mjs",
+      "line": 10,
+      "path": "/tmp/zhensi_jinsha_reports/build_receipt.json",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/.daily-jinsha-reports-core/scripts/build_reports.mjs",
+      "line": 11,
+      "path": "/Users/ddt/work/臻肆/报表/客户表最新.xlsx",
+      "category": "external-business-path-or-legacy-metadata"
+    },
+    {
+      "file": "skills/.daily-jinsha-reports-core/scripts/build_reports.mjs",
+      "line": 12,
+      "path": "/Users/ddt/work/臻肆/报表/美团全部_2026-08-25至2026-08-25.xlsx",
+      "category": "external-business-path-or-legacy-metadata"
+    },
+    {
+      "file": "skills/.daily-jinsha-reports-core/scripts/build_reports.mjs",
+      "line": 13,
+      "path": "/Users/ddt/work/臻肆/报表/淘宝闪购_模版2026-08-24至2026-08-24.xlsx",
+      "category": "external-business-path-or-legacy-metadata"
+    },
+    {
+      "file": "skills/.daily-jinsha-reports-core/scripts/build_reports.mjs",
+      "line": 14,
+      "path": "/Users/ddt/work/臻肆/报表",
+      "category": "external-business-path-or-legacy-metadata"
+    },
+    {
+      "file": "skills/.daily-jinsha-reports-core/scripts/build_reports.mjs",
+      "line": 325,
+      "path": "/tmp/zhensi_jinsha_reports",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/.daily-jinsha-reports-core/scripts/jinsha_download_executor.mjs",
+      "line": 13,
+      "path": "/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python",
+      "category": "external-python-runtime"
+    },
+    {
+      "file": "skills/.daily-jinsha-reports-core/scripts/jinsha_download_executor.mjs",
+      "line": 223,
+      "path": "/tmp/zhensi_jinsha_reports/download_receipt.json",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/.daily-jinsha-reports-core/scripts/wechat_file_sender.py",
+      "line": 23,
+      "path": "/tmp/zhensi_jinsha_reports/build_receipt.json",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/.daily-jinsha-reports-core/scripts/wechat_file_sender.py",
+      "line": 24,
+      "path": "/tmp/zhensi_jinsha_reports/wechat_send_receipt.json",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/posts/taobao-brand-post/scripts/lease.mjs",
+      "line": 9,
+      "path": "/tmp/zhensi-post-9230.lock",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/posts/taobao-svc-post/scripts/lease.mjs",
+      "line": 9,
+      "path": "/tmp/zhensi-post-9231.lock",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/posts/meituan-post/scripts/lease.mjs",
+      "line": 9,
+      "path": "/tmp/zhensi-post-9233.lock",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/posts/jinsha-post/scripts/existing_owned_target.mjs",
+      "line": 8,
+      "path": "/tmp/zhensi_daily_download/background-browser",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/posts/jinsha-post/scripts/existing_owned_target.mjs",
+      "line": 9,
+      "path": "/Users/ddt/Library/Application Support/AOS Background Chrome/jinsha-business/.aos-background-chrome/state.json",
+      "category": "host-browser-profile-do-not-copy-login-data"
+    },
+    {
+      "file": "skills/posts/jinsha-post/scripts/lease.mjs",
+      "line": 10,
+      "path": "/tmp/zhensi-jinsha-cua-exam.lock",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/wechat-messaging/scripts/dependency_maintenance.py",
+      "line": 49,
+      "path": "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/scripts/{name}",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "skills/wechat-messaging/scripts/dependency_maintenance.py",
+      "line": 479,
+      "path": "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/scripts/wechat_interaction_lock.py",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "skills/wechat-messaging/scripts/desktop_text_readback.py",
+      "line": 15,
+      "path": "/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python",
+      "category": "external-python-runtime"
+    },
+    {
+      "file": "skills/wechat-messaging/scripts/workflow_bridge.py",
+      "line": 30,
+      "path": "/tmp/zhensi_daily_download/background-browser",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/workflows/daily-store-task-completion-ops-to-wechat/scripts/task_workflow.py",
+      "line": 41,
+      "path": "/Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "category": "external-tool-runtime"
+    },
+    {
+      "file": "skills/workflows/daily-store-task-completion-ops-to-wechat/scripts/task_workflow.py",
+      "line": 42,
+      "path": "/Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules",
+      "category": "external-node-library"
+    },
+    {
+      "file": "skills/workflows/daily-top10-to-wechat-group/scripts/desktop_background_executor.mjs",
+      "line": 12,
+      "path": "/Users/ddt/work/projects/ai_agent/aos-platform/plugins/browser/headless-playwright/node_modules/playwright-core",
+      "category": "external-project-browser-library"
+    },
+    {
+      "file": "skills/workflows/daily-top10-to-wechat-group/scripts/desktop_background_executor.mjs",
+      "line": 17,
+      "path": "/Users/ddt/Library/Application Support/AOS Background Chrome",
+      "category": "host-browser-profile-do-not-copy-login-data"
+    },
+    {
+      "file": "skills/workflows/daily-top10-to-wechat-group/scripts/desktop_background_executor.mjs",
+      "line": 132,
+      "path": "/tmp/zhensi_top10",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/workflows/daily-top10-to-wechat-group/scripts/desktop_native_executor.mjs",
+      "line": 8,
+      "path": "/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python",
+      "category": "external-python-runtime"
+    },
+    {
+      "file": "skills/workflows/daily-top10-to-wechat-group/scripts/desktop_visual_executor.mjs",
+      "line": 11,
+      "path": "/tmp/zhensi_top10",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/workflows/daily-top10-to-wechat-group/scripts/desktop_visual_executor.mjs",
+      "line": 26,
+      "path": "/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python",
+      "category": "external-python-runtime"
+    },
+    {
+      "file": "skills/workflows/daily-top10-to-wechat-group/scripts/phone_executor.py",
+      "line": 28,
+      "path": "/opt/homebrew/bin/adb",
+      "category": "host-installed-program"
+    },
+    {
+      "file": "skills/workflows/daily-top10-to-wechat-group/scripts/phone_executor.py",
+      "line": 836,
+      "path": "/tmp/zhensi_top10/desktop_receipt.json",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/workflows/daily-top10-to-wechat-group/scripts/workflow_executor.py",
+      "line": 20,
+      "path": "/Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "category": "external-tool-runtime"
+    },
+    {
+      "file": "skills/workflows/daily-top10-to-wechat-group/scripts/desktop_executor.mjs",
+      "line": 203,
+      "path": "/tmp/zhensi_top10",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/workflows/daily-top10-to-wechat-group/scripts/desktop_executor.mjs",
+      "line": 204,
+      "path": "/tmp/zhensi_top10/desktop_receipt.json",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/workflows/daily-top10-to-wechat-group/scripts/desktop_cua_executor.mjs",
+      "line": 37,
+      "path": "/tmp/zhensi_top10",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/workflows/daily-agent-new-merchants-to-wechat/scripts/desktop_wechat_sender.py",
+      "line": 25,
+      "path": "/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python",
+      "category": "external-python-runtime"
+    },
+    {
+      "file": "skills/workflows/daily-agent-new-merchants-to-wechat/scripts/wechat_sender_executor.py",
+      "line": 675,
+      "path": "/tmp/zhensi_agent_merchants/collection_receipt.json",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/workflows/daily-agent-new-merchants-to-wechat/scripts/merchant_collector_executor.mjs",
+      "line": 11,
+      "path": "/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python",
+      "category": "external-python-runtime"
+    },
+    {
+      "file": "skills/workflows/daily-agent-new-merchants-to-wechat/scripts/merchant_collector_executor.mjs",
+      "line": 618,
+      "path": "/tmp/zhensi_agent_merchants/collection_receipt.json",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/workflows/daily-agent-new-merchants-to-wechat/scripts/merchant_collector_executor.mjs",
+      "line": 756,
+      "path": "/tmp/zhensi_agent_merchants/collection_receipt.json",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/workflows/daily-agent-new-merchants-to-wechat/scripts/structured_merchant_collector.py",
+      "line": 244,
+      "path": "/Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "category": "external-tool-runtime"
+    },
+    {
+      "file": "skills/workflows/daily-agent-new-merchants-to-wechat/scripts/chrome_desktop_bridge.py",
+      "line": 33,
+      "path": "/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python",
+      "category": "external-python-runtime"
+    },
+    {
+      "file": "skills/workflows/daily-agent-new-merchants-to-wechat/scripts/chrome_desktop_bridge.py",
+      "line": 39,
+      "path": "/tmp/zhensi_agent_merchants/collection_receipt.json",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/workflows/daily-agent-new-merchants-to-wechat/scripts/chrome_desktop_bridge.py",
+      "line": 40,
+      "path": "/tmp/zhensi-agent-bridge.png",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/workflows/daily-agent-new-merchants-to-wechat/scripts/background_merchant_collector.mjs",
+      "line": 14,
+      "path": "/Users/ddt/Library/Application Support/AOS Background Chrome",
+      "category": "host-browser-profile-do-not-copy-login-data"
+    },
+    {
+      "file": "skills/workflows/daily-agent-new-merchants-to-wechat/scripts/maintenance_executor.py",
+      "line": 166,
+      "path": "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "skills/workflows/daily-quality-products-optimization/scripts/quality_report.mjs",
+      "line": 7,
+      "path": "/Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules",
+      "category": "external-node-library"
+    },
+    {
+      "file": "skills/workflows/daily-quality-products-optimization/scripts/quality_workflow.py",
+      "line": 19,
+      "path": "/Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "category": "external-tool-runtime"
+    },
+    {
+      "file": "skills/workflows/daily-quality-products-optimization/scripts/quality_workflow.py",
+      "line": 166,
+      "path": "/Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "category": "external-tool-runtime"
+    },
+    {
+      "file": "skills/workflows/daily-new-stores-activity-audit-to-wechat/scripts/activity_workflow.py",
+      "line": 21,
+      "path": "/Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "category": "external-tool-runtime"
+    },
+    {
+      "file": "skills/workflows/daily-new-stores-activity-audit-to-wechat/scripts/activity_workflow.py",
+      "line": 22,
+      "path": "/Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules",
+      "category": "external-node-library"
+    },
+    {
+      "file": "skills/workflows/negative-feedback-list-appeals/scripts/deliver_batch.mjs",
+      "line": 15,
+      "path": "/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python",
+      "category": "external-python-runtime"
+    },
+    {
+      "file": "skills/workflows/meituan-intelligent-customer-service/scripts/append_daily_reply_log.mjs",
+      "line": 3,
+      "path": "/Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/@oai/artifact-tool/dist/artifact_tool.mjs",
+      "category": "external-node-library"
+    },
+    {
+      "file": "skills/workflows/meituan-intelligent-customer-service/scripts/build_empty_daily_reply_log.mjs",
+      "line": 5,
+      "path": "/Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/@oai/artifact-tool/dist/artifact_tool.mjs",
+      "category": "external-node-library"
+    },
+    {
+      "file": "skills/workflows/meituan-intelligent-customer-service/scripts/compile_daily_reply_xlsx.mjs",
+      "line": 9,
+      "path": "/Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/@oai/artifact-tool/dist/artifact_tool.mjs",
+      "category": "external-node-library"
+    },
+    {
+      "file": "skills/workflows/meituan-intelligent-customer-service/scripts/send_daily_reply_xlsx_to_wechat.mjs",
+      "line": 11,
+      "path": "/Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/@oai/artifact-tool/dist/artifact_tool.mjs",
+      "category": "external-node-library"
+    },
+    {
+      "file": "skills/workflows/meituan-intelligent-customer-service/scripts/send_daily_reply_xlsx_to_wechat.mjs",
+      "line": 14,
+      "path": "/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python",
+      "category": "external-python-runtime"
+    },
+    {
+      "file": "skills/workflows/daily-store-metrics-rotation-to-wechat/scripts/metrics_rotation_daily.py",
+      "line": 76,
+      "path": "/Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "category": "external-tool-runtime"
+    },
+    {
+      "file": "skills/workflows/meituan-waimai-negative-review-appeals/scripts/deliver_batch.mjs",
+      "line": 9,
+      "path": "/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python",
+      "category": "external-python-runtime"
+    },
+    {
+      "file": "skills/workflows/daily-new-stores-opening-to-wechat/scripts/workflow.py",
+      "line": 26,
+      "path": "/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python",
+      "category": "external-python-runtime"
+    },
+    {
+      "file": "skills/workflows/daily-new-stores-opening-to-wechat/scripts/workflow.py",
+      "line": 40,
+      "path": "/Users/ddt/.nvm/versions/node/v20.20.2/bin/node",
+      "category": "external-tool-runtime"
+    },
+    {
+      "file": "skills/workflows/daily-new-stores-opening-to-wechat/scripts/workflow.py",
+      "line": 41,
+      "path": "/Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "category": "external-tool-runtime"
+    },
+    {
+      "file": "skills/workflows/daily-new-stores-opening-to-wechat/scripts/collector.mjs",
+      "line": 9,
+      "path": "/Users/ddt/work/projects/ai_agent/aos-platform/plugins/browser/isolated-persistent-playwright/node_modules/playwright-core",
+      "category": "external-project-browser-library"
+    },
+    {
+      "file": "skills/workflows/daily-wechat-video-publish/scripts/platform_chrome_bridge.py",
+      "line": 8,
+      "path": "/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python",
+      "category": "external-python-runtime"
+    },
+    {
+      "file": "skills/workflows/daily-wechat-video-publish/scripts/douyin_chrome_bridge.py",
+      "line": 8,
+      "path": "/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python",
+      "category": "external-python-runtime"
+    },
+    {
+      "file": "skills/workflows/daily-wechat-video-publish/scripts/douyin_chrome_bridge.py",
+      "line": 32,
+      "path": "/tmp/douyin-chrome-bridge.png",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/workflows/daily-wechat-video-publish/scripts/workflow_executor.py",
+      "line": 26,
+      "path": "/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python",
+      "category": "external-python-runtime"
+    },
+    {
+      "file": "skills/workflows/daily-wechat-video-publish/scripts/lib/chrome_common.py",
+      "line": 21,
+      "path": "/tmp/zhensi-chrome-bridge.png",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/workflows/daily-wechat-video-publish/scripts/lib/wechat_bridge.py",
+      "line": 19,
+      "path": "/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python",
+      "category": "external-python-runtime"
+    },
+    {
+      "file": "skills/workflows/contract-termination-applications-screenshot/scripts/contract_termination_shot.mjs",
+      "line": 296,
+      "path": "/tmp/zhensi-post-9231.lock",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/workflows/contract-termination-applications-screenshot/scripts/contract_termination_workflow.py",
+      "line": 33,
+      "path": "/Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "category": "external-tool-runtime"
+    },
+    {
+      "file": "skills/workflows/contract-termination-applications-screenshot/scripts/contract_termination_workflow.py",
+      "line": 34,
+      "path": "/Users/ddt/.workbuddy/binaries/node/workspace/node_modules",
+      "category": "external-node-library"
+    },
+    {
+      "file": "skills/workflows/daily-taobao-download-to-jinsha/scripts/background_browser_executor.mjs",
+      "line": 15,
+      "path": "/Users/ddt/work/projects/ai_agent/aos-platform/plugins/browser/headless-playwright/node_modules/playwright-core",
+      "category": "external-project-browser-library"
+    },
+    {
+      "file": "skills/workflows/daily-taobao-download-to-jinsha/scripts/background_browser_executor.mjs",
+      "line": 43,
+      "path": "/tmp/zhensi_daily_download/background-browser",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/workflows/daily-taobao-download-to-jinsha/scripts/background_browser_executor.mjs",
+      "line": 1692,
+      "path": "/tmp/store.xlsx",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/workflows/daily-taobao-download-to-jinsha/scripts/background_browser_executor.mjs",
+      "line": 1692,
+      "path": "/tmp/review.xlsx",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/workflows/daily-taobao-download-to-jinsha/scripts/background_browser_executor.mjs",
+      "line": 1725,
+      "path": "/tmp/other-profile",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/workflows/daily-taobao-download-to-jinsha/scripts/entrypoint.mjs",
+      "line": 54,
+      "path": "/tmp/zhensi_daily_download/background-browser",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/workflows/daily-taobao-download-to-jinsha/scripts/cua_sequence_executor.mjs",
+      "line": 47,
+      "path": "/tmp/zhensi_daily_download/download_receipt.json",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/workflows/daily-taobao-download-to-jinsha/scripts/desktop_wechat_evidence_sender.mjs",
+      "line": 11,
+      "path": "/Users/ddt/.workbuddy/binaries/python/envs/default/bin/python",
+      "category": "external-python-runtime"
+    },
+    {
+      "file": "skills/workflows/daily-taobao-download-to-jinsha/scripts/desktop_wechat_evidence_sender.mjs",
+      "line": 12,
+      "path": "/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python",
+      "category": "external-python-runtime"
+    },
+    {
+      "file": "skills/workflows/daily-taobao-download-to-jinsha/scripts/desktop_wechat_evidence_sender.mjs",
+      "line": 19,
+      "path": "/tmp/zhensi_daily_download/background-browser",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/workflows/daily-taobao-download-to-jinsha/scripts/desktop_wechat_evidence_sender.mjs",
+      "line": 20,
+      "path": "/tmp/zhensi_daily_download/desktop-wechat",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/workflows/daily-taobao-download-to-jinsha/scripts/download_executor.mjs",
+      "line": 573,
+      "path": "/tmp/zhensi_daily_download/download_receipt.json",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/workflows/daily-taobao-download-to-jinsha/scripts/download_executor.mjs",
+      "line": 632,
+      "path": "/tmp/zhensi_daily_download/download_receipt.json",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/workflows/daily-taobao-download-to-jinsha/scripts/jinsha_prepare_executor.mjs",
+      "line": 43,
+      "path": "/tmp/zhensi_daily_download/download_receipt.json",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/workflows/daily-taobao-download-to-jinsha/scripts/jinsha_prepare_executor.mjs",
+      "line": 425,
+      "path": "/tmp/zhensi_daily_download/evidence",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/workflows/daily-taobao-download-to-jinsha/scripts/jinsha_prepare_executor.mjs",
+      "line": 450,
+      "path": "/tmp/zhensi_daily_download/download_receipt.json",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/workflows/daily-taobao-download-to-jinsha/scripts/jinsha_prepare_executor.mjs",
+      "line": 453,
+      "path": "/tmp/zhensi_daily_download/evidence",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/workflows/daily-taobao-download-to-jinsha/scripts/jinsha_prepare_executor.mjs",
+      "line": 618,
+      "path": "/tmp/zhensi_daily_download/wechat_evidence_manifest.json",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/workflows/taobao-flash-sale-negative-review-appeals/scripts/deliver_batch.mjs",
+      "line": 9,
+      "path": "/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python",
+      "category": "external-python-runtime"
+    },
+    {
+      "file": "skills/workflows/daily-new-stores-decoration-audit-to-wechat/scripts/decoration_workflow.py",
+      "line": 21,
+      "path": "/Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "category": "external-tool-runtime"
+    },
+    {
+      "file": "skills/workflows/daily-new-stores-decoration-audit-to-wechat/scripts/decoration_workflow.py",
+      "line": 22,
+      "path": "/Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules",
+      "category": "external-node-library"
+    },
+    {
+      "file": "skills/workflows/daily-negative-reviews/scripts/workflow_policy.mjs",
+      "line": 20,
+      "path": "/Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+      "category": "external-python-runtime"
+    },
+    {
+      "file": "skills/workflows/daily-negative-reviews/scripts/workflow_policy.mjs",
+      "line": 21,
+      "path": "/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python",
+      "category": "external-python-runtime"
+    },
+    {
+      "file": "skills/workflows/daily-negative-reviews/scripts/workflow_policy.mjs",
+      "line": 22,
+      "path": "/Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "category": "external-tool-runtime"
+    },
+    {
+      "file": "skills/workflows/store-inspection/runtime/hybrid-meituan-reinspection-2026-09-14/device-before/page-state.json",
+      "line": 10,
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/store-inspection/runtime/hybrid-meituan-reinspection-2026-09-14/device-before/screen.png",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "skills/workflows/store-inspection/runtime/hybrid-meituan-reinspection-2026-09-14/device-before/page-state.json",
+      "line": 12,
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/store-inspection/runtime/hybrid-meituan-reinspection-2026-09-14/device-before/hierarchy.xml",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "skills/workflows/store-inspection/runtime/hybrid-meituan-reinspection-2026-09-14/美团外卖-9家湘菜（金谊广场店）/device-unlocked/page-state.json",
+      "line": 10,
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/store-inspection/runtime/hybrid-meituan-reinspection-2026-09-14/美团外卖-9家湘菜（金谊广场店）/device-unlocked/screen.png",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "skills/workflows/store-inspection/runtime/hybrid-meituan-reinspection-2026-09-14/美团外卖-9家湘菜（金谊广场店）/device-unlocked/page-state.json",
+      "line": 12,
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/store-inspection/runtime/hybrid-meituan-reinspection-2026-09-14/美团外卖-9家湘菜（金谊广场店）/device-unlocked/hierarchy.xml",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "skills/workflows/store-inspection/runtime/hybrid-meituan-reinspection-2026-09-14/system-manager-block/page-state.json",
+      "line": 10,
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/store-inspection/runtime/hybrid-meituan-reinspection-2026-09-14/system-manager-block/screen.png",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "skills/workflows/store-inspection/runtime/hybrid-meituan-reinspection-2026-09-14/system-manager-block/page-state.json",
+      "line": 12,
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/store-inspection/runtime/hybrid-meituan-reinspection-2026-09-14/system-manager-block/hierarchy.xml",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "skills/workflows/store-inspection/runtime/hybrid-reinspection-2026-09-12/device-state-location/page-state.json",
+      "line": 10,
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/store-inspection/runtime/hybrid-reinspection-2026-09-12/device-state-location/screen.png",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "skills/workflows/store-inspection/runtime/hybrid-reinspection-2026-09-12/device-state-location/page-state.json",
+      "line": 12,
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/store-inspection/runtime/hybrid-reinspection-2026-09-12/device-state-location/hierarchy.xml",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "skills/workflows/store-inspection/runtime/meituan-silent-probe-2026-09-14/probe.mjs",
+      "line": 5,
+      "path": "/Users/ddt/work/projects/ai_agent/aos-platform/plugins/browser/headless-playwright/",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "skills/workflows/store-inspection/runtime/meituan-silent-probe-2026-09-14/probe.mjs",
+      "line": 10,
+      "path": "/tmp/meituan-silent-probe",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/workflows/store-inspection/runtime/meituan-silent-probe-2026-09-14/probe-receipt.json",
+      "line": 16,
+      "path": "/tmp/meituan-silent-probe/waimaie-probe.png",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/workflows/store-inspection/runtime/jinsha-recheck-2026-09-14/open-receipt.json",
+      "line": 15,
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/store-inspection/runtime/jinsha-recheck-2026-09-14/open.png",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "skills/workflows/daily-new-stores-not-nourished-ops-to-wechat/scripts/nourish_workflow.py",
+      "line": 30,
+      "path": "/Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "category": "external-tool-runtime"
+    },
+    {
+      "file": "skills/workflows/daily-new-stores-not-nourished-ops-to-wechat/scripts/nourish_workflow.py",
+      "line": 31,
+      "path": "/Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules",
+      "category": "external-node-library"
+    },
+    {
+      "file": "skills/workflows/daily-meituan-income-top10-to-wechat/scripts/income_workflow.py",
+      "line": 20,
+      "path": "/Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "category": "external-tool-runtime"
+    },
+    {
+      "file": "skills/workflows/daily-service-market-ranking-to-wechat/scripts/ranking_workflow.py",
+      "line": 20,
+      "path": "/Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "category": "external-tool-runtime"
+    },
+    {
+      "file": "skills/workflows/daily-jinsha-reports-to-business-wechat/scripts/business_workflow_policy.mjs",
+      "line": 17,
+      "path": "/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python",
+      "category": "external-python-runtime"
+    },
+    {
+      "file": "skills/workflows/daily-jinsha-reports-to-business-wechat/scripts/business_jinsha_browser_exam.mjs",
+      "line": 22,
+      "path": "/Users/ddt/work/projects/ai_agent/aos-platform/plugins/browser/headless-playwright/node_modules/playwright-core",
+      "category": "external-project-browser-library"
+    },
+    {
+      "file": "skills/workflows/daily-jinsha-reports-to-business-wechat/scripts/business_jinsha_browser_exam.mjs",
+      "line": 24,
+      "path": "/Users/ddt/Library/Application Support/AOS Background Chrome",
+      "category": "host-browser-profile-do-not-copy-login-data"
+    },
+    {
+      "file": "skills/workflows/daily-jinsha-reports-to-business-wechat/scripts/business_desktop_wechat_file_sender.py",
+      "line": 57,
+      "path": "/tmp/jinsha-windows-preflight",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/basic_diag_workflow.py",
+      "line": 29,
+      "path": "/Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "category": "external-tool-runtime"
+    },
+    {
+      "file": "skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/basic_diag_workflow.py",
+      "line": 30,
+      "path": "/Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules",
+      "category": "external-node-library"
+    },
+    {
+      "file": "runs/maintenance-20260924T2315-ae9f30f7-cd69-4e76-9498-67abdb035d2f/workflow.json",
+      "line": 58,
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/runs/maintenance-20260924T2315-ae9f30f7-cd69-4e76-9498-67abdb035d2f/maintenance-receipt.json",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "runs/maintenance-20260924T2315-ae9f30f7-cd69-4e76-9498-67abdb035d2f/workflow.json",
+      "line": 119,
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/dependencies.json",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "runs/maintenance-20260924T2315-ae9f30f7-cd69-4e76-9498-67abdb035d2f/workflow.json",
+      "line": 135,
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/runs/maintenance-20260924T2315-ae9f30f7-cd69-4e76-9498-67abdb035d2f/wechat-dependencies/receipt.json",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "runs/maintenance-20260924T2315-ae9f30f7-cd69-4e76-9498-67abdb035d2f/maintenance-receipt.json",
+      "line": 9,
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/runs/maintenance-20260924T2315-ae9f30f7-cd69-4e76-9498-67abdb035d2f/wechat-dependencies/receipt.json",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "runs/maintenance-20260924T2315-ae9f30f7-cd69-4e76-9498-67abdb035d2f/maintenance-receipt.json",
+      "line": 19,
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/scripts/workflow_bridge.py",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "runs/maintenance-20260924T2315-ae9f30f7-cd69-4e76-9498-67abdb035d2f/maintenance-receipt.json",
+      "line": 23,
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/scripts/workflow_preflight.py",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "runs/maintenance-20260924T2315-ae9f30f7-cd69-4e76-9498-67abdb035d2f/maintenance-receipt.json",
+      "line": 27,
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/dependencies.json",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "runs/maintenance-20260924T2315-ae9f30f7-cd69-4e76-9498-67abdb035d2f/maintenance-receipt.json",
+      "line": 31,
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/scripts/dependency_maintenance.py",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "runs/maintenance-20260924T2315-ae9f30f7-cd69-4e76-9498-67abdb035d2f/maintenance-receipt.json",
+      "line": 35,
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-agent-new-merchants-to-wechat/scripts/workflow_executor.py",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "runs/maintenance-20260924T2315-ae9f30f7-cd69-4e76-9498-67abdb035d2f/maintenance-receipt.json",
+      "line": 39,
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-agent-new-merchants-to-wechat/scripts/maintenance_executor.py",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "runs/maintenance-20260924T2315-ae9f30f7-cd69-4e76-9498-67abdb035d2f/maintenance-receipt.json",
+      "line": 43,
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-agent-new-merchants-to-wechat/scripts/executor_integrity.py",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "runs/maintenance-20260924T2315-ae9f30f7-cd69-4e76-9498-67abdb035d2f/maintenance-receipt.json",
+      "line": 47,
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-agent-new-merchants-to-wechat/scripts/runtime_contract.py",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "runs/maintenance-20260924T2315-ae9f30f7-cd69-4e76-9498-67abdb035d2f/maintenance-receipt.json",
+      "line": 51,
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-agent-new-merchants-to-wechat/scripts/test_background_merchant_collector.mjs",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "runs/maintenance-20260924T2315-ae9f30f7-cd69-4e76-9498-67abdb035d2f/maintenance-receipt.json",
+      "line": 55,
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-agent-new-merchants-to-wechat/scripts/structured_merchant_collector.py",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "runs/maintenance-20260924T2315-ae9f30f7-cd69-4e76-9498-67abdb035d2f/maintenance-receipt.json",
+      "line": 59,
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-agent-new-merchants-to-wechat/scripts/background_merchant_collector.mjs",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "runs/maintenance-20260924T2315-ae9f30f7-cd69-4e76-9498-67abdb035d2f/maintenance-receipt.json",
+      "line": 63,
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-agent-new-merchants-to-wechat/scripts/desktop_wechat_sender.py",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "runs/maintenance-20260924T2315-ae9f30f7-cd69-4e76-9498-67abdb035d2f/maintenance-receipt.json",
+      "line": 67,
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-agent-new-merchants-to-wechat/scripts/wechat_sender_executor.py",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "runs/maintenance-20260924T2315-ae9f30f7-cd69-4e76-9498-67abdb035d2f/maintenance-receipt.json",
+      "line": 71,
+      "path": "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/scripts/desktop_sender.py",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "runs/maintenance-20260924T2315-ae9f30f7-cd69-4e76-9498-67abdb035d2f/maintenance-receipt.json",
+      "line": 75,
+      "path": "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/scripts/desktop_preflight.py",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "runs/maintenance-20260924T2315-ae9f30f7-cd69-4e76-9498-67abdb035d2f/maintenance-receipt.json",
+      "line": 79,
+      "path": "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/scripts/wechat_interaction_lock.py",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "runs/maintenance-20260924T2315-ae9f30f7-cd69-4e76-9498-67abdb035d2f/maintenance-receipt.json",
+      "line": 83,
+      "path": "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/scripts/wechat_desktop.py",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "runs/maintenance-20260924T2315-ae9f30f7-cd69-4e76-9498-67abdb035d2f/maintenance-receipt.json",
+      "line": 87,
+      "path": "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/scripts/cgevent_click.swift",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "runs/maintenance-20260924T2315-ae9f30f7-cd69-4e76-9498-67abdb035d2f/maintenance-receipt.json",
+      "line": 91,
+      "path": "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/scripts/cgevent_click_bin",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "runs/maintenance-20260924T2315-ae9f30f7-cd69-4e76-9498-67abdb035d2f/wechat-dependencies/receipt.json",
+      "line": 60,
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/dependencies.json",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "vendor/dedicated-chrome-controller/scripts/handoff.test.mjs",
+      "line": 18,
+      "path": "/tmp/profile",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "vendor/dedicated-chrome-controller/scripts/handoff.test.mjs",
+      "line": 22,
+      "path": "/tmp/profile ",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "vendor/dedicated-chrome-controller/scripts/handoff.test.mjs",
+      "line": 22,
+      "path": "/tmp/profile-other ",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "vendor/dedicated-chrome-controller/scripts/handoff.test.mjs",
+      "line": 36,
+      "path": "/tmp/a",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "vendor/installed-taobao-skill/scripts/background_browser_executor.mjs",
+      "line": 15,
+      "path": "/Users/ddt/work/projects/ai_agent/aos-platform/plugins/browser/headless-playwright/node_modules/playwright-core",
+      "category": "external-project-browser-library"
+    },
+    {
+      "file": "vendor/installed-taobao-skill/scripts/background_browser_executor.mjs",
+      "line": 37,
+      "path": "/Users/ddt/work/projects/ai_agent/multimedia/mediacrawler/browser_control/control-background-dedicated-chrome/scripts/background_chrome.mjs",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "vendor/installed-taobao-skill/scripts/background_browser_executor.mjs",
+      "line": 38,
+      "path": "/Users/ddt/work/projects/ai_agent/multimedia/mediacrawler/browser_control/control-background-dedicated-chrome/scripts/session_guard.mjs",
+      "category": "external-path-needs-review"
+    },
+    {
+      "file": "vendor/installed-taobao-skill/scripts/background_browser_executor.mjs",
+      "line": 43,
+      "path": "/tmp/zhensi_daily_download/background-browser",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "vendor/installed-taobao-skill/scripts/background_browser_executor.mjs",
+      "line": 1625,
+      "path": "/tmp/store.xlsx",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "vendor/installed-taobao-skill/scripts/background_browser_executor.mjs",
+      "line": 1625,
+      "path": "/tmp/review.xlsx",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "vendor/installed-taobao-skill/scripts/background_browser_executor.mjs",
+      "line": 1658,
+      "path": "/tmp/other-profile",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "vendor/installed-taobao-skill/scripts/entrypoint.mjs",
+      "line": 54,
+      "path": "/tmp/zhensi_daily_download/background-browser",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "vendor/installed-taobao-skill/scripts/desktop_wechat_evidence_sender.mjs",
+      "line": 11,
+      "path": "/Users/ddt/.workbuddy/binaries/python/envs/default/bin/python",
+      "category": "external-python-runtime"
+    },
+    {
+      "file": "vendor/installed-taobao-skill/scripts/desktop_wechat_evidence_sender.mjs",
+      "line": 12,
+      "path": "/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python",
+      "category": "external-python-runtime"
+    },
+    {
+      "file": "vendor/installed-taobao-skill/scripts/desktop_wechat_evidence_sender.mjs",
+      "line": 19,
+      "path": "/tmp/zhensi_daily_download/background-browser",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "vendor/installed-taobao-skill/scripts/desktop_wechat_evidence_sender.mjs",
+      "line": 20,
+      "path": "/tmp/zhensi_daily_download/desktop-wechat",
+      "category": "external-temporary-or-lock-path"
+    },
+    {
+      "file": "vendor/legacy-app-controler/wechat-desktop-control/scripts/wechat_desktop.py",
+      "line": 23,
+      "path": "/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python",
+      "category": "external-python-runtime"
+    },
+    {
+      "file": "vendor/legacy-app-controler/wechat-desktop-control/scripts/wechat_interaction_lock.py",
+      "line": 12,
+      "path": "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/.runtime/wechat-ui-interaction.lock",
+      "category": "external-path-needs-review"
+    }
+  ],
+  "readOnly": true,
+  "sendAttempts": 0
+}

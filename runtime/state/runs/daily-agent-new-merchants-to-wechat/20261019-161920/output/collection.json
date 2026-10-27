@@ -1,0 +1,176 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-19",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 100,
+    "task_page": 401,
+    "navigation": 1476,
+    "date_filter": 1514,
+    "page_1_read": 463,
+    "selection_audit": 0,
+    "detail_544123889": 1112,
+    "detail_546227527": 3505,
+    "detail_1357693154": 1661
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_544123889": "PASS",
+    "detail_546227527": "PASS",
+    "detail_1357693154": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "544123889",
+      "merchantName": "多馋嘴肉蟹煲",
+      "recommendTime": "2026-10-19 15:10:49",
+      "city": "通辽市",
+      "status": "待处理",
+      "rowIndex": 2,
+      "sourcePage": 1,
+      "tableOrder": 8,
+      "address": "明仁大街与步行街交叉口南160米",
+      "contact": "崔，15504753792",
+      "detailVerified": true,
+      "text": "城市：通辽市  ；  联系人：崔，15504753792  ；  店铺：多馋嘴肉蟹煲  ；  地址：明仁大街与步行街交叉口南160米",
+      "sha256": "811e2526198122910acb5cca7a8f5bf5b0557028bacab239f3643c6fd01d1e47"
+    },
+    {
+      "merchantId": "546227527",
+      "merchantName": "福建馄饨王·面条·米饭",
+      "recommendTime": "2026-10-19 15:47:10",
+      "city": "上海市",
+      "status": "待处理",
+      "rowIndex": 1,
+      "sourcePage": 1,
+      "tableOrder": 9,
+      "address": "宛平南路970号-1",
+      "contact": "徐生，15915985252",
+      "detailVerified": true,
+      "text": "城市：上海市  ；  联系人：徐生，15915985252  ；  店铺：福建馄饨王·面条·米饭  ；  地址：宛平南路970号-1",
+      "sha256": "259827552c0305610c2a681f60ef4b242228ef95e821779cddfdd72e2af1aecd"
+    },
+    {
+      "merchantId": "1357693154",
+      "merchantName": "第壹烤场1元烤串",
+      "recommendTime": "2026-10-19 16:11:15",
+      "city": "昆明市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 10,
+      "address": "县街街道办事处石江村委会安澜路文博雅园底商s49号商铺",
+      "contact": "何，15288191182",
+      "detailVerified": true,
+      "text": "城市：昆明市  ；  联系人：何，15288191182  ；  店铺：第壹烤场1元烤串  ；  地址：县街街道办事处石江村委会安澜路文博雅园底商s49号商铺",
+      "sha256": "7498c172e92a6e8133eb04a1d97d086b358ee6979e7b834ff90ab560e970b9ff"
+    }
+  ],
+  "frontmostBefore": "com.tencent.workbuddy.mac",
+  "createdAt": "2026-10-19T08:19:32.163Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-19",
+    "merchantName": "沙县小吃(云华路店)",
+    "merchantId": "546074715",
+    "recommendTime": "2026-10-19 13:57:30",
+    "tableOrder": 7,
+    "messageSha256": "4b0d610bf2008cec56e717b968a9aa35687f0a6dd6f233079020ef08d066fbfc",
+    "sentAt": "2026-10-19T15:01:52+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-19",
+  "filterEndDate": "2026-10-19",
+  "dateFilter": "2026-10-19..2026-10-19",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 10,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 10,
+  "pendingRows": 10,
+  "targetCount": 3,
+  "selectionAudit": {
+    "totalRows": 10,
+    "pendingRows": 10,
+    "excludedAtOrBeforeCursor": 7,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 3,
+    "rows": [
+      {
+        "merchantId": "1357693154",
+        "recommendTime": "2026-10-19 16:11:15",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546227527",
+        "recommendTime": "2026-10-19 15:47:10",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "544123889",
+        "recommendTime": "2026-10-19 15:10:49",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546074715",
+        "recommendTime": "2026-10-19 13:57:30",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1335014609",
+        "recommendTime": "2026-10-19 13:13:02",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "542834120",
+        "recommendTime": "2026-10-19 12:31:32",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1364102557",
+        "recommendTime": "2026-10-19 10:30:09",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546486813",
+        "recommendTime": "2026-10-19 10:10:02",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "544562101",
+        "recommendTime": "2026-10-19 08:28:03",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1310479636",
+        "recommendTime": "2026-10-19 07:20:25",
+        "status": "待处理"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 11062,
+  "frontmostAfter": "com.tencent.workbuddy.mac",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261019-161920/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261019-161920/output/collection-attempt-1.review.md"
+}

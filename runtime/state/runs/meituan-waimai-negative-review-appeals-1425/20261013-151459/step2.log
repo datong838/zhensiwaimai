@@ -1,0 +1,9 @@
+file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-waimai-negative-review-appeals/scripts/appeal_report_builder.mjs:38
+  if (missingVerifiedKeys.length) throw Error(`platform-snapshot-missing-verified-submissions:${missingVerifiedKeys.length}`);
+                                        ^
+
+Error: platform-snapshot-missing-verified-submissions:1
+    at buildFullAppealReport (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-waimai-negative-review-appeals/scripts/appeal_report_builder.mjs:38:41)
+    at async file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-waimai-negative-review-appeals/scripts/build_single_batch_excel.mjs:11:28
+
+Node.js v24.19.0

@@ -1,0 +1,208 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-09",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 113,
+    "task_page": 482,
+    "navigation": 1600,
+    "date_filter": 1037,
+    "page_1_read": 403,
+    "page_1_next": 61,
+    "page_2_read": 663,
+    "page_2_next": 62,
+    "page_3_read": 570,
+    "selection_audit": 0
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "page_1_next": "PASS",
+    "page_2_read": "PASS",
+    "page_2_next": "PASS",
+    "page_3_read": "PASS",
+    "selection_audit": "PASS"
+  },
+  "messages": [],
+  "frontmostBefore": "com.tencent.workbuddy.mac",
+  "createdAt": "2026-10-09T13:39:48.671Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-09",
+    "merchantName": "使劲炫-蛋包饭-肥牛饭-鳗鱼饭",
+    "merchantId": "543501434",
+    "recommendTime": "2026-10-09 18:40:04",
+    "tableOrder": 34,
+    "messageSha256": "bbdffe050b2f74867fc34b1fe09dc614c2c3cdb7f9465890b35c16fd37c59830",
+    "sentAt": "2026-10-09T21:20:48+0800",
+    "verified": true,
+    "note": "2026-10-09 监理经 Windows 网关(.3)补发 15 条 + 疆麦尔已于 8:21 落群(群回读证实)；游标推进至末条以防重复外发。证据 .local/runs/manual-gateway-backfill-20261009/evidence.jsonl"
+  },
+  "cursorSource": "local",
+  "filterStartDate": "2026-10-09",
+  "filterEndDate": "2026-10-09",
+  "dateFilter": "2026-10-09..2026-10-09",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 10,
+      "nextEnabled": true
+    },
+    {
+      "page": 2,
+      "rowCount": 10,
+      "nextEnabled": true
+    },
+    {
+      "page": 3,
+      "rowCount": 3,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 23,
+  "pendingRows": 15,
+  "targetCount": 0,
+  "selectionAudit": {
+    "totalRows": 23,
+    "pendingRows": 15,
+    "excludedAtOrBeforeCursor": 21,
+    "excludedAfterCursorNotPending": 2,
+    "targetCount": 0,
+    "rows": [
+      {
+        "merchantId": "543501434",
+        "recommendTime": "2026-10-09 18:40:04",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1342930879",
+        "recommendTime": "2026-10-09 17:47:20",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "544634423",
+        "recommendTime": "2026-10-09 16:31:19",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546642446",
+        "recommendTime": "2026-10-09 16:28:09",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "536191937",
+        "recommendTime": "2026-10-09 16:23:13",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1360714934",
+        "recommendTime": "2026-10-09 16:06:52",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1364088358",
+        "recommendTime": "2026-10-09 15:44:46",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1343100242",
+        "recommendTime": "2026-10-09 14:44:55",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "541567943",
+        "recommendTime": "2026-10-09 14:04:59",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "541776241",
+        "recommendTime": "2026-10-09 12:31:25",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "545692013",
+        "recommendTime": "2026-10-09 12:28:29",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546376532",
+        "recommendTime": "2026-10-09 12:06:10",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "2038415796",
+        "recommendTime": "2026-10-09 10:48:10",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "529507609",
+        "recommendTime": "2026-10-09 10:23:10",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1364337844",
+        "recommendTime": "2026-10-09 10:17:29",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1360227534",
+        "recommendTime": "2026-10-09 20:34:47",
+        "status": "完成"
+      },
+      {
+        "merchantId": "1331564067",
+        "recommendTime": "2026-10-09 18:53:24",
+        "status": "完成"
+      },
+      {
+        "merchantId": "1353390407",
+        "recommendTime": "2026-10-09 18:28:08",
+        "status": "完成"
+      },
+      {
+        "merchantId": "546952118",
+        "recommendTime": "2026-10-09 17:59:15",
+        "status": "完成"
+      },
+      {
+        "merchantId": "502455991",
+        "recommendTime": "2026-10-09 15:15:46",
+        "status": "完成"
+      },
+      {
+        "merchantId": "546290691",
+        "recommendTime": "2026-10-09 13:06:07",
+        "status": "完成"
+      },
+      {
+        "merchantId": "1358791510",
+        "recommendTime": "2026-10-09 12:54:01",
+        "status": "完成"
+      },
+      {
+        "merchantId": "1255237661",
+        "recommendTime": "2026-10-09 09:46:35",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 5474,
+  "frontmostAfter": "com.tencent.workbuddy.mac",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261009-213942/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261009-213942/output/collection-attempt-1.review.md"
+}

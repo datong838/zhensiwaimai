@@ -1,0 +1,139 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-07",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 238,
+    "task_page": 544,
+    "navigation": 1736,
+    "date_filter": 1418,
+    "page_1_read": 296,
+    "selection_audit": 0,
+    "detail_1316655046": 770,
+    "detail_546590794": 2384
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_1316655046": "PASS",
+    "detail_546590794": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "1316655046",
+      "merchantName": "洽醉捞汁小海鲜",
+      "recommendTime": "2026-10-07 14:42:25",
+      "city": "长春市",
+      "status": "待处理",
+      "rowIndex": 1,
+      "sourcePage": 1,
+      "tableOrder": 5,
+      "address": "工农大路南胡同13号28栋107室",
+      "contact": "崔，17543056299",
+      "detailVerified": true,
+      "text": "城市：长春市  ；  联系人：崔，17543056299  ；  店铺：洽醉捞汁小海鲜  ；  地址：工农大路南胡同13号28栋107室",
+      "sha256": "5b8cf1c6fd5f1a206f829d201b8cee3b99088e6be68c07592bed095c96966082"
+    },
+    {
+      "merchantId": "546590794",
+      "merchantName": "杨记鸡煲",
+      "recommendTime": "2026-10-07 15:14:06",
+      "city": "揭阳市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 6,
+      "address": "流沙东街道秀陇村寮前园新六路167号",
+      "contact": "杨，13414849120",
+      "detailVerified": true,
+      "text": "城市：揭阳市  ；  联系人：杨，13414849120  ；  店铺：杨记鸡煲  ；  地址：流沙东街道秀陇村寮前园新六路167号",
+      "sha256": "9c1bb63a292fe44b719898d2fddce367854f69b842c0acec95bc16ddd3402dae"
+    }
+  ],
+  "frontmostBefore": "com.tencent.yuanbao",
+  "createdAt": "2026-10-07T07:54:22.929Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-07",
+    "merchantName": "肖记擀面皮",
+    "merchantId": "1355794675",
+    "recommendTime": "2026-10-07 14:03:59",
+    "tableOrder": 4,
+    "messageSha256": "a6e7e30336fbba9cae7c19eccf712ad4f1f19e02c9b47e5271b45debedb3f092",
+    "sentAt": "2026-10-07T14:31:41+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-07",
+  "filterEndDate": "2026-10-07",
+  "dateFilter": "2026-10-07..2026-10-07",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 6,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 6,
+  "pendingRows": 6,
+  "targetCount": 2,
+  "selectionAudit": {
+    "totalRows": 6,
+    "pendingRows": 6,
+    "excludedAtOrBeforeCursor": 4,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 2,
+    "rows": [
+      {
+        "merchantId": "546590794",
+        "recommendTime": "2026-10-07 15:14:06",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1316655046",
+        "recommendTime": "2026-10-07 14:42:25",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1355794675",
+        "recommendTime": "2026-10-07 14:03:59",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "543219931",
+        "recommendTime": "2026-10-07 11:50:25",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1342388590",
+        "recommendTime": "2026-10-07 09:07:48",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "542957171",
+        "recommendTime": "2026-10-07 01:44:14",
+        "status": "待处理"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 7984,
+  "frontmostAfter": "com.tencent.yuanbao",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261007-155414/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261007-155414/output/collection-attempt-1.review.md"
+}

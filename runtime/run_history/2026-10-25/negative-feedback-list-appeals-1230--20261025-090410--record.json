@@ -1,0 +1,23 @@
+{
+  "skill": "negative-feedback-list-appeals-1230",
+  "ledger_name": "负反馈列表申诉·双平台 Excel 汇总发群（每日08:30·申诉后即发）",
+  "schedule": "每日08:20执行，08:30前交付",
+  "dev_state": "active",
+  "status": "FAILED",
+  "category": "UNKNOWN",
+  "detail": "reason=pagination-total-mismatch:meituan:rows=60:total=56 (receipt:reason)",
+  "next_action": "看护代理读日志定位根因后升级处理",
+  "attempts": 1,
+  "max_retries": 0,
+  "duration_seconds": 12.98,
+  "started_at": "2026-10-25T09:04:10",
+  "finished_at": "2026-10-25T09:04:23",
+  "triggered_by": "daemon",
+  "logs": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-25/negative-feedback-list-appeals-1230--20261025-090410--a1--s1.log"
+  ],
+  "fail_signal": {
+    "kind": "reason",
+    "code": "pagination-total-mismatch:meituan:rows=60:total=56"
+  }
+}

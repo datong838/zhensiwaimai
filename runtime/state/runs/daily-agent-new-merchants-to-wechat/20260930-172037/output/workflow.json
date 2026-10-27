@@ -1,0 +1,282 @@
+{
+  "ok": false,
+  "runId": "62cec8e2-829e-45c8-8d02-22e9cadccbd3",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "executor_integrity": 8,
+    "runtime_policy": 0,
+    "offline_selftest": 177,
+    "collection": 5352,
+    "audit": 0,
+    "desktop_wechat_preflight": 18
+  },
+  "stageResults": {
+    "executor_integrity": "PASS",
+    "runtime_policy": "PASS",
+    "offline_selftest": "PASS",
+    "collection": "PASS",
+    "audit": "PASS",
+    "desktop_wechat_preflight": "FAIL"
+  },
+  "stage": "desktop_wechat_preflight",
+  "wechatChannel": "desktop",
+  "collectionAttempts": [
+    {
+      "ok": true,
+      "executor": "merchant-collector",
+      "browserController": "control-background-dedicated-chrome",
+      "profile": "taobao-agent-service",
+      "port": 9231,
+      "groupName": "电销+直播攻坚组",
+      "businessDate": "2026-09-30",
+      "runtimeModelDecisions": 0,
+      "stageMs": {
+        "background_preflight": 45,
+        "task_page": 542,
+        "navigation": 1429,
+        "date_filter": 1678,
+        "page_1_read": 353,
+        "selection_audit": 1,
+        "detail_541571894": 753
+      },
+      "stageResults": {
+        "background_preflight": "PASS",
+        "task_page": "PASS",
+        "navigation": "PASS",
+        "date_filter": "PASS",
+        "page_1_read": "PASS",
+        "selection_audit": "PASS",
+        "detail_541571894": "PASS"
+      },
+      "frontmostBefore": "com.openai.codex",
+      "createdAt": "2026-09-30T09:20:42.725Z",
+      "cursorSource": "verified-history",
+      "filterStartDate": "2026-09-30",
+      "filterEndDate": "2026-09-30",
+      "dateFilter": "2026-09-30..2026-09-30",
+      "dateFilterVerified": true,
+      "pages": [
+        {
+          "page": 1,
+          "rowCount": 8,
+          "nextEnabled": false
+        }
+      ],
+      "paginationComplete": true,
+      "totalRows": 8,
+      "pendingRows": 5,
+      "targetCount": 1,
+      "selectionAudit": {
+        "totalRows": 8,
+        "pendingRows": 5,
+        "excludedAtOrBeforeCursor": 6,
+        "excludedAfterCursorNotPending": 1,
+        "targetCount": 1,
+        "rows": [
+          {
+            "merchantId": "541571894",
+            "recommendTime": "2026-09-30 16:55:39",
+            "status": "待处理"
+          },
+          {
+            "merchantId": "546531224",
+            "recommendTime": "2026-09-30 15:03:10",
+            "status": "待处理"
+          },
+          {
+            "merchantId": "1263459850",
+            "recommendTime": "2026-09-30 13:26:54",
+            "status": "待处理"
+          },
+          {
+            "merchantId": "521315008",
+            "recommendTime": "2026-09-30 10:35:21",
+            "status": "待处理"
+          },
+          {
+            "merchantId": "543891127",
+            "recommendTime": "2026-09-30 10:28:04",
+            "status": "待处理"
+          },
+          {
+            "merchantId": "1362405258",
+            "recommendTime": "2026-09-30 16:02:53",
+            "status": "完成"
+          },
+          {
+            "merchantId": "1360640820",
+            "recommendTime": "2026-09-30 14:35:56",
+            "status": "完成"
+          },
+          {
+            "merchantId": "1348225171",
+            "recommendTime": "2026-09-30 12:54:03",
+            "status": "完成"
+          }
+        ]
+      },
+      "ascending": true,
+      "detailsVerified": true,
+      "url": "https://open.shop.ele.me/manager/agent/home",
+      "elapsedMs": 5036,
+      "frontmostAfter": "com.openai.codex",
+      "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20260930-172037/output/collection-attempt-1.review.json",
+      "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20260930-172037/output/collection-attempt-1.review.md",
+      "attempt": 1
+    }
+  ],
+  "executorIntegrity": {
+    "ok": true,
+    "status": "UNSEALED_ACCEPTANCE",
+    "manifestSha256": "5d45461c0d769f079e4a2441ee30bd1fa549b9bae0afc8eb27bc30746b55c865",
+    "fileCount": 19,
+    "authorization": "user-20260916-production-hardening",
+    "runtimeModelDecisions": 0,
+    "maintenanceAcceptance": "desktop-wechat-shared-preflight",
+    "sharedTextAcceptance": "wechat-messaging-desktop-text",
+    "sharedMediaAcceptance": "not-required-by-text-only-merchant-workflow"
+  },
+  "runtimePolicy": {
+    "ok": true,
+    "group": "电销+直播攻坚组",
+    "channel": "desktop",
+    "cursorFile": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/cursor.json",
+    "maxCollectionAttempts": 2,
+    "collectionBudgetSeconds": 180
+  },
+  "selftest": {
+    "ok": true,
+    "senderTests": 5,
+    "browserTests": 37
+  },
+  "collection": {
+    "ok": true,
+    "executor": "merchant-collector",
+    "browserController": "control-background-dedicated-chrome",
+    "profile": "taobao-agent-service",
+    "port": 9231,
+    "groupName": "电销+直播攻坚组",
+    "businessDate": "2026-09-30",
+    "runtimeModelDecisions": 0,
+    "stageMs": {
+      "background_preflight": 45,
+      "task_page": 542,
+      "navigation": 1429,
+      "date_filter": 1678,
+      "page_1_read": 353,
+      "selection_audit": 1,
+      "detail_541571894": 753
+    },
+    "stageResults": {
+      "background_preflight": "PASS",
+      "task_page": "PASS",
+      "navigation": "PASS",
+      "date_filter": "PASS",
+      "page_1_read": "PASS",
+      "selection_audit": "PASS",
+      "detail_541571894": "PASS"
+    },
+    "frontmostBefore": "com.openai.codex",
+    "createdAt": "2026-09-30T09:20:42.725Z",
+    "cursorSource": "verified-history",
+    "filterStartDate": "2026-09-30",
+    "filterEndDate": "2026-09-30",
+    "dateFilter": "2026-09-30..2026-09-30",
+    "dateFilterVerified": true,
+    "pages": [
+      {
+        "page": 1,
+        "rowCount": 8,
+        "nextEnabled": false
+      }
+    ],
+    "paginationComplete": true,
+    "totalRows": 8,
+    "pendingRows": 5,
+    "targetCount": 1,
+    "selectionAudit": {
+      "totalRows": 8,
+      "pendingRows": 5,
+      "excludedAtOrBeforeCursor": 6,
+      "excludedAfterCursorNotPending": 1,
+      "targetCount": 1,
+      "rows": [
+        {
+          "merchantId": "541571894",
+          "recommendTime": "2026-09-30 16:55:39",
+          "status": "待处理"
+        },
+        {
+          "merchantId": "546531224",
+          "recommendTime": "2026-09-30 15:03:10",
+          "status": "待处理"
+        },
+        {
+          "merchantId": "1263459850",
+          "recommendTime": "2026-09-30 13:26:54",
+          "status": "待处理"
+        },
+        {
+          "merchantId": "521315008",
+          "recommendTime": "2026-09-30 10:35:21",
+          "status": "待处理"
+        },
+        {
+          "merchantId": "543891127",
+          "recommendTime": "2026-09-30 10:28:04",
+          "status": "待处理"
+        },
+        {
+          "merchantId": "1362405258",
+          "recommendTime": "2026-09-30 16:02:53",
+          "status": "完成"
+        },
+        {
+          "merchantId": "1360640820",
+          "recommendTime": "2026-09-30 14:35:56",
+          "status": "完成"
+        },
+        {
+          "merchantId": "1348225171",
+          "recommendTime": "2026-09-30 12:54:03",
+          "status": "完成"
+        }
+      ]
+    },
+    "ascending": true,
+    "detailsVerified": true,
+    "url": "https://open.shop.ele.me/manager/agent/home",
+    "elapsedMs": 5036,
+    "frontmostAfter": "com.openai.codex",
+    "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20260930-172037/output/collection-attempt-1.review.json",
+    "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20260930-172037/output/collection-attempt-1.review.md"
+  },
+  "error": "<urlopen error [Errno 65] No route to host>",
+  "desktopWechatPreflight": {
+    "ok": false,
+    "reason": "<urlopen error [Errno 65] No route to host>",
+    "sendAttempts": 0,
+    "attemptReviews": [
+      {
+        "attempt": 1,
+        "elapsedMs": 18,
+        "ok": false,
+        "reason": "<urlopen error [Errno 65] No route to host>",
+        "sendAttempts": 0,
+        "sendReview": []
+      }
+    ],
+    "contentionRetries": 0,
+    "contentionWaitMs": 0,
+    "contentionEvents": []
+  },
+  "elapsedMs": 5686,
+  "completion": {
+    "state": "RECOVERABLE_NO_SEND",
+    "nextAction": "diagnose-repair-test-maintain-retry-once",
+    "automaticRecoveryAllowed": true,
+    "recoveryAttemptBudget": 1,
+    "reason": "<urlopen error [Errno 65] No route to host>"
+  },
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20260930-172037/output/review.json"
+}

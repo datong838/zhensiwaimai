@@ -1,0 +1,23 @@
+{
+  "skill": "daily-negative-reviews",
+  "ledger_name": "昨日差评分析（每日08:40）",
+  "schedule": "每日08:30",
+  "dev_state": "active",
+  "status": "FAILED",
+  "category": "UNKNOWN",
+  "detail": "reason=jinsha-lease-busy:negative-reviews-1792888610585 (receipt:reason)",
+  "next_action": "看护代理读日志定位根因后升级处理",
+  "attempts": 1,
+  "max_retries": 0,
+  "duration_seconds": 0.51,
+  "started_at": "2026-10-25T09:06:27",
+  "finished_at": "2026-10-25T09:06:27",
+  "triggered_by": "daemon",
+  "logs": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-25/daily-negative-reviews--20261025-090627--a1--s1.log"
+  ],
+  "fail_signal": {
+    "kind": "reason",
+    "code": "jinsha-lease-busy:negative-reviews-1792888610585"
+  }
+}

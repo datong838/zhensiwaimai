@@ -1,0 +1,124 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-05",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 41,
+    "task_page": 546,
+    "navigation": 1594,
+    "date_filter": 1368,
+    "page_1_read": 240,
+    "selection_audit": 0,
+    "detail_1332581200": 742,
+    "detail_1362271630": 2352
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_1332581200": "PASS",
+    "detail_1362271630": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "1332581200",
+      "merchantName": "味你而来烤鸡(贵定店)",
+      "recommendTime": "2026-10-05 12:52:03",
+      "city": "黔南布依族苗族自治州",
+      "status": "待处理",
+      "rowIndex": 1,
+      "sourcePage": 1,
+      "tableOrder": 2,
+      "address": "金南街道商会大楼东楼6号门面",
+      "contact": "龚玺，18683444111",
+      "detailVerified": true,
+      "text": "城市：黔南布依族苗族自治州  ；  联系人：龚玺，18683444111  ；  店铺：味你而来烤鸡(贵定店)  ；  地址：金南街道商会大楼东楼6号门面",
+      "sha256": "8a40a86839cf131081eccc2542aa1cf7355ad351b15bb0735030b31ff9157fa9"
+    },
+    {
+      "merchantId": "1362271630",
+      "merchantName": "味萃坊虾蟹牛骨馆",
+      "recommendTime": "2026-10-05 13:05:35",
+      "city": "惠州市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 3,
+      "address": "淡水街道草洋中路7号一楼B铺",
+      "contact": "谭先生，13823586197",
+      "detailVerified": true,
+      "text": "城市：惠州市  ；  联系人：谭先生，13823586197  ；  店铺：味萃坊虾蟹牛骨馆  ；  地址：淡水街道草洋中路7号一楼B铺",
+      "sha256": "2dcafba525255ef96f7f4d2133f5eab04f475b97dc28f18a1b3bfa43314e6934"
+    }
+  ],
+  "frontmostBefore": "unavailable",
+  "createdAt": "2026-10-05T05:33:35.124Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-05",
+    "merchantName": "聚德烤鸭",
+    "merchantId": "1341962648",
+    "recommendTime": "2026-10-05 09:49:45",
+    "tableOrder": 8,
+    "messageSha256": "1d79a3132c3a86c0e6f04f7e78cd09d046d2f6332fa40c2bc312cc39ae353278",
+    "sentAt": "2026-10-05T12:08:09+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-05",
+  "filterEndDate": "2026-10-05",
+  "dateFilter": "2026-10-05..2026-10-05",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 3,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 3,
+  "pendingRows": 3,
+  "targetCount": 2,
+  "selectionAudit": {
+    "totalRows": 3,
+    "pendingRows": 3,
+    "excludedAtOrBeforeCursor": 1,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 2,
+    "rows": [
+      {
+        "merchantId": "1362271630",
+        "recommendTime": "2026-10-05 13:05:35",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1332581200",
+        "recommendTime": "2026-10-05 12:52:03",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1341962648",
+        "recommendTime": "2026-10-05 09:49:45",
+        "status": "待处理"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 7346,
+  "frontmostAfter": "unavailable",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261005-133326/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261005-133326/output/collection-attempt-1.review.md"
+}

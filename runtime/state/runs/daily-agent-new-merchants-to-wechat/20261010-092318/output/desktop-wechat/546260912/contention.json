@@ -1,0 +1,198 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：赣州市  ；  联系人：蒋昌海，17688534716  ；  店铺：重庆鸡公煲·特色纸包鱼烤鱼  ；  地址：赣州经济技术开发区新能源汽车科技城二期3-9商铺",
+      "sha256": "c8e6affcf9582e1b741ec18c5e995ef468f4201bf62ab0d6cc406b06fba0a05f"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "e7cd3ffc7f5d29e0c2f4aaa8cf830b62fb57d7faa4787b3473c6e649f1165e99",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "c8e6affcf9582e1b741ec18c5e995ef468f4201bf62ab0d6cc406b06fba0a05f",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1791595416.203124,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-text-anchor",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "电销+直播攻坚组",
+          "currentTitle": "电销+直播攻坚组",
+          "messageCount": 40,
+          "anchor": "text-exact",
+          "anchorValue": "城市：赣州市  ；  联系人：蒋昌海，17688534716  ；  店铺：重庆鸡公煲·特色纸包鱼烤鱼  ；  地址：赣州经济技术开发区新能源汽车科技城二期3-9商铺",
+          "anchorInTrailingPosition": true,
+          "autoKind": null,
+          "readbackAt": 1791595438.917999
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "电销+直播攻坚组",
+            "len": 83
+          },
+          "route": "relay",
+          "direct_error": "[Errno 65] No route to host",
+          "direct_local_network_blocked": true,
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 240
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 22714
+      }
+    ],
+    "elapsedMs": 22960,
+    "eventKey": "35358a17e31d77088546e6e0c649d507d49ac703c7173131a97770c1c4fe2700",
+    "reviewSummary": {
+      "totalElapsedMs": 22960,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/e2be0bf5dbd785a574be15c2fbb2ccb034b86f85810d5b8dd53e8bb281cc94e1.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 240,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 22714,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 22960,
+  "reviewSummary": {
+    "totalElapsedMs": 22960,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "ok": true,
+    "resolvedGroup": "电销+直播攻坚组",
+    "currentTitle": "电销+直播攻坚组",
+    "messageCount": 40,
+    "anchor": "text-exact",
+    "anchorValue": "城市：赣州市  ；  联系人：蒋昌海，17688534716  ；  店铺：重庆鸡公煲·特色纸包鱼烤鱼  ；  地址：赣州经济技术开发区新能源汽车科技城二期3-9商铺",
+    "anchorInTrailingPosition": true,
+    "autoKind": null,
+    "readbackAt": 1791595438.917999
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false,
+  "attemptReviews": [
+    {
+      "attempt": 1,
+      "elapsedMs": 23116,
+      "ok": true,
+      "reason": null,
+      "sendAttempts": 1,
+      "sendReview": [
+        {
+          "stage": "authorization",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 1,
+          "label": "authorization"
+        },
+        {
+          "stage": "freeze:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 2,
+          "label": "freeze:0"
+        },
+        {
+          "stage": "preflight",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 240,
+          "item": 3,
+          "label": "preflight"
+        },
+        {
+          "stage": "send:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 22714,
+          "item": 4,
+          "label": "send:0"
+        }
+      ]
+    }
+  ],
+  "contentionRetries": 0,
+  "contentionWaitMs": 0,
+  "contentionEvents": []
+}

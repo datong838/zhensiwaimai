@@ -1,0 +1,156 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-21",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 173,
+    "task_page": 503,
+    "navigation": 1387,
+    "date_filter": 1556,
+    "page_1_read": 324,
+    "selection_audit": 0,
+    "detail_1149026756": 777,
+    "detail_1316635375": 1004,
+    "detail_1364936969": 2430
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_1149026756": "PASS",
+    "detail_1316635375": "PASS",
+    "detail_1364936969": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "1149026756",
+      "merchantName": "云贵川小炒店",
+      "recommendTime": "2026-10-21 11:06:51",
+      "city": "汕头市",
+      "status": "待处理",
+      "rowIndex": 2,
+      "sourcePage": 1,
+      "tableOrder": 4,
+      "address": "广益街道北陇华东路旁",
+      "contact": "王，15218971886",
+      "detailVerified": true,
+      "text": "城市：汕头市  ；  联系人：王，15218971886  ；  店铺：云贵川小炒店  ；  地址：广益街道北陇华东路旁",
+      "sha256": "0f1646dd1e53bb626517782912fd9a6a0a261ae1e43a14f93d6e3dc6d022f453"
+    },
+    {
+      "merchantId": "1316635375",
+      "merchantName": "巷陌食集",
+      "recommendTime": "2026-10-21 11:16:38",
+      "city": "红河哈尼族彝族自治州",
+      "status": "待处理",
+      "rowIndex": 1,
+      "sourcePage": 1,
+      "tableOrder": 5,
+      "address": "异龙镇卫家营社区异龙镇小西山7号",
+      "contact": "李嘉丽，13769390672",
+      "detailVerified": true,
+      "text": "城市：红河哈尼族彝族自治州  ；  联系人：李嘉丽，13769390672  ；  店铺：巷陌食集  ；  地址：异龙镇卫家营社区异龙镇小西山7号",
+      "sha256": "f03011c9f09b9f68943f6a7da6d191fde6937ec889637a7c245ba57f6f26423e"
+    },
+    {
+      "merchantId": "1364936969",
+      "merchantName": "鑫宇熏拌鸡架",
+      "recommendTime": "2026-10-21 11:26:52",
+      "city": "青岛市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 6,
+      "address": "长城路700号青岛农业大学海都餐厅一、二、三楼",
+      "contact": "马，15206984824",
+      "detailVerified": true,
+      "text": "城市：青岛市  ；  联系人：马，15206984824  ；  店铺：鑫宇熏拌鸡架  ；  地址：长城路700号青岛农业大学海都餐厅一、二、三楼",
+      "sha256": "77d0448a59e48f00c82ec2283af2e5efa3f3105f45ab4cd580f97a4573d01477"
+    }
+  ],
+  "frontmostBefore": "com.tencent.workbuddy.mac",
+  "createdAt": "2026-10-21T04:07:58.576Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-21",
+    "merchantName": "清真新疆炒米粉",
+    "merchantId": "2099099893",
+    "recommendTime": "2026-10-21 10:26:36",
+    "tableOrder": 29,
+    "messageSha256": "94c4bbab5b99144bc89911a80c3ca4e874749c1f98a2c7132571bc1e135d36c2",
+    "sentAt": "2026-10-21T10:33:30+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-21",
+  "filterEndDate": "2026-10-21",
+  "dateFilter": "2026-10-21..2026-10-21",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 6,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 6,
+  "pendingRows": 5,
+  "targetCount": 3,
+  "selectionAudit": {
+    "totalRows": 6,
+    "pendingRows": 5,
+    "excludedAtOrBeforeCursor": 3,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 3,
+    "rows": [
+      {
+        "merchantId": "1364936969",
+        "recommendTime": "2026-10-21 11:26:52",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1316635375",
+        "recommendTime": "2026-10-21 11:16:38",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1149026756",
+        "recommendTime": "2026-10-21 11:06:51",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "2099099893",
+        "recommendTime": "2026-10-21 10:26:36",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1198136457",
+        "recommendTime": "2026-10-21 10:01:48",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546206388",
+        "recommendTime": "2026-10-21 09:39:50",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 8838,
+  "frontmostAfter": "com.tencent.workbuddy.mac",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261021-120748/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261021-120748/output/collection-attempt-1.review.md"
+}

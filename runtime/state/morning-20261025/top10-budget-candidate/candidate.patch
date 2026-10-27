@@ -1,0 +1,40 @@
+--- skills/workflows/daily-top10-to-wechat-group/scripts/workflow_executor.py
++++ skills/workflows/daily-top10-to-wechat-group/scripts/workflow_executor.py
+@@ -33,7 +33,7 @@
+     from wecom_adapter import WeComAdapter as WindowsAdapter  # 2026-10-23 channel switch → 企微
+     adapter=WindowsAdapter()
+     return adapter.preflight({'groupName':CANONICAL_TARGET_GROUP,
+-        'context':{'searchGroupName':None,'deadlineAt':time.time()+120}},output_dir)
++        'context':{'searchGroupName':None,'deadlineAt':time.time()+900}},output_dir)
+ 
+ def load_shared_preflight():
+     spec=importlib.util.spec_from_file_location('top10_wechat_shared_preflight',DESKTOP_PREFLIGHT)
+@@ -175,7 +175,7 @@
+             ledger=ROOT.parent/'.runtime'/'send-ledger'
+             cmd=[sys.executable,str(DESKTOP_SENDER), "--workflow-id", "top10",'--group',phone.TARGET_GROUP,'--payload-type','image','--item',str(image),
+                  '--authorization',args.standing_authorization,'--ledger',str(ledger),'--marker-name',marker,
+-                 '--output-dir',str(Path(desktop['receiptFile']).parent/'desktop-wechat'),'--deadline-unix',str(desktop['deadlineAt']/1000),'--execute']
++                 '--output-dir',str(Path(desktop['receiptFile']).parent/'desktop-wechat'),'--deadline-unix',str(time.time()+900),'--execute']
+             send_retry_history=[]
+             while True:
+                 sent=subprocess.run(cmd,capture_output=True,text=True,timeout=1000)
+@@ -210,7 +210,7 @@
+         result['desktopWechat' if args.wechat_channel=='desktop' else 'phone']=p
+         if not p.get('ok'):result['reason']=('desktop-wechat:' if args.wechat_channel=='desktop' else 'mobile-wechat:')+p.get('reason','failed')
+         result['endToEndMs']=round(time.time()*1000-desktop['startedAt'])
+-        if result['endToEndMs']>=180000:raise phone.StopRun('total-deadline-exceeded')
++        if result['endToEndMs']>=900000:raise phone.StopRun('total-deadline-exceeded')
+     except Exception as e:
+         result['ok']=False
+         result['reason']=str(e)
+--- skills/workflows/daily-top10-to-wechat-group/scripts/desktop_background_executor.mjs
++++ skills/workflows/daily-top10-to-wechat-group/scripts/desktop_background_executor.mjs
+@@ -85,7 +85,7 @@
+       let owned=0;for(const candidate of context.pages()){try{if(await candidate.evaluate(()=>window.name)===`aos-background-task:${taskId}`)owned++;}catch{}}
+       if(owned!==0)throw Error('task-page-already-exists');
+     });
+-    started=Date.now();deadline=started+180000;Object.assign(receipt,{startedAt:started,deadlineAt:deadline,dataDate:yesterdayInShanghai()});
++    started=Date.now();deadline=started+900000;Object.assign(receipt,{startedAt:started,deadlineAt:deadline,dataDate:yesterdayInShanghai()});
+     await stage('open_home',async()=>{
+       const context=browser.contexts()[0];page=await context.newPage();await page.setViewportSize({width:2200,height:1800});
+       cdpSession=await context.newCDPSession(page);await cdpSession.send('Emulation.setDeviceMetricsOverride',{width:2200,height:1800,deviceScaleFactor:2,mobile:false});receipt.deviceScaleFactor=2;

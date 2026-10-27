@@ -1,0 +1,77 @@
+{
+  "scenario": "old-date pending unknown plus new-date untried merchant",
+  "isolated": true,
+  "collectionSelectedDates": [
+    "2026-10-27",
+    "2026-10-28"
+  ],
+  "originalSenderResult": {
+    "ok": false,
+    "executor": "merchant-desktop-wechat-sender",
+    "channel": "desktop",
+    "sent": 0,
+    "messageCount": 2,
+    "historySkipped": 0,
+    "items": [
+      {
+        "merchantId": "100002",
+        "merchantName": "offline fixture 100002",
+        "review": [
+          {
+            "stage": "发送前合同复核",
+            "status": "PASS",
+            "pitfalls": [],
+            "elapsedMs": 0
+          },
+          {
+            "stage": "已有attempt只读复核",
+            "status": "FAIL",
+            "pitfalls": [
+              "offline-unknown-still-pending"
+            ],
+            "details": [],
+            "attempts": [],
+            "elapsedMs": 0
+          },
+          {
+            "stage": "双帧与原生复制全文复核",
+            "status": "SKIPPED",
+            "elapsedMs": null,
+            "pitfalls": [
+              "前置阶段失败，代码禁止继续"
+            ]
+          },
+          {
+            "stage": "提交前证据门禁",
+            "status": "SKIPPED",
+            "elapsedMs": null,
+            "pitfalls": [
+              "前置阶段失败，代码禁止继续"
+            ]
+          },
+          {
+            "stage": "成功历史与原子游标提交",
+            "status": "SKIPPED",
+            "elapsedMs": null,
+            "pitfalls": [
+              "前置阶段失败，代码禁止继续"
+            ]
+          }
+        ]
+      }
+    ],
+    "contentionRetries": 0,
+    "contentionWaitMs": 0,
+    "contentionEvents": [],
+    "mode": "reconcile-only",
+    "desktop": {
+      "ok": false,
+      "reason": "offline-unknown-still-pending"
+    },
+    "reason": "offline-unknown-still-pending"
+  },
+  "reconcileCalls": 1,
+  "productionSends": 0,
+  "productionStateChanges": 0,
+  "conclusion": "old unknown truncates batch to first item; new-date merchant remains unprocessed; repair must retain old unknown and cursor evidence"
+}

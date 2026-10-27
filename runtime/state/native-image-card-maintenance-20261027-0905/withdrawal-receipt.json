@@ -1,0 +1,53 @@
+{
+  "at": "2026-10-27T09:18:46.482407+08:00",
+  "reason": "用户明确他人会议邀约不属于本方工作流，不再处理由该外部消息引出的额外维护；仅撤回本轮候选源码/摘要同步",
+  "restored": [
+    {
+      "path": "skills/wechat-messaging/scripts/native_ui_post.py",
+      "candidateSha256": "33fa7d438d5df0e2feddffb485d8fe476ba0f3925d28f8cfdc0d313198a423c0",
+      "restoredSha256": "257bb829b0fdeff611aaa6646ad56354ed7651a2f81b595f7de2b7b9309679f3",
+      "matchesBackup": true
+    },
+    {
+      "path": "skills/wechat-messaging/scripts/dependency_maintenance.py",
+      "candidateSha256": "a1527b7b53cf54a802b380f2d4c609b137a0fab88d8dca756ba1bb4770f4847f",
+      "restoredSha256": "1e2f7d49f25b334d0da4ebec8cc5ab6d2673acf34401ca9e710c02279147167e",
+      "matchesBackup": true
+    },
+    {
+      "path": "skills/wechat-messaging/dependencies.json",
+      "candidateSha256": "d7288abeceb711808dd21b75e8a7a789d8cae0868687ebb2e46accc4626268b9",
+      "restoredSha256": "d9abee072890374c0c60e9119517e1ce889c480de417718e6b04b7f8ecbb5936",
+      "matchesBackup": true
+    },
+    {
+      "path": "skills/wechat-messaging/tests/test_native_ui_post.py",
+      "candidateSha256": "403d82adb0915c56315df9bb53ca270414d4c84f1e2d8f78fd8cc52f51d73ed5",
+      "restoredSha256": "206c21c219bc363cbb4110a89573b6bed79382f45655077dccab66594b65171c",
+      "matchesBackup": true
+    },
+    {
+      "path": "skills/wechat-messaging/tests/test_dependency_maintenance.py",
+      "candidateSha256": "94a22cb806bd8ae8d8f2a2bd6795af227ab33a9d11d876070b18f957d80522b7",
+      "restoredSha256": "6c65140e06af980045b32242738a5df176adc88bf5009f64d0dd831836a6cca9",
+      "matchesBackup": true
+    },
+    {
+      "path": "skills/workflows/daily-agent-new-merchants-to-wechat/executor-lock.json",
+      "candidateSha256": "4dd8c99832ddc4a15d80dcc34df572d9aa0fd0eb582c86fec4dda3fb89fd6a82",
+      "restoredSha256": "0dc1c68b12052bc0f4832b9a0e9c6422e11e67944d27e9187f0dca5dd5858fc2",
+      "matchesBackup": true
+    },
+    {
+      "path": "skills/workflows/daily-negative-reviews/scripts/test_maintenance_executor.mjs",
+      "candidateSha256": "e0b48c171113e0feb33e6af09c4a6906201216a82602c613011eeedec0ff7cb5",
+      "restoredSha256": "360e46f59532397d27cf856132f106e4b20a33c12e9014c304178dc400a8a0b1",
+      "matchesBackup": true
+    }
+  ],
+  "businessRecordsModified": false,
+  "sendAttempts": 0,
+  "nativeUiActions": 0,
+  "existingPreflightRepairsPreserved": true,
+  "candidateArchive": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/native-image-card-maintenance-20261027-0905/withdrawn-candidate"
+}

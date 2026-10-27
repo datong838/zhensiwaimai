@@ -1,0 +1,37 @@
+{
+  "at": "2026-10-27T18:39:10.145928",
+  "authorization": "用户明确“图片补发”，美团原blocked零发送、淘宝已确认显示不重发",
+  "originalMarker": "state/shared/meituan-waimai-negative-review-appeals/summary-attempts/meituan-waimai-appeals-summary-2026-10-26.json",
+  "originalSha256": "58f6e43e91ab37342eb96ef4f9d4fa096bad016e0eaa21b3fed096e806a3f75c",
+  "originalSendAttempts": 0,
+  "groupAndEmptyComposerVerified": true,
+  "dispatch": "原主任/control仅恢复美团18:30原流程；原Excel verified幂等跳过，原零发送图沿原事件安全恢复，允许原桥既有零发送产物重绑机制，禁止unknown重发",
+  "codeChange": false,
+  "outcome": "submitted-once-readonly-verification-pending",
+  "codeFix": {
+    "helper": "runtime/summary_zero_payload.mjs",
+    "entry": "skills/workflows/meituan-waimai-negative-review-appeals/scripts/deliver_batch.mjs",
+    "isolatedTests": 7,
+    "sharedDependencies": true,
+    "ledgerOrOldReceiptEdited": false
+  },
+  "currentComposer": "‘",
+  "actualNewSendAttempts": 1,
+  "userAction": "清空未知草稿；不能覆盖或替用户删除，未发送。",
+  "userClearedDraft": true,
+  "userClearedDraftAt": "2026-10-27T18:47:59.723630",
+  "groupAndEmptyComposerReverified": true,
+  "originalSha256Preserved": true,
+  "originalEventPreserved": true,
+  "originalTaskAfterRecovery": "skills/wechat-messaging/.runtime/ui-post-queue/44e2988e-93ae-4ca1-8355-df3ddec5ff89",
+  "newResult": {
+    "status": "unknown",
+    "sendAttempts": 1,
+    "resolvedGroup": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "inputEmpty": true,
+    "reason": "native-ui-inline-image-not-exposed",
+    "backend": "system-events-ui-tree"
+  },
+  "taobaoNotResent": true,
+  "finishedAt": "2026-10-27T18:51:52.917846"
+}

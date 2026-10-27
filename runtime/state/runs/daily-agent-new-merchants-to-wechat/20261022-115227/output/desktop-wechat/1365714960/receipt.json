@@ -1,0 +1,152 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：聊城市  ；  联系人：王，19606355568  ；  店铺：罐罐食咖  ；  地址：新区街道东昌西路北、柳园北路西5号楼A区潮玩街区外主题店3-1(一址多照热食类食品制售,自制饮品制售)  ；  商家ID：1365714960",
+      "sha256": "6a3f5b31ed60f734436cd1dac36b0c8a51ff47e7de471e5b7b9bd5d1cad63a83"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "9cf5be8ece47f322201f53ae1c55478f5534c14d0b5b6d1d3abcf2d36ffb7891",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "6a3f5b31ed60f734436cd1dac36b0c8a51ff47e7de471e5b7b9bd5d1cad63a83",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1792641180.394492,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-text-anchor",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "电销+直播攻坚组",
+          "currentTitle": "电销+直播攻坚组",
+          "messageCount": 42,
+          "anchor": "text-exact",
+          "anchorValue": "城市：聊城市  ；  联系人：王，19606355568  ；  店铺：罐罐食咖  ；  地址：新区街道东昌西路北、柳园北路西5号楼A区潮玩街区外主题店3-1(一址多照热食类食品制售,自制饮品制售)  ；  商家ID：1365714960",
+          "anchorInTrailingPosition": true,
+          "autoKind": null,
+          "readbackAt": 1792641212.609497
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "电销+直播攻坚组",
+            "len": 119
+          },
+          "route": "relay",
+          "direct_error": "[Errno 65] No route to host",
+          "direct_local_network_blocked": true,
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 9319
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 32215
+      }
+    ],
+    "elapsedMs": 41540,
+    "eventKey": "7dacdc1f70846f4dc8b9c39b2f760d7029dfb7ba6bffa7dedc4ec73b7e25b056",
+    "reviewSummary": {
+      "totalElapsedMs": 41540,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/bf14047098a499f47f1c09b4c6eba61b437d2f3433cc2479b167d3952e39ada6.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 9319,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 32215,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 41540,
+  "reviewSummary": {
+    "totalElapsedMs": 41540,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "ok": true,
+    "resolvedGroup": "电销+直播攻坚组",
+    "currentTitle": "电销+直播攻坚组",
+    "messageCount": 42,
+    "anchor": "text-exact",
+    "anchorValue": "城市：聊城市  ；  联系人：王，19606355568  ；  店铺：罐罐食咖  ；  地址：新区街道东昌西路北、柳园北路西5号楼A区潮玩街区外主题店3-1(一址多照热食类食品制售,自制饮品制售)  ；  商家ID：1365714960",
+    "anchorInTrailingPosition": true,
+    "autoKind": null,
+    "readbackAt": 1792641212.609497
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false
+}

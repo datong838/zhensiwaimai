@@ -1,0 +1,25 @@
+{
+  "ok": false,
+  "reason": "windows-driver-unreachable",
+  "detail": "连不到 Windows 驱动（连接级错误，但非本地网络授权问题）。",
+  "health": {
+    "ok": false,
+    "error": "timed out",
+    "error_kind": "connection",
+    "local_network_blocked": false
+  },
+  "attempts": [],
+  "attemptReviews": [
+    {
+      "attempt": 1,
+      "elapsedMs": 30029,
+      "ok": false,
+      "reason": "windows-driver-unreachable",
+      "sendAttempts": 0,
+      "sendReview": []
+    }
+  ],
+  "contentionRetries": 0,
+  "contentionWaitMs": 0,
+  "contentionEvents": []
+}

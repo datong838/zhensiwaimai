@@ -1,0 +1,127 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-11",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 36,
+    "task_page": 561,
+    "navigation": 1440,
+    "date_filter": 1568,
+    "page_1_read": 374,
+    "selection_audit": 1,
+    "detail_545977903": 788
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_545977903": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "545977903",
+      "merchantName": "喜年鲜饺",
+      "recommendTime": "2026-10-11 10:50:52",
+      "city": "营口市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 5,
+      "address": "25-群星国际新城A3#楼-4#门市",
+      "contact": "孙女士，18741717868",
+      "detailVerified": true,
+      "text": "城市：营口市  ；  联系人：孙女士，18741717868  ；  店铺：喜年鲜饺  ；  地址：25-群星国际新城A3#楼-4#门市",
+      "sha256": "3af964e175903d9a05ea7a7c1b71837c4757538c7b73fe1b49eba1926ae959b2"
+    }
+  ],
+  "frontmostBefore": "com.google.Chrome",
+  "createdAt": "2026-10-11T03:30:47.183Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-11",
+    "merchantName": "盈夏面馆上海浇头面",
+    "merchantId": "1362226686",
+    "recommendTime": "2026-10-11 08:46:54",
+    "tableOrder": 35,
+    "messageSha256": "b21d5c54d0c10482fe815428f5aed76a0503771e06f53f794719a1d7aa729c40",
+    "sentAt": "2026-10-11T10:25:17+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-11",
+  "filterEndDate": "2026-10-11",
+  "dateFilter": "2026-10-11..2026-10-11",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 7,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 7,
+  "pendingRows": 4,
+  "targetCount": 1,
+  "selectionAudit": {
+    "totalRows": 7,
+    "pendingRows": 4,
+    "excludedAtOrBeforeCursor": 4,
+    "excludedAfterCursorNotPending": 2,
+    "targetCount": 1,
+    "rows": [
+      {
+        "merchantId": "545977903",
+        "recommendTime": "2026-10-11 10:50:52",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1362226686",
+        "recommendTime": "2026-10-11 08:46:54",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1357690495",
+        "recommendTime": "2026-10-11 04:36:43",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "156280223",
+        "recommendTime": "2026-10-11 00:27:37",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "545920607",
+        "recommendTime": "2026-10-11 11:12:48",
+        "status": "完成"
+      },
+      {
+        "merchantId": "522475064",
+        "recommendTime": "2026-10-11 11:02:28",
+        "status": "完成"
+      },
+      {
+        "merchantId": "1354966645",
+        "recommendTime": "2026-10-11 03:02:14",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 5003,
+  "frontmostAfter": "com.google.Chrome",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261011-113041/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261011-113041/output/collection-attempt-1.review.md"
+}

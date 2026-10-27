@@ -1,0 +1,207 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：丽江市  ；  联系人：李，19988788186  ；  店铺：罐里香·罐罐米线·罐罐饭  ；  地址：束河街道办事处艺海小吃城6号摊位武大郎烧饼旁  ；  商家ID：544101544",
+      "sha256": "967ca2227eb11a6545d1159e2f73806f35de64bea1168f3fa65eb9eb2a11fe35"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 0,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "23271e4f17d965cc7709678f386c39a85e0e4d2a8c320314e9de51ec7c63a958",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "967ca2227eb11a6545d1159e2f73806f35de64bea1168f3fa65eb9eb2a11fe35",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1792813907.244174,
+        "sendAttempts": 1,
+        "verificationLevel": "wecom-ui-text-anchor",
+        "evidence": {
+          "frame1": true,
+          "frame2_input_cleared": true,
+          "verified": true,
+          "tail1": [
+            "城市：连云港市  ；  联系人：老板，18400694193-4911 -，15151281177  ；  店铺：于炒炒爆炒浇头面  ；  地址：新安镇新东北路东侧(恒基广场四楼L4-35号商铺）  ；  商家ID：542631428",
+            "由微信用户创建的外部群，含14位外部联系人 | 群主: 李知恒- AllenLi@微信",
+            "电销+直播攻坚组",
+            "250.0"
+          ]
+        },
+        "transport": {
+          "kind": "text",
+          "sendAttempts": 1,
+          "sent": true,
+          "receipt": {
+            "result": "verified",
+            "verify": {
+              "frame1": true,
+              "frame2_input_cleared": true,
+              "verified": true,
+              "tail1": [
+                "城市：连云港市  ；  联系人：老板，18400694193-4911 -，15151281177  ；  店铺：于炒炒爆炒浇头面  ；  地址：新安镇新东北路东侧(恒基广场四楼L4-35号商铺）  ；  商家ID：542631428",
+                "由微信用户创建的外部群，含14位外部联系人 | 群主: 李知恒- AllenLi@微信",
+                "电销+直播攻坚组",
+                "250.0"
+              ]
+            },
+            "steps": [
+              {
+                "navigate": "chat-title-verified:'电销+直播攻坚组'"
+              },
+              {
+                "title_gate": "电销+直播攻坚组"
+              },
+              {
+                "write": true,
+                "info": "pos=(310.0, 601.0) attempt=1 len=97 head='城市：丽江市  ；  联系人：李，199'"
+              },
+              {
+                "title_gate_final": "电销+直播攻坚组"
+              },
+              {
+                "send_mode": "enter-once",
+                "send_attempts": [
+                  {
+                    "try": "enter",
+                    "input_clean": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 12259
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 33963
+      }
+    ],
+    "elapsedMs": 46310,
+    "eventKey": "aa74930f165f9b03b8ab1c6691309a2372a81d51fe968b3b9a250d4203ac41c4",
+    "reviewSummary": {
+      "totalElapsedMs": 46310,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/0f76ef7a2a147bfdb3d826cdbcd8e9fa29df19474c4396b49a6e0ec5beb98f62.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 12259,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 33963,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 46310,
+  "reviewSummary": {
+    "totalElapsedMs": 46310,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "frame1": true,
+    "frame2_input_cleared": true,
+    "verified": true,
+    "tail1": [
+      "城市：连云港市  ；  联系人：老板，18400694193-4911 -，15151281177  ；  店铺：于炒炒爆炒浇头面  ；  地址：新安镇新东北路东侧(恒基广场四楼L4-35号商铺）  ；  商家ID：542631428",
+      "由微信用户创建的外部群，含14位外部联系人 | 群主: 李知恒- AllenLi@微信",
+      "电销+直播攻坚组",
+      "250.0"
+    ]
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false,
+  "reusedExisting": true,
+  "merchantId": "544101544",
+  "messageSha256": "967ca2227eb11a6545d1159e2f73806f35de64bea1168f3fa65eb9eb2a11fe35",
+  "uiPostReadback": {
+    "method": "wecom-ui-tree-text",
+    "resolvedGroup": "电销+直播攻坚组",
+    "sha256": "967ca2227eb11a6545d1159e2f73806f35de64bea1168f3fa65eb9eb2a11fe35",
+    "observations": [
+      {
+        "groupName": "电销+直播攻坚组",
+        "inputEmpty": true,
+        "newMessageVisible": true,
+        "visibleTextSha256": "967ca2227eb11a6545d1159e2f73806f35de64bea1168f3fa65eb9eb2a11fe35",
+        "observedAt": 1792825036.28
+      },
+      {
+        "groupName": "电销+直播攻坚组",
+        "inputEmpty": true,
+        "newMessageVisible": true,
+        "visibleTextSha256": "967ca2227eb11a6545d1159e2f73806f35de64bea1168f3fa65eb9eb2a11fe35",
+        "observedAt": 1792825173.601
+      }
+    ]
+  }
+}

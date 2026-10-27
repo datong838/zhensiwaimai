@@ -1,0 +1,474 @@
+{
+  "date": "2026-10-27",
+  "checkedAt": "12:46:57",
+  "verdict": "NO-GO",
+  "A_no_success_all_day": [
+    {
+      "skill": "meituan-intelligent-customer-service-15",
+      "cadence_hours": 24,
+      "runs": 0,
+      "success": 0,
+      "failed": 0
+    },
+    {
+      "skill": "meituan-intelligent-customer-service",
+      "cadence_hours": 24,
+      "runs": 0,
+      "success": 0,
+      "failed": 0
+    },
+    {
+      "skill": "daily-quality-products-optimization",
+      "cadence_hours": 24,
+      "runs": 0,
+      "success": 0,
+      "failed": 0
+    },
+    {
+      "skill": "meituan-waimai-negative-review-appeals-11",
+      "cadence_hours": 24,
+      "runs": 0,
+      "success": 0,
+      "failed": 0
+    },
+    {
+      "skill": "taobao-flash-sale-negative-review-appeals",
+      "cadence_hours": 24,
+      "runs": 0,
+      "success": 0,
+      "failed": 0
+    },
+    {
+      "skill": "daily-new-stores-activity-audit-to-wechat",
+      "runs": 1,
+      "success": 0,
+      "businessCoverage": {
+        "complete": false,
+        "targets": 1,
+        "uncovered": [
+          {
+            "name": "海上三小姐·甜品·下午茶(河西店)",
+            "reason": "activity-collection-skipped:shop-not-found:未搜索到店铺"
+          }
+        ],
+        "reason": "1家门店未检查",
+        "source": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-27/daily-new-stores-activity-audit-to-wechat--20261027-110020--a1--s1.log",
+        "record": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-27/daily-new-stores-activity-audit-to-wechat--20261027-110020--record.json",
+        "finished_at": "2026-10-27T11:00:30"
+      }
+    },
+    {
+      "skill": "daily-new-stores-decoration-audit-to-wechat",
+      "runs": 1,
+      "success": 0,
+      "businessCoverage": {
+        "complete": false,
+        "targets": 1,
+        "uncovered": [
+          {
+            "name": "海上三小姐·甜品·下午茶(河西店)",
+            "reason": "decoration-collection-skipped:shop-not-found:未搜索到店铺"
+          }
+        ],
+        "reason": "1家门店未检查",
+        "source": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-27/daily-new-stores-decoration-audit-to-wechat--20261027-113039--a1--s1.log",
+        "record": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-27/daily-new-stores-decoration-audit-to-wechat--20261027-113039--record.json",
+        "finished_at": "2026-10-27T11:30:48"
+      }
+    },
+    {
+      "skill": "daily-store-task-completion-ops-to-wechat",
+      "cadence_hours": 24,
+      "runs": 2,
+      "success": 0,
+      "failed": 2
+    },
+    {
+      "skill": "daily-taobao-download-to-jinsha",
+      "cadence_hours": 24,
+      "runs": 0,
+      "success": 0,
+      "failed": 0
+    },
+    {
+      "skill": "daily-service-market-ranking-to-wechat",
+      "cadence_hours": 24,
+      "runs": 9,
+      "success": 0,
+      "failed": 9
+    },
+    {
+      "skill": "daily-top10-to-wechat-group",
+      "cadence_hours": 24,
+      "runs": 3,
+      "success": 0,
+      "failed": 3
+    },
+    {
+      "skill": "daily-meituan-income-top10-to-wechat",
+      "cadence_hours": 24,
+      "runs": 19,
+      "success": 0,
+      "failed": 19
+    },
+    {
+      "skill": "daily-negative-reviews",
+      "cadence_hours": 24,
+      "runs": 12,
+      "success": 0,
+      "failed": 12
+    },
+    {
+      "skill": "contract-termination-applications-screenshot",
+      "cadence_hours": 24,
+      "runs": 11,
+      "success": 0,
+      "failed": 11
+    }
+  ],
+  "B_failed_needs_triage": [
+    {
+      "skill": "negative-feedback-list-appeals-0930",
+      "time": "08:20",
+      "code": "jinsha-page-count:2"
+    },
+    {
+      "skill": "negative-feedback-list-appeals-0930",
+      "time": "08:22",
+      "code": "jinsha-page-count:2"
+    },
+    {
+      "skill": "daily-new-stores-opening-to-wechat",
+      "time": "10:00",
+      "code": "WebSocket is not defined"
+    },
+    {
+      "skill": "daily-store-task-completion-ops-to-wechat",
+      "time": "12:02",
+      "code": "native-ui-inline-image-not-exposed"
+    },
+    {
+      "skill": "daily-store-task-completion-ops-to-wechat",
+      "time": "12:31",
+      "code": "prior-attempt-requires-read-only-reconciliation"
+    },
+    {
+      "skill": "daily-service-market-ranking-to-wechat",
+      "time": "10:00",
+      "code": "delivery"
+    },
+    {
+      "skill": "daily-service-market-ranking-to-wechat",
+      "time": "10:17",
+      "code": "prior-attempt-requires-read-only-reconciliation"
+    },
+    {
+      "skill": "daily-service-market-ranking-to-wechat",
+      "time": "10:30",
+      "code": "prior-attempt-requires-read-only-reconciliation"
+    },
+    {
+      "skill": "daily-service-market-ranking-to-wechat",
+      "time": "11:00",
+      "code": "prior-attempt-requires-read-only-reconciliation"
+    },
+    {
+      "skill": "daily-service-market-ranking-to-wechat",
+      "time": "11:19",
+      "code": "prior-attempt-requires-read-only-reconciliation"
+    },
+    {
+      "skill": "daily-service-market-ranking-to-wechat",
+      "time": "11:30",
+      "code": "prior-attempt-requires-read-only-reconciliation"
+    },
+    {
+      "skill": "daily-service-market-ranking-to-wechat",
+      "time": "11:41",
+      "code": "prior-attempt-requires-read-only-reconciliation"
+    },
+    {
+      "skill": "daily-service-market-ranking-to-wechat",
+      "time": "12:02",
+      "code": "prior-attempt-requires-read-only-reconciliation"
+    },
+    {
+      "skill": "daily-service-market-ranking-to-wechat",
+      "time": "12:31",
+      "code": "prior-attempt-requires-read-only-reconciliation"
+    },
+    {
+      "skill": "daily-top10-to-wechat-group",
+      "time": "08:00",
+      "code": "desktop:page.goto: net::ERR_CONNECTION_CLOSED at https://melody.shop.ele.me/app/chain/95708808/dashboard#app.chainshop.dashboard\nCall log:\n  - navigating to \"https://melody.shop.ele.me/app/chain/95708808/dashboard#app.chainshop.dashboard\", waiting until \"domcontentloaded\""
+    },
+    {
+      "skill": "daily-top10-to-wechat-group",
+      "time": "08:04",
+      "code": "desktop:ten-business-rows-not-ready:income-header-not-unique"
+    },
+    {
+      "skill": "daily-top10-to-wechat-group",
+      "time": "08:20",
+      "code": "desktop-wechat:image-submission-awaits-read-only-verification"
+    },
+    {
+      "skill": "daily-meituan-income-top10-to-wechat",
+      "time": "08:00",
+      "code": "stopped"
+    },
+    {
+      "skill": "daily-meituan-income-top10-to-wechat",
+      "time": "08:04",
+      "code": "delivery"
+    },
+    {
+      "skill": "daily-meituan-income-top10-to-wechat",
+      "time": "08:20",
+      "code": "prior-attempt-requires-read-only-reconciliation"
+    },
+    {
+      "skill": "daily-meituan-income-top10-to-wechat",
+      "time": "08:22",
+      "code": "prior-attempt-requires-read-only-reconciliation"
+    },
+    {
+      "skill": "daily-meituan-income-top10-to-wechat",
+      "time": "08:24",
+      "code": "prior-attempt-requires-read-only-reconciliation"
+    },
+    {
+      "skill": "daily-meituan-income-top10-to-wechat",
+      "time": "08:25",
+      "code": "prior-attempt-requires-read-only-reconciliation"
+    },
+    {
+      "skill": "daily-meituan-income-top10-to-wechat",
+      "time": "08:28",
+      "code": "prior-attempt-requires-read-only-reconciliation"
+    },
+    {
+      "skill": "daily-meituan-income-top10-to-wechat",
+      "time": "08:30",
+      "code": "prior-attempt-requires-read-only-reconciliation"
+    },
+    {
+      "skill": "daily-meituan-income-top10-to-wechat",
+      "time": "09:00",
+      "code": "prior-attempt-requires-read-only-reconciliation"
+    },
+    {
+      "skill": "daily-meituan-income-top10-to-wechat",
+      "time": "09:30",
+      "code": "prior-attempt-requires-read-only-reconciliation"
+    },
+    {
+      "skill": "daily-meituan-income-top10-to-wechat",
+      "time": "10:00",
+      "code": "prior-attempt-requires-read-only-reconciliation"
+    },
+    {
+      "skill": "daily-meituan-income-top10-to-wechat",
+      "time": "10:17",
+      "code": "prior-attempt-requires-read-only-reconciliation"
+    },
+    {
+      "skill": "daily-meituan-income-top10-to-wechat",
+      "time": "10:30",
+      "code": "prior-attempt-requires-read-only-reconciliation"
+    },
+    {
+      "skill": "daily-meituan-income-top10-to-wechat",
+      "time": "11:00",
+      "code": "prior-attempt-requires-read-only-reconciliation"
+    },
+    {
+      "skill": "daily-meituan-income-top10-to-wechat",
+      "time": "11:19",
+      "code": "prior-attempt-requires-read-only-reconciliation"
+    },
+    {
+      "skill": "daily-meituan-income-top10-to-wechat",
+      "time": "11:30",
+      "code": "prior-attempt-requires-read-only-reconciliation"
+    },
+    {
+      "skill": "daily-meituan-income-top10-to-wechat",
+      "time": "11:41",
+      "code": "prior-attempt-requires-read-only-reconciliation"
+    },
+    {
+      "skill": "daily-meituan-income-top10-to-wechat",
+      "time": "12:02",
+      "code": "prior-attempt-requires-read-only-reconciliation"
+    },
+    {
+      "skill": "daily-meituan-income-top10-to-wechat",
+      "time": "12:31",
+      "code": "prior-attempt-requires-read-only-reconciliation"
+    },
+    {
+      "skill": "daily-negative-reviews",
+      "time": "08:31",
+      "code": "image-submission-awaits-read-only-verification"
+    },
+    {
+      "skill": "daily-negative-reviews",
+      "time": "09:00",
+      "code": "image-submission-awaits-read-only-verification"
+    },
+    {
+      "skill": "daily-negative-reviews",
+      "time": "09:30",
+      "code": "image-submission-awaits-read-only-verification"
+    },
+    {
+      "skill": "daily-negative-reviews",
+      "time": "10:01",
+      "code": "image-submission-awaits-read-only-verification"
+    },
+    {
+      "skill": "daily-negative-reviews",
+      "time": "10:17",
+      "code": "image-submission-awaits-read-only-verification"
+    },
+    {
+      "skill": "daily-negative-reviews",
+      "time": "10:30",
+      "code": "image-submission-awaits-read-only-verification"
+    },
+    {
+      "skill": "daily-negative-reviews",
+      "time": "11:00",
+      "code": "image-submission-awaits-read-only-verification"
+    },
+    {
+      "skill": "daily-negative-reviews",
+      "time": "11:19",
+      "code": "image-submission-awaits-read-only-verification"
+    },
+    {
+      "skill": "daily-negative-reviews",
+      "time": "11:30",
+      "code": "image-submission-awaits-read-only-verification"
+    },
+    {
+      "skill": "daily-negative-reviews",
+      "time": "11:41",
+      "code": "image-submission-awaits-read-only-verification"
+    },
+    {
+      "skill": "daily-negative-reviews",
+      "time": "12:02",
+      "code": "image-submission-awaits-read-only-verification"
+    },
+    {
+      "skill": "daily-negative-reviews",
+      "time": "12:31",
+      "code": "image-submission-awaits-read-only-verification"
+    },
+    {
+      "skill": "contract-termination-applications-screenshot",
+      "time": "09:01",
+      "code": "image-submission-awaits-read-only-verification"
+    },
+    {
+      "skill": "contract-termination-applications-screenshot",
+      "time": "09:30",
+      "code": "prior-attempt-requires-read-only-reconciliation"
+    },
+    {
+      "skill": "contract-termination-applications-screenshot",
+      "time": "10:01",
+      "code": "prior-attempt-requires-read-only-reconciliation"
+    },
+    {
+      "skill": "contract-termination-applications-screenshot",
+      "time": "10:17",
+      "code": "prior-attempt-requires-read-only-reconciliation"
+    },
+    {
+      "skill": "contract-termination-applications-screenshot",
+      "time": "10:30",
+      "code": "prior-attempt-requires-read-only-reconciliation"
+    },
+    {
+      "skill": "contract-termination-applications-screenshot",
+      "time": "11:00",
+      "code": "prior-attempt-requires-read-only-reconciliation"
+    },
+    {
+      "skill": "contract-termination-applications-screenshot",
+      "time": "11:19",
+      "code": "prior-attempt-requires-read-only-reconciliation"
+    },
+    {
+      "skill": "contract-termination-applications-screenshot",
+      "time": "11:30",
+      "code": "prior-attempt-requires-read-only-reconciliation"
+    },
+    {
+      "skill": "contract-termination-applications-screenshot",
+      "time": "11:41",
+      "code": "prior-attempt-requires-read-only-reconciliation"
+    },
+    {
+      "skill": "contract-termination-applications-screenshot",
+      "time": "12:03",
+      "code": "prior-attempt-requires-read-only-reconciliation"
+    },
+    {
+      "skill": "contract-termination-applications-screenshot",
+      "time": "12:31",
+      "code": "prior-attempt-requires-read-only-reconciliation"
+    }
+  ],
+  "C_ok": [
+    {
+      "skill": "daily-agent-new-merchants-to-wechat",
+      "runs": 9,
+      "via_e5_idempotent_evidence": null
+    },
+    {
+      "skill": "negative-feedback-list-appeals-0930",
+      "runs": 3,
+      "via_e5_idempotent_evidence": null
+    },
+    {
+      "skill": "negative-feedback-list-appeals-1230",
+      "runs": 1,
+      "via_e5_idempotent_evidence": null
+    },
+    {
+      "skill": "meituan-intelligent-customer-service-12",
+      "runs": 1,
+      "via_e5_idempotent_evidence": null
+    },
+    {
+      "skill": "daily-new-stores-opening-to-wechat",
+      "runs": 2,
+      "via_e5_idempotent_evidence": null
+    },
+    {
+      "skill": "daily-new-stores-not-nourished-ops-to-wechat",
+      "runs": 1,
+      "via_e5_idempotent_evidence": null
+    },
+    {
+      "skill": "daily-store-basic-diagnosis-to-wechat",
+      "runs": 1,
+      "via_e5_idempotent_evidence": null
+    },
+    {
+      "skill": "daily-jinsha-reports-to-business-wechat",
+      "runs": 1,
+      "via_e5_idempotent_evidence": null
+    }
+  ],
+  "customer_user_acceptances": [],
+  "business_delivery_facts": [],
+  "D_nonenabled_records": [
+    "s-blocked"
+  ],
+  "rule": "A 非空→不发台账；B 逐条定性（防重拦截/真故障）后才可发"
+}

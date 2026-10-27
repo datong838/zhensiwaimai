@@ -1,0 +1,24 @@
+{
+  "skill": "daily-taobao-download-to-jinsha",
+  "ledger_name": "淘宝昨日报表下载上传金鲨（每日13:00）",
+  "schedule": "每日13:00",
+  "dev_state": "active",
+  "status": "FAILED",
+  "category": "UNKNOWN",
+  "detail": "stage=workflow-incomplete (receipt:stage) phase_last=taobao_open [note: 工作流未跑完（阶段未收口）。看 phaseHistory 末项定位停在哪一步。]",
+  "next_action": "看护代理读日志定位根因后升级处理",
+  "attempts": 1,
+  "max_retries": 2,
+  "duration_seconds": 188.44,
+  "started_at": "2026-10-24T02:49:10",
+  "finished_at": "2026-10-24T02:52:19",
+  "triggered_by": "sweep-test",
+  "logs": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-24/daily-taobao-download-to-jinsha--20261024-024910--a1--s1.log"
+  ],
+  "fail_signal": {
+    "kind": "stage",
+    "code": "workflow-incomplete",
+    "phase_last": "taobao_open"
+  }
+}

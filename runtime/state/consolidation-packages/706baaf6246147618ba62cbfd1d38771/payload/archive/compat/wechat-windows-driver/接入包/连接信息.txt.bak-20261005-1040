@@ -1,0 +1,40 @@
+微信自动发送服务 · 连接信息（只在你我两台机器之间传，不要外发）
+
+────────────────────────────────────────
+服务地址  http://192.168.0.4:8731
+TOKEN     XFVfZHoKwjHaWsZ7EXt2kNvWLSg4TGSvIpMQnvIkCaY
+网络      同一局域网（192.168.0.x）
+────────────────────────────────────────
+
+【用法一】直接填进 example.py（最简单）
+
+    打开 example.py，改这两行：
+
+        WIN_IP = "192.168.0.4"
+        TOKEN  = "XFVfZHoKwjHaWsZ7EXt2kNvWLSg4TGSvIpMQnvIkCaY"
+
+    然后运行：
+        python example.py
+
+【用法二】设环境变量（推荐，token 不用写进代码）
+
+    Mac / Linux：
+        export WIN_IP="192.168.0.4"
+        export WECHAT_AGENT_TOKEN="XFVfZHoKwjHaWsZ7EXt2kNvWLSg4TGSvIpMQnvIkCaY"
+
+    Windows PowerShell：
+        $env:WIN_IP="192.168.0.4"
+        $env:WECHAT_AGENT_TOKEN="XFVfZHoKwjHaWsZ7EXt2kNvWLSg4TGSvIpMQnvIkCaY"
+
+    之后代码里直接：
+        from client import WeChat
+        wx = WeChat()
+
+【用法三】显式传入
+
+        wx = WeChat("192.168.0.4", "XFVfZHoKwjHaWsZ7EXt2kNvWLSg4TGSvIpMQnvIkCaY")
+
+────────────────────────────────────────
+先跑自检确认连通：python example.py
+详细说明见 USAGE.md
+────────────────────────────────────────

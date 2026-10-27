@@ -1,0 +1,30 @@
+{
+  "checks": [
+    {
+      "manifest": "skills/posts/taobao-brand-post/dependencies.json",
+      "checked": 6,
+      "mismatches": []
+    },
+    {
+      "manifest": "skills/posts/taobao-svc-post/dependencies.json",
+      "checked": 5,
+      "mismatches": []
+    },
+    {
+      "manifest": "skills/posts/meituan-post/dependencies.json",
+      "checked": 5,
+      "mismatches": []
+    },
+    {
+      "manifest": "skills/posts/jinsha-post/dependencies.json",
+      "checked": 5,
+      "mismatches": []
+    },
+    {
+      "manifest": "skills/workflows/daily-quality-products-optimization/runtime-policy.json",
+      "checked": 4,
+      "mismatches": []
+    }
+  ],
+  "scope": "只读字节校验，不运行生产、不等同业务完成"
+}

@@ -1,0 +1,73 @@
+{
+  "at": "2026-10-25T14:11:24.489Z",
+  "localTime": "2026-10-25 22:11:24",
+  "ok": true,
+  "productionSendAttempts": 0,
+  "credentialsRead": false,
+  "results": [
+    {
+      "port": 9230,
+      "status": "ok",
+      "action": "reload-original-business-page",
+      "origin": "https://melody.shop.ele.me",
+      "textLength": 143,
+      "loginExpired": false,
+      "visibleObstructions": 0,
+      "markers": [
+        "门店",
+        "商家"
+      ]
+    },
+    {
+      "port": 9231,
+      "status": "ok",
+      "action": "reload-original-business-page",
+      "origin": "https://open.shop.ele.me",
+      "textLength": 1218,
+      "loginExpired": false,
+      "visibleObstructions": 0,
+      "markers": [
+        "门店",
+        "商家"
+      ]
+    },
+    {
+      "port": 9232,
+      "status": "ok",
+      "action": "read-only-after-original-reload",
+      "textLength": 106997,
+      "loginExpired": false,
+      "visibleObstructions": 0,
+      "markers": [
+        "门店",
+        "报表"
+      ]
+    },
+    {
+      "port": 9233,
+      "status": "ok",
+      "action": "original-im-reset",
+      "ok": true,
+      "closed": 1,
+      "remainingIMPages": 1
+    }
+  ],
+  "imReset": {
+    "ok": true,
+    "closed": 1,
+    "remainingIMPages": 1
+  },
+  "initialReceiptPreserved": true,
+  "imPostCheck": {
+    "at": "2026-10-25T14:13:33.428Z",
+    "ok": true,
+    "pageCount": 1,
+    "markers": [
+      "顾客消息",
+      "未回复",
+      "正在接待"
+    ],
+    "loginExpired": false,
+    "visibleRisk": false
+  }
+}

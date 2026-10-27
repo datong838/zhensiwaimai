@@ -1,0 +1,24 @@
+{
+  "skill": "taobao-flash-sale-negative-review-appeals",
+  "ledger_name": "淘宝闪购自动差评申诉并企微反馈（每2小时·13:00起）",
+  "schedule": "每2小时（13-17档）",
+  "dev_state": "active",
+  "status": "FAILED",
+  "category": "UNKNOWN",
+  "detail": "reason=zero-replies-no-send:report-has-no-data-rows (receipt:reason) [note: 铁律红灯：汇总为 0 条 ⇒ 不发送（硬闸已生效）。**必须上报，绝不可当良性静音**。]",
+  "next_action": "看护代理读日志定位根因后升级处理",
+  "attempts": 1,
+  "max_retries": 2,
+  "duration_seconds": 9.87,
+  "started_at": "2026-10-24T02:53:17",
+  "finished_at": "2026-10-24T02:53:27",
+  "triggered_by": "sweep-test",
+  "logs": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-24/taobao-flash-sale-negative-review-appeals--20261024-025317--a1--s1.log",
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-24/taobao-flash-sale-negative-review-appeals--20261024-025317--a1--s2.log"
+  ],
+  "fail_signal": {
+    "kind": "reason",
+    "code": "zero-replies-no-send:report-has-no-data-rows"
+  }
+}

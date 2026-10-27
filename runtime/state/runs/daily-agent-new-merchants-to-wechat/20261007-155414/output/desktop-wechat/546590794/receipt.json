@@ -1,0 +1,150 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：揭阳市  ；  联系人：杨，13414849120  ；  店铺：杨记鸡煲  ；  地址：流沙东街道秀陇村寮前园新六路167号",
+      "sha256": "9c1bb63a292fe44b719898d2fddce367854f69b842c0acec95bc16ddd3402dae"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "92756b6aadcc4a97d8f569fc1fa6b97f8b3a2c8d763daa26eac97a09253dace2",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "9c1bb63a292fe44b719898d2fddce367854f69b842c0acec95bc16ddd3402dae",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1791359699.2391412,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-text-anchor",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "电销+直播攻坚组",
+          "currentTitle": "电销+直播攻坚组",
+          "messageCount": 50,
+          "anchor": "text-exact",
+          "anchorValue": "城市：揭阳市  ；  联系人：杨，13414849120  ；  店铺：杨记鸡煲  ；  地址：流沙东街道秀陇村寮前园新六路167号",
+          "anchorInTrailingPosition": true,
+          "autoKind": null,
+          "readbackAt": 1791359725.09627
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "电销+直播攻坚组",
+            "len": 66
+          },
+          "route": "direct",
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 3425
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 25857
+      }
+    ],
+    "elapsedMs": 29285,
+    "eventKey": "562d157915816a8eabd63e89f68fec513c100a859620b8156817f81a05d57bd2",
+    "reviewSummary": {
+      "totalElapsedMs": 29285,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/1e40d1c00a2f623f32013d3fcb4e97e9b5a8dc53eee0016c412c8238d26034fc.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 3425,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 25857,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 29285,
+  "reviewSummary": {
+    "totalElapsedMs": 29285,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "ok": true,
+    "resolvedGroup": "电销+直播攻坚组",
+    "currentTitle": "电销+直播攻坚组",
+    "messageCount": 50,
+    "anchor": "text-exact",
+    "anchorValue": "城市：揭阳市  ；  联系人：杨，13414849120  ；  店铺：杨记鸡煲  ；  地址：流沙东街道秀陇村寮前园新六路167号",
+    "anchorInTrailingPosition": true,
+    "autoKind": null,
+    "readbackAt": 1791359725.09627
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false
+}

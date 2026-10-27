@@ -1,0 +1,195 @@
+{
+  "schemaVersion": 1,
+  "runId": "4989e65a-a3c7-4cf0-ad2b-885797f5900c",
+  "ok": false,
+  "sent": 0,
+  "verifiedNewSends": 0,
+  "verifiedExisting": 0,
+  "unresolvedItems": 0,
+  "completion": {
+    "state": "USER_ACTION_REQUIRED",
+    "nextAction": "request-login-or-challenge-resolution",
+    "automaticRecoveryAllowed": false,
+    "recoveryAttemptBudget": 0,
+    "reason": "windows-sessions-unavailable:HTTP 500: {\"ok\": false, \"error\": \"微信进程在运行，但主窗口未出现——通常意味着**尚未完成登录**（重启后需扫码登录）。请在服务端完成扫码登录后重试；也可用 /health 的 logged_in 字段或 wx.wait_ready() 等待就绪。\"}"
+  },
+  "rows": [
+    {
+      "item": 1,
+      "stage": "executor_integrity",
+      "label": "封板完整性",
+      "elapsedMs": 7,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": null
+    },
+    {
+      "item": 2,
+      "stage": "runtime_policy",
+      "label": "授权、群与通道门禁",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": null
+    },
+    {
+      "item": 3,
+      "stage": "offline_selftest",
+      "label": "离线自测",
+      "elapsedMs": 202,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": null
+    },
+    {
+      "item": 4,
+      "stage": "collection",
+      "label": "商家采集",
+      "elapsedMs": 8789,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": null
+    },
+    {
+      "item": 5,
+      "stage": "collection.1.background_preflight",
+      "label": "采集第1次 · 后台浏览器预检",
+      "elapsedMs": 229,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 6,
+      "stage": "collection.1.task_page",
+      "label": "采集第1次 · 建立独立任务页",
+      "elapsedMs": 763,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 7,
+      "stage": "collection.1.navigation",
+      "label": "采集第1次 · 进入意向商户列表",
+      "elapsedMs": 1709,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 8,
+      "stage": "collection.1.date_filter",
+      "label": "采集第1次 · 日期设置与双帧回读",
+      "elapsedMs": 1569,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 9,
+      "stage": "collection.1.page_1_read",
+      "label": "采集第1次 · 第1页采集与稳定核验",
+      "elapsedMs": 321,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 10,
+      "stage": "collection.1.selection_audit",
+      "label": "采集第1次 · selection_audit",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 11,
+      "stage": "collection.1.detail_542957171",
+      "label": "采集第1次 · 商家详情核验 542957171",
+      "elapsedMs": 774,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 12,
+      "stage": "collection.1.detail_1342388590",
+      "label": "采集第1次 · 商家详情核验 1342388590",
+      "elapsedMs": 2402,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 13,
+      "stage": "audit",
+      "label": "采集合同审计",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": null
+    },
+    {
+      "item": 14,
+      "stage": "desktop_wechat_preflight",
+      "label": "桌面微信预检",
+      "elapsedMs": 31353,
+      "status": "FAIL",
+      "pitfalls": [
+        "windows-sessions-unavailable:HTTP 500: {\"ok\": false, \"error\": \"微信进程在运行，但主窗口未出现——通常意味着**尚未完成登录**（重启后需扫码登录）。请在服务端完成扫码登录后重试；也可用 /health 的 logged_in 字段或 wx.wait_ready() 等待就绪。\"}"
+      ],
+      "parent": null
+    },
+    {
+      "item": 15,
+      "stage": "preflight.1",
+      "label": "群定位第1次",
+      "elapsedMs": 31350,
+      "status": "FAIL",
+      "pitfalls": [
+        "windows-sessions-unavailable:HTTP 500: {\"ok\": false, \"error\": \"微信进程在运行，但主窗口未出现——通常意味着**尚未完成登录**（重启后需扫码登录）。请在服务端完成扫码登录后重试；也可用 /health 的 logged_in 字段或 wx.wait_ready() 等待就绪。\"}"
+      ],
+      "parent": "desktop_wechat_preflight"
+    },
+    {
+      "item": 16,
+      "stage": "desktop_wechat",
+      "label": "逐条通知",
+      "elapsedMs": null,
+      "status": "SKIPPED",
+      "pitfalls": [],
+      "parent": null
+    },
+    {
+      "item": 17,
+      "stage": "final_cursor_check",
+      "label": "最终账本与游标复核",
+      "elapsedMs": null,
+      "status": "SKIPPED",
+      "pitfalls": [],
+      "parent": null
+    },
+    {
+      "item": 18,
+      "stage": "reseal",
+      "label": "真实非空验收重封",
+      "elapsedMs": null,
+      "status": "NOOP",
+      "pitfalls": [
+        "无真实新增发送，保持未封板"
+      ],
+      "parent": null
+    },
+    {
+      "item": 19,
+      "stage": "total",
+      "label": "整轮总耗时（含子阶段，不重复相加）",
+      "elapsedMs": 40479,
+      "status": "FAIL",
+      "pitfalls": [],
+      "parent": null
+    }
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：萍乡市  ；  联系人：范田，15674195661  ；  店铺：食螺莊柳州螺蛳粉  ；  地址：泉湖北路与武功山西大道交叉口北220米发哥食堂隔壁",
+      "sha256": "daac68ecca0c1ed0fbc637cfb167165d1c2e5ad82dd14d191f1386f3f2258cdf"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "b4ccc6bc3cada3da34c418f5c0c3fea90d96908d62a7d5dde15ccc77edfc053d",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "daac68ecca0c1ed0fbc637cfb167165d1c2e5ad82dd14d191f1386f3f2258cdf",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1792512982.543669,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-text-anchor",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "电销+直播攻坚组",
+          "currentTitle": "电销+直播攻坚组",
+          "messageCount": 44,
+          "anchor": "text-exact",
+          "anchorValue": "城市：萍乡市  ；  联系人：范田，15674195661  ；  店铺：食螺莊柳州螺蛳粉  ；  地址：泉湖北路与武功山西大道交叉口北220米发哥食堂隔壁",
+          "anchorInTrailingPosition": true,
+          "autoKind": null,
+          "readbackAt": 1792513009.0109482
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "电销+直播攻坚组",
+            "len": 78
+          },
+          "route": "relay",
+          "direct_error": "[Errno 65] No route to host",
+          "direct_local_network_blocked": true,
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 9266
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 26466
+      }
+    ],
+    "elapsedMs": 35739,
+    "eventKey": "00cc9f1e5f40fd11f368c4dbaf90cc2727e7475fe7d1dcaaa581e575fe7a5f18",
+    "reviewSummary": {
+      "totalElapsedMs": 35739,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/7fc4f2bc63498fcadc8cb6ab01645a3b0fe8e64e9ca8cc42566283821cbb6150.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 9266,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 26466,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 35739,
+  "reviewSummary": {
+    "totalElapsedMs": 35739,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "ok": true,
+    "resolvedGroup": "电销+直播攻坚组",
+    "currentTitle": "电销+直播攻坚组",
+    "messageCount": 44,
+    "anchor": "text-exact",
+    "anchorValue": "城市：萍乡市  ；  联系人：范田，15674195661  ；  店铺：食螺莊柳州螺蛳粉  ；  地址：泉湖北路与武功山西大道交叉口北220米发哥食堂隔壁",
+    "anchorInTrailingPosition": true,
+    "autoKind": null,
+    "readbackAt": 1792513009.0109482
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false
+}

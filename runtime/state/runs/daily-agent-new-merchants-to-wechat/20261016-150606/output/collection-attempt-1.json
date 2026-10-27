@@ -1,0 +1,148 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-16",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 186,
+    "task_page": 459,
+    "navigation": 1367,
+    "date_filter": 1564,
+    "page_1_read": 524,
+    "page_1_next": 68,
+    "page_2_read": 716,
+    "selection_audit": 1
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "page_1_next": "PASS",
+    "page_2_read": "PASS",
+    "selection_audit": "PASS"
+  },
+  "messages": [],
+  "frontmostBefore": "com.tencent.workbuddy.mac",
+  "createdAt": "2026-10-16T07:06:12.539Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-16",
+    "merchantName": "黔山野蘸水牛肉菜",
+    "merchantId": "546525371",
+    "recommendTime": "2026-10-16 13:57:47",
+    "tableOrder": 10,
+    "messageSha256": "3ba44bf2c602e739acc95be6096f21586ccf89c47046ea86d7f7242b8f5305de",
+    "sentAt": "2026-10-16T14:03:38+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-16",
+  "filterEndDate": "2026-10-16",
+  "dateFilter": "2026-10-16..2026-10-16",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 10,
+      "nextEnabled": true
+    },
+    {
+      "page": 2,
+      "rowCount": 3,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 13,
+  "pendingRows": 9,
+  "targetCount": 0,
+  "selectionAudit": {
+    "totalRows": 13,
+    "pendingRows": 9,
+    "excludedAtOrBeforeCursor": 10,
+    "excludedAfterCursorNotPending": 3,
+    "targetCount": 0,
+    "rows": [
+      {
+        "merchantId": "546525371",
+        "recommendTime": "2026-10-16 13:57:47",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546522532",
+        "recommendTime": "2026-10-16 13:34:41",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "544818283",
+        "recommendTime": "2026-10-16 13:32:39",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "533104918",
+        "recommendTime": "2026-10-16 12:27:32",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "536340036",
+        "recommendTime": "2026-10-16 11:41:41",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546295453",
+        "recommendTime": "2026-10-16 09:59:38",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "542707286",
+        "recommendTime": "2026-10-16 09:41:00",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1305054447",
+        "recommendTime": "2026-10-16 09:23:53",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1301551946",
+        "recommendTime": "2026-10-16 08:37:08",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1316649848",
+        "recommendTime": "2026-10-16 14:45:51",
+        "status": "完成"
+      },
+      {
+        "merchantId": "534488557",
+        "recommendTime": "2026-10-16 14:42:27",
+        "status": "完成"
+      },
+      {
+        "merchantId": "1355806445",
+        "recommendTime": "2026-10-16 14:11:04",
+        "status": "完成"
+      },
+      {
+        "merchantId": "1359435212",
+        "recommendTime": "2026-10-16 13:41:15",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 5464,
+  "frontmostAfter": "com.tencent.workbuddy.mac",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261016-150606/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261016-150606/output/collection-attempt-1.review.md"
+}

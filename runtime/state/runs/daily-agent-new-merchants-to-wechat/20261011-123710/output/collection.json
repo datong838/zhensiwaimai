@@ -1,0 +1,132 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-11",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 53,
+    "task_page": 248,
+    "navigation": 1379,
+    "date_filter": 1470,
+    "page_1_read": 343,
+    "selection_audit": 0,
+    "detail_1317602476": 779
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_1317602476": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "1317602476",
+      "merchantName": "渔悦·石锅鱼",
+      "recommendTime": "2026-10-11 12:32:18",
+      "city": "南宁市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 8,
+      "address": "盘岭路1号盘岭庄苑J栋-6号",
+      "contact": "高琪静，13197682970",
+      "detailVerified": true,
+      "text": "城市：南宁市  ；  联系人：高琪静，13197682970  ；  店铺：渔悦·石锅鱼  ；  地址：盘岭路1号盘岭庄苑J栋-6号",
+      "sha256": "62cefafb0ab93d49cceefbf6aacf47d3f584f0573b9ad09d00e386f74a8a8a1c"
+    }
+  ],
+  "frontmostBefore": "com.todesktop.230313mzl4w4u92",
+  "createdAt": "2026-10-11T04:37:16.379Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-11",
+    "merchantName": "喜年鲜饺",
+    "merchantId": "545977903",
+    "recommendTime": "2026-10-11 10:50:52",
+    "tableOrder": 5,
+    "messageSha256": "3af964e175903d9a05ea7a7c1b71837c4757538c7b73fe1b49eba1926ae959b2",
+    "sentAt": "2026-10-11T11:31:16+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-11",
+  "filterEndDate": "2026-10-11",
+  "dateFilter": "2026-10-11..2026-10-11",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 8,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 8,
+  "pendingRows": 5,
+  "targetCount": 1,
+  "selectionAudit": {
+    "totalRows": 8,
+    "pendingRows": 5,
+    "excludedAtOrBeforeCursor": 5,
+    "excludedAfterCursorNotPending": 2,
+    "targetCount": 1,
+    "rows": [
+      {
+        "merchantId": "1317602476",
+        "recommendTime": "2026-10-11 12:32:18",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "545977903",
+        "recommendTime": "2026-10-11 10:50:52",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1362226686",
+        "recommendTime": "2026-10-11 08:46:54",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1357690495",
+        "recommendTime": "2026-10-11 04:36:43",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "156280223",
+        "recommendTime": "2026-10-11 00:27:37",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "545920607",
+        "recommendTime": "2026-10-11 11:12:48",
+        "status": "完成"
+      },
+      {
+        "merchantId": "522475064",
+        "recommendTime": "2026-10-11 11:02:28",
+        "status": "完成"
+      },
+      {
+        "merchantId": "1354966645",
+        "recommendTime": "2026-10-11 03:02:14",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 4836,
+  "frontmostAfter": "com.todesktop.230313mzl4w4u92",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261011-123710/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261011-123710/output/collection-attempt-1.review.md"
+}

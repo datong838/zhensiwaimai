@@ -1,0 +1,25 @@
+{
+  "skill": "daily-new-stores-opening-to-wechat",
+  "ledger_name": "新店开业识别与通知（每日10:50）",
+  "schedule": "每日10:50",
+  "dev_state": "active",
+  "status": "FAILED",
+  "category": "RECOVERABLE",
+  "detail": "reason=page.waitForFunction: Timeout 30000ms exceeded. (receipt:reason)",
+  "next_action": "重试预算耗尽：看护代理读日志决定再等冷却重跑或跳过",
+  "attempts": 3,
+  "max_retries": 2,
+  "duration_seconds": 819.18,
+  "started_at": "2026-10-24T02:53:35",
+  "finished_at": "2026-10-24T03:07:14",
+  "triggered_by": "sweep-test",
+  "logs": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-24/daily-new-stores-opening-to-wechat--20261024-025335--a1--s1.log",
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-24/daily-new-stores-opening-to-wechat--20261024-025944--a2--s1.log",
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-24/daily-new-stores-opening-to-wechat--20261024-030516--a3--s1.log"
+  ],
+  "fail_signal": {
+    "kind": "reason",
+    "code": "page.waitForFunction: Timeout 30000ms exceeded."
+  }
+}

@@ -1,0 +1,166 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-09",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 79,
+    "task_page": 434,
+    "navigation": 1171,
+    "date_filter": 1511,
+    "page_1_read": 359,
+    "page_1_next": 57,
+    "page_2_read": 569,
+    "selection_audit": 1,
+    "detail_529520233": 801
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "page_1_next": "PASS",
+    "page_2_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_529520233": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "529520233",
+      "merchantName": "疆麦尔椒麻鸡",
+      "recommendTime": "2026-10-08 23:16:40",
+      "city": "乌鲁木齐市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 13,
+      "address": "人民路车市巷59号",
+      "contact": "马先生，15299057728",
+      "detailVerified": true,
+      "text": "城市：乌鲁木齐市  ；  联系人：马先生，15299057728  ；  店铺：疆麦尔椒麻鸡  ；  地址：人民路车市巷59号",
+      "sha256": "5a82b3ca28c55deb7839b3d3bfd15917c33bfb859a7bbec32d8b62b9fc7ae01d"
+    }
+  ],
+  "frontmostBefore": "com.google.Chrome",
+  "createdAt": "2026-10-08T23:16:23.326Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-08",
+    "merchantName": "赵二两把子肉",
+    "merchantId": "545845110",
+    "recommendTime": "2026-10-08 18:13:48",
+    "tableOrder": 12,
+    "messageSha256": "facc7c13dc92898a99be9464c7e78652efba89c0febbcc929286c4a0ab2b7d0d",
+    "sentAt": "2026-10-08T20:38:31+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-08",
+  "filterEndDate": "2026-10-09",
+  "dateFilter": "2026-10-08..2026-10-09",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 10,
+      "nextEnabled": true
+    },
+    {
+      "page": 2,
+      "rowCount": 3,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 13,
+  "pendingRows": 9,
+  "targetCount": 1,
+  "selectionAudit": {
+    "totalRows": 13,
+    "pendingRows": 9,
+    "excludedAtOrBeforeCursor": 12,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 1,
+    "rows": [
+      {
+        "merchantId": "529520233",
+        "recommendTime": "2026-10-08 23:16:40",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "545845110",
+        "recommendTime": "2026-10-08 18:13:48",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1343716140",
+        "recommendTime": "2026-10-08 17:18:47",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1347208605",
+        "recommendTime": "2026-10-08 16:23:20",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "544806195",
+        "recommendTime": "2026-10-08 14:00:50",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1340910319",
+        "recommendTime": "2026-10-08 13:56:42",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1355498382",
+        "recommendTime": "2026-10-08 11:51:44",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "540991156",
+        "recommendTime": "2026-10-08 01:59:03",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "545462236",
+        "recommendTime": "2026-10-08 01:51:15",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "547015922",
+        "recommendTime": "2026-10-08 16:12:55",
+        "status": "完成"
+      },
+      {
+        "merchantId": "546571451",
+        "recommendTime": "2026-10-08 15:35:14",
+        "status": "完成"
+      },
+      {
+        "merchantId": "1358946098",
+        "recommendTime": "2026-10-08 15:04:19",
+        "status": "完成"
+      },
+      {
+        "merchantId": "1355660185",
+        "recommendTime": "2026-10-08 14:46:30",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 6278,
+  "frontmostAfter": "com.google.Chrome",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261009-071616/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261009-071616/output/collection-attempt-1.review.md"
+}

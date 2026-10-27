@@ -1,0 +1,122 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-19",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 66,
+    "task_page": 494,
+    "navigation": 1332,
+    "date_filter": 2249,
+    "page_1_read": 392,
+    "selection_audit": 0,
+    "detail_1335014609": 1301
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_1335014609": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "1335014609",
+      "merchantName": "帝王米线麦哆馅饼",
+      "recommendTime": "2026-10-19 13:13:02",
+      "city": "济南市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 6,
+      "address": "吐丝口东路与澳门北路交叉口西80米",
+      "contact": "马，15966061073",
+      "detailVerified": true,
+      "text": "城市：济南市  ；  联系人：马，15966061073  ；  店铺：帝王米线麦哆馅饼  ；  地址：吐丝口东路与澳门北路交叉口西80米",
+      "sha256": "1d1746f1c608eceddcb09d528b77b71cb3815fdf17f8615cb6f21b8fb818084e"
+    }
+  ],
+  "frontmostBefore": "com.tencent.xinWeChat",
+  "createdAt": "2026-10-19T05:54:42.028Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-19",
+    "merchantName": "探密牛蛙·龙虾·烤鱼（福田店）",
+    "merchantId": "542834120",
+    "recommendTime": "2026-10-19 12:31:32",
+    "tableOrder": 5,
+    "messageSha256": "5e0f965505abff12e83921e108f85f2381d7c56c2a2752b7dfb6dbfd8df32b8e",
+    "sentAt": "2026-10-19T12:49:44+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-19",
+  "filterEndDate": "2026-10-19",
+  "dateFilter": "2026-10-19..2026-10-19",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 6,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 6,
+  "pendingRows": 6,
+  "targetCount": 1,
+  "selectionAudit": {
+    "totalRows": 6,
+    "pendingRows": 6,
+    "excludedAtOrBeforeCursor": 5,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 1,
+    "rows": [
+      {
+        "merchantId": "1335014609",
+        "recommendTime": "2026-10-19 13:13:02",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "542834120",
+        "recommendTime": "2026-10-19 12:31:32",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1364102557",
+        "recommendTime": "2026-10-19 10:30:09",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546486813",
+        "recommendTime": "2026-10-19 10:10:02",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "544562101",
+        "recommendTime": "2026-10-19 08:28:03",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1310479636",
+        "recommendTime": "2026-10-19 07:20:25",
+        "status": "待处理"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 6467,
+  "frontmostAfter": "com.tencent.xinWeChat",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261019-135434/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261019-135434/output/collection-attempt-1.review.md"
+}

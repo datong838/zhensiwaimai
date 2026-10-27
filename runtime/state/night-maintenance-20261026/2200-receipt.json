@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-26",
+  "completedAt": "2026-10-26T14:40:12.446798+00:00",
+  "ok": true,
+  "posts": [
+    {
+      "checkedAt": "2026-10-26T14:37:13.046Z",
+      "port": 9230,
+      "origin": "https://melody.shop.ele.me",
+      "path": "/app/chain/95708808/dashboard",
+      "login": false,
+      "markers": [
+        "门店",
+        "数据"
+      ],
+      "risk": false,
+      "ok": true
+    },
+    {
+      "port": 9231,
+      "ok": true,
+      "businessPages": 1,
+      "probes": [
+        {
+          "origin": "https://open.shop.ele.me",
+          "path": "/manager/base/abnormal-diagnosis",
+          "markers": [
+            "代运营",
+            "客户管理",
+            "经营任务",
+            "数据中心"
+          ],
+          "login": false,
+          "risk": false
+        }
+      ]
+    },
+    {
+      "port": 9232,
+      "ok": true,
+      "businessPages": 2,
+      "probes": [
+        {
+          "origin": "https://data.guoshuyufen.com",
+          "path": "/",
+          "markers": [
+            "实时数据"
+          ],
+          "login": false,
+          "risk": false
+        },
+        {
+          "origin": "https://data.guoshuyufen.com",
+          "path": "/",
+          "markers": [
+            "实时数据"
+          ],
+          "login": false,
+          "risk": false
+        }
+      ]
+    },
+    {
+      "port": 9233,
+      "ok": true,
+      "businessPages": 1,
+      "probes": [
+        {
+          "origin": "https://waimaie.meituan.com",
+          "path": "/imworkbench/home",
+          "markers": [
+            "顾客消息",
+            "客服管理",
+            "正在接待",
+            "待人工回复",
+            "未回复"
+          ],
+          "login": false,
+          "risk": false
+        }
+      ]
+    }
+  ],
+  "imReset": {
+    "ok": true,
+    "closed": 1,
+    "remainingIMPages": 1,
+    "checkedAt": "2026-10-26T14:15:03.389Z",
+    "beforeIM": 1,
+    "afterIM": 1,
+    "otherPagesPreserved": true,
+    "health": {
+      "markers": [
+        "顾客消息",
+        "客服管理",
+        "正在接待",
+        "待人工回复",
+        "未回复"
+      ],
+      "login": false,
+      "risk": false
+    }
+  },
+  "userConfirmedBrandLogin": true,
+  "brandLoginRecovered": true,
+  "newSendAttempts": 0,
+  "cookiesOrLocalStorageRead": false,
+  "note": "Normal UI reload and business-text checks only; original failed brand check retained, user manually restored login; unrelated pages preserved."
+}

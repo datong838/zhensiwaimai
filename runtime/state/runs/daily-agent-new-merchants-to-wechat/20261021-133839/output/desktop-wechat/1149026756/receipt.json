@@ -1,0 +1,152 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：汕头市  ；  联系人：王，15218971886  ；  店铺：云贵川小炒店  ；  地址：广益街道北陇华东路旁",
+      "sha256": "0f1646dd1e53bb626517782912fd9a6a0a261ae1e43a14f93d6e3dc6d022f453"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "bd82b3e5bf25b825a361cd62c6e2cf4d336f6bc5229b114084dcc8798f6ac078",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "0f1646dd1e53bb626517782912fd9a6a0a261ae1e43a14f93d6e3dc6d022f453",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1792561158.994817,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-text-anchor",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "电销+直播攻坚组",
+          "currentTitle": "电销+直播攻坚组",
+          "messageCount": 43,
+          "anchor": "text-exact",
+          "anchorValue": "城市：汕头市  ；  联系人：王，15218971886  ；  店铺：云贵川小炒店  ；  地址：广益街道北陇华东路旁",
+          "anchorInTrailingPosition": true,
+          "autoKind": null,
+          "readbackAt": 1792561187.3469281
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "电销+直播攻坚组",
+            "len": 60
+          },
+          "route": "relay",
+          "direct_error": "[Errno 65] No route to host",
+          "direct_local_network_blocked": true,
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 9349
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 28352
+      }
+    ],
+    "elapsedMs": 37843,
+    "eventKey": "4c0f1b789ecac4cd4d703445be67438e289789202351f771f4f10ab9a6da4fdd",
+    "reviewSummary": {
+      "totalElapsedMs": 37843,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/b940d0b8760c6fae516e05b3e9ee90830072cecfbfa9d42989767012960de2b3.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 9349,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 28352,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 37843,
+  "reviewSummary": {
+    "totalElapsedMs": 37843,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "ok": true,
+    "resolvedGroup": "电销+直播攻坚组",
+    "currentTitle": "电销+直播攻坚组",
+    "messageCount": 43,
+    "anchor": "text-exact",
+    "anchorValue": "城市：汕头市  ；  联系人：王，15218971886  ；  店铺：云贵川小炒店  ；  地址：广益街道北陇华东路旁",
+    "anchorInTrailingPosition": true,
+    "autoKind": null,
+    "readbackAt": 1792561187.3469281
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false
+}

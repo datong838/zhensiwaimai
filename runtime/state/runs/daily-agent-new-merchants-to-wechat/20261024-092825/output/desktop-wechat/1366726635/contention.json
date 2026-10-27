@@ -1,0 +1,229 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：长沙市  ；  联系人：唐，13306921546  ；  店铺：拾卤堂  ；  地址：井湾子街道红星村社区农民新村39栋欧金盛私房一楼8号  ；  商家ID：1366726635",
+      "sha256": "a19d28f350bdb0b458610f79b3178148884bf60f87c6d39e320371a47c1fe1a3"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "3a23cb0a32206bf8738f287891558036fb16f5616e32c7a019f0b9369cba07b4",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "a19d28f350bdb0b458610f79b3178148884bf60f87c6d39e320371a47c1fe1a3",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1792805338.268681,
+        "sendAttempts": 1,
+        "verificationLevel": "wecom-ui-text-anchor",
+        "evidence": {
+          "frame1": true,
+          "frame2_input_cleared": true,
+          "verified": true,
+          "tail1": [
+            "城市：江门市  ；  联系人：陈生，13426848124  ；  店铺：包鑫喜  ；  地址：台城街道办事处台东路557号102号商铺  ；  商家ID：1360809513",
+            "由微信用户创建的外部群，含14位外部联系人 | 群主: 李知恒- AllenLi@微信",
+            "电销+直播攻坚组",
+            "250.0"
+          ]
+        },
+        "transport": {
+          "kind": "text",
+          "sendAttempts": 1,
+          "sent": true,
+          "receipt": {
+            "result": "verified",
+            "verify": {
+              "frame1": true,
+              "frame2_input_cleared": true,
+              "verified": true,
+              "tail1": [
+                "城市：江门市  ；  联系人：陈生，13426848124  ；  店铺：包鑫喜  ；  地址：台城街道办事处台东路557号102号商铺  ；  商家ID：1360809513",
+                "由微信用户创建的外部群，含14位外部联系人 | 群主: 李知恒- AllenLi@微信",
+                "电销+直播攻坚组",
+                "250.0"
+              ]
+            },
+            "steps": [
+              {
+                "navigate": "chat-title-verified:'电销+直播攻坚组'"
+              },
+              {
+                "title_gate": "电销+直播攻坚组"
+              },
+              {
+                "write": true,
+                "info": "pos=(493.0, 599.0) attempt=1 len=93 head='城市：长沙市  ；  联系人：唐，133'"
+              },
+              {
+                "title_gate_final": "电销+直播攻坚组"
+              },
+              {
+                "send_mode": "enter-once",
+                "send_attempts": [
+                  {
+                    "try": "enter",
+                    "input_clean": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 12109
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 73653
+      }
+    ],
+    "elapsedMs": 85860,
+    "eventKey": "be42227db10f324ab37ccd7ce7a382d300df3adb7c60f6739f5fddee79710396",
+    "reviewSummary": {
+      "totalElapsedMs": 85860,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/4b613cbec61faff831e615ba0838307ceb9bb82c766b3e95e31ce014a3076d88.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 12109,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 73653,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 85860,
+  "reviewSummary": {
+    "totalElapsedMs": 85860,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "frame1": true,
+    "frame2_input_cleared": true,
+    "verified": true,
+    "tail1": [
+      "城市：江门市  ；  联系人：陈生，13426848124  ；  店铺：包鑫喜  ；  地址：台城街道办事处台东路557号102号商铺  ；  商家ID：1360809513",
+      "由微信用户创建的外部群，含14位外部联系人 | 群主: 李知恒- AllenLi@微信",
+      "电销+直播攻坚组",
+      "250.0"
+    ]
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false,
+  "attemptReviews": [
+    {
+      "attempt": 1,
+      "elapsedMs": 85933,
+      "ok": true,
+      "reason": null,
+      "sendAttempts": 1,
+      "sendReview": [
+        {
+          "stage": "authorization",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 1,
+          "label": "authorization"
+        },
+        {
+          "stage": "freeze:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 2,
+          "label": "freeze:0"
+        },
+        {
+          "stage": "preflight",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 12109,
+          "item": 3,
+          "label": "preflight"
+        },
+        {
+          "stage": "send:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 73653,
+          "item": 4,
+          "label": "send:0"
+        }
+      ]
+    }
+  ],
+  "contentionRetries": 0,
+  "contentionWaitMs": 0,
+  "contentionEvents": []
+}

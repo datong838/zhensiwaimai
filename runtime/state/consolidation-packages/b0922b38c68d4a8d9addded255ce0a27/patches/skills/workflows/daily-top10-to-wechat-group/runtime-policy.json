@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "policyId": "daily-top10-desktop-v1",
+  "browserProfile": "taobao-brand",
+  "browserPort": 9230,
+  "wechatChannel": "desktop",
+  "targetGroup": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+  "runtimeModelDecisions": 0,
+  "files": {
+    "runtime_guard": {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/scripts/runtime_guard.py",
+      "sha256": "c6ee8f0adfaf018a7cfb36f81b4d6783311087e45a4dfd453e759d7f6323959b"
+    },
+    "workflow_executor": {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/scripts/workflow_executor.py",
+      "sha256": "7bcdda2f87a011e8262075e55b41fea5cf22f13d6cebb53fc69bdba1a22b4251"
+    },
+    "background_executor": {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/scripts/desktop_background_executor.mjs",
+      "sha256": "d7824c632c35a3ebce75378afea8879313a6a80268235e5e4a70b2483269752f"
+    },
+    "desktop_sender": {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/workflow_bridge_windows.py",
+      "sha256": "f7d843eeca265edc12e9c9475fdd996114d29f68953c10e56b5dc3323319da4d"
+    },
+    "desktop_preflight": {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/workflow_preflight.py",
+      "sha256": "6340a77b63f400216460ba1aaded0556238a77d54ff3e655b9cd87985c162d58"
+    },
+    "wechat_interaction_lock": {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/legacy-app-controler/wechat-desktop-control/scripts/wechat_interaction_lock.py",
+      "sha256": "a70f0e947df2e993ac4aec50995c92582d4f15f9583138a9fcde450396ba3ea2"
+    },
+    "messaging_dependencies": {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/dependencies.json",
+      "sha256": "0581d829a4a65fcfbb31ec1d999bd6d1f4fba558eecc5b16b4ce384ff8bd6f0f"
+    },
+    "receipt_validator": {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/scripts/phone_executor.py",
+      "sha256": "b8d4d8c53bdb980dad19a08930035e954f3bbe2fffe82a5728b7132b2a8f305d"
+    }
+  },
+  "_comment": "2026-10-20 大同指令：目标群 FEIBING NEO AI数字员工 → 上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰；runtime_guard.py 同步改 CANONICAL_TARGET_GROUP 并重绑 sha256（受控再封印，#31）。 2026-10-22 09:58 受控重绑 background_executor sha256（4d3fa3c6→4f67281d）：capture_self_check 增加同裁剪表头带 OCR 并集，修 Apple Vision 整图版面漏识「营业额/商圈收入排名」导致的 08:02/08:45/09:27 三连假失败。",
+  "rebindHistory": [
+    {
+      "at": "2026-10-24T01:31:06+08:00",
+      "file": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/scripts/workflow_executor.py",
+      "reason": "受控再封印：企微测试群扫描所需的 fail-safe 单点翻转（WECHAT_TEST_GROUP 测试群覆盖 + WECOM_AUTOSWEEP 焦点锁定守卫 + WECOM_TEST_ROOT 标记林隔离）均为运行期环境变量驱动、无环境变量时行为与原版完全一致；本重绑仅刷新摘要，不改动运行期语义。另含 10-23 企微通道迁移后未同步的既有漂移补绑。",
+      "oldSha256": "0baf49b0e5837527943606bfb5e091654a6d4dd4c5fb9d14da52959cad52b955",
+      "newSha256": "3d2e094c6c4a86218a107541022e7f2a1c62441e346c9ebb4cfd03ed9a584a8b"
+    },
+    {
+      "at": "2026-10-24T01:31:06+08:00",
+      "file": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/workflow_bridge_windows.py",
+      "reason": "受控再封印：企微测试群扫描所需的 fail-safe 单点翻转（WECHAT_TEST_GROUP 测试群覆盖 + WECOM_AUTOSWEEP 焦点锁定守卫 + WECOM_TEST_ROOT 标记林隔离）均为运行期环境变量驱动、无环境变量时行为与原版完全一致；本重绑仅刷新摘要，不改动运行期语义。另含 10-23 企微通道迁移后未同步的既有漂移补绑。",
+      "oldSha256": "6fa054e0a8d2d77051ca0ad141a4384794f0d2836f5dbfd799ca3c20abba9a39",
+      "newSha256": "f7d843eeca265edc12e9c9475fdd996114d29f68953c10e56b5dc3323319da4d"
+    },
+    {
+      "at": "2026-10-24T01:31:06+08:00",
+      "file": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/dependencies.json",
+      "reason": "受控再封印：企微测试群扫描所需的 fail-safe 单点翻转（WECHAT_TEST_GROUP 测试群覆盖 + WECOM_AUTOSWEEP 焦点锁定守卫 + WECOM_TEST_ROOT 标记林隔离）均为运行期环境变量驱动、无环境变量时行为与原版完全一致；本重绑仅刷新摘要，不改动运行期语义。另含 10-23 企微通道迁移后未同步的既有漂移补绑。",
+      "oldSha256": "bdab30b3d4aafb459ba928f7bd280ea1d3171b6b765d751bfa109ea0e17a2956",
+      "newSha256": "17de2b7ecdeb44ae8a8a948758348f7c74f56ec3e928af473727cccd0deb4bd8"
+    },
+    {
+      "at": "2026-10-25",
+      "authorization": "用户今晚修复遗留并去掉执行倒计时",
+      "file": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/scripts/workflow_executor.py",
+      "oldSha256": "3d2e094c6c4a86218a107541022e7f2a1c62441e346c9ebb4cfd03ed9a584a8b",
+      "newSha256": "7c3d688f45abdbdba09f55e45dd7d7d42d17b18a25e907690c2b82fc06381af7",
+      "plan": "docs/solutions/20261025-Top10执行倒计时清理.md"
+    },
+    {
+      "at": "2026-10-25",
+      "authorization": "用户今晚修复遗留并去掉执行倒计时",
+      "file": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/scripts/desktop_background_executor.mjs",
+      "oldSha256": "4f67281d1620b65f290a947de2ab3b38d88c357da54ecadcaf922789f956cf6a",
+      "newSha256": "4e5cb1ccd75106c676607a74efc4f7dd7f4104c66fa9abb7ba518eb349de47e4",
+      "plan": "docs/solutions/20261025-Top10执行倒计时清理.md"
+    },
+    {
+      "at": "2026-10-26T12:58:41.342256+08:00",
+      "authorization": "用户明确要求Top10按收入金额从高到低，兼容收入/预计收入",
+      "file": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/scripts/desktop_background_executor.mjs",
+      "oldSha256": "4e5cb1ccd75106c676607a74efc4f7dd7f4104c66fa9abb7ba518eb349de47e4",
+      "newSha256": "d7824c632c35a3ebce75378afea8879313a6a80268235e5e4a70b2483269752f",
+      "plan": "docs/solutions/20261026-Top10收入排序口径变更.md",
+      "validation": "offline tests; real capture and delivery acceptance pending"
+    },
+    {
+      "at": "2026-10-26T12:58:41.342256+08:00",
+      "authorization": "用户明确要求Top10按收入金额从高到低，兼容收入/预计收入",
+      "file": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/scripts/workflow_executor.py",
+      "oldSha256": "7c3d688f45abdbdba09f55e45dd7d7d42d17b18a25e907690c2b82fc06381af7",
+      "newSha256": "186a3678a0133faa115dcfc21b707fdc7ae428d4b12f58ce1bbc535a7e969cdc",
+      "plan": "docs/solutions/20261026-Top10收入排序口径变更.md",
+      "validation": "offline tests; real capture and delivery acceptance pending"
+    },
+    {
+      "at": "2026-10-26T12:58:41.342256+08:00",
+      "authorization": "用户明确要求Top10按收入金额从高到低，兼容收入/预计收入",
+      "file": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/scripts/runtime_guard.py",
+      "oldSha256": "2340768c7636e358fd8304009c4ce446332baa3b19c03594867ab29fa5b469df",
+      "newSha256": "f5133023eff4e953513268db111e4514a458a62b5f02be903a643a7d4a20b30d",
+      "plan": "docs/solutions/20261026-Top10收入排序口径变更.md",
+      "validation": "offline tests; real capture and delivery acceptance pending"
+    },
+    {
+      "at": "2026-10-26T12:58:41.342256+08:00",
+      "authorization": "用户明确要求Top10按收入金额从高到低，兼容收入/预计收入",
+      "file": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/scripts/phone_executor.py",
+      "oldSha256": null,
+      "newSha256": "b8d4d8c53bdb980dad19a08930035e954f3bbe2fffe82a5728b7132b2a8f305d",
+      "plan": "docs/solutions/20261026-Top10收入排序口径变更.md",
+      "validation": "offline tests; real capture and delivery acceptance pending"
+    },
+    {
+      "at": "2026-10-26T16:37:10.694363+08:00",
+      "authorization": "用户要求两平台Top10图片各带固定平台说明",
+      "file": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/scripts/workflow_executor.py",
+      "oldSha256": "186a3678a0133faa115dcfc21b707fdc7ae428d4b12f58ce1bbc535a7e969cdc",
+      "newSha256": "7bcdda2f87a011e8262075e55b41fea5cf22f13d6cebb53fc69bdba1a22b4251",
+      "plan": "docs/solutions/20261026-双平台收入Top10与美团新流方案.md"
+    }
+  ]
+}

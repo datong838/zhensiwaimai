@@ -1,0 +1,200 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：北京市  ；  联系人：13145203455，13145203455  ；  店铺：小四川·麻辣香锅·铁板烧  ；  地址：华源一里10号楼及配套商业太平桥路15号内15号楼﹣1层105-24  ；  商家ID：1366421882",
+      "sha256": "d8c70d28f9087afcc1ab18241497f31a21fb5b843cb8bcac1b1938464803201d"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "4c9c655d7e257bee2decfcd89598a4f63394a41c6f245f9849daee284759361a",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "d8c70d28f9087afcc1ab18241497f31a21fb5b843cb8bcac1b1938464803201d",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1792657084.80398,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-text-anchor",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "电销+直播攻坚组",
+          "currentTitle": "电销+直播攻坚组",
+          "messageCount": 43,
+          "anchor": "text-exact",
+          "anchorValue": "城市：北京市  ；  联系人：13145203455，13145203455  ；  店铺：小四川·麻辣香锅·铁板烧  ；  地址：华源一里10号楼及配套商业太平桥路15号内15号楼﹣1层105-24  ；  商家ID：1366421882",
+          "anchorInTrailingPosition": true,
+          "autoKind": null,
+          "readbackAt": 1792657113.95067
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "电销+直播攻坚组",
+            "len": 120
+          },
+          "route": "relay",
+          "direct_error": "[Errno 65] No route to host",
+          "direct_local_network_blocked": true,
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 19860
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 29146
+      }
+    ],
+    "elapsedMs": 49012,
+    "eventKey": "3a8eb7bfacade44f13622e20f53fc41d8e18b9270fade692aaa1acbdcd111cc9",
+    "reviewSummary": {
+      "totalElapsedMs": 49012,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/03559baa2351433eff2456a179d277ce2a7050bca5636f3e3d5c9cbccc228cb7.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 19860,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 29146,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 49012,
+  "reviewSummary": {
+    "totalElapsedMs": 49012,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "ok": true,
+    "resolvedGroup": "电销+直播攻坚组",
+    "currentTitle": "电销+直播攻坚组",
+    "messageCount": 43,
+    "anchor": "text-exact",
+    "anchorValue": "城市：北京市  ；  联系人：13145203455，13145203455  ；  店铺：小四川·麻辣香锅·铁板烧  ；  地址：华源一里10号楼及配套商业太平桥路15号内15号楼﹣1层105-24  ；  商家ID：1366421882",
+    "anchorInTrailingPosition": true,
+    "autoKind": null,
+    "readbackAt": 1792657113.95067
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false,
+  "attemptReviews": [
+    {
+      "attempt": 1,
+      "elapsedMs": 49153,
+      "ok": true,
+      "reason": null,
+      "sendAttempts": 1,
+      "sendReview": [
+        {
+          "stage": "authorization",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 1,
+          "label": "authorization"
+        },
+        {
+          "stage": "freeze:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 2,
+          "label": "freeze:0"
+        },
+        {
+          "stage": "preflight",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 19860,
+          "item": 3,
+          "label": "preflight"
+        },
+        {
+          "stage": "send:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 29146,
+          "item": 4,
+          "label": "send:0"
+        }
+      ]
+    }
+  ],
+  "contentionRetries": 0,
+  "contentionWaitMs": 0,
+  "contentionEvents": [],
+  "merchantId": "1366421882",
+  "messageSha256": "d8c70d28f9087afcc1ab18241497f31a21fb5b843cb8bcac1b1938464803201d"
+}

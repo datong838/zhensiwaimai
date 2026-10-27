@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "targetCount": 3,
+  "totalRows": 10,
+  "pendingRows": 10,
+  "rows": [
+    {
+      "item": 1,
+      "stage": "background_preflight",
+      "label": "后台浏览器预检",
+      "elapsedMs": 100,
+      "status": "PASS",
+      "pitfalls": []
+    },
+    {
+      "item": 2,
+      "stage": "task_page",
+      "label": "建立独立任务页",
+      "elapsedMs": 401,
+      "status": "PASS",
+      "pitfalls": []
+    },
+    {
+      "item": 3,
+      "stage": "navigation",
+      "label": "进入意向商户列表",
+      "elapsedMs": 1476,
+      "status": "PASS",
+      "pitfalls": []
+    },
+    {
+      "item": 4,
+      "stage": "date_filter",
+      "label": "日期设置与双帧回读",
+      "elapsedMs": 1514,
+      "status": "PASS",
+      "pitfalls": []
+    },
+    {
+      "item": 5,
+      "stage": "page_1_read",
+      "label": "第1页采集与稳定核验",
+      "elapsedMs": 463,
+      "status": "PASS",
+      "pitfalls": []
+    },
+    {
+      "item": 6,
+      "stage": "selection_audit",
+      "label": "选择审计（总10/游标及以前7/游标后非待处理0/待发3）",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": []
+    },
+    {
+      "item": 7,
+      "stage": "detail_544123889",
+      "label": "商家详情核验 544123889",
+      "elapsedMs": 1112,
+      "status": "PASS",
+      "pitfalls": []
+    },
+    {
+      "item": 8,
+      "stage": "detail_546227527",
+      "label": "商家详情核验 546227527",
+      "elapsedMs": 3505,
+      "status": "PASS",
+      "pitfalls": []
+    },
+    {
+      "item": 9,
+      "stage": "detail_1357693154",
+      "label": "商家详情核验 1357693154",
+      "elapsedMs": 1661,
+      "status": "PASS",
+      "pitfalls": []
+    },
+    {
+      "item": 10,
+      "stage": "total",
+      "label": "只读采集总耗时（含子阶段，不重复相加）",
+      "elapsedMs": 11062,
+      "status": "PASS",
+      "pitfalls": []
+    }
+  ]
+}

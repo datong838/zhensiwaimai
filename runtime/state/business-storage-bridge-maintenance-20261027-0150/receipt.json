@@ -1,0 +1,98 @@
+{
+  "ok": true,
+  "action": "prepare",
+  "status": "prepared",
+  "review": [
+    {
+      "label": "维护授权",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "授权有效期",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "读取依赖清单",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "计算候选摘要",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 7
+    },
+    {
+      "label": "授权范围",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "统一微信完整离线测试",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 4305
+    },
+    {
+      "label": "原子写入依赖清单",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "依赖清单回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "统一入口完整性回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 32
+    }
+  ],
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "authorization": "user-20261027-business-storage-bridge-gate",
+  "expiresAt": "2026-10-27T06:00:00+08:00",
+  "userInstructionSha256": "c6e6e6d031fdb1a60357cdae84304df0363cb29aef3bdfbf2fa0b50fce2ec5ea",
+  "dependencyManifestPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/dependencies.json",
+  "dependencyManifestBeforeSha256": "0581d829a4a65fcfbb31ec1d999bd6d1f4fba558eecc5b16b4ce384ff8bd6f0f",
+  "dependencyManifestAfterSha256": "2734947eca1658894fece04681bf1cbdd4e078c0acf1d59b709e67f783c8f067",
+  "changes": [
+    {
+      "path": "../../runtime/business_storage.py",
+      "before": "0000000000000000000000000000000000000000000000000000000000000000",
+      "after": "42e1a1b0b821d2f9eed5082f0748966aad15c651bdd0cbd62fecbc462cdfcaee"
+    },
+    {
+      "path": "scripts/dependency_maintenance.py",
+      "before": "78121366f7211e2377eca0e9fbcd586beb9196693a85ff1aeed72b9c93fe484c",
+      "after": "bb10c8f1753444cfc1b05a8a3cee706005f31b767f2c275089c810d9ffdefd5a"
+    },
+    {
+      "path": "scripts/workflow_bridge.py",
+      "before": "b439c9a4974f82e52a9e4f1f2ede4a7095400575c61628b55d37e2fc54f95329",
+      "after": "d2f92dc26761edc1bfceff5c22b04da9d419eb87353b3fa9c7a2ceec82e65b44"
+    }
+  ],
+  "tests": {
+    "ok": true,
+    "elapsedMs": 4305,
+    "testCount": 411
+  },
+  "capabilityCheck": {
+    "ok": true,
+    "elapsedMs": 32,
+    "testCount": null
+  },
+  "candidateFileCount": 33,
+  "elapsedMs": 4347
+}

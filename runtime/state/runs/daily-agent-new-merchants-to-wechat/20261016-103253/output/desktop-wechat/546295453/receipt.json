@@ -1,0 +1,150 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：长沙市  ；  联系人：吴，17773173366  ；  店铺：一号隆江猪脚饭（德思勤店）  ；  地址：洞井街道洞井安置小区3栋3单元1楼北边门面",
+      "sha256": "c020eac9d78d1aaa1886c7b1bdf48a0c79685aa97a0ca9bc266e11d5046a1b30"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "584adb4b8ab251d28d24dcd6155ee6b3317568eaa5a0e97ff088ce5d6ed553c3",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "c020eac9d78d1aaa1886c7b1bdf48a0c79685aa97a0ca9bc266e11d5046a1b30",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1792118057.661077,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-text-anchor",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "电销+直播攻坚组",
+          "currentTitle": "电销+直播攻坚组",
+          "messageCount": 42,
+          "anchor": "text-exact",
+          "anchorValue": "城市：长沙市  ；  联系人：吴，17773173366  ；  店铺：一号隆江猪脚饭（德思勤店）  ；  地址：洞井街道洞井安置小区3栋3单元1楼北边门面",
+          "anchorInTrailingPosition": true,
+          "autoKind": null,
+          "readbackAt": 1792118079.4162319
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "电销+直播攻坚组",
+            "len": 78
+          },
+          "route": "direct",
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 191
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 21754
+      }
+    ],
+    "elapsedMs": 21951,
+    "eventKey": "cc1570087ccaeb9bd4cc951243962edd8e760523131559cd1bbd9601883ce0a7",
+    "reviewSummary": {
+      "totalElapsedMs": 21951,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/e592da0c221955844d12acbd7b92db93a528e4acdfaa9f0e65e8f69324904c9c.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 191,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 21754,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 21951,
+  "reviewSummary": {
+    "totalElapsedMs": 21951,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "ok": true,
+    "resolvedGroup": "电销+直播攻坚组",
+    "currentTitle": "电销+直播攻坚组",
+    "messageCount": 42,
+    "anchor": "text-exact",
+    "anchorValue": "城市：长沙市  ；  联系人：吴，17773173366  ；  店铺：一号隆江猪脚饭（德思勤店）  ；  地址：洞井街道洞井安置小区3栋3单元1楼北边门面",
+    "anchorInTrailingPosition": true,
+    "autoKind": null,
+    "readbackAt": 1792118079.4162319
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false
+}

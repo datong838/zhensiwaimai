@@ -1,0 +1,23 @@
+{
+  "skill": "daily-new-stores-activity-audit-to-wechat",
+  "ledger_name": "淘宝新店活动缺项巡检与提醒（每日11:00）",
+  "schedule": "每日11:00",
+  "dev_state": "active",
+  "status": "FAILED",
+  "category": "UNKNOWN",
+  "detail": "nested-reason=activity-collection-unknown:-new-stores-activity-audit-to-wechat/scripts/activity_collector.mjs:225:17) ⏎     at async main (/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-new-stores-activity-audit-to-wechat/scripts/activity_collector.mjs:300:21)\"} (receipt:nested_reason) [note: 采集阶段失败（岗位后台 Chrome / CDP / 页面元素）。按铁律先「关页重开」复位再定性站点改版。]",
+  "next_action": "看护代理读日志定位根因后升级处理",
+  "attempts": 1,
+  "max_retries": 0,
+  "duration_seconds": 8.41,
+  "started_at": "2026-10-25T11:28:24",
+  "finished_at": "2026-10-25T11:28:33",
+  "triggered_by": "daemon",
+  "logs": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-25/daily-new-stores-activity-audit-to-wechat--20261025-112824--a1--s1.log"
+  ],
+  "fail_signal": {
+    "kind": "nested_reason",
+    "code": "activity-collection-unknown:-new-stores-activity-audit-to-wechat/scripts/activity_collector.mjs:225:17) ⏎     at async main (/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-new-stores-activity-audit-to-wechat/scripts/activity_collector.mjs:300:21)\"}"
+  }
+}

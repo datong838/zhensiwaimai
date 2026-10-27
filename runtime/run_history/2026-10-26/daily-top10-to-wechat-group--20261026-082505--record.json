@@ -1,0 +1,25 @@
+{
+  "skill": "daily-top10-to-wechat-group",
+  "ledger_name": "昨日门店Top10截图发运营群（每日08:00）",
+  "schedule": "每日08:00",
+  "dev_state": "active",
+  "status": "FAILED",
+  "category": "UNKNOWN",
+  "detail": "reason=desktop-wechat:legacy-marker-binding-mismatch (receipt:reason) [idempotent-skip-UNVERIFIED marker=/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/.runtime/send-ledger/2026-10-25-main-cc43d929019d.json state=unknown sendAttempts=1] [note: 桥对「同日已 verified 标记」的拒发（幂等保护，非故障）。**必须**由 P0-1b 证据裁决核实当日 verified 外发后，才判 SKIPPED_IDEMPOTENT；证据不足照常告警。]",
+  "next_action": "看护代理读日志定位根因后升级处理",
+  "attempts": 1,
+  "max_retries": 0,
+  "duration_seconds": 16.59,
+  "started_at": "2026-10-26T08:25:05",
+  "finished_at": "2026-10-26T08:25:21",
+  "triggered_by": "daemon",
+  "logs": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-26/daily-top10-to-wechat-group--20261026-082505--a1--s1.log"
+  ],
+  "fail_signal": {
+    "kind": "reason",
+    "code": "desktop-wechat:legacy-marker-binding-mismatch",
+    "idempotent_unverified": true,
+    "idempotent_evidence": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/.runtime/send-ledger/2026-10-25-main-cc43d929019d.json"
+  }
+}

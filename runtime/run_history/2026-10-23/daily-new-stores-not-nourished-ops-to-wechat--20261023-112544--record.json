@@ -1,0 +1,23 @@
+{
+  "skill": "daily-new-stores-not-nourished-ops-to-wechat",
+  "ledger_name": "淘宝新店未养活运营分配（每日11:40）",
+  "schedule": "每日11:40",
+  "dev_state": "active",
+  "status": "FAILED",
+  "category": "UNKNOWN",
+  "detail": "reason=target-group-not-exactly-listed (receipt:reason)",
+  "next_action": "看护代理读日志定位根因后升级处理",
+  "attempts": 1,
+  "max_retries": 2,
+  "duration_seconds": 40.46,
+  "started_at": "2026-10-23T11:25:44",
+  "finished_at": "2026-10-23T11:26:25",
+  "triggered_by": "daemon",
+  "logs": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-23/daily-new-stores-not-nourished-ops-to-wechat--20261023-112544--a1--s1.log"
+  ],
+  "fail_signal": {
+    "kind": "reason",
+    "code": "target-group-not-exactly-listed"
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-17",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 50,
+    "task_page": 423,
+    "navigation": 1444,
+    "date_filter": 2140,
+    "page_1_read": 429,
+    "selection_audit": 0,
+    "detail_1352088115": 1096
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_1352088115": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "1352088115",
+      "merchantName": "重庆麻辣烫·麻辣拌",
+      "recommendTime": "2026-10-17 12:49:26",
+      "city": "北京市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 8,
+      "address": "望京街9号商业楼-1层3A等5套内3A号279室",
+      "contact": "丹，16632237821",
+      "detailVerified": true,
+      "text": "城市：北京市  ；  联系人：丹，16632237821  ；  店铺：重庆麻辣烫·麻辣拌  ；  地址：望京街9号商业楼-1层3A等5套内3A号279室",
+      "sha256": "1419ac61eb7a1556bc621e377d784099f3a340358faea4b9af25c88522f088f2"
+    }
+  ],
+  "frontmostBefore": "com.tencent.workbuddy.mac",
+  "createdAt": "2026-10-17T05:47:38.154Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-17",
+    "merchantName": "喜稻韩式烤肉拌饭",
+    "merchantId": "507519525",
+    "recommendTime": "2026-10-17 12:27:54",
+    "tableOrder": 6,
+    "messageSha256": "aafa1005eba57e24a2ab565934a01f29aa33ceb5e7f8b286e6403edec0b0047c",
+    "sentAt": "2026-10-17T12:39:03+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-17",
+  "filterEndDate": "2026-10-17",
+  "dateFilter": "2026-10-17..2026-10-17",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 8,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 8,
+  "pendingRows": 7,
+  "targetCount": 1,
+  "selectionAudit": {
+    "totalRows": 8,
+    "pendingRows": 7,
+    "excludedAtOrBeforeCursor": 6,
+    "excludedAfterCursorNotPending": 1,
+    "targetCount": 1,
+    "rows": [
+      {
+        "merchantId": "1352088115",
+        "recommendTime": "2026-10-17 12:49:26",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "507519525",
+        "recommendTime": "2026-10-17 12:27:54",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1359496396",
+        "recommendTime": "2026-10-17 12:14:50",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1366113527",
+        "recommendTime": "2026-10-17 12:08:30",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "525323950",
+        "recommendTime": "2026-10-17 11:47:03",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "531654077",
+        "recommendTime": "2026-10-17 09:56:44",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "535961676",
+        "recommendTime": "2026-10-17 09:27:52",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "545386108",
+        "recommendTime": "2026-10-17 12:38:19",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 6186,
+  "frontmostAfter": "com.tencent.workbuddy.mac",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261017-134731/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261017-134731/output/collection-attempt-1.review.md"
+}

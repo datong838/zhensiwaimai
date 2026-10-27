@@ -1,0 +1,150 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：防城港市  ；  联系人：梁，18077074080  ；  店铺：刘记美食  ；  地址：北部湾大道168号阳光海岸二期四组团12号楼1层1210号商铺",
+      "sha256": "211decc9de83bf2a1eb60a25ef3d78f61c6aa169a9259ca3c1d44454ca188fa7"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "ee2997e1f97eb3d558a5494d605920a0331dceb492f7991865fb8b27e1cbc0af",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "211decc9de83bf2a1eb60a25ef3d78f61c6aa169a9259ca3c1d44454ca188fa7",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1792414620.915461,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-text-anchor",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "电销+直播攻坚组",
+          "currentTitle": "电销+直播攻坚组",
+          "messageCount": 45,
+          "anchor": "text-exact",
+          "anchorValue": "城市：防城港市  ；  联系人：梁，18077074080  ；  店铺：刘记美食  ；  地址：北部湾大道168号阳光海岸二期四组团12号楼1层1210号商铺",
+          "anchorInTrailingPosition": true,
+          "autoKind": null,
+          "readbackAt": 1792414644.0124831
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "电销+直播攻坚组",
+            "len": 80
+          },
+          "route": "direct",
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 168
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 23099
+      }
+    ],
+    "elapsedMs": 23270,
+    "eventKey": "d5dde802514880d66e187160db3b19aded5e956102d734984acc3de9ef09a2f3",
+    "reviewSummary": {
+      "totalElapsedMs": 23270,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/aaf5ce212869a2a8a7678a130f6c3b1a5c92dd50a116b52b60ee21c8e4e53d8b.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 168,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 23099,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 23270,
+  "reviewSummary": {
+    "totalElapsedMs": 23270,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "ok": true,
+    "resolvedGroup": "电销+直播攻坚组",
+    "currentTitle": "电销+直播攻坚组",
+    "messageCount": 45,
+    "anchor": "text-exact",
+    "anchorValue": "城市：防城港市  ；  联系人：梁，18077074080  ；  店铺：刘记美食  ；  地址：北部湾大道168号阳光海岸二期四组团12号楼1层1210号商铺",
+    "anchorInTrailingPosition": true,
+    "autoKind": null,
+    "readbackAt": 1792414644.0124831
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false
+}

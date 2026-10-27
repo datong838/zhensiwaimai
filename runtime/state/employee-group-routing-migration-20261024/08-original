@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "description": "P0-2 落群路由外置（仅 group/kind/count；授权串与防重台账路径留在封印代码 workflow_bridge.py 内，绝不外置）",
+  "updatedAt": "2026-10-23T00:02:49+08:00",
+  "updatedBy": "大同(WorkBuddy执行)",
+  "reason": "2026-10-22 大同指定：员工群=FEIBING NEO AI数字员工，运营群=上海臻肆外卖运营-盯个盯-饭敢当。淘宝闪购差评申诉、美团外卖差评申诉的 Excel 结果表一律改发运营群（原发员工群）：taobao-flash-appeals / meituan-waimai-appeals 路由 GROUP→JINSHA_GROUP，并新增申诉汇总台账截图 image 通道（taobao-flash-appeals-summary / meituan-waimai-appeals-summary）。同日晚间：差评分析流新增整表长图 image 通道 negative-reviews-summary（Excel 发群后补发长图）。",
+  "routes": {
+    "merchants": {
+      "group": "电销+直播攻坚组",
+      "kind": "text",
+      "count": 1,
+      "channel": "wecom"
+    },
+    "top10": {
+      "group": "JINSHA_GROUP",
+      "kind": "image",
+      "count": 1,
+      "channel": "wecom"
+    },
+    "taobao-evidence": {
+      "group": "GROUP",
+      "kind": "image",
+      "count": [
+        1,
+        2
+      ],
+      "channel": "wecom"
+    },
+    "jinsha-reports": {
+      "group": "JINSHA_GROUP",
+      "kind": "file",
+      "count": 2,
+      "channel": "wecom"
+    },
+    "jinsha-reports-taobao-repair-20260917": {
+      "group": "JINSHA_GROUP",
+      "kind": "file",
+      "count": 1,
+      "channel": "wecom"
+    },
+    "negative-reviews": {
+      "group": "JINSHA_GROUP",
+      "kind": "file",
+      "count": 1,
+      "channel": "wecom"
+    },
+    "negative-reviews-summary": {
+      "group": "JINSHA_GROUP",
+      "kind": "image",
+      "count": 1,
+      "channel": "wecom"
+    },
+    "taobao-flash-appeals": {
+      "group": "JINSHA_GROUP",
+      "kind": "file",
+      "count": 1,
+      "channel": "wecom"
+    },
+    "meituan-waimai-appeals": {
+      "group": "JINSHA_GROUP",
+      "kind": "file",
+      "count": 1,
+      "channel": "wecom"
+    },
+    "meituan-customer-reply-daily": {
+      "group": "GROUP",
+      "kind": "file",
+      "count": 1,
+      "channel": "wecom"
+    },
+    "negative-feedback-appeals": {
+      "group": "JINSHA_GROUP",
+      "kind": "file",
+      "count": 2,
+      "channel": "wecom"
+    },
+    "taobao-flash-appeals-summary": {
+      "group": "JINSHA_GROUP",
+      "kind": "image",
+      "count": 1,
+      "channel": "wecom"
+    },
+    "meituan-waimai-appeals-summary": {
+      "group": "JINSHA_GROUP",
+      "kind": "image",
+      "count": 1,
+      "channel": "wecom"
+    },
+    "jinsha-reports-taobao-repair-20261023": {
+      "group": "JINSHA_GROUP",
+      "kind": "file",
+      "count": 1,
+      "channel": "wecom"
+    }
+  }
+}

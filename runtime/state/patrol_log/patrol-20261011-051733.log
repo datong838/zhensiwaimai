@@ -1,0 +1,18 @@
+===== 四岗位登录态探针 20261011-051733 =====
+>> 对时:
+Sun Oct 11 05:17:33 CST 2026
+>> 随机等待 63s 后开始探测
+>> 开始探测 05:18:36
+>> 探测结果:
+   9230 GREEN :: 主页登录态(https://melody.shop.ele.me/app/chain/545516738/dashboard#app.chainshop.dashboard); 全量login命中=0; pages=4
+   9231 GREEN :: 主页登录态(https://open.shop.ele.me/manager/base/home); 全量login命中=0; pages=3
+   9232 GREEN :: 主页登录态(https://data.guoshuyufen.com/#/businessData/realTimeData); 全量login命中=0; pages=3
+   9233 GREEN :: 主页登录态(https://waimaie.meituan.com/imworkbench/home?appId=4&clientType=140006#/im/page/workbench/reception); 全量login命中=0; pages=3
+>> 监理闭环看板检查:
+
+>> IS_NIGHT=1 (hour=05)
+>> 网关 /health: {'ok': False, 'error': '[Errno 54] Connection reset by peer', 'error_kind': 'connection', 'local_network_blocked': False, 'route': 'relay', 'direct_error': '[Errno 65] No route to host', 'direct_local_network_blocked': True} 
+>> 无异常，未发送任何微信告警。
+ALERT_SENT=0
+SUMMARY | 9230:GREEN 9231:GREEN 9232:GREEN 9233:GREEN | night=1 gw=0 alert=0
+LOG=/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/patrol_log/patrol-20261011-051733.log

@@ -1,0 +1,99 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-20",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 68,
+    "task_page": 246,
+    "navigation": 1240,
+    "date_filter": 1528,
+    "page_1_read": 346,
+    "selection_audit": 0
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS"
+  },
+  "messages": [],
+  "frontmostBefore": "com.tencent.workbuddy.mac",
+  "createdAt": "2026-10-20T02:20:55.138Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-20",
+    "merchantName": "JS COFFEE",
+    "merchantId": "546176035",
+    "recommendTime": "2026-10-20 09:08:51",
+    "tableOrder": 24,
+    "messageSha256": "1f54c7dd7eae92c7fcf36f87e66190a1141f8fbbb30695e00a4797de58a4c424",
+    "sentAt": "2026-10-20T10:09:42+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-20",
+  "filterEndDate": "2026-10-20",
+  "dateFilter": "2026-10-20..2026-10-20",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 5,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 5,
+  "pendingRows": 3,
+  "targetCount": 0,
+  "selectionAudit": {
+    "totalRows": 5,
+    "pendingRows": 3,
+    "excludedAtOrBeforeCursor": 4,
+    "excludedAfterCursorNotPending": 1,
+    "targetCount": 0,
+    "rows": [
+      {
+        "merchantId": "546176035",
+        "recommendTime": "2026-10-20 09:08:51",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1274140663",
+        "recommendTime": "2026-10-20 07:30:33",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1239714604",
+        "recommendTime": "2026-10-20 02:54:47",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1347208092",
+        "recommendTime": "2026-10-20 09:37:16",
+        "status": "完成"
+      },
+      {
+        "merchantId": "1358930862",
+        "recommendTime": "2026-10-20 08:43:12",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 3911,
+  "frontmostAfter": "com.tencent.workbuddy.mac",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261020-102050/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261020-102050/output/collection-attempt-1.review.md"
+}

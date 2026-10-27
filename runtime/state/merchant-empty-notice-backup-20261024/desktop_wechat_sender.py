@@ -1,0 +1,541 @@
+#!/usr/bin/env python3
+"""Desktop-WeChat adapter preserving the merchant workflow's ledger and cursor."""
+from __future__ import annotations
+
+import json
+import importlib.util
+import hashlib
+import re
+import subprocess
+import sys
+import time
+from pathlib import Path
+from PIL import Image
+
+import wechat_sender_executor as mobile
+import runtime_contract
+
+# 大同 2026-09-30 授权：Mac 桌面微信停用（"桌面微信不让用了"），通知改走
+# Windows 10 驱动服务（同 CLI/同授权/同台账的 Windows transport 桥）。
+DESKTOP_SENDER = Path("/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/workflow_bridge_windows.py")
+DESKTOP_WECHAT = DESKTOP_SENDER.with_name("wechat_desktop.py")
+DESKTOP_PREFLIGHT = DESKTOP_SENDER.with_name("workflow_preflight.py")
+DEFAULT_CONTENTION_WAIT_SECONDS = 60.0
+DEFAULT_CONTENTION_POLL_SECONDS = 5.0
+MAC_CONTROL_PYTHON = Path("/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python")
+
+
+def blocked_zero_send_text_marker_matches(group: str, item: dict, marker: Path) -> bool:
+    """True only when code receipts prove this bound item never reached a send attempt."""
+    root = (mobile.STATE_DIR / "send-attempts").resolve()
+    if marker.is_symlink() or marker.resolve().parent != root or not marker.is_file():
+        return False
+    try:
+        prior = json.loads(marker.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return False
+    payloads = prior.get("payloads") or []
+    common = prior.get("commonReceipt") or {}
+    common_items = common.get("items") or []
+    if len(payloads) != 1:
+        return False
+    digest = hashlib.sha256(item["text"].encode("utf-8")).hexdigest()
+    p = payloads[0]
+    ci = common_items[0] if len(common_items) == 1 else {}
+    transport = ci.get("transport") or {}
+    tp = transport.get("payloads") or []
+    binding = (
+        item.get("type", "text") == "text" and group == mobile.PRODUCTION_GROUP
+        and prior.get("bridgeVersion") == 1 and prior.get("state") == "blocked"
+        and prior.get("sendAttempts") == 0 and prior.get("newSendAttempts", 0) == 0
+        and prior.get("groupName") == group and prior.get("payloadType") == "text"
+        and p.get("text") == item.get("text") and p.get("sha256") == digest == item.get("sha256")
+    )
+    if not binding or common.get("status") != "blocked" or common.get("groupName") != group:
+        return False
+    if (prior.get("reason") == "desktop-text-input-write-failed"
+            and prior.get("stage") == "prepare_payload"
+            and prior.get("physicalSendAttempts") == 0
+            and common.get("reason") == prior.get("reason")
+            and len(common_items) == 1 and ci.get("status") == "blocked"
+            and ci.get("type") == "text" and ci.get("sendAttempts") == 0
+            and ci.get("sha256") == digest and ci.get("reason") == prior.get("reason")
+            and transport.get("groupName") == group and transport.get("payloadType") == "text"
+            and transport.get("stage") == "prepare_payload" and transport.get("sendAttempts") == 0
+            and transport.get("reason") == prior.get("reason") and len(tp) == 1
+            and tp[0].get("text") == item.get("text") and tp[0].get("sha256") == digest):
+        return True
+    review = common.get("review") or []
+    stage_names = [row.get("stage") for row in review if isinstance(row, dict)]
+    return (
+        prior.get("reason") == "resume-prepared-text-readback-mismatch"
+        and prior.get("stage") is None and prior.get("physicalSendAttempts") is None
+        and common.get("reason") == prior.get("reason") and common.get("items") == []
+        and re.fullmatch(r"[0-9a-f]{64}", str(common.get("requestDigest") or ""))
+        and stage_names == ["authorization", "freeze:0", "preflight"]
+        and all(row.get("status") == "completed" for row in review)
+        and (common.get("reviewSummary") or {}).get("result") == "blocked"
+        and (common.get("reviewSummary") or {}).get("failedStages") == []
+    )
+
+
+def _load_shared_preflight():
+    spec = importlib.util.spec_from_file_location("merchant_wechat_shared_preflight", DESKTOP_PREFLIGHT)
+    if spec is None or spec.loader is None:
+        raise mobile.StopRun("desktop-preflight-load-failed")
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+def _write_private_json(path: Path, value: dict) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+    temporary = path.with_suffix(path.suffix + ".tmp")
+    temporary.write_text(json.dumps(value, ensure_ascii=False, indent=2), encoding="utf-8")
+    temporary.chmod(0o600)
+    temporary.replace(path)
+
+
+def _hard_gate(reason: str, send_attempts: int = 0) -> bool:
+    """True means waiting/retrying could violate identity or idempotency."""
+    if send_attempts:
+        return True
+    hard_fragments = (
+        "blocked-login", "authorization", "already-attempted", "attempted-result",
+        "payload-file", "message-contract", "collection-", "unsupported-group",
+        "window-capture-failed", "window-capture-target-missing",
+        "result-count:2", "result-count:3", "result-count:multiple",
+        "header-count:multiple", "group-title-not-unique:2", "group-title-not-unique:3",
+    )
+    if any(fragment in reason for fragment in hard_fragments):
+        return True
+    counts = re.findall(r"(?:result-count|header-count|group-title-not-unique|row-count):(\d+)", reason)
+    if any(int(value) > 1 for value in counts):
+        return True
+    transient = (
+        "desktop-chat-input-focus-failed", "desktop-chat-input-not-empty",
+        "desktop-group-title-not-unique:0", "exact-group-result-count:0",
+        "ax-exact-header-count:0", "wechat-search-region-contended",
+    )
+    # Unknown failures are not evidence of harmless contention.
+    return not any(reason == item or reason.endswith(":" + item) for item in transient)
+
+
+def _wait_before_send(operation, *, phase: str, output_dir: Path, wait_seconds: float,
+                      poll_seconds: float) -> dict:
+    """Retry transient desktop-WeChat interference only before a send attempt."""
+    started = time.monotonic()
+    events: list[dict] = []
+    observations: list[dict] = []
+    attempt = 0
+    while True:
+        attempt += 1
+        operation_started = time.monotonic()
+        try:
+            receipt = operation()
+        except subprocess.TimeoutExpired:
+            receipt = {"ok": False, "reason": "desktop-wechat-operation-timeout", "sendAttempts": 0}
+        except Exception as error:
+            receipt = {"ok": False, "reason": str(error), "sendAttempts": 0}
+        observations.append({"attempt": attempt, "elapsedMs": round((time.monotonic()-operation_started)*1000),
+                             "ok": receipt.get("ok") is True, "reason": receipt.get("reason"),
+                             "sendAttempts": receipt.get("sendAttempts", 0),
+                             "sendReview": receipt.get("sendReview", [])})
+        receipt = receipt | {"attemptReviews": list(observations)}
+        if receipt.get("ok") is True:
+            waited_ms = sum(event["waitMs"] for event in events)
+            result = receipt | {
+                "contentionRetries": len(events),
+                "contentionWaitMs": waited_ms,
+                "contentionEvents": events,
+            }
+            _write_private_json(output_dir / "contention.json", result)
+            return result
+        reason = str(receipt.get("reason") or receipt.get("note") or "desktop-wechat-failed")
+        send_attempts = int(receipt.get("sendAttempts") or 0)
+        if receipt.get("hardGate") is True or _hard_gate(reason, send_attempts):
+            result = receipt | {
+                "contentionRetries": len(events),
+                "contentionWaitMs": sum(event["waitMs"] for event in events),
+                "contentionEvents": events,
+            }
+            _write_private_json(output_dir / "contention.json", result)
+            return result
+        elapsed = time.monotonic() - started
+        if elapsed >= wait_seconds:
+            result = receipt | {
+                "ok": False,
+                "reason": "desktop-wechat-contention-timeout:" + reason,
+                "contentionRetries": len(events),
+                "contentionWaitMs": sum(event["waitMs"] for event in events),
+                "contentionEvents": events,
+            }
+            _write_private_json(output_dir / "contention.json", result)
+            return result
+        delay = min(poll_seconds, max(0.0, wait_seconds - elapsed))
+        events.append({"phase": phase, "attempt": attempt, "reason": reason, "waitMs": round(delay * 1000)})
+        _write_private_json(output_dir / "contention.json", {
+            "ok": False, "phase": phase, "contentionRetries": len(events),
+            "contentionWaitMs": sum(event["waitMs"] for event in events), "contentionEvents": events,
+        })
+        wait_started = time.monotonic()
+        time.sleep(delay)
+        events[-1]["observedWaitMs"] = round((time.monotonic()-wait_started)*1000)
+
+
+# Readback now lives in the common skill. Retain aliases for offline diagnostics.
+sys.path.insert(0, str(DESKTOP_SENDER.parent))
+from desktop_text_readback import (_ax_chat_state, _scroll_latest_messages,
+    _payload_bubble_anchor, _read_unique_payload_anchor, _copy_exact_bubble)
+
+
+def _verify_delivery_evidence(value: dict, group: str, item: dict) -> None:
+    """提交前证据门禁（通道对等）。2026-09-30 大同授权：Mac 桌面微信停用后，
+    ⑪ 通知走 Windows 驱动服务，其对等证据是服务端读回锚点
+    （windows-readback-text-anchor）：目标会话标题当前且 payload 精确文本
+    位于会话尾部。仅当存在该级证据时按 Windows 契约校验，否则回落到既有
+    Mac 原生复制读回契约（runtime_contract.verify_delivery）。"""
+    win = None
+    for it in ((value.get("commonReceipt") or {}).get("items") or []):
+        if (it.get("verificationLevel") == "windows-readback-text-anchor"
+                and isinstance(it.get("evidence"), dict)):
+            win = it
+            break
+    if win is None:
+        runtime_contract.verify_delivery(value, group, item)
+        return
+    evidence = win["evidence"]
+    payloads = value.get("payloads") or []
+    if not (value.get("ok") is True and value.get("verified") is True
+            and value.get("state") == "verified" and value.get("groupName") == group
+            # 2026-10-10 大同授权「发现卡了立即解决」：本函数同时服务「新发送」与
+            # 「已verified收据复用」两条路径。新发送要求恰好 1 次物理发送（防重复外发），
+            # 但复用路径（reusedExisting=True）继承历史 marker 的 sendAttempts（可能 >1），
+            # 此时本调用 0 新发送、证据在上一轮已读回验证 ⇒ 不以 sendAttempts==1 拒之。
+            # 与 L371「已verified收据复用」分支及桥 reusedExisting 分支语义对齐。
+            and (value.get("sendAttempts") == 1 or value.get("reusedExisting") is True)
+            and value.get("merchantId") == item["merchantId"]
+            and value.get("messageSha256") == item["sha256"]
+            and len(payloads) == 1 and payloads[0].get("text") == item["text"]
+            and payloads[0].get("sha256") == item["sha256"]
+            and hashlib.sha256(item["text"].encode()).hexdigest() == item["sha256"]
+            and evidence.get("ok") is True and evidence.get("anchor") == "text-exact"
+            and evidence.get("anchorValue") == item["text"]
+            and evidence.get("resolvedGroup") == group
+            and evidence.get("anchorInTrailingPosition") is True):
+        raise mobile.StopRun("delivery-evidence-incomplete")
+
+
+def _business_receipt(marker, item, output_dir, receipt):
+    value = receipt | {"merchantId": item["merchantId"], "messageSha256": item["sha256"]}
+    if value.get("verified") is True:
+        _verify_delivery_evidence(value, value["groupName"], item)
+        _write_private_json(marker, value)
+        _write_private_json(output_dir / "acceptance-receipt.json", value)
+    return value
+
+
+def blocked_zero_send_windows_rejected_marker(group: str, item: dict, marker: Path) -> bool:
+    """True when the channel driver rejected the send **before any byte left**.
+
+    2026-10-22 事故（大同：「既然是有问题有失败 必须修改的东西，为什么找我决定」）：
+    Windows 驱动在「打开会话」阶段就 500（`打开会话失败，当前标题='…'，目标='…'` /
+    `未找到会话`），此时一个字都没打出去 —— `physicalSendAttempts=0`、
+    `transport.sendAttempts=0`、且 `transport` 里没有 `data.sent`。
+
+    2026-10-23 扩展：通道切企业微信后，同语义形态 = `wecom-send-failed:*`
+    （WeComAdapter 发送失败时输入框已在进程内清空，零字节发出）。
+
+    旧判据（`blocked_zero_send_text_marker_matches`）只白名单两种 prepare_payload 类
+    reason，于是这类「0 发送失败」既不进发送路径、也过不了 reconcile 门槛，每轮只回
+    `legacy-attempt-reconcile-only`：**不发送、不前进、不告警**，8 家商家积压 7 小时。
+
+    这里只做一件事：证明「可以当作全新一次发送」——不走到草稿恢复
+    （`--resume-blocked-zero-marker`，那是给「已写入草稿但未点发送」用的），
+    因为本形态下连会话都没打开，输入框里不可能有残留草稿。
+    """
+    root = (mobile.STATE_DIR / "send-attempts").resolve()
+    if marker.is_symlink() or marker.resolve().parent != root or not marker.is_file():
+        return False
+    try:
+        prior = json.loads(marker.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return False
+    reason = str(prior.get("reason") or "")
+    payloads = prior.get("payloads") or []
+    common = prior.get("commonReceipt") or {}
+    common_items = common.get("items") or []
+    if len(payloads) != 1 or len(common_items) != 1:
+        return False
+    digest = hashlib.sha256(item["text"].encode("utf-8")).hexdigest()
+    payload = payloads[0]
+    ci = common_items[0]
+    transport = ci.get("transport") or {}
+    # ① 业务绑定（两通道共用）：同一群、同一商家文案、同一摘要
+    binding = (
+        item.get("type", "text") == "text" and group == mobile.PRODUCTION_GROUP
+        and prior.get("bridgeVersion") == 1 and prior.get("state") == "blocked"
+        and prior.get("sendAttempts") == 0 and prior.get("newSendAttempts", 0) == 0
+        and prior.get("groupName") == group and prior.get("payloadType") == "text"
+        and payload.get("text") == item.get("text")
+        and payload.get("sha256") == digest == item.get("sha256")
+        and common.get("status") == "blocked" and common.get("groupName") == group
+        and prior.get("physicalSendAttempts") == 0
+        and prior.get("copyReadback") is None
+        and common.get("reason") == prior.get("reason")
+        and ci.get("status") == "blocked" and ci.get("type") == "text"
+        and ci.get("sendAttempts") == 0 and ci.get("sha256") == digest
+        and ci.get("reason") == prior.get("reason")
+    )
+    # ②a Windows 驱动形态：驱动在「打开会话」阶段就拒了，没有任何字节发出
+    windows_form = (
+        reason.startswith("windows-send-rejected:")
+        and ("打开会话失败" in reason or "未找到会话" in reason)
+        and transport.get("ok") is False
+        and transport.get("sendAttempts") in (0, None)
+        and not (transport.get("data") or {}).get("sent")
+    )
+    # ②b 企业微信形态（2026-10-23 通道切换）：WeComAdapter 发送阶段失败时
+    # 输入框已在进程内清空 —— 零字节发出（sendAttempts=0、sent=False）。
+    # 只认 wecom-send-failed:*；egress-denied:*（策略拒绝该 payload，重发必拒）
+    # 与 deadline-expired（调度窗口问题）不在此列，防止无意义重试。
+    wecom_form = (
+        reason.startswith("wecom-send-failed:")
+        and transport.get("sendAttempts") in (0, None)
+        and transport.get("sent") is not True
+        and not (transport.get("data") or {}).get("sent")
+    )
+    return binding and (windows_form or wecom_form)
+
+
+def _reconcile_unknown(marker: Path, group: str, item: dict, output_dir: Path) -> dict:
+    command = [sys.executable, str(DESKTOP_SENDER), "--workflow-id", "merchants",
+        "--group", group, "--payload-type", "text", "--item", item["text"],
+        "--authorization", runtime_contract.PRODUCTION_AUTHORIZATION,
+        "--ledger", str(marker.parent), "--marker-name", marker.name,
+        "--output-dir", str(output_dir), "--reconcile"]
+    proc = subprocess.run(command, capture_output=True, text=True, timeout=180)
+    try: receipt = json.loads(proc.stdout.strip().splitlines()[-1])
+    except (ValueError, IndexError):
+        return {"ok":False,"reason":"common-reconcile-no-receipt","sendAttempts":None}
+    return _business_receipt(marker, item, output_dir, receipt)
+
+
+def _copy_verify_successful_send(marker: Path, group: str, item: dict,
+                                 output_dir: Path, receipt: dict) -> dict:
+    # Common executor already verified native copy and new outgoing evidence.
+    return _business_receipt(marker, item, output_dir, receipt)
+
+
+def _windows_preflight_once(group, output_dir, pending_item, marker, resume_text):
+    """群可达性预检（单次尝试，供 _wait_before_send 包裹/测试 mock）。
+
+    大同 2026-09-30：Mac 桌面微信停用，preflight 改走驱动服务。
+    大同 2026-10-23：通道切企业微信，preflight 与发送同通道 —— 复用封印桥
+    prepare 的完整合同校验（REGISTRY/授权/台账绑定），再在 WeComAdapter.session
+    内做群可达性预检（前缀搜索导航 + send --dry-run，不产生对外副作用）。
+    与 workflow_bridge_windows 路由分流一致：发送路径早已按 routes.merchants
+    channel=wecom 走桥，这里只是补齐 preflight 不再混搭 Windows 驱动。
+    """
+    import workflow_bridge as bridge
+    from executor import deadline
+    from wecom_adapter import WeComAdapter as WindowsAdapter
+    args = bridge.argparse.Namespace(
+        workflow_id="merchants", group=group, payload_type="text",
+        item=[pending_item["text"]] if pending_item else ["preflight-connectivity-probe"],
+        ledger=str(mobile.STATE_DIR / "send-attempts"),
+        marker_name=(mobile.send_identity(group, pending_item) + ".json") if pending_item
+                    else "desktop-preflight-probe.json",
+        authorization=bridge.REGISTRY["merchants"][3],
+        resume_blocked_zero_marker=(str(marker) if resume_text is not None else None),
+        reconcile=False, execute=False)
+    request, _grant = bridge.prepare(args)
+    adapter = WindowsAdapter()
+    with deadline(request["context"]["deadlineAt"]), adapter.session(request):
+        return adapter.preflight(request, output_dir)
+
+
+def preflight(group: str, output_dir: Path, wait_seconds: float = DEFAULT_CONTENTION_WAIT_SECONDS,
+              poll_seconds: float = DEFAULT_CONTENTION_POLL_SECONDS,
+              pending_item: dict | None = None) -> dict:
+    marker = (mobile.STATE_DIR / "send-attempts" /
+              (mobile.send_identity(group, pending_item) + ".json")) if pending_item else None
+    resume_text = (pending_item["text"] if marker and
+                   blocked_zero_send_text_marker_matches(group, pending_item, marker) else None)
+    def once():
+        return _windows_preflight_once(group, output_dir, pending_item, marker, resume_text)
+
+    receipt = _wait_before_send(once, phase="preflight", output_dir=output_dir,
+                                wait_seconds=wait_seconds, poll_seconds=poll_seconds)
+    if receipt.get("ok") is not True:
+        error = mobile.StopRun(str(receipt.get("reason", "desktop-wechat-preflight-failed")))
+        error.receipt = receipt
+        raise error
+    if resume_text is not None:
+        receipt = receipt | {"zeroSendDraftRecovery": "exact-payload-reused",
+                             "draftSha256": hashlib.sha256(resume_text.encode("utf-8")).hexdigest()}
+    return receipt
+
+
+def run(collection_path: Path, group: str, authorization: str, output_dir: Path,
+        wait_seconds: float = DEFAULT_CONTENTION_WAIT_SECONDS,
+        poll_seconds: float = DEFAULT_CONTENTION_POLL_SECONDS,
+        reconciliation_only: bool = False) -> dict:
+    collection = mobile.load_collection(collection_path, group)
+    mobile.audit_collection(collection)
+    expected = {mobile.TEST_GROUP: mobile.TEST_AUTHORIZATION,
+                mobile.PRODUCTION_GROUP: runtime_contract.PRODUCTION_AUTHORIZATION}
+    if group not in expected or authorization != expected[group]:
+        raise mobile.StopRun("standing-authorization-group-mismatch")
+    history = []
+    if mobile.HISTORY_FILE.exists():
+        history = [json.loads(line) for line in mobile.HISTORY_FILE.read_text().splitlines()]
+    sent_keys = {mobile.send_identity(group, row) for row in history
+                 if row.get("groupName") == group and row.get("verified") is True}
+    messages = [row for row in collection["messages"] if mobile.send_identity(group, row) not in sent_keys]
+    result = {"ok": False, "executor": "merchant-desktop-wechat-sender", "channel": "desktop", "sent": 0,
+              "messageCount": len(messages), "historySkipped": len(collection["messages"]) - len(messages),
+              "items": [], "contentionRetries": 0, "contentionWaitMs": 0, "contentionEvents": []}
+    if not messages:
+        return result | {"ok": True, "mode": "execute-noop"}
+    if reconciliation_only:
+        first_marker = mobile.STATE_DIR / "send-attempts" / (mobile.send_identity(group, messages[0]) + ".json")
+        previous = json.loads(first_marker.read_text()) if first_marker.exists() else None
+        safe_blocked = bool(previous and (
+            blocked_zero_send_text_marker_matches(group, messages[0], first_marker)
+            or blocked_zero_send_windows_rejected_marker(group, messages[0], first_marker)))
+        if safe_blocked:
+            # 2026-10-23 16:0x 事故修复（#97 的正面修法）：
+            # marker 是「零发送 blocked」（sendAttempts=0 / physicalSendAttempts=0 /
+            # 无 data.sent，reason 为 wecom-send-failed:* 等），说明一个字节都没
+            # 发出去 —— 此时不该回 not-eligible 把任务卡死，而应降级为**全新发送**。
+            # 旧写法与 safe_blocked 反了：每轮只回 reconcile-only-marker-not-eligible，
+            # 既不发送也不前进（实测 16:03 档 8.9s 空转）。
+            reconciliation_only = False
+        elif not previous:
+            return result | {"reason": "reconcile-only-marker-not-eligible"}
+        else:
+            messages = messages[:1]
+            result["mode"] = "reconcile-only"
+    for item in messages:
+        item_dir = output_dir / item["merchantId"]
+        marker = mobile.STATE_DIR / "send-attempts" / (mobile.send_identity(group, item) + ".json")
+        # Any non-blocked marker predating this item makes this a read-only
+        # recovery, even when its physical attempt count is unknown (null).
+        previous_marker = json.loads(marker.read_text()) if marker.exists() else None
+        safe_blocked = (previous_marker and previous_marker.get("bridgeVersion") == 1
+                        and previous_marker.get("state") == "blocked"
+                        and previous_marker.get("sendAttempts") == 0)
+        preexisting_attempt = bool(previous_marker and not safe_blocked)
+        item_review = {"merchantId": item["merchantId"], "merchantName": item["merchantName"], "review": []}
+        result["items"].append(item_review)
+        receipt = {}
+        def measured(name, operation, require_ok=False):
+            started = time.monotonic()
+            row = {"stage": name, "status": "FAIL", "pitfalls": []}
+            item_review["review"].append(row)
+            try:
+                value = operation()
+                if isinstance(value, dict):
+                    row["pitfalls"] = [e["reason"] for e in value.get("contentionEvents", [])]
+                    attempts = value.get("attemptReviews", []) if name == "定位、输入与单次发送" else []
+                    row["details"] = [detail for attempt in attempts for detail in attempt.get("sendReview", [])]
+                    row["attempts"] = attempts
+                    if require_ok and value.get("ok") is not True:
+                        result["desktop"] = value
+                        raise mobile.StopRun(value.get("reason", name + "-failed"))
+                row["status"] = "FAIL" if isinstance(value, dict) and value.get("ok") is False else "PASS"
+                if row["status"] == "FAIL":
+                    row["pitfalls"].append(value.get("reason", name + "-failed"))
+                return value
+            except Exception as error:
+                row["pitfalls"].append(str(error))
+                raise
+            finally:
+                row["elapsedMs"] = round((time.monotonic() - started) * 1000)
+                _write_private_json(output_dir / "delivery-progress.json", result)
+        try:
+            # Recheck date/receipt age immediately before each merchant.
+            measured("发送前合同复核", lambda: mobile.audit_collection(collection))
+            previous = json.loads(marker.read_text()) if marker.exists() else None
+            safe_blocked = bool(previous_marker and (
+                blocked_zero_send_text_marker_matches(group, item, marker)
+                or blocked_zero_send_windows_rejected_marker(group, item, marker)))
+            if previous and previous.get("verified") is True and previous.get("state") == "verified":
+                # 桥级 verified 收据：等价于桥的 reusedExisting 分支，直接复用，
+                # 不再要求物理复核（Windows 时代 text reconcile 无法跑 Mac 原生复制）。
+                # 2026-10-10 大同授权「发现卡了立即解决」：复用分支此前只在内存 enrich
+                # receipt，从不落盘 marker ⇒ 磁盘 marker 仍是桥 schema（无顶层 merchantId/
+                # messageSha256），导致下游 runtime_contract.audit_final 从磁盘重读 marker
+                # 时被 verify_delivery 判为 delivery-evidence-incomplete，每小时流每轮
+                # 重选同一店→死循环 FAILED。改为走 _business_receipt（与新发送、已有 attempt
+                # 只读复核两条分支一致）把完整绑定字段持久化进 marker，供最终账本复核。
+                receipt = measured("已verified收据复用", lambda: _business_receipt(
+                    marker, item, item_dir,
+                    previous | {"ok": True, "reusedExisting": True, "newSendAttempts": 0}), True)
+                result["reconciled"] = result.get("reconciled", 0) + 1
+            elif previous and not safe_blocked:
+                receipt = measured("已有attempt只读复核", lambda: _reconcile_unknown(marker, group, item, item_dir), True)
+                result["reconciled"] = result.get("reconciled", 0) + 1
+            else:
+                command = [sys.executable, str(DESKTOP_SENDER), "--workflow-id", "merchants", "--group", group, "--payload-type", "text",
+                           "--item", item["text"], "--authorization", authorization,
+                           "--ledger", str(mobile.STATE_DIR / "send-attempts"), "--marker-name", marker.name,
+                           "--output-dir", str(item_dir), "--execute"]
+                resume_draft = bool(safe_blocked and blocked_zero_send_text_marker_matches(group, item, marker))
+                if resume_draft:
+                    command.extend(["--resume-blocked-zero-marker", str(marker)])
+                    item_review["review"].append({"stage": "零发送草稿绑定复核", "status": "PASS",
+                        "elapsedMs": 0, "pitfalls": [], "evidence": "group-payload-hash-and-zero-send-marker"})
+                def once():
+                    # A prior process may have created attempted without returning a receipt.
+                    if marker.exists() and not safe_blocked:
+                        return {"ok": False, "reason": "already-attempted-result-unknown", "sendAttempts": 1}
+                    try:
+                        completed = subprocess.run(command, capture_output=True, text=True, timeout=180)
+                        value = json.loads(completed.stdout.strip().splitlines()[-1])
+                    except (subprocess.TimeoutExpired, json.JSONDecodeError, IndexError):
+                        return {"ok": False, "reason": "desktop-send-invalid-receipt",
+                                "sendAttempts": 1 if marker.exists() else 0}
+                    if completed.returncode or value.get("verified") is not True:
+                        return value | {"ok": False}
+                    return value
+                receipt = measured("定位、输入与单次发送", lambda: _wait_before_send(
+                    once, phase="send-before-attempt", output_dir=item_dir,
+                    wait_seconds=wait_seconds, poll_seconds=poll_seconds))
+                result["contentionRetries"] += int(receipt.get("contentionRetries") or 0)
+                result["contentionWaitMs"] += int(receipt.get("contentionWaitMs") or 0)
+                result["contentionEvents"].extend(receipt.get("contentionEvents") or [])
+                if receipt.get("verified") is not True:
+                    if marker.exists() and receipt.get("reason") == "desktop-post-send-verification-unknown":
+                        receipt = measured("发送后只读恢复", lambda: _reconcile_unknown(marker, group, item, item_dir), True)
+                        result["reconciled"] = result.get("reconciled", 0) + 1
+                    else:
+                        item_review["review"][-1]["status"] = "FAIL"
+                        raise mobile.StopRun(receipt.get("reason", "desktop-send-failed"))
+                else:
+                    receipt = measured("双帧与原生复制全文复核", lambda: _copy_verify_successful_send(
+                        marker, group, item, item_dir, receipt), True)
+            measured("提交前证据门禁", lambda: _verify_delivery_evidence(receipt, group, item), True)
+            measured("成功历史与原子游标提交", lambda: mobile.append_history_then_cursor(group, collection["businessDate"], item))
+            if not preexisting_attempt and receipt.get("reconciledWithoutSend") is not True:
+                result["sent"] += 1
+            result["lastMerchantId"] = item["merchantId"]
+            if reconciliation_only:
+                # This invocation must not reach a later, unsent merchant.
+                return result | {"ok": True, "verified": True, "mode": "reconcile-only"}
+        except Exception as error:
+            result.update(reason=str(error), desktop=result.get("desktop", receipt))
+            entered = {row["stage"] for row in item_review["review"]}
+            for name in ("双帧与原生复制全文复核", "提交前证据门禁", "成功历史与原子游标提交"):
+                if name not in entered:
+                    item_review["review"].append({"stage": name, "status": "SKIPPED", "elapsedMs": None,
+                                                  "pitfalls": ["前置阶段失败，代码禁止继续"]})
+            for pending in messages[len(result["items"]):]:
+                result["items"].append({"merchantId": pending["merchantId"], "merchantName": pending["merchantName"],
+                    "review": [{"stage": "通知流程", "status": "SKIPPED", "elapsedMs": None,
+                                "pitfalls": ["上一商家未完成，代码禁止越过游标"]}]})
+            _write_private_json(output_dir / "delivery-progress.json", result)
+            return result
+    return result | {"ok": True, "verified": True, "mode": "execute"}

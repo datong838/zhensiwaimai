@@ -1,0 +1,28 @@
+{
+  "ok": false,
+  "executor": "desktop",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-brand",
+  "port": 9230,
+  "taskId": "top10-fc9cfc45-4264-402e-b959-9570556ca28e",
+  "runId": "fc9cfc45-4264-402e-b959-9570556ca28e",
+  "stageMs": {
+    "background_preflight": 72,
+    "open_home": 10284
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "open_home": "FAIL"
+  },
+  "retryCount": 0,
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "receiptFile": "/tmp/zhensi_top10/fc9cfc45-4264-402e-b959-9570556ca28e/desktop_receipt.json",
+  "stage": "open_home",
+  "startedAt": 1793059213212,
+  "deadlineAt": 1793059393212,
+  "dataDate": "2026-10-26",
+  "deviceScaleFactor": 2,
+  "reason": "page.goto: net::ERR_CONNECTION_CLOSED at https://melody.shop.ele.me/app/chain/95708808/dashboard#app.chainshop.dashboard\nCall log:\n  - navigating to \"https://melody.shop.ele.me/app/chain/95708808/dashboard#app.chainshop.dashboard\", waiting until \"domcontentloaded\"\n",
+  "elapsedMs": 10308
+}

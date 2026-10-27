@@ -1,0 +1,302 @@
+{
+  "at": "2026-10-27T10:43:23.974447+08:00",
+  "manifestSha256": "21917feccec65a33e71a44c9cc3b817a9318173a10e63d85bc981cff6996b9dd",
+  "enabledFlows": 22,
+  "uniqueEntryFiles": 23,
+  "rows": [
+    {
+      "name": "daily-top10-to-wechat-group",
+      "cwdExists": true,
+      "entries": [
+        "skills/workflows/daily-top10-to-wechat-group/scripts/workflow_executor.py"
+      ]
+    },
+    {
+      "name": "daily-negative-reviews",
+      "cwdExists": true,
+      "entries": [
+        "skills/workflows/daily-negative-reviews/scripts/workflow_executor.mjs"
+      ]
+    },
+    {
+      "name": "contract-termination-applications-screenshot",
+      "cwdExists": true,
+      "entries": [
+        "skills/workflows/contract-termination-applications-screenshot/scripts/contract_termination_daily.py"
+      ]
+    },
+    {
+      "name": "daily-jinsha-reports-to-business-wechat",
+      "cwdExists": true,
+      "entries": [
+        "skills/workflows/daily-jinsha-reports-to-business-wechat/scripts/business_workflow_executor.mjs"
+      ]
+    },
+    {
+      "name": "daily-taobao-download-to-jinsha",
+      "cwdExists": true,
+      "entries": [
+        "skills/workflows/daily-taobao-download-to-jinsha/scripts/entrypoint.mjs"
+      ]
+    },
+    {
+      "name": "daily-agent-new-merchants-to-wechat",
+      "cwdExists": true,
+      "entries": [
+        "skills/workflows/daily-agent-new-merchants-to-wechat/scripts/workflow_executor.py"
+      ]
+    },
+    {
+      "name": "meituan-intelligent-customer-service-12",
+      "cwdExists": true,
+      "entries": [
+        "skills/workflows/meituan-intelligent-customer-service/scripts/ensure_unanswered_queue.mjs",
+        "skills/workflows/meituan-intelligent-customer-service/scripts/reply_unanswered_sessions.mjs",
+        "skills/workflows/meituan-intelligent-customer-service/scripts/compile_daily_reply_xlsx.mjs",
+        "skills/workflows/meituan-intelligent-customer-service/scripts/send_daily_reply_xlsx_to_wechat.mjs"
+      ]
+    },
+    {
+      "name": "meituan-intelligent-customer-service-15",
+      "cwdExists": true,
+      "entries": [
+        "skills/workflows/meituan-intelligent-customer-service/scripts/ensure_unanswered_queue.mjs",
+        "skills/workflows/meituan-intelligent-customer-service/scripts/reply_unanswered_sessions.mjs",
+        "skills/workflows/meituan-intelligent-customer-service/scripts/compile_daily_reply_xlsx.mjs",
+        "skills/workflows/meituan-intelligent-customer-service/scripts/send_daily_reply_xlsx_to_wechat.mjs"
+      ]
+    },
+    {
+      "name": "meituan-intelligent-customer-service",
+      "cwdExists": true,
+      "entries": [
+        "skills/workflows/meituan-intelligent-customer-service/scripts/ensure_unanswered_queue.mjs",
+        "skills/workflows/meituan-intelligent-customer-service/scripts/reply_unanswered_sessions.mjs",
+        "skills/workflows/meituan-intelligent-customer-service/scripts/compile_daily_reply_xlsx.mjs",
+        "skills/workflows/meituan-intelligent-customer-service/scripts/send_daily_reply_xlsx_to_wechat.mjs"
+      ]
+    },
+    {
+      "name": "taobao-flash-sale-negative-review-appeals",
+      "cwdExists": true,
+      "entries": [
+        "runtime/appeal_shift.mjs"
+      ]
+    },
+    {
+      "name": "daily-new-stores-opening-to-wechat",
+      "cwdExists": true,
+      "entries": [
+        "skills/workflows/daily-new-stores-opening-to-wechat/scripts/workflow.py"
+      ]
+    },
+    {
+      "name": "daily-new-stores-activity-audit-to-wechat",
+      "cwdExists": true,
+      "entries": [
+        "skills/workflows/daily-new-stores-activity-audit-to-wechat/scripts/activity_daily.py"
+      ]
+    },
+    {
+      "name": "meituan-waimai-negative-review-appeals-11",
+      "cwdExists": true,
+      "entries": [
+        "runtime/appeal_shift.mjs"
+      ]
+    },
+    {
+      "name": "negative-feedback-list-appeals-0930",
+      "cwdExists": true,
+      "entries": [
+        "skills/workflows/negative-feedback-list-appeals/scripts/appeal_executor.mjs"
+      ]
+    },
+    {
+      "name": "negative-feedback-list-appeals-1230",
+      "cwdExists": true,
+      "entries": [
+        "skills/workflows/negative-feedback-list-appeals/scripts/build_report.mjs",
+        "skills/workflows/negative-feedback-list-appeals/scripts/deliver_batch.mjs"
+      ]
+    },
+    {
+      "name": "daily-new-stores-decoration-audit-to-wechat",
+      "cwdExists": true,
+      "entries": [
+        "skills/workflows/daily-new-stores-decoration-audit-to-wechat/scripts/decoration_daily.py"
+      ]
+    },
+    {
+      "name": "daily-new-stores-not-nourished-ops-to-wechat",
+      "cwdExists": true,
+      "entries": [
+        "skills/workflows/daily-new-stores-not-nourished-ops-to-wechat/scripts/nourish_daily.py"
+      ]
+    },
+    {
+      "name": "daily-store-task-completion-ops-to-wechat",
+      "cwdExists": true,
+      "entries": [
+        "skills/workflows/daily-store-task-completion-ops-to-wechat/scripts/task_daily.py"
+      ]
+    },
+    {
+      "name": "daily-store-basic-diagnosis-to-wechat",
+      "cwdExists": true,
+      "entries": [
+        "skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/basic_diag_daily.py"
+      ]
+    },
+    {
+      "name": "daily-service-market-ranking-to-wechat",
+      "cwdExists": true,
+      "entries": [
+        "skills/workflows/daily-service-market-ranking-to-wechat/scripts/ranking_workflow.py"
+      ]
+    },
+    {
+      "name": "daily-meituan-income-top10-to-wechat",
+      "cwdExists": true,
+      "entries": [
+        "skills/workflows/daily-meituan-income-top10-to-wechat/scripts/income_workflow.py"
+      ]
+    },
+    {
+      "name": "daily-quality-products-optimization",
+      "cwdExists": true,
+      "entries": [
+        "skills/workflows/daily-quality-products-optimization/scripts/quality_workflow.py"
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "file": "skills/workflows/daily-top10-to-wechat-group/scripts/workflow_executor.py",
+      "ok": true,
+      "check": "AST only; not imported"
+    },
+    {
+      "file": "skills/workflows/daily-negative-reviews/scripts/workflow_executor.mjs",
+      "ok": true,
+      "check": "node --check only",
+      "error": null
+    },
+    {
+      "file": "skills/workflows/contract-termination-applications-screenshot/scripts/contract_termination_daily.py",
+      "ok": true,
+      "check": "AST only; not imported"
+    },
+    {
+      "file": "skills/workflows/daily-jinsha-reports-to-business-wechat/scripts/business_workflow_executor.mjs",
+      "ok": true,
+      "check": "node --check only",
+      "error": null
+    },
+    {
+      "file": "skills/workflows/daily-taobao-download-to-jinsha/scripts/entrypoint.mjs",
+      "ok": true,
+      "check": "node --check only",
+      "error": null
+    },
+    {
+      "file": "skills/workflows/daily-agent-new-merchants-to-wechat/scripts/workflow_executor.py",
+      "ok": true,
+      "check": "AST only; not imported"
+    },
+    {
+      "file": "skills/workflows/meituan-intelligent-customer-service/scripts/ensure_unanswered_queue.mjs",
+      "ok": true,
+      "check": "node --check only",
+      "error": null
+    },
+    {
+      "file": "skills/workflows/meituan-intelligent-customer-service/scripts/reply_unanswered_sessions.mjs",
+      "ok": true,
+      "check": "node --check only",
+      "error": null
+    },
+    {
+      "file": "skills/workflows/meituan-intelligent-customer-service/scripts/compile_daily_reply_xlsx.mjs",
+      "ok": true,
+      "check": "node --check only",
+      "error": null
+    },
+    {
+      "file": "skills/workflows/meituan-intelligent-customer-service/scripts/send_daily_reply_xlsx_to_wechat.mjs",
+      "ok": true,
+      "check": "node --check only",
+      "error": null
+    },
+    {
+      "file": "runtime/appeal_shift.mjs",
+      "ok": true,
+      "check": "node --check only",
+      "error": null
+    },
+    {
+      "file": "skills/workflows/daily-new-stores-opening-to-wechat/scripts/workflow.py",
+      "ok": true,
+      "check": "AST only; not imported"
+    },
+    {
+      "file": "skills/workflows/daily-new-stores-activity-audit-to-wechat/scripts/activity_daily.py",
+      "ok": true,
+      "check": "AST only; not imported"
+    },
+    {
+      "file": "skills/workflows/negative-feedback-list-appeals/scripts/appeal_executor.mjs",
+      "ok": true,
+      "check": "node --check only",
+      "error": null
+    },
+    {
+      "file": "skills/workflows/negative-feedback-list-appeals/scripts/build_report.mjs",
+      "ok": true,
+      "check": "node --check only",
+      "error": null
+    },
+    {
+      "file": "skills/workflows/negative-feedback-list-appeals/scripts/deliver_batch.mjs",
+      "ok": true,
+      "check": "node --check only",
+      "error": null
+    },
+    {
+      "file": "skills/workflows/daily-new-stores-decoration-audit-to-wechat/scripts/decoration_daily.py",
+      "ok": true,
+      "check": "AST only; not imported"
+    },
+    {
+      "file": "skills/workflows/daily-new-stores-not-nourished-ops-to-wechat/scripts/nourish_daily.py",
+      "ok": true,
+      "check": "AST only; not imported"
+    },
+    {
+      "file": "skills/workflows/daily-store-task-completion-ops-to-wechat/scripts/task_daily.py",
+      "ok": true,
+      "check": "AST only; not imported"
+    },
+    {
+      "file": "skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/basic_diag_daily.py",
+      "ok": true,
+      "check": "AST only; not imported"
+    },
+    {
+      "file": "skills/workflows/daily-service-market-ranking-to-wechat/scripts/ranking_workflow.py",
+      "ok": true,
+      "check": "AST only; not imported"
+    },
+    {
+      "file": "skills/workflows/daily-meituan-income-top10-to-wechat/scripts/income_workflow.py",
+      "ok": true,
+      "check": "AST only; not imported"
+    },
+    {
+      "file": "skills/workflows/daily-quality-products-optimization/scripts/quality_workflow.py",
+      "ok": true,
+      "check": "AST only; not imported"
+    }
+  ],
+  "ok": true,
+  "scope": "file existence and syntax only; no module imports, no browser actions, no execution; not evidence of workflow completion"
+}

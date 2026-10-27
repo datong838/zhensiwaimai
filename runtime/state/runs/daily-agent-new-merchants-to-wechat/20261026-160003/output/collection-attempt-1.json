@@ -1,0 +1,112 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-26",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 88,
+    "task_page": 368,
+    "navigation": 1583,
+    "date_filter": 2454,
+    "page_1_read": 478,
+    "selection_audit": 0,
+    "detail_1359555169": 1654
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_1359555169": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "1359555169",
+      "merchantName": "芸窠里·手作茶酒铺（奶茶·咖啡·鲜啤）蒙山路店",
+      "recommendTime": "2026-10-26 15:31:55",
+      "city": "上海市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 4,
+      "address": "山阳镇蒙山路1020号",
+      "contact": "孙焓峰，15921625652",
+      "detailVerified": true,
+      "text": "城市：上海市  ；  联系人：孙焓峰，15921625652  ；  店铺：芸窠里·手作茶酒铺（奶茶·咖啡·鲜啤）蒙山路店  ；  地址：山阳镇蒙山路1020号  ；  商家ID：1359555169",
+      "sha256": "1d72dd46a7bb5c64044ca208195672b31b4573cc1c4690a3bafa398d79eb4ea5"
+    }
+  ],
+  "frontmostBefore": "com.google.Chrome",
+  "createdAt": "2026-10-26T08:00:10.821Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-26",
+    "merchantName": "南稻是鲜碾米铺米乳",
+    "merchantId": "546901789",
+    "recommendTime": "2026-10-26 14:33:25",
+    "tableOrder": 3,
+    "messageSha256": "a49788605717d9ed42b3df926c8936083e08b12cc8ea9cd25ccdc611d9188043",
+    "sentAt": "2026-10-26T15:00:28+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-26",
+  "filterEndDate": "2026-10-26",
+  "dateFilter": "2026-10-26..2026-10-26",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 4,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 4,
+  "pendingRows": 4,
+  "targetCount": 1,
+  "selectionAudit": {
+    "totalRows": 4,
+    "pendingRows": 4,
+    "excludedAtOrBeforeCursor": 3,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 1,
+    "rows": [
+      {
+        "merchantId": "1359555169",
+        "recommendTime": "2026-10-26 15:31:55",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546901789",
+        "recommendTime": "2026-10-26 14:33:25",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "538822520",
+        "recommendTime": "2026-10-26 11:50:03",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "544670041",
+        "recommendTime": "2026-10-26 00:56:45",
+        "status": "待处理"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 6960,
+  "frontmostAfter": "com.google.Chrome",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261026-160003/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261026-160003/output/collection-attempt-1.review.md"
+}

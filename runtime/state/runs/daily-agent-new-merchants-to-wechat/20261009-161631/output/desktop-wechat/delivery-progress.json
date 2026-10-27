@@ -1,0 +1,213 @@
+{
+  "ok": false,
+  "executor": "merchant-desktop-wechat-sender",
+  "channel": "desktop",
+  "sent": 0,
+  "messageCount": 11,
+  "historySkipped": 0,
+  "items": [
+    {
+      "merchantId": "529520233",
+      "merchantName": "疆麦尔椒麻鸡",
+      "review": [
+        {
+          "stage": "发送前合同复核",
+          "status": "PASS",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "已有attempt只读复核",
+          "status": "FAIL",
+          "pitfalls": [
+            "legacy-attempt-reconcile-only"
+          ],
+          "details": [],
+          "attempts": [],
+          "elapsedMs": 103
+        },
+        {
+          "stage": "双帧与原生复制全文复核",
+          "status": "SKIPPED",
+          "elapsedMs": null,
+          "pitfalls": [
+            "前置阶段失败，代码禁止继续"
+          ]
+        },
+        {
+          "stage": "提交前证据门禁",
+          "status": "SKIPPED",
+          "elapsedMs": null,
+          "pitfalls": [
+            "前置阶段失败，代码禁止继续"
+          ]
+        },
+        {
+          "stage": "成功历史与原子游标提交",
+          "status": "SKIPPED",
+          "elapsedMs": null,
+          "pitfalls": [
+            "前置阶段失败，代码禁止继续"
+          ]
+        }
+      ]
+    }
+  ],
+  "contentionRetries": 0,
+  "contentionWaitMs": 0,
+  "contentionEvents": [],
+  "mode": "reconcile-only",
+  "desktop": {
+    "bridgeVersion": 1,
+    "ok": false,
+    "verified": false,
+    "payloadType": "text",
+    "state": "unknown",
+    "groupName": "电销+直播攻坚组",
+    "payloads": [
+      {
+        "text": "城市：乌鲁木齐市  ；  联系人：马先生，15299057728  ；  店铺：疆麦尔椒麻鸡  ；  地址：人民路车市巷59号",
+        "sha256": "5a82b3ca28c55deb7839b3d3bfd15917c33bfb859a7bbec32d8b62b9fc7ae01d"
+      }
+    ],
+    "sendAttempts": 1,
+    "newSendAttempts": 1,
+    "reason": "legacy-attempt-reconcile-only",
+    "runtimeModelDecisions": 0,
+    "commonReceipt": {
+      "ok": false,
+      "status": "unknown",
+      "groupName": "电销+直播攻坚组",
+      "channel": "desktop",
+      "requestDigest": "481b30883d132ecfbebb7a2cf95e9b93b3e97b55783b3c4e9e7569fad08b7129",
+      "runtimeModelDecisions": 0,
+      "items": [
+        {
+          "itemId": "0",
+          "sha256": "5a82b3ca28c55deb7839b3d3bfd15917c33bfb859a7bbec32d8b62b9fc7ae01d",
+          "type": "text",
+          "status": "unknown",
+          "claimedAt": 1791505241.187291,
+          "sendAttempts": 1,
+          "reason": "windows-current-session-title-mismatch",
+          "evidence": {
+            "ok": false,
+            "resolvedGroup": "电销+直播攻坚组",
+            "titleProven": false,
+            "reason": "windows-current-session-title-mismatch",
+            "polls": 0
+          },
+          "transport": {
+            "ok": true,
+            "data": {
+              "sent": true,
+              "who": "电销+直播攻坚组",
+              "len": 63
+            },
+            "route": "relay",
+            "direct_error": "[Errno 65] No route to host",
+            "direct_local_network_blocked": true,
+            "sendAttempts": 1
+          }
+        }
+      ],
+      "review": [
+        {
+          "stage": "authorization",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "freeze:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "preflight",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 273
+        },
+        {
+          "stage": "send:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 36222
+        }
+      ],
+      "reason": "windows-current-session-title-mismatch",
+      "elapsedMs": 36499,
+      "eventKey": "fc7f504080d8a52d728368b57bceeaac6d9a8ecfe037c1b6dbc8715bcd3dd02e",
+      "reviewSummary": {
+        "totalElapsedMs": 36499,
+        "result": "unknown",
+        "stageCount": 4,
+        "completedStages": 4,
+        "failedStages": []
+      }
+    },
+    "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/f5b6f1b36066ebe74eef8fe9324acf6833d490283dac4bd64f35630378f9c8ed.json",
+    "sendReview": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0,
+        "item": 1,
+        "label": "authorization"
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0,
+        "item": 2,
+        "label": "freeze:0"
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 273,
+        "item": 3,
+        "label": "preflight"
+      },
+      {
+        "stage": "send:0",
+        "status": "failed",
+        "pitfalls": [
+          {
+            "code": "messaging-stage",
+            "reason": "windows-current-session-title-mismatch"
+          }
+        ],
+        "elapsedMs": 36222,
+        "item": 4,
+        "label": "send:0"
+      }
+    ],
+    "elapsedMs": 36499,
+    "reviewSummary": {
+      "totalElapsedMs": 36499,
+      "itemCount": 4,
+      "pitfallCount": 1,
+      "result": "failed"
+    },
+    "copyReadback": {
+      "ok": false,
+      "resolvedGroup": "电销+直播攻坚组",
+      "titleProven": false,
+      "reason": "windows-current-session-title-mismatch",
+      "polls": 0
+    },
+    "physicalSendAttempts": 1,
+    "postSendInputCleared": null,
+    "stage": null,
+    "reconciledWithoutSend": false,
+    "merchantId": "529520233",
+    "messageSha256": "5a82b3ca28c55deb7839b3d3bfd15917c33bfb859a7bbec32d8b62b9fc7ae01d"
+  },
+  "reason": "legacy-attempt-reconcile-only"
+}

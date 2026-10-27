@@ -1,0 +1,89 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-25",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 211,
+    "task_page": 613,
+    "navigation": 1523,
+    "date_filter": 1947,
+    "page_1_read": 368,
+    "selection_audit": 0
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS"
+  },
+  "messages": [],
+  "frontmostBefore": "com.tencent.WeWorkMac",
+  "createdAt": "2026-10-25T06:38:07.752Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-25",
+    "merchantName": "林记温州小吃",
+    "merchantId": "546415903",
+    "recommendTime": "2026-10-25 12:41:00",
+    "tableOrder": 3,
+    "messageSha256": "58da92b299053ba50f9d483b35c8aa5d14d8c62c106eaf6d4d55dceb856fdd31",
+    "sentAt": "2026-10-25T14:04:15+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-25",
+  "filterEndDate": "2026-10-25",
+  "dateFilter": "2026-10-25..2026-10-25",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 3,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 3,
+  "pendingRows": 3,
+  "targetCount": 0,
+  "selectionAudit": {
+    "totalRows": 3,
+    "pendingRows": 3,
+    "excludedAtOrBeforeCursor": 3,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 0,
+    "rows": [
+      {
+        "merchantId": "546415903",
+        "recommendTime": "2026-10-25 12:41:00",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1349334631",
+        "recommendTime": "2026-10-25 12:33:44",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "536996326",
+        "recommendTime": "2026-10-25 02:07:43",
+        "status": "待处理"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 4910,
+  "frontmostAfter": "com.tencent.WeWorkMac",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261025-143802/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261025-143802/output/collection-attempt-1.review.md"
+}

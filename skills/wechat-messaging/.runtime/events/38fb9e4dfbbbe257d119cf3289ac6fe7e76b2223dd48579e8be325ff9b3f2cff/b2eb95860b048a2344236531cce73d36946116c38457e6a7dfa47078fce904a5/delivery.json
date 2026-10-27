@@ -1,0 +1,115 @@
+{
+  "itemId": "customer-service-log-2026-09-27",
+  "sha256": "c17f252c51d5dc03017b303a40f3e0d4ed566d5538600547eb14b69f19e24b70",
+  "type": "file",
+  "status": "verified",
+  "claimedAt": 1790519150.546068,
+  "sendAttempts": 1,
+  "verificationLevel": "file-name-size-ui",
+  "evidence": {
+    "ok": true,
+    "transportVerified": true,
+    "completionFrames": [
+      "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/38fb9e4dfbbbe257d119cf3289ac6fe7e76b2223dd48579e8be325ff9b3f2cff/b2eb95860b048a2344236531cce73d36946116c38457e6a7dfa47078fce904a5/transport/after-send-1.png",
+      "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/38fb9e4dfbbbe257d119cf3289ac6fe7e76b2223dd48579e8be325ff9b3f2cff/b2eb95860b048a2344236531cce73d36946116c38457e6a7dfa47078fce904a5/transport/after-send-2.png"
+    ]
+  },
+  "transport": {
+    "ok": true,
+    "executor": "wechat-desktop-sender",
+    "channel": "desktop",
+    "groupName": "FEIBING NEO AI数字员工",
+    "payloadType": "file",
+    "sendAttempts": 1,
+    "runtimeModelDecisions": 0,
+    "stage": "completed",
+    "stageMs": {
+      "locate_group": 683,
+      "verify_target_and_input": 1868,
+      "prepare_payload": 1844,
+      "claim_and_send": 3520,
+      "post_send_verify": 5688
+    },
+    "payloadIdentity": "bf00bdab45dfa94e8d265da92daeec83adc3eb762db86288b7e1032f5fa2f0ca",
+    "payloads": [
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/38fb9e4dfbbbe257d119cf3289ac6fe7e76b2223dd48579e8be325ff9b3f2cff/b2eb95860b048a2344236531cce73d36946116c38457e6a7dfa47078fce904a5/payload/美团客户回复记录-2026-09-27.xlsx",
+        "name": "美团客户回复记录-2026-09-27.xlsx",
+        "size": 16599,
+        "sha256": "c17f252c51d5dc03017b303a40f3e0d4ed566d5538600547eb14b69f19e24b70"
+      }
+    ],
+    "groupPreflight": {
+      "ok": true,
+      "reason": null,
+      "sendAttempts": 0,
+      "group": "FEIBING NEO AI数字员工",
+      "header": "FEIBING NEO AI数字员工(19)",
+      "note": "ax-current-group-fast-path",
+      "groupTypeVerified": true,
+      "groupTypeProof": "member-count-header",
+      "composerVerifiedEmpty": true,
+      "attempts": []
+    },
+    "preparedInputChangedPixels": 53087,
+    "preparedInputChangedRatio": 0.14372,
+    "preparedFileObjectCount": 1,
+    "preparedFilePrefixesVerified": true,
+    "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/38fb9e4dfbbbe257d119cf3289ac6fe7e76b2223dd48579e8be325ff9b3f2cff/b2eb95860b048a2344236531cce73d36946116c38457e6a7dfa47078fce904a5/transport-ledger/attempt.json",
+    "postSendInputCleared": [
+      true,
+      true
+    ],
+    "verified": true,
+    "state": "verified",
+    "elapsedMs": 14306,
+    "sendReview": [
+      {
+        "item": 1,
+        "stage": "locate_group",
+        "label": "精确定位目标群",
+        "elapsedMs": 683,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 2,
+        "stage": "verify_target_and_input",
+        "label": "复核目标群与输入框",
+        "elapsedMs": 1868,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 3,
+        "stage": "prepare_payload",
+        "label": "准备并复核发送载荷",
+        "elapsedMs": 1844,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 4,
+        "stage": "claim_and_send",
+        "label": "领取防重账本并单次发送",
+        "elapsedMs": 3520,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 5,
+        "stage": "post_send_verify",
+        "label": "发送后双帧复核",
+        "elapsedMs": 5688,
+        "status": "completed",
+        "pitfalls": []
+      }
+    ],
+    "reviewSummary": {
+      "totalElapsedMs": 14306,
+      "itemCount": 5,
+      "pitfallCount": 0,
+      "result": "success"
+    }
+  }
+}

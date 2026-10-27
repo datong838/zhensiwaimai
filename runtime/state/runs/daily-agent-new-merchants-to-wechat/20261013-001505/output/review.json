@@ -1,0 +1,513 @@
+{
+  "schemaVersion": 1,
+  "runId": "97f21221-1f83-40c7-8049-2dbab7971ff8",
+  "ok": false,
+  "sent": 2,
+  "verifiedNewSends": 2,
+  "verifiedExisting": 0,
+  "unresolvedItems": 3,
+  "completion": {
+    "state": "USER_ACTION_REQUIRED",
+    "nextAction": "request-login-or-challenge-resolution",
+    "automaticRecoveryAllowed": false,
+    "recoveryAttemptBudget": 0,
+    "reason": "windows-send-rejected:HTTP 500: {\"ok\": false, \"error\": \"微信进程在运行，但主窗口未出现——通常意味着**尚未完成登录**（重启后需扫码登录）。请在服务端完成扫码登录后重试；也可用 /health 的 logged_in 字段或 wx.wait_ready() 等待就绪。\"}"
+  },
+  "rows": [
+    {
+      "item": 1,
+      "stage": "executor_integrity",
+      "label": "封板完整性",
+      "elapsedMs": 7,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": null
+    },
+    {
+      "item": 2,
+      "stage": "runtime_policy",
+      "label": "授权、群与通道门禁",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": null
+    },
+    {
+      "item": 3,
+      "stage": "offline_selftest",
+      "label": "离线自测",
+      "elapsedMs": 312,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": null
+    },
+    {
+      "item": 4,
+      "stage": "collection",
+      "label": "商家采集",
+      "elapsedMs": 13288,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": null
+    },
+    {
+      "item": 5,
+      "stage": "collection.1.background_preflight",
+      "label": "采集第1次 · 后台浏览器预检",
+      "elapsedMs": 153,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 6,
+      "stage": "collection.1.task_page",
+      "label": "采集第1次 · 建立独立任务页",
+      "elapsedMs": 381,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 7,
+      "stage": "collection.1.navigation",
+      "label": "采集第1次 · 进入意向商户列表",
+      "elapsedMs": 1166,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 8,
+      "stage": "collection.1.date_filter",
+      "label": "采集第1次 · 日期设置与双帧回读",
+      "elapsedMs": 1325,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 9,
+      "stage": "collection.1.page_1_read",
+      "label": "采集第1次 · 第1页采集与稳定核验",
+      "elapsedMs": 431,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 10,
+      "stage": "collection.1.page_1_next",
+      "label": "采集第1次 · 第1页翻页",
+      "elapsedMs": 70,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 11,
+      "stage": "collection.1.page_2_read",
+      "label": "采集第1次 · 第2页采集与稳定核验",
+      "elapsedMs": 625,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 12,
+      "stage": "collection.1.selection_audit",
+      "label": "采集第1次 · selection_audit",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 13,
+      "stage": "collection.1.detail_1359175528",
+      "label": "采集第1次 · 商家详情核验 1359175528",
+      "elapsedMs": 841,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 14,
+      "stage": "collection.1.detail_1308670670",
+      "label": "采集第1次 · 商家详情核验 1308670670",
+      "elapsedMs": 2492,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 15,
+      "stage": "collection.1.detail_1347814921",
+      "label": "采集第1次 · 商家详情核验 1347814921",
+      "elapsedMs": 1141,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 16,
+      "stage": "collection.1.detail_1259184624",
+      "label": "采集第1次 · 商家详情核验 1259184624",
+      "elapsedMs": 1128,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 17,
+      "stage": "collection.1.detail_546547343",
+      "label": "采集第1次 · 商家详情核验 546547343",
+      "elapsedMs": 1180,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "collection"
+    },
+    {
+      "item": 18,
+      "stage": "audit",
+      "label": "采集合同审计",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": null
+    },
+    {
+      "item": 19,
+      "stage": "desktop_wechat_preflight",
+      "label": "桌面微信预检",
+      "elapsedMs": 13913,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": null
+    },
+    {
+      "item": 20,
+      "stage": "preflight.1",
+      "label": "群定位第1次",
+      "elapsedMs": 13913,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat_preflight"
+    },
+    {
+      "item": 21,
+      "stage": "desktop_wechat",
+      "label": "逐条通知",
+      "elapsedMs": 150395,
+      "status": "FAIL",
+      "pitfalls": [
+        "windows-send-rejected:HTTP 500: {\"ok\": false, \"error\": \"微信进程在运行，但主窗口未出现——通常意味着**尚未完成登录**（重启后需扫码登录）。请在服务端完成扫码登录后重试；也可用 /health 的 logged_in 字段或 wx.wait_ready() 等待就绪。\"}"
+      ],
+      "parent": null
+    },
+    {
+      "item": 22,
+      "stage": "merchant.1359175528.发送前合同复核",
+      "label": "握云寿司料理屋 · 发送前合同复核",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 23,
+      "stage": "merchant.1359175528.定位、输入与单次发送",
+      "label": "握云寿司料理屋 · 定位、输入与单次发送",
+      "elapsedMs": 38959,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 24,
+      "stage": "merchant.1359175528.authorization",
+      "label": "握云寿司料理屋 · authorization",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 25,
+      "stage": "merchant.1359175528.freeze:0",
+      "label": "握云寿司料理屋 · freeze:0",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 26,
+      "stage": "merchant.1359175528.preflight",
+      "label": "握云寿司料理屋 · preflight",
+      "elapsedMs": 9327,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 27,
+      "stage": "merchant.1359175528.send:0",
+      "label": "握云寿司料理屋 · send:0",
+      "elapsedMs": 29494,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 28,
+      "stage": "merchant.1359175528.双帧与原生复制全文复核",
+      "label": "握云寿司料理屋 · 双帧与原生复制全文复核",
+      "elapsedMs": 1,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 29,
+      "stage": "merchant.1359175528.提交前证据门禁",
+      "label": "握云寿司料理屋 · 提交前证据门禁",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 30,
+      "stage": "merchant.1359175528.成功历史与原子游标提交",
+      "label": "握云寿司料理屋 · 成功历史与原子游标提交",
+      "elapsedMs": 2,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 31,
+      "stage": "merchant.1308670670.发送前合同复核",
+      "label": "崔姑娘·手工水饺 · 发送前合同复核",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 32,
+      "stage": "merchant.1308670670.定位、输入与单次发送",
+      "label": "崔姑娘·手工水饺 · 定位、输入与单次发送",
+      "elapsedMs": 37992,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 33,
+      "stage": "merchant.1308670670.authorization",
+      "label": "崔姑娘·手工水饺 · authorization",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 34,
+      "stage": "merchant.1308670670.freeze:0",
+      "label": "崔姑娘·手工水饺 · freeze:0",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 35,
+      "stage": "merchant.1308670670.preflight",
+      "label": "崔姑娘·手工水饺 · preflight",
+      "elapsedMs": 9345,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 36,
+      "stage": "merchant.1308670670.send:0",
+      "label": "崔姑娘·手工水饺 · send:0",
+      "elapsedMs": 28537,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 37,
+      "stage": "merchant.1308670670.双帧与原生复制全文复核",
+      "label": "崔姑娘·手工水饺 · 双帧与原生复制全文复核",
+      "elapsedMs": 1,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 38,
+      "stage": "merchant.1308670670.提交前证据门禁",
+      "label": "崔姑娘·手工水饺 · 提交前证据门禁",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 39,
+      "stage": "merchant.1308670670.成功历史与原子游标提交",
+      "label": "崔姑娘·手工水饺 · 成功历史与原子游标提交",
+      "elapsedMs": 1,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 40,
+      "stage": "merchant.1347814921.发送前合同复核",
+      "label": "二姐特色馄饨（总店） · 发送前合同复核",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 41,
+      "stage": "merchant.1347814921.定位、输入与单次发送",
+      "label": "二姐特色馄饨（总店） · 定位、输入与单次发送",
+      "elapsedMs": 73427,
+      "status": "FAIL",
+      "pitfalls": [
+        "windows-send-rejected:HTTP 500: {\"ok\": false, \"error\": \"微信进程在运行，但主窗口未出现——通常意味着**尚未完成登录**（重启后需扫码登录）。请在服务端完成扫码登录后重试；也可用 /health 的 logged_in 字段或 wx.wait_ready() 等待就绪。\"}"
+      ],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 42,
+      "stage": "merchant.1347814921.authorization",
+      "label": "二姐特色馄饨（总店） · authorization",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 43,
+      "stage": "merchant.1347814921.freeze:0",
+      "label": "二姐特色馄饨（总店） · freeze:0",
+      "elapsedMs": 0,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 44,
+      "stage": "merchant.1347814921.preflight",
+      "label": "二姐特色馄饨（总店） · preflight",
+      "elapsedMs": 9241,
+      "status": "PASS",
+      "pitfalls": [],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 45,
+      "stage": "merchant.1347814921.send:0",
+      "label": "二姐特色馄饨（总店） · send:0",
+      "elapsedMs": 64064,
+      "status": "FAIL",
+      "pitfalls": [
+        "windows-send-rejected:HTTP 500: {\"ok\": false, \"error\": \"微信进程在运行，但主窗口未出现——通常意味着**尚未完成登录**（重启后需扫码登录）。请在服务端完成扫码登录后重试；也可用 /health 的 logged_in 字段或 wx.wait_ready() 等待就绪。\"}"
+      ],
+      "parent": "定位、输入与单次发送"
+    },
+    {
+      "item": 46,
+      "stage": "merchant.1347814921.双帧与原生复制全文复核",
+      "label": "二姐特色馄饨（总店） · 双帧与原生复制全文复核",
+      "elapsedMs": null,
+      "status": "SKIPPED",
+      "pitfalls": [
+        "前置阶段失败，代码禁止继续"
+      ],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 47,
+      "stage": "merchant.1347814921.提交前证据门禁",
+      "label": "二姐特色馄饨（总店） · 提交前证据门禁",
+      "elapsedMs": null,
+      "status": "SKIPPED",
+      "pitfalls": [
+        "前置阶段失败，代码禁止继续"
+      ],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 48,
+      "stage": "merchant.1347814921.成功历史与原子游标提交",
+      "label": "二姐特色馄饨（总店） · 成功历史与原子游标提交",
+      "elapsedMs": null,
+      "status": "SKIPPED",
+      "pitfalls": [
+        "前置阶段失败，代码禁止继续"
+      ],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 49,
+      "stage": "merchant.1259184624.通知流程",
+      "label": "西北美食 · 通知流程",
+      "elapsedMs": null,
+      "status": "SKIPPED",
+      "pitfalls": [
+        "上一商家未完成，代码禁止越过游标"
+      ],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 50,
+      "stage": "merchant.546547343.通知流程",
+      "label": "牛小螺·柳州味（台头店） · 通知流程",
+      "elapsedMs": null,
+      "status": "SKIPPED",
+      "pitfalls": [
+        "上一商家未完成，代码禁止越过游标"
+      ],
+      "parent": "desktop_wechat"
+    },
+    {
+      "item": 51,
+      "stage": "final_cursor_check",
+      "label": "最终账本与游标复核",
+      "elapsedMs": null,
+      "status": "SKIPPED",
+      "pitfalls": [],
+      "parent": null
+    },
+    {
+      "item": 52,
+      "stage": "reseal",
+      "label": "真实非空验收重封",
+      "elapsedMs": null,
+      "status": "NOOP",
+      "pitfalls": [
+        "无真实新增发送，保持未封板"
+      ],
+      "parent": null
+    },
+    {
+      "item": 53,
+      "stage": "total",
+      "label": "整轮总耗时（含子阶段，不重复相加）",
+      "elapsedMs": 178058,
+      "status": "FAIL",
+      "pitfalls": [],
+      "parent": null
+    }
+  ]
+}

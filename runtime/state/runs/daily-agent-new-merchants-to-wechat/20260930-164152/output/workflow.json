@@ -1,0 +1,679 @@
+{
+  "ok": false,
+  "runId": "cb8f4fb0-41b1-4b88-ad90-b4384a0e609a",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "executor_integrity": 2,
+    "runtime_policy": 0,
+    "offline_selftest": 190,
+    "collection": 11471,
+    "audit": 0,
+    "desktop_wechat": 3
+  },
+  "stageResults": {
+    "executor_integrity": "PASS",
+    "runtime_policy": "PASS",
+    "offline_selftest": "PASS",
+    "collection": "PASS",
+    "audit": "PASS",
+    "desktop_wechat_preflight": "SKIPPED",
+    "desktop_wechat": "FAIL"
+  },
+  "stage": "desktop_wechat",
+  "wechatChannel": "desktop",
+  "collectionAttempts": [
+    {
+      "ok": true,
+      "executor": "merchant-collector",
+      "browserController": "control-background-dedicated-chrome",
+      "profile": "taobao-agent-service",
+      "port": 9231,
+      "groupName": "电销+直播攻坚组",
+      "businessDate": "2026-09-30",
+      "runtimeModelDecisions": 0,
+      "stageMs": {
+        "background_preflight": 41,
+        "task_page": 300,
+        "navigation": 1194,
+        "date_filter": 1357,
+        "page_1_read": 276,
+        "page_1_next": 41,
+        "page_2_read": 532,
+        "page_2_next": 52,
+        "page_3_read": 494,
+        "selection_audit": 0,
+        "detail_543891127": 768,
+        "detail_521315008": 2379,
+        "detail_1263459850": 1031,
+        "detail_546531224": 1046
+      },
+      "stageResults": {
+        "background_preflight": "PASS",
+        "task_page": "PASS",
+        "navigation": "PASS",
+        "date_filter": "PASS",
+        "page_1_read": "PASS",
+        "page_1_next": "PASS",
+        "page_2_read": "PASS",
+        "page_2_next": "PASS",
+        "page_3_read": "PASS",
+        "selection_audit": "PASS",
+        "detail_543891127": "PASS",
+        "detail_521315008": "PASS",
+        "detail_1263459850": "PASS",
+        "detail_546531224": "PASS"
+      },
+      "frontmostBefore": "unavailable",
+      "createdAt": "2026-09-30T08:42:04.299Z",
+      "cursorSource": "verified-history",
+      "filterStartDate": "2026-09-29",
+      "filterEndDate": "2026-09-30",
+      "dateFilter": "2026-09-29..2026-09-30",
+      "dateFilterVerified": true,
+      "pages": [
+        {
+          "page": 1,
+          "rowCount": 10,
+          "nextEnabled": true
+        },
+        {
+          "page": 2,
+          "rowCount": 10,
+          "nextEnabled": true
+        },
+        {
+          "page": 3,
+          "rowCount": 3,
+          "nextEnabled": false
+        }
+      ],
+      "paginationComplete": true,
+      "totalRows": 23,
+      "pendingRows": 11,
+      "targetCount": 4,
+      "selectionAudit": {
+        "totalRows": 23,
+        "pendingRows": 11,
+        "excludedAtOrBeforeCursor": 16,
+        "excludedAfterCursorNotPending": 3,
+        "targetCount": 4,
+        "rows": [
+          {
+            "merchantId": "546531224",
+            "recommendTime": "2026-09-30 15:03:10",
+            "status": "待处理"
+          },
+          {
+            "merchantId": "1263459850",
+            "recommendTime": "2026-09-30 13:26:54",
+            "status": "待处理"
+          },
+          {
+            "merchantId": "521315008",
+            "recommendTime": "2026-09-30 10:35:21",
+            "status": "待处理"
+          },
+          {
+            "merchantId": "543891127",
+            "recommendTime": "2026-09-30 10:28:04",
+            "status": "待处理"
+          },
+          {
+            "merchantId": "545647345",
+            "recommendTime": "2026-09-29 20:21:13",
+            "status": "待处理"
+          },
+          {
+            "merchantId": "1342995222",
+            "recommendTime": "2026-09-29 19:38:06",
+            "status": "待处理"
+          },
+          {
+            "merchantId": "1353344341",
+            "recommendTime": "2026-09-29 17:44:38",
+            "status": "待处理"
+          },
+          {
+            "merchantId": "1348270756",
+            "recommendTime": "2026-09-29 16:39:36",
+            "status": "待处理"
+          },
+          {
+            "merchantId": "2063133",
+            "recommendTime": "2026-09-29 12:18:08",
+            "status": "待处理"
+          },
+          {
+            "merchantId": "542145980",
+            "recommendTime": "2026-09-29 11:13:45",
+            "status": "待处理"
+          },
+          {
+            "merchantId": "1352194876",
+            "recommendTime": "2026-09-29 11:02:48",
+            "status": "待处理"
+          },
+          {
+            "merchantId": "1356340073",
+            "recommendTime": "2026-09-29 18:53:31",
+            "status": "处理中(签约中)"
+          },
+          {
+            "merchantId": "1341026344",
+            "recommendTime": "2026-09-29 18:34:49",
+            "status": "处理中(签约中)"
+          },
+          {
+            "merchantId": "1358166209",
+            "recommendTime": "2026-09-29 17:57:53",
+            "status": "处理中(签约中)"
+          },
+          {
+            "merchantId": "545807063",
+            "recommendTime": "2026-09-29 15:39:32",
+            "status": "处理中(签约中)"
+          },
+          {
+            "merchantId": "1357845888",
+            "recommendTime": "2026-09-29 14:48:02",
+            "status": "处理中(已退回)"
+          },
+          {
+            "merchantId": "544356374",
+            "recommendTime": "2026-09-29 12:51:47",
+            "status": "处理中(签约中)"
+          },
+          {
+            "merchantId": "1362405258",
+            "recommendTime": "2026-09-30 16:02:53",
+            "status": "完成"
+          },
+          {
+            "merchantId": "1360640820",
+            "recommendTime": "2026-09-30 14:35:56",
+            "status": "完成"
+          },
+          {
+            "merchantId": "1348225171",
+            "recommendTime": "2026-09-30 12:54:03",
+            "status": "完成"
+          },
+          {
+            "merchantId": "544372719",
+            "recommendTime": "2026-09-29 19:53:34",
+            "status": "完成"
+          },
+          {
+            "merchantId": "546536721",
+            "recommendTime": "2026-09-29 19:00:41",
+            "status": "完成"
+          },
+          {
+            "merchantId": "544498139",
+            "recommendTime": "2026-09-29 11:36:39",
+            "status": "完成"
+          }
+        ]
+      },
+      "ascending": true,
+      "detailsVerified": true,
+      "url": "https://open.shop.ele.me/manager/agent/home",
+      "elapsedMs": 11138,
+      "frontmostAfter": "unavailable",
+      "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20260930-164152/output/collection-attempt-1.review.json",
+      "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20260930-164152/output/collection-attempt-1.review.md",
+      "attempt": 1
+    }
+  ],
+  "executorIntegrity": {
+    "ok": true,
+    "status": "UNSEALED_ACCEPTANCE",
+    "manifestSha256": "fc9c6a0454d59fed4b919184df22a910008700760a6b37e3c8bb28ffde07ae71",
+    "fileCount": 19,
+    "authorization": "user-20260916-production-hardening",
+    "runtimeModelDecisions": 0,
+    "maintenanceAcceptance": "desktop-wechat-shared-preflight",
+    "sharedTextAcceptance": "wechat-messaging-desktop-text",
+    "sharedMediaAcceptance": "not-required-by-text-only-merchant-workflow"
+  },
+  "runtimePolicy": {
+    "ok": true,
+    "group": "电销+直播攻坚组",
+    "channel": "desktop",
+    "cursorFile": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/cursor.json",
+    "maxCollectionAttempts": 2,
+    "collectionBudgetSeconds": 180
+  },
+  "selftest": {
+    "ok": true,
+    "senderTests": 5,
+    "browserTests": 37
+  },
+  "collection": {
+    "ok": true,
+    "executor": "merchant-collector",
+    "browserController": "control-background-dedicated-chrome",
+    "profile": "taobao-agent-service",
+    "port": 9231,
+    "groupName": "电销+直播攻坚组",
+    "businessDate": "2026-09-30",
+    "runtimeModelDecisions": 0,
+    "stageMs": {
+      "background_preflight": 41,
+      "task_page": 300,
+      "navigation": 1194,
+      "date_filter": 1357,
+      "page_1_read": 276,
+      "page_1_next": 41,
+      "page_2_read": 532,
+      "page_2_next": 52,
+      "page_3_read": 494,
+      "selection_audit": 0,
+      "detail_543891127": 768,
+      "detail_521315008": 2379,
+      "detail_1263459850": 1031,
+      "detail_546531224": 1046
+    },
+    "stageResults": {
+      "background_preflight": "PASS",
+      "task_page": "PASS",
+      "navigation": "PASS",
+      "date_filter": "PASS",
+      "page_1_read": "PASS",
+      "page_1_next": "PASS",
+      "page_2_read": "PASS",
+      "page_2_next": "PASS",
+      "page_3_read": "PASS",
+      "selection_audit": "PASS",
+      "detail_543891127": "PASS",
+      "detail_521315008": "PASS",
+      "detail_1263459850": "PASS",
+      "detail_546531224": "PASS"
+    },
+    "frontmostBefore": "unavailable",
+    "createdAt": "2026-09-30T08:42:04.299Z",
+    "cursorSource": "verified-history",
+    "filterStartDate": "2026-09-29",
+    "filterEndDate": "2026-09-30",
+    "dateFilter": "2026-09-29..2026-09-30",
+    "dateFilterVerified": true,
+    "pages": [
+      {
+        "page": 1,
+        "rowCount": 10,
+        "nextEnabled": true
+      },
+      {
+        "page": 2,
+        "rowCount": 10,
+        "nextEnabled": true
+      },
+      {
+        "page": 3,
+        "rowCount": 3,
+        "nextEnabled": false
+      }
+    ],
+    "paginationComplete": true,
+    "totalRows": 23,
+    "pendingRows": 11,
+    "targetCount": 4,
+    "selectionAudit": {
+      "totalRows": 23,
+      "pendingRows": 11,
+      "excludedAtOrBeforeCursor": 16,
+      "excludedAfterCursorNotPending": 3,
+      "targetCount": 4,
+      "rows": [
+        {
+          "merchantId": "546531224",
+          "recommendTime": "2026-09-30 15:03:10",
+          "status": "待处理"
+        },
+        {
+          "merchantId": "1263459850",
+          "recommendTime": "2026-09-30 13:26:54",
+          "status": "待处理"
+        },
+        {
+          "merchantId": "521315008",
+          "recommendTime": "2026-09-30 10:35:21",
+          "status": "待处理"
+        },
+        {
+          "merchantId": "543891127",
+          "recommendTime": "2026-09-30 10:28:04",
+          "status": "待处理"
+        },
+        {
+          "merchantId": "545647345",
+          "recommendTime": "2026-09-29 20:21:13",
+          "status": "待处理"
+        },
+        {
+          "merchantId": "1342995222",
+          "recommendTime": "2026-09-29 19:38:06",
+          "status": "待处理"
+        },
+        {
+          "merchantId": "1353344341",
+          "recommendTime": "2026-09-29 17:44:38",
+          "status": "待处理"
+        },
+        {
+          "merchantId": "1348270756",
+          "recommendTime": "2026-09-29 16:39:36",
+          "status": "待处理"
+        },
+        {
+          "merchantId": "2063133",
+          "recommendTime": "2026-09-29 12:18:08",
+          "status": "待处理"
+        },
+        {
+          "merchantId": "542145980",
+          "recommendTime": "2026-09-29 11:13:45",
+          "status": "待处理"
+        },
+        {
+          "merchantId": "1352194876",
+          "recommendTime": "2026-09-29 11:02:48",
+          "status": "待处理"
+        },
+        {
+          "merchantId": "1356340073",
+          "recommendTime": "2026-09-29 18:53:31",
+          "status": "处理中(签约中)"
+        },
+        {
+          "merchantId": "1341026344",
+          "recommendTime": "2026-09-29 18:34:49",
+          "status": "处理中(签约中)"
+        },
+        {
+          "merchantId": "1358166209",
+          "recommendTime": "2026-09-29 17:57:53",
+          "status": "处理中(签约中)"
+        },
+        {
+          "merchantId": "545807063",
+          "recommendTime": "2026-09-29 15:39:32",
+          "status": "处理中(签约中)"
+        },
+        {
+          "merchantId": "1357845888",
+          "recommendTime": "2026-09-29 14:48:02",
+          "status": "处理中(已退回)"
+        },
+        {
+          "merchantId": "544356374",
+          "recommendTime": "2026-09-29 12:51:47",
+          "status": "处理中(签约中)"
+        },
+        {
+          "merchantId": "1362405258",
+          "recommendTime": "2026-09-30 16:02:53",
+          "status": "完成"
+        },
+        {
+          "merchantId": "1360640820",
+          "recommendTime": "2026-09-30 14:35:56",
+          "status": "完成"
+        },
+        {
+          "merchantId": "1348225171",
+          "recommendTime": "2026-09-30 12:54:03",
+          "status": "完成"
+        },
+        {
+          "merchantId": "544372719",
+          "recommendTime": "2026-09-29 19:53:34",
+          "status": "完成"
+        },
+        {
+          "merchantId": "546536721",
+          "recommendTime": "2026-09-29 19:00:41",
+          "status": "完成"
+        },
+        {
+          "merchantId": "544498139",
+          "recommendTime": "2026-09-29 11:36:39",
+          "status": "完成"
+        }
+      ]
+    },
+    "ascending": true,
+    "detailsVerified": true,
+    "url": "https://open.shop.ele.me/manager/agent/home",
+    "elapsedMs": 11138,
+    "frontmostAfter": "unavailable",
+    "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20260930-164152/output/collection-attempt-1.review.json",
+    "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20260930-164152/output/collection-attempt-1.review.md"
+  },
+  "desktopWechatPreflight": {
+    "ok": true,
+    "skipped": true,
+    "reason": "existing-attempt-reconcile-only",
+    "sendAttempts": 1
+  },
+  "wechat": {
+    "ok": false,
+    "executor": "merchant-desktop-wechat-sender",
+    "channel": "desktop",
+    "sent": 0,
+    "messageCount": 4,
+    "historySkipped": 0,
+    "items": [
+      {
+        "merchantId": "543891127",
+        "merchantName": "范大厨下饭菜馆",
+        "review": [
+          {
+            "stage": "发送前合同复核",
+            "status": "PASS",
+            "pitfalls": [],
+            "elapsedMs": 0
+          },
+          {
+            "stage": "已verified收据复用",
+            "status": "PASS",
+            "pitfalls": [],
+            "details": [],
+            "attempts": [],
+            "elapsedMs": 0
+          },
+          {
+            "stage": "提交前证据门禁",
+            "status": "FAIL",
+            "pitfalls": [
+              "delivery-evidence-incomplete"
+            ],
+            "elapsedMs": 0
+          },
+          {
+            "stage": "双帧与原生复制全文复核",
+            "status": "SKIPPED",
+            "elapsedMs": null,
+            "pitfalls": [
+              "前置阶段失败，代码禁止继续"
+            ]
+          },
+          {
+            "stage": "成功历史与原子游标提交",
+            "status": "SKIPPED",
+            "elapsedMs": null,
+            "pitfalls": [
+              "前置阶段失败，代码禁止继续"
+            ]
+          }
+        ]
+      }
+    ],
+    "contentionRetries": 0,
+    "contentionWaitMs": 0,
+    "contentionEvents": [],
+    "mode": "reconcile-only",
+    "reconciled": 1,
+    "reason": "delivery-evidence-incomplete",
+    "desktop": {
+      "bridgeVersion": 1,
+      "ok": true,
+      "verified": true,
+      "payloadType": "text",
+      "state": "verified",
+      "groupName": "电销+直播攻坚组",
+      "payloads": [
+        {
+          "text": "永州市\n范，17520427158\n范大厨下饭菜馆\n永州大道289号",
+          "sha256": "4522c544ce0b3f3de6959658b7ddeda9644028b277a98898b1b49f35873f48c8"
+        }
+      ],
+      "sendAttempts": 1,
+      "newSendAttempts": 0,
+      "reason": null,
+      "runtimeModelDecisions": 0,
+      "commonReceipt": {
+        "ok": true,
+        "status": "verified",
+        "groupName": "电销+直播攻坚组",
+        "channel": "desktop",
+        "requestDigest": "9cd80498bbe0a5df97aa51faa29361dd657039d24136ab9aadfdd7fbffeef832",
+        "runtimeModelDecisions": 0,
+        "items": [
+          {
+            "itemId": "0",
+            "sha256": "4522c544ce0b3f3de6959658b7ddeda9644028b277a98898b1b49f35873f48c8",
+            "type": "text",
+            "status": "verified",
+            "claimedAt": 1790757316.970616,
+            "sendAttempts": 1,
+            "verificationLevel": "windows-readback-text-anchor",
+            "evidence": {
+              "ok": true,
+              "resolvedGroup": "电销+直播攻坚组",
+              "currentTitle": "电销+直播攻坚组",
+              "messageCount": 48,
+              "anchor": "text-exact",
+              "anchorValue": "永州市\n范，17520427158\n范大厨下饭菜馆\n永州大道289号",
+              "anchorInTrailingPosition": true,
+              "autoKind": null,
+              "readbackAt": 1790757346.67876
+            },
+            "transport": {
+              "ok": true,
+              "data": {
+                "sent": true,
+                "who": "电销+直播攻坚组",
+                "len": 34
+              },
+              "sendAttempts": 1
+            }
+          }
+        ],
+        "review": [
+          {
+            "stage": "authorization",
+            "status": "completed",
+            "pitfalls": [],
+            "elapsedMs": 0
+          },
+          {
+            "stage": "freeze:0",
+            "status": "completed",
+            "pitfalls": [],
+            "elapsedMs": 0
+          },
+          {
+            "stage": "preflight",
+            "status": "completed",
+            "pitfalls": [],
+            "elapsedMs": 391
+          },
+          {
+            "stage": "send:0",
+            "status": "completed",
+            "pitfalls": [],
+            "elapsedMs": 29707
+          }
+        ],
+        "elapsedMs": 30101,
+        "eventKey": "c6e6b7fcb92b1b6c8e20bc827cc0aa2d42f0a349b491200d95971a0b869dbd9d",
+        "reviewSummary": {
+          "totalElapsedMs": 30101,
+          "result": "verified",
+          "stageCount": 4,
+          "completedStages": 4,
+          "failedStages": []
+        }
+      },
+      "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/ac203ce59bfdb28fbdbcaad716eac04fa33d10c7a7cccd651dbc151ef30dfe96.json",
+      "sendReview": [
+        {
+          "stage": "authorization",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 1,
+          "label": "authorization"
+        },
+        {
+          "stage": "freeze:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 2,
+          "label": "freeze:0"
+        },
+        {
+          "stage": "preflight",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 391,
+          "item": 3,
+          "label": "preflight"
+        },
+        {
+          "stage": "send:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 29707,
+          "item": 4,
+          "label": "send:0"
+        }
+      ],
+      "elapsedMs": 30101,
+      "reviewSummary": {
+        "totalElapsedMs": 30101,
+        "itemCount": 4,
+        "pitfallCount": 0,
+        "result": "success"
+      },
+      "copyReadback": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 48,
+        "anchor": "text-exact",
+        "anchorValue": "永州市\n范，17520427158\n范大厨下饭菜馆\n永州大道289号",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1790757346.67876
+      },
+      "physicalSendAttempts": 1,
+      "postSendInputCleared": null,
+      "stage": null,
+      "reconciledWithoutSend": false,
+      "reusedExisting": true
+    }
+  },
+  "error": "delivery-evidence-incomplete",
+  "elapsedMs": 11667,
+  "completion": {
+    "state": "RECONCILE_ONLY",
+    "nextAction": "native-copy-read-only-reconcile-no-resend",
+    "automaticRecoveryAllowed": true,
+    "recoveryAttemptBudget": 1,
+    "reason": "delivery-evidence-incomplete"
+  },
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20260930-164152/output/review.json"
+}

@@ -1,0 +1,23 @@
+{
+  "skill": "daily-jinsha-reports-to-business-wechat",
+  "ledger_name": "金鲨昨日双平台日报发运营群（每日11:00）",
+  "schedule": "每日11:00",
+  "dev_state": "active",
+  "status": "FAILED",
+  "category": "UNKNOWN",
+  "detail": "reason=desktop-attempt-not-verifiable (receipt:reason)",
+  "next_action": "看护代理读日志定位根因后升级处理",
+  "attempts": 1,
+  "max_retries": 2,
+  "duration_seconds": 597.84,
+  "started_at": "2026-10-25T12:59:20",
+  "finished_at": "2026-10-25T13:09:18",
+  "triggered_by": "daemon",
+  "logs": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-25/daily-jinsha-reports-to-business-wechat--20261025-125920--a1--s1.log"
+  ],
+  "fail_signal": {
+    "kind": "reason",
+    "code": "desktop-attempt-not-verifiable"
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "ok": true,
+  "action": "prepare",
+  "status": "prepared",
+  "review": [
+    {
+      "label": "维护授权",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "授权有效期",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "读取依赖清单",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "计算候选摘要",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 11
+    },
+    {
+      "label": "授权范围",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "统一微信完整离线测试",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 4385
+    },
+    {
+      "label": "原子写入依赖清单",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "依赖清单回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 2
+    },
+    {
+      "label": "统一入口完整性回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 40
+    }
+  ],
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "authorization": "user-20261025-ui-no-wall-clock",
+  "expiresAt": "2026-10-26T12:00:00+08:00",
+  "userInstructionSha256": "6b18bd5262a9a9e0533d983c60dce4cbb755881a1333e3c630469199a891b5f5",
+  "dependencyManifestPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/dependencies.json",
+  "dependencyManifestBeforeSha256": "fba2bee00e73ac26008f7246c58ca2d443437bfc8c6829277cd025782544f868",
+  "dependencyManifestAfterSha256": "76b4df365ccbd15f21d866114e18d4d48e64629611564e5ff1b65c30df5c0e5f",
+  "changes": [
+    {
+      "path": "scripts/contract.py",
+      "before": "61988f0e32da535d5344a3359115f79cec696b28352398e4943b1863ce49d9d1",
+      "after": "c37b410fb4d98ff9745dde3a95dc4098ae23e4d9913725ef5ca5e7c208cb7393"
+    },
+    {
+      "path": "scripts/dependency_maintenance.py",
+      "before": "c7a56f8cf8655c4cef8fd788db7d37c584817ea7532e6fb538ca713dd6ba96ff",
+      "after": "0cbfc767ac13cdd274cdd0ad42fa84fe30e4bbb434dfe957b2c74d566760f008"
+    },
+    {
+      "path": "scripts/executor.py",
+      "before": "a470d05745648a81015e0e0e975f945b4a5ddda6bf7ec9b75f14972309aef3ef",
+      "after": "8a900b25e79aca47eb9ae077e94dc374f9c66a3358694c3fc5979399d4741461"
+    }
+  ],
+  "tests": {
+    "ok": true,
+    "elapsedMs": 4385,
+    "testCount": 355
+  },
+  "capabilityCheck": {
+    "ok": true,
+    "elapsedMs": 40,
+    "testCount": null
+  },
+  "candidateFileCount": 32,
+  "elapsedMs": 4439
+}

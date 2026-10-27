@@ -1,0 +1,39 @@
+{
+  "ok": false,
+  "executor": "desktop",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-brand",
+  "port": 9230,
+  "taskId": "top10-7b59e69c-191f-4e2f-8dd5-0269c5814dbc",
+  "runId": "7b59e69c-191f-4e2f-8dd5-0269c5814dbc",
+  "stageMs": {
+    "background_preflight": 93,
+    "open_home": 1212,
+    "dismiss_known_notice": 601,
+    "navigate_store_analysis": 1143,
+    "select_yesterday": 369,
+    "verify_sort": 15098
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "open_home": "PASS",
+    "dismiss_known_notice": "PASS",
+    "navigate_store_analysis": "PASS",
+    "select_yesterday": "PASS",
+    "verify_sort": "FAIL"
+  },
+  "retryCount": 0,
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "receiptFile": "/tmp/zhensi_top10/7b59e69c-191f-4e2f-8dd5-0269c5814dbc/desktop_receipt.json",
+  "stage": "verify_sort",
+  "startedAt": 1793059432560,
+  "deadlineAt": 1793059612560,
+  "dataDate": "2026-10-26",
+  "deviceScaleFactor": 2,
+  "homeUrl": "https://melody.shop.ele.me/app/chain/95708808/dashboard#app.chainshop.dashboard",
+  "knownNotice": "DISMISSED",
+  "storeUrl": "https://melody.shop.ele.me/app/chain/95708808/store-analysis#app.chainshop.store-analysis?path=1&dateType=realTime&orderCol=valid_ord_amt&orderType=DESC",
+  "reason": "ten-business-rows-not-ready:income-header-not-unique",
+  "elapsedMs": 18467
+}

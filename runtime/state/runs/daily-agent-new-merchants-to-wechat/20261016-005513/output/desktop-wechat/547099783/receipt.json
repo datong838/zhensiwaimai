@@ -1,0 +1,152 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：嘉兴市  ；  联系人：陶，17769908837  ；  店铺：杨记木桶饭  ；  地址：南湖街道建国中路港澳商城C幢南05号营业用房1楼1底二楼",
+      "sha256": "70d2ce71d176d0af8054a0021601994cb5ff264521e6a9eab99f709497a16f5c"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "1c9d846d4e5ea94cfecd8798d1ae24268fa892066dcc82598b219cc5e1d60722",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "70d2ce71d176d0af8054a0021601994cb5ff264521e6a9eab99f709497a16f5c",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1792083467.575246,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-text-anchor",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "电销+直播攻坚组",
+          "currentTitle": "电销+直播攻坚组",
+          "messageCount": 43,
+          "anchor": "text-exact",
+          "anchorValue": "城市：嘉兴市  ；  联系人：陶，17769908837  ；  店铺：杨记木桶饭  ；  地址：南湖街道建国中路港澳商城C幢南05号营业用房1楼1底二楼",
+          "anchorInTrailingPosition": true,
+          "autoKind": null,
+          "readbackAt": 1792083495.316131
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "电销+直播攻坚组",
+            "len": 77
+          },
+          "route": "relay",
+          "direct_error": "[Errno 65] No route to host",
+          "direct_local_network_blocked": true,
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 9478
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 27741
+      }
+    ],
+    "elapsedMs": 37227,
+    "eventKey": "e02c26af358a51e3f814b1c13c979e873cc8b4b07b749b40b94930a82eec86e4",
+    "reviewSummary": {
+      "totalElapsedMs": 37227,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/3e6f9767a5db3d80c3942ec293c8b5a9f01012b95a61c89fde24bb1ef6280c1b.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 9478,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 27741,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 37227,
+  "reviewSummary": {
+    "totalElapsedMs": 37227,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "ok": true,
+    "resolvedGroup": "电销+直播攻坚组",
+    "currentTitle": "电销+直播攻坚组",
+    "messageCount": 43,
+    "anchor": "text-exact",
+    "anchorValue": "城市：嘉兴市  ；  联系人：陶，17769908837  ；  店铺：杨记木桶饭  ；  地址：南湖街道建国中路港澳商城C幢南05号营业用房1楼1底二楼",
+    "anchorInTrailingPosition": true,
+    "autoKind": null,
+    "readbackAt": 1792083495.316131
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false
+}

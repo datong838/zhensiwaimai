@@ -1,0 +1,41 @@
+{
+  "at": "2026-10-27T10:44:31.830304+08:00",
+  "checks": [
+    {
+      "file": "skills/workflows/daily-store-task-completion-ops-to-wechat/scripts/task_workflow.py",
+      "node": "/Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "exists": true,
+      "probe": "v24.19.0 function",
+      "ok": true
+    },
+    {
+      "file": "skills/workflows/daily-new-stores-activity-audit-to-wechat/scripts/activity_workflow.py",
+      "node": "/Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "exists": true,
+      "probe": "v24.19.0 function",
+      "ok": true
+    },
+    {
+      "file": "skills/workflows/daily-new-stores-decoration-audit-to-wechat/scripts/decoration_workflow.py",
+      "node": "/Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "exists": true,
+      "probe": "v24.19.0 function",
+      "ok": true
+    },
+    {
+      "file": "skills/workflows/daily-new-stores-not-nourished-ops-to-wechat/scripts/nourish_workflow.py",
+      "node": "/Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "exists": true,
+      "probe": "v24.19.0 function",
+      "ok": true
+    },
+    {
+      "file": "skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/basic_diag_workflow.py",
+      "node": "/Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "exists": true,
+      "probe": "v24.19.0 function",
+      "ok": true
+    }
+  ],
+  "scope": "interpreter startup only; no collector imported/executed"
+}

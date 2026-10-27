@@ -1,0 +1,247 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-13",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 66,
+    "task_page": 294,
+    "navigation": 1549,
+    "date_filter": 1388,
+    "page_1_read": 483,
+    "page_1_next": 74,
+    "page_2_read": 763,
+    "selection_audit": 1,
+    "detail_1347814921": 873,
+    "detail_1259184624": 2518,
+    "detail_546547343": 1264,
+    "detail_1254581528": 1204
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "page_1_next": "PASS",
+    "page_2_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_1347814921": "PASS",
+    "detail_1259184624": "PASS",
+    "detail_546547343": "PASS",
+    "detail_1254581528": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "1347814921",
+      "merchantName": "二姐特色馄饨（总店）",
+      "recommendTime": "2026-10-12 18:27:02",
+      "city": "阜阳市",
+      "status": "待处理",
+      "rowIndex": 3,
+      "sourcePage": 1,
+      "tableOrder": 15,
+      "address": "城关镇细阳加油站对面门面房一间(从北向南第8间)",
+      "contact": "二姐，13277752666",
+      "detailVerified": true,
+      "text": "城市：阜阳市  ；  联系人：二姐，13277752666  ；  店铺：二姐特色馄饨（总店）  ；  地址：城关镇细阳加油站对面门面房一间(从北向南第8间)",
+      "sha256": "54f3adc103f679c272ecddd148e456a649b2ede18e4d4cd1293eaa6d92bdb0e7"
+    },
+    {
+      "merchantId": "1259184624",
+      "merchantName": "西北美食",
+      "recommendTime": "2026-10-12 19:50:40",
+      "city": "哈尔滨市",
+      "status": "待处理",
+      "rowIndex": 2,
+      "sourcePage": 1,
+      "tableOrder": 16,
+      "address": "保健路142号医科二院家属楼32栋",
+      "contact": "韩，17645540972",
+      "detailVerified": true,
+      "text": "城市：哈尔滨市  ；  联系人：韩，17645540972  ；  店铺：西北美食  ；  地址：保健路142号医科二院家属楼32栋",
+      "sha256": "ef41d2ce83456ed0ce208d3d8669f3a6808c515bb1d2b2af5b47b37d3cd9ebb2"
+    },
+    {
+      "merchantId": "546547343",
+      "merchantName": "牛小螺·柳州味（台头店）",
+      "recommendTime": "2026-10-12 20:12:16",
+      "city": "青岛市",
+      "status": "待处理",
+      "rowIndex": 1,
+      "sourcePage": 1,
+      "tableOrder": 17,
+      "address": "台头社区253-1",
+      "contact": "郭加龙，13573877444",
+      "detailVerified": true,
+      "text": "城市：青岛市  ；  联系人：郭加龙，13573877444  ；  店铺：牛小螺·柳州味（台头店）  ；  地址：台头社区253-1",
+      "sha256": "fd16479a331d9ffbc49a37c062542c2f5af785d501bd97100491f777b7069405"
+    },
+    {
+      "merchantId": "1254581528",
+      "merchantName": "小胡烧烤·龙虾",
+      "recommendTime": "2026-10-13 01:37:38",
+      "city": "池州市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 19,
+      "address": "南大门1号地块二期A区13幢105",
+      "contact": "方锦龙，18156613129",
+      "detailVerified": true,
+      "text": "城市：池州市  ；  联系人：方锦龙，18156613129  ；  店铺：小胡烧烤·龙虾  ；  地址：南大门1号地块二期A区13幢105",
+      "sha256": "7e215d9b6a918be081d7ea5323914e8b6c54e1ddb7a4ecbef60e1112b88e9f32"
+    }
+  ],
+  "frontmostBefore": "com.tencent.yuanbao",
+  "createdAt": "2026-10-12T18:21:26.599Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-13",
+    "merchantName": "崔姑娘·手工水饺",
+    "merchantId": "1308670670",
+    "recommendTime": "2026-10-12 17:46:05",
+    "tableOrder": 14,
+    "messageSha256": "d9dce7cc0d028650d24b1b5906cd17e1cc79961a47af00d28dc132c7c09a7660",
+    "sentAt": "2026-10-13T00:16:50+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-12",
+  "filterEndDate": "2026-10-13",
+  "dateFilter": "2026-10-12..2026-10-13",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 10,
+      "nextEnabled": true
+    },
+    {
+      "page": 2,
+      "rowCount": 9,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 19,
+  "pendingRows": 11,
+  "targetCount": 4,
+  "selectionAudit": {
+    "totalRows": 19,
+    "pendingRows": 11,
+    "excludedAtOrBeforeCursor": 14,
+    "excludedAfterCursorNotPending": 1,
+    "targetCount": 4,
+    "rows": [
+      {
+        "merchantId": "1254581528",
+        "recommendTime": "2026-10-13 01:37:38",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546547343",
+        "recommendTime": "2026-10-12 20:12:16",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1259184624",
+        "recommendTime": "2026-10-12 19:50:40",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1347814921",
+        "recommendTime": "2026-10-12 18:27:02",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1308670670",
+        "recommendTime": "2026-10-12 17:46:05",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1359175528",
+        "recommendTime": "2026-10-12 17:36:30",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546812895",
+        "recommendTime": "2026-10-12 16:54:28",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1359530815",
+        "recommendTime": "2026-10-12 14:25:30",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546526773",
+        "recommendTime": "2026-10-12 13:31:53",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1357544210",
+        "recommendTime": "2026-10-12 11:03:59",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1122082877",
+        "recommendTime": "2026-10-12 08:57:42",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1364448158",
+        "recommendTime": "2026-10-12 17:28:06",
+        "status": "处理中(已退回)"
+      },
+      {
+        "merchantId": "528665610",
+        "recommendTime": "2026-10-12 16:49:55",
+        "status": "处理中(签约中)"
+      },
+      {
+        "merchantId": "545571270",
+        "recommendTime": "2026-10-12 13:04:44",
+        "status": "处理中(签约中)"
+      },
+      {
+        "merchantId": "546561996",
+        "recommendTime": "2026-10-12 10:42:27",
+        "status": "处理中(签约中)"
+      },
+      {
+        "merchantId": "546200474",
+        "recommendTime": "2026-10-12 09:56:37",
+        "status": "处理中(已退回)"
+      },
+      {
+        "merchantId": "546943463",
+        "recommendTime": "2026-10-12 20:54:46",
+        "status": "完成"
+      },
+      {
+        "merchantId": "546542516",
+        "recommendTime": "2026-10-12 14:48:02",
+        "status": "完成"
+      },
+      {
+        "merchantId": "546642286",
+        "recommendTime": "2026-10-12 12:17:14",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 12482,
+  "frontmostAfter": "com.tencent.yuanbao",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261013-022113/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261013-022113/output/collection-attempt-1.review.md"
+}

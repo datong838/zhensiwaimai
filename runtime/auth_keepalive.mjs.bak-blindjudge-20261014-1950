@@ -1,0 +1,251 @@
+#!/usr/bin/env node
+// auth_keepalive.mjs —— 四岗位登录态「保活 + 真会话探活」（只读+轻量写标记）
+//
+// 立项背景（2026-10-12 事故复盘）
+//   daily-agent-new-merchants-to-wechat 连续 9~11 轮报 `service-shell-not-ready`，
+//   排查数小时才发现真因是 **9231 掉登录**：
+//     · 本地 Cookie 有效期 182~399 天，全数未过期 ⇒ 不是本地 TTL，是服务端会话失效；
+//     · 且实测「访问一次」后 Cookie 的 expires_utc **完全没有变化**（BEFORE==AFTER），
+//       说明本地 cookie 不是滑动续期型，保活能否延长服务端 session 属**待验证假设**；
+//     · 旧 tab 是已渲染 SPA，页面完好、shell marker 全中，看着"登录正常" ⇒
+//       login_health_check.py 只数 tab ⇒ 08:29 仍误报 ok=true；
+//     · 采集器 LOGIN_MARKERS 漏「账号登录」，5 个标记全不命中 ⇒ 误报 shell-not-ready。
+//   ⇒ 只有「新建一个真会话」才能证伪登录态。本脚本即承担此责，并记录每次结果，
+//      用于回答「定期访问到底能不能延长会话寿命」这一真数据实验。
+//
+// 用法
+//   node auth_keepalive.mjs                       # 四岗位逐个探活
+//   node auth_keepalive.mjs --ports 9231          # 只探某几个岗位
+//   node auth_keepalive.mjs --json                # 结构化输出
+//   node auth_keepalive.mjs --notify              # 掉登录时发 macOS 通知
+//   node auth_keepalive.mjs --open-login          # 掉登录时 headful 拉起登录页（会弹窗）
+//   node auth_keepalive.mjs --status              # 只看历史摘要
+//
+// 退出码：0=全部可用；3=检出掉登录/端口不可用（needs-attention）；4=跳过（岗位忙）
+//
+// 边界（严守，不得突破）
+//   · 只做 newPage→goto→回读→close，**不点击、不输入、不提交任何凭证**；
+//   · 不发任何外发消息、不写游标、不改封印、不触发强制运行；
+//   · 9231 必须抢 taobao-svc-post 工位锁，抢不到即跳过（绝不干扰正在跑的采集流）；
+//   · 临时 tab 必定关闭，杜绝 tab 堆积拖垮渲染线程。
+
+import fs from 'node:fs';
+import path from 'node:path';
+import process from 'node:process';
+import { spawn } from 'node:child_process';
+
+const HOME = '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back';
+const STATE_DIR = path.join(HOME, 'runtime/state');
+const HISTORY = path.join(STATE_DIR, 'auth_keepalive_history.jsonl');
+const LAST = path.join(STATE_DIR, 'auth_keepalive_last.json');
+
+// 各项 plist（权威源）里的岗位目标 URL —— 不要用依赖 guessing 的路径
+const TARGETS = {
+  9230: { role: 'taobao-brand', profile: 'taobao-brand', lease: false,
+    url: 'https://melody.shop.ele.me/app/chain/95708808/stats__center#app.chainshop.stats.center',
+    host: 'melody.shop.ele.me',
+    // 业务就绪判据：出现了工作台文本才算真登录（不能用 URL 是否变化来判定）
+    shell: ['appstore 控制台', '代运营', '客户管理', '意向商户管理', '商家意向列表', '门店'],
+    minLen: 100 },
+  9231: { role: 'taobao-agent-service', profile: 'taobao-agent-service', lease: true,
+    url: 'https://open.shop.ele.me/manager/base/home',
+    host: 'open.shop.ele.me',
+    shell: ['appstore 控制台', '代运营', '客户管理', '意向商户管理', '商家意向列表'],
+    minLen: 100 },
+  9232: { role: 'jinsha-business', profile: 'jinsha-business', lease: false,
+    url: 'https://data.guoshuyufen.com/#/negativeAnalyse',
+    host: 'data.guoshuyufen.com',
+    shell: [], minLen: 200 },
+  9233: { role: 'meituan-im', profile: 'meituan-merchant', lease: false,
+    url: 'https://waimaie.meituan.com/imworkbench/home?appId=4&clientType=140006#/im/page/workbench/reception',
+    host: 'waimaie.meituan.com',
+    shell: [], minLen: 200 },
+};
+const LOGIN_HINTS = ['login', 'passport', 'signin', 'sso', 'oauth'];
+
+// 纯函数：会话判定。单独抽出来是为了**可自检** —— 判据必须有正负对照，
+// 不能只验证"四岗位都正常"这一种形状（那正是本次事故反复踩的坑：
+// 2026-10-12 掉登录时，老判据在仅有的验证里全部返回"通过"）。
+export function judgeSession(finalUrl, status, cfg) {
+  const url = String(finalUrl || '');
+  const lower = url.toLowerCase();
+  const redirected = LOGIN_HINTS.some(h => lower.includes(h));
+  const onHost = cfg ? lower.includes(String(cfg.host).toLowerCase()) : false;
+  const httpOk = Number.isInteger(status) && status >= 200 && status < 400;
+  return { redirected, onHost, httpOk, ok: !redirected && httpOk };
+}
+
+// --self-test：内置正负对照，不触碰任何真实岗位，纯本地判定表。
+export function selfTest() {
+  const cfg = TARGETS[9231];
+  const H = 'https://open.shop.ele.me';
+  const cases = [
+    { name: '正·业务页 HTTP200',  url: H + '/manager/base/home',      status: 200, want: true },
+    { name: '正·带查询串业务页',   url: H + '/manager/base/home?x=1',  status: 200, want: true },
+    { name: '负·重定向到 /login', url: H + '/login?redirect=%2Fhome', status: 200, want: false },
+    { name: '负·跳 passport',     url: 'https://passport.ele.me/sso', status: 200, want: false },
+    { name: '负·跳 signin/oauth', url: 'https://x.com/signin?a=1',    status: 200, want: false },
+    { name: '负·HTTP 500',       url: H + '/manager/base/home',      status: 500, want: false },
+  ];
+  let pass = 0, fail = 0;
+  console.log('self-test 会话判定表（cfg=9231 / open.shop.ele.me）');
+  for (const c of cases) {
+    const got = judgeSession(c.url, c.status, cfg).ok;
+    const hit = got === c.want;
+    hit ? pass++ : fail++;
+    console.log(`  ${hit ? '✅' : '❌'} ${c.name.padEnd(20)} want=${String(c.want).padEnd(5)} got=${String(got).padEnd(5)} ${c.url.slice(0, 58)}`);
+  }
+  console.log(`self-test: ${pass} passed, ${fail} failed`);
+  return fail;
+}
+
+const argv = process.argv.slice(2);
+const JSON_OUT = argv.includes('--json');
+const NOTIFY = argv.includes('--notify');
+const OPEN_LOGIN = argv.includes('--open-login');
+const STATUS_ONLY = argv.includes('--status');
+const pi = argv.indexOf('--ports');
+const PORTS = pi >= 0 && argv[pi + 1]
+  ? argv[pi + 1].split(',').map(s => Number(s.trim())).filter(Boolean)
+  : Object.keys(TARGETS).map(Number);
+
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+function openWs(u, ms = 8000) {
+  return new Promise((res, rej) => {
+    const w = new WebSocket(String(u).replace('localhost', '127.0.0.1'));
+    w.addEventListener('open', () => res(w), { once: true });
+    w.addEventListener('error', () => rej(new Error('ws-open-fail')), { once: true });
+    setTimeout(() => rej(new Error('ws-open-timeout')), ms);
+  });
+}
+function rpc(w, m, p, ms) {
+  const id = Math.floor(Math.random() * 1e9);
+  return new Promise((res, rej) => {
+    const on = e => { let d; try { d = JSON.parse(e.data); } catch { return; }
+      if (d.id === id) { w.removeEventListener('message', on); clearTimeout(t); res(d); } };
+    const t = setTimeout(() => { w.removeEventListener('message', on); rej(new Error('timeout:' + m)); }, ms);
+    w.addEventListener('message', on);
+    w.send(JSON.stringify({ id, method: m, params: p || {} }));
+  });
+}
+const READ = `(()=>{const t=(document.body?document.body.innerText:'')||'';
+  return JSON.stringify({href:location.href,len:t.length,ready:document.readyState,head:t.slice(0,80)})})()`;
+
+function notify(msg) {
+  try { spawn('osascript', ['-e', `display notification "${msg}" with title "臻肆看护"`], { stdio: 'ignore' }); } catch {}
+}
+function openLogin(cfg, port) {
+  try {
+    spawn('bash', ['-c',
+      `cd ${HOME} && BG_CHROME_LAUNCH=headful bash runtime/bg-chrome-up.sh ${cfg.profile} ${port} '${cfg.url}'`
+    ], { stdio: 'ignore', detached: true }).unref();
+  } catch {}
+}
+
+// 工位互斥：复用 taobao-svc-post 的锁契约（锁存在且未过期且非自己 ⇒ 忙）
+const LEASE_TTL_MS = 30 * 60 * 1000;
+// 只读判断工位是否被占用（本脚本不持有锁：它不 newTarget、也不和采集流竞争资源）
+async function leaseBusy(port) {
+  try {
+    const cur = JSON.parse(
+      await fs.promises.readFile(`/tmp/zhensi-post-${port}.lock`, 'utf8'));
+    if (cur && Date.now() - (cur.acquiredAt || 0) <= LEASE_TTL_MS) return true; // 他人持有
+  } catch {}
+  return false;
+}
+
+async function probe(port) {
+  const cfg = TARGETS[port];
+  if (!cfg) return { port, role: 'unconfigured', ok: false, detail: '端口未配置' };
+  const out = { port, role: cfg.role, cdp: false, ok: false, detail: '' };
+
+  // ① 工位被采集流占用 ⇒ 跳过。保活绝不干扰正在跑的业务流。
+  if (await leaseBusy(port)) {
+    out.detail = 'SKIPPED：工位忙（有采集流占用）'; out.busy = true; return out;
+  }
+
+  let ws;
+  try {
+    // ② 取现有目标域 tab（本脚本绝不 newTarget —— 见头部「边界」条款）
+    const ver = await (await fetch(`http://127.0.0.1:${port}/json/version`, { headers: { Host: 'localhost' } })).json();
+    out.cdp = true;
+    const list = await (await fetch(`http://127.0.0.1:${port}/json/list`, { headers: { Host: 'localhost' } })).json();
+    const pages = list.filter(x => x.type === 'page' && String(x.url || '').includes(cfg.host));
+    const tab = pages[0];
+    if (!tab) { out.detail = `无目标域(${cfg.host})标签页`; return out; }
+
+    ws = await openWs(tab.webSocketDebuggerUrl);
+    await rpc(ws, 'Runtime.enable', {}, 5000).catch(() => {});
+
+    // ③ 同源带凭证请求（hash 不进 URL，服务端只看 pathname+search）
+    const u = new URL(cfg.url);
+    const probePath = u.pathname + (u.search || '');
+    out.probePath = probePath;
+    const expr = `(async()=>{try{
+        const r=await fetch(${JSON.stringify(probePath)},{method:'GET',credentials:'include',redirect:'follow'});
+        return JSON.stringify({status:r.status,ok:r.ok,finalUrl:r.url});
+      }catch(e){return JSON.stringify({err:String(e)})}})()`;
+    const rr = await rpc(ws, 'Runtime.evaluate',
+      { expression: expr, returnByValue: true, awaitPromise: true }, 30000);
+    const v = rr.result && rr.result.result && rr.result.result.value;
+    let info = {};
+    if (typeof v === 'string') { try { info = JSON.parse(v); } catch {} }
+    if (rr.result && rr.result.exceptionDetails) {
+      info = { err: JSON.stringify(rr.result.exceptionDetails.exception || rr.result.exceptionDetails).slice(0, 160) };
+    }
+    if (info.err) { out.detail = '同源请求异常: ' + String(info.err).slice(0, 110); return out; }
+
+    const finalUrl = String(info.finalUrl || '');
+    out.status = info.status;
+    out.url = finalUrl.slice(0, 110);
+    const verdict = judgeSession(finalUrl, Number(info.status), cfg);
+    out.redirected = verdict.redirected;
+    out.onHost = verdict.onHost;
+    out.ok = verdict.ok;
+    out.detail = verdict.redirected
+      ? `已重定向到 ${finalUrl.slice(0, 70)} ⇒ 掉登录`
+      : (!verdict.httpOk ? `同源请求异常状态 HTTP ${info.status}`
+      : `同源请求 HTTP ${info.status}（会话有效，已向服务端续期）`);
+  } catch (e) {
+    out.detail = '保活异常: ' + e.message;
+  } finally {
+    try { ws && ws.close(); } catch {}
+  }
+  return out;
+}
+
+async function main() {
+  if (argv.includes('--self-test')) process.exit(selfTest() ? 1 : 0);
+  if (STATUS_ONLY) {
+    const lines = fs.existsSync(HISTORY) ? fs.readFileSync(HISTORY, 'utf8').trim().split('\n') : [];
+    const rows = lines.slice(-12).map(l => { try { return JSON.parse(l); } catch { return null; } }).filter(Boolean);
+    for (const r of rows) {
+      console.log(`  ${r.at}  ok=${r.ok}  ${r.rows.map(x => `${x.port}:${x.ok ? 'OK' : 'BAD'}`).join(' ')}`);
+    }
+    return;
+  }
+  const rows = [];
+  for (const port of PORTS) rows.push(await probe(port));
+  const busy = rows.filter(r => r.busy);
+  const bad = rows.filter(r => !r.ok && !r.busy);
+  const at = new Date().toISOString();
+  const rec = { at, ok: bad.length === 0, rows };
+  fs.appendFileSync(HISTORY, JSON.stringify(rec) + '\n');
+  fs.writeFileSync(LAST, JSON.stringify(rec, null, 2));
+
+  if (JSON_OUT) console.log(JSON.stringify(rec, null, 2));
+  else {
+    console.log(`auth-keepalive ${at}`);
+    for (const r of rows) {
+      const flag = r.busy ? '⏭ 跳过(工位忙)' : (r.ok ? '✅ ' + r.detail : '❌ ' + r.detail);
+      console.log(`  :${r.port} ${String(r.role).padEnd(20)} ${flag}${r.url ? '  ' + r.url : ''}`);
+    }
+  }
+  if (bad.length && NOTIFY) {
+    notify(`登录态告警：${bad.map(r => r.port + '(' + r.role + ')').join('、')} 需要重新登录`);
+  }
+  if (bad.length && OPEN_LOGIN) for (const r of bad) openLogin(TARGETS[r.port], r.port);
+  process.exit(bad.length ? 3 : (busy.length === rows.length ? 4 : 0));
+}
+main().catch(e => { console.log(JSON.stringify({ error: e.message })); process.exit(1); });

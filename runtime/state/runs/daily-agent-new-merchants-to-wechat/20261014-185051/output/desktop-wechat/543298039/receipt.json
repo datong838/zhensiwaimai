@@ -1,0 +1,152 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：乌兰察布市  ；  联系人：张海娟，13753926100  ；  店铺：嘉嘉快餐店  ；  地址：丰川路与电灯巷交叉口西南160米",
+      "sha256": "acb5c00b5bdc9e1738ab6d91b34b1beeee0c355a1da7d6041f6881c7cf8bdfe3"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "53d2171b55e00020f7435c811f24db43d6b7e7935e055ca666a1d91c8bed495d",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "acb5c00b5bdc9e1738ab6d91b34b1beeee0c355a1da7d6041f6881c7cf8bdfe3",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1791975122.489142,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-text-anchor",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "电销+直播攻坚组",
+          "currentTitle": "电销+直播攻坚组",
+          "messageCount": 42,
+          "anchor": "text-exact",
+          "anchorValue": "城市：乌兰察布市  ；  联系人：张海娟，13753926100  ；  店铺：嘉嘉快餐店  ；  地址：丰川路与电灯巷交叉口西南160米",
+          "anchorInTrailingPosition": true,
+          "autoKind": null,
+          "readbackAt": 1791975145.2513769
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "电销+直播攻坚组",
+            "len": 69
+          },
+          "route": "relay",
+          "direct_error": "[Errno 65] No route to host",
+          "direct_local_network_blocked": true,
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 281
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 22762
+      }
+    ],
+    "elapsedMs": 23047,
+    "eventKey": "559b2bc92d4fd3900754dc4f27e936ee58f3f3f61f8cffd54619f533545fdf25",
+    "reviewSummary": {
+      "totalElapsedMs": 23047,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/c58490cf0c3db49bfff33b0279b15d52b23cc886e321b63b441feade25d4835b.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 281,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 22762,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 23047,
+  "reviewSummary": {
+    "totalElapsedMs": 23047,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "ok": true,
+    "resolvedGroup": "电销+直播攻坚组",
+    "currentTitle": "电销+直播攻坚组",
+    "messageCount": 42,
+    "anchor": "text-exact",
+    "anchorValue": "城市：乌兰察布市  ；  联系人：张海娟，13753926100  ；  店铺：嘉嘉快餐店  ；  地址：丰川路与电灯巷交叉口西南160米",
+    "anchorInTrailingPosition": true,
+    "autoKind": null,
+    "readbackAt": 1791975145.2513769
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false
+}

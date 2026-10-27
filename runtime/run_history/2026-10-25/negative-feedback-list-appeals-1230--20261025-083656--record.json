@@ -1,0 +1,24 @@
+{
+  "skill": "negative-feedback-list-appeals-1230",
+  "ledger_name": "负反馈列表申诉·双平台 Excel 汇总发群（每日08:30·申诉后即发）",
+  "schedule": "每日08:20执行，08:30前交付",
+  "dev_state": "active",
+  "status": "FAILED",
+  "category": "UNKNOWN",
+  "detail": "embedded-reason=ledger-payload-conflict (receipt:embedded_reason)",
+  "next_action": "看护代理读日志定位根因后升级处理",
+  "attempts": 1,
+  "max_retries": 0,
+  "duration_seconds": 29.04,
+  "started_at": "2026-10-25T08:36:56",
+  "finished_at": "2026-10-25T08:37:25",
+  "triggered_by": "daemon",
+  "logs": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-25/negative-feedback-list-appeals-1230--20261025-083656--a1--s1.log",
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-25/negative-feedback-list-appeals-1230--20261025-083656--a1--s2.log"
+  ],
+  "fail_signal": {
+    "kind": "embedded_reason",
+    "code": "ledger-payload-conflict"
+  }
+}

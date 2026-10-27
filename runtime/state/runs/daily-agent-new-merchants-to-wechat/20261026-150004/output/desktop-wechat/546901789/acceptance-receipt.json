@@ -1,0 +1,299 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：常州市  ；  联系人：屠先生，13915020019  ；  店铺：南稻是鲜碾米铺米乳  ；  地址：茶山街道龙游路5号茶山里园区6号楼6-5-3号  ；  商家ID：546901789",
+      "sha256": "a49788605717d9ed42b3df926c8936083e08b12cc8ea9cd25ccdc611d9188043"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "e17fb64e3fd49dcedfe48d6513989f2fc7f18af87d505b2b8affd0277f0bf595",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "a49788605717d9ed42b3df926c8936083e08b12cc8ea9cd25ccdc611d9188043",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1792998018.417471,
+        "sendAttempts": 1,
+        "resolvedGroup": "电销+直播攻坚组",
+        "observations": [
+          {
+            "groupName": "电销+直播攻坚组",
+            "inputEmpty": true,
+            "newMessageVisible": true,
+            "observedAt": 1792998026.191794,
+            "visibleText": "城市：常州市  ；  联系人：屠先生，13915020019  ；  店铺：南稻是鲜碾米铺米乳  ；  地址：茶山街道龙游路5号茶山里园区6号楼6-5-3号  ；  商家ID：546901789",
+            "visibleTextSha256": "a49788605717d9ed42b3df926c8936083e08b12cc8ea9cd25ccdc611d9188043",
+            "messagePath": [
+              0,
+              27,
+              9,
+              0,
+              0,
+              0,
+              20
+            ]
+          },
+          {
+            "groupName": "电销+直播攻坚组",
+            "inputEmpty": true,
+            "newMessageVisible": true,
+            "observedAt": 1792998028.4707441,
+            "visibleText": "城市：常州市  ；  联系人：屠先生，13915020019  ；  店铺：南稻是鲜碾米铺米乳  ；  地址：茶山街道龙游路5号茶山里园区6号楼6-5-3号  ；  商家ID：546901789",
+            "visibleTextSha256": "a49788605717d9ed42b3df926c8936083e08b12cc8ea9cd25ccdc611d9188043",
+            "messagePath": [
+              0,
+              27,
+              9,
+              0,
+              0,
+              0,
+              20
+            ]
+          }
+        ],
+        "backend": "system-events-ui-tree",
+        "verificationLevel": "wecom-ui-tree-text",
+        "evidence": {
+          "method": "wecom-ui-tree-text",
+          "resolvedGroup": "电销+直播攻坚组",
+          "sha256": "a49788605717d9ed42b3df926c8936083e08b12cc8ea9cd25ccdc611d9188043",
+          "observations": [
+            {
+              "groupName": "电销+直播攻坚组",
+              "inputEmpty": true,
+              "newMessageVisible": true,
+              "observedAt": 1792998026.191794,
+              "visibleText": "城市：常州市  ；  联系人：屠先生，13915020019  ；  店铺：南稻是鲜碾米铺米乳  ；  地址：茶山街道龙游路5号茶山里园区6号楼6-5-3号  ；  商家ID：546901789",
+              "visibleTextSha256": "a49788605717d9ed42b3df926c8936083e08b12cc8ea9cd25ccdc611d9188043",
+              "messagePath": [
+                0,
+                27,
+                9,
+                0,
+                0,
+                0,
+                20
+              ]
+            },
+            {
+              "groupName": "电销+直播攻坚组",
+              "inputEmpty": true,
+              "newMessageVisible": true,
+              "observedAt": 1792998028.4707441,
+              "visibleText": "城市：常州市  ；  联系人：屠先生，13915020019  ；  店铺：南稻是鲜碾米铺米乳  ；  地址：茶山街道龙游路5号茶山里园区6号楼6-5-3号  ；  商家ID：546901789",
+              "visibleTextSha256": "a49788605717d9ed42b3df926c8936083e08b12cc8ea9cd25ccdc611d9188043",
+              "messagePath": [
+                0,
+                27,
+                9,
+                0,
+                0,
+                0,
+                20
+              ]
+            }
+          ]
+        },
+        "transport": {
+          "kind": "text",
+          "sendAttempts": 1,
+          "sent": true,
+          "postSendInputCleared": [
+            true,
+            true
+          ],
+          "stage": "post_send_verify"
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 767
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 10078
+      }
+    ],
+    "elapsedMs": 10848,
+    "eventKey": "c7d07d5275fdda7ce46290ad62d3046e7214904064db6228ce31143969d83662",
+    "reviewSummary": {
+      "totalElapsedMs": 10848,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/0aa509da989282f2ecc5fdf58b23d6d02f82f1407c6032bbc954b64b14acfb6d.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 767,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 10078,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 10848,
+  "reviewSummary": {
+    "totalElapsedMs": 10848,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "method": "wecom-ui-tree-text",
+    "resolvedGroup": "电销+直播攻坚组",
+    "sha256": "a49788605717d9ed42b3df926c8936083e08b12cc8ea9cd25ccdc611d9188043",
+    "observations": [
+      {
+        "groupName": "电销+直播攻坚组",
+        "inputEmpty": true,
+        "newMessageVisible": true,
+        "observedAt": 1792998026.191794,
+        "visibleText": "城市：常州市  ；  联系人：屠先生，13915020019  ；  店铺：南稻是鲜碾米铺米乳  ；  地址：茶山街道龙游路5号茶山里园区6号楼6-5-3号  ；  商家ID：546901789",
+        "visibleTextSha256": "a49788605717d9ed42b3df926c8936083e08b12cc8ea9cd25ccdc611d9188043",
+        "messagePath": [
+          0,
+          27,
+          9,
+          0,
+          0,
+          0,
+          20
+        ]
+      },
+      {
+        "groupName": "电销+直播攻坚组",
+        "inputEmpty": true,
+        "newMessageVisible": true,
+        "observedAt": 1792998028.4707441,
+        "visibleText": "城市：常州市  ；  联系人：屠先生，13915020019  ；  店铺：南稻是鲜碾米铺米乳  ；  地址：茶山街道龙游路5号茶山里园区6号楼6-5-3号  ；  商家ID：546901789",
+        "visibleTextSha256": "a49788605717d9ed42b3df926c8936083e08b12cc8ea9cd25ccdc611d9188043",
+        "messagePath": [
+          0,
+          27,
+          9,
+          0,
+          0,
+          0,
+          20
+        ]
+      }
+    ]
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": [
+    true,
+    true
+  ],
+  "stage": "post_send_verify",
+  "reconciledWithoutSend": false,
+  "attemptReviews": [
+    {
+      "attempt": 1,
+      "elapsedMs": 10947,
+      "ok": true,
+      "reason": null,
+      "sendAttempts": 1,
+      "sendReview": [
+        {
+          "stage": "authorization",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 1,
+          "label": "authorization"
+        },
+        {
+          "stage": "freeze:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 2,
+          "label": "freeze:0"
+        },
+        {
+          "stage": "preflight",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 767,
+          "item": 3,
+          "label": "preflight"
+        },
+        {
+          "stage": "send:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 10078,
+          "item": 4,
+          "label": "send:0"
+        }
+      ]
+    }
+  ],
+  "contentionRetries": 0,
+  "contentionWaitMs": 0,
+  "contentionEvents": [],
+  "merchantId": "546901789",
+  "messageSha256": "a49788605717d9ed42b3df926c8936083e08b12cc8ea9cd25ccdc611d9188043"
+}

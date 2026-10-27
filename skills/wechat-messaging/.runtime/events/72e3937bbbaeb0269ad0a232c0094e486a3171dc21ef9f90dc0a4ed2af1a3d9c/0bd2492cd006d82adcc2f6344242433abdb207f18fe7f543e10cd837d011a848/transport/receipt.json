@@ -1,0 +1,81 @@
+{
+  "ok": false,
+  "executor": "wechat-desktop-sender",
+  "channel": "desktop",
+  "groupName": "FEIBING NEO AI数字员工",
+  "payloadType": "file",
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "stage": "prepare_payload",
+  "stageMs": {
+    "locate_group": 719,
+    "verify_target_and_input": 1758,
+    "prepare_payload": 1838
+  },
+  "payloadIdentity": "4058494adef5665fbfb9421e3b93e20c234e8a0fd2dda54b6dc5d2af91f5f640",
+  "payloads": [
+    {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/72e3937bbbaeb0269ad0a232c0094e486a3171dc21ef9f90dc0a4ed2af1a3d9c/0bd2492cd006d82adcc2f6344242433abdb207f18fe7f543e10cd837d011a848/payload/美团客户回复记录-2026-09-21.xlsx",
+      "name": "美团客户回复记录-2026-09-21.xlsx",
+      "size": 6862,
+      "sha256": "927d5abf0516b1fc93337057302c6a4c5f3b53d4b94c428c259290c3ec0e5e17"
+    }
+  ],
+  "groupPreflight": {
+    "ok": true,
+    "reason": null,
+    "sendAttempts": 0,
+    "group": "FEIBING NEO AI数字员工",
+    "header": "FEIBING NEO AI数字员工(18)",
+    "note": "ax-current-group-fast-path",
+    "groupTypeVerified": true,
+    "groupTypeProof": "member-count-header",
+    "composerVerifiedEmpty": true,
+    "attempts": []
+  },
+  "preparedInputChangedPixels": 52812,
+  "preparedInputChangedRatio": 0.142976,
+  "preparedFileObjectCount": 1,
+  "preparedFilePrefixesVerified": false,
+  "reason": "desktop-file-preview-not-prepared",
+  "uncommittedPreviewCleanup": "failed",
+  "uncommittedPreviewCleanupReason": "key-Escape-failed",
+  "elapsedMs": 4989,
+  "sendReview": [
+    {
+      "item": 1,
+      "stage": "locate_group",
+      "label": "精确定位目标群",
+      "elapsedMs": 719,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 2,
+      "stage": "verify_target_and_input",
+      "label": "复核目标群与输入框",
+      "elapsedMs": 1758,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 3,
+      "stage": "prepare_payload",
+      "label": "准备并复核发送载荷",
+      "elapsedMs": 1838,
+      "status": "failed",
+      "pitfalls": [
+        {
+          "code": "send-failure",
+          "reason": "desktop-file-preview-not-prepared"
+        }
+      ]
+    }
+  ],
+  "reviewSummary": {
+    "totalElapsedMs": 4989,
+    "itemCount": 3,
+    "pitfallCount": 1,
+    "result": "failed"
+  }
+}

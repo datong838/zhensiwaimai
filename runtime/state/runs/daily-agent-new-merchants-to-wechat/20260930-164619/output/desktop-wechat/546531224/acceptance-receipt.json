@@ -1,0 +1,197 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "苏州市\n刘，15936086907\n知香·手撕烤鸭\n花桥镇光明路1359号1号楼52室",
+      "sha256": "4d87744ee22eacf9143fb0a986f7162011989e1484279a760a13477fc5e938e6"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "726185849542b360869c2ef8dbfe5f1a21a2c1193b62cfb4feb2a71457112446",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "4d87744ee22eacf9143fb0a986f7162011989e1484279a760a13477fc5e938e6",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1790758028.338112,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-text-anchor",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "电销+直播攻坚组",
+          "currentTitle": "电销+直播攻坚组",
+          "messageCount": 46,
+          "anchor": "text-exact",
+          "anchorValue": "苏州市\n刘，15936086907\n知香·手撕烤鸭\n花桥镇光明路1359号1号楼52室",
+          "anchorInTrailingPosition": true,
+          "autoKind": null,
+          "readbackAt": 1790758048.709003
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "电销+直播攻坚组",
+            "len": 43
+          },
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 373
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 20371
+      }
+    ],
+    "elapsedMs": 20746,
+    "eventKey": "9a7c180dbb65d3e0ccd51fc4be2ec0de0d1efdfd38f88566bceadbae8628f780",
+    "reviewSummary": {
+      "totalElapsedMs": 20746,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/415cba54d601d976ac4abd2e49a5bddf3cd391dc5bd5e4737274b2735ab8cc14.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 373,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 20371,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 20746,
+  "reviewSummary": {
+    "totalElapsedMs": 20746,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "ok": true,
+    "resolvedGroup": "电销+直播攻坚组",
+    "currentTitle": "电销+直播攻坚组",
+    "messageCount": 46,
+    "anchor": "text-exact",
+    "anchorValue": "苏州市\n刘，15936086907\n知香·手撕烤鸭\n花桥镇光明路1359号1号楼52室",
+    "anchorInTrailingPosition": true,
+    "autoKind": null,
+    "readbackAt": 1790758048.709003
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false,
+  "attemptReviews": [
+    {
+      "attempt": 1,
+      "elapsedMs": 20820,
+      "ok": true,
+      "reason": null,
+      "sendAttempts": 1,
+      "sendReview": [
+        {
+          "stage": "authorization",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 1,
+          "label": "authorization"
+        },
+        {
+          "stage": "freeze:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 2,
+          "label": "freeze:0"
+        },
+        {
+          "stage": "preflight",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 373,
+          "item": 3,
+          "label": "preflight"
+        },
+        {
+          "stage": "send:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 20371,
+          "item": 4,
+          "label": "send:0"
+        }
+      ]
+    }
+  ],
+  "contentionRetries": 0,
+  "contentionWaitMs": 0,
+  "contentionEvents": [],
+  "merchantId": "546531224",
+  "messageSha256": "4d87744ee22eacf9143fb0a986f7162011989e1484279a760a13477fc5e938e6"
+}

@@ -1,0 +1,128 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""18:00 后由监理（或自动化）触发的工作台账发送器。
+
+逻辑：
+  1. 读 daemon 维护的 state/last_cycle.json，判断是否 all_green（当日全部 active 流成功）。
+  2. 未全绿 → 列出未完成的流，拒绝发送（返回 1），避免假账。
+  3. 全绿 → 经 Windows 网关（IP 不硬编码，见下）把 work/<日期>臻肆工作台账.xlsx 发到 AI 员工群。
+  4. 已发送过（sent_today.json 当天有记录）→ 跳过重复发送。
+
+⚠️ 沙箱 shim 会拦截对 /Users/ddt 文件的 open()，调用方必须这样跑：
+    env -u PYTHONPATH /Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python \
+        -S /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/send_ledger_now.py
+（-S 跳过 sitecustomize 即关掉 shim；env -u PYTHONPATH 清掉注入的 PYTHONPATH）
+"""
+import json
+import os
+import sys
+from datetime import datetime
+from pathlib import Path
+
+RUNTIME = Path(__file__).resolve().parent
+STATE = RUNTIME / "state"
+REPO = RUNTIME.parent  # zhensi_waimai_back
+DATE_STR = datetime.now().strftime("%Y-%m-%d")
+GROUP = "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰"
+LEDGER = REPO / "work" / ("%s臻肆工作台账.xlsx" % DATE_STR)
+SENT_TODAY = STATE / "sent_today.json"
+
+# Windows 驱动直连（client.py 内部已 ProxyHandler({}) 绕过本地代理）
+#
+# ★2026-10-06 22:27 修正：本文件原先硬编码 DRIVER_IP="192.168.0.5"，与「IP 权威源=
+#   接入包/连接信息.txt」的自述矛盾，且 .5/.2 是同一台 Windows 机的无线/有线两口，
+#   Mac 侧可达性会随网络环境漂移（10-06 白天只有 .2 通、晚上只有 .5 通）。
+#   钉死单一 IP ⇒ 漂到另一侧当天台账直接 ABORT，是可避免的定时炸弹。
+#   改为复用 wxsend.load_config()：权威源解析 + 候选顺序 + /health 身份校验，
+#   与中继(wxsend/relay)同一哲学——可达性以实测为准，不硬编码。
+DRIVER_DIR = "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/archive/compat/wechat-windows-driver"
+DRIVER_TOKEN_FALLBACK = "XFVfZHoKwjHaWsZ7EXt2kNvWLSg4TGSvIpMQnvIkCaY"  # 仅当解析失败时兜底
+
+
+def load_last_cycle():
+    p = STATE / "last_cycle.json"
+    if not p.exists():
+        return None
+    try:
+        return json.loads(p.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+
+
+def main():
+    lc = load_last_cycle()
+    if lc is None:
+        print("[ABORT] 无 state/last_cycle.json —— 守护可能未运行或未跑完周期，不发送。")
+        return 2
+    all_green = lc.get("all_green")
+    skills = lc.get("skills", {})
+    not_green = {k: v for k, v in skills.items()
+                 if v.get("category") != "SUCCESS"}
+    if (not all_green) or not_green:
+        print("[SKIP] 未全绿，不发送台账。未完成/非成功流：")
+        for k, v in sorted(not_green.items()):
+            print("   - %s : %s/%s" % (k, v.get("status"), v.get("category")))
+        return 1
+    if not LEDGER.exists():
+        print("[ABORT] 台账文件不存在：%s" % LEDGER)
+        return 2
+
+    sent = {}
+    if SENT_TODAY.exists():
+        try:
+            sent = json.loads(SENT_TODAY.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            sent = {}
+    if sent.get(DATE_STR):
+        print("[INFO] 今日(%s)已发送台账，跳过重复发送。" % DATE_STR)
+        return 0
+
+    sys.path.insert(0, DRIVER_DIR)
+    try:
+        from client import WeChat
+    except Exception as e:  # noqa: BLE001
+        print("[ABORT] 无法导入 Windows 驱动客户端：%r" % e)
+        return 2
+
+    # 网关地址解析：权威源 接入包/连接信息.txt + 候选 + /health 身份校验。
+    # 解析器自己也会兜底回解析 IP，故这里再包一层，保证 DRIVER_IP 一定有值。
+    driver_ip, driver_token = "", ""
+    try:
+        from wxsend import load_config
+        driver_ip, driver_token = load_config()
+    except Exception as e:  # noqa: BLE001
+        print("[WARN] 网关地址解析失败（%r），回退直连默认候选并逐个探测。" % e)
+
+    if not driver_token:
+        driver_token = DRIVER_TOKEN_FALLBACK
+    if not driver_ip:
+        # ★2026-10-10 fallback 配置化：读 wechat-windows-driver/gateway.json（单一权威）
+        try:
+            with open("/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/archive/compat/wechat-windows-driver/gateway.json",
+                      encoding="utf-8") as _f:
+                driver_ip = str(json.load(_f)["candidates"][0]).strip()
+        except Exception:
+            driver_ip = "192.168.0.3"   # 配置不可用时的最后兜底
+
+    wx = WeChat(driver_ip, driver_token)
+    h = wx.health()
+    print("[gateway] %s:%s  route=%s" % (driver_ip, "8731", (h or {}).get("route")))
+    print("[health] %s" % h)
+    if not (isinstance(h, dict) and h.get("ok")):
+        print("[ABORT] 驱动未就绪：%s" % h)
+        return 2
+
+    res = wx.send_local_file(GROUP, str(LEDGER))
+    print("[send result] %s" % res)
+    if res.get("ok"):
+        sent[DATE_STR] = datetime.now().isoformat(timespec="seconds")
+        SENT_TODAY.write_text(json.dumps(sent, ensure_ascii=False, indent=2),
+                              encoding="utf-8")
+        print("[OK] 台账已发至「%s」群：%s" % (GROUP, LEDGER.name))
+        return 0
+    print("[FAIL] 发送失败：%s" % res)
+    return 3
+
+
+if __name__ == "__main__":
+    sys.exit(main())

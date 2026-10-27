@@ -1,0 +1,134 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-25",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 260,
+    "task_page": 610,
+    "navigation": 1864,
+    "date_filter": 2132,
+    "page_1_read": 407,
+    "selection_audit": 0,
+    "detail_542957265": 1714,
+    "detail_1316551731": 3481
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_542957265": "PASS",
+    "detail_1316551731": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "542957265",
+      "merchantName": "东北烤冷面·芝士火鸡面",
+      "recommendTime": "2026-10-25 15:30:55",
+      "city": "太原市",
+      "status": "待处理",
+      "rowIndex": 1,
+      "sourcePage": 1,
+      "tableOrder": 4,
+      "address": "小井峪街道迎泽西大街125号1幢1层商铺1040号",
+      "contact": "卢园园，18834192982",
+      "detailVerified": true,
+      "text": "城市：太原市  ；  联系人：卢园园，18834192982  ；  店铺：东北烤冷面·芝士火鸡面  ；  地址：小井峪街道迎泽西大街125号1幢1层商铺1040号  ；  商家ID：542957265",
+      "sha256": "f6f2d41765457999e54f9227d3e571d5ae9555738864a0b81bd72dce3b066b33"
+    },
+    {
+      "merchantId": "1316551731",
+      "merchantName": "槿舍石锅拌饭",
+      "recommendTime": "2026-10-25 15:35:33",
+      "city": "嘉兴市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 5,
+      "address": "乌镇镇花石东路72号",
+      "contact": "沈斌斌，18368361994",
+      "detailVerified": true,
+      "text": "城市：嘉兴市  ；  联系人：沈斌斌，18368361994  ；  店铺：槿舍石锅拌饭  ；  地址：乌镇镇花石东路72号  ；  商家ID：1316551731",
+      "sha256": "36abd13a7fd5ac53a91ba3e54027267aabdf7422d4a49bccb5c4cae6d5232db9"
+    }
+  ],
+  "frontmostBefore": "com.openai.codex",
+  "createdAt": "2026-10-25T08:00:19.664Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-25",
+    "merchantName": "林记温州小吃",
+    "merchantId": "546415903",
+    "recommendTime": "2026-10-25 12:41:00",
+    "tableOrder": 3,
+    "messageSha256": "58da92b299053ba50f9d483b35c8aa5d14d8c62c106eaf6d4d55dceb856fdd31",
+    "sentAt": "2026-10-25T14:04:15+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-25",
+  "filterEndDate": "2026-10-25",
+  "dateFilter": "2026-10-25..2026-10-25",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 5,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 5,
+  "pendingRows": 5,
+  "targetCount": 2,
+  "selectionAudit": {
+    "totalRows": 5,
+    "pendingRows": 5,
+    "excludedAtOrBeforeCursor": 3,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 2,
+    "rows": [
+      {
+        "merchantId": "1316551731",
+        "recommendTime": "2026-10-25 15:35:33",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "542957265",
+        "recommendTime": "2026-10-25 15:30:55",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546415903",
+        "recommendTime": "2026-10-25 12:41:00",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1349334631",
+        "recommendTime": "2026-10-25 12:33:44",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "536996326",
+        "recommendTime": "2026-10-25 02:07:43",
+        "status": "待处理"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 11492,
+  "frontmostAfter": "com.openai.codex",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261025-160007/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261025-160007/output/collection-attempt-1.review.md"
+}

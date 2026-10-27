@@ -1,0 +1,30 @@
+════════ zhensi 通道基线体检  2026-10-06 13:09:04 CST ════════
+
+【A】daemon 心跳（车间主任）
+  心跳 mtime  = 2026-10-06 12:45:47 （距今 23 分钟）
+  run_all.py  = 25146
+  launchd     = (无 careloop 条目)
+  next_cycle  = 2026-10-06T13:15:47
+
+【B】中继 127.0.0.1:8732（给 launchd daemon 绕 TCC 用）
+  [relay-up] 已在监听 127.0.0.1:8732 (pid=44881)
+  /health     = {"ok": true, "msg": "agent up", "uiautomation": true, "wechat_running": true, "logged_in": true, "ready": true, "worker": true, "host": "0.0.0.0:8731"}
+  上游         = [relay] upstream target -> 192.168.0.2:8731
+
+【C】直连 192.168.0.x:8731（前台/GUI 正解通道）
+  192.168.0.2   = {"ok": true, "msg": "agent up", "uiautomation": true, "wechat_running": true, "logged_in": true, "ready": true, "worker": true, "host": "0.0.0.0:8731"}
+  192.168.0.5   = (无响应)
+  wxsend --status =
+    {'ok': True, 'msg': 'agent up', 'uiautomation': True, 'wechat_running': True, 'logged_in': True, 'ready': True, 'worker': True, 'host': '0.0.0.0:8731', 'route': 'direct'}
+  wxsend --sessions（前 5 条）= 
+     - FEIBING NEO AI数字员工已置顶
+     - 上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰已置顶
+     - 偷懒别偷懒-臻肆已置顶
+     - AGI技术交流群已置顶
+     - 和恒中队家长群已置顶
+
+──────────────── 判读 ────────────────
+  · A 正常：心跳 < 90 分钟且 run_all.py 进程在
+  · B 正常：8732 在监听 且 /health 回 "agent up"
+  · C 正常：192.168.0.2 回驱动签名（msg=agent up 且含 uiautomation/worker）
+  · 已知非故障：192.168.0.5（无线网卡）从 Mac 侧不可达属常态

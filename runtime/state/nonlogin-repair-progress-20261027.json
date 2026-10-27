@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-27",
+  "repair": "native-preflight-zero-send-recovery",
+  "tests": {
+    "scheduledRecovery": 26,
+    "entrypointContract": 50,
+    "historicalRecovery": 12,
+    "originalPreflight": true
+  },
+  "production": {
+    "originalDirectorRun": "runtime/state/runs/daily-taobao-download-to-jinsha/20261027-132632",
+    "originalUploadRunId": "3f6c12c0-ea9b-4eb5-a95c-253269c4c841",
+    "repeatedUpload": false,
+    "actualFinalStage": "wechat-send-failed",
+    "verification": "image-submission-awaits-read-only-verification",
+    "doNotResend": true
+  },
+  "appeals": {
+    "originalRun": "runtime/state/runs/taobao-flash-sale-negative-review-appeals/20261027-132153",
+    "newVerifiedSubmitted": 9,
+    "oldUnknownPreserved": "050714b3099f"
+  },
+  "activityDecoration": {
+    "status": "incomplete",
+    "evidence": "runtime/state/new-store-direct-visible-20261027.json",
+    "visibleError": "当前账号无法访问该店铺",
+    "next": "核查现有授权账号目录与来源店铺身份；不改权限、不更换目标店、不伪完成"
+  },
+  "readonlyReconciliationReview": {
+    "checked": "skills/wechat-messaging/scripts/wecom_adapter.py",
+    "channel": "original WeCom native UI adapter",
+    "imageConclusion": "现行原生图片缺少内容级证据，不调用旧桌面截图通道、不复发、不提升verified",
+    "nextOriginalSlot": "14:00 merchant notice",
+    "directorPid": 57981
+  }
+}

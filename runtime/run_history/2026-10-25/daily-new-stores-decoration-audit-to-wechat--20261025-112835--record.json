@@ -1,0 +1,23 @@
+{
+  "skill": "daily-new-stores-decoration-audit-to-wechat",
+  "ledger_name": "淘宝新店装修缺失巡检与提醒（每日11:30）",
+  "schedule": "每日11:30",
+  "dev_state": "active",
+  "status": "FAILED",
+  "category": "RECOVERABLE",
+  "detail": "nested-reason=ui-post-result-timeout (receipt:nested_reason)",
+  "next_action": "重试预算耗尽：看护代理读日志决定再等冷却重跑或跳过",
+  "attempts": 1,
+  "max_retries": 0,
+  "duration_seconds": 175.35,
+  "started_at": "2026-10-25T11:28:35",
+  "finished_at": "2026-10-25T11:31:30",
+  "triggered_by": "daemon",
+  "logs": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-25/daily-new-stores-decoration-audit-to-wechat--20261025-112835--a1--s1.log"
+  ],
+  "fail_signal": {
+    "kind": "nested_reason",
+    "code": "ui-post-result-timeout"
+  }
+}

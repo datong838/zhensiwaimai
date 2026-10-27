@@ -1,0 +1,61 @@
+{
+  "ok": false,
+  "status": "blocked",
+  "groupName": "临时测试群请忽略 💰发财精英荟💰",
+  "channel": "desktop",
+  "requestDigest": "e6bce10865b4722188643b068f8a67bce0d0add61b38deb079f796071bcd5d0a",
+  "runtimeModelDecisions": 0,
+  "items": [],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:text",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:image",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 4
+    },
+    {
+      "stage": "freeze:excel",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "stage": "preflight",
+      "status": "failed",
+      "pitfalls": [
+        "ui-post-preflight-not-verified"
+      ],
+      "elapsedMs": 831
+    }
+  ],
+  "reason": "ui-post-preflight-not-verified",
+  "elapsedMs": 841,
+  "eventKey": "be26142fe3f08b077b001adc2ac4918fdb9db6742d5259c1b1e0f30d793ed96d",
+  "reviewSummary": {
+    "totalElapsedMs": 841,
+    "result": "blocked",
+    "stageCount": 5,
+    "completedStages": 4,
+    "failedStages": [
+      {
+        "stage": "preflight",
+        "status": "failed",
+        "pitfalls": [
+          "ui-post-preflight-not-verified"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-18",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 69,
+    "task_page": 328,
+    "navigation": 1215,
+    "date_filter": 1690,
+    "page_1_read": 348,
+    "selection_audit": 0,
+    "detail_546541656": 769
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_546541656": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "546541656",
+      "merchantName": "米煦拌饭",
+      "recommendTime": "2026-10-18 13:42:51",
+      "city": "北京市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 5,
+      "address": "春和路50号院101幢-1层-1-69",
+      "contact": "张旭，13699201607",
+      "detailVerified": true,
+      "text": "城市：北京市  ；  联系人：张旭，13699201607  ；  店铺：米煦拌饭  ；  地址：春和路50号院101幢-1层-1-69",
+      "sha256": "376f63f62c399b1d950e07631118545efaa552e82317cb27f40862391a8cb0a8"
+    }
+  ],
+  "frontmostBefore": "com.google.Chrome",
+  "createdAt": "2026-10-18T06:37:38.552Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-18",
+    "merchantName": "爱辣无优麻辣烫·麻辣拌·炸串",
+    "merchantId": "1297280842",
+    "recommendTime": "2026-10-18 10:55:44",
+    "tableOrder": 3,
+    "messageSha256": "3b13d47940103acf74a0ae15ccbc902061b182bc0b82ae5f87552ba239f6f971",
+    "sentAt": "2026-10-18T11:21:22+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-18",
+  "filterEndDate": "2026-10-18",
+  "dateFilter": "2026-10-18..2026-10-18",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 5,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 5,
+  "pendingRows": 4,
+  "targetCount": 1,
+  "selectionAudit": {
+    "totalRows": 5,
+    "pendingRows": 4,
+    "excludedAtOrBeforeCursor": 3,
+    "excludedAfterCursorNotPending": 1,
+    "targetCount": 1,
+    "rows": [
+      {
+        "merchantId": "546541656",
+        "recommendTime": "2026-10-18 13:42:51",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1297280842",
+        "recommendTime": "2026-10-18 10:55:44",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1334954314",
+        "recommendTime": "2026-10-18 08:54:36",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "547026719",
+        "recommendTime": "2026-10-18 08:48:28",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1362967118",
+        "recommendTime": "2026-10-18 13:13:45",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 4940,
+  "frontmostAfter": "com.google.Chrome",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261018-143733/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261018-143733/output/collection-attempt-1.review.md"
+}

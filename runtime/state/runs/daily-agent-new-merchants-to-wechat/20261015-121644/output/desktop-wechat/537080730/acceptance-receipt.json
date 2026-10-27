@@ -1,0 +1,200 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：漯河市  ；  联系人：海洋，15188409183  ；  店铺：信阳热干面(黄岗店)  ；  地址：金山路与珠江路交叉口向西100米路北",
+      "sha256": "eaa2086f9dfd84bcf08d4f07f3b41c1c89ebef267c43001093f13a3101b10f38"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "b80e16303eb2a25d73689552b978d217e550e5d865d34cfb72daa98eefc191bd",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "eaa2086f9dfd84bcf08d4f07f3b41c1c89ebef267c43001093f13a3101b10f38",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1792037851.524527,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-text-anchor",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "电销+直播攻坚组",
+          "currentTitle": "电销+直播攻坚组",
+          "messageCount": 37,
+          "anchor": "text-exact",
+          "anchorValue": "城市：漯河市  ；  联系人：海洋，15188409183  ；  店铺：信阳热干面(黄岗店)  ；  地址：金山路与珠江路交叉口向西100米路北",
+          "anchorInTrailingPosition": true,
+          "autoKind": null,
+          "readbackAt": 1792037878.879039
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "电销+直播攻坚组",
+            "len": 73
+          },
+          "route": "relay",
+          "direct_error": "[Errno 65] No route to host",
+          "direct_local_network_blocked": true,
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 930
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 27357
+      }
+    ],
+    "elapsedMs": 28292,
+    "eventKey": "fe0332290644e10c1fb52840d9a6e90013e6fd5e4aabd7997471c5c0754f795d",
+    "reviewSummary": {
+      "totalElapsedMs": 28292,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/4440a8cf04227ae58a609a952cae8ee714d224721c0d95993d00bc64fdef799a.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 930,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 27357,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 28292,
+  "reviewSummary": {
+    "totalElapsedMs": 28292,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "ok": true,
+    "resolvedGroup": "电销+直播攻坚组",
+    "currentTitle": "电销+直播攻坚组",
+    "messageCount": 37,
+    "anchor": "text-exact",
+    "anchorValue": "城市：漯河市  ；  联系人：海洋，15188409183  ；  店铺：信阳热干面(黄岗店)  ；  地址：金山路与珠江路交叉口向西100米路北",
+    "anchorInTrailingPosition": true,
+    "autoKind": null,
+    "readbackAt": 1792037878.879039
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false,
+  "attemptReviews": [
+    {
+      "attempt": 1,
+      "elapsedMs": 28424,
+      "ok": true,
+      "reason": null,
+      "sendAttempts": 1,
+      "sendReview": [
+        {
+          "stage": "authorization",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 1,
+          "label": "authorization"
+        },
+        {
+          "stage": "freeze:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 2,
+          "label": "freeze:0"
+        },
+        {
+          "stage": "preflight",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 930,
+          "item": 3,
+          "label": "preflight"
+        },
+        {
+          "stage": "send:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 27357,
+          "item": 4,
+          "label": "send:0"
+        }
+      ]
+    }
+  ],
+  "contentionRetries": 0,
+  "contentionWaitMs": 0,
+  "contentionEvents": [],
+  "merchantId": "537080730",
+  "messageSha256": "eaa2086f9dfd84bcf08d4f07f3b41c1c89ebef267c43001093f13a3101b10f38"
+}

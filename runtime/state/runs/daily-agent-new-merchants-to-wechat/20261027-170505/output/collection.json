@@ -1,0 +1,114 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-27",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 57,
+    "task_page": 156,
+    "navigation": 1132,
+    "date_filter": 1392,
+    "page_1_read": 468,
+    "selection_audit": 0
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS"
+  },
+  "messages": [],
+  "frontmostBefore": "com.tencent.WeWorkMac",
+  "createdAt": "2026-10-27T09:05:09.852Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-27",
+    "merchantName": "金橙手抓饼",
+    "merchantId": "157493476",
+    "recommendTime": "2026-10-27 16:44:31",
+    "tableOrder": 8,
+    "messageSha256": "e2076f3ee28739da21f9a17bf8bf97fcb53369a9cad136b91b0cd1630fc871b1",
+    "sentAt": "2026-10-27T16:50:32+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-27",
+  "filterEndDate": "2026-10-27",
+  "dateFilter": "2026-10-27..2026-10-27",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 8,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 8,
+  "pendingRows": 5,
+  "targetCount": 0,
+  "selectionAudit": {
+    "totalRows": 8,
+    "pendingRows": 5,
+    "excludedAtOrBeforeCursor": 8,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 0,
+    "rows": [
+      {
+        "merchantId": "157493476",
+        "recommendTime": "2026-10-27 16:44:31",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1366726036",
+        "recommendTime": "2026-10-27 11:10:27",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "544654530",
+        "recommendTime": "2026-10-27 11:00:44",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1349163544",
+        "recommendTime": "2026-10-27 09:54:39",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1366725839",
+        "recommendTime": "2026-10-27 08:06:10",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1362270458",
+        "recommendTime": "2026-10-27 14:08:52",
+        "status": "完成"
+      },
+      {
+        "merchantId": "543895790",
+        "recommendTime": "2026-10-27 11:28:11",
+        "status": "完成"
+      },
+      {
+        "merchantId": "546901789",
+        "recommendTime": "2026-10-27 10:59:27",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 3430,
+  "frontmostAfter": "com.tencent.WeWorkMac",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261027-170505/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261027-170505/output/collection-attempt-1.review.md"
+}

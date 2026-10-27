@@ -1,0 +1,344 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-16",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 131,
+    "task_page": 468,
+    "navigation": 1437,
+    "date_filter": 1580,
+    "page_1_read": 631,
+    "page_1_next": 67,
+    "page_2_read": 996,
+    "page_2_next": 66,
+    "page_3_read": 850,
+    "selection_audit": 0,
+    "detail_544591968": 2352,
+    "detail_545327871": 970,
+    "detail_518216603": 1246,
+    "detail_547099783": 1108,
+    "detail_1360754616": 1140,
+    "detail_545858399": 1254,
+    "detail_1340997808": 1236,
+    "detail_1318781912": 5879
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "page_1_next": "PASS",
+    "page_2_read": "PASS",
+    "page_2_next": "PASS",
+    "page_3_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_544591968": "PASS",
+    "detail_545327871": "PASS",
+    "detail_518216603": "PASS",
+    "detail_547099783": "PASS",
+    "detail_1360754616": "PASS",
+    "detail_545858399": "PASS",
+    "detail_1340997808": "PASS",
+    "detail_1318781912": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "544591968",
+      "merchantName": "孟同学三味鸡烧烤",
+      "recommendTime": "2026-10-15 18:21:18",
+      "city": "商丘市",
+      "status": "待处理",
+      "rowIndex": 7,
+      "sourcePage": 1,
+      "tableOrder": 16,
+      "address": "平原街道平原路东民主路南46号南侧门面5号6号",
+      "contact": "冯，15660899918",
+      "detailVerified": true,
+      "text": "城市：商丘市  ；  联系人：冯，15660899918  ；  店铺：孟同学三味鸡烧烤  ；  地址：平原街道平原路东民主路南46号南侧门面5号6号",
+      "sha256": "8c1b5e9199041fdd8cd5dae064bbc1e5bfc24ffa8fb7b75697df5a3459cf8dd5"
+    },
+    {
+      "merchantId": "545327871",
+      "merchantName": "兰州拉面",
+      "recommendTime": "2026-10-15 19:03:54",
+      "city": "上海市",
+      "status": "待处理",
+      "rowIndex": 6,
+      "sourcePage": 1,
+      "tableOrder": 17,
+      "address": "泗泾镇沪松公路2033号21幢02室",
+      "contact": "马先生，18693013303",
+      "detailVerified": true,
+      "text": "城市：上海市  ；  联系人：马先生，18693013303  ；  店铺：兰州拉面  ；  地址：泗泾镇沪松公路2033号21幢02室",
+      "sha256": "11f9753ea08924db9d06124d8dca0940f9ee446c2ee24177a11e477ae466fd3f"
+    },
+    {
+      "merchantId": "518216603",
+      "merchantName": "茶百道",
+      "recommendTime": "2026-10-15 19:31:32",
+      "city": "常州市",
+      "status": "待处理",
+      "rowIndex": 5,
+      "sourcePage": 1,
+      "tableOrder": 18,
+      "address": "雕庄街道中海环宇天地26幢",
+      "contact": "刘鹏飞，13685239831",
+      "detailVerified": true,
+      "text": "城市：常州市  ；  联系人：刘鹏飞，13685239831  ；  店铺：茶百道  ；  地址：雕庄街道中海环宇天地26幢",
+      "sha256": "b480e1ce8336a857071e66c3bd230a0a57a6a67df93a36fbbbf14335260945c8"
+    },
+    {
+      "merchantId": "547099783",
+      "merchantName": "杨记木桶饭",
+      "recommendTime": "2026-10-15 19:35:54",
+      "city": "嘉兴市",
+      "status": "待处理",
+      "rowIndex": 4,
+      "sourcePage": 1,
+      "tableOrder": 19,
+      "address": "南湖街道建国中路港澳商城C幢南05号营业用房1楼1底二楼",
+      "contact": "陶，17769908837",
+      "detailVerified": true,
+      "text": "城市：嘉兴市  ；  联系人：陶，17769908837  ；  店铺：杨记木桶饭  ；  地址：南湖街道建国中路港澳商城C幢南05号营业用房1楼1底二楼",
+      "sha256": "70d2ce71d176d0af8054a0021601994cb5ff264521e6a9eab99f709497a16f5c"
+    },
+    {
+      "merchantId": "1360754616",
+      "merchantName": "啊嫲沙茶面·原味粿条汤",
+      "recommendTime": "2026-10-15 19:54:01",
+      "city": "深圳市",
+      "status": "待处理",
+      "rowIndex": 3,
+      "sourcePage": 1,
+      "tableOrder": 20,
+      "address": "坂田街道马安堂社区新河街5-1号107",
+      "contact": "沈，13535866007",
+      "detailVerified": true,
+      "text": "城市：深圳市  ；  联系人：沈，13535866007  ；  店铺：啊嫲沙茶面·原味粿条汤  ；  地址：坂田街道马安堂社区新河街5-1号107",
+      "sha256": "bdc60537f1a2fc7132d882ae4ff609bf916d38ffbb46c173ae4c5fb70393d3ca"
+    },
+    {
+      "merchantId": "545858399",
+      "merchantName": "香约鸡架",
+      "recommendTime": "2026-10-15 20:10:08",
+      "city": "绥化市",
+      "status": "待处理",
+      "rowIndex": 2,
+      "sourcePage": 1,
+      "tableOrder": 21,
+      "address": "南八街阳光小区3号楼1层13门",
+      "contact": "王，18946046495",
+      "detailVerified": true,
+      "text": "城市：绥化市  ；  联系人：王，18946046495  ；  店铺：香约鸡架  ；  地址：南八街阳光小区3号楼1层13门",
+      "sha256": "15fe091167977761e142bce3701b4ff24b5c6bd099fea5d6e126a7b330ce6112"
+    },
+    {
+      "merchantId": "1340997808",
+      "merchantName": "云贵客罐罐米线",
+      "recommendTime": "2026-10-15 20:55:59",
+      "city": "郑州市",
+      "status": "待处理",
+      "rowIndex": 1,
+      "sourcePage": 1,
+      "tableOrder": 22,
+      "address": "电厂路70-1号楼-附011号",
+      "contact": "朱老师，13733161830",
+      "detailVerified": true,
+      "text": "城市：郑州市  ；  联系人：朱老师，13733161830  ；  店铺：云贵客罐罐米线  ；  地址：电厂路70-1号楼-附011号",
+      "sha256": "8f71512be995c562107b212ad90934b332b927274ce5ead278c202797b60c0be"
+    },
+    {
+      "merchantId": "1318781912",
+      "merchantName": "蛙有道·椒盐牛蛙（观前街店）",
+      "recommendTime": "2026-10-15 22:30:42",
+      "city": "苏州市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 23,
+      "address": "人民路1331号B1b10",
+      "contact": "高，18860458620",
+      "detailVerified": true,
+      "text": "城市：苏州市  ；  联系人：高，18860458620  ；  店铺：蛙有道·椒盐牛蛙（观前街店）  ；  地址：人民路1331号B1b10",
+      "sha256": "371beb3e720df11e66751d539dd4325c0e7c7131b2e093be539b1e94ce1f51c1"
+    }
+  ],
+  "frontmostBefore": "com.tencent.workbuddy.mac",
+  "createdAt": "2026-10-15T16:24:11.878Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-15",
+    "merchantName": "仔仔刀削面",
+    "merchantId": "1358531588",
+    "recommendTime": "2026-10-15 16:11:47",
+    "tableOrder": 14,
+    "messageSha256": "0e015eb257c9dc376d78bdf988bc666fe7de72a8bc450e6a4c2c32d9885fbb8f",
+    "sentAt": "2026-10-15T17:45:46+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-15",
+  "filterEndDate": "2026-10-16",
+  "dateFilter": "2026-10-15..2026-10-16",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 10,
+      "nextEnabled": true
+    },
+    {
+      "page": 2,
+      "rowCount": 10,
+      "nextEnabled": true
+    },
+    {
+      "page": 3,
+      "rowCount": 3,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 23,
+  "pendingRows": 17,
+  "targetCount": 8,
+  "selectionAudit": {
+    "totalRows": 23,
+    "pendingRows": 17,
+    "excludedAtOrBeforeCursor": 14,
+    "excludedAfterCursorNotPending": 1,
+    "targetCount": 8,
+    "rows": [
+      {
+        "merchantId": "1318781912",
+        "recommendTime": "2026-10-15 22:30:42",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1340997808",
+        "recommendTime": "2026-10-15 20:55:59",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "545858399",
+        "recommendTime": "2026-10-15 20:10:08",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1360754616",
+        "recommendTime": "2026-10-15 19:54:01",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "547099783",
+        "recommendTime": "2026-10-15 19:35:54",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "518216603",
+        "recommendTime": "2026-10-15 19:31:32",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "545327871",
+        "recommendTime": "2026-10-15 19:03:54",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "544591968",
+        "recommendTime": "2026-10-15 18:21:18",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1358531588",
+        "recommendTime": "2026-10-15 16:11:47",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1365479557",
+        "recommendTime": "2026-10-15 15:53:27",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "2097234715",
+        "recommendTime": "2026-10-15 14:26:46",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546955037",
+        "recommendTime": "2026-10-15 14:02:52",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1359461282",
+        "recommendTime": "2026-10-15 13:20:14",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1365354901",
+        "recommendTime": "2026-10-15 12:36:07",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "537080730",
+        "recommendTime": "2026-10-15 11:13:13",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "544900786",
+        "recommendTime": "2026-10-15 09:51:00",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1248699831",
+        "recommendTime": "2026-10-15 09:28:07",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1364962122",
+        "recommendTime": "2026-10-15 12:13:18",
+        "status": "处理中(签约中)"
+      },
+      {
+        "merchantId": "1334976687",
+        "recommendTime": "2026-10-15 11:29:08",
+        "status": "处理中(已退回)"
+      },
+      {
+        "merchantId": "1366143168",
+        "recommendTime": "2026-10-15 11:23:43",
+        "status": "处理中(签约中)"
+      },
+      {
+        "merchantId": "1349800086",
+        "recommendTime": "2026-10-15 11:15:13",
+        "status": "处理中(签约中)"
+      },
+      {
+        "merchantId": "537911803",
+        "recommendTime": "2026-10-15 10:59:09",
+        "status": "处理中(签约中)"
+      },
+      {
+        "merchantId": "1358366111",
+        "recommendTime": "2026-10-15 16:23:07",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 25649,
+  "frontmostAfter": "com.tencent.workbuddy.mac",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261016-002345/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261016-002345/output/collection-attempt-1.review.md"
+}

@@ -1,0 +1,198 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-24",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 60,
+    "task_page": 163,
+    "navigation": 1288,
+    "date_filter": 1609,
+    "page_1_read": 414,
+    "page_1_next": 126,
+    "page_2_read": 699,
+    "selection_audit": 0,
+    "detail_1366726635": 1070,
+    "detail_544101544": 3202
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "page_1_next": "PASS",
+    "page_2_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_1366726635": "PASS",
+    "detail_544101544": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "1366726635",
+      "merchantName": "拾卤堂",
+      "recommendTime": "2026-10-24 09:16:58",
+      "city": "长沙市",
+      "status": "待处理",
+      "rowIndex": 1,
+      "sourcePage": 1,
+      "tableOrder": 15,
+      "address": "井湾子街道红星村社区农民新村39栋欧金盛私房一楼8号",
+      "contact": "唐，13306921546",
+      "detailVerified": true,
+      "text": "城市：长沙市  ；  联系人：唐，13306921546  ；  店铺：拾卤堂  ；  地址：井湾子街道红星村社区农民新村39栋欧金盛私房一楼8号  ；  商家ID：1366726635",
+      "sha256": "a19d28f350bdb0b458610f79b3178148884bf60f87c6d39e320371a47c1fe1a3"
+    },
+    {
+      "merchantId": "544101544",
+      "merchantName": "罐里香·罐罐米线·罐罐饭",
+      "recommendTime": "2026-10-24 10:46:20",
+      "city": "丽江市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 16,
+      "address": "束河街道办事处艺海小吃城6号摊位武大郎烧饼旁",
+      "contact": "李，19988788186",
+      "detailVerified": true,
+      "text": "城市：丽江市  ；  联系人：李，19988788186  ；  店铺：罐里香·罐罐米线·罐罐饭  ；  地址：束河街道办事处艺海小吃城6号摊位武大郎烧饼旁  ；  商家ID：544101544",
+      "sha256": "967ca2227eb11a6545d1159e2f73806f35de64bea1168f3fa65eb9eb2a11fe35"
+    }
+  ],
+  "frontmostBefore": "com.openai.codex",
+  "createdAt": "2026-10-24T06:41:44.839Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-23",
+    "merchantName": "小林炖品",
+    "merchantId": "530625798",
+    "recommendTime": "2026-10-23 18:52:23",
+    "tableOrder": 14,
+    "messageSha256": "d99c5dc16f0eb7d3c967586e1396d547c3f404b2a23c47d4681c5e19c30cf9a0",
+    "sentAt": "2026-10-23T19:00:23+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-23",
+  "filterEndDate": "2026-10-24",
+  "dateFilter": "2026-10-23..2026-10-24",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 10,
+      "nextEnabled": true
+    },
+    {
+      "page": 2,
+      "rowCount": 6,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 16,
+  "pendingRows": 13,
+  "targetCount": 2,
+  "selectionAudit": {
+    "totalRows": 16,
+    "pendingRows": 13,
+    "excludedAtOrBeforeCursor": 14,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 2,
+    "rows": [
+      {
+        "merchantId": "544101544",
+        "recommendTime": "2026-10-24 10:46:20",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1366726635",
+        "recommendTime": "2026-10-24 09:16:58",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "530625798",
+        "recommendTime": "2026-10-23 18:52:23",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1360809513",
+        "recommendTime": "2026-10-23 17:48:54",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "544340117",
+        "recommendTime": "2026-10-23 14:37:16",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1367119979",
+        "recommendTime": "2026-10-23 14:32:55",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "531545085",
+        "recommendTime": "2026-10-23 13:09:07",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "547371844",
+        "recommendTime": "2026-10-23 12:01:25",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "518954171",
+        "recommendTime": "2026-10-23 11:14:09",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "544912726",
+        "recommendTime": "2026-10-23 10:16:43",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1360738806",
+        "recommendTime": "2026-10-23 09:39:50",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1267161696",
+        "recommendTime": "2026-10-23 08:56:02",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "547346929",
+        "recommendTime": "2026-10-23 03:03:19",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "542631428",
+        "recommendTime": "2026-10-23 18:19:21",
+        "status": "完成"
+      },
+      {
+        "merchantId": "1360738806",
+        "recommendTime": "2026-10-23 15:42:53",
+        "status": "完成"
+      },
+      {
+        "merchantId": "547346929",
+        "recommendTime": "2026-10-23 09:30:06",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 10140,
+  "frontmostAfter": "com.openai.codex",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261024-144134/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261024-144134/output/collection-attempt-1.review.md"
+}

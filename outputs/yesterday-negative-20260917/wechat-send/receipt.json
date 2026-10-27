@@ -1,0 +1,92 @@
+{
+  "ok": false,
+  "executor": "wechat-desktop-sender",
+  "channel": "desktop",
+  "groupName": "FEIBING NEO AI数字员工",
+  "payloadType": "file",
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "stage": "prepare_payload",
+  "stageMs": {
+    "locate_group": 536,
+    "verify_target_and_input": 7039,
+    "prepare_payload": 1944
+  },
+  "payloadIdentity": "0558d9b8a4afde7d5c240ece37aef30ced4a889b15056468ea77452a7a5f1952",
+  "payloads": [
+    {
+      "path": "/Users/ddt/work/projects/ai_agent/outputs/yesterday-negative-20260917/差评分析数据_2026-09-17_2026-09-17.xlsx",
+      "name": "差评分析数据_2026-09-17_2026-09-17.xlsx",
+      "size": 14821,
+      "sha256": "ba8fe175d3643d8d77db06ddbee6fe2858dd0aabf9195cc8c0e1fac449b8c7d3"
+    }
+  ],
+  "groupPreflight": {
+    "ok": true,
+    "action": "open-group",
+    "group": "FEIBING NEO AI数字员工",
+    "header": "FEIBING NEO AI数字员工",
+    "note": "ax-current-header",
+    "reason": null,
+    "sendAttempts": 0,
+    "runtimeModelDecisions": 0,
+    "stageMs": {
+      "exact_group_preflight": 536
+    },
+    "artifacts": [],
+    "hardGate": false
+  },
+  "preparedInputChangedPixels": 52812,
+  "preparedInputChangedRatio": 0.142976,
+  "preparedFileObjectCount": 0,
+  "preparedFilePrefixesVerified": true,
+  "reason": "desktop-file-preview-not-prepared",
+  "uncommittedPreviewCleanup": "failed",
+  "uncommittedPreviewCleanupReason": "key-Escape-failed",
+  "elapsedMs": 10233,
+  "sendReview": [
+    {
+      "item": 1,
+      "stage": "locate_group",
+      "label": "精确定位目标群",
+      "elapsedMs": 536,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 2,
+      "stage": "verify_target_and_input",
+      "label": "复核目标群与输入框",
+      "elapsedMs": 7039,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 3,
+      "stage": "prepare_payload",
+      "label": "准备并复核发送载荷",
+      "elapsedMs": 1944,
+      "status": "failed",
+      "pitfalls": [
+        {
+          "code": "send-failure",
+          "reason": "desktop-file-preview-not-prepared"
+        }
+      ]
+    }
+  ],
+  "reviewSummary": {
+    "totalElapsedMs": 10233,
+    "itemCount": 3,
+    "pitfallCount": 1,
+    "result": "failed"
+  },
+  "interactionLock": {
+    "lockPath": "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/.runtime/wechat-ui-interaction.lock",
+    "owner": "sender:70110:1789694294858082000",
+    "waitCycles": 0,
+    "waitMs": 0,
+    "acquired": true,
+    "released": true
+  }
+}

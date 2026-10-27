@@ -1,0 +1,109 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-09-30",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 43,
+    "task_page": 275,
+    "navigation": 942,
+    "date_filter": 1228,
+    "page_1_read": 270,
+    "selection_audit": 0
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS"
+  },
+  "messages": [],
+  "frontmostBefore": "unavailable",
+  "createdAt": "2026-09-30T08:49:14.332Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-09-30",
+    "merchantName": "知香·手撕烤鸭",
+    "merchantId": "546531224",
+    "recommendTime": "2026-09-30 15:03:10",
+    "tableOrder": 6,
+    "messageSha256": "4d87744ee22eacf9143fb0a986f7162011989e1484279a760a13477fc5e938e6",
+    "sentAt": "2026-09-30T16:47:28+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-09-30",
+  "filterEndDate": "2026-09-30",
+  "dateFilter": "2026-09-30..2026-09-30",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 7,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 7,
+  "pendingRows": 4,
+  "targetCount": 0,
+  "selectionAudit": {
+    "totalRows": 7,
+    "pendingRows": 4,
+    "excludedAtOrBeforeCursor": 6,
+    "excludedAfterCursorNotPending": 1,
+    "targetCount": 0,
+    "rows": [
+      {
+        "merchantId": "546531224",
+        "recommendTime": "2026-09-30 15:03:10",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1263459850",
+        "recommendTime": "2026-09-30 13:26:54",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "521315008",
+        "recommendTime": "2026-09-30 10:35:21",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "543891127",
+        "recommendTime": "2026-09-30 10:28:04",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1362405258",
+        "recommendTime": "2026-09-30 16:02:53",
+        "status": "完成"
+      },
+      {
+        "merchantId": "1360640820",
+        "recommendTime": "2026-09-30 14:35:56",
+        "status": "完成"
+      },
+      {
+        "merchantId": "1348225171",
+        "recommendTime": "2026-09-30 12:54:03",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 3126,
+  "frontmostAfter": "unavailable",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20260930-164910/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20260930-164910/output/collection-attempt-1.review.md"
+}

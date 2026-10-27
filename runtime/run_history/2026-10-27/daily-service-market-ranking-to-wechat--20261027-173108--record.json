@@ -1,0 +1,23 @@
+{
+  "skill": "daily-service-market-ranking-to-wechat",
+  "ledger_name": "淘宝闪购服务市场排名与本月考核指标",
+  "schedule": "每日10:00（首次上线当日补执行一次）",
+  "dev_state": "active",
+  "status": "FAILED",
+  "category": "UNKNOWN",
+  "detail": "reason=prior-attempt-requires-read-only-reconciliation (receipt:reason)",
+  "next_action": "看护代理读日志定位根因后升级处理",
+  "attempts": 1,
+  "max_retries": 0,
+  "duration_seconds": 0.13,
+  "started_at": "2026-10-27T17:31:08",
+  "finished_at": "2026-10-27T17:31:08",
+  "triggered_by": "daemon",
+  "logs": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-27/daily-service-market-ranking-to-wechat--20261027-173108--a1--s1.log"
+  ],
+  "fail_signal": {
+    "kind": "reason",
+    "code": "prior-attempt-requires-read-only-reconciliation"
+  }
+}

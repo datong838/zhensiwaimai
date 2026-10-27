@@ -1,0 +1,149 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "琼海市\n喜柿，13876225291\n喜柿·鲜果茶(琼海中原店)\n中原镇中东老街1号小学路",
+      "sha256": "f4515c281c3b7e8657b1efa11263f5dbf07f7959e9f2033058849cb303962251"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "ac6581dc1f550ce722a010b37aae3248fe232f800a4eac9fe3ce8ed9295c1871",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "f4515c281c3b7e8657b1efa11263f5dbf07f7959e9f2033058849cb303962251",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1790908413.826873,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-text-anchor",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "电销+直播攻坚组",
+          "currentTitle": "电销+直播攻坚组",
+          "messageCount": 43,
+          "anchor": "text-exact",
+          "anchorValue": "琼海市\n喜柿，13876225291\n喜柿·鲜果茶(琼海中原店)\n中原镇中东老街1号小学路",
+          "anchorInTrailingPosition": true,
+          "autoKind": null,
+          "readbackAt": 1790908436.2971158
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "电销+直播攻坚组",
+            "len": 45
+          },
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 360
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 22470
+      }
+    ],
+    "elapsedMs": 22833,
+    "eventKey": "2aacf13ab4685fb80ca1b5c9bd568deb4b041b337cfba6e0921aae9d5fb2818d",
+    "reviewSummary": {
+      "totalElapsedMs": 22833,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/17c7f5980997c324e823fbd52f90beeac02cd9ed1b833d15e62f7a14d194a8f5.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 360,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 22470,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 22833,
+  "reviewSummary": {
+    "totalElapsedMs": 22833,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "ok": true,
+    "resolvedGroup": "电销+直播攻坚组",
+    "currentTitle": "电销+直播攻坚组",
+    "messageCount": 43,
+    "anchor": "text-exact",
+    "anchorValue": "琼海市\n喜柿，13876225291\n喜柿·鲜果茶(琼海中原店)\n中原镇中东老街1号小学路",
+    "anchorInTrailingPosition": true,
+    "autoKind": null,
+    "readbackAt": 1790908436.2971158
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false
+}

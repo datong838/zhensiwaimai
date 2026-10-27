@@ -1,0 +1,89 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-04",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 73,
+    "task_page": 375,
+    "navigation": 1430,
+    "date_filter": 1515,
+    "page_1_read": 381,
+    "selection_audit": 0
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS"
+  },
+  "messages": [],
+  "frontmostBefore": "com.tencent.workbuddy.mac",
+  "createdAt": "2026-10-04T09:09:38.600Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-04",
+    "merchantName": "No Er | 一烫人间东北老式麻辣烫炸串",
+    "merchantId": "546516617",
+    "recommendTime": "2026-10-04 13:42:45",
+    "tableOrder": 3,
+    "messageSha256": "969d3c8700692051558ce5f6d7a1bbe1a836276e94d1cbe769fd3c5dda94c331",
+    "sentAt": "2026-10-04T14:04:01+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-04",
+  "filterEndDate": "2026-10-04",
+  "dateFilter": "2026-10-04..2026-10-04",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 3,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 3,
+  "pendingRows": 3,
+  "targetCount": 0,
+  "selectionAudit": {
+    "totalRows": 3,
+    "pendingRows": 3,
+    "excludedAtOrBeforeCursor": 3,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 0,
+    "rows": [
+      {
+        "merchantId": "546516617",
+        "recommendTime": "2026-10-04 13:42:45",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546133876",
+        "recommendTime": "2026-10-04 11:15:46",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "527430085",
+        "recommendTime": "2026-10-04 10:07:25",
+        "status": "待处理"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 4238,
+  "frontmostAfter": "com.tencent.workbuddy.mac",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261004-170933/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261004-170933/output/collection-attempt-1.review.md"
+}

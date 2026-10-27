@@ -1,0 +1,117 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-05",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 49,
+    "task_page": 461,
+    "navigation": 3740,
+    "date_filter": 1330,
+    "page_1_read": 258,
+    "selection_audit": 0,
+    "detail_1339019526": 767
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_1339019526": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "1339019526",
+      "merchantName": "胖胖中国兰州牛肉拉面",
+      "recommendTime": "2026-10-05 17:00:46",
+      "city": "南昌市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 5,
+      "address": "东新乡河洲路1655号洪大科技物流园1号楼一楼41、43号",
+      "contact": "马林，13247865310",
+      "detailVerified": true,
+      "text": "城市：南昌市  ；  联系人：马林，13247865310  ；  店铺：胖胖中国兰州牛肉拉面  ；  地址：东新乡河洲路1655号洪大科技物流园1号楼一楼41、43号",
+      "sha256": "d2eeb5bb8167114c183bdc1806edf3a05428b8bc3bd185842361a3f38c80f969"
+    }
+  ],
+  "frontmostBefore": "unavailable",
+  "createdAt": "2026-10-05T09:02:40.225Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-05",
+    "merchantName": "圆序甜鲜.绵绵冰糖水.蒸饺小吃.意面简餐",
+    "merchantId": "544800658",
+    "recommendTime": "2026-10-05 15:08:25",
+    "tableOrder": 4,
+    "messageSha256": "f63605d2c4a33a90a98c347ffddeb249e745ce516844534a28edaab5efb98646",
+    "sentAt": "2026-10-05T16:02:18+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-05",
+  "filterEndDate": "2026-10-05",
+  "dateFilter": "2026-10-05..2026-10-05",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 5,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 5,
+  "pendingRows": 5,
+  "targetCount": 1,
+  "selectionAudit": {
+    "totalRows": 5,
+    "pendingRows": 5,
+    "excludedAtOrBeforeCursor": 4,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 1,
+    "rows": [
+      {
+        "merchantId": "1339019526",
+        "recommendTime": "2026-10-05 17:00:46",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "544800658",
+        "recommendTime": "2026-10-05 15:08:25",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1362271630",
+        "recommendTime": "2026-10-05 13:05:35",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1332581200",
+        "recommendTime": "2026-10-05 12:52:03",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1341962648",
+        "recommendTime": "2026-10-05 09:49:45",
+        "status": "待处理"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 7053,
+  "frontmostAfter": "unavailable",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261005-170232/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261005-170232/output/collection-attempt-1.review.md"
+}

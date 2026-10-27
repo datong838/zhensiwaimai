@@ -1,0 +1,94 @@
+import assert from 'node:assert/strict';
+import {spawn} from 'node:child_process';
+import crypto from 'node:crypto';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {FIXED, SKILL_DIR, assertConfig, buildConfig, previousBusinessDate, shanghaiDay} from './workflow_policy.mjs';
+
+const SCRIPT_DIR=path.dirname(fileURLToPath(import.meta.url));
+const MANIFEST=path.join(SKILL_DIR,'dependencies.json');
+const POLICY=path.join(SKILL_DIR,'runtime-policy.json');
+const PUBLIC_MANIFEST='/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/dependencies.json';
+const PUBLIC_BRIDGE='/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/workflow_bridge_windows.py';
+// 2026-09-30 D14：REGISTRY 台账路径迁移改动了桌面桥字节；本清单同样绑定它，
+// 处理方式与 PUBLIC_MANIFEST/PUBLIC_BRIDGE 相同——本地不做字节检查（权威封印在
+// wechat-messaging 侧），重绑时按公共清单的钉死值重算。
+const PUBLIC_DESKTOP_BRIDGE='/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/workflow_bridge.py';
+const MAINTENANCE_AUTHORIZATION='user-20260920-negative-review-dependency-maintenance';
+const SELF_KEY='scripts/maintenance_executor.mjs';
+const CODE_REPAIRABLE_FILES=new Set(['scripts/workflow_executor.mjs','scripts/workflow_policy.mjs','scripts/browser_collect.mjs','scripts/build_report.mjs','scripts/test_workflow_policy.mjs','scripts/test_browser_policy.mjs','scripts/test_build_report.mjs','scripts/test_maintenance_executor.mjs',SELF_KEY]);
+const TESTS=['test_workflow_policy.mjs','test_browser_policy.mjs','test_build_report.mjs','test_reconcile.py','test_maintenance_executor.mjs'];
+
+function sha256(bytes){return crypto.createHash('sha256').update(bytes).digest('hex');}
+async function readJson(file){return JSON.parse(await fs.readFile(file,'utf8'));}
+async function atomicJson(file,value){const temp=`${file}.${process.pid}.tmp`;await fs.writeFile(temp,`${JSON.stringify(value,null,2)}\n`,{mode:0o600});await fs.rename(temp,file);}
+async function run(command,args,cwd=SKILL_DIR){return await new Promise(resolve=>{const child=spawn(command,args,{cwd,stdio:['ignore','pipe','pipe']});let stdout='',stderr='';child.stdout.on('data',chunk=>stdout+=chunk);child.stderr.on('data',chunk=>stderr+=chunk);child.once('error',error=>resolve({ok:false,reason:String(error)}));child.once('close',code=>resolve({ok:code===0,code,stdout,stderr,reason:code===0?null:(stderr||stdout).trim()}));});}
+function nextDailyBusinessDate(now=new Date()){
+  const day=shanghaiDay(now);const parts=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Shanghai',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(now);const hour=Number(parts.find(part=>part.type==='hour')?.value),minute=Number(parts.find(part=>part.type==='minute')?.value);
+  if(hour<9||(hour===9&&minute===0))return previousBusinessDate(day);
+  const tomorrow=shanghaiDay(new Date(new Date(`${day}T12:00:00+08:00`).getTime()+86400000));return previousBusinessDate(tomorrow);
+}
+async function publicManifestClean(){const result=await run(FIXED.wechatPython,[path.join(path.dirname(PUBLIC_MANIFEST),'scripts','dependency_maintenance.py'),'inspect'],path.dirname(PUBLIC_MANIFEST));const parsed=JSON.parse(result.stdout.trim()||'{}');if(!result.ok||parsed.ok!==true||parsed.status!=='clean'||parsed.sendAttempts!==0||parsed.runtimeModelDecisions!==0)throw Error(`public-dependency-inspect-failed:${parsed.reason||result.reason||'invalid'}`);const manifest=await readJson(PUBLIC_MANIFEST);return {...parsed,manifest};}
+function acceptanceBusinessDate(now,acceptedBusinessDate){const current=buildConfig(now).businessDate;return current>acceptedBusinessDate?current:nextDailyBusinessDate(now);}
+async function absent(file){try{await fs.access(file);return false;}catch(error){if(error.code==='ENOENT')return true;throw error;}}
+async function currentRunIsAbsentPreEffect(config){for(const file of [config.config,config.state,config.browserReceipt,config.raw,config.report,config.sendReceipt,path.join(FIXED.sendLedger,config.sendMarker)])if(!await absent(file))throw Error('current-business-run-has-effect-artifact');return true;}
+function assertAllocatedStatePreEffect(state){
+  const allowed=new Set(['policyVersion','businessDate','phase','status','startedAt','updatedAt','reviewItems','runtimeModelDecisions']);
+  if(Object.keys(state||{}).some(key=>!allowed.has(key)))throw Error('current-business-run-not-allocated-pre-effect');
+  if(state?.phase!=='created'||!['active','recoverable'].includes(state?.status)||!Array.isArray(state?.reviewItems)||state.reviewItems.length!==0||state.attempted||state.unknown||state.sendAttempts!=null||state.reason||state.recoveryReason||state.recovery)throw Error('current-business-run-not-allocated-pre-effect');
+  return true;
+}
+async function currentRunIsAllocatedPreEffect(config){
+  assertConfig(config);
+  const stored=await readJson(config.config);assertConfig(stored);
+  if(JSON.stringify(stored)!==JSON.stringify(config))throw Error('allocated-config-identity-mismatch');
+  assertAllocatedStatePreEffect(await readJson(config.state));
+  const effects=[config.browserReceipt,config.raw,config.uiStatus,config.finalData,config.analysis,config.report,config.reportValidation,config.sendOutput,config.screenshot,config.screenshotReceipt,config.screenshotSendOutput,config.summary,path.join(FIXED.sendLedger,config.sendMarker),path.join(FIXED.summaryLedger,config.screenshotSendMarker)];
+  for(const file of effects)if(!await absent(file))throw Error('current-business-run-has-effect-artifact');
+  // Unknown files also mean this is no longer an allocation-only directory.
+  const names=await fs.readdir(config.runDir);
+  if(names.some(name=>![path.basename(config.config),path.basename(config.state)].includes(name)))throw Error('allocated-run-has-unknown-artifact');
+  return true;
+}
+async function currentRunIsPreEffect(config){if(await absent(config.browserReceipt))return currentRunIsAllocatedPreEffect(config);const state=await readJson(config.state),browser=await readJson(config.browserReceipt);if(state.phase!=='created'||state.status!=='recoverable'||browser.downloadClicks!==0)throw Error('current-business-run-not-pre-effect');for(const file of [config.raw,config.report,config.sendReceipt,path.join(FIXED.sendLedger,config.sendMarker)])if(!await absent(file))throw Error('current-business-run-has-effect-artifact');return true;}
+async function currentRunHasReusableDownload(config){const state=await readJson(config.state),browser=await readJson(config.browserReceipt);if(!['created','downloaded'].includes(state.phase)||state.status!=='recoverable'||browser.downloadClicks!==1)throw Error('current-business-run-not-reusable-download');const info=await fs.stat(config.raw),actual=sha256(await fs.readFile(config.raw));if(browser.download){if(path.resolve(browser.download.path)!==path.resolve(config.raw)||browser.download.size!==info.size||browser.download.sha256!==actual)throw Error('current-business-run-download-identity-mismatch');}else{const completed=(state.reviewItems||[]).filter(item=>item.stage==='download'&&item.status==='completed');if(state.phase!=='downloaded'||completed.length!==1||info.size<=0)throw Error('current-business-run-download-receipt-loss-invalid');const archive=await run('/usr/bin/unzip',['-t',config.raw]);if(!archive.ok)throw Error('current-business-run-download-receipt-loss-invalid');}for(const file of [config.report,config.sendReceipt,path.join(FIXED.sendLedger,config.sendMarker)])if(!await absent(file))throw Error('current-business-run-has-effect-artifact');return true;}
+function isZeroSendWechatPreflightBlocked(state,marker){return state?.phase==='report_built'&&state?.status==='recoverable'&&marker?.state==='blocked'&&marker?.verified===false&&marker?.sendAttempts===0&&marker?.reason==='exact-group-result-count:0';}
+async function currentRunIsZeroSendWechatPreflightBlocked(config){const state=await readJson(config.state),marker=await readJson(path.join(FIXED.sendLedger,config.sendMarker));if(!isZeroSendWechatPreflightBlocked(state,marker))throw Error('current-business-run-not-zero-send-wechat-preflight');return true;}
+function isZeroSendWechatRuntimeBlocked(state,receipt){return state?.phase==='report_built'&&state?.status==='recoverable'&&receipt?.state==='blocked'&&receipt?.verified===false&&receipt?.sendAttempts===0&&receipt?.newSendAttempts===0&&receipt?.attempted!==true&&receipt?.unknown!==true&&receipt?.reason==="No module named 'AppKit'";}
+async function currentRunIsZeroSendWechatRuntimeBlocked(config){const state=await readJson(config.state),receipt=await readJson(config.sendReceipt);if(!isZeroSendWechatRuntimeBlocked(state,receipt))throw Error('current-business-run-not-zero-send-wechat-runtime');return true;}
+// 2026-09-30：Windows 驱动业务拒绝（服务端已应答、什么都没发出）也属已证明零发送。
+// 判定项与上方运行时阻断逐项同强度，仅多要求 reason 以 'windows-send-rejected:' 开头。
+function isZeroSendWechatDriverBlocked(state,receipt){return state?.phase==='report_built'&&state?.status==='recoverable'&&receipt?.state==='blocked'&&receipt?.verified===false&&receipt?.sendAttempts===0&&receipt?.newSendAttempts===0&&receipt?.attempted!==true&&receipt?.unknown!==true&&typeof receipt?.reason==='string'&&receipt.reason.startsWith('windows-send-rejected:');}
+async function currentRunIsZeroSendWechatDriverBlocked(config){const state=await readJson(config.state),receipt=await readJson(config.sendReceipt);if(!isZeroSendWechatDriverBlocked(state,receipt))throw Error('current-business-run-not-zero-send-wechat-driver-rejected');return true;}
+async function currentRunIsComplete(config){const state=await readJson(config.state);if(state.phase!=='complete'||state.status!=='complete')throw Error('current-business-run-not-complete');return true;}
+async function acceptedRunIsComplete(policy){const config=buildConfig(new Date(new Date(`${policy.acceptedBusinessDate}T12:00:00+08:00`).getTime()+86400000));if(config.businessDate!==policy.acceptedBusinessDate||path.resolve(policy.acceptedSummary)!==path.resolve(config.summary))throw Error('accepted-run-path-mismatch');await currentRunIsComplete(config);const summary=await readJson(config.summary);if(summary.ok!==true||summary.businessDate!==policy.acceptedBusinessDate||summary.completionReview?.codeEnforced!==true||summary.send?.verified!==true||summary.report?.sha256!==policy.acceptedReportSha256)throw Error('accepted-run-proof-invalid');return true;}
+async function assertLocalIntegrity(manifest,{allowCodeRepair=false}={}){for(const [file,expected] of Object.entries(manifest.files||{})){if([PUBLIC_MANIFEST,PUBLIC_BRIDGE,PUBLIC_DESKTOP_BRIDGE].includes(file))continue;const resolved=path.isAbsolute(file)?file:path.join(SKILL_DIR,file);const actual=sha256(await fs.readFile(resolved));if(actual!==expected&&(!allowCodeRepair||!CODE_REPAIRABLE_FILES.has(file)))throw Error(`local-dependency-hash-mismatch:${file}`);}return sha256(await fs.readFile(path.join(SKILL_DIR,SELF_KEY)));}
+async function runOfflineTests(){for(const test of TESTS){const isPython=test.endsWith('.py');const result=await run(isPython?FIXED.analysisPython:FIXED.node,[path.join(SCRIPT_DIR,test)]);if(!result.ok)throw Error(`offline-test-failed:${test}:${result.reason}`);}const selfTest=await run(FIXED.node,[path.join(SCRIPT_DIR,'workflow_executor.mjs'),'--self-test']);const parsed=JSON.parse(selfTest.stdout.trim()||'{}');if(!selfTest.ok||parsed.ok!==true||parsed.runtimeModelDecisions!==0)throw Error(`workflow-self-test-failed:${parsed.reason||selfTest.reason||'invalid'}`);return {tests:TESTS.length+1};}
+async function prepareUnsealedAcceptance(authorization,{now=new Date()}={}){
+  const started=Date.now();const review=[];const stage=async(label,fn)=>{const tick=Date.now();try{const value=await fn();review.push({label,status:'completed',elapsedMs:Date.now()-tick,pitfalls:[]});return value;}catch(error){review.push({label,status:'failed',elapsedMs:Date.now()-tick,pitfalls:[String(error.message||error)]});throw error;}};
+  if(authorization!==MAINTENANCE_AUTHORIZATION)throw Error('maintenance-authorization-mismatch');
+  const originalManifest=await fs.readFile(MANIFEST),originalPolicy=await fs.readFile(POLICY);let manifestWritten=false;
+  try{
+    const policy=await stage('核验封板或可重绑定验收态',async()=>{const value=await readJson(POLICY),current=buildConfig(now);if(value.authorizationRef!==FIXED.authorization)throw Error('release-authorization-mismatch');if(value.status==='SEALED'){if(!value.dependencyDigest||!value.acceptedSummary)throw Error('sealed-policy-invalid');await acceptedRunIsComplete(value);if(current.businessDate===value.acceptedBusinessDate)await currentRunIsComplete(current);else if(!await absent(current.state))throw Error('new-business-run-already-started');return {...value,rebind:false,codeRepair:true,keepAllowed:false};}if(value.status==='UNSEALED_ACCEPTANCE'&&value.allowedBusinessDate>current.businessDate){if(await absent(current.state))return {...value,rebind:true,codeRepair:false,keepAllowed:false};await currentRunIsComplete(current);return {...value,rebind:false,codeRepair:true,keepAllowed:true};}if(value.status==='UNSEALED_ACCEPTANCE'&&value.allowedBusinessDate===current.businessDate){if(await absent(current.state)){await currentRunIsAbsentPreEffect(current);return {...value,rebind:false,codeRepair:true,keepAllowed:false};}try{await currentRunIsPreEffect(current);return {...value,rebind:false,codeRepair:true,keepAllowed:false};}catch{try{await currentRunHasReusableDownload(current);return {...value,rebind:false,codeRepair:true,keepAllowed:false};}catch{try{await currentRunIsZeroSendWechatPreflightBlocked(current);return {...value,rebind:false,codeRepair:true,keepAllowed:false};}catch{try{await currentRunIsZeroSendWechatRuntimeBlocked(current);return {...value,rebind:false,codeRepair:true,keepAllowed:false};}catch{await currentRunIsZeroSendWechatDriverBlocked(current);return {...value,rebind:false,codeRepair:true,keepAllowed:false};}}}}}throw Error('release-policy-not-maintainable');});
+    const manifest=await stage('核验差评本地依赖',async()=>readJson(MANIFEST));
+    const selfHash=await stage('核验维护器完整性',()=>assertLocalIntegrity(manifest,{allowCodeRepair:policy.rebind||policy.codeRepair}));
+    const publicInspect=await stage('核验公共微信依赖',publicManifestClean);
+    const publicHash=sha256(await fs.readFile(PUBLIC_MANIFEST));
+    const bridgeHash=sha256(await fs.readFile(PUBLIC_BRIDGE));
+    const desktopBridgeHash=sha256(await fs.readFile(PUBLIC_DESKTOP_BRIDGE));
+    if(publicInspect.manifest.files?.['scripts/workflow_bridge_windows.py']!==bridgeHash)throw Error('public-bridge-not-bound-by-public-manifest');
+    if(publicInspect.manifest.files?.['scripts/workflow_bridge.py']!==desktopBridgeHash)throw Error('public-desktop-bridge-not-bound-by-public-manifest');
+    if(manifest.files?.[PUBLIC_MANIFEST]===publicHash&&manifest.files?.[PUBLIC_BRIDGE]===bridgeHash&&manifest.files?.[PUBLIC_DESKTOP_BRIDGE]===desktopBridgeHash&&!policy.rebind&&!policy.codeRepair)throw Error('outer-dependency-already-current');
+    const files={...manifest.files,[PUBLIC_MANIFEST]:publicHash,[PUBLIC_BRIDGE]:bridgeHash,[PUBLIC_DESKTOP_BRIDGE]:desktopBridgeHash,[SELF_KEY]:selfHash};if(policy.codeRepair)for(const file of CODE_REPAIRABLE_FILES)files[file]=sha256(await fs.readFile(path.join(SKILL_DIR,file)));const candidate={...manifest,files};
+    await stage('原子更新外层依赖摘要',async()=>{await atomicJson(MANIFEST,candidate);manifestWritten=true;const reread=await readJson(MANIFEST);assert.equal(reread.files[PUBLIC_MANIFEST],publicHash);assert.equal(reread.files[PUBLIC_BRIDGE],bridgeHash);assert.equal(reread.files[PUBLIC_DESKTOP_BRIDGE],desktopBridgeHash);assert.equal(reread.files[SELF_KEY],selfHash);});
+    const tests=await stage('运行差评离线回归与自检',runOfflineTests);
+    const allowedBusinessDate=policy.keepAllowed?policy.allowedBusinessDate:policy.status==='SEALED'?acceptanceBusinessDate(now,policy.acceptedBusinessDate):(policy.rebind||policy.codeRepair)?buildConfig(now).businessDate:acceptanceBusinessDate(now,policy.acceptedBusinessDate);if(!policy.keepAllowed&&allowedBusinessDate<=policy.acceptedBusinessDate)throw Error('acceptance-business-date-not-future');
+    const candidateBytes=await fs.readFile(MANIFEST);const acceptance={schemaVersion:1,status:'UNSEALED_ACCEPTANCE',authorizationRef:FIXED.authorization,candidateDependencyDigest:sha256(candidateBytes),allowedBusinessDate,preparedAt:new Date(now).toISOString(),maintenance:{authorization,publicManifestSha256:publicHash,publicInspect:{candidateFileCount:publicInspect.candidateFileCount,sendAttempts:0,runtimeModelDecisions:0},tests,sendAttempts:0,runtimeModelDecisions:0}};
+    await stage('原子进入一次性验收态',async()=>{await atomicJson(POLICY,acceptance);const reread=await readJson(POLICY);assert.equal(reread.status,'UNSEALED_ACCEPTANCE');assert.equal(reread.allowedBusinessDate,allowedBusinessDate);assert.equal(reread.candidateDependencyDigest,sha256(await fs.readFile(MANIFEST)));});
+    return {ok:true,status:'prepared',allowedBusinessDate,sendAttempts:0,runtimeModelDecisions:0,totalElapsedMs:Date.now()-started,review};
+  }catch(error){if(manifestWritten)await fs.writeFile(MANIFEST,originalManifest,{mode:0o600});await fs.writeFile(POLICY,originalPolicy,{mode:0o600});throw error;}
+}
+async function main(){const [action,authorization]=process.argv.slice(2);if(action!=='prepare-unsealed-acceptance'||!authorization)throw Error('usage: maintenance_executor.mjs prepare-unsealed-acceptance AUTHORIZATION');console.log(JSON.stringify(await prepareUnsealedAcceptance(authorization)));}
+export {assertAllocatedStatePreEffect,currentRunIsAllocatedPreEffect,MAINTENANCE_AUTHORIZATION,nextDailyBusinessDate,acceptanceBusinessDate,isZeroSendWechatPreflightBlocked,isZeroSendWechatRuntimeBlocked,isZeroSendWechatDriverBlocked,currentRunIsComplete,currentRunIsAbsentPreEffect,currentRunHasReusableDownload,prepareUnsealedAcceptance};
+if(fileURLToPath(import.meta.url)===path.resolve(process.argv[1]||''))main().catch(error=>{console.error(JSON.stringify({ok:false,status:'blocked',reason:String(error.message||error),sendAttempts:0,runtimeModelDecisions:0}));process.exitCode=1;});

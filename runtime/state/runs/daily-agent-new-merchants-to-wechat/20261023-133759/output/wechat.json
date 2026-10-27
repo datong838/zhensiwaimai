@@ -1,0 +1,331 @@
+{
+  "ok": false,
+  "executor": "merchant-desktop-wechat-sender",
+  "channel": "desktop",
+  "sent": 0,
+  "messageCount": 1,
+  "historySkipped": 0,
+  "items": [
+    {
+      "merchantId": "531545085",
+      "merchantName": "蒋大厨居民楼菜馆",
+      "review": [
+        {
+          "stage": "发送前合同复核",
+          "status": "PASS",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "定位、输入与单次发送",
+          "status": "FAIL",
+          "pitfalls": [
+            "'path'"
+          ],
+          "details": [
+            {
+              "stage": "authorization",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0,
+              "item": 1,
+              "label": "authorization"
+            },
+            {
+              "stage": "freeze:0",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0,
+              "item": 2,
+              "label": "freeze:0"
+            },
+            {
+              "stage": "preflight",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 62598,
+              "item": 3,
+              "label": "preflight"
+            },
+            {
+              "stage": "send:0",
+              "status": "failed",
+              "pitfalls": [
+                {
+                  "code": "messaging-stage",
+                  "reason": "'path'"
+                }
+              ],
+              "elapsedMs": 0,
+              "item": 4,
+              "label": "send:0"
+            }
+          ],
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsedMs": 62704,
+              "ok": false,
+              "reason": "'path'",
+              "sendAttempts": null,
+              "sendReview": [
+                {
+                  "stage": "authorization",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 0,
+                  "item": 1,
+                  "label": "authorization"
+                },
+                {
+                  "stage": "freeze:0",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 0,
+                  "item": 2,
+                  "label": "freeze:0"
+                },
+                {
+                  "stage": "preflight",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 62598,
+                  "item": 3,
+                  "label": "preflight"
+                },
+                {
+                  "stage": "send:0",
+                  "status": "failed",
+                  "pitfalls": [
+                    {
+                      "code": "messaging-stage",
+                      "reason": "'path'"
+                    }
+                  ],
+                  "elapsedMs": 0,
+                  "item": 4,
+                  "label": "send:0"
+                }
+              ]
+            }
+          ],
+          "elapsedMs": 62707
+        },
+        {
+          "stage": "双帧与原生复制全文复核",
+          "status": "SKIPPED",
+          "elapsedMs": null,
+          "pitfalls": [
+            "前置阶段失败，代码禁止继续"
+          ]
+        },
+        {
+          "stage": "提交前证据门禁",
+          "status": "SKIPPED",
+          "elapsedMs": null,
+          "pitfalls": [
+            "前置阶段失败，代码禁止继续"
+          ]
+        },
+        {
+          "stage": "成功历史与原子游标提交",
+          "status": "SKIPPED",
+          "elapsedMs": null,
+          "pitfalls": [
+            "前置阶段失败，代码禁止继续"
+          ]
+        }
+      ]
+    }
+  ],
+  "contentionRetries": 0,
+  "contentionWaitMs": 0,
+  "contentionEvents": [],
+  "reason": "'path'",
+  "desktop": {
+    "bridgeVersion": 1,
+    "ok": false,
+    "verified": false,
+    "payloadType": "text",
+    "state": "unknown",
+    "groupName": "电销+直播攻坚组",
+    "payloads": [
+      {
+        "text": "城市：广元市  ；  联系人：杨女士，15183966658  ；  店铺：蒋大厨居民楼菜馆  ；  地址：嘉陵街道东颖巷24号-26号  ；  商家ID：531545085",
+        "sha256": "39123b05a0c1370532f145dae8460c0a9847b8a23adb46132d677e1d8e156992"
+      }
+    ],
+    "sendAttempts": null,
+    "newSendAttempts": null,
+    "reason": "'path'",
+    "runtimeModelDecisions": 0,
+    "commonReceipt": {
+      "ok": false,
+      "status": "unknown",
+      "groupName": "电销+直播攻坚组",
+      "channel": "desktop",
+      "requestDigest": "b3fb279f061bbfcacf964abe5b7f361376cb877935c2cc1c9c53ca3ae9615107",
+      "runtimeModelDecisions": 0,
+      "items": [
+        {
+          "itemId": "0",
+          "sha256": "39123b05a0c1370532f145dae8460c0a9847b8a23adb46132d677e1d8e156992",
+          "type": "text",
+          "status": "unknown",
+          "claimedAt": 1792733950.91574,
+          "reason": "'path'",
+          "sendAttempts": null
+        }
+      ],
+      "review": [
+        {
+          "stage": "authorization",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "freeze:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "preflight",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 62598
+        },
+        {
+          "stage": "send:0",
+          "status": "failed",
+          "pitfalls": [
+            "'path'"
+          ],
+          "elapsedMs": 0
+        }
+      ],
+      "reason": "'path'",
+      "elapsedMs": 62601,
+      "eventKey": "a08b5d77e9a95baeaa20e225a2310afd17cf10c89413ad7c4ffe3d20f5c79585",
+      "reviewSummary": {
+        "totalElapsedMs": 62601,
+        "result": "unknown",
+        "stageCount": 4,
+        "completedStages": 3,
+        "failedStages": [
+          {
+            "stage": "send:0",
+            "status": "failed",
+            "pitfalls": [
+              "'path'"
+            ]
+          }
+        ]
+      }
+    },
+    "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/06fe1675692d06b4f494ad8f9b4516cf2cad523ca8dd3a24f7e78a7c367d6aae.json",
+    "sendReview": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0,
+        "item": 1,
+        "label": "authorization"
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0,
+        "item": 2,
+        "label": "freeze:0"
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 62598,
+        "item": 3,
+        "label": "preflight"
+      },
+      {
+        "stage": "send:0",
+        "status": "failed",
+        "pitfalls": [
+          {
+            "code": "messaging-stage",
+            "reason": "'path'"
+          }
+        ],
+        "elapsedMs": 0,
+        "item": 4,
+        "label": "send:0"
+      }
+    ],
+    "elapsedMs": 62601,
+    "reviewSummary": {
+      "totalElapsedMs": 62601,
+      "itemCount": 4,
+      "pitfallCount": 1,
+      "result": "failed"
+    },
+    "copyReadback": null,
+    "physicalSendAttempts": null,
+    "postSendInputCleared": null,
+    "stage": null,
+    "reconciledWithoutSend": false,
+    "attemptReviews": [
+      {
+        "attempt": 1,
+        "elapsedMs": 62704,
+        "ok": false,
+        "reason": "'path'",
+        "sendAttempts": null,
+        "sendReview": [
+          {
+            "stage": "authorization",
+            "status": "completed",
+            "pitfalls": [],
+            "elapsedMs": 0,
+            "item": 1,
+            "label": "authorization"
+          },
+          {
+            "stage": "freeze:0",
+            "status": "completed",
+            "pitfalls": [],
+            "elapsedMs": 0,
+            "item": 2,
+            "label": "freeze:0"
+          },
+          {
+            "stage": "preflight",
+            "status": "completed",
+            "pitfalls": [],
+            "elapsedMs": 62598,
+            "item": 3,
+            "label": "preflight"
+          },
+          {
+            "stage": "send:0",
+            "status": "failed",
+            "pitfalls": [
+              {
+                "code": "messaging-stage",
+                "reason": "'path'"
+              }
+            ],
+            "elapsedMs": 0,
+            "item": 4,
+            "label": "send:0"
+          }
+        ]
+      }
+    ],
+    "contentionRetries": 0,
+    "contentionWaitMs": 0,
+    "contentionEvents": []
+  }
+}

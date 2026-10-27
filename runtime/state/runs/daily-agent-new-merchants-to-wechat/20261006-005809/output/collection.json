@@ -1,0 +1,137 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-06",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 61,
+    "task_page": 511,
+    "navigation": 1418,
+    "date_filter": 1462,
+    "page_1_read": 312,
+    "selection_audit": 0,
+    "detail_1332142200": 765
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_1332142200": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "1332142200",
+      "merchantName": "旨寿司",
+      "recommendTime": "2026-10-05 23:24:18",
+      "city": "南通市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 8,
+      "address": "桃园路12号南通CBD大有境A座4层",
+      "contact": "荆，18015207427",
+      "detailVerified": true,
+      "text": "城市：南通市  ；  联系人：荆，18015207427  ；  店铺：旨寿司  ；  地址：桃园路12号南通CBD大有境A座4层",
+      "sha256": "10e36fb96a38da59bc089218e0b17a5f7a0534df69f0496992583225ddca259a"
+    }
+  ],
+  "frontmostBefore": "com.todesktop.230313mzl4w4u92",
+  "createdAt": "2026-10-05T16:58:15.338Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-05",
+    "merchantName": "炭禧金牌烧腊·猪脚饭",
+    "merchantId": "546325671",
+    "recommendTime": "2026-10-05 17:43:49",
+    "tableOrder": 7,
+    "messageSha256": "bece9ed901df0b3ef8963120438c13e6fe969ee042b1e2d38f7c3ddfb300da0a",
+    "sentAt": "2026-10-05T18:04:15+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-05",
+  "filterEndDate": "2026-10-06",
+  "dateFilter": "2026-10-05..2026-10-06",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 9,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 9,
+  "pendingRows": 8,
+  "targetCount": 1,
+  "selectionAudit": {
+    "totalRows": 9,
+    "pendingRows": 8,
+    "excludedAtOrBeforeCursor": 7,
+    "excludedAfterCursorNotPending": 1,
+    "targetCount": 1,
+    "rows": [
+      {
+        "merchantId": "1332142200",
+        "recommendTime": "2026-10-05 23:24:18",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546325671",
+        "recommendTime": "2026-10-05 17:43:49",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546550670",
+        "recommendTime": "2026-10-05 17:33:52",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1339019526",
+        "recommendTime": "2026-10-05 17:00:46",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "544800658",
+        "recommendTime": "2026-10-05 15:08:25",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1362271630",
+        "recommendTime": "2026-10-05 13:05:35",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1332581200",
+        "recommendTime": "2026-10-05 12:52:03",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1341962648",
+        "recommendTime": "2026-10-05 09:49:45",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1341868798",
+        "recommendTime": "2026-10-05 23:30:28",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 5062,
+  "frontmostAfter": "com.todesktop.230313mzl4w4u92",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261006-005809/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261006-005809/output/collection-attempt-1.review.md"
+}

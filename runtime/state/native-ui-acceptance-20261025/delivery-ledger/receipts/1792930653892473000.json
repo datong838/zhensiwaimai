@@ -1,0 +1,192 @@
+{
+  "ok": false,
+  "status": "partial",
+  "groupName": "临时测试群请忽略 💰发财精英荟💰",
+  "channel": "desktop",
+  "requestDigest": "2a30af20a6eefdfea47b08450f43db4390604b281932989afc544a2d6590ba18",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "text",
+      "sha256": "68a8681e10cbd2c7b67bc944c142edaf202c94c21d39897677d73ea44e84140e",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1792930620.521607,
+      "sendAttempts": 1,
+      "resolvedGroup": "临时测试群请忽略 💰发财精英荟💰",
+      "observations": [
+        {
+          "groupName": "临时测试群请忽略 💰发财精英荟💰",
+          "inputEmpty": true,
+          "newMessageVisible": true,
+          "observedAt": 1792930626.7492428,
+          "visibleText": "【原生UI实操测试 NATIVE-20261025-A01】合成内容，无客户数据；验证搜群后文字完整单条发送。",
+          "visibleTextSha256": "68a8681e10cbd2c7b67bc944c142edaf202c94c21d39897677d73ea44e84140e",
+          "messagePath": [
+            0,
+            25,
+            9,
+            0,
+            0,
+            0,
+            7
+          ]
+        },
+        {
+          "groupName": "临时测试群请忽略 💰发财精英荟💰",
+          "inputEmpty": true,
+          "newMessageVisible": true,
+          "observedAt": 1792930628.8403132,
+          "visibleText": "【原生UI实操测试 NATIVE-20261025-A01】合成内容，无客户数据；验证搜群后文字完整单条发送。",
+          "visibleTextSha256": "68a8681e10cbd2c7b67bc944c142edaf202c94c21d39897677d73ea44e84140e",
+          "messagePath": [
+            0,
+            25,
+            9,
+            0,
+            0,
+            0,
+            7
+          ]
+        }
+      ],
+      "backend": "system-events-ui-tree",
+      "verificationLevel": "wecom-ui-tree-text",
+      "evidence": {
+        "method": "wecom-ui-tree-text",
+        "resolvedGroup": "临时测试群请忽略 💰发财精英荟💰",
+        "sha256": "68a8681e10cbd2c7b67bc944c142edaf202c94c21d39897677d73ea44e84140e",
+        "observations": [
+          {
+            "groupName": "临时测试群请忽略 💰发财精英荟💰",
+            "inputEmpty": true,
+            "newMessageVisible": true,
+            "observedAt": 1792930626.7492428,
+            "visibleText": "【原生UI实操测试 NATIVE-20261025-A01】合成内容，无客户数据；验证搜群后文字完整单条发送。",
+            "visibleTextSha256": "68a8681e10cbd2c7b67bc944c142edaf202c94c21d39897677d73ea44e84140e",
+            "messagePath": [
+              0,
+              25,
+              9,
+              0,
+              0,
+              0,
+              7
+            ]
+          },
+          {
+            "groupName": "临时测试群请忽略 💰发财精英荟💰",
+            "inputEmpty": true,
+            "newMessageVisible": true,
+            "observedAt": 1792930628.8403132,
+            "visibleText": "【原生UI实操测试 NATIVE-20261025-A01】合成内容，无客户数据；验证搜群后文字完整单条发送。",
+            "visibleTextSha256": "68a8681e10cbd2c7b67bc944c142edaf202c94c21d39897677d73ea44e84140e",
+            "messagePath": [
+              0,
+              25,
+              9,
+              0,
+              0,
+              0,
+              7
+            ]
+          }
+        ]
+      },
+      "transport": {
+        "kind": "text",
+        "sendAttempts": 1,
+        "sent": true,
+        "postSendInputCleared": [
+          true,
+          true
+        ],
+        "stage": "post_send_verify"
+      }
+    },
+    {
+      "itemId": "image",
+      "sha256": "dd46e9235f2e3790de0e8e685aec62e424f6dd1b7a64f8fdfdc3bb31c0bb075b",
+      "type": "image",
+      "status": "unknown",
+      "claimedAt": 1792930628.851255,
+      "sendAttempts": 1,
+      "resolvedGroup": "临时测试群请忽略 💰发财精英荟💰",
+      "inputEmpty": true,
+      "reason": "native-ui-inline-image-not-exposed",
+      "backend": "system-events-ui-tree"
+    },
+    {
+      "itemId": "excel",
+      "sha256": "3c17eaf92b215d5e476989f8146426f762dbcbcdf992deea3b1a68581477d520",
+      "type": "file",
+      "status": "unknown",
+      "claimedAt": 1792930642.883989,
+      "sendAttempts": 1,
+      "resolvedGroup": "临时测试群请忽略 💰发财精英荟💰",
+      "inputEmpty": false,
+      "reason": "native-ui-file-preview-mismatch",
+      "backend": "system-events-ui-tree"
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:text",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:image",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:excel",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 6520
+    },
+    {
+      "stage": "send:text",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 8329
+    },
+    {
+      "stage": "send:image",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 14032
+    },
+    {
+      "stage": "send:excel",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 11008
+    }
+  ],
+  "reason": "native-ui-file-preview-mismatch",
+  "elapsedMs": 39893,
+  "eventKey": "acc9f8774b4d841afe8132c0830de33839de11b3e32d712afe4abf259d6f083e",
+  "reviewSummary": {
+    "totalElapsedMs": 39893,
+    "result": "partial",
+    "stageCount": 8,
+    "completedStages": 8,
+    "failedStages": []
+  }
+}

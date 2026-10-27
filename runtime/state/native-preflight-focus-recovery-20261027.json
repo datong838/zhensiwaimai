@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-27",
+  "changeFiles": [
+    "skills/wechat-messaging/scripts/native_ui_post.py",
+    "skills/wechat-messaging/tests/test_native_ui_post.py"
+  ],
+  "scope": "preflight exact focus mismatch only, one recovery under same active owner and no claim/send-intent/response; no send-stage retry",
+  "sha256": "935bf3bfe17e2b575b81f6d9b03287dd290e82d464d1f9f22655f003cb489842",
+  "pythonTests": 55,
+  "jxaScenarios": 11,
+  "realUIActionsDuringTests": 0,
+  "dependencyInspect": "clean; candidateFileCount=33; sendAttempts=0",
+  "currentPinnedFile": false,
+  "standingProductionScheduleChanged": false,
+  "ledgerWritesByMaintenance": 0,
+  "productionAcceptance": {
+    "slot": "14:30",
+    "originalWorkflowOk": true,
+    "fixedNoticeVerified": true,
+    "sendAttempts": 1,
+    "preflightRecoveryAttempts": 0,
+    "scope": "正常原生预检和发送已实跑；本档未复现焦点争用，不冒充真实触发恢复分支"
+  }
+}

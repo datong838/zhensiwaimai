@@ -1,0 +1,45 @@
+{
+  "at": "2026-10-27T10:53:34.676724+08:00",
+  "before": {
+    "skills/workflows/daily-top10-to-wechat-group/scripts/desktop_background_executor.mjs": "bd1392f7c381d146423c3254df096a22a75d4ea9b91761537df80923682d2877",
+    "skills/workflows/daily-new-stores-opening-to-wechat/scripts/collector.mjs": "47d68013f5e3b4721bbca3dbd5557a84aadc3230f70673a923c9f1cdf29b1dbe",
+    "skills/workflows/daily-taobao-download-to-jinsha/scripts/background_browser_executor.mjs": "1476a4ca116f2355f94f6067bc1032eed58789b7a40376a9e4f5d8a0bc1570fe",
+    "skills/workflows/daily-jinsha-reports-to-business-wechat/scripts/business_jinsha_browser_exam.mjs": "429cb0f3ba4aac0722d0a91225e21450cc0eded4e8261ccaa15eca6496efb43f",
+    "skills/workflows/daily-top10-to-wechat-group/runtime-policy.json": "d968114b76b88ea146943a04f0d8649b13b5ca45052f2ae0bb5ca4b06798661a",
+    "skills/workflows/daily-taobao-download-to-jinsha/scripts/entrypoint.mjs": "d7b1e85e82d91cf959cae62f22fdc9b9ef8d637d5fb6d7ea1ae6b05b5e2b0b8e",
+    "vendor/installed-taobao-skill/scripts/entrypoint.mjs": "d7b1e85e82d91cf959cae62f22fdc9b9ef8d637d5fb6d7ea1ae6b05b5e2b0b8e"
+  },
+  "after": {
+    "skills/workflows/daily-top10-to-wechat-group/scripts/desktop_background_executor.mjs": "e08495f3c7226af65438b3708da2c13f74fc55bd439d10c45d29296fe33dd50a",
+    "skills/workflows/daily-new-stores-opening-to-wechat/scripts/collector.mjs": "ed57c2a8dab2599f3a10a1893da0e79fdccf69db51abef78c1a314ba271c1514",
+    "skills/workflows/daily-taobao-download-to-jinsha/scripts/background_browser_executor.mjs": "cc0e796dff58f8142a5c7355e9626dd87fd9a42c058a639e441bda2a0146df6b",
+    "skills/workflows/daily-jinsha-reports-to-business-wechat/scripts/business_jinsha_browser_exam.mjs": "52a2d71610d887d7a6b514cb938231a1e7ab2966526322864d0ac1c44d8a0b4b",
+    "skills/workflows/daily-top10-to-wechat-group/runtime-policy.json": "898bb390d6847bc6f1887d1c912f632ef48afe71b57b437b83593a1e9867e09e",
+    "skills/workflows/daily-taobao-download-to-jinsha/scripts/entrypoint.mjs": "4782eb29d95532815a59229f1444a51698ef1dc5781703e60d7f3cfd354165b5",
+    "vendor/installed-taobao-skill/scripts/entrypoint.mjs": "4782eb29d95532815a59229f1444a51698ef1dc5781703e60d7f3cfd354165b5"
+  },
+  "versions": {
+    "headless-playwright": "1.62.1",
+    "isolated-persistent-playwright": "1.63.0"
+  },
+  "libraryTreeEquivalence": {
+    "headlessFiles": 111,
+    "isolatedFiles": 114,
+    "shaEqual": true,
+    "symlinks": 0
+  },
+  "validation": {
+    "nodeSyntax": "pass",
+    "newStoreCollectorTests": 7,
+    "top10BackgroundTests": 12,
+    "top10RuntimeGuardTests": 14,
+    "taobaoExecutorSelfTests": 87,
+    "jinshaFrozenCoreSelfTest": 18,
+    "fiveOriginalGuards": "pass",
+    "installedEntryEquality": "pass",
+    "executorDigest": "pass",
+    "productionSendAttempts": 0
+  },
+  "productionActions": 0,
+  "validatedAt": "2026-10-27T10:54:51.178585+08:00"
+}

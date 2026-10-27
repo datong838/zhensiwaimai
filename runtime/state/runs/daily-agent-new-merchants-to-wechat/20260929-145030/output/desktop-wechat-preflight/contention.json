@@ -1,0 +1,118 @@
+{
+  "ok": false,
+  "action": "open-group",
+  "group": "电销+直播攻坚组",
+  "header": null,
+  "note": "wechat-search-region-contended",
+  "reason": "desktop-wechat-contention-timeout:wechat-search-region-contended",
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "searchGroup": "电销+直播攻坚组",
+  "stageMs": {
+    "exact_group_preflight": 523
+  },
+  "hardGate": false,
+  "attempts": [
+    {
+      "reason": "wechat-search-region-contended",
+      "elapsedMs": {
+        "exact_group_preflight": 498
+      }
+    },
+    {
+      "reason": "wechat-search-region-contended",
+      "elapsedMs": {
+        "exact_group_preflight": 517
+      }
+    },
+    {
+      "reason": "wechat-search-region-contended",
+      "elapsedMs": {
+        "exact_group_preflight": 517
+      }
+    },
+    {
+      "reason": "wechat-search-region-contended",
+      "elapsedMs": {
+        "exact_group_preflight": 528
+      }
+    },
+    {
+      "reason": "wechat-search-region-contended",
+      "elapsedMs": {
+        "exact_group_preflight": 541
+      }
+    },
+    {
+      "reason": "wechat-search-region-contended",
+      "elapsedMs": {
+        "exact_group_preflight": 528
+      }
+    },
+    {
+      "reason": "wechat-search-region-contended",
+      "elapsedMs": {
+        "exact_group_preflight": 519
+      }
+    },
+    {
+      "reason": "wechat-search-region-contended",
+      "elapsedMs": {
+        "exact_group_preflight": 522
+      }
+    },
+    {
+      "reason": "wechat-search-region-contended",
+      "elapsedMs": {
+        "exact_group_preflight": 510
+      }
+    },
+    {
+      "reason": "wechat-search-region-contended",
+      "elapsedMs": {
+        "exact_group_preflight": 527
+      }
+    },
+    {
+      "reason": "wechat-search-region-contended",
+      "elapsedMs": {
+        "exact_group_preflight": 513
+      }
+    },
+    {
+      "reason": "wechat-search-region-contended",
+      "elapsedMs": {
+        "exact_group_preflight": 523
+      }
+    }
+  ],
+  "attemptReviews": [
+    {
+      "attempt": 1,
+      "elapsedMs": 47846,
+      "ok": false,
+      "reason": "wechat-search-region-contended",
+      "sendAttempts": 0,
+      "sendReview": []
+    },
+    {
+      "attempt": 2,
+      "elapsedMs": 54755,
+      "ok": false,
+      "reason": "wechat-search-region-contended",
+      "sendAttempts": 0,
+      "sendReview": []
+    }
+  ],
+  "contentionRetries": 1,
+  "contentionWaitMs": 5000,
+  "contentionEvents": [
+    {
+      "phase": "preflight",
+      "attempt": 1,
+      "reason": "wechat-search-region-contended",
+      "waitMs": 5000,
+      "observedWaitMs": 5001
+    }
+  ]
+}

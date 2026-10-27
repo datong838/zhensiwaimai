@@ -1,0 +1,25 @@
+{
+  "skill": "daily-agent-new-merchants-to-wechat",
+  "ledger_name": "淘宝新增商家增量通知（每30分钟·发电销+直播攻坚组）",
+  "schedule": "每30分钟（08:30 起，19:00 前停，latest_hour=19）",
+  "dev_state": "active",
+  "status": "FAILED",
+  "category": "UNKNOWN",
+  "detail": "stage=offline_selftest (receipt:stage) [note: 离线自检失败（非生产发送动作）。看具体子用例；不涉外发。]",
+  "next_action": "看护代理读日志定位根因后升级处理",
+  "attempts": 3,
+  "max_retries": 2,
+  "duration_seconds": 762.0,
+  "started_at": "2026-10-23T16:15:41",
+  "finished_at": "2026-10-23T16:28:23",
+  "triggered_by": "daemon",
+  "logs": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-23/daily-agent-new-merchants-to-wechat--20261023-161541--a1--s1.log",
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-23/daily-agent-new-merchants-to-wechat--20261023-162225--a2--s1.log",
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-23/daily-agent-new-merchants-to-wechat--20261023-162822--a3--s1.log"
+  ],
+  "fail_signal": {
+    "kind": "stage",
+    "code": "offline_selftest"
+  }
+}

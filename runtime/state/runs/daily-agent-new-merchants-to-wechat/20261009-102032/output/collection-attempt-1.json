@@ -1,0 +1,193 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-09",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 126,
+    "task_page": 526,
+    "navigation": 1628,
+    "date_filter": 1271,
+    "page_1_read": 374,
+    "page_1_next": 66,
+    "page_2_read": 565,
+    "selection_audit": 0,
+    "detail_529520233": 847,
+    "detail_1364337844": 2430
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "page_1_next": "PASS",
+    "page_2_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_529520233": "PASS",
+    "detail_1364337844": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "529520233",
+      "merchantName": "疆麦尔椒麻鸡",
+      "recommendTime": "2026-10-08 23:16:40",
+      "city": "乌鲁木齐市",
+      "status": "待处理",
+      "rowIndex": 1,
+      "sourcePage": 1,
+      "tableOrder": 13,
+      "address": "人民路车市巷59号",
+      "contact": "马先生，15299057728",
+      "detailVerified": true,
+      "text": "城市：乌鲁木齐市  ；  联系人：马先生，15299057728  ；  店铺：疆麦尔椒麻鸡  ；  地址：人民路车市巷59号",
+      "sha256": "5a82b3ca28c55deb7839b3d3bfd15917c33bfb859a7bbec32d8b62b9fc7ae01d"
+    },
+    {
+      "merchantId": "1364337844",
+      "merchantName": "云巷小宴",
+      "recommendTime": "2026-10-09 10:17:29",
+      "city": "保山市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 15,
+      "address": "永昌街道办事处海棠村3组4号",
+      "contact": "时航，15287576520",
+      "detailVerified": true,
+      "text": "城市：保山市  ；  联系人：时航，15287576520  ；  店铺：云巷小宴  ；  地址：永昌街道办事处海棠村3组4号",
+      "sha256": "2b34666ef448446ae3d3c158e80c3d9d3ac7c813a666915d8f2428e23e7cee76"
+    }
+  ],
+  "frontmostBefore": "com.tencent.yuanbao",
+  "createdAt": "2026-10-09T02:20:41.994Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-08",
+    "merchantName": "赵二两把子肉",
+    "merchantId": "545845110",
+    "recommendTime": "2026-10-08 18:13:48",
+    "tableOrder": 12,
+    "messageSha256": "facc7c13dc92898a99be9464c7e78652efba89c0febbcc929286c4a0ab2b7d0d",
+    "sentAt": "2026-10-08T20:38:31+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-08",
+  "filterEndDate": "2026-10-09",
+  "dateFilter": "2026-10-08..2026-10-09",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 10,
+      "nextEnabled": true
+    },
+    {
+      "page": 2,
+      "rowCount": 5,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 15,
+  "pendingRows": 10,
+  "targetCount": 2,
+  "selectionAudit": {
+    "totalRows": 15,
+    "pendingRows": 10,
+    "excludedAtOrBeforeCursor": 12,
+    "excludedAfterCursorNotPending": 1,
+    "targetCount": 2,
+    "rows": [
+      {
+        "merchantId": "1364337844",
+        "recommendTime": "2026-10-09 10:17:29",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "529520233",
+        "recommendTime": "2026-10-08 23:16:40",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "545845110",
+        "recommendTime": "2026-10-08 18:13:48",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1343716140",
+        "recommendTime": "2026-10-08 17:18:47",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1347208605",
+        "recommendTime": "2026-10-08 16:23:20",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "544806195",
+        "recommendTime": "2026-10-08 14:00:50",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1340910319",
+        "recommendTime": "2026-10-08 13:56:42",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1355498382",
+        "recommendTime": "2026-10-08 11:51:44",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "540991156",
+        "recommendTime": "2026-10-08 01:59:03",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "545462236",
+        "recommendTime": "2026-10-08 01:51:15",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1255237661",
+        "recommendTime": "2026-10-09 09:46:35",
+        "status": "完成"
+      },
+      {
+        "merchantId": "547015922",
+        "recommendTime": "2026-10-08 16:12:55",
+        "status": "完成"
+      },
+      {
+        "merchantId": "546571451",
+        "recommendTime": "2026-10-08 15:35:14",
+        "status": "完成"
+      },
+      {
+        "merchantId": "1358946098",
+        "recommendTime": "2026-10-08 15:04:19",
+        "status": "完成"
+      },
+      {
+        "merchantId": "1355660185",
+        "recommendTime": "2026-10-08 14:46:30",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 9200,
+  "frontmostAfter": "com.tencent.yuanbao",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261009-102032/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261009-102032/output/collection-attempt-1.review.md"
+}

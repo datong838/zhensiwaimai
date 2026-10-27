@@ -1,0 +1,144 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-18",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 58,
+    "task_page": 1222,
+    "navigation": 597,
+    "date_filter": 1398,
+    "page_1_read": 408,
+    "selection_audit": 1,
+    "detail_546890051": 824,
+    "detail_1320329741": 995
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_546890051": "PASS",
+    "detail_1320329741": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "546890051",
+      "merchantName": "兰州牛肉拉面",
+      "recommendTime": "2026-10-18 15:08:43",
+      "city": "泉州市",
+      "status": "待处理",
+      "rowIndex": 1,
+      "sourcePage": 1,
+      "tableOrder": 6,
+      "address": "高霞丹阳路1-21号",
+      "contact": "阿龙，17709370593",
+      "detailVerified": true,
+      "text": "城市：泉州市  ；  联系人：阿龙，17709370593  ；  店铺：兰州牛肉拉面  ；  地址：高霞丹阳路1-21号",
+      "sha256": "ea96d36883010e9ac2568ab67b799de8b7b5d5271c452aea6fbedb60691384db"
+    },
+    {
+      "merchantId": "1320329741",
+      "merchantName": "麻辣烫·麻辣拌·麻辣香锅",
+      "recommendTime": "2026-10-18 15:43:00",
+      "city": "南京市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 7,
+      "address": "神农路1号南京特殊教育师范学院栖霞校区第一食堂",
+      "contact": "薛俊琦，19159846869",
+      "detailVerified": true,
+      "text": "城市：南京市  ；  联系人：薛俊琦，19159846869  ；  店铺：麻辣烫·麻辣拌·麻辣香锅  ；  地址：神农路1号南京特殊教育师范学院栖霞校区第一食堂",
+      "sha256": "9e985467959cf86166957a739067395a5b09c51143f4d05886c531dc347baaab"
+    }
+  ],
+  "frontmostBefore": "com.google.Chrome",
+  "createdAt": "2026-10-18T07:46:05.627Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-18",
+    "merchantName": "米煦拌饭",
+    "merchantId": "546541656",
+    "recommendTime": "2026-10-18 13:42:51",
+    "tableOrder": 5,
+    "messageSha256": "376f63f62c399b1d950e07631118545efaa552e82317cb27f40862391a8cb0a8",
+    "sentAt": "2026-10-18T14:38:34+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-18",
+  "filterEndDate": "2026-10-18",
+  "dateFilter": "2026-10-18..2026-10-18",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 7,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 7,
+  "pendingRows": 6,
+  "targetCount": 2,
+  "selectionAudit": {
+    "totalRows": 7,
+    "pendingRows": 6,
+    "excludedAtOrBeforeCursor": 5,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 2,
+    "rows": [
+      {
+        "merchantId": "1320329741",
+        "recommendTime": "2026-10-18 15:43:00",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546890051",
+        "recommendTime": "2026-10-18 15:08:43",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546541656",
+        "recommendTime": "2026-10-18 13:42:51",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1297280842",
+        "recommendTime": "2026-10-18 10:55:44",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1334954314",
+        "recommendTime": "2026-10-18 08:54:36",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "547026719",
+        "recommendTime": "2026-10-18 08:48:28",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1362967118",
+        "recommendTime": "2026-10-18 13:13:45",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 6135,
+  "frontmostAfter": "com.google.Chrome",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261018-154558/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261018-154558/output/collection-attempt-1.review.md"
+}

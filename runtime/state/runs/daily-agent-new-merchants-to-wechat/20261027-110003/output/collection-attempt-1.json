@@ -1,0 +1,89 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-27",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 119,
+    "task_page": 482,
+    "navigation": 1389,
+    "date_filter": 1471,
+    "page_1_read": 371,
+    "selection_audit": 0
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS"
+  },
+  "messages": [],
+  "frontmostBefore": "com.openai.codex",
+  "createdAt": "2026-10-27T03:00:08.535Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-27",
+    "merchantName": "七分秋甜减糖50%·韩式切块·动物奶油·甜品(柳巷店）",
+    "merchantId": "1349163544",
+    "recommendTime": "2026-10-27 09:54:39",
+    "tableOrder": 2,
+    "messageSha256": "d3fe800e7f0b0f1cff4e06106f87567b5110c47f203514e88938e09b1bdc7ec7",
+    "sentAt": "2026-10-27T10:00:24+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-27",
+  "filterEndDate": "2026-10-27",
+  "dateFilter": "2026-10-27..2026-10-27",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 3,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 3,
+  "pendingRows": 2,
+  "targetCount": 0,
+  "selectionAudit": {
+    "totalRows": 3,
+    "pendingRows": 2,
+    "excludedAtOrBeforeCursor": 2,
+    "excludedAfterCursorNotPending": 1,
+    "targetCount": 0,
+    "rows": [
+      {
+        "merchantId": "1349163544",
+        "recommendTime": "2026-10-27 09:54:39",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1366725839",
+        "recommendTime": "2026-10-27 08:06:10",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546901789",
+        "recommendTime": "2026-10-27 10:59:27",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 4062,
+  "frontmostAfter": "com.openai.codex",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261027-110003/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261027-110003/output/collection-attempt-1.review.md"
+}

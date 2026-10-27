@@ -1,0 +1,137 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-27",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 76,
+    "task_page": 168,
+    "navigation": 2778,
+    "date_filter": 1523,
+    "page_1_read": 466,
+    "selection_audit": 0,
+    "detail_1366725839": 759
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_1366725839": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "1366725839",
+      "merchantName": "口味鸭脖王·热卤",
+      "recommendTime": "2026-10-27 08:06:10",
+      "city": "成都市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 9,
+      "address": "十陵街道江华路87号附1号",
+      "contact": "曾，15882115594",
+      "detailVerified": true,
+      "text": "城市：成都市  ；  联系人：曾，15882115594  ；  店铺：口味鸭脖王·热卤  ；  地址：十陵街道江华路87号附1号  ；  商家ID：1366725839",
+      "sha256": "93b8563c4b477dd7ad0fe5204d519548d0827012ff7ab96a10ab8976cb61a1bb"
+    }
+  ],
+  "frontmostBefore": "com.tencent.WeWorkMac",
+  "createdAt": "2026-10-27T00:30:13.938Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-26",
+    "merchantName": "包炒炒浇头面",
+    "merchantId": "547308768",
+    "recommendTime": "2026-10-26 17:45:52",
+    "tableOrder": 7,
+    "messageSha256": "10dd31e2ff207b233d344dcdb7551565fb3ac9e4b640c9739d44f25e5fbd6c9a",
+    "sentAt": "2026-10-26T18:00:24+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-26",
+  "filterEndDate": "2026-10-27",
+  "dateFilter": "2026-10-26..2026-10-27",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 9,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 9,
+  "pendingRows": 6,
+  "targetCount": 1,
+  "selectionAudit": {
+    "totalRows": 9,
+    "pendingRows": 6,
+    "excludedAtOrBeforeCursor": 6,
+    "excludedAfterCursorNotPending": 2,
+    "targetCount": 1,
+    "rows": [
+      {
+        "merchantId": "1366725839",
+        "recommendTime": "2026-10-27 08:06:10",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "547308768",
+        "recommendTime": "2026-10-26 17:45:52",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "547032462",
+        "recommendTime": "2026-10-26 16:38:07",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1359555169",
+        "recommendTime": "2026-10-26 15:31:55",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "538822520",
+        "recommendTime": "2026-10-26 11:50:03",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "544670041",
+        "recommendTime": "2026-10-26 00:56:45",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1367052651",
+        "recommendTime": "2026-10-26 18:25:24",
+        "status": "完成"
+      },
+      {
+        "merchantId": "547086971",
+        "recommendTime": "2026-10-26 18:19:21",
+        "status": "完成"
+      },
+      {
+        "merchantId": "547330034",
+        "recommendTime": "2026-10-26 16:25:54",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 6017,
+  "frontmostAfter": "com.tencent.WeWorkMac",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261027-083006/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261027-083006/output/collection-attempt-1.review.md"
+}

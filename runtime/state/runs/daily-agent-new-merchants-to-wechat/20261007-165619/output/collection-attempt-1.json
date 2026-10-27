@@ -1,0 +1,104 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-07",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 238,
+    "task_page": 646,
+    "navigation": 1544,
+    "date_filter": 1342,
+    "page_1_read": 361,
+    "selection_audit": 0
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS"
+  },
+  "messages": [],
+  "frontmostBefore": "com.tencent.yuanbao",
+  "createdAt": "2026-10-07T08:56:25.391Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-07",
+    "merchantName": "杨记鸡煲",
+    "merchantId": "546590794",
+    "recommendTime": "2026-10-07 15:14:06",
+    "tableOrder": 6,
+    "messageSha256": "9c1bb63a292fe44b719898d2fddce367854f69b842c0acec95bc16ddd3402dae",
+    "sentAt": "2026-10-07T15:55:25+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-07",
+  "filterEndDate": "2026-10-07",
+  "dateFilter": "2026-10-07..2026-10-07",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 6,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 6,
+  "pendingRows": 6,
+  "targetCount": 0,
+  "selectionAudit": {
+    "totalRows": 6,
+    "pendingRows": 6,
+    "excludedAtOrBeforeCursor": 6,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 0,
+    "rows": [
+      {
+        "merchantId": "546590794",
+        "recommendTime": "2026-10-07 15:14:06",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1316655046",
+        "recommendTime": "2026-10-07 14:42:25",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1355794675",
+        "recommendTime": "2026-10-07 14:03:59",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "543219931",
+        "recommendTime": "2026-10-07 11:50:25",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1342388590",
+        "recommendTime": "2026-10-07 09:07:48",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "542957171",
+        "recommendTime": "2026-10-07 01:44:14",
+        "status": "待处理"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 4644,
+  "frontmostAfter": "com.tencent.yuanbao",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261007-165619/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261007-165619/output/collection-attempt-1.review.md"
+}

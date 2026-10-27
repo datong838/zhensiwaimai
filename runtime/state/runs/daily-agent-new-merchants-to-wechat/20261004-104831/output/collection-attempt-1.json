@@ -1,0 +1,127 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-04",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 80,
+    "task_page": 295,
+    "navigation": 1680,
+    "date_filter": 1407,
+    "page_1_read": 323,
+    "selection_audit": 1,
+    "detail_527430085": 772
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_527430085": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "527430085",
+      "merchantName": "丁振涛生煎",
+      "recommendTime": "2026-10-04 10:07:25",
+      "city": "武汉市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 7,
+      "address": "古田四路天泽一方",
+      "contact": "丁振涛，15927109698",
+      "detailVerified": true,
+      "text": "城市：武汉市  ；  联系人：丁振涛，15927109698  ；  店铺：丁振涛生煎  ；  地址：古田四路天泽一方",
+      "sha256": "4a83ade213cf5a69f5f3aef20811e6f01892fc97230a335286d090ce66504788"
+    }
+  ],
+  "frontmostBefore": "com.tencent.workbuddy.mac",
+  "createdAt": "2026-10-04T02:48:37.337Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-03",
+    "merchantName": "顶好餐饮店",
+    "merchantId": "1138963048",
+    "recommendTime": "2026-10-03 15:08:13",
+    "tableOrder": 6,
+    "messageSha256": "ecbb51d3d39b05f1d44adf4157edef2fc789cc1a88481dcb108cf703bcdcd770",
+    "sentAt": "2026-10-03T18:21:58+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-03",
+  "filterEndDate": "2026-10-04",
+  "dateFilter": "2026-10-03..2026-10-04",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 7,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 7,
+  "pendingRows": 7,
+  "targetCount": 1,
+  "selectionAudit": {
+    "totalRows": 7,
+    "pendingRows": 7,
+    "excludedAtOrBeforeCursor": 6,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 1,
+    "rows": [
+      {
+        "merchantId": "527430085",
+        "recommendTime": "2026-10-04 10:07:25",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1138963048",
+        "recommendTime": "2026-10-03 15:08:13",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "545440640",
+        "recommendTime": "2026-10-03 14:15:27",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1343054859",
+        "recommendTime": "2026-10-03 13:32:49",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "543005047",
+        "recommendTime": "2026-10-03 12:58:56",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "542668196",
+        "recommendTime": "2026-10-03 11:50:41",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "2097569711",
+        "recommendTime": "2026-10-03 11:21:56",
+        "status": "待处理"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 5058,
+  "frontmostAfter": "com.tencent.workbuddy.mac",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261004-104831/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261004-104831/output/collection-attempt-1.review.md"
+}

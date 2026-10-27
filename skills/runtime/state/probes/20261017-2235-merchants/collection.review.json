@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "targetCount": null,
+  "totalRows": null,
+  "pendingRows": null,
+  "rows": [
+    {
+      "item": 1,
+      "stage": "background_preflight",
+      "label": "后台浏览器预检",
+      "elapsedMs": null,
+      "status": "SKIPPED",
+      "pitfalls": []
+    },
+    {
+      "item": 2,
+      "stage": "task_page",
+      "label": "建立独立任务页",
+      "elapsedMs": null,
+      "status": "SKIPPED",
+      "pitfalls": []
+    },
+    {
+      "item": 3,
+      "stage": "navigation",
+      "label": "进入意向商户列表",
+      "elapsedMs": null,
+      "status": "SKIPPED",
+      "pitfalls": []
+    },
+    {
+      "item": 4,
+      "stage": "date_filter",
+      "label": "日期设置与双帧回读",
+      "elapsedMs": null,
+      "status": "SKIPPED",
+      "pitfalls": []
+    },
+    {
+      "item": 5,
+      "stage": "selection_audit",
+      "label": "选择审计",
+      "elapsedMs": null,
+      "status": "SKIPPED",
+      "pitfalls": []
+    },
+    {
+      "item": 6,
+      "stage": "collector",
+      "label": "采集器前置门禁",
+      "elapsedMs": null,
+      "status": "FAIL",
+      "pitfalls": [
+        "cursor-unavailable-requires-group-recovery"
+      ]
+    },
+    {
+      "item": 7,
+      "stage": "total",
+      "label": "只读采集总耗时（含子阶段，不重复相加）",
+      "elapsedMs": 1,
+      "status": "FAIL",
+      "pitfalls": [
+        "cursor-unavailable-requires-group-recovery"
+      ]
+    }
+  ]
+}

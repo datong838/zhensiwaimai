@@ -1,0 +1,137 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-12",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 112,
+    "task_page": 311,
+    "navigation": 1275,
+    "date_filter": 1401,
+    "page_1_read": 408,
+    "selection_audit": 0,
+    "detail_1359530815": 818
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_1359530815": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "1359530815",
+      "merchantName": "手工大馅水饺盖饭",
+      "recommendTime": "2026-10-12 14:25:30",
+      "city": "邯郸市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 8,
+      "address": "光明大街啤酒厂东门对面第七号门市",
+      "contact": "李，15097846985",
+      "detailVerified": true,
+      "text": "城市：邯郸市  ；  联系人：李，15097846985  ；  店铺：手工大馅水饺盖饭  ；  地址：光明大街啤酒厂东门对面第七号门市",
+      "sha256": "27d49df6d2d67361d321068b0b58e476882ad760f642681a35cef1eee0fc1628"
+    }
+  ],
+  "frontmostBefore": "com.tencent.yuanbao",
+  "createdAt": "2026-10-12T07:23:20.732Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-12",
+    "merchantName": "阿静手工水饺·米线·关东煮",
+    "merchantId": "546526773",
+    "recommendTime": "2026-10-12 13:31:53",
+    "tableOrder": 7,
+    "messageSha256": "fe70e199ad690daa25f1be5a434e29532172d1d4c156866df105fc43c85c773e",
+    "sentAt": "2026-10-12T14:17:02+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-12",
+  "filterEndDate": "2026-10-12",
+  "dateFilter": "2026-10-12..2026-10-12",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 9,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 9,
+  "pendingRows": 7,
+  "targetCount": 1,
+  "selectionAudit": {
+    "totalRows": 9,
+    "pendingRows": 7,
+    "excludedAtOrBeforeCursor": 7,
+    "excludedAfterCursorNotPending": 1,
+    "targetCount": 1,
+    "rows": [
+      {
+        "merchantId": "1359530815",
+        "recommendTime": "2026-10-12 14:25:30",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546526773",
+        "recommendTime": "2026-10-12 13:31:53",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "545571270",
+        "recommendTime": "2026-10-12 13:04:44",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1357544210",
+        "recommendTime": "2026-10-12 11:03:59",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546561996",
+        "recommendTime": "2026-10-12 10:42:27",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546200474",
+        "recommendTime": "2026-10-12 09:56:37",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1122082877",
+        "recommendTime": "2026-10-12 08:57:42",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546542516",
+        "recommendTime": "2026-10-12 14:48:02",
+        "status": "完成"
+      },
+      {
+        "merchantId": "546642286",
+        "recommendTime": "2026-10-12 12:17:14",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 4861,
+  "frontmostAfter": "com.tencent.yuanbao",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261012-152315/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261012-152315/output/collection-attempt-1.review.md"
+}

@@ -1,0 +1,195 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-06",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 200,
+    "task_page": 474,
+    "navigation": 1413,
+    "date_filter": 1218,
+    "page_1_read": 322,
+    "page_1_next": 53,
+    "page_2_read": 544,
+    "selection_audit": 0,
+    "detail_543338440": 780,
+    "detail_1357327730": 2368,
+    "detail_1332435894": 1052
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "page_1_next": "PASS",
+    "page_2_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_543338440": "PASS",
+    "detail_1357327730": "PASS",
+    "detail_1332435894": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "543338440",
+      "merchantName": "饭福星·炭火烤肉拌饭·烤排饭",
+      "recommendTime": "2026-10-06 12:45:36",
+      "city": "深圳市",
+      "status": "待处理",
+      "rowIndex": 2,
+      "sourcePage": 1,
+      "tableOrder": 10,
+      "address": "龙城街道黄阁坑社区新秀新村66号102热食类食品制售",
+      "contact": "纪，17675438432",
+      "detailVerified": true,
+      "text": "城市：深圳市  ；  联系人：纪，17675438432  ；  店铺：饭福星·炭火烤肉拌饭·烤排饭  ；  地址：龙城街道黄阁坑社区新秀新村66号102热食类食品制售",
+      "sha256": "039eaad41acf07e6d6a3f4ac3cf000e2673245b12c69833fb4267854eb430273"
+    },
+    {
+      "merchantId": "1357327730",
+      "merchantName": "刘大妈秘卤大碗饭",
+      "recommendTime": "2026-10-06 14:40:49",
+      "city": "深圳市",
+      "status": "待处理",
+      "rowIndex": 1,
+      "sourcePage": 1,
+      "tableOrder": 11,
+      "address": "福永街道白石厦社区东区永丰二路14号G1永丰二路14-4号",
+      "contact": "李生，13560770401",
+      "detailVerified": true,
+      "text": "城市：深圳市  ；  联系人：李生，13560770401  ；  店铺：刘大妈秘卤大碗饭  ；  地址：福永街道白石厦社区东区永丰二路14号G1永丰二路14-4号",
+      "sha256": "8f6f610e989e72efba1a0c75333cba534347c44038476c03aa9aaf6ec364f57b"
+    },
+    {
+      "merchantId": "1332435894",
+      "merchantName": "隆江猪脚饭·猪头汤",
+      "recommendTime": "2026-10-06 15:47:26",
+      "city": "合肥市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 12,
+      "address": "三里街街道凤阳路与全椒路交口东南凤阳东路4号0号门面东边一间",
+      "contact": "李瑞贺，15555149311",
+      "detailVerified": true,
+      "text": "城市：合肥市  ；  联系人：李瑞贺，15555149311  ；  店铺：隆江猪脚饭·猪头汤  ；  地址：三里街街道凤阳路与全椒路交口东南凤阳东路4号0号门面东边一间",
+      "sha256": "e5c97fff64385b1d50ed6895e0fd45cfa133a475ac97fc9aea0791c6ed26ba61"
+    }
+  ],
+  "frontmostBefore": "com.tencent.workbuddy.mac",
+  "createdAt": "2026-10-06T08:01:07.864Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-06",
+    "merchantName": "旨寿司",
+    "merchantId": "1332142200",
+    "recommendTime": "2026-10-05 23:24:18",
+    "tableOrder": 8,
+    "messageSha256": "10e36fb96a38da59bc089218e0b17a5f7a0534df69f0496992583225ddca259a",
+    "sentAt": "2026-10-06T14:57:32+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-05",
+  "filterEndDate": "2026-10-06",
+  "dateFilter": "2026-10-05..2026-10-06",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 10,
+      "nextEnabled": true
+    },
+    {
+      "page": 2,
+      "rowCount": 2,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 12,
+  "pendingRows": 11,
+  "targetCount": 3,
+  "selectionAudit": {
+    "totalRows": 12,
+    "pendingRows": 11,
+    "excludedAtOrBeforeCursor": 8,
+    "excludedAfterCursorNotPending": 1,
+    "targetCount": 3,
+    "rows": [
+      {
+        "merchantId": "1332435894",
+        "recommendTime": "2026-10-06 15:47:26",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1357327730",
+        "recommendTime": "2026-10-06 14:40:49",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "543338440",
+        "recommendTime": "2026-10-06 12:45:36",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1332142200",
+        "recommendTime": "2026-10-05 23:24:18",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546325671",
+        "recommendTime": "2026-10-05 17:43:49",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546550670",
+        "recommendTime": "2026-10-05 17:33:52",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1339019526",
+        "recommendTime": "2026-10-05 17:00:46",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "544800658",
+        "recommendTime": "2026-10-05 15:08:25",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1362271630",
+        "recommendTime": "2026-10-05 13:05:35",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1332581200",
+        "recommendTime": "2026-10-05 12:52:03",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1341962648",
+        "recommendTime": "2026-10-05 09:49:45",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1341868798",
+        "recommendTime": "2026-10-05 23:30:28",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 9811,
+  "frontmostAfter": "com.tencent.workbuddy.mac",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261006-160057/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261006-160057/output/collection-attempt-1.review.md"
+}
