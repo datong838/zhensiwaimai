@@ -1,0 +1,104 @@
+{
+  "ok": true,
+  "sourceDigests": {
+    "skills/workflows/contract-termination-applications-screenshot/scripts/contract_termination_shot.mjs": "319c170cb1ff60eb481a1a51e8864b94531645d94a429d7bfec9a53dd2f159f2",
+    "skills/posts/shared/lease_core.mjs": "30fd4d6dc186b27fe5f3882fd62745c622a1ac66d13cc89cb10f5d20cb30fa62",
+    "runtime/post_lease_file.py": "76118532de56f5a6922e66c3a74be84bcd6e92e9f4ef295f28cdb85eabb4d670",
+    "skills/posts/taobao-brand-post/scripts/lease.mjs": "4610c74fa9b15dd4da9a513189217b4b0579823a633668f7bdf8237ba9b10640",
+    "skills/posts/taobao-svc-post/scripts/lease.mjs": "28343a3a24a18e650d72190168408f51a8e58e0e7a092a32ec3f837f2a03ccc3",
+    "skills/posts/jinsha-post/scripts/lease.mjs": "da6a0f05d234e5e05eb9a0eae4d46fdb0ea8f67cd0f18e51f84371bfff810077",
+    "skills/posts/meituan-post/scripts/lease.mjs": "cb25a4cfa774368c3e7905296fb0c57152ebf8824dca4ac7a6fbd7aad03f1376"
+  },
+  "checks": [
+    {
+      "name": "broker-tests",
+      "exitCode": 0,
+      "argv": [
+        "/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "runtime/tests",
+        "-p",
+        "test_post_lease_file.py",
+        "-v"
+      ]
+    },
+    {
+      "name": "role-api-tests",
+      "exitCode": 0,
+      "argv": [
+        "/Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--test",
+        "skills/posts/shared/lease_contract.test.mjs"
+      ]
+    },
+    {
+      "name": "jinsha-original-contract",
+      "exitCode": 0,
+      "argv": [
+        "/Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--test",
+        "skills/posts/jinsha-post/scripts/test_contract.mjs"
+      ]
+    },
+    {
+      "name": "roster-lifecycle",
+      "exitCode": 0,
+      "argv": [
+        "/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "skills/workflows/daily-store-metrics-rotation-to-wechat/scripts",
+        "-p",
+        "test_refresh_shop_pool.py",
+        "-v"
+      ]
+    },
+    {
+      "name": "roster-original-release",
+      "exitCode": 0,
+      "argv": [
+        "/Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--test",
+        "skills/workflows/daily-store-metrics-rotation-to-wechat/scripts/release_roster_lease.test.mjs"
+      ]
+    },
+    {
+      "name": "contract-tests",
+      "exitCode": 0,
+      "argv": [
+        "/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "skills/workflows/contract-termination-applications-screenshot/tests",
+        "-v"
+      ]
+    },
+    {
+      "name": "contract-selftest",
+      "exitCode": 0,
+      "argv": [
+        "/Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "skills/workflows/contract-termination-applications-screenshot/scripts/contract_termination_shot.mjs",
+        "--self-test"
+      ]
+    },
+    {
+      "name": "whitespace",
+      "exitCode": 0,
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ]
+    }
+  ],
+  "liveLeaseMutations": 0,
+  "productionActions": 0
+}

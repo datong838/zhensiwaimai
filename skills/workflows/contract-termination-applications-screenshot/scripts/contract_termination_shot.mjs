@@ -155,17 +155,6 @@ async function shutdown(code, payload) {
   setTimeout(() => process.exit(code), 3000).unref();
 }
 
-// 死 pid 遗留租约自愈：pid 已不存在 ⇒ 视为陈旧，直接清理（TTL 30min 太长，会把工位白锁半小时）
-async function clearDeadLease(leasePath) {
-  try {
-    const raw = JSON.parse(fs.readFileSync(leasePath, 'utf8'));
-    if (!raw || !raw.pid) return false;
-    try { process.kill(raw.pid, 0); return false; } catch (e) { if (e.code !== 'ESRCH') return false; }
-    fs.unlinkSync(leasePath);
-    return true;
-  } catch { return false; }
-}
-
 async function loginGuard(page) {
   assertOrigin(page.url());
   const body = await page.evaluate(() => (document.body && document.body.innerText) || '');
@@ -306,7 +295,6 @@ async function main() {
   const receipt = { runId, at: now.toISOString(), route: ROUTE, taskStatus: TASK_STATUS, outDir, pages: [], rows: [], header: null, warnings: [], reset: null };
 
   const LEASE_PATH = '/tmp/zhensi-post-9231.lock';
-  if (await clearDeadLease(LEASE_PATH)) log('已清理死 pid 遗留租约（自愈，不白锁 30min）');
   LEASE = await acquirePostLease(runId, LEASE_PATH);
   if (!LEASE) { log('SKIPPED_BUSY: 9231 工位忙（他人持有租约），不驱动浏览器'); return shutdown(4, { ...receipt, ok: false, reason: 'post-busy' }); }
 

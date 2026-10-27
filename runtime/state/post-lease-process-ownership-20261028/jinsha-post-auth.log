@@ -1,0 +1,18 @@
+✔ assertJinshaEntry 放行正常金鲨首页快照 (0.438ms)
+✔ assertJinshaEntry 路由不符抛默认错误码 (0.16575ms)
+✔ assertJinshaEntry 支持自定义 home 与 errorCode（NEGATIVE 路由 + route 错误码） (0.368375ms)
+✔ assertJinshaEntry 标题不符抛错 (0.05225ms)
+✔ assertJinshaEntry risk=true 抛错（覆盖「登录失效」风险词场景） (0.049833ms)
+✔ assertJinshaLoginGate 放行正常日报页 (0.061125ms)
+✔ assertJinshaLoginGate origin 不符抛 jinsha-origin-changed (0.042083ms)
+✔ assertJinshaLoginGate 登录页抛 jinsha-login-required (0.043417ms)
+✔ assertJinshaLoginGate 命中登录标记抛 jinsha-login-required (0.067042ms)
+✔ isJinshaLoginUrl 仅金鲨 login 路由为真 (0.096291ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 39.785708

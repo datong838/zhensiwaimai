@@ -1,0 +1,376 @@
+✖ taobao-brand-post live owner survives TTL (6.283417ms)
+✖ taobao-brand-post fresh dead owner is reclaimed immediately (1.620667ms)
+✔ taobao-brand-post own repeated run preserves original API contract (1.702375ms)
+✖ taobao-brand-post same runId cannot adopt another live PID (1.124167ms)
+✖ taobao-brand-post altered owner cannot release and stale token cannot release reacquisition (0.803167ms)
+✖ taobao-brand-post opaque expired owner is not guessed dead (1.058083ms)
+✖ taobao-svc-post live owner survives TTL (1.0425ms)
+✖ taobao-svc-post fresh dead owner is reclaimed immediately (0.721458ms)
+✔ taobao-svc-post own repeated run preserves original API contract (0.947958ms)
+✖ taobao-svc-post same runId cannot adopt another live PID (0.902ms)
+✖ taobao-svc-post altered owner cannot release and stale token cannot release reacquisition (0.938375ms)
+✖ taobao-svc-post opaque expired owner is not guessed dead (0.937792ms)
+✖ meituan-post live owner survives TTL (1.164667ms)
+✔ meituan-post fresh dead owner is reclaimed immediately (0.815625ms)
+✔ meituan-post own repeated run preserves original API contract (0.772708ms)
+✖ meituan-post same runId cannot adopt another live PID (0.968292ms)
+✖ meituan-post altered owner cannot release and stale token cannot release reacquisition (0.839083ms)
+✖ meituan-post opaque expired owner is not guessed dead (1.011292ms)
+✖ jinsha-post live owner survives TTL (1.639458ms)
+✖ jinsha-post fresh dead owner is reclaimed immediately (0.585917ms)
+✔ jinsha-post own repeated run preserves original API contract (0.745ms)
+✔ jinsha-post same runId cannot adopt another live PID (1.201ms)
+✖ jinsha-post altered owner cannot release and stale token cannot release reacquisition (0.67925ms)
+✖ jinsha-post opaque expired owner is not guessed dead (0.822125ms)
+ℹ tests 24
+ℹ suites 0
+ℹ pass 6
+ℹ fail 18
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 99.606291
+
+✖ failing tests:
+
+test at skills/posts/shared/lease_contract.test.mjs:33:3
+✖ taobao-brand-post live owner survives TTL (6.283417ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + {
+  +   acquiredAt: 1793124701645,
+  +   leasePath: '/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/physical-post-test-x8x3C6/physical.lock',
+  +   pid: 50036,
+  +   runId: 'new'
+  + }
+  - null
+  
+      at busy (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/posts/shared/lease_contract.test.mjs:31:17)
+      at async TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/posts/shared/lease_contract.test.mjs:35:42)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { runId: 'new', pid: 50036, acquiredAt: 1793124701645, leasePath: '/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/physical-post-test-x8x3C6/physical.lock' },
+    expected: null,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at skills/posts/shared/lease_contract.test.mjs:37:3
+✖ taobao-brand-post fresh dead owner is reclaimed immediately (1.620667ms)
+  TypeError: Cannot read properties of null (reading 'runId')
+      at TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/posts/shared/lease_contract.test.mjs:39:69)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+
+test at skills/posts/shared/lease_contract.test.mjs:47:3
+✖ taobao-brand-post same runId cannot adopt another live PID (1.124167ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + {
+  +   acquiredAt: 1793124701652,
+  +   leasePath: '/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/physical-post-test-6SBae1/physical.lock',
+  +   pid: 50035,
+  +   runId: 'same'
+  + }
+  - null
+  
+      at busy (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/posts/shared/lease_contract.test.mjs:31:17)
+      at async TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/posts/shared/lease_contract.test.mjs:49:42)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { runId: 'same', pid: 50035, acquiredAt: 1793124701652, leasePath: '/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/physical-post-test-6SBae1/physical.lock' },
+    expected: null,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at skills/posts/shared/lease_contract.test.mjs:51:3
+✖ taobao-brand-post altered owner cannot release and stale token cannot release reacquisition (0.803167ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/posts/shared/lease_contract.test.mjs:54:17)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at skills/posts/shared/lease_contract.test.mjs:60:3
+✖ taobao-brand-post opaque expired owner is not guessed dead (1.058083ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + {
+  +   acquiredAt: 1793124701654,
+  +   leasePath: '/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/physical-post-test-lvzRwN/physical.lock',
+  +   pid: 50036,
+  +   runId: 'new'
+  + }
+  - null
+  
+      at busy (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/posts/shared/lease_contract.test.mjs:31:17)
+      at async TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/posts/shared/lease_contract.test.mjs:62:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { runId: 'new', pid: 50036, acquiredAt: 1793124701654, leasePath: '/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/physical-post-test-lvzRwN/physical.lock' },
+    expected: null,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at skills/posts/shared/lease_contract.test.mjs:33:3
+✖ taobao-svc-post live owner survives TTL (1.0425ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + {
+  +   acquiredAt: 1793124701655,
+  +   leasePath: '/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/physical-post-test-OQ9yen/physical.lock',
+  +   pid: 50036,
+  +   runId: 'new'
+  + }
+  - null
+  
+      at busy (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/posts/shared/lease_contract.test.mjs:31:17)
+      at async TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/posts/shared/lease_contract.test.mjs:35:42)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { runId: 'new', pid: 50036, acquiredAt: 1793124701655, leasePath: '/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/physical-post-test-OQ9yen/physical.lock' },
+    expected: null,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at skills/posts/shared/lease_contract.test.mjs:37:3
+✖ taobao-svc-post fresh dead owner is reclaimed immediately (0.721458ms)
+  TypeError: Cannot read properties of null (reading 'runId')
+      at TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/posts/shared/lease_contract.test.mjs:39:69)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+
+test at skills/posts/shared/lease_contract.test.mjs:47:3
+✖ taobao-svc-post same runId cannot adopt another live PID (0.902ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + {
+  +   acquiredAt: 1793124701658,
+  +   leasePath: '/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/physical-post-test-QJFM3J/physical.lock',
+  +   pid: 50035,
+  +   runId: 'same'
+  + }
+  - null
+  
+      at busy (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/posts/shared/lease_contract.test.mjs:31:17)
+      at async TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/posts/shared/lease_contract.test.mjs:49:42)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { runId: 'same', pid: 50035, acquiredAt: 1793124701658, leasePath: '/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/physical-post-test-QJFM3J/physical.lock' },
+    expected: null,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at skills/posts/shared/lease_contract.test.mjs:51:3
+✖ taobao-svc-post altered owner cannot release and stale token cannot release reacquisition (0.938375ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/posts/shared/lease_contract.test.mjs:54:17)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at skills/posts/shared/lease_contract.test.mjs:60:3
+✖ taobao-svc-post opaque expired owner is not guessed dead (0.937792ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + {
+  +   acquiredAt: 1793124701660,
+  +   leasePath: '/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/physical-post-test-WkzTew/physical.lock',
+  +   pid: 50036,
+  +   runId: 'new'
+  + }
+  - null
+  
+      at busy (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/posts/shared/lease_contract.test.mjs:31:17)
+      at async TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/posts/shared/lease_contract.test.mjs:62:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { runId: 'new', pid: 50036, acquiredAt: 1793124701660, leasePath: '/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/physical-post-test-WkzTew/physical.lock' },
+    expected: null,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at skills/posts/shared/lease_contract.test.mjs:33:3
+✖ meituan-post live owner survives TTL (1.164667ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + {
+  +   acquiredAt: 1793124701661,
+  +   leasePath: '/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/physical-post-test-mpy5TS/physical.lock',
+  +   pid: 50036,
+  +   runId: 'new'
+  + }
+  - null
+  
+      at busy (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/posts/shared/lease_contract.test.mjs:31:17)
+      at async TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/posts/shared/lease_contract.test.mjs:35:42)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { runId: 'new', pid: 50036, acquiredAt: 1793124701661, leasePath: '/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/physical-post-test-mpy5TS/physical.lock' },
+    expected: null,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at skills/posts/shared/lease_contract.test.mjs:47:3
+✖ meituan-post same runId cannot adopt another live PID (0.968292ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + {
+  +   acquiredAt: 1793124701663,
+  +   leasePath: '/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/physical-post-test-U5Yvv2/physical.lock',
+  +   pid: 50035,
+  +   runId: 'same'
+  + }
+  - null
+  
+      at busy (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/posts/shared/lease_contract.test.mjs:31:17)
+      at async TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/posts/shared/lease_contract.test.mjs:49:42)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { runId: 'same', pid: 50035, acquiredAt: 1793124701663, leasePath: '/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/physical-post-test-U5Yvv2/physical.lock' },
+    expected: null,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at skills/posts/shared/lease_contract.test.mjs:51:3
+✖ meituan-post altered owner cannot release and stale token cannot release reacquisition (0.839083ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/posts/shared/lease_contract.test.mjs:54:17)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at skills/posts/shared/lease_contract.test.mjs:60:3
+✖ meituan-post opaque expired owner is not guessed dead (1.011292ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + {
+  +   acquiredAt: 1793124701665,
+  +   leasePath: '/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/physical-post-test-hBFw2A/physical.lock',
+  +   pid: 50036,
+  +   runId: 'new'
+  + }
+  - null
+  
+      at busy (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/posts/shared/lease_contract.test.mjs:31:17)
+      at async TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/posts/shared/lease_contract.test.mjs:62:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { runId: 'new', pid: 50036, acquiredAt: 1793124701665, leasePath: '/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/physical-post-test-hBFw2A/physical.lock' },
+    expected: null,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at skills/posts/shared/lease_contract.test.mjs:33:3
+✖ jinsha-post live owner survives TTL (1.639458ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async busy (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/posts/shared/lease_contract.test.mjs:30:15)
+      at async TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/posts/shared/lease_contract.test.mjs:35:42)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /jinsha-lease-busy/,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at skills/posts/shared/lease_contract.test.mjs:37:3
+✖ jinsha-post fresh dead owner is reclaimed immediately (0.585917ms)
+  Error: jinsha-lease-busy:dead
+      at acquireJinshaLease (data:text/javascript;base64,Ly8g6YeR6bKo5bKX77yIamluc2hhLXBvc3TvvInlt6XkvY3np5/nuqbplIEg4oCU4oCUIOS6kuaWpeeahOeOsOaIkOWunueOsO+8iFcy77yJCi8vIOS7jiAuZGFpbHktamluc2hhLXJlcG9ydHMtY29yZS9zY3JpcHRzL2ppbnNoYV9jdWFfZXhhbS5qcyDljp/moLfov4Hnp7vvvIzlpZHnuqbkuI3lj5jvvJoKLy8gICAtIGFjcXVpcmVKaW5zaGFMZWFzZe+8muaWh+S7tumUge+8iHd4IOeLrOWNoOWIm+W7uu+8ie+8jEVFWElTVCDkuJTmnKrov4fmnJ8g4oaSIGppbnNoYS1sZWFzZS1idXN577ybCi8vICAgICDov4fmnJ/vvIg+IHR0bE1z77yJ4oaSIOmHiuaUvuWQjumHjeivleS4gOasoeOAggovLyAgIC0gcmVsZWFzZUppbnNoYUxlYXNl77ya5qCh6aqMIG93bmVy77yIcnVuSWQgKyBhY3F1aXJlZEF077yJ77yM5LiN5Yy56YWNIOKGkiBqaW5zaGEtbGVhc2Utb3duZXItbWlzbWF0Y2jjgIIKLy8g6L+Z5piv44CM6YeR6bKo5bel5L2N5ZCM5LiA5pe25Yi75Y+q5YWB6K645LiA5p2h5rWB5rC057q/5b2T54+t44CN55qE54mp55CG5L+d6K+B44CCCgppbXBvcnQgZnMgZnJvbSAnbm9kZTpmcy9wcm9taXNlcyc7Cgpjb25zdCBERUZBVUxUX0xFQVNFX1BBVEggPSAnL3RtcC96aGVuc2ktamluc2hhLWN1YS1leGFtLmxvY2snOwpjb25zdCBERUZBVUxUX0xFQVNFX1RUTF9NUyA9IDMwICogNjAgKiAxMDAwOwoKZXhwb3J0IGFzeW5jIGZ1bmN0aW9uIGFjcXVpcmVKaW5zaGFMZWFzZShydW5JZCwgbGVhc2VQYXRoID0gREVGQVVMVF9MRUFTRV9QQVRILCB0dGxNcyA9IERFRkFVTFRfTEVBU0VfVFRMX01TKSB7CiAgY29uc3Qgbm93ID0gRGF0ZS5ub3coKTsKICBjb25zdCBwYXlsb2FkID0ge3J1bklkLCBwaWQ6IHR5cGVvZiBwcm9jZXNzID09PSAndW5kZWZpbmVkJyA/IG51bGwgOiBwcm9jZXNzLnBpZCwgYWNxdWlyZWRBdDogbm93fTsKICBmb3IgKGxldCBhdHRlbXB0ID0gMDsgYXR0ZW1wdCA8IDI7IGF0dGVtcHQrKykgewogICAgdHJ5IHsKICAgICAgY29uc3QgaGFuZGxlID0gYXdhaXQgZnMub3BlbihsZWFzZVBhdGgsICd3eCcsIDBvNjAwKTsKICAgICAgYXdhaXQgaGFuZGxlLndyaXRlRmlsZShKU09OLnN0cmluZ2lmeShwYXlsb2FkKSk7CiAgICAgIGF3YWl0IGhhbmRsZS5jbG9zZSgpOwogICAgICByZXR1cm4gey4uLnBheWxvYWQsIHBhdGg6IGxlYXNlUGF0aH07CiAgICB9IGNhdGNoIChlcnJvcikgewogICAgICBpZiAoZXJyb3I/LmNvZGUgIT09ICdFRVhJU1QnKSB0aHJvdyBlcnJvcjsKICAgICAgbGV0IGV4aXN0aW5nID0ge307CiAgICAgIHRyeSB7ZXhpc3RpbmcgPSBKU09OLnBhcnNlKGF3YWl0IGZzLnJlYWRGaWxlKGxlYXNlUGF0aCwgJ3V0ZjgnKSk7fSBjYXRjaCB7fQogICAgICBjb25zdCBhY3F1aXJlZEF0ID0gTnVtYmVyKGV4aXN0aW5nPy5hY3F1aXJlZEF0KTsKICAgICAgaWYgKGF0dGVtcHQgPT09IDAgJiYgTnVtYmVyLmlzRmluaXRlKGFjcXVpcmVkQXQpICYmIG5vdyAtIGFjcXVpcmVkQXQgPiB0dGxNcykgewogICAgICAgIGF3YWl0IGZzLnVubGluayhsZWFzZVBhdGgpLmNhdGNoKCh1bmxpbmtFcnJvcikgPT4ge2lmICh1bmxpbmtFcnJvcj8uY29kZSAhPT0gJ0VOT0VOVCcpIHRocm93IHVubGlua0Vycm9yO30pOwogICAgICAgIGNvbnRpbnVlOwogICAgICB9CiAgICAgIHRocm93IEVycm9yKCdqaW5zaGEtbGVhc2UtYnVzeTonICsgU3RyaW5nKGV4aXN0aW5nPy5ydW5JZCB8fCAndW5rbm93bicpKTsKICAgIH0KICB9CiAgdGhyb3cgRXJyb3IoJ2ppbnNoYS1sZWFzZS1hY3F1aXJlLWZhaWxlZCcpOwp9CgpleHBvcnQgYXN5bmMgZnVuY3Rpb24gcmVsZWFzZUppbnNoYUxlYXNlKGxlYXNlKSB7CiAgaWYgKCFsZWFzZSkgcmV0dXJuIGZhbHNlOwogIGxldCBleGlzdGluZyA9IHt9OwogIHRyeSB7ZXhpc3RpbmcgPSBKU09OLnBhcnNlKGF3YWl0IGZzLnJlYWRGaWxlKGxlYXNlLnBhdGgsICd1dGY4JykpO30gY2F0Y2ggKGVycm9yKSB7CiAgICBpZiAoZXJyb3I/LmNvZGUgPT09ICdFTk9FTlQnKSByZXR1cm4gZmFsc2U7CiAgICB0aHJvdyBlcnJvcjsKICB9CiAgaWYgKGV4aXN0aW5nPy5ydW5JZCAhPT0gbGVhc2UucnVuSWQgfHwgZXhpc3Rpbmc/LmFjcXVpcmVkQXQgIT09IGxlYXNlLmFjcXVpcmVkQXQpCiAgICB0aHJvdyBFcnJvcignamluc2hhLWxlYXNlLW93bmVyLW1pc21hdGNoJyk7CiAgYXdhaXQgZnMudW5saW5rKGxlYXNlLnBhdGgpOwogIHJldHVybiB0cnVlOwp9Cg==:31:13)
+      at async TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/posts/shared/lease_contract.test.mjs:39:17)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+
+test at skills/posts/shared/lease_contract.test.mjs:51:3
+✖ jinsha-post altered owner cannot release and stale token cannot release reacquisition (0.67925ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/posts/shared/lease_contract.test.mjs:53:15)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /owner-mismatch/,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at skills/posts/shared/lease_contract.test.mjs:60:3
+✖ jinsha-post opaque expired owner is not guessed dead (0.822125ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async busy (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/posts/shared/lease_contract.test.mjs:30:15)
+      at async TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/posts/shared/lease_contract.test.mjs:62:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /jinsha-lease-busy/,
+    operator: 'rejects',
+    diff: 'simple'
+  }

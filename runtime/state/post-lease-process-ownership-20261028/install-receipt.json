@@ -1,0 +1,66 @@
+{
+  "ok": true,
+  "originalGates": [
+    {
+      "post": "taobao-brand-post",
+      "exitCode": 0,
+      "stdout": "{\n  \"ok\": true,\n  \"status\": \"clean\",\n  \"fileCount\": 8,\n  \"mismatches\": []\n}\n",
+      "stderr": ""
+    },
+    {
+      "post": "taobao-svc-post",
+      "exitCode": 0,
+      "stdout": "{\n  \"ok\": true,\n  \"status\": \"clean\",\n  \"fileCount\": 7,\n  \"mismatches\": []\n}\n",
+      "stderr": ""
+    },
+    {
+      "post": "jinsha-post",
+      "exitCode": 0,
+      "stdout": "{\n  \"ok\": true,\n  \"status\": \"clean\",\n  \"fileCount\": 7,\n  \"mismatches\": []\n}\n",
+      "stderr": ""
+    },
+    {
+      "post": "meituan-post",
+      "exitCode": 0,
+      "stdout": "{\n  \"ok\": true,\n  \"status\": \"clean\",\n  \"fileCount\": 7,\n  \"mismatches\": []\n}\n",
+      "stderr": ""
+    }
+  ],
+  "sourceDigests": {
+    "skills/workflows/contract-termination-applications-screenshot/scripts/contract_termination_shot.mjs": "319c170cb1ff60eb481a1a51e8864b94531645d94a429d7bfec9a53dd2f159f2",
+    "skills/posts/shared/lease_core.mjs": "30fd4d6dc186b27fe5f3882fd62745c622a1ac66d13cc89cb10f5d20cb30fa62",
+    "runtime/post_lease_file.py": "76118532de56f5a6922e66c3a74be84bcd6e92e9f4ef295f28cdb85eabb4d670",
+    "skills/posts/taobao-brand-post/scripts/lease.mjs": "4610c74fa9b15dd4da9a513189217b4b0579823a633668f7bdf8237ba9b10640",
+    "skills/posts/taobao-svc-post/scripts/lease.mjs": "28343a3a24a18e650d72190168408f51a8e58e0e7a092a32ec3f837f2a03ccc3",
+    "skills/posts/jinsha-post/scripts/lease.mjs": "da6a0f05d234e5e05eb9a0eae4d46fdb0ea8f67cd0f18e51f84371bfff810077",
+    "skills/posts/meituan-post/scripts/lease.mjs": "cb25a4cfa774368c3e7905296fb0c57152ebf8824dca4ac7a6fbd7aad03f1376"
+  },
+  "changes": [
+    {
+      "post": "taobao-brand-post",
+      "path": "skills/posts/taobao-brand-post/dependencies.json",
+      "originalSha256": "eabbd28d7204e9704f0992a4f4284c8fa86184b02a7046ad81d08af597bd2c44",
+      "candidateSha256": "ee74830c251ce31707224b47e33c0cba7756e69d3f1d25b01d2b405e4e276ab4"
+    },
+    {
+      "post": "taobao-svc-post",
+      "path": "skills/posts/taobao-svc-post/dependencies.json",
+      "originalSha256": "fff05187bcfe4bca1c6eec8a78fa4e9dbe48e175c2e75988bada05f25927c507",
+      "candidateSha256": "ed810b6d7f518bc2e11b8bad958a1348391a251cd5a81c14516e2a722a2b0ed5"
+    },
+    {
+      "post": "jinsha-post",
+      "path": "skills/posts/jinsha-post/dependencies.json",
+      "originalSha256": "45de5a1e0453eeabae22300a46e798b2ddc5ce0a3dc2373d5ae33095e2212e3f",
+      "candidateSha256": "4f7ff22ceb0bd1c27f96f3103ecd4fdb28bef39154c84465b40c603d3c5b094e"
+    },
+    {
+      "post": "meituan-post",
+      "path": "skills/posts/meituan-post/dependencies.json",
+      "originalSha256": "e6e2040fdd8d6062ef16bf0e1feeab38333faa021b1e34e37194f02129e89a79",
+      "candidateSha256": "dca7453b782012b5620fe3fc9ffcbd1019816b7f797ef74b34725876e78ea51f"
+    }
+  ],
+  "liveLeaseMutations": 0,
+  "productionActions": 0
+}

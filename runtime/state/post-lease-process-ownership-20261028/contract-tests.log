@@ -1,0 +1,30 @@
+test_ambiguous_or_missing_or_symlink_receipt_rejected (test_capture_receipt.CaptureReceiptTests.test_ambiguous_or_missing_or_symlink_receipt_rejected) ... ok
+test_complete_multipage_and_single_page (test_capture_receipt.CaptureReceiptTests.test_complete_multipage_and_single_page) ... ok
+test_failed_dry_wrong_route_status_or_reset_rejected (test_capture_receipt.CaptureReceiptTests.test_failed_dry_wrong_route_status_or_reset_rejected) ... ok
+test_known_total_row_count_and_row_state_must_match (test_capture_receipt.CaptureReceiptTests.test_known_total_row_count_and_row_state_must_match) ... ok
+test_missing_file_is_not_silently_dropped (test_capture_receipt.CaptureReceiptTests.test_missing_file_is_not_silently_dropped) ... ok
+test_original_receipt_controls_images_and_extra_png_is_ignored (test_capture_receipt.CaptureReceiptTests.test_original_receipt_controls_images_and_extra_png_is_ignored) ... ok
+test_partial_or_missing_or_duplicate_page_rejected (test_capture_receipt.CaptureReceiptTests.test_partial_or_missing_or_duplicate_page_rejected) ... ok
+test_size_and_png_structure_must_match (test_capture_receipt.CaptureReceiptTests.test_size_and_png_structure_must_match) ... ok
+test_stale_future_naive_or_bad_date_rejected (test_capture_receipt.CaptureReceiptTests.test_stale_future_naive_or_bad_date_rejected) ... ok
+test_symlink_or_foreign_directory_rejected (test_capture_receipt.CaptureReceiptTests.test_symlink_or_foreign_directory_rejected) ... ok
+test_utc_timestamp_uses_shanghai_day (test_capture_receipt.CaptureReceiptTests.test_utc_timestamp_uses_shanghai_day) ... ok
+test_zero_rows_is_no_report_after_complete_validation (test_capture_receipt.CaptureReceiptTests.test_zero_rows_is_no_report_after_complete_validation) ... ok
+test_all_pages_required_and_ordered (test_delivery.DeliveryTests.test_all_pages_required_and_ordered) ... ok
+test_capture_and_deliver_run_keep_original_paths (test_delivery.DeliveryTests.test_capture_and_deliver_run_keep_original_paths) ... ok
+test_exception_retains_completed_page_evidence (test_delivery.DeliveryTests.test_exception_retains_completed_page_evidence) ... ok
+test_invalid_deliver_run_does_not_send_or_create_new_run (test_delivery.DeliveryTests.test_invalid_deliver_run_does_not_send_or_create_new_run) ... ok
+test_invalid_normal_capture_never_reaches_delivery (test_delivery.DeliveryTests.test_invalid_normal_capture_never_reaches_delivery) ... ok
+test_old_images_block_before_supplement_or_adapter (test_delivery.DeliveryTests.test_old_images_block_before_supplement_or_adapter) ... ok
+test_pending_main_never_collects_or_creates_run (test_delivery.DeliveryTests.test_pending_main_never_collects_or_creates_run) ... ok
+test_pending_requires_current_native_owner (test_delivery.DeliveryTests.test_pending_requires_current_native_owner) ... ok
+test_pending_requires_exact_current_binding (test_delivery.DeliveryTests.test_pending_requires_exact_current_binding) ... ok
+test_single_page_remains_compatible (test_delivery.DeliveryTests.test_single_page_remains_compatible) ... ok
+test_submitted_pending_images_continue_only_unattempted_pages (test_delivery.DeliveryTests.test_submitted_pending_images_continue_only_unattempted_pages) ... ok
+test_unknown_stops_remaining_pages_and_never_retries (test_delivery.DeliveryTests.test_unknown_stops_remaining_pages_and_never_retries) ... ok
+test_unsafe_unknown_never_allows_next_page (test_delivery.DeliveryTests.test_unsafe_unknown_never_allows_next_page) ... ok
+
+----------------------------------------------------------------------
+Ran 25 tests in 0.047s
+
+OK

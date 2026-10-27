@@ -1,48 +1,16 @@
-// 金鲨岗（jinsha-post）工位租约锁 —— 互斥的现成实现（W2）
-// 从 .daily-jinsha-reports-core/scripts/jinsha_cua_exam.js 原样迁移，契约不变：
-//   - acquireJinshaLease：文件锁（wx 独占创建），EEXIST 且未过期 → jinsha-lease-busy；
-//     过期（> ttlMs）→ 释放后重试一次。
-//   - releaseJinshaLease：校验 owner（runId + acquiredAt），不匹配 → jinsha-lease-owner-mismatch。
-// 这是「金鲨工位同一时刻只允许一条流水线当班」的物理保证。
-
-import fs from 'node:fs/promises';
-
+// Physical ownership is serialized by the original post lease broker.
+import {acquire, release} from '../../shared/lease_core.mjs';
 const DEFAULT_LEASE_PATH = '/tmp/zhensi-jinsha-cua-exam.lock';
 const DEFAULT_LEASE_TTL_MS = 30 * 60 * 1000;
-
 export async function acquireJinshaLease(runId, leasePath = DEFAULT_LEASE_PATH, ttlMs = DEFAULT_LEASE_TTL_MS) {
-  const now = Date.now();
-  const payload = {runId, pid: typeof process === 'undefined' ? null : process.pid, acquiredAt: now};
-  for (let attempt = 0; attempt < 2; attempt++) {
-    try {
-      const handle = await fs.open(leasePath, 'wx', 0o600);
-      await handle.writeFile(JSON.stringify(payload));
-      await handle.close();
-      return {...payload, path: leasePath};
-    } catch (error) {
-      if (error?.code !== 'EEXIST') throw error;
-      let existing = {};
-      try {existing = JSON.parse(await fs.readFile(leasePath, 'utf8'));} catch {}
-      const acquiredAt = Number(existing?.acquiredAt);
-      if (attempt === 0 && Number.isFinite(acquiredAt) && now - acquiredAt > ttlMs) {
-        await fs.unlink(leasePath).catch((unlinkError) => {if (unlinkError?.code !== 'ENOENT') throw unlinkError;});
-        continue;
-      }
-      throw Error('jinsha-lease-busy:' + String(existing?.runId || 'unknown'));
-    }
-  }
-  throw Error('jinsha-lease-acquire-failed');
+  // ttlMs remains API-compatible; age never authorizes takeover of a live PID.
+  const result = acquire(runId, leasePath, {style: 'jinsha', reentrant: false});
+  if (result.status !== 'acquired') throw Error('jinsha-lease-busy:' + String(result.ownerRunId || 'unknown'));
+  return {...result.lease, path: leasePath};
 }
-
 export async function releaseJinshaLease(lease) {
   if (!lease) return false;
-  let existing = {};
-  try {existing = JSON.parse(await fs.readFile(lease.path, 'utf8'));} catch (error) {
-    if (error?.code === 'ENOENT') return false;
-    throw error;
-  }
-  if (existing?.runId !== lease.runId || existing?.acquiredAt !== lease.acquiredAt)
-    throw Error('jinsha-lease-owner-mismatch');
-  await fs.unlink(lease.path);
-  return true;
+  const result = release(lease, lease.path);
+  if (result.status === 'mismatch') throw Error('jinsha-lease-owner-mismatch');
+  return result.status === 'released';
 }

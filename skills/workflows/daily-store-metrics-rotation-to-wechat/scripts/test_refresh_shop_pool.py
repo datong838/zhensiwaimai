@@ -51,7 +51,7 @@ class CollectorLifecycleTests(unittest.TestCase):
         helper = (Path(__file__).parent/'release_roster_lease.mjs').resolve().as_uri()
         with tempfile.TemporaryDirectory(prefix='roster-timeout-test-') as folder:
             lease = Path(folder)/'lease.json'
-            script = "require('fs').writeFileSync(process.argv[1],JSON.stringify({runId:process.argv[2],pid:process.pid}));setInterval(()=>{},1000)"
+            script = "require('fs').writeFileSync(process.argv[1],JSON.stringify({runId:process.argv[2],pid:process.pid,acquiredAt:Date.now(),leasePath:process.argv[1]}));setInterval(()=>{},1000)"
             def cleanup(pid):
                 self.cleanup(pid)
                 self.assertTrue(lease.exists(), 'test child must have acquired its temporary lease')

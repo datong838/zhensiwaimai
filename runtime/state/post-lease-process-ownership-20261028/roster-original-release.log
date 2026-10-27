@@ -1,0 +1,16 @@
+✔ only a unique valid roster UUID is accepted (0.495542ms)
+✔ missing lease is idempotent (33.533791ms)
+✔ own reaped child lease is released using original API, ignoring stored path (59.959167ms)
+✔ live owner is preserved regardless of old timestamp (21.920834ms)
+✔ foreign pid is preserved byte for byte (21.675708ms)
+✔ foreign runId is preserved byte for byte (34.024583ms)
+✔ malformed lease and invalid caller cannot authorize release (52.554916ms)
+✔ original release refuses a replacement task that acquired before release (51.861ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 323.319459

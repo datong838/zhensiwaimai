@@ -1,0 +1,110 @@
+{
+  "checkedAt": "2026-10-28T02:22:36.078299+08:00",
+  "status": "installed-code-and-original-integrity-verified",
+  "testCasesPassed": 138,
+  "redOriginalApiCases": {
+    "total": 24,
+    "passed": 6,
+    "failed": 18
+  },
+  "originalPostManifestFileCounts": {
+    "taobao-brand-post": 8,
+    "taobao-svc-post": 7,
+    "jinsha-post": 7,
+    "meituan-post": 7
+  },
+  "unchangedOriginalNonLeasePins": [
+    "skills/posts/taobao-brand-post/SKILL.md",
+    "skills/posts/taobao-brand-post/scripts/channel.mjs",
+    "skills/posts/taobao-brand-post/scripts/test_auth.mjs",
+    "skills/posts/taobao-brand-post/scripts/auth.mjs",
+    "skills/posts/taobao-brand-post/scripts/connect.mjs",
+    "skills/posts/taobao-svc-post/SKILL.md",
+    "skills/posts/taobao-svc-post/scripts/test_auth.mjs",
+    "skills/posts/taobao-svc-post/scripts/auth.mjs",
+    "skills/posts/taobao-svc-post/scripts/connect.mjs",
+    "skills/posts/jinsha-post/SKILL.md",
+    "skills/posts/jinsha-post/scripts/connect.mjs",
+    "skills/posts/jinsha-post/scripts/pagination.mjs",
+    "skills/posts/jinsha-post/scripts/test_contract.mjs",
+    "skills/posts/meituan-post/SKILL.md",
+    "skills/posts/meituan-post/scripts/test_auth.mjs",
+    "skills/posts/meituan-post/scripts/auth.mjs",
+    "skills/posts/meituan-post/scripts/connect.mjs"
+  ],
+  "originalBusinessFilesChanged": [],
+  "unexpectedBusinessFiles": [],
+  "sourceDigests": {
+    "skills/workflows/contract-termination-applications-screenshot/scripts/contract_termination_shot.mjs": "319c170cb1ff60eb481a1a51e8864b94531645d94a429d7bfec9a53dd2f159f2",
+    "skills/posts/shared/lease_core.mjs": "30fd4d6dc186b27fe5f3882fd62745c622a1ac66d13cc89cb10f5d20cb30fa62",
+    "runtime/post_lease_file.py": "76118532de56f5a6922e66c3a74be84bcd6e92e9f4ef295f28cdb85eabb4d670",
+    "skills/posts/taobao-brand-post/scripts/lease.mjs": "4610c74fa9b15dd4da9a513189217b4b0579823a633668f7bdf8237ba9b10640",
+    "skills/posts/taobao-svc-post/scripts/lease.mjs": "28343a3a24a18e650d72190168408f51a8e58e0e7a092a32ec3f837f2a03ccc3",
+    "skills/posts/jinsha-post/scripts/lease.mjs": "da6a0f05d234e5e05eb9a0eae4d46fdb0ea8f67cd0f18e51f84371bfff810077",
+    "skills/posts/meituan-post/scripts/lease.mjs": "cb25a4cfa774368c3e7905296fb0c57152ebf8824dca4ac7a6fbd7aad03f1376"
+  },
+  "originalDirector": {
+    "physicalLocks": [
+      {
+        "path": "/tmp/zhensi-post-9230.lock",
+        "exists": false,
+        "guardExists": false
+      },
+      {
+        "path": "/tmp/zhensi-post-9231.lock",
+        "exists": false,
+        "guardExists": false
+      },
+      {
+        "path": "/tmp/zhensi-jinsha-cua-exam.lock",
+        "exists": false,
+        "guardExists": false
+      },
+      {
+        "path": "/tmp/zhensi-post-9233.lock",
+        "exists": false,
+        "guardExists": false
+      }
+    ],
+    "liveSteps": 0,
+    "directorPid": 54029,
+    "directorRestarted": false,
+    "daemon": {
+      "pid": 54029,
+      "started_at": "2026-10-27T19:37:47",
+      "last_cycle_at": "2026-10-28T01:58:22",
+      "status": "running",
+      "next_cycle_at": "2026-10-28T02:28:22"
+    }
+  },
+  "browserListenerPids": {
+    "9230": [
+      "12961"
+    ],
+    "9231": [
+      "3212"
+    ],
+    "9232": [
+      "89873"
+    ],
+    "9233": [
+      "7155"
+    ]
+  },
+  "legacyJinshaFrozenCore": {
+    "integrityPassed": true,
+    "fileCount": 18,
+    "activeChannel": "browser",
+    "activeCollectorUsesCanonicalPostLease": true,
+    "frozenCuaBytesChanged": false
+  },
+  "liveLeaseMutations": 0,
+  "browserActions": 0,
+  "browserRestarts": 0,
+  "productionActions": 0,
+  "sendAttempts": 0,
+  "remaining": [
+    "Original director outer 90-minute group-lock TTL/live-owner boundary still needs safe implementation and activation audit",
+    "Real business executions remain for original schedule; static tests are not delivery acceptance"
+  ]
+}
