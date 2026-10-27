@@ -46419,3 +46419,32 @@
 
 === 发送门判断 ===
 [info] 今日已发送台账，跳过重复发送。
+[fixed_schedule] 到达固定排班时点，开始下一周期
+
+=== daemon 周期 2026-10-27 (force_all=False) ===
+[skip] daily-agent-new-merchants-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] negative-feedback-list-appeals-0930 当日已成功（cadence 内），本周期跳过
+[skip] negative-feedback-list-appeals-1230 当日已成功（cadence 内），本周期跳过
+[skip] meituan-intelligent-customer-service-12 superseded_customer_slot，本周期跳过
+[skip] meituan-intelligent-customer-service-15 superseded_customer_slot，本周期跳过
+[skip] meituan-intelligent-customer-service 当日已成功（cadence 内），本周期跳过
+[skip] daily-quality-products-optimization 当日已成功（cadence 内），本周期跳过
+[skip] meituan-waimai-negative-review-appeals-11 business_delivery_observed，本周期跳过
+[skip] taobao-flash-sale-negative-review-appeals business_delivery_observed，本周期跳过
+[skip] daily-new-stores-opening-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-activity-audit-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-decoration-audit-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-not-nourished-ops-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-store-task-completion-ops-to-wechat business_delivery_observed，本周期跳过
+[skip] daily-store-basic-diagnosis-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-taobao-download-to-jinsha business_delivery_observed，本周期跳过
+[skip] daily-service-market-ranking-to-wechat business_delivery_observed，本周期跳过
+[skip] daily-top10-to-wechat-group business_delivery_observed，本周期跳过
+[skip] daily-meituan-income-top10-to-wechat business_delivery_observed，本周期跳过
+[skip] daily-negative-reviews business_delivery_observed，本周期跳过
+[skip] contract-termination-applications-screenshot business_delivery_observed，本周期跳过
+[skip] daily-jinsha-reports-to-business-wechat 当日已成功（cadence 内），本周期跳过
+[ok] 台账 xlsx 已生成: /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/work/2026-10-27臻肆工作台账.xlsx (active 20/20)
+
+=== 发送门判断 ===
+[info] 今日已发送台账，跳过重复发送。

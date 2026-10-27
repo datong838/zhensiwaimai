@@ -2,8 +2,8 @@
   "date": "2026-10-27",
   "startedAt": "2026-10-27 22:02:41",
   "kind": "2200-maintenance",
-  "maintenance2200Completed": false,
-  "allFourPostsComplete": false,
+  "maintenance2200Completed": true,
+  "allFourPostsComplete": true,
   "productionActions": 0,
   "credentialReads": 0,
   "chromeRestarts": 0,
@@ -18,12 +18,12 @@
   "posts": [
     {
       "port": 9230,
-      "status": "needs-login",
-      "checkedAt": "2026-10-27T14:02:45.061Z",
+      "status": "healthy",
+      "checkedAt": "2026-10-27T15:30:48.075Z",
       "leaseOwnerPid": 91106,
       "originalPhysicalLeaseHeld": true,
       "domain": "melody.shop.ele.me",
-      "path": "/login",
+      "path": "/app/chain/95708808/dashboard",
       "hash": "",
       "businessPagesBefore": 1,
       "businessPagesAfter": 1,
@@ -44,16 +44,84 @@
         "visibleOverlayCount": 0
       },
       "after": {
-        "bodyLength": 77,
-        "businessMarkers": [],
-        "login": true,
+        "bodyLength": 143,
+        "businessMarkers": [
+          "店铺",
+          "门店",
+          "首页"
+        ],
+        "login": false,
         "verification": false,
         "noPermission": false,
         "visibleRiskModal": 0,
         "visibleOverlayCount": 0
       },
-      "frames": [],
-      "externalCondition": "existing brand business page redirected to merchant login after one normal reload; manual login required"
+      "frames": [
+        {
+          "path": "/app/chain/95708808/dashboard",
+          "body": {
+            "bodyLength": 143,
+            "businessMarkers": [
+              "店铺",
+              "门店",
+              "首页"
+            ],
+            "login": false,
+            "verification": false,
+            "noPermission": false,
+            "visibleRiskModal": 0,
+            "visibleOverlayCount": 0
+          }
+        },
+        {
+          "path": "/chain",
+          "body": {
+            "bodyLength": 1333,
+            "businessMarkers": [
+              "收入",
+              "门店经营",
+              "店铺",
+              "门店",
+              "经营"
+            ],
+            "login": false,
+            "verification": false,
+            "noPermission": false,
+            "visibleRiskModal": 0,
+            "visibleOverlayCount": 0
+          }
+        },
+        {
+          "path": "embedded-frame",
+          "body": {
+            "bodyLength": 7509,
+            "businessMarkers": [],
+            "login": false,
+            "verification": false,
+            "noPermission": false,
+            "visibleRiskModal": 0,
+            "visibleOverlayCount": 0
+          }
+        }
+      ],
+      "initialLoginFailurePreserved": {
+        "status": "needs-login",
+        "checkedAt": "2026-10-27T14:02:45.061Z",
+        "path": "/login",
+        "after": {
+          "bodyLength": 77,
+          "businessMarkers": [],
+          "login": true,
+          "verification": false,
+          "noPermission": false,
+          "visibleRiskModal": 0,
+          "visibleOverlayCount": 0
+        },
+        "externalCondition": "existing brand business page redirected to merchant login after one normal reload; manual login required"
+      },
+      "loginRestoredByUser": true,
+      "headless": true,
+      "restorationEvidence": "runtime/state/night-maintenance-2026-10-27/9230-login-restored-headless.json"
     },
     {
       "port": 9231,
@@ -220,12 +288,12 @@
   ],
   "imResetPassed": true,
   "checkedAt": "2026-10-27T14:05:11.400Z",
-  "remaining": [
-    {
-      "port": 9230,
-      "action": "manual-login-in-existing-brand-profile",
-      "blocksTomorrowFirstDue": "08:00 brand Top10 and dependent brand flows"
-    }
-  ],
-  "imResetMustNotRepeat": true
+  "remaining": [],
+  "imResetMustNotRepeat": true,
+  "completedAt": "2026-10-27T15:30:48.075Z",
+  "userAuthorized9230ModeSwitches": 2,
+  "modeSwitchEvidence": [
+    "runtime/state/night-maintenance-2026-10-27/9230-headed-login-launch.json",
+    "runtime/state/night-maintenance-2026-10-27/9230-login-restored-headless.json"
+  ]
 }
