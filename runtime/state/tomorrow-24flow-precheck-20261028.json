@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-27T21:56:10.578693+08:00",
+  "checkedAt": "2026-10-27T23:25:28.427642+08:00",
   "forRunDate": "2026-10-28",
   "yesterdayBusinessDate": "2026-10-27",
   "productionActions": 0,
@@ -499,7 +499,7 @@
       "policies": [
         {
           "name": "executor-lock.json",
-          "status": "SEALED",
+          "status": "UNSEALED_ACCEPTANCE",
           "allowedBusinessDate": null,
           "fileHashesChecked": 19,
           "drift": []
@@ -513,7 +513,7 @@
           "registeredFilesPresent": 19,
           "hashesChecked": 19,
           "drift": [],
-          "status": "SEALED",
+          "status": "UNSEALED_ACCEPTANCE",
           "allowedBusinessDate": null
         }
       ]
@@ -941,8 +941,8 @@
   "knownUnclosed": [
     {
       "kind": "merchant-crossday-old-unknown",
-      "state": "isolated-reproduction-confirmed-not-fixed",
-      "evidence": "runtime/state/merchant-crossday-unknown-isolated-20261027.json"
+      "state": "controlled-fix-installed-real-nonempty-acceptance-pending",
+      "evidence": "runtime/state/merchant-crossday-repair-20261027/post-install-audit.json"
     },
     {
       "kind": "negative-review-business-day",
@@ -958,5 +958,17 @@
       "state": "must-fresh-check-before-due-no-credential-reading"
     }
   ],
-  "claim": "static-current-state-precheck-only-not-tomorrow-production-success"
+  "claim": "static-current-state-precheck-only-not-tomorrow-production-success",
+  "previousCheckedAt": "2026-10-27T21:56:10.578693+08:00",
+  "merchantRuntimeVerification": {
+    "ok": true,
+    "status": "UNSEALED_ACCEPTANCE",
+    "manifestSha256": "76575d4adc519cfa2b19689a8e4f74ebb7dbcd4246c044030e0ecb98e7fae4a4",
+    "fileCount": 19,
+    "authorization": "user-20260916-production-hardening",
+    "runtimeModelDecisions": 0,
+    "maintenanceAcceptance": "desktop-wechat-shared-preflight",
+    "sharedTextAcceptance": "wechat-messaging-desktop-text",
+    "sharedMediaAcceptance": "not-required-by-text-only-merchant-workflow"
+  }
 }

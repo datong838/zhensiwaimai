@@ -1,0 +1,74 @@
+{
+  "observedAt": "2026-10-27T22:25:40.031381+08:00",
+  "producer": "read-only-existing-marker-inventory",
+  "businessWrites": 0,
+  "sendAttempts": 0,
+  "root": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants",
+  "cursorSha256": "59460c9c7ba9a33b5845f2d2090cd0a02fe4e923d31162a118ab9e57b5d1bd9d",
+  "historySha256": "7fbd35f9d84b11e85bbebc59090b96347e8064f3b07f7ff5350e908649f398c6",
+  "stateCounts": {
+    "verified": 519,
+    "blocked": 5,
+    "missing": 10,
+    "attempted": 1,
+    "unknown": 1
+  },
+  "markers": [
+    {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/empty-202610251430.json",
+      "name": "empty-202610251430.json",
+      "sha256": "00314e0aa8ff7cad7eb75555cdb6a6b56ed9993b739728c8726aa40a0a9e71c8",
+      "state": "attempted",
+      "groupName": "电销+直播攻坚组",
+      "sendAttempts": null,
+      "rootKeys": [
+        "bridgeVersion",
+        "state",
+        "groupName",
+        "payloadType",
+        "payloads",
+        "sendAttempts",
+        "verified"
+      ],
+      "payloadCount": 1,
+      "commonReceiptKeys": []
+    },
+    {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/1d88234cd14dd766f35a0d72afe0f568783638ee7c7322addae194abdd4dcf41.json",
+      "name": "1d88234cd14dd766f35a0d72afe0f568783638ee7c7322addae194abdd4dcf41.json",
+      "sha256": "ef80b00002438f39e3fe8848e17f9147db5a104386b201245e1b1afc8ee45406",
+      "state": "unknown",
+      "groupName": "FEIBING NEO AI数字员工",
+      "sendAttempts": 1,
+      "rootKeys": [
+        "ok",
+        "executor",
+        "channel",
+        "groupName",
+        "payloadType",
+        "sendAttempts",
+        "runtimeModelDecisions",
+        "stage",
+        "stageMs",
+        "payloadIdentity",
+        "payloads",
+        "groupPreflight",
+        "textInputVerified",
+        "textWriteAttempts",
+        "clipboardClearedBeforeTextWrite",
+        "preparedInputChangedPixels",
+        "preparedInputChangedRatio",
+        "attemptMarker",
+        "postSendInputCleared",
+        "postSendFailureReason",
+        "reason",
+        "state",
+        "elapsedMs",
+        "sendReview",
+        "reviewSummary"
+      ],
+      "payloadCount": 1,
+      "commonReceiptKeys": []
+    }
+  ]
+}

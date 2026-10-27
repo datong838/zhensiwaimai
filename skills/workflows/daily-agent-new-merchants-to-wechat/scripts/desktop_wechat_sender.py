@@ -402,9 +402,11 @@ def preflight(group: str, output_dir: Path, wait_seconds: float = DEFAULT_CONTEN
 def run(collection_path: Path, group: str, authorization: str, output_dir: Path,
         wait_seconds: float = DEFAULT_CONTENTION_WAIT_SECONDS,
         poll_seconds: float = DEFAULT_CONTENTION_POLL_SECONDS,
-        reconciliation_only: bool = False) -> dict:
+        reconciliation_only: bool = False, dispatch_plan=None) -> dict:
     collection = mobile.load_collection(collection_path, group)
     mobile.audit_collection(collection)
+    if dispatch_plan is not None:
+        runtime_contract.validate_day_dispatch(mobile, group, collection, collection_path, dispatch_plan)
     expected = {mobile.TEST_GROUP: mobile.TEST_AUTHORIZATION,
                 mobile.PRODUCTION_GROUP: runtime_contract.PRODUCTION_AUTHORIZATION}
     if group not in expected or authorization != expected[group]:
@@ -415,9 +417,15 @@ def run(collection_path: Path, group: str, authorization: str, output_dir: Path,
     sent_keys = {mobile.send_identity(group, row) for row in history
                  if row.get("groupName") == group and row.get("verified") is True}
     messages = [row for row in collection["messages"] if mobile.send_identity(group, row) not in sent_keys]
+    if dispatch_plan is not None:
+        current_ids = set(dispatch_plan['eligibleIdentities'])
+        messages = [row for row in messages if mobile.send_identity(group, row) in current_ids]
     result = {"ok": False, "executor": "merchant-desktop-wechat-sender", "channel": "desktop", "sent": 0,
               "messageCount": len(messages), "historySkipped": len(collection["messages"]) - len(messages),
               "items": [], "contentionRetries": 0, "contentionWaitMs": 0, "contentionEvents": []}
+    if dispatch_plan is not None:
+        result['historicalDeferred'] = dispatch_plan['historicalDeferred']
+        result['historySkipped'] = sum(mobile.send_identity(group, row) in sent_keys for row in collection['messages'])
     if not messages:
         return result | {"ok": True, "mode": "execute-noop"}
     if reconciliation_only:
@@ -511,8 +519,21 @@ def run(collection_path: Path, group: str, authorization: str, output_dir: Path,
                         "elapsedMs": 0, "pitfalls": [], "evidence": "group-payload-hash-and-zero-send-marker"})
                 def once():
                     # A prior process may have created attempted without returning a receipt.
+                    def existing_attempt():
+                        value = json.loads(marker.read_text())
+                        return {"ok": False, "reason": "already-attempted-result-unknown",
+                                "state": value.get('state', 'unknown'),
+                                "sendAttempts": value.get('sendAttempts'),
+                                "physicalSendAttempts": value.get('physicalSendAttempts')}
                     if marker.exists() and not safe_blocked:
-                        return {"ok": False, "reason": "already-attempted-result-unknown", "sendAttempts": 1}
+                        return existing_attempt()
+                    if dispatch_plan is not None:
+                        runtime_contract.validate_day_dispatch(mobile, group, collection, collection_path, dispatch_plan)
+                        if marker.exists() and not (blocked_zero_send_text_marker_matches(group,item,marker)
+                                or blocked_zero_send_windows_rejected_marker(group,item,marker)):
+                            return existing_attempt()
+                        runtime_contract.record_dispatch_origin(mobile,group,item,collection,collection_path,
+                                                               zero_send_verified=bool(marker.exists()))
                     try:
                         completed = subprocess.run(command, capture_output=True, text=True, timeout=None)
                         value = json.loads(completed.stdout.strip().splitlines()[-1])

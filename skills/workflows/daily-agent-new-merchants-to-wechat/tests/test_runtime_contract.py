@@ -17,6 +17,12 @@ import structured_merchant_collector as collector
 import executor_integrity as integrity
 
 
+def current_collection(value):
+    """Keep orchestration stubs within the real collection date/group contract."""
+    return value | {'groupName': sender.PRODUCTION_GROUP,
+                    'businessDate': datetime.now(ZoneInfo('Asia/Shanghai')).strftime('%Y-%m-%d')}
+
+
 def item_and_receipt():
     text = "城市\n联系人\n商家\n地址"
     digest = hashlib.sha256(text.encode()).hexdigest()
@@ -189,8 +195,9 @@ class RuntimeContractTests(unittest.TestCase):
                                      {"messages": [], "cursor": item | {"merchantId": "different"}}, "desktop")
 
     def execute_fake(self, directory, receipts, selftest_error=None):
-        good = {"ok": True, "messages": [], "cursor": {}, "stageMs": {"navigation": 3},
-                "stageResults": {"navigation": "PASS"}}
+        good = current_collection({"ok": True, "messages": [], "cursor": {}, "stageMs": {"navigation": 3},
+                "stageResults": {"navigation": "PASS"}})
+        receipts = [current_collection(row) if row.get('ok') else row for row in receipts]
         with patch.object(sender, "STATE_DIR", Path(directory)), \
              patch.object(integrity, "verify_for_run", return_value={"ok": True, "status": "SEALED"}), \
              patch.object(contract, "offline_selftest", side_effect=selftest_error, return_value={"ok": True}), \
@@ -227,8 +234,8 @@ class RuntimeContractTests(unittest.TestCase):
 
     def test_pending_merchants_preflight_once_before_delivery(self):
         item, _ = item_and_receipt()
-        receipt = {"ok": True, "messages": [item], "cursor": {}, "stageMs": {"navigation": 3},
-                   "stageResults": {"navigation": "PASS"}}
+        receipt = current_collection({"ok": True, "messages": [item], "cursor": {}, "stageMs": {"navigation": 3},
+                   "stageResults": {"navigation": "PASS"}})
         order = []
         with tempfile.TemporaryDirectory() as directory, \
              patch.object(sender, "STATE_DIR", Path(directory)), \
@@ -246,8 +253,8 @@ class RuntimeContractTests(unittest.TestCase):
 
     def test_real_new_send_in_unsealed_run_invokes_code_owned_reseal(self):
         item, _ = item_and_receipt()
-        receipt = {"ok": True, "messages": [item], "cursor": {}, "stageMs": {"navigation": 3},
-                   "stageResults": {"navigation": "PASS"}}
+        receipt = current_collection({"ok": True, "messages": [item], "cursor": {}, "stageMs": {"navigation": 3},
+                   "stageResults": {"navigation": "PASS"}})
         delivery = {"ok": True, "items": [{"merchantId": item["merchantId"],
             "merchantName": item["merchantName"], "review": [
                 {"stage": "定位、输入与单次发送", "status": "PASS", "elapsedMs": 1},
@@ -383,7 +390,7 @@ class ReconciliationOnlyTests(unittest.TestCase):
         first, receipt = item_and_receipt()
         second = first | {"merchantId": "87654321", "merchantName": "后续商家"}
         second["sha256"] = __import__("hashlib").sha256(second["text"].encode()).hexdigest()
-        collection = {"ok": True, "businessDate": "2026-09-20", "messages": [first, second], "cursor": {}}
+        collection = current_collection({"ok": True, "messages": [first, second], "cursor": {}})
         with tempfile.TemporaryDirectory() as directory:
             state = Path(directory) / "state"; state.mkdir()
             marker_dir = state / "send-attempts"; marker_dir.mkdir()
@@ -421,7 +428,7 @@ class ReconciliationOnlyTests(unittest.TestCase):
 
     def test_null_attempt_unknown_marker_cannot_enter_send_preflight_or_send(self):
         first, receipt = item_and_receipt()
-        collection = {"ok": True, "businessDate": "2026-09-20", "messages": [first], "cursor": {}}
+        collection = current_collection({"ok": True, "messages": [first], "cursor": {}})
         with tempfile.TemporaryDirectory() as directory:
             state = Path(directory) / "state"; state.mkdir()
             marker_dir = state / "send-attempts"; marker_dir.mkdir()

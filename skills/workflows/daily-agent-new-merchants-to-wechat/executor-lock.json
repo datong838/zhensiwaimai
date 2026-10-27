@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "SEALED",
+  "status": "UNSEALED_ACCEPTANCE",
   "sealedAt": "2026-10-24T18:21:16.175447+08:00",
   "acceptance": {
     "receiptPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261024-181557/output/desktop-wechat/546957114/acceptance-receipt.json",
@@ -53,7 +53,7 @@
     },
     "workflow_executor": {
       "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-agent-new-merchants-to-wechat/scripts/workflow_executor.py",
-      "sha256": "48d2fd5b026c6b005f8e3e1a6fe8fe724e8832f781131f4238923d2a83f80ee4"
+      "sha256": "f7b97aea3878da11d06b667130eeebe9121c98fe0131552c9f598891805ca735"
     },
     "maintenance_executor": {
       "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-agent-new-merchants-to-wechat/scripts/maintenance_executor.py",
@@ -65,7 +65,7 @@
     },
     "runtime_contract": {
       "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-agent-new-merchants-to-wechat/scripts/runtime_contract.py",
-      "sha256": "e18e642c94b15dfc8928c30b28cdc3dfa2baa740e70b3334d2d50af472cbaac7"
+      "sha256": "abd2290e985c2f9d34b16d805dd9f4d01c314f23a3c40d4bdc493377b5e3962a"
     },
     "background_selftest": {
       "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-agent-new-merchants-to-wechat/scripts/test_background_merchant_collector.mjs",
@@ -81,7 +81,7 @@
     },
     "desktop_adapter": {
       "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-agent-new-merchants-to-wechat/scripts/desktop_wechat_sender.py",
-      "sha256": "1226e39b19ea28939a3dbd0d9d5bc9c7bb09413a25bfd0efee18e5270b10a410"
+      "sha256": "cda72838790a86c8e78f249bc5ec953ad06ddfb3ea3ba41316a4fb2a12c9d3b3"
     },
     "mobile_sender": {
       "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-agent-new-merchants-to-wechat/scripts/wechat_sender_executor.py",
@@ -208,13 +208,13 @@
   ],
   "unsealedAcceptance": {
     "authorization": "user-20260916-production-hardening",
-    "authorizedAt": "2026-10-24T14:14:09.846682+08:00",
-    "expiresAt": "2026-10-27T06:00:00+08:00",
+    "authorizedAt": "2026-10-27T23:12:58.918012+08:00",
+    "expiresAt": "2026-11-02T23:12:44+08:00",
     "scope": "Code-owned maintenance candidate; next real nonempty merchant send; automatic reseal only",
     "userInstruction": "允许新增代码化维护执行器，并将生产锁切换为验收态，等待下一家真实商家自动重新封板。",
-    "userInstructionSha256": "2c59203c3f8c5169c20449330f29d6ab10b8c56aa0c8c7aa29818b514248627c",
-    "maintenanceAuthorization": "user-20261005-package-migration-resync",
-    "maintenanceReceiptPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/merchant-code-consolidation-resync-20261027-0300/maintenance-receipt.json",
-    "maintenanceReceiptSha256": "4affca44c3c6d5800757d6a3f458a96afcff49523b5cd319f0d8f27c132d2117"
+    "userInstructionSha256": "c91518a278b43dcab9835dbda5168b9a3adc188ce3c5c8b6d2c0e930a91ea974",
+    "maintenanceAuthorization": "user-20260918-code-maintenance",
+    "maintenanceReceiptPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/merchant-crossday-repair-20261027/install/maintenance-receipt.json",
+    "maintenanceReceiptSha256": "f767e44658f88d787addaa7d994ab3eaa54bf59f0dfe249302dc635010225e77"
   }
 }

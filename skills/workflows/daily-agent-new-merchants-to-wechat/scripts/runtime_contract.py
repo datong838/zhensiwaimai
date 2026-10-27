@@ -8,6 +8,8 @@ import re
 import subprocess
 import time
 from pathlib import Path
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 PRODUCTION_AUTHORIZATION = "user-20260915-production-hourly"
 STAGES = {
@@ -16,6 +18,7 @@ STAGES = {
     "offline_selftest": "离线自测",
     "collection": "商家采集",
     "audit": "采集合同审计",
+    "day_dispatch": "当日派发与历史待核隔离",
     "empty_notice": "半小时无新增意向商家通知",
     "desktop_wechat_preflight": "桌面微信预检",
     "desktop_wechat": "逐条通知",
@@ -187,11 +190,16 @@ def verify_delivery(receipt, group, item):
             "physicalSendAttempts": receipt.get("physicalSendAttempts")}
 
 
-def audit_final(sender, group, collection, channel, reconciliation_only=False):
+def audit_final(sender, group, collection, channel, reconciliation_only=False,
+                dispatch_plan=None, collection_path=None):
     current = json.loads(sender.cursor_file(group).read_text())
     if current.get("groupName") != group or current.get("verified") is not True:
         raise RuntimeError("final-cursor-unverified")
     messages = collection["messages"]
+    if dispatch_plan is not None:
+        validate_day_dispatch(sender, group, collection, collection_path, dispatch_plan)
+        eligible = set(dispatch_plan['eligibleIdentities'])
+        messages = [item for item in messages if sender.send_identity(group, item) in eligible]
     checked_messages = messages[:1] if reconciliation_only else messages
     if checked_messages and any(current.get(k) != checked_messages[-1][k]
                         for k in ("merchantId", "recommendTime", "tableOrder")):
@@ -211,7 +219,8 @@ def audit_final(sender, group, collection, channel, reconciliation_only=False):
             verify_delivery(json.loads(marker.read_text()), group, item)
     return {"verified": True, "merchantId": current["merchantId"],
             "recommendTime": current["recommendTime"], "checkedDeliveries": len(checked_messages),
-            "reconciliationOnly": reconciliation_only}
+            "reconciliationOnly": reconciliation_only,
+            "historicalDeferred": len((dispatch_plan or {}).get('historicalDeferred', []))}
 
 
 def delivery_counts(delivery):
@@ -333,8 +342,11 @@ def build_review(result):
         "PASS" if result.get("ok") else "FAIL")
     counts = delivery_counts(result.get("wechat", {}))
     completion = result.get("completion") or completion_state(result)
-    return {"schemaVersion": 1, "runId": result["runId"], "ok": result.get("ok") is True,
-            "sent": counts["verifiedNewSends"], **counts, "completion": completion, "rows": rows}
+    review = {"schemaVersion": 1, "runId": result["runId"], "ok": result.get("ok") is True,
+              "sent": counts["verifiedNewSends"], **counts, "completion": completion, "rows": rows}
+    if result.get('dayDispatch') is not None:
+        review['historicalDeferred'] = result['dayDispatch']['historicalDeferred']
+    return review
 
 
 def render_review(review):
@@ -354,4 +366,203 @@ def render_review(review):
               f"- 自动恢复：`{str(completion.get('automaticRecoveryAllowed', False)).lower()}`",
               f"- 恢复预算：`{completion.get('recoveryAttemptBudget', 0)}`",
               f"- 原因：`{completion.get('reason', 'unknown')}`"]
+    historical = review.get('historicalDeferred') or []
+    if historical:
+        lines += ['', '## 历史待核（未重发、未改为已核验）', '',
+                  f'本轮当前项之外另保留 {len(historical)} 项，原标记与独立登记均保留。']
+        for item in historical:
+            lines.append(f"- `{safe(item['identity'])}`：旧日 {safe(item['attemptBusinessDate'])}，仍待只读核验。")
     return "\n".join(lines) + "\n"
+
+
+# Mechanism metadata is separate from immutable send markers and the success cursor.
+def _dispatch_now():
+    return datetime.now(ZoneInfo('Asia/Shanghai'))
+
+
+def _dispatch_path(sender, *parts):
+    root = sender.STATE_DIR.resolve()
+    path = root.joinpath(*parts)
+    if path.resolve() != path or not path.is_relative_to(root):
+        raise RuntimeError('dispatch-state-symlink-or-escape')
+    return path
+
+
+def _dispatch_read(path, default=None):
+    path = Path(path)
+    if path.is_symlink():
+        raise RuntimeError('dispatch-state-symlink')
+    if not path.exists():
+        return default
+    try:
+        return json.loads(path.read_text(encoding='utf-8'))
+    except (ValueError, OSError) as error:
+        raise RuntimeError('dispatch-state-invalid') from error
+
+
+def _dispatch_day(value):
+    try:
+        stamp = datetime.fromisoformat(value.replace('Z', '+00:00'))
+        if stamp.tzinfo is None:
+            raise ValueError('timezone-required')
+        return stamp.astimezone(ZoneInfo('Asia/Shanghai')).date().isoformat()
+    except (ValueError, TypeError, AttributeError) as error:
+        raise RuntimeError('dispatch-date-proof-invalid') from error
+
+
+def _dispatch_source(collection, path, group, now):
+    raw = Path(path).read_bytes()
+    if (json.loads(raw) != collection or collection.get('ok') is not True
+            or not isinstance(collection.get('messages'), list) or collection.get('groupName') != group
+            or collection.get('businessDate') != now.strftime('%Y-%m-%d')):
+        raise RuntimeError('dispatch-source-binding-invalid')
+    return hashlib.sha256(raw).hexdigest()
+
+
+def _marker_payload_sha(marker):
+    if marker.get('payloadType') not in (None, 'text'):
+        raise RuntimeError('dispatch-old-payload-kind-invalid')
+    payloads = marker.get('payloads') or []
+    digest = marker.get('messageSha256')
+    if payloads:
+        if (len(payloads) != 1 or not isinstance(payloads[0].get('text'), str)
+                or hashlib.sha256(payloads[0]['text'].encode()).hexdigest() != payloads[0].get('sha256')
+                or (digest is not None and digest != payloads[0]['sha256'])):
+            raise RuntimeError('dispatch-old-payload-binding-invalid')
+        digest = payloads[0]['sha256']
+    if not isinstance(digest, str) or not re.fullmatch(r'[a-f0-9]{64}', digest):
+        return None
+    return digest
+
+
+def record_dispatch_origin(sender, group, item, collection, collection_path,
+                           zero_send_verified=False, now=None):
+    """Record preparation, never an attempt or delivery; unknown cannot be redated."""
+    now = now or _dispatch_now()
+    source_sha = _dispatch_source(collection, collection_path, group, now)
+    identity = sender.send_identity(group, item)
+    marker_path = _dispatch_path(sender, 'send-attempts', identity + '.json')
+    prior = _dispatch_read(marker_path)
+    if prior is not None and not (zero_send_verified and prior.get('state') == 'blocked'
+                                 and prior.get('sendAttempts') == 0
+                                 and prior.get('groupName') == group):
+        raise RuntimeError('dispatch-origin-existing-attempt')
+    path = _dispatch_path(sender, 'dispatch-origins', identity + '.json')
+    data = _dispatch_read(path, {'schemaVersion': 1, 'preparations': []})
+    if data.get('schemaVersion') != 1 or not isinstance(data.get('preparations'), list):
+        raise RuntimeError('dispatch-origin-invalid')
+    row = {'identity': identity, 'groupName': group, 'messageSha256': item['sha256'],
+           'businessDate': collection['businessDate'], 'preparedAt': now.isoformat(),
+           'sourceSha256': source_sha}
+    data['preparations'].append(row)
+    sender.atomic_write_json(path, data)
+    return row
+
+
+def _historical_proof(sender, group, identity, marker, marker_sha, observations, day):
+    if marker.get('groupName') != group:
+        raise RuntimeError('dispatch-marker-group-mismatch')
+    payload_sha = _marker_payload_sha(marker)
+    if payload_sha is None:
+        return None
+    origin = _dispatch_read(_dispatch_path(sender, 'dispatch-origins', identity + '.json'))
+    if origin is not None:
+        preparations = origin.get('preparations')
+        if origin.get('schemaVersion') != 1 or not isinstance(preparations, list) or not preparations:
+            raise RuntimeError('dispatch-origin-invalid')
+        latest = preparations[-1]
+        if (latest.get('identity') != identity or latest.get('groupName') != group
+                or latest.get('messageSha256') != payload_sha
+                or _dispatch_day(latest.get('preparedAt')) != latest.get('businessDate')):
+            raise RuntimeError('dispatch-origin-binding-invalid')
+        # The latest preparation wins, even if an old marker happened to have identical bytes.
+        if latest['businessDate'] >= day:
+            return None
+        return {'kind': 'original-dispatch-origin', 'businessDate': latest['businessDate'],
+                'payloadSha256': payload_sha}
+    matches = [row for row in observations.get(identity, [])
+               if row.get('groupName') == group and row.get('markerSha256') == marker_sha]
+    days = [_dispatch_day(row.get('firstObservedAt')) for row in matches]
+    if not days or min(days) >= day:
+        return None
+    return {'kind': 'prior-day-exact-marker-observation', 'businessDate': min(days),
+            'payloadSha256': payload_sha}
+
+
+def day_dispatch(sender, group, collection, collection_path, *, register=False, now=None):
+    """Partition only proved historical attempts; leave the original collection untouched."""
+    now = now or _dispatch_now()
+    source_sha = _dispatch_source(collection, collection_path, group, now)
+    day = collection['businessDate']
+    observation_path = _dispatch_path(sender, 'attempt-observations-v1.json')
+    observed = _dispatch_read(observation_path, {'schemaVersion': 1, 'entries': {}})
+    if observed.get('schemaVersion') != 1 or not isinstance(observed.get('entries'), dict):
+        raise RuntimeError('dispatch-observations-invalid')
+    markers = {}; changed = False
+    for item in collection['messages']:
+        identity = sender.send_identity(group, item)
+        if identity in markers:
+            raise RuntimeError('dispatch-duplicate-identity')
+        path = _dispatch_path(sender, 'send-attempts', identity + '.json')
+        marker = _dispatch_read(path)
+        digest = hashlib.sha256(path.read_bytes()).hexdigest() if marker is not None else None
+        markers[identity] = (marker, digest)
+        if marker is None or marker.get('state') not in ('unknown', 'attempted'):
+            continue
+        if marker.get('groupName') is None:
+            # An incomplete legacy marker can only use the original read-only
+            # reconciliation path; it cannot acquire historical skip permission.
+            continue
+        if marker.get('groupName') != group:
+            raise RuntimeError('dispatch-marker-group-mismatch')
+        rows = observed['entries'].setdefault(identity, [])
+        if not isinstance(rows, list):
+            raise RuntimeError('dispatch-observations-invalid')
+        if register and not any(row.get('markerSha256') == digest and row.get('groupName') == group for row in rows):
+            rows.append({'markerSha256': digest, 'groupName': group, 'firstObservedAt': now.isoformat()})
+            changed = True
+    if changed:
+        sender.atomic_write_json(observation_path, observed)
+    plan = {'schemaVersion': 1, 'groupName': group, 'businessDate': day,
+            'sourceSha256': source_sha, 'eligibleIdentities': [], 'historicalDeferred': []}
+    for item in collection['messages']:
+        identity = sender.send_identity(group, item); marker, digest = markers[identity]
+        proof = (_historical_proof(sender, group, identity, marker, digest, observed['entries'], day)
+                 if marker is not None and marker.get('state') in ('unknown', 'attempted')
+                 and marker.get('groupName') is not None else None)
+        if proof is None:
+            plan['eligibleIdentities'].append(identity)
+            continue
+        if item['recommendTime'][:10] > proof['businessDate']:
+            raise RuntimeError('dispatch-recommendation-after-old-attempt')
+        stable = {'schemaVersion': 1, 'identity': identity, 'groupName': group,
+                  'merchantId': item['merchantId'], 'recommendTime': item['recommendTime'],
+                  'currentPayloadSha256': item['sha256'],
+                  'originalMarkerSha256': digest, 'attemptBusinessDate': proof['businessDate'],
+                  'proofKind': proof['kind'], 'originalPayloadSha256': proof['payloadSha256']}
+        record_path = _dispatch_path(sender, 'historical-pending', identity, digest + '-' + item['sha256'] + '.json')
+        record = _dispatch_read(record_path)
+        if record is None and register:
+            record = stable | {'registeredAt': now.isoformat(), 'sourceSha256': source_sha,
+                               'itemSnapshot': item, 'originalMarkerSnapshot': marker,
+                               'observedState': marker['state'], 'resolved': False}
+            sender.atomic_write_json(record_path, record)
+        snapshot = (record or {}).get('itemSnapshot') or {}
+        if (record is None or any(record.get(k) != value for k, value in stable.items())
+                or record.get('originalMarkerSnapshot') != marker
+                or snapshot.get('merchantId') != item['merchantId']
+                or snapshot.get('recommendTime') != item['recommendTime']
+                or snapshot.get('text') != item['text'] or snapshot.get('sha256') != item['sha256']):
+            raise RuntimeError('dispatch-historical-registration-invalid')
+        plan['historicalDeferred'].append({'identity': identity, 'attemptBusinessDate': proof['businessDate'],
+            'originalMarkerSha256': digest, 'recordPath': str(record_path),
+            'recordSha256': hashlib.sha256(record_path.read_bytes()).hexdigest(),
+            'payloadConflict': proof['payloadSha256'] != item['sha256']})
+    return plan
+
+
+def validate_day_dispatch(sender, group, collection, collection_path, plan, now=None):
+    expected = day_dispatch(sender, group, collection, collection_path, now=now)
+    if plan != expected:
+        raise RuntimeError('dispatch-plan-binding-invalid')
+    return True

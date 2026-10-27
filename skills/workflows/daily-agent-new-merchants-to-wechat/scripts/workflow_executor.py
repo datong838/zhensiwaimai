@@ -15,13 +15,19 @@ import runtime_contract
 
 WORKFLOW_RUNS_ROOT = Path(__file__).resolve().parents[4] / "runs"
 
-def empty_notice_arguments(collection, group, now=None):
+def empty_notice_arguments(collection, group, now=None, dispatch_plan=None, collection_path=None):
     """Half-hour scoped notice; never treat collection failure as an empty result."""
     from datetime import datetime
     from zoneinfo import ZoneInfo
     now = (now or datetime.now(ZoneInfo('Asia/Shanghai'))).astimezone(ZoneInfo('Asia/Shanghai'))
-    if group != sender.PRODUCTION_GROUP or collection.get('ok') is not True or collection.get('messages') != []:
+    if group != sender.PRODUCTION_GROUP or collection.get('ok') is not True:
         raise RuntimeError('empty-notice-scope-invalid')
+    if collection.get('messages') != []:
+        if dispatch_plan is None:
+            raise RuntimeError('empty-notice-scope-invalid')
+        runtime_contract.validate_day_dispatch(sender, group, collection, collection_path, dispatch_plan, now=now)
+        if dispatch_plan['eligibleIdentities'] or not dispatch_plan['historicalDeferred']:
+            raise RuntimeError('empty-notice-current-items-remain')
     if collection.get('businessDate') != now.strftime('%Y-%m-%d'):
         raise RuntimeError('empty-notice-business-date-mismatch')
     minutes = now.hour * 60 + now.minute
@@ -34,10 +40,10 @@ def empty_notice_arguments(collection, group, now=None):
             '--marker-name', f'empty-{slot}.json', '--item', '当前无新增意向商家', '--execute']
 
 
-def send_empty_notice(collection, group, output_dir):
+def send_empty_notice(collection, group, output_dir, dispatch_plan=None, collection_path=None):
     import subprocess
     import sys
-    argv = empty_notice_arguments(collection, group)
+    argv = empty_notice_arguments(collection, group, dispatch_plan=dispatch_plan, collection_path=collection_path)
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True, mode=0o700)
     bridge = Path(__file__).resolve().parents[3] / 'wechat-messaging/scripts/workflow_bridge_windows.py'
@@ -151,11 +157,18 @@ def execute(args):
         result['collection']={k:v for k,v in r.items() if k not in ['messages','cursor']}
         if not r['ok']:raise RuntimeError(r.get('error','collection-failed'))
         stage('audit',lambda:sender.audit_collection(sender.load_collection(receipt_path,args.group)))
-        if not r['messages']:
-            result['emptyNotice'] = stage('empty_notice', lambda: send_empty_notice(r, args.group, out/'empty-notice'))
+        dispatch_plan = stage('day_dispatch', lambda: runtime_contract.day_dispatch(
+            sender, args.group, r, receipt_path, register=True))
+        result['dayDispatch'] = dispatch_plan
+        collector.private_json(out/'day-dispatch.json', dispatch_plan)
+        current_ids = set(dispatch_plan['eligibleIdentities'])
+        current_messages = [item for item in r['messages'] if sender.send_identity(args.group,item) in current_ids]
+        if not current_messages:
+            result['emptyNotice'] = stage('empty_notice', lambda: send_empty_notice(
+                r, args.group, out/'empty-notice', dispatch_plan=dispatch_plan, collection_path=receipt_path))
         reconciliation_only = False
-        if args.wechat_channel == 'desktop' and r['messages']:
-            first = r['messages'][0]
+        if args.wechat_channel == 'desktop' and current_messages:
+            first = current_messages[0]
             marker, recovered_marker = recover_unknown_marker_from_receipt(first, args.group)
             previous = json.loads(marker.read_text()) if marker.exists() else None
             if recovered_marker:
@@ -179,7 +192,8 @@ def execute(args):
         if args.wechat_channel == 'desktop':
             delivery=stage('desktop_wechat',lambda:desktop_wechat_sender.run(
                 receipt_path,args.group,args.standing_authorization,out/'desktop-wechat',
-                args.wechat_contention_wait_seconds,args.wechat_contention_poll_seconds,reconciliation_only=reconciliation_only))
+                args.wechat_contention_wait_seconds,args.wechat_contention_poll_seconds,
+                reconciliation_only=reconciliation_only,dispatch_plan=dispatch_plan))
         else:
             delivery=stage('phone',lambda:sender.run(SimpleNamespace(group=args.group,serial=args.serial,execute=True,probe_locate_group=False,
                        standing_authorization=args.standing_authorization,collection_receipt=str(receipt_path))))
@@ -190,7 +204,8 @@ def execute(args):
             result['stageResults'][result['stage']]='FAIL'
             raise RuntimeError(delivery.get('reason','wechat-failed'))
         def check():
-            return runtime_contract.audit_final(sender,args.group,r,args.wechat_channel,reconciliation_only=reconciliation_only)
+            return runtime_contract.audit_final(sender,args.group,r,args.wechat_channel,
+                reconciliation_only=reconciliation_only,dispatch_plan=dispatch_plan,collection_path=receipt_path)
         result['finalCursor']=stage('final_cursor_check',check)
         counts=runtime_contract.delivery_counts(delivery)
         if result['executorIntegrity'].get('status') == 'UNSEALED_ACCEPTANCE' and counts['verifiedNewSends'] > 0:

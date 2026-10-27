@@ -119,3 +119,11 @@ description: 从淘宝闪购服务商平台「代运营-客户管理-意向商�
 桥接代码保留旧marker：旧verified按完整内容绑定复用；旧attempted/unknown只能只读复核；部分成功不算整批完成。仅新桥证明零次发送的blocked可重走查群流程。迁移离线回归不代表本业务新的真实非空验收，已有封板状态不会自动提升。详见[迁移合同](../wechat-messaging/references/integration.md)。
 
 当前候选版本须保持 `UNSEALED_ACCEPTANCE`，直至下一条真实新增商家完成生产群文字发送、原生全文复制、双帧、历史和游标核验；届时由执行器代码自动重封。详见[无新增零微信触达与真实非空自动重封方案](references/plan-2026-09-17-noop-first-and-auto-reseal.md)。
+
+## 2026-10-27 跨日历史未知隔离
+
+当前企微控制以仓内企业微信原生UI岗位约定为准，本文历史桌面/Windows/手机说明不构成换通道许可。原总入口完成完整采集与原合同审计后，生成day-dispatch分区：仅有原派发来源或原标记字节的真实旧日观察证明、且已持久登记historical-pending的旧unknown/attempted，可从当前新日项中隔离。不能仅按推荐时间或mtime判断旧日；当天未知、日期不明和错群仍保留原停止/只读核验门。
+
+完整collection不裁剪，不改targetCount或原标记/历史/游标。当前项按源顺序走原预检、原发送和原历史后游标提交；只有当前项真实核验才能推进游标。无当前项时游标必须不变，完整成功采集且全部原目标均有历史隔离证明时才可原半小时事件发固定无新增通知。内部复盘独立列历史待核，不能将其写成verified或据此重发。机制数据在原state目录的dispatch-origins、attempt-observations-v1.json和historical-pending，不放智能体工具目录。
+
+实施、风险及受控验收见仓内docs/solutions/20261027-新商家跨日未知项隔离方案.md；安装只走原maintenance_executor，真实非空自动重封条件保持，夜间不生产预演。
