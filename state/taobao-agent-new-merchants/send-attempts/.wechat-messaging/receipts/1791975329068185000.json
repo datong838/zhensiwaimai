@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "3f6e59cd3b213ca9a278182b06116cf0de6a5c4bf482136d13e4203fe2abc95d",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "4f2a9fb581d002ce589aeb929b7be687a37ce2de25c52c5bd267864ec5d4f3fd",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1791975306.5878432,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 37,
+        "anchor": "text-exact",
+        "anchorValue": "城市：黔东南苗族侗族自治州  ；  联系人：郭海肠旺面湖南面，18085503301  ；  店铺：郭海肠旺面湖南面  ；  地址：康复路宏宇1号商住楼一层9号门面1.小餐饮登记证是",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1791975329.0652301
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 91
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 267
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 22477
+    }
+  ],
+  "elapsedMs": 22748,
+  "eventKey": "c6bf7fb9f1560e63fc2a1b1fea419caad611457facb7283648c9425ca5cde4d6",
+  "reviewSummary": {
+    "totalElapsedMs": 22748,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

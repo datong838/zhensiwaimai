@@ -1,0 +1,75 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "83a2888ebc44ca719725858b0e96b81973f99351afca4a485239c7eb048fa1f0",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "a256a6de292c9c195c1c4a1d50fd8dd25afede5862cfad1a556dc82b724ba4e5",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1792248456.170971,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 43,
+        "anchor": "text-exact",
+        "anchorValue": "城市：珠海市  ；  联系人：马，13282289151  ；  店铺：穆味王·私房牛肉面《旗航店》  ；  地址：高新区新沙六路70号3栋102",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1792248478.255278
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 73
+        },
+        "route": "direct",
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 179
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 22084
+    }
+  ],
+  "elapsedMs": 22295,
+  "eventKey": "9bb95d85db25a4b1a066f0cb713549407930e70e6a4e81b6f75f625fc4536d95",
+  "reviewSummary": {
+    "totalElapsedMs": 22295,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

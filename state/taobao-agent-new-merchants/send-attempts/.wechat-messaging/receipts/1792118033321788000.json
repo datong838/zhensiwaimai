@@ -1,0 +1,75 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "4432051f26c0742e3ecfa652cd4fd05297b7a9a1d3acb1f4009d11be0824b361",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "9471b993e6d10f053cf46caaccebdfa06d5328f9b2cd9e1f413766d58c1ddbbf",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1792118011.572844,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 42,
+        "anchor": "text-exact",
+        "anchorValue": "城市：儋州市  ；  联系人：齐，15032420003  ；  店铺：阿拉吧铁板饭（卤肉饭鸡腿饭）  ；  地址：那大镇文化南路67号",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1792118033.3156
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 68
+        },
+        "route": "direct",
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 193
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 21742
+    }
+  ],
+  "elapsedMs": 21943,
+  "eventKey": "725361109880ffaed6e00738dbc1171a51a4debcc7f99f1caccfc4b98f1f597c",
+  "reviewSummary": {
+    "totalElapsedMs": 21943,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

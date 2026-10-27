@@ -1,0 +1,11 @@
+申诉流 (6):
+  order=2    daily-negative-reviews
+  order=7    meituan-waimai-negative-review-appeals-11
+  order=7    meituan-waimai-negative-review-appeals-1425
+  order=8    taobao-flash-sale-negative-review-appeals
+  order=12   negative-feedback-list-appeals-0930
+  order=13   negative-feedback-list-appeals-1230
+brand: order=19   brand-negative-review-appeal-followup
+
+判据: brand.order 19 > max(申诉流).order 13 ✅
+flow-order-assert: ALL PASS

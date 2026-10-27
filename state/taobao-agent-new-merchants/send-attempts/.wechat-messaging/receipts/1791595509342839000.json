@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "ef332f02b09da98d598ca012deb1947d96aa5b2a746b27d453d88b20557845aa",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "7bfcba64693e1041983ce6c73da00cc5296f4a46cb6a04e2eb8bb45007685948",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1791595485.563314,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 37,
+        "anchor": "text-exact",
+        "anchorValue": "城市：青岛市  ；  联系人：店里，18105422208  ；  店铺：来碗盖浇饭  ；  地址：阜安街道大同新村38号第二间",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1791595509.337656
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 64
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 220
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 23774
+    }
+  ],
+  "elapsedMs": 24000,
+  "eventKey": "b50e37b047a44fac79689f65b6a4a2057e56de3b970d9a62fcfc6db5fed2c5b7",
+  "reviewSummary": {
+    "totalElapsedMs": 24000,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "bec0d358e0e3bd86e2fb4b6358ab8d3624f76f929fbe8f17fc68ed4005c83e06",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "932a516f7aae24c26a8d4df9776a79fc0a5ea5a99255ceed1935c0ca55a80a69",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1792037880.149098,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 37,
+        "anchor": "text-exact",
+        "anchorValue": "城市：贺州市  ；  联系人：周，17817196113  ；  店铺：五谷兴现熬鱼汤粉  ；  地址：城广场路10号电视台办公大楼一楼16#17#商铺",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1792037909.1582668
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 76
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 1148
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 29009
+    }
+  ],
+  "elapsedMs": 30160,
+  "eventKey": "9f86489d26f3bcdcbea87213d9004a0481510e55049d96b9a5b2dac79c881554",
+  "reviewSummary": {
+    "totalElapsedMs": 30160,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "70c82d26dcce37f878fa16bc84381546923cbebc82b5959d73f9faf243dcd5f3",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "5e0f965505abff12e83921e108f85f2381d7c56c2a2752b7dfb6dbfd8df32b8e",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1792385358.555329,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 43,
+        "anchor": "text-exact",
+        "anchorValue": "城市：深圳市  ；  联系人：许生，13691914973  ；  店铺：探密牛蛙·龙虾·烤鱼（福田店）  ；  地址：沙头街道沙尾社区沙尾西村224-2",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1792385384.430828
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 77
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 9201
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 25875
+    }
+  ],
+  "elapsedMs": 35082,
+  "eventKey": "8ec3f161997340e333345f41407acd08d7f6103534276a41704403680a829f5a",
+  "reviewSummary": {
+    "totalElapsedMs": 35082,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

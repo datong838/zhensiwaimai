@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "f03899059713fd6f05ef4f107d43aba1aaf7105f71702ffa298d4f453ff6ae60",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "811e2526198122910acb5cca7a8f5bf5b0557028bacab239f3643c6fd01d1e47",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1792398001.6341429,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 44,
+        "anchor": "text-exact",
+        "anchorValue": "城市：通辽市  ；  联系人：崔，15504753792  ；  店铺：多馋嘴肉蟹煲  ；  地址：明仁大街与步行街交叉口南160米",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1792398028.1099231
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 66
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 12185
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 26475
+    }
+  ],
+  "elapsedMs": 38665,
+  "eventKey": "9afe8f80e20f8013ef6c522202a2fc358e3836c1a035f7d5863803dc78ff5613",
+  "reviewSummary": {
+    "totalElapsedMs": 38665,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

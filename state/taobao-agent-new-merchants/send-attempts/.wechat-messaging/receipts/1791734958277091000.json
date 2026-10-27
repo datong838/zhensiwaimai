@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "6143552b46381fb414e0e1156b1df7e0e70d50822be9a469bc00860960b9b7e2",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "77b04a040e08a2cab7f56a1746ce838e088252d632c83c27fe7679513ffe0d41",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1791734935.2215092,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 42,
+        "anchor": "text-exact",
+        "anchorValue": "城市：上海市  ；  联系人：方，13962417475  ；  店铺：笼王焖面焖饭  ；  地址：佳源金海公路35号213室梦想广场",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1791734958.273937
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 67
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 9198
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 23052
+    }
+  ],
+  "elapsedMs": 32254,
+  "eventKey": "a9f40c492561de836e76ba35099d06bddd0470e023d4efb65af15064ce732430",
+  "reviewSummary": {
+    "totalElapsedMs": 32254,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

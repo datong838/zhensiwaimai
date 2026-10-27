@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "c900884b2d9356737ca9f23c1635163985263c6b5372c9faba37ea3e88c3513c",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "10e3eb380989754b34634abe8c6182fa6d004bb99c31cd5fb9e54cb0f67ff1cb",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1792130555.5054579,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 45,
+        "anchor": "text-exact",
+        "anchorValue": "城市：齐齐哈尔市  ；  联系人：刘，15046217323  ；  店铺：钟哥鸭货  ；  地址：和祥组团5号楼00单元01层17号",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1792130581.769203
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 67
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 9355
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 26260
+    }
+  ],
+  "elapsedMs": 35624,
+  "eventKey": "90173127282af370958298cac601a8fb00d799f348ab72ef48b2cd809342d91e",
+  "reviewSummary": {
+    "totalElapsedMs": 35624,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

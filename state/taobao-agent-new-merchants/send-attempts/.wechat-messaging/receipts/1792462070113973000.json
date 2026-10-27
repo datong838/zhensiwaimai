@@ -1,0 +1,75 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "d3cccf2a7d8cd8357de27bfb7932ba35970a06b15b38eb4e47ec54a74fe37eff",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "76b47f4e7a531b715ed6a2866faabc92019e97716ca5d04733a542c17bd25626",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1792462045.025537,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 45,
+        "anchor": "text-exact",
+        "anchorValue": "城市：徐州市  ；  联系人：俞，15205201096  ；  店铺：山娃重庆老火锅  ；  地址：火花街道新淮海西路延长线4号麓山荣郡商业广场一期幢5单元109号",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1792462070.111809
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 83
+        },
+        "route": "direct",
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 182
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 25087
+    }
+  ],
+  "elapsedMs": 25272,
+  "eventKey": "3ab721be1e83afc227d799c5484d4bca53081ef2fa26b03723ca615a59dc629b",
+  "reviewSummary": {
+    "totalElapsedMs": 25272,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

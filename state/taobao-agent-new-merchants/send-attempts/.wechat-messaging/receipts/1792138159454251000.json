@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "d22b19b8b2bb2c44106b859b4bf98da8305ab806b82762cd5add6f8b58761b5f",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "ba0d9420f029d7a3fc786e4b5758ded0a91560eee64c7c205dec1ba06d024a09",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1792138132.707468,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 45,
+        "anchor": "text-exact",
+        "anchorValue": "城市：南宁市  ；  联系人：兰，18677047565  ；  店铺：兰记现炖牛腩饭.粉  ；  地址：下均路8号天龙丽园1-3栋一层156号",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1792138159.448757
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 72
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 9345
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 26741
+    }
+  ],
+  "elapsedMs": 36093,
+  "eventKey": "4e123072a1e165fdcacec11fdaf297efaf41a0482d2aa0033acaed7574151fb4",
+  "reviewSummary": {
+    "totalElapsedMs": 36093,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：南通市  ；  联系人：荆，18015207427  ；  店铺：旨寿司  ；  地址：桃园路12号南通CBD大有境A座4层",
+      "sha256": "10e36fb96a38da59bc089218e0b17a5f7a0534df69f0496992583225ddca259a"
+    }
+  ],
+  "sendAttempts": 1,
+  "physicalSendAttempts": 1,
+  "merchantId": "1332142200",
+  "messageSha256": "10e36fb96a38da59bc089218e0b17a5f7a0534df69f0496992583225ddca259a",
+  "runtimeModelDecisions": 0,
+  "reason": null,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "10e36fb96a38da59bc089218e0b17a5f7a0534df69f0496992583225ddca259a",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1791266470.371417,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-text-anchor",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "电销+直播攻坚组",
+          "currentTitle": "电销+直播攻坚组",
+          "messageCount": 50,
+          "anchor": "text-exact",
+          "anchorValue": "城市：南通市  ；  联系人：荆，18015207427  ；  店铺：旨寿司  ；  地址：桃园路12号南通CBD大有境A座4层",
+          "anchorInTrailingPosition": true
+        }
+      }
+    ]
+  },
+  "copyReadback": {
+    "ok": true,
+    "resolvedGroup": "电销+直播攻坚组",
+    "currentTitle": "电销+直播攻坚组",
+    "messageCount": 50,
+    "anchor": "text-exact",
+    "anchorValue": "城市：南通市  ；  联系人：荆，18015207427  ；  店铺：旨寿司  ；  地址：桃园路12号南通CBD大有境A座4层",
+    "anchorInTrailingPosition": true,
+    "readbackAt": 1791266470.0
+  },
+  "completionProvenance": {
+    "decision": "controlled-verified-from-driver-readback",
+    "authorizedBy": "大同 · 2026-10-06 会话内明确同意方案 A（同意写生产防重台账）",
+    "incident": "本机中继 8 秒静默丢响应（localhost_relay.py，已于 2026-10-06 14:2x 修复上线）",
+    "why": "发送已实际执行并送达，但响应被中继吞掉、进程被杀，transport 收据从未落盘 ⇒ marker 停在 state=attempted / sendAttempts=null；代码层三条复核路径（sealed legacy_text_reconcile、WindowsAdapter.reconcile、重新 --execute）全部要求收据齐全 ⇒ 零自愈、游标永久阻塞。",
+    "evidenceBasis": "事故报告《20261006-发送响应丢失事故报告-中继8秒超时》§三：驱动只读回读（wx.read 50 条）确认旨寿司那条在群、位于会话尾部、时间戳 14:01、正文与载荷逐字一致；大同本人亦亲见。",
+    "noResendGuarantee": "本次结论化不触发任何发送；流程复用该 verified 收据后仅提交成功历史与游标。",
+    "replacedState": "attempted",
+    "evidenceObservedAt": "2026-10-06T14:01+08:00",
+    "recordedAt": "2026-10-06T14:44:57+0800",
+    "recordedBy": "WorkBuddy 监理",
+    "note": "本记录不伪造 transport/attemptReviews：该轮桥未返回任何收据。"
+  }
+}

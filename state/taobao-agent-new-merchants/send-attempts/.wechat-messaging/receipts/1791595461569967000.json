@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "a0eaf05d226331d1961d71e977bdc7b6884d2f21f780450b480587706d5a7c58",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "3edd6f75ed8ceefafce33901f5da63ae59408479683cb4ddfd73dcd93b3445ca",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1791595439.2923908,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 39,
+        "anchor": "text-exact",
+        "anchorValue": "城市：淮南市  ；  联系人：17717287478，17717287478  ；  店铺：兰州牛肉面  ；  地址：山南新区安理家园113号商铺",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1791595461.567457
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 73
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 223
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 22275
+    }
+  ],
+  "elapsedMs": 22501,
+  "eventKey": "7dc475f5b4f404068dcba3d58f2833d77a6a8cd7be26b6bda30b42cff0ea0782",
+  "reviewSummary": {
+    "totalElapsedMs": 22501,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

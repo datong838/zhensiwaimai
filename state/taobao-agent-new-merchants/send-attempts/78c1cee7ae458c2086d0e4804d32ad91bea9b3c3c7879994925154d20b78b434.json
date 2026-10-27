@@ -1,0 +1,200 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：咸宁市  ；  联系人：吴，19318024902  ；  店铺：山谷Valley·咖啡·手作甜品  ；  地址：赤马港街道赤马港社区子敬路108号丁关雄私房201室",
+      "sha256": "6b37070a6a71fe18010f0c9fca516d9986daff26c9a5ff7095f92ceba0e8dae5"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "07e0308327ec78d593c3464f0f348a06171f2b584d437d968f578d726ffdadc9",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "6b37070a6a71fe18010f0c9fca516d9986daff26c9a5ff7095f92ceba0e8dae5",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1791599503.646643,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-text-anchor",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "电销+直播攻坚组",
+          "currentTitle": "电销+直播攻坚组",
+          "messageCount": 38,
+          "anchor": "text-exact",
+          "anchorValue": "城市：咸宁市  ；  联系人：吴，19318024902  ；  店铺：山谷Valley·咖啡·手作甜品  ；  地址：赤马港街道赤马港社区子敬路108号丁关雄私房201室",
+          "anchorInTrailingPosition": true,
+          "autoKind": null,
+          "readbackAt": 1791599525.872254
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "电销+直播攻坚组",
+            "len": 86
+          },
+          "route": "relay",
+          "direct_error": "[Errno 65] No route to host",
+          "direct_local_network_blocked": true,
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 288
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 22226
+      }
+    ],
+    "elapsedMs": 22520,
+    "eventKey": "100cf4205d28026802664a2f13bf610f9cd043f890e9b05a9cfe6c3c556ec25a",
+    "reviewSummary": {
+      "totalElapsedMs": 22520,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/78c1cee7ae458c2086d0e4804d32ad91bea9b3c3c7879994925154d20b78b434.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 288,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 22226,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 22520,
+  "reviewSummary": {
+    "totalElapsedMs": 22520,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "ok": true,
+    "resolvedGroup": "电销+直播攻坚组",
+    "currentTitle": "电销+直播攻坚组",
+    "messageCount": 38,
+    "anchor": "text-exact",
+    "anchorValue": "城市：咸宁市  ；  联系人：吴，19318024902  ；  店铺：山谷Valley·咖啡·手作甜品  ；  地址：赤马港街道赤马港社区子敬路108号丁关雄私房201室",
+    "anchorInTrailingPosition": true,
+    "autoKind": null,
+    "readbackAt": 1791599525.872254
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false,
+  "attemptReviews": [
+    {
+      "attempt": 1,
+      "elapsedMs": 22864,
+      "ok": true,
+      "reason": null,
+      "sendAttempts": 1,
+      "sendReview": [
+        {
+          "stage": "authorization",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 1,
+          "label": "authorization"
+        },
+        {
+          "stage": "freeze:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 2,
+          "label": "freeze:0"
+        },
+        {
+          "stage": "preflight",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 288,
+          "item": 3,
+          "label": "preflight"
+        },
+        {
+          "stage": "send:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 22226,
+          "item": 4,
+          "label": "send:0"
+        }
+      ]
+    }
+  ],
+  "contentionRetries": 0,
+  "contentionWaitMs": 0,
+  "contentionEvents": [],
+  "merchantId": "528995168",
+  "messageSha256": "6b37070a6a71fe18010f0c9fca516d9986daff26c9a5ff7095f92ceba0e8dae5"
+}

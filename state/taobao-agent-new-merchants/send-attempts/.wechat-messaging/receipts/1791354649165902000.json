@@ -1,0 +1,75 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "8641ce6fe69614c4a74244d0bf9615e609c163832291931e8cfbd658199a5920",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "50fe445d79eb0bea231bdfe467a8b1ead8e6addcf32902e065e7e6d52fd564db",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1791354626.942603,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 50,
+        "anchor": "text-exact",
+        "anchorValue": "城市：长沙市  ；  联系人：左生，19848088355  ；  店铺：飘香馄饨·石磨肠粉  ；  地址：湖南湘江新区麓谷街道麓泉社区麓谷大道627号海创科技工业园A-1、A-2栋裙楼101-3号",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1791354649.163211
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 99
+        },
+        "route": "direct",
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 3322
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 22221
+    }
+  ],
+  "elapsedMs": 25546,
+  "eventKey": "20c7d73d379a22ea7ae996ec5ace1453ee22a7f0165f2a2359064916c30da8c0",
+  "reviewSummary": {
+    "totalElapsedMs": 25546,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

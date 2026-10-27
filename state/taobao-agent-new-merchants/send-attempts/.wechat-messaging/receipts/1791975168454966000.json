@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "333b3fad8fd53604236da78d950bbfe8ca543dd51e590b3eeccb77d3bc50760c",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "822634307d7c42cba14eafe5b9406e9b9cc4be5cba915b3217b0ea4061b1f480",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1791975145.69513,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 41,
+        "anchor": "text-exact",
+        "anchorValue": "城市：北京市  ；  联系人：戴，13166719409  ；  店铺：屹佰杯·台湾鲁肉饭·盐酥鸡（中关村店）  ；  地址：北四环西路66号-1层-158",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1791975168.451044
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 78
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 292
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 22756
+    }
+  ],
+  "elapsedMs": 23053,
+  "eventKey": "d0221ebbb58b7171cbeda473536741461712a6e1862ecd86b21deb6dddb89cab",
+  "reviewSummary": {
+    "totalElapsedMs": 23053,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

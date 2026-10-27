@@ -1,0 +1,50 @@
+{
+  "runId": "2026-10-21-d44c8729bfc8",
+  "rows": [
+    {
+      "shopId": "694471",
+      "shopName": "李当家汉派猪蹄饭(一清路店)",
+      "metric": "M01",
+      "group": "",
+      "status": "captured",
+      "steps": [
+        {
+          "stage": "capture",
+          "elapsedMs": 32057
+        },
+        {
+          "stage": "compose",
+          "elapsedMs": 0
+        },
+        {
+          "stage": "post-login-check",
+          "elapsedMs": 67
+        }
+      ],
+      "pitfalls": [],
+      "image": "work/metrics-rotation-development/live-20261021/state/runs/2026-10-21-d44c8729bfc8/694471/M01/M01_shop694471_20261020180057.png",
+      "elapsedMs": 32132
+    },
+    {
+      "shopId": "694471",
+      "shopName": "李当家汉派猪蹄饭(一清路店)",
+      "metric": "M10",
+      "group": "",
+      "status": "failed",
+      "steps": [
+        {
+          "stage": "capture",
+          "elapsedMs": 33695
+        },
+        {
+          "stage": "failure-login-check",
+          "elapsedMs": 69
+        }
+      ],
+      "pitfalls": [
+        "capture-failed-8"
+      ],
+      "elapsedMs": 33765
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "a08c5b3734fa86b8fb3c41b82d1b410cdfc807664dc864291bdbc4e94cc4ee80",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "e277fb1d79daea147a93f30df09323d04e733a086cb07ff8ecd761637de06b98",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1792549967.478092,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 42,
+        "anchor": "text-exact",
+        "anchorValue": "城市：成都市  ；  联系人：邓，15583209888  ；  店铺：邓撇儿隆江猪脚饭  ；  地址：天生路173号",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1792549988.8159292
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 59
+        },
+        "route": "direct",
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 192
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 21338
+    }
+  ],
+  "elapsedMs": 21533,
+  "eventKey": "aaf104823f1ff0a38741d35b602e3778a52ccaceeb894c4fc4d12f25f015037f",
+  "reviewSummary": {
+    "totalElapsedMs": 21533,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

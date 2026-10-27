@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "feefb64389fee5375579468fc3a91bffd0ffdbe149c0d2001eb21fe01a405055",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "5583ddac16819638a67bb28e3ff60fa449088bcd051d05ca8ca297209948e6f7",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1791685206.334708,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 45,
+        "anchor": "text-exact",
+        "anchorValue": "城市：湖州市  ；  联系人：吴女士，15857295322  ；  店铺：玖美烤吧  ；  地址：练市镇东兴路14号",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1791685228.862772
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 59
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 3308
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 22527
+    }
+  ],
+  "elapsedMs": 25840,
+  "eventKey": "8c46c81e4f21080004739ac8ef68447ebd0a82964dd3a8e8dff548226c77cf65",
+  "reviewSummary": {
+    "totalElapsedMs": 25840,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

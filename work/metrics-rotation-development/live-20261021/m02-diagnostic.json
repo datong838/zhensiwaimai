@@ -1,0 +1,54 @@
+{
+  "ok": false,
+  "workflowId": "daily-store-metrics-rotation-to-wechat",
+  "mode": "capture",
+  "status": "incomplete",
+  "businessDate": "2026-10-21",
+  "runId": "2026-10-21-8aa6dc16ee2c",
+  "metrics": [
+    "M02"
+  ],
+  "summary": {
+    "poolTotal": 1,
+    "expected": 1,
+    "pending": 0,
+    "blocked": 0,
+    "unknown": 0,
+    "already_verified": 0,
+    "verified": 0,
+    "captured": 0,
+    "no-data": 0,
+    "failed": 1,
+    "ledger_pending": 0,
+    "remaining": 1
+  },
+  "rows": [
+    {
+      "shopId": "694471",
+      "shopName": "李当家汉派猪蹄饭(一清路店)",
+      "metric": "M02",
+      "group": "",
+      "status": "failed",
+      "steps": [
+        {
+          "stage": "capture",
+          "elapsedMs": 3068
+        },
+        {
+          "stage": "failure-login-check",
+          "elapsedMs": 74
+        }
+      ],
+      "pitfalls": [
+        "switch-popup-not-open-4"
+      ],
+      "elapsedMs": 3142
+    }
+  ],
+  "elapsedMs": 3142,
+  "externalEffectRequested": false,
+  "stage": "metrics-incomplete",
+  "executorBaselineHash": "2c9934bbb942d8948db95c10598825d327078a6389fdd97cd488a19f3e1dc451",
+  "sourcePoolTotal": 863,
+  "scopeLimited": true
+}

@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "f88d8f8bdbdf0094806f84486ef64595c38d1064f4c0a3b58fb071e9463af401",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "62cefafb0ab93d49cceefbf6aacf47d3f584f0573b9ad09d00e386f74a8a8a1c",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1791693444.0358012,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 41,
+        "anchor": "text-exact",
+        "anchorValue": "城市：南宁市  ；  联系人：高琪静，13197682970  ；  店铺：渔悦·石锅鱼  ；  地址：盘岭路1号盘岭庄苑J栋-6号",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1791693466.4691179
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 66
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 3220
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 22433
+    }
+  ],
+  "elapsedMs": 25657,
+  "eventKey": "c1d749365abb5fa9e79ebe7aaf245bf4fe100cdda6a7a4ecfc981807755077fa",
+  "reviewSummary": {
+    "totalElapsedMs": 25657,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

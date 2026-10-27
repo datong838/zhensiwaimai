@@ -1,0 +1,75 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "45d1c210b85f850f459b83df83a2c8f7496b8acaf5d671aa193309aade1bd45b",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "5cdc002dcde30703bbe2ac6daf43377e1f3d64014a64eff241b2cfacec057ecb",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1792414688.083335,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 44,
+        "anchor": "text-exact",
+        "anchorValue": "城市：汕头市  ；  联系人：王，13211255907  ；  店铺：中谷麦王厨江湖菜  ；  地址：峡山街道汕尾广汕公路南港涵洋(即粤运汽车客运站)站前中路第07号",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1792414711.337069
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 84
+        },
+        "route": "direct",
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 173
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 23254
+    }
+  ],
+  "elapsedMs": 23430,
+  "eventKey": "aaa9acaead6293d7527a1be1964a3bb289f7f410bd18fc6511e219f57016940f",
+  "reviewSummary": {
+    "totalElapsedMs": 23430,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

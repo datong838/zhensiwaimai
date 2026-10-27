@@ -1,0 +1,68 @@
+{
+  "ok": false,
+  "status": "blocked",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "c5f58c8d0f76252786f258d7e9fe21f7de36bad2699486c2aea906378b329304",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "54f3adc103f679c272ecddd148e456a649b2ede18e4d4cd1293eaa6d92bdb0e7",
+      "type": "text",
+      "status": "blocked",
+      "claimedAt": 1791821819.96065,
+      "sendAttempts": 0,
+      "reason": "windows-send-rejected:HTTP 500: {\"ok\": false, \"error\": \"微信进程在运行，但主窗口未出现——通常意味着**尚未完成登录**（重启后需扫码登录）。请在服务端完成扫码登录后重试；也可用 /health 的 logged_in 字段或 wx.wait_ready() 等待就绪。\"}",
+      "transport": {
+        "ok": false,
+        "error": "HTTP 500: {\"ok\": false, \"error\": \"微信进程在运行，但主窗口未出现——通常意味着**尚未完成登录**（重启后需扫码登录）。请在服务端完成扫码登录后重试；也可用 /health 的 logged_in 字段或 wx.wait_ready() 等待就绪。\"}",
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 0
+      },
+      "attemptErrors": [
+        "HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题=''，目标='电销+直播攻坚组'\"}",
+        "HTTP 500: {\"ok\": false, \"error\": \"微信进程在运行，但主窗口未出现——通常意味着**尚未完成登录**（重启后需扫码登录）。请在服务端完成扫码登录后重试；也可用 /health 的 logged_in 字段或 wx.wait_ready() 等待就绪。\"}",
+        "HTTP 500: {\"ok\": false, \"error\": \"微信进程在运行，但主窗口未出现——通常意味着**尚未完成登录**（重启后需扫码登录）。请在服务端完成扫码登录后重试；也可用 /health 的 logged_in 字段或 wx.wait_ready() 等待就绪。\"}"
+      ]
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 9241
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 64064
+    }
+  ],
+  "reason": "windows-send-rejected:HTTP 500: {\"ok\": false, \"error\": \"微信进程在运行，但主窗口未出现——通常意味着**尚未完成登录**（重启后需扫码登录）。请在服务端完成扫码登录后重试；也可用 /health 的 logged_in 字段或 wx.wait_ready() 等待就绪。\"}",
+  "elapsedMs": 73311,
+  "eventKey": "8aa04e96bea9e92700647a3cf7863eae1bfd8d3a4fb2b655203c01e017ce4b4d",
+  "reviewSummary": {
+    "totalElapsedMs": 73311,
+    "result": "blocked",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

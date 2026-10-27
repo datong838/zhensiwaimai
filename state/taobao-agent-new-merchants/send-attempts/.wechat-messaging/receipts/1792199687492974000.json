@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "3e0b740c133ea0ed8d228596faa28ec326c3691feb06e2c67138ffce820fa183",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "c222ffe05fc7e139ed34adcaa5148ffac4f1792f0a97e07ba5c1f45dd19e92a9",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1792199660.763659,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 46,
+        "anchor": "text-exact",
+        "anchorValue": "城市：宁波市  ；  联系人：马，18793023330  ；  店铺：兰州牛肉拉面  ；  地址：南门街道万安路31号(1-12)",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1792199687.489611
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 66
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 12193
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 26725
+    }
+  ],
+  "elapsedMs": 38923,
+  "eventKey": "0bbdb3bbe8be09332505f01a7fdb122b45b12fd4a30b6517ed2f446fe08701ec",
+  "reviewSummary": {
+    "totalElapsedMs": 38923,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

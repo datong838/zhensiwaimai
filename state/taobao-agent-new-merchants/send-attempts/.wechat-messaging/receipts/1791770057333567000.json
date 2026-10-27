@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "5c234846e1b1e62c051d2ba3c7fa5423c6b6f50e496418758e34474f5e7bbd54",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "6ca181e60cd3dfc4c2624cc7760f2ad6c5d00ab6e1483eb87744d27133939499",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1791770031.0864131,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 41,
+        "anchor": "text-exact",
+        "anchorValue": "城市：南宁市  ；  联系人：王先生，15089978066  ；  店铺：猪猪小厨·烧椒猪脚饭  ；  地址：城厢镇标营社区标营路111号康和城3号楼90号商铺",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1791770057.32937
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 81
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 9231
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 26242
+    }
+  ],
+  "elapsedMs": 35479,
+  "eventKey": "5b2f962ab67c9b1d9dc03014704a7cfffd814719101a9bf87a50de334a7cc6b9",
+  "reviewSummary": {
+    "totalElapsedMs": 35479,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

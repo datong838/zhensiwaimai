@@ -1,0 +1,75 @@
+{
+  "bridgeVersion": 1,
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloadType": "text",
+  "payloads": [
+    {
+      "text": "城市：红河哈尼族彝族自治州  ；  联系人：李嘉丽，13769390672  ；  店铺：巷陌食集  ；  地址：异龙镇卫家营社区异龙镇小西山7号",
+      "sha256": "f03011c9f09b9f68943f6a7da6d191fde6937ec889637a7c245ba57f6f26423e"
+    }
+  ],
+  "sendAttempts": 1,
+  "verified": true,
+  "ok": true,
+  "physicalSendAttempts": 1,
+  "messageSha256": "f03011c9f09b9f68943f6a7da6d191fde6937ec889637a7c245ba57f6f26423e",
+  "runtimeModelDecisions": 0,
+  "reason": null,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "f03011c9f09b9f68943f6a7da6d191fde6937ec889637a7c245ba57f6f26423e",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1792561515.275264,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-text-anchor",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "电销+直播攻坚组",
+          "currentTitle": "电销+直播攻坚组",
+          "messageCount": 42,
+          "anchor": "text-exact",
+          "anchorValue": "城市：红河哈尼族彝族自治州  ；  联系人：李嘉丽，13769390672  ；  店铺：巷陌食集  ；  地址：异龙镇卫家营社区异龙镇小西山7号",
+          "anchorInTrailingPosition": true,
+          "readbackAt": 1792561515.274986,
+          "strategy": "exact"
+        }
+      }
+    ]
+  },
+  "readbackEvidence": {
+    "ok": true,
+    "resolvedGroup": "电销+直播攻坚组",
+    "currentTitle": "电销+直播攻坚组",
+    "messageCount": 42,
+    "anchor": "text-exact",
+    "anchorValue": "城市：红河哈尼族彝族自治州  ；  联系人：李嘉丽，13769390672  ；  店铺：巷陌食集  ；  地址：异龙镇卫家营社区异龙镇小西山7号",
+    "anchorInTrailingPosition": true,
+    "readbackAt": 1792561515.274986,
+    "strategy": "exact"
+  },
+  "verificationMethod": "windows-driver-readback-anchor",
+  "completionProvenance": {
+    "decision": "controlled-verified-from-driver-readback",
+    "tool": "runtime/conclude_attempt_deadlock.py (A2b-②)",
+    "authorizedBy": "授权串 conclude:eca998cdbe1d（操作者：WorkBuddy 监理）",
+    "recordedAt": "2026-10-21T13:45:15+0800",
+    "recordedBy": "WorkBuddy 监理",
+    "replacedState": "attempted",
+    "evidenceObservedAt": "2026-10-21T13:45:15+0800",
+    "evidenceBasis": "驱动只读回读：目标会话标题当前，且载荷精确文本位于会话尾部（anchor=text-exact）。",
+    "noResendGuarantee": "本次结论化不触发任何发送；流程复用该 verified 收据后仅提交成功历史与游标。",
+    "note": "本记录不伪造 transport/attemptReviews：本工具只做只读读回取证，不复现桥的真实发送收据。；13:40:19 kickstart 打断 13:38:39 run 第 2 家发送后的回执窗口；readback 取证消息已在群尾"
+  },
+  "merchantId": "1316635375",
+  "reusedExisting": true,
+  "newSendAttempts": 0
+}

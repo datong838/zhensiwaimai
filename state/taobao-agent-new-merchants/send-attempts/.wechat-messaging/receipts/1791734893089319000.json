@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "b9a3ae61dabc57e50f5f99bf7e0bd3b0edd6593041ec12ba3a53dd2a810eea68",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "059e5a060e826943e0697ddb3417420e674e627243b397b2b39ab6e39fc63157",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1791734869.8970938,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 42,
+        "anchor": "text-exact",
+        "anchorValue": "城市：邯郸市  ；  联系人：邢，18532070551  ；  店铺：老巷口卤肉卷饼  ；  地址：临洺关镇政府街天骏商业广场西广场一层5号岗亭",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1791734893.085801
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 73
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 9350
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 23187
+    }
+  ],
+  "elapsedMs": 32544,
+  "eventKey": "fbbc27e0f024fce2d007214caf03973cca460c7680f53723b757e6de27dfd555",
+  "reviewSummary": {
+    "totalElapsedMs": 32544,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

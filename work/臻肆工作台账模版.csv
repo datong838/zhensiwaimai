@@ -1,0 +1,9 @@
+﻿工作流名称,工作流目录,执行时间,当日是否完成,备注
+昨日门店 Top10 截图发 AI 员工群,../skills/daily-top10-to-wechat-group,每日 08:00,否,目标群：FEIBING NEO AI数字员工；昨日数据；每日仅一次发送尝试
+昨日差评分析,../skills/daily-negative-reviews,每日 09:00,否,昨日全部平台 1–3 星差评；完成后发送固定运营微信群
+品牌差评申诉跟进,../skills/brand-negative-review-appeal-followup,每日 09:40,否,读取品牌表并逐条生成申诉跟进；发送须服从独立授权与防重
+金鲨昨日双平台日报发运营群,../skills/daily-jinsha-reports-to-business-wechat,每日 11:00,否,生成美团外卖与淘宝闪购两份日报，并发送固定运营微信群
+淘宝昨日报表下载上传金鲨,../skills/daily-taobao-download-to-jinsha,每日 13:00,否,下载门店与评价报表，去重上传金鲨并发送证据
+淘宝新增商家增量通知,../skills/daily-agent-new-merchants-to-wechat,每小时,否,全天增量检查；当日最后一轮完成后再标记为是
+企业微信视频下载与三平台发布,../skills/daily-wechat-video-publish,按需（未配置自动时刻）,不适用,下载后必须人工检查；获得发布授权后才可发布
+每周外卖巡店,../skills/store-inspection,每周（未配置执行日和时刻）,不适用,按周生成巡店台账；仅在本日被安排时改为否并执行

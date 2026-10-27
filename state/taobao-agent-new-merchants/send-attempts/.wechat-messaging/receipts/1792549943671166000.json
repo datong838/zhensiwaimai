@@ -1,0 +1,75 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "620fed3d9df860ed2ec48a630e21197e7907f24410485e47be71bff49974271e",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "08b7d3019467f8ee787b944ff0c366226f95dcba8f531efd62062a58affa7975",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1792549922.0343602,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 44,
+        "anchor": "text-exact",
+        "anchorValue": "城市：无锡市  ；  联系人：李腾飞，13863626572  ；  店铺：渔町寿司  ；  地址：南闸街道白玉路258号",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1792549943.6701498
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 61
+        },
+        "route": "direct",
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 187
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 21636
+    }
+  ],
+  "elapsedMs": 21824,
+  "eventKey": "5279b9933b6487f608f556518e38df2ed1fa7df39c34830f36c5de8b7d9a573c",
+  "reviewSummary": {
+    "totalElapsedMs": 21824,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

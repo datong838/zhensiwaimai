@@ -1,0 +1,74 @@
+{
+  "ok": false,
+  "status": "unknown",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "481b30883d132ecfbebb7a2cf95e9b93b3e97b55783b3c4e9e7569fad08b7129",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "5a82b3ca28c55deb7839b3d3bfd15917c33bfb859a7bbec32d8b62b9fc7ae01d",
+      "type": "text",
+      "status": "unknown",
+      "claimedAt": 1791505241.187291,
+      "sendAttempts": 1,
+      "reason": "windows-current-session-title-mismatch",
+      "evidence": {
+        "ok": false,
+        "resolvedGroup": "电销+直播攻坚组",
+        "titleProven": false,
+        "reason": "windows-current-session-title-mismatch",
+        "polls": 0
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 63
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 273
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 36222
+    }
+  ],
+  "reason": "windows-current-session-title-mismatch",
+  "elapsedMs": 36499,
+  "eventKey": "fc7f504080d8a52d728368b57bceeaac6d9a8ecfe037c1b6dbc8715bcd3dd02e",
+  "reviewSummary": {
+    "totalElapsedMs": 36499,
+    "result": "unknown",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

@@ -1,0 +1,198 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：武汉市  ；  联系人：杨烨，19519808501  ；  店铺：蜜雪冰城  ；  地址：武汉东湖新技术开发区花山镇花城大道2号碧桂园生态城二期(观澜)9栋1单元1层03室  ；  商家ID：524831612",
+      "sha256": "ad38e0a4758c3dc09e20189811cc15def2471f77d342c820d995235f4c3ff20b"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "dd570f45dd2ff5bf92d59ddf3183431bc42fa37d071e50313d946ea90da97bfd",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "ad38e0a4758c3dc09e20189811cc15def2471f77d342c820d995235f4c3ff20b",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1792636723.7649589,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-text-anchor",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "电销+直播攻坚组",
+          "currentTitle": "电销+直播攻坚组",
+          "messageCount": 42,
+          "anchor": "text-exact",
+          "anchorValue": "城市：武汉市  ；  联系人：杨烨，19519808501  ；  店铺：蜜雪冰城  ；  地址：武汉东湖新技术开发区花山镇花城大道2号碧桂园生态城二期(观澜)9栋1单元1层03室  ；  商家ID：524831612",
+          "anchorInTrailingPosition": true,
+          "autoKind": null,
+          "readbackAt": 1792636749.8360362
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "电销+直播攻坚组",
+            "len": 109
+          },
+          "route": "direct",
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 208
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 26073
+      }
+    ],
+    "elapsedMs": 26285,
+    "eventKey": "23ee1caad49d2492285f5f8b16bc45ad5cebb2116f3c449fcb54d6b281544cf0",
+    "reviewSummary": {
+      "totalElapsedMs": 26285,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/6fdbb24e16fb3ceff7fd31c8c4a8db8715d8d708f758c36778cdd2a019bc8ec0.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 208,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 26073,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 26285,
+  "reviewSummary": {
+    "totalElapsedMs": 26285,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "ok": true,
+    "resolvedGroup": "电销+直播攻坚组",
+    "currentTitle": "电销+直播攻坚组",
+    "messageCount": 42,
+    "anchor": "text-exact",
+    "anchorValue": "城市：武汉市  ；  联系人：杨烨，19519808501  ；  店铺：蜜雪冰城  ；  地址：武汉东湖新技术开发区花山镇花城大道2号碧桂园生态城二期(观澜)9栋1单元1层03室  ；  商家ID：524831612",
+    "anchorInTrailingPosition": true,
+    "autoKind": null,
+    "readbackAt": 1792636749.8360362
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false,
+  "attemptReviews": [
+    {
+      "attempt": 1,
+      "elapsedMs": 26385,
+      "ok": true,
+      "reason": null,
+      "sendAttempts": 1,
+      "sendReview": [
+        {
+          "stage": "authorization",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 1,
+          "label": "authorization"
+        },
+        {
+          "stage": "freeze:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 2,
+          "label": "freeze:0"
+        },
+        {
+          "stage": "preflight",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 208,
+          "item": 3,
+          "label": "preflight"
+        },
+        {
+          "stage": "send:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 26073,
+          "item": 4,
+          "label": "send:0"
+        }
+      ]
+    }
+  ],
+  "contentionRetries": 0,
+  "contentionWaitMs": 0,
+  "contentionEvents": [],
+  "merchantId": "524831612",
+  "messageSha256": "ad38e0a4758c3dc09e20189811cc15def2471f77d342c820d995235f4c3ff20b"
+}

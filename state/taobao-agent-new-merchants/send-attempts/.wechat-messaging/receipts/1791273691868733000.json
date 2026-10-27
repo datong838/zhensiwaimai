@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "a2ce6eae67485e8bc1b7e7ba5fda0469761122abbcc4cf159ed9cc50f5fbee5e",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "039eaad41acf07e6d6a3f4ac3cf000e2673245b12c69833fb4267854eb430273",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1791273669.4547021,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 50,
+        "anchor": "text-exact",
+        "anchorValue": "城市：深圳市  ；  联系人：纪，17675438432  ；  店铺：饭福星·炭火烤肉拌饭·烤排饭  ；  地址：龙城街道黄阁坑社区新秀新村66号102热食类食品制售",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1791273691.866576
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 84
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 190
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 22412
+    }
+  ],
+  "elapsedMs": 22606,
+  "eventKey": "b004d2004c7c1f3a02728b386a94ba9b6d771af79981a5a678fa657643a9373e",
+  "reviewSummary": {
+    "totalElapsedMs": 22606,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

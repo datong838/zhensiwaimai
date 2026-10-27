@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "66f37674c194787d31113f0fc8e0be330daa0e939fa19588a5d1e8607b5c99db",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "3b13d47940103acf74a0ae15ccbc902061b182bc0b82ae5f87552ba239f6f971",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1792293653.1112351,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 43,
+        "anchor": "text-exact",
+        "anchorValue": "城市：吉林市  ；  联系人：成，13804411322  ；  店铺：爱辣无优麻辣烫·麻辣拌·炸串  ；  地址：铁路新建南区4号楼3号网点",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1792293682.124588
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 71
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 12176
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 29013
+    }
+  ],
+  "elapsedMs": 41194,
+  "eventKey": "a69dbb7bce6728c98ed24ce694232429a2497d58205328e4ad547bde5fddfd23",
+  "reviewSummary": {
+    "totalElapsedMs": 41194,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

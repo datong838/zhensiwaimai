@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "1bae7eb1ed8a43c75d9536e1910145871f04cae3f280a678af882b68275fe38b",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "3ba44bf2c602e739acc95be6096f21586ccf89c47046ea86d7f7242b8f5305de",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1792130591.261918,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 45,
+        "anchor": "text-exact",
+        "anchorValue": "城市：南京市  ；  联系人：杜宗恒，17558436122  ；  店铺：黔山野蘸水牛肉菜  ；  地址：弘景大道3666号南京传媒学院教育服务中心ING广场南传好吃街F216-1室",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1792130617.9760268
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 92
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 9352
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 26711
+    }
+  ],
+  "elapsedMs": 36142,
+  "eventKey": "2b9d27ab8b3c4f91d0131cf6ea21e84322f4af792b5b9c00b98c2d6e26c18c18",
+  "reviewSummary": {
+    "totalElapsedMs": 36142,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

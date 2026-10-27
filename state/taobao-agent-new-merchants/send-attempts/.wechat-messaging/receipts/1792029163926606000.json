@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "18c3218f79bbba215ffa0b8fbfc0a28ecc4f962bf19fc5b19ad02ed63730e09a",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "3ef5bffdc1db807d6e114fd7efe104d9c5b4e4616418843c3a869d761b5dda7c",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1792029133.176563,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 36,
+        "anchor": "text-exact",
+        "anchorValue": "城市：沈阳市  ；  联系人：汪，17624060741  ；  店铺：浩泰老饭盒大块牛肉饭  ；  地址：金卡路12甲号(1021)",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1792029163.922314
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 67
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 421
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 30746
+    }
+  ],
+  "elapsedMs": 31172,
+  "eventKey": "29e1a716d1ecdcba01773a30fdabb75d96dc096b65c80e8df6439fa77d9f4c2c",
+  "reviewSummary": {
+    "totalElapsedMs": 31172,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

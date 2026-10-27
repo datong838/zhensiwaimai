@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "5b0e714cfffc4d176ca31f8885b2b8b073b704f56557e11c9ab80029aff68fe1",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "c1599a415ad15e771500b7996b1707e11058bd557800efdb768d9fb8fb7be694",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1791685310.436478,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 42,
+        "anchor": "text-exact",
+        "anchorValue": "城市：合肥市  ；  联系人：刘，14755165220  ；  店铺：川渝·沸腾鲜鱼锅·小龙虾  ；  地址：井岗镇樊洼路1号乐彩中心7幢307室",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1791685333.1776671
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 74
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 3247
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 22741
+    }
+  ],
+  "elapsedMs": 25990,
+  "eventKey": "bb98e65c9c0d1ac6f9075213e09ac258eb5d7f64fe8a3aeb36508f2c2fbc9f57",
+  "reviewSummary": {
+    "totalElapsedMs": 25990,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "eb99a2e83b8b9fce0be4645abaa27f613b8bd6998e64330073a4a4ff4ecde921",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "9a064125f911ba9c5628845dd5f5b1b420d833f160d8fc110bbe0df331806592",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1792044238.311697,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 35,
+        "anchor": "text-exact",
+        "anchorValue": "城市：长沙市  ；  联系人：陈庚，18674505236  ；  店铺：面包疆山  ；  地址：安沙镇毛塘社区毛塘铺组668号食堂101负一楼9号档口",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1792044265.757361
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 76
+        },
+        "route": "direct",
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 871
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 27446
+    }
+  ],
+  "elapsedMs": 28322,
+  "eventKey": "c6f42e1c93f0e8b64aa7233fb15bea811ff269ae03677be46d9dc0df831f95d0",
+  "reviewSummary": {
+    "totalElapsedMs": 28322,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

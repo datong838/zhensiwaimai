@@ -1,0 +1,75 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "3ce8e79e2720b3abb95a3dcede008c3bb3f7cb15cfdb61a578b8afc585967731",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "e1246300628e2af86b9dfae540593cfe38c1b91189ddb1b06c7f6a3abb76bb59",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1792549852.641671,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 45,
+        "anchor": "text-exact",
+        "anchorValue": "城市：眉山市  ；  联系人：沈艳，15082340094  ；  店铺：多炸乐小吃店  ；  地址：洪川镇城城隍街22号",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1792549875.860493
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 61
+        },
+        "route": "direct",
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 185
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 23219
+    }
+  ],
+  "elapsedMs": 23406,
+  "eventKey": "57255b8409539ed2d0e471cf79ca04aa976a9854c28dbbc45edd9882b80be353",
+  "reviewSummary": {
+    "totalElapsedMs": 23406,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

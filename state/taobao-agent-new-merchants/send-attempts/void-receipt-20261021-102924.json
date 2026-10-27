@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "voidedAt": "2026-10-21T10:29:24+08:00",
+  "voidedBy": "WorkBuddy 监理",
+  "authorization": "大同 2026-10-20 23:11 指令·第一优先处置（9231 掉登录后补跑新商家流积压）；2026-10-21 10:25 大同「9231 已登录好切无头」确认后接力",
+  "scope": "新商家流 postrelogin 补跑遗留 blocked 死角 marker 双层 void（legacy-attempt-reconcile-only；发送器严格放行名单不含 windows-send-rejected reason ⇒ 只读对账不重发）",
+  "voided": [
+    {
+      "layer": "per-merchant marker",
+      "path": "36552993088f46d41cc28baf06185d8f433dcdc63056309214337243a0c8db9f.json -> 36552993088f46d41cc28baf06185d8f433dcdc63056309214337243a0c8db9f.json.voided-20261021-102924",
+      "merchant": "电销+直播攻坚组（披萨星球·披萨·意面·焗饭 1360630774）",
+      "state": "blocked",
+      "sendAttempts": 0,
+      "newSendAttempts": 0,
+      "physicalSendAttempts": 0
+    },
+    {
+      "layer": "bridge event",
+      "path": ".wechat-messaging/events/ce04f0f051617530892642a8abd1818e19092f93ede2e54e93364894cabe6719 -> ce04f0f051617530892642a8abd1818e19092f93ede2e54e93364894cabe6719.voided-20261021-102924",
+      "bindingDigest": "4f4d6ed9731143b2e04436672c2c7ecf307b706a5953c3d721bf2a69051cee28"
+    }
+  ],
+  "evidenceNeverSent": [
+    "per-merchant marker: state=blocked sendAttempts=0 newSendAttempts=0 physicalSendAttempts=0",
+    "事件层 delivery.json: status=blocked sendAttempts=0",
+    "transport: route=relay, direct_error=[Errno 65] No route to host, sendAttempts=0",
+    "attemptErrors 三条全为发送前失败：『打开会话失败，当前标题=''』『微信进程在运行，但主窗口未出现——尚未完成登录』×2",
+    "⇒ 10:26 发送时 Windows 侧微信窗口未就绪 ⇒ 物理上不可能投递；无 transport.data.sent、无 readback 锚点"
+  ],
+  "preconditionCheckAtVoid": "Windows 网关 192.168.110.184:8731 /health: logged_in=true ready=true wechat_running=true uiautomation=true（10:27 实测）；list_sessions 含「电销+直播攻坚组」⇒ 10:26 的『未就绪』条件已消失，具备真发条件",
+  "expectedOutcome": "重跑补发 8 家积压经 Windows 网关真发 → verified；游标推进",
+  "lesson": "与 2026-10-13 10:09 先例同构：postrelogin 补跑首撞 Windows 微信窗口未就绪（HTTP 500 logged_in 假阴性窗口期）⇒ blocked marker 死角 ⇒ 双层 void 后重跑即恢复。补跑链路应在发送前先打 /health 确认 ready 再起，可避免此死角（可登记为待办）。"
+}

@@ -1,0 +1,26 @@
+{
+  "voidedAt": "2026-10-07T08:41:35+08:00",
+  "flow": "daily-agent-new-merchants-to-wechat",
+  "businessDate": "2026-10-06",
+  "operator": "监理（WorkBuddy 会话）",
+  "authorization": "大同既定原则：完成当日任务为最高原则；幽灵 attempt marker（乱码期出生、无成功收据）卡死 RECONCILE_ONLY，按 2026-10-06 12:27 先例作废解锁",
+  "voided": [
+    {
+      "item": "幽灵 attempt marker（state=attempted, sendAttempts=null, verified=false）",
+      "path": "state/taobao-agent-new-merchants/send-attempts/b26956b5fed5659707d078eb6b1589d2e84357b080e170e4f320ab45d191b43a.json → …voided-20261007-084135",
+      "bornAt": "2026-10-07 08:03（GBK 乱码期）",
+      "merchant": "542957171 寿小卤·潮汕猪脚饭（重庆）",
+      "messageSha256": "3fa5d8e50b40c69c3bfce9c5770df023a8febbf0a189b22c8dbed848939a68b0"
+    }
+  ],
+  "safetyEvidence": {
+    "threeWayReconciliation": {
+      "marker": "state=attempted, verified=false, sendAttempts=null（无成功收据）",
+      "runEvidence0803": "delivery-progress.json: reason=desktop-send-invalid-receipt, sendAttempts=1, elapsedMs=180011（180s 超时——乱码期打开会话失败，文本从未输入更未发送）",
+      "runEvidence0837": "RECONCILE_ONLY 只读复核，未产生新发送"
+    },
+    "conclusion": "该消息从未进入微信会话，更从未发出，作废安全"
+    }
+  },
+  "expectedNext": "下一轮 daemon（09:08 档）重新发送该商家文本，正常 verified"
+}

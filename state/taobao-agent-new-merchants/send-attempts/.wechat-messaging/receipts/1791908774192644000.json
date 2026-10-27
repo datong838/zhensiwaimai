@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "48c21e99aa310f500d99347fbf3b200008d336948bd03d31cfd93c6e6c5eaec2",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "2bb52f0476f276f15bcd250af144e72a492dadee0ad55f075096ac7ec6064885",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1791908746.71406,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 43,
+        "anchor": "text-exact",
+        "anchorValue": "城市：苏州市  ；  联系人：祁双峰，16651238853  ；  店铺：鲜禾灶擂椒盖码饭  ；  地址：港区中兴街186幢122室",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1791908774.188364
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 67
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 9232
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 27473
+    }
+  ],
+  "elapsedMs": 36711,
+  "eventKey": "f687792a7b3799bf7f88c00cc3f94c31227fddff92215c30e0e019e326769d79",
+  "reviewSummary": {
+    "totalElapsedMs": 36711,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

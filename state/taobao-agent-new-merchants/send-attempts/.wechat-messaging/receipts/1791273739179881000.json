@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "344da356076e9922b4dcfa4442f92f21e5c7448fe64b1f15562e7005a31931bb",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "e5c97fff64385b1d50ed6895e0fd45cfa133a475ac97fc9aea0791c6ed26ba61",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1791273716.5524411,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 50,
+        "anchor": "text-exact",
+        "anchorValue": "城市：合肥市  ；  联系人：李瑞贺，15555149311  ；  店铺：隆江猪脚饭·猪头汤  ；  地址：三里街街道凤阳路与全椒路交口东南凤阳东路4号0号门面东边一间",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1791273739.178049
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 85
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 183
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 22625
+    }
+  ],
+  "elapsedMs": 22811,
+  "eventKey": "5b74a9f6bcac2b0829c5e997294614465169cc3bafa8de1d51838bbb69962d90",
+  "reviewSummary": {
+    "totalElapsedMs": 22811,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

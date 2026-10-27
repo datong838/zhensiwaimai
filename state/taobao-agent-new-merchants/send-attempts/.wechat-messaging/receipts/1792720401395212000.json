@@ -1,0 +1,75 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "21f4283b621d42479fb6fad02d41530c0af18b0a2eb181ea474c92c326e69549",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "1d3846578e438f3c0c477e54c318f0369745208fc1630761c81c667c53065787",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1792720377.38573,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 44,
+        "anchor": "text-exact",
+        "anchorValue": "城市：天津市  ；  联系人：王，13389941383  ；  店铺：咖瑞拉咖啡  ；  地址：大寺镇芦北路与赛达九支路交口力扬商业中心16-底商6  ；  商家ID：546236797",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1792720401.393419
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 94
+        },
+        "route": "direct",
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 1696
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 24007
+    }
+  ],
+  "elapsedMs": 25707,
+  "eventKey": "c25895834545ae05a155ec9c33f0908d6f237f49ba4ae2df44734d923776db45",
+  "reviewSummary": {
+    "totalElapsedMs": 25707,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

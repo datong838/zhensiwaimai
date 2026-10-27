@@ -1,0 +1,75 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "27265283c92e5ebd816cb45341410767c5d4c9e40a41d41b26647653328cba61",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "d3fef18842c95b369a323a9364cb36935577de64110a62f3074c484f8ddead5f",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1791427528.0319731,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 50,
+        "anchor": "text-exact",
+        "anchorValue": "城市：牡丹江市  ；  联系人：梁明，13836307700  ；  店铺：QQ鸡架锡纸花甲粉  ；  地址：牡丹街西七条路84号",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1791427553.780139
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 65
+        },
+        "route": "direct",
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 3362
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 25747
+    }
+  ],
+  "elapsedMs": 29113,
+  "eventKey": "97d624c58ff56c38645f6aa4757559812c7eefa4ccf23644323b8a71524ddf1c",
+  "reviewSummary": {
+    "totalElapsedMs": 29113,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

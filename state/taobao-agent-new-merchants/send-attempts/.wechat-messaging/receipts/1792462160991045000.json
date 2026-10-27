@@ -1,0 +1,75 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "7b5be7b96b50cc5e9972929b957411b93f8ab4168bb7903b185c16c2dc5d65c7",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "7a26405f9895432b2a97f057f3b83a3e472c21e31c8c65a56141561773178e27",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1792462137.6628559,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 42,
+        "anchor": "text-exact",
+        "anchorValue": "城市：长沙市  ；  联系人：艾力，15001445548  ；  店铺：新疆羊肉火锅烧烤店  ；  地址：星沙街道马达岭社区海伦春天13324栋-207",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1792462160.9892218
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 77
+        },
+        "route": "direct",
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 171
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 23326
+    }
+  ],
+  "elapsedMs": 23500,
+  "eventKey": "5f7ce70cbdf72dc7541c366ae256dc9c78881f30e8fb91e4a4ba5f87fb07b071",
+  "reviewSummary": {
+    "totalElapsedMs": 23500,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

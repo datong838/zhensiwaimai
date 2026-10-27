@@ -1,0 +1,75 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "d1a74d54e415e519434cacf9bc4ab8580374f57a851464992faefc7d73b26ff0",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "27d49df6d2d67361d321068b0b58e476882ad760f642681a35cef1eee0fc1628",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1791789801.749414,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 44,
+        "anchor": "text-exact",
+        "anchorValue": "城市：邯郸市  ；  联系人：李，15097846985  ；  店铺：手工大馅水饺盖饭  ；  地址：光明大街啤酒厂东门对面第七号门市",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1791789823.323998
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 68
+        },
+        "route": "direct",
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 174
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 21575
+    }
+  ],
+  "elapsedMs": 21753,
+  "eventKey": "c5fe969ec2b9260143968e54de1c356e350caa4543b5eff022313975312b512a",
+  "reviewSummary": {
+    "totalElapsedMs": 21753,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

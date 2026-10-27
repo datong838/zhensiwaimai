@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "b683eef6bca76ff2c0af688a845b7e5d2159b7172d078b7a2c181e4091f45257",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "b480e1ce8336a857071e66c3bd230a0a57a6a67df93a36fbbbf14335260945c8",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1792083430.157732,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 43,
+        "anchor": "text-exact",
+        "anchorValue": "城市：常州市  ；  联系人：刘鹏飞，13685239831  ；  店铺：茶百道  ；  地址：雕庄街道中海环宇天地26幢",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1792083457.9828339
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 62
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 9543
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 27824
+    }
+  ],
+  "elapsedMs": 37371,
+  "eventKey": "d368810be91e300de43a02b17bae66b4f33173475c907daa338dfc93a5cf24c3",
+  "reviewSummary": {
+    "totalElapsedMs": 37371,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

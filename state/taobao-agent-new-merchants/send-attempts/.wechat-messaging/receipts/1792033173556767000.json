@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "85303fb8707bceb241fd669031db1c0f4d9dc2d27639ad0c9a72c38c2ba70a83",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "8d79cefbfe722f7061622e5c2ab26658a0566dd2e223d51dd979fe6a43efed78",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1792033147.166579,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 37,
+        "anchor": "text-exact",
+        "anchorValue": "城市：昆明市  ；  联系人：李，19286931207  ；  店铺：724pub 线上酒馆·现调鸡尾酒  ；  地址：莲华街道办事处龙泉路127号万彩城商业中心LG层94号",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1792033173.553067
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 88
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 712
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 26386
+    }
+  ],
+  "elapsedMs": 27104,
+  "eventKey": "7ed669241e0754c7474ed645a709c802c6451e03d871dbc47ff38a6664d36ad9",
+  "reviewSummary": {
+    "totalElapsedMs": 27104,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "ea3aaa8da7e2f8596a5dc2e264e01e2c4684bf4710bd98f5202120b867a6cdf2",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "a564766ba3a04eea9c49c6b0ee3f6960da93a88bbc7a85f0fbc19046c3e5a07e",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1792549943.9508119,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 43,
+        "anchor": "text-exact",
+        "anchorValue": "城市：厦门市  ；  联系人：江先生，18698312122  ；  店铺：必酱鲜港式卤煮牛杂  ；  地址：侨英街道孙厝乐安北里113-1-102号",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1792549967.179282
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 75
+        },
+        "route": "direct",
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 189
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 23229
+    }
+  ],
+  "elapsedMs": 23420,
+  "eventKey": "1bda201077f1e668e52613610c6ad91be48a956285920dd4f77490007f1f6262",
+  "reviewSummary": {
+    "totalElapsedMs": 23420,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

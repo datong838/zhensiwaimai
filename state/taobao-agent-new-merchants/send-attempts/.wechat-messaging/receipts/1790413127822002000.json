@@ -1,0 +1,65 @@
+{
+  "ok": false,
+  "status": "unknown",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "d0e23567577998baa73e979e0e8678018fec1f9b33849e41f78819b50068d070",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "473c944bc2ab166f4ec94116df129dcf061c5e480193a20fe517eb05ee8c16ca",
+      "type": "text",
+      "status": "unknown",
+      "claimedAt": 1790413104.8754098,
+      "reason": "wechat-window-capture-failed:could not create image from window:quartz-window-capture-invalid",
+      "sendAttempts": null
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 873
+    },
+    {
+      "stage": "send:0",
+      "status": "failed",
+      "pitfalls": [
+        "wechat-window-capture-failed:could not create image from window:quartz-window-capture-invalid"
+      ],
+      "elapsedMs": 22945
+    }
+  ],
+  "reason": "wechat-window-capture-failed:could not create image from window:quartz-window-capture-invalid",
+  "elapsedMs": 23821,
+  "eventKey": "729975ba8f7730192aec1167d7b09c1198a8961596c82408f2826b71edc10bc7",
+  "reviewSummary": {
+    "totalElapsedMs": 23821,
+    "result": "unknown",
+    "stageCount": 4,
+    "completedStages": 3,
+    "failedStages": [
+      {
+        "stage": "send:0",
+        "status": "failed",
+        "pitfalls": [
+          "wechat-window-capture-failed:could not create image from window:quartz-window-capture-invalid"
+        ]
+      }
+    ]
+  }
+}

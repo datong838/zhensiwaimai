@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "f82e46a7e9cce35fa0f4c35b8376c6e7a1c3c35adb3fa377eb342ab34e6c85f9",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "a6763349a6c0cb57cec88b7b489e6d7548443963602f1909df3a682323ae4141",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1792482328.204853,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 44,
+        "anchor": "text-exact",
+        "anchorValue": "城市：湖州市  ；  联系人：齐，17623839460  ；  店铺：莲香记·鸡蛋灌饼  ；  地址：递铺街道银湾村环岛西路827号",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1792482355.3142002
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 67
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 9239
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 27109
+    }
+  ],
+  "elapsedMs": 36353,
+  "eventKey": "6f5e17eb24a884a84326085681ef89f5648e9a0979db2ac1fc4474b4e3b3b5c8",
+  "reviewSummary": {
+    "totalElapsedMs": 36353,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

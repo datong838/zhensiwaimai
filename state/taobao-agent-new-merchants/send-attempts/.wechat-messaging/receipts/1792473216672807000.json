@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "d22076ce9c11e8de84dddc3841f7796679eb024bf7fd202473646a21e4765526",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "a10321596dfccab4143ee71efc46d4c508004830fa2e310d59a0cf4bcb989817",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1792473190.6293051,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 43,
+        "anchor": "text-exact",
+        "anchorValue": "城市：盘锦市  ；  联系人：王，15834458786  ；  店铺：友达面馆  ；  地址：水游城负一层东侧001号",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1792473216.66917
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 60
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 9259
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 26039
+    }
+  ],
+  "elapsedMs": 35303,
+  "eventKey": "d3968f28d39791d70d5121679712bd1117ca170234dc6ce87bc270ba8c7e7628",
+  "reviewSummary": {
+    "totalElapsedMs": 35303,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

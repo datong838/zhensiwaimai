@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "2f6eec91ea55fda1f49bc76c18b8345bd2bfb0fb3e3049e0606848783392ed89",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "88440d24803adda52d5ed93ee6fcc027f3277307da4fadb011827bb9f10b55e3",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1791611494.621566,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 38,
+        "anchor": "text-exact",
+        "anchorValue": "城市：潮州市  ；  联系人：柯生，13534699184  ；  店铺：肠粉粿条面  ；  地址：长美二村西溪东路10号铺面1层",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1791611516.6150458
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 65
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 277
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 21993
+    }
+  ],
+  "elapsedMs": 22275,
+  "eventKey": "a6798c0fb7390a5eda18d0b9ae2f402e117f4baef74bb935e1547581f7ea9f86",
+  "reviewSummary": {
+    "totalElapsedMs": 22275,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "192601010681a4597b3c9b0fb839570a248b0559d0a6724f19f65c2bd66b812f",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "841319a9a30bd5062f91b7e47cd3306b38780285334831520a04b0f5954e0537",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1791697370.390804,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 41,
+        "anchor": "text-exact",
+        "anchorValue": "城市：黄山市  ；  联系人：郑，18455908545  ；  店铺：螺哩螺嗦  ；  地址：祥和学府21栋1011室",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1791697394.524277
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 60
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 3212
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 24133
+    }
+  ],
+  "elapsedMs": 27349,
+  "eventKey": "1bcdc6240a9ec98bd2357ee40ab1ecc4e297193a660feeb2c123fe35829062ce",
+  "reviewSummary": {
+    "totalElapsedMs": 27349,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

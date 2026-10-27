@@ -1,0 +1,301 @@
+{
+  "ok": true,
+  "executor": "wechat-desktop-sender",
+  "channel": "desktop",
+  "groupName": "电销+直播攻坚组",
+  "payloadType": "text",
+  "sendAttempts": 1,
+  "runtimeModelDecisions": 0,
+  "stage": "completed",
+  "stageMs": {
+    "locate_group": 278,
+    "verify_target_and_input": 6248,
+    "prepare_payload": 1743,
+    "claim_and_send": 3165,
+    "post_send_verify": 14145
+  },
+  "payloadIdentity": "f439eb68e779448d6f65470359ce6e6cdcf74351139bf8544cc02def6355b5f9",
+  "payloads": [
+    {
+      "text": "邵阳市\n石伟豪，17773975202\n紫苏鸭腿（新邵店）\n湾田广场S5栋SY010101室",
+      "sha256": "2f24df704d74dd214480cbbd7e9f5dff414b291a101294de09c4554851506753"
+    }
+  ],
+  "groupPreflight": {
+    "ok": true,
+    "action": "open-group",
+    "group": "电销+直播攻坚组",
+    "header": "电销+直播攻坚组",
+    "note": "ax-current-header",
+    "reason": null,
+    "sendAttempts": 0,
+    "runtimeModelDecisions": 0,
+    "stageMs": {
+      "exact_group_preflight": 278
+    },
+    "artifacts": [],
+    "hardGate": false
+  },
+  "textInputVerified": true,
+  "textWriteAttempts": 1,
+  "clipboardClearedBeforeTextWrite": true,
+  "preparedInputChangedPixels": 14203,
+  "preparedInputChangedRatio": 0.038451,
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/state/taobao-agent-new-merchants/send-attempts/c62fa30001210e15397cdda189bc1c9014656888d7670e55edf4e04f272543ca.json",
+  "postSendInputCleared": [
+    true,
+    true
+  ],
+  "verified": true,
+  "state": "verified",
+  "elapsedMs": 25580,
+  "sendReview": [
+    {
+      "item": 1,
+      "stage": "locate_group",
+      "label": "精确定位目标群",
+      "elapsedMs": 278,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 2,
+      "stage": "verify_target_and_input",
+      "label": "复核目标群与输入框",
+      "elapsedMs": 6248,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 3,
+      "stage": "prepare_payload",
+      "label": "准备并复核发送载荷",
+      "elapsedMs": 1743,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 4,
+      "stage": "claim_and_send",
+      "label": "领取防重账本并单次发送",
+      "elapsedMs": 3165,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 5,
+      "stage": "post_send_verify",
+      "label": "发送后双帧复核",
+      "elapsedMs": 14145,
+      "status": "completed",
+      "pitfalls": []
+    }
+  ],
+  "reviewSummary": {
+    "totalElapsedMs": 25580,
+    "itemCount": 5,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "interactionLock": {
+    "lockPath": "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/.runtime/wechat-ui-interaction.lock",
+    "owner": "sender:45598:1789543881721379000",
+    "waitCycles": 0,
+    "waitMs": 0,
+    "acquired": true,
+    "released": true
+  },
+  "attemptReviews": [
+    {
+      "attempt": 1,
+      "elapsedMs": 25647,
+      "ok": true,
+      "reason": null,
+      "sendAttempts": 1,
+      "sendReview": [
+        {
+          "item": 1,
+          "stage": "locate_group",
+          "label": "精确定位目标群",
+          "elapsedMs": 278,
+          "status": "completed",
+          "pitfalls": []
+        },
+        {
+          "item": 2,
+          "stage": "verify_target_and_input",
+          "label": "复核目标群与输入框",
+          "elapsedMs": 6248,
+          "status": "completed",
+          "pitfalls": []
+        },
+        {
+          "item": 3,
+          "stage": "prepare_payload",
+          "label": "准备并复核发送载荷",
+          "elapsedMs": 1743,
+          "status": "completed",
+          "pitfalls": []
+        },
+        {
+          "item": 4,
+          "stage": "claim_and_send",
+          "label": "领取防重账本并单次发送",
+          "elapsedMs": 3165,
+          "status": "completed",
+          "pitfalls": []
+        },
+        {
+          "item": 5,
+          "stage": "post_send_verify",
+          "label": "发送后双帧复核",
+          "elapsedMs": 14145,
+          "status": "completed",
+          "pitfalls": []
+        }
+      ]
+    }
+  ],
+  "contentionRetries": 0,
+  "contentionWaitMs": 0,
+  "contentionEvents": [],
+  "verificationMethod": "desktop-bubble-copy-exact-two-frame",
+  "copyReadback": {
+    "ok": true,
+    "bubblePositions": [
+      [
+        1892.0,
+        981.0
+      ],
+      [
+        1892.0,
+        981.0
+      ]
+    ],
+    "copyMenuCount": 1,
+    "composerEmpty": true,
+    "copiedTextSha256": "2f24df704d74dd214480cbbd7e9f5dff414b291a101294de09c4554851506753",
+    "scrolls": [
+      {
+        "ok": true,
+        "messageList": {
+          "x": 330.0,
+          "y": 104.0,
+          "width": 810.0,
+          "height": 468.0
+        },
+        "scrollEvents": 12,
+        "frame": 1,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "messageList": {
+          "x": 330.0,
+          "y": 104.0,
+          "width": 810.0,
+          "height": 468.0
+        },
+        "scrollEvents": 12,
+        "frame": 1,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "messageList": {
+          "x": 330.0,
+          "y": 104.0,
+          "width": 810.0,
+          "height": 468.0
+        },
+        "scrollEvents": 12,
+        "frame": 1,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "messageList": {
+          "x": 330.0,
+          "y": 104.0,
+          "width": 810.0,
+          "height": 468.0
+        },
+        "scrollEvents": 12,
+        "frame": 1,
+        "recoveryCycle": 1
+      }
+    ],
+    "frameAnchors": [
+      {
+        "ok": true,
+        "x": 1838.0,
+        "y": 940.0,
+        "matchedLineIndexes": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "matchedAnchorCount": 4,
+        "linePositions": {
+          "0": [
+            1763.0,
+            860.0
+          ],
+          "1": [
+            1869.0,
+            903.0
+          ],
+          "2": [
+            1838.0,
+            940.0
+          ],
+          "3": [
+            1892.0,
+            981.0
+          ]
+        },
+        "headerCount": 1,
+        "ocrAttempts": 1,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "x": 1838.0,
+        "y": 940.0,
+        "matchedLineIndexes": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "matchedAnchorCount": 4,
+        "linePositions": {
+          "0": [
+            1763.0,
+            860.0
+          ],
+          "1": [
+            1869.0,
+            903.0
+          ],
+          "2": [
+            1838.0,
+            940.0
+          ],
+          "3": [
+            1892.0,
+            981.0
+          ]
+        },
+        "headerCount": 1,
+        "ocrAttempts": 1,
+        "recoveryCycle": 1
+      }
+    ],
+    "stableLineIndex": 3
+  },
+  "physicalSendAttempts": 1,
+  "merchantId": "1356565396",
+  "messageSha256": "2f24df704d74dd214480cbbd7e9f5dff414b291a101294de09c4554851506753"
+}

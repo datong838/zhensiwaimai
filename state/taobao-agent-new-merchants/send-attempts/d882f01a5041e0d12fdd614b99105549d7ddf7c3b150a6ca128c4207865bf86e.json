@@ -1,0 +1,50 @@
+{
+  "ok": true,
+  "executor": "wechat-desktop-sender",
+  "channel": "desktop",
+  "groupName": "FEIBING NEO AI数字员工",
+  "payloadType": "text",
+  "sendAttempts": 1,
+  "runtimeModelDecisions": 0,
+  "stage": "post_send_verify",
+  "stageMs": {
+    "locate_group": 395,
+    "prepare_payload": 9310,
+    "claim_and_send": 3852,
+    "post_send_verify": 16339
+  },
+  "payloadIdentity": "dc303b0af583f92bfd0f066ca0f9b9ab2f8f646ab8323c5f0a64ec3a7f3c681d",
+  "payloads": [
+    {
+      "text": "眉山市\n欧，17381758910\n豆禾甜记·西米露·凉面·炸串\n怀仁街道高滩路一段155号（汇悦天地）5幢19号20号豆禾甜记",
+      "sha256": "00d2fac3ac3e20e84e771705473d829e75e35a7c317599b45789613f7b70d596"
+    }
+  ],
+  "groupPreflight": {
+    "ok": true,
+    "action": "open-group",
+    "group": "FEIBING NEO AI数字员工",
+    "header": "FEIBING NEO AI数字员工",
+    "note": "ax-current-header",
+    "reason": null,
+    "sendAttempts": 0,
+    "runtimeModelDecisions": 0,
+    "stageMs": {
+      "exact_group_preflight": 395
+    },
+    "artifacts": [],
+    "hardGate": false
+  },
+  "textInputVerified": true,
+  "textWriteAttempts": 1,
+  "clipboardClearedBeforeTextWrite": true,
+  "preparedInputChangedPixels": 18097,
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/state/taobao-agent-new-merchants/send-attempts/d882f01a5041e0d12fdd614b99105549d7ddf7c3b150a6ca128c4207865bf86e.json",
+  "postSendInputCleared": [
+    true,
+    true
+  ],
+  "verified": true,
+  "state": "verified",
+  "verifiedAt": 1789208149.617919
+}

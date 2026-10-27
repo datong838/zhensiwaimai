@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "voidedAt": "2026-10-07T14:21:37+08:00",
+  "authorization": "监理按 2026-10-04 大同拍板之 0 条/死锁清理授权与 void 三方对账铁律执行；本次为 evidenceNeverSent 实证后双层 void",
+  "scope": "daily-agent-new-merchants-to-wechat 商家2 飘香馄饨·石磨肠粉 (merchantId=1342388590) 12:48 轮幽灵 attempt",
+  "voided": [
+    {
+      "layer": "per-merchant marker",
+      "path": "state/taobao-agent-new-merchants/send-attempts/04df76102361363375fd0390ccd311872451ea7b4512b43ed448e4e403afb3a3.json",
+      "renamedTo": "04df76102361363375fd0390ccd311872451ea7b4512b43ed448e4e403afb3a3.json.voided-20261007-142137",
+      "claimedAt": "1791348557 (2026-10-07 12:49:17)",
+      "evidenceNeverSent": "transport 报 sent=true len=99，但 14:17 经 Windows 网关只读回读（read_messages，当前会话=电销+直播攻坚组，50 条窗口）尾部为商家1寿小卤(12:49 实发)，其后无飘香馄饨条目——若真入群必然出现在寿小卤之后，判定 transport 假成功，消息从未入群"
+    },
+    {
+      "layer": "bridge event (claim 真身)",
+      "path": "state/taobao-agent-new-merchants/send-attempts/.wechat-messaging/events/20c7d73d379a22ea7ae996ec5ace1453ee22a7f0165f2a2359064916c30da8c0/63428f6b520456a0381658a1c0ba3d86c167e8e770ecc2972ae4945b5ff0f070/delivery.json",
+      "renamedTo": "events/20c7d73d…c0.voided-20261007-142137",
+      "state": "status=unknown, reason=windows-current-session-title-mismatch, polls=0",
+      "evidenceNeverSent": "同上；且 polls=0 说明回读验证从未轮询成功（title 一直不匹配），与回读实证互证"
+    }
+  ],
+  "notVoided": [
+    {
+      "item": "商家1 寿小卤 542957171",
+      "reason": "12:49 实发成功且群内锚点可见（回读尾部即此条），游标已提交，无需处理"
+    },
+    {
+      "item": "商家3 甜也 543219931",
+      "reason": "从未 attempt（上游失败代码禁止越过游标），无幂等层可 void，等下轮 daemon 自然发送"
+    },
+    {
+      "item": "brand 流共享事件（requestDigest 各条目）",
+      "reason": "属另一流，条目1 已实发锚点曾找到，严禁 void，走授权过期收口（已定性）"
+    }
+  ],
+  "expectedOutcome": "下轮 daemon（Mac 休眠唤醒后）重采飘香馄饨+甜也并正常发送；因消息从未入群，无重复发送风险",
+  "lesson": "transport sent=true 不可单独作为已发送证据（Windows 驱动存在假成功路径）；判定必须以只读回读锚点为准。本次 12:48 轮 title-mismatch 的 polls=0 表明验证窗口内 current_chat 标题始终不匹配——疑似发送后微信窗口被切走（与 12:59 Mac 休眠时段接近，或 Windows 侧人为操作），发送动作可能打进了错误上下文但驱动未报错。需在 F7 清单登记：驱动 send 的 title 前置校验缺口。"
+}

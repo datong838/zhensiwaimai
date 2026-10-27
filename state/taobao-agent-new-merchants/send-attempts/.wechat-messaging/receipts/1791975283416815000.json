@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "ee21e81dbbb5adcfce315f160b2b41ecc76c8845f7454b623927bab2943f8de5",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "33b61c5e572dd7db637b36e139a93122b6f1276addf167c28891c62ae343f6bf",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1791975260.466652,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 38,
+        "anchor": "text-exact",
+        "anchorValue": "城市：烟台市  ；  联系人：刘，15564526737  ；  店铺：四喜·潮汕生腌·三文鱼（开发区万达店）  ；  地址：中国(山东)自由贸易试验区烟台片区福莱山街道淮河路9号万达华府3号网点107号",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1791975283.413727
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 102
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 292
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 22946
+    }
+  ],
+  "elapsedMs": 23243,
+  "eventKey": "ed0ed4d884290827808dbaee1dd1cbb51950bbb83a03e3717a200010c8598ac7",
+  "reviewSummary": {
+    "totalElapsedMs": 23243,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

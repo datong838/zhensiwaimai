@@ -1,0 +1,60 @@
+{
+  "status": "verified",
+  "sendAttempts": 1,
+  "verificationLevel": "wecom-ui-text-anchor",
+  "reason": null,
+  "evidence": {
+    "frame1": true,
+    "frame2_input_cleared": true,
+    "verified": true,
+    "tail1": [
+      "城市：连云港市  ；  联系人：老板，18400694193-4911 -，15151281177  ；  店铺：于炒炒爆炒浇头面  ；  地址：新安镇新东北路东侧(恒基广场四楼L4-35号商铺）  ；  商家ID：542631428",
+      "由微信用户创建的外部群，含14位外部联系人 | 群主: 李知恒- AllenLi@微信",
+      "电销+直播攻坚组",
+      "250.0"
+    ]
+  },
+  "transport": {
+    "kind": "text",
+    "sendAttempts": 1,
+    "sent": true,
+    "receipt": {
+      "result": "verified",
+      "verify": {
+        "frame1": true,
+        "frame2_input_cleared": true,
+        "verified": true,
+        "tail1": [
+          "城市：连云港市  ；  联系人：老板，18400694193-4911 -，15151281177  ；  店铺：于炒炒爆炒浇头面  ；  地址：新安镇新东北路东侧(恒基广场四楼L4-35号商铺）  ；  商家ID：542631428",
+          "由微信用户创建的外部群，含14位外部联系人 | 群主: 李知恒- AllenLi@微信",
+          "电销+直播攻坚组",
+          "250.0"
+        ]
+      },
+      "steps": [
+        {
+          "navigate": "chat-title-verified:'电销+直播攻坚组'"
+        },
+        {
+          "title_gate": "电销+直播攻坚组"
+        },
+        {
+          "write": true,
+          "info": "pos=(310.0, 601.0) attempt=1 len=97 head='城市：丽江市  ；  联系人：李，199'"
+        },
+        {
+          "title_gate_final": "电销+直播攻坚组"
+        },
+        {
+          "send_mode": "enter-once",
+          "send_attempts": [
+            {
+              "try": "enter",
+              "input_clean": true
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

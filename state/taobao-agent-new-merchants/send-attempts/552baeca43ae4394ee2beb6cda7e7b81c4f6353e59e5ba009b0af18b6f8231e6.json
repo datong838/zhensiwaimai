@@ -1,0 +1,266 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "烟台市\n章鱼哥，13275356992\n海贼章鱼哥\n福新街道福海路318号万科广场B1-K17号",
+      "sha256": "473c944bc2ab166f4ec94116df129dcf061c5e480193a20fe517eb05ee8c16ca"
+    }
+  ],
+  "sendAttempts": null,
+  "newSendAttempts": null,
+  "reason": "wechat-window-capture-failed:could not create image from window:quartz-window-capture-invalid",
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": false,
+    "status": "unknown",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "d0e23567577998baa73e979e0e8678018fec1f9b33849e41f78819b50068d070",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "473c944bc2ab166f4ec94116df129dcf061c5e480193a20fe517eb05ee8c16ca",
+        "type": "text",
+        "status": "unknown",
+        "claimedAt": 1790413104.8754098,
+        "reason": "wechat-window-capture-failed:could not create image from window:quartz-window-capture-invalid",
+        "sendAttempts": null
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 873
+      },
+      {
+        "stage": "send:0",
+        "status": "failed",
+        "pitfalls": [
+          "wechat-window-capture-failed:could not create image from window:quartz-window-capture-invalid"
+        ],
+        "elapsedMs": 22945
+      }
+    ],
+    "reason": "wechat-window-capture-failed:could not create image from window:quartz-window-capture-invalid",
+    "elapsedMs": 23821,
+    "eventKey": "729975ba8f7730192aec1167d7b09c1198a8961596c82408f2826b71edc10bc7",
+    "reviewSummary": {
+      "totalElapsedMs": 23821,
+      "result": "unknown",
+      "stageCount": 4,
+      "completedStages": 3,
+      "failedStages": [
+        {
+          "stage": "send:0",
+          "status": "failed",
+          "pitfalls": [
+            "wechat-window-capture-failed:could not create image from window:quartz-window-capture-invalid"
+          ]
+        }
+      ]
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/state/taobao-agent-new-merchants/send-attempts/552baeca43ae4394ee2beb6cda7e7b81c4f6353e59e5ba009b0af18b6f8231e6.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 873,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "failed",
+      "pitfalls": [
+        {
+          "code": "messaging-stage",
+          "reason": "wechat-window-capture-failed:could not create image from window:quartz-window-capture-invalid"
+        }
+      ],
+      "elapsedMs": 22945,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 23821,
+  "reviewSummary": {
+    "totalElapsedMs": 23821,
+    "itemCount": 4,
+    "pitfallCount": 1,
+    "result": "failed"
+  },
+  "copyReadback": {
+    "ok": true,
+    "bubblePositions": [
+      [
+        1830.0,
+        981.0
+      ],
+      [
+        1830.0,
+        981.0
+      ]
+    ],
+    "copyMenuCount": 1,
+    "composerEmpty": true,
+    "copiedTextSha256": "473c944bc2ab166f4ec94116df129dcf061c5e480193a20fe517eb05ee8c16ca",
+    "scrolls": [
+      {
+        "ok": true,
+        "messageList": {
+          "x": 325.0,
+          "y": 98.0,
+          "width": 810.0,
+          "height": 468.0
+        },
+        "scrollEvents": 12,
+        "frame": 1,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "messageList": {
+          "x": 325.0,
+          "y": 98.0,
+          "width": 810.0,
+          "height": 468.0
+        },
+        "scrollEvents": 12,
+        "frame": 1,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "messageList": {
+          "x": 325.0,
+          "y": 98.0,
+          "width": 810.0,
+          "height": 468.0
+        },
+        "scrollEvents": 12,
+        "frame": 1,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "messageList": {
+          "x": 325.0,
+          "y": 98.0,
+          "width": 810.0,
+          "height": 468.0
+        },
+        "scrollEvents": 12,
+        "frame": 1,
+        "recoveryCycle": 1
+      }
+    ],
+    "frameAnchors": [
+      {
+        "ok": true,
+        "candidateCount": 1,
+        "x": 1659.0,
+        "y": 942.0,
+        "matchedLineIndexes": [
+          0,
+          2,
+          3
+        ],
+        "matchedAnchorCount": 3,
+        "linePositions": {
+          "0": [
+            1634.0,
+            867.0
+          ],
+          "2": [
+            1659.0,
+            942.0
+          ],
+          "3": [
+            1830.0,
+            981.0
+          ]
+        },
+        "headerCount": 0,
+        "ocrAttempts": 1,
+        "headerVerifiedByAX": true,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "candidateCount": 1,
+        "x": 1659.0,
+        "y": 942.0,
+        "matchedLineIndexes": [
+          0,
+          2,
+          3
+        ],
+        "matchedAnchorCount": 3,
+        "linePositions": {
+          "0": [
+            1634.0,
+            867.0
+          ],
+          "2": [
+            1659.0,
+            942.0
+          ],
+          "3": [
+            1830.0,
+            981.0
+          ]
+        },
+        "headerCount": 0,
+        "ocrAttempts": 1,
+        "headerVerifiedByAX": true,
+        "recoveryCycle": 1
+      }
+    ],
+    "stableLineIndex": 3
+  },
+  "physicalSendAttempts": null,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": true,
+  "verificationMethod": "desktop-bubble-copy-exact-two-frame",
+  "merchantId": "530104447",
+  "messageSha256": "473c944bc2ab166f4ec94116df129dcf061c5e480193a20fe517eb05ee8c16ca"
+}

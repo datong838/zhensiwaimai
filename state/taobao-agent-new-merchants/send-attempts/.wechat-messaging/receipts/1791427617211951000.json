@@ -1,0 +1,75 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "953fb75d6f79a18e3c556fdb4c6701d6d93a589765936a7d0618b733b67bd1cd",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "8d5247c3a892b87f8fe19c4228f758d286d4862907c39f80cfe74f0c361682a1",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1791427588.230178,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 49,
+        "anchor": "text-exact",
+        "anchorValue": "城市：惠州市  ；  联系人：拜，18693027105  ；  店铺：兰州牛肉面  ；  地址：平山黄排社区解放南路83号",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1791427617.210718
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 62
+        },
+        "route": "direct",
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 3424
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 28981
+    }
+  ],
+  "elapsedMs": 32408,
+  "eventKey": "885c804b97bb0b90de752ffba93b0cd52cc9d589d3094ce944bebabbb280f9b4",
+  "reviewSummary": {
+    "totalElapsedMs": 32408,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "dbf58090e848cdbc6719d4797632ad85ad5809d16fb834ac9ceac1cb7cb2cb49",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "b9f9a0d7fc9b2eeb49dd50b234c20ada4db7126f571220cdb4851f60af59fcb3",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1791605101.5179362,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 39,
+        "anchor": "text-exact",
+        "anchorValue": "城市：苏州市  ；  联系人：邓师傅，15312185333  ；  店铺：秦唐丰大碗面  ；  地址：浮桥镇光华路100号18幢一楼109室",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1791605123.4991732
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 71
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 236
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 21980
+    }
+  ],
+  "elapsedMs": 22221,
+  "eventKey": "55f46718192565e080b04942e73521575a40e77b8bb46f1ad5664b855e4cfb17",
+  "reviewSummary": {
+    "totalElapsedMs": 22221,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

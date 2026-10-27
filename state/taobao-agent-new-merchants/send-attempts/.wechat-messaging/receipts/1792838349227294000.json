@@ -1,0 +1,106 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "7f5b4dc7c3556afe5811218390f009186719ca94ca777cfccc33bc60a0d1c758",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "13785863a9b510209ae4ada2a13b85d721428f4adf293a925e45490c4577bb97",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1792838239.4413881,
+      "sendAttempts": 1,
+      "resolvedGroup": "电销+直播攻坚组",
+      "observations": [
+        {
+          "groupName": "电销+直播攻坚组",
+          "inputEmpty": true,
+          "newMessageVisible": true,
+          "visibleTextSha256": "13785863a9b510209ae4ada2a13b85d721428f4adf293a925e45490c4577bb97",
+          "observedAt": 1792838303.315,
+          "visibleMessageTime": "下午 6:38"
+        },
+        {
+          "groupName": "电销+直播攻坚组",
+          "inputEmpty": true,
+          "newMessageVisible": true,
+          "visibleTextSha256": "13785863a9b510209ae4ada2a13b85d721428f4adf293a925e45490c4577bb97",
+          "observedAt": 1792838325.736,
+          "visibleMessageTime": "下午 6:38"
+        }
+      ],
+      "verificationLevel": "wecom-ui-tree-text",
+      "evidence": {
+        "method": "wecom-ui-tree-text",
+        "resolvedGroup": "电销+直播攻坚组",
+        "sha256": "13785863a9b510209ae4ada2a13b85d721428f4adf293a925e45490c4577bb97",
+        "observations": [
+          {
+            "groupName": "电销+直播攻坚组",
+            "inputEmpty": true,
+            "newMessageVisible": true,
+            "visibleTextSha256": "13785863a9b510209ae4ada2a13b85d721428f4adf293a925e45490c4577bb97",
+            "observedAt": 1792838303.315,
+            "visibleMessageTime": "下午 6:38"
+          },
+          {
+            "groupName": "电销+直播攻坚组",
+            "inputEmpty": true,
+            "newMessageVisible": true,
+            "visibleTextSha256": "13785863a9b510209ae4ada2a13b85d721428f4adf293a925e45490c4577bb97",
+            "observedAt": 1792838325.736,
+            "visibleMessageTime": "下午 6:38"
+          }
+        ]
+      },
+      "transport": {
+        "kind": "text",
+        "sendAttempts": 1,
+        "sent": true,
+        "postSendInputCleared": [
+          true,
+          true
+        ],
+        "stage": "post_send_verify"
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 153620
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 109778
+    }
+  ],
+  "elapsedMs": 263406,
+  "eventKey": "923a8ef1872f0726a053b1d5fd6c39865b49b23815c0f8ef3cb8e61b553e4ab3",
+  "reviewSummary": {
+    "totalElapsedMs": 263406,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

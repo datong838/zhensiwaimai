@@ -1,0 +1,116 @@
+{
+  "itemId": "0",
+  "sha256": "76077da007f687626088809debfe52e175f54941fbcf7b652fd503fe01a1c9d7",
+  "type": "text",
+  "status": "unknown",
+  "claimedAt": 1790262194.7569358,
+  "sendAttempts": 1,
+  "verificationLevel": "insufficient",
+  "reason": "desktop-reconcile-copy-menu-not-unique",
+  "evidence": {
+    "ok": false,
+    "reason": "desktop-reconcile-copy-menu-not-unique",
+    "copyMenuCount": 0,
+    "newOutgoingEvidence": {
+      "ok": false,
+      "reason": "copy-position-missing"
+    }
+  },
+  "transport": {
+    "ok": true,
+    "executor": "wechat-desktop-sender",
+    "channel": "desktop",
+    "groupName": "电销+直播攻坚组",
+    "payloadType": "text",
+    "sendAttempts": 1,
+    "runtimeModelDecisions": 0,
+    "stage": "completed",
+    "stageMs": {
+      "locate_group": 729,
+      "verify_target_and_input": 1903,
+      "prepare_payload": 1796,
+      "claim_and_send": 4670,
+      "post_send_verify": 6166
+    },
+    "payloadIdentity": "5ec517e8eb2ee41b44d57f53c69123b69b9f66b23bd1c82ab6bc8824d24bd17e",
+    "payloads": [
+      {
+        "text": "阳江市\n黄小姐，15218178903\n清源牛腩蒸面\n春城街道广场路58号",
+        "sha256": "76077da007f687626088809debfe52e175f54941fbcf7b652fd503fe01a1c9d7"
+      }
+    ],
+    "groupPreflight": {
+      "ok": true,
+      "reason": null,
+      "sendAttempts": 0,
+      "group": "电销+直播攻坚组",
+      "header": "电销+直播攻坚组(18)",
+      "note": "ax-current-group-fast-path",
+      "groupTypeVerified": true,
+      "groupTypeProof": "member-count-header",
+      "composerVerifiedEmpty": true,
+      "attempts": []
+    },
+    "textInputVerified": true,
+    "textWriteAttempts": 1,
+    "clipboardClearedBeforeTextWrite": true,
+    "preparedInputChangedPixels": 14914,
+    "preparedInputChangedRatio": 0.040201,
+    "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/state/taobao-agent-new-merchants/send-attempts/.wechat-messaging/events/c2d9d3c2be6b56a0174cda28d1e77f762355ead7768f9c5ff2edeca15081d227/7f5df1749201bfbc19ba15604e7b200d46a2bb5c30f6ff8b6d1ef19fabf1833e/transport-ledger/attempt.json",
+    "postSendInputCleared": [
+      true,
+      true
+    ],
+    "verified": true,
+    "state": "verified",
+    "elapsedMs": 15264,
+    "sendReview": [
+      {
+        "item": 1,
+        "stage": "locate_group",
+        "label": "精确定位目标群",
+        "elapsedMs": 729,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 2,
+        "stage": "verify_target_and_input",
+        "label": "复核目标群与输入框",
+        "elapsedMs": 1903,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 3,
+        "stage": "prepare_payload",
+        "label": "准备并复核发送载荷",
+        "elapsedMs": 1796,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 4,
+        "stage": "claim_and_send",
+        "label": "领取防重账本并单次发送",
+        "elapsedMs": 4670,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 5,
+        "stage": "post_send_verify",
+        "label": "发送后双帧复核",
+        "elapsedMs": 6166,
+        "status": "completed",
+        "pitfalls": []
+      }
+    ],
+    "reviewSummary": {
+      "totalElapsedMs": 15264,
+      "itemCount": 5,
+      "pitfallCount": 0,
+      "result": "success"
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "voidedAt": "2026-10-22T09:42:50+08:00",
+  "voidedBy": "WorkBuddy 监理",
+  "authorization": "大同 2026-10-22 09:35 指令「检查是否有积压任务流 推动处理」；本轮巡检定位该 marker 自 02:27 起 7 小时（02:27→09:35）无人能推进（每周期 3 attempts 全撞 legacy-attempt-reconcile-only），按 #87 既有授权流程处置「消息不在群」出口",
+  "scope": "新商家流 02:27 周期 Windows 驱动「打开会话失败」遗留 blocked marker 双层 void（sendAttempts=0、physicalSendAttempts=0、copyReadback=null ⇒ 桥 legacy_text_reconcile 四出口全闭：仅接受 state∈{unknown,verified} 且 sendAttempts==1）",
+  "voided": [
+    {
+      "layer": "per-merchant marker",
+      "path": "aed679fa67b4931be6bbc2f1f280c591d83622ac23257f9677ca678724ac2369.json -> aed679fa67b4931be6bbc2f1f280c591d83622ac23257f9677ca678724ac2369.json.voided-20261022-0942",
+      "merchant": "电销+直播攻坚组（0090汉堡工厂 1307479521）",
+      "state": "blocked",
+      "sendAttempts": 0,
+      "physicalSendAttempts": 0,
+      "verified": false
+    },
+    {
+      "layer": "per-merchant bridge lock",
+      "path": "aed679fa67b4931be6bbc2f1f280c591d83622ac23257f9677ca678724ac2369.bridge.lock -> 同名 .voided-20261022-0942",
+      "note": "0 字节旁路锁，与 marker 同批清理，避免新发送被陈旧锁阻塞"
+    },
+    {
+      "layer": "bridge event",
+      "path": ".wechat-messaging/events/9dd624b0d55ec7ad75d926177258a360794f9b94cacfd16f79d8822281ba2924 -> 同名 .voided-20261022-0942",
+      "bindingDigest": "181a551edbdebcd7a5a8f546e8b7128e66caf109f0a78ab05131754efe20de96"
+    }
+  ],
+  "evidenceNeverSent": [
+    "per-merchant marker: state=blocked sendAttempts=0 newSendAttempts=0 physicalSendAttempts=0 verified=false copyReadback=null",
+    "事件层 delivery.json: status=blocked, claimedAt=1792607095.49（02:24:55），sendAttempts=0，无 transport/ 回执目录",
+    "transport: {ok:false, error:'windows-send-rejected:HTTP 500: 打开会话失败，当前标题=\\'昨天 10:33\\'，目标=\\'电销+直播攻坚组\\''} ⇒ 失败发生在「打开会话」阶段，早于输入/回车",
+    "cursor.json 仍停在 2026-10-21 17:17 福满满Man Man厚切千层蛋糕（verified=true），今日 send-history.jsonl 零条记录 ⇒ 该商家从未进入发送阶段",
+    "06 个周期（08:14/08:45/08:50/08:56/…）全部返回 legacy-attempt-reconcile-only，桥拒绝任何重发路径",
+    "⇒ 物理未投递成立：无 transport.data.sent、无 readback 锚点"
+  ],
+  "preconditionCheckAtVoid": "Windows 网关 09:40 实测 /health: ok=true agent up, logged_in=true, ready=true, wechat_running=true；list_sessions 含「电销+直播攻坚组」⇒ 通道身份门禁具备条件。09:40 用「文件传输助手」发探针 60s 无回执（curl 空响应）、current_chat 未切到该会话 ⇒ 驱动「打开会话」能力疑似仍未恢复，本轮 void 后需观察下一周期实测结果，若再撞同一错误则升级为网关侧事件（非同侧可修）",
+  "expectedOutcome": "下一周期（09:57 或 10:0x）对 0090汉堡工厂 重新走完整发送→verified；成功后游标推进，解除 4 条待处理积压（本批 itemCount=4，前 3 条为已 verified 存量）",
+  "lesson": "blocked∧sendAttempts=0 是本流第三类死锁（前两类：attempted 子进程超时、attempted 后 unkown）。桥的 legacy_text_reconcile 只认 unknown/verified∧sendAttempts==1，blocked∧0 永远闭口 ⇒ 必须 void 双层的现场处置能力要固化，且「打开会话失败」应在桥侧改判为可重试（待大同拍板是否改动封印文件 workflow_bridge.py）"
+}

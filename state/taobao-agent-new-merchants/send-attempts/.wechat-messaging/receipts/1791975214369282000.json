@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "748b7706f38247f61b456a1fc52d9cdbdcfe9b2a0055c016197ad9ae5b635b08",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "abd4b3af6ab798c091a3f50200c86b3a49942915784b246caef2e9281ab86fc3",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1791975191.941149,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 40,
+        "anchor": "text-exact",
+        "anchorValue": "城市：成都市  ；  联系人：高，13541148515  ；  店铺：小渔国  ；  地址：犀浦街金樽三街312号1层",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1791975214.362753
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 60
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 291
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 22424
+    }
+  ],
+  "elapsedMs": 22720,
+  "eventKey": "68745557bc42b6152ac675e381201dcbde011fe6132f1a1b5e64a8c0c1529ad3",
+  "reviewSummary": {
+    "totalElapsedMs": 22720,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

@@ -1,0 +1,299 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：亳州市  ；  联系人：武兵兵，18056730108  ；  店铺：福麦阁芝士烤冷面  ；  地址：薛阁白衣路205号  ；  商家ID：1366987042",
+      "sha256": "91755472bca8067074c23b1a0e5ff3e1cad295a7b294f2de8b659f74dc3fe675"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "027239f33f20c058f1bb3d7a2dcef1f6d619a573c31c25d73f4ed677ab326d73",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "91755472bca8067074c23b1a0e5ff3e1cad295a7b294f2de8b659f74dc3fe675",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1792974655.333972,
+        "sendAttempts": 1,
+        "resolvedGroup": "电销+直播攻坚组",
+        "observations": [
+          {
+            "groupName": "电销+直播攻坚组",
+            "inputEmpty": true,
+            "newMessageVisible": true,
+            "observedAt": 1792974661.330292,
+            "visibleText": "城市：亳州市  ；  联系人：武兵兵，18056730108  ；  店铺：福麦阁芝士烤冷面  ；  地址：薛阁白衣路205号  ；  商家ID：1366987042",
+            "visibleTextSha256": "91755472bca8067074c23b1a0e5ff3e1cad295a7b294f2de8b659f74dc3fe675",
+            "messagePath": [
+              0,
+              25,
+              9,
+              0,
+              0,
+              0,
+              23
+            ]
+          },
+          {
+            "groupName": "电销+直播攻坚组",
+            "inputEmpty": true,
+            "newMessageVisible": true,
+            "observedAt": 1792974663.199349,
+            "visibleText": "城市：亳州市  ；  联系人：武兵兵，18056730108  ；  店铺：福麦阁芝士烤冷面  ；  地址：薛阁白衣路205号  ；  商家ID：1366987042",
+            "visibleTextSha256": "91755472bca8067074c23b1a0e5ff3e1cad295a7b294f2de8b659f74dc3fe675",
+            "messagePath": [
+              0,
+              25,
+              9,
+              0,
+              0,
+              0,
+              23
+            ]
+          }
+        ],
+        "backend": "system-events-ui-tree",
+        "verificationLevel": "wecom-ui-tree-text",
+        "evidence": {
+          "method": "wecom-ui-tree-text",
+          "resolvedGroup": "电销+直播攻坚组",
+          "sha256": "91755472bca8067074c23b1a0e5ff3e1cad295a7b294f2de8b659f74dc3fe675",
+          "observations": [
+            {
+              "groupName": "电销+直播攻坚组",
+              "inputEmpty": true,
+              "newMessageVisible": true,
+              "observedAt": 1792974661.330292,
+              "visibleText": "城市：亳州市  ；  联系人：武兵兵，18056730108  ；  店铺：福麦阁芝士烤冷面  ；  地址：薛阁白衣路205号  ；  商家ID：1366987042",
+              "visibleTextSha256": "91755472bca8067074c23b1a0e5ff3e1cad295a7b294f2de8b659f74dc3fe675",
+              "messagePath": [
+                0,
+                25,
+                9,
+                0,
+                0,
+                0,
+                23
+              ]
+            },
+            {
+              "groupName": "电销+直播攻坚组",
+              "inputEmpty": true,
+              "newMessageVisible": true,
+              "observedAt": 1792974663.199349,
+              "visibleText": "城市：亳州市  ；  联系人：武兵兵，18056730108  ；  店铺：福麦阁芝士烤冷面  ；  地址：薛阁白衣路205号  ；  商家ID：1366987042",
+              "visibleTextSha256": "91755472bca8067074c23b1a0e5ff3e1cad295a7b294f2de8b659f74dc3fe675",
+              "messagePath": [
+                0,
+                25,
+                9,
+                0,
+                0,
+                0,
+                23
+              ]
+            }
+          ]
+        },
+        "transport": {
+          "kind": "text",
+          "sendAttempts": 1,
+          "sent": true,
+          "postSendInputCleared": [
+            true,
+            true
+          ],
+          "stage": "post_send_verify"
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 690
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 7888
+      }
+    ],
+    "elapsedMs": 8581,
+    "eventKey": "219e374c6d85865d9185011ff278ad422e8d1c61eaef0c95fd7461d8c31048c1",
+    "reviewSummary": {
+      "totalElapsedMs": 8581,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/b0eec5eca48e9dc41ee96db5313cd76bbb29a9e9d145c86ff9489a24748e6b76.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 690,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 7888,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 8581,
+  "reviewSummary": {
+    "totalElapsedMs": 8581,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "method": "wecom-ui-tree-text",
+    "resolvedGroup": "电销+直播攻坚组",
+    "sha256": "91755472bca8067074c23b1a0e5ff3e1cad295a7b294f2de8b659f74dc3fe675",
+    "observations": [
+      {
+        "groupName": "电销+直播攻坚组",
+        "inputEmpty": true,
+        "newMessageVisible": true,
+        "observedAt": 1792974661.330292,
+        "visibleText": "城市：亳州市  ；  联系人：武兵兵，18056730108  ；  店铺：福麦阁芝士烤冷面  ；  地址：薛阁白衣路205号  ；  商家ID：1366987042",
+        "visibleTextSha256": "91755472bca8067074c23b1a0e5ff3e1cad295a7b294f2de8b659f74dc3fe675",
+        "messagePath": [
+          0,
+          25,
+          9,
+          0,
+          0,
+          0,
+          23
+        ]
+      },
+      {
+        "groupName": "电销+直播攻坚组",
+        "inputEmpty": true,
+        "newMessageVisible": true,
+        "observedAt": 1792974663.199349,
+        "visibleText": "城市：亳州市  ；  联系人：武兵兵，18056730108  ；  店铺：福麦阁芝士烤冷面  ；  地址：薛阁白衣路205号  ；  商家ID：1366987042",
+        "visibleTextSha256": "91755472bca8067074c23b1a0e5ff3e1cad295a7b294f2de8b659f74dc3fe675",
+        "messagePath": [
+          0,
+          25,
+          9,
+          0,
+          0,
+          0,
+          23
+        ]
+      }
+    ]
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": [
+    true,
+    true
+  ],
+  "stage": "post_send_verify",
+  "reconciledWithoutSend": false,
+  "attemptReviews": [
+    {
+      "attempt": 1,
+      "elapsedMs": 8652,
+      "ok": true,
+      "reason": null,
+      "sendAttempts": 1,
+      "sendReview": [
+        {
+          "stage": "authorization",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 1,
+          "label": "authorization"
+        },
+        {
+          "stage": "freeze:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 2,
+          "label": "freeze:0"
+        },
+        {
+          "stage": "preflight",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 690,
+          "item": 3,
+          "label": "preflight"
+        },
+        {
+          "stage": "send:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 7888,
+          "item": 4,
+          "label": "send:0"
+        }
+      ]
+    }
+  ],
+  "contentionRetries": 0,
+  "contentionWaitMs": 0,
+  "contentionEvents": [],
+  "merchantId": "1366987042",
+  "messageSha256": "91755472bca8067074c23b1a0e5ff3e1cad295a7b294f2de8b659f74dc3fe675"
+}

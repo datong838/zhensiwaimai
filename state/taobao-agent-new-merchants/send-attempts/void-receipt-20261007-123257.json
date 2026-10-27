@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "voidedAt": "2026-10-07T12:32:57+08:00",
+  "voidedBy": "WorkBuddy 监理",
+  "authorization": "大同 2026-10-07「微信正常 你尽快处理累积任务流」直接指令",
+  "scope": "新商家流卡死层补齐——此前两次只 void 了 per-merchant marker，漏了桥事件层（与 F5 taobao「漏作废事件绑定」同构教训第三次应验）",
+  "voided": [
+    {
+      "layer": "bridge event dir（claim 状态真身）",
+      "path": "state/taobao-agent-new-merchants/send-attempts/.wechat-messaging/events/1dcfc85635884afff8199b5627d9090153697f530aca395f9dc7d96e3e9da1c4 → …voided-20261007-123257",
+      "attemptDir": "0a082bd6435d880bfca041cd0fbe162e40fa39e3bceb26ca4add53946b49235b",
+      "birthAt": "2026-10-07 08:03（GBK 乱码期）",
+      "evidenceNeverSent": [
+        "delivery.json: status=attempted, claimedAt=1791331434(10:08 窗口期), 无 transport/delivery 收据",
+        "12:03/12:17 两轮回执 reason=existing-attempt-reconcile-only（deduplication blocked，从未实际发送）",
+        "文本 sha 3fa5d8e5… 与 marker 绑定一致，从未输入会话"
+      ]
+    },
+    {
+      "layer": "per-merchant marker（第三代，12:03 轮重建）",
+      "path": "state/taobao-agent-new-merchants/send-attempts/b26956b5fed5659707d078eb6b1589d2e84357b080e170e4f320ab45d191b43a.json → …voided-20261007-123257",
+      "note": "第一代 08:03、第二代 10:08 分别于 08:41/11:44 void；本代 12:03 由 daemon 轮重建，因事件层未清，重建即回到 reconcile-only"
+    }
+  ],
+  "expectedOutcome": "下一轮（~13:03）新商家 542957171 文本正常发送，商家 2/3（飘香馄饨/甜也）随后游标推进",
+  "lesson": "新商家流的幂等死锁层有两处：①per-merchant marker（send-attempts/<identity>.json）②桥事件层（send-attempts/.wechat-messaging/events/<eventKey>/）。只清①不清②，每轮重建 marker 后立即回到 RECONCILE_ONLY——与 taobao F5「marker+事件绑定双层同时间戳作废」完全同构。"
+}

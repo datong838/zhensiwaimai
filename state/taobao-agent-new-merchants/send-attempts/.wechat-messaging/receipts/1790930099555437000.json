@@ -1,0 +1,74 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "0d6630bcfdd4400eb2c7c6c2b41616695a497918abae4a1f9c21f69334214294",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "85145d72ba2850fbd7eaba58cecd77d230c2ccbda78ba447d2d81455af01708f",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1790930076.851716,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 44,
+        "anchor": "text-exact",
+        "anchorValue": "成都市\n徐，15737543211\n毛记和意冒菜\n长荣路66号1栋4层67-82、122-126、128、130-140号",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1790930099.553215
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 61
+        },
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 352
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 22701
+    }
+  ],
+  "elapsedMs": 23057,
+  "eventKey": "a609413da14a159dcfdba6383a1ea3cc7f6c59d3c9f1d6108b23a62466f5dd08",
+  "reviewSummary": {
+    "totalElapsedMs": 23057,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

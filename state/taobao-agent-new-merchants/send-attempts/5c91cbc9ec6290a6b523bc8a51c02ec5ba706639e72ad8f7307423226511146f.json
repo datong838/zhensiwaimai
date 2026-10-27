@@ -1,0 +1,200 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：运城市  ；  联系人：李，17634004305  ；  店铺：赵二两把子肉  ；  地址：北城街道槐中北路建材巷6号第四间门面房餐饮服务",
+      "sha256": "facc7c13dc92898a99be9464c7e78652efba89c0febbcc929286c4a0ab2b7d0d"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "e5f3e8716624b79438ebf8a18d95d268dc3077062434e39603a73d2f300600f2",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "facc7c13dc92898a99be9464c7e78652efba89c0febbcc929286c4a0ab2b7d0d",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1791463089.03194,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-text-anchor",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "电销+直播攻坚组",
+          "currentTitle": "电销+直播攻坚组",
+          "messageCount": 50,
+          "anchor": "text-exact",
+          "anchorValue": "城市：运城市  ；  联系人：李，17634004305  ；  店铺：赵二两把子肉  ；  地址：北城街道槐中北路建材巷6号第四间门面房餐饮服务",
+          "anchorInTrailingPosition": true,
+          "autoKind": null,
+          "readbackAt": 1791463111.4239738
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "电销+直播攻坚组",
+            "len": 73
+          },
+          "route": "relay",
+          "direct_error": "[Errno 65] No route to host",
+          "direct_local_network_blocked": true,
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 217
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 22392
+      }
+    ],
+    "elapsedMs": 22614,
+    "eventKey": "e7e9f36708e64de55e39887cec6a62fe2e9447acad0ca1907a81b6655cec6d31",
+    "reviewSummary": {
+      "totalElapsedMs": 22614,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/5c91cbc9ec6290a6b523bc8a51c02ec5ba706639e72ad8f7307423226511146f.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 217,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 22392,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 22614,
+  "reviewSummary": {
+    "totalElapsedMs": 22614,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "ok": true,
+    "resolvedGroup": "电销+直播攻坚组",
+    "currentTitle": "电销+直播攻坚组",
+    "messageCount": 50,
+    "anchor": "text-exact",
+    "anchorValue": "城市：运城市  ；  联系人：李，17634004305  ；  店铺：赵二两把子肉  ；  地址：北城街道槐中北路建材巷6号第四间门面房餐饮服务",
+    "anchorInTrailingPosition": true,
+    "autoKind": null,
+    "readbackAt": 1791463111.4239738
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false,
+  "attemptReviews": [
+    {
+      "attempt": 1,
+      "elapsedMs": 22733,
+      "ok": true,
+      "reason": null,
+      "sendAttempts": 1,
+      "sendReview": [
+        {
+          "stage": "authorization",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 1,
+          "label": "authorization"
+        },
+        {
+          "stage": "freeze:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 2,
+          "label": "freeze:0"
+        },
+        {
+          "stage": "preflight",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 217,
+          "item": 3,
+          "label": "preflight"
+        },
+        {
+          "stage": "send:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 22392,
+          "item": 4,
+          "label": "send:0"
+        }
+      ]
+    }
+  ],
+  "contentionRetries": 0,
+  "contentionWaitMs": 0,
+  "contentionEvents": [],
+  "merchantId": "545845110",
+  "messageSha256": "facc7c13dc92898a99be9464c7e78652efba89c0febbcc929286c4a0ab2b7d0d"
+}

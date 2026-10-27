@@ -1,0 +1,200 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：昆明市  ；  联系人：何，15288191182  ；  店铺：第壹烤场1元烤串  ；  地址：县街街道办事处石江村委会安澜路文博雅园底商s49号商铺",
+      "sha256": "7498c172e92a6e8133eb04a1d97d086b358ee6979e7b834ff90ab560e970b9ff"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "f750ea5209646a905561d63718720049dac9c98a7cdb79c68f5e3a6eab740e71",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "7498c172e92a6e8133eb04a1d97d086b358ee6979e7b834ff90ab560e970b9ff",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1792398073.065633,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-text-anchor",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "电销+直播攻坚组",
+          "currentTitle": "电销+直播攻坚组",
+          "messageCount": 44,
+          "anchor": "text-exact",
+          "anchorValue": "城市：昆明市  ；  联系人：何，15288191182  ；  店铺：第壹烤场1元烤串  ；  地址：县街街道办事处石江村委会安澜路文博雅园底商s49号商铺",
+          "anchorInTrailingPosition": true,
+          "autoKind": null,
+          "readbackAt": 1792398099.6371148
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "电销+直播攻坚组",
+            "len": 79
+          },
+          "route": "relay",
+          "direct_error": "[Errno 65] No route to host",
+          "direct_local_network_blocked": true,
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 9245
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 26571
+      }
+    ],
+    "elapsedMs": 35824,
+    "eventKey": "6df722f9aa656f705e339a8df228285ed68df020c708c4fa2287ff9aca928ed4",
+    "reviewSummary": {
+      "totalElapsedMs": 35824,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/ec2e9b9358d34a293c1cf30b7603cbcdef59e64eebd1dbb8ab77380d427589b4.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 9245,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 26571,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 35824,
+  "reviewSummary": {
+    "totalElapsedMs": 35824,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "ok": true,
+    "resolvedGroup": "电销+直播攻坚组",
+    "currentTitle": "电销+直播攻坚组",
+    "messageCount": 44,
+    "anchor": "text-exact",
+    "anchorValue": "城市：昆明市  ；  联系人：何，15288191182  ；  店铺：第壹烤场1元烤串  ；  地址：县街街道办事处石江村委会安澜路文博雅园底商s49号商铺",
+    "anchorInTrailingPosition": true,
+    "autoKind": null,
+    "readbackAt": 1792398099.6371148
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false,
+  "attemptReviews": [
+    {
+      "attempt": 1,
+      "elapsedMs": 35928,
+      "ok": true,
+      "reason": null,
+      "sendAttempts": 1,
+      "sendReview": [
+        {
+          "stage": "authorization",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 1,
+          "label": "authorization"
+        },
+        {
+          "stage": "freeze:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 2,
+          "label": "freeze:0"
+        },
+        {
+          "stage": "preflight",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 9245,
+          "item": 3,
+          "label": "preflight"
+        },
+        {
+          "stage": "send:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 26571,
+          "item": 4,
+          "label": "send:0"
+        }
+      ]
+    }
+  ],
+  "contentionRetries": 0,
+  "contentionWaitMs": 0,
+  "contentionEvents": [],
+  "merchantId": "1357693154",
+  "messageSha256": "7498c172e92a6e8133eb04a1d97d086b358ee6979e7b834ff90ab560e970b9ff"
+}

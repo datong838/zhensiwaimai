@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "a5b88614a1b010a82d554170ee6a1314697ce497bf0cd1ee0927036ccc00bd2e",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "bc6c5724f9769cf9529b64797b75e94917a3fccac3d2c89e92defff17f93f6fb",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1791685258.474418,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 44,
+        "anchor": "text-exact",
+        "anchorValue": "城市：秦皇岛市  ；  联系人：魏联欢，18203350302  ；  店铺：小两口·刀削面  ；  地址：紫峰水畔北区",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1791685281.061815
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 60
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 3260
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 22587
+    }
+  ],
+  "elapsedMs": 25850,
+  "eventKey": "eef977d2e0e82c2a9f10e94eca328245d5690310f6e29c8d877f6a2cac6ca974",
+  "reviewSummary": {
+    "totalElapsedMs": 25850,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

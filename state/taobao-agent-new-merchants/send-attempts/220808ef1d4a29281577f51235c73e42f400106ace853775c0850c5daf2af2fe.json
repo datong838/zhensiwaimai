@@ -1,0 +1,64 @@
+{
+  "ok": true,
+  "executor": "wechat-desktop-sender",
+  "channel": "desktop",
+  "groupName": "FEIBING NEO AI数字员工",
+  "payloadType": "text",
+  "sendAttempts": 1,
+  "runtimeModelDecisions": 0,
+  "stage": "post_send_verify",
+  "stageMs": {
+    "locate_group": 332,
+    "prepare_payload": 8978,
+    "claim_and_send": 3798
+  },
+  "payloadIdentity": "e95c6bcbf107864dbd78e471830e77e552ecdc760a5f3ab4fd105b38ca4888c9",
+  "payloads": [
+    {
+      "text": "大连市\n赵，15642355585\n吃货天下水果捞希腊酸奶·精品果切\n香颂园22-8号",
+      "sha256": "2d4155ab412df0a4a475461180576aae30b0b9365866d9691d6e384701e4673b"
+    }
+  ],
+  "groupPreflight": {
+    "ok": true,
+    "action": "open-group",
+    "group": "FEIBING NEO AI数字员工",
+    "header": "FEIBING NEO AI数字员工",
+    "note": "ax-current-header",
+    "reason": null,
+    "sendAttempts": 0,
+    "runtimeModelDecisions": 0,
+    "stageMs": {
+      "exact_group_preflight": 332
+    },
+    "artifacts": [],
+    "hardGate": false
+  },
+  "textInputVerified": true,
+  "textWriteAttempts": 1,
+  "clipboardClearedBeforeTextWrite": true,
+  "preparedInputChangedPixels": 16206,
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/state/taobao-agent-new-merchants/send-attempts/220808ef1d4a29281577f51235c73e42f400106ace853775c0850c5daf2af2fe.json",
+  "reason": "desktop-chat-input-focus-failed",
+  "state": "verified",
+  "verified": true,
+  "verifiedAt": 1789185062.477937,
+  "verificationMethod": "desktop-bubble-copy-exact-two-frame",
+  "reconciledWithoutSend": true,
+  "reconcileObservation": {
+    "ok": true,
+    "bubblePositions": [
+      [
+        1854.0,
+        941.0
+      ],
+      [
+        1854.0,
+        941.0
+      ]
+    ],
+    "copyMenuCount": 1,
+    "composerEmpty": true,
+    "copiedTextSha256": "2d4155ab412df0a4a475461180576aae30b0b9365866d9691d6e384701e4673b"
+  }
+}

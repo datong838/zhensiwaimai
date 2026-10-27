@@ -1,0 +1,75 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "a8003a1a7bbc48bf1b380fd43fd0887568caf743df1573cb04844f716c58d805",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "b8ffa23ba798372220e16c1dbcebdc90c3290b414d8b7be03eab166edb759874",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1792248478.641474,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 42,
+        "anchor": "text-exact",
+        "anchorValue": "城市：杭州市  ；  联系人：周，15958003335  ；  店铺：瑶阿瑶饭团·手抓饼·烤冷面  ；  地址：宁围街道振宁路47-4号",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1792248500.5449479
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 69
+        },
+        "route": "direct",
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 175
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 21905
+    }
+  ],
+  "elapsedMs": 22110,
+  "eventKey": "a7652536f950db5d8db732347e51b1575ee4b7b281fd21c38dfbc20a7d366b9f",
+  "reviewSummary": {
+    "totalElapsedMs": 22110,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

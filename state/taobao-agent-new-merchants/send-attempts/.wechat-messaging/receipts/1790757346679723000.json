@@ -1,0 +1,74 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "9cd80498bbe0a5df97aa51faa29361dd657039d24136ab9aadfdd7fbffeef832",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "4522c544ce0b3f3de6959658b7ddeda9644028b277a98898b1b49f35873f48c8",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1790757316.970616,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 48,
+        "anchor": "text-exact",
+        "anchorValue": "永州市\n范，17520427158\n范大厨下饭菜馆\n永州大道289号",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1790757346.67876
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 34
+        },
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 391
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 29707
+    }
+  ],
+  "elapsedMs": 30101,
+  "eventKey": "c6e6b7fcb92b1b6c8e20bc827cc0aa2d42f0a349b491200d95971a0b869dbd9d",
+  "reviewSummary": {
+    "totalElapsedMs": 30101,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

@@ -1,0 +1,566 @@
+{
+  "businessDate": "2026-10-21",
+  "scope": "one store × M01–M11; capture only; recovery runs retained",
+  "shopId": "694471",
+  "shopName": "李当家汉派猪蹄饭(一清路店)",
+  "sourcePoolTotal": 863,
+  "captureReviewed": 11,
+  "businessDataComplete": false,
+  "sendRequested": false,
+  "sendEvents": 0,
+  "sendCheckpoints": 0,
+  "ledgerUnchanged": true,
+  "ledgerSha256": "d6b4f0641ad3f382d889e100ad6ed511aae408a4aa7dbe227d10ef8cb3f6dfdb",
+  "measuredWorkflowElapsedMs": 631953,
+  "rows": [
+    {
+      "shopId": "694471",
+      "shopName": "李当家汉派猪蹄饭(一清路店)",
+      "metric": "M01",
+      "group": "",
+      "status": "captured",
+      "steps": [
+        {
+          "stage": "capture",
+          "elapsedMs": 32057
+        },
+        {
+          "stage": "compose",
+          "elapsedMs": 0
+        },
+        {
+          "stage": "post-login-check",
+          "elapsedMs": 67
+        }
+      ],
+      "pitfalls": [],
+      "image": "work/metrics-rotation-development/live-20261021/state/runs/2026-10-21-d44c8729bfc8/694471/M01/M01_shop694471_20261020180057.png",
+      "elapsedMs": 32132,
+      "runId": "2026-10-21-d44c8729bfc8",
+      "executorBaselineHash": null,
+      "attempts": [
+        {
+          "runId": "2026-10-21-de0317eb2071",
+          "status": "captured",
+          "elapsedMs": 32175,
+          "pitfalls": []
+        },
+        {
+          "runId": "2026-10-21-d44c8729bfc8",
+          "status": "captured",
+          "elapsedMs": 32132,
+          "pitfalls": []
+        }
+      ],
+      "attemptElapsedMs": 64307,
+      "visualReview": "unobstructed-region-reviewed",
+      "dataObservation": "评分4.4；质量4.5；服务4.4；6行明细。首图被手机号提醒遮挡，已拒收并重采。",
+      "sha256": "c96b4e149258c122213464f1a0c71957926bf936855525a8237a7ea84adfda9e"
+    },
+    {
+      "shopId": "694471",
+      "shopName": "李当家汉派猪蹄饭(一清路店)",
+      "metric": "M02",
+      "group": "",
+      "status": "captured",
+      "steps": [
+        {
+          "stage": "capture",
+          "elapsedMs": 56572
+        },
+        {
+          "stage": "compose",
+          "elapsedMs": 0
+        },
+        {
+          "stage": "post-login-check",
+          "elapsedMs": 70
+        }
+      ],
+      "pitfalls": [],
+      "image": "work/metrics-rotation-development/live-20261021/state/runs/2026-10-21-56f8c14db489/694471/M02/M02_shop694471_20261020175146.png",
+      "elapsedMs": 56652,
+      "runId": "2026-10-21-56f8c14db489",
+      "executorBaselineHash": null,
+      "attempts": [
+        {
+          "runId": "2026-10-21-de0317eb2071",
+          "status": "failed",
+          "elapsedMs": 3082,
+          "pitfalls": [
+            "subprocess-failed"
+          ]
+        },
+        {
+          "runId": "2026-10-21-8aa6dc16ee2c",
+          "status": "failed",
+          "elapsedMs": 3142,
+          "pitfalls": [
+            "switch-popup-not-open-4"
+          ]
+        },
+        {
+          "runId": "2026-10-21-56f8c14db489",
+          "status": "captured",
+          "elapsedMs": 56652,
+          "pitfalls": []
+        }
+      ],
+      "attemptElapsedMs": 62876,
+      "visualReview": "unobstructed-region-reviewed",
+      "dataObservation": "概览5卡为--/暂无；下单顾客趋势有折线。仅部分数据可用，未确认缺失原因。",
+      "sha256": "ee3a9e65fc82d71d5e5aa528345397ca7ce3baafacf1e834a2e4ba99748157b7"
+    },
+    {
+      "shopId": "694471",
+      "shopName": "李当家汉派猪蹄饭(一清路店)",
+      "metric": "M03",
+      "group": "",
+      "status": "captured",
+      "steps": [
+        {
+          "stage": "capture",
+          "elapsedMs": 55986
+        },
+        {
+          "stage": "compose",
+          "elapsedMs": 0
+        },
+        {
+          "stage": "post-login-check",
+          "elapsedMs": 74
+        }
+      ],
+      "pitfalls": [],
+      "image": "work/metrics-rotation-development/live-20261021/state/runs/2026-10-21-56f8c14db489/694471/M03/M03_shop694471_20261020175243.png",
+      "elapsedMs": 56061,
+      "runId": "2026-10-21-56f8c14db489",
+      "executorBaselineHash": null,
+      "attempts": [
+        {
+          "runId": "2026-10-21-de0317eb2071",
+          "status": "failed",
+          "elapsedMs": 3097,
+          "pitfalls": [
+            "subprocess-failed"
+          ]
+        },
+        {
+          "runId": "2026-10-21-56f8c14db489",
+          "status": "captured",
+          "elapsedMs": 56061,
+          "pitfalls": []
+        }
+      ],
+      "attemptElapsedMs": 59158,
+      "visualReview": "unobstructed-region-reviewed",
+      "dataObservation": "近30日下单频次表明确显示暂无数据。",
+      "sha256": "4c3511c9d05281e94493af26ff2b6ee10840c36014856d84a45b67b19a5b30ba"
+    },
+    {
+      "shopId": "694471",
+      "shopName": "李当家汉派猪蹄饭(一清路店)",
+      "metric": "M04",
+      "group": "",
+      "status": "captured",
+      "steps": [
+        {
+          "stage": "capture",
+          "elapsedMs": 56189
+        },
+        {
+          "stage": "compose",
+          "elapsedMs": 0
+        },
+        {
+          "stage": "post-login-check",
+          "elapsedMs": 71
+        }
+      ],
+      "pitfalls": [],
+      "image": "work/metrics-rotation-development/live-20261021/state/runs/2026-10-21-56f8c14db489/694471/M04/M04_shop694471_20261020175339.png",
+      "elapsedMs": 56262,
+      "runId": "2026-10-21-56f8c14db489",
+      "executorBaselineHash": null,
+      "attempts": [
+        {
+          "runId": "2026-10-21-de0317eb2071",
+          "status": "failed",
+          "elapsedMs": 3106,
+          "pitfalls": [
+            "subprocess-failed"
+          ]
+        },
+        {
+          "runId": "2026-10-21-56f8c14db489",
+          "status": "captured",
+          "elapsedMs": 56262,
+          "pitfalls": []
+        }
+      ],
+      "attemptElapsedMs": 59368,
+      "visualReview": "unobstructed-region-reviewed",
+      "dataObservation": "近30日下单时段明确显示暂无数据。",
+      "sha256": "718b7bf0ad34f7f46f18cfebd0886fcc192609c81d5d99897d78f69acfc0f69e"
+    },
+    {
+      "shopId": "694471",
+      "shopName": "李当家汉派猪蹄饭(一清路店)",
+      "metric": "M05",
+      "group": "",
+      "status": "captured",
+      "steps": [
+        {
+          "stage": "capture",
+          "elapsedMs": 56027
+        },
+        {
+          "stage": "compose",
+          "elapsedMs": 0
+        },
+        {
+          "stage": "post-login-check",
+          "elapsedMs": 69
+        }
+      ],
+      "pitfalls": [],
+      "image": "work/metrics-rotation-development/live-20261021/state/runs/2026-10-21-56f8c14db489/694471/M05/M05_shop694471_20261020175435.png",
+      "elapsedMs": 56098,
+      "runId": "2026-10-21-56f8c14db489",
+      "executorBaselineHash": null,
+      "attempts": [
+        {
+          "runId": "2026-10-21-de0317eb2071",
+          "status": "failed",
+          "elapsedMs": 3073,
+          "pitfalls": [
+            "subprocess-failed"
+          ]
+        },
+        {
+          "runId": "2026-10-21-56f8c14db489",
+          "status": "captured",
+          "elapsedMs": 56098,
+          "pitfalls": []
+        }
+      ],
+      "attemptElapsedMs": 59171,
+      "visualReview": "unobstructed-region-reviewed",
+      "dataObservation": "近30日热门街区TOP10暂无数据；地图正常显示。",
+      "sha256": "0162e8f01c276a69f7472622c8ab3691afebb79ddd6ae90a96b1172121ca91b7"
+    },
+    {
+      "shopId": "694471",
+      "shopName": "李当家汉派猪蹄饭(一清路店)",
+      "metric": "M06",
+      "group": "",
+      "status": "captured",
+      "steps": [
+        {
+          "stage": "capture",
+          "elapsedMs": 55972
+        },
+        {
+          "stage": "compose",
+          "elapsedMs": 0
+        },
+        {
+          "stage": "post-login-check",
+          "elapsedMs": 76
+        }
+      ],
+      "pitfalls": [],
+      "image": "work/metrics-rotation-development/live-20261021/state/runs/2026-10-21-56f8c14db489/694471/M06/M06_shop694471_20261020175531.png",
+      "elapsedMs": 56050,
+      "runId": "2026-10-21-56f8c14db489",
+      "executorBaselineHash": null,
+      "attempts": [
+        {
+          "runId": "2026-10-21-de0317eb2071",
+          "status": "failed",
+          "elapsedMs": 3081,
+          "pitfalls": [
+            "subprocess-failed"
+          ]
+        },
+        {
+          "runId": "2026-10-21-56f8c14db489",
+          "status": "captured",
+          "elapsedMs": 56050,
+          "pitfalls": []
+        }
+      ],
+      "attemptElapsedMs": 59131,
+      "visualReview": "unobstructed-region-reviewed",
+      "dataObservation": "互动行为近7日有值（评分4.7/评价6/未评价77/差评1）；画像近30日暂无数据。",
+      "sha256": "16631360ef8a86dfd1d3c10ba1f02c4126deba0dc0b261053b5b2397e7bcb3c0"
+    },
+    {
+      "shopId": "694471",
+      "shopName": "李当家汉派猪蹄饭(一清路店)",
+      "metric": "M07",
+      "group": "",
+      "status": "captured",
+      "steps": [
+        {
+          "stage": "capture",
+          "elapsedMs": 35698
+        },
+        {
+          "stage": "compose",
+          "elapsedMs": 0
+        },
+        {
+          "stage": "post-login-check",
+          "elapsedMs": 80
+        }
+      ],
+      "pitfalls": [],
+      "image": "work/metrics-rotation-development/live-20261021/state/runs/2026-10-21-56f8c14db489/694471/M07/M07_shop694471_20261020175605.png",
+      "elapsedMs": 35779,
+      "runId": "2026-10-21-56f8c14db489",
+      "executorBaselineHash": null,
+      "attempts": [
+        {
+          "runId": "2026-10-21-de0317eb2071",
+          "status": "failed",
+          "elapsedMs": 3079,
+          "pitfalls": [
+            "subprocess-failed"
+          ]
+        },
+        {
+          "runId": "2026-10-21-56f8c14db489",
+          "status": "captured",
+          "elapsedMs": 35779,
+          "pitfalls": []
+        }
+      ],
+      "attemptElapsedMs": 38858,
+      "visualReview": "unobstructed-region-reviewed",
+      "dataObservation": "近30日历史概览多项--，不可当作0或完整数据。",
+      "sha256": "e0e4b41423f87d898e8b34cfaa1df51ec54f8f58911f7cccf0fc9e5d91648b6b"
+    },
+    {
+      "shopId": "694471",
+      "shopName": "李当家汉派猪蹄饭(一清路店)",
+      "metric": "M08",
+      "group": "",
+      "status": "captured",
+      "steps": [
+        {
+          "stage": "capture",
+          "elapsedMs": 36355
+        },
+        {
+          "stage": "compose",
+          "elapsedMs": 0
+        },
+        {
+          "stage": "post-login-check",
+          "elapsedMs": 81
+        }
+      ],
+      "pitfalls": [],
+      "image": "work/metrics-rotation-development/live-20261021/state/runs/2026-10-21-56f8c14db489/694471/M08/M08_shop694471_20261020175642.png",
+      "elapsedMs": 36437,
+      "runId": "2026-10-21-56f8c14db489",
+      "executorBaselineHash": null,
+      "attempts": [
+        {
+          "runId": "2026-10-21-de0317eb2071",
+          "status": "failed",
+          "elapsedMs": 3083,
+          "pitfalls": [
+            "subprocess-failed"
+          ]
+        },
+        {
+          "runId": "2026-10-21-56f8c14db489",
+          "status": "captured",
+          "elapsedMs": 36437,
+          "pitfalls": []
+        }
+      ],
+      "attemptElapsedMs": 39520,
+      "visualReview": "unobstructed-region-reviewed",
+      "dataObservation": "近30日漏斗本店和同行均显示0，未独立验证是否为真实零值。",
+      "sha256": "80383a7f098aaf01b58f151f2f2f39d8ca0a2dc248c4b5a9bd986998d747be25"
+    },
+    {
+      "shopId": "694471",
+      "shopName": "李当家汉派猪蹄饭(一清路店)",
+      "metric": "M09",
+      "group": "",
+      "status": "captured",
+      "steps": [
+        {
+          "stage": "capture",
+          "elapsedMs": 36374
+        },
+        {
+          "stage": "compose",
+          "elapsedMs": 0
+        },
+        {
+          "stage": "post-login-check",
+          "elapsedMs": 66
+        }
+      ],
+      "pitfalls": [],
+      "image": "work/metrics-rotation-development/live-20261021/state/runs/2026-10-21-56f8c14db489/694471/M09/M09_shop694471_20261020175718.png",
+      "elapsedMs": 36441,
+      "runId": "2026-10-21-56f8c14db489",
+      "executorBaselineHash": null,
+      "attempts": [
+        {
+          "runId": "2026-10-21-de0317eb2071",
+          "status": "failed",
+          "elapsedMs": 3087,
+          "pitfalls": [
+            "subprocess-failed"
+          ]
+        },
+        {
+          "runId": "2026-10-21-56f8c14db489",
+          "status": "captured",
+          "elapsedMs": 36441,
+          "pitfalls": []
+        }
+      ],
+      "attemptElapsedMs": 39528,
+      "visualReview": "unobstructed-region-reviewed",
+      "dataObservation": "自然流量来源明确显示暂无数据。",
+      "sha256": "9a77a5a8f649bd86ef4534f055c2991882d769fa3eb138ba83f1adee383065ca"
+    },
+    {
+      "shopId": "694471",
+      "shopName": "李当家汉派猪蹄饭(一清路店)",
+      "metric": "M10",
+      "group": "",
+      "status": "captured",
+      "steps": [
+        {
+          "stage": "capture",
+          "elapsedMs": 36376
+        },
+        {
+          "stage": "compose",
+          "elapsedMs": 0
+        },
+        {
+          "stage": "post-login-check",
+          "elapsedMs": 77
+        }
+      ],
+      "pitfalls": [],
+      "image": "work/metrics-rotation-development/live-20261021/state/runs/2026-10-21-7b03b4535407/694471/M10/M10_shop694471_20261020180547.png",
+      "elapsedMs": 36465,
+      "runId": "2026-10-21-7b03b4535407",
+      "executorBaselineHash": null,
+      "attempts": [
+        {
+          "runId": "2026-10-21-de0317eb2071",
+          "status": "failed",
+          "elapsedMs": 3071,
+          "pitfalls": [
+            "subprocess-failed"
+          ]
+        },
+        {
+          "runId": "2026-10-21-56f8c14db489",
+          "status": "failed",
+          "elapsedMs": 33801,
+          "pitfalls": [
+            "capture-failed-8"
+          ]
+        },
+        {
+          "runId": "2026-10-21-d44c8729bfc8",
+          "status": "failed",
+          "elapsedMs": 33765,
+          "pitfalls": [
+            "capture-failed-8"
+          ]
+        },
+        {
+          "runId": "2026-10-21-7b03b4535407",
+          "status": "captured",
+          "elapsedMs": 36465,
+          "pitfalls": []
+        }
+      ],
+      "attemptElapsedMs": 107102,
+      "visualReview": "unobstructed-region-reviewed",
+      "dataObservation": "近30日商品明细暂无数据；原时间坐标范围漏掉下移控件，已改唯一语义组定位并重采。",
+      "sha256": "7a6608a0cc9e218d5b510edefbbdebf77a643f270496495e44379969701593b1"
+    },
+    {
+      "shopId": "694471",
+      "shopName": "李当家汉派猪蹄饭(一清路店)",
+      "metric": "M11",
+      "group": "",
+      "status": "captured",
+      "steps": [
+        {
+          "stage": "capture",
+          "elapsedMs": 39637
+        },
+        {
+          "stage": "compose",
+          "elapsedMs": 31
+        },
+        {
+          "stage": "post-login-check",
+          "elapsedMs": 69
+        }
+      ],
+      "pitfalls": [],
+      "image": "work/metrics-rotation-development/live-20261021/state/runs/2026-10-21-56f8c14db489/694471/M11/combined.png",
+      "elapsedMs": 39739,
+      "runId": "2026-10-21-56f8c14db489",
+      "executorBaselineHash": null,
+      "attempts": [
+        {
+          "runId": "2026-10-21-de0317eb2071",
+          "status": "failed",
+          "elapsedMs": 3077,
+          "pitfalls": [
+            "subprocess-failed"
+          ]
+        },
+        {
+          "runId": "2026-10-21-56f8c14db489",
+          "status": "captured",
+          "elapsedMs": 39739,
+          "pitfalls": []
+        }
+      ],
+      "attemptElapsedMs": 42816,
+      "visualReview": "unobstructed-region-reviewed",
+      "dataObservation": "三图无损合成；概览本周服务异常率9.1%、出餐上报100%；营业/出餐近30日多项--。日期输入框由页面自身横向压缩，但已激活近30日。",
+      "sha256": "c8cb3454916ad975cc827bfd4f6d5d219f795f0632614093cd5e6b2f37bc97d4"
+    }
+  ],
+  "tests": {
+    "python": {
+      "passed": 32,
+      "seconds": 1.25
+    },
+    "node": {
+      "passed": 18,
+      "seconds": 0.0556
+    },
+    "legacyLedgerScript": {
+      "failed": 5,
+      "reason": "hardcoded 486 stores and former 20-slot assumptions; temporary copy only; not a pytest module"
+    }
+  },
+  "productionEnabled": false,
+  "finalProbe": {
+    "ok": true,
+    "port": 9230,
+    "expectChain": true,
+    "leaseReleased": true
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "de49ff8de62c33944ae908137de5a8847633ad91f09d1a531e4d318df621f8d6",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "250cb5bcac34ba22d83921a3c9446f3a855536f3935252e5596ac4c11a2b7316",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1792829663.919637,
+      "sendAttempts": 1,
+      "resolvedGroup": "电销+直播攻坚组",
+      "observations": [
+        {
+          "groupName": "电销+直播攻坚组",
+          "inputEmpty": true,
+          "newMessageVisible": true,
+          "visibleTextSha256": "250cb5bcac34ba22d83921a3c9446f3a855536f3935252e5596ac4c11a2b7316",
+          "observedAt": 1792829804.31
+        },
+        {
+          "groupName": "电销+直播攻坚组",
+          "inputEmpty": true,
+          "newMessageVisible": true,
+          "visibleTextSha256": "250cb5bcac34ba22d83921a3c9446f3a855536f3935252e5596ac4c11a2b7316",
+          "observedAt": 1792829842.171
+        }
+      ],
+      "evidenceNote": "New merchant ID1355654666, actual AX full text twice; tel markdown normalized to displayed digits; one Return; new 16:16 right-side blue bubble, exact group, empty composer. Purple upper-left icon observed; no cause inferred.",
+      "verificationLevel": "wecom-ui-tree-text",
+      "evidence": {
+        "method": "wecom-ui-tree-text",
+        "resolvedGroup": "电销+直播攻坚组",
+        "sha256": "250cb5bcac34ba22d83921a3c9446f3a855536f3935252e5596ac4c11a2b7316",
+        "observations": [
+          {
+            "groupName": "电销+直播攻坚组",
+            "inputEmpty": true,
+            "newMessageVisible": true,
+            "visibleTextSha256": "250cb5bcac34ba22d83921a3c9446f3a855536f3935252e5596ac4c11a2b7316",
+            "observedAt": 1792829804.31
+          },
+          {
+            "groupName": "电销+直播攻坚组",
+            "inputEmpty": true,
+            "newMessageVisible": true,
+            "visibleTextSha256": "250cb5bcac34ba22d83921a3c9446f3a855536f3935252e5596ac4c11a2b7316",
+            "observedAt": 1792829842.171
+          }
+        ]
+      },
+      "transport": {
+        "kind": "text",
+        "sendAttempts": 1,
+        "sent": true,
+        "postSendInputCleared": [
+          true,
+          true
+        ],
+        "stage": "post_send_verify"
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 247405
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 212421
+    }
+  ],
+  "elapsedMs": 459832,
+  "eventKey": "57b621287f8427767280ee6069030c83716028b73d7f5f463f836ec036d67987",
+  "reviewSummary": {
+    "totalElapsedMs": 459832,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

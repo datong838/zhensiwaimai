@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "93811f82783fb61acdeef283985e6f8098dc89dd3a0931e06b3a0c3db70e46ac",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "22d27f1a5246bc7d0981fc10344f88a718d2a2f9d9f2cf204637fab34068b744",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1791620056.2654562,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 42,
+        "anchor": "text-exact",
+        "anchorValue": "城市：驻马店市  ；  联系人：黄先生，13911067975  ；  店铺：僖甜蛋糕CAKE  ；  地址：开元大道奥田中央公馆北门商铺1101号",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1791620078.695449
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 74
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 219
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 22430
+    }
+  ],
+  "elapsedMs": 22656,
+  "eventKey": "061cc7f0e282b1177b796d0040cf4b960a4469e6047e33ded68b40619ebf1c76",
+  "reviewSummary": {
+    "totalElapsedMs": 22656,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

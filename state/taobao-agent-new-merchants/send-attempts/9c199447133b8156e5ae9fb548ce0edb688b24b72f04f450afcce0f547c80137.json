@@ -1,0 +1,50 @@
+{
+  "ok": true,
+  "executor": "wechat-desktop-sender",
+  "channel": "desktop",
+  "groupName": "FEIBING NEO AI数字员工",
+  "payloadType": "text",
+  "sendAttempts": 1,
+  "runtimeModelDecisions": 0,
+  "stage": "post_send_verify",
+  "stageMs": {
+    "locate_group": 434,
+    "prepare_payload": 9591,
+    "claim_and_send": 4262,
+    "post_send_verify": 22767
+  },
+  "payloadIdentity": "9721609b136c44c3ddc24c0affee6d3ec3efe8af04a1e6e9ac3939eb83ea3c54",
+  "payloads": [
+    {
+      "text": "濮阳市\n金金，18860328376\n金小鸭麻鸭面\n城关镇小康村2号路南6排路东1号一楼",
+      "sha256": "06968922a3420dc985b4badff21713d45fc6cb115dcbbf71f5092de1a1d0cee4"
+    }
+  ],
+  "groupPreflight": {
+    "ok": true,
+    "action": "open-group",
+    "group": "FEIBING NEO AI数字员工",
+    "header": "FEIBING NEO AI数字员工",
+    "note": "ax-current-header",
+    "reason": null,
+    "sendAttempts": 0,
+    "runtimeModelDecisions": 0,
+    "stageMs": {
+      "exact_group_preflight": 434
+    },
+    "artifacts": [],
+    "hardGate": false
+  },
+  "textInputVerified": true,
+  "textWriteAttempts": 1,
+  "clipboardClearedBeforeTextWrite": true,
+  "preparedInputChangedPixels": 20978,
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/state/taobao-agent-new-merchants/send-attempts/9c199447133b8156e5ae9fb548ce0edb688b24b72f04f450afcce0f547c80137.json",
+  "postSendInputCleared": [
+    true,
+    true
+  ],
+  "verified": true,
+  "state": "verified",
+  "verifiedAt": 1789208186.7710211
+}

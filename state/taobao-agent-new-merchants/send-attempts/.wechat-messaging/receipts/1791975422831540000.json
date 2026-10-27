@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "f2805d07e04baa142b9ad2d59a1d4d8789fa2601651ef77fff57e6979d8c260f",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "67e1b66461b41fc3c2f56a51f4a5d674f647e6eec374755b4c7075fd784acb51",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1791975400.6790102,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 36,
+        "anchor": "text-exact",
+        "anchorValue": "城市：达州市  ；  联系人：刘，19182858892  ；  店铺：蒲嬢嬢鲜肉烧烤  ；  地址：金龙大道155号（时尚家苑正大门口）",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1791975422.8289459
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 69
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 347
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 22149
+    }
+  ],
+  "elapsedMs": 22501,
+  "eventKey": "bd923aafd78861e5d336e87b18c413633f4ad79375645530a4c6cf8d083aa1d0",
+  "reviewSummary": {
+    "totalElapsedMs": 22501,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

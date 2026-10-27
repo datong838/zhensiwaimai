@@ -1,0 +1,238 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：无锡市  ；  联系人：王，15961812018  ；  店铺：一碗香·武汉热干面  ；  地址：江海南路88号(原南方不锈钢市场内)南方东路4026号南方夜市147号  ；  商家ID：538651578",
+      "sha256": "9ad52e3e07939d9b53aae9f84bd44f1e3cccb14d97bd3075978fb67ab82c1d90"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "a0b45bedd5e4fd455dd60a8fcde321a6ad2645b7a8b3cc6e918972562e35610f",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "9ad52e3e07939d9b53aae9f84bd44f1e3cccb14d97bd3075978fb67ab82c1d90",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1792888975.6168478,
+        "sendAttempts": 1,
+        "resolvedGroup": "电销+直播攻坚组",
+        "observations": [
+          {
+            "groupName": "电销+直播攻坚组",
+            "inputEmpty": true,
+            "newMessageVisible": true,
+            "visibleTextSha256": "9ad52e3e07939d9b53aae9f84bd44f1e3cccb14d97bd3075978fb67ab82c1d90",
+            "observedAt": 1792889096.447
+          },
+          {
+            "groupName": "电销+直播攻坚组",
+            "inputEmpty": true,
+            "newMessageVisible": true,
+            "visibleTextSha256": "9ad52e3e07939d9b53aae9f84bd44f1e3cccb14d97bd3075978fb67ab82c1d90",
+            "observedAt": 1792889131.88
+          }
+        ],
+        "verificationLevel": "wecom-ui-tree-text",
+        "evidence": {
+          "method": "wecom-ui-tree-text",
+          "resolvedGroup": "电销+直播攻坚组",
+          "sha256": "9ad52e3e07939d9b53aae9f84bd44f1e3cccb14d97bd3075978fb67ab82c1d90",
+          "observations": [
+            {
+              "groupName": "电销+直播攻坚组",
+              "inputEmpty": true,
+              "newMessageVisible": true,
+              "visibleTextSha256": "9ad52e3e07939d9b53aae9f84bd44f1e3cccb14d97bd3075978fb67ab82c1d90",
+              "observedAt": 1792889096.447
+            },
+            {
+              "groupName": "电销+直播攻坚组",
+              "inputEmpty": true,
+              "newMessageVisible": true,
+              "visibleTextSha256": "9ad52e3e07939d9b53aae9f84bd44f1e3cccb14d97bd3075978fb67ab82c1d90",
+              "observedAt": 1792889131.88
+            }
+          ]
+        },
+        "transport": {
+          "kind": "text",
+          "sendAttempts": 1,
+          "sent": true,
+          "postSendInputCleared": [
+            true,
+            true
+          ],
+          "stage": "post_send_verify"
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 116494
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 196650
+      }
+    ],
+    "elapsedMs": 313152,
+    "eventKey": "37e518137ab7c39b471399729d5d8c44d6edb80d64fc94da6f6c29ff3efbe353",
+    "reviewSummary": {
+      "totalElapsedMs": 313152,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/8fbcee7c7c99268696d045b87f9499f3249f218d7a0247eab0ad2acbd2b126d0.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 116494,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 196650,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 313152,
+  "reviewSummary": {
+    "totalElapsedMs": 313152,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "method": "wecom-ui-tree-text",
+    "resolvedGroup": "电销+直播攻坚组",
+    "sha256": "9ad52e3e07939d9b53aae9f84bd44f1e3cccb14d97bd3075978fb67ab82c1d90",
+    "observations": [
+      {
+        "groupName": "电销+直播攻坚组",
+        "inputEmpty": true,
+        "newMessageVisible": true,
+        "visibleTextSha256": "9ad52e3e07939d9b53aae9f84bd44f1e3cccb14d97bd3075978fb67ab82c1d90",
+        "observedAt": 1792889096.447
+      },
+      {
+        "groupName": "电销+直播攻坚组",
+        "inputEmpty": true,
+        "newMessageVisible": true,
+        "visibleTextSha256": "9ad52e3e07939d9b53aae9f84bd44f1e3cccb14d97bd3075978fb67ab82c1d90",
+        "observedAt": 1792889131.88
+      }
+    ]
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": [
+    true,
+    true
+  ],
+  "stage": "post_send_verify",
+  "reconciledWithoutSend": false,
+  "attemptReviews": [
+    {
+      "attempt": 1,
+      "elapsedMs": 313314,
+      "ok": true,
+      "reason": null,
+      "sendAttempts": 1,
+      "sendReview": [
+        {
+          "stage": "authorization",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 1,
+          "label": "authorization"
+        },
+        {
+          "stage": "freeze:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 2,
+          "label": "freeze:0"
+        },
+        {
+          "stage": "preflight",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 116494,
+          "item": 3,
+          "label": "preflight"
+        },
+        {
+          "stage": "send:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 196650,
+          "item": 4,
+          "label": "send:0"
+        }
+      ]
+    }
+  ],
+  "contentionRetries": 0,
+  "contentionWaitMs": 0,
+  "contentionEvents": [],
+  "merchantId": "538651578",
+  "messageSha256": "9ad52e3e07939d9b53aae9f84bd44f1e3cccb14d97bd3075978fb67ab82c1d90"
+}

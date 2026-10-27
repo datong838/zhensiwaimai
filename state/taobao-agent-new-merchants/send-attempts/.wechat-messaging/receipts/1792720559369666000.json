@@ -1,0 +1,75 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "d0f0d4fdfd135b2e4d4a9fb143ff11c3dd7f19b386d7d106bdbb8b59a839e6ec",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "415e3473e1ca4d2613d8b6bab473c412ee067d77d60abf7603b912b43ae7d34d",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1792720535.744354,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 40,
+        "anchor": "text-exact",
+        "anchorValue": "城市：安庆市  ；  联系人：潘，18055638328  ；  店铺：小鑫的窑炉披萨·意面焗饭  ；  地址：园艺场安置区内058号东起第1、2开间  ；  商家ID：545711840",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1792720559.3676522
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 94
+        },
+        "route": "direct",
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 2005
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 23623
+    }
+  ],
+  "elapsedMs": 25631,
+  "eventKey": "72c0592a0a27b90465040aac37ba61aa016d5fbf8309ee6a268133eb3143464f",
+  "reviewSummary": {
+    "totalElapsedMs": 25631,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

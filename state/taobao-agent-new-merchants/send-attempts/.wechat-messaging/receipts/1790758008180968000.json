@@ -1,0 +1,74 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "8de2b068f5dc2c4c35a9468b36e1bb27dfbbc2b0420dcdeadf4af08926e746d0",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "0e1789344fa444b701165b24c230d01762e1836970a336b4d219db11c6473662",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1790757988.721762,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 48,
+        "anchor": "text-exact",
+        "anchorValue": "东莞市\n陶，16683914352\n贵州遵义羊肉粉（贵州名优小吃）\n德隆路六巷17号103室",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1790758008.1797
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 46
+        },
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 383
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 19458
+    }
+  ],
+  "elapsedMs": 19844,
+  "eventKey": "1cf193b15ffc02f95cf2b4080c0a25c3ee55e7a7b9b05b52ecced21c820da506",
+  "reviewSummary": {
+    "totalElapsedMs": 19844,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "voidedAt": "2026-10-22T09:49:00+08:00",
+  "voidedBy": "WorkBuddy 监理",
+  "authorization": "承接 void-receipt-20261022-0942.json（大同 09:35「检查是否有积压任务流 推动处理」）；同一故障因复发，第二轮 void",
+  "scope": "新商家流 09:43:02 周期（void 后第一次真发送）再次 blocked：微信客户端仍处「会话列表为空/搜索无结果」状态，发送仍在「打开会话」阶段被拒。为使每小时周期都能走真发送路径（微信一修好就自动补发），再次双层 void 该 blocked marker",
+  "voided": [
+    {
+      "layer": "per-merchant marker",
+      "path": "aed679fa67b4931be6bbc2f1f280c591d83622ac23257f9677ca678724ac2369.json -> 同名 .voided-20261022-0949",
+      "merchant": "电销+直播攻坚组（0090汉堡工厂 1307479521）",
+      "state": "blocked",
+      "sendAttempts": 0,
+      "physicalSendAttempts": 0,
+      "verified": false
+    },
+    {
+      "layer": "bridge event",
+      "path": ".wechat-messaging/events/9dd624b0d55ec7ad75d926177258a360794f9b94cacfd16f79d8822281ba2924 -> 同名 .voided-20261022-0949",
+      "bindingDigest": "181a551edbdebcd7a5a8f546e8b7128e66caf109f0a78ab05131754efe20de96",
+      "createdAt": "09:46（本轮 09:43:02 周期重建）"
+    }
+  ],
+  "evidenceNeverSent": [
+    "09:46 重建的 marker：state=blocked sendAttempts=0 physicalSendAttempts=0 verified=false copyReadback=null",
+    "reason 与 02:24 同源：windows-send-rejected:HTTP 500 打开会话失败，当前标题='昨天 10:33'",
+    "dump_tree 09:48:10 实测：主窗体在、登录态在，但**会话列表 0 项**、搜索框空而结果空 ⇒ 客户端 UI 未渲染会话，非鉴权/中继故障",
+    "本轮 void 只恢复「可重试」能力，不改变微信侧状态"
+  ],
+  "expectedOutcome": "微信侧修复后，下一个整点周期自动真发送并 verified；若仍失败会再生成同名 blocked marker（不会累积）",
+  "lesson": "同一小时两次 void 属同因复发（非新故障）：第一次 void 证明标记层已解，故障层上移到微信客户端。诊断价值在于「void 后立刻回到真发送路径」这一点，可用来把标记层故障与通道层故障切开。"
+}

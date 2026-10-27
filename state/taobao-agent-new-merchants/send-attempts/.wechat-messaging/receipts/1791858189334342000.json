@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "53cc7d9b428e04e898b44447fd95eee35d87b04157ecb611d18678d86a8b9b88",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "fd16479a331d9ffbc49a37c062542c2f5af785d501bd97100491f777b7069405",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1791858161.7446988,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 46,
+        "anchor": "text-exact",
+        "anchorValue": "城市：青岛市  ；  联系人：郭加龙，13573877444  ；  店铺：牛小螺·柳州味（台头店）  ；  地址：台头社区253-1",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1791858189.329226
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 67
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 6325
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 27584
+    }
+  ],
+  "elapsedMs": 33916,
+  "eventKey": "e442435a975effb2697b9dc81782255018a623d57b594c2cd31c1da4383df6b1",
+  "reviewSummary": {
+    "totalElapsedMs": 33916,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

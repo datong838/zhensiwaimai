@@ -1,0 +1,75 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "40e2b9547cef5adba1eb91173cde4f968942b897b5c4e136834c0c20f8da44dc",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "90fcd03fd4264de37962d1ab81ff580b926fee31606574b55160321bd495a247",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1792720483.823442,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 41,
+        "anchor": "text-exact",
+        "anchorValue": "城市：北京市  ；  联系人：马，15021709698  ；  店铺：小马·老北京炸鸡  ；  地址：丰台北路18号院5号楼-1层-102内30-10  ；  商家ID：547308197",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1792720507.663309
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 95
+        },
+        "route": "direct",
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 2045
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 23839
+    }
+  ],
+  "elapsedMs": 25892,
+  "eventKey": "916674b5576b917690e08b5821fc006f8af7a2237ef2ddd5898f1e2cdf92554b",
+  "reviewSummary": {
+    "totalElapsedMs": 25892,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

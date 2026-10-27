@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "36be14985b9d24c092f7322382cf6ce32c19aa10b17597ad87352ec5bbf62fd0",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "a760894b166f2ace1786fad5eb15c6b96cff833ba8c01c73c72cc56dba2efeb7",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1791975214.777766,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 40,
+        "anchor": "text-exact",
+        "anchorValue": "城市：西宁市  ；  联系人：韩先生，18697149886  ；  店铺：佰富顺·寻味干拌牛肉面  ；  地址：大众街3号1号楼3-9号铺",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1791975237.2046661
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 70
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 273
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 22427
+    }
+  ],
+  "elapsedMs": 22703,
+  "eventKey": "4a1ea2f1df29c2089ef76625122c07a17b5dc127fdc20405093b8c66e1e836c0",
+  "reviewSummary": {
+    "totalElapsedMs": 22703,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

@@ -1,0 +1,197 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：中山市  ；  联系人：f，18988594812  ；  店铺：FISH CAFE TEA  ；  地址：小榄镇新市路二街11号之二FISH CAFE TEA",
+      "sha256": "2e4f14d0c5313e9a6fdef5cc389a8dec60437571fd4577aab665ff164b809a53"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "b801b5acb1f4a722a4a34cea5eee7143d3c7bdc0f8651e52bec788d44fa6d797",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "2e4f14d0c5313e9a6fdef5cc389a8dec60437571fd4577aab665ff164b809a53",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1790999135.061213,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-text-anchor",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "电销+直播攻坚组",
+          "currentTitle": "电销+直播攻坚组",
+          "messageCount": 43,
+          "anchor": "text-exact",
+          "anchorValue": "城市：中山市  ；  联系人：f，18988594812  ；  店铺：FISH CAFE TEA  ；  地址：小榄镇新市路二街11号之二FISH CAFE TEA",
+          "anchorInTrailingPosition": true,
+          "autoKind": null,
+          "readbackAt": 1790999158.605762
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "电销+直播攻坚组",
+            "len": 83
+          },
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 389
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 23544
+      }
+    ],
+    "elapsedMs": 23937,
+    "eventKey": "930324253d648481dbd7a4f5c0d7e5e0eb875a8f42bf05c11d0b7c895294d059",
+    "reviewSummary": {
+      "totalElapsedMs": 23937,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/7a06d287d2c1f0675de3e92581140dee970bf95ad59c702efc7f965afc3757fc.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 389,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 23544,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 23937,
+  "reviewSummary": {
+    "totalElapsedMs": 23937,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "ok": true,
+    "resolvedGroup": "电销+直播攻坚组",
+    "currentTitle": "电销+直播攻坚组",
+    "messageCount": 43,
+    "anchor": "text-exact",
+    "anchorValue": "城市：中山市  ；  联系人：f，18988594812  ；  店铺：FISH CAFE TEA  ；  地址：小榄镇新市路二街11号之二FISH CAFE TEA",
+    "anchorInTrailingPosition": true,
+    "autoKind": null,
+    "readbackAt": 1790999158.605762
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false,
+  "attemptReviews": [
+    {
+      "attempt": 1,
+      "elapsedMs": 24026,
+      "ok": true,
+      "reason": null,
+      "sendAttempts": 1,
+      "sendReview": [
+        {
+          "stage": "authorization",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 1,
+          "label": "authorization"
+        },
+        {
+          "stage": "freeze:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 2,
+          "label": "freeze:0"
+        },
+        {
+          "stage": "preflight",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 389,
+          "item": 3,
+          "label": "preflight"
+        },
+        {
+          "stage": "send:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 23544,
+          "item": 4,
+          "label": "send:0"
+        }
+      ]
+    }
+  ],
+  "contentionRetries": 0,
+  "contentionWaitMs": 0,
+  "contentionEvents": [],
+  "merchantId": "2097569711",
+  "messageSha256": "2e4f14d0c5313e9a6fdef5cc389a8dec60437571fd4577aab665ff164b809a53"
+}

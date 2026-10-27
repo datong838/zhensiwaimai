@@ -1,0 +1,277 @@
+{
+  "ok": false,
+  "workflowId": "daily-store-metrics-rotation-to-wechat",
+  "mode": "capture",
+  "status": "incomplete",
+  "businessDate": "2026-10-21",
+  "runId": "2026-10-21-de0317eb2071",
+  "metrics": [
+    "M01",
+    "M02",
+    "M03",
+    "M04",
+    "M05",
+    "M06",
+    "M07",
+    "M08",
+    "M09",
+    "M10",
+    "M11"
+  ],
+  "summary": {
+    "poolTotal": 1,
+    "expected": 11,
+    "pending": 0,
+    "blocked": 0,
+    "unknown": 0,
+    "already_verified": 0,
+    "verified": 0,
+    "captured": 1,
+    "no-data": 0,
+    "failed": 10,
+    "ledger_pending": 0,
+    "remaining": 11
+  },
+  "rows": [
+    {
+      "shopId": "694471",
+      "shopName": "李当家汉派猪蹄饭(一清路店)",
+      "metric": "M01",
+      "group": "",
+      "status": "captured",
+      "steps": [
+        {
+          "stage": "capture",
+          "elapsedMs": 32089
+        },
+        {
+          "stage": "compose",
+          "elapsedMs": 0
+        },
+        {
+          "stage": "post-login-check",
+          "elapsedMs": 74
+        }
+      ],
+      "pitfalls": [],
+      "image": "work/metrics-rotation-development/live-20261021/state/runs/2026-10-21-de0317eb2071/694471/M01/M01_shop694471_20261020174513.png",
+      "elapsedMs": 32175
+    },
+    {
+      "shopId": "694471",
+      "shopName": "李当家汉派猪蹄饭(一清路店)",
+      "metric": "M02",
+      "group": "",
+      "status": "failed",
+      "steps": [
+        {
+          "stage": "capture",
+          "elapsedMs": 3014
+        },
+        {
+          "stage": "failure-login-check",
+          "elapsedMs": 67
+        }
+      ],
+      "pitfalls": [
+        "subprocess-failed"
+      ],
+      "elapsedMs": 3082
+    },
+    {
+      "shopId": "694471",
+      "shopName": "李当家汉派猪蹄饭(一清路店)",
+      "metric": "M03",
+      "group": "",
+      "status": "failed",
+      "steps": [
+        {
+          "stage": "capture",
+          "elapsedMs": 2998
+        },
+        {
+          "stage": "failure-login-check",
+          "elapsedMs": 98
+        }
+      ],
+      "pitfalls": [
+        "subprocess-failed"
+      ],
+      "elapsedMs": 3097
+    },
+    {
+      "shopId": "694471",
+      "shopName": "李当家汉派猪蹄饭(一清路店)",
+      "metric": "M04",
+      "group": "",
+      "status": "failed",
+      "steps": [
+        {
+          "stage": "capture",
+          "elapsedMs": 3029
+        },
+        {
+          "stage": "failure-login-check",
+          "elapsedMs": 76
+        }
+      ],
+      "pitfalls": [
+        "subprocess-failed"
+      ],
+      "elapsedMs": 3106
+    },
+    {
+      "shopId": "694471",
+      "shopName": "李当家汉派猪蹄饭(一清路店)",
+      "metric": "M05",
+      "group": "",
+      "status": "failed",
+      "steps": [
+        {
+          "stage": "capture",
+          "elapsedMs": 3003
+        },
+        {
+          "stage": "failure-login-check",
+          "elapsedMs": 70
+        }
+      ],
+      "pitfalls": [
+        "subprocess-failed"
+      ],
+      "elapsedMs": 3073
+    },
+    {
+      "shopId": "694471",
+      "shopName": "李当家汉派猪蹄饭(一清路店)",
+      "metric": "M06",
+      "group": "",
+      "status": "failed",
+      "steps": [
+        {
+          "stage": "capture",
+          "elapsedMs": 3011
+        },
+        {
+          "stage": "failure-login-check",
+          "elapsedMs": 69
+        }
+      ],
+      "pitfalls": [
+        "subprocess-failed"
+      ],
+      "elapsedMs": 3081
+    },
+    {
+      "shopId": "694471",
+      "shopName": "李当家汉派猪蹄饭(一清路店)",
+      "metric": "M07",
+      "group": "",
+      "status": "failed",
+      "steps": [
+        {
+          "stage": "capture",
+          "elapsedMs": 3004
+        },
+        {
+          "stage": "failure-login-check",
+          "elapsedMs": 75
+        }
+      ],
+      "pitfalls": [
+        "subprocess-failed"
+      ],
+      "elapsedMs": 3079
+    },
+    {
+      "shopId": "694471",
+      "shopName": "李当家汉派猪蹄饭(一清路店)",
+      "metric": "M08",
+      "group": "",
+      "status": "failed",
+      "steps": [
+        {
+          "stage": "capture",
+          "elapsedMs": 3013
+        },
+        {
+          "stage": "failure-login-check",
+          "elapsedMs": 70
+        }
+      ],
+      "pitfalls": [
+        "subprocess-failed"
+      ],
+      "elapsedMs": 3083
+    },
+    {
+      "shopId": "694471",
+      "shopName": "李当家汉派猪蹄饭(一清路店)",
+      "metric": "M09",
+      "group": "",
+      "status": "failed",
+      "steps": [
+        {
+          "stage": "capture",
+          "elapsedMs": 3016
+        },
+        {
+          "stage": "failure-login-check",
+          "elapsedMs": 70
+        }
+      ],
+      "pitfalls": [
+        "subprocess-failed"
+      ],
+      "elapsedMs": 3087
+    },
+    {
+      "shopId": "694471",
+      "shopName": "李当家汉派猪蹄饭(一清路店)",
+      "metric": "M10",
+      "group": "",
+      "status": "failed",
+      "steps": [
+        {
+          "stage": "capture",
+          "elapsedMs": 3003
+        },
+        {
+          "stage": "failure-login-check",
+          "elapsedMs": 67
+        }
+      ],
+      "pitfalls": [
+        "subprocess-failed"
+      ],
+      "elapsedMs": 3071
+    },
+    {
+      "shopId": "694471",
+      "shopName": "李当家汉派猪蹄饭(一清路店)",
+      "metric": "M11",
+      "group": "",
+      "status": "failed",
+      "steps": [
+        {
+          "stage": "capture",
+          "elapsedMs": 3008
+        },
+        {
+          "stage": "failure-login-check",
+          "elapsedMs": 69
+        }
+      ],
+      "pitfalls": [
+        "subprocess-failed"
+      ],
+      "elapsedMs": 3077
+    }
+  ],
+  "elapsedMs": 63018,
+  "externalEffectRequested": false,
+  "stage": "metrics-incomplete",
+  "executorBaselineHash": "310d32e66aaf5e4c17819a78d875d7fb6f766f6311c2b67be6912ecd577950a8",
+  "sourcePoolTotal": 863,
+  "scopeLimited": true
+}

@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "0a032905f59741098b4f8630adfee14989b506a71fcb0b98ae8305487f804710",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "a83c2686c369eecd75203440c1a30731ac6c71f6d8a02614632ab8e469b97774",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1791611539.628908,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 38,
+        "anchor": "text-exact",
+        "anchorValue": "城市：东莞市  ；  联系人：胡先生，15334156642  ；  店铺：利品湘现炒木桶饭  ；  地址：宵边长福街20号106",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1791611561.7687051
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 65
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 287
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 22140
+    }
+  ],
+  "elapsedMs": 22433,
+  "eventKey": "45ad63b895669541997d69c26b9cb769ae1b6b2f5638f4723f123973d09c6bea",
+  "reviewSummary": {
+    "totalElapsedMs": 22433,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

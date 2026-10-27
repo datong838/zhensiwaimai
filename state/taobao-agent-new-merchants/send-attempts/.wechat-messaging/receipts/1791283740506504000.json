@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "1dd0f1ed17c77fad76761a423d4e30a8232a7b37f9daebdcd3b6f7b929609416",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "4d27b94ad19562351b78ac068d94e733ef6b3e064ad31c20016457a0c2a9b16e",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1791283718.0303428,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 50,
+        "anchor": "text-exact",
+        "anchorValue": "城市：惠州市  ；  联系人：小峰，13480550333  ；  店铺：巧星芒·贵州冰浆  ；  地址：水口街道办事处龙湖东四路10号南贸花园商场1层01号L125-2商铺",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1791283740.504425
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 87
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 167
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 22474
+    }
+  ],
+  "elapsedMs": 22644,
+  "eventKey": "642469c3154869a21b333894fad9828adb7b982e5724ef55e43336dffdd8fad5",
+  "reviewSummary": {
+    "totalElapsedMs": 22644,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "voidedAt": "2026-10-22T10:38:00+08:00",
+  "voidedBy": "WorkBuddy 监理（大同 10:32/10:34 明确指令「windows那边好了，你尽快发出去 / 我让你发出去 你尽快发」）",
+  "authorization": "大同 2026-10-22 10:34 直接指令；承接 void-receipt-20261022-0942 / -0949 同一故障链",
+  "scope": "09:54 周期遗留 blocked marker 第三次双层 void（sendAttempts=0 / physicalSendAttempts=0 / copyReadback=null ⇒ 从未真发）。目的：清掉标记层，让已修好的 Windows 驱动走真发送路径",
+  "voided": [
+    {
+      "layer": "per-merchant marker",
+      "path": "aed679fa67b4931be6bbc2f1f280c591d83622ac23257f9677ca678724ac2369.json -> 同名 .voided-20261022-1038",
+      "merchant": "电销+直播攻坚组（0090汉堡工厂 1307479521）",
+      "state": "blocked",
+      "sendAttempts": 0,
+      "physicalSendAttempts": 0
+    },
+    {
+      "layer": "bridge lock",
+      "path": "aed679fa...bridge.lock -> .voided-20261022-1038"
+    },
+    {
+      "layer": "event digest dir",
+      "path": ".wechat-messaging/events/9dd624b0... -> .voided-20261022-1038"
+    }
+  ],
+  "evidenceNeverSent": [
+    "marker: state=blocked sendAttempts=0 newSendAttempts=0 physicalSendAttempts=0 verified=false copyReadback=null",
+    "commonReceipt.sendReview: send:0 status=failed（在「打开会话」阶段被拒，未键入未发送）",
+    "reason: windows-send-rejected:HTTP 500 打开会话失败，当前标题='昨天 10:33'"
+  ],
+  "newFinding": {
+    "windowsTokenDrift": "Windows 侧 server.py 重启时未带 WECHAT_AGENT_TOKEN 环境变量，实际生效默认值 CHANGE_ME_STRONG_TOKEN（实测 client current 用该值 200 OK，用旧强 token 401）。Mac 侧临时对齐：接入包/连接信息.txt TOKEN 已改为实际生效值（备份 连接信息.txt.bak-20261022-1037），待 Windows 以强 token 重启后改回。",
+    "windowsFixConfirmed": "current_chat 返回「电销+直播攻坚组 (19)」⇒ 修复后驱动已能正确打开目标群（含 '+' 不再被当 SHIFT）",
+    "chatListEmptyResolved": "09:48 实测「会话列表整片为空」的 #94 状态已恢复，list 与搜索均正常"
+  },
+  "outcome": "void 后立即 manual_run_once 真发送：runId=2f453987-d13a-4c5b-ad90-b28e3a7d231d，ok=true，stage=complete，wechat.sent=8 / messageCount=8，mode=execute，completion=COMPLETE（final-cursor-and-history-verified），10:30 后 verified marker 共 8 条",
+  "lesson": "blocked∧sendAttempts=0 的 marker 在任何代码修复后都必须先 void 才能回到真发送路径；否则每周期只回 legacy-attempt-reconcile-only，看起来像「修了也没用」。同时：Windows 侧重启 server.py 若漏带 WECHAT_AGENT_TOKEN，会静默降级到默认 token，Mac 侧回 401 —— 重启后必须回读 current_chat 验 token。"
+}

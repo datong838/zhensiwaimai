@@ -1,0 +1,61 @@
+{
+  "ok": false,
+  "status": "blocked",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "0a06b3ae76926983f04fec910a4ce51155dc2cbc38a0e64199f8ea5ab43b1150",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "39123b05a0c1370532f145dae8460c0a9847b8a23adb46132d677e1d8e156992",
+      "type": "text",
+      "status": "blocked",
+      "claimedAt": 1792743333.547425,
+      "sendAttempts": 0,
+      "reason": "wecom-send-failed:sender-exit-2",
+      "transport": {
+        "kind": "text",
+        "sendAttempts": 0,
+        "sent": false,
+        "receipt": {}
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 64004
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 237
+    }
+  ],
+  "reason": "wecom-send-failed:sender-exit-2",
+  "elapsedMs": 64243,
+  "eventKey": "a08b5d77e9a95baeaa20e225a2310afd17cf10c89413ad7c4ffe3d20f5c79585",
+  "reviewSummary": {
+    "totalElapsedMs": 64243,
+    "result": "blocked",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "voidedAt": "2026-10-07T20:47:30+08:00",
+  "voidedAtCorrection": "初版误写 20:53:00（预估时钟）；据文件系统 mtime 勘误为 20:47:30（rename ~20:47、回执落盘 20:48）。文件名 TS=205300 保留（rename 链已落盘），本字段为准。",
+  "authorization": "监理按 2026-10-04 大同拍板之 0 条/死锁清理授权与 void 三方对账铁律执行；本次为 evidenceNeverSent 实证后双层 void（与 void-receipt-20261007-142137 飘香馄饨同族同流程）",
+  "scope": "daily-agent-new-merchants-to-wechat 商家 口缸米线·米线 (merchantId=522475064) 19:43 轮幽灵 attempt（relay 路径）",
+  "voided": [
+    {
+      "layer": "per-merchant marker",
+      "path": "state/taobao-agent-new-merchants/send-attempts/4574a99d63df162926e32162e4917fa48cc2289201b7a4110dd460f28b15eec8.json",
+      "renamedTo": "4574a99d63df162926e32162e4917fa48cc2289201b7a4110dd460f28b15eec8.json.voided-20261007-205300",
+      "claimedAt": "1791373392 (2026-10-07 19:43:12)",
+      "evidenceNeverSent": "transport 报 sent=true len=80 route=relay(direct_error=Errno65)，但 20:27 经 Windows 网关取证：current_chat=「电销+直播攻坚组 (18)」确认前台=目标群，read_messages 全 50 条无「口缸/15087573261/保山」锚点，群尾部=17:58 郭郭东北大碗麻辣烫 ⇒ 消息从未入群；20:52 复核 FEIBING 群（前台已切换时读到的 50 条）亦无口缸/保山锚点 ⇒ 双群排除。len=80 与文本字符数恰好相等（实测），无截断，属驱动假成功路径（发送动作可能打进错误上下文但驱动不报错）"
+    },
+    {
+      "layer": "bridge event (claim 真身)",
+      "path": "state/taobao-agent-new-merchants/send-attempts/.wechat-messaging/events/4cc48abb9b4fc343f3d8a6f7c47fde5280bed25e74ae72e96633ef1a4488d237/2d8b44233ab341440d6d408fe2637a95017dd3e6c952e0a9d60e7b779d1f1fec/delivery.json",
+      "renamedTo": ".wechat-messaging/events/4cc48abb9b4fc343f3d8a6f7c47fde5280bed25e74ae72e96633ef1a4488d237.voided-20261007-205300",
+      "payloadProof": "delivery.json sha256=65f683e54f6bbb2bb87837bde753c6486254d3c9620980da1c9b807455e1f819 与口缸米线 payload 完全一致，sendAttempts=1 status=unknown"
+    }
+  ],
+  "notVoided": [
+    {
+      "item": "郭郭东北大碗麻辣烫 546862408（17:58 轮）",
+      "reason": "五阶段门禁全 PASS 且群内 17:58 锚点可见，cursor 已提交 verified，严禁动"
+    },
+    {
+      "item": "桥事件 61d02c6c…（郭郭 17:58 verified 事件）",
+      "reason": "已 verified 的成功事件，严禁动"
+    },
+    {
+      "item": "洽醉捞汁小海鲜 1316655046 / 杨记鸡煲 546590794（15:55 轮）",
+      "reason": "五阶段全 PASS，群内 15:54 锚点可见，已收口"
+    }
+  ],
+  "deadlockEvidence": {
+    "rounds": "19:43 FAIL(windows-readback-anchor-not-trailing) → 20:14 FAIL(legacy-attempt-reconcile-only) → 20:45 FAIL(legacy-attempt-reconcile-only)",
+    "rootCause": "workflow_bridge.py legacy_text_reconcile() L440-443 入口门槛要求 marker stage==post_send_verify ∨ state==verified ∨ wrapped_unknown 三者之一；本 marker stage=null(19:43 轮中断在 desktop_wechat 阶段)+state=unknown+sendAttempts=1，三分支全不满足 ⇒ reconcile 确定性拒绝，无自愈出口。runtime_contract.py RECONCILE_ONLY budget=1 仅为描述性，无预算耗尽状态转移 ⇒ 第三类死锁形态"
+  },
+  "expectedOutcome": "下轮 daemon（21:14）重采口缸米线（19:40 推荐，待处理）并正常发送；因消息从未入群（双群排除实证），无重复发送风险",
+  "lesson": "① relay 路径（Errno65 回落）首次现身假成功案例，relay 链路 send 确认逻辑需单独审计（与 F8 send 前置 title 校验合并根治）；② marker stage=null 的中断态不属 reconcile 白名单也不属授权过期 ⇒ 状态机需补第三类出口（如：reconcile 连续 N 次 FAIL + evidenceNeverSent 实证 → 自动转 void 候选并上报）；③ 回读取证必须 current_chat 先行确认前台，本次 FEIBING 群的意外读取恰好提供双群排除，属方法论正收益"
+}

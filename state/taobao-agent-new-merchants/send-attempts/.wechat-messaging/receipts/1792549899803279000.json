@@ -1,0 +1,75 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "f87becf32493060bf21c9786a50b6547c64b78c89cdfb631204cc67313d9fd97",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "976d73b7745f9a9b674d4448cd589a7b2c7b32424fe4032c619beea0a0124780",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1792549876.136517,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 45,
+        "anchor": "text-exact",
+        "anchorValue": "城市：佛山市  ；  联系人：郝翔，19021087900  ；  店铺：湖南益阳麻辣烫  ；  地址：张槎街道村尾村中一惜音庙一楼30号铺",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1792549899.8017988
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 70
+        },
+        "route": "direct",
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 182
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 23665
+    }
+  ],
+  "elapsedMs": 23850,
+  "eventKey": "dfe3876ebb7be06c74d57cb23330ccbd8577ebbbb31bd1bf2753286aef3d53d4",
+  "reviewSummary": {
+    "totalElapsedMs": 23850,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

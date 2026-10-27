@@ -1,0 +1,197 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：沧州市  ；  联系人：杨洋，19331733655  ；  店铺：食焖坊黄焖鸡  ；  地址：清州镇南环路与104国道交口西北角西数第三间门市二楼",
+      "sha256": "fff8938b0975d777a94ae57126a0a39d2f6b1322b3f5b76d0a7ef3bccc440ce0"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "6cc9e131e5e5fb86f2271edd128a25b8dbed546569c60e6cc52a3562293aded8",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "fff8938b0975d777a94ae57126a0a39d2f6b1322b3f5b76d0a7ef3bccc440ce0",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1790999111.293937,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-text-anchor",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "电销+直播攻坚组",
+          "currentTitle": "电销+直播攻坚组",
+          "messageCount": 44,
+          "anchor": "text-exact",
+          "anchorValue": "城市：沧州市  ；  联系人：杨洋，19331733655  ；  店铺：食焖坊黄焖鸡  ；  地址：清州镇南环路与104国道交口西北角西数第三间门市二楼",
+          "anchorInTrailingPosition": true,
+          "autoKind": null,
+          "readbackAt": 1790999134.575983
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "电销+直播攻坚组",
+            "len": 77
+          },
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 322
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 23282
+      }
+    ],
+    "elapsedMs": 23607,
+    "eventKey": "b7c1162fa1100ea7e1f2097233b07e689fecec8a9798bf30cf91c45455fec2e2",
+    "reviewSummary": {
+      "totalElapsedMs": 23607,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/fa278e29f5d210483ec9467622d634cda7834917f370bafefafa00c47e1c4582.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 322,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 23282,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 23607,
+  "reviewSummary": {
+    "totalElapsedMs": 23607,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "ok": true,
+    "resolvedGroup": "电销+直播攻坚组",
+    "currentTitle": "电销+直播攻坚组",
+    "messageCount": 44,
+    "anchor": "text-exact",
+    "anchorValue": "城市：沧州市  ；  联系人：杨洋，19331733655  ；  店铺：食焖坊黄焖鸡  ；  地址：清州镇南环路与104国道交口西北角西数第三间门市二楼",
+    "anchorInTrailingPosition": true,
+    "autoKind": null,
+    "readbackAt": 1790999134.575983
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": null,
+  "stage": null,
+  "reconciledWithoutSend": false,
+  "attemptReviews": [
+    {
+      "attempt": 1,
+      "elapsedMs": 23750,
+      "ok": true,
+      "reason": null,
+      "sendAttempts": 1,
+      "sendReview": [
+        {
+          "stage": "authorization",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 1,
+          "label": "authorization"
+        },
+        {
+          "stage": "freeze:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 2,
+          "label": "freeze:0"
+        },
+        {
+          "stage": "preflight",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 322,
+          "item": 3,
+          "label": "preflight"
+        },
+        {
+          "stage": "send:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 23282,
+          "item": 4,
+          "label": "send:0"
+        }
+      ]
+    }
+  ],
+  "contentionRetries": 0,
+  "contentionWaitMs": 0,
+  "contentionEvents": [],
+  "merchantId": "546627135",
+  "messageSha256": "fff8938b0975d777a94ae57126a0a39d2f6b1322b3f5b76d0a7ef3bccc440ce0"
+}

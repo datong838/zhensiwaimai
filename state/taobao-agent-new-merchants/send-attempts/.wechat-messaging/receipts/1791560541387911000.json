@@ -1,0 +1,75 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "037dc45d8876cd2d2ccd53bc145db0201aaba8ae72e674d3833f68637b7122fe",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "1156275d120cf378e1763d33ccad3ea756550f7a22c443e62a1a0e6129853393",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1791560519.974256,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 40,
+        "anchor": "text-exact",
+        "anchorValue": "城市：新余市  ；  联系人：胡，18565797953  ；  店铺：曹氏鸭脖  ；  地址：五一路245号",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1791560541.3856761
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 55
+        },
+        "route": "direct",
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 333
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 21411
+    }
+  ],
+  "elapsedMs": 21748,
+  "eventKey": "6e7f9d8a52b71fc7863de3fd9fcd53470090f2f7b19d7de303b0ec2e3487d0b9",
+  "reviewSummary": {
+    "totalElapsedMs": 21748,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

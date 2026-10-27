@@ -1,0 +1,75 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "c9ad1cdd3b30f6704b5f59f75e0a04611c27842f69d593a48474bd1ee5822bfb",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "dc3a0e4436399bae617ef3d0facdfc9d1001d8e2a644557036ed22f49a7b5539",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1792720403.625567,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 43,
+        "anchor": "text-exact",
+        "anchorValue": "城市：西安市  ；  联系人：董先生，18193413317  ；  店铺：庆丰社辣子鸡拌面  ；  地址：何家营新村神禾四路学前师范学院东门向下50米  ；  商家ID：542811405",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1792720427.668304
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 95
+        },
+        "route": "direct",
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 2098
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 24042
+    }
+  ],
+  "elapsedMs": 26144,
+  "eventKey": "0b1c3f0e58a24856759bcc662fc537a548ccd7e32da5ce6fd145230f52dad12a",
+  "reviewSummary": {
+    "totalElapsedMs": 26144,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

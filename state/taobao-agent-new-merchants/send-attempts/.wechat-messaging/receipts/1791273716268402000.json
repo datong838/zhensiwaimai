@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "cb2758faa6ebef09607f947836ca8147c28d6fe612d84b149141e565d1f99704",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "8f6f610e989e72efba1a0c75333cba534347c44038476c03aa9aaf6ec364f57b",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1791273692.178524,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 50,
+        "anchor": "text-exact",
+        "anchorValue": "城市：深圳市  ；  联系人：李生，13560770401  ；  店铺：刘大妈秘卤大碗饭  ；  地址：福永街道白石厦社区东区永丰二路14号G1永丰二路14-4号",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1791273716.265785
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 82
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 194
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 24088
+    }
+  ],
+  "elapsedMs": 24285,
+  "eventKey": "d498fde2565b69898622134bb31ac9667c2dcf68787ccc62c46ec7052cfa63d0",
+  "reviewSummary": {
+    "totalElapsedMs": 24285,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

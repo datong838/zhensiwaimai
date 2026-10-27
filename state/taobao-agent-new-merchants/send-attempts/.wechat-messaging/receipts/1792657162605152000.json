@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "48969965e37408b6299c39b217ac64604a71f53a138f6c90e8fc442e664d4f98",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "36b5bda6b7930888f968804ef308b7e4a3d305649949406292437cf3a7375745",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1792657133.998177,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 43,
+        "anchor": "text-exact",
+        "anchorValue": "城市：大庆市  ；  联系人：赵东原，13555548946  ；  店铺：米哥家烤肉拌饭脆皮鸡饭  ；  地址：火炬路32号18门  ；  商家ID：1308691275",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1792657162.602268
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 86
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 19881
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 28602
+    }
+  ],
+  "elapsedMs": 48489,
+  "eventKey": "4c220d99860928892f8b1013eec3353949579f0765e6374ad327781679c468b5",
+  "reviewSummary": {
+    "totalElapsedMs": 48489,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "5ae3ccf384abfc888cb862de6b66ec2205abbb394fcebdcab3dcdaa96883af14",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "9f554c7740dd93929bdb6732a7e7a4f834cf32536e4f0bb1f0a0612af24bcef1",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1792401812.042485,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 43,
+        "anchor": "text-exact",
+        "anchorValue": "城市：昆明市  ；  联系人：纤果纪，15368865386  ；  店铺：纤果纪  ；  地址：春华序9栋商业06号",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1792401838.464031
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 59
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 9222
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 26419
+    }
+  ],
+  "elapsedMs": 35651,
+  "eventKey": "e3e1514cec039fe8549c8e60a0133770b0289fbef9dffed38a9015520db110d4",
+  "reviewSummary": {
+    "totalElapsedMs": 35651,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

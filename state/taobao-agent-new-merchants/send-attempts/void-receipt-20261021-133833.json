@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "voidedAt": "2026-10-21T13:38:33+08:00",
+  "voidedBy": "WorkBuddy 监理",
+  "authorization": "大同 2026-10-21 13:32 人眼取证回复：群内最新消息为「清真新疆炒米粉」——与游标 cursor.json（该店 10:33:30 sent+verified，此后无游标推进）完全吻合 ⇒ 12:08 云贵川小炒店消息物理未进群；此前 13:05 汇报给出双出口约定，大同选择「没有→void+补发」路径",
+  "scope": "新商家流 12:07 周期 subprocess 180s 超时遗留 attempted 死锁 marker 双层 void（legacy-attempt-reconcile-only；sendAttempts=null 无收据 ⇒ 桥四出口全闭）",
+  "voided": [
+    {
+      "layer": "per-merchant marker",
+      "path": "b940d0b8760c6fae516e05b3e9ee90830072cecfbfa9d42989767012960de2b3.json -> b940d0b8760c6fae516e05b3e9ee90830072cecfbfa9d42989767012960de2b3.json.voided-20261021-133833",
+      "merchant": "电销+直播攻坚组（云贵川小炒店 1149026756）",
+      "state": "attempted",
+      "sendAttempts": null,
+      "verified": false
+    },
+    {
+      "layer": "bridge event",
+      "path": ".wechat-messaging/events/4c0f1b789ecac4cd4d703445be67438e289789202351f771f4f10ab9a6da4fdd -> .wechat-messaging/events/4c0f1b789ecac4cd4d703445be67438e289789202351f771f4f10ab9a6da4fdd.voided-20261021-133833",
+      "bindingDigest": "4c0f1b789ecac4cd4d703445be67438e289789202351f771f4f10ab9a6da4fdd"
+    }
+  ],
+  "evidenceNeverSent": [
+    "per-merchant marker: state=attempted sendAttempts=null（桥从未收到子进程结果）verified=false",
+    "事件层 delivery.json: status=attempted, claimedAt=1792555705（12:08:15），transport/ 子目录为空（无任何发送回执落盘）",
+    "子进程产物 delivery-progress.json: sendReview=[]（180021ms 超时被杀，无任何发送阶段中间证据）",
+    "workflow.json completion: state=RECONCILE_ONLY nextAction=native-copy-read-only-reconcile-no-resend（流程自身判定只许只读对账）",
+    "12:16/12:21/12:55/13:01/13:06 五轮全撞 legacy-attempt-reconcile-only（a2-a6）",
+    "机器只读回读不可达：驱动无切会话 action、/last 被探测污染、网关 server 静默无任务日志",
+    "大同人眼 13:32 确认群内最新=清真新疆炒米粉 ⇒ 与 cursor.json（10:33:30 verified 后无推进）三方吻合 ⇒ 12:08 消息不在群内",
+    "⇒ 物理未投递成立；无 transport.data.sent、无 readback 锚点"
+  ],
+  "preconditionCheckAtVoid": "Windows 网关 health: logged_in=true ready=true（12:08 preflight 实测）；发送方死因=子进程 180s 超时（非网关异常），下一次发送具备正常条件",
+  "expectedOutcome": "下轮（14:01 或 force_run）对云贵川小炒店重新走完整发送→verified；同批解锁巷陌食集(1316635375)、鑫宇熏拌鸡架(1364936969)、新采集 538520334 共 4 家",
+  "lesson": "与 conclude_attempt_deadlock.py 文档记录的 2026-10-06 旨寿司死结同构但证据方向相反：旨寿司=readback 发现消息在群（结论化 verified 不重发）；本案=readback 人眼确认不在群（void 后重发）。两类出口都已实战覆盖。另：daemon 子进程 180s 超时是本流第二次超时型死锁（10-26 前运维关注点：超时阈值 vs 驱动慢回复）"
+}

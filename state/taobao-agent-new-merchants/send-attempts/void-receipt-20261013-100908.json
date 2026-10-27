@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "voidedAt": "2026-10-13T10:09:08.778903+08:00",
+  "voidedBy": "WorkBuddy 监理",
+  "authorization": "大同 2026-10-13「每小时新商家的 尽快」直接指令",
+  "scope": "新商家流 00:18 blocked 死角 marker 双层 void（F10-1 legacy-attempt-reconcile-only 死角；发送器严格放行名单不含 windows-send-rejected reason ⇒ 转 --reconcile ⇒ 桥 state=blocked 非白名单 ⇒ 每轮只读对账不重发）",
+  "voided": [
+    {
+      "layer": "per-merchant marker",
+      "path": "c182772c3a73560ba36ca34f0dbdeea34171ea29d7eae6757025304372139d66.json -> c182772c3a73560ba36ca34f0dbdeea34171ea29d7eae6757025304372139d66.json.voided-20261013-100908",
+      "merchant": "电销+直播攻坚组",
+      "state": "blocked",
+      "sendAttempts": 0,
+      "newSendAttempts": 0
+    }
+  ],
+  "evidenceNeverSent": [
+    "per-merchant marker: state=blocked sendAttempts=0 newSendAttempts=0 physicalSendAttempts缺失",
+    "事件层 delivery.json: .wechat-messaging/events/8aa04e96bea9e92700647a3cf7863eae1bfd8d3a4fb2b655203c01e017ce4b4d/edca46b85864532aee7d3aaad545df60f197ea460d35d0b0785d823ce0d84f6a/delivery.json status=blocked sendAttempts=0",
+    "transport: route=relay, direct_error=[Errno 65] No route to host, sendAttempts=0",
+    "reason/attemptErrors 三条全为发送前失败：『打开会话失败，当前标题=[]』『微信进程在运行，但主窗口未出现——尚未完成登录』",
+    "⇒ 00:18 时 Windows 侧微信未登录 ⇒ 物理上不可能投递；无 transport.data.sent、无 readback 锚点"
+  ],
+  "preconditionCheckAtVoid": "Windows 网关 192.168.0.3 /health: logged_in=true ready=true wechat_running=true（00:18 的『未登录』条件已消失，具备真发条件）",
+  "expectedOutcome": "下一 cadence（约 10:19）daemon 重新采集 → 该商家经 Windows 网关真发 → verified；游标推进",
+  "lesson": "新商家流死锁有两层：①per-merchant marker（send-attempts/<identity>.json）②桥事件层（send-attempts/.wechat-messaging/events/<eventKey>/，其 binding.json 钉旧 requestDigest，且 event_lock 在 rebind=False 时对漂移抛 event-payload-conflict）。桥的 rebind_event 依赖 marker 存在（never_sent(prior)）⇒ 只清①会使下轮 rebind=False 撞②的 binding 冲突。必须双层同时间戳 void（与 F10-1 设计稿 §1「自动 void」目标一致，本次为人工前置）。"
+}

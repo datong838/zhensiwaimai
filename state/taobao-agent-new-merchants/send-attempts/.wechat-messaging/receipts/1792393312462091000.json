@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "683a3d255747557bfdc2dca3c9a541a44af6b320c5531f708e70237fc708584c",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "4b0d610bf2008cec56e717b968a9aa35687f0a6dd6f233079020ef08d066fbfc",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1792393290.763238,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 44,
+        "anchor": "text-exact",
+        "anchorValue": "城市：成都市  ；  联系人：彭，15160620197  ；  店铺：沙县小吃(云华路店)  ；  地址：成都高新区云华路333号4栋1单元1楼104号",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1792393312.4583411
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 77
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 12190
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 21694
+    }
+  ],
+  "elapsedMs": 33890,
+  "eventKey": "bbd053603bb61c2b0d0b2034b194b234e72548ef138a7ef691858f3e35c6f091",
+  "reviewSummary": {
+    "totalElapsedMs": 33890,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "791a05f090b601d39df9d68894ec651ebb5c0fd1f5c6cd092f58348b3a12201b",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "ba316422e076014638ca56c3307425281e4b836893cb3afc7d32f8e359faeae5",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1792199733.334077,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 46,
+        "anchor": "text-exact",
+        "anchorValue": "城市：惠州市  ；  联系人：李志强，17600286914  ；  店铺：王者·黄焖鸡米饭  ；  地址：淡水嘉华楼D栋地下商场6.7.8.9.10之10号",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1792199760.504777
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 79
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 9508
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 27169
+    }
+  ],
+  "elapsedMs": 36682,
+  "eventKey": "37d059aefa53f565749e5f1b8d22d34df526d512010c1a75b132f95c8f0702ec",
+  "reviewSummary": {
+    "totalElapsedMs": 36682,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

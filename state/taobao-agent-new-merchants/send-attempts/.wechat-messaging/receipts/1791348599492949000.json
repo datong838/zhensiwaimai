@@ -1,0 +1,72 @@
+{
+  "ok": false,
+  "status": "unknown",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "80bd77fb3a78d2c468a6e8cd514721fc733e39d7aceff41af515104d7ecd3fb4",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "50fe445d79eb0bea231bdfe467a8b1ead8e6addcf32902e065e7e6d52fd564db",
+      "type": "text",
+      "status": "unknown",
+      "claimedAt": 1791348557.7515361,
+      "sendAttempts": 1,
+      "reason": "windows-current-session-title-mismatch",
+      "evidence": {
+        "ok": false,
+        "resolvedGroup": "电销+直播攻坚组",
+        "titleProven": false,
+        "reason": "windows-current-session-title-mismatch",
+        "polls": 0
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 99
+        },
+        "route": "direct",
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 3481
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 40659
+    }
+  ],
+  "reason": "windows-current-session-title-mismatch",
+  "elapsedMs": 45229,
+  "eventKey": "20c7d73d379a22ea7ae996ec5ace1453ee22a7f0165f2a2359064916c30da8c0",
+  "reviewSummary": {
+    "totalElapsedMs": 45229,
+    "result": "unknown",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

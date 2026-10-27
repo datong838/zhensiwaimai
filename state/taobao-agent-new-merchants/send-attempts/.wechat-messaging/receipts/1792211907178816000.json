@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "5ae0febaceb4bcaac16b05eed7d2798a28c46595e26dec4b4b9bfc49a5cc01f3",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "643698d72e231788c53016318049366ff94d414b57fe1b930b5b1381c56adfee",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1792211880.862397,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 45,
+        "anchor": "text-exact",
+        "anchorValue": "城市：常州市  ；  联系人：大兵，18915887729  ；  店铺：刘师傅·烤鸭  ；  地址：溧城街道台港路38号(锦绣农贸市场一楼大门东侧3号)",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1792211907.175204
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 77
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 9243
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 26311
+    }
+  ],
+  "elapsedMs": 35561,
+  "eventKey": "5770bf667dc3ebe3602af1af0bdcfeee1ad94cef76f15de14391b284aebcca4d",
+  "reviewSummary": {
+    "totalElapsedMs": 35561,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

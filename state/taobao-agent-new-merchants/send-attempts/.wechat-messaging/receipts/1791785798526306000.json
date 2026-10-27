@@ -1,0 +1,75 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "00f23d3838e72ec0be7a9ea05fd08d0d0db5e9906325ecab0d8c38f042b2b69c",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "af753fd32c91815fcd914a7566ed72f6a6070dae4e1df7333d0e7e1bca814193",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1791785776.4889321,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 43,
+        "anchor": "text-exact",
+        "anchorValue": "城市：德州市  ；  联系人：王，13290282131  ；  店铺：至尊麻辣烫●麻辣拌  ；  地址：唐人公馆西门Y至尊麻辣烫",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1791785798.5213199
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 65
+        },
+        "route": "direct",
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 162
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 22033
+    }
+  ],
+  "elapsedMs": 22200,
+  "eventKey": "6b597c310e7b5456f4652f31977b12e5bdd649de0891a5fe2f432d9967fabd20",
+  "reviewSummary": {
+    "totalElapsedMs": 22200,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

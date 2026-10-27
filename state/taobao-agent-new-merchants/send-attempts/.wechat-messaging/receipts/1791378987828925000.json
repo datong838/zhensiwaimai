@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "e28dfc26dda1c52b89927b9e2551eaedad1158d5e662cfdea60f65f3c0cd0123",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "65f683e54f6bbb2bb87837bde753c6486254d3c9620980da1c9b807455e1f819",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1791378965.5847821,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-text-anchor",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "电销+直播攻坚组",
+        "currentTitle": "电销+直播攻坚组",
+        "messageCount": 50,
+        "anchor": "text-exact",
+        "anchorValue": "城市：保山市  ；  联系人：赵，15087573261  ；  店铺：口缸米线·米线  ；  地址：永盛街道办事处保山中医药高等专科学校内(小吃街21号商铺)",
+        "anchorInTrailingPosition": true,
+        "autoKind": null,
+        "readbackAt": 1791378987.825839
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "电销+直播攻坚组",
+          "len": 80
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 256
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 22241
+    }
+  ],
+  "elapsedMs": 22501,
+  "eventKey": "4cc48abb9b4fc343f3d8a6f7c47fde5280bed25e74ae72e96633ef1a4488d237",
+  "reviewSummary": {
+    "totalElapsedMs": 22501,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}
