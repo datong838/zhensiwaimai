@@ -40,19 +40,20 @@
     "哈尔滨东北烧烤(黄泥磅店)1356051667原整改一次后平台无推荐数据，旧提交仍unknown，不返扫重试",
     "暂停三流的巡店身份/城市、其他发券参数和异机部署验收仍未完成；保持三流停用",
     "金鲨37家美团门店授权失效需各门店原账号恢复，其他独立流继续；名单见work/2026-10-28-金鲨美团授权失效门店37家.txt",
-    "名单维护父宿主崩溃/强杀后业务弹层及更广泛原租约TTL/原子获取机制仍需独立评估，未改冻结岗位文件",
+    "名单维护父宿主崩溃/强杀后业务弹层仍需独立核查；四岗位物理TTL/并发获取本批已修复，原主任外层组锁单列待办",
     "合同流新来源门待10月28日09:00原主任自然执行验收，不补发历史unknown或提前生产",
     "负反馈双Excel新逐页一致性门待08:20后原主任真实来源与双平台文件交付验收，原申诉成功前置不变",
     "10点新店通知及服务市场排名真实新日执行/送达待原主任验收；前置只读门不重分类既有未知",
-    "活动11:00/装修11:30新恢复与完成门待原主任真实新日验收；通用物理租约TTL/原子获取仍另需审核",
+    "活动11:00/装修11:30新恢复与完成门待原主任真实新日验收；四岗位物理租约已修，原主任外层组锁仍待生效核查",
     "P0共用机制：原主任外层90分钟组锁仍有超TTL活进程覆盖分支，需独立最小修复、隔离并发/存活测试和安全生效方案；本批未改运行中的原主任"
   ],
   "codeAndDeployment": {
-    "latestSourceCommit": "本批源/维护/交接见所在提交，base c67941e6",
+    "latestSourceCommit": "89b73a1d6be164ef265a5b84bb4a2f8994045324",
     "productionReplays": 0,
     "messagesSentByNightMaintenance": 0,
     "originalLedgersMutated": false,
-    "sourceRollback": "各维护目录保留本次修改前源与policy；仅回滚匹配本轮源与登记，不reset/rebase、不动生产数据或队列"
+    "sourceRollback": "各维护目录保留本次修改前源与policy；仅回滚匹配本轮源与登记，不reset/rebase、不动生产数据或队列",
+    "physicalLeaseAudit": "runtime/state/post-lease-process-ownership-20261028/final-audit.json"
   },
   "resumeSteps": [
     "先读现行监理Skill、0800SOP、企微岗位约定、最新manifest和用户约束；核对Asia/Shanghai时间",
