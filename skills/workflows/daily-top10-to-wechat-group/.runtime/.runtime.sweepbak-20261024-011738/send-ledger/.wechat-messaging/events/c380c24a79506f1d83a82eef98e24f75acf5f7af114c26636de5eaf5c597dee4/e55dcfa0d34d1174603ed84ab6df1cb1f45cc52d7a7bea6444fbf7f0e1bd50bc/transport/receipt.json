@@ -1,0 +1,109 @@
+{
+  "ok": true,
+  "executor": "wechat-desktop-sender",
+  "channel": "desktop",
+  "groupName": "FEIBING NEO AI数字员工",
+  "payloadType": "image",
+  "sendAttempts": 1,
+  "runtimeModelDecisions": 0,
+  "stage": "completed",
+  "stageMs": {
+    "locate_group": 302,
+    "verify_target_and_input": 1838,
+    "prepare_payload": 2226,
+    "claim_and_send": 3510,
+    "post_send_verify": 6078
+  },
+  "payloadIdentity": "21e5686f48284ef0e3d510db38267db1d44319902560c2347ba9fe627a86e6d2",
+  "payloads": [
+    {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-top10-to-wechat-group/.runtime/send-ledger/.wechat-messaging/events/c380c24a79506f1d83a82eef98e24f75acf5f7af114c26636de5eaf5c597dee4/e55dcfa0d34d1174603ed84ab6df1cb1f45cc52d7a7bea6444fbf7f0e1bd50bc/payload/2026-09-16_top10seller.png",
+      "name": "2026-09-16_top10seller.png",
+      "size": 368461,
+      "sha256": "d62be95b5eee5ac71c463f83f6e6a54c63c96395e41f1d3a63dd64ccb22feb68"
+    }
+  ],
+  "groupPreflight": {
+    "ok": true,
+    "action": "open-group",
+    "group": "FEIBING NEO AI数字员工",
+    "header": "FEIBING NEO AI数字员工",
+    "note": "ax-current-header",
+    "reason": null,
+    "sendAttempts": 0,
+    "runtimeModelDecisions": 0,
+    "stageMs": {
+      "exact_group_preflight": 302
+    },
+    "artifacts": [],
+    "hardGate": false
+  },
+  "preparedInputChangedPixels": 8716,
+  "preparedInputChangedRatio": 0.023596,
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-top10-to-wechat-group/.runtime/send-ledger/.wechat-messaging/events/c380c24a79506f1d83a82eef98e24f75acf5f7af114c26636de5eaf5c597dee4/e55dcfa0d34d1174603ed84ab6df1cb1f45cc52d7a7bea6444fbf7f0e1bd50bc/transport-ledger/attempt.json",
+  "postSendInputCleared": [
+    true,
+    true
+  ],
+  "postSendEvidence": [
+    {
+      "chatChangedPixels": 130634,
+      "inputChangedPixels": 3321
+    },
+    {
+      "chatChangedPixels": 130634,
+      "inputChangedPixels": 3321
+    }
+  ],
+  "verified": true,
+  "state": "verified",
+  "elapsedMs": 13955,
+  "sendReview": [
+    {
+      "item": 1,
+      "stage": "locate_group",
+      "label": "精确定位目标群",
+      "elapsedMs": 302,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 2,
+      "stage": "verify_target_and_input",
+      "label": "复核目标群与输入框",
+      "elapsedMs": 1838,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 3,
+      "stage": "prepare_payload",
+      "label": "准备并复核发送载荷",
+      "elapsedMs": 2226,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 4,
+      "stage": "claim_and_send",
+      "label": "领取防重账本并单次发送",
+      "elapsedMs": 3510,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 5,
+      "stage": "post_send_verify",
+      "label": "发送后双帧复核",
+      "elapsedMs": 6078,
+      "status": "completed",
+      "pitfalls": []
+    }
+  ],
+  "reviewSummary": {
+    "totalElapsedMs": 13955,
+    "itemCount": 5,
+    "pitfallCount": 0,
+    "result": "success"
+  }
+}

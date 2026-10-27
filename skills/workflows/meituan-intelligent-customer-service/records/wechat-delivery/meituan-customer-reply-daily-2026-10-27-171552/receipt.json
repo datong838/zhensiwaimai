@@ -1,0 +1,108 @@
+{
+  "bridgeVersion": 1,
+  "ok": false,
+  "verified": false,
+  "payloadType": "file",
+  "state": "blocked",
+  "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+  "payloads": [
+    {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-intelligent-customer-service/records/美团客户回复记录-2026-10-27.xlsx",
+      "name": "美团客户回复记录-2026-10-27.xlsx",
+      "size": 5858,
+      "sha256": "0f5ba5c4ac4b260286fb144d81bafd8dcc5b3214455fb267ceeae2fae916532c"
+    }
+  ],
+  "sendAttempts": 0,
+  "newSendAttempts": 0,
+  "reason": "ui-post-preflight-not-verified",
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": false,
+    "status": "blocked",
+    "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "channel": "desktop",
+    "requestDigest": "8b00a674e232e1cdd3737e249e7b4219dc68e0e5573961d771375b15f8fc9692",
+    "runtimeModelDecisions": 0,
+    "items": [],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "failed",
+        "pitfalls": [
+          "ui-post-preflight-not-verified"
+        ],
+        "elapsedMs": 617
+      }
+    ],
+    "reason": "ui-post-preflight-not-verified",
+    "elapsedMs": 618,
+    "eventKey": "9526a36c2f4d77473417693106c124af600fb317ae9253987f2b7274fa98bae1",
+    "reviewSummary": {
+      "totalElapsedMs": 618,
+      "result": "blocked",
+      "stageCount": 3,
+      "completedStages": 2,
+      "failedStages": [
+        {
+          "stage": "preflight",
+          "status": "failed",
+          "pitfalls": [
+            "ui-post-preflight-not-verified"
+          ]
+        }
+      ]
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/meituan-customer-reply-daily/wechat-attempts/meituan-customer-reply-daily-2026-10-27-171552.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "failed",
+      "pitfalls": [
+        {
+          "code": "messaging-stage",
+          "reason": "ui-post-preflight-not-verified"
+        }
+      ],
+      "elapsedMs": 617,
+      "item": 3,
+      "label": "preflight"
+    }
+  ],
+  "elapsedMs": 618,
+  "reviewSummary": {
+    "totalElapsedMs": 618,
+    "itemCount": 3,
+    "pitfallCount": 1,
+    "result": "failed"
+  }
+}

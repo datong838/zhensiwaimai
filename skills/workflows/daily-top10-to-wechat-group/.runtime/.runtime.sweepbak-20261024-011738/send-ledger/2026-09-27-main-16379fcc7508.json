@@ -1,0 +1,230 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "image",
+  "state": "verified",
+  "groupName": "FEIBING NEO AI数字员工",
+  "payloads": [
+    {
+      "path": "/private/tmp/zhensi_top10/718cec31-4059-487d-b948-fb914e2e050d/2026-09-27_top10seller.png",
+      "name": "2026-09-27_top10seller.png",
+      "size": 367561,
+      "sha256": "65cd4a98dda33f6eaea2abc7fae57303f7b0d27db61083f56e4c8aed73be9873"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "FEIBING NEO AI数字员工",
+    "channel": "desktop",
+    "requestDigest": "8a1442ea8fd277d0b7e6bd1ce2ceded472ab7e7e7aa10db0edd85d695c34089e",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "65cd4a98dda33f6eaea2abc7fae57303f7b0d27db61083f56e4c8aed73be9873",
+        "type": "image",
+        "status": "verified",
+        "claimedAt": 1790554591.553959,
+        "sendAttempts": 1,
+        "verificationLevel": "image-content-match",
+        "evidence": {
+          "ok": true,
+          "transportVerified": true,
+          "completionFrames": [
+            "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-top10-to-wechat-group/.runtime/send-ledger/.wechat-messaging/events/195514005578a6259a6cb4ab92fbcc577c8db1c5e3699bd8e2af6237ac100dce/80d55c4e3b566b29d79585aa36394666afa10655f088ccfdb5b1a2f7939a8de2/transport/after-send-1.png",
+            "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-top10-to-wechat-group/.runtime/send-ledger/.wechat-messaging/events/195514005578a6259a6cb4ab92fbcc577c8db1c5e3699bd8e2af6237ac100dce/80d55c4e3b566b29d79585aa36394666afa10655f088ccfdb5b1a2f7939a8de2/transport/after-send-2.png"
+          ]
+        },
+        "transport": {
+          "ok": true,
+          "executor": "wechat-desktop-sender",
+          "channel": "desktop",
+          "groupName": "FEIBING NEO AI数字员工",
+          "payloadType": "image",
+          "sendAttempts": 1,
+          "runtimeModelDecisions": 0,
+          "stage": "completed",
+          "stageMs": {
+            "locate_group": 710,
+            "verify_target_and_input": 1663,
+            "prepare_payload": 1956,
+            "claim_and_send": 3539,
+            "post_send_verify": 6168
+          },
+          "payloadIdentity": "47d13adc3d87dcb9abce51c9c7de2012cb168d15d8f24281f9542e600f250dc9",
+          "payloads": [
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-top10-to-wechat-group/.runtime/send-ledger/.wechat-messaging/events/195514005578a6259a6cb4ab92fbcc577c8db1c5e3699bd8e2af6237ac100dce/80d55c4e3b566b29d79585aa36394666afa10655f088ccfdb5b1a2f7939a8de2/payload/2026-09-27_top10seller.png",
+              "name": "2026-09-27_top10seller.png",
+              "size": 367561,
+              "sha256": "65cd4a98dda33f6eaea2abc7fae57303f7b0d27db61083f56e4c8aed73be9873"
+            }
+          ],
+          "groupPreflight": {
+            "ok": true,
+            "reason": null,
+            "sendAttempts": 0,
+            "group": "FEIBING NEO AI数字员工",
+            "header": "FEIBING NEO AI数字员工(19)",
+            "note": "ax-current-group-fast-path",
+            "groupTypeVerified": true,
+            "groupTypeProof": "member-count-header",
+            "composerVerifiedEmpty": true,
+            "attempts": []
+          },
+          "preparedInputChangedPixels": 9520,
+          "preparedInputChangedRatio": 0.025773,
+          "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-top10-to-wechat-group/.runtime/send-ledger/.wechat-messaging/events/195514005578a6259a6cb4ab92fbcc577c8db1c5e3699bd8e2af6237ac100dce/80d55c4e3b566b29d79585aa36394666afa10655f088ccfdb5b1a2f7939a8de2/transport-ledger/attempt.json",
+          "postSendInputCleared": [
+            true,
+            true
+          ],
+          "postSendEvidence": [
+            {
+              "chatChangedPixels": 342473,
+              "inputChangedPixels": 2901
+            },
+            {
+              "chatChangedPixels": 342473,
+              "inputChangedPixels": 2901
+            }
+          ],
+          "verified": true,
+          "state": "verified",
+          "elapsedMs": 14038,
+          "sendReview": [
+            {
+              "item": 1,
+              "stage": "locate_group",
+              "label": "精确定位目标群",
+              "elapsedMs": 710,
+              "status": "completed",
+              "pitfalls": []
+            },
+            {
+              "item": 2,
+              "stage": "verify_target_and_input",
+              "label": "复核目标群与输入框",
+              "elapsedMs": 1663,
+              "status": "completed",
+              "pitfalls": []
+            },
+            {
+              "item": 3,
+              "stage": "prepare_payload",
+              "label": "准备并复核发送载荷",
+              "elapsedMs": 1956,
+              "status": "completed",
+              "pitfalls": []
+            },
+            {
+              "item": 4,
+              "stage": "claim_and_send",
+              "label": "领取防重账本并单次发送",
+              "elapsedMs": 3539,
+              "status": "completed",
+              "pitfalls": []
+            },
+            {
+              "item": 5,
+              "stage": "post_send_verify",
+              "label": "发送后双帧复核",
+              "elapsedMs": 6168,
+              "status": "completed",
+              "pitfalls": []
+            }
+          ],
+          "reviewSummary": {
+            "totalElapsedMs": 14038,
+            "itemCount": 5,
+            "pitfallCount": 0,
+            "result": "success"
+          }
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 1
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 872
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 14038
+      }
+    ],
+    "elapsedMs": 14913,
+    "eventKey": "195514005578a6259a6cb4ab92fbcc577c8db1c5e3699bd8e2af6237ac100dce",
+    "reviewSummary": {
+      "totalElapsedMs": 14913,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-top10-to-wechat-group/.runtime/send-ledger/2026-09-27-main-16379fcc7508.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 1,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 872,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 14038,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 14913,
+  "reviewSummary": {
+    "totalElapsedMs": 14913,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  }
+}

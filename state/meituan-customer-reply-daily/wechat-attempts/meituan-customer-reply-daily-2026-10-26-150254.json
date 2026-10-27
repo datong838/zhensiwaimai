@@ -1,0 +1,205 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "file",
+  "state": "verified",
+  "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+  "payloads": [
+    {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-intelligent-customer-service/records/美团客户回复记录-2026-10-26.xlsx",
+      "name": "美团客户回复记录-2026-10-26.xlsx",
+      "size": 5597,
+      "sha256": "e92e6982b50995a5e0dbd955179b01b25e8e31b822952414d124c01a050d3316"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "channel": "desktop",
+    "requestDigest": "a8b788ebba630d67d73a0f49e4c445d3c7d5c43bbc269b08124859ecc3a0741d",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "e92e6982b50995a5e0dbd955179b01b25e8e31b822952414d124c01a050d3316",
+        "type": "file",
+        "status": "verified",
+        "claimedAt": 1792998180.880957,
+        "sendAttempts": 1,
+        "resolvedGroup": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+        "observations": [
+          {
+            "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+            "inputEmpty": true,
+            "newMessageVisible": true,
+            "observedAt": 1792998197.30213,
+            "messagePath": [
+              0,
+              27,
+              9,
+              0,
+              0,
+              0,
+              20
+            ],
+            "visibleFileName": "美团客户回复记录-2026-10-26.xlsx",
+            "visibleFileSize": "5K"
+          },
+          {
+            "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+            "inputEmpty": true,
+            "newMessageVisible": true,
+            "observedAt": 1792998199.256054,
+            "messagePath": [
+              0,
+              27,
+              9,
+              0,
+              0,
+              0,
+              20
+            ],
+            "visibleFileName": "美团客户回复记录-2026-10-26.xlsx",
+            "visibleFileSize": "5K"
+          }
+        ],
+        "backend": "system-events-ui-tree",
+        "verificationLevel": "wecom-ui-tree-file-name-size",
+        "evidence": {
+          "method": "wecom-ui-tree-file-name-size",
+          "resolvedGroup": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+          "sha256": "e92e6982b50995a5e0dbd955179b01b25e8e31b822952414d124c01a050d3316",
+          "observations": [
+            {
+              "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+              "inputEmpty": true,
+              "newMessageVisible": true,
+              "observedAt": 1792998197.30213,
+              "messagePath": [
+                0,
+                27,
+                9,
+                0,
+                0,
+                0,
+                20
+              ],
+              "visibleFileName": "美团客户回复记录-2026-10-26.xlsx",
+              "visibleFileSize": "5K"
+            },
+            {
+              "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+              "inputEmpty": true,
+              "newMessageVisible": true,
+              "observedAt": 1792998199.256054,
+              "messagePath": [
+                0,
+                27,
+                9,
+                0,
+                0,
+                0,
+                20
+              ],
+              "visibleFileName": "美团客户回复记录-2026-10-26.xlsx",
+              "visibleFileSize": "5K"
+            }
+          ]
+        },
+        "transport": {
+          "kind": "file",
+          "sendAttempts": 1,
+          "sent": true,
+          "postSendInputCleared": [
+            true,
+            true
+          ],
+          "stage": "post_send_verify"
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 5662
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 18403
+      }
+    ],
+    "elapsedMs": 24068,
+    "eventKey": "2f7fb56bd5c837d44e300e484d8f588d032dd6994827d927ec7a996320926733",
+    "reviewSummary": {
+      "totalElapsedMs": 24068,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/meituan-customer-reply-daily/wechat-attempts/meituan-customer-reply-daily-2026-10-26-150254.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 5662,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 18403,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 24068,
+  "reviewSummary": {
+    "totalElapsedMs": 24068,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  }
+}

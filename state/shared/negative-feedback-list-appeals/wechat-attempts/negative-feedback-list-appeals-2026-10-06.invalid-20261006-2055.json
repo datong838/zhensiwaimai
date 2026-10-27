@@ -1,0 +1,118 @@
+{
+  "bridgeVersion": 1,
+  "ok": false,
+  "verified": false,
+  "payloadType": "file",
+  "state": "blocked",
+  "groupName": "FEIBING NEO AI数字员工",
+  "payloads": [
+    {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/outputs/negative-feedback-list-appeals-20261006/负反馈申诉汇总_美团外卖_2026-10-06.xlsx",
+      "name": "负反馈申诉汇总_美团外卖_2026-10-06.xlsx",
+      "size": 15864,
+      "sha256": "7418e44f62a888d786c78750d926db83399fb4d5f1e0b7dfde10ce8ff5a8f4be"
+    },
+    {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/outputs/negative-feedback-list-appeals-20261006/负反馈申诉汇总_淘宝闪购_2026-10-06.xlsx",
+      "name": "负反馈申诉汇总_淘宝闪购_2026-10-06.xlsx",
+      "size": 31636,
+      "sha256": "98fc3a70ca084ffa2829e7a167fa1daa94c944ad0134fbf1e1be6355cd1bb025"
+    }
+  ],
+  "sendAttempts": 0,
+  "newSendAttempts": 0,
+  "reason": "windows-driver-unreachable",
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": false,
+    "status": "blocked",
+    "groupName": "FEIBING NEO AI数字员工",
+    "channel": "desktop",
+    "requestDigest": "2dbd288ed42d92709a2c4e1bc62074aedc475243943147d830d3d2f291e54c77",
+    "runtimeModelDecisions": 0,
+    "items": [],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 8
+      },
+      {
+        "stage": "freeze:1",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 7
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 30018
+      }
+    ],
+    "reason": "windows-driver-unreachable",
+    "elapsedMs": 30047,
+    "eventKey": "59b07aadbe8d20a390c47a98de9f8c6a2a093ca044c93a4dcdf76752297a9372",
+    "reviewSummary": {
+      "totalElapsedMs": 30047,
+      "result": "blocked",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/state/negative-feedback-list-appeals/wechat-attempts/negative-feedback-list-appeals-2026-10-06.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 8,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "freeze:1",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 7,
+      "item": 3,
+      "label": "freeze:1"
+    },
+    {
+      "stage": "preflight",
+      "status": "failed",
+      "pitfalls": [
+        {
+          "code": "messaging-stage",
+          "reason": "windows-driver-unreachable"
+        }
+      ],
+      "elapsedMs": 30018,
+      "item": 4,
+      "label": "preflight"
+    }
+  ],
+  "elapsedMs": 30047,
+  "reviewSummary": {
+    "totalElapsedMs": 30047,
+    "itemCount": 4,
+    "pitfallCount": 1,
+    "result": "failed"
+  }
+}

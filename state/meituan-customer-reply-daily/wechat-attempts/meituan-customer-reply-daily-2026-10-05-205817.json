@@ -1,0 +1,140 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "file",
+  "state": "verified",
+  "groupName": "FEIBING NEO AI数字员工",
+  "payloads": [
+    {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-intelligent-customer-service/records/美团客户回复记录-2026-10-05.xlsx",
+      "name": "美团客户回复记录-2026-10-05.xlsx",
+      "size": 5920,
+      "sha256": "52af51c7f5f6f1fe4cda5003b5ed9d73eaa88fd3ff41cd9f68265c155f4bfd22"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "FEIBING NEO AI数字员工",
+    "channel": "desktop",
+    "requestDigest": "cf0bf7f5b98ef6199e55566ae7afd56dd91e8289c97bc91db1f708490d28efa9",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "52af51c7f5f6f1fe4cda5003b5ed9d73eaa88fd3ff41cd9f68265c155f4bfd22",
+        "type": "file",
+        "status": "verified",
+        "claimedAt": 1791205097.9961832,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-file-card",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "FEIBING NEO AI数字员工",
+          "currentTitle": "FEIBING NEO AI数字员工",
+          "messageCount": 39,
+          "anchor": "file-card",
+          "anchorValue": "[文件]",
+          "anchorInTrailingPosition": true,
+          "autoKind": "file",
+          "readbackAt": 1791205125.608486
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "FEIBING NEO AI数字员工",
+            "path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\美团客户回复记录-2026-10-05_3.xlsx",
+            "kind": "file",
+            "auto": "file",
+            "uploaded_from": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/meituan-customer-reply-daily/wechat-attempts/.wechat-messaging/events/bf965e508e169802b2c9958f2390366714d3f7eff179293422772d2234d2674d/3c528defef91c80eb84bbef2ad627c0a2a826f5626b51c4be888b235f76119fb/payload/美团客户回复记录-2026-10-05.xlsx",
+            "server_path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\美团客户回复记录-2026-10-05_3.xlsx"
+          },
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 212
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 27612
+      }
+    ],
+    "elapsedMs": 27827,
+    "eventKey": "bf965e508e169802b2c9958f2390366714d3f7eff179293422772d2234d2674d",
+    "reviewSummary": {
+      "totalElapsedMs": 27827,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/meituan-customer-reply-daily/wechat-attempts/meituan-customer-reply-daily-2026-10-05-205817.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 212,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 27612,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 27827,
+  "reviewSummary": {
+    "totalElapsedMs": 27827,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  }
+}

@@ -1,0 +1,297 @@
+{
+  "ok": true,
+  "executor": "wechat-desktop-sender",
+  "channel": "desktop",
+  "groupName": "FEIBING NEO AI数字员工",
+  "payloadType": "text",
+  "sendAttempts": 1,
+  "runtimeModelDecisions": 0,
+  "stage": "completed",
+  "stageMs": {
+    "locate_group": 289,
+    "verify_target_and_input": 7150,
+    "prepare_payload": 1476,
+    "claim_and_send": 3667,
+    "post_send_verify": 14856
+  },
+  "payloadIdentity": "4ae53d13366e44f66599861b22df5da265dc35e4cc7fd477a335c6b436e4b2b8",
+  "payloads": [
+    {
+      "text": "海口市\n林，19989800685\nEATNOW·大君拌饭\n江东新区桂林洋经济开发区大学城勤学路盒子夜市J5-21-8号",
+      "sha256": "c23a34492e0013578cec7256b58a198d0912864868f640a3095c4d23ccd81c5d"
+    }
+  ],
+  "groupPreflight": {
+    "ok": true,
+    "action": "open-group",
+    "group": "FEIBING NEO AI数字员工",
+    "header": "FEIBING NEO AI数字员工",
+    "note": "ax-current-header",
+    "reason": null,
+    "sendAttempts": 0,
+    "runtimeModelDecisions": 0,
+    "stageMs": {
+      "exact_group_preflight": 289
+    },
+    "artifacts": [],
+    "hardGate": false
+  },
+  "textInputVerified": true,
+  "textWriteAttempts": 1,
+  "clipboardClearedBeforeTextWrite": true,
+  "preparedInputChangedPixels": 21510,
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/state/taobao-agent-new-merchants/send-attempts/d0014dca172f1c8b4871c1deb65d46ca64cd8b31e9bc854eea6b5ceb3a523013.json",
+  "postSendInputCleared": [
+    true,
+    true
+  ],
+  "verified": true,
+  "state": "verified",
+  "elapsedMs": 27438,
+  "sendReview": [
+    {
+      "item": 1,
+      "stage": "locate_group",
+      "label": "精确定位目标群",
+      "elapsedMs": 289,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 2,
+      "stage": "verify_target_and_input",
+      "label": "复核目标群与输入框",
+      "elapsedMs": 7150,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 3,
+      "stage": "prepare_payload",
+      "label": "准备并复核发送载荷",
+      "elapsedMs": 1476,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 4,
+      "stage": "claim_and_send",
+      "label": "领取防重账本并单次发送",
+      "elapsedMs": 3667,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 5,
+      "stage": "post_send_verify",
+      "label": "发送后双帧复核",
+      "elapsedMs": 14856,
+      "status": "completed",
+      "pitfalls": []
+    }
+  ],
+  "reviewSummary": {
+    "totalElapsedMs": 27438,
+    "itemCount": 5,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "interactionLock": {
+    "lockPath": "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/.runtime/wechat-ui-interaction.lock",
+    "owner": "sender:43509:1789297141062550000",
+    "waitCycles": 0,
+    "waitMs": 0,
+    "acquired": true,
+    "released": true
+  },
+  "contentionRetries": 0,
+  "contentionWaitMs": 0,
+  "contentionEvents": [],
+  "verificationMethod": "desktop-bubble-copy-exact-two-frame",
+  "copyReadback": {
+    "ok": true,
+    "bubblePositions": [
+      [
+        1695.0,
+        987.0
+      ],
+      [
+        1695.0,
+        987.0
+      ]
+    ],
+    "copyMenuCount": 1,
+    "composerEmpty": true,
+    "copiedTextSha256": "c23a34492e0013578cec7256b58a198d0912864868f640a3095c4d23ccd81c5d",
+    "scrolls": [
+      {
+        "ok": true,
+        "messageList": {
+          "x": 330.0,
+          "y": 104.0,
+          "width": 810.0,
+          "height": 471.0
+        },
+        "scrollEvents": 12,
+        "frame": 1,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "messageList": {
+          "x": 330.0,
+          "y": 104.0,
+          "width": 810.0,
+          "height": 471.0
+        },
+        "scrollEvents": 12,
+        "frame": 1,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "messageList": {
+          "x": 330.0,
+          "y": 104.0,
+          "width": 810.0,
+          "height": 471.0
+        },
+        "scrollEvents": 12,
+        "frame": 1,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "messageList": {
+          "x": 330.0,
+          "y": 104.0,
+          "width": 810.0,
+          "height": 471.0
+        },
+        "scrollEvents": 12,
+        "frame": 1,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "messageList": {
+          "x": 330.0,
+          "y": 104.0,
+          "width": 810.0,
+          "height": 471.0
+        },
+        "scrollEvents": 12,
+        "frame": 2,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "messageList": {
+          "x": 330.0,
+          "y": 104.0,
+          "width": 810.0,
+          "height": 471.0
+        },
+        "scrollEvents": 12,
+        "frame": 2,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "messageList": {
+          "x": 330.0,
+          "y": 104.0,
+          "width": 810.0,
+          "height": 471.0
+        },
+        "scrollEvents": 12,
+        "frame": 2,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "messageList": {
+          "x": 330.0,
+          "y": 104.0,
+          "width": 810.0,
+          "height": 471.0
+        },
+        "scrollEvents": 12,
+        "frame": 2,
+        "recoveryCycle": 1
+      }
+    ],
+    "frameAnchors": [
+      {
+        "ok": true,
+        "x": 1447.0,
+        "y": 948.0,
+        "matchedLineIndexes": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "matchedAnchorCount": 4,
+        "linePositions": {
+          "0": [
+            1371.0,
+            867.0
+          ],
+          "1": [
+            1452.0,
+            909.0
+          ],
+          "2": [
+            1447.0,
+            948.0
+          ],
+          "3": [
+            1695.0,
+            987.0
+          ]
+        },
+        "headerCount": 1,
+        "ocrAttempts": 1,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "x": 1447.0,
+        "y": 948.0,
+        "matchedLineIndexes": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "matchedAnchorCount": 4,
+        "linePositions": {
+          "0": [
+            1371.0,
+            867.0
+          ],
+          "1": [
+            1452.0,
+            909.0
+          ],
+          "2": [
+            1447.0,
+            948.0
+          ],
+          "3": [
+            1695.0,
+            987.0
+          ]
+        },
+        "headerCount": 1,
+        "ocrAttempts": 1,
+        "recoveryCycle": 1
+      }
+    ],
+    "stableLineIndex": 3
+  },
+  "physicalSendAttempts": 1,
+  "merchantId": "1358910162",
+  "messageSha256": "c23a34492e0013578cec7256b58a198d0912864868f640a3095c4d23ccd81c5d"
+}

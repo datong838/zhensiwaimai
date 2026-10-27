@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "status": "blocked",
+  "rows": [
+    {
+      "label": "维护授权",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "授权有效期",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "验收态回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "运行摘要稳定回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 5013
+    },
+    {
+      "label": "共享封印件依赖回执",
+      "status": "FAIL",
+      "pitfalls": [
+        "refresh-shared-locator-dependency-receipt-required"
+      ],
+      "elapsedMs": 0
+    }
+  ],
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0
+}

@@ -1,0 +1,143 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "file",
+  "state": "verified",
+  "groupName": "FEIBING NEO AI数字员工",
+  "payloads": [
+    {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/outputs/negative-feedback-list-appeals-20261008/负反馈申诉汇总_美团外卖_2026-10-08.xlsx",
+      "name": "负反馈申诉汇总_美团外卖_2026-10-08.xlsx",
+      "size": 14000,
+      "sha256": "e70c014d4be08e1615aa1eb0100becbc1ccf9755154ca10cbfa897c336342e1f"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "FEIBING NEO AI数字员工",
+    "channel": "desktop",
+    "requestDigest": "58772b4746ad09e459652969816e598cff475a488d1340d39ac077626ae19217",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "e70c014d4be08e1615aa1eb0100becbc1ccf9755154ca10cbfa897c336342e1f",
+        "type": "file",
+        "status": "verified",
+        "claimedAt": 1791435740.5965598,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-file-card",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "FEIBING NEO AI数字员工",
+          "currentTitle": "FEIBING NEO AI数字员工",
+          "messageCount": 50,
+          "anchor": "file-card",
+          "anchorValue": "[文件]",
+          "anchorInTrailingPosition": true,
+          "autoKind": "file",
+          "readbackAt": 1791435770.405579
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "FEIBING NEO AI数字员工",
+            "path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\负反馈申诉汇总_美团外卖_2026-10-08.xlsx",
+            "kind": "file",
+            "auto": "file",
+            "uploaded_from": "/Users/ddt/work/projects/ai_agent/state/negative-feedback-list-appeals/wechat-attempts/.wechat-messaging/events/fb70b00553a219cd1a0c30bc779285ab76291fc9748dad4f049c21c92e48c3ca/64839151e4297ba8978decac145cc41225be11500216a327eafb87e13a44f80a/payload/负反馈申诉汇总_美团外卖_2026-10-08.xlsx",
+            "server_path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\负反馈申诉汇总_美团外卖_2026-10-08.xlsx"
+          },
+          "route": "relay",
+          "direct_error": "[Errno 65] No route to host",
+          "direct_local_network_blocked": true,
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 1034
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 29809
+      }
+    ],
+    "elapsedMs": 30847,
+    "eventKey": "fb70b00553a219cd1a0c30bc779285ab76291fc9748dad4f049c21c92e48c3ca",
+    "reviewSummary": {
+      "totalElapsedMs": 30847,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/state/negative-feedback-list-appeals/wechat-attempts/negative-feedback-list-appeals-2026-10-08.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 1034,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 29809,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 30847,
+  "reviewSummary": {
+    "totalElapsedMs": 30847,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  }
+}

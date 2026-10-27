@@ -1,0 +1,82 @@
+{
+  "ok": true,
+  "action": "prepare",
+  "status": "prepared",
+  "review": [
+    {
+      "label": "维护授权",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "授权有效期",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "读取依赖清单",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "计算候选摘要",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "统一微信完整离线测试",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 3693
+    },
+    {
+      "label": "原子写入依赖清单",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "依赖清单回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "统一入口完整性回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 30
+    }
+  ],
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "authorization": "user-20260918-code-maintenance",
+  "expiresAt": "2026-09-26T23:50:00+08:00",
+  "userInstructionSha256": "c91518a278b43dcab9835dbda5168b9a3adc188ce3c5c8b6d2c0e930a91ea974",
+  "dependencyManifestPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/dependencies.json",
+  "dependencyManifestBeforeSha256": "8f2dc6131882a2cc5bbf152a3e805e2ac8571f5e6193081916997c339e36cdeb",
+  "dependencyManifestAfterSha256": "81a0e54c6ddcc6527d5c742ae967bea9cf3ac8aacdb4fbb0a865503d84ce8bd7",
+  "changes": [
+    {
+      "path": "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/scripts/wechat_desktop.py",
+      "before": "367856a0c247d6c04796b54894e78b9d0daf7e32c1521613e2870b35282cde24",
+      "after": "90451d3aaa536cc1ab3e71ba42187a0c42beb7287ad44dcd1ba677033d9f3802"
+    }
+  ],
+  "tests": {
+    "ok": true,
+    "elapsedMs": 3693,
+    "testCount": 172
+  },
+  "capabilityCheck": {
+    "ok": true,
+    "elapsedMs": 30,
+    "testCount": null
+  },
+  "candidateFileCount": 29,
+  "elapsedMs": 3726
+}

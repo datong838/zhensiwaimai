@@ -1,0 +1,143 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "file",
+  "state": "verified",
+  "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+  "payloads": [
+    {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/outputs/negative-feedback-list-appeals-20261017/负反馈申诉汇总_美团外卖_2026-10-17.xlsx",
+      "name": "负反馈申诉汇总_美团外卖_2026-10-17.xlsx",
+      "size": 15546,
+      "sha256": "86db026efef290ed4e105ae07b98125c1a140aded2c7a8584db3dac777212b2c"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "channel": "desktop",
+    "requestDigest": "8a9c6c81fe2cdf421e8e2df147e06adf8cfbd9571e957ab596b2249edd0884f9",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "86db026efef290ed4e105ae07b98125c1a140aded2c7a8584db3dac777212b2c",
+        "type": "file",
+        "status": "verified",
+        "claimedAt": 1792211972.989135,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-file-card",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+          "currentTitle": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+          "messageCount": 32,
+          "anchor": "file-card",
+          "anchorValue": "[文件]",
+          "anchorInTrailingPosition": true,
+          "autoKind": "file",
+          "readbackAt": 1792212005.345293
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "上海臻肆外卖运营-盯个盯-饭敢当",
+            "path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\负反馈申诉汇总_美团外卖_2026-10-17.xlsx",
+            "kind": "file",
+            "auto": "file",
+            "uploaded_from": "/Users/ddt/work/projects/ai_agent/state/negative-feedback-list-appeals/wechat-attempts/.wechat-messaging/events/40d92142c7587de7b7155e06e79e0eabc00d6ed9a0ffe60e9d352d097f0a3cc6/6e002d7c117e42249a0bfb79fd066b125d18f0ffd5d66afa869f7b98dc957677/payload/负反馈申诉汇总_美团外卖_2026-10-17.xlsx",
+            "server_path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\负反馈申诉汇总_美团外卖_2026-10-17.xlsx"
+          },
+          "route": "relay",
+          "direct_error": "[Errno 65] No route to host",
+          "direct_local_network_blocked": true,
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 13827
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 32355
+      }
+    ],
+    "elapsedMs": 46189,
+    "eventKey": "40d92142c7587de7b7155e06e79e0eabc00d6ed9a0ffe60e9d352d097f0a3cc6",
+    "reviewSummary": {
+      "totalElapsedMs": 46189,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/state/negative-feedback-list-appeals/wechat-attempts/negative-feedback-list-appeals-2026-10-17.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 13827,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 32355,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 46189,
+  "reviewSummary": {
+    "totalElapsedMs": 46189,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  }
+}

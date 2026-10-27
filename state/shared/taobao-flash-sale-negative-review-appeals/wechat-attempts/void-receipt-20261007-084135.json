@@ -1,0 +1,26 @@
+{
+  "voidedAt": "2026-10-07T08:41:35+08:00",
+  "flow": "taobao-flash-sale-negative-review-appeals",
+  "businessDate": "2026-10-06",
+  "operator": "监理（WorkBuddy 会话）",
+  "authorization": "大同既定原则：完成当日任务为最高原则；连续两轮 legacy-marker-binding-mismatch / event-payload-conflict 卡死后按 2026-10-06 12:27 先例双作废解锁",
+  "voided": [
+    {
+      "item": "事件绑定目录（根因，07:42 void 时漏作废）",
+      "path": ".wechat-messaging/events/977700814effacd1bf0a34111387065a946bd1c09fd68aebfb51c43dfb098264 → …voided-20261007-084135",
+      "staleBindingDigest": "e059026a0fed4b4ff396f8a240967d4c389868d8dcdcc30d444c2e9167349204",
+      "frozenAt": "2026-10-07 00:10（Windows 网关休眠期，占位表 4329B）"
+    },
+    {
+      "item": "attempt marker（08:06 轮重建后又与 08:38 重采冲突）",
+      "path": "taobao-flash-appeals-2026-10-06.json → …voided-20261007-084135",
+      "staleMarkerPayload": "16312B sha=c95bbaed…（08:06 轮）"
+    }
+  ],
+  "safetyEvidence": {
+    "sendAttempts": 0,
+    "deliveryReceipts": "无（事件目录仅 binding.json+payload 副本+.lock，无任何 delivery/transport 收据）",
+    "conclusion": "00:10 休眠期冻结的占位表从未外发，作废安全"
+  },
+  "expectedNext": "下一轮 daemon（09:40 档）以当前真实表 16430B/3b0b5101 重新冻结，正常发送"
+}

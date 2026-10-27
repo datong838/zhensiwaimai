@@ -1,0 +1,19 @@
+{
+  "ok": false,
+  "action": "prepare-unsealed-acceptance",
+  "status": "blocked",
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "review": [
+    {
+      "label": "维护授权",
+      "status": "FAIL",
+      "pitfalls": [
+        "maintenance-authorization-mismatch"
+      ],
+      "elapsedMs": 0
+    }
+  ],
+  "reason": "maintenance-authorization-mismatch",
+  "elapsedMs": 0
+}

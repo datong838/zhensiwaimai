@@ -1,0 +1,37 @@
+{
+  "ok": false,
+  "action": "prepare-unsealed-acceptance",
+  "status": "blocked",
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "review": [
+    {
+      "label": "维护授权",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "授权有效期",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "原封板与验收凭据",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 8
+    },
+    {
+      "label": "统一微信依赖维护",
+      "status": "FAIL",
+      "pitfalls": [
+        "maintenance-command-failed:python"
+      ],
+      "elapsedMs": 32
+    }
+  ],
+  "reason": "maintenance-command-failed:python",
+  "elapsedMs": 41
+}

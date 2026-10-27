@@ -1,0 +1,88 @@
+{
+  "ok": true,
+  "action": "prepare",
+  "status": "prepared",
+  "review": [
+    {
+      "label": "维护授权",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "授权有效期",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "读取依赖清单",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "计算候选摘要",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 5
+    },
+    {
+      "label": "授权范围",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "统一微信完整离线测试",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 3722
+    },
+    {
+      "label": "原子写入依赖清单",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "依赖清单回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "统一入口完整性回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 32
+    }
+  ],
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "authorization": "user-20260928-merchant-zero-send-draft-recovery",
+  "expiresAt": "2026-09-29T00:00:00+08:00",
+  "userInstructionSha256": "0ace8c807a5917d407779c312a95ec6a7094f40417de114556555bb48ecdbf11",
+  "dependencyManifestPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/dependencies.json",
+  "dependencyManifestBeforeSha256": "138aafc1de16e03929151c4f0a6f9c95433039d7ec46e0374ffae5584b804eee",
+  "dependencyManifestAfterSha256": "52694725182df2771883695a4fea09913bbc4979156da7e1e313452ac2c90b8b",
+  "changes": [
+    {
+      "path": "scripts/desktop_adapter.py",
+      "before": "9176e880572955f731a97ce367d39468ceb172d34359673dd96431bfc32d08a1",
+      "after": "314ec87603ccf03fb42c91741da4e1f847fc506e77f654206a9cafc26de9e6b4"
+    }
+  ],
+  "tests": {
+    "ok": true,
+    "elapsedMs": 3722,
+    "testCount": 194
+  },
+  "capabilityCheck": {
+    "ok": true,
+    "elapsedMs": 32,
+    "testCount": null
+  },
+  "candidateFileCount": 29,
+  "elapsedMs": 3761
+}

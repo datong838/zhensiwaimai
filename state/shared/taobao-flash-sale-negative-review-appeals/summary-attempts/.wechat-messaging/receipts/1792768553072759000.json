@@ -1,0 +1,49 @@
+{
+  "ok": false,
+  "status": "blocked",
+  "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+  "channel": "desktop",
+  "requestDigest": "9b92f11d7045eae74123ae9f66a5019e2bb226e2cc26a94ab6fabd083e784a8e",
+  "runtimeModelDecisions": 0,
+  "items": [],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "failed",
+      "pitfalls": [
+        "Command '['/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python', '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/wecom_desktop_sender.py', 'send', '--group', '上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰', '--text', '  ', '--dry-run']' timed out after 180.0 seconds"
+      ],
+      "elapsedMs": 212173
+    }
+  ],
+  "reason": "Command '['/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python', '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/wecom_desktop_sender.py', 'send', '--group', '上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰', '--text', '  ', '--dry-run']' timed out after 180.0 seconds",
+  "elapsedMs": 212174,
+  "eventKey": "9c4122373dc4734d49dc28e0e29855554fed0decb526b7a1af701f91caeef78c",
+  "reviewSummary": {
+    "totalElapsedMs": 212174,
+    "result": "blocked",
+    "stageCount": 3,
+    "completedStages": 2,
+    "failedStages": [
+      {
+        "stage": "preflight",
+        "status": "failed",
+        "pitfalls": [
+          "Command '['/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python', '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/wecom_desktop_sender.py', 'send', '--group', '上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰', '--text', '  ', '--dry-run']' timed out after 180.0 seconds"
+        ]
+      }
+    ]
+  }
+}

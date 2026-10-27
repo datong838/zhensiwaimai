@@ -1,0 +1,120 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "file",
+  "state": "verified",
+  "groupName": "FEIBING NEO AI数字员工",
+  "payloads": [
+    {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/outputs/taobao-flash-sale-negative-review-appeals-20260929/淘宝闪购差评申诉汇总-2026-09-28.xlsx",
+      "name": "淘宝闪购差评申诉汇总-2026-09-28.xlsx",
+      "size": 20305,
+      "sha256": "ffd9933e034185e211cb8f0db1adbd4d94671f1cc5033260f03b9ed51d85f23f"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": "mobile-manual-delivery-reconciled; historical commonReceipt below is the earlier zero-send desktop block",
+  "mobileManualReceipt": {
+    "channel": "mobile",
+    "deviceHash": "f2724cf436e9",
+    "groupName": "FEIBING NEO AI数字员工",
+    "fileName": "淘宝闪购差评申诉汇总-2026-09-28.xlsx",
+    "size": 20305,
+    "sha256": "ffd9933e034185e211cb8f0db1adbd4d94671f1cc5033260f03b9ed51d85f23f",
+    "sendClickAttempts": 1,
+    "verification": "exact selected file and bound phone hash before click; stable outgoing file bubble with full name, 19.8 KB and no uploading indicator",
+    "evidenceScreenshot": "/tmp/taobao-appeals-mobile-20260929.X7RM40/after-upload-stable.png"
+  },
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": false,
+    "status": "blocked",
+    "groupName": "FEIBING NEO AI数字员工",
+    "channel": "desktop",
+    "requestDigest": "e78a6f7192813ba774fa2704eba5eb784380e5ab8a0f70cd345080dfe2599af6",
+    "runtimeModelDecisions": 0,
+    "items": [],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "failed",
+        "pitfalls": [
+          "desktop-wechat-preflight-failed"
+        ],
+        "elapsedMs": 10642
+      }
+    ],
+    "reason": "desktop-wechat-preflight-failed",
+    "sendAttempts": 0,
+    "elapsedMs": 10643,
+    "eventKey": "e59f6b73b77a42649bf5e6b51471fd37cf0fe03e2beceb8fda7c14078e66a44d",
+    "reviewSummary": {
+      "totalElapsedMs": 10643,
+      "result": "blocked",
+      "stageCount": 3,
+      "completedStages": 2,
+      "failedStages": [
+        {
+          "stage": "preflight",
+          "status": "failed",
+          "pitfalls": [
+            "desktop-wechat-preflight-failed"
+          ]
+        }
+      ]
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/state/taobao-flash-sale-negative-review-appeals/wechat-attempts/taobao-flash-appeals-2026-09-28-correction-v1.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "failed",
+      "pitfalls": [
+        {
+          "code": "messaging-stage",
+          "reason": "desktop-wechat-preflight-failed"
+        }
+      ],
+      "elapsedMs": 10642,
+      "item": 3,
+      "label": "preflight"
+    }
+  ],
+  "elapsedMs": 10643,
+  "reviewSummary": {
+    "totalElapsedMs": 10643,
+    "itemCount": 3,
+    "pitfallCount": 1,
+    "result": "failed"
+  }
+}

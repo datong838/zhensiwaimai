@@ -1,0 +1,136 @@
+{
+  "ok": false,
+  "status": "blocked",
+  "groupName": "FEIBING NEO AI数字员工",
+  "channel": "desktop",
+  "requestDigest": "a0fce354322c038f92090c46829e2a62ebd6d45ed2d666c645ae7c7d60b906da",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "d2e91ec0d0a6c0bac7ab261db593508c4484afc0c74675c24d3685ad7e7bae25",
+      "type": "file",
+      "status": "blocked",
+      "claimedAt": 1790073935.521709,
+      "sendAttempts": 0,
+      "reason": "desktop-file-preview-not-prepared",
+      "transport": {
+        "ok": false,
+        "executor": "wechat-desktop-sender",
+        "channel": "desktop",
+        "groupName": "FEIBING NEO AI数字员工",
+        "payloadType": "file",
+        "sendAttempts": 0,
+        "runtimeModelDecisions": 0,
+        "stage": "prepare_payload",
+        "stageMs": {
+          "locate_group": 740,
+          "verify_target_and_input": 1773,
+          "prepare_payload": 1919
+        },
+        "payloadIdentity": "f17797ee7e671b708c4b6cdc7d9c88606123d6ef285558f3b5833de394d5be5f",
+        "payloads": [
+          {
+            "path": "/Users/ddt/work/projects/ai_agent/state/taobao-flash-sale-negative-review-appeals/wechat-attempts/.wechat-messaging/events/674f9f506842a0f2d367c15c976456b51f90cd5be987bee80a67640df8349f75/81e633b8acd9911ac27cab85efaf33e24074ebec9e5e9e7b94dc15e096a2e5ba/payload/淘宝闪购差评申诉汇总-2026-09-21.xlsx",
+            "name": "淘宝闪购差评申诉汇总-2026-09-21.xlsx",
+            "size": 8890,
+            "sha256": "d2e91ec0d0a6c0bac7ab261db593508c4484afc0c74675c24d3685ad7e7bae25"
+          }
+        ],
+        "groupPreflight": {
+          "ok": true,
+          "reason": null,
+          "sendAttempts": 0,
+          "group": "FEIBING NEO AI数字员工",
+          "header": "FEIBING NEO AI数字员工(18)",
+          "note": "ax-current-group-fast-path",
+          "groupTypeVerified": true,
+          "groupTypeProof": "member-count-header",
+          "composerVerifiedEmpty": true,
+          "attempts": []
+        },
+        "preparedInputChangedPixels": 53256,
+        "preparedInputChangedRatio": 0.144178,
+        "preparedFileObjectCount": 1,
+        "preparedFilePrefixesVerified": false,
+        "reason": "desktop-file-preview-not-prepared",
+        "uncommittedPreviewCleanup": "failed",
+        "uncommittedPreviewCleanupReason": "key-Escape-failed",
+        "elapsedMs": 5155,
+        "sendReview": [
+          {
+            "item": 1,
+            "stage": "locate_group",
+            "label": "精确定位目标群",
+            "elapsedMs": 740,
+            "status": "completed",
+            "pitfalls": []
+          },
+          {
+            "item": 2,
+            "stage": "verify_target_and_input",
+            "label": "复核目标群与输入框",
+            "elapsedMs": 1773,
+            "status": "completed",
+            "pitfalls": []
+          },
+          {
+            "item": 3,
+            "stage": "prepare_payload",
+            "label": "准备并复核发送载荷",
+            "elapsedMs": 1919,
+            "status": "failed",
+            "pitfalls": [
+              {
+                "code": "send-failure",
+                "reason": "desktop-file-preview-not-prepared"
+              }
+            ]
+          }
+        ],
+        "reviewSummary": {
+          "totalElapsedMs": 5155,
+          "itemCount": 3,
+          "pitfallCount": 1,
+          "result": "failed"
+        }
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 12959
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 5155
+    }
+  ],
+  "reason": "desktop-file-preview-not-prepared",
+  "elapsedMs": 18117,
+  "eventKey": "674f9f506842a0f2d367c15c976456b51f90cd5be987bee80a67640df8349f75",
+  "reviewSummary": {
+    "totalElapsedMs": 18117,
+    "result": "blocked",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

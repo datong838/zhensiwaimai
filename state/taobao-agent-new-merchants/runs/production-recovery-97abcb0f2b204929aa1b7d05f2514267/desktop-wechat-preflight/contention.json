@@ -1,0 +1,48 @@
+{
+  "ok": true,
+  "action": "open-group",
+  "group": "电销+直播攻坚组",
+  "header": "电销+直播攻坚组",
+  "note": "ocr-exact-local-result-raw-ax-header",
+  "reason": null,
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "searchGroup": "电销+直播攻坚组",
+  "stageMs": {
+    "exact_group_preflight": 2253
+  },
+  "artifacts": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai/state/taobao-agent-new-merchants/runs/production-recovery-97abcb0f2b204929aa1b7d05f2514267/desktop-wechat-preflight/open_group_exact_local.png"
+  ],
+  "hardGate": false,
+  "candidateStrategy": "ocr-exact-local-result-raw-ax-header",
+  "groupTypeVerified": true,
+  "groupTypeProof": "member-count-header",
+  "attempts": [
+    {
+      "reason": "exact-group-result-count:0",
+      "elapsedMs": {
+        "exact_group_preflight": 15829
+      }
+    },
+    {
+      "reason": null,
+      "elapsedMs": {
+        "exact_group_preflight": 2253
+      }
+    }
+  ],
+  "attemptReviews": [
+    {
+      "attempt": 1,
+      "elapsedMs": 20853,
+      "ok": true,
+      "reason": null,
+      "sendAttempts": 0,
+      "sendReview": []
+    }
+  ],
+  "contentionRetries": 0,
+  "contentionWaitMs": 0,
+  "contentionEvents": []
+}

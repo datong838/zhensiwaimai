@@ -1,0 +1,122 @@
+{
+  "bridgeVersion": 1,
+  "ok": false,
+  "verified": false,
+  "payloadType": "file",
+  "state": "unknown",
+  "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+  "payloads": [
+    {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-intelligent-customer-service/records/美团客户回复记录-2026-10-24.xlsx",
+      "name": "美团客户回复记录-2026-10-24.xlsx",
+      "size": 6187,
+      "sha256": "444b7075e3d8fe48b9e0b89c5879b851f206c9a298f28e570e5d47634ba09588"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": "ui-post-result-timeout",
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": false,
+    "status": "unknown",
+    "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "channel": "desktop",
+    "requestDigest": "5535e07316453a878b1d668e11ed7a5b3cf3b26bddd19b5d3dfe4c14a2cbe74c",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "444b7075e3d8fe48b9e0b89c5879b851f206c9a298f28e570e5d47634ba09588",
+        "type": "file",
+        "status": "unknown",
+        "claimedAt": 1792831140.086039,
+        "sendAttempts": 1,
+        "reason": "ui-post-result-timeout"
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 267339
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 557054
+      }
+    ],
+    "reason": "ui-post-result-timeout",
+    "elapsedMs": 824400,
+    "eventKey": "7b43ca9c7eaacf23100eaaf89db1d939cafb63f60a944f1a3981382ee75aed35",
+    "reviewSummary": {
+      "totalElapsedMs": 824400,
+      "result": "unknown",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/meituan-customer-reply-daily/wechat-attempts/meituan-customer-reply-daily-2026-10-24-163432.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 267339,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "failed",
+      "pitfalls": [
+        {
+          "code": "messaging-stage",
+          "reason": "ui-post-result-timeout"
+        }
+      ],
+      "elapsedMs": 557054,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 824400,
+  "reviewSummary": {
+    "totalElapsedMs": 824400,
+    "itemCount": 4,
+    "pitfallCount": 1,
+    "result": "failed"
+  }
+}

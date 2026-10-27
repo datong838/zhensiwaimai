@@ -1,0 +1,90 @@
+{
+ "ok": true,
+ "action": "prepare",
+ "status": "prepared",
+ "review": [
+  {
+   "label": "维护授权",
+   "status": "PASS",
+   "pitfalls": [],
+   "elapsedMs": 0
+  },
+  {
+   "label": "授权有效期",
+   "status": "PASS",
+   "pitfalls": [],
+   "elapsedMs": 0
+  },
+  {
+   "label": "读取依赖清单",
+   "status": "PASS",
+   "pitfalls": [],
+   "elapsedMs": 1
+  },
+  {
+   "label": "计算候选摘要",
+   "status": "PASS",
+   "pitfalls": [],
+   "elapsedMs": 8
+  },
+  {
+   "label": "授权范围",
+   "status": "PASS",
+   "pitfalls": [],
+   "elapsedMs": 0
+  },
+  {
+   "label": "统一微信完整离线测试",
+   "status": "PASS",
+   "pitfalls": [],
+   "elapsedMs": 3806
+  },
+  {
+   "label": "原子写入依赖清单",
+   "status": "PASS",
+   "pitfalls": [],
+   "elapsedMs": 1
+  },
+  {
+   "label": "依赖清单回读",
+   "status": "PASS",
+   "pitfalls": [],
+   "elapsedMs": 1
+  },
+  {
+   "label": "统一入口完整性回读",
+   "status": "PASS",
+   "pitfalls": [],
+   "elapsedMs": 45
+  }
+ ],
+ "sendAttempts": 0,
+ "runtimeModelDecisions": 0,
+ "authorization": "user-20260918-code-maintenance",
+ "expiresAt": "2026-10-26T00:00:00+08:00",
+ "userInstructionSha256": "c91518a278b43dcab9835dbda5168b9a3adc188ce3c5c8b6d2c0e930a91ea974",
+ "dependencyManifestPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/dependencies.json",
+ "dependencyManifestBeforeSha256": "b97ff39876390c23042aee43915144d313c68a6a9b6a95565d22a12d338558ae",
+ "dependencyManifestAfterSha256": "29299b0e6b3b6273c93b45bcec294ea3a5d5824058b71b37c5be9eb5958119ac",
+ "changes": [
+  {
+   "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/dependencies.json",
+   "before": "b97ff39876390c23042aee43915144d313c68a6a9b6a95565d22a12d338558ae",
+   "after": "29299b0e6b3b6273c93b45bcec294ea3a5d5824058b71b37c5be9eb5958119ac"
+  }
+ ],
+ "tests": {
+  "ok": true,
+  "elapsedMs": 3806,
+  "testCount": 254
+ },
+ "capabilityCheck": {
+  "ok": true,
+  "elapsedMs": 45,
+  "testCount": null
+ },
+ "_provenance": {
+  "context": "2026-10-18 18:05 另一线修复 windows_adapter.py reconcile never-dispatched 死锁并重钉 wechat-messaging/dependencies.json，但漏做下游 daily-agent-new-merchants-to-wechat executor-lock 重钉；2026-10-19 09:28 起本流每小时 executor_integrity FAIL。本回执为事后补签：before=锁内陈旧摘要(改动前 dependencies.json)，after=当前盘上值；离线测试 254 例 env -u PYTHONPATH 全绿(2026-10-19 09:5x)。授权依据：#31 受控再封印 + user-20260918-code-maintenance 先例。",
+  "signedAt": "2026-10-19T09:55:00+08:00"
+ }
+}

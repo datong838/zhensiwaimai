@@ -1,0 +1,59 @@
+{
+  "ok": true,
+  "executor": "wechat-desktop-sender",
+  "channel": "desktop",
+  "groupName": "FEIBING NEO AI数字员工",
+  "payloadType": "image",
+  "sendAttempts": 1,
+  "runtimeModelDecisions": 0,
+  "stage": "post_send_verify",
+  "stageMs": {
+    "locate_group": 350,
+    "prepare_payload": 8772,
+    "claim_and_send": 3780,
+    "post_send_verify": 15635
+  },
+  "payloadIdentity": "e63c63f3540b82fedaee544d38239d5dbb76077a890393f41725e27e14877e35",
+  "payloads": [
+    {
+      "path": "/private/tmp/zhensi_top10/b6705031-a501-4a32-99aa-dca1819d66f0/2026-09-11_top10seller.png",
+      "name": "2026-09-11_top10seller.png",
+      "size": 378384,
+      "sha256": "9dc3cbb69cabbbdf6d2e39fe347d481e2e36dc32d80f114deb028ecf7c21a363"
+    }
+  ],
+  "groupPreflight": {
+    "ok": true,
+    "action": "open-group",
+    "group": "FEIBING NEO AI数字员工",
+    "header": "FEIBING NEO AI数字员工",
+    "note": "ax-current-header",
+    "reason": null,
+    "sendAttempts": 0,
+    "runtimeModelDecisions": 0,
+    "stageMs": {
+      "exact_group_preflight": 350
+    },
+    "artifacts": [],
+    "hardGate": false
+  },
+  "preparedInputChangedPixels": 11253,
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-top10-to-wechat-group/.runtime/send-ledger/2026-09-11-main-16379fcc7508.json",
+  "postSendInputCleared": [
+    true,
+    true
+  ],
+  "postSendEvidence": [
+    {
+      "chatChangedPixels": 638323,
+      "inputChangedPixels": 3457
+    },
+    {
+      "chatChangedPixels": 638323,
+      "inputChangedPixels": 3321
+    }
+  ],
+  "verified": true,
+  "state": "verified",
+  "verifiedAt": 1789172272.11244
+}

@@ -1,0 +1,119 @@
+{
+  "ok": false,
+  "executor": "wechat-desktop-sender",
+  "channel": "desktop",
+  "groupName": "FEIBING NEO AI数字员工",
+  "payloadType": "text",
+  "sendAttempts": 1,
+  "runtimeModelDecisions": 0,
+  "stage": "post_send_verify",
+  "stageMs": {
+    "locate_group": 302,
+    "verify_target_and_input": 6924,
+    "prepare_payload": 1403,
+    "claim_and_send": 3727,
+    "post_send_verify": 14922
+  },
+  "payloadIdentity": "4501b03aef5dad68e7f141b347cd89b724020cd6ca3d6ca9b226c56f0b5ad0cb",
+  "payloads": [
+    {
+      "text": "白银市\n高，19312656565\n大C柠檬茶室（尚文坊大橙奶茶店）\n兴平路街道尚文坊街82号",
+      "sha256": "7db179057a9315ae1793073604f744ca196daa058be2af86cd09c3b0ac46a728"
+    }
+  ],
+  "groupPreflight": {
+    "ok": true,
+    "action": "open-group",
+    "group": "FEIBING NEO AI数字员工",
+    "header": "FEIBING NEO AI数字员工",
+    "note": "ax-current-header",
+    "reason": null,
+    "sendAttempts": 0,
+    "runtimeModelDecisions": 0,
+    "stageMs": {
+      "exact_group_preflight": 302
+    },
+    "artifacts": [],
+    "hardGate": false
+  },
+  "textInputVerified": true,
+  "textWriteAttempts": 1,
+  "clipboardClearedBeforeTextWrite": true,
+  "preparedInputChangedPixels": 18824,
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/state/taobao-agent-new-merchants/send-attempts/48a5e8ddc0fbd46d6877b8bdabb3fc3d33af6e736120776480354b9517ae5042.json",
+  "postSendInputCleared": [
+    true,
+    true
+  ],
+  "verified": false,
+  "state": "unknown",
+  "elapsedMs": 27279,
+  "sendReview": [
+    {
+      "item": 1,
+      "stage": "locate_group",
+      "label": "精确定位目标群",
+      "elapsedMs": 302,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 2,
+      "stage": "verify_target_and_input",
+      "label": "复核目标群与输入框",
+      "elapsedMs": 6924,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 3,
+      "stage": "prepare_payload",
+      "label": "准备并复核发送载荷",
+      "elapsedMs": 1403,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 4,
+      "stage": "claim_and_send",
+      "label": "领取防重账本并单次发送",
+      "elapsedMs": 3727,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 5,
+      "stage": "post_send_verify",
+      "label": "发送后双帧复核",
+      "elapsedMs": 14922,
+      "status": "completed",
+      "pitfalls": []
+    }
+  ],
+  "reviewSummary": {
+    "totalElapsedMs": 27279,
+    "itemCount": 5,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "interactionLock": {
+    "lockPath": "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/.runtime/wechat-ui-interaction.lock",
+    "owner": "sender:5859:1789266858791561000",
+    "waitCycles": 0,
+    "waitMs": 0,
+    "acquired": true,
+    "released": true
+  },
+  "contentionRetries": 0,
+  "contentionWaitMs": 0,
+  "contentionEvents": [],
+  "reason": "desktop-post-send-verification-unknown",
+  "postSendFailureReason": "desktop-reconcile-bubble-not-unique",
+  "copyReadback": {
+    "ok": false,
+    "reason": "desktop-reconcile-bubble-not-unique",
+    "headerCount": 1,
+    "bubbleCount": 0
+  },
+  "physicalSendAttempts": 1
+}

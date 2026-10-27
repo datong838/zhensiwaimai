@@ -1,0 +1,82 @@
+{
+  "ok": true,
+  "action": "prepare",
+  "status": "prepared",
+  "review": [
+    {
+      "label": "维护授权",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "授权有效期",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "读取依赖清单",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "计算候选摘要",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 7
+    },
+    {
+      "label": "统一微信完整离线测试",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 3594
+    },
+    {
+      "label": "原子写入依赖清单",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "依赖清单回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "统一入口完整性回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 26
+    }
+  ],
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "authorization": "user-20260918-code-maintenance",
+  "expiresAt": "2026-09-27T22:00:00+08:00",
+  "userInstructionSha256": "c91518a278b43dcab9835dbda5168b9a3adc188ce3c5c8b6d2c0e930a91ea974",
+  "dependencyManifestPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/dependencies.json",
+  "dependencyManifestBeforeSha256": "73ff8f399b12f321c7db284f2d0e634d3e80b9fd57c2ab802238a9abcee5ebfc",
+  "dependencyManifestAfterSha256": "fee37703d1f6a47c7fdfb002762767997523506343db74cdc626ad4a28e28fe5",
+  "changes": [
+    {
+      "path": "scripts/workflow_bridge.py",
+      "before": "62e81d14316ef3f8f6bfc28fe2f006ae3485340b3a811a1fdf40fd1daece027f",
+      "after": "5bd411a5a441edfa0612a1919928f768a8ba89e7a7d31c5d4242f36b5a68dfc7"
+    }
+  ],
+  "tests": {
+    "ok": true,
+    "elapsedMs": 3594,
+    "testCount": 174
+  },
+  "capabilityCheck": {
+    "ok": true,
+    "elapsedMs": 26,
+    "testCount": null
+  },
+  "candidateFileCount": 29,
+  "elapsedMs": 3631
+}

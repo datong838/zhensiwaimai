@@ -1,0 +1,34 @@
+{
+  "voidedAt": "2026-10-07T08:41:35+08:00",
+  "flow": "daily-top10-to-wechat-group",
+  "businessDate": "2026-10-06",
+  "operator": "监理（WorkBuddy 会话）",
+  "authorization": "大同既定原则：完成当日任务为最高原则；marker 出生于 GBK 乱码期（attemptErrors 铁证）从未发成，重试轮 legacy-marker-binding-mismatch 死锁，按 2026-10-06 12:27 先例双作废解锁",
+  "voided": [
+    {
+      "item": "事件绑定目录（根因）",
+      "path": "send-ledger/.wechat-messaging/events/b7a436a78ed0db731a2d63ff6d8c6f985c5d81cd514122fca6a3e35a779c9665 → …voided-20261007-084135",
+      "staleBindingDigest": "2f4059f583e8038c5314ada952439d52d049c14d3ca6d2bba64422e0af94bd21",
+      "frozenAt": "2026-10-07 08:00（GBK 乱码期）"
+    },
+    {
+      "item": "attempt marker",
+      " markersPath": "send-ledger/2026-10-06-main-16379fcc7508.json → …voided-20261007-084135",
+      "staleMarkerPayload": "image 364634B sha=fe93d8cf…（/tmp uuid 临时目录，每轮重生成）"
+    }
+  ],
+  "safetyEvidence": {
+    "threeWayReconciliation": {
+      "marker": "verified=false, sendAttempts=3, reason=windows-transport-anomaly:deadline-expired",
+      "eventDelivery": "delivery.json status=unknown（无成功收据）",
+      "workflowRuns": "最近 3 个 run 目录全部 verified:false / state:unknown",
+      "csvProjection": "outputs/ 无 daily-top10-to-wechat-group-20261007 归档目录（本轮从未走到交付归档）"
+    },
+    "attemptErrors": [
+      "HTTP 500: 打开会话失败，当前标题='FEIBING NEO AI数字员工 (19)'，目标='FEIBING NEO AI鏁板瓧鍛樺伐'（GBK 乱码铁证 ×2）",
+      "deadline-expired"
+    ],
+    "conclusion": "业务日 10-06 top10 报告从未外发，作废安全"
+  },
+  "expectedNext": "下一轮 daemon 以新图片重新冻结绑定，正常发送"
+}

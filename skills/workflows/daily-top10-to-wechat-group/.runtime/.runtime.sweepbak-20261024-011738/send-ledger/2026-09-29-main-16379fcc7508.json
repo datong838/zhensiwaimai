@@ -1,0 +1,140 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "image",
+  "state": "verified",
+  "groupName": "FEIBING NEO AI数字员工",
+  "payloads": [
+    {
+      "path": "/private/tmp/zhensi_top10/bfda654c-57fc-4ecd-a3e1-fba234a43cb9/2026-09-29_top10seller.png",
+      "name": "2026-09-29_top10seller.png",
+      "size": 367180,
+      "sha256": "0c959c899130bc0f7b50d5226cf53405c3893ddad5ae2f85d47a2466e03d7949"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "FEIBING NEO AI数字员工",
+    "channel": "desktop",
+    "requestDigest": "875204891559d08fddbfa3ca903c20cf2dec4be7ab62d5cbf154972a809687ea",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "0c959c899130bc0f7b50d5226cf53405c3893ddad5ae2f85d47a2466e03d7949",
+        "type": "image",
+        "status": "verified",
+        "claimedAt": 1790737196.731075,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-file-card",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "FEIBING NEO AI数字员工",
+          "currentTitle": "FEIBING NEO AI数字员工",
+          "messageCount": 46,
+          "anchor": "file-card",
+          "anchorValue": "[图片]",
+          "anchorInTrailingPosition": true,
+          "autoKind": "image",
+          "readbackAt": 1790737222.608137
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "FEIBING NEO AI数字员工",
+            "path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\2026-09-29_top10seller.png",
+            "kind": "image",
+            "auto": "image",
+            "uploaded_from": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/daily-top10-to-wechat-group/.runtime/send-ledger/.wechat-messaging/events/1d0d75ca64fbea7c6329f719f8849dcea1bb7660087c42e74076a016405eca17/0a177dba12bb96d8e28b4d8a93da6355f55cfd012b7e07df5a08e6e93ca55b5f/payload/2026-09-29_top10seller.png",
+            "server_path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\2026-09-29_top10seller.png"
+          },
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 1
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 370
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 25877
+      }
+    ],
+    "elapsedMs": 26250,
+    "eventKey": "1d0d75ca64fbea7c6329f719f8849dcea1bb7660087c42e74076a016405eca17",
+    "reviewSummary": {
+      "totalElapsedMs": 26250,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/daily-top10-to-wechat-group/.runtime/send-ledger/2026-09-29-main-16379fcc7508.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 1,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 370,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 25877,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 26250,
+  "reviewSummary": {
+    "totalElapsedMs": 26250,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  }
+}

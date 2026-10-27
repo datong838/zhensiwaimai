@@ -1,0 +1,157 @@
+{
+  "ok": true,
+  "action": "prepare-unsealed-acceptance",
+  "status": "UNSEALED_ACCEPTANCE",
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "review": [
+    {
+      "label": "维护授权",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "授权有效期",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "原封板与验收凭据",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 2
+    },
+    {
+      "label": "统一微信依赖维护",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 3345
+    },
+    {
+      "label": "商户完整离线测试",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 321
+    },
+    {
+      "label": "维护收据固化",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "原子切换验收态",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "验收态代码回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    }
+  ],
+  "expiresAt": "2026-09-22T19:52:20.949868+08:00",
+  "maintenanceReceiptPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/state/taobao-agent-new-merchants/maintenance/heartbeat-bridge-resync-20260921T195055/acceptance/maintenance-receipt.json",
+  "maintenanceReceiptSha256": "0c9f0883a5233e91a92b53a779a232caee97a10a871d3660f067232b8641c06e",
+  "dependencyMaintenance": {
+    "ok": true,
+    "action": "prepare",
+    "status": "prepared",
+    "review": [
+      {
+        "label": "维护授权",
+        "status": "PASS",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "label": "授权有效期",
+        "status": "PASS",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "label": "读取依赖清单",
+        "status": "PASS",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "label": "计算候选摘要",
+        "status": "PASS",
+        "pitfalls": [],
+        "elapsedMs": 1
+      },
+      {
+        "label": "统一微信完整离线测试",
+        "status": "PASS",
+        "pitfalls": [],
+        "elapsedMs": 3276
+      },
+      {
+        "label": "原子写入依赖清单",
+        "status": "PASS",
+        "pitfalls": [],
+        "elapsedMs": 1
+      },
+      {
+        "label": "依赖清单回读",
+        "status": "PASS",
+        "pitfalls": [],
+        "elapsedMs": 1
+      },
+      {
+        "label": "统一入口完整性回读",
+        "status": "PASS",
+        "pitfalls": [],
+        "elapsedMs": 34
+      }
+    ],
+    "sendAttempts": 0,
+    "runtimeModelDecisions": 0,
+    "authorization": "user-20260918-code-maintenance",
+    "expiresAt": "2026-09-22T19:52:20.949868+08:00",
+    "userInstructionSha256": "c91518a278b43dcab9835dbda5168b9a3adc188ce3c5c8b6d2c0e930a91ea974",
+    "dependencyManifestPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/dependencies.json",
+    "dependencyManifestBeforeSha256": "ed34acd542f68de70c76444d5b6a0cf1be01d2d5d37edaad60e26e6c01e96359",
+    "dependencyManifestAfterSha256": "ed34acd542f68de70c76444d5b6a0cf1be01d2d5d37edaad60e26e6c01e96359",
+    "changes": [],
+    "tests": {
+      "ok": true,
+      "elapsedMs": 3276,
+      "testCount": 146
+    },
+    "capabilityCheck": {
+      "ok": true,
+      "elapsedMs": 34,
+      "testCount": null
+    },
+    "candidateFileCount": 29,
+    "elapsedMs": 3314,
+    "receiptPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/state/taobao-agent-new-merchants/maintenance/heartbeat-bridge-resync-20260921T195055/acceptance/wechat-dependencies/receipt.json",
+    "receiptSha256": "d9d74837d79749e4ad14dd47c8ba2a3f35f57f6e948b78d27c11a9ec8642eb13"
+  },
+  "merchantTests": {
+    "ok": true,
+    "elapsedMs": 321,
+    "testCount": 100,
+    "json": null
+  },
+  "candidateFileCount": 19,
+  "verification": {
+    "ok": true,
+    "status": "UNSEALED_ACCEPTANCE",
+    "manifestSha256": "6b59d96049d112796bd601261c87deaa6b7ab591f4f72ef0ba85fbba787bfbc8",
+    "fileCount": 19,
+    "authorization": "user-20260916-production-hardening",
+    "runtimeModelDecisions": 0,
+    "maintenanceAcceptance": "desktop-wechat-shared-preflight",
+    "sharedTextAcceptance": "wechat-messaging-desktop-text",
+    "sharedMediaAcceptance": "not-required-by-text-only-merchant-workflow"
+  },
+  "elapsedMs": 3671
+}

@@ -1,0 +1,50 @@
+{
+  "ok": false,
+  "status": "blocked",
+  "groupName": "FEIBING NEO AI数字员工",
+  "channel": "desktop",
+  "requestDigest": "d21446afcd1e15ec36aef3ede34ec586b4b6371c23bb76c02cee49d8a95e6533",
+  "runtimeModelDecisions": 0,
+  "items": [],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "failed",
+      "pitfalls": [
+        "desktop-wechat-preflight-failed"
+      ],
+      "elapsedMs": 9285
+    }
+  ],
+  "reason": "desktop-wechat-preflight-failed",
+  "sendAttempts": 0,
+  "elapsedMs": 9286,
+  "eventKey": "e59f6b73b77a42649bf5e6b51471fd37cf0fe03e2beceb8fda7c14078e66a44d",
+  "reviewSummary": {
+    "totalElapsedMs": 9286,
+    "result": "blocked",
+    "stageCount": 3,
+    "completedStages": 2,
+    "failedStages": [
+      {
+        "stage": "preflight",
+        "status": "failed",
+        "pitfalls": [
+          "desktop-wechat-preflight-failed"
+        ]
+      }
+    ]
+  }
+}

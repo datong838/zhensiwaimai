@@ -1,0 +1,49 @@
+{
+ "schemaVersion": 1,
+ "kind": "controlled-marker-verification",
+ "authorizedBy": "事实授权·大同2026-10-09指令",
+ "recordedAt": "2026-10-09T21:33:59+0800",
+ "group": "电销+直播攻坚组",
+ "merchantId": "529520233",
+ "marker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/f5b6f1b36066ebe74eef8fe9324acf6833d490283dac4bd64f35630378f9c8ed.json",
+ "backup": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/f5b6f1b36066ebe74eef8fe9324acf6833d490283dac4bd64f35630378f9c8ed.json.bak-controlled-verified-20261009-213359",
+ "before": {
+  "state": "unknown",
+  "verified": false,
+  "sendAttempts": 1
+ },
+ "after": {
+  "state": "verified",
+  "verified": true,
+  "sendAttempts": 1
+ },
+ "evidence": {
+  "ok": true,
+  "resolvedGroup": "电销+直播攻坚组",
+  "currentTitle": "电销+直播攻坚组",
+  "titleProven": true,
+  "messageCount": 16,
+  "anchor": "text-exact",
+  "anchorValue": "城市：乌鲁木齐市  ；  联系人：马先生，15299057728  ；  店铺：疆麦尔椒麻鸡  ；  地址：人民路车市巷59号",
+  "anchorInTrailingPosition": true,
+  "readbackAt": 1791551700.0,
+  "strategy": "supervised-readback-2026-10-09-2115",
+  "note": "监理 21:15 全量读回 16/16 店铺名命中；桥 commonReceipt.transport.sent=true(route=relay)"
+ },
+ "provenance": {
+  "decision": "controlled-verified-from-driver-readback",
+  "tool": "runtime/conclude_attempt_deadlock.py (A2b-②)",
+  "authorizedBy": "事实授权·大同2026-10-09指令(以事实为准·自决结论化)",
+  "recordedAt": "2026-10-09T21:33:59+0800",
+  "recordedBy": "WorkBuddy 监理",
+  "replacedState": "unknown",
+  "evidenceObservedAt": "2026-10-09T21:15:00+0800",
+  "evidenceBasis": "驱动只读回读：目标会话标题当前，且载荷精确文本位于会话尾部（anchor=text-exact）。",
+  "noResendGuarantee": "本次结论化不触发任何发送；流程复用该 verified 收据后仅提交成功历史与游标。",
+  "note": "本记录不伪造 transport/attemptReviews：本工具只做只读读回取证，不复现桥的真实发送收据。；以事实结论化：桥transport已记sent=true；监理21:15读回16/16命中。不触发任何重发。"
+ },
+ "gatePassed": true,
+ "verifications": [
+  "supervisor-fact-based-conclusion"
+ ]
+}

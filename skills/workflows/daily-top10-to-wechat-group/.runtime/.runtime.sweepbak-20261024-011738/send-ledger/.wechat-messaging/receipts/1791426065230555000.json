@@ -1,0 +1,81 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "FEIBING NEO AI数字员工",
+  "channel": "desktop",
+  "requestDigest": "c317aefd79196c5718f6efe126a6f5185598fd19e4d605464d82309b8ae9b979",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "a906869e6da247cece5b39d39d51ff8a33901128ae493bfa0166d5bbfad4107d",
+      "type": "image",
+      "status": "verified",
+      "claimedAt": 1791426012.53235,
+      "sendAttempts": 1,
+      "verificationLevel": "windows-readback-file-card",
+      "evidence": {
+        "ok": true,
+        "resolvedGroup": "FEIBING NEO AI数字员工",
+        "currentTitle": "FEIBING NEO AI数字员工",
+        "messageCount": 50,
+        "anchor": "file-card",
+        "anchorValue": "[图片]",
+        "anchorInTrailingPosition": true,
+        "autoKind": "image",
+        "readbackAt": 1791426065.226479
+      },
+      "transport": {
+        "ok": true,
+        "data": {
+          "sent": true,
+          "who": "FEIBING NEO AI数字员工",
+          "path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\2026-10-07_top10seller.png",
+          "kind": "image",
+          "auto": "image",
+          "uploaded_from": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/.runtime/send-ledger/.wechat-messaging/events/4f9d868cf3f2a317d340332f44235ff0ff3339a5583ea52a01db2ef95be18a02/207bb0910db2474c0c44f751bdb66652b5f6662dfa7782a342de9297641e077d/payload/2026-10-07_top10seller.png",
+          "server_path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\2026-10-07_top10seller.png"
+        },
+        "route": "relay",
+        "direct_error": "[Errno 65] No route to host",
+        "direct_local_network_blocked": true,
+        "sendAttempts": 1
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 656
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 52695
+    }
+  ],
+  "elapsedMs": 53356,
+  "eventKey": "4f9d868cf3f2a317d340332f44235ff0ff3339a5583ea52a01db2ef95be18a02",
+  "reviewSummary": {
+    "totalElapsedMs": 53356,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

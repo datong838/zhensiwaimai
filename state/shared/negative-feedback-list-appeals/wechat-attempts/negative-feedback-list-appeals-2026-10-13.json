@@ -1,0 +1,141 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "file",
+  "state": "verified",
+  "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+  "payloads": [
+    {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/outputs/negative-feedback-list-appeals-20261013/负反馈申诉汇总_美团外卖_2026-10-13.xlsx",
+      "name": "负反馈申诉汇总_美团外卖_2026-10-13.xlsx",
+      "size": 14948,
+      "sha256": "72ef60c9c7e5b504a2dda31db82a2fb0529c440497efc498ea881358831c7659"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "channel": "desktop",
+    "requestDigest": "cdcd7d5158c779b6f11ad83ea503d8731ed63a243dc57607a810ac7c4343e151",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "72ef60c9c7e5b504a2dda31db82a2fb0529c440497efc498ea881358831c7659",
+        "type": "file",
+        "status": "verified",
+        "claimedAt": 1791867879.973578,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-file-card",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+          "currentTitle": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+          "messageCount": 31,
+          "anchor": "file-card",
+          "anchorValue": "[文件]",
+          "anchorInTrailingPosition": true,
+          "autoKind": "file",
+          "readbackAt": 1791867908.091987
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "上海臻肆外卖运营-盯个盯-饭敢当",
+            "path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\负反馈申诉汇总_美团外卖_2026-10-13.xlsx",
+            "kind": "file",
+            "auto": "file",
+            "uploaded_from": "/Users/ddt/work/projects/ai_agent/state/negative-feedback-list-appeals/wechat-attempts/.wechat-messaging/events/338acc7f39bbc5e79bb5e42f1dc64897f65e9da9d862f4e08667da2f4e911ade/d8e5e6498d88bcb5b3d64c79b5c37574edf0d454bb1978fee59abb59f064177b/payload/负反馈申诉汇总_美团外卖_2026-10-13.xlsx",
+            "server_path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\负反馈申诉汇总_美团外卖_2026-10-13.xlsx"
+          },
+          "route": "direct",
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 203
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 28123
+      }
+    ],
+    "elapsedMs": 28331,
+    "eventKey": "338acc7f39bbc5e79bb5e42f1dc64897f65e9da9d862f4e08667da2f4e911ade",
+    "reviewSummary": {
+      "totalElapsedMs": 28331,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/state/negative-feedback-list-appeals/wechat-attempts/negative-feedback-list-appeals-2026-10-13.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 203,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 28123,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 28331,
+  "reviewSummary": {
+    "totalElapsedMs": 28331,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  }
+}

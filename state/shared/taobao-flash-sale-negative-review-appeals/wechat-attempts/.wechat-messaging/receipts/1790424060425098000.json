@@ -1,0 +1,121 @@
+{
+  "ok": false,
+  "status": "blocked",
+  "groupName": "FEIBING NEO AI数字员工",
+  "channel": "desktop",
+  "requestDigest": "bf7fc060fac477d4019494e5a649c0fde993541c4b0c85ab728f9efcbf6d9914",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "53b88988f7eb8fe76233d05654ecff6378c834a106ceb54f55770361f32a228c",
+      "type": "file",
+      "status": "blocked",
+      "claimedAt": 1790424059.2766159,
+      "sendAttempts": 0,
+      "reason": "wechat-window-capture-failed:could not create image from window:quartz-window-capture-invalid",
+      "transport": {
+        "ok": false,
+        "executor": "wechat-desktop-sender",
+        "channel": "desktop",
+        "groupName": "FEIBING NEO AI数字员工",
+        "payloadType": "file",
+        "sendAttempts": 0,
+        "runtimeModelDecisions": 0,
+        "stage": "verify_target_and_input",
+        "stageMs": {
+          "locate_group": 690,
+          "verify_target_and_input": 456
+        },
+        "payloadIdentity": "1ace4902880564a3d163514cf9da736de71afbda5da2cefc31ba77e30e86f103",
+        "payloads": [
+          {
+            "path": "/Users/ddt/work/projects/ai_agent/state/taobao-flash-sale-negative-review-appeals/wechat-attempts/.wechat-messaging/events/454cc571e18300d4a0619a87131b70f95210e768710dc52f80d705361f58659c/3c70e18acb097932866a1d651e706781cf62df47bf27413ddbe704df8c71dfde/payload/淘宝闪购差评申诉汇总-2026-09-25.xlsx",
+            "name": "淘宝闪购差评申诉汇总-2026-09-25.xlsx",
+            "size": 22904,
+            "sha256": "53b88988f7eb8fe76233d05654ecff6378c834a106ceb54f55770361f32a228c"
+          }
+        ],
+        "groupPreflight": {
+          "ok": true,
+          "reason": null,
+          "sendAttempts": 0,
+          "group": "FEIBING NEO AI数字员工",
+          "header": "FEIBING NEO AI数字员工(19)",
+          "note": "ax-current-group-fast-path",
+          "groupTypeVerified": true,
+          "groupTypeProof": "member-count-header",
+          "composerVerifiedEmpty": true,
+          "attempts": []
+        },
+        "reason": "wechat-window-capture-failed:could not create image from window:quartz-window-capture-invalid",
+        "elapsedMs": 1146,
+        "sendReview": [
+          {
+            "item": 1,
+            "stage": "locate_group",
+            "label": "精确定位目标群",
+            "elapsedMs": 690,
+            "status": "completed",
+            "pitfalls": []
+          },
+          {
+            "item": 2,
+            "stage": "verify_target_and_input",
+            "label": "复核目标群与输入框",
+            "elapsedMs": 456,
+            "status": "failed",
+            "pitfalls": [
+              {
+                "code": "send-failure",
+                "reason": "wechat-window-capture-failed:could not create image from window:quartz-window-capture-invalid"
+              }
+            ]
+          }
+        ],
+        "reviewSummary": {
+          "totalElapsedMs": 1146,
+          "itemCount": 2,
+          "pitfallCount": 1,
+          "result": "failed"
+        }
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 1014
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 1147
+    }
+  ],
+  "reason": "wechat-window-capture-failed:could not create image from window:quartz-window-capture-invalid",
+  "elapsedMs": 2164,
+  "eventKey": "454cc571e18300d4a0619a87131b70f95210e768710dc52f80d705361f58659c",
+  "reviewSummary": {
+    "totalElapsedMs": 2164,
+    "result": "blocked",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

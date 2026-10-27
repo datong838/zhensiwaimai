@@ -1,0 +1,84 @@
+{
+ "ok": true,
+ "action": "prepare",
+ "status": "prepared",
+ "review": [
+  {
+   "label": "维护授权",
+   "status": "PASS",
+   "pitfalls": [],
+   "elapsedMs": 0
+  },
+  {
+   "label": "授权有效期",
+   "status": "PASS",
+   "pitfalls": [],
+   "elapsedMs": 0
+  },
+  {
+   "label": "读取依赖清单",
+   "status": "PASS",
+   "pitfalls": [],
+   "elapsedMs": 1
+  },
+  {
+   "label": "计算候选摘要",
+   "status": "PASS",
+   "pitfalls": [],
+   "elapsedMs": 8
+  },
+  {
+   "label": "授权范围",
+   "status": "PASS",
+   "pitfalls": [],
+   "elapsedMs": 0
+  },
+  {
+   "label": "统一微信完整离线测试",
+   "status": "PASS",
+   "pitfalls": [],
+   "elapsedMs": 3806
+  },
+  {
+   "label": "原子写入依赖清单",
+   "status": "PASS",
+   "pitfalls": [],
+   "elapsedMs": 1
+  },
+  {
+   "label": "依赖清单回读",
+   "status": "PASS",
+   "pitfalls": [],
+   "elapsedMs": 1
+  },
+  {
+   "label": "统一入口完整性回读",
+   "status": "PASS",
+   "pitfalls": [],
+   "elapsedMs": 45
+  }
+ ],
+ "sendAttempts": 0,
+ "runtimeModelDecisions": 0,
+ "authorization": "user-20260918-code-maintenance",
+ "expiresAt": "2026-10-26T00:00:00+08:00",
+ "userInstructionSha256": "c91518a278b43dcab9835dbda5168b9a3adc188ce3c5c8b6d2c0e930a91ea974",
+ "dependencyManifestPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/dependencies.json",
+ "dependencyManifestBeforeSha256": "29299b0e6b3b6273c93b45bcec294ea3a5d5824058b71b37c5be9eb5958119ac",
+ "dependencyManifestAfterSha256": "29299b0e6b3b6273c93b45bcec294ea3a5d5824058b71b37c5be9eb5958119ac",
+ "changes": [],
+ "tests": {
+  "ok": true,
+  "elapsedMs": 3806,
+  "testCount": 254
+ },
+ "capabilityCheck": {
+  "ok": true,
+  "elapsedMs": 45,
+  "testCount": null
+ },
+ "_provenance": {
+  "context": "2026-10-18 18:05 另一线修复 windows_adapter.py reconcile never-dispatched 死锁并重钉 wechat-messaging/dependencies.json（含 windows_adapter.py 摘要 b97ff→29299b），但漏做下游 daily-agent-new-merchants-to-wechat executor-lock 重钉；2026-10-19 05:52 起本流每小时 executor_integrity FAIL（executor-lock-digest-mismatch:messaging_dependencies）。本回执=上游重钉完成后的事实 clean 回执（before==after=当前盘上 dependencies.json 摘要，本次重钉无上游字节变化）；离线测试 254 例 env -u PYTHONPATH 全绿（2026-10-19 09:5x，沙箱 PYTHONPATH shim 会致 5 例假阳性，见 WORK_MEM #16/#71）。授权依据：#31 受控再封印 + user-20260918-code-maintenance 先例 + 10-05 clean-receipt 先例（20261005-224500-wechat-dependency-clean-receipt.json）。",
+  "signedAt": "2026-10-19T09:58:00+08:00"
+ }
+}

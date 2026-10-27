@@ -1,0 +1,221 @@
+{
+  "ok": false,
+  "executor": "merchant-desktop-wechat-sender",
+  "channel": "desktop",
+  "sent": 0,
+  "messageCount": 10,
+  "historySkipped": 0,
+  "items": [
+    {
+      "merchantId": "543171221",
+      "merchantName": "聚杭福·老北京烤鸭",
+      "review": [
+        {
+          "stage": "发送前合同复核",
+          "status": "PASS",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "零发送草稿绑定复核",
+          "status": "PASS",
+          "elapsedMs": 0,
+          "pitfalls": [],
+          "evidence": "group-payload-hash-and-zero-send-marker"
+        },
+        {
+          "stage": "定位、输入与单次发送",
+          "status": "FAIL",
+          "pitfalls": [
+            "resume-blocked-zero-marker-contract-mismatch"
+          ],
+          "details": [],
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsedMs": 45,
+              "ok": false,
+              "reason": "resume-blocked-zero-marker-contract-mismatch",
+              "sendAttempts": null,
+              "sendReview": []
+            }
+          ],
+          "elapsedMs": 46
+        },
+        {
+          "stage": "双帧与原生复制全文复核",
+          "status": "SKIPPED",
+          "elapsedMs": null,
+          "pitfalls": [
+            "前置阶段失败，代码禁止继续"
+          ]
+        },
+        {
+          "stage": "提交前证据门禁",
+          "status": "SKIPPED",
+          "elapsedMs": null,
+          "pitfalls": [
+            "前置阶段失败，代码禁止继续"
+          ]
+        },
+        {
+          "stage": "成功历史与原子游标提交",
+          "status": "SKIPPED",
+          "elapsedMs": null,
+          "pitfalls": [
+            "前置阶段失败，代码禁止继续"
+          ]
+        }
+      ]
+    },
+    {
+      "merchantId": "532400758",
+      "merchantName": "童记老北京烧饼铺",
+      "review": [
+        {
+          "stage": "通知流程",
+          "status": "SKIPPED",
+          "elapsedMs": null,
+          "pitfalls": [
+            "上一商家未完成，代码禁止越过游标"
+          ]
+        }
+      ]
+    },
+    {
+      "merchantId": "544737901",
+      "merchantName": "云禾鲜鲜饺小馆",
+      "review": [
+        {
+          "stage": "通知流程",
+          "status": "SKIPPED",
+          "elapsedMs": null,
+          "pitfalls": [
+            "上一商家未完成，代码禁止越过游标"
+          ]
+        }
+      ]
+    },
+    {
+      "merchantId": "545013058",
+      "merchantName": "肉酱米线",
+      "review": [
+        {
+          "stage": "通知流程",
+          "status": "SKIPPED",
+          "elapsedMs": null,
+          "pitfalls": [
+            "上一商家未完成，代码禁止越过游标"
+          ]
+        }
+      ]
+    },
+    {
+      "merchantId": "545754827",
+      "merchantName": "好食光·汉堡·奶茶·炸鸡",
+      "review": [
+        {
+          "stage": "通知流程",
+          "status": "SKIPPED",
+          "elapsedMs": null,
+          "pitfalls": [
+            "上一商家未完成，代码禁止越过游标"
+          ]
+        }
+      ]
+    },
+    {
+      "merchantId": "544351248",
+      "merchantName": "幸福大排档",
+      "review": [
+        {
+          "stage": "通知流程",
+          "status": "SKIPPED",
+          "elapsedMs": null,
+          "pitfalls": [
+            "上一商家未完成，代码禁止越过游标"
+          ]
+        }
+      ]
+    },
+    {
+      "merchantId": "545651009",
+      "merchantName": "沪上阿姨·精选茶饮",
+      "review": [
+        {
+          "stage": "通知流程",
+          "status": "SKIPPED",
+          "elapsedMs": null,
+          "pitfalls": [
+            "上一商家未完成，代码禁止越过游标"
+          ]
+        }
+      ]
+    },
+    {
+      "merchantId": "1338043255",
+      "merchantName": "贵州米粉",
+      "review": [
+        {
+          "stage": "通知流程",
+          "status": "SKIPPED",
+          "elapsedMs": null,
+          "pitfalls": [
+            "上一商家未完成，代码禁止越过游标"
+          ]
+        }
+      ]
+    },
+    {
+      "merchantId": "1348244350",
+      "merchantName": "主饺",
+      "review": [
+        {
+          "stage": "通知流程",
+          "status": "SKIPPED",
+          "elapsedMs": null,
+          "pitfalls": [
+            "上一商家未完成，代码禁止越过游标"
+          ]
+        }
+      ]
+    },
+    {
+      "merchantId": "1338957706",
+      "merchantName": "张记包子铺",
+      "review": [
+        {
+          "stage": "通知流程",
+          "status": "SKIPPED",
+          "elapsedMs": null,
+          "pitfalls": [
+            "上一商家未完成，代码禁止越过游标"
+          ]
+        }
+      ]
+    }
+  ],
+  "contentionRetries": 0,
+  "contentionWaitMs": 0,
+  "contentionEvents": [],
+  "reason": "resume-blocked-zero-marker-contract-mismatch",
+  "desktop": {
+    "ok": false,
+    "verified": false,
+    "reason": "resume-blocked-zero-marker-contract-mismatch",
+    "sendAttempts": null,
+    "attemptReviews": [
+      {
+        "attempt": 1,
+        "elapsedMs": 45,
+        "ok": false,
+        "reason": "resume-blocked-zero-marker-contract-mismatch",
+        "sendAttempts": null,
+        "sendReview": []
+      }
+    ],
+    "contentionRetries": 0,
+    "contentionWaitMs": 0,
+    "contentionEvents": []
+  }
+}

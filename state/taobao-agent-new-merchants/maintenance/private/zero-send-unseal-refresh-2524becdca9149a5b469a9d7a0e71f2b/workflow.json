@@ -1,0 +1,43 @@
+{
+  "ok": false,
+  "action": "refresh-unsealed-acceptance",
+  "status": "blocked",
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "review": [
+    {
+      "label": "维护授权",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "授权有效期",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "验收态回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "运行摘要稳定回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 5012
+    },
+    {
+      "label": "零发送草稿修复依赖回执",
+      "status": "FAIL",
+      "pitfalls": [
+        "refresh-shared-locator-manifest-after-mismatch"
+      ],
+      "elapsedMs": 1
+    }
+  ],
+  "reason": "refresh-shared-locator-manifest-after-mismatch",
+  "elapsedMs": 5014
+}

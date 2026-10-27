@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "status": "SEALED",
+  "sealedAt": "2026-09-16T23:07:39.120189+08:00",
+  "acceptance": {
+    "receiptPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/state/taobao-agent-new-merchants/runs/2026-09-16-wechat-skill-production-complete-230529/desktop-wechat/1347324261/acceptance-receipt.json",
+    "receiptSha256": "b6013db650c39d3acb7d6a3199490865ed6cd88763c5cf98abb6111f56955c68",
+    "merchantId": "1347324261",
+    "messageSha256": "82fac65a1c3511e23cebf453faef31ad08c026b535495dd450fd280fd1ad1aac",
+    "verification": "desktop-bubble-copy-exact-two-frame"
+  },
+  "maintenanceAcceptance": {
+    "type": "desktop-wechat-shared-preflight",
+    "receiptPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/state/shared-wechat-preflight/2026-09-12/receipt.json",
+    "receiptSha256": "a65c21080dc75a287c993eff9804cc4dd1509a09be034e8e4223a1aaa065579e",
+    "groupName": "FEIBING NEO AI数字员工",
+    "verification": "shared-preflight+ax-current-header+zero-window-touch",
+    "sendAttempts": 0,
+    "runtimeModelDecisions": 0
+  },
+  "latestRealSend": {
+    "receiptPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/state/taobao-agent-new-merchants/runs/2026-09-16-wechat-skill-production-complete-230529/desktop-wechat/1347324261/acceptance-receipt.json",
+    "receiptSha256": "b6013db650c39d3acb7d6a3199490865ed6cd88763c5cf98abb6111f56955c68",
+    "merchantId": "1347324261",
+    "messageSha256": "82fac65a1c3511e23cebf453faef31ad08c026b535495dd450fd280fd1ad1aac",
+    "verification": "desktop-bubble-copy-exact-two-frame"
+  },
+  "latestDeterministicReconcile": {
+    "receiptPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/state/taobao-agent-new-merchants/runs/2026-09-16-wechat-skill-production-complete-230529/desktop-wechat/543501515/acceptance-receipt.json",
+    "receiptSha256": "50340bd3ff5149537ddea9d44b879eee94374dc34e8e1ce77a45cee7fd2eb6f7",
+    "merchantId": "543501515",
+    "messageSha256": "073f4735e6fa73a445ebc6ceb0ed7b01715b70e65bae5f7dd63e715bc1b3dbfa",
+    "sendAttempts": 1,
+    "reconciledWithoutSend": true,
+    "verification": "desktop-bubble-copy-exact-two-frame"
+  },
+  "files": {
+    "messaging_bridge": {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/scripts/workflow_bridge.py",
+      "sha256": "5a3c63f6fa01a426864a76f5a37737c4ffedd48bd16af59d1a87f763227772cd"
+    },
+    "messaging_preflight": {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/scripts/workflow_preflight.py",
+      "sha256": "10720007663297cb61938e5a192bde2f15c902fbd18a187d2bd305e63f16b1ac"
+    },
+    "messaging_dependencies": {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/dependencies.json",
+      "sha256": "dbd1e5ded8922101ea8dd3eb15dfb32f184a6bf21aa02f5591caad50a0e98457"
+    },
+    "workflow_executor": {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-agent-new-merchants-to-wechat/scripts/workflow_executor.py",
+      "sha256": "d8c487ced286f30f461a3baeff4ddf7afefd78d17200d6464d18e3911206af49"
+    },
+    "integrity_gate": {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-agent-new-merchants-to-wechat/scripts/executor_integrity.py",
+      "sha256": "b19852afde55d25244b32eb735bada32f31f9c2eead76abee8cd46e89cd69ffc"
+    },
+    "runtime_contract": {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-agent-new-merchants-to-wechat/scripts/runtime_contract.py",
+      "sha256": "50d602683aa9cc5aaf25f09d897a55cbf49e76a341330a63589594542cdcc7fc"
+    },
+    "background_selftest": {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-agent-new-merchants-to-wechat/scripts/test_background_merchant_collector.mjs",
+      "sha256": "95e215b7140ec0695e5d8131536185938f7faf697f5cc112d2622fda044f02a9"
+    },
+    "structured_collector": {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-agent-new-merchants-to-wechat/scripts/structured_merchant_collector.py",
+      "sha256": "fa4cf8db70fe7bbfe0438753071a85474721b1355a4249a2238142a59c223b52"
+    },
+    "background_collector": {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-agent-new-merchants-to-wechat/scripts/background_merchant_collector.mjs",
+      "sha256": "3815447d04a2148a27eba455675d90445a18cd61e5213b77107d7acdb1c4c645"
+    },
+    "desktop_adapter": {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-agent-new-merchants-to-wechat/scripts/desktop_wechat_sender.py",
+      "sha256": "7ab8621600b6beefec319459e284db3a3167648ee7abfa79dd14e36b9e2ef718"
+    },
+    "mobile_sender": {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-agent-new-merchants-to-wechat/scripts/wechat_sender_executor.py",
+      "sha256": "11af52192ef188325f3fe0f18c60203cd69bc2252848444870cf7765d367275f"
+    },
+    "shared_desktop_sender": {
+      "path": "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/scripts/desktop_sender.py",
+      "sha256": "04d79a588640646505972245b1ce023425b8603b2c040c296894301609770b75"
+    },
+    "shared_desktop_preflight": {
+      "path": "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/scripts/desktop_preflight.py",
+      "sha256": "fabaadc77e6339188f5e0b684073009a2c76de6a584337b556eb62188110c184"
+    },
+    "shared_wechat_interaction_lock": {
+      "path": "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/scripts/wechat_interaction_lock.py",
+      "sha256": "3119492475903a3deb417e841ea73ca6ddc458a7f4bcf155f2a5ce3355f126e0"
+    },
+    "shared_desktop_locator": {
+      "path": "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/scripts/wechat_desktop.py",
+      "sha256": "770c39a1c1eefc9bdadd83b30aec28edf8d1fd84e59f55a382882ca0539d6e0a"
+    },
+    "shared_click_source": {
+      "path": "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/scripts/cgevent_click.swift",
+      "sha256": "4aef04055932d9a172773cb6c114faf96c832ebd5fb6e97a9e2bcf42029c46b8"
+    },
+    "shared_click_binary": {
+      "path": "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/scripts/cgevent_click_bin",
+      "sha256": "5e2f8f67c431b9a4e8f76a69bd88a4e5c2fe7112aa487a0f7385dbaf5a6fa04f"
+    }
+  },
+  "lastUnsealedAcceptance": {
+    "authorization": "user-20260916-production-hardening",
+    "authorizedAt": "2026-09-16T17:16:02+08:00",
+    "expiresAt": "2026-09-18T23:59:59+08:00",
+    "scope": "Production only; enforce exact production target, strict row parsing, selection audit, and outcome-aware review; one real pending merchant acceptance",
+    "userInstruction": "你趁暂时没工作任务，赶紧维护复盘沉淀流程代码"
+  }
+}

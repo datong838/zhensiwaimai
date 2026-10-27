@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "policyId": "daily-top10-desktop-v1",
+  "browserProfile": "taobao-brand",
+  "browserPort": 9230,
+  "wechatChannel": "desktop",
+  "targetGroup": "FEIBING NEO AI数字员工",
+  "runtimeModelDecisions": 0,
+  "files": {
+    "runtime_guard": {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/scripts/runtime_guard.py",
+      "sha256": "5d0aaa010b69a4a1563504f8f1ce40c41078d4284a8c536b471f02f692c64cac"
+    },
+    "workflow_executor": {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/scripts/workflow_executor.py",
+      "sha256": "0baf49b0e5837527943606bfb5e091654a6d4dd4c5fb9d14da52959cad52b955"
+    },
+    "background_executor": {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/scripts/desktop_background_executor.mjs",
+      "sha256": "8f13d6ae095a5dc7c04c8a417501529e05e1d35d41180221fd1bd42d12ba0d71"
+    },
+    "desktop_sender": {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/workflow_bridge_windows.py",
+      "sha256": "6fa054e0a8d2d77051ca0ad141a4384794f0d2836f5dbfd799ca3c20abba9a39"
+    },
+    "desktop_preflight": {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/workflow_preflight.py",
+      "sha256": "6340a77b63f400216460ba1aaded0556238a77d54ff3e655b9cd87985c162d58"
+    },
+    "wechat_interaction_lock": {
+      "path": "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/scripts/wechat_interaction_lock.py",
+      "sha256": "3119492475903a3deb417e841ea73ca6ddc458a7f4bcf155f2a5ce3355f126e0"
+    },
+    "messaging_dependencies": {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/dependencies.json",
+      "sha256": "d3e6d94361a85b6462714095d419f3f10f7acbdcb430aecfb469d863f4cf9318"
+    }
+  }
+}

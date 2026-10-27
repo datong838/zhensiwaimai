@@ -1,0 +1,24 @@
+{
+  "itemId": "0",
+  "sha256": "fe93d8cf4aff80f9a61d34f9c49267c52936372adc9049dba4eeb78c1665a1f4",
+  "type": "image",
+  "status": "unknown",
+  "claimedAt": 1791331232.7605681,
+  "sendAttempts": 3,
+  "reason": "windows-transport-anomaly:deadline-expired",
+  "transport": {
+    "ok": false,
+    "error": "deadline-expired",
+    "error_kind": "connection",
+    "local_network_blocked": false,
+    "route": "relay",
+    "direct_error": "[Errno 65] No route to host",
+    "direct_local_network_blocked": true,
+    "sendAttempts": 3
+  },
+  "attemptErrors": [
+    "HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题='FEIBING NEO AI数字员工 (19)'，目标='FEIBING NEO AI鏁板瓧鍛樺伐'\"}",
+    "HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题='FEIBING NEO AI数字员工 (19)'，目标='FEIBING NEO AI鏁板瓧鍛樺伐'\"}",
+    "deadline-expired"
+  ]
+}

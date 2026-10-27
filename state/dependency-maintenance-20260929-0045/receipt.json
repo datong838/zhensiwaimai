@@ -1,0 +1,98 @@
+{
+  "ok": true,
+  "action": "prepare",
+  "status": "prepared",
+  "review": [
+    {
+      "label": "维护授权",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "授权有效期",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "读取依赖清单",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "计算候选摘要",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 6
+    },
+    {
+      "label": "授权范围",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "统一微信完整离线测试",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 3756
+    },
+    {
+      "label": "原子写入依赖清单",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "依赖清单回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "统一入口完整性回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 29
+    }
+  ],
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "authorization": "user-20260929-back-path-migration-dependency-resync",
+  "expiresAt": "2026-09-29T02:30:00+08:00",
+  "userInstructionSha256": "27e6c38c1dc2a71aa684e10cc54d727d6c5d067977a10ee22503dff0bfa526e8",
+  "dependencyManifestPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/dependencies.json",
+  "dependencyManifestBeforeSha256": "c710da411b347525a2ab8c7b314a100a0fbbfbdc0f0d9d111718a2e9c932ee35",
+  "dependencyManifestAfterSha256": "4729b073382911dc11a2dc56615190d98d80ac514ad9ebc02706714fac2d1db4",
+  "changes": [
+    {
+      "path": "scripts/dependency_maintenance.py",
+      "before": "49a387373dd871a4bcade1c91786ccf700a3b120690491ed8f2a2099aa05503d",
+      "after": "99478dc1a7d9d2fbfa3c0ef7962e0a6b3d8cdbe3528948f5456dd578168bd025"
+    },
+    {
+      "path": "scripts/mobile_helpers.py",
+      "before": "74bff51ad5d27693be0e91564f861cc68157e039723518481100514c282f8992",
+      "after": "43eb58449de724637e8f6b3ec27db3e071aa2f197103ba8c7e2841a7cde2fd94"
+    },
+    {
+      "path": "scripts/mobile_text.py",
+      "before": "bbbe052ee8b12f353710571c3483699241508c0634a1dd7959e5e2825802cefa",
+      "after": "b564ebbe3b2fde14653d4a94de43d4c357a84edb9649c835dec46685cb2c02ce"
+    }
+  ],
+  "tests": {
+    "ok": true,
+    "elapsedMs": 3756,
+    "testCount": 195
+  },
+  "capabilityCheck": {
+    "ok": true,
+    "elapsedMs": 29,
+    "testCount": null
+  },
+  "candidateFileCount": 29,
+  "elapsedMs": 3793
+}

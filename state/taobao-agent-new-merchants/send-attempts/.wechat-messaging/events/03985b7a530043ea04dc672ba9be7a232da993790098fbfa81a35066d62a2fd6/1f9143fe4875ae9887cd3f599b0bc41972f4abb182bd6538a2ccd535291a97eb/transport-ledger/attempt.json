@@ -1,0 +1,97 @@
+{
+  "ok": true,
+  "executor": "wechat-desktop-sender",
+  "channel": "desktop",
+  "groupName": "电销+直播攻坚组",
+  "payloadType": "text",
+  "sendAttempts": 1,
+  "runtimeModelDecisions": 0,
+  "stage": "completed",
+  "stageMs": {
+    "locate_group": 747,
+    "verify_target_and_input": 2214,
+    "prepare_payload": 1837,
+    "claim_and_send": 3860,
+    "post_send_verify": 6031
+  },
+  "payloadIdentity": "a57b584a9505330eff7a7a325f8675eeb45f09a06aa8f1be513685b0f0bb9f1b",
+  "payloads": [
+    {
+      "text": "上海市\n官，19848000857\n云小煮麻辣烫\n广富林街道文翔路3088弄18号",
+      "sha256": "70c1e66630901acb658e013d87347eb0b6a3a5adaa4d95b7cedb4fa7b8eb2093"
+    }
+  ],
+  "groupPreflight": {
+    "ok": true,
+    "reason": null,
+    "sendAttempts": 0,
+    "group": "电销+直播攻坚组",
+    "header": "电销+直播攻坚组(18)",
+    "note": "ax-current-group-fast-path",
+    "groupTypeVerified": true,
+    "groupTypeProof": "member-count-header",
+    "composerVerifiedEmpty": true,
+    "attempts": []
+  },
+  "textInputVerified": true,
+  "textWriteAttempts": 1,
+  "clipboardClearedBeforeTextWrite": true,
+  "preparedInputChangedPixels": 12904,
+  "preparedInputChangedRatio": 0.034934,
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/state/taobao-agent-new-merchants/send-attempts/.wechat-messaging/events/03985b7a530043ea04dc672ba9be7a232da993790098fbfa81a35066d62a2fd6/1f9143fe4875ae9887cd3f599b0bc41972f4abb182bd6538a2ccd535291a97eb/transport-ledger/attempt.json",
+  "postSendInputCleared": [
+    true,
+    true
+  ],
+  "verified": true,
+  "state": "verified",
+  "elapsedMs": 14689,
+  "sendReview": [
+    {
+      "item": 1,
+      "stage": "locate_group",
+      "label": "精确定位目标群",
+      "elapsedMs": 747,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 2,
+      "stage": "verify_target_and_input",
+      "label": "复核目标群与输入框",
+      "elapsedMs": 2214,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 3,
+      "stage": "prepare_payload",
+      "label": "准备并复核发送载荷",
+      "elapsedMs": 1837,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 4,
+      "stage": "claim_and_send",
+      "label": "领取防重账本并单次发送",
+      "elapsedMs": 3860,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 5,
+      "stage": "post_send_verify",
+      "label": "发送后双帧复核",
+      "elapsedMs": 6031,
+      "status": "completed",
+      "pitfalls": []
+    }
+  ],
+  "reviewSummary": {
+    "totalElapsedMs": 14689,
+    "itemCount": 5,
+    "pitfallCount": 0,
+    "result": "success"
+  }
+}

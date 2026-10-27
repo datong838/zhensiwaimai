@@ -1,0 +1,98 @@
+{
+  "bridgeVersion": 1,
+  "ok": false,
+  "verified": false,
+  "payloadType": "file",
+  "state": "blocked",
+  "groupName": "FEIBING NEO AI数字员工",
+  "payloads": [
+    {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/outputs/taobao-flash-sale-negative-review-appeals-20261003/淘宝闪购差评申诉汇总-2026-10-02.xlsx",
+      "name": "淘宝闪购差评申诉汇总-2026-10-02.xlsx",
+      "size": 4332,
+      "sha256": "7777d02c608c1f6ca61337e250c2b4083924a27090f737f4eafc43108f2f1827"
+    }
+  ],
+  "sendAttempts": 0,
+  "newSendAttempts": 0,
+  "reason": "windows-driver-unreachable",
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": false,
+    "status": "blocked",
+    "groupName": "FEIBING NEO AI数字员工",
+    "channel": "desktop",
+    "requestDigest": "aafc401011675772e27b67719b49e629784f28600fcb1e6a9bde68ed28a6e573",
+    "runtimeModelDecisions": 0,
+    "items": [],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 30012
+      }
+    ],
+    "reason": "windows-driver-unreachable",
+    "elapsedMs": 30014,
+    "eventKey": "e620fcbe6d1f21f6bac644709c20089de2525089b79da23e9cc6609d4c068c84",
+    "reviewSummary": {
+      "totalElapsedMs": 30014,
+      "result": "blocked",
+      "stageCount": 3,
+      "completedStages": 3,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/state/taobao-flash-sale-negative-review-appeals/wechat-attempts/taobao-flash-appeals-2026-10-02.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "failed",
+      "pitfalls": [
+        {
+          "code": "messaging-stage",
+          "reason": "windows-driver-unreachable"
+        }
+      ],
+      "elapsedMs": 30012,
+      "item": 3,
+      "label": "preflight"
+    }
+  ],
+  "elapsedMs": 30014,
+  "reviewSummary": {
+    "totalElapsedMs": 30014,
+    "itemCount": 3,
+    "pitfallCount": 1,
+    "result": "failed"
+  }
+}

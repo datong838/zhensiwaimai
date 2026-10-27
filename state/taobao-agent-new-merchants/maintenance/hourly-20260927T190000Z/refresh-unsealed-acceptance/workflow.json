@@ -1,0 +1,25 @@
+{
+  "ok": false,
+  "action": "refresh-unsealed-acceptance",
+  "status": "blocked",
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "review": [
+    {
+      "label": "维护授权",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "授权有效期",
+      "status": "FAIL",
+      "pitfalls": [
+        "maintenance-expiry-out-of-range"
+      ],
+      "elapsedMs": 0
+    }
+  ],
+  "reason": "maintenance-expiry-out-of-range",
+  "elapsedMs": 0
+}

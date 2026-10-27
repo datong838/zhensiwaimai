@@ -1,0 +1,152 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "file",
+  "state": "verified",
+  "groupName": "FEIBING NEO AI数字员工",
+  "channel": "desktop",
+  "payloads": [
+    {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/outputs/meituan-waimai-negative-review-appeals-20261001/美团外卖差评申诉汇总-2026-09-30.xlsx",
+      "name": "美团外卖差评申诉汇总-2026-09-30.xlsx",
+      "size": 23790,
+      "sha256": "c8fdc7385706c8aed972338d5d6f891e6e1f80ca6cdd5804ee6a7939329084ed"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "FEIBING NEO AI数字员工",
+    "channel": "desktop",
+    "requestDigest": "fbc274bf3e83bc7925bc5bd0c845c61bed052e9f40f97723108c883a36edda79",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "c8fdc7385706c8aed972338d5d6f891e6e1f80ca6cdd5804ee6a7939329084ed",
+        "type": "file",
+        "status": "verified",
+        "claimedAt": 1790854254.894856,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-appeal-transport-linked-new-file-card",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "FEIBING NEO AI数字员工",
+          "currentTitle": "FEIBING NEO AI数字员工",
+          "messageCount": 50,
+          "anchor": "file-card",
+          "anchorValue": "[文件]",
+          "anchorInTrailingPosition": true,
+          "autoKind": "file",
+          "readbackAt": 1790854286.818174,
+          "frozenMediaSha256": "c8fdc7385706c8aed972338d5d6f891e6e1f80ca6cdd5804ee6a7939329084ed",
+          "frozenMediaName": "美团外卖差评申诉汇总-2026-09-30.xlsx",
+          "cardsBefore": 13,
+          "cardsAfter": 14,
+          "frozenFileSha256": "c8fdc7385706c8aed972338d5d6f891e6e1f80ca6cdd5804ee6a7939329084ed",
+          "frozenFileName": "美团外卖差评申诉汇总-2026-09-30.xlsx",
+          "fileCardsBefore": 13,
+          "fileCardsAfter": 14
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "FEIBING NEO AI数字员工",
+            "path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\美团外卖差评申诉汇总-2026-09-30.xlsx",
+            "kind": "file",
+            "auto": "file",
+            "uploaded_from": "/Users/ddt/work/projects/ai_agent/state/meituan-waimai-negative-review-appeals/wechat-attempts/.wechat-messaging/events/62cd1e04a11e5b99d0678dbf7ce37566ebfba1997eeffeddaaaef6b9e0a72485/0768d6d8eb10a408b27bc05374ea4cc38df40d031897f947304986da5af77ce9/payload/美团外卖差评申诉汇总-2026-09-30.xlsx",
+            "server_path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\美团外卖差评申诉汇总-2026-09-30.xlsx"
+          },
+          "sendAttempts": 1
+        },
+        "transportName": "windows-driver",
+        "fullNameUiVerified": false,
+        "sizeUiVerified": false
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 3607
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 33841
+      }
+    ],
+    "elapsedMs": 37453,
+    "eventKey": "62cd1e04a11e5b99d0678dbf7ce37566ebfba1997eeffeddaaaef6b9e0a72485",
+    "reviewSummary": {
+      "totalElapsedMs": 37453,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/state/meituan-waimai-negative-review-appeals/wechat-attempts/meituan-waimai-appeals-2026-09-30.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 3607,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 33841,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 37453,
+  "reviewSummary": {
+    "totalElapsedMs": 37453,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  }
+}

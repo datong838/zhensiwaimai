@@ -1,0 +1,108 @@
+{
+  "ok": true,
+  "executor": "wechat-desktop-sender",
+  "channel": "desktop",
+  "groupName": "FEIBING NEO AI数字员工",
+  "payloadType": "image",
+  "sendAttempts": 1,
+  "runtimeModelDecisions": 0,
+  "stage": "completed",
+  "stageMs": {
+    "locate_group": 328,
+    "verify_target_and_input": 7095,
+    "prepare_payload": 1852,
+    "claim_and_send": 3651,
+    "post_send_verify": 15805
+  },
+  "payloadIdentity": "f8c20e94e81b073afd17bb6651590ab140141a54c6a2aed5d9ab4f56d792e551",
+  "payloads": [
+    {
+      "path": "/private/tmp/zhensi_top10/f3fd0003-bb46-43f9-b479-7924333324ea/2026-09-12_top10seller.png",
+      "name": "2026-09-12_top10seller.png",
+      "size": 352223,
+      "sha256": "0773e6f15da233dddfbee2135f808b1135164736b8e693fe133d9c20879a4821"
+    }
+  ],
+  "groupPreflight": {
+    "ok": true,
+    "action": "open-group",
+    "group": "FEIBING NEO AI数字员工",
+    "header": "FEIBING NEO AI数字员工",
+    "note": "ax-current-header",
+    "reason": null,
+    "sendAttempts": 0,
+    "runtimeModelDecisions": 0,
+    "stageMs": {
+      "exact_group_preflight": 328
+    },
+    "artifacts": [],
+    "hardGate": false
+  },
+  "preparedInputChangedPixels": 11957,
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-top10-to-wechat-group/.runtime/send-ledger/2026-09-12-main-16379fcc7508.json",
+  "postSendInputCleared": [
+    true,
+    true
+  ],
+  "postSendEvidence": [
+    {
+      "chatChangedPixels": 150547,
+      "inputChangedPixels": 3457
+    },
+    {
+      "chatChangedPixels": 150547,
+      "inputChangedPixels": 3457
+    }
+  ],
+  "verified": true,
+  "state": "verified",
+  "elapsedMs": 28732,
+  "sendReview": [
+    {
+      "item": 1,
+      "stage": "locate_group",
+      "label": "精确定位目标群",
+      "elapsedMs": 328,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 2,
+      "stage": "verify_target_and_input",
+      "label": "复核目标群与输入框",
+      "elapsedMs": 7095,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 3,
+      "stage": "prepare_payload",
+      "label": "准备并复核发送载荷",
+      "elapsedMs": 1852,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 4,
+      "stage": "claim_and_send",
+      "label": "领取防重账本并单次发送",
+      "elapsedMs": 3651,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 5,
+      "stage": "post_send_verify",
+      "label": "发送后双帧复核",
+      "elapsedMs": 15805,
+      "status": "completed",
+      "pitfalls": []
+    }
+  ],
+  "reviewSummary": {
+    "totalElapsedMs": 28732,
+    "itemCount": 5,
+    "pitfallCount": 0,
+    "result": "success"
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "file",
+  "state": "verified",
+  "groupName": "FEIBING NEO AI数字员工",
+  "payloads": [
+    {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/outputs/meituan-waimai-negative-review-appeals-20260929/美团外卖差评申诉汇总-2026-09-28.xlsx",
+      "name": "美团外卖差评申诉汇总-2026-09-28.xlsx",
+      "size": 16369,
+      "sha256": "cf6d3fd7d1a7f8e0d8979b944de0bd1201e57114881fc537afb0a4ab9deba778"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": "mobile-manual-delivery-reconciled; historical commonReceipt below is the earlier zero-send desktop block",
+  "mobileManualReceipt": {
+    "channel": "mobile",
+    "deviceHash": "f2724cf436e9",
+    "groupName": "FEIBING NEO AI数字员工",
+    "fileName": "美团外卖差评申诉汇总-2026-09-28.xlsx",
+    "size": 16369,
+    "sha256": "cf6d3fd7d1a7f8e0d8979b944de0bd1201e57114881fc537afb0a4ab9deba778",
+    "sendClickAttempts": 1,
+    "verification": "exact selected file and bound phone hash before click; two stable outgoing file frames with full name, 16.0 KB and no uploading indicator",
+    "evidenceScreenshot": "/tmp/meituan-mobile-post-stable/screen.png"
+  },
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": false,
+    "status": "blocked",
+    "groupName": "FEIBING NEO AI数字员工",
+    "channel": "desktop",
+    "requestDigest": "0b023c84564885089856dcc1c9236f7d75e55c110d0c458914ef4d11e875bbc2",
+    "runtimeModelDecisions": 0,
+    "items": [],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "failed",
+        "pitfalls": [
+          "desktop-wechat-preflight-failed"
+        ],
+        "elapsedMs": 10443
+      }
+    ],
+    "reason": "desktop-wechat-preflight-failed",
+    "sendAttempts": 0,
+    "elapsedMs": 23282,
+    "eventKey": "ff9add2c63392c98320fb9786bb6153623dc4fefd54c11664aaca1e4bb87cc99",
+    "reviewSummary": {
+      "totalElapsedMs": 23282,
+      "result": "blocked",
+      "stageCount": 3,
+      "completedStages": 2,
+      "failedStages": [
+        {
+          "stage": "preflight",
+          "status": "failed",
+          "pitfalls": [
+            "desktop-wechat-preflight-failed"
+          ]
+        }
+      ]
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/state/meituan-waimai-negative-review-appeals/wechat-attempts/meituan-waimai-appeals-2026-09-28.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "failed",
+      "pitfalls": [
+        {
+          "code": "messaging-stage",
+          "reason": "desktop-wechat-preflight-failed"
+        }
+      ],
+      "elapsedMs": 10443,
+      "item": 3,
+      "label": "preflight"
+    }
+  ],
+  "elapsedMs": 23282,
+  "reviewSummary": {
+    "totalElapsedMs": 23282,
+    "itemCount": 3,
+    "pitfallCount": 1,
+    "result": "failed"
+  }
+}

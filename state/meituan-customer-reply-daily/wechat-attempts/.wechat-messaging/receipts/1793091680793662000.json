@@ -1,0 +1,49 @@
+{
+  "ok": false,
+  "status": "blocked",
+  "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+  "channel": "desktop",
+  "requestDigest": "fe687484458a638f672789d0b049a0ec033dd28ad76943d516331a4eab3b8291",
+  "runtimeModelDecisions": 0,
+  "items": [],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "failed",
+      "pitfalls": [
+        "ui-post-preflight-not-verified"
+      ],
+      "elapsedMs": 597
+    }
+  ],
+  "reason": "ui-post-preflight-not-verified",
+  "elapsedMs": 598,
+  "eventKey": "90a21d017e79b5b525fe34934b76dcf2a50a8060e9153afefefee04fe8567825",
+  "reviewSummary": {
+    "totalElapsedMs": 598,
+    "result": "blocked",
+    "stageCount": 3,
+    "completedStages": 2,
+    "failedStages": [
+      {
+        "stage": "preflight",
+        "status": "failed",
+        "pitfalls": [
+          "ui-post-preflight-not-verified"
+        ]
+      }
+    ]
+  }
+}

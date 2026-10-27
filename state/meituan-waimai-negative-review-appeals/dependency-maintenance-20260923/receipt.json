@@ -1,0 +1,82 @@
+{
+  "ok": true,
+  "action": "prepare",
+  "status": "prepared",
+  "review": [
+    {
+      "label": "维护授权",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "授权有效期",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "读取依赖清单",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "计算候选摘要",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 9
+    },
+    {
+      "label": "统一微信完整离线测试",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 3964
+    },
+    {
+      "label": "原子写入依赖清单",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "依赖清单回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "统一入口完整性回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 36
+    }
+  ],
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "authorization": "user-20260918-code-maintenance",
+  "expiresAt": "2026-09-23T21:18:26+08:00",
+  "userInstructionSha256": "c91518a278b43dcab9835dbda5168b9a3adc188ce3c5c8b6d2c0e930a91ea974",
+  "dependencyManifestPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/dependencies.json",
+  "dependencyManifestBeforeSha256": "05157ab13298fc4b965863fcbc04e7dde609e544f202eab8ecf005ec086ac463",
+  "dependencyManifestAfterSha256": "14880c633963158d8cc526bdc9490fbca143ac7371cb0f3fe7233ed42b9da39b",
+  "changes": [
+    {
+      "path": "scripts/workflow_bridge.py",
+      "before": "c1f21fcb8a12057f38a4c3e23db6af63a892bb1b00e654dbbfcb3739a38863d5",
+      "after": "ec935ef435faa0edff35f895aefc532161c37218f6498a17486ebf1ca4702d22"
+    }
+  ],
+  "tests": {
+    "ok": true,
+    "elapsedMs": 3964,
+    "testCount": 161
+  },
+  "capabilityCheck": {
+    "ok": true,
+    "elapsedMs": 36,
+    "testCount": null
+  },
+  "candidateFileCount": 29,
+  "elapsedMs": 4012
+}

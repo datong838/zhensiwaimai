@@ -1,0 +1,401 @@
+{
+  "ok": false,
+  "executor": "merchant-desktop-wechat-sender",
+  "channel": "desktop",
+  "sent": 0,
+  "messageCount": 10,
+  "historySkipped": 0,
+  "items": [
+    {
+      "merchantId": "543171221",
+      "merchantName": "聚杭福·老北京烤鸭",
+      "review": [
+        {
+          "stage": "发送前合同复核",
+          "status": "PASS",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "零发送草稿绑定复核",
+          "status": "PASS",
+          "elapsedMs": 0,
+          "pitfalls": [],
+          "evidence": "group-payload-hash-and-zero-send-marker"
+        },
+        {
+          "stage": "定位、输入与单次发送",
+          "status": "FAIL",
+          "pitfalls": [
+            "resume-prepared-text-readback-mismatch"
+          ],
+          "details": [
+            {
+              "stage": "authorization",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0,
+              "item": 1,
+              "label": "authorization"
+            },
+            {
+              "stage": "freeze:0",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0,
+              "item": 2,
+              "label": "freeze:0"
+            },
+            {
+              "stage": "preflight",
+              "status": "failed",
+              "pitfalls": [
+                {
+                  "code": "messaging-stage",
+                  "reason": "resume-prepared-text-readback-mismatch"
+                }
+              ],
+              "elapsedMs": 893,
+              "item": 3,
+              "label": "preflight"
+            }
+          ],
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsedMs": 969,
+              "ok": false,
+              "reason": "resume-prepared-text-readback-mismatch",
+              "sendAttempts": 0,
+              "sendReview": [
+                {
+                  "stage": "authorization",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 0,
+                  "item": 1,
+                  "label": "authorization"
+                },
+                {
+                  "stage": "freeze:0",
+                  "status": "completed",
+                  "pitfalls": [],
+                  "elapsedMs": 0,
+                  "item": 2,
+                  "label": "freeze:0"
+                },
+                {
+                  "stage": "preflight",
+                  "status": "failed",
+                  "pitfalls": [
+                    {
+                      "code": "messaging-stage",
+                      "reason": "resume-prepared-text-readback-mismatch"
+                    }
+                  ],
+                  "elapsedMs": 893,
+                  "item": 3,
+                  "label": "preflight"
+                }
+              ]
+            }
+          ],
+          "elapsedMs": 970
+        },
+        {
+          "stage": "双帧与原生复制全文复核",
+          "status": "SKIPPED",
+          "elapsedMs": null,
+          "pitfalls": [
+            "前置阶段失败，代码禁止继续"
+          ]
+        },
+        {
+          "stage": "提交前证据门禁",
+          "status": "SKIPPED",
+          "elapsedMs": null,
+          "pitfalls": [
+            "前置阶段失败，代码禁止继续"
+          ]
+        },
+        {
+          "stage": "成功历史与原子游标提交",
+          "status": "SKIPPED",
+          "elapsedMs": null,
+          "pitfalls": [
+            "前置阶段失败，代码禁止继续"
+          ]
+        }
+      ]
+    },
+    {
+      "merchantId": "532400758",
+      "merchantName": "童记老北京烧饼铺",
+      "review": [
+        {
+          "stage": "通知流程",
+          "status": "SKIPPED",
+          "elapsedMs": null,
+          "pitfalls": [
+            "上一商家未完成，代码禁止越过游标"
+          ]
+        }
+      ]
+    },
+    {
+      "merchantId": "544737901",
+      "merchantName": "云禾鲜鲜饺小馆",
+      "review": [
+        {
+          "stage": "通知流程",
+          "status": "SKIPPED",
+          "elapsedMs": null,
+          "pitfalls": [
+            "上一商家未完成，代码禁止越过游标"
+          ]
+        }
+      ]
+    },
+    {
+      "merchantId": "545013058",
+      "merchantName": "肉酱米线",
+      "review": [
+        {
+          "stage": "通知流程",
+          "status": "SKIPPED",
+          "elapsedMs": null,
+          "pitfalls": [
+            "上一商家未完成，代码禁止越过游标"
+          ]
+        }
+      ]
+    },
+    {
+      "merchantId": "545754827",
+      "merchantName": "好食光·汉堡·奶茶·炸鸡",
+      "review": [
+        {
+          "stage": "通知流程",
+          "status": "SKIPPED",
+          "elapsedMs": null,
+          "pitfalls": [
+            "上一商家未完成，代码禁止越过游标"
+          ]
+        }
+      ]
+    },
+    {
+      "merchantId": "544351248",
+      "merchantName": "幸福大排档",
+      "review": [
+        {
+          "stage": "通知流程",
+          "status": "SKIPPED",
+          "elapsedMs": null,
+          "pitfalls": [
+            "上一商家未完成，代码禁止越过游标"
+          ]
+        }
+      ]
+    },
+    {
+      "merchantId": "545651009",
+      "merchantName": "沪上阿姨·精选茶饮",
+      "review": [
+        {
+          "stage": "通知流程",
+          "status": "SKIPPED",
+          "elapsedMs": null,
+          "pitfalls": [
+            "上一商家未完成，代码禁止越过游标"
+          ]
+        }
+      ]
+    },
+    {
+      "merchantId": "1338043255",
+      "merchantName": "贵州米粉",
+      "review": [
+        {
+          "stage": "通知流程",
+          "status": "SKIPPED",
+          "elapsedMs": null,
+          "pitfalls": [
+            "上一商家未完成，代码禁止越过游标"
+          ]
+        }
+      ]
+    },
+    {
+      "merchantId": "1348244350",
+      "merchantName": "主饺",
+      "review": [
+        {
+          "stage": "通知流程",
+          "status": "SKIPPED",
+          "elapsedMs": null,
+          "pitfalls": [
+            "上一商家未完成，代码禁止越过游标"
+          ]
+        }
+      ]
+    },
+    {
+      "merchantId": "1338957706",
+      "merchantName": "张记包子铺",
+      "review": [
+        {
+          "stage": "通知流程",
+          "status": "SKIPPED",
+          "elapsedMs": null,
+          "pitfalls": [
+            "上一商家未完成，代码禁止越过游标"
+          ]
+        }
+      ]
+    }
+  ],
+  "contentionRetries": 0,
+  "contentionWaitMs": 0,
+  "contentionEvents": [],
+  "reason": "resume-prepared-text-readback-mismatch",
+  "desktop": {
+    "bridgeVersion": 1,
+    "ok": false,
+    "verified": false,
+    "payloadType": "text",
+    "state": "blocked",
+    "groupName": "电销+直播攻坚组",
+    "payloads": [
+      {
+        "text": "杭州市\n叶，13685779817\n聚杭福·老北京烤鸭\n闲林街道闲富南路101号第一层沿街13号",
+        "sha256": "c32a35903a312842395c19adf775d93b516dfcc28834323047bd6f7e74d12181"
+      }
+    ],
+    "sendAttempts": 0,
+    "newSendAttempts": 0,
+    "reason": "resume-prepared-text-readback-mismatch",
+    "runtimeModelDecisions": 0,
+    "commonReceipt": {
+      "ok": false,
+      "status": "blocked",
+      "groupName": "电销+直播攻坚组",
+      "channel": "desktop",
+      "requestDigest": "5485522a32a93733a656c6aba788bfe188349d6a0aed4b9a22d510840042d673",
+      "runtimeModelDecisions": 0,
+      "items": [],
+      "review": [
+        {
+          "stage": "authorization",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "freeze:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "preflight",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 893
+        }
+      ],
+      "reason": "resume-prepared-text-readback-mismatch",
+      "elapsedMs": 894,
+      "eventKey": "38574d3047155208a830a75a8e811bc16e5f3fe3ee6580d5e57787e1f3a87b47",
+      "reviewSummary": {
+        "totalElapsedMs": 894,
+        "result": "blocked",
+        "stageCount": 3,
+        "completedStages": 3,
+        "failedStages": []
+      }
+    },
+    "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/state/taobao-agent-new-merchants/send-attempts/027119f708109bc52dc17c0789de06420ceb229f8099acaa654f232b559d48bd.json",
+    "sendReview": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0,
+        "item": 1,
+        "label": "authorization"
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0,
+        "item": 2,
+        "label": "freeze:0"
+      },
+      {
+        "stage": "preflight",
+        "status": "failed",
+        "pitfalls": [
+          {
+            "code": "messaging-stage",
+            "reason": "resume-prepared-text-readback-mismatch"
+          }
+        ],
+        "elapsedMs": 893,
+        "item": 3,
+        "label": "preflight"
+      }
+    ],
+    "elapsedMs": 894,
+    "reviewSummary": {
+      "totalElapsedMs": 894,
+      "itemCount": 3,
+      "pitfallCount": 1,
+      "result": "failed"
+    },
+    "attemptReviews": [
+      {
+        "attempt": 1,
+        "elapsedMs": 969,
+        "ok": false,
+        "reason": "resume-prepared-text-readback-mismatch",
+        "sendAttempts": 0,
+        "sendReview": [
+          {
+            "stage": "authorization",
+            "status": "completed",
+            "pitfalls": [],
+            "elapsedMs": 0,
+            "item": 1,
+            "label": "authorization"
+          },
+          {
+            "stage": "freeze:0",
+            "status": "completed",
+            "pitfalls": [],
+            "elapsedMs": 0,
+            "item": 2,
+            "label": "freeze:0"
+          },
+          {
+            "stage": "preflight",
+            "status": "failed",
+            "pitfalls": [
+              {
+                "code": "messaging-stage",
+                "reason": "resume-prepared-text-readback-mismatch"
+              }
+            ],
+            "elapsedMs": 893,
+            "item": 3,
+            "label": "preflight"
+          }
+        ]
+      }
+    ],
+    "contentionRetries": 0,
+    "contentionWaitMs": 0,
+    "contentionEvents": []
+  }
+}

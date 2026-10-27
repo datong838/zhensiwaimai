@@ -1,0 +1,137 @@
+{
+  "bridgeVersion": 1,
+  "ok": false,
+  "verified": false,
+  "payloadType": "image",
+  "state": "unknown",
+  "groupName": "FEIBING NEO AI数字员工",
+  "payloads": [
+    {
+      "path": "/private/tmp/zhensi_top10/fe2d371c-6be5-496a-b44e-f3641ef7973d/2026-10-06_top10seller.png",
+      "name": "2026-10-06_top10seller.png",
+      "size": 364634,
+      "sha256": "fe93d8cf4aff80f9a61d34f9c49267c52936372adc9049dba4eeb78c1665a1f4"
+    }
+  ],
+  "sendAttempts": 3,
+  "newSendAttempts": 3,
+  "reason": "windows-transport-anomaly:deadline-expired",
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": false,
+    "status": "unknown",
+    "groupName": "FEIBING NEO AI数字员工",
+    "channel": "desktop",
+    "requestDigest": "50772664a7f28348c0a966bc0e835e84689a01e68639e83d818f88ad5d6f9d75",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "fe93d8cf4aff80f9a61d34f9c49267c52936372adc9049dba4eeb78c1665a1f4",
+        "type": "image",
+        "status": "unknown",
+        "claimedAt": 1791331232.7605681,
+        "sendAttempts": 3,
+        "reason": "windows-transport-anomaly:deadline-expired",
+        "transport": {
+          "ok": false,
+          "error": "deadline-expired",
+          "error_kind": "connection",
+          "local_network_blocked": false,
+          "route": "relay",
+          "direct_error": "[Errno 65] No route to host",
+          "direct_local_network_blocked": true,
+          "sendAttempts": 3
+        },
+        "attemptErrors": [
+          "HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题='FEIBING NEO AI数字员工 (19)'，目标='FEIBING NEO AI鏁板瓧鍛樺伐'\"}",
+          "HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题='FEIBING NEO AI数字员工 (19)'，目标='FEIBING NEO AI鏁板瓧鍛樺伐'\"}",
+          "deadline-expired"
+        ]
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 1
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 251
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 168840
+      }
+    ],
+    "reason": "windows-transport-anomaly:deadline-expired",
+    "elapsedMs": 169096,
+    "eventKey": "b7a436a78ed0db731a2d63ff6d8c6f985c5d81cd514122fca6a3e35a779c9665",
+    "reviewSummary": {
+      "totalElapsedMs": 169096,
+      "result": "unknown",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/.runtime/send-ledger/2026-10-06-main-16379fcc7508.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 1,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 251,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "failed",
+      "pitfalls": [
+        {
+          "code": "messaging-stage",
+          "reason": "windows-transport-anomaly:deadline-expired"
+        }
+      ],
+      "elapsedMs": 168840,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 169096,
+  "reviewSummary": {
+    "totalElapsedMs": 169096,
+    "itemCount": 4,
+    "pitfallCount": 1,
+    "result": "failed"
+  }
+}

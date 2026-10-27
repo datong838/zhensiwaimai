@@ -1,0 +1,43 @@
+{
+  "ok": false,
+  "status": "blocked",
+  "groupName": "FEIBING NEO AI数字员工",
+  "channel": "desktop",
+  "requestDigest": "9e1abbaee037bb5a18c4b5bc54bd5a37df81cd187950a87c44f45bffb9f384b6",
+  "runtimeModelDecisions": 0,
+  "items": [],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "failed",
+      "pitfalls": [
+        "frozen-payload-mismatch"
+      ],
+      "elapsedMs": 0
+    }
+  ],
+  "reason": "frozen-payload-mismatch",
+  "elapsedMs": 1,
+  "eventKey": "a87d0da4b9da7423d5554346bb731b0618d75f29eb7aeedee4f11c92b09a8dad",
+  "reviewSummary": {
+    "totalElapsedMs": 1,
+    "result": "blocked",
+    "stageCount": 2,
+    "completedStages": 1,
+    "failedStages": [
+      {
+        "stage": "freeze:0",
+        "status": "failed",
+        "pitfalls": [
+          "frozen-payload-mismatch"
+        ]
+      }
+    ]
+  }
+}

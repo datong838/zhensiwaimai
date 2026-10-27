@@ -1,0 +1,212 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-09-16",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 69,
+    "task_page": 3280,
+    "navigation": 1312,
+    "date_filter": 1637,
+    "page_1_read": 325,
+    "page_1_next": 66,
+    "page_2_read": 1007,
+    "selection_audit": 1,
+    "detail_543501515": 819,
+    "detail_1346147318": 963,
+    "detail_544770168": 989,
+    "detail_1347324261": 943
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "page_1_next": "PASS",
+    "page_2_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_543501515": "PASS",
+    "detail_1346147318": "PASS",
+    "detail_544770168": "PASS",
+    "detail_1347324261": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "543501515",
+      "merchantName": "懵懂家披萨",
+      "recommendTime": "2026-09-16 19:51:15",
+      "city": "徐州市",
+      "status": "待处理",
+      "rowIndex": 3,
+      "sourcePage": 1,
+      "tableOrder": 9,
+      "address": "睢城街道元府西街1号",
+      "contact": "吴，15852250888",
+      "detailVerified": true,
+      "text": "徐州市\n吴，15852250888\n懵懂家披萨\n睢城街道元府西街1号",
+      "sha256": "073f4735e6fa73a445ebc6ceb0ed7b01715b70e65bae5f7dd63e715bc1b3dbfa"
+    },
+    {
+      "merchantId": "1346147318",
+      "merchantName": "水城羊肉粉",
+      "recommendTime": "2026-09-16 21:44:04",
+      "city": "毕节市",
+      "status": "待处理",
+      "rowIndex": 2,
+      "sourcePage": 1,
+      "tableOrder": 10,
+      "address": "雍熙街道办事处沿河社区沿河小区地税局对面",
+      "contact": "18230790813，18230790813",
+      "detailVerified": true,
+      "text": "毕节市\n18230790813，18230790813\n水城羊肉粉\n雍熙街道办事处沿河社区沿河小区地税局对面",
+      "sha256": "ea542ffda7a82f5d54ffd1643ddc54a17e8e0406b3efa334e78a9ef517ab6ebe"
+    },
+    {
+      "merchantId": "544770168",
+      "merchantName": "玉膳粉堂·新疆炒米粉·柳州螺蛳粉",
+      "recommendTime": "2026-09-16 22:04:35",
+      "city": "西宁市",
+      "status": "待处理",
+      "rowIndex": 1,
+      "sourcePage": 1,
+      "tableOrder": 11,
+      "address": "文汇路街道西川南路80号8号楼80-116号",
+      "contact": "马，18597109154",
+      "detailVerified": true,
+      "text": "西宁市\n马，18597109154\n玉膳粉堂·新疆炒米粉·柳州螺蛳粉\n文汇路街道西川南路80号8号楼80-116号",
+      "sha256": "a4611342cd5062dab5947c9953fe60628fd4afe65f3d2e8adb07e7f52f463ab9"
+    },
+    {
+      "merchantId": "1347324261",
+      "merchantName": "晓文脱骨凤爪·冷吃",
+      "recommendTime": "2026-09-16 22:18:42",
+      "city": "沈阳市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 12,
+      "address": "南苇巷22号",
+      "contact": "张先生，13897928242",
+      "detailVerified": true,
+      "text": "沈阳市\n张先生，13897928242\n晓文脱骨凤爪·冷吃\n南苇巷22号",
+      "sha256": "82fac65a1c3511e23cebf453faef31ad08c026b535495dd450fd280fd1ad1aac"
+    }
+  ],
+  "frontmostBefore": "com.openai.codex",
+  "createdAt": "2026-09-16T14:25:40.550Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-09-16",
+    "merchantName": "小九家麻糍铺",
+    "merchantId": "1342360684",
+    "recommendTime": "2026-09-16 14:45:08",
+    "tableOrder": 6,
+    "messageSha256": "3e862d28299f5b4639a9735f5a44821b03f7d3a7d525280b340692e45de49306",
+    "sentAt": "2026-09-16T15:32:45+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-09-16",
+  "filterEndDate": "2026-09-16",
+  "dateFilter": "2026-09-16..2026-09-16",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 10,
+      "nextEnabled": true
+    },
+    {
+      "page": 2,
+      "rowCount": 2,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 12,
+  "pendingRows": 6,
+  "targetCount": 4,
+  "selectionAudit": {
+    "totalRows": 12,
+    "pendingRows": 6,
+    "excludedAtOrBeforeCursor": 6,
+    "excludedAfterCursorNotPending": 2,
+    "targetCount": 4,
+    "rows": [
+      {
+        "merchantId": "1347324261",
+        "recommendTime": "2026-09-16 22:18:42",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "544770168",
+        "recommendTime": "2026-09-16 22:04:35",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1346147318",
+        "recommendTime": "2026-09-16 21:44:04",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "543501515",
+        "recommendTime": "2026-09-16 19:51:15",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1342360684",
+        "recommendTime": "2026-09-16 14:45:08",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "545585913",
+        "recommendTime": "2026-09-16 00:38:01",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1356565396",
+        "recommendTime": "2026-09-16 13:52:23",
+        "status": "处理中(签约中)"
+      },
+      {
+        "merchantId": "545825448",
+        "recommendTime": "2026-09-16 12:01:43",
+        "status": "处理中(签约中)"
+      },
+      {
+        "merchantId": "1348199341",
+        "recommendTime": "2026-09-16 18:01:24",
+        "status": "完成"
+      },
+      {
+        "merchantId": "1350972148",
+        "recommendTime": "2026-09-16 15:31:34",
+        "status": "完成"
+      },
+      {
+        "merchantId": "544917086",
+        "recommendTime": "2026-09-16 11:54:56",
+        "status": "完成"
+      },
+      {
+        "merchantId": "510373694",
+        "recommendTime": "2026-09-16 00:32:10",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 13054,
+  "frontmostAfter": "com.openai.codex",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/state/taobao-agent-new-merchants/runs/2026-09-16-maintenance-heartbeat-222431.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/state/taobao-agent-new-merchants/runs/2026-09-16-maintenance-heartbeat-222431.review.md"
+}

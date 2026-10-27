@@ -1,0 +1,141 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "image",
+  "state": "verified",
+  "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+  "payloads": [
+    {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/outputs/meituan-waimai-negative-review-appeals-20261023/美团外卖差评申诉台账-2026-10-22.png",
+      "name": "美团外卖差评申诉台账-2026-10-22.png",
+      "size": 120579,
+      "sha256": "606d651873d77b0370fdc62c37c5f8b148b9a38ee0af6267ae5eb72da44de527"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "channel": "desktop",
+    "requestDigest": "53593670576856428cf660114de34bf9be6ff982fe520fc56b401a173ecb26c6",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "606d651873d77b0370fdc62c37c5f8b148b9a38ee0af6267ae5eb72da44de527",
+        "type": "image",
+        "status": "verified",
+        "claimedAt": 1792721889.050577,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-file-card",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+          "currentTitle": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+          "messageCount": 27,
+          "anchor": "file-card",
+          "anchorValue": "[图片]",
+          "anchorInTrailingPosition": true,
+          "autoKind": "image",
+          "readbackAt": 1792721918.274693
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "上海臻肆外卖运营-盯个盯-饭敢当",
+            "path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\美团外卖差评申诉台账-2026-10-22.png",
+            "kind": "image",
+            "auto": "image",
+            "uploaded_from": "/Users/ddt/work/projects/ai_agent/state/meituan-waimai-negative-review-appeals/summary-attempts/.wechat-messaging/events/f274c4f62a590a86b4cfe1b2405e79a505a03ed96cd32aaa7fc276be6a7b903e/08e007be418fad3f0489496bc72bfe8ec462ff89c67fbec985fa9831390c2ea1/payload/美团外卖差评申诉台账-2026-10-22.png",
+            "server_path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\美团外卖差评申诉台账-2026-10-22.png"
+          },
+          "route": "direct",
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 1701
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 29222
+      }
+    ],
+    "elapsedMs": 30929,
+    "eventKey": "f274c4f62a590a86b4cfe1b2405e79a505a03ed96cd32aaa7fc276be6a7b903e",
+    "reviewSummary": {
+      "totalElapsedMs": 30929,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/state/meituan-waimai-negative-review-appeals/summary-attempts/meituan-waimai-appeals-summary-2026-10-22.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 1701,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 29222,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 30929,
+  "reviewSummary": {
+    "totalElapsedMs": 30929,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  }
+}

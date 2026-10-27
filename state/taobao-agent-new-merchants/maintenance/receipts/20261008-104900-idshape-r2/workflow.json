@@ -1,0 +1,69 @@
+{
+  "ok": true,
+  "action": "refresh-unsealed-acceptance",
+  "status": "SEALED",
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "review": [
+    {
+      "label": "维护授权",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "授权有效期",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "验收态回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "运行摘要稳定回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 5006
+    },
+    {
+      "label": "共享封印件依赖回执",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "商户完整离线测试",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 10550
+    },
+    {
+      "label": "新维护收据固化",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "验收态摘要刷新",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "刷新后门禁回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    }
+  ],
+  "repairType": "sealed-shared-dependency-resync",
+  "refreshedFileCount": 19,
+  "maintenanceReceiptPath": "/tmp/merchants-idshape2-20261008/maintenance-receipt.json",
+  "maintenanceReceiptSha256": "52784e66481b13471ba7291f11f6c86948663d18806a290e9c5ead61b234d515",
+  "dependencyReceiptPath": "/private/tmp/dep-idshape-clean-20261008/receipt.json",
+  "elapsedMs": 15560
+}

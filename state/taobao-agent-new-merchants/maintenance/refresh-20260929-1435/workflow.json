@@ -1,0 +1,69 @@
+{
+  "ok": true,
+  "action": "refresh-unsealed-acceptance",
+  "status": "UNSEALED_ACCEPTANCE",
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "review": [
+    {
+      "label": "维护授权",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "授权有效期",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "验收态回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "运行摘要稳定回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 5007
+    },
+    {
+      "label": "已登记共享定位依赖回执",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "商户完整离线测试",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 10634
+    },
+    {
+      "label": "新维护收据固化",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "验收态摘要刷新",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "刷新后门禁回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 2
+    }
+  ],
+  "repairType": "registered-shared-desktop-locator",
+  "refreshedFileCount": 19,
+  "maintenanceReceiptPath": "state/taobao-agent-new-merchants/maintenance/refresh-20260929-1435/maintenance-receipt.json",
+  "maintenanceReceiptSha256": "7257212a7c12f5ccc8fba74bdb90e72856de7c6e238a41099174e26b60b5f61c",
+  "dependencyReceiptPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/maintenance/dep-20260929-1430/receipt.json",
+  "elapsedMs": 15646
+}

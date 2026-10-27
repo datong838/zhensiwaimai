@@ -1,0 +1,98 @@
+{
+  "bridgeVersion": 1,
+  "ok": false,
+  "verified": false,
+  "payloadType": "file",
+  "state": "blocked",
+  "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+  "payloads": [
+    {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-intelligent-customer-service/records/美团客户回复记录-2026-10-24.xlsx",
+      "name": "美团客户回复记录-2026-10-24.xlsx",
+      "size": 6191,
+      "sha256": "540f52e41b13579ac46529bf3da5d1d27edddb424c3e357eeae3b4c4a4ec8081"
+    }
+  ],
+  "sendAttempts": 0,
+  "newSendAttempts": 0,
+  "reason": "ui-tree-only-required",
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": false,
+    "status": "blocked",
+    "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "channel": "desktop",
+    "requestDigest": "8490c3d3286a78a9afc956d19410bef243878edc2d1a1b3a87ed61c8d880c6db",
+    "runtimeModelDecisions": 0,
+    "items": [],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 1
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 2
+      }
+    ],
+    "reason": "ui-tree-only-required",
+    "elapsedMs": 4,
+    "eventKey": "6f13ef2ba1d5d725176671892819265f61052cf5c45479f1e5d4bb24633bec30",
+    "reviewSummary": {
+      "totalElapsedMs": 4,
+      "result": "blocked",
+      "stageCount": 3,
+      "completedStages": 3,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/meituan-customer-reply-daily/wechat-attempts/meituan-customer-reply-daily-2026-10-24-145325.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 1,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "failed",
+      "pitfalls": [
+        {
+          "code": "messaging-stage",
+          "reason": "ui-tree-only-required"
+        }
+      ],
+      "elapsedMs": 2,
+      "item": 3,
+      "label": "preflight"
+    }
+  ],
+  "elapsedMs": 4,
+  "reviewSummary": {
+    "totalElapsedMs": 4,
+    "itemCount": 3,
+    "pitfallCount": 1,
+    "result": "failed"
+  }
+}

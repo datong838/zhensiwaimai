@@ -1,0 +1,458 @@
+{
+  "ok": true,
+  "executor": "wechat-desktop-sender",
+  "channel": "desktop",
+  "groupName": "FEIBING NEO AI数字员工",
+  "payloadType": "text",
+  "sendAttempts": 1,
+  "runtimeModelDecisions": 0,
+  "stage": "post_send_verify",
+  "stageMs": {
+    "locate_group": 342,
+    "verify_target_and_input": 7474,
+    "prepare_payload": 1561,
+    "claim_and_send": 3993,
+    "post_send_verify": 16242
+  },
+  "payloadIdentity": "069993b5845fcc975d4c29b4d8c2bc3c1dcee59678541db514a41b4be33abc24",
+  "payloads": [
+    {
+      "text": "喀什地区\n邢竣淇，13239095761\n鸡小焖黄焖鸡米饭（盖饭·廊桥水岸店）\n新疆学府街道廊桥水岸社区时代大道201号(廊桥水岸B区)SB12栋1层S08号商铺",
+      "sha256": "d987359465c0f078cfeb6923e280ceeeac27290eb9399254eb2f4006247fe2f1"
+    }
+  ],
+  "groupPreflight": {
+    "ok": true,
+    "action": "open-group",
+    "group": "FEIBING NEO AI数字员工",
+    "header": "FEIBING NEO AI数字员工",
+    "note": "ax-current-header",
+    "reason": null,
+    "sendAttempts": 0,
+    "runtimeModelDecisions": 0,
+    "stageMs": {
+      "exact_group_preflight": 342
+    },
+    "artifacts": [],
+    "hardGate": false
+  },
+  "textInputVerified": true,
+  "textWriteAttempts": 1,
+  "clipboardClearedBeforeTextWrite": true,
+  "preparedInputChangedPixels": 28453,
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/state/taobao-agent-new-merchants/send-attempts/916637aa5927b1defe89a75e72cdf7b119f210cedc4af68cb62a2ed600756c15.json",
+  "postSendInputCleared": [
+    true,
+    true
+  ],
+  "postSendFailureReason": "desktop-post-send-verification-unknown",
+  "reason": "desktop-post-send-verification-unknown",
+  "state": "verified",
+  "elapsedMs": 29615,
+  "sendReview": [
+    {
+      "item": 1,
+      "stage": "locate_group",
+      "label": "精确定位目标群",
+      "elapsedMs": 342,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 2,
+      "stage": "verify_target_and_input",
+      "label": "复核目标群与输入框",
+      "elapsedMs": 7474,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 3,
+      "stage": "prepare_payload",
+      "label": "准备并复核发送载荷",
+      "elapsedMs": 1561,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 4,
+      "stage": "claim_and_send",
+      "label": "领取防重账本并单次发送",
+      "elapsedMs": 3993,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 5,
+      "stage": "post_send_verify",
+      "label": "发送后双帧复核",
+      "elapsedMs": 16242,
+      "status": "failed",
+      "pitfalls": [
+        {
+          "code": "send-failure",
+          "reason": "desktop-post-send-verification-unknown"
+        }
+      ]
+    }
+  ],
+  "reviewSummary": {
+    "totalElapsedMs": 29615,
+    "itemCount": 5,
+    "pitfallCount": 1,
+    "result": "failed"
+  },
+  "verified": true,
+  "verifiedAt": 1789311855.4237592,
+  "verificationMethod": "desktop-bubble-copy-exact-two-frame",
+  "reconciledWithoutSend": true,
+  "reconcileObservation": {
+    "ok": true,
+    "bubblePositions": [
+      [
+        1310.0,
+        946.0
+      ],
+      [
+        1310.0,
+        946.0
+      ]
+    ],
+    "copyMenuCount": 1,
+    "composerEmpty": true,
+    "copiedTextSha256": "d987359465c0f078cfeb6923e280ceeeac27290eb9399254eb2f4006247fe2f1",
+    "scrolls": [
+      {
+        "ok": true,
+        "messageList": {
+          "x": 330.0,
+          "y": 104.0,
+          "width": 810.0,
+          "height": 471.0
+        },
+        "scrollEvents": 12,
+        "frame": 1,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "messageList": {
+          "x": 330.0,
+          "y": 104.0,
+          "width": 810.0,
+          "height": 471.0
+        },
+        "scrollEvents": 12,
+        "frame": 1,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "messageList": {
+          "x": 330.0,
+          "y": 104.0,
+          "width": 810.0,
+          "height": 471.0
+        },
+        "scrollEvents": 12,
+        "frame": 1,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "messageList": {
+          "x": 330.0,
+          "y": 104.0,
+          "width": 810.0,
+          "height": 471.0
+        },
+        "scrollEvents": 12,
+        "frame": 1,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "messageList": {
+          "x": 330.0,
+          "y": 104.0,
+          "width": 810.0,
+          "height": 471.0
+        },
+        "scrollEvents": 12,
+        "frame": 2,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "messageList": {
+          "x": 330.0,
+          "y": 104.0,
+          "width": 810.0,
+          "height": 471.0
+        },
+        "scrollEvents": 12,
+        "frame": 2,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "messageList": {
+          "x": 330.0,
+          "y": 104.0,
+          "width": 810.0,
+          "height": 471.0
+        },
+        "scrollEvents": 12,
+        "frame": 2,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "messageList": {
+          "x": 330.0,
+          "y": 104.0,
+          "width": 810.0,
+          "height": 471.0
+        },
+        "scrollEvents": 12,
+        "frame": 2,
+        "recoveryCycle": 1
+      }
+    ],
+    "frameAnchors": [
+      {
+        "ok": true,
+        "x": 1231.0,
+        "y": 909.0,
+        "matchedLineIndexes": [
+          0,
+          1,
+          2
+        ],
+        "matchedAnchorCount": 3,
+        "linePositions": {
+          "0": [
+            1138.0,
+            867.0
+          ],
+          "1": [
+            1231.0,
+            909.0
+          ],
+          "2": [
+            1310.0,
+            946.0
+          ]
+        },
+        "headerCount": 1,
+        "ocrAttempts": 1,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "x": 1231.0,
+        "y": 909.0,
+        "matchedLineIndexes": [
+          0,
+          1,
+          2
+        ],
+        "matchedAnchorCount": 3,
+        "linePositions": {
+          "0": [
+            1138.0,
+            867.0
+          ],
+          "1": [
+            1231.0,
+            909.0
+          ],
+          "2": [
+            1310.0,
+            946.0
+          ]
+        },
+        "headerCount": 1,
+        "ocrAttempts": 1,
+        "recoveryCycle": 1
+      }
+    ],
+    "stableLineIndex": 2
+  },
+  "copyReadback": {
+    "ok": true,
+    "bubblePositions": [
+      [
+        1310.0,
+        946.0
+      ],
+      [
+        1310.0,
+        946.0
+      ]
+    ],
+    "copyMenuCount": 1,
+    "composerEmpty": true,
+    "copiedTextSha256": "d987359465c0f078cfeb6923e280ceeeac27290eb9399254eb2f4006247fe2f1",
+    "scrolls": [
+      {
+        "ok": true,
+        "messageList": {
+          "x": 330.0,
+          "y": 104.0,
+          "width": 810.0,
+          "height": 471.0
+        },
+        "scrollEvents": 12,
+        "frame": 1,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "messageList": {
+          "x": 330.0,
+          "y": 104.0,
+          "width": 810.0,
+          "height": 471.0
+        },
+        "scrollEvents": 12,
+        "frame": 1,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "messageList": {
+          "x": 330.0,
+          "y": 104.0,
+          "width": 810.0,
+          "height": 471.0
+        },
+        "scrollEvents": 12,
+        "frame": 1,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "messageList": {
+          "x": 330.0,
+          "y": 104.0,
+          "width": 810.0,
+          "height": 471.0
+        },
+        "scrollEvents": 12,
+        "frame": 1,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "messageList": {
+          "x": 330.0,
+          "y": 104.0,
+          "width": 810.0,
+          "height": 471.0
+        },
+        "scrollEvents": 12,
+        "frame": 2,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "messageList": {
+          "x": 330.0,
+          "y": 104.0,
+          "width": 810.0,
+          "height": 471.0
+        },
+        "scrollEvents": 12,
+        "frame": 2,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "messageList": {
+          "x": 330.0,
+          "y": 104.0,
+          "width": 810.0,
+          "height": 471.0
+        },
+        "scrollEvents": 12,
+        "frame": 2,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "messageList": {
+          "x": 330.0,
+          "y": 104.0,
+          "width": 810.0,
+          "height": 471.0
+        },
+        "scrollEvents": 12,
+        "frame": 2,
+        "recoveryCycle": 1
+      }
+    ],
+    "frameAnchors": [
+      {
+        "ok": true,
+        "x": 1231.0,
+        "y": 909.0,
+        "matchedLineIndexes": [
+          0,
+          1,
+          2
+        ],
+        "matchedAnchorCount": 3,
+        "linePositions": {
+          "0": [
+            1138.0,
+            867.0
+          ],
+          "1": [
+            1231.0,
+            909.0
+          ],
+          "2": [
+            1310.0,
+            946.0
+          ]
+        },
+        "headerCount": 1,
+        "ocrAttempts": 1,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "x": 1231.0,
+        "y": 909.0,
+        "matchedLineIndexes": [
+          0,
+          1,
+          2
+        ],
+        "matchedAnchorCount": 3,
+        "linePositions": {
+          "0": [
+            1138.0,
+            867.0
+          ],
+          "1": [
+            1231.0,
+            909.0
+          ],
+          "2": [
+            1310.0,
+            946.0
+          ]
+        },
+        "headerCount": 1,
+        "ocrAttempts": 1,
+        "recoveryCycle": 1
+      }
+    ],
+    "stableLineIndex": 2
+  },
+  "physicalSendAttempts": 1,
+  "merchantId": "545238943",
+  "messageSha256": "d987359465c0f078cfeb6923e280ceeeac27290eb9399254eb2f4006247fe2f1"
+}

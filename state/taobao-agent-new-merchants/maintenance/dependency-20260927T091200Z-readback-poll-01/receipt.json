@@ -1,0 +1,43 @@
+{
+  "ok": false,
+  "action": "prepare",
+  "status": "blocked",
+  "review": [
+    {
+      "label": "维护授权",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "授权有效期",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "读取依赖清单",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "计算候选摘要",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 5
+    },
+    {
+      "label": "统一微信完整离线测试",
+      "status": "FAIL",
+      "pitfalls": [
+        "maintenance-command-failed:-m"
+      ],
+      "elapsedMs": 3775
+    }
+  ],
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "reason": "maintenance-command-failed:-m",
+  "elapsedMs": 3781
+}

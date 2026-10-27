@@ -1,0 +1,48 @@
+--- before/wechat_desktop.py
++++ after/wechat_desktop.py
+@@ -469,6 +469,21 @@
+     ]
+ 
+ 
++def ax_confirms_raw_group_header(group_name: str) -> bool:
++    """Read only: preserve the real group identity when OCR changes a plus glyph."""
++    state = wechat_ax_state()
++    window = state["window"]
++    pattern = re.escape(group_name) + r"(?:[（(]\d+[）)])?"
++    positions = {
++        (round(item["x"]), round(item["y"]), round(item["height"]))
++        for item in state.get("texts", [])
++        if item["x"] > window["x"] + 280
++        and window["y"] <= item["y"] < window["y"] + 100
++        and re.fullmatch(pattern, item["text"].strip())
++    }
++    return len(positions) == 1
++
++
+ def find_exact_headers(hits: list[OcrHit], group_name: str) -> list[OcrHit]:
+     # The chat pane moves horizontally with the normalized WeChat window width.
+     # Derive its left edge from the current OCR canvas instead of assuming the
+@@ -476,10 +491,21 @@
+     # text in search results and message history.
+     right_edge = max((h.cx + h.w / 2 for h in hits), default=0)
+     content_left = max(300.0, right_edge * 0.27)
+-    return [
++    top_hits = [
+         h for h in hits
+-        if h.cx > content_left and h.cy < 120 and exact_group_text(h.text, group_name)
++        if h.cx > content_left and h.cy < 120
+     ]
++    exact = [h for h in top_hits if exact_group_text(h.text, group_name)]
++    if "+" not in group_name and "＋" not in group_name:
++        return exact
++    visual = [h for h in top_hits if exact_group_text(
++        h.text.replace("＋", "+"), group_name.replace("＋", "+"))]
++    if visual == exact:
++        return exact
++    # Count all visual candidates before consulting AX; never collapse two titles.
++    if len(visual) != 1:
++        return visual
++    return visual if ax_confirms_raw_group_header(group_name) else []
+ 
+ 
+ def find_search_controls(hits: list[OcrHit]) -> list[OcrHit]:

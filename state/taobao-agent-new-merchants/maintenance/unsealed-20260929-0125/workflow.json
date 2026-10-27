@@ -1,0 +1,163 @@
+{
+  "ok": true,
+  "action": "prepare-unsealed-acceptance",
+  "status": "UNSEALED_ACCEPTANCE",
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "review": [
+    {
+      "label": "维护授权",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "授权有效期",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "原封板与验收凭据",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 6
+    },
+    {
+      "label": "统一微信依赖维护",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 3820
+    },
+    {
+      "label": "商户完整离线测试",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 10396
+    },
+    {
+      "label": "维护收据固化",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "原子切换验收态",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "验收态代码回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    }
+  ],
+  "expiresAt": "2026-09-29T03:00:00+08:00",
+  "maintenanceReceiptPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/maintenance/unsealed-20260929-0125/maintenance-receipt.json",
+  "maintenanceReceiptSha256": "518a22753b67b95d21ab710fede06212ca317acd5f350f8439e3619063d7abf5",
+  "dependencyMaintenance": {
+    "ok": true,
+    "action": "prepare",
+    "status": "prepared",
+    "review": [
+      {
+        "label": "维护授权",
+        "status": "PASS",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "label": "授权有效期",
+        "status": "PASS",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "label": "读取依赖清单",
+        "status": "PASS",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "label": "计算候选摘要",
+        "status": "PASS",
+        "pitfalls": [],
+        "elapsedMs": 5
+      },
+      {
+        "label": "授权范围",
+        "status": "PASS",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "label": "统一微信完整离线测试",
+        "status": "PASS",
+        "pitfalls": [],
+        "elapsedMs": 3746
+      },
+      {
+        "label": "原子写入依赖清单",
+        "status": "PASS",
+        "pitfalls": [],
+        "elapsedMs": 1
+      },
+      {
+        "label": "依赖清单回读",
+        "status": "PASS",
+        "pitfalls": [],
+        "elapsedMs": 2
+      },
+      {
+        "label": "统一入口完整性回读",
+        "status": "PASS",
+        "pitfalls": [],
+        "elapsedMs": 30
+      }
+    ],
+    "sendAttempts": 0,
+    "runtimeModelDecisions": 0,
+    "authorization": "user-20260918-code-maintenance",
+    "expiresAt": "2026-09-29T03:00:00+08:00",
+    "userInstructionSha256": "c91518a278b43dcab9835dbda5168b9a3adc188ce3c5c8b6d2c0e930a91ea974",
+    "dependencyManifestPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/dependencies.json",
+    "dependencyManifestBeforeSha256": "4729b073382911dc11a2dc56615190d98d80ac514ad9ebc02706714fac2d1db4",
+    "dependencyManifestAfterSha256": "4729b073382911dc11a2dc56615190d98d80ac514ad9ebc02706714fac2d1db4",
+    "changes": [],
+    "tests": {
+      "ok": true,
+      "elapsedMs": 3746,
+      "testCount": 195
+    },
+    "capabilityCheck": {
+      "ok": true,
+      "elapsedMs": 30,
+      "testCount": null
+    },
+    "candidateFileCount": 29,
+    "elapsedMs": 3784,
+    "receiptPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/maintenance/unsealed-20260929-0125/wechat-dependencies/receipt.json",
+    "receiptSha256": "47910d24f8ec99631934ba7a33960c2f391a11fa84c6193263101def724aed32"
+  },
+  "merchantTests": {
+    "ok": true,
+    "elapsedMs": 10396,
+    "testCount": 115,
+    "json": null
+  },
+  "candidateFileCount": 19,
+  "verification": {
+    "ok": true,
+    "status": "UNSEALED_ACCEPTANCE",
+    "manifestSha256": "a376b127dce9e2d82b3a62dddd64883e571018367ed45cdf20272d4e3b4cae0b",
+    "fileCount": 19,
+    "authorization": "user-20260916-production-hardening",
+    "runtimeModelDecisions": 0,
+    "maintenanceAcceptance": "desktop-wechat-shared-preflight",
+    "sharedTextAcceptance": "wechat-messaging-desktop-text",
+    "sharedMediaAcceptance": "not-required-by-text-only-merchant-workflow"
+  },
+  "elapsedMs": 14224
+}

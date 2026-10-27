@@ -1,0 +1,50 @@
+{
+  "ok": false,
+  "status": "blocked",
+  "groupName": "FEIBING NEO AI数字员工",
+  "channel": "mobile",
+  "requestDigest": "c8aecf28a25fcdd6b9367fc157d27143403a6b2a3c4541bed275f5ae1b86fd4d",
+  "runtimeModelDecisions": 0,
+  "items": [],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "failed",
+      "pitfalls": [
+        "wechat-home-not-recognized"
+      ],
+      "elapsedMs": 35362
+    }
+  ],
+  "reason": "wechat-home-not-recognized",
+  "sendAttempts": 0,
+  "elapsedMs": 38760,
+  "eventKey": "df2c040f7082237bc20cced4824b2862370801858de6a68c0d5b2e9e41e7675d",
+  "reviewSummary": {
+    "totalElapsedMs": 38760,
+    "result": "blocked",
+    "stageCount": 3,
+    "completedStages": 2,
+    "failedStages": [
+      {
+        "stage": "preflight",
+        "status": "failed",
+        "pitfalls": [
+          "wechat-home-not-recognized"
+        ]
+      }
+    ]
+  }
+}

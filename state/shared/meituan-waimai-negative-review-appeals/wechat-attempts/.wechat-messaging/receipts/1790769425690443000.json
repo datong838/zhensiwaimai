@@ -1,0 +1,50 @@
+{
+  "ok": false,
+  "status": "blocked",
+  "groupName": "FEIBING NEO AI数字员工",
+  "channel": "mobile",
+  "requestDigest": "dbb797d5f3d363f9485bfe5214ce52b7a8064ffbb95d0d7f2115b4267d20ac7c",
+  "runtimeModelDecisions": 0,
+  "items": [],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "failed",
+      "pitfalls": [
+        "group-info-full-name-not-exact"
+      ],
+      "elapsedMs": 39169
+    }
+  ],
+  "reason": "group-info-full-name-not-exact",
+  "sendAttempts": 0,
+  "elapsedMs": 42657,
+  "eventKey": "df2c040f7082237bc20cced4824b2862370801858de6a68c0d5b2e9e41e7675d",
+  "reviewSummary": {
+    "totalElapsedMs": 42657,
+    "result": "blocked",
+    "stageCount": 3,
+    "completedStages": 2,
+    "failedStages": [
+      {
+        "stage": "preflight",
+        "status": "failed",
+        "pitfalls": [
+          "group-info-full-name-not-exact"
+        ]
+      }
+    ]
+  }
+}

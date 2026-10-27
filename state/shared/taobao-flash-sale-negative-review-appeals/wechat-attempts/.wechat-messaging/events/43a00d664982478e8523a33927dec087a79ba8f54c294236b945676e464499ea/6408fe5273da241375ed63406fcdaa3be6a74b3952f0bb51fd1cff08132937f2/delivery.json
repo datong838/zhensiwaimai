@@ -1,0 +1,115 @@
+{
+  "itemId": "0",
+  "sha256": "05d27b835209badcd9e106b4adb2025585d3fcc09194a12d3ce0cc2192ffc1c6",
+  "type": "file",
+  "status": "verified",
+  "claimedAt": 1790248054.6028428,
+  "sendAttempts": 1,
+  "verificationLevel": "file-name-size-ui",
+  "evidence": {
+    "ok": true,
+    "transportVerified": true,
+    "completionFrames": [
+      "/Users/ddt/work/projects/ai_agent/state/taobao-flash-sale-negative-review-appeals/wechat-attempts/.wechat-messaging/events/43a00d664982478e8523a33927dec087a79ba8f54c294236b945676e464499ea/6408fe5273da241375ed63406fcdaa3be6a74b3952f0bb51fd1cff08132937f2/transport/after-send-1.png",
+      "/Users/ddt/work/projects/ai_agent/state/taobao-flash-sale-negative-review-appeals/wechat-attempts/.wechat-messaging/events/43a00d664982478e8523a33927dec087a79ba8f54c294236b945676e464499ea/6408fe5273da241375ed63406fcdaa3be6a74b3952f0bb51fd1cff08132937f2/transport/after-send-2.png"
+    ]
+  },
+  "transport": {
+    "ok": true,
+    "executor": "wechat-desktop-sender",
+    "channel": "desktop",
+    "groupName": "FEIBING NEO AI数字员工",
+    "payloadType": "file",
+    "sendAttempts": 1,
+    "runtimeModelDecisions": 0,
+    "stage": "completed",
+    "stageMs": {
+      "locate_group": 864,
+      "verify_target_and_input": 2156,
+      "prepare_payload": 2649,
+      "claim_and_send": 4925,
+      "post_send_verify": 7508
+    },
+    "payloadIdentity": "062e696ac2b4d8ea4b0df01ebe49587837b1c16251e1676f6c3dd9100c41e71b",
+    "payloads": [
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/state/taobao-flash-sale-negative-review-appeals/wechat-attempts/.wechat-messaging/events/43a00d664982478e8523a33927dec087a79ba8f54c294236b945676e464499ea/6408fe5273da241375ed63406fcdaa3be6a74b3952f0bb51fd1cff08132937f2/payload/淘宝闪购差评申诉汇总-2026-09-23.xlsx",
+        "name": "淘宝闪购差评申诉汇总-2026-09-23.xlsx",
+        "size": 28248,
+        "sha256": "05d27b835209badcd9e106b4adb2025585d3fcc09194a12d3ce0cc2192ffc1c6"
+      }
+    ],
+    "groupPreflight": {
+      "ok": true,
+      "reason": null,
+      "sendAttempts": 0,
+      "group": "FEIBING NEO AI数字员工",
+      "header": "FEIBING NEO AI数字员工(19)",
+      "note": "ax-current-group-fast-path",
+      "groupTypeVerified": true,
+      "groupTypeProof": "member-count-header",
+      "composerVerifiedEmpty": true,
+      "attempts": []
+    },
+    "preparedInputChangedPixels": 54385,
+    "preparedInputChangedRatio": 0.146594,
+    "preparedFileObjectCount": 1,
+    "preparedFilePrefixesVerified": true,
+    "attemptMarker": "/Users/ddt/work/projects/ai_agent/state/taobao-flash-sale-negative-review-appeals/wechat-attempts/.wechat-messaging/events/43a00d664982478e8523a33927dec087a79ba8f54c294236b945676e464499ea/6408fe5273da241375ed63406fcdaa3be6a74b3952f0bb51fd1cff08132937f2/transport-ledger/attempt.json",
+    "postSendInputCleared": [
+      true,
+      true
+    ],
+    "verified": true,
+    "state": "verified",
+    "elapsedMs": 19102,
+    "sendReview": [
+      {
+        "item": 1,
+        "stage": "locate_group",
+        "label": "精确定位目标群",
+        "elapsedMs": 864,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 2,
+        "stage": "verify_target_and_input",
+        "label": "复核目标群与输入框",
+        "elapsedMs": 2156,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 3,
+        "stage": "prepare_payload",
+        "label": "准备并复核发送载荷",
+        "elapsedMs": 2649,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 4,
+        "stage": "claim_and_send",
+        "label": "领取防重账本并单次发送",
+        "elapsedMs": 4925,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 5,
+        "stage": "post_send_verify",
+        "label": "发送后双帧复核",
+        "elapsedMs": 7508,
+        "status": "completed",
+        "pitfalls": []
+      }
+    ],
+    "reviewSummary": {
+      "totalElapsedMs": 19102,
+      "itemCount": 5,
+      "pitfallCount": 0,
+      "result": "success"
+    }
+  }
+}

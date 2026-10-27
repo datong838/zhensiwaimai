@@ -1,0 +1,143 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "image",
+  "state": "verified",
+  "groupName": "FEIBING NEO AI数字员工",
+  "payloads": [
+    {
+      "path": "/private/tmp/zhensi_top10/05ff8552-99b5-4660-bd71-c5d81dbd9edd/2026-10-11_top10seller.png",
+      "name": "2026-10-11_top10seller.png",
+      "size": 370044,
+      "sha256": "898afcc0a0c52035161b7d0c6f85b587d57b9f56584204e4d9cd7ef64a5e40ac"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "FEIBING NEO AI数字员工",
+    "channel": "desktop",
+    "requestDigest": "4b4749b5d18a338a670eed99ebab8dbb840a03ed28bd4de9e56e1570fe4be911",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "898afcc0a0c52035161b7d0c6f85b587d57b9f56584204e4d9cd7ef64a5e40ac",
+        "type": "image",
+        "status": "verified",
+        "claimedAt": 1791769928.478643,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-file-card",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "FEIBING NEO AI数字员工",
+          "currentTitle": "FEIBING NEO AI数字员工",
+          "messageCount": 50,
+          "anchor": "file-card",
+          "anchorValue": "[图片]",
+          "anchorInTrailingPosition": true,
+          "autoKind": "image",
+          "readbackAt": 1791769960.9544692
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "FEIBING NEO AI数字员工",
+            "path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\2026-10-11_top10seller.png",
+            "kind": "image",
+            "auto": "image",
+            "uploaded_from": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/.runtime/send-ledger/.wechat-messaging/events/5759368594a429fad4ec5fd10b033e864a3283a0ef696474eb5e4ad7d6c0bb4c/5b590c298f51eb0a8981992b1e5ec6a17a564f44cca227103f4938b2cfd45fed/payload/2026-10-11_top10seller.png",
+            "server_path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\2026-10-11_top10seller.png"
+          },
+          "route": "relay",
+          "direct_error": "[Errno 65] No route to host",
+          "direct_local_network_blocked": true,
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 1
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 10021
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 32475
+      }
+    ],
+    "elapsedMs": 42501,
+    "eventKey": "5759368594a429fad4ec5fd10b033e864a3283a0ef696474eb5e4ad7d6c0bb4c",
+    "reviewSummary": {
+      "totalElapsedMs": 42501,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/.runtime/send-ledger/2026-10-11-main-16379fcc7508.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 1,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 10021,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 32475,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 42501,
+  "reviewSummary": {
+    "totalElapsedMs": 42501,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "ok": true,
+  "action": "prepare",
+  "status": "prepared",
+  "review": [
+    {
+      "label": "维护授权",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "授权有效期",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "读取依赖清单",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "计算候选摘要",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 4
+    },
+    {
+      "label": "授权范围",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "统一微信完整离线测试",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 3982
+    },
+    {
+      "label": "原子写入依赖清单",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "依赖清单回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "统一入口完整性回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 32
+    }
+  ],
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "authorization": "user-20260918-code-maintenance",
+  "expiresAt": "2026-09-29T23:00:00+08:00",
+  "userInstructionSha256": "c91518a278b43dcab9835dbda5168b9a3adc188ce3c5c8b6d2c0e930a91ea974",
+  "dependencyManifestPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/dependencies.json",
+  "dependencyManifestBeforeSha256": "4729b073382911dc11a2dc56615190d98d80ac514ad9ebc02706714fac2d1db4",
+  "dependencyManifestAfterSha256": "3b5634ea47727c90331afab55719dc9ab7305fee9175702b608a8f66e798b87d",
+  "changes": [
+    {
+      "path": "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/scripts/desktop_sender.py",
+      "before": "507934aca54bac903fd2a41501b8e2fc5ba944dd04e7ff616ebf7a330ee931c1",
+      "after": "d75890a3aeceefcf105c047a2e5ce73894f84e110d9ceffa0f47e41a9ee1aa10"
+    },
+    {
+      "path": "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/scripts/wechat_desktop.py",
+      "before": "01e576fb7bf0aceb04a89f9e4f6dfead3bd93ce42847d9f6ed2a3c217ec83feb",
+      "after": "4b8d95a1c998edb89976774ff041c6907034e4d3bcc4517a60e8b02122dd12b8"
+    },
+    {
+      "path": "scripts/dependency_maintenance.py",
+      "before": "99478dc1a7d9d2fbfa3c0ef7962e0a6b3d8cdbe3528948f5456dd578168bd025",
+      "after": "4a6a1c36363a038aaf9f34b0a7171afb58fd59eff549a22235efbd1ede16e5c8"
+    },
+    {
+      "path": "scripts/mobile_helpers.py",
+      "before": "43eb58449de724637e8f6b3ec27db3e071aa2f197103ba8c7e2841a7cde2fd94",
+      "after": "bc2606cf3ffa8cd7c65f4d2ecb1a310600b27a03b30f103e56d783601083bf61"
+    }
+  ],
+  "tests": {
+    "ok": true,
+    "elapsedMs": 3982,
+    "testCount": 197
+  },
+  "capabilityCheck": {
+    "ok": true,
+    "elapsedMs": 32,
+    "testCount": null
+  },
+  "candidateFileCount": 29,
+  "elapsedMs": 4020
+}

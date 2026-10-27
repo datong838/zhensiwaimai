@@ -1,0 +1,36 @@
+{
+  "ok": true,
+  "action": "refresh-unsealed-acceptance",
+  "status": "UNSEALED_ACCEPTANCE",
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "review": [
+    {
+      "label": "维护授权",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "验收态回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "验收态摘要刷新",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "刷新后门禁回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 2
+    }
+  ],
+  "refreshedFileCount": 19,
+  "maintenanceReceiptPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/state/taobao-agent-new-merchants/maintenance/2026-09-18-code-owned-100430/maintenance-receipt.json",
+  "elapsedMs": 10
+}

@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "kind": "controlled-marker-verification",
+  "authorizedBy": "大同 · 2026-10-06 会话内明确同意方案 A（同意写生产防重台账）",
+  "recordedAt": "2026-10-06T14:44:57+0800",
+  "group": "电销+直播攻坚组",
+  "item": {
+    "merchantId": "1332142200",
+    "merchantName": "旨寿司",
+    "recommendTime": "2026-10-05 23:24:18",
+    "tableOrder": 8,
+    "sha256": "10e36fb96a38da59bc089218e0b17a5f7a0534df69f0496992583225ddca259a"
+  },
+  "marker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/4ac1b723d471815a77080fada0ba4aff84a9214d09bfed8343e1a91f4d30684c.json",
+  "backup": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/4ac1b723d471815a77080fada0ba4aff84a9214d09bfed8343e1a91f4d30684c.json.bak-controlled-verified-20261006-144457",
+  "before": {
+    "sha256": "b8178c0a512b0bfa00ffe438e57b17ea16fd0750cd0c4a6b3e1feb10482d95c5",
+    "state": "attempted",
+    "verified": false,
+    "sendAttempts": null
+  },
+  "after": {
+    "sha256": "adedd38decc766931b15508cd719dd759ee4930e52f1dc231f1a0aba14a7229b",
+    "state": "verified",
+    "verified": true,
+    "sendAttempts": 1
+  },
+  "provenance": {
+    "decision": "controlled-verified-from-driver-readback",
+    "authorizedBy": "大同 · 2026-10-06 会话内明确同意方案 A（同意写生产防重台账）",
+    "incident": "本机中继 8 秒静默丢响应（localhost_relay.py，已于 2026-10-06 14:2x 修复上线）",
+    "why": "发送已实际执行并送达，但响应被中继吞掉、进程被杀，transport 收据从未落盘 ⇒ marker 停在 state=attempted / sendAttempts=null；代码层三条复核路径（sealed legacy_text_reconcile、WindowsAdapter.reconcile、重新 --execute）全部要求收据齐全 ⇒ 零自愈、游标永久阻塞。",
+    "evidenceBasis": "事故报告《20261006-发送响应丢失事故报告-中继8秒超时》§三：驱动只读回读（wx.read 50 条）确认旨寿司那条在群、位于会话尾部、时间戳 14:01、正文与载荷逐字一致；大同本人亦亲见。",
+    "noResendGuarantee": "本次结论化不触发任何发送；流程复用该 verified 收据后仅提交成功历史与游标。",
+    "replacedState": "attempted",
+    "evidenceObservedAt": "2026-10-06T14:01+08:00",
+    "recordedAt": "2026-10-06T14:44:57+0800",
+    "recordedBy": "WorkBuddy 监理",
+    "note": "本记录不伪造 transport/attemptReviews：该轮桥未返回任何收据。"
+  },
+  "verifications": [
+    "desktop._verify_delivery_evidence",
+    "runtime_contract.verify_delivery",
+    "blocked_zero_send_text_marker_matches=False",
+    "reconciliation_only=True"
+  ]
+}

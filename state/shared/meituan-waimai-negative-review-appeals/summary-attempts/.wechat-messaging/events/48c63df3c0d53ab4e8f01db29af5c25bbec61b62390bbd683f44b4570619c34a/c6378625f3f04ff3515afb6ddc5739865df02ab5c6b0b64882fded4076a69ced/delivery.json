@@ -1,0 +1,63 @@
+{
+  "itemId": "0",
+  "sha256": "81b529d6c56b41a965d31b5ad98ac32fd278eb4f83313e28c3577f37e5c80622",
+  "type": "image",
+  "status": "unknown",
+  "claimedAt": 1792807969.9727519,
+  "sendAttempts": 1,
+  "reason": "wecom-tail-unconfirmed",
+  "evidence": {
+    "tail_hit": false,
+    "media_marker_hit": false,
+    "sent": true,
+    "tail1": [
+      "2026-10-24基础诊断-运营问题分析.xlsx",
+      "由微信用户创建的外部群，含45位外部联系人 | 群主: 李知恒- AllenLi@微信",
+      "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+      "250.0"
+    ]
+  },
+  "transport": {
+    "kind": "image",
+    "sendAttempts": 1,
+    "sent": true,
+    "receipt": {
+      "result": "sent-tail-unconfirmed",
+      "verify": {
+        "tail_hit": false,
+        "media_marker_hit": false,
+        "sent": true,
+        "tail1": [
+          "2026-10-24基础诊断-运营问题分析.xlsx",
+          "由微信用户创建的外部群，含45位外部联系人 | 群主: 李知恒- AllenLi@微信",
+          "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+          "250.0"
+        ]
+      },
+      "steps": [
+        {
+          "navigate": "chat-title-verified:'上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰'"
+        },
+        {
+          "title_gate": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰"
+        },
+        {
+          "paste": true,
+          "try": 1
+        },
+        {
+          "title_gate_final": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰"
+        },
+        {
+          "send_attempts": [
+            {
+              "try": "enter",
+              "input_clean": true
+            }
+          ],
+          "sent": true
+        }
+      ]
+    }
+  }
+}

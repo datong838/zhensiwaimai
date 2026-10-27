@@ -1,0 +1,82 @@
+{
+  "ok": true,
+  "action": "prepare",
+  "status": "prepared",
+  "review": [
+    {
+      "label": "维护授权",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "授权有效期",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "读取依赖清单",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "计算候选摘要",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 26
+    },
+    {
+      "label": "统一微信完整离线测试",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 5483
+    },
+    {
+      "label": "原子写入依赖清单",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 2
+    },
+    {
+      "label": "依赖清单回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "统一入口完整性回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 35
+    }
+  ],
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "authorization": "user-20260918-code-maintenance",
+  "expiresAt": "2026-09-21T04:00:00+08:00",
+  "userInstructionSha256": "c91518a278b43dcab9835dbda5168b9a3adc188ce3c5c8b6d2c0e930a91ea974",
+  "dependencyManifestPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/dependencies.json",
+  "dependencyManifestBeforeSha256": "e94b318ad01788e5a89c0928c5c75590305f321fa57f5af73e6826b315a54260",
+  "dependencyManifestAfterSha256": "cd7bba7c357b7d46edb3cb99471246644e1a71f06dbcae45c439b2f2af530058",
+  "changes": [
+    {
+      "path": "scripts/workflow_bridge.py",
+      "before": "650c6ca32b095fe0cfd66978f9821d32947d34cf4ce87492af89a277d59460b9",
+      "after": "38f6d5f43d302fb424af02f003b02e1b744a3318a35ececd1e5e39b2356e659e"
+    }
+  ],
+  "tests": {
+    "ok": true,
+    "elapsedMs": 5483,
+    "testCount": 146
+  },
+  "capabilityCheck": {
+    "ok": true,
+    "elapsedMs": 35,
+    "testCount": null
+  },
+  "candidateFileCount": 29,
+  "elapsedMs": 5549
+}

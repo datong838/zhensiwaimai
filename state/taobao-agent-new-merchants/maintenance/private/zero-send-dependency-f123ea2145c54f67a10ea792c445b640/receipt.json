@@ -1,0 +1,82 @@
+{
+  "ok": true,
+  "action": "prepare",
+  "status": "prepared",
+  "review": [
+    {
+      "label": "维护授权",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "授权有效期",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "读取依赖清单",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "计算候选摘要",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "授权范围",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "统一微信完整离线测试",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 3745
+    },
+    {
+      "label": "原子写入依赖清单",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "依赖清单回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "统一入口完整性回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 38
+    }
+  ],
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "authorization": "user-20260928-merchant-zero-send-draft-recovery",
+  "expiresAt": "2026-09-29T00:00:00+08:00",
+  "userInstructionSha256": "0ace8c807a5917d407779c312a95ec6a7094f40417de114556555bb48ecdbf11",
+  "dependencyManifestPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/dependencies.json",
+  "dependencyManifestBeforeSha256": "cc7f4bafe9789bf615c3cbced4706af94c557159a2680913916669d30d4e628c",
+  "dependencyManifestAfterSha256": "cc7f4bafe9789bf615c3cbced4706af94c557159a2680913916669d30d4e628c",
+  "changes": [],
+  "tests": {
+    "ok": true,
+    "elapsedMs": 3745,
+    "testCount": 190
+  },
+  "capabilityCheck": {
+    "ok": true,
+    "elapsedMs": 38,
+    "testCount": null
+  },
+  "candidateFileCount": 29,
+  "elapsedMs": 3786
+}

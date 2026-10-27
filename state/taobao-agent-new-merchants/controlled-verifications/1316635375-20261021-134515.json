@@ -1,0 +1,49 @@
+{
+ "schemaVersion": 1,
+ "kind": "controlled-marker-verification",
+ "authorizedBy": "授权串（操作者：WorkBuddy 监理）",
+ "recordedAt": "2026-10-21T13:45:15+0800",
+ "group": "电销+直播攻坚组",
+ "merchantId": "1316635375",
+ "marker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/bab7269a6741de196f05e2daf7435dca24be11e909be9c0e4cd45c3a88eb3bfd.json",
+ "backup": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/bab7269a6741de196f05e2daf7435dca24be11e909be9c0e4cd45c3a88eb3bfd.json.bak-controlled-verified-20261021-134515",
+ "evidenceSidecar": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/bab7269a6741de196f05e2daf7435dca24be11e909be9c0e4cd45c3a88eb3bfd.json.readback-evidence-20261021-134515.json",
+ "before": {
+  "sha256": "5ee09ad90ec440b308dd7a7242ad8deb5910f00b23f8f9563eae9e3303498181",
+  "state": "attempted",
+  "verified": false,
+  "sendAttempts": null
+ },
+ "after": {
+  "sha256": "bab80ebbb92cc206544ca1027ef5906f26457b87bb7b6ecda31e74646aa1efb1",
+  "state": "verified",
+  "verified": true,
+  "sendAttempts": 1
+ },
+ "evidence": {
+  "ok": true,
+  "resolvedGroup": "电销+直播攻坚组",
+  "currentTitle": "电销+直播攻坚组",
+  "messageCount": 42,
+  "anchor": "text-exact",
+  "anchorValue": "城市：红河哈尼族彝族自治州  ；  联系人：李嘉丽，13769390672  ；  店铺：巷陌食集  ；  地址：异龙镇卫家营社区异龙镇小西山7号",
+  "anchorInTrailingPosition": true,
+  "readbackAt": 1792561515.274986,
+  "strategy": "exact"
+ },
+ "provenance": {
+  "decision": "controlled-verified-from-driver-readback",
+  "tool": "runtime/conclude_attempt_deadlock.py (A2b-②)",
+  "authorizedBy": "授权串 conclude:eca998cdbe1d（操作者：WorkBuddy 监理）",
+  "recordedAt": "2026-10-21T13:45:15+0800",
+  "recordedBy": "WorkBuddy 监理",
+  "replacedState": "attempted",
+  "evidenceObservedAt": "2026-10-21T13:45:15+0800",
+  "evidenceBasis": "驱动只读回读：目标会话标题当前，且载荷精确文本位于会话尾部（anchor=text-exact）。",
+  "noResendGuarantee": "本次结论化不触发任何发送；流程复用该 verified 收据后仅提交成功历史与游标。",
+  "note": "本记录不伪造 transport/attemptReviews：本工具只做只读读回取证，不复现桥的真实发送收据。；13:40:19 kickstart 打断 13:38:39 run 第 2 家发送后的回执窗口；readback 取证消息已在群尾"
+ },
+ "verifications": [
+  "conclude_attempt_deadlock.readback-anchor"
+ ]
+}

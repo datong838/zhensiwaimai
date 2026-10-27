@@ -1,0 +1,398 @@
+{
+  "ok": false,
+  "executor": "workflow",
+  "runId": "b6ff9541-757d-4410-8dbc-958c8727b8b1",
+  "sendAttempts": 1,
+  "preflightMs": 5878,
+  "runtimeModelDecisions": 0,
+  "receiptFile": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/.runtime/workflow-runs/b6ff9541-757d-4410-8dbc-958c8727b8b1/workflow_receipt.json",
+  "runtimePolicy": {
+    "policyId": "daily-top10-desktop-v1",
+    "browserProfile": "taobao-brand",
+    "browserPort": 9230,
+    "wechatChannel": "desktop",
+    "validatedFileCount": 7
+  },
+  "mode": "execute",
+  "windowsWechatPreflight": {
+    "ok": true,
+    "reason": null,
+    "candidateStrategy": null,
+    "resolvedGroup": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰"
+  },
+  "wechatGuard": {
+    "lockPath": "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/.runtime/wechat-ui-interaction.lock",
+    "lockWaitMs": 0,
+    "lockWaitCycles": 0,
+    "contentionWaitMs": 10000,
+    "contentionChecks": 4,
+    "stableChecksRequired": 2,
+    "acquired": true,
+    "released": true
+  },
+  "wechatChannel": "desktop",
+  "desktopRunId": "9b5a94b7-bb2c-4df8-b500-9b753d262961",
+  "desktop": {
+    "ok": true,
+    "executor": "desktop",
+    "browserController": "control-background-dedicated-chrome",
+    "profile": "taobao-brand",
+    "port": 9230,
+    "taskId": "top10-9b5a94b7-bb2c-4df8-b500-9b753d262961",
+    "runId": "9b5a94b7-bb2c-4df8-b500-9b753d262961",
+    "stageMs": {
+      "background_preflight": 183,
+      "open_home": 1770,
+      "dismiss_known_notice": 374,
+      "navigate_store_analysis": 1722,
+      "select_yesterday": 303,
+      "verify_sort": 656,
+      "capture_self_check": 2791
+    },
+    "stageResults": {
+      "background_preflight": "PASS",
+      "open_home": "PASS",
+      "dismiss_known_notice": "PASS",
+      "navigate_store_analysis": "PASS",
+      "select_yesterday": "PASS",
+      "verify_sort": "PASS",
+      "capture_self_check": "PASS"
+    },
+    "retryCount": 0,
+    "sendAttempts": 0,
+    "runtimeModelDecisions": 0,
+    "receiptFile": "/tmp/zhensi_top10/9b5a94b7-bb2c-4df8-b500-9b753d262961/desktop_receipt.json",
+    "stage": "capture_self_check",
+    "startedAt": 1792973413195,
+    "deadlineAt": 1792973593195,
+    "dataDate": "2026-10-25",
+    "deviceScaleFactor": 2,
+    "homeUrl": "https://melody.shop.ele.me/app/chain/95708808/dashboard#app.chainshop.dashboard",
+    "knownNotice": "DISMISSED",
+    "storeUrl": "https://melody.shop.ele.me/app/chain/95708808/store-analysis#app.chainshop.store-analysis?path=1&dateType=realTime&orderCol=valid_ord_amt&orderType=DESC",
+    "captureGeometry": {
+      "viewport": {
+        "width": 2200,
+        "height": 1800
+      },
+      "tableBox": {
+        "x": 652,
+        "y": 621.421875,
+        "width": 1120,
+        "height": 826.96875
+      },
+      "pagerBox": {
+        "x": 1188.296875,
+        "y": 1464.390625,
+        "width": 583.703125,
+        "height": 32
+      },
+      "clip": {
+        "x": 652,
+        "y": 621,
+        "width": 1120,
+        "height": 882
+      }
+    },
+    "captureScale": 1,
+    "file": "/tmp/zhensi_top10/9b5a94b7-bb2c-4df8-b500-9b753d262961/2026-10-25_top10seller.png",
+    "width": 2240,
+    "height": 1764,
+    "sha256": "6383a2785de838bc851a22eb21019ee000e983b25ee360646a402b13dbb53332",
+    "stores": [
+      "味之绝美蛙鱼火锅(周浦万达店)",
+      "味之绝·美蛙鱼头火锅(亚新广场店)",
+      "味之绝热血美蛙鱼头火锅(五角场万达店)",
+      "味之绝美蛙鱼头火锅(宝山万达店)",
+      "湘味小厨(活力城店)",
+      "繁花肴(缤谷广场店)",
+      "严二嬢鲜鱼火锅(北蔡店)",
+      "渔味妙酸菜鱼烤鱼(龙茗路店)",
+      "雅位·新上海菜(龙湖天街店)",
+      "湘锅锅·地道湖南菜·长沙大排档(浦江店)"
+    ],
+    "revenues": [
+      14976.35,
+      14224.6,
+      12597.96,
+      10811.96,
+      10800.37,
+      8778.6,
+      8730.6,
+      8252.01,
+      7986.2,
+      7532
+    ],
+    "page": 1,
+    "pageSize": 10,
+    "layout": "background-table-and-pagination",
+    "capture": {
+      "x": 652,
+      "y": 621,
+      "width": 1120,
+      "height": 882
+    },
+    "elapsedMs": 7647
+  },
+  "delivery": {
+    "bridgeVersion": 1,
+    "ok": false,
+    "verified": false,
+    "payloadType": "image",
+    "state": "unknown",
+    "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "payloads": [
+      {
+        "path": "/private/tmp/zhensi_top10/9b5a94b7-bb2c-4df8-b500-9b753d262961/2026-10-25_top10seller.png",
+        "name": "2026-10-25_top10seller.png",
+        "size": 350378,
+        "sha256": "6383a2785de838bc851a22eb21019ee000e983b25ee360646a402b13dbb53332"
+      }
+    ],
+    "sendAttempts": 1,
+    "newSendAttempts": 1,
+    "reason": "image-submission-awaits-read-only-verification",
+    "runtimeModelDecisions": 0,
+    "commonReceipt": {
+      "ok": false,
+      "status": "unknown",
+      "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+      "channel": "desktop",
+      "requestDigest": "ed6b67170ae22f7cd85f9878035dcdedb8e141a33b1f14712cf8c84749b7d330",
+      "runtimeModelDecisions": 0,
+      "items": [
+        {
+          "itemId": "0",
+          "sha256": "6383a2785de838bc851a22eb21019ee000e983b25ee360646a402b13dbb53332",
+          "type": "image",
+          "status": "unknown",
+          "claimedAt": 1792973426.849178,
+          "sendAttempts": 1,
+          "resolvedGroup": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+          "inputEmpty": true,
+          "reason": "native-ui-inline-image-not-exposed",
+          "backend": "system-events-ui-tree"
+        }
+      ],
+      "review": [
+        {
+          "stage": "authorization",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "freeze:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "preflight",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 669
+        },
+        {
+          "stage": "send:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 13712
+        }
+      ],
+      "executionComplete": true,
+      "verificationPending": [
+        "0"
+      ],
+      "reason": "image-submission-awaits-read-only-verification",
+      "elapsedMs": 14384,
+      "eventKey": "633dbdb0fb82914ffcd808d4969bb63cfd2ab0e971e98cc85e2c752325dbb4e0",
+      "reviewSummary": {
+        "totalElapsedMs": 14384,
+        "result": "unknown",
+        "stageCount": 4,
+        "completedStages": 4,
+        "failedStages": []
+      }
+    },
+    "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/.runtime/send-ledger/2026-10-25-main-cc43d929019d.json",
+    "sendReview": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0,
+        "item": 1,
+        "label": "authorization"
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0,
+        "item": 2,
+        "label": "freeze:0"
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 669,
+        "item": 3,
+        "label": "preflight"
+      },
+      {
+        "stage": "send:0",
+        "status": "failed",
+        "pitfalls": [
+          {
+            "code": "messaging-stage",
+            "reason": "native-ui-inline-image-not-exposed"
+          }
+        ],
+        "elapsedMs": 13712,
+        "item": 4,
+        "label": "send:0"
+      }
+    ],
+    "elapsedMs": 14384,
+    "reviewSummary": {
+      "totalElapsedMs": 14384,
+      "itemCount": 4,
+      "pitfallCount": 1,
+      "result": "failed"
+    }
+  },
+  "desktopWechat": {
+    "bridgeVersion": 1,
+    "ok": false,
+    "verified": false,
+    "payloadType": "image",
+    "state": "unknown",
+    "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "payloads": [
+      {
+        "path": "/private/tmp/zhensi_top10/9b5a94b7-bb2c-4df8-b500-9b753d262961/2026-10-25_top10seller.png",
+        "name": "2026-10-25_top10seller.png",
+        "size": 350378,
+        "sha256": "6383a2785de838bc851a22eb21019ee000e983b25ee360646a402b13dbb53332"
+      }
+    ],
+    "sendAttempts": 1,
+    "newSendAttempts": 1,
+    "reason": "image-submission-awaits-read-only-verification",
+    "runtimeModelDecisions": 0,
+    "commonReceipt": {
+      "ok": false,
+      "status": "unknown",
+      "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+      "channel": "desktop",
+      "requestDigest": "ed6b67170ae22f7cd85f9878035dcdedb8e141a33b1f14712cf8c84749b7d330",
+      "runtimeModelDecisions": 0,
+      "items": [
+        {
+          "itemId": "0",
+          "sha256": "6383a2785de838bc851a22eb21019ee000e983b25ee360646a402b13dbb53332",
+          "type": "image",
+          "status": "unknown",
+          "claimedAt": 1792973426.849178,
+          "sendAttempts": 1,
+          "resolvedGroup": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+          "inputEmpty": true,
+          "reason": "native-ui-inline-image-not-exposed",
+          "backend": "system-events-ui-tree"
+        }
+      ],
+      "review": [
+        {
+          "stage": "authorization",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "freeze:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0
+        },
+        {
+          "stage": "preflight",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 669
+        },
+        {
+          "stage": "send:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 13712
+        }
+      ],
+      "executionComplete": true,
+      "verificationPending": [
+        "0"
+      ],
+      "reason": "image-submission-awaits-read-only-verification",
+      "elapsedMs": 14384,
+      "eventKey": "633dbdb0fb82914ffcd808d4969bb63cfd2ab0e971e98cc85e2c752325dbb4e0",
+      "reviewSummary": {
+        "totalElapsedMs": 14384,
+        "result": "unknown",
+        "stageCount": 4,
+        "completedStages": 4,
+        "failedStages": []
+      }
+    },
+    "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/.runtime/send-ledger/2026-10-25-main-cc43d929019d.json",
+    "sendReview": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0,
+        "item": 1,
+        "label": "authorization"
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0,
+        "item": 2,
+        "label": "freeze:0"
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 669,
+        "item": 3,
+        "label": "preflight"
+      },
+      {
+        "stage": "send:0",
+        "status": "failed",
+        "pitfalls": [
+          {
+            "code": "messaging-stage",
+            "reason": "native-ui-inline-image-not-exposed"
+          }
+        ],
+        "elapsedMs": 13712,
+        "item": 4,
+        "label": "send:0"
+      }
+    ],
+    "elapsedMs": 14384,
+    "reviewSummary": {
+      "totalElapsedMs": 14384,
+      "itemCount": 4,
+      "pitfallCount": 1,
+      "result": "failed"
+    }
+  },
+  "reason": "desktop-wechat:image-submission-awaits-read-only-verification",
+  "endToEndMs": 27382,
+  "wallMs": 33611
+}

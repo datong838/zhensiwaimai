@@ -1,0 +1,294 @@
+{
+  "ok": true,
+  "executor": "wechat-desktop-sender",
+  "channel": "desktop",
+  "groupName": "电销+直播攻坚组",
+  "payloadType": "text",
+  "sendAttempts": 1,
+  "runtimeModelDecisions": 0,
+  "stage": "completed",
+  "stageMs": {
+    "locate_group": 311,
+    "verify_target_and_input": 6279,
+    "prepare_payload": 1660,
+    "claim_and_send": 3120,
+    "post_send_verify": 13438
+  },
+  "payloadIdentity": "29d9712718076857cd013bce1e0170f7ccfa6729317c54e82757f68ae1e0d972",
+  "payloads": [
+    {
+      "text": "惠州市\n苏先生，18122814908\n川湘菜馆\n园洲镇土瓜圩村657号(住宅)热食类食品制售",
+      "sha256": "6534057c77b129a56169396d2bf61745c0cd18464c9e2bb669905280f5710ebe"
+    }
+  ],
+  "groupPreflight": {
+    "ok": true,
+    "action": "open-group",
+    "group": "电销+直播攻坚组",
+    "header": "电销+直播攻坚组",
+    "note": "ax-current-header",
+    "reason": null,
+    "sendAttempts": 0,
+    "runtimeModelDecisions": 0,
+    "stageMs": {
+      "exact_group_preflight": 311
+    },
+    "artifacts": [],
+    "hardGate": false
+  },
+  "textInputVerified": true,
+  "textWriteAttempts": 1,
+  "clipboardClearedBeforeTextWrite": true,
+  "preparedInputChangedPixels": 15535,
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/state/taobao-agent-new-merchants/send-attempts/96b338636a49ede37e4d8518759ccdfee9d8e13b0107131c47e9d9619d248d5d.json",
+  "postSendInputCleared": [
+    true,
+    true
+  ],
+  "verified": true,
+  "state": "verified",
+  "elapsedMs": 24808,
+  "sendReview": [
+    {
+      "item": 1,
+      "stage": "locate_group",
+      "label": "精确定位目标群",
+      "elapsedMs": 311,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 2,
+      "stage": "verify_target_and_input",
+      "label": "复核目标群与输入框",
+      "elapsedMs": 6279,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 3,
+      "stage": "prepare_payload",
+      "label": "准备并复核发送载荷",
+      "elapsedMs": 1660,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 4,
+      "stage": "claim_and_send",
+      "label": "领取防重账本并单次发送",
+      "elapsedMs": 3120,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 5,
+      "stage": "post_send_verify",
+      "label": "发送后双帧复核",
+      "elapsedMs": 13438,
+      "status": "completed",
+      "pitfalls": []
+    }
+  ],
+  "reviewSummary": {
+    "totalElapsedMs": 24808,
+    "itemCount": 5,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "interactionLock": {
+    "lockPath": "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/.runtime/wechat-ui-interaction.lock",
+    "owner": "sender:51412:1789465554753127000",
+    "waitCycles": 0,
+    "waitMs": 0,
+    "acquired": true,
+    "released": true
+  },
+  "contentionRetries": 1,
+  "contentionWaitMs": 5000,
+  "contentionEvents": [
+    {
+      "phase": "send-before-attempt",
+      "attempt": 1,
+      "reason": "desktop-chat-input-focus-failed",
+      "waitMs": 5000
+    }
+  ],
+  "verificationMethod": "desktop-bubble-copy-exact-two-frame",
+  "copyReadback": {
+    "ok": true,
+    "bubblePositions": [
+      [
+        1667.0,
+        903.0
+      ],
+      [
+        1667.0,
+        903.0
+      ]
+    ],
+    "copyMenuCount": 1,
+    "composerEmpty": true,
+    "copiedTextSha256": "6534057c77b129a56169396d2bf61745c0cd18464c9e2bb669905280f5710ebe",
+    "scrolls": [
+      {
+        "ok": true,
+        "messageList": {
+          "x": 330.0,
+          "y": 104.0,
+          "width": 810.0,
+          "height": 468.0
+        },
+        "scrollEvents": 12,
+        "frame": 1,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "messageList": {
+          "x": 330.0,
+          "y": 104.0,
+          "width": 810.0,
+          "height": 468.0
+        },
+        "scrollEvents": 12,
+        "frame": 1,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "messageList": {
+          "x": 330.0,
+          "y": 104.0,
+          "width": 810.0,
+          "height": 468.0
+        },
+        "scrollEvents": 12,
+        "frame": 1,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "messageList": {
+          "x": 330.0,
+          "y": 104.0,
+          "width": 810.0,
+          "height": 468.0
+        },
+        "scrollEvents": 12,
+        "frame": 1,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "messageList": {
+          "x": 330.0,
+          "y": 104.0,
+          "width": 810.0,
+          "height": 468.0
+        },
+        "scrollEvents": 12,
+        "frame": 2,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "messageList": {
+          "x": 330.0,
+          "y": 104.0,
+          "width": 810.0,
+          "height": 468.0
+        },
+        "scrollEvents": 12,
+        "frame": 2,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "messageList": {
+          "x": 330.0,
+          "y": 104.0,
+          "width": 810.0,
+          "height": 468.0
+        },
+        "scrollEvents": 12,
+        "frame": 2,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "messageList": {
+          "x": 330.0,
+          "y": 104.0,
+          "width": 810.0,
+          "height": 468.0
+        },
+        "scrollEvents": 12,
+        "frame": 2,
+        "recoveryCycle": 1
+      }
+    ],
+    "frameAnchors": [
+      {
+        "ok": true,
+        "x": 1667.0,
+        "y": 903.0,
+        "matchedLineIndexes": [
+          0,
+          1,
+          2
+        ],
+        "matchedAnchorCount": 3,
+        "linePositions": {
+          "0": [
+            1563.0,
+            860.0
+          ],
+          "1": [
+            1667.0,
+            903.0
+          ],
+          "2": [
+            1576.0,
+            940.0
+          ]
+        },
+        "headerCount": 1,
+        "ocrAttempts": 1,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "x": 1667.0,
+        "y": 903.0,
+        "matchedLineIndexes": [
+          0,
+          1,
+          2
+        ],
+        "matchedAnchorCount": 3,
+        "linePositions": {
+          "0": [
+            1563.0,
+            860.0
+          ],
+          "1": [
+            1667.0,
+            903.0
+          ],
+          "2": [
+            1576.0,
+            940.0
+          ]
+        },
+        "headerCount": 1,
+        "ocrAttempts": 1,
+        "recoveryCycle": 1
+      }
+    ],
+    "stableLineIndex": 1
+  },
+  "physicalSendAttempts": 1,
+  "merchantId": "527163234",
+  "messageSha256": "6534057c77b129a56169396d2bf61745c0cd18464c9e2bb669905280f5710ebe"
+}

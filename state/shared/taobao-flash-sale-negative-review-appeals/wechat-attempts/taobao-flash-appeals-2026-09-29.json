@@ -1,0 +1,140 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "file",
+  "state": "verified",
+  "groupName": "FEIBING NEO AI数字员工",
+  "payloads": [
+    {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/outputs/taobao-flash-sale-negative-review-appeals-20260930/淘宝闪购差评申诉汇总-2026-09-29.xlsx",
+      "name": "淘宝闪购差评申诉汇总-2026-09-29.xlsx",
+      "size": 23896,
+      "sha256": "b6c25f2263aaba5ffaf31ff583b7f097858275807e54c0750d06f9675989e214"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "FEIBING NEO AI数字员工",
+    "channel": "desktop",
+    "requestDigest": "cd833c6820543388072448dd640250d9bb74e65ad4c5322804d8a54604c62ca2",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "b6c25f2263aaba5ffaf31ff583b7f097858275807e54c0750d06f9675989e214",
+        "type": "file",
+        "status": "verified",
+        "claimedAt": 1790753733.147687,
+        "sendAttempts": 1,
+        "verificationLevel": "windows-readback-file-card",
+        "evidence": {
+          "ok": true,
+          "resolvedGroup": "FEIBING NEO AI数字员工",
+          "currentTitle": "FEIBING NEO AI数字员工",
+          "messageCount": 36,
+          "anchor": "file-card",
+          "anchorValue": "[文件]",
+          "anchorInTrailingPosition": true,
+          "autoKind": "file",
+          "readbackAt": 1790753757.947669
+        },
+        "transport": {
+          "ok": true,
+          "data": {
+            "sent": true,
+            "who": "FEIBING NEO AI数字员工",
+            "path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\淘宝闪购差评申诉汇总-2026-09-29.xlsx",
+            "kind": "file",
+            "auto": "file",
+            "uploaded_from": "/Users/ddt/work/projects/ai_agent/state/taobao-flash-sale-negative-review-appeals/wechat-attempts/.wechat-messaging/events/f8c8c4b14fa10068d2613dd64240852b4d1beab9a48d90ffcc20682d19aee4f0/3ffad2d38753ed7c932e72179a58c1d72d2b951ce8986ee0a64cb3c4c27c9142/payload/淘宝闪购差评申诉汇总-2026-09-29.xlsx",
+            "server_path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\淘宝闪购差评申诉汇总-2026-09-29.xlsx"
+          },
+          "sendAttempts": 1
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 1
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 444
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 24799
+      }
+    ],
+    "elapsedMs": 25247,
+    "eventKey": "f8c8c4b14fa10068d2613dd64240852b4d1beab9a48d90ffcc20682d19aee4f0",
+    "reviewSummary": {
+      "totalElapsedMs": 25247,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/state/taobao-flash-sale-negative-review-appeals/wechat-attempts/taobao-flash-appeals-2026-09-29.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 1,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 444,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 24799,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 25247,
+  "reviewSummary": {
+    "totalElapsedMs": 25247,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  }
+}

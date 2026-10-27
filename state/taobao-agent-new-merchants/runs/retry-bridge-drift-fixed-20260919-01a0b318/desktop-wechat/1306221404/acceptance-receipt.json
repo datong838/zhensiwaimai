@@ -1,0 +1,566 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "太原市\n赵志鹏，13623656977\n重庆小面\n新兰路31号",
+      "sha256": "840f3b9e9ccbc00668d71f10c139c2efe0176f985b3c349c117608f4acce4715"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "ab9cbe9313bf010b0f2052c71d7743fea2f3a1e8f8a99140391d7f423920b88f",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "840f3b9e9ccbc00668d71f10c139c2efe0176f985b3c349c117608f4acce4715",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1789795583.945345,
+        "sendAttempts": 1,
+        "verificationLevel": "native-text-exact",
+        "evidence": {
+          "ok": true,
+          "bubblePositions": [
+            [
+              1838.0,
+              981.0
+            ],
+            [
+              1838.0,
+              981.0
+            ]
+          ],
+          "copyMenuCount": 1,
+          "composerEmpty": true,
+          "copiedTextSha256": "840f3b9e9ccbc00668d71f10c139c2efe0176f985b3c349c117608f4acce4715",
+          "scrolls": [
+            {
+              "ok": true,
+              "messageList": {
+                "x": 330.0,
+                "y": 104.0,
+                "width": 810.0,
+                "height": 468.0
+              },
+              "scrollEvents": 12,
+              "frame": 1,
+              "recoveryCycle": 1
+            },
+            {
+              "ok": true,
+              "messageList": {
+                "x": 330.0,
+                "y": 104.0,
+                "width": 810.0,
+                "height": 468.0
+              },
+              "scrollEvents": 12,
+              "frame": 1,
+              "recoveryCycle": 1
+            },
+            {
+              "ok": true,
+              "messageList": {
+                "x": 330.0,
+                "y": 104.0,
+                "width": 810.0,
+                "height": 468.0
+              },
+              "scrollEvents": 12,
+              "frame": 1,
+              "recoveryCycle": 1
+            },
+            {
+              "ok": true,
+              "messageList": {
+                "x": 330.0,
+                "y": 104.0,
+                "width": 810.0,
+                "height": 468.0
+              },
+              "scrollEvents": 12,
+              "frame": 1,
+              "recoveryCycle": 1
+            }
+          ],
+          "frameAnchors": [
+            {
+              "ok": true,
+              "candidateCount": 1,
+              "x": 1822.0,
+              "y": 942.0,
+              "matchedLineIndexes": [
+                0,
+                2,
+                3
+              ],
+              "matchedAnchorCount": 3,
+              "linePositions": {
+                "0": [
+                  1807.0,
+                  860.0
+                ],
+                "2": [
+                  1822.0,
+                  942.0
+                ],
+                "3": [
+                  1838.0,
+                  981.0
+                ]
+              },
+              "headerCount": 1,
+              "ocrAttempts": 1,
+              "headerVerifiedByAX": true,
+              "recoveryCycle": 1
+            },
+            {
+              "ok": true,
+              "candidateCount": 1,
+              "x": 1822.0,
+              "y": 942.0,
+              "matchedLineIndexes": [
+                0,
+                2,
+                3
+              ],
+              "matchedAnchorCount": 3,
+              "linePositions": {
+                "0": [
+                  1807.0,
+                  860.0
+                ],
+                "2": [
+                  1822.0,
+                  942.0
+                ],
+                "3": [
+                  1838.0,
+                  981.0
+                ]
+              },
+              "headerCount": 1,
+              "ocrAttempts": 1,
+              "headerVerifiedByAX": true,
+              "recoveryCycle": 1
+            }
+          ],
+          "stableLineIndex": 3,
+          "newOutgoingEvidence": {
+            "ok": true,
+            "frames": [
+              {
+                "position": [
+                  1838.0,
+                  981.0
+                ],
+                "greenPixels": 6720,
+                "changed": 100.918125
+              },
+              {
+                "position": [
+                  1838.0,
+                  981.0
+                ],
+                "greenPixels": 6720,
+                "changed": 100.918125
+              }
+            ]
+          }
+        },
+        "transport": {
+          "ok": true,
+          "executor": "wechat-desktop-sender",
+          "channel": "desktop",
+          "groupName": "电销+直播攻坚组",
+          "payloadType": "text",
+          "sendAttempts": 1,
+          "runtimeModelDecisions": 0,
+          "stage": "completed",
+          "stageMs": {
+            "locate_group": 691,
+            "verify_target_and_input": 1901,
+            "prepare_payload": 1693,
+            "claim_and_send": 3776,
+            "post_send_verify": 6323
+          },
+          "payloadIdentity": "e6f0f3bb6c9d5614e1ae1850f5784f71260cf0e6afb027b76da4b4a7568f06ef",
+          "payloads": [
+            {
+              "text": "太原市\n赵志鹏，13623656977\n重庆小面\n新兰路31号",
+              "sha256": "840f3b9e9ccbc00668d71f10c139c2efe0176f985b3c349c117608f4acce4715"
+            }
+          ],
+          "groupPreflight": {
+            "ok": true,
+            "reason": null,
+            "sendAttempts": 0,
+            "group": "电销+直播攻坚组",
+            "header": "电销+直播攻坚组(17)",
+            "note": "ax-current-group-fast-path",
+            "groupTypeVerified": true,
+            "groupTypeProof": "member-count-header",
+            "composerVerifiedEmpty": true,
+            "attempts": []
+          },
+          "textInputVerified": true,
+          "textWriteAttempts": 1,
+          "clipboardClearedBeforeTextWrite": true,
+          "preparedInputChangedPixels": 11145,
+          "preparedInputChangedRatio": 0.030172,
+          "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/state/taobao-agent-new-merchants/send-attempts/.wechat-messaging/events/ed631a3d4aaf0ee443167ed39848f51cb92daf5018799ba8afc361fe435d710a/a99e427c70908f4480ceccc6ebd6ab2282792a40152068002da08e1d11e7c8d7/transport-ledger/attempt.json",
+          "postSendInputCleared": [
+            true,
+            true
+          ],
+          "verified": true,
+          "state": "verified",
+          "elapsedMs": 14384,
+          "sendReview": [
+            {
+              "item": 1,
+              "stage": "locate_group",
+              "label": "精确定位目标群",
+              "elapsedMs": 691,
+              "status": "completed",
+              "pitfalls": []
+            },
+            {
+              "item": 2,
+              "stage": "verify_target_and_input",
+              "label": "复核目标群与输入框",
+              "elapsedMs": 1901,
+              "status": "completed",
+              "pitfalls": []
+            },
+            {
+              "item": 3,
+              "stage": "prepare_payload",
+              "label": "准备并复核发送载荷",
+              "elapsedMs": 1693,
+              "status": "completed",
+              "pitfalls": []
+            },
+            {
+              "item": 4,
+              "stage": "claim_and_send",
+              "label": "领取防重账本并单次发送",
+              "elapsedMs": 3776,
+              "status": "completed",
+              "pitfalls": []
+            },
+            {
+              "item": 5,
+              "stage": "post_send_verify",
+              "label": "发送后双帧复核",
+              "elapsedMs": 6323,
+              "status": "completed",
+              "pitfalls": []
+            }
+          ],
+          "reviewSummary": {
+            "totalElapsedMs": 14384,
+            "itemCount": 5,
+            "pitfallCount": 0,
+            "result": "success"
+          }
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 878
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 29645
+      }
+    ],
+    "elapsedMs": 30526,
+    "eventKey": "ed631a3d4aaf0ee443167ed39848f51cb92daf5018799ba8afc361fe435d710a",
+    "reviewSummary": {
+      "totalElapsedMs": 30526,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/state/taobao-agent-new-merchants/send-attempts/4865f3405340413c563d694a94ab43a3398a4e5eaea73c7942361291252ebeb3.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 878,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 29645,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 30526,
+  "reviewSummary": {
+    "totalElapsedMs": 30526,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "ok": true,
+    "bubblePositions": [
+      [
+        1838.0,
+        981.0
+      ],
+      [
+        1838.0,
+        981.0
+      ]
+    ],
+    "copyMenuCount": 1,
+    "composerEmpty": true,
+    "copiedTextSha256": "840f3b9e9ccbc00668d71f10c139c2efe0176f985b3c349c117608f4acce4715",
+    "scrolls": [
+      {
+        "ok": true,
+        "messageList": {
+          "x": 330.0,
+          "y": 104.0,
+          "width": 810.0,
+          "height": 468.0
+        },
+        "scrollEvents": 12,
+        "frame": 1,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "messageList": {
+          "x": 330.0,
+          "y": 104.0,
+          "width": 810.0,
+          "height": 468.0
+        },
+        "scrollEvents": 12,
+        "frame": 1,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "messageList": {
+          "x": 330.0,
+          "y": 104.0,
+          "width": 810.0,
+          "height": 468.0
+        },
+        "scrollEvents": 12,
+        "frame": 1,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "messageList": {
+          "x": 330.0,
+          "y": 104.0,
+          "width": 810.0,
+          "height": 468.0
+        },
+        "scrollEvents": 12,
+        "frame": 1,
+        "recoveryCycle": 1
+      }
+    ],
+    "frameAnchors": [
+      {
+        "ok": true,
+        "candidateCount": 1,
+        "x": 1822.0,
+        "y": 942.0,
+        "matchedLineIndexes": [
+          0,
+          2,
+          3
+        ],
+        "matchedAnchorCount": 3,
+        "linePositions": {
+          "0": [
+            1807.0,
+            860.0
+          ],
+          "2": [
+            1822.0,
+            942.0
+          ],
+          "3": [
+            1838.0,
+            981.0
+          ]
+        },
+        "headerCount": 1,
+        "ocrAttempts": 1,
+        "headerVerifiedByAX": true,
+        "recoveryCycle": 1
+      },
+      {
+        "ok": true,
+        "candidateCount": 1,
+        "x": 1822.0,
+        "y": 942.0,
+        "matchedLineIndexes": [
+          0,
+          2,
+          3
+        ],
+        "matchedAnchorCount": 3,
+        "linePositions": {
+          "0": [
+            1807.0,
+            860.0
+          ],
+          "2": [
+            1822.0,
+            942.0
+          ],
+          "3": [
+            1838.0,
+            981.0
+          ]
+        },
+        "headerCount": 1,
+        "ocrAttempts": 1,
+        "headerVerifiedByAX": true,
+        "recoveryCycle": 1
+      }
+    ],
+    "stableLineIndex": 3,
+    "newOutgoingEvidence": {
+      "ok": true,
+      "frames": [
+        {
+          "position": [
+            1838.0,
+            981.0
+          ],
+          "greenPixels": 6720,
+          "changed": 100.918125
+        },
+        {
+          "position": [
+            1838.0,
+            981.0
+          ],
+          "greenPixels": 6720,
+          "changed": 100.918125
+        }
+      ]
+    }
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": [
+    true,
+    true
+  ],
+  "stage": "completed",
+  "reconciledWithoutSend": false,
+  "attemptReviews": [
+    {
+      "attempt": 1,
+      "elapsedMs": 30604,
+      "ok": true,
+      "reason": null,
+      "sendAttempts": 1,
+      "sendReview": [
+        {
+          "stage": "authorization",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 1,
+          "label": "authorization"
+        },
+        {
+          "stage": "freeze:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 2,
+          "label": "freeze:0"
+        },
+        {
+          "stage": "preflight",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 878,
+          "item": 3,
+          "label": "preflight"
+        },
+        {
+          "stage": "send:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 29645,
+          "item": 4,
+          "label": "send:0"
+        }
+      ]
+    }
+  ],
+  "contentionRetries": 0,
+  "contentionWaitMs": 0,
+  "contentionEvents": [],
+  "merchantId": "1306221404",
+  "messageSha256": "840f3b9e9ccbc00668d71f10c139c2efe0176f985b3c349c117608f4acce4715"
+}

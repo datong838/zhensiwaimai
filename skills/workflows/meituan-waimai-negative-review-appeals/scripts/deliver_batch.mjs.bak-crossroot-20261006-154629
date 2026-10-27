@@ -1,0 +1,63 @@
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
+import fs from "node:fs/promises";
+import path from "node:path";
+
+const run = promisify(execFile);
+const python = "/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python";
+const bridge = "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/workflow_bridge_windows.py";
+const group = "FEIBING NEO AI数字员工";
+const authorization = "user-20260923-meituan-waimai-appeals-fixed-delivery";
+const shanghaiDay = (date = new Date()) => new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Shanghai", year: "numeric", month: "2-digit", day: "2-digit" }).format(date);
+const runDate = shanghaiDay();
+const businessDateValue = new Date(`${runDate}T00:00:00+08:00`);
+businessDateValue.setUTCDate(businessDateValue.getUTCDate() - 1);
+const businessDate = shanghaiDay(businessDateValue);
+const root = "/Users/ddt/work/projects/ai_agent/zhensi_waimai";
+const reportDir = path.join(root, "outputs", `meituan-waimai-negative-review-appeals-${runDate.replaceAll("-", "")}`);
+const report = path.join(reportDir, `美团外卖差评申诉汇总-${businessDate}.xlsx`);
+const ledger = "/Users/ddt/work/projects/ai_agent/state/meituan-waimai-negative-review-appeals/wechat-attempts";
+
+function args(correction = false) {
+  return [bridge, "--workflow-id", "meituan-waimai-appeals", "--group", group, "--payload-type", "file",
+    "--authorization", correction ? `user-${runDate.replaceAll("-", "")}-meituan-waimai-appeals-correction-v1` : authorization,
+    "--ledger", ledger, "--marker-name", `meituan-waimai-appeals-${businessDate}${correction ? "-correction-v1" : ""}.json`,
+    "--output-dir", path.join(reportDir, "wechat-delivery", ...(correction ? ["correction-v1"] : [])), "--item", report,
+    "--deadline-unix", String(Math.floor(Date.now() / 1000) + 180),
+    ...(correction ? ["--correction-v1"] : []), "--execute"];
+}
+
+async function main() {
+  const supplied = process.argv.slice(2);
+  const correction = supplied.includes("--correction-v1");
+  const mode = supplied.find((value) => value !== "--correction-v1");
+  if (supplied.some((value) => !["--execute", "--self-test", "--correction-v1"].includes(value))
+      || new Set(supplied).size !== supplied.length
+      || (correction && mode !== "--execute")) throw new Error("invalid correction or mode flags");
+  if (mode === "--self-test") {
+    const stat = await fs.stat(report);
+    const ok = stat.isFile() && report.endsWith(`-${businessDate}.xlsx`);
+    console.log(JSON.stringify({ ok, workflowId: "meituan-waimai-appeals", group, businessDate, itemCount: 1, runtimeModelDecisions: 0 }));
+    if (!ok) process.exitCode = 1;
+    return;
+  }
+  if (mode !== "--execute") throw new Error("usage: deliver_batch.mjs --execute|--self-test");
+  // 规则（大同 2026-10-05）：无新待申诉内容（records 目录无巡检/申诉记录）则跳过发送，避免空文件入客户群
+  const recordsDir = path.join(root, "records", "meituan-waimai-negative-review-appeals", businessDate);
+  let hasContent = false;
+  try {
+    const files = await fs.readdir(recordsDir);
+    hasContent = files.some((f) => f.endsWith(".md"));
+  } catch { hasContent = false; }
+  if (!hasContent) {
+    console.log(JSON.stringify({ ok: true, skipped: true, reason: `no-candidate-records-for-${businessDate}`, workflowId: "meituan-waimai-appeals", group, businessDate, itemCount: 0, runtimeModelDecisions: 0 }));
+    return;
+  }
+  const { stdout } = await run(python, args(correction), { timeout: 240_000, maxBuffer: 16 * 1024 * 1024 });
+  console.log(stdout.trim());
+}
+
+main().catch((error) => {
+  console.error(JSON.stringify({ ok: false, reason: String(error.message || error), stdout: error.stdout || "", stderr: error.stderr || "" }));
+  process.exitCode = 1;
+});

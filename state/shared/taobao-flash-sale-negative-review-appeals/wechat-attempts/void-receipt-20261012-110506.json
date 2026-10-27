@@ -1,0 +1,34 @@
+{
+  "voidedAt": "2026-10-12T11:05:06+08:00",
+  "authorization": "2026-10-12 大同指令：「差评申诉汇总 今天的也要发 昨天的补发。0行记录的 不要发」——昨天的补发授权含作废事故 marker",
+  "scope": {
+    "workflow": "taobao-flash-sale-negative-review-appeals",
+    "businessDate": "2026-10-11",
+    "markerName": "taobao-flash-appeals-2026-10-11.json",
+    "groupName": "FEIBING NEO AI数字员工",
+    "payloadType": "file"
+  },
+  "voided": {
+    "layer1": {
+      "marker": "taobao-flash-appeals-2026-10-11.json.voided-20261012-110506",
+      "bridgeLock": "taobao-flash-appeals-2026-10-11.bridge.lock.voided-20261012-110506"
+    },
+    "layer2": {
+      "eventDir": ".wechat-messaging/events/65e84555dd119c1f6830fdda4e1ef9742bc0d02d473039f4c567bed90a81dc08.voided-20261012-110506",
+      "frozenPayload": "淘宝闪购差评申诉汇总-2026-10-11.xlsx（2026-10-12 00:11 凌晨档误发的 0 行空表，4329B）"
+    }
+  },
+  "incidentContext": {
+    "whatHappened": "凌晨 00:11 档（earliest_hour=0 时期遗留排程）在午夜刚过时重采 businessDate=2026-10-11 数据，平台时序口径下返回 0 条，生成空表并外发到群（sendAttempts=1, verified，violating 10-04 铁律）。事后已双层修复：earliest 0→9 + deliver_batch.mjs hasDataRows 零条硬闸。",
+    "blockage": "该 verified marker 让今天白天所有轮次 already_verified 跳过——10-11 正确汇总无法补发。",
+    "differenceFromVoid-20261008": "10-08 先例是 sendAttempts=0（从未发出）的解死锁 void；本次是「空表已误发」的事故作废+重建，大同已显式授权补发。"
+  },
+  "notVoided": [
+    "taobao-flash-appeals-2026-10-10.json（10-11 09:45 verified，99 行真实数据，正常发送，严禁动）"
+  ],
+  "expectedOutcome": "下一轮 daemon（~11:54 档）重采 10-11 平台真实数据 → buildFullAppealReport 重建 xlsx（有数据）→ hasDataRows 硬闸放行 → 发送 10-11 正确汇总（即「昨天的补发」）。今天的 10-12 汇总明天凌晨后由排程正常发送（同样受零条硬闸保护）。0 行时硬闸 exit 1 拒发。",
+  "safetyChecks": {
+    "doubleSendRisk": "低：旧事件层已归档，新发送走全新 marker（requestDigest 不同）。10-10 的 verified marker 未动，今日不会重发 10-10。",
+    "zeroRowGate": "deliver_batch.mjs hasDataRows() 已在位（2026-10-12 凌晨修复），读回 xlsx A8 起数据行，0 行 exit 1。"
+  }
+}

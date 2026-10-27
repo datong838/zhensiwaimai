@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "voidedAt": "2026-10-07T11:44:22+08:00",
+  "voidedBy": "WorkBuddy 监理",
+  "authorization": "大同 2026-10-06「完成当日任务为最高原则」+ 本轮「微信正常 你尽快处理累积任务流」直接指令",
+  "scope": "微信窗口消失期（09:22-11:20 左右）出生的幂等绑定死锁清理，与 20261007-084135 同构（第三次）",
+  "voided": [
+    {
+      "flow": "daily-agent-new-merchants-to-wechat",
+      "layer": "per-merchant attempt marker",
+      "path": "state/taobao-agent-new-merchants/send-attempts/b26956b5fed5659707d078eb6b1589d2e84357b080e170e4f320ab45d191b43a.json → …voided-20261007-114422",
+      "merchant": "542957171 寿小卤·潮汕猪脚饭",
+      "payloadSha256": "3fa5d8e50b40c69c3bfce9c5770df023a8febbf0a189b22c8dbed848939a68b0",
+      "evidenceNeverSent": [
+        "claimedAt=1791331434 (10:08:22，微信窗口已消失后)",
+        "marker state=unknown, verified=false, sendAttempts=null",
+        "10:52 轮 delivery-progress: deduplication blocked / existing-attempt-reconcile-only",
+        "bridge 回执 1791338883381059000: status=unknown, sendAttempts 未记账任何成功"
+      ]
+    },
+    {
+      "flow": "taobao-flash-sale-negative-review-appeals",
+      "layer": "ledger marker + event binding (双层)",
+      "path": "state/taobao-flash-sale-negative-review-appeals/wechat-attempts/taobao-flash-appeals-2026-10-06.json → …voided-20261007-114422",
+      "path2": "…wechat-attempts/.wechat-messaging/events/977700814effacd1bf0a34111387065a946bd1c09fd68aebfb51c43dfb098264 → …voided-20261007-114422",
+      "eventBindingDigest": "5bd724678967584fa353c8830ba7d132f66e66c52098bc87ef01ebe925a3cae6",
+      "evidenceNeverSent": [
+        "marker state=blocked, sendAttempts=0（09:23 窗口期冻结）",
+        "事件目录仅 binding.json + preflight（10:52 重建后无任何 transport/delivery 收据）",
+        "10:08/10:52 两轮失败码均为 legacy-marker-binding-mismatch（每轮重采 sha 变化，绑定出生即死）"
+      ]
+    }
+  ],
+  "notVoided": {
+    "flow": "brand-negative-review-appeal-followup",
+    "reason": "条目1（appeal-2e65027f）10:08 已实际发出（transport sent=true，49.9s，10:09:20 回读锚点曾找到），void 会造成真实客户群重复发图。既定规则自动处置：authorization expiresAt=11:19:06 已过期，delivery_executor.run() 将按 2026-09-30 大同授权规则走 prior-event-authorization-expired-event-closed，skipped 收口 ok=True，条目2/3 随事件关闭不补发（与 D8 残留自然过期裁决同构）",
+    "items": {
+      "appeal-2e65027f68875207722c": "已发出（unknown 悬置），不重发",
+      "appeal-776533653a2694b237fc": "仅有 freeze，从未发出，随授权过期关闭",
+      "appeal-3e18dfa58d566556843e": "仅有 freeze，从未发出，随授权过期关闭"
+    }
+  },
+  "expectedOutcome": {
+    "new-merchants": "下一轮（每 30 分钟）无幽灵 marker，正常发送商家 542957171 文本",
+    "taobao": "下一轮（约 12:38）无死绑定，以当轮重采 xlsx 正常发送",
+    "brand": "下一轮自动 skipped 收口（授权过期规则），当日不再重试发送"
+  }
+}

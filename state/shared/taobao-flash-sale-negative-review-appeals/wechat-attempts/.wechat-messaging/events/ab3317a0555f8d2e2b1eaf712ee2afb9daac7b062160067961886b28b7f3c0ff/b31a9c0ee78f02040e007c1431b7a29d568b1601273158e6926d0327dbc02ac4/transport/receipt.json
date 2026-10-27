@@ -1,0 +1,81 @@
+{
+  "ok": false,
+  "executor": "wechat-desktop-sender",
+  "channel": "desktop",
+  "groupName": "FEIBING NEO AI数字员工",
+  "payloadType": "file",
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "stage": "prepare_payload",
+  "stageMs": {
+    "locate_group": 762,
+    "verify_target_and_input": 1883,
+    "prepare_payload": 1890
+  },
+  "payloadIdentity": "9c018b35b71f07117047ab992786547b55f828ad691e7a53804581de757ef76f",
+  "payloads": [
+    {
+      "path": "/Users/ddt/work/projects/ai_agent/state/taobao-flash-sale-negative-review-appeals/wechat-attempts/.wechat-messaging/events/ab3317a0555f8d2e2b1eaf712ee2afb9daac7b062160067961886b28b7f3c0ff/b31a9c0ee78f02040e007c1431b7a29d568b1601273158e6926d0327dbc02ac4/payload/淘宝闪购差评申诉汇总-2026-09-20.xlsx",
+      "name": "淘宝闪购差评申诉汇总-2026-09-20.xlsx",
+      "size": 6484,
+      "sha256": "f6b7c3ce017427570b12dd1eb06ae24a7811701e98a89be4cb08455188096ad9"
+    }
+  ],
+  "groupPreflight": {
+    "ok": true,
+    "reason": null,
+    "sendAttempts": 0,
+    "group": "FEIBING NEO AI数字员工",
+    "header": "FEIBING NEO AI数字员工(18)",
+    "note": "ax-current-group-fast-path",
+    "groupTypeVerified": true,
+    "groupTypeProof": "member-count-header",
+    "composerVerifiedEmpty": true,
+    "attempts": []
+  },
+  "preparedInputChangedPixels": 52948,
+  "preparedInputChangedRatio": 0.143344,
+  "preparedFileObjectCount": 1,
+  "preparedFilePrefixesVerified": false,
+  "reason": "desktop-file-preview-not-prepared",
+  "uncommittedPreviewCleanup": "failed",
+  "uncommittedPreviewCleanupReason": "key-Escape-failed",
+  "elapsedMs": 5241,
+  "sendReview": [
+    {
+      "item": 1,
+      "stage": "locate_group",
+      "label": "精确定位目标群",
+      "elapsedMs": 762,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 2,
+      "stage": "verify_target_and_input",
+      "label": "复核目标群与输入框",
+      "elapsedMs": 1883,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 3,
+      "stage": "prepare_payload",
+      "label": "准备并复核发送载荷",
+      "elapsedMs": 1890,
+      "status": "failed",
+      "pitfalls": [
+        {
+          "code": "send-failure",
+          "reason": "desktop-file-preview-not-prepared"
+        }
+      ]
+    }
+  ],
+  "reviewSummary": {
+    "totalElapsedMs": 5241,
+    "itemCount": 3,
+    "pitfallCount": 1,
+    "result": "failed"
+  }
+}

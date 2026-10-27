@@ -1,0 +1,64 @@
+{
+  "ok": false,
+  "status": "blocked",
+  "groupName": "FEIBING NEO AI数字员工",
+  "channel": "mobile",
+  "requestDigest": "a43b1351588701ae4cf179ad35bf4ee3b8148227f3dbfefe48c4e8abf53b42c9",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "50764302dd741b2658b188c5a5c001d0ad2c51b8bca4a5d11597221c72514065",
+      "type": "file",
+      "status": "blocked",
+      "claimedAt": 1790770462.869956,
+      "sendAttempts": 0,
+      "reason": "selected-file-animation-not-stable",
+      "deviceHash": "f2724cf436e9",
+      "failureEvidence": {
+        "foreground": {
+          "package": "com.tencent.mm",
+          "activity": ".ui.halfscreen.HalfScreenTransparentActivity",
+          "pid": 7704
+        },
+        "screenshot": "/Users/ddt/work/projects/ai_agent/state/meituan-waimai-negative-review-appeals/wechat-attempts/.wechat-messaging/events/df2c040f7082237bc20cced4824b2862370801858de6a68c0d5b2e9e41e7675d/03c6250e0c7431dee1e91fef5bd510c3893cfb8f662fa434bd3fdb31967fc893/failure.png"
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 16757
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 44375
+    }
+  ],
+  "reason": "selected-file-animation-not-stable",
+  "elapsedMs": 64722,
+  "eventKey": "df2c040f7082237bc20cced4824b2862370801858de6a68c0d5b2e9e41e7675d",
+  "reviewSummary": {
+    "totalElapsedMs": 64722,
+    "result": "blocked",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

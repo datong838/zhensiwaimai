@@ -1,0 +1,108 @@
+{
+  "bridgeVersion": 1,
+  "ok": false,
+  "verified": false,
+  "payloadType": "image",
+  "state": "blocked",
+  "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+  "payloads": [
+    {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/outputs/taobao-flash-sale-negative-review-appeals-20261023/淘宝闪购差评申诉台账-2026-10-22.png",
+      "name": "淘宝闪购差评申诉台账-2026-10-22.png",
+      "size": 121958,
+      "sha256": "a3b42eea14e548318847e25b35bac1e08e237cde0bbfcf66ab0ab1c17c2ebde8"
+    }
+  ],
+  "sendAttempts": 0,
+  "newSendAttempts": 0,
+  "reason": "Command '['/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python', '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/wecom_desktop_sender.py', 'send', '--group', '上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰', '--text', '  ', '--dry-run']' timed out after 180.0 seconds",
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": false,
+    "status": "blocked",
+    "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "channel": "desktop",
+    "requestDigest": "9b92f11d7045eae74123ae9f66a5019e2bb226e2cc26a94ab6fabd083e784a8e",
+    "runtimeModelDecisions": 0,
+    "items": [],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "failed",
+        "pitfalls": [
+          "Command '['/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python', '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/wecom_desktop_sender.py', 'send', '--group', '上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰', '--text', '  ', '--dry-run']' timed out after 180.0 seconds"
+        ],
+        "elapsedMs": 212173
+      }
+    ],
+    "reason": "Command '['/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python', '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/wecom_desktop_sender.py', 'send', '--group', '上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰', '--text', '  ', '--dry-run']' timed out after 180.0 seconds",
+    "elapsedMs": 212174,
+    "eventKey": "9c4122373dc4734d49dc28e0e29855554fed0decb526b7a1af701f91caeef78c",
+    "reviewSummary": {
+      "totalElapsedMs": 212174,
+      "result": "blocked",
+      "stageCount": 3,
+      "completedStages": 2,
+      "failedStages": [
+        {
+          "stage": "preflight",
+          "status": "failed",
+          "pitfalls": [
+            "Command '['/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python', '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/wecom_desktop_sender.py', 'send', '--group', '上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰', '--text', '  ', '--dry-run']' timed out after 180.0 seconds"
+          ]
+        }
+      ]
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/state/taobao-flash-sale-negative-review-appeals/summary-attempts/taobao-flash-appeals-summary-2026-10-22.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "failed",
+      "pitfalls": [
+        {
+          "code": "messaging-stage",
+          "reason": "Command '['/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python', '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/wecom_desktop_sender.py', 'send', '--group', '上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰', '--text', '  ', '--dry-run']' timed out after 180.0 seconds"
+        }
+      ],
+      "elapsedMs": 212173,
+      "item": 3,
+      "label": "preflight"
+    }
+  ],
+  "elapsedMs": 212174,
+  "reviewSummary": {
+    "totalElapsedMs": 212174,
+    "itemCount": 3,
+    "pitfallCount": 1,
+    "result": "failed"
+  }
+}

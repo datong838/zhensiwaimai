@@ -1,0 +1,40 @@
+{
+  "voidedAt": "2026-10-08T08:58:14+08:00",
+  "authorization": "2026-10-04 大同常设授权（0条/死锁清理授权与 void 三方对账铁律）；同构先例 void-receipt-20261007-074214（10-07 晨休眠期 marker 同病同治）",
+  "scope": {
+    "workflow": "taobao-flash-sale-negative-review-appeals",
+    "businessDate": "2026-10-07",
+    "markerName": "taobao-flash-appeals-2026-10-07.json",
+    "groupName": "FEIBING NEO AI数字员工",
+    "payloadType": "file"
+  },
+  "voided": {
+    "layer1": {
+      "marker": "taobao-flash-appeals-2026-10-07.json.voided-20261008-085814",
+      "bridgeLock": "taobao-flash-appeals-2026-10-07.bridge.lock.voided-20261008-085814"
+    },
+    "layer2": {
+      "eventDir": ".wechat-messaging/events/2494f3a1d2c138f630af7386f92f8fe1f9ff86a965e3897109586890f27e89aa.voided-20261008-085814",
+      "frozenPayload": "淘宝闪购差评申诉汇总-2026-10-07.xlsx（休眠窗口冻结的 433B 空表）"
+    }
+  },
+  "evidenceNeverSent": {
+    "sendAttempts": 0,
+    "markerState": "blocked",
+    "markerReason": "windows-driver-unreachable",
+    "markerCreatedAt": "2026-10-08T00:20（Windows 休眠窗口内，双侧网关不可达）",
+    "reviewResult": "failed（authorization 完成，发送阶段 blocked）",
+    "reasoning": "sendAttempts=0 ⇒ 从未向驱动提交发送请求，零重复发送风险。休眠唤醒后每轮重采生成新 xlsx，sha 漂移（marker 绑定 1b2e73f7… vs 当前 3540c206…）触发 legacy-marker-binding-mismatch 拒发死循环（10-08 00:25–08:31 共 16 轮 FAILED）。"
+  },
+  "notVoided": [
+    "taobao-flash-appeals-2026-10-06.json（10-07 12:06 verified，已实证外发，严禁动）",
+    "10-06 系 void-receipt 三份（074214/084135/114422）已处置留痕，不重复动)"
+  ],
+  "deadlockEvidence": {
+    "failedRounds": "2026-10-08 00:25–08:31 共 16 轮 taobao-flash-sale-negative-review-appeals FAILED",
+    "code": "legacy-marker-binding-mismatch",
+    "rootCause": "休眠窗口 marker（blocked/0 attempts/绑空表 sha）+ 唤醒后重采 sha 漂移 ⇒ 绑定校验确定性拒绝（此为防错发保护，行为正确，但缺自愈出口——与 F10-1 第四类待补出口同族）"
+  },
+  "expectedOutcome": "下一轮 daemon（09:01 后）以当前重采 xlsx 新建 marker 正常外发；发送后按五阶段门禁 verify。",
+  "lesson": "连续第二天休眠窗口 marker 死锁（10-07 晨 + 10-08 晨同构）。F10-1 出口设计须覆盖 binding-mismatch 形态：sendAttempts=0 + sha 漂移 + blocked ⇒ 自动 void 候选，不必等 16 轮。"
+}

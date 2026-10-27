@@ -1,0 +1,82 @@
+{
+  "ok": true,
+  "action": "prepare",
+  "status": "prepared",
+  "review": [
+    {
+      "label": "维护授权",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "授权有效期",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "读取依赖清单",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "计算候选摘要",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 4
+    },
+    {
+      "label": "统一微信完整离线测试",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 3753
+    },
+    {
+      "label": "原子写入依赖清单",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "依赖清单回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 2
+    },
+    {
+      "label": "统一入口完整性回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 127
+    }
+  ],
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "authorization": "user-20260918-code-maintenance",
+  "expiresAt": "2026-09-23T21:31:51+08:00",
+  "userInstructionSha256": "c91518a278b43dcab9835dbda5168b9a3adc188ce3c5c8b6d2c0e930a91ea974",
+  "dependencyManifestPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/dependencies.json",
+  "dependencyManifestBeforeSha256": "14880c633963158d8cc526bdc9490fbca143ac7371cb0f3fe7233ed42b9da39b",
+  "dependencyManifestAfterSha256": "2aa04d3ac364b4cac5187cdea1a706e6cb9bb0231e414d97a94590e71d983f45",
+  "changes": [
+    {
+      "path": "scripts/desktop_adapter.py",
+      "before": "e11e918be6d86975e0e72b9ecd262f4fe68eecb0b839a8c6f1925b23d1aeb16b",
+      "after": "2f4f8428be7d3108ecde1c23cb6f5ab79c0e6e910e65b0dc2b572e32a5b5ada3"
+    }
+  ],
+  "tests": {
+    "ok": true,
+    "elapsedMs": 3753,
+    "testCount": 162
+  },
+  "capabilityCheck": {
+    "ok": true,
+    "elapsedMs": 127,
+    "testCount": null
+  },
+  "candidateFileCount": 29,
+  "elapsedMs": 3888
+}

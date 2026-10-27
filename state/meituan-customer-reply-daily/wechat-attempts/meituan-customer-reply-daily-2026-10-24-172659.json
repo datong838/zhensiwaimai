@@ -1,0 +1,128 @@
+{
+  "bridgeVersion": 1,
+  "ok": false,
+  "verified": false,
+  "payloadType": "file",
+  "state": "unknown",
+  "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+  "payloads": [
+    {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-intelligent-customer-service/records/美团客户回复记录-2026-10-24.xlsx",
+      "name": "美团客户回复记录-2026-10-24.xlsx",
+      "size": 6188,
+      "sha256": "7c46f4b433985791c8d4b9cdfc6c0aa4e1b53ec9185220f29f2cdebb69cc2317"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": "final-action-rejected-user-changed-dialog-disappeared",
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": false,
+    "status": "unknown",
+    "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "channel": "desktop",
+    "requestDigest": "1ee55af57ea6c2dbb3191333c74e6f2b47d29da63df35273d2c81ec866c6cf41",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "7c46f4b433985791c8d4b9cdfc6c0aa4e1b53ec9185220f29f2cdebb69cc2317",
+        "type": "file",
+        "status": "unknown",
+        "claimedAt": 1792834556.100582,
+        "sendAttempts": 1,
+        "resolvedGroup": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+        "reason": "final-action-rejected-user-changed-dialog-disappeared",
+        "observedAt": 1792834730.82757,
+        "inputEmpty": true,
+        "newMessageVisible": false,
+        "actualSuccessfulFinalActions": 0,
+        "notes": "事前intent及同字节副本核对已完成。选文件后出现使用原文件，但该最终点击工具拒绝The user changed。新UI弹窗消失，仍仅原16:46/17:20/17:25三张卡，无本轮新卡。未重试发送，不能判定已送达。"
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 536026
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 174773
+      }
+    ],
+    "reason": "final-action-rejected-user-changed-dialog-disappeared",
+    "elapsedMs": 710810,
+    "eventKey": "f4bdaaa5c93403fd2d865c2e78a8ae59bcb0946687254b3e8a088479976f8892",
+    "reviewSummary": {
+      "totalElapsedMs": 710810,
+      "result": "unknown",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/meituan-customer-reply-daily/wechat-attempts/meituan-customer-reply-daily-2026-10-24-172659.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 536026,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "failed",
+      "pitfalls": [
+        {
+          "code": "messaging-stage",
+          "reason": "final-action-rejected-user-changed-dialog-disappeared"
+        }
+      ],
+      "elapsedMs": 174773,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 710810,
+  "reviewSummary": {
+    "totalElapsedMs": 710810,
+    "itemCount": 4,
+    "pitfallCount": 1,
+    "result": "failed"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "ok": false,
+  "status": "blocked",
+  "groupName": "FEIBING NEO AI数字员工",
+  "channel": "desktop",
+  "requestDigest": "da7ec30f38b97cc5a6fc1bb37b1fe133e18e71a7894dc7aa563b0156f20ba617",
+  "runtimeModelDecisions": 0,
+  "items": [],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 31153
+    }
+  ],
+  "reason": "windows-sessions-unavailable:HTTP 500: {\"ok\": false, \"error\": \"微信进程在运行，但主窗口未出现——通常意味着**尚未完成登录**（重启后需扫码登录）。请在服务端完成扫码登录后重试；也可用 /health 的 logged_in 字段或 wx.wait_ready() 等待就绪。\"}",
+  "elapsedMs": 31155,
+  "eventKey": "977700814effacd1bf0a34111387065a946bd1c09fd68aebfb51c43dfb098264",
+  "reviewSummary": {
+    "totalElapsedMs": 31155,
+    "result": "blocked",
+    "stageCount": 3,
+    "completedStages": 3,
+    "failedStages": []
+  }
+}
