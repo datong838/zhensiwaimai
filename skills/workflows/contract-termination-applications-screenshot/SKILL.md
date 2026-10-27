@@ -40,7 +40,7 @@ allowed-tools:
 ```bash
 cd /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/contract-termination-applications-screenshot/scripts
 
-# 判据自检（纯函数，不碰工位）：必须 13 passed, 0 failed
+# 判据自检（纯函数，不碰工位）：必须 19 passed, 0 failed
 NODE_PATH=/Users/ddt/.workbuddy/binaries/node/workspace/node_modules \
   /Users/ddt/.workbuddy/binaries/node/versions/22.22.2-2/bin/node contract_termination_shot.mjs --self-test
 
@@ -96,3 +96,7 @@ python3 scripts/contract_termination_daily.py --disarm     # 制动发送；--ar
 - **防重**：marker = `.runtime/contract-termination/events/<YYYY-MM-DD>-contract-termination-ops.json`（state: attempted→verified；sha256 不一致 ⇒ same-event-payload-conflict 阻断，防同日重复外发）。
 - **0 行不产不发**：无数据行时不发群（记 `no-report`）。
 - **发送闸**：默认放行；`SEND_DISARMED.json` 存在即制动（零外发）。
+
+## 2026-10-28 当日完整来源门
+
+正式交付校验原成功收据的上海业务日期、完整页数/行数、处理中状态、复位与本run截图路径/PNG/大小；缺图不再静默忽略。完整零行不发送。`--deliver-run`仅使用当日唯一完整采集收据列出的图片，不再搜集目录任意PNG；旧图不能换新日事件发送。原同日attempted/unknown仍只读不重发，历史记录不改。多页未完成属于采集错误exit9，不误报登录失效。原生企业微信投递规则以仓内现行UI岗位SOP为准，早期Windows命令仅历史。方案见仓内`docs/solutions/20261028-合同流完整当日来源校验.md`。

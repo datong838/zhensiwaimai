@@ -16,6 +16,9 @@
     },
     "entry": {
       "path": "skills/workflows/contract-termination-applications-screenshot/scripts/contract_termination_daily.py"
+    },
+    "captureReceipt": {
+      "path": "skills/workflows/contract-termination-applications-screenshot/scripts/contract_capture_receipt.py"
     }
   },
   "_comment": "2026-10-20 大同指令新建：与 daily-top10 同形态（进页面→筛选→截表格原图），菜单换为 客户管理→合同解约申请，任务状态固定「处理中」，每日 09:00 值班发运营群。轻量 policy（不纳入 messaging 32 文件封印体系）。"

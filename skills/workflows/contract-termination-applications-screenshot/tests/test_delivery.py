@@ -10,6 +10,7 @@ from unittest.mock import patch
 ROOT=Path(__file__).resolve().parents[4]
 sys.path.insert(0,str(ROOT/'runtime'))
 sys.path.insert(0,str(ROOT/'skills/wechat-messaging/scripts'))
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
 spec=importlib.util.spec_from_file_location('contract_delivery',Path(__file__).resolve().parents[1]/'scripts/contract_termination_workflow.py')
 subject=importlib.util.module_from_spec(spec);spec.loader.exec_module(subject)
 class Adapter:
@@ -29,7 +30,7 @@ class DeliveryTests(unittest.TestCase):
         self.root=Path(self.tmp.name);self.events=self.root/'events';self.events.mkdir()
         self.images=[]
         for i in range(3):
-            p=self.root/f'p{i+1}.png';p.write_bytes(f'fixture{i}'.encode());self.images.append(str(p))
+            p=self.root/f'2026-10-25_合同解约申请_处理中_p{i+1}.png';p.write_bytes(f'fixture{i}'.encode());self.images.append(str(p))
         for p in [patch.object(subject,'EVENTS',self.events),patch.object(subject,'arm_state',return_value={'armed':True}),patch('authorized_supplement.deliver_once',return_value=None),patch('wecom_adapter.target_preflight_verified',return_value=True)]:p.start();self.addCleanup(p.stop)
     def execute(self,images,adapter):
         with patch('wecom_adapter.WeComAdapter',return_value=adapter):
@@ -104,9 +105,25 @@ class DeliveryTests(unittest.TestCase):
         self.assertIsNone(subject.pending_today(day))
     def test_capture_and_deliver_run_keep_original_paths(self):
         for args in ([],['--execute','--deliver-run',str(self.root)]):
-            with patch.object(sys,'argv',['entry']+args), patch.object(subject,'pending_today') as guard, patch.object(subject,'shot',return_value={}) as shot, patch.object(subject,'RUNS',self.root/'runs'), patch.object(subject,'find_run_images',return_value=self.images[:1]), patch.object(subject,'deliver',return_value={'status':'verified'}) as send, contextlib.redirect_stdout(io.StringIO()):
+            with patch.object(sys,'argv',['entry']+args), patch.object(subject,'pending_today') as guard, patch.object(subject,'shot',return_value={}) as shot, patch.object(subject,'collect_images',return_value=[]), patch.object(subject,'RUNS',self.root/'runs'), patch.object(subject,'find_run_images',return_value=self.images[:1]), patch.object(subject,'deliver',return_value={'status':'verified'}) as send, contextlib.redirect_stdout(io.StringIO()):
                 subject.main()
             guard.assert_not_called()
             if args:shot.assert_not_called();send.assert_called_once()
             else:shot.assert_called_once();send.assert_not_called()
+    def test_old_images_block_before_supplement_or_adapter(self):
+        import authorized_supplement
+        with patch.object(authorized_supplement,'deliver_once') as supplement, patch('wecom_adapter.WeComAdapter') as adapter:
+            result=subject.deliver(self.images[:1],self.root,'2026-10-26')
+        self.assertEqual(result['status'],'blocked');self.assertEqual(result['sendAttempts'],0)
+        supplement.assert_not_called();adapter.assert_not_called();self.assertFalse(list(self.events.glob('*.json')))
+    def test_invalid_deliver_run_does_not_send_or_create_new_run(self):
+        with patch.object(sys,'argv',['entry','--execute','--deliver-run',str(self.root)]), patch.object(subject,'deliver') as send, patch.object(subject,'shot') as shot, contextlib.redirect_stdout(io.StringIO()) as output:
+            with self.assertRaises(SystemExit):subject.main()
+        self.assertEqual(json.loads(output.getvalue())['sendAttempts'],0)
+        shot.assert_not_called();send.assert_not_called()
+    def test_invalid_normal_capture_never_reaches_delivery(self):
+        with patch.object(sys,'argv',['entry','--execute']),patch.object(subject,'RUNS',self.root/'runs'),patch.object(subject,'shot',return_value={'ok':True}),patch.object(subject,'deliver') as send,contextlib.redirect_stdout(io.StringIO()) as output:
+            with self.assertRaises(SystemExit):subject.main()
+        self.assertEqual(json.loads(output.getvalue())['sendAttempts'],0)
+        send.assert_not_called();self.assertFalse(list(self.events.glob('*.json')))
 if __name__=='__main__':unittest.main()

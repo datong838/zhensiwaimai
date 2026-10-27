@@ -67,6 +67,12 @@ export function planPages(total, pageSize) {
   return Math.max(1, Math.ceil(total / pageSize));
 }
 
+export function completeCapture(actualPages, plannedPages, actualRows, total) {
+  return Number.isInteger(actualPages) && actualPages > 0 && Number.isInteger(plannedPages)
+    && actualPages === plannedPages && Number.isInteger(actualRows) && actualRows >= 0
+    && (total === null || Number.isInteger(total) && total >= 0 && actualRows === total);
+}
+
 // 下拉选项里精确定位目标项（禁模糊匹配：'处理中' 不得命中 '待处理中'）
 export function pickOptionIndex(options, want) {
   const arr = Array.isArray(options) ? options : [];
@@ -108,6 +114,12 @@ export function selfTest() {
     { name: 'cleanRows·负 全 nbsp 行被丢', got: cleanRows([['\u00a0', ' '], ['a', '']]).length, want: 1 },
     { name: 'buildClip·正 加滚动偏移', got: JSON.stringify(buildClip({ x: 10, y: 20, w: 800, h: 100 }, 120, 0, 500)), want: JSON.stringify({ x: 10, y: 520, width: 800, height: 100, scale: 1 }) },
     { name: 'buildClip·负 零宽 ⇒ null', got: buildClip({ x: 0, y: 0, w: 0, h: 0 }, 0, 0, 0), want: null },
+    { name: 'completeCapture·完整多页', got: completeCapture(2,2,12,12), want: true },
+    { name: 'completeCapture·缺页', got: completeCapture(1,2,10,12), want: false },
+    { name: 'completeCapture·缺行', got: completeCapture(2,2,11,12), want: false },
+    { name: 'completeCapture·无总数仍核对页数', got: completeCapture(2,2,12,null), want: true },
+    { name: 'completeCapture·空表一页', got: completeCapture(1,1,0,0), want: true },
+    { name: 'completeCapture·无页不可成功', got: completeCapture(0,0,0,0), want: false },
   ];
   let pass = 0;
   const fails = [];
@@ -287,8 +299,8 @@ async function capture(page, outFile) {
 
 async function main() {
   const now = new Date();
-  const ymd = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
-  const hhmm = `${String(now.getHours()).padStart(2, '0')}${String(now.getMinutes()).padStart(2, '0')}`;
+  const ymd = new Intl.DateTimeFormat('sv-SE', {timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit'}).format(now);
+  const hhmm = new Intl.DateTimeFormat('en-GB', {timeZone:'Asia/Shanghai',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).format(now).replace(':','');
   const outDir = path.join(OUT_ROOT, ymd);
   const runId = `contract-termination-shot-${now.getTime()}`;
   const receipt = { runId, at: now.toISOString(), route: ROUTE, taskStatus: TASK_STATUS, outDir, pages: [], rows: [], header: null, warnings: [], reset: null };
@@ -400,7 +412,8 @@ async function main() {
       receipt.reset = page.url();
     } catch (e) { receipt.warnings.push('复位 home 失败：' + e.message.slice(0, 80)); }
 
-    const ok = receipt.pages.length > 0 && (receipt.statusCheck ? receipt.statusCheck.bad === 0 : false);
+    receipt.completePages = completeCapture(receipt.pages.length, pages, receipt.rows.length, total);
+    const ok = receipt.pages.length > 0 && receipt.completePages && (receipt.statusCheck ? receipt.statusCheck.bad === 0 : false);
     receipt.ok = ok;
     fs.mkdirSync(outDir, { recursive: true });
     const receiptFile = path.join(outDir, `${dateTag}_contract-termination_run-${hhmm}.json`);
@@ -409,7 +422,7 @@ async function main() {
     log(`收据: ${receiptFile}`);
     log(`合计 ${receipt.rows.length} 行 / ${receipt.pages.length} 页；状态自检=${receipt.statusCheck ? receipt.statusCheck.bad : 'n/a'} 异常`);
     if (receipt.warnings.length) log('告警: ' + receipt.warnings.join(' | '));
-    return shutdown(ok ? 0 : 3, receipt);
+    return shutdown(ok ? 0 : 9, receipt);
   } catch (e) {
     const msg = String(e && e.message || e);
     const loginish = /service-login-required|service-origin-changed/.test(msg);

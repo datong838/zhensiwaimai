@@ -23,6 +23,7 @@ import time
 from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
+from contract_capture_receipt import capture_images, load_run_images
 
 SKILL = Path(__file__).resolve().parents[1]
 RUNTIME = SKILL / ".runtime" / "contract-termination"
@@ -96,14 +97,9 @@ def shot(run_dir: Path, task_status: str = "处理中") -> dict:
     return payload
 
 
-def collect_images(receipt: dict) -> list:
-    """从收据 pages[] 收集 PNG 绝对路径（按页序）。"""
-    files = []
-    for p in receipt.get("pages", []):
-        f = p.get("file")
-        if f and Path(f).is_file():
-            files.append(str(Path(f).resolve()))
-    return files
+def collect_images(receipt: dict, day: str, run_dir: Path, task_status='处理中') -> list:
+    """Reject partial, stale or unbound captures instead of silently dropping pages."""
+    return capture_images(receipt, day, run_dir, task_status)
 
 
 def files_sha(files: list) -> str:
@@ -127,6 +123,9 @@ def submitted_image_pending(adapter, item: dict, result: dict) -> bool:
 def deliver(images: list, run_dir: Path, day: str) -> dict:
     if not images:
         return {"status": "no-report", "sendAttempts": 0}  # 0 行/无图：铁律不产不发
+    expected_names = [f'{day}_合同解约申请_处理中_p{i + 1}.png' for i in range(len(images))]
+    if [Path(f).name for f in images] != expected_names:
+        return {'status': 'blocked', 'reason': 'contract-current-day-ordered-images-required', 'sendAttempts': 0}
     gate = arm_state()
     if not gate["armed"]:
         return {"status": "blocked", "reason": "send-disarmed", "sendAttempts": 0}
@@ -232,13 +231,9 @@ def deliver(images: list, run_dir: Path, day: str) -> dict:
             'executionComplete': result['executionComplete'], 'verificationPending': result['verificationPending']}
 
 
-def find_run_images(run_dir: Path) -> list:
-    """补发：从某次 run 的 shot-out 目录找 PNG（按文件名页序）。
-    注意 shot.mjs 在 --out-dir 下还会拼 <YYYY-MM-DD>/ 子目录，必须 rglob。"""
-    files = sorted(run_dir.rglob("*.png"),
-                   key=lambda p: (int(re.search(r"_p(\d+)\.png$", p.name).group(1))
-                                  if re.search(r"_p(\d+)\.png$", p.name) else 0, p.name))
-    return [str(p.resolve()) for p in files]
+def find_run_images(run_dir: Path, day: str) -> list:
+    """Only the unique original complete current-day capture defines delivery pages."""
+    return load_run_images(run_dir, day)[0]
 
 
 def pending_today(day: str) -> dict | None:
@@ -284,7 +279,12 @@ def main() -> None:
     if args.deliver_run:
         run_dir = Path(args.deliver_run).resolve()
         receipt = {"deliverRun": True}
-        images = find_run_images(run_dir)
+        try:
+            images = find_run_images(run_dir, day)
+        except (ValueError, OSError, TypeError) as error:
+            print(json.dumps({'status': 'blocked', 'reason': str(error), 'sendAttempts': 0,
+                              'runDir': str(run_dir), 'day': day}, ensure_ascii=False))
+            raise SystemExit(1)
         if not images:
             print(json.dumps({"status": "no-report", "reason": "deliver-run-no-images",
                               "runDir": str(run_dir), "day": day}, ensure_ascii=False))
@@ -299,7 +299,7 @@ def main() -> None:
                 result = {"status": "skipped-busy", "reason": receipt.get("reason"), "sendAttempts": 0}
                 print(json.dumps({**result, "day": day, "runDir": str(run_dir)}, ensure_ascii=False))
                 return  # 工位忙：可恢复跳过，不算失败
-            images = collect_images(receipt)
+            images = collect_images(receipt, day, run_dir, args.task_status)
             result = (deliver(images, run_dir, day) if args.execute
                       else {"status": "ready" if images else "no-report", "sendAttempts": 0})
         except Exception as error:  # noqa: BLE001
