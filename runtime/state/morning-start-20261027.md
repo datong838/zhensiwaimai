@@ -279,3 +279,7 @@ Top10与淘宝下载目录已同卷rename到`runtime/state/business-evidence/`�
 六批普通追加提交均已核对origin/main：1cb186e、c310f63、eb17193、548d1388、e137a207、9c7ca0bc。用户期间明确继续清理纯业务历史，四轮共18970文件/1196303037字节，保留26号及以后和运行/防重/验收依赖，真实active20/20、最终台账24行均是、原SHA/verified/一次发送不变，门禁与存储目标通过。原主任54029正常，未停止原主任、Chrome或当前上传子进程。
 
 最终收尾脚本已准备：先核对六批远端与main，再纳入全部现存工作区变更及授权删除记录，原4个gitlink只在外层索引替换为3568普通文件（原内层.git不动），逐项Git blob和SHA校验、连接完整性检查、正常push并回读远端最终HEAD。此时尚未把最终收尾说成已推送；最终结果见本聊天真实命令输出及/tmp/zhensi-final-push-20261027.json。22点维护仍未到点，不complete Goal，不重发日终表或旧图片。
+
+## 用户新增：明日24流提前排障
+
+用户明确新增明天任务：24流重点检查，提前排除各种阻塞、卡点。已预置docs/operations/20261028-24流执行前阻塞排查清单.md、runtime/state/morning-start-20261028.md；均明确只是前夜计划，不是明日运行或完成。新鲜只读检查tomorrow-24flow-precheck-20261028.json覆盖24身份/22原入口、原首档cadence和已登记文件SHA，未发现新入口/摘要漂移；负反馈第二条dependency_pending是原当天串行依赖，三流继续false，生产0。商家跨日unknown串行缺口尚未修复，差评修复需明日真实验收，图片自动回读仍待解决，已明确保留未完成。未改排班、未提前造新日run/output/marker/意图，未新增自动化。今晚22点维护仍按原计划，Goal保持active。
