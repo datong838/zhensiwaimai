@@ -1,0 +1,1154 @@
+{
+  "checkedAt": "2026-10-27T23:46:33.865582+08:00",
+  "forRunDate": "2026-10-28",
+  "ledgerIdentityCount": 24,
+  "enabledOriginalFlowCount": 22,
+  "rows": [
+    {
+      "flow": "daily-top10-to-wechat-group",
+      "firstDue": "2026-10-28T08:00:00",
+      "sources": [
+        {
+          "path": "skills/workflows/daily-top10-to-wechat-group/scripts/workflow_executor.py",
+          "sha256": "7bcdda2f87a011e8262075e55b41fea5cf22f13d6cebb53fc69bdba1a22b4251",
+          "selectedBoundaryEvidence": [
+            {
+              "line": 96,
+              "text": "and result.get('uncommittedPreviewCleanup')=='attempted'"
+            },
+            {
+              "line": 99,
+              "text": "and result.get('state')!='unknown'"
+            },
+            {
+              "line": 119,
+              "text": "marker=label_dir/(data_date+'.json')"
+            },
+            {
+              "line": 122,
+              "text": "return {'status':'already_verified' if prior.get('state')=='verified' else 'unknown','sendAttempts':0}"
+            },
+            {
+              "line": 127,
+              "text": "'context':{'workflowId':'top10-income-label','eventId':data_date+'-taobao-income-top10-label',"
+            },
+            {
+              "line": 133,
+              "text": "return {'status':'already_verified' if prior.get('state')=='verified' else 'unknown','sendAttempts':0}"
+            },
+            {
+              "line": 137,
+              "text": "atomic_json(marker,{'state':'attempted','sha256':item['sha256'],'sendAttempts':None})"
+            },
+            {
+              "line": 141,
+              "text": "atomic_json(marker,{'state':'unknown','sha256':item['sha256'],'sendAttempts':None});raise"
+            },
+            {
+              "line": 142,
+              "text": "atomic_json(marker,{'state':'verified' if result.get('status')=='verified' else 'unknown','sha256':item['sha256'],'result':result,'sendAttempts':result.get('sendAttempts')})"
+            },
+            {
+              "line": 210,
+              "text": "marker=f\"{receipt['dataDate']}-main-{group_key}{suffix}.json\""
+            },
+            {
+              "line": 212,
+              "text": "if (ledger/marker).exists():raise phone.StopRun('desktop-send-already-attempted')"
+            },
+            {
+              "line": 227,
+              "text": "# Retry only before any send attempt; unknown/attempted outcomes"
+            }
+          ]
+        }
+      ],
+      "scope": "entry-and-date-event-boundary-source-inventory-not-full-business-acceptance",
+      "requiresFreshBusinessCheck": true
+    },
+    {
+      "flow": "daily-negative-reviews",
+      "firstDue": "2026-10-28T08:30:00",
+      "sources": [
+        {
+          "path": "skills/workflows/daily-negative-reviews/scripts/workflow_executor.mjs",
+          "sha256": "9b286a97caa463320009592573c92350598ba381eecd46f3df881d4f05320f86",
+          "selectedBoundaryEvidence": [
+            {
+              "line": 15,
+              "text": "function earlyFailureReceipt(error){return {ok:false,policyVersion:POLICY_VERSION,reason:String(error.message||error),preEffect:true,sendAttempts:0,attempted:false,unknown:false,partial:false,runtimeModelDecisions:0};}"
+            },
+            {
+              "line": 20,
+              "text": "async function writeSummary(config,state,source=config){const previous=source.correctionOf?await readOptional(config.summary):null,analysis=await readOptional(source.analysis),report=await readOptional(source.reportValid"
+            },
+            {
+              "line": 24,
+              "text": "async function allocate(){const config=buildConfig();await fs.mkdir(config.runDir,{recursive:true,mode:0o700});const priorConfig=await readOptional(config.config);if(priorConfig)assertConfig(priorConfig);else await atomi"
+            },
+            {
+              "line": 28,
+              "text": "async function reconcilePhase(config,state){const started=Date.now();const result=await run(FIXED.analysisPython,[path.join(SCRIPT_DIR,'reconcile.py'),config.config]);if(!result.ok)return fail(config,state,'reconcile','下"
+            },
+            {
+              "line": 29,
+              "text": "async function reportPhase(config,state){const started=Date.now();const result=await run(FIXED.node,[path.join(SCRIPT_DIR,'build_report.mjs'),config.config]);if(!result.ok)return fail(config,state,'build_report','生成并验收固定"
+            },
+            {
+              "line": 35,
+              "text": "async function sendPhase(config,state){const started=Date.now();const external=await readUiDeliveryEvidence(config,FIXED.group);if(external){state.externalExcelDelivery=external;addReview(state,'wechat_send','核验独立UI补发送达证"
+            },
+            {
+              "line": 44,
+              "text": "if(receipt.ok!==true||receipt.businessDate!==config.businessDate||receipt.rows<1||receipt.sha256!==identity.sha256||receipt.size!==identity.size||identity.size<=0)return fail(config,state,'screenshot','渲染整表长图',started,'s"
+            },
+            {
+              "line": 46,
+              "text": "const marker=path.join(FIXED.summaryLedger,config.screenshotSendMarker);"
+            },
+            {
+              "line": 58,
+              "text": "async function correctionPhase(config,state){const correction=buildCorrectionConfig(config);assertConfig(correction);await atomicJson(correction.config,correction);let started=Date.now();const reconciled=await run(FIXED."
+            },
+            {
+              "line": 59,
+              "text": "async function execute(){try{await assertDependencyHashes();}catch(error){error.preEffect=true;throw error;}const pendingConfig=buildConfig(),pendingPolicy=await releasePolicy();if(pendingPolicy.status==='UNSEALED_ACCEPT"
+            }
+          ]
+        }
+      ],
+      "scope": "entry-and-date-event-boundary-source-inventory-not-full-business-acceptance",
+      "requiresFreshBusinessCheck": true
+    },
+    {
+      "flow": "contract-termination-applications-screenshot",
+      "firstDue": "2026-10-28T09:00:00",
+      "sources": [
+        {
+          "path": "skills/workflows/contract-termination-applications-screenshot/scripts/contract_termination_daily.py",
+          "sha256": "8aab35cddb8ea2baca503ed59d681892f345179a4d2462498abcd72cdc9925f4",
+          "selectedBoundaryEvidence": []
+        },
+        {
+          "path": "skills/workflows/contract-termination-applications-screenshot/scripts/contract_termination_workflow.py",
+          "sha256": "0462bbb45c34315394ff9b79afba1cb5ca7cf8f3599de8fb50fb8fd4228793a5",
+          "selectedBoundaryEvidence": [
+            {
+              "line": 12,
+              "text": "退出码：0=成功（含 already_verified/no-report/ready）；1=失败/unknown/blocked"
+            },
+            {
+              "line": 77,
+              "text": "day = datetime.now(LOCAL_TZ).date().isoformat()"
+            },
+            {
+              "line": 120,
+              "text": "and item.get('type') == 'image' and result.get('status') == 'unknown'"
+            },
+            {
+              "line": 140,
+              "text": "event = f\"{day}-contract-termination-ops\""
+            },
+            {
+              "line": 156,
+              "text": "return {\"status\": \"unknown\", \"reason\": \"prior-attempt-requires-read-only-reconciliation\","
+            },
+            {
+              "line": 167,
+              "text": "\"context\": {\"workflowId\": WORKFLOW_ID, \"eventId\": event,"
+            },
+            {
+              "line": 181,
+              "text": "return {\"status\": \"already_verified\" if prior.get(\"state\") == \"verified\" else \"unknown\","
+            },
+            {
+              "line": 206,
+              "text": "result = {'status': 'verified' if complete else 'unknown', 'sendAttempts': attempts,"
+            },
+            {
+              "line": 213,
+              "text": "atomic_json(marker, {\"state\": \"unknown\", \"event\": event, \"sha256\": file_sha,"
+            },
+            {
+              "line": 216,
+              "text": "return {\"status\": \"unknown\", \"reason\": f\"windows-execution-error:{error}\", \"sendAttempts\": None}"
+            },
+            {
+              "line": 226,
+              "text": "atomic_json(marker, {\"state\": \"unknown\", \"event\": event, \"sha256\": file_sha, \"groupName\": GROUP,"
+            },
+            {
+              "line": 230,
+              "text": "return {\"status\": \"unknown\", \"reason\": result.get(\"reason\"),"
+            }
+          ]
+        }
+      ],
+      "scope": "entry-and-date-event-boundary-source-inventory-not-full-business-acceptance",
+      "requiresFreshBusinessCheck": true
+    },
+    {
+      "flow": "daily-jinsha-reports-to-business-wechat",
+      "firstDue": "2026-10-28T11:00:00",
+      "sources": [
+        {
+          "path": "skills/workflows/daily-jinsha-reports-to-business-wechat/scripts/business_workflow_executor.mjs",
+          "sha256": "0ef60163882972aa08f5cdd89f417d408e222a7c6c5b9439238cfb65e2e73a3a",
+          "selectedBoundaryEvidence": [
+            {
+              "line": 33,
+              "text": "const day=productionDay(now),businessDate=previousBusinessDate(day),dayRoot=path.join(FIXED.runsRoot,day);await fs.mkdir(dayRoot,{recursive:true});"
+            },
+            {
+              "line": 34,
+              "text": "const unresolved=[];for(const entry of await fs.readdir(dayRoot)){if(!/^\\d{2}$/.test(entry))continue;const dir=path.join(dayRoot,entry);const run=await loadRun(dir);if(run.state.phase==='prepared'&&['active','blocked-unk"
+            },
+            {
+              "line": 35,
+              "text": "/* c8 ignore next */ for(let index=1;index<=99;index++){const suffix=String(index).padStart(2,'0'),runId=`jinsha-business-production-${day}-${suffix}`,runDir=path.join(dayRoot,suffix),outputDir=path.join(FIXED.outputRoot"
+            },
+            {
+              "line": 39,
+              "text": "async function loadRun(runDir){const configPath=path.join(path.resolve(runDir),'config.json'),config=await readJson(configPath);assertProductionConfig(config,configPath);const state=await readJson(config.workflowState);i"
+            },
+            {
+              "line": 46,
+              "text": "const nodes=definitions.flatMap(([name,stage,to])=>{const starts=events.filter(event=>event.type==='attempt'&&event.stage===stage);if(!starts.length)return [];const end=events.find(event=>event.type==='transition'&&event"
+            },
+            {
+              "line": 47,
+              "text": "const finalTransition=events.find(event=>event.type==='transition'&&event.to==='complete');if(finalTransition)nodes.push({name:'finalize',attempts:1,startedAt:finalTransition.at,finishedAt:state.completedAt||finishedAt,e"
+            },
+            {
+              "line": 48,
+              "text": "const pitfalls=events.flatMap(event=>{if(event.type==='blocked')return [{at:event.at,stage:event.phase,type:'blocked',detail:event.reason}];if(event.type==='decision'&&((event.stage==='download'&&event.decision!=='downlo"
+            },
+            {
+              "line": 52,
+              "text": "return {schemaVersion:1,policyVersion:state.policyVersion,runId:state.runId,businessDate:state.businessDate,status:state.status,phase:state.phase,nextAction:state.nextAction,totalElapsedMs,nodes,pitfalls,codeEnforced:tru"
+            },
+            {
+              "line": 63,
+              "text": "/* c8 ignore next */ async function validateDownloaded(config){const receipt=await readJson(config.downloadUiReceipt);if(receipt.ok!==true||receipt.runId!==config.runId||receipt.businessDate!==config.businessDate||receip"
+            },
+            {
+              "line": 64,
+              "text": "/* c8 ignore next */ async function validatePrepared(config){const preflight=await readJson(config.preflightReceipt),build=await readJson(config.buildReceipt),exam=await readJson(config.examReceipt);if(preflight.ok!==tru"
+            },
+            {
+              "line": 102,
+              "text": "/* c8 ignore next */ async function attemptMarker(config){const preflight=await readJsonOptional(config.preflightReceipt);if(!preflight)return {exists:false,verified:false,file:null};const items=PLATFORMS.map(platform=>p"
+            },
+            {
+              "line": 104,
+              "text": "if(state.phase!=='prepared'||!['needs-resume','blocked-unknown-send'].includes(state.status))return false;"
+            }
+          ]
+        }
+      ],
+      "scope": "entry-and-date-event-boundary-source-inventory-not-full-business-acceptance",
+      "requiresFreshBusinessCheck": true
+    },
+    {
+      "flow": "daily-taobao-download-to-jinsha",
+      "firstDue": "2026-10-28T13:00:00",
+      "sources": [
+        {
+          "path": "skills/workflows/daily-taobao-download-to-jinsha/scripts/entrypoint.mjs",
+          "sha256": "463ef5b34ea49d9e748c38231882791c84ee98ed31d7154c607b1850b54496a6",
+          "selectedBoundaryEvidence": [
+            {
+              "line": 92,
+              "text": "forbidden: ['manual-dependencies-json-edit', 'direct-workflow-bridge-send', 'retry-when-attempt-count-unknown'],"
+            },
+            {
+              "line": 109,
+              "text": "forbidden: ['new-evidence-event', 'repeat-production-upload', 'manual-send', 'unknown-effect-resend'],"
+            },
+            {
+              "line": 157,
+              "text": "if (receipt.evidenceManifest?.runId !== receipt.runId || receipt.evidenceManifest?.businessDate !== receipt.businessDate) throw new Error('receipt-manifest-mismatch');"
+            },
+            {
+              "line": 158,
+              "text": "const expectedDir = path.join(matchedEvidenceRoot, `${receipt.businessDate}-${receipt.runId}`);"
+            },
+            {
+              "line": 194,
+              "text": "root:EVIDENCE_ROOT,ledger:WECHAT_LEDGER,businessDate:yesterdayShanghai(),policyVersion:CONTROL_POLICY_VERSION,"
+            },
+            {
+              "line": 198,
+              "text": "root: EVIDENCE_ROOT, ledger: WECHAT_LEDGER, businessDate: yesterdayShanghai(),"
+            },
+            {
+              "line": 252,
+              "text": "if (externalEffectUnknown || /(?:upload-result-unknown|external-effect-not-verified|attempted|unknown)/.test(normalized)) {"
+            },
+            {
+              "line": 255,
+              "text": "requiredAction: 'code-owned-read-only-reconciliation', reason: String(reason || 'external-effect-unknown'),"
+            },
+            {
+              "line": 268,
+              "text": "&& !['attempted', 'unknown', 'partial'].includes(item?.status))) return 'proven-zero';"
+            },
+            {
+              "line": 271,
+              "text": "|| ['attempted', 'unknown', 'partial'].includes(item?.status))) return 'attempted-or-unknown';"
+            },
+            {
+              "line": 272,
+              "text": "return 'unknown';"
+            },
+            {
+              "line": 303,
+              "text": "const unknown = lookupHistoricalExperience({ stage: 'preflight',"
+            }
+          ]
+        }
+      ],
+      "scope": "entry-and-date-event-boundary-source-inventory-not-full-business-acceptance",
+      "requiresFreshBusinessCheck": true
+    },
+    {
+      "flow": "daily-agent-new-merchants-to-wechat",
+      "firstDue": "2026-10-28T08:30:00",
+      "sources": [
+        {
+          "path": "skills/workflows/daily-agent-new-merchants-to-wechat/scripts/workflow_executor.py",
+          "sha256": "f7b97aea3878da11d06b667130eeebe9121c98fe0131552c9f598891805ca735",
+          "selectedBoundaryEvidence": [
+            {
+              "line": 31,
+              "text": "if collection.get('businessDate') != now.strftime('%Y-%m-%d'):"
+            },
+            {
+              "line": 36,
+              "text": "slot = now.replace(minute=(now.minute // 30) * 30, second=0, microsecond=0).strftime('%Y%m%d%H%M')"
+            },
+            {
+              "line": 63,
+              "text": "wrapped_unknown = (receipt.get(\"stage\") == \"completed\""
+            },
+            {
+              "line": 64,
+              "text": "and (receipt.get(\"commonReceipt\") or {}).get(\"status\") == \"unknown\")"
+            },
+            {
+              "line": 66,
+              "text": "and receipt.get(\"state\") == \"unknown\""
+            },
+            {
+              "line": 69,
+              "text": "and (receipt.get(\"stage\") == \"post_send_verify\" or wrapped_unknown)"
+            },
+            {
+              "line": 75,
+              "text": "def recover_unknown_marker_from_receipt(item, group):"
+            },
+            {
+              "line": 76,
+              "text": "\"\"\"Recover only a uniquely bound nonzero marker from private unknown receipts.\"\"\""
+            },
+            {
+              "line": 77,
+              "text": "marker = sender.STATE_DIR / 'send-attempts' / (sender.send_identity(group, item) + '.json')"
+            },
+            {
+              "line": 88,
+              "text": "and prior.get('sendAttempts') == 1 and prior.get('state') in ('unknown', 'verified')):"
+            },
+            {
+              "line": 90,
+              "text": "if not (prior.get('state') == 'unknown' and prior.get('sendAttempts') == 1):"
+            },
+            {
+              "line": 172,
+              "text": "marker, recovered_marker = recover_unknown_marker_from_receipt(first, args.group)"
+            }
+          ]
+        }
+      ],
+      "scope": "entry-and-date-event-boundary-source-inventory-not-full-business-acceptance",
+      "requiresFreshBusinessCheck": true
+    },
+    {
+      "flow": "meituan-intelligent-customer-service-12",
+      "firstDue": "2026-10-28T12:00:00",
+      "sources": [
+        {
+          "path": "skills/workflows/meituan-intelligent-customer-service/scripts/ensure_unanswered_queue.mjs",
+          "sha256": "de72df8fe8744b0a10e69821b860399a22cf7646dbb06ffcb3b158a915dd8d40",
+          "selectedBoundaryEvidence": []
+        },
+        {
+          "path": "skills/workflows/meituan-intelligent-customer-service/scripts/reply_unanswered_sessions.mjs",
+          "sha256": "65b45cdb3051b49bc1c42cdccf00cd5b5656f143313444756cc5f92829e62a8e",
+          "selectedBoundaryEvidence": [
+            {
+              "line": 133,
+              "text": "const side = w ? (String(w.className).includes(\"right-message\") ? \"right\" : \"left\") : \"unknown\";"
+            }
+          ]
+        },
+        {
+          "path": "skills/workflows/meituan-intelligent-customer-service/scripts/compile_daily_reply_xlsx.mjs",
+          "sha256": "11677ca65f59db27a4590930fd291963160b487f6037eea4f3ec6ddac84e9700",
+          "selectedBoundaryEvidence": []
+        },
+        {
+          "path": "skills/workflows/meituan-intelligent-customer-service/scripts/send_daily_reply_xlsx_to_wechat.mjs",
+          "sha256": "4ea46bc2354d5e92ff1f2c3b435e6efe600936e7f407daa6441819da61b197a5",
+          "selectedBoundaryEvidence": [
+            {
+              "line": 41,
+              "text": "const marker = `meituan-customer-reply-daily-${roundStamp}.json`;"
+            }
+          ]
+        }
+      ],
+      "scope": "entry-and-date-event-boundary-source-inventory-not-full-business-acceptance",
+      "requiresFreshBusinessCheck": true
+    },
+    {
+      "flow": "meituan-intelligent-customer-service-15",
+      "firstDue": "2026-10-28T15:00:00",
+      "sources": [
+        {
+          "path": "skills/workflows/meituan-intelligent-customer-service/scripts/ensure_unanswered_queue.mjs",
+          "sha256": "de72df8fe8744b0a10e69821b860399a22cf7646dbb06ffcb3b158a915dd8d40",
+          "selectedBoundaryEvidence": []
+        },
+        {
+          "path": "skills/workflows/meituan-intelligent-customer-service/scripts/reply_unanswered_sessions.mjs",
+          "sha256": "65b45cdb3051b49bc1c42cdccf00cd5b5656f143313444756cc5f92829e62a8e",
+          "selectedBoundaryEvidence": [
+            {
+              "line": 133,
+              "text": "const side = w ? (String(w.className).includes(\"right-message\") ? \"right\" : \"left\") : \"unknown\";"
+            }
+          ]
+        },
+        {
+          "path": "skills/workflows/meituan-intelligent-customer-service/scripts/compile_daily_reply_xlsx.mjs",
+          "sha256": "11677ca65f59db27a4590930fd291963160b487f6037eea4f3ec6ddac84e9700",
+          "selectedBoundaryEvidence": []
+        },
+        {
+          "path": "skills/workflows/meituan-intelligent-customer-service/scripts/send_daily_reply_xlsx_to_wechat.mjs",
+          "sha256": "4ea46bc2354d5e92ff1f2c3b435e6efe600936e7f407daa6441819da61b197a5",
+          "selectedBoundaryEvidence": [
+            {
+              "line": 41,
+              "text": "const marker = `meituan-customer-reply-daily-${roundStamp}.json`;"
+            }
+          ]
+        }
+      ],
+      "scope": "entry-and-date-event-boundary-source-inventory-not-full-business-acceptance",
+      "requiresFreshBusinessCheck": true
+    },
+    {
+      "flow": "meituan-intelligent-customer-service",
+      "firstDue": "2026-10-28T17:00:00",
+      "sources": [
+        {
+          "path": "skills/workflows/meituan-intelligent-customer-service/scripts/ensure_unanswered_queue.mjs",
+          "sha256": "de72df8fe8744b0a10e69821b860399a22cf7646dbb06ffcb3b158a915dd8d40",
+          "selectedBoundaryEvidence": []
+        },
+        {
+          "path": "skills/workflows/meituan-intelligent-customer-service/scripts/reply_unanswered_sessions.mjs",
+          "sha256": "65b45cdb3051b49bc1c42cdccf00cd5b5656f143313444756cc5f92829e62a8e",
+          "selectedBoundaryEvidence": [
+            {
+              "line": 133,
+              "text": "const side = w ? (String(w.className).includes(\"right-message\") ? \"right\" : \"left\") : \"unknown\";"
+            }
+          ]
+        },
+        {
+          "path": "skills/workflows/meituan-intelligent-customer-service/scripts/compile_daily_reply_xlsx.mjs",
+          "sha256": "11677ca65f59db27a4590930fd291963160b487f6037eea4f3ec6ddac84e9700",
+          "selectedBoundaryEvidence": []
+        },
+        {
+          "path": "skills/workflows/meituan-intelligent-customer-service/scripts/send_daily_reply_xlsx_to_wechat.mjs",
+          "sha256": "4ea46bc2354d5e92ff1f2c3b435e6efe600936e7f407daa6441819da61b197a5",
+          "selectedBoundaryEvidence": [
+            {
+              "line": 41,
+              "text": "const marker = `meituan-customer-reply-daily-${roundStamp}.json`;"
+            }
+          ]
+        }
+      ],
+      "scope": "entry-and-date-event-boundary-source-inventory-not-full-business-acceptance",
+      "requiresFreshBusinessCheck": true
+    },
+    {
+      "flow": "taobao-flash-sale-negative-review-appeals",
+      "firstDue": "2026-10-28T13:00:00",
+      "sources": [
+        {
+          "path": "runtime/appeal_shift.mjs",
+          "sha256": "aa6c3078c68024b0339dbc200fe5bce29f6090e9907bf48908b408c055483f66",
+          "selectedBoundaryEvidence": []
+        }
+      ],
+      "scope": "entry-and-date-event-boundary-source-inventory-not-full-business-acceptance",
+      "requiresFreshBusinessCheck": true
+    },
+    {
+      "flow": "daily-new-stores-opening-to-wechat",
+      "firstDue": "2026-10-28T10:00:00",
+      "sources": [
+        {
+          "path": "skills/workflows/daily-new-stores-opening-to-wechat/scripts/workflow.py",
+          "sha256": "94ac6883230ce099fd6f0884d70863d84ed895d2dc282537c5edbb73645af3dd",
+          "selectedBoundaryEvidence": [
+            {
+              "line": 294,
+              "text": "return supplement | {'status': '已验证发送' if supplement.get('status') in ('verified','already_verified') else supplement.get('status','unknown')}"
+            },
+            {
+              "line": 299,
+              "text": "marker = ledger / f\"{day}-{digest[:16]}.json\""
+            },
+            {
+              "line": 323,
+              "text": "return {\"status\": \"unknown\", \"reason\": \"prior-attempt-requires-read-only-reconciliation\","
+            },
+            {
+              "line": 343,
+              "text": "\"context\": {\"workflowId\": WORKFLOW_ID, \"eventId\": day, \"accountAlias\": \"main-wechat\","
+            },
+            {
+              "line": 357,
+              "text": "atomic_json(marker, {\"bridgeVersion\": 1, \"state\": \"attempted\", \"groupName\": GROUP,"
+            },
+            {
+              "line": 366,
+              "text": "return {\"status\": \"unknown\", \"reason\": f\"windows-execution-error:{error}\","
+            },
+            {
+              "line": 380,
+              "text": "if result.get(\"status\") == \"unknown\":"
+            },
+            {
+              "line": 381,
+              "text": "return {\"status\": \"unknown\", \"reason\": result.get(\"reason\", \"windows-result-unknown\"),"
+            },
+            {
+              "line": 390,
+              "text": "day = now_local().date().isoformat()"
+            }
+          ]
+        }
+      ],
+      "scope": "entry-and-date-event-boundary-source-inventory-not-full-business-acceptance",
+      "requiresFreshBusinessCheck": true
+    },
+    {
+      "flow": "daily-new-stores-activity-audit-to-wechat",
+      "firstDue": "2026-10-28T11:00:00",
+      "sources": [
+        {
+          "path": "skills/workflows/daily-new-stores-activity-audit-to-wechat/scripts/activity_daily.py",
+          "sha256": "ab3b24e8ccb8f2109d08f6746addabffcdf82644ea12e8b3224474038087c9dc",
+          "selectedBoundaryEvidence": [
+            {
+              "line": 34,
+              "text": "if checked.astimezone(activity.LOCAL_TZ).date().isoformat() != day:"
+            },
+            {
+              "line": 66,
+              "text": "day = datetime.now(activity.LOCAL_TZ).date().isoformat()"
+            },
+            {
+              "line": 93,
+              "text": "# 2026-10-11 非营业中店（暂停营业/已下线）：采集器显式 skip 语义，不算 unknown——"
+            },
+            {
+              "line": 112,
+              "text": "shop = {\"sourceName\": hit[\"name\"], \"status\": \"unknown\", \"reason\": msg,"
+            },
+            {
+              "line": 124,
+              "text": "for s in result[\"shops\"]) else \"unknown\")"
+            },
+            {
+              "line": 135,
+              "text": "result = {\"status\": \"unknown\", \"reason\": str(error), \"shops\": []}"
+            }
+          ]
+        }
+      ],
+      "scope": "entry-and-date-event-boundary-source-inventory-not-full-business-acceptance",
+      "requiresFreshBusinessCheck": true
+    },
+    {
+      "flow": "meituan-waimai-negative-review-appeals-11",
+      "firstDue": "2026-10-28T13:00:00",
+      "sources": [
+        {
+          "path": "runtime/appeal_shift.mjs",
+          "sha256": "aa6c3078c68024b0339dbc200fe5bce29f6090e9907bf48908b408c055483f66",
+          "selectedBoundaryEvidence": []
+        }
+      ],
+      "scope": "entry-and-date-event-boundary-source-inventory-not-full-business-acceptance",
+      "requiresFreshBusinessCheck": true
+    },
+    {
+      "flow": "negative-feedback-list-appeals-0930",
+      "firstDue": "2026-10-28T08:20:00",
+      "sources": [
+        {
+          "path": "skills/workflows/negative-feedback-list-appeals/scripts/appeal_executor.mjs",
+          "sha256": "826c0426dd358c6d483d34166078d7e31144060483a99c739791562af3fa259f",
+          "selectedBoundaryEvidence": [
+            {
+              "line": 7,
+              "text": "// 回读失败 ⇒ unknown + （美团）停止批次、（淘宝）跳过该条并由跨日账本防重复。"
+            },
+            {
+              "line": 12,
+              "text": "PLATFORMS, RANGE_DAYS, RECORDS, atomicWrite, businessDate, clean, eligible, existingRecordAnyDate,"
+            },
+            {
+              "line": 17,
+              "text": "const TERMINAL = ['verified_submitted', 'unknown', 'blocked'];"
+            },
+            {
+              "line": 24,
+              "text": "mdField('业务日期', r.businessDate),"
+            },
+            {
+              "line": 54,
+              "text": "// Only bound older records are deferred. Current/undated unknown still stops."
+            },
+            {
+              "line": 58,
+              "text": "const historical = prior === 'unknown' && record.key === key"
+            },
+            {
+              "line": 59,
+              "text": "&& /^\\d{4}-\\d{2}-\\d{2}$/.test(record.businessDate || '')"
+            },
+            {
+              "line": 60,
+              "text": "&& record.businessDate < business && /^[a-f0-9]{64}$/.test(record.sourceSha256 || '');"
+            },
+            {
+              "line": 62,
+              "text": "receipt.historicalUnknown.push({ key, state: 'unknown', businessDate: record.businessDate,"
+            },
+            {
+              "line": 64,
+              "text": "} else if (prior === 'unknown') receipt.unknown.push(key);"
+            },
+            {
+              "line": 70,
+              "text": "return prior === 'unknown' && !historical ? 'stop' : 'continue';"
+            },
+            {
+              "line": 175,
+              "text": "// 这样「确认已受理但页面跳走」不会被误判为 unknown。"
+            }
+          ]
+        }
+      ],
+      "scope": "entry-and-date-event-boundary-source-inventory-not-full-business-acceptance",
+      "requiresFreshBusinessCheck": true
+    },
+    {
+      "flow": "negative-feedback-list-appeals-1230",
+      "firstDue": "2026-10-28T08:20:00",
+      "sources": [
+        {
+          "path": "skills/workflows/negative-feedback-list-appeals/scripts/build_report.mjs",
+          "sha256": "07ca4fdfb8b90aa8c838a94985f5ec320a7ad0e8c3d78623686c4fb5a5d70e16",
+          "selectedBoundaryEvidence": [
+            {
+              "line": 5,
+              "text": "import { FLOW_ID, ROOT, businessDate, shanghaiDay, recentRange } from './jinsha.mjs';"
+            },
+            {
+              "line": 8,
+              "text": "const business = businessDate();"
+            }
+          ]
+        },
+        {
+          "path": "skills/workflows/negative-feedback-list-appeals/scripts/deliver_batch.mjs",
+          "sha256": "d4b278e1e713aca2553efad71172c6cdb9a2bb013f9647535a762d46c2ada463",
+          "selectedBoundaryEvidence": [
+            {
+              "line": 12,
+              "text": "import { FLOW_ID, GROUP, RECORDS, ROOT, businessDate, shanghaiDay, recentRange, PLATFORMS } from './jinsha.mjs';"
+            },
+            {
+              "line": 19,
+              "text": "const business = businessDate();"
+            },
+            {
+              "line": 52,
+              "text": "if (manifest.ok !== true || manifest.businessDate !== business"
+            },
+            {
+              "line": 98,
+              "text": "console.log(JSON.stringify({ ok: allOk, workflowId: FLOW_ID, group: GROUP, businessDate: business, itemCount: items.length, runtimeModelDecisions: 0 }));"
+            },
+            {
+              "line": 108,
+              "text": "ok: false, reason: 'no-report-files-to-deliver', workflowId: FLOW_ID, businessDate: business, runtimeModelDecisions: 0,"
+            }
+          ]
+        }
+      ],
+      "scope": "entry-and-date-event-boundary-source-inventory-not-full-business-acceptance",
+      "requiresFreshBusinessCheck": true
+    },
+    {
+      "flow": "daily-new-stores-decoration-audit-to-wechat",
+      "firstDue": "2026-10-28T11:30:00",
+      "sources": [
+        {
+          "path": "skills/workflows/daily-new-stores-decoration-audit-to-wechat/scripts/decoration_daily.py",
+          "sha256": "9c632c49cb69aced2681bc692f09a294aaf6a289b2934ef3bbe8874756fc273a",
+          "selectedBoundaryEvidence": [
+            {
+              "line": 46,
+              "text": "- skipped/unknown 店不动表（避免用缺口数据污染跟踪结论）"
+            },
+            {
+              "line": 51,
+              "text": "today = datetime.now(decoration.LOCAL_TZ).date()"
+            },
+            {
+              "line": 79,
+              "text": "first = datetime.fromisoformat(entry[\"firstAlertDay\"]).date()"
+            },
+            {
+              "line": 99,
+              "text": "if checked.astimezone(decoration.LOCAL_TZ).date().isoformat() != day:"
+            },
+            {
+              "line": 131,
+              "text": "day = datetime.now(decoration.LOCAL_TZ).date().isoformat()"
+            },
+            {
+              "line": 159,
+              "text": "# shop-not-found / shop-search-timeout 均属业务/工位数据缺口，记 skipped 不算 unknown，"
+            },
+            {
+              "line": 175,
+              "text": "shop = {\"sourceName\": hit[\"name\"], \"status\": \"unknown\", \"reason\": msg,"
+            },
+            {
+              "line": 189,
+              "text": "for s in result[\"shops\"]) else \"unknown\")"
+            },
+            {
+              "line": 200,
+              "text": "result = {\"status\": \"unknown\", \"reason\": str(error), \"shops\": []}"
+            }
+          ]
+        }
+      ],
+      "scope": "entry-and-date-event-boundary-source-inventory-not-full-business-acceptance",
+      "requiresFreshBusinessCheck": true
+    },
+    {
+      "flow": "daily-new-stores-not-nourished-ops-to-wechat",
+      "firstDue": "2026-10-28T11:40:00",
+      "sources": [
+        {
+          "path": "skills/workflows/daily-new-stores-not-nourished-ops-to-wechat/scripts/nourish_daily.py",
+          "sha256": "2539a3208ff8f9de2f74293fa43abd661a6b804ae0a067f0bc2fa9b7bfd864ed",
+          "selectedBoundaryEvidence": []
+        },
+        {
+          "path": "skills/workflows/daily-new-stores-not-nourished-ops-to-wechat/scripts/nourish_workflow.py",
+          "sha256": "c239d3cd00d9ec9999f093f2b91000976d5dea353b0a3d3f5d7620422cc13c8b",
+          "selectedBoundaryEvidence": [
+            {
+              "line": 86,
+              "text": "code = payload.get(\"code\") or \"nourish-collect-unknown\""
+            },
+            {
+              "line": 197,
+              "text": "event = f\"{day}-taobao-not-nourished-ops\""
+            },
+            {
+              "line": 213,
+              "text": "return {\"status\": \"unknown\", \"reason\": \"prior-attempt-requires-read-only-reconciliation\","
+            },
+            {
+              "line": 223,
+              "text": "\"context\": {\"workflowId\": WORKFLOW_ID, \"eventId\": event,"
+            },
+            {
+              "line": 237,
+              "text": "return {\"status\": \"already_verified\" if prior.get(\"state\") == \"verified\" else \"unknown\","
+            },
+            {
+              "line": 249,
+              "text": "atomic_json(marker, {\"state\": \"unknown\", \"event\": event, \"sha256\": file_sha,"
+            },
+            {
+              "line": 252,
+              "text": "return {\"status\": \"unknown\", \"reason\": f\"windows-execution-error:{error}\", \"sendAttempts\": None}"
+            },
+            {
+              "line": 261,
+              "text": "atomic_json(marker, {\"state\": \"unknown\", \"event\": event, \"sha256\": file_sha, \"groupName\": GROUP,"
+            },
+            {
+              "line": 264,
+              "text": "return {\"status\": \"unknown\", \"reason\": result.get(\"reason\"),"
+            },
+            {
+              "line": 289,
+              "text": "day = datetime.now(LOCAL_TZ).date().isoformat()"
+            },
+            {
+              "line": 303,
+              "text": "result = {\"status\": \"unknown\", \"reason\": str(error), \"sendAttempts\": 0, \"runDir\": str(run_dir), \"day\": day}"
+            }
+          ]
+        }
+      ],
+      "scope": "entry-and-date-event-boundary-source-inventory-not-full-business-acceptance",
+      "requiresFreshBusinessCheck": true
+    },
+    {
+      "flow": "daily-store-task-completion-ops-to-wechat",
+      "firstDue": "2026-10-28T12:00:00",
+      "sources": [
+        {
+          "path": "skills/workflows/daily-store-task-completion-ops-to-wechat/scripts/task_daily.py",
+          "sha256": "9fe8dc6ce78cf2f6aa3dfe9c204cae3394f003327642f546bdbcee5f7fbfb982",
+          "selectedBoundaryEvidence": []
+        },
+        {
+          "path": "skills/workflows/daily-store-task-completion-ops-to-wechat/scripts/task_workflow.py",
+          "sha256": "574282053543ea170f593323f13e6327bcae8f8815ee31c242b8f841de3d96b2",
+          "selectedBoundaryEvidence": [
+            {
+              "line": 103,
+              "text": "code = payload.get(\"code\") or \"taskrate-collect-unknown\""
+            },
+            {
+              "line": 317,
+              "text": "任一不过 ⇒ fail-closed 返回 ok=False（调用方降级 unknown，人工介入）。"
+            },
+            {
+              "line": 364,
+              "text": "# 与 unknown（可能已发出、收据不明）性质完全不同，必须区分开："
+            },
+            {
+              "line": 365,
+              "text": "# unknown ⇒ 绝不重发，只读对账；blocked ⇒ 可以安全重试。"
+            },
+            {
+              "line": 368,
+              "text": "return {\"status\": \"unknown\", \"reason\": \"prior-attempt-requires-read-only-reconciliation\","
+            },
+            {
+              "line": 375,
+              "text": "atomic_json(marker, {\"state\": \"unknown\", \"event\": event, \"sha256\": file_sha,"
+            },
+            {
+              "line": 378,
+              "text": "return {\"status\": \"unknown\", \"reason\": f\"windows-execution-error:{error}\","
+            },
+            {
+              "line": 395,
+              "text": "# blocked 与 unknown 分开记账，不许把「确定没发」写成「可能发过」。"
+            },
+            {
+              "line": 396,
+              "text": "final_state = \"unknown\" if result.get(\"status\") not in (\"blocked\",) else \"blocked\""
+            },
+            {
+              "line": 401,
+              "text": "return {\"status\": result.get(\"status\", \"unknown\"), \"reason\": result.get(\"reason\"),"
+            },
+            {
+              "line": 436,
+              "text": "detail_event = f\"{day}-taobao-store-task-detail\""
+            },
+            {
+              "line": 437,
+              "text": "stats_event = f\"{day}-taobao-store-task-stats\""
+            }
+          ]
+        }
+      ],
+      "scope": "entry-and-date-event-boundary-source-inventory-not-full-business-acceptance",
+      "requiresFreshBusinessCheck": true
+    },
+    {
+      "flow": "daily-store-basic-diagnosis-to-wechat",
+      "firstDue": "2026-10-28T11:18:00",
+      "sources": [
+        {
+          "path": "skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/basic_diag_daily.py",
+          "sha256": "4cbe919cccf356454f6c3ba65992a5dae46a8f31f7c5be16b318bc26102975cb",
+          "selectedBoundaryEvidence": []
+        },
+        {
+          "path": "skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/basic_diag_workflow.py",
+          "sha256": "3d068712c0e4641e44cb64ee28dd103aaa54d71fdaea331e2d660d34946699a2",
+          "selectedBoundaryEvidence": [
+            {
+              "line": 87,
+              "text": "code = payload.get(\"code\") or \"basic-diag-collect-unknown\""
+            },
+            {
+              "line": 193,
+              "text": "event = f\"{day}-store-basic-diagnosis-ops\""
+            },
+            {
+              "line": 209,
+              "text": "return {\"status\": \"unknown\", \"reason\": \"prior-attempt-requires-read-only-reconciliation\","
+            },
+            {
+              "line": 219,
+              "text": "\"context\": {\"workflowId\": WORKFLOW_ID, \"eventId\": event,"
+            },
+            {
+              "line": 233,
+              "text": "return {\"status\": \"already_verified\" if prior.get(\"state\") == \"verified\" else \"unknown\","
+            },
+            {
+              "line": 245,
+              "text": "atomic_json(marker, {\"state\": \"unknown\", \"event\": event, \"sha256\": file_sha,"
+            },
+            {
+              "line": 248,
+              "text": "return {\"status\": \"unknown\", \"reason\": f\"windows-execution-error:{error}\", \"sendAttempts\": None}"
+            },
+            {
+              "line": 257,
+              "text": "atomic_json(marker, {\"state\": \"unknown\", \"event\": event, \"sha256\": file_sha, \"groupName\": GROUP,"
+            },
+            {
+              "line": 260,
+              "text": "return {\"status\": \"unknown\", \"reason\": result.get(\"reason\"),"
+            },
+            {
+              "line": 285,
+              "text": "day = datetime.now(LOCAL_TZ).date().isoformat()"
+            },
+            {
+              "line": 302,
+              "text": "result = {\"status\": \"unknown\", \"reason\": str(error), \"sendAttempts\": 0, \"runDir\": str(run_dir), \"day\": day}"
+            }
+          ]
+        }
+      ],
+      "scope": "entry-and-date-event-boundary-source-inventory-not-full-business-acceptance",
+      "requiresFreshBusinessCheck": true
+    },
+    {
+      "flow": "daily-service-market-ranking-to-wechat",
+      "firstDue": "2026-10-28T10:00:00",
+      "sources": [
+        {
+          "path": "skills/workflows/daily-service-market-ranking-to-wechat/scripts/ranking_workflow.py",
+          "sha256": "1a666774e2fc66249ddbd45c2e6a6d3099c673543bf7c217316062d53b8b7ca0",
+          "selectedBoundaryEvidence": [
+            {
+              "line": 25,
+              "text": "def day_now():"
+            },
+            {
+              "line": 26,
+              "text": "return datetime.now(ZoneInfo('Asia/Shanghai')).strftime('%Y-%m-%d')"
+            },
+            {
+              "line": 56,
+              "text": "'status': 'already_verified' if prior.get('state') == 'verified' else 'unknown',"
+            },
+            {
+              "line": 68,
+              "text": "if source.get('browserPort') != 9231 or stamp.astimezone(ZoneInfo('Asia/Shanghai')).strftime('%Y-%m-%d') != day:"
+            },
+            {
+              "line": 91,
+              "text": "day = day_now()"
+            },
+            {
+              "line": 97,
+              "text": "marker = folder / 'delivery.json'"
+            },
+            {
+              "line": 104,
+              "text": "event = day + '-service-market-ranking'"
+            },
+            {
+              "line": 106,
+              "text": "'context': {'workflowId': FLOW, 'eventId': event, 'accountAlias': 'main-wechat',"
+            },
+            {
+              "line": 116,
+              "text": "binding = {'eventId': event, 'groupName': GROUP, 'sha256': item['sha256'], 'name': item['name']}"
+            },
+            {
+              "line": 117,
+              "text": "atomic_json(marker, binding | {'state': 'attempted', 'sendAttempts': None})"
+            },
+            {
+              "line": 124,
+              "text": "atomic_json(marker, binding | {'state': 'unknown', 'sendAttempts': None, 'reason': str(error)})"
+            },
+            {
+              "line": 127,
+              "text": "atomic_json(marker, binding | {'state': 'verified' if verified else 'unknown',"
+            }
+          ]
+        }
+      ],
+      "scope": "entry-and-date-event-boundary-source-inventory-not-full-business-acceptance",
+      "requiresFreshBusinessCheck": true
+    },
+    {
+      "flow": "daily-meituan-income-top10-to-wechat",
+      "firstDue": "2026-10-28T08:00:00",
+      "sources": [
+        {
+          "path": "skills/workflows/daily-meituan-income-top10-to-wechat/scripts/income_workflow.py",
+          "sha256": "1510659359c81268c419d1708e3d9710a4f72326168cf17798bc64e26077d92e",
+          "selectedBoundaryEvidence": [
+            {
+              "line": 25,
+              "text": "def day_now():"
+            },
+            {
+              "line": 26,
+              "text": "return datetime.now(ZoneInfo('Asia/Shanghai')).strftime('%Y-%m-%d')"
+            },
+            {
+              "line": 56,
+              "text": "'status': 'already_verified' if prior.get('state') == 'verified' else 'unknown',"
+            },
+            {
+              "line": 63,
+              "text": "data_date=(datetime.fromisoformat(day).date()-timedelta(days=1)).isoformat()"
+            },
+            {
+              "line": 70,
+              "text": "if source.get('dataDate') != data_date or source.get('browserPort') != 9233 or stamp.astimezone(ZoneInfo('Asia/Shanghai')).strftime('%Y-%m-%d') != day:"
+            },
+            {
+              "line": 93,
+              "text": "day = day_now()"
+            },
+            {
+              "line": 99,
+              "text": "marker = folder / 'delivery.json'"
+            },
+            {
+              "line": 106,
+              "text": "event = day + '-meituan-income-top10'"
+            },
+            {
+              "line": 109,
+              "text": "'context': {'workflowId': FLOW, 'eventId': event, 'accountAlias': 'main-wechat',"
+            },
+            {
+              "line": 119,
+              "text": "binding = {'eventId': event, 'groupName': GROUP, 'sha256': item['sha256'], 'name': item['name']}"
+            },
+            {
+              "line": 120,
+              "text": "atomic_json(marker, binding | {'state': 'attempted', 'sendAttempts': None})"
+            },
+            {
+              "line": 126,
+              "text": "atomic_json(marker,binding|{'state':'attempted','items':deliveries,'currentItem':payload['itemId'],'sendAttempts':None})"
+            }
+          ]
+        }
+      ],
+      "scope": "entry-and-date-event-boundary-source-inventory-not-full-business-acceptance",
+      "requiresFreshBusinessCheck": true
+    },
+    {
+      "flow": "daily-quality-products-optimization",
+      "firstDue": "2026-10-28T17:00:00",
+      "sources": [
+        {
+          "path": "skills/workflows/daily-quality-products-optimization/scripts/quality_workflow.py",
+          "sha256": "c6bb3950277b0f6a12bc580e4c8b0de6896844896cc5e35b17f184fb3b19c9b0",
+          "selectedBoundaryEvidence": [
+            {
+              "line": 25,
+              "text": "def day_now():return datetime.now(ZoneInfo('Asia/Shanghai')).strftime('%Y-%m-%d')"
+            },
+            {
+              "line": 59,
+              "text": "def recorded_unknown(store,day,folder):"
+            },
+            {
+              "line": 63,
+              "text": "if not (store['state']=='unknown' and store.get('executionRecorded') is True and fact['day']==day and fact['kind']=='attempted-unconfirmed'"
+            },
+            {
+              "line": 64,
+              "text": "and str(store['shopId']).isdigit() and sub['day']==day and sub['shopId']==store['shopId'] and sub['eventId']==day+'-quality-'+store['shopId']"
+            },
+            {
+              "line": 83,
+              "text": "if not (shop.isdigit() and sub['day']==day and sub['shopId']==shop and sub['eventId']==day+'-quality-'+shop):return False"
+            },
+            {
+              "line": 94,
+              "text": "elif store.get('state') in ('unknown','attempted') and real_daily_intent(store,day,folder):unconfirmed.append(store);label='已发起优化，结果未确认；今日未重复提交'"
+            },
+            {
+              "line": 113,
+              "text": "'checkedNoAction':len(checked),'attemptedUnconfirmed':len(unconfirmed),'failed':len(failed),'rowErrorCount':len(state.get('rowErrors',[])),"
+            },
+            {
+              "line": 128,
+              "text": "optimized=[s for s in stores if s.get('state')=='completed'];checked=[s for s in stores if s.get('state')=='checked_no_action'];unconfirmed=[s for s in stores if recorded_unknown(s,day,folder)]"
+            },
+            {
+              "line": 131,
+              "text": "and all((s.get('state') in ('completed','checked_no_action') or recorded_unknown(s,day,folder)) and str(s.get('shopId','')).isdigit() for s in stores)"
+            },
+            {
+              "line": 139,
+              "text": "if store['state']=='unknown':"
+            },
+            {
+              "line": 140,
+              "text": "if not recorded_unknown(store,day,folder):raise ValueError('quality-unconfirmed-execution-binding-invalid')"
+            },
+            {
+              "line": 142,
+              "text": "elif store.get('technicalStatusPreserved')=='unknown':"
+            }
+          ]
+        }
+      ],
+      "scope": "entry-and-date-event-boundary-source-inventory-not-full-business-acceptance",
+      "requiresFreshBusinessCheck": true
+    }
+  ],
+  "missingReferencedEntries": [],
+  "inlineEntryObservation": "download-to-jinsha entry is in node -e import; explicitly resolved scripts/entrypoint.mjs instead of treating an empty direct-entry list as full verification",
+  "realBrowserHealthEvidence": "runtime/state/night-maintenance-2026-10-27/late-readonly-health.json",
+  "productionActions": 0,
+  "workflowRunsStarted": 0,
+  "limitations": [
+    "Selected source lines do not prove full code review or future platform availability.",
+    "All next-day data and delivery must be proved by original real runs.",
+    "Image automatic verification remains unresolved."
+  ]
+}
