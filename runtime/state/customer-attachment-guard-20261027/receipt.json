@@ -1,0 +1,28 @@
+{
+  "checkedAt": "2026-10-27T23:43:24.944134+08:00",
+  "state": "source-installed-offline-tested-real-duty-acceptance-pending",
+  "tests": {
+    "newGuard": 19,
+    "originalQueue": 7,
+    "originalDutySchedule": 7,
+    "fraudAcknowledgementRegression": "passed",
+    "sharedDependencies": "passed"
+  },
+  "testEnvironmentCorrection": "Original Python duty suite requires PYTHONPATH=runtime; corrected invocation passed all 7 tests.",
+  "originalMarkerCount": 49,
+  "originalMarkersUnchanged": true,
+  "productionWrites": 0,
+  "sendAttempts": 0,
+  "sourceFiles": [
+    {
+      "path": "skills/workflows/meituan-intelligent-customer-service/scripts/send_daily_reply_xlsx_to_wechat.mjs",
+      "sha256": "4ea46bc2354d5e92ff1f2c3b435e6efe600936e7f407daa6441819da61b197a5"
+    },
+    {
+      "path": "skills/workflows/meituan-intelligent-customer-service/scripts/daily_attachment_guard.mjs",
+      "sha256": "a3cbe4f00819fd11638f4fb55a5b31ea1589f140683b401a496415400c4a3772"
+    }
+  ],
+  "runtimeAcceptance": "original director next actual duty; no night production replay",
+  "limitations": "read-only same-duty guard; existing normal multi-round delivery authorization unchanged; prior independent duties/days do not block current duty"
+}

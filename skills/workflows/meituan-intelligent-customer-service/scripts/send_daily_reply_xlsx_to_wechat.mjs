@@ -9,6 +9,7 @@ import { fileURLToPath } from "node:url";
 // 2026-10-04 铁律硬闸：发群前读取 xlsx 实际数据行数，0 条汇总结果绝不外发 Excel。
 // 复用 step3 同款 artifact_tool 解析工作簿（路径与 compile_daily_reply_xlsx.mjs 一致）。
 import { FileBlob, SpreadsheetFile } from "@oai/artifact-tool";
+import { checkDailyAttachmentAttempts } from './daily_attachment_guard.mjs';
 
 const run = promisify(execFile);
 const python = "/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python";
@@ -102,6 +103,12 @@ async function main() {
     return;
   }
 
+  const attemptGuard = await checkDailyAttachmentAttempts({ ledger, group });
+  if (!attemptGuard.ok) {
+    console.log(JSON.stringify({ ...attemptGuard, workflowId, sendAttempts: 0, runtimeModelDecisions: 0 }));
+    process.exitCode = 1;
+    return;
+  }
   const { stdout } = await run(python, args(), { maxBuffer: 16 * 1024 * 1024 });
   console.log(stdout.trim());
 }
