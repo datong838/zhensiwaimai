@@ -8,9 +8,9 @@
 // 门禁：分页读到的行数必须等于页面「共 N 条」，否则 fail-closed 拒绝生成。
 import {
   ALL_STATUS, PLATFORMS, assertJinshaEntry, clean, entryProbe, navigate, recentRange, sleep,
-  stableRecordKey, HOME,
+  stableRecordKey, HOME, STATUS_ORDER, TAOBAO_CATEGORY_ORDER,
 } from './jinsha.mjs';
-import { openFilteredPage, readState } from './page_state.mjs';
+import { openFilteredPage, readState, assertState } from './page_state.mjs';
 
 export const snapshotSignature = state => JSON.stringify({
   total: state.totalNumber,
@@ -61,11 +61,32 @@ export async function nextPage(cdp, gate, previousPage, previousFirstKey, { paus
 /** 对当前已筛选视图分页全量采集（不依赖具体维度，status / category 通用）。
  *  行采集=物理行（与平台「共 N 条」一致；淘宝列表实测含完全重复条目，按平台口径如实入表）。
  *  防竞态靠 nextPage 的「页码前进且首页卡片必须变化」双条件，重复渲染不会被采入。 */
-async function collectCurrentPages(cdp, gate) {
-  let state = await readState(cdp);
+export async function collectCurrentPages(cdp, gate, { read = readState, advance = nextPage } = {}) {
+  let state = await read(cdp);
   const total = state.totalNumber, rows = [], seen = new Set();
+  const spec = PLATFORMS.find(p => p.key === gate.platformKey);
+  if (!spec) throw Error('platform-key-invalid:' + gate.platformKey);
+  let firstCounts;
+  function validatePage(current) {
+    assertState(current, gate);
+    if (!isCoherentSnapshot(current)) throw Error('feedback-report-page-not-coherent');
+    if (current.totalNumber !== total) throw Error('feedback-report-total-drift');
+    const source = spec.mode === 'status' ? current.statusCounts : current.categoryCounts;
+    const labels = spec.mode === 'status' ? STATUS_ORDER : TAOBAO_CATEGORY_ORDER;
+    if (!source || labels.some(label => !Number.isInteger(source[label]) || source[label] < 0)) {
+      throw Error('feedback-report-dimension-count-missing');
+    }
+    const counts = Object.fromEntries(labels.map(label => [label, source[label]]));
+    if (counts.全部 !== total) throw Error('feedback-report-dimension-total-mismatch');
+    if (firstCounts && JSON.stringify(firstCounts) !== JSON.stringify(counts)) throw Error('feedback-report-dimension-drift');
+    firstCounts ||= counts;
+    return counts;
+  }
+  const hasNextPage = () => cdp.eval(`(()=>{const n=[...document.querySelectorAll('.el-pagination .btn-next')].filter(x=>x.offsetParent!==null);return n.length===1&&!n[0].classList.contains('disabled')&&n[0].getAttribute('disabled')===null})()`);
   while (true) {
+    validatePage(state);
     const page = state.pageActive || (total === 0 ? 1 : 0);
+    if (page !== seen.size + 1) throw Error(`feedback-report-page-sequence:${page}:${seen.size + 1}`);
     if (!page || seen.has(page)) {
       throw Error(`pagination-state-invalid:${gate.platformKey}:${page}:${rows.length}:${state.cards.length}:${total}`);
     }
@@ -74,17 +95,24 @@ async function collectCurrentPages(cdp, gate) {
       ...c, status: ALL_STATUS,
       key: stableRecordKey({ platform: gate.platformKey, store: c.store, date: c.date, orderNo: c.orderNo, category: c.category }),
     })));
-    if (rows.length === total) return { rows, total };
-    const hasNext = await cdp.eval(`(()=>{const n=[...document.querySelectorAll('.el-pagination .btn-next')].filter(x=>x.offsetParent!==null);return n.length===1&&!n[0].classList.contains('disabled')&&n[0].getAttribute('disabled')===null})()`);
-    if (!hasNext) {
-      if (rows.length !== total) {
-        throw Error(`pagination-total-mismatch:${gate.platformKey}:rows=${rows.length}:total=${total}`);
+    const hasNext = await hasNextPage();
+    if (rows.length === total) {
+      if (hasNext) throw Error('feedback-report-unexpected-next-page');
+      const finalState = await read(cdp);
+      const counts = validatePage(finalState);
+      if (finalState.pageActive !== state.pageActive || JSON.stringify(finalState.cards) !== JSON.stringify(state.cards)) {
+        throw Error('feedback-report-final-page-changed');
       }
-      return { rows, total };
+      if (await hasNextPage()) throw Error('feedback-report-unexpected-next-page');
+      return { rows, total, counts, finalState };
+    }
+    if (rows.length > total) throw Error(`pagination-total-mismatch:${gate.platformKey}:rows=${rows.length}:total=${total}`);
+    if (!hasNext) {
+      throw Error(`pagination-total-mismatch:${gate.platformKey}:rows=${rows.length}:total=${total}`);
     }
     const card = state.cards[0];
     const firstKey = card ? stableRecordKey({ platform: gate.platformKey, store: card.store, date: card.date, orderNo: card.orderNo, category: card.category }) : null;
-    const next = await nextPage(cdp, gate, page, firstKey);
+    const next = await advance(cdp, gate, page, firstKey);
     state = next.state;
   }
 }
@@ -115,10 +143,7 @@ export async function collectPlatform(cdp, platformKey, window = recentRange()) 
     await openFilteredPage(cdp, { platformKey, status: '未申诉', window });
     const gate = { platformKey, status: ALL_STATUS, window };
     await selectStatusStable(cdp, gate, ALL_STATUS);
-    const { rows, total } = await collectCurrentPages(cdp, gate);
-    const state = await readState(cdp);
-    const counts = { 全部: rows.length };
-    for (const key of ['未申诉', '申诉中', '申诉成功', '申诉失败']) counts[key] = Number(state.statusCounts?.[key] ?? 0);
+    const { rows, total, counts } = await collectCurrentPages(cdp, gate);
     const snapshot = {
       platformKey, platformLabel: spec.label, businessWindow: window, counts, total, rows,
       collectedAt: new Date().toISOString(), runtimeModelDecisions: 0,
@@ -129,11 +154,9 @@ export async function collectPlatform(cdp, platformKey, window = recentRange()) 
 
   // category 模式（淘宝）：openFilteredPage 已落在「全部」分类视图
   const gate = { platformKey, status: undefined, window };
-  const landed = await openFilteredPage(cdp, { platformKey, window });
-  const categoryCounts = landed.categoryCounts || {};
-  const { rows, total } = await collectCurrentPages(cdp, gate);
-  const counts = { 全部: rows.length };
-  for (const key of ['食品安全负反馈率', '服务负反馈率']) counts[key] = Number(categoryCounts?.[key] ?? 0);
+  await openFilteredPage(cdp, { platformKey, window });
+  const { rows, total, counts } = await collectCurrentPages(cdp, gate);
+  const categoryCounts = { ...counts };
   const snapshot = {
     platformKey, platformLabel: spec.label, businessWindow: window, counts, categoryCounts, total, rows,
     collectedAt: new Date().toISOString(), runtimeModelDecisions: 0,

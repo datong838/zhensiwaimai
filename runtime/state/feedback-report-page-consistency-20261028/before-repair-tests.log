@@ -1,0 +1,180 @@
+✔ stable single page preserves actual source count (0.795083ms)
+✔ stable multipage collects physical rows in original order (0.359459ms)
+✔ actual duplicate physical rows are retained (0.0585ms)
+✔ stable empty view remains a valid zero snapshot (0.060583ms)
+✖ total drift on later page cannot be accepted as original total (0.385417ms)
+✖ final readback total drift is not ignored (0.091416ms)
+✖ final page content change is not ignored (0.082167ms)
+✖ source all count must agree with page total (0.069541ms)
+✖ missing dimension count cannot become a fabricated zero (0.087333ms)
+✖ final dimension count drift is rejected (0.167ms)
+✖ wrong platform, window or category cannot contribute rows (0.0995ms)
+✖ starting at a later page is not full collection (0.087042ms)
+✖ noncontinuous next page is rejected (0.090625ms)
+✖ rows equal initial total but next page still enabled is incomplete (0.073167ms)
+✔ too few rows and no next page remains a hard failure (0.10775ms)
+✖ category mode reads actual category counters (0.076083ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 5
+ℹ fail 11
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 46.647
+
+✖ failing tests:
+
+test at skills/workflows/negative-feedback-list-appeals/scripts/test_report_page_consistency.mjs:36:1
+✖ total drift on later page cannot be accepted as original total (0.385417ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/negative-feedback-list-appeals/scripts/test_report_page_consistency.mjs:38:3)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /total-drift/,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at skills/workflows/negative-feedback-list-appeals/scripts/test_report_page_consistency.mjs:40:1
+✖ final readback total drift is not ignored (0.091416ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/negative-feedback-list-appeals/scripts/test_report_page_consistency.mjs:41:3)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /total-drift/,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at skills/workflows/negative-feedback-list-appeals/scripts/test_report_page_consistency.mjs:43:1
+✖ final page content change is not ignored (0.082167ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/negative-feedback-list-appeals/scripts/test_report_page_consistency.mjs:44:3)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /final-page-changed/,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at skills/workflows/negative-feedback-list-appeals/scripts/test_report_page_consistency.mjs:46:1
+✖ source all count must agree with page total (0.069541ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/negative-feedback-list-appeals/scripts/test_report_page_consistency.mjs:48:3)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /dimension-total/,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at skills/workflows/negative-feedback-list-appeals/scripts/test_report_page_consistency.mjs:50:1
+✖ missing dimension count cannot become a fabricated zero (0.087333ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/negative-feedback-list-appeals/scripts/test_report_page_consistency.mjs:52:3)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /dimension-count/,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at skills/workflows/negative-feedback-list-appeals/scripts/test_report_page_consistency.mjs:54:1
+✖ final dimension count drift is rejected (0.167ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/negative-feedback-list-appeals/scripts/test_report_page_consistency.mjs:56:3)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /dimension-drift/,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at skills/workflows/negative-feedback-list-appeals/scripts/test_report_page_consistency.mjs:58:1
+✖ wrong platform, window or category cannot contribute rows (0.0995ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/negative-feedback-list-appeals/scripts/test_report_page_consistency.mjs:60:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /feedback-/,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at skills/workflows/negative-feedback-list-appeals/scripts/test_report_page_consistency.mjs:63:1
+✖ starting at a later page is not full collection (0.087042ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/negative-feedback-list-appeals/scripts/test_report_page_consistency.mjs:64:3)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /page-sequence/,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at skills/workflows/negative-feedback-list-appeals/scripts/test_report_page_consistency.mjs:66:1
+✖ noncontinuous next page is rejected (0.090625ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/negative-feedback-list-appeals/scripts/test_report_page_consistency.mjs:67:3)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /page-sequence/,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at skills/workflows/negative-feedback-list-appeals/scripts/test_report_page_consistency.mjs:69:1
+✖ rows equal initial total but next page still enabled is incomplete (0.073167ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/negative-feedback-list-appeals/scripts/test_report_page_consistency.mjs:70:3)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /unexpected-next/,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at skills/workflows/negative-feedback-list-appeals/scripts/test_report_page_consistency.mjs:75:1
+✖ category mode reads actual category counters (0.076083ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/negative-feedback-list-appeals/scripts/test_report_page_consistency.mjs:78:3)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /category-mismatch/,
+    operator: 'rejects',
+    diff: 'simple'
+  }
