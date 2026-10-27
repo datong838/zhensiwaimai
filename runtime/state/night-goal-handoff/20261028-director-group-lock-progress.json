@@ -49,14 +49,15 @@
     "9231服务商主页正文正常，单店1202115550商品整改跳扫码登录页；原登录需恢复，不能误报整个服务商主体掉线，独立正常流继续"
   ],
   "codeAndDeployment": {
-    "latestSourceCommit": "本轮待提交，push后补实际SHA",
+    "latestSourceCommit": "6cc854dc8d8ca48256ffda8e6e0eb968f9a03a4a",
     "productionReplays": 0,
     "messagesSentByNightMaintenance": 0,
     "originalLedgersMutated": false,
     "sourceRollback": "保留各原件；本批runtime/state/director-group-lock-20261028/originals/run_all.py，只匹配源回滚并同样空闲门生效；不回滚业务事实/原锁/账本",
     "physicalLeaseAudit": "runtime/state/post-lease-process-ownership-20261028/final-audit.json",
     "directorGroupLockAudit": "runtime/state/director-group-lock-20261028/receipt.json",
-    "directorPid": 55035
+    "directorPid": 55035,
+    "latestSourcePushed": "origin/main"
   },
   "resumeSteps": [
     "先读现行监理Skill、0800SOP、企微岗位约定、最新manifest和用户约束；核对Asia/Shanghai时间",
