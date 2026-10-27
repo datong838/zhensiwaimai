@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {FLOW,COMPANY,METRIC,compact,digest,validateMerchants,validateProducts,submissionKey,reconcileProducts,maySubmit,aggregate,segmentDeadline,canStartStore,shanghaiClock,recordedUnknown,SINGLE_PASS,finishSinglePass} from './quality_core.mjs';
+import {FLOW,COMPANY,METRIC,compact,digest,validateMerchants,validateProducts,noExecutableSuggestions,submissionKey,reconcileProducts,maySubmit,aggregate,segmentDeadline,canStartStore,shanghaiClock,recordedUnknown,SINGLE_PASS,finishSinglePass} from './quality_core.mjs';
 const BASE=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const ROOT=path.resolve(BASE,'../../..');
 const HOME='https://open.shop.ele.me/manager/base/home';
@@ -326,6 +326,7 @@ export async function runSegment({execute=false}={}){
     await noModal(frame);const before=await stable(frame,productDom,Math.min(storeDeadline,Date.now()+10000));store.before={total:before.total,visibleProducts:before.products.length};
     const action=frame.getByRole('button',{name:'一键优化类目详情',exact:true});
     if(before.total===0||await action.count()===0||await action.isDisabled()){store.state='checked_no_action';store.reason='no-available-platform-optimization';store.completedAt=new Date().toISOString();continue;}
+    if(noExecutableSuggestions(before)){store.state='checked_no_action';store.reason='no-executable-platform-suggestions';store.completedAt=new Date().toISOString();continue;}
     store.selectionNote=await prepareSelection(frame,storeDeadline);
     await action.click({timeout:budget(storeDeadline)});const pop=frame.locator('.ant-popover.ant-popconfirm:visible');await pop.waitFor({state:'visible',timeout:budget(storeDeadline)});
     const prompt=compact(await pop.innerText());if(!prompt.includes('优化全部类目详情问题')||!prompt.includes('优化后，有建议的类目详情将自动采纳平台建议信息，其余的请手动优化'))throw Error('quality-optimization-confirmation-scope-invalid');

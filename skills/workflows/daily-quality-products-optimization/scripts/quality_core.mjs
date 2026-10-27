@@ -20,6 +20,11 @@ export function validateProducts(snapshot){
  for(const p of snapshot.products){if(!p.name||!Array.isArray(p.issues)||!p.issues.length||typeof p.hasSuggestion!=='boolean')throw Error('quality-product-schema-invalid');}
  return snapshot;
 }
+export function noExecutableSuggestions(snapshot){
+ if(snapshot?.loading!==false||snapshot?.hasNext!==false||!(snapshot?.total>0))return false;
+ try{validateProducts(snapshot);}catch{return false;}
+ return snapshot.products.every(product=>product.hasSuggestion===false);
+}
 export function submissionKey(shopId,products){
  if(!/^\d+$/.test(shopId))throw Error('quality-shop-id-invalid');validateProducts(products);
  return digest({shopId,taskIds:products.products.map(p=>p.taskId).sort(),scope:'all-category-details'});

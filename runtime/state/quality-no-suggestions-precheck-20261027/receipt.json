@@ -1,0 +1,29 @@
+{
+  "installedAt": "2026-10-27T23:52:29.681943+08:00",
+  "status": "minimal-source-and-existing-digest-registration-installed",
+  "changedFiles": {
+    "scripts/quality_core.mjs": {
+      "before": "b1fda09d1b460241e4a4952ace3f849e98c51db6cb4acb238226273790f72930",
+      "after": "ee0903d62b389e02a99344ba9229a95003e33272e6cdd4c4c3d3c7b06ec3b013"
+    },
+    "scripts/quality_optimizer.mjs": {
+      "before": "a9a85d9fecd96499f796ec0b9d45179a3f81ad84c940d295ced5fd2f835a4bf1",
+      "after": "64cd942318ac391873ba2336ba2852a85e5dd70f0bdb96314baed1e5d6c24285"
+    }
+  },
+  "policyBeforeSha256": "bc74852b4f673c5400dc7184762affabd64c2289833731fdd401d06465da7461",
+  "policyAfterSha256": "07c21f686595618cadac8253752143b2018f16cbbcff487223c1a5fd6bc6fc92",
+  "originalPolicyGatesVerified": true,
+  "nonFilePolicyFieldsUnchanged": true,
+  "protectedBusinessFiles": 19,
+  "protectedBusinessFilesUnchanged": true,
+  "tests": {
+    "newNoSuggestions": 17,
+    "originalNode": 77,
+    "originalPython": 25
+  },
+  "businessWrites": 0,
+  "sendAttempts": 0,
+  "realBusinessAcceptance": "pending-next-original-director-daily-pass",
+  "oldUnknownPreserved": true
+}
