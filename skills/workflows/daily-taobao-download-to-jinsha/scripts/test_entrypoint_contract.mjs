@@ -4,7 +4,7 @@ import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const source = path.join(path.dirname(fileURLToPath(import.meta.url)), 'entrypoint.mjs');
-const installed = '/Users/ddt/.codex/skills/daily-taobao-download-to-jinsha/scripts/entrypoint.mjs';
+const installed = '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/installed-taobao-skill/scripts/entrypoint.mjs';
 
 function scheduledFunctionBody(code) {
   const start = code.indexOf('export async function runScheduled(...args) {');

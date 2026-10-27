@@ -1,0 +1,125 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+wxsend —— 微信发送包装器（Mac 侧一键发文字/文件到微信）
+
+自动从同目录「接入包/连接信息.txt」解析服务地址和 TOKEN，无需设置环境变量。
+内置重试（兜住服务端偶发的「打开会话失败」）。
+
+用法：
+    python3 wxsend.py "臻肆测试群" "消息文字"
+    python3 wxsend.py --file "臻肆测试群" /path/to/文件.xlsx
+    python3 wxsend.py --status          # 探活
+    python3 wxsend.py --sessions        # 列会话
+"""
+import json
+import os
+import re
+import sys
+import time
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
+
+INFO_FILE = os.path.join(HERE, "接入包", "连接信息.txt")
+
+
+def _health_ok(ip, token, timeout=3.0):
+    """/health 身份校验：必须返回 ok=true 且 agent up 才算我们那台主机（/health 不校验 token，
+    因此命中后仍要求 token 非空——token 只来自本地连接信息.txt，不会被外部注入）。"""
+    try:
+        import urllib.request
+        req = urllib.request.Request(f"http://{ip}:8731/health",
+                                     headers={"Authorization": f"Bearer {token}"})
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            data = json.loads(resp.read().decode("utf-8", "replace"))
+        return bool(data.get("ok")) and "agent up" in str(data.get("msg", ""))
+    except Exception:
+        return False
+
+
+def load_config():
+    """从连接信息.txt 解析 IP 和 TOKEN，避免 token 二次落盘。
+
+    2026-10-06 晚升级（有线 .2 宕、无线 .5 活的实战教训）：不再信任单一 IP，
+    改为「候选 + /health 身份校验」——候选顺序 有线.2 优先、无线.5 兜底
+    （连接信息.txt 解析出的地址排最前），取第一个通过身份校验者。
+    与 localhost_relay.py 的候选哲学一致：不硬编码可达性，实测为准。
+    """
+    ip, token = "192.168.0.2", ""
+    with open(INFO_FILE, encoding="utf-8") as f:
+        text = f.read()
+    m = re.search(r"http://([\d.]+):(\d+)", text)
+    if m:
+        ip = m.group(1)
+    m = re.search(r"TOKEN\s+([A-Za-z0-9+/=_\-]{16,})", text)
+    if m:
+        token = m.group(1)
+    if not token:
+        raise SystemExit(f"[!] 未能从 {INFO_FILE} 解析出 TOKEN")
+    # 候选 + 身份校验：解析 IP 优先，.5 无线兜底（去重）；取第一个 /health 通过者
+    candidates = [ip] + [c for c in ("192.168.0.2", "192.168.0.5") if c != ip]
+    for cand in candidates:
+        if _health_ok(cand, token):
+            if cand != ip:
+                print(f"[!] 首选 {ip} 不可达，回落候选 {cand}（/health 身份校验通过）")
+            return cand, token
+    # 全部候选失败：维持旧行为返回解析 IP，让上层给出原始连接错误
+    return ip, token
+
+
+def send_with_retry(wx, who, payload, is_file=False, attempts=3, gap=6):
+    """带重试的发送；服务端偶发「打开会话失败」重试即可过。"""
+    last = None
+    for i in range(1, attempts + 1):
+        last = wx.send_auto(who, payload) if not is_file else wx.send_local_file(who, payload)
+        if last.get("ok"):
+            if i > 1:
+                print(f"    (第{i}次重试成功)")
+            return last
+        err = str(last.get("error", ""))
+        print(f"    第{i}次失败: {err[:120]}")
+        if i < attempts:
+            time.sleep(gap)
+    return last
+
+
+def main(argv):
+    from client import WeChat
+
+    if not argv or argv[0] in ("-h", "--help"):
+        print(__doc__)
+        return 0
+    ip, token = load_config()
+    wx = WeChat(ip, token)
+
+    if argv[0] == "--status":
+        print(wx.health())
+        return 0
+    if argv[0] == "--sessions":
+        r = wx.sessions()
+        for n in (r.get("data") or {}).get("sessions", []):
+            print(" -", n)
+        return 0
+
+    is_file = argv[0] == "--file"
+    # 模式开关（--file 等）占 argv[0] 时，who 从 argv[1] 开始；否则 argv[0] 就是 who
+    args = argv[1:] if argv[0].startswith("--") else argv
+    if len(args) < 2:
+        print(__doc__)
+        return 1
+    who, payload = args[0], args[1]
+
+    r = send_with_retry(wx, who, payload, is_file=is_file)
+    if r.get("ok"):
+        d = r.get("data", {})
+        print(f"[OK] 已发送 -> {who}  (类型: {d.get('auto', 'text')})")
+        if d.get("server_path"):
+            print(f"     服务端路径: {d['server_path']}")
+        return 0
+    print(f"[FAIL] {r.get('error')}")
+    return 1
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv[1:]))

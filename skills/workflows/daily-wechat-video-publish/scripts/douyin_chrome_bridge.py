@@ -31,10 +31,10 @@ UPLOAD_URL = 'https://creator.douyin.com/creator-micro/content/upload'
 MANAGE_URL = 'https://creator.douyin.com/creator-micro/content/manage'
 SHOT = Path('/tmp/douyin-chrome-bridge.png')
 OCR_BIN = Path(
-    '/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/scripts/ocr_vision_bin'
+    '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/legacy-app-controler/wechat-desktop-control/scripts/ocr_vision_bin'
 )
 CG_CLICK = Path(
-    '/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/scripts/cgevent_click_bin'
+    '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/legacy-app-controler/wechat-desktop-control/scripts/cgevent_click_bin'
 )
 OPTS = Quartz.kCGWindowListOptionOnScreenOnly | Quartz.kCGWindowListExcludeDesktopElements
 

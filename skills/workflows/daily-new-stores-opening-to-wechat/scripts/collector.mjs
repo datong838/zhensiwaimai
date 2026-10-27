@@ -6,15 +6,34 @@ import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 
 const require = createRequire(import.meta.url);
-const { chromium } = require('/Users/ddt/work/projects/ai_agent/aos-platform/plugins/browser/isolated-persistent-playwright/node_modules/playwright-core');
+const { chromium } = require('/Users/ddt/work/projects/ai_agent/browser/isolated-persistent-playwright/node_modules/playwright-core');
 // 2026-09-30 S2b 金鲨岗转正：采集前必须持有金鲨工位租约（posts/jinsha-post），
 // 与 jinsha 日报/差评分析共用同一把锁（/tmp/zhensi-jinsha-cua-exam.lock）⇒ 工位互斥。
 // busy 时本轮 blocked，daemon 下轮重试；锁 TTL 30min 自愈。
 import { acquireJinshaLease, releaseJinshaLease } from '../../../posts/jinsha-post/scripts/lease.mjs';
+import { selectExistingJinshaTarget } from '../../../posts/jinsha-post/scripts/existing_owned_target.mjs';
 const ORIGIN = 'https://data.guoshuyufen.com';
 const REALTIME_URL = `${ORIGIN}/#/businessData/realTimeData`;
 const PORT = 'http://127.0.0.1:9232';
 const MAX_PAGES = 100;
+
+export async function chooseJinshaPage(pages, resolveOwned=async()=>selectExistingJinshaTarget(
+  await (await fetch(`${PORT}/json/list`)).json())) {
+  const jinsha=pages.filter(page=>page.url().startsWith(`${ORIGIN}/`));
+  const realtime=jinsha.filter(page=>page.url()===REALTIME_URL);
+  if(realtime.length===1)return realtime[0];
+  if(realtime.length===0&&jinsha.length===1)return jinsha[0];
+  if(jinsha.length===0)throw Error('jinsha-tab-missing');
+  const selected=await resolveOwned();
+  if(!selected.jinshaOwnerMarker)throw Error('jinsha-owned-page-proof-missing');
+  const matches=[];
+  for(const page of jinsha){
+    const current=await page.evaluate(()=>({url:location.href,marker:window.name}));
+    if(current.url===selected.url&&current.marker===selected.jinshaOwnerMarker)matches.push(page);
+  }
+  if(matches.length!==1)throw Error(`jinsha-owned-page-binding-not-unique:${matches.length}`);
+  return matches[0];
+}
 
 export function eligibleDays(value) {
   const match = /^\s*([0-3])\s*天\s*$/.exec(value || '');
@@ -351,12 +370,7 @@ async function main() {
     browser = await chromium.connectOverCDP(PORT);
     const contexts = browser.contexts();
     if (contexts.length !== 1) throw new Error('cdp-context-not-unique');
-    const realtimeTabs = contexts[0].pages().filter(candidate => candidate.url() === REALTIME_URL);
-    const jinshaTabs = contexts[0].pages().filter(candidate => candidate.url().startsWith(`${ORIGIN}/`));
-    if (realtimeTabs.length > 1 || (!realtimeTabs.length && jinshaTabs.length !== 1))
-      throw new Error(`jinsha-tab-ambiguous:${jinshaTabs.length}`);
-    page = realtimeTabs[0] || jinshaTabs[0];
-    if (!page) throw new Error('jinsha-tab-missing');
+    page = await chooseJinshaPage(contexts[0].pages());
     await dismissAnnouncement(page);
     if (page.url() !== REALTIME_URL) {
       const menu = page.getByText('实时数据', { exact: true });

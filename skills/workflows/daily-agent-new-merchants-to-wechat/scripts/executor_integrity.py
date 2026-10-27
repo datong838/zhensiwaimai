@@ -12,7 +12,7 @@ from pathlib import Path
 SKILL_ROOT = Path(__file__).resolve().parents[1]
 MANIFEST_PATH = SKILL_ROOT / "executor-lock.json"
 SHARED_WECHAT_ROOT = Path(
-    "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/scripts"
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/legacy-app-controler/wechat-desktop-control/scripts"
 )
 RUNTIME_FILES = {
     "messaging_bridge": SKILL_ROOT.parents[1] / "wechat-messaging/scripts/workflow_bridge.py",

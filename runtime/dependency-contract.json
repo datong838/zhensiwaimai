@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "purpose": "臻肆业务运行依赖与部署核验合同；不是安装锁文件，不自动执行",
+  "observedDate": "2026-10-27",
+  "authority": {
+    "businessMechanisms": "skills/mechanisms",
+    "workflowSchedule": "runtime/skills_manifest.json",
+    "storage": "runtime/state/storage-layout-v1.json",
+    "nativeUi": "docs/operations/20261024-企业微信UI岗位执行约定.md"
+  },
+  "runtime": {
+    "node": {
+      "observedVersion": "24.19.0",
+      "requiredCapabilities": [
+        "globalThis.WebSocket",
+        "ESM",
+        "CDP connection to dedicated existing Chrome"
+      ],
+      "configuration": "runtime/skills_manifest.json interpreters.node; ZENSI_NODE override",
+      "ownership": "external host runtime; do not copy whole Codex/WorkBuddy"
+    },
+    "python": {
+      "observedVersion": "3.12.13",
+      "configuration": "runtime/skills_manifest.json interpreters.python; ZENSI_PYTHON override",
+      "observedBusinessPackages": {
+        "openpyxl": "3.1.5",
+        "Pillow": "11.3.0",
+        "requests": "2.34.2"
+      },
+      "ownership": "external host Python; current interpreter retained",
+      "businessVersionFile": "requirements-business.lock.txt",
+      "observedBusinessDependencyClosure": {
+        "openpyxl": "3.1.5",
+        "et-xmlfile": "2.0.0",
+        "Pillow": "11.3.0",
+        "requests": "2.34.2",
+        "charset-normalizer": "3.5.1",
+        "idna": "3.19",
+        "urllib3": "2.7.0",
+        "certifi": "2026.7.22"
+      }
+    }
+  },
+  "browserComponents": [
+    {
+      "name": "playwright-core",
+      "version": "1.62.1",
+      "path": "/Users/ddt/work/projects/ai_agent/browser/headless-playwright/node_modules/playwright-core",
+      "consumers": [
+        "daily-top10-to-wechat-group",
+        "daily-taobao-download-to-jinsha",
+        "daily-jinsha-reports-to-business-wechat"
+      ],
+      "license": "Apache-2.0"
+    },
+    {
+      "name": "playwright-core",
+      "version": "1.63.0",
+      "path": "/Users/ddt/work/projects/ai_agent/browser/isolated-persistent-playwright/node_modules/playwright-core",
+      "consumers": [
+        "daily-new-stores-opening-to-wechat"
+      ],
+      "license": "Apache-2.0"
+    }
+  ],
+  "hostNodeLibraries": {
+    "observed": {
+      "playwright": "1.62.1",
+      "playwright-core": "1.62.1",
+      "@oai/artifact-tool": "2.8.99"
+    },
+    "currentRoot": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/node_modules",
+    "ownership": "two library packages vendored locally; playwright-core uses independent shared browser component; no intelligent-agent engine copied",
+    "deploymentLimit": "vendored libraries are gitignored local assets; exact file SHA manifest retained for backup; host Node/Python/apps still external"
+  },
+  "externalApplications": [
+    "Google Chrome dedicated original profiles 9230/9231/9232/9233",
+    "macOS System Events public UI scripting",
+    "Tencent WeWorkMac with existing Accessibility permissions"
+  ],
+  "protectedExternalInterfaces": {
+    "profiles": "host managed; no credentials/cookies/localStorage copied",
+    "locks": "retain original shared physical-resource lock paths; no parallel lock domain",
+    "automation": "existing 06:00/08:00/22:00 host schedules unchanged"
+  },
+  "unfinished": [
+    "one new store visibility unresolved; no false inspection completion"
+  ],
+  "validationScope": "Versions and paths observed, library switching tested separately; dependency declaration is not production acceptance",
+  "evidenceStorage": {
+    "top10": "runtime/state/business-evidence/top10",
+    "taobaoDownload": "runtime/state/business-evidence/taobao-download",
+    "legacyAliasesRetained": true,
+    "historicalReceiptBytesChanged": false
+  },
+  "deploymentGuide": "docs/operations/运行依赖与部署边界.md",
+  "nodeLibraryManifest": "runtime/state/node-library-consolidation-20261027.json",
+  "nonActiveLegacyLinks": [
+    "skills/workflows/store-inspection/node_modules",
+    "skills/workflows/store-inspection/scripts/node_modules"
+  ],
+  "nodeLibraryLock": "runtime/node-libraries.lock.json"
+}

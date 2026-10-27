@@ -37,3 +37,9 @@ coverage_html/
 # Business data and preserved source archives after directory consolidation
 data/
 archive/
+
+# Version the standalone libraries required by the consolidated workflows.
+!vendor/node_modules/
+!vendor/node_modules/**
+vendor/node_modules/**/__pycache__/
+vendor/node_modules/**/.DS_Store

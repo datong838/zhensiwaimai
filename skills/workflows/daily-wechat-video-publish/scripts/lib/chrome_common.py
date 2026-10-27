@@ -13,10 +13,10 @@ from lib.platform_spec import TAOBAO_STOW_BOUNDS, PlatformSpec
 from lib import chrome_ax
 
 OCR_BIN = Path(
-    '/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/scripts/ocr_vision_bin'
+    '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/legacy-app-controler/wechat-desktop-control/scripts/ocr_vision_bin'
 )
 CG_CLICK = Path(
-    '/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/scripts/cgevent_click_bin'
+    '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/legacy-app-controler/wechat-desktop-control/scripts/cgevent_click_bin'
 )
 SHOT = Path('/tmp/zhensi-chrome-bridge.png')
 OPTS = Quartz.kCGWindowListOptionOnScreenOnly | Quartz.kCGWindowListExcludeDesktopElements

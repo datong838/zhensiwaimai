@@ -3,8 +3,8 @@
 # 用法: bash login_state_probe.sh
 set -u
 RUNTIME=/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime
-GJ=/Users/ddt/work/projects/ai_agent/wechat-windows-driver/gateway.json
-CONN=/Users/ddt/work/projects/ai_agent/wechat-windows-driver/接入包/连接信息.txt
+GJ=/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/archive/compat/wechat-windows-driver/gateway.json
+CONN=/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/archive/compat/wechat-windows-driver/接入包/连接信息.txt
 GROUP="FEIBING NEO AI数字员工"
 JUDGE=$RUNTIME/_probe_judge.py
 BGUP=$RUNTIME/bg-chrome-up.sh

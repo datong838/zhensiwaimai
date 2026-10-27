@@ -2,7 +2,7 @@ import crypto from "node:crypto";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { Workbook, SpreadsheetFile } from "/Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/@oai/artifact-tool/dist/artifact_tool.mjs";
+import { Workbook, SpreadsheetFile } from "@oai/artifact-tool";
 
 const baseDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const date = process.argv[2];

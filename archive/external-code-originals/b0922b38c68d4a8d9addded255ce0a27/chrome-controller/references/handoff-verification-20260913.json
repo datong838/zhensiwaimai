@@ -1,0 +1,33 @@
+{
+  "status": "CODE_AND_LOCAL_BROWSER_VERIFIED_REAL_HANDOFF_BLOCKED",
+  "date": "2026-09-13",
+  "tests": {
+    "passed": 16,
+    "failed": 0,
+    "skipped": 0,
+    "includesRealLocalChrome": true,
+    "realBusinessAuthenticationVerified": false
+  },
+  "liveAttempt": {
+    "profile": "meituan-merchant",
+    "pid": 6541,
+    "mode": "visible",
+    "port": 9233,
+    "result": "legacy-visible-no-control-interface",
+    "processStopped": false,
+    "browserRestarted": false,
+    "credentialsRead": false
+  },
+  "files": {
+    "scripts/background_chrome.mjs": "ee620bb28462b16f922acf4f3c2fd3d2798f8e7ba5d78dd4af183d8b5367a1a4",
+    "scripts/run_task.mjs": "510d9726671256de7683639f6959baa219d263d5901c026ddc919bb34e38512f",
+    "scripts/session_guard.mjs": "fdf33fd7717d0a5c148708ce58584c003f064a68225d676cf87e8e45b1cf9f4c",
+    "scripts/handoff.mjs": "912347ef78c6f61361fcc67851b9a078c269a5515df989dc40d11aa856a19e83",
+    "scripts/handoff.test.mjs": "7773788c56055933c4e3013a6d944a2f24dccc44fdf7c3692d30e91b0579f4ad",
+    "scripts/handoff.integration.test.mjs": "333b499ad276e2b0444ec3aa76650db7c5e9100347e0b844cebbf823f620a0bb",
+    "SKILL.md": "e3e697bd12350fe9aa78dbf83dd1ed044f90cc8fdf6eba38a4aca4d618766932",
+    "references/implementation-plan.md": "2001ae5509816884173b8550f1b35283797424855f9157f2ecf4f097931eb86a",
+    "references/operations-runbook.md": "53b24733db279d0e2ae1b8aaa1794044dfb4c8089cd03495c2bbc381e1af9e49",
+    "references/login-handoff-plan.md": "3e47ec14aa5c21b8b2af0cc5b424d828aa43105dea5e8e273c46767de25576e3"
+  }
+}

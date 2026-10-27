@@ -12,7 +12,7 @@ import { pathToFileURL } from 'node:url';
 import { promisify } from 'node:util';
 
 const require = createRequire(import.meta.url);
-const { chromium } = require('/Users/ddt/work/projects/ai_agent/aos-platform/plugins/browser/headless-playwright/node_modules/playwright-core');
+const { chromium } = require('/Users/ddt/work/projects/ai_agent/browser/headless-playwright/node_modules/playwright-core');
 const execFile = promisify(execFileCallback);
 
 export const FIXED = Object.freeze({
@@ -34,13 +34,13 @@ export const FIXED = Object.freeze({
 });
 
 const PROFILE_ROOT = path.join(os.homedir(), 'Library/Application Support/AOS Background Chrome');
-const DEDICATED_CHROME_LAUNCHER = '/Users/ddt/work/projects/ai_agent/multimedia/mediacrawler/browser_control/control-background-dedicated-chrome/scripts/background_chrome.mjs';
-const DEDICATED_CHROME_SESSION_GUARD = '/Users/ddt/work/projects/ai_agent/multimedia/mediacrawler/browser_control/control-background-dedicated-chrome/scripts/session_guard.mjs';
+const DEDICATED_CHROME_LAUNCHER = '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/dedicated-chrome-controller/scripts/background_chrome.mjs';
+const DEDICATED_CHROME_SESSION_GUARD = '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/dedicated-chrome-controller/scripts/session_guard.mjs';
 const DEDICATED_CHROME_LAUNCHER_SHA256 = 'e805e95a3c0f2f1d0be35317a76433bbf4cd618e32b978fc172ac85f64fa26d1';
 // 2026-10-03 受控重钉：外部共享依赖 session_guard.mjs 于 2026-10-02 23:12 被改动
 // （文件完整正常，177 行、导出齐全），旧摘要 a3f24649… 已过时，按新字节重绑。
 const DEDICATED_CHROME_SESSION_GUARD_SHA256 = '07dbd017f32c00d0041546c6bb249b0febe90fbd9648579d75b2a9571632ec2c';
-const DEFAULT_OUTPUT = '/tmp/zhensi_daily_download/background-browser';
+const DEFAULT_OUTPUT = "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/business-evidence/taobao-download/background-browser";
 const JINSHA_BUSINESS_RUNS_ROOT = '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/jinsha-business-production';
 const MODE = Object.freeze({
   PRODUCTION: 'execute',
@@ -1095,8 +1095,8 @@ async function loadProductionResumeReceipt(businessDate) {
       if (path.resolve(directory) !== path.resolve(expectedDirectory)) continue;
       const files = {};
       for (const type of ['store', 'review']) {
-        const resolved = path.resolve(receipt.files[type].path);
-        if (!resolved.startsWith(`${path.resolve(directory)}${path.sep}`)) throw new Error(`resume-file-out-of-scope:${type}`);
+        const resolved = await fsp.realpath(receipt.files[type].path);
+        if (!resolved.startsWith(`${await fsp.realpath(directory)}${path.sep}`)) throw new Error(`resume-file-out-of-scope:${type}`);
         const validated = await validateXlsx(resolved, type, businessDate);
         if (validated.size !== receipt.files[type].size || validated.sha256 !== receipt.files[type].sha256 || validated.name !== receipt.files[type].name) {
           throw new Error(`resume-file-receipt-mismatch:${type}`);
@@ -1494,6 +1494,9 @@ function assertCompletionContract(receipt) {
 
 async function runFixed(mode) {
   if (!PHASE_CHAINS[mode]) throw new Error('unsupported-internal-run-mode');
+  const evidenceStorageHelper = "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/evidence_storage.mjs";
+  if (crypto.createHash('sha256').update(await fsp.readFile(evidenceStorageHelper)).digest('hex') !== 'ba84c386010a0a887f0103da38d170bc145c50a5846caf6d8fe58d26efd758d2') throw Error('evidence-storage-helper-drift');
+  await (await import(`file://${evidenceStorageHelper}`)).ensureEvidenceAliases();
   const execute = mode === MODE.PRODUCTION;
   const verifyIdempotencyOnly = mode === MODE.VERIFY_TODAY;
   const businessDate = yesterdayShanghai();

@@ -77,7 +77,30 @@ def validate_receipt(receipt: dict, expected_name: str = "EGO TACO ·伊戈塔�
     return [target for target in TARGETS if derived[target] == "missing"]
 
 
+def not_found_receipt(hit: dict, reason: str) -> dict:
+    if (hit.get("channel") != "淘宝" or not isinstance(hit.get("name"), str)
+            or not hit["name"].strip() or not re.fullmatch(r"[0-3]天", str(hit.get("days", "")))
+            or reason != "activity-collection-skipped:shop-not-found:未搜索到店铺"):
+        raise ValueError("activity-not-found-source-invalid")
+    return {"inspectionOutcome": "master-account-store-not-found", "shopName": hit["name"],
+            "days": hit["days"], "account": ACCOUNT, "checkedAt": datetime.now(LOCAL_TZ).isoformat(),
+            "reason": reason, "recordNote": "店铺在主账号查不到未能检查"}
+
+
+def not_found_message(receipt: dict, expected_name: str) -> str:
+    not_found_receipt({"channel": "淘宝", "name": receipt.get("shopName"), "days": receipt.get("days")}, receipt.get("reason"))
+    checked = datetime.fromisoformat(receipt["checkedAt"])
+    if (receipt.get("shopName") != expected_name or receipt.get("account") != ACCOUNT
+            or receipt.get("recordNote") != "店铺在主账号查不到未能检查"
+            or checked.tzinfo is None or checked.astimezone(LOCAL_TZ).date() != datetime.now(LOCAL_TZ).date()
+            or abs((datetime.now(LOCAL_TZ) - checked).total_seconds()) > 600):
+        raise ValueError("activity-not-found-receipt-invalid")
+    return f"活动配置巡检：{expected_name} 新店铺（开业{receipt['days']}）淘宝闪购商家版 查无此店铺"
+
+
 def message(receipt: dict, expected_name: str = "EGO TACO ·伊戈塔可·香辣蟹(雨花店)") -> str | None:
+    if receipt.get("inspectionOutcome") == "master-account-store-not-found":
+        return not_found_message(receipt, expected_name)
     missing = validate_receipt(receipt, expected_name)
     if not missing:
         return None
@@ -116,7 +139,9 @@ def deliver(receipt: dict, run_dir: Path, expected_name: str = "EGO TACO ·伊�
     if body is None:
         return {"status": "no-missing", "sendAttempts": 0}
     day = datetime.now(LOCAL_TZ).date().isoformat()
-    event = f"{day}-taobao-{receipt['shopId']}-activity-reminder"
+    store_key = ("not-found-" + hashlib.sha256(expected_name.encode()).hexdigest()[:24]
+                 if receipt.get("inspectionOutcome") == "master-account-store-not-found" else receipt['shopId'])
+    event = f"{day}-taobao-{store_key}-activity-reminder"
     digest = hashlib.sha256(body.encode("utf-8")).hexdigest()
     if not EVENTS.is_dir():
         return {"status": "blocked", "reason": "canonical-activity-ledger-unavailable", "sendAttempts": 0}
@@ -146,7 +171,8 @@ def deliver(receipt: dict, run_dir: Path, expected_name: str = "EGO TACO ·伊�
                            "accountAlias": "main-wechat", "channel": "desktop", "deadlineAt": deadline}}
     grant = {"schemaVersion": 1, "accountAlias": "main-wechat", "groupName": GROUP,
              "channel": "desktop", "expiresAt": deadline,
-             "authorizationRef": "user-20261001-daily-new-store-activity-missing-reminder-windows-gateway"}
+             "authorizationRef": ("user-20261027-new-store-master-account-not-found-notice"
+                                  if receipt.get("inspectionOutcome") == "master-account-store-not-found" else "user-20261001-daily-new-store-activity-missing-reminder-windows-gateway")}
     try:
         adapter = WindowsAdapter()
         with adapter.session(request):

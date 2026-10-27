@@ -23,7 +23,6 @@ _STATE_NAME = os.environ.get('WECOM_TEST_ROOT') or '.runtime'
 STATE = ROOT / _STATE_NAME
 CAPABILITIES = {'desktop': {'text': 'candidate', 'image': 'candidate', 'file': 'candidate', 'video': 'unsupported'},
                 'mobile': {'text': 'candidate', 'image': 'candidate', 'file': 'candidate', 'video': 'unsupported'},
-                'mobile-wecom': {'text': 'candidate', 'image': 'candidate', 'file': 'candidate', 'video': 'unsupported'},
                 'receive': 'unsupported', 'verifyExistingFiles': 'implemented-read-only',
                 'automaticRestart': 'unsupported'}
 
@@ -44,22 +43,11 @@ def deadline(until):
         signal.signal(signal.SIGALRM, old)
 
 
-def verify_dependencies(channel=None):
+def verify_dependencies():
     manifest = read_json(ROOT / 'dependencies.json')
     if not manifest or not manifest.get('files'):
         raise Rejected('dependency-manifest-missing')
-    files = manifest['files']
-    if channel == 'mobile-wecom':
-        # The independent Android channel does not load the legacy Mac sender.
-        # Verify only its complete local execution chain, avoiding stale
-        # absolute dependencies from another machine without weakening desktop.
-        required = ('scripts/executor.py', 'scripts/contract.py', 'scripts/ledger.py',
-                    'scripts/dependency_maintenance.py', 'scripts/android_wecom_channel.py',
-                    'scripts/android_wecom_acceptance.py')
-        if any(name not in files for name in required):
-            raise Rejected('mobile-wecom-dependency-registration-incomplete')
-        files = {name: files[name] for name in required}
-    for name, expected in files.items():
+    for name, expected in manifest['files'].items():
         p = Path(name)
         if not p.is_absolute():
             p = ROOT / p
@@ -69,12 +57,8 @@ def verify_dependencies(channel=None):
 
 
 def runtime_gate(request, grant):
-    channel = request.get('context', {}).get('channel')
-    verify_dependencies(channel)
-    policy_path = (ROOT / 'mobile-wecom-runtime-policy.json'
-                   if channel == 'mobile-wecom'
-                   else ROOT / 'runtime-policy.json')
-    policy = read_json(policy_path)
+    verify_dependencies()
+    policy = read_json(ROOT / 'runtime-policy.json')
     if policy.get('mode') != 'acceptance':
         raise Rejected('runtime-offline-awaiting-acceptance')
     if (request['groupName'] != policy.get('groupName')
@@ -241,21 +225,18 @@ def main():
     p.add_argument('action', choices=('capabilities','validate','preflight','verify-existing','execute','reconcile','receive'))
     p.add_argument('--request'); p.add_argument('--authorization')
     p.add_argument('--device-serial-file')
-    p.add_argument('--channel', choices=('desktop', 'mobile-wecom'))
     args = p.parse_args()
     try:
         if args.action == 'capabilities':
-            verify_dependencies(args.channel)
-            policy_path = ROOT / ('mobile-wecom-runtime-policy.json'
-                                  if args.channel == 'mobile-wecom' else 'runtime-policy.json')
-            output = {'ok':True, 'capabilities':CAPABILITIES, 'policy':read_json(policy_path)}
+            verify_dependencies()
+            output = {'ok':True, 'capabilities':CAPABILITIES, 'policy':read_json(ROOT/'runtime-policy.json')}
         elif args.action == 'receive':
             output = {'ok':False, 'status':'unsupported', 'reason':'receive-not-implemented'}
         else:
             request = normalize(read_json(args.request))
             if args.action == 'validate':
                 output = {'ok':True, 'mode':'offline-validation', 'requestDigest':request_digest(request),
-                          'eventKey':event_key(request), 'supported':request['context']['channel'] in ('desktop', 'mobile-wecom') and all(i['type']!='video' for i in request['items']),
+                          'eventKey':event_key(request), 'supported':request['context']['channel']=='desktop' and all(i['type']!='video' for i in request['items']),
                           'items':[{k:v for k,v in i.items() if k not in ('text','path')} for i in request['items']]}
             elif args.action in ('preflight', 'verify-existing'):
                 verify_dependencies()
@@ -288,15 +269,6 @@ def main():
                         raise Rejected('mobile-device-policy-mismatch')
                     from mobile_adapter import MobileAdapter
                     adapter=MobileAdapter(serial)
-                elif request['context']['channel']=='mobile-wecom':
-                    if not args.device_serial_file:raise Rejected('mobile-wecom-device-binding-required')
-                    serial=Path(args.device_serial_file).read_text().strip()
-                    import hashlib
-                    policy=read_json(ROOT/'mobile-wecom-runtime-policy.json')
-                    if hashlib.sha256(serial.encode()).hexdigest()[:12]!=policy.get('deviceHash') or policy.get('package')!='com.tencent.wework':
-                        raise Rejected('mobile-wecom-device-policy-mismatch')
-                    from android_wecom_channel import AndroidWeComAdapter
-                    adapter=AndroidWeComAdapter(serial)
                 else:
                     from desktop_adapter import DesktopAdapter
                     adapter=DesktopAdapter()

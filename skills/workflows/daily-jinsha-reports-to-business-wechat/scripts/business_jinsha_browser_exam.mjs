@@ -19,7 +19,7 @@ import {resolveJinshaChannel} from './jinsha_channel_policy.mjs';
 import {assertInternalInvocation} from './business_workflow_policy.mjs';
 
 const require=createRequire(import.meta.url);
-const {chromium}=require('/Users/ddt/work/projects/ai_agent/aos-platform/plugins/browser/headless-playwright/node_modules/playwright-core');
+const {chromium}=require('/Users/ddt/work/projects/ai_agent/browser/headless-playwright/node_modules/playwright-core');
 const execFile=promisify(execFileCb);
 const PROFILE_ROOT='/Users/ddt/Library/Application Support/AOS Background Chrome';
 const PROFILE='jinsha-business';

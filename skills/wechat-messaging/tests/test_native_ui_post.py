@@ -28,6 +28,35 @@ class NativePostTests(unittest.TestCase):
    with patch.object(post,'QUEUE',Path(d)),patch.object(post,'owner_active',return_value=True),patch.object(post,'ensure_group',return_value='电销+直播攻坚组') as locate,patch.object(post,'read_anchor',side_effect=AssertionError('repeated-precheck')):
     result=post.preflight(p)
    locate.assert_called_once();self.assertTrue(result['result']['ok'])
+ def preflight_task(self, root):
+  p,t=self.task(root);t['stage']='preflight';t.pop('binding');t['binding']=post.text_hash(json.dumps(t,sort_keys=True,ensure_ascii=False));(p/'task.json').write_text(json.dumps(t));return p
+ def test_preflight_focus_only_once_recovers_same_group(self):
+  with tempfile.TemporaryDirectory() as d:
+   p=self.preflight_task(Path(d))
+   with patch.object(post,'QUEUE',Path(d)),patch.object(post,'owner_active',return_value=True),patch.object(post,'ensure_group',side_effect=[RuntimeError('Error: native-ui-focus-mismatch (-2700)'), '电销+直播攻坚组']) as locate:
+    r=post.preflight(p)
+   self.assertEqual(locate.call_count,2);self.assertEqual(r['result']['preflightRecoveryAttempts'],1);self.assertTrue(r['result']['ok']);self.assertFalse((p/'send-intent.json').exists())
+ def test_preflight_focus_second_failure_stops_without_claim(self):
+  with tempfile.TemporaryDirectory() as d:
+   p=self.preflight_task(Path(d))
+   with patch.object(post,'QUEUE',Path(d)),patch.object(post,'owner_active',return_value=True),patch.object(post,'ensure_group',side_effect=RuntimeError('native-ui-focus-mismatch')) as locate:
+    with self.assertRaisesRegex(RuntimeError,'focus-mismatch'):post.preflight(p)
+   self.assertEqual(locate.call_count,2);self.assertFalse((p/'claim.json').exists());self.assertFalse((p/'response.json').exists())
+ def test_preflight_other_failure_never_recovers(self):
+  for reason in ['native-ui-existing-draft-do-not-overwrite','native-ui-target-or-draft-mismatch','native-ui-anchor-changed:search','native-ui-focus-mismatch-extra']:
+   with self.subTest(reason=reason),tempfile.TemporaryDirectory() as d:
+    p=self.preflight_task(Path(d))
+    with patch.object(post,'QUEUE',Path(d)),patch.object(post,'owner_active',return_value=True),patch.object(post,'ensure_group',side_effect=RuntimeError(reason)) as locate:
+     with self.assertRaises(RuntimeError):post.preflight(p)
+    self.assertEqual(locate.call_count,1)
+ def test_preflight_recovery_requires_live_owner_and_no_intent(self):
+  for marker in ['claim.json','send-intent.json','dead-owner']:
+   with self.subTest(marker=marker),tempfile.TemporaryDirectory() as d:
+    p=self.preflight_task(Path(d))
+    if marker!='dead-owner':(p/marker).write_text('{}')
+    with patch.object(post,'QUEUE',Path(d)),patch.object(post,'owner_active',side_effect=[True,False] if marker=='dead-owner' else None,return_value=True),patch.object(post,'ensure_group',side_effect=RuntimeError('native-ui-focus-mismatch')) as locate:
+     with self.assertRaises(RuntimeError):post.preflight(p)
+    self.assertEqual(locate.call_count,1)
  def test_same_group_preflight_does_not_navigate(self):
   with patch.object(post,'read_anchor',side_effect=[({}, {'value':'群'}),({}, {'value':''})]),patch.object(post,'execute') as ui:
    self.assertEqual(post.ensure_group('群'),'群');ui.assert_not_called()

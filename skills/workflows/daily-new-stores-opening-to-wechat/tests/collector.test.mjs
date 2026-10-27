@@ -3,7 +3,24 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { eligibleDays, parseTotal, loadKnownAnnouncements, recordAnnouncementHit, duplicateHits } from '../scripts/collector.mjs';
+import { eligibleDays, parseTotal, loadKnownAnnouncements, recordAnnouncementHit, duplicateHits, chooseJinshaPage } from '../scripts/collector.mjs';
+
+test('existing page selection preserves single-page routes and requires owner proof for ambiguity',async()=>{
+  const url='https://data.guoshuyufen.com/#/businessData/realTimeData';
+  const page=(url,marker)=>({url:()=>url,evaluate:async()=>({url,marker})});
+  const owned=page(url,'owned'),other=page(url,''),foreign=page('https://example.org/','owned');
+  const forbidden=async()=>{throw Error('single-page-must-not-probe');};
+  assert.equal(await chooseJinshaPage([owned,foreign],forbidden),owned);
+  const upload=page('https://data.guoshuyufen.com/#/upload','');
+  assert.equal(await chooseJinshaPage([upload],forbidden),upload);
+  const proof=async()=>({url,jinshaOwnerMarker:'owned'});
+  assert.equal(await chooseJinshaPage([other,owned,foreign],proof),owned);
+  await assert.rejects(()=>chooseJinshaPage([owned,other],async()=>({url})),/owned-page-proof-missing/);
+  await assert.rejects(()=>chooseJinshaPage([owned,other],async()=>({url,jinshaOwnerMarker:'changed'})),/owned-page-binding-not-unique:0/);
+  await assert.rejects(()=>chooseJinshaPage([owned,owned],proof),/owned-page-binding-not-unique:2/);
+  await assert.rejects(()=>chooseJinshaPage([foreign],forbidden),/jinsha-tab-missing/);
+  await assert.rejects(()=>chooseJinshaPage([owned,other],async()=>{throw Error('jinsha-owned-page-not-unique:0');}),/owned-page-not-unique:0/);
+});
 
 test('only stores opened within three days qualify', () => {
   for (const day of [0, 1, 2, 3]) assert.equal(eligibleDays(`${day}天`), day);

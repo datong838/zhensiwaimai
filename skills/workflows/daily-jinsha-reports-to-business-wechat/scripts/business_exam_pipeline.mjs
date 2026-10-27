@@ -9,7 +9,7 @@ import { assertJinshaReleased } from '../../../.daily-jinsha-reports-core/script
 import { mayFallbackFromWecom, resolveWechatChannel } from './wechat_channel_policy.mjs';
 import { resolveJinshaChannel } from './jinsha_channel_policy.mjs';
 import { runBrowserJinshaExam } from './business_jinsha_browser_exam.mjs';
-import { assertFrozenCoreHashes, assertInternalInvocation, assertProductionConfig, assertStagePermission } from './business_workflow_policy.mjs';
+import { FIXED, assertFrozenCoreHashes, assertInternalInvocation, assertProductionConfig, assertStagePermission } from './business_workflow_policy.mjs';
 
 const exec = promisify(execFile);
 const EXPECTED_GROUP = '上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰';
@@ -85,7 +85,7 @@ async function prepare() {
     await fs.writeFile(c.downloadReceipt, JSON.stringify(d,null,2));
     result.stage='build';
     const buildStart=Date.now();
-    let build=await runBuildReports({receipt:c.downloadReceipt,buildReceipt:c.buildReceipt,outputDir:c.outputDir,filenameSuffix:'',titleSuffix:''});
+    let build=await runBuildReports({receipt:c.downloadReceipt,buildReceipt:c.buildReceipt,outputDir:c.outputDir,customer:path.join(FIXED.outputRoot,'客户表最新.xlsx'),meituanReference:path.join(FIXED.outputRoot,'美团全部_2026-08-25至2026-08-25.xlsx'),taobaoTemplate:path.join(FIXED.outputRoot,'淘宝闪购_模版2026-08-24至2026-08-24.xlsx'),filenameSuffix:'',titleSuffix:''});
     result.nodes.push({name:'build',startedAt:buildStart,finishedAt:Date.now(),elapsedMs:Date.now()-buildStart,ok:true,llmIntervention:false});
     for (const platform of ['meituan','taobao']) {
       const name=c.sendNames?.[platform];

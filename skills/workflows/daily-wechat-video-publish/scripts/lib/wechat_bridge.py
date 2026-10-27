@@ -8,7 +8,7 @@ import time
 from dataclasses import dataclass
 from pathlib import Path
 
-WECHAT_SKILL = Path('/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/scripts')
+WECHAT_SKILL = Path('/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/legacy-app-controler/wechat-desktop-control/scripts')
 if str(WECHAT_SKILL) not in sys.path:
     sys.path.insert(0, str(WECHAT_SKILL))
 

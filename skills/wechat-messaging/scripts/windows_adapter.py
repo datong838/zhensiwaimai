@@ -59,7 +59,7 @@ def _test_process_active():
 
 DRIVER_HOME = Path(os.environ.get(
     'ZENSI_WINDOWS_DRIVER_HOME',
-    '/Users/ddt/work/projects/ai_agent/wechat-windows-driver'))
+    '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/archive/compat/wechat-windows-driver'))
 
 SEND_ATTEMPTS = 3
 SEND_RETRY_GAP = 6

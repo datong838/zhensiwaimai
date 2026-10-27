@@ -23,7 +23,7 @@ from wechat_scan import DURATION_RE
 
 import sys
 
-WECHAT_SKILL = Path('/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/scripts')
+WECHAT_SKILL = Path('/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/legacy-app-controler/wechat-desktop-control/scripts')
 sys.path.insert(0, str(WECHAT_SKILL))
 import wechat_desktop as wd  # noqa: E402
 

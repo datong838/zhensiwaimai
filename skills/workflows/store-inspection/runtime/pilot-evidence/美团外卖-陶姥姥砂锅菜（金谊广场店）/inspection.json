@@ -1,0 +1,36 @@
+{
+  "platform": "美团外卖",
+  "city": "上海市",
+  "rosterStoreName": "陶姥姥砂锅· 广式啫啫煲（金谊广场店）",
+  "storeName": "陶姥姥砂锅菜（金谊广场店）",
+  "inspectionDate": "2026-09-09",
+  "identityEvidence": "01-search-result.png、06-merchant.png；同商圈地址一致，消费者端名称发生变化",
+  "conclusion": "消费者端门店名称较周台账已变化；当前4.2分且差评集中度高，菜量、价格感知与食后不适反馈需要立即核查。",
+  "conclusionEvidence": "01-search-result.png、04-reviews.png、05-negative-reviews.png、06-merchant.png",
+  "facts": [
+    {"label":"身份变化","value":"周台账为“陶姥姥砂锅·广式啫啫煲”，美团消费者端显示“陶姥姥砂锅菜”；金谊广场地址一致","evidence":"01-search-result.png、06-merchant.png"},
+    {"label":"搜索页表现","value":"4.2分，月售300+，约68米，起送30元、免配送费，接受10:30后配送预订","evidence":"01-search-result.png"},
+    {"label":"商品结构","value":"可见宠粉福利、招牌生啫、鲜活海鲜、鲜蔬啫啫、人气套餐等分类；代表商品包括沙姜走地鸡、招牌砂锅菜双人套餐","evidence":"02-store-home.png、03-products-scroll.png"},
+    {"label":"评价概况","value":"外卖评价63、线下真实评价1769；好评50、差评11、商家回复61","evidence":"04-reviews.png、05-negative-reviews.png"},
+    {"label":"商家信息","value":"上海市浦东新区上南路4467弄73号401室-2铺；配送时间10:30-14:30、16:00-21:00","evidence":"06-merchant.png"}
+  ],
+  "issues": [
+    {"priority":"P0","issue":"食品体验与潜在安全客诉","fact":"差评称小黄鱼肉质老、吃完拉肚子；另一条称鸡丁肉少且不推荐","recommendation":"立即回溯对应订单、原料批次、留样和制作记录；若无法排除食品安全风险，按内部客诉机制升级","evidence":"05-negative-reviews.png"},
+    {"priority":"P0","issue":"评分与差评集中度偏高","fact":"页面评分4.2，差评11/63；消费者端已展示明显负面聚类","recommendation":"设7天整改观察期，逐单核对菜品、包装和回复质量，目标先压降新增差评","evidence":"01-search-result.png、04-reviews.png、05-negative-reviews.png"},
+    {"priority":"P1","issue":"名称口径漂移","fact":"周台账和消费者端门店名称不一致，但金谊广场地址一致","recommendation":"回到金鲨店铺列表确认当前平台名并更新下周台账，保留旧名作为别名","evidence":"01-search-result.png、06-merchant.png"},
+    {"priority":"P1","issue":"分量与价格感知","fact":"差评明确表示价格不便宜、份量与堂食体验差距大","recommendation":"复核外卖版克重、主图和价格锚点，避免图片或套餐命名形成过高预期","evidence":"05-negative-reviews.png"}
+  ],
+  "evidence": [
+    {"node":"搜索结果","fact":"消费者端新名称、商圈、评分、月售与配送信息","file":"01-search-result.png"},
+    {"node":"商品首页","fact":"评分、月售、分类和促销","file":"02-store-home.png"},
+    {"node":"商品下翻","fact":"更多分类、商品、价格和月售覆盖","file":"03-products-scroll.png"},
+    {"node":"评价","fact":"评价结构、好差评、商家回复和正向评价","file":"04-reviews.png"},
+    {"node":"差评","fact":"菜品体验、食后不适、分量与价格反馈","file":"05-negative-reviews.png"},
+    {"node":"商家","fact":"地址、配送时间、设施和榜单信息","file":"06-merchant.png"}
+  ],
+  "gaps": [
+    {"field":"食品安全调查结果","status":"UNKNOWN","reason":"消费者端只有评价，无法确认症状因果","next":"需订单、留样和原料批次联合核查"},
+    {"field":"退款率/客诉率","status":"UNKNOWN","reason":"消费者端不展示经营后台指标","next":"需商家后台验证"},
+    {"field":"门店正式改名时间","status":"UNKNOWN","reason":"周台账与消费者端名称不同，页面不展示变更时间","next":"需金鲨或平台后台验证"}
+  ]
+}

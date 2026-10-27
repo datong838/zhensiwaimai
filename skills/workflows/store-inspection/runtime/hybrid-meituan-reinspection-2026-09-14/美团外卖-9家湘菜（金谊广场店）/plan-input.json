@@ -1,0 +1,37 @@
+{
+  "store": {
+    "platform": "美团外卖",
+    "city": "上海市",
+    "poi": "中房金谊广场",
+    "rosterStoreName": "9家湘菜（金谊广场店）",
+    "storeName": "9家湘菜（金谊广场店）",
+    "inspectionDate": "2026-09-14"
+  },
+  "stages": {
+    "reports": {
+      "status": "skipped",
+      "attempts": 0,
+      "finishedAt": "2026-09-14T00:40:00+08:00",
+      "facts": []
+    },
+    "meituan_backend": {
+      "status": "complete",
+      "attempts": 1,
+      "finishedAt": "2026-09-14T01:06:00+08:00",
+      "facts": [
+        {
+          "platform": "美团外卖",
+          "city": "上海市",
+          "rosterStoreName": "9家湘菜（金谊广场店）",
+          "storeName": "9家湘菜（金谊广场店）",
+          "row": 19,
+          "sourceType": "meituan_backend",
+          "observedDate": "2026-09-14",
+          "sourceRef": "meituan:1093331:19:2026-09-13T17:05:30.745Z",
+          "finding": "美团商家后台门店资料显示，营业时段为10:00-21:00，覆盖周一至周日，营业时长达到不低于8小时的检查要求。",
+          "recommendation": "保持当前每日10:00-21:00营业时段；如临时停业或缩短营业，及时同步后台并复核消费者端展示。"
+        }
+      ]
+    }
+  }
+}

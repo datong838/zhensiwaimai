@@ -55,6 +55,25 @@ class DependencyMaintenanceTests(unittest.TestCase):
             "scripts/target.py", maintenance.SELF_KEY, maintenance.HEARTBEAT_RECOVERY_KEY, maintenance.DESKTOP_ADAPTER_KEY, maintenance.POLICY_REGISTRATION_KEY, maintenance.EGRESS_POLICY_KEY,
         })
 
+    def test_code_consolidation_migrates_registered_key_and_rejects_collision(self):
+        directory, root, manifest = self.clean_merchant_fixture(); self.addCleanup(directory.cleanup)
+        old = root / "outside-old.py"; new = root / "inside-new.py"
+        old.write_text("same", encoding="utf-8"); new.write_text("same", encoding="utf-8")
+        value = json.loads(manifest.read_text(encoding="utf-8"))
+        value["files"][str(old)] = maintenance.sha256(old)
+        manifest.write_text(json.dumps(value), encoding="utf-8")
+        with patch.object(maintenance, "CODE_CONSOLIDATION_KEY_MIGRATIONS",
+                          {str(old): str(new)}):
+            _, current = maintenance._read_manifest(manifest)
+            candidate, changes = maintenance._candidate(current, root)
+            self.assertNotIn(str(old), candidate["files"])
+            self.assertEqual(candidate["files"][str(new)], maintenance.sha256(new))
+            self.assertEqual(changes, [])
+            current["files"][str(new)] = "f" * 64
+            with self.assertRaisesRegex(maintenance.MaintenanceError,
+                                        "code-consolidation-key-collision"):
+                maintenance._candidate(current, root)
+
     def test_wrong_authorization_never_writes_manifest(self):
         directory, root, manifest = self.fixture(); self.addCleanup(directory.cleanup)
         before = manifest.read_bytes()

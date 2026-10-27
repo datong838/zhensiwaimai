@@ -1,0 +1,11 @@
+import { session, sleep } from '../scripts/lib/cdp.mjs';
+const s = await session({ port: 9230, width: 1440, height: 1500 });
+await s.rearm();
+console.log('URL=' + await s.mainEval('location.href'));
+console.log('READY=' + await s.mainEval('document.readyState'));
+console.log('TOP=' + await s.mainEval(`(()=>{const n=document.querySelector('[class*=shop-name__]');return n?n.innerText.trim():'(none)'})()`));
+console.log('IFRAMES=' + await s.mainEval(`JSON.stringify([...document.querySelectorAll('iframe')].map(i=>({src:(i.src||'').slice(0,80),w:i.clientWidth,h:i.clientHeight})))`));
+const r = await s.ctxForFrame(/melody-stats-next/);
+console.log('CTX=' + JSON.stringify(r));
+if(!r.err) console.log('INNER=' + await s.frameEval(r.id)('location.href'));
+s.cdp.close(); process.exit(0);

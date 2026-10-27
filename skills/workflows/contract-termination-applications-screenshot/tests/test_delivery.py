@@ -21,6 +21,8 @@ class Adapter:
         if isinstance(result,Exception):raise result
         return result
 OK={'status':'verified','sendAttempts':1,'verificationLevel':'test-only'}
+PENDING={'status':'unknown','sendAttempts':1,'resolvedGroup':subject.GROUP,'inputEmpty':True,
+         'backend':'system-events-ui-tree','reason':'native-ui-inline-image-not-exposed'}
 class DeliveryTests(unittest.TestCase):
     def setUp(self):
         self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup)
@@ -52,6 +54,30 @@ class DeliveryTests(unittest.TestCase):
     def test_single_page_remains_compatible(self):
         result=self.execute(self.images[:1],Adapter([OK]))
         self.assertEqual(result['status'],'verified');self.assertEqual(result['sendAttempts'],1)
+    def test_submitted_pending_images_continue_only_unattempted_pages(self):
+        adapter=Adapter([PENDING,PENDING,OK]);adapter.owner_lifetime=True
+        result=self.execute(self.images,adapter)
+        self.assertEqual(result['status'],'unknown');self.assertEqual(result['sendAttempts'],3)
+        self.assertTrue(result['executionComplete'])
+        self.assertEqual(result['verificationPending'],['contract-termination-p1','contract-termination-p2'])
+        self.assertEqual(len(adapter.calls),3);self.assertEqual(self.marker()['state'],'unknown')
+        before=next(self.events.glob('*.json')).read_bytes()
+        self.assertEqual(self.execute(self.images,adapter)['status'],'unknown')
+        self.assertEqual(len(adapter.calls),3);self.assertEqual(before,next(self.events.glob('*.json')).read_bytes())
+    def test_unsafe_unknown_never_allows_next_page(self):
+        for change in ({'resolvedGroup':'wrong'},{'inputEmpty':False},{'sendAttempts':0},
+                       {'sendAttempts':2},{'sendAttempts':True},{'backend':'other'},
+                       {'reason':'timeout'},{'status':'blocked'}):
+            with self.subTest(change=change):
+                for p in self.events.glob('*.json'):p.unlink()
+                adapter=Adapter([PENDING|change,OK]);adapter.owner_lifetime=True
+                result=self.execute(self.images[:2],adapter)
+                self.assertEqual(result['status'],'unknown');self.assertEqual(len(adapter.calls),1)
+                self.assertFalse(result.get('executionComplete',False))
+    def test_pending_requires_current_native_owner(self):
+        adapter=Adapter([PENDING,OK])
+        self.assertEqual(self.execute(self.images[:2],adapter)['status'],'unknown')
+        self.assertEqual(len(adapter.calls),1)
     def pending_marker(self, day, **changes):
         data={'event':day+'-contract-termination-ops','state':'unknown','groupName':subject.GROUP,
               'sha256':'a'*64,'images':[day+'_合同解约申请_处理中_p1.png']}

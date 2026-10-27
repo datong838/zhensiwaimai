@@ -5,7 +5,7 @@ import {execFile} from 'node:child_process';
 import {promisify} from 'node:util';
 const exec=promisify(execFile);
 const ORIGIN='https://data.guoshuyufen.com/';
-const PROOFS='/tmp/zhensi_daily_download/background-browser';
+const PROOFS="/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/business-evidence/taobao-download/background-browser";
 const STATE='/Users/ddt/Library/Application Support/AOS Background Chrome/jinsha-business/.aos-background-chrome/state.json';
 export function ownerMarker(receipt,pid){
  const profile=receipt?.profiles?.jinsha;

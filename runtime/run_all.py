@@ -1033,6 +1033,7 @@ def build_ledger_rows(data: dict, records_by_skill: dict) -> list:
     2026-10-20 18:35 大同指令：台账恢复原有格式（四列），「首轮」列撤销——
     内部 SRE 指标绝不出现在客户可见的台账里。first_attempt_outcomes 保留供内部巡检。"""
     from business_delivery_facts import read_fact, read_execution_note
+    from business_coverage import read_daily_coverage
     skill_by_name = {s["name"]: s for s in data.get("skills", [])}
     rows = []
     for r in data.get("ledger_template", []):
@@ -1042,8 +1043,11 @@ def build_ledger_rows(data: dict, records_by_skill: dict) -> list:
         current_schedule = current_skill.get("schedule") or r["schedule"]
         merged = (current_skill.get("enabled") is False
                   and current_schedule.startswith("已合并"))
+        coverage = read_daily_coverage(sk, datetime.now().strftime('%Y-%m-%d'), REPO_ROOT)
         if merged:
             done, exec_time, note = '已合并', '', current_schedule
+        elif coverage and not coverage['complete']:
+            done, exec_time, note = '否', '', coverage['reason']
         elif read_fact(sk):
             done, exec_time, note = '是', '', '原送达证据已核对；旧技术异常保留'
         elif fixed_schedule.customer_duty_user_accepted(sk, datetime.now()) and not fixed_schedule.customer_slot_superseded(sk, datetime.now()):

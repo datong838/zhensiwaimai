@@ -16,7 +16,7 @@ export function shiftPlan(platform,date=new Date()) {
   if (minutes<780 || minutes>=1140) throw Error('outside-authorized-afternoon-window');
   const slot=minutes>=1110?'18:30':minutes>=1020?'17:00':minutes>=900?'15:00':'13:00';
   const spec=flows[platform];
-  const steps=[{stage:'appeal',flow:spec.appeal,script:'appeal_executor.mjs',args:['--execute']}];
+  const steps=slot==='18:30'?[]:[{stage:'appeal',flow:spec.appeal,script:'appeal_executor.mjs',args:['--execute']}];
   if (slot==='18:30') steps.push({stage:'build',flow:spec.report,script:spec.build,args:[]},{stage:'deliver',flow:spec.report,script:'deliver_batch.mjs',args:['--execute']});
   return {platform,slot,steps};
 }

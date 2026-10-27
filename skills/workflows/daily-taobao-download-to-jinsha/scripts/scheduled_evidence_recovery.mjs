@@ -54,7 +54,7 @@ async function blockedBeforeSend(marker, markerFile) {
     && marker.sendReview?.at(-1)?.stage === 'preflight'
     && marker.sendReview.at(-1).status === 'failed')) return false;
   if (marker.reason === 'wechat-window-capture-failed') return true;
-  if (marker.reason !== 'wecom-preflight-failed:locate-fail:wecom-not-frontmost') return false;
+  if (!['wecom-preflight-failed:locate-fail:wecom-not-frontmost', 'ui-post-preflight-not-verified'].includes(marker.reason)) return false;
   const key=marker.commonReceipt.eventKey;
   if (!/^[a-f0-9]{64}$/.test(key||'')) return false;
   const event=path.join(path.dirname(markerFile),'.wechat-messaging','events',key);
@@ -64,6 +64,19 @@ async function blockedBeforeSend(marker, markerFile) {
     const binding=JSON.parse(await fs.readFile(path.join(event,'binding.json'),'utf8'));
     if (binding.digest !== expected) return false;
     for (const child of await fs.readdir(event,{withFileTypes:true})) {
+      if (marker.reason === 'ui-post-preflight-not-verified') {
+        if (child.isFile() && ['binding.json', '.lock'].includes(child.name)) continue;
+        const index = marker.payloads.findIndex((_, i) => sha256(JSON.stringify([key, String(i)])) === child.name);
+        if (!child.isDirectory() || index < 0) return false;
+        const work = path.join(event, child.name), payload = marker.payloads[index];
+        const children = await fs.readdir(work, {withFileTypes:true});
+        if (children.length !== 1 || children[0].name !== 'payload' || !children[0].isDirectory()) return false;
+        const files = await fs.readdir(path.join(work, 'payload'), {withFileTypes:true});
+        if (files.length !== 1 || files[0].name !== payload.name || !files[0].isFile()) return false;
+        const bytes = await fs.readFile(path.join(work, 'payload', payload.name));
+        if (bytes.length !== payload.size || sha256(bytes) !== payload.sha256) return false;
+        continue;
+      }
       if (!child.isDirectory()) continue;
       try { await fs.stat(path.join(event,child.name,'delivery.json'));return false; }
       catch(error) { if(error.code!=='ENOENT') return false; }

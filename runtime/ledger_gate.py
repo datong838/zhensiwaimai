@@ -96,6 +96,7 @@ def _is_success_equivalent(record: dict, date_str: str) -> bool:
 
 def main(date_str: str) -> int:
     from business_delivery_facts import read_fact
+    from business_coverage import read_daily_coverage
     now = datetime.now()
     manifest = json.load(open(MANIFEST))
     skills = manifest.get("skills") or []
@@ -119,6 +120,13 @@ def main(date_str: str) -> int:
     a_list, b_list, ok_list = [], [], []
     for s in sorted(enabled, key=lambda x: x.get("order", 99)):
         name = s["name"]
+        coverage = read_daily_coverage(name, date_str, ROOT)
+        if coverage and not coverage['complete']:
+            a_list.append({'skill': name, 'runs': len(records.get(name, [])),
+                           'success': 0, 'technical_success': sum(
+                               str(r.get('status', '')).upper() == 'SUCCESS'
+                               for r in records.get(name, [])), 'businessCoverage': coverage})
+            continue
         fact = read_fact(name, check_day)
         if fact:
             ok_list.append({'skill': name, 'runs': len(records.get(name, [])),

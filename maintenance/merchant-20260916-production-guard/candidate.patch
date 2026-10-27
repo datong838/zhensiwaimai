@@ -1,0 +1,115 @@
+--- scripts/workflow_executor.py
++++ scripts/workflow_executor.py
+@@ -93,7 +93,7 @@
+             collector.private_json(out/'workflow.json',result);lock.close()
+     return result
+ def build_parser():
+-    p=argparse.ArgumentParser();p.add_argument('--group',default=sender.TEST_GROUP);p.add_argument('--serial');p.add_argument('--wechat-channel',choices=('mobile','desktop'),default='desktop');p.add_argument('--standing-authorization',required=True);p.add_argument('--output-dir',required=True)
++    p=argparse.ArgumentParser();p.add_argument('--group',default=sender.PRODUCTION_GROUP);p.add_argument('--serial');p.add_argument('--wechat-channel',choices=('mobile','desktop'),default='desktop');p.add_argument('--standing-authorization',required=True);p.add_argument('--output-dir',required=True)
+     p.add_argument('--wechat-contention-wait-seconds',type=float,default=desktop_wechat_sender.DEFAULT_CONTENTION_WAIT_SECONDS)
+     p.add_argument('--wechat-contention-poll-seconds',type=float,default=desktop_wechat_sender.DEFAULT_CONTENTION_POLL_SECONDS)
+     p.add_argument('--unsealed-acceptance-authorization')
+--- scripts/runtime_contract.py
++++ scripts/runtime_contract.py
+@@ -36,6 +36,8 @@
+ 
+ 
+ def validate_policy(args, sender):
++    if args.group != sender.PRODUCTION_GROUP:
++        raise RuntimeError("production-only-target-required")
+     expected = {sender.PRODUCTION_GROUP: PRODUCTION_AUTHORIZATION,
+                 sender.TEST_GROUP: sender.TEST_AUTHORIZATION}
+     if args.group not in expected or args.standing_authorization != expected[args.group]:
+@@ -124,6 +126,17 @@
+             "recommendTime": current["recommendTime"], "checkedDeliveries": len(messages)}
+ 
+ 
++def delivery_counts(delivery):
++    counts = {"verifiedNewSends": 0, "verifiedExisting": 0, "unresolvedItems": 0}
++    for item in delivery.get("items", []):
++        phases = item.get("review", [])
++        committed = any(p.get("stage") == "成功历史与原子游标提交" and p.get("status") == "PASS" for p in phases)
++        entered_send = any(p.get("stage") == "定位、输入与单次发送" and p.get("status") in ("PASS", "FAIL") for p in phases)
++        key = ("verifiedNewSends" if entered_send else "verifiedExisting") if committed else "unresolvedItems"
++        counts[key] += 1
++    return counts
++
++
+ def build_review(result):
+     rows = []
+     def add(stage, label, elapsed, status, pitfalls=(), parent=None):
+@@ -141,6 +154,9 @@
+         pitfalls = [result["error"]] if status == "FAIL" and result.get("error") else []
+         if key == "desktop_wechat_preflight":
+             pitfalls += [e["reason"] for e in result.get("desktopWechatPreflight", {}).get("contentionEvents", [])]
++        if key == "desktop_wechat" and status == "PASS" and result.get("wechat", {}).get("mode") == "execute-noop":
++            status = "NOOP"
++            pitfalls = ["无待发商家，未触发发送"]
+         add(key, STAGES[key], elapsed, status, pitfalls)
+         if key == "desktop_wechat_preflight":
+             preflight = result.get("desktopWechatPreflight", {})
+@@ -171,14 +187,15 @@
+     add("total", "整轮总耗时（含子阶段，不重复相加）", result["elapsedMs"],
+         "PASS" if result.get("ok") else "FAIL")
+     return {"schemaVersion": 1, "runId": result["runId"], "ok": result.get("ok") is True,
+-            "sent": result.get("wechat", {}).get("sent", 0), "rows": rows}
++            "sent": result.get("wechat", {}).get("sent", 0),
++            **delivery_counts(result.get("wechat", {})), "rows": rows}
+ 
+ 
+ def render_review(review):
+     def safe(value):
+         return str(value).replace("|", "\\|").replace("\n", " ")
+     lines = ["# 每轮执行复盘", "", "| 项目 | 耗时 | 结果 | 踩坑点 |", "|---|---:|---|---|"]
+-    labels = {"PASS": "通过", "FAIL": "失败", "SKIPPED": "未执行"}
++    labels = {"PASS": "通过", "FAIL": "失败", "SKIPPED": "未执行", "NOOP": "无待发"}
+     for row in review["rows"]:
+         elapsed = "—" if row["elapsedMs"] is None else f"{row['elapsedMs']/1000:.3f}秒"
+         pitfalls = "；".join(row["pitfalls"]) or ("前置门禁未通过" if row["status"] == "SKIPPED" else "无")
+--- scripts/background_merchant_collector.mjs
++++ scripts/background_merchant_collector.mjs
+@@ -18,10 +18,19 @@
+ 
+ export function stableIncremental(rows,cursor,date){
+   const ordered=rows.map((row,index)=>({...row,__index:index})).sort((a,b)=>a.recommendTime.localeCompare(b.recommendTime)||a.__index-b.__index).map(({__index,...row},index)=>({...row,tableOrder:index+1}));
+-  if(cursor.recommendTime<`${date} 00:00:00`)return ordered;
++  if(cursor.recommendTime<`${date} 00:00:00`)throw Error('cursor-outside-filter-range');
+   const matches=ordered.map((row,index)=>row.merchantId===cursor.merchantId&&row.recommendTime===cursor.recommendTime?index:-1).filter(index=>index>=0);
+   if(matches.length!==1)throw Error('same-day-cursor-not-unique');
+   return ordered.slice(matches[0]+1);
++}
++
++export function selectionAudit(rows,cursor,date){
++  const after=stableIncremental(rows,cursor,date);
++  const targets=after.filter(row=>row.status==='待处理');
++  return {totalRows:rows.length,pendingRows:rows.filter(row=>row.status==='待处理').length,
++    excludedAtOrBeforeCursor:rows.length-after.length,
++    excludedAfterCursorNotPending:after.length-targets.length,targetCount:targets.length,
++    rows:rows.map(row=>({merchantId:row.merchantId,recommendTime:row.recommendTime,status:row.status}))};
+ }
+ 
+ export function messageFor(row){
+@@ -30,11 +39,12 @@
+ }
+ 
+ export function parseLogicalRows(headers, matrices){
++  if(new Set(headers).size!==headers.length)throw Error('merchant-headers-duplicate');
+   const rows=[];
+   for(const [rowIndex,cells] of matrices.entries()){
+-    if(cells.length!==headers.length)continue;
++    if(cells.length!==headers.length)throw Error(`merchant-row-column-mismatch:${rowIndex}`);
+     const data=Object.fromEntries(headers.map((header,index)=>[header,String(cells[index]||'').trim()]));
+-    if(!/^\d{7,}$/.test(data['商家ID']||''))continue;
++    if(!/^\d{7,}$/.test(data['商家ID']||''))throw Error(`merchant-row-id-invalid:${rowIndex}`);
+     rows.push({merchantId:data['商家ID'],merchantName:data['商家名称']||'',recommendTime:data['推荐时间']||'',city:data['城市']||'',status:data['状态']||'',rowIndex});
+   }
+   if(matrices.length>0&&rows.length===0)throw Error(`merchant-row-parse-empty:${matrices.length}`);
+@@ -94,7 +104,7 @@
+     await stage('navigation',()=>route(page));await stage('date_filter',()=>filterDate(page,startDate,endDate));
+     const allRows=[],pages=[],seen=new Set(),pageSignatures=new Map();let priorSignature=null;for(let expected=1;expected<=50;expected++){const stable=await stage(`page_${expected}_read`,()=>stablePage(page,expected,priorSignature));const {rows,state,signature}=stable;priorSignature=signature;pageSignatures.set(expected,signature);if(rows.some(row=>!new RegExp(`^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$`).test(row.recommendTime)||row.recommendTime.slice(0,10)<startDate||row.recommendTime.slice(0,10)>endDate))throw Error('row-outside-filter-range');for(const row of rows){const identity=`${row.merchantId}\n${row.recommendTime}`;if(seen.has(identity))throw Error('duplicate-pagination-row-identity');seen.add(identity);row.sourcePage=expected;allRows.push(row);}pages.push({page:expected,rowCount:rows.length,nextEnabled:state.nextEnabled});if(!state.nextEnabled)break;await stage(`page_${expected}_next`,()=>state.next.click());if(expected===50)throw Error('pagination-budget-exceeded');}
+     const pending=allRows.filter(row=>row.status==='待处理');const targets=stableIncremental(allRows,input.cursor,startDate).filter(row=>row.status==='待处理');for(const target of targets){let state=await pager(page),currentPage=state.page;while(currentPage>target.sourcePage){state=await pager(page);await state.prev.click();currentPage-=1;await exactPage(page,currentPage,pageSignatures.get(currentPage));}while(currentPage<target.sourcePage){state=await pager(page);await state.next.click();currentPage+=1;await exactPage(page,currentPage,pageSignatures.get(currentPage));}const current=(await tableRows(page)).rows.filter(row=>row.merchantId===target.merchantId&&row.merchantName===target.merchantName&&row.recommendTime===target.recommendTime);if(current.length!==1)throw Error('detail-row-not-unique');const detail=await stage('detail_'+target.merchantId,()=>readDetail(page,{...target,rowIndex:current[0].rowIndex}));const text=messageFor(detail);result.messages.push({...detail,text,sha256:crypto.createHash('sha256').update(text).digest('hex')});}
+-    result.ok=true;Object.assign(result,{createdAt:new Date().toISOString(),cursor:input.cursor,cursorSource:input.cursorSource,filterStartDate:startDate,filterEndDate:endDate,dateFilter:`${startDate}..${endDate}`,dateFilterVerified:true,pages,paginationComplete:true,totalRows:allRows.length,pendingRows:pending.length,targetCount:targets.length,ascending:true,detailsVerified:true,url:page.url()});
++    result.ok=true;Object.assign(result,{createdAt:new Date().toISOString(),cursor:input.cursor,cursorSource:input.cursorSource,filterStartDate:startDate,filterEndDate:endDate,dateFilter:`${startDate}..${endDate}`,dateFilterVerified:true,pages,paginationComplete:true,totalRows:allRows.length,pendingRows:pending.length,targetCount:targets.length,selectionAudit:selectionAudit(allRows,input.cursor,startDate),ascending:true,detailsVerified:true,url:page.url()});
+   }catch(error){result.error=String(error.message||error);}finally{if(page)await page.close().catch(()=>{});if(browser)await browser.close().catch(()=>{});result.elapsedMs=Date.now()-started;result.frontmostAfter=await frontmost();}
+   return result;
+ }

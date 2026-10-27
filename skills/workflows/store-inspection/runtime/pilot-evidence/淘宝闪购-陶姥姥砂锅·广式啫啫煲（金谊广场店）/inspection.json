@@ -1,0 +1,34 @@
+{
+  "platform": "淘宝闪购",
+  "city": "上海市",
+  "rosterStoreName": "陶姥姥砂锅· 广式啫啫煲(金谊广场店)",
+  "storeName": "陶姥姥砂锅·广式啫啫煲（金谊广场店）",
+  "inspectionDate": "2026-09-09",
+  "identityEvidence": "01-search-result.png、06-merchant.png",
+  "conclusion": "配送速度和销量尚可，但4.4分且近期差评占比偏高；分量、米饭口感和咸度是当前优先改善项。",
+  "conclusionEvidence": "01-search-result.png、04-reviews.png、05-negative-reviews.png、06-merchant.png",
+  "facts": [
+    {"label":"搜索页表现","value":"4.4分，月售600+，约15分钟、111米，起送30元、免配送费，接受10:30开始配送预订","evidence":"01-search-result.png"},
+    {"label":"商品结构","value":"可见招牌生啫、鲜活海鲜、鲜蔬啫啫、超值特价、人气套餐等分类；代表商品包括沙姜走地鸡和招牌砂锅菜双人套餐","evidence":"02-store-home.png、03-products-scroll.png"},
+    {"label":"评价概况","value":"评价177，商品质量4.4、服务体验4.3；页面展示近期差评12条","evidence":"04-reviews.png、05-negative-reviews.png"},
+    {"label":"商家信息","value":"上海市浦东新区上南路4467弄73号401室-2铺；周一至周日10:30-14:30、16:00-21:00","evidence":"06-merchant.png"}
+  ],
+  "issues": [
+    {"priority":"P0","issue":"米饭与口味稳定性","fact":"1星差评反映米饭硬、偏咸，并伴随味道1星、包装1星","recommendation":"当日抽检米饭保温时长、含水率和盐度；对晚市批次增加出餐前品控","evidence":"05-negative-reviews.png"},
+    {"priority":"P0","issue":"分量与价格感知","fact":"多条差评集中在分量少、价格与菜量不匹配","recommendation":"复核套餐主菜净重与页面图片，明确份量说明并校正装盒标准","evidence":"05-negative-reviews.png"},
+    {"priority":"P1","issue":"评价结构偏弱","fact":"近期差评12/177，服务体验4.3，页面总分4.4","recommendation":"建立差评逐单复盘表，优先跟踪米饭、咸度、份量和包装四类问题","evidence":"04-reviews.png、05-negative-reviews.png"}
+  ],
+  "evidence": [
+    {"node":"搜索结果","fact":"完整店名、商圈、评分、月售、配送与起送信息","file":"01-search-result.png"},
+    {"node":"商品首页","fact":"分类、代表商品、价格与优惠","file":"02-store-home.png"},
+    {"node":"商品下翻","fact":"更多分类和商品覆盖","file":"03-products-scroll.png"},
+    {"node":"评价","fact":"评分、评价量、评价维度与商家回复","file":"04-reviews.png"},
+    {"node":"近期差评","fact":"米饭、咸度、份量和价格感知负面反馈","file":"05-negative-reviews.png"},
+    {"node":"商家","fact":"地址、分段营业时间和服务标签","file":"06-merchant.png"}
+  ],
+  "gaps": [
+    {"field":"退款率/客诉率","status":"UNKNOWN","reason":"消费者端不展示经营后台指标","next":"需商家后台验证"},
+    {"field":"标准克重","status":"UNKNOWN","reason":"消费者端不展示实际净重","next":"需门店称重抽检"},
+    {"field":"活动补贴承担","status":"UNKNOWN","reason":"消费者端无法拆分补贴来源","next":"需营销后台验证"}
+  ]
+}

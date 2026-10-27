@@ -9,7 +9,7 @@ import {promisify} from 'node:util';
 import {yesterdayInShanghai,isNonIncreasing} from './desktop_executor.mjs';
 
 const require=createRequire(import.meta.url);
-const {chromium}=require('/Users/ddt/work/projects/ai_agent/aos-platform/plugins/browser/headless-playwright/node_modules/playwright-core');
+const {chromium}=require('/Users/ddt/work/projects/ai_agent/browser/headless-playwright/node_modules/playwright-core');
 const execFile=promisify(execFileCb);
 const dir=path.dirname(fileURLToPath(import.meta.url));
 const HOME_URL='https://melody.shop.ele.me/app/chain/95708808/dashboard#app.chainshop.dashboard';
@@ -22,12 +22,39 @@ export const normalizeHeader=value=>String(value).replace(/\s+/g,'').replace(/\(
 export function incomeColumn(headers){const matches=headers.map((h,i)=>({h:normalizeHeader(h),i})).filter(x=>/^(预计收入|收入)(（元）)?$/.test(x.h));if(matches.length!==1)throw Error('income-header-not-unique');return matches[0].i;}
 export function incomeMoney(value){const text=String(value||'').trim().split('\n')[0].trim().replace(/^[¥￥]\s*/, '').replace(/元$/, '').trim();if(!/^(?:\d+|\d{1,3}(?:,\d{3})+)(?:\.\d{1,2})?$/.test(text))return NaN;return Number(text.replaceAll(',',''));}
 export const incomeDescending=snapshot=>snapshot.sortOrders?.[incomeColumn(snapshot.headers)]==='descending';
+export function leafHeaderCells(rows){
+  if(!rows.length)throw Error('header-grid-empty');
+  const grid=Array.from({length:rows.length},()=>[]);
+  for(let r=0;r<rows.length;r++){let col=0;for(const cell of rows[r]){
+    while(grid[r][col])col++;
+    const height=cell.rowSpan||1,width=cell.colSpan||1;
+    if(!Number.isInteger(height)||!Number.isInteger(width)||height<1||width<1||r+height>rows.length)throw Error('header-grid-span');
+    for(let y=r;y<r+height;y++)for(let x=col;x<col+width;x++){if(grid[y][x])throw Error('header-grid-overlap');grid[y][x]=cell;}
+    col+=width;
+  }}
+  const width=grid[0].length;
+  if(!width||grid.some(row=>row.length!==width||Array.from({length:width},(_,i)=>row[i]).some(x=>!x)))throw Error('header-grid-incomplete');
+  const leaves=grid.at(-1);if(leaves.some(x=>(x.colSpan||1)!==1))throw Error('header-grid-nonleaf');return leaves;
+}
 const BANNED_OCR=/(顾客|手机号|已下\d*单|补充备注|催单|投诉|发票申请)/;
 export const CANONICAL_PROFILE='taobao-brand';
 export const CANONICAL_PORT=9230;
 
 function parseArgs(argv){const out={profile:'taobao-brand',port:'9230'};for(let i=0;i<argv.length;i++){if(argv[i]==='--self-test')out.selfTest=true;else if(argv[i].startsWith('--'))out[argv[i].slice(2)]=argv[++i];}return out;}
 export const safeId=value=>/^[a-z0-9][a-z0-9-]{0,62}$/.test(value||'');
+export function ownsTaskMarker(marker,taskId){
+  if(typeof marker!=='string'||!safeId(taskId))return false;
+  const expected=`aos-background-task:${taskId}`;
+  if(marker===expected)return true;
+  if(!marker.startsWith('nameStorage:'))return false;
+  const split=marker.indexOf('?');if(split<0)return false;
+  try{
+    if(decodeURIComponent(marker.slice('nameStorage:'.length,split))!==expected)return false;
+    const entries=[...new URLSearchParams(marker.slice(split+1))];
+    const allowed=new Set(['TRACERT_REF_referPageId','TRACERT_REF_referO2oPageId']);
+    return entries.length>0&&entries.length<=2&&new Set(entries.map(([key])=>key)).size===entries.length&&entries.every(([key,value])=>allowed.has(key)&&/^[a-zA-Z0-9._-]+$/.test(value));
+  }catch{return false;}
+}
 const firstLine=value=>(value||'').trim().split('\n')[0].trim();
 const money=value=>{const match=firstLine(value).match(/^([\d,]+(?:\.\d{1,2})?)/);return match?Number(match[1].replaceAll(',','')):NaN;};
 export function rowsFromCellMatrix(matrix,headers){
@@ -48,7 +75,34 @@ export function assertCanonicalBrowser(profile,port){
 async function allFrameText(page){const bodies=[];for(const frame of page.frames()){try{const value=(await frame.locator('body').first().innerText()).trim();if(value)bodies.push(value);}catch{}}return [...new Set(bodies)].join('\n');}
 async function waitUntil(fn,timeoutMs,page,reason){const end=Date.now()+timeoutMs;let last;while(Date.now()<end){try{last=await fn();if(last)return last;}catch(error){last=error;}await page.waitForTimeout(200);}throw Error(reason+(last instanceof Error?':'+last.message:''));}
 async function uniqueVisibleText(page,text,timeoutMs){return waitUntil(async()=>{const found=[];for(const frame of page.frames()){const items=frame.getByText(text,{exact:true});for(let i=0;i<await items.count();i++){const item=items.nth(i);if(await item.isVisible())found.push(item);}}if(found.length>1)throw Error('visible-text-not-unique:'+text);return found[0]||null;},timeoutMs,page,'visible-text-missing:'+text);}
-async function tableSnapshot(frame){const tables=await frame.locator('table').evaluateAll(tables=>tables.map(table=>({headers:[...table.querySelectorAll('thead th')].map(x=>(x.innerText||'').trim()),sortOrders:[...table.querySelectorAll('thead th')].map(x=>x.getAttribute('aria-sort')||(x.querySelector('.ant-table-column-sorter-down.active')?'descending':x.querySelector('.ant-table-column-sorter-up.active')?'ascending':null)),matrix:[...table.querySelectorAll('tbody tr')].map(row=>[...row.querySelectorAll('td')].map(cell=>(cell.innerText||'').trim()))})));const candidates=tables.filter(x=>x.headers.some(h=>['门店名称','店铺名称'].includes(normalizeHeader(h)))&&x.headers.some(h=>normalizeHeader(h)==='有效订单量'));if(candidates.length!==1)return null;incomeColumn(candidates[0].headers);return candidates[0];}
+async function tableSnapshot(frame){
+  const raw=await frame.locator('table').evaluateAll(tables=>tables.map(table=>({headerRows:[...table.querySelectorAll('thead tr')].map(row=>[...row.querySelectorAll('th')].map(x=>({text:(x.innerText||'').trim(),rowSpan:x.rowSpan,colSpan:x.colSpan,sortOrder:x.getAttribute('aria-sort')||(x.querySelector('.ant-table-column-sorter-down.active')?'descending':x.querySelector('.ant-table-column-sorter-up.active')?'ascending':null)}))),matrix:[...table.querySelectorAll('tbody tr')].map(row=>[...row.querySelectorAll('td')].map(cell=>(cell.innerText||'').trim()))})));
+  const tables=raw.filter(x=>x.headerRows.length).map(x=>{const leaves=leafHeaderCells(x.headerRows);return {headers:leaves.map(x=>x.text),sortOrders:leaves.map(x=>x.sortOrder),matrix:x.matrix};});
+  const candidates=tables.filter(x=>x.headers.some(h=>['门店名称','店铺名称'].includes(normalizeHeader(h)))&&x.headers.some(h=>normalizeHeader(h)==='有效订单量'));
+  if(candidates.length!==1)return null;incomeColumn(candidates[0].headers);return candidates[0];
+}
+async function ensureIncomeMetric(frame,page){
+  const headers=await frame.locator('thead th').allInnerTexts();
+  const existing=headers.filter(h=>/^(预计收入|收入)(（元）)?$/.test(normalizeHeader(h)));
+  if(existing.length){incomeColumn(headers);return 'ALREADY_VISIBLE';}
+  const select=frame.getByRole('button',{name:/^选择指标\s*\(\d+\)$/});
+  if(await select.count()!==1)throw Error('metric-selector-not-unique');await select.click({timeout:5000});
+  const modal=frame.locator('.ant-modal-wrap:visible');
+  if(await modal.count()!==1||!(await modal.innerText()).includes('营收指标组'))throw Error('income-metric-modal-mismatch');
+  const labels=modal.locator('label.ant-checkbox-wrapper');
+  const chosen=()=>labels.evaluateAll(xs=>xs.filter(x=>x.querySelector('input[type=checkbox]')?.checked).map(x=>(x.innerText||'').replace(/\s+/g,'')));
+  const before=await chosen(),options=[];
+  for(let i=0;i<await labels.count();i++){const label=labels.nth(i);if(/^(预计收入|收入)$/.test(normalizeHeader(await label.innerText())))options.push(label);}
+  if(options.length!==1)throw Error('income-metric-option-not-unique');
+  const label=normalizeHeader(await options[0].innerText());
+  if(await options[0].locator('input').isChecked())throw Error('income-selected-but-column-missing');
+  await options[0].click({timeout:5000});const after=await chosen();
+  if(after.length!==before.length+1||!after.includes(label)||before.some(x=>!after.includes(x))||after.some(x=>x!==label&&!before.includes(x)))throw Error('income-metric-selection-drift');
+  const confirm=modal.getByRole('button',{name:/^确认\s*\(\d+\)$/});
+  if(await confirm.count()!==1)throw Error('income-metric-confirm-not-unique');await confirm.click({timeout:5000});
+  await waitUntil(async()=>{if(await modal.isVisible())return null;const hs=await frame.locator('thead th').allInnerTexts();return hs.some(h=>normalizeHeader(h)===label);},10000,page,'income-metric-not-visible');
+  return 'ADDED_INCOME_ONLY';
+}
 async function pagerSnapshot(frame){return frame.evaluate(()=>({active:[...document.querySelectorAll('.ant-pagination-item-active')].map(x=>(x.textContent||'').trim()),pageSizes:[...document.querySelectorAll('.ant-select-selection-item')].map(x=>(x.textContent||'').replace(/\s+/g,' ').trim()).filter(x=>x.includes('条/页'))}));}
 async function dismissKnownNotice(page){
   const visible=[];for(const frame of page.frames()){const modals=frame.locator('.ant-modal-wrap:visible');for(let i=0;i<await modals.count();i++)visible.push(modals.nth(i));}
@@ -75,8 +129,11 @@ export function selfTest(){
   return {ok:true,tests:7,runtimeModelDecisions:0};
 }
 
-export async function runBackgroundDesktop({profile='taobao-brand',port=9230,outputRoot='/tmp/zhensi_top10',runId=crypto.randomUUID()}={}){
+export async function runBackgroundDesktop({profile='taobao-brand',port=9230,outputRoot=path.resolve(dir,'../../../../runtime/state/business-evidence/top10'),runId=crypto.randomUUID()}={}){
   assertCanonicalBrowser(profile,port);
+  const evidenceStorageHelper = "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/evidence_storage.mjs";
+  if (crypto.createHash('sha256').update(await fs.readFile(evidenceStorageHelper)).digest('hex') !== 'ba84c386010a0a887f0103da38d170bc145c50a5846caf6d8fe58d26efd758d2') throw Error('evidence-storage-helper-drift');
+  await (await import(`file://${evidenceStorageHelper}`)).ensureEvidenceAliases();
   const taskId=`top10-${runId}`;const outputDir=path.join(outputRoot,runId);await fs.mkdir(outputDir,{recursive:true,mode:0o700});
   const receiptFile=path.join(outputDir,'desktop_receipt.json');
   const receipt={ok:false,executor:'desktop',browserController:'control-background-dedicated-chrome',profile,port,taskId,runId,stageMs:{},stageResults:{},retryCount:0,sendAttempts:0,runtimeModelDecisions:0,receiptFile};
@@ -118,6 +175,7 @@ export async function runBackgroundDesktop({profile='taobao-brand',port=9230,out
       await waitUntil(async()=>{const current=frame.getByText('昨日',{exact:true}).first();const checked=await current.evaluate(e=>e.closest('label')?.classList.contains('ant-radio-button-wrapper-checked')||false);const text=await frame.locator('body').innerText();return checked&&text.includes(`已选时间：${short}`);},10000,page,'yesterday-postcondition-failed');
     });
     let rows,wrapper,pagination;
+    await stage('ensure_income_metric',async()=>{receipt.incomeMetricSelection=await ensureIncomeMetric(frame,page);});
     await stage('verify_sort',async()=>{
       let snapshot=await waitUntil(async()=>{const body=await frame.locator('body').innerText(),spinning=await frame.locator('.ant-spin-spinning').count();if(yesterdayDataState(body,spinning)==='NOT_READY')throw Error('yesterday-data-not-ready');const value=await tableSnapshot(frame);if(!value)return null;const parsed=rowsFromCellMatrix(value.matrix,value.headers);return parsed.length===10&&parsed.every(x=>x.store&&Number.isFinite(x.income)&&Number.isFinite(x.orders))?{value,parsed}:null;},15000,page,'ten-business-rows-not-ready');
       for(const header of REQUIRED_HEADERS)if(!snapshot.value.headers.includes(header)&&!(header==='门店名称'&&snapshot.value.headers.includes('店铺名称')))throw Error('table-header-missing:'+header);
@@ -137,6 +195,18 @@ export async function runBackgroundDesktop({profile='taobao-brand',port=9230,out
       if(visible.length!==1)throw Error('table-wrapper-not-unique');wrapper=visible[0];
       const pagers=frame.locator('.ant-pagination');const shown=[];for(let i=0;i<await pagers.count();i++)if(await pagers.nth(i).isVisible())shown.push(pagers.nth(i));
       if(shown.length!==1)throw Error('pagination-not-unique');pagination=shown[0];
+      const incomeCell=frame.locator('th').filter({hasText:new RegExp(`^${incomeHeader}$`)});
+      if(await incomeCell.count()!==1)throw Error('capture-income-header-not-unique');
+      receipt.incomeVisibility=await incomeCell.evaluate(e=>{
+        const wrapper=e.closest('.ant-table-wrapper');let scroller=e.parentElement;
+        while(scroller&&!(scroller.scrollWidth>scroller.clientWidth&&['auto','scroll'].includes(getComputedStyle(scroller).overflowX)))scroller=scroller.parentElement;
+        const bounds=()=>{const outer=wrapper.getBoundingClientRect();const left=[...wrapper.querySelectorAll('th.ant-table-cell-fix-left')].map(x=>x.getBoundingClientRect().right);const right=[...wrapper.querySelectorAll('th.ant-table-cell-fix-right')].map(x=>x.getBoundingClientRect().left);return {left:Math.max(outer.left,...left),right:Math.min(outer.right,...right)};};
+        let box=e.getBoundingClientRect(),visible=bounds();
+        if(scroller&&box.right>visible.right-8)scroller.scrollLeft+=box.right-visible.right+16;
+        box=e.getBoundingClientRect();visible=bounds();
+        return {ok:box.left>=visible.left&&box.right<=visible.right-8,left:box.left,right:box.right,visible,scrollLeft:scroller?.scrollLeft??null};
+      });
+      if(!receipt.incomeVisibility.ok)throw Error('capture-income-column-obscured');
     });
     await stage('capture_self_check',async()=>{
       const tableBox=await wrapper.boundingBox(),pagerBox=await pagination.boundingBox();
@@ -185,7 +255,7 @@ export async function runBackgroundDesktop({profile='taobao-brand',port=9230,out
     receipt.ok=true;
   }catch(error){receipt.reason=error.message;}
   finally{
-    if(page){try{if(await page.evaluate(()=>window.name)===`aos-background-task:${taskId}`)await page.close();}catch{}}
+    if(page){try{if(ownsTaskMarker(await page.evaluate(()=>window.name),taskId)){await page.close();receipt.cleanupStatus='completed';}else receipt.cleanupStatus='preserved-marker-mismatch';}catch(error){receipt.cleanupStatus='failed';receipt.cleanupReason=String(error.message||error);}}
     if(browser)try{await browser.close();}catch{}
     receipt.elapsedMs=started?Date.now()-started:0;await fs.writeFile(receiptFile,JSON.stringify(receipt,null,2),{mode:0o600});
   }

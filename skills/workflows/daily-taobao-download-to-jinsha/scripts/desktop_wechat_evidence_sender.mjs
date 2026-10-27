@@ -16,8 +16,8 @@ const SENDER = '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wech
 const SENDER_MANIFEST = '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/dependencies.json';
 const SENDER_MANIFEST_KEY = 'scripts/workflow_bridge_windows.py';
 const LEDGER = '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/taobao-jinsha-wechat-evidence-attempts';
-const EVIDENCE_ROOT = '/tmp/zhensi_daily_download/background-browser';
-const OUTPUT_ROOT = '/tmp/zhensi_daily_download/desktop-wechat';
+const EVIDENCE_ROOT = "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/business-evidence/taobao-download/background-browser";
+const OUTPUT_ROOT = "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/business-evidence/taobao-download/desktop-wechat";
 const GROUP_NAME = '上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰';
 const SCHEDULED_POLICY_ID = 'user-approved-unattended-daily-2026-09-12';
 const RESOURCE_WAIT_MS = 10 * 60_000;
@@ -88,8 +88,8 @@ function assertManifestShape(manifest) {
   const expectedNames = ['jinsha-store-final.png', 'jinsha-review-final.png'];
   manifest.images.forEach((item, index) => {
     const resolved = path.resolve(item?.path || '');
-    const ownedPrefix = `${EVIDENCE_ROOT}/${manifest.businessDate}-${manifest.runId}/`;
-    if (!resolved.startsWith(ownedPrefix) || path.basename(resolved) !== expectedNames[index] || !/^[a-f0-9]{64}$/.test(item?.sha256 || '')) {
+    const ownedPrefix = [EVIDENCE_ROOT, "/tmp/zhensi_daily_download/background-browser"].map(root => `${root}/${manifest.businessDate}-${manifest.runId}/`);
+    if (!ownedPrefix.some(prefix => resolved.startsWith(prefix)) || path.basename(resolved) !== expectedNames[index] || !/^[a-f0-9]{64}$/.test(item?.sha256 || '')) {
       throw Error(`evidence-image-scope-invalid:${index}`);
     }
   });
@@ -136,6 +136,9 @@ async function invokeSender(python, args) {
 
 async function sendVerifiedManifest(manifest, authorization, authorizationMode, pendingOverride) {
   assertManifestShape(manifest);
+  const evidenceStorageHelper = "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/evidence_storage.mjs";
+  if (crypto.createHash('sha256').update(await fs.readFile(evidenceStorageHelper)).digest('hex') !== 'ba84c386010a0a887f0103da38d170bc145c50a5846caf6d8fe58d26efd758d2') throw Error('evidence-storage-helper-drift');
+  await (await import(`file://${evidenceStorageHelper}`)).ensureEvidenceAliases();
   const senderSha256 = verifyCentralSenderIntegrity();
   // 2026-10-03 受控维护（大同授权「方案 B：开搞」）：定时通道先做逐图已交付核验，
   // 只发送当日尚未核验交付的缺失图；全缺=原双图行为（授权话术/marker 键逐字节不变），

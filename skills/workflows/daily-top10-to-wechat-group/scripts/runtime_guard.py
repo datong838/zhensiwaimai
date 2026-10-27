@@ -23,7 +23,7 @@ CANONICAL_TARGET_GROUP = "上海臻肆外卖运营-盯个盯-饭敢当 💰发�
 # windows_adapter resolve_group 精确命中，同 prefix 无歧义）。
 CANONICAL_AUTHORIZATION = "zhensi-feibing-neo-ai-main-wechat-top10-v1"
 SHARED_WECHAT_ROOT = Path(
-    "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/scripts"
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/legacy-app-controler/wechat-desktop-control/scripts"
 )
 EXPECTED_POLICY_FILES = {
     "runtime_guard": Path(__file__).resolve(),

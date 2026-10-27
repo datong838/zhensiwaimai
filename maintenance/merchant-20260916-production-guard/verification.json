@@ -1,0 +1,50 @@
+{
+  "status": "OFFLINE_VERIFIED_NOT_DEPLOYED",
+  "productionSeal": {
+    "ok": true,
+    "status": "SEALED",
+    "manifestSha256": "d0ea8578a2163d46890efc7cd34720650a1ff040822bca939205002e5260213c",
+    "fileCount": 14,
+    "acceptanceMerchantId": "545585913",
+    "acceptanceMessageSha256": "c8bdb5bceeb018d80858b7014e4c1733086a3af5c39a3897eb44eef0ec28d889",
+    "runtimeModelDecisions": 0,
+    "maintenanceAcceptance": "desktop-wechat-shared-preflight"
+  },
+  "protectedFiles": {
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/daily-agent-new-merchants-to-wechat/executor-lock.json": "d0ea8578a2163d46890efc7cd34720650a1ff040822bca939205002e5260213c",
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/cursor.json": "b34e1d76e936d19671412346fc8b51ef1d18c2cb4bb8e91f5774e76a8d4e4e1d",
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/cursor.test.json": "ccd76e5fc4f92e9efb5de5381b73d8b1e83275de1c3d363bd9f23016d18d18fd",
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-history.jsonl": "a203c6beb821bb97c49d5b810d3382b7040ac91841757bbc960069772818dccd"
+  },
+  "review": [
+    {
+      "name": "候选Python门禁与回归",
+      "elapsedMs": 375,
+      "ok": true,
+      "output": ".................\n----------------------------------------------------------------------\nRan 17 tests in 0.020s\n\nOK\n"
+    },
+    {
+      "name": "候选浏览器回归",
+      "elapsedMs": 194,
+      "ok": true,
+      "output": "{\"ok\":true,\"tests\":15,\"runtimeModelDecisions\":0}\n"
+    },
+    {
+      "name": "候选采集反例",
+      "elapsedMs": 173,
+      "ok": true,
+      "output": "{\"ok\":true,\"assertions\":11}\n"
+    },
+    {
+      "name": "生产合同回归",
+      "elapsedMs": 284,
+      "ok": true,
+      "output": ".....................................................\n----------------------------------------------------------------------\nRan 53 tests in 0.037s\n\nOK\n"
+    },
+    {
+      "name": "生产封板与数据保护核验",
+      "elapsedMs": 1,
+      "ok": true
+    }
+  ]
+}

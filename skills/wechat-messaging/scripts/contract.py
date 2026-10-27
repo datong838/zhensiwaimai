@@ -57,7 +57,7 @@ def normalize(request):
         search_group = nonempty(context['searchGroupName'], 'search-group')
         if search_group != search_group.strip() or '\n' in search_group or '\r' in search_group:
             raise Rejected('search-group-invalid')
-    if context['channel'] not in ('desktop', 'mobile', 'mobile-wecom'):
+    if context['channel'] not in ('desktop', 'mobile'):
         raise Rejected('unsupported-channel')
     timestamp(context['deadlineAt'], 'deadline')
     if not isinstance(request['items'], list) or not 1 <= len(request['items']) <= 20:

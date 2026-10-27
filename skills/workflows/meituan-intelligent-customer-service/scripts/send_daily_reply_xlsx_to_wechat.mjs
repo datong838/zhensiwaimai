@@ -8,7 +8,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 // 2026-10-04 铁律硬闸：发群前读取 xlsx 实际数据行数，0 条汇总结果绝不外发 Excel。
 // 复用 step3 同款 artifact_tool 解析工作簿（路径与 compile_daily_reply_xlsx.mjs 一致）。
-import { FileBlob, SpreadsheetFile } from "/Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/@oai/artifact-tool/dist/artifact_tool.mjs";
+import { FileBlob, SpreadsheetFile } from "@oai/artifact-tool";
 
 const run = promisify(execFile);
 const python = "/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python";

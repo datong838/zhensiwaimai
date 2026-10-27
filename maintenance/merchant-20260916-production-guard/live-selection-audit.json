@@ -1,0 +1,105 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-09-16",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 68,
+    "task_page": 1552,
+    "navigation": 909,
+    "date_filter": 1797,
+    "page_1_read": 247
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS"
+  },
+  "messages": [],
+  "frontmostBefore": "com.openai.codex",
+  "createdAt": "2026-09-16T09:18:07.276Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-09-16",
+    "merchantName": "小九家麻糍铺",
+    "merchantId": "1342360684",
+    "recommendTime": "2026-09-16 14:45:08",
+    "tableOrder": 6,
+    "messageSha256": "3e862d28299f5b4639a9735f5a44821b03f7d3a7d525280b340692e45de49306",
+    "sentAt": "2026-09-16T15:32:45+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-09-16",
+  "filterEndDate": "2026-09-16",
+  "dateFilter": "2026-09-16..2026-09-16",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 7,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 7,
+  "pendingRows": 4,
+  "targetCount": 0,
+  "selectionAudit": {
+    "totalRows": 7,
+    "pendingRows": 4,
+    "excludedAtOrBeforeCursor": 6,
+    "excludedAfterCursorNotPending": 1,
+    "targetCount": 0,
+    "rows": [
+      {
+        "merchantId": "1342360684",
+        "recommendTime": "2026-09-16 14:45:08",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1356565396",
+        "recommendTime": "2026-09-16 13:52:23",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "545825448",
+        "recommendTime": "2026-09-16 12:01:43",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "545585913",
+        "recommendTime": "2026-09-16 00:38:01",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1350972148",
+        "recommendTime": "2026-09-16 15:31:34",
+        "status": "完成"
+      },
+      {
+        "merchantId": "544917086",
+        "recommendTime": "2026-09-16 11:54:56",
+        "status": "完成"
+      },
+      {
+        "merchantId": "510373694",
+        "recommendTime": "2026-09-16 00:32:10",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 4921,
+  "frontmostAfter": "com.openai.codex"
+}

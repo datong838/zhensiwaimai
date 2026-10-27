@@ -1,0 +1,57 @@
+{
+  "status": "REAL_HANDOFF_AND_OLD_PAGE_RELEASE_VERIFIED",
+  "tests": {
+    "passed": 19,
+    "failed": 0,
+    "skipped": 0
+  },
+  "live": {
+    "profile": "meituan-merchant",
+    "instanceId": "6d5b1c48-9095-414a-8f4f-525dad03fb4e",
+    "pid": 11818,
+    "port": 9233,
+    "processStartedAt": "Sun Sep 13 11:46:59 2026",
+    "phase": "WINDOW_RELEASED",
+    "taskId": "meituan-live-20260913-recovered",
+    "activeTargetId": "6A0C13E39C7226A40AB08F7B1B22224B",
+    "closedPreviousTargets": 1,
+    "observations": [
+      {
+        "authenticated": true,
+        "reason": "AUTHENTICATED",
+        "markers": [
+          "全部门店",
+          "今日有效订单",
+          "今日预计收入",
+          "巡店助手",
+          "巡检门店"
+        ],
+        "loginMarkers": [],
+        "securityMarkers": [],
+        "textLength": 787,
+        "url": "https://waimaie.meituan.com/",
+        "title": "美团外卖商家版",
+        "frameCount": 3,
+        "at": "2026-09-13T04:30:22.563Z"
+      }
+    ]
+  },
+  "postReleaseInspect": {
+    "authenticated": true,
+    "at": "2026-09-13T04:30:36.229Z",
+    "samePid": 11818
+  },
+  "processRestartedDuringRecovery": false,
+  "businessWrites": 0,
+  "codeHashes": {
+    "scripts/background_chrome.mjs": "5ddcc1a718a49119dede5e20d29c0f45e354ad9eff0587806a83633b3affbcd0",
+    "scripts/run_task.mjs": "510d9726671256de7683639f6959baa219d263d5901c026ddc919bb34e38512f",
+    "scripts/session_guard.mjs": "4919b1a6eb79f3a4082cd9ad7cae73e49bcff70c63ad695b823060c58a8e27ad",
+    "scripts/handoff.mjs": "e7a93192640775e73768732bde0d43acd9fd75ee88e75b66c114672e7441ede8",
+    "scripts/handoff.test.mjs": "7dfca4c1d33f3e0d293e3de8c1c1e6a7707b1fb55a06f0a7651f59d4125077c0",
+    "scripts/handoff.integration.test.mjs": "0906d962a5bb4883b942f1a5fa30383cfb1d6114d525e6c62f3758b7d8f6f1fe",
+    "SKILL.md": "4558063c5cccdd06b8c5ca6fe29a3cb6ee87460b8266aa11254efa75d7a2bf3f",
+    "references/login-handoff-plan.md": "06cd0b4ffb78dc70173424628bd863fd3a42214961ab6be9ba6011847f095c86",
+    "references/operations-runbook.md": "142d83f6998cdf9d14253f302b1c0e44a6d805dbfacc8cf613801acea05648a6"
+  }
+}

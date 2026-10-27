@@ -30,7 +30,7 @@ from pathlib import Path
 import AppKit
 import Quartz
 
-SHARED = Path("/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/"
+SHARED = Path("/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/legacy-app-controler/"
               "wechat-desktop-control/scripts")
 
 WECHAT_MARKERS = ("通讯录", "文件传输助手", "订阅号", "服务通知", "微信团队",

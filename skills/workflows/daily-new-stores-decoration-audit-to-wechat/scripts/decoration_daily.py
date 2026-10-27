@@ -159,7 +159,16 @@ def run(execute: bool) -> dict:
                 # shop-not-found / shop-search-timeout 均属业务/工位数据缺口，记 skipped 不算 unknown，
                 # 不中断其余门店巡检。
                 msg = str(error)
-                if msg.startswith("decoration-collection-skipped:"):
+                if msg == "decoration-collection-skipped:shop-not-found:未搜索到店铺":
+                    receipt = decoration.not_found_receipt(hit, msg)
+                    body = decoration.message(receipt, hit["name"])
+                    delivery = (decoration.deliver(receipt, run_dir, hit["name"]) if execute
+                                else {"status": "ready", "sendAttempts": 0})
+                    shop = {"sourceName": hit["name"], "days": hit["days"],
+                            "inspectionOutcome": receipt["inspectionOutcome"], "recordNote": receipt["recordNote"],
+                            "text": body, "runDir": str(run_dir), **delivery}
+                    decoration.atomic_json(run_dir / "store-not-found.json", receipt)
+                elif msg.startswith("decoration-collection-skipped:"):
                     shop = {"sourceName": hit["name"], "status": "skipped", "reason": msg,
                             "sendAttempts": 0, "runDir": str(run_dir)}
                 else:

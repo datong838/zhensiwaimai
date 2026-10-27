@@ -1,5 +1,12 @@
 import assert from 'node:assert/strict';
-import {incomeColumn,incomeMoney,rowsFromCellMatrix,incomeDescending,selfTest} from './desktop_background_executor.mjs';
+import {incomeColumn,incomeMoney,rowsFromCellMatrix,incomeDescending,leafHeaderCells,selfTest} from './desktop_background_executor.mjs';
+const cell=(text,rowSpan=1,colSpan=1,sortOrder=null)=>({text,rowSpan,colSpan,sortOrder});
+const grouped=leafHeaderCells([[cell('门店名称',2),cell('营收数据',1,3),cell('有效订单量',2)],[cell('收入',1,1,'descending'),cell('营业额'),cell('支出')]]);
+assert.deepEqual(grouped.map(x=>x.text),['门店名称','收入','营业额','支出','有效订单量']);
+assert.equal(grouped[1].sortOrder,'descending');
+assert.equal(rowsFromCellMatrix([['甲','100','999','899','10']],grouped.map(x=>x.text))[0].income,100);
+assert.deepEqual(leafHeaderCells([[cell('门店名称'),cell('收入')]]).map(x=>x.text),['门店名称','收入']);
+assert.throws(()=>leafHeaderCells([[cell('组',1,2)],[cell('收入')]]),/header-grid/);
 for(const label of ['收入','预计收入','预计收入（元）','收入 (元)'])assert.equal(incomeColumn(['商圈收入排名',label,'营业额']),1);
 for(const headers of [['营业额','商圈收入排名'],['收入占比'],['收入','预计收入'],['净收入排名']])assert.throws(()=>incomeColumn(headers));
 for(const value of ['第1名/20名','20%','--','100abc','1,23.00',''])assert.ok(Number.isNaN(incomeMoney(value)));
@@ -11,4 +18,4 @@ assert.equal(incomeDescending({headers,sortOrders:[null,null,'descending']}),tru
 assert.equal(incomeDescending({headers,sortOrders:['descending',null,'ascending']}),false);
 assert.equal(incomeDescending({headers,sortOrders:[]}),false);
 assert.equal(selfTest().ok,true);
-console.log(JSON.stringify({ok:true,scenarios:22,browserActions:0,sendAttempts:0}));
+console.log(JSON.stringify({ok:true,scenarios:27,browserActions:0,sendAttempts:0}));

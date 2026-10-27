@@ -162,7 +162,32 @@ def quality_optimization_allowed(request, *, root=None, day=None):
     except (OSError,ValueError,KeyError,TypeError):return False
 
 
+def not_found_notice_allowed(request):
+    import hashlib
+    import re
+    from datetime import datetime
+    from zoneinfo import ZoneInfo
+    context = request.get('context', {}); items = request.get('items', [])
+    scopes = {'daily-new-stores-activity-reminder': ('activity', 'missing-activity', '活动配置巡检'),
+              'daily-new-stores-decoration-reminder': ('decoration', 'missing-decoration', '店铺装修巡检')}
+    scope = scopes.get(context.get('workflowId'))
+    if (not scope or request.get('groupName') != GROUP or len(items) != 1
+            or context.get('accountAlias') != 'main-wechat' or context.get('channel') != 'desktop'):
+        return False
+    kind, item_id, title = scope; item = items[0]; body = item.get('text', '')
+    if item.get('itemId') != item_id or item.get('type') != 'text' or not isinstance(body, str):
+        return False
+    match = re.fullmatch(re.escape(title) + r'：([^\r\n]+) 新店铺（开业([0-3])天）淘宝闪购商家版 查无此店铺', body)
+    if not match or not match[1].strip() or item.get('sha256') != hashlib.sha256(body.encode()).hexdigest():
+        return False
+    day = datetime.now(ZoneInfo('Asia/Shanghai')).strftime('%Y-%m-%d')
+    key = hashlib.sha256(match[1].encode()).hexdigest()[:24]
+    return context.get('eventId') == f'{day}-taobao-not-found-{key}-{kind}-reminder'
+
+
 def allowed_direct(request):
+    if '-taobao-not-found-' in str(request.get('context', {}).get('eventId', '')):
+        return not_found_notice_allowed(request)
     if request.get('context',{}).get('workflowId')=='daily-quality-products-optimization':
         return quality_optimization_allowed(request)
     if request.get('context',{}).get('workflowId')=='daily-meituan-income-top10-ops':

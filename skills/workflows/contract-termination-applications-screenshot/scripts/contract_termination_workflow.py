@@ -114,6 +114,16 @@ def files_sha(files: list) -> str:
     return h.hexdigest()
 
 
+def submitted_image_pending(adapter, item: dict, result: dict) -> bool:
+    """Only a bound native single submission may let untouched pages proceed."""
+    return (getattr(adapter, 'owner_lifetime', False) is True
+            and item.get('type') == 'image' and result.get('status') == 'unknown'
+            and type(result.get('sendAttempts')) is int and result['sendAttempts'] == 1
+            and result.get('resolvedGroup') == GROUP and result.get('inputEmpty') is True
+            and result.get('backend') == 'system-events-ui-tree'
+            and result.get('reason') == 'native-ui-inline-image-not-exposed')
+
+
 def deliver(images: list, run_dir: Path, day: str) -> dict:
     if not images:
         return {"status": "no-report", "sendAttempts": 0}  # 0 行/无图：铁律不产不发
@@ -184,15 +194,21 @@ def deliver(images: list, run_dir: Path, day: str) -> dict:
                     page_receipts.append({'itemId': item['itemId'], 'result': page})
                     current = json.loads(marker.read_text(encoding='utf-8'))
                     atomic_json(marker, current | {'pageReceipts': page_receipts})
-                    if page.get('status') != 'verified':
+                    if page.get('status') != 'verified' and not submitted_image_pending(adapter, item, page):
                         break
                 counts = [p['result'].get('sendAttempts') for p in page_receipts]
                 attempts = sum(counts) if all(isinstance(n, int) and not isinstance(n, bool) for n in counts) else None
                 complete = len(page_receipts) == len(images) and all(p['result'].get('status') == 'verified' for p in page_receipts)
+                pending = [p['itemId'] for i, p in enumerate(page_receipts)
+                           if submitted_image_pending(adapter, request['items'][i], p['result'])]
+                execution_complete = len(page_receipts) == len(images) and all(
+                    p['result'].get('status') == 'verified' or p['itemId'] in pending for p in page_receipts)
                 result = {'status': 'verified' if complete else 'unknown', 'sendAttempts': attempts,
+                          'executionComplete': execution_complete, 'verificationPending': pending,
                           'verificationLevel': page_receipts[-1]['result'].get('verificationLevel'),
                           'evidence': {'pageReceipts': page_receipts},
-                          'reason': None if complete else page_receipts[-1]['result'].get('reason') or 'page-delivery-not-verified'}
+                          'reason': None if complete else ('image-submission-awaits-read-only-verification'
+                              if execution_complete and pending else page_receipts[-1]['result'].get('reason') or 'page-delivery-not-verified')}
             except Exception as error:  # noqa: BLE001
                 atomic_json(marker, {"state": "unknown", "event": event, "sha256": file_sha,
                                      "groupName": GROUP, "images": [Path(f).name for f in images],
@@ -209,9 +225,11 @@ def deliver(images: list, run_dir: Path, day: str) -> dict:
                 "verificationLevel": result.get("verificationLevel")}
     atomic_json(marker, {"state": "unknown", "event": event, "sha256": file_sha, "groupName": GROUP,
                          "images": [Path(f).name for f in images], "sendAttempts": result.get("sendAttempts"),
-                         "reason": result.get("reason"), 'pageReceipts': page_receipts})
+                         "reason": result.get("reason"), 'pageReceipts': page_receipts,
+                         'executionComplete': result['executionComplete'], 'verificationPending': result['verificationPending']})
     return {"status": "unknown", "reason": result.get("reason"),
-            "sendAttempts": result.get("sendAttempts"), "event": event}
+            "sendAttempts": result.get("sendAttempts"), "event": event,
+            'executionComplete': result['executionComplete'], 'verificationPending': result['verificationPending']}
 
 
 def find_run_images(run_dir: Path) -> list:

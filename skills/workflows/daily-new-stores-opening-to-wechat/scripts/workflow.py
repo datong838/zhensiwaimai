@@ -36,17 +36,37 @@ def now_local() -> datetime:
 
 
 def node_binary() -> Path:
-    choices = [
+    choices = []
+    configured = os.environ.get('ZENSI_NODE')
+    if configured:
+        choices.append(Path(configured))
+    try:
+        director = json.loads((ROOT / 'runtime/skills_manifest.json').read_text())['interpreters']['node']
+        if isinstance(director, str) and director:
+            choices.append(Path(director))
+    except (OSError, ValueError, KeyError, TypeError):
+        pass
+    choices += [
         Path("/Users/ddt/.nvm/versions/node/v20.20.2/bin/node"),
         Path("/Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node"),
     ]
     found = shutil.which("node")
     if found:
         choices.append(Path(found))
+    seen = set()
     for candidate in choices:
+        if str(candidate) in seen:
+            continue
+        seen.add(str(candidate))
         if candidate.is_file():
-            return candidate
-    raise RuntimeError("node-runtime-unavailable")
+            try:
+                probe = subprocess.run([str(candidate), '--eval', 'process.stdout.write(typeof globalThis.WebSocket)'],
+                                       capture_output=True, text=True, timeout=5, check=False)
+                if probe.returncode == 0 and probe.stdout.strip() == 'function':
+                    return candidate
+            except (OSError, subprocess.TimeoutExpired):
+                continue
+    raise RuntimeError("node-websocket-runtime-unavailable")
 
 
 def atomic_json(path: Path, value: dict) -> None:

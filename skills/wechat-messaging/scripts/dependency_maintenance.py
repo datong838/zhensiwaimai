@@ -23,8 +23,6 @@ HEARTBEAT_RECOVERY_KEY = "scripts/heartbeat_recovery.py"
 DESKTOP_ADAPTER_KEY = "scripts/desktop_adapter.py"
 POLICY_REGISTRATION_KEY = "scripts/policy_registration.py"
 EGRESS_POLICY_KEY = "scripts/egress_policy.py"
-ANDROID_WECOM_CHANNEL_KEY = "scripts/android_wecom_channel.py"
-ANDROID_WECOM_ACCEPTANCE_KEY = "scripts/android_wecom_acceptance.py"
 BUSINESS_STORAGE_KEY = "../../runtime/business_storage.py"
 # 2026-09-29 `_back` 重指路径迁移导致的依赖摘要漂移。
 # 授权话术（大同原话）：「我授权 你修改到能确实 验收通过」
@@ -46,6 +44,13 @@ WORKFLOWS_KEY_MIGRATIONS = {
         "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/scripts/ocr_vision",
     "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/daily-agent-new-merchants-to-wechat/.runtime/ocr_control_label":
         "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-agent-new-merchants-to-wechat/.runtime/ocr_control_label",
+}
+CODE_CONSOLIDATION_KEY_MIGRATIONS = {
+    f"/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/scripts/{name}":
+        f"/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/legacy-app-controler/wechat-desktop-control/scripts/{name}"
+    for name in ("desktop_sender.py", "desktop_preflight.py", "wechat_desktop.py",
+                 "wechat_interaction_lock.py", "cgevent_click_bin", "cgevent_key_bin",
+                 "ocr_vision_bin")
 }
 # 授权话术（大同原话）：「OK执行吧，我看你还是没迁移好，你Loop起来 把这个事情 做好后。全部在 测试一遍 不要再停下来 和请示了」
 WORKFLOWS_MIGRATION_AUTHORIZATION = "user-20261005-workflows-path-migration-final"
@@ -84,20 +89,20 @@ ZERO_SEND_DRAFT_PATHS = {
     SELF_KEY,
     "scripts/desktop_adapter.py", "scripts/workflow_bridge.py",
     "scripts/workflow_preflight.py",
-    "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/"
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/legacy-app-controler/"
     "wechat-desktop-control/scripts/desktop_sender.py",
 }
 NEW_STORES_AUTHORIZATION = "user-20260928-daily-new-stores-wechat-gate-repair"
 NEW_STORES_INSTRUCTION = "你该修改代码修改代码 不要停下"
 NEW_STORES_INSTRUCTION_SHA256 = hashlib.sha256(NEW_STORES_INSTRUCTION.encode("utf-8")).hexdigest()
 NEW_STORES_ALLOWED_AFTER = {
-    "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/"
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/legacy-app-controler/"
     "wechat-desktop-control/scripts/desktop_sender.py":
         "507934aca54bac903fd2a41501b8e2fc5ba944dd04e7ff616ebf7a330ee931c1",
     "scripts/desktop_adapter.py":
         "9176e880572955f731a97ce367d39468ceb172d34359673dd96431bfc32d08a1",
     "scripts/desktop_text_readback.py":
-        "aa80f3648414f7eb37561f54c72747d325791175d761a0eb402badbf6c03ff84",
+        "c914a59e903a874608f5d0092e1e0d464b0410556248092b858295658607bfea",
     "scripts/workflow_bridge.py":
         "26ed0feb549277b440f5390490bc70ce55d942160de6a89eda4764abbb60d20b",
     "scripts/workflow_preflight.py":
@@ -107,7 +112,7 @@ NEW_STORES_ALLOWED_AFTER = {
 # workflow only when its exact reviewed bytes are present. This is not a
 # general-purpose shared dependency allowlist.
 MERCHANT_SHARED_LOCATOR_PATH = (
-    "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/"
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/legacy-app-controler/"
     "wechat-desktop-control/scripts/wechat_desktop.py"
 )
 # 2026-09-29 大同授权「可修改任何门禁 优先确保今日工作完成」：
@@ -118,7 +123,7 @@ MERCHANT_SHARED_LOCATOR_SHA256 = (
 # 同一次重写中的桌面发送层（输入框/发送按钮 AX 化）：与 locator 成对登记，
 # 仍只认这一份精确审阅字节，不构成通用漂移白名单。
 MERCHANT_SHARED_SENDER_PATH = (
-    "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/"
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/legacy-app-controler/"
     "wechat-desktop-control/scripts/desktop_sender.py"
 )
 MERCHANT_SHARED_SENDER_SHA256 = (
@@ -143,11 +148,11 @@ DESKTOP_REWRITE_INSTRUCTION_SHA256 = hashlib.sha256(
     DESKTOP_REWRITE_INSTRUCTION.encode("utf-8")
 ).hexdigest()
 DESKTOP_REWRITE_LOCATOR_PATH = (
-    "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/"
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/legacy-app-controler/"
     "wechat-desktop-control/scripts/wechat_desktop.py"
 )
 DESKTOP_REWRITE_PREFLIGHT_PATH = (
-    "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/"
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/legacy-app-controler/"
     "wechat-desktop-control/scripts/desktop_preflight.py"
 )
 DESKTOP_REWRITE_ALLOWED_AFTER = {
@@ -462,6 +467,21 @@ BUSINESS_STORAGE_BRIDGE_ALLOWED_AFTER = {
     BUSINESS_STORAGE_KEY:
         "42e1a1b0b821d2f9eed5082f0748966aad15c651bdd0cbd62fecbc462cdfcaee",
 }
+CODE_CONSOLIDATION_AUTHORIZATION = "user-20261027-external-code-consolidation"
+CODE_CONSOLIDATION_INSTRUCTION = (
+    "把外部代码逻辑收拢到系统内，直接复制到内部，并把用到的地方修改成收拢后的新位置；"
+    "全部看完重要任务流代码并检查，不影响已有功能和数据。"
+)
+CODE_CONSOLIDATION_INSTRUCTION_SHA256 = hashlib.sha256(
+    CODE_CONSOLIDATION_INSTRUCTION.encode("utf-8")
+).hexdigest()
+CODE_CONSOLIDATION_LOCK = CODE_CONSOLIDATION_KEY_MIGRATIONS[
+    "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/scripts/wechat_interaction_lock.py"]
+CODE_CONSOLIDATION_ALLOWED_AFTER = {
+    "scripts/desktop_text_readback.py": "c914a59e903a874608f5d0092e1e0d464b0410556248092b858295658607bfea",
+    "scripts/windows_adapter.py": "098bf4f0d8ab2bb7f6cbb4f5885ffd3515c32316e23c1b74ca042d6e6cc06e9b",
+    CODE_CONSOLIDATION_LOCK: "a70f0e947df2e993ac4aec50995c92582d4f15f9583138a9fcde450396ba3ea2",
+}
 MAINTENANCE_AUTHORIZATIONS = {
     'user-20261025-pending-image-continue': {'instructionSha256': 'cb4e3f301ab836e49183049acc1da46992342dc41c3edc1c3514b32c0e336149', 'allowedChangePaths': {SELF_KEY, 'scripts/executor.py'}, 'allowedAfterSha256': {'scripts/executor.py': '8ac898329e252cf44b6ea96693f6c0eafa2efde9ac5fe8aff7b546a30c3a4522'}},
     'user-20261025-ui-no-wall-clock': {"instructionSha256": '6b18bd5262a9a9e0533d983c60dce4cbb755881a1333e3c630469199a891b5f5', "allowedChangePaths": {SELF_KEY, "scripts/contract.py", "scripts/executor.py"}, "allowedAfterSha256": {'scripts/contract.py': 'c37b410fb4d98ff9745dde3a95dc4098ae23e4d9913725ef5ca5e7c208cb7393', 'scripts/executor.py': '8a900b25e79aca47eb9ae077e94dc374f9c66a3358694c3fc5979399d4741461'}},
@@ -589,15 +609,10 @@ MAINTENANCE_AUTHORIZATIONS = {
         "allowedChangePaths": {SELF_KEY, *BUSINESS_STORAGE_BRIDGE_ALLOWED_AFTER},
         "allowedAfterSha256": BUSINESS_STORAGE_BRIDGE_ALLOWED_AFTER,
     },
-    "user-20261025-android-enterprise-wecom-channel": {
-        "instructionSha256": hashlib.sha256((
-            "OK 就在你的新分区里做开发： 他现有的这个是 桌面mac版企业微信 ，我要你 新增加一个android 手机版的企业微信发送通道，"
-            "你参考一下/Users/os/work/projects/app-controler 或者 /Users/os/work/projects/phone-harness 你新写一个 手机版的企业微信发送通道。"
-            "请注意不要改动现有的 桌面mac版企业微信 ，以后 2个通道要同时用的；我已经链接好了数据线 接通了 手机 你看下"
-        ).encode("utf-8")).hexdigest(),
-        "allowedChangePaths": {SELF_KEY, "scripts/contract.py", "scripts/executor.py",
-                               ANDROID_WECOM_CHANNEL_KEY, ANDROID_WECOM_ACCEPTANCE_KEY},
-        "skipExternalDependencies": True,
+    CODE_CONSOLIDATION_AUTHORIZATION: {
+        "instructionSha256": CODE_CONSOLIDATION_INSTRUCTION_SHA256,
+        "allowedChangePaths": {SELF_KEY, *CODE_CONSOLIDATION_ALLOWED_AFTER},
+        "allowedAfterSha256": CODE_CONSOLIDATION_ALLOWED_AFTER,
     },
 }
 MAX_AUTHORIZATION_AGE = timedelta(days=7)
@@ -661,14 +676,19 @@ def _validate_expiry(value: str, now: datetime | None = None) -> datetime:
     return expiry
 
 
-def _candidate(manifest: dict, root: Path = ROOT, *, skip_external_dependencies: bool = False,
-               include_android_wecom: bool = False,
+def _candidate(manifest: dict, root: Path = ROOT, *,
                include_business_storage: bool = False) -> tuple[dict, list[dict]]:
     candidate = copy.deepcopy(manifest)
     files = candidate["files"]
     for legacy_key, current_key in WORKFLOWS_KEY_MIGRATIONS.items():
         if legacy_key in files and current_key not in files:
             files[current_key] = files.pop(legacy_key)
+    for legacy_key, current_key in CODE_CONSOLIDATION_KEY_MIGRATIONS.items():
+        if legacy_key not in files:
+            continue
+        if current_key in files and files[current_key] != files[legacy_key]:
+            raise MaintenanceError("code-consolidation-key-collision")
+        files[current_key] = files.pop(legacy_key)
     files.setdefault(SELF_KEY, "0" * 64)
     # The bounded heartbeat repair state machine is executable production
     # control logic, so it must be covered by the same digest gate as the
@@ -682,9 +702,6 @@ def _candidate(manifest: dict, root: Path = ROOT, *, skip_external_dependencies:
     # (test payloads may only ever enter test groups / test scripts may not drive
     # production business logic), so it must be digest-covered like the executor.
     files.setdefault(EGRESS_POLICY_KEY, "0" * 64)
-    if include_android_wecom:
-        files.setdefault(ANDROID_WECOM_CHANNEL_KEY, "0" * 64)
-        files.setdefault(ANDROID_WECOM_ACCEPTANCE_KEY, "0" * 64)
     if include_business_storage:
         files.setdefault(BUSINESS_STORAGE_KEY, "0" * 64)
     changes = []
@@ -693,8 +710,6 @@ def _candidate(manifest: dict, root: Path = ROOT, *, skip_external_dependencies:
         if not isinstance(name, str) or not re.fullmatch(r"[0-9a-f]{64}", str(expected)):
             raise MaintenanceError(f"dependency-entry-invalid:{name}")
         path = _resolve(name, root)
-        if skip_external_dependencies and Path(name).is_absolute() and not path.is_relative_to(root):
-            continue
         if not path.is_file():
             raise MaintenanceError(f"dependency-file-missing:{path}")
         actual = sha256(path)
@@ -704,11 +719,9 @@ def _candidate(manifest: dict, root: Path = ROOT, *, skip_external_dependencies:
     return candidate, changes
 
 
-def inspect(manifest_path: Path = MANIFEST_PATH, root: Path = ROOT, *,
-            skip_external_dependencies: bool = False) -> dict:
+def inspect(manifest_path: Path = MANIFEST_PATH, root: Path = ROOT) -> dict:
     _, manifest = _read_manifest(manifest_path)
-    candidate, changes = _candidate(manifest, root,
-                                    skip_external_dependencies=skip_external_dependencies)
+    candidate, changes = _candidate(manifest, root)
     return {
         "ok": True,
         "action": "inspect",
@@ -736,19 +749,6 @@ def _run(command: list[str], cwd: Path = WORKSPACE_ROOT, timeout: int = 300) -> 
         "elapsedMs": round((time.monotonic() - started) * 1000),
         "testCount": int(match.group(1)) if match else None,
     }
-
-
-def _run_android_wecom_regressions(root: Path) -> dict:
-    """Run Android plus shared-engine tests without importing legacy Mac UI modules."""
-    started = time.monotonic()
-    total = 0
-    for pattern in ("test_android_wecom_channel.py", "test_dependency_maintenance.py",
-                    "test_policy.py", "test_egress_policy.py", "test_mobile.py"):
-        result = _run([sys.executable, "-m", "unittest", "discover", "-s",
-                       str(root / "tests"), "-p", pattern])
-        total += result.get("testCount") or 0
-    return {"ok": True, "elapsedMs": round((time.monotonic() - started) * 1000),
-            "testCount": total}
 
 
 def _review(result: dict) -> dict:
@@ -804,8 +804,6 @@ def prepare(authorization: str, expires_at: str, output_dir: Path,
         original, manifest = stage("读取依赖清单", lambda: _read_manifest(manifest_path))
         candidate, changes = stage("计算候选摘要", lambda: _candidate(
             manifest, root,
-            skip_external_dependencies=authorization_profile.get("skipExternalDependencies", False),
-            include_android_wecom=authorization == "user-20261025-android-enterprise-wecom-channel",
             include_business_storage=authorization == BUSINESS_STORAGE_BRIDGE_AUTHORIZATION,
         ))
         def validate_change_scope():
@@ -947,6 +945,12 @@ def prepare(authorization: str, expires_at: str, output_dir: Path,
                        change["after"] != approved.get(change["path"])
                        for change in changes):
                     raise MaintenanceError("business-storage-bridge-unreviewed-dependency-bytes")
+            if authorization == CODE_CONSOLIDATION_AUTHORIZATION:
+                approved = authorization_profile["allowedAfterSha256"]
+                if any(change["path"] != SELF_KEY and
+                       change["after"] != approved.get(change["path"])
+                       for change in changes):
+                    raise MaintenanceError("code-consolidation-unreviewed-dependency-bytes")
             if authorization == 'user-20261025-pending-image-continue':
                 approved = authorization_profile['allowedAfterSha256']
                 if any(change['path'] != SELF_KEY and change['after'] != approved.get(change['path']) for change in changes):
@@ -993,25 +997,17 @@ def prepare(authorization: str, expires_at: str, output_dir: Path,
             return True
 
         stage("授权范围", validate_change_scope)
-        if authorization == "user-20261025-android-enterprise-wecom-channel":
-            tests = stage("Android企微与共享执行器离线回归", lambda: _run_android_wecom_regressions(root))
-        else:
-            tests = stage("统一微信完整离线测试", lambda: run_command([
-                sys.executable, "-m", "unittest", "discover", "-s",
-                str(root / "tests"), "-p", "test_*.py",
-            ]))
+        tests = stage("统一微信完整离线测试", lambda: run_command([
+            sys.executable, "-m", "unittest", "discover", "-s",
+            str(root / "tests"), "-p", "test_*.py",
+        ]))
         stage("原子写入依赖清单", lambda: _atomic_bytes(manifest_path, _json_bytes(candidate)))
         wrote = True
-        verified = stage("依赖清单回读", lambda: inspect(
-            manifest_path, root,
-            skip_external_dependencies=authorization_profile.get("skipExternalDependencies", False),
-        ))
+        verified = stage("依赖清单回读", lambda: inspect(manifest_path, root))
         if verified["status"] != "clean":
             raise MaintenanceError("dependency-manifest-postwrite-drift")
         capability = stage("统一入口完整性回读", lambda: run_command([
             sys.executable, str(root / "scripts/executor.py"), "capabilities",
-            *( ["--channel", "mobile-wecom"]
-               if authorization == "user-20261025-android-enterprise-wecom-channel" else [] ),
         ]))
         result.update(
             ok=True,

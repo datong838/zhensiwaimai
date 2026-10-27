@@ -1,5 +1,7 @@
 // 负反馈列表申诉工作流 · 离线自测（不触碰浏览器、不发任何消息）
 import assert from 'node:assert/strict';
+import path from 'node:path';
+import { businessPath } from '../../../../runtime/business_storage.mjs';
 import {
   APPEAL_STATUS, PLATFORMS, RANGE_DAYS, RECORDS, STATUS_ORDER, TIME_RANGE,
   businessDate, clean, eligible, parsePassRate, recentRange, shanghaiDay, stableRecordKey,
@@ -234,7 +236,7 @@ const ok = (cond, name) => { assert.ok(cond, name); tests++; };
   // 不得出现手工文件选择器相关参数
   assert.ok(!/choose|manual|select-file/i.test(joined), 'no manual file picker');
   // ledger 路径固定到本 flow
-  ok(joined.includes('state/negative-feedback-list-appeals/wechat-attempts'), 'ledger scoped to flow');
+  assert.equal(args[args.indexOf('--ledger')+1],path.join(businessPath('negative-feedback'),'wechat-attempts'));tests++;
   tests += 6;
 }
 

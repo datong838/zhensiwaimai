@@ -5,11 +5,11 @@
 # 总原则：检测到问题第一时间尽量自修，不允许等待放任；真修不了才输出需要人工介入。
 set +e
 ZJ=/Users/ddt/work/projects/ai_agent/zhensi_waimai_back
-GW=/Users/ddt/work/projects/ai_agent/wechat-windows-driver/gateway.json
+GW=/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/archive/compat/wechat-windows-driver/gateway.json
 NODE=/Users/ddt/.workbuddy/binaries/node/versions/22.22.2-2/bin/node
 PY=/usr/bin/python3
 CHK=$ZJ/runtime/_auto_channel_check.sh
-RELAY_PY=/Users/ddt/work/projects/ai_agent/wechat-windows-driver/localhost_relay.py
+RELAY_PY=/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/archive/compat/wechat-windows-driver/localhost_relay.py
 WOL=$ZJ/runtime/wol_windows.py
 WOL_PY=/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python3
 
@@ -75,7 +75,7 @@ if [ "$CHANNEL_STATE" = "UNREACHABLE" ]; then
     pkill -f "localhost_relay.py" 2>/dev/null; sleep 1
     CAND_CSV=$("$PY" -c "import json;print(','.join(json.load(open('$GW'))['candidates']))")
     GWPORT=$("$PY" -c "import json;print(json.load(open('$GW'))['port'])")
-    cd /Users/ddt/work/projects/ai_agent/wechat-windows-driver
+    cd /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/archive/compat/wechat-windows-driver
     RELAY_TARGET_HOSTS="$CAND_CSV" RELAY_TARGET_PORT="$GWPORT" RELAY_LISTEN_HOST="127.0.0.1" RELAY_LISTEN_PORT="8732" \
       setsid nohup "$WOL_PY" "$RELAY_PY" > /tmp/relay_1300.out 2>&1 &
     cd "$ZJ"

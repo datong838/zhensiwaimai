@@ -18,7 +18,7 @@ import sys
 import time
 from pathlib import Path
 
-SHARED = Path("/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/"
+SHARED = Path("/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/legacy-app-controler/"
               "wechat-desktop-control/scripts")
 
 

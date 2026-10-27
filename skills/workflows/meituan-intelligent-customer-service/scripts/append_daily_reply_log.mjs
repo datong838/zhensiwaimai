@@ -1,6 +1,6 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { FileBlob, SpreadsheetFile } from "/Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/@oai/artifact-tool/dist/artifact_tool.mjs";
+import { FileBlob, SpreadsheetFile } from "@oai/artifact-tool";
 
 const baseDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const input = process.argv[2];

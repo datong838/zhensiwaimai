@@ -34,7 +34,7 @@ import time
 from pathlib import Path
 
 SHARED = Path(
-    "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/"
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/legacy-app-controler/"
     "wechat-desktop-control/scripts"
 )
 DEFAULT_OUT = Path(__file__).resolve().parent / "state" / "wechat_foreground_probe.jsonl"

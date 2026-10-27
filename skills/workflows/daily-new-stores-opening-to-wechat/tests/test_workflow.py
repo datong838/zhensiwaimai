@@ -4,6 +4,7 @@ import json
 import pathlib
 import tempfile
 import unittest
+from types import SimpleNamespace
 from unittest.mock import patch
 
 
@@ -27,6 +28,18 @@ def receipt():
 
 
 class WorkflowTests(unittest.TestCase):
+    def test_node_uses_director_config_and_checks_websocket_before_browser(self):
+        with patch.object(workflow.os.environ,'get',return_value=None),patch.object(workflow.Path,'read_text',return_value=json.dumps({'interpreters':{'node':'/director/node'}})),patch.object(workflow.Path,'is_file',return_value=True),patch.object(workflow.shutil,'which',return_value=None),patch.object(workflow.subprocess,'run',return_value=SimpleNamespace(returncode=0,stdout='function')) as probe:
+            self.assertEqual(workflow.node_binary(),pathlib.Path('/director/node'))
+            self.assertEqual(probe.call_count,1)
+            self.assertIn('WebSocket',probe.call_args.args[0][-1])
+    def test_node_skips_runtime_without_websocket_and_never_uses_it_for_collection(self):
+        values=[SimpleNamespace(returncode=0,stdout='undefined'),SimpleNamespace(returncode=0,stdout='function')]
+        with patch.object(workflow.os.environ,'get',return_value=None),patch.object(workflow.Path,'read_text',return_value=json.dumps({'interpreters':{'node':'/director/node'}})),patch.object(workflow.Path,'is_file',return_value=True),patch.object(workflow.shutil,'which',return_value=None),patch.object(workflow.subprocess,'run',side_effect=values) as probe:
+            chosen=workflow.node_binary();self.assertNotEqual(chosen,pathlib.Path('/director/node'));self.assertEqual(probe.call_count,2)
+    def test_node_fails_before_browser_when_required_feature_is_unavailable(self):
+        with patch.object(workflow.os.environ,'get',return_value=None),patch.object(workflow.Path,'read_text',return_value=json.dumps({'interpreters':{'node':'/director/node'}})),patch.object(workflow.Path,'is_file',return_value=True),patch.object(workflow.shutil,'which',return_value=None),patch.object(workflow.subprocess,'run',return_value=SimpleNamespace(returncode=0,stdout='undefined')):
+            with self.assertRaisesRegex(RuntimeError,'node-websocket-runtime-unavailable'):workflow.node_binary()
     def test_complete_receipt_and_message_format(self):
         data = receipt()
         self.assertEqual(workflow.validate_collection(data), data["hits"])

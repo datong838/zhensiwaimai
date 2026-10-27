@@ -96,7 +96,16 @@ def run(execute: bool) -> dict:
                 # 2026-10-12 放宽为全部 skipped 前缀（shop-not-operating / shop-not-found /
                 # shop-search-timeout）：店铺树数据缺口（代理商新店未同步）同属业务语义 skip。
                 msg = str(error)
-                if msg.startswith("activity-collection-skipped:"):
+                if msg == "activity-collection-skipped:shop-not-found:未搜索到店铺":
+                    receipt = activity.not_found_receipt(hit, msg)
+                    body = activity.message(receipt, hit["name"])
+                    delivery = (activity.deliver(receipt, run_dir, hit["name"]) if execute
+                                else {"status": "ready", "sendAttempts": 0})
+                    shop = {"sourceName": hit["name"], "days": hit["days"],
+                            "inspectionOutcome": receipt["inspectionOutcome"], "recordNote": receipt["recordNote"],
+                            "text": body, "runDir": str(run_dir), **delivery}
+                    activity.atomic_json(run_dir / "store-not-found.json", receipt)
+                elif msg.startswith("activity-collection-skipped:"):
                     shop = {"sourceName": hit["name"], "status": "skipped", "reason": msg,
                             "sendAttempts": 0, "runDir": str(run_dir)}
                 else:

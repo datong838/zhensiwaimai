@@ -20,7 +20,7 @@ from AppKit import NSWorkspace
 
 BUNDLE = "com.tencent.WeWorkMac"
 APP_NAME = "企业微信"
-OCR = Path("/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/scripts/ocr_vision_bin")
+OCR = Path("/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/legacy-app-controler/wechat-desktop-control/scripts/ocr_vision_bin")
 
 
 class StopRun(RuntimeError):

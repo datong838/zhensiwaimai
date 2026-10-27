@@ -1,0 +1,163 @@
+{
+  "policyVersion": 2,
+  "safetyMode": "READ_ONLY",
+  "stageSequence": [
+    "reports",
+    "meituan_backend",
+    "mobile",
+    "assemble",
+    "validate"
+  ],
+  "currentStage": "mobile",
+  "store": {
+    "platform": "美团外卖",
+    "city": "上海市",
+    "poi": "中房金谊广场",
+    "rosterStoreName": "9家湘菜（金谊广场店）",
+    "storeName": "9家湘菜（金谊广场店）",
+    "inspectionDate": "2026-09-14"
+  },
+  "route": {
+    "platform": "美团外卖",
+    "rosterStoreName": "9家湘菜（金谊广场店）",
+    "consumerStoreName": "9家湘菜（金谊广场店）",
+    "aliases": [],
+    "city": "上海市",
+    "poi": "中房金谊广场",
+    "merchantAddressAnchor": "上南路4467"
+  },
+  "stageReceipts": [
+    {
+      "stage": "reports",
+      "status": "skipped",
+      "attempts": 0,
+      "finishedAt": "2026-09-14T00:40:00+08:00",
+      "factRows": []
+    },
+    {
+      "stage": "meituan_backend",
+      "status": "complete",
+      "attempts": 1,
+      "finishedAt": "2026-09-14T01:06:00+08:00",
+      "factRows": [
+        19
+      ]
+    }
+  ],
+  "selectedFacts": [
+    {
+      "platform": "美团外卖",
+      "city": "上海市",
+      "rosterStoreName": "9家湘菜（金谊广场店）",
+      "storeName": "9家湘菜（金谊广场店）",
+      "row": 19,
+      "sourceType": "meituan_backend",
+      "observedDate": "2026-09-14",
+      "sourceRef": "meituan:1093331:19:2026-09-13T17:05:30.745Z",
+      "finding": "美团商家后台门店资料显示，营业时段为10:00-21:00，覆盖周一至周日，营业时长达到不低于8小时的检查要求。",
+      "recommendation": "保持当前每日10:00-21:00营业时段；如临时停业或缩短营业，及时同步后台并复核消费者端展示。"
+    }
+  ],
+  "ignoredBackendFacts": [],
+  "mobileChecklist": [
+    {
+      "module": "search",
+      "rows": [
+        2,
+        11,
+        12,
+        21,
+        23,
+        25,
+        26,
+        29,
+        30
+      ]
+    },
+    {
+      "module": "products",
+      "rows": [
+        3,
+        4,
+        13,
+        14,
+        15,
+        16,
+        17,
+        31,
+        32,
+        36,
+        37,
+        38,
+        40
+      ]
+    },
+    {
+      "module": "reviews",
+      "rows": [
+        5,
+        6,
+        7,
+        10
+      ]
+    },
+    {
+      "module": "merchant",
+      "rows": [
+        18,
+        20,
+        33,
+        39,
+        41,
+        45
+      ]
+    }
+  ],
+  "mobileRows": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    20,
+    21,
+    23,
+    25,
+    26,
+    29,
+    30,
+    31,
+    32,
+    33,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    45
+  ],
+  "unresolvedRows": [
+    8,
+    9,
+    22,
+    24,
+    27,
+    28,
+    34,
+    35,
+    42,
+    43,
+    44
+  ]
+}

@@ -35,7 +35,7 @@ SENT_TODAY = STATE / "sent_today.json"
 #   钉死单一 IP ⇒ 漂到另一侧当天台账直接 ABORT，是可避免的定时炸弹。
 #   改为复用 wxsend.load_config()：权威源解析 + 候选顺序 + /health 身份校验，
 #   与中继(wxsend/relay)同一哲学——可达性以实测为准，不硬编码。
-DRIVER_DIR = "/Users/ddt/work/projects/ai_agent/wechat-windows-driver"
+DRIVER_DIR = "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/archive/compat/wechat-windows-driver"
 DRIVER_TOKEN_FALLBACK = "XFVfZHoKwjHaWsZ7EXt2kNvWLSg4TGSvIpMQnvIkCaY"  # 仅当解析失败时兜底
 
 
@@ -98,7 +98,7 @@ def main():
     if not driver_ip:
         # ★2026-10-10 fallback 配置化：读 wechat-windows-driver/gateway.json（单一权威）
         try:
-            with open("/Users/ddt/work/projects/ai_agent/wechat-windows-driver/gateway.json",
+            with open("/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/archive/compat/wechat-windows-driver/gateway.json",
                       encoding="utf-8") as _f:
                 driver_ip = str(json.load(_f)["candidates"][0]).strip()
         except Exception:

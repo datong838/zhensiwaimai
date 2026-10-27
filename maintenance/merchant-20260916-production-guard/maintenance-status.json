@@ -1,0 +1,31 @@
+{
+  "status": "AWAITING_REAL_NONEMPTY_ACCEPTANCE",
+  "productionCodeInstalled": true,
+  "lock": "UNSEALED_ACCEPTANCE",
+  "authorization": "user-20260916-production-hardening",
+  "automation": "ACTIVE_MAINTENANCE_ACCEPTANCE",
+  "pythonRegressionTests": 70,
+  "browserSelftests": 26,
+  "readonlyReviewCodeGenerated": true,
+  "readonlyProductionOnly": true,
+  "lastReadOnlyTargetCount": 0,
+  "lastReadOnlyReview": {
+    "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/runs/2026-09-16-readonly-review-final.review.json",
+    "elapsedMs": 4144,
+    "totalRows": 8,
+    "pendingRows": 2,
+    "targetCount": 0
+  },
+  "lastNoopValidation": {
+    "ok": true,
+    "elapsedMs": 36733,
+    "verifiedNewSends": 0,
+    "verifiedExisting": 0,
+    "unresolvedItems": 0
+  },
+  "remaining": [
+    "real nonempty production acceptance",
+    "reseal with new acceptance receipt",
+    "normal sealed replay"
+  ]
+}

@@ -18,6 +18,7 @@ import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { assertJinshaEntry, JINSHA_TITLE } from '../../../posts/jinsha-post/scripts/auth.mjs';
+import { selectExistingJinshaTarget, assertSelectedJinshaTarget } from '../../../posts/jinsha-post/scripts/existing_owned_target.mjs';
 
 export const ENDPOINT = 'http://127.0.0.1:9232';
 export const ORIGIN = 'https://data.guoshuyufen.com/';
@@ -110,9 +111,8 @@ export class Cdp {
   constructor(ws) { this.ws = ws; this.next = 0; this.pending = new Map(); }
   static async open() {
     const targets = await (await fetch(`${ENDPOINT}/json/list`)).json();
-    const pages = targets.filter(x => x.type === 'page' && x.url.startsWith(ORIGIN));
-    if (pages.length !== 1) throw Error(`jinsha-page-count:${pages.length}`);
-    const ws = new WebSocket(pages[0].webSocketDebuggerUrl);
+    const selected = await selectExistingJinshaTarget(targets);
+    const ws = new WebSocket(selected.webSocketDebuggerUrl);
     await new Promise((resolve, reject) => {
       const timer = setTimeout(() => reject(Error('cdp-connect-timeout')), 20000);
       ws.addEventListener('open', () => { clearTimeout(timer); resolve(); }, { once: true });
@@ -124,6 +124,7 @@ export class Cdp {
       const done = cdp.pending.get(m.id);
       if (done) { cdp.pending.delete(m.id); m.error ? done.reject(Error(m.error.message)) : done.resolve(m.result); }
     });
+    try { await assertSelectedJinshaTarget(cdp, selected); } catch (error) { cdp.close(); throw error; }
     return cdp;
   }
   call(method, params = {}, timeoutMs = 45000) {

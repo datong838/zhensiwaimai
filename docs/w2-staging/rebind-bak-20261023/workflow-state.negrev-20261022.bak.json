@@ -1,0 +1,93 @@
+{
+  "policyVersion": "daily-negative-reviews-code-enforced-v1",
+  "businessDate": "2026-10-22",
+  "phase": "sent",
+  "status": "active",
+  "startedAt": 1792717067013,
+  "updatedAt": 1792720269338,
+  "reviewItems": [
+    {
+      "stage": "browser_validate",
+      "label": "连接并唯一定位金鲨页面",
+      "attempts": 1,
+      "elapsedMs": 2596,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "route_and_date",
+      "label": "核验淘宝外卖入口并设置昨日日期",
+      "attempts": 1,
+      "elapsedMs": 6493,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "download",
+      "label": "下载全部平台差评",
+      "attempts": 1,
+      "elapsedMs": 6173,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "extract_platforms",
+      "label": "读取三平台页面列表",
+      "attempts": 1,
+      "elapsedMs": 7364,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "reconcile",
+      "label": "下载与页面逐条对账",
+      "attempts": 1,
+      "elapsedMs": 447,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "build_report",
+      "label": "生成并验收固定格式Excel",
+      "attempts": 1,
+      "elapsedMs": 969,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 4327,
+      "status": "failed",
+      "pitfalls": [
+        "windows-wechat-not-ready"
+      ]
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 4185,
+      "status": "failed",
+      "pitfalls": [
+        "windows-wechat-not-ready"
+      ]
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 32505,
+      "status": "completed",
+      "pitfalls": []
+    }
+  ],
+  "runtimeModelDecisions": 0,
+  "lastRecovery": {
+    "allowed": true,
+    "stage": "wechat_send",
+    "priorFailures": 2,
+    "nextAttempt": 3
+  }
+}

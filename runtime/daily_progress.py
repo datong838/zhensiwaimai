@@ -142,6 +142,7 @@ def _latest_record(name: str, day: str):
 
 
 def build(now: dt.datetime | None = None) -> dict:
+    from business_coverage import read_daily_coverage
     now = now or dt.datetime.now()
     day = now.strftime("%Y-%m-%d")
     m = _load(MANIFEST, {})
@@ -176,7 +177,12 @@ def build(now: dt.datetime | None = None) -> dict:
         fw = failure_watch.get(name, {})
         rec = _latest_record(name, day)
         superseded = fixed_schedule.customer_slot_superseded(name, now)
-        if superseded:
+        coverage = read_daily_coverage(name, day, ROOT)
+        if due and coverage and not coverage['complete']:
+            done = False
+            state, mark = '未完成·门店未覆盖', '❌'
+            reason = coverage['reason']
+        elif superseded:
             state, mark = '历史档·不补跑', '⏭️'
             reason = '保留历史记录；当前最新客服档承担全量值班'
         elif fixed_schedule.customer_duty_user_accepted(name, now):

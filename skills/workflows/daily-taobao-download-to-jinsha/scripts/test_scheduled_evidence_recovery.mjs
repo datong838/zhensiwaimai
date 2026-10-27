@@ -80,6 +80,32 @@ try {
   assert.equal((await inspectPendingEvidence({root,ledger,businessDate,policyVersion})).kind,'blocked');
   await writeJson(pairMarkerFile,{...wecomMarker,sendAttempts:null});
   assert.equal((await inspectPendingEvidence({root,ledger,businessDate,policyVersion})).kind,'blocked');
+  // Native preflight failure resumes only before any per-item journal/intent exists.
+  await writeJson(path.join(event,'binding.json'),{digest:sha256(JSON.stringify(binding))});
+  const nativeMarker={...wecomMarker,reason:'ui-post-preflight-not-verified',
+    commonReceipt:{...wecomMarker.commonReceipt,reason:'ui-post-preflight-not-verified'}};
+  await writeJson(pairMarkerFile,nativeMarker);
+  assert.equal((await inspectPendingEvidence({root,ledger,businessDate,policyVersion})).kind,'resume');
+  await fs.mkdir(path.join(event,'item-intent'));
+  assert.equal((await inspectPendingEvidence({root,ledger,businessDate,policyVersion})).kind,'blocked');
+  await fs.rm(path.join(event,'item-intent'),{recursive:true});
+  const frozenWork=path.join(event,sha256(JSON.stringify([eventKey,'0'])));
+  await fs.mkdir(path.join(frozenWork,'payload'),{recursive:true});
+  await fs.copyFile(run1.payloads[0].path,path.join(frozenWork,'payload',run1.payloads[0].name));
+  assert.equal((await inspectPendingEvidence({root,ledger,businessDate,policyVersion})).kind,'resume');
+  await writeJson(path.join(frozenWork,'delivery.json'),{status:'attempted'});
+  assert.equal((await inspectPendingEvidence({root,ledger,businessDate,policyVersion})).kind,'blocked');
+  await fs.rm(path.join(frozenWork,'delivery.json'));
+  await fs.writeFile(path.join(frozenWork,'payload',run1.payloads[0].name),'changed');
+  assert.equal((await inspectPendingEvidence({root,ledger,businessDate,policyVersion})).kind,'blocked');
+  await fs.rm(frozenWork,{recursive:true});
+  await writeJson(pairMarkerFile,{...nativeMarker,newSendAttempts:1});
+  assert.equal((await inspectPendingEvidence({root,ledger,businessDate,policyVersion})).kind,'blocked');
+  await writeJson(pairMarkerFile,{...nativeMarker,sendAttempts:null});
+  assert.equal((await inspectPendingEvidence({root,ledger,businessDate,policyVersion})).kind,'blocked');
+  await writeJson(pairMarkerFile,nativeMarker);
+  await writeJson(path.join(event,'binding.json'),{digest:'b'.repeat(64)});
+  assert.equal((await inspectPendingEvidence({root,ledger,businessDate,policyVersion})).kind,'blocked');
   await writeJson(pairMarkerFile,pairMarker);
 
 
@@ -139,7 +165,7 @@ try {
   assert.equal(result.kind, 'blocked');
   assert.equal(result.reason, 'scheduled-evidence-external-effect-reconcile-required');
 
-  console.log(JSON.stringify({ ok: true, checks: 18 }));
+  console.log(JSON.stringify({ ok: true, checks: 26 }));
 } finally {
   await fs.rm(temporary, { recursive: true, force: true });
 }

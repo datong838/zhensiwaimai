@@ -16,7 +16,7 @@ import os
 import sys
 import time
 
-WXDIR = "/Users/ddt/work/projects/ai_agent/wechat-windows-driver"
+WXDIR = "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/archive/compat/wechat-windows-driver"
 sys.path.insert(0, WXDIR)
 
 import wxsend  # noqa: E402

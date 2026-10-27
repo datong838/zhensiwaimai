@@ -1,0 +1,1406 @@
+[
+ {
+  "name": "商家首页",
+  "parent": "",
+  "sref": "app.shop.dashboard",
+  "short": "dashboard",
+  "url": "https://napos-dashboard-pc.faas.ele.me/single",
+  "menuType": "firstLevelMenu",
+  "perm": "home_page"
+ },
+ {
+  "name": "订单管理",
+  "parent": "",
+  "sref": "",
+  "short": "",
+  "url": "",
+  "menuType": "catalog",
+  "perm": "order"
+ },
+ {
+  "name": "订单处理",
+  "parent": "订单管理",
+  "sref": "app.shop.order.processing",
+  "short": "order__processing",
+  "url": "https://napos-order-pc.faas.ele.me/app/processing/${:path__decode__default(all)}?shopId=:shopId",
+  "menuType": "",
+  "perm": "order_processing"
+ },
+ {
+  "name": "打印排查工具",
+  "parent": "订单管理",
+  "sref": "app.shop.setting.print.helper",
+  "short": "setting__print__helper",
+  "url": "https://napos-order-pc.faas.ele.me/printHelper",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "申诉中心",
+  "parent": "订单管理",
+  "sref": "app.shop.order.complaint",
+  "short": "order__complaint",
+  "url": "https://napos-order-pc.faas.ele.me/complaint-center",
+  "menuType": "secondaryMenu",
+  "perm": ""
+ },
+ {
+  "name": "订单评级",
+  "parent": "订单管理",
+  "sref": "app.shop.service-level",
+  "short": "service-level",
+  "url": "https://r.ele.me/napos-order-merchant-operation-pc/service-level?taskType=:taskType",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "专送生效数据",
+  "parent": "订单管理",
+  "sref": "app.shop.sjfwdata",
+  "short": "sjfwdata",
+  "url": "https://r.ele.me/alsc-fulfill-group-order-pc/one-to-one-statistics",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "订单查询",
+  "parent": "订单管理",
+  "sref": "app.shop.order.querying",
+  "short": "order__querying",
+  "url": "https://napos-order-pc.faas.ele.me/app/query?shopId=:shopId",
+  "menuType": "secondaryMenu",
+  "perm": "order_inquiry"
+ },
+ {
+  "name": "索赔中心",
+  "parent": "订单管理",
+  "sref": "app.shop.order.claim",
+  "short": "order__claim",
+  "url": "https://napos-order-claim-pc.ele.me/",
+  "menuType": "secondaryMenu",
+  "perm": ""
+ },
+ {
+  "name": "索赔二级页",
+  "parent": "订单管理",
+  "sref": "app.shop.claim",
+  "short": "claim",
+  "url": "https://napos-order-pc.faas.ele.me/app/claim?orderId=${:orderId}",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "订单设置",
+  "parent": "订单管理",
+  "sref": "app.shop.setting",
+  "short": "setting",
+  "url": "https://melody-settings.faas.ele.me/${:path__decode}?${:query__default(a=1)}",
+  "menuType": "secondaryMenu",
+  "perm": "order_setting"
+ },
+ {
+  "name": "企业订餐",
+  "parent": "订单管理",
+  "sref": "app.shop.enterprise({path: 'order.instant'})",
+  "short": "enterprise",
+  "url": "https://ent-napos.faas.ele.me/#/order/instant",
+  "menuType": "secondaryMenu",
+  "perm": "enterprise"
+ },
+ {
+  "name": "商品管理",
+  "parent": "",
+  "sref": "",
+  "short": "",
+  "url": "",
+  "menuType": "catalog",
+  "perm": "goods"
+ },
+ {
+  "name": "商品列表",
+  "parent": "商品管理",
+  "sref": "app.shop.food({path: 'management'})",
+  "short": "food",
+  "url": "https://napos-goods-pc.faas.ele.me/single/goods-manage?manageType=${:manageType}",
+  "menuType": "secondaryMenu",
+  "perm": "goods_read_goods"
+ },
+ {
+  "name": "商家/商品授权",
+  "parent": "商品管理",
+  "sref": "app.shop.tuan_goods_auth",
+  "short": "tuan_goods_auth",
+  "url": "https://r.ele.me/napos-goods-tuan-pc/goods-auth",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "商品整改",
+  "parent": "商品管理",
+  "sref": "app.shop.food-rectify",
+  "short": "food-rectify",
+  "url": "https://napos-goods-pc.faas.ele.me/rectify/single?no_back=1",
+  "menuType": "secondaryMenu",
+  "perm": ""
+ },
+ {
+  "name": "商品助手",
+  "parent": "商品管理",
+  "sref": "app.shop.goods-help",
+  "short": "goods-help",
+  "url": "https://napos-goods-pc.faas.ele.me/assistant?cardType=:cardType",
+  "menuType": "secondaryMenu",
+  "perm": ""
+ },
+ {
+  "name": "操作记录",
+  "parent": "商品管理",
+  "sref": "app.shop.goods-record",
+  "short": "goods-record",
+  "url": "https://napos-goods-pc.faas.ele.me/operation-record?typeCode=:typeCode",
+  "menuType": "secondaryMenu",
+  "perm": ""
+ },
+ {
+  "name": "爆品团",
+  "parent": "商品管理",
+  "sref": "app.shop.food-tuan",
+  "short": "food-tuan",
+  "url": "https://r.ele.me/alsc-fulfill-group-order-pc/group-order",
+  "menuType": "secondaryMenu",
+  "perm": ""
+ },
+ {
+  "name": "顾客管理",
+  "parent": "",
+  "sref": "",
+  "short": "",
+  "url": "",
+  "menuType": "catalog",
+  "perm": "customer"
+ },
+ {
+  "name": "顾客分析",
+  "parent": "顾客管理",
+  "sref": "app.shop.customerStats",
+  "short": "customerStats",
+  "url": "https://melody-stats-next.ele.me/new/#/?tab=custom&subTab=&otherParams={\"export\":\"custom\"}",
+  "menuType": "secondaryMenu",
+  "perm": "customer_analysis"
+ },
+ {
+  "name": "粉丝群管理",
+  "parent": "顾客管理",
+  "sref": "app.shop.fansgroup_message",
+  "short": "fansgroup_message",
+  "url": "https://chain-fan-group-manage.faas.ele.me/?Transfer",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "顾客画像",
+  "parent": "顾客管理",
+  "sref": "app.shop.customerMap",
+  "short": "customerMap",
+  "url": "https://melody-stats-next.ele.me/new/#/single/customer-portrait",
+  "menuType": "secondaryMenu",
+  "perm": "customer_portrait"
+ },
+ {
+  "name": "精准营销",
+  "parent": "顾客管理",
+  "sref": "app.shop.activity.crm",
+  "short": "activity__crm",
+  "url": "https://melody-consumer.faas.ele.me?shopId=:shopId",
+  "menuType": "secondaryMenu",
+  "perm": "customer_center"
+ },
+ {
+  "name": "顾客评价",
+  "parent": "顾客管理",
+  "sref": "app.shop.comments",
+  "short": "comments",
+  "url": "https://melody-comment.faas.ele.me?${:search}",
+  "menuType": "secondaryMenu",
+  "perm": "customer_evaluation"
+ },
+ {
+  "name": "顾客评价新",
+  "parent": "顾客管理",
+  "sref": "app.shop.comments-new",
+  "short": "comments-new",
+  "url": "https://melody-stats-next.faas.ele.me/single/stats/evaluate-new",
+  "menuType": "subpage",
+  "perm": "customer_evaluation"
+ },
+ {
+  "name": "爆品团评价",
+  "parent": "顾客管理",
+  "sref": "app.shop.evaluate-group-buy",
+  "short": "evaluate-group-buy",
+  "url": "https://melody-comment.faas.ele.me/group-buy",
+  "menuType": "secondaryMenu",
+  "perm": ""
+ },
+ {
+  "name": "顾客发票",
+  "parent": "顾客管理",
+  "sref": "app.shop.customer-receipt",
+  "short": "customer-receipt",
+  "url": "https://r.ele.me/fin-invoice-combo-web/customerInvoice?appCode=napos&userId=:userId&sellerApplicationNo=:sellerApplicationNo",
+  "menuType": "secondaryMenu",
+  "perm": "customer_evaluation"
+ },
+ {
+  "name": "门店管理",
+  "parent": "",
+  "sref": "",
+  "short": "",
+  "url": "",
+  "menuType": "catalog",
+  "perm": "store"
+ },
+ {
+  "name": "门店装修",
+  "parent": "门店管理",
+  "sref": "app.shop.decorate",
+  "short": "decorate",
+  "url": "https://melody-decorate.faas.ele.me${:path}?${:params}",
+  "menuType": "secondaryMenu",
+  "perm": "store_decoration"
+ },
+ {
+  "name": "业务经理权限",
+  "parent": "门店管理",
+  "sref": "app.shop.bd-permission",
+  "short": "bd-permission",
+  "url": "https://chain-permission.faas.ele.me/role-permissions-bd?from=melody&tab=${:tab__default(permissions)}",
+  "menuType": "secondaryMenu",
+  "perm": ""
+ },
+ {
+  "name": "商家认证",
+  "parent": "门店管理",
+  "sref": "app.shop.merchant-management",
+  "short": "merchant-management",
+  "url": "https://napos-merchant-subject-pc.faas.ele.me/nps/merchant-info-auth",
+  "menuType": "secondaryMenu",
+  "perm": ""
+ },
+ {
+  "name": "服务自检",
+  "parent": "门店管理",
+  "sref": "app.shop.serviceselftest",
+  "short": "serviceselftest",
+  "url": "https://r.ele.me/alsc-sre-saas-napos/#/home-wm?version=v4",
+  "menuType": "secondaryMenu",
+  "perm": ""
+ },
+ {
+  "name": "电子营业执照",
+  "parent": "门店管理",
+  "sref": "app.shop.digital-license-auth",
+  "short": "digital-license-auth",
+  "url": "https://r.ele.me/napos-fast-kaidian/digital-license-pc.html",
+  "menuType": "secondaryMenu",
+  "perm": ""
+ },
+ {
+  "name": "门店信息",
+  "parent": "门店管理",
+  "sref": "app.shop.shop-info({path: 'index', params: null})",
+  "short": "shop-info",
+  "url": "https://melody.faas.ele.me/app/shop/:shopId/shop-info?path=index&pageType=shop-basic",
+  "menuType": "secondaryMenu",
+  "perm": "shop_read_shop_info"
+ },
+ {
+  "name": "歇业保护",
+  "parent": "门店管理",
+  "sref": "app.shop.close-protection",
+  "short": "close-protection",
+  "url": "https://napos-close-protection-pc.faas.ele.me/home",
+  "menuType": "secondaryMenu",
+  "perm": ""
+ },
+ {
+  "name": "多平台管理",
+  "parent": "门店管理",
+  "sref": "app.shop.multiPlatform",
+  "short": "multiPlatform",
+  "url": "https://melody-takeaway-ticket.faas.ele.me/multi-platform?shopId=:shopId",
+  "menuType": "secondaryMenu",
+  "perm": "multi_platform"
+ },
+ {
+  "name": "合作方案",
+  "parent": "门店管理",
+  "sref": "app.shop.pack",
+  "short": "pack",
+  "url": "https://alsc-pc-commercial-contracts.faas.ele.me?shopId=:shopId&source=napos",
+  "menuType": "secondaryMenu",
+  "perm": "cooperation_scheme"
+ },
+ {
+  "name": "配送管理",
+  "parent": "门店管理",
+  "sref": "app.shop.delivery({path: 'index'})",
+  "short": "delivery",
+  "url": "https://melody-delivery.faas.ele.me/?shopId=:shopId&platform=melody&${:query__default(a=1)}",
+  "menuType": "secondaryMenu",
+  "perm": "shop_read_shop_delivery"
+ },
+ {
+  "name": "到店自取",
+  "parent": "门店管理",
+  "sref": "app.shop.selfPick",
+  "short": "selfPick",
+  "url": "https://r.ele.me/alsc-merchant-fulfill-pre/selfPick.html",
+  "menuType": "secondaryMenu",
+  "perm": ""
+ },
+ {
+  "name": "商家保障",
+  "parent": "门店管理",
+  "sref": "app.shop.insurance",
+  "short": "insurance",
+  "url": "https://r.ele.me/alsc-pc-insurance/desktop-insurance${:path__decode}?shopId=:shopId&type=${:type}&spmb=${:spmb}&activeType=:activeType",
+  "menuType": "secondaryMenu",
+  "perm": "store_food_safety_insurance"
+ },
+ {
+  "name": "蜂鸟跑腿",
+  "parent": "门店管理",
+  "sref": "app.shop.fnpt",
+  "short": "fnpt",
+  "url": "https://fndelivery.ele.me/static/open/fnpt-pc/xuantuiindex.html?napos#/ebaiindex",
+  "menuType": "secondaryMenu",
+  "perm": "store_fnpt"
+ },
+ {
+  "name": "外卖安心卡",
+  "parent": "门店管理",
+  "sref": "app.shop.peacecard",
+  "short": "peacecard",
+  "url": "https://melody-extra.faas.ele.me/peace-card?shopId=:shopId",
+  "menuType": "subpage",
+  "perm": "peace_card"
+ },
+ {
+  "name": "数据中心",
+  "parent": "",
+  "sref": "",
+  "short": "",
+  "url": "",
+  "menuType": "catalog",
+  "perm": "data_read_data_info"
+ },
+ {
+  "name": "经营分析",
+  "parent": "数据中心",
+  "sref": "app.shop.stats.center",
+  "short": "stats__center",
+  "url": "https://melody-stats-next.ele.me/new/#/?tab=${:path__decode}&subTab=${:subTab__decode}&otherParams=:otherParams",
+  "menuType": "secondaryMenu",
+  "perm": "data_center"
+ },
+ {
+  "name": "市场洞察",
+  "parent": "数据中心",
+  "sref": "app.shop.ckaManagement",
+  "short": "ckaManagement",
+  "url": "https://melody-stats-next.ele.me/new/#/market-analysis?tab=:tab&subTab=${:subTab__decode__default(1)}&otherParams=:otherParams",
+  "menuType": "secondaryMenu",
+  "perm": "data_cka_management"
+ },
+ {
+  "name": "数据下载",
+  "parent": "数据中心",
+  "sref": "app.shop.downloadCenter",
+  "short": "downloadCenter",
+  "url": "https://melody-stats-next.ele.me/new/#/download-center?tab=${:path__decode}&defaultTask=:defaultTask&subTab=${:subTab__decode}&otherParams=:otherParams",
+  "menuType": "secondaryMenu",
+  "perm": "data_download_center"
+ },
+ {
+  "name": "小参学堂",
+  "parent": "数据中心",
+  "sref": "app.shop.training",
+  "short": "training",
+  "url": "https://melody-stats-next.ele.me/new/#/training",
+  "menuType": "secondaryMenu",
+  "perm": ""
+ },
+ {
+  "name": "行业复苏",
+  "parent": "数据中心",
+  "sref": "app.shop.stats.recover",
+  "short": "stats__recover",
+  "url": "https://napos-phospherus-pc.faas.ele.me",
+  "menuType": "subpage",
+  "perm": "data_stats_recover"
+ },
+ {
+  "name": "财务管理",
+  "parent": "",
+  "sref": "",
+  "short": "",
+  "url": "",
+  "menuType": "catalog",
+  "perm": "finance"
+ },
+ {
+  "name": "财务首页",
+  "parent": "财务管理",
+  "sref": "app.shop.billCheckout",
+  "short": "billCheckout",
+  "url": "https://napos-bill-pc.faas.ele.me/napos-bill-pc/v2/bill-index?shopType=SINGLE",
+  "menuType": "secondaryMenu",
+  "perm": "financial_home"
+ },
+ {
+  "name": "财务对账",
+  "parent": "财务管理",
+  "sref": "app.shop.billDetail",
+  "short": "billDetail",
+  "url": "https://napos-bill-pc.faas.ele.me/napos-bill-pc/v2/bill-checking?shopType=SINGLE",
+  "menuType": "secondaryMenu",
+  "perm": "financial_reconciliation"
+ },
+ {
+  "name": "月度统计",
+  "parent": "财务管理",
+  "sref": "app.shop.bill-summary",
+  "short": "bill-summary",
+  "url": "https://napos-bill-pc.faas.ele.me/v2/monthly-statistics",
+  "menuType": "secondaryMenu",
+  "perm": ""
+ },
+ {
+  "name": "账户管理",
+  "parent": "财务管理",
+  "sref": "app.shop.bill",
+  "short": "bill",
+  "url": "https://balance-desktop.faas.ele.me",
+  "menuType": "secondaryMenu",
+  "perm": "financial_management"
+ },
+ {
+  "name": "财务下载",
+  "parent": "财务管理",
+  "sref": "app.shop.stream",
+  "short": "stream",
+  "url": "https://napos-bill-pc.faas.ele.me/napos-bill-pc/v2/bill-download?shopType=SINGLE",
+  "menuType": "secondaryMenu",
+  "perm": "financial_downloads"
+ },
+ {
+  "name": "余额流水下载",
+  "parent": "财务管理",
+  "sref": "app.shop.balance-flow",
+  "short": "balance-flow",
+  "url": "https://r.ele.me/napos-chain-settle/export-balance-flow?bizType=ELE",
+  "menuType": "secondaryMenu",
+  "perm": ""
+ },
+ {
+  "name": "开票服务",
+  "parent": "财务管理",
+  "sref": "app.shop.billReceipt",
+  "short": "billReceipt",
+  "url": "https://r.ele.me/fin-invoice-combo-web/invoice-issue?appCode=napos",
+  "menuType": "secondaryMenu",
+  "perm": "billReceipt"
+ },
+ {
+  "name": "温馨提示",
+  "parent": "财务管理",
+  "sref": "app.shop.balance-sign",
+  "short": "balance-sign",
+  "url": "https://balance-desktop.faas.ele.me/#/sign",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "涉税信息报送",
+  "parent": "财务管理",
+  "sref": "app.shop.sheshui_xinxi",
+  "short": "sheshui_xinxi",
+  "url": "https://r.ele.me/fin-invoice-combo-web/tax-related-information?appCode=napos",
+  "menuType": "secondaryMenu",
+  "perm": ""
+ },
+ {
+  "name": "绑卡",
+  "parent": "财务管理",
+  "sref": "app.shop.jike-desktop",
+  "short": "jike-desktop",
+  "url": "https://jike-desktop.faas.ele.me?cardType=user&balanceUrl=https%3A%2F%2Fbalance-desktop.faas.ele.me",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "营销中心",
+  "parent": "",
+  "sref": "",
+  "short": "",
+  "url": "",
+  "menuType": "catalog",
+  "perm": "marketing"
+ },
+ {
+  "name": "活动中心",
+  "parent": "营销中心",
+  "sref": "app.shop.activity.index",
+  "short": "activity__index",
+  "url": "https://melody-activity-index.faas.ele.me${:path__default(/home/index)}?shopId=:shopId&${:params}",
+  "menuType": "secondaryMenu",
+  "perm": "marketing_center"
+ },
+ {
+  "name": "低实收风险预警",
+  "parent": "营销中心 > 活动中心",
+  "sref": "app.shop.market-lowshopincome",
+  "short": "market-lowshopincome",
+  "url": "https://marketing-self-pc.faas.ele.me/low-shop-income-list",
+  "menuType": "",
+  "perm": ""
+ },
+ {
+  "name": "活动创建",
+  "parent": "营销中心 > 活动中心",
+  "sref": "app.shop.create-activity",
+  "short": "create-activity",
+  "url": "https://melody-activity-pc.faas.ele.me/redirect?activityType=${:activityType}&__open_in_client__&source=${:source}",
+  "menuType": "",
+  "perm": ""
+ },
+ {
+  "name": "优评返券",
+  "parent": "营销中心 > 活动中心",
+  "sref": "app.shop.comments-activity",
+  "short": "comments-activity",
+  "url": "https://melody-consumer.faas.ele.me/create-activity?type=${:type}&marketingEnum=${:marketingEnum}&title=${:title}",
+  "menuType": "",
+  "perm": ""
+ },
+ {
+  "name": "流量活动",
+  "parent": "营销中心",
+  "sref": "app.shop.merchant",
+  "short": "merchant",
+  "url": "https://ele-melody-merchant.faas.ele.me/home-page",
+  "menuType": "secondaryMenu",
+  "perm": "marketing_investment_center"
+ },
+ {
+  "name": "我的活动",
+  "parent": "营销中心",
+  "sref": "app.shop.activity.myActivity",
+  "short": "activity__myActivity",
+  "url": "https://melody-activity-index.faas.ele.me${:path__default(/home/myActivity)}?shopId=:shopId&${:params}",
+  "menuType": "secondaryMenu",
+  "perm": "marketing_my_activities"
+ },
+ {
+  "name": "集点返券详情",
+  "parent": "营销中心 > 我的活动",
+  "sref": "app.shop.collection-detail",
+  "short": "collection-detail",
+  "url": "https://napos-activity-pc.faas.ele.me/detail/collection?activityId=${:activityId}",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "下单返券详情",
+  "parent": "营销中心 > 我的活动",
+  "sref": "app.shop.activity-detail",
+  "short": "activity-detail",
+  "url": "https://melody-activity-pc.faas.ele.me/public/detail?source=${:source}&playInstanceId=${:playInstanceId}",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "营销效果",
+  "parent": "营销中心",
+  "sref": "app.shop.statscenter",
+  "short": "statscenter",
+  "url": "https://melody-stats-next.ele.me/new/#/single/activity-data",
+  "menuType": "secondaryMenu",
+  "perm": ""
+ },
+ {
+  "name": "活动设置",
+  "parent": "营销中心",
+  "sref": "app.shop.activity.setting",
+  "short": "activity__setting",
+  "url": "https://napos-activity-pc.faas.ele.me/activity-setting-single",
+  "menuType": "secondaryMenu",
+  "perm": "activity_read_setting, activity_edit_setting"
+ },
+ {
+  "name": "闪购联盟",
+  "parent": "",
+  "sref": "",
+  "short": "",
+  "url": "",
+  "menuType": "catalog",
+  "perm": ""
+ },
+ {
+  "name": "首页",
+  "parent": "闪购联盟",
+  "sref": "app.shop.zw-promotion.home",
+  "short": "zw-promotion__home",
+  "url": "https://r.ele.me/bs-taoke-pc/#/single/home",
+  "menuType": "secondaryMenu",
+  "perm": ""
+ },
+ {
+  "name": "闪购联盟活动",
+  "parent": "闪购联盟",
+  "sref": "app.shop.zw-promotion.activies",
+  "short": "zw-promotion__activies",
+  "url": "https://r.ele.me/bs-taoke-pc?shopType=single&status=${:status}&type=${:type}#/my-activity",
+  "menuType": "secondaryMenu",
+  "perm": ""
+ },
+ {
+  "name": "外卖券",
+  "parent": "",
+  "sref": "",
+  "short": "",
+  "url": "",
+  "menuType": "catalog",
+  "perm": "alsc_setting"
+ },
+ {
+  "name": "券创建管理",
+  "parent": "外卖券",
+  "sref": "app.shop.tbqfood",
+  "short": "tbqfood",
+  "url": "https://alsc-router.faas.ele.me?to=food&params=${:params__encode__}",
+  "menuType": "secondaryMenu",
+  "perm": "taobao_coupons_goods_single"
+ },
+ {
+  "name": "券服务管理",
+  "parent": "外卖券",
+  "sref": "app.shop.tbqservice",
+  "short": "tbqservice",
+  "url": "https://melody-takeaway-ticket.faas.ele.me/",
+  "menuType": "secondaryMenu",
+  "perm": "taobao_coupons_service_single"
+ },
+ {
+  "name": "券平台活动",
+  "parent": "外卖券",
+  "sref": "app.shop.tbqactivity",
+  "short": "tbqactivity",
+  "url": "https://alsc-router.faas.ele.me?to=activity&params=${:params__encode__}",
+  "menuType": "subpage",
+  "perm": "taobao_coupons_platform_activities_single"
+ },
+ {
+  "name": "券流量活动",
+  "parent": "外卖券",
+  "sref": "app.shop.tbqactivity_new",
+  "short": "tbqactivity_new",
+  "url": "https://market-alsc.ele.me/app/alsc-merchant-activity/index/#/",
+  "menuType": "secondaryMenu",
+  "perm": "taobao_coupons_platform_activities_single"
+ },
+ {
+  "name": "店铺推广",
+  "parent": "",
+  "sref": "app.shop.vas({'_reload': true})",
+  "short": "vas",
+  "url": "https://r.ele.me/doujin-isv-manage/index.html?__path__=elePcHome%2Findex",
+  "menuType": "firstLevelMenu",
+  "perm": "promotion"
+ },
+ {
+  "name": "推广首页",
+  "parent": "店铺推广",
+  "sref": "app.shop.dptg-tgsy({'_reload':true})",
+  "short": "dptg-tgsy",
+  "url": "https://r.ele.me/doujin-isv-manage/index.html?__path__=elePcHome/index&spm=:spm",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "自动提预算",
+  "parent": "店铺推广",
+  "sref": "app.shop.autoRaiseBudgetPage",
+  "short": "autoRaiseBudgetPage",
+  "url": "https://r.ele.me/doujin-isv-manage/index.html?__path__=accountPc/accountIndex&autoShowRaiseBudgetModal=true&closePeakDay=true",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "活动列表",
+  "parent": "店铺推广",
+  "sref": "app.shop.activity-list",
+  "short": "activity-list",
+  "url": "https://r.ele.me/bp-activity-center/#/single?couponId=:couponId&spm=:spm",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "优惠券列表",
+  "parent": "店铺推广",
+  "sref": "app.shop.coupon-list",
+  "short": "coupon-list",
+  "url": "https://r.ele.me/promote-benefits-pc/#/single?spm=:spm",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "推广魔方详情",
+  "parent": "店铺推广",
+  "sref": "app.shop.dptg-tgmf",
+  "short": "dptg-tgmf",
+  "url": "https://r.ele.me/doujin-isv-manage/index.html?__path__=promotionCubeSingle/pcDetail&bizCode=eleOneStop&spm=:spm",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "账户详情/自动充值",
+  "parent": "店铺推广",
+  "sref": "app.shop.zhxq-zdcz",
+  "short": "zhxq-zdcz",
+  "url": "https://r.ele.me/doujin-isv-manage/index.html?__path__=accountPc/setAutoChargePage&spm=:spm",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "成长中心",
+  "parent": "",
+  "sref": "",
+  "short": "",
+  "url": "",
+  "menuType": "catalog",
+  "perm": "store_credit_score,task_center,store_welfare,business_school,serviceScore"
+ },
+ {
+  "name": "店铺分",
+  "parent": "成长中心",
+  "sref": "app.shop.shop-score",
+  "short": "shop-score",
+  "url": "https://napos-shop-operation-pc.faas.ele.me/shop-score",
+  "menuType": "secondaryMenu",
+  "perm": ""
+ },
+ {
+  "name": "亮标经营",
+  "parent": "成长中心",
+  "sref": "app.shop.lbjy",
+  "short": "lbjy",
+  "url": "https://www",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "体检中心",
+  "parent": "成长中心",
+  "sref": "app.shop.credit-score",
+  "short": "credit-score",
+  "url": "https://r.ele.me/alsc-credit-score/?shopId=:shopId&redirect=:redirect",
+  "menuType": "",
+  "perm": "store_credit_score"
+ },
+ {
+  "name": "新店任务",
+  "parent": "成长中心",
+  "sref": "app.shop.newShopTask",
+  "short": "newShopTask",
+  "url": "https://napos-shop-operation-pc.faas.ele.me/new-shop-task",
+  "menuType": "secondaryMenu",
+  "perm": ""
+ },
+ {
+  "name": "新店成长任务",
+  "parent": "成长中心",
+  "sref": "app.shop.brandnew-shoptask",
+  "short": "brandnew-shoptask",
+  "url": "https://napos-shop-operation-pc.faas.ele.me/brand-new-shop-task",
+  "menuType": "secondaryMenu",
+  "perm": ""
+ },
+ {
+  "name": "权益中心",
+  "parent": "成长中心",
+  "sref": "app.shop.rewardCenter",
+  "short": "rewardCenter",
+  "url": "https://napos-shop-operation-pc.faas.ele.me/reward-center",
+  "menuType": "secondaryMenu",
+  "perm": ""
+ },
+ {
+  "name": "门店福利",
+  "parent": "成长中心",
+  "sref": "app.shop.welfare",
+  "short": "welfare",
+  "url": "https://spe.faas.ele.me?shopId=:shopId",
+  "menuType": "subpage",
+  "perm": "store_welfare"
+ },
+ {
+  "name": "商家学院",
+  "parent": "成长中心",
+  "sref": "app.shop.college",
+  "short": "college",
+  "url": "https://melody-base.faas.ele.me/college",
+  "menuType": "subpage",
+  "perm": "business_school"
+ },
+ {
+  "name": "外卖课堂",
+  "parent": "成长中心",
+  "sref": "app.shop.alsc-school",
+  "short": "alsc-school",
+  "url": "https://alins.ele.me/",
+  "menuType": "secondaryMenu",
+  "perm": "alsc_school"
+ },
+ {
+  "name": "规则中心",
+  "parent": "成长中心",
+  "sref": "app.shop.ruleCenter",
+  "short": "ruleCenter",
+  "url": "https://h5.ele.me/alsc-risk-rule-center-fe/?platform=napos#${:path__default(/RulesOverview)}",
+  "menuType": "secondaryMenu",
+  "perm": ""
+ },
+ {
+  "name": "消息权益",
+  "parent": "成长中心",
+  "sref": "app.shop.im-rights",
+  "short": "im-rights",
+  "url": "https://napos-im-rights-pc.faas.ele.me/",
+  "menuType": "secondaryMenu",
+  "perm": ""
+ },
+ {
+  "name": "免单活动",
+  "parent": "成长中心",
+  "sref": "app.shop.freecharge-activity",
+  "short": "freecharge-activity",
+  "url": "https://napos-shop-operation-pc.faas.ele.me/free-charge-shop",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "免单友谊赛",
+  "parent": "成长中心",
+  "sref": "app.shop.freeshop",
+  "short": "freeshop",
+  "url": "https://napos-shop-operation-pc.faas.ele.me/free-charge-shop",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "饿掌柜",
+  "parent": "",
+  "sref": "app.shop.ekeeper",
+  "short": "ekeeper",
+  "url": "https://napos-ekeeper.faas.ele.me/index?shopId=:shopId&come_from=${: come_from}",
+  "menuType": "firstLevelMenu",
+  "perm": "ekeeper"
+ },
+ {
+  "name": "服务市场",
+  "parent": "",
+  "sref": "",
+  "short": "",
+  "url": "",
+  "menuType": "catalog",
+  "perm": "service_market"
+ },
+ {
+  "name": "全部服务",
+  "parent": "服务市场",
+  "sref": "app.shop.appstore({ path: '/appstore'})",
+  "short": "appstore",
+  "url": "https://nest-market.faas.ele.me${:path__default(/appstore)}?shopId=:shopId",
+  "menuType": "secondaryMenu",
+  "perm": "service_market_homepapge"
+ },
+ {
+  "name": "代运营合同",
+  "parent": "服务市场",
+  "sref": "app.shop.agent-contracts",
+  "short": "agent-contracts",
+  "url": "https://r.ele.me/alsc-pc-service-market/contract-list?shopId=:shopId&contractNo=:contractNo&from=:from",
+  "menuType": "secondaryMenu",
+  "perm": ""
+ },
+ {
+  "name": "我的服务",
+  "parent": "服务市场",
+  "sref": "app.shop.appstore-mine({ path: '/appstore/mine'})",
+  "short": "appstore-mine",
+  "url": "https://nest-market.faas.ele.me${:path__default(/appstore)}?shopId=:shopId&contractNo=:contractNo&from=:from",
+  "menuType": "secondaryMenu",
+  "perm": "service_market_myservice"
+ },
+ {
+  "name": "授权应用管理",
+  "parent": "服务市场",
+  "sref": "app.shop.auth-manage",
+  "short": "auth-manage",
+  "url": "https://r.ele.me/nest-fe-napos/auth-manage?shopId=:shopId&shopBizType=shop",
+  "menuType": "secondaryMenu",
+  "perm": ""
+ },
+ {
+  "name": "金融保险",
+  "parent": "",
+  "sref": "",
+  "short": "",
+  "url": "",
+  "menuType": "catalog",
+  "perm": ""
+ },
+ {
+  "name": "先享后付",
+  "parent": "金融保险",
+  "sref": "app.shop.dptg-xxhf",
+  "short": "dptg-xxhf",
+  "url": "https://r.ele.me/alsc-enjoy-before-pay-pc/home",
+  "menuType": "secondaryMenu",
+  "perm": ""
+ },
+ {
+  "name": "短视频",
+  "parent": "",
+  "sref": "",
+  "short": "",
+  "url": "",
+  "menuType": "catalog",
+  "perm": ""
+ },
+ {
+  "name": "视频管理",
+  "parent": "短视频",
+  "sref": "app.shop.short-video",
+  "short": "short-video",
+  "url": "https://napos-brand-video-pc.ele.me/open?openCb=${:url__encode__default(https%3A%2F%2Fmarket.alsc.taobao.com%2Fapp%2Fnapos-merchant-video-mng%2Findex%2F%23%2F)}",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "直播管理",
+  "parent": "",
+  "sref": "",
+  "short": "",
+  "url": "",
+  "menuType": "catalog",
+  "perm": ""
+ },
+ {
+  "name": "直播白皮书",
+  "parent": "直播管理",
+  "sref": "app.shop.living-white-book",
+  "short": "living-white-book",
+  "url": "https://alins.ele.me/label.html?from=naposApp&id=1094",
+  "menuType": "secondaryMenu",
+  "perm": ""
+ },
+ {
+  "name": "账号关联",
+  "parent": "直播管理",
+  "sref": "app.shop.living-account-associated",
+  "short": "living-account-associated",
+  "url": "https://market.alsc.taobao.com/app/kbt-market-vip/main/merchant/ELE?authCode=${:authCode}&state=${:state}",
+  "menuType": "secondaryMenu",
+  "perm": ""
+ },
+ {
+  "name": "安全中心",
+  "parent": "",
+  "sref": "",
+  "short": "",
+  "url": "",
+  "menuType": "catalog",
+  "perm": ""
+ },
+ {
+  "name": "操作日志",
+  "parent": "安全中心",
+  "sref": "app.shop.operation-log",
+  "short": "operation-log",
+  "url": "https://napos-log-pc.faas.ele.me/OperationLog",
+  "menuType": "secondaryMenu",
+  "perm": ""
+ },
+ {
+  "name": "隐藏菜单",
+  "parent": "",
+  "sref": "",
+  "short": "",
+  "url": "",
+  "menuType": "catalog",
+  "perm": ""
+ },
+ {
+  "name": "商户审核",
+  "parent": "隐藏菜单",
+  "sref": "app.shop.activity.review",
+  "short": "activity__review",
+  "url": "https://play-everything-pc.faas.ele.me${:path__default(/melody/touchDetail)}?shopId=${:shopId}&playInstanceId=${:playInstanceId}&workflowId=${:workflowId}&metaId=${:metaId}",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "申诉表单",
+  "parent": "隐藏菜单",
+  "sref": "app.shop.complaint-form",
+  "short": "complaint-form",
+  "url": "https://napos-order-pc.faas.ele.me/complaint-center/form?shopId=:shopId&orderId=:orderId&reverseId=:reverseId",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "餐损定责",
+  "parent": "隐藏菜单",
+  "sref": "app.shop.claim-order",
+  "short": "claim-order",
+  "url": "https://napos-order-pc.faas.ele.me/claim?orderId=:orderId",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "首屏菜单创建入口",
+  "parent": "隐藏菜单",
+  "sref": "app.shop.createBossRecommendMenu",
+  "short": "createBossRecommendMenu",
+  "url": "https://r.ele.me/napos-goods-isomorphy#/first-screen-menu/home/?from=moss_modal",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "起送价修改",
+  "parent": "隐藏菜单",
+  "sref": "app.shop.delivery.price",
+  "short": "delivery__price",
+  "url": "https://r.ele.me/alsc-merchant-delivery-pc/setting?shopId=:shopId&platform=melody&tabTag=:tabTag",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "餐损申请",
+  "parent": "隐藏菜单",
+  "sref": "app.shop.yuexiang-complaint-form",
+  "short": "yuexiang-complaint-form",
+  "url": "https://napos-order-pc.faas.ele.me/app/mealDamageForm?shopId=:shopId&orderId=:orderId&reverseId=:reverseId",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "到店自取优惠工具",
+  "parent": "隐藏菜单",
+  "sref": "app.shop.pickup_discount_tool",
+  "short": "pickup_discount_tool",
+  "url": "https://marketing-self-pc.faas.ele.me/self-fetch-order-activity/create",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "推广首页-活动中心",
+  "parent": "隐藏菜单",
+  "sref": "app.shop.bp-activity-center",
+  "short": "bp-activity-center",
+  "url": "https://r.ele.me/bp-activity-center/#/single?couponId=:couponId",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "子账号管理",
+  "parent": "隐藏菜单",
+  "sref": "app.shop.sub-account",
+  "short": "sub-account",
+  "url": "https://r.ele.me/napos-brand-management-pc/subAccount/detail?prefix=shop",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "子账号管理操作记录",
+  "parent": "隐藏菜单",
+  "sref": "app.shop.optionHistory",
+  "short": "optionHistory",
+  "url": "https://r.ele.me/napos-brand-management-pc/optionHistory?newTab=${:newTab}",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "商家咨询后触达",
+  "parent": "隐藏菜单",
+  "sref": "app.shop.service-notice",
+  "short": "service-notice",
+  "url": "https://r.ele.me/goto-some-page/?userType=USER_NAPOS&alimeBotSourceId=4000005&alimeBotFrom=emR6ofDvHo3W",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "商家充返活动列表",
+  "parent": "隐藏菜单",
+  "sref": "app.shop.vas.rebatelist",
+  "short": "vas__rebatelist",
+  "url": "https://bs-rebate-activity.faas.ele.me/pc/single/list?query=${:params}",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "活动管理",
+  "parent": "隐藏菜单",
+  "sref": "app.shop.activity.self.superintrol",
+  "short": "activity__self__superintrol",
+  "url": "https://melody-activity.faas.ele.me/app/single/activity/self/superintrol?shopId=:shopId",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "投诉反馈",
+  "parent": "隐藏菜单",
+  "sref": "app.shop.feedback",
+  "short": "feedback",
+  "url": "https://help.ele.me/napos",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "日志中心",
+  "parent": "隐藏菜单",
+  "sref": "app.shop.log",
+  "short": "log",
+  "url": "https://melody-log.faas.ele.me/list?shopId=:shopId",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "竞价推广",
+  "parent": "隐藏菜单",
+  "sref": "app.shop.vas.bid",
+  "short": "vas__bid",
+  "url": "https://r.ele.me/doujin-isv-manage/index.html?__path__=eleCpc/dashBoard",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "发券宝",
+  "parent": "隐藏菜单",
+  "sref": "app.shop.vas.coupon",
+  "short": "vas__coupon",
+  "url": "https://bs-coupon-ark.faas.ele.me",
+  "menuType": "subpage",
+  "perm": "marketing_coupon_bao"
+ },
+ {
+  "name": "推广资金",
+  "parent": "隐藏菜单",
+  "sref": "app.shop.vas.account",
+  "short": "vas__account",
+  "url": "https://r.ele.me/doujin-isv-manage/index.html?__path__=accountPc/accountIndex",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "品牌展位",
+  "parent": "隐藏菜单",
+  "sref": "app.shop.vas.adv",
+  "short": "vas__adv",
+  "url": "https://napos-brand.faas.ele.me/#/app/shop/vas/adv",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "消息",
+  "parent": "隐藏菜单",
+  "sref": "app.shop.notice",
+  "short": "notice",
+  "url": "https://crystal-message.faas.ele.me/message?app=NAPOS&accountType=SHOP&token=:ksid&messageTypes=ANNOUNCEMENT,ORDER,FINANCE,DISTRIBUTION,ACTIVITY,COMMODITY,OTHER&shopId=:shopId",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "订单搜索",
+  "parent": "隐藏菜单",
+  "sref": "app.shop.order.searchings",
+  "short": "order__searchings",
+  "url": "https://napos-order-pc.faas.ele.me/app/searchings?shopId=:shopId&searchInfo=${:searchInfo__encode}",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "营业资质",
+  "parent": "隐藏菜单",
+  "sref": "app.shop.business-intelligence",
+  "short": "business-intelligence",
+  "url": "https://tb.ele.me/wow/z/zele/default/fBFha8K8fKcpjbmCaTQ7?wh_biz=tm&wh_ttid=phone",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "开店审核详情",
+  "parent": "隐藏菜单",
+  "sref": "app.shop.kaidian-steps",
+  "short": "kaidian-steps",
+  "url": "https://kaidian-steps.faas.ele.me/shop-status?shopId=:shopId&from=melody&type=apply",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "评价分析",
+  "parent": "隐藏菜单",
+  "sref": "app.shop.stats.comment",
+  "short": "stats__comment",
+  "url": "https://melody-stats-next.faas.ele.me/single/stats/evaluate",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "评价分析3.0",
+  "parent": "隐藏菜单",
+  "sref": "app.shop.evaluation",
+  "short": "evaluation",
+  "url": "https://melody-stats-next.faas.ele.me/single/stats/evaluation?${:search}",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "工单",
+  "parent": "隐藏菜单",
+  "sref": "app.shop.woos",
+  "short": "woos",
+  "url": "https://woos.ele.me/pc/napos/${:path__decode}?shopId=:shopId&${:query__decode}",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "饿掌柜权益包",
+  "parent": "隐藏菜单",
+  "sref": "app.shop.salepack",
+  "short": "salepack",
+  "url": "https://melody-goods-menu-solution.faas.ele.me/app/ekeeper/sale-pack/${:id__default(0)}?shopId=${:shopId}",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "优享大牌",
+  "parent": "隐藏菜单",
+  "sref": "app.shop.vas.brand",
+  "short": "vas__brand",
+  "url": "https://bs-brand-express.faas.ele.me",
+  "menuType": "subpage",
+  "perm": "marketing_brand_train"
+ },
+ {
+  "name": "招商中心单店",
+  "parent": "隐藏菜单",
+  "sref": "app.shop.merchant.single",
+  "short": "merchant__single",
+  "url": "https://melody-merchant.faas.ele.me/${:path__default(index)}${:subPath}${:query}",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "我的账号",
+  "parent": "隐藏菜单",
+  "sref": "app.shop.userinfo",
+  "short": "userinfo",
+  "url": "https://melody-base.faas.ele.me/userinfo/?shopId=:shopId",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "重要待办",
+  "parent": "隐藏菜单",
+  "sref": "app.shop.important-todo",
+  "short": "important-todo",
+  "url": "https://napos-important-todo-pc.faas.ele.me/list",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "菜单分组建议触达落地页V2跳转链接",
+  "parent": "隐藏菜单",
+  "sref": "app.shop.rectifyRecommendMenuTwo",
+  "short": "rectifyRecommendMenuTwo",
+  "url": "https://r.ele.me/napos-goods-isomorphy#/menu-group-refine?sourcePath=foodManage&spm=${:spm}",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "待办历史",
+  "parent": "隐藏菜单",
+  "sref": "app.shop.stodo-history",
+  "short": "stodo-history",
+  "url": "https://napos-important-todo-pc.faas.ele.me/history",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "淘客",
+  "parent": "隐藏菜单",
+  "sref": "app.shop.vas.taoke",
+  "short": "vas__taoke",
+  "url": "https://bs-union-taoke.faas.ele.me",
+  "menuType": "subpage",
+  "perm": "promotion"
+ },
+ {
+  "name": "优选展位",
+  "parent": "隐藏菜单",
+  "sref": "app.shop.vas_prefer",
+  "short": "vas_prefer",
+  "url": "https://r.ele.me/bs-prefer-booth-h5/#/bs-prefer-booth/",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "菜单分组建议触达落地页",
+  "parent": "隐藏菜单",
+  "sref": "app.shop.rectifyRecommendMenu",
+  "short": "rectifyRecommendMenu",
+  "url": "https://napos-goods-pc.faas.ele.me/rectify/recommend-menu",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "异常商品",
+  "parent": "隐藏菜单",
+  "sref": "app.shop.defectiveProducts",
+  "short": "defectiveProducts",
+  "url": "https://r.ele.me/napos-goods-quality-pc/defective-products?spm=${:spm}",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "类目修改页面",
+  "parent": "隐藏菜单",
+  "sref": "app.shop.category-management",
+  "short": "category-management",
+  "url": "https://r.ele.me/platform-category-management/category-management.html?detailId=${:detailId}",
+  "menuType": "subpage",
+  "perm": ""
+ },
+ {
+  "name": "更多应用",
+  "parent": "",
+  "sref": "",
+  "short": "",
+  "url": "",
+  "menuType": "catalog",
+  "perm": ""
+ },
+ {
+  "name": "阳光厨房",
+  "parent": "更多应用",
+  "sref": "app.shop.suncook",
+  "short": "suncook",
+  "url": "https://nr.ele.me/app/eleme-saas-retail/sun-cook-manage",
+  "menuType": "secondaryMenu",
+  "perm": ""
+ }
+]

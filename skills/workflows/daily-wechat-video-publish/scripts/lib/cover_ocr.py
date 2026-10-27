@@ -6,7 +6,7 @@ import subprocess
 from pathlib import Path
 
 OCR_BIN = Path(
-    '/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/scripts/ocr_vision_bin'
+    '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/legacy-app-controler/wechat-desktop-control/scripts/ocr_vision_bin'
 )
 
 

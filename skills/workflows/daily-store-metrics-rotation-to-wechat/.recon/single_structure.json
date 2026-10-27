@@ -1,0 +1,189 @@
+{
+ "scrollH": 2739,
+ "cards": [
+  {
+   "cls": "customer_analysis",
+   "docY": 92,
+   "h": 585,
+   "titles": [],
+   "sels": [
+    {
+     "docY": 110,
+     "x": 963,
+     "val": "商圈同行均值"
+    },
+    {
+     "docY": 110,
+     "x": 1094,
+     "val": "近7日"
+    }
+   ],
+   "radios": [
+    {
+     "t": "全部顾客",
+     "checked": true,
+     "docY": 151
+    },
+    {
+     "t": "新客",
+     "checked": false,
+     "docY": 151
+    },
+    {
+     "t": "老客",
+     "checked": false,
+     "docY": 151
+    }
+   ]
+  },
+  {
+   "cls": "customer_distribution",
+   "docY": 693,
+   "h": 1196,
+   "titles": [
+    {
+     "t": "下单行为",
+     "cls": "h3",
+     "docY": 767,
+     "x": 66
+    },
+    {
+     "t": "下单时段",
+     "cls": "period_title",
+     "docY": 767,
+     "x": 633
+    },
+    {
+     "t": "下单时段",
+     "cls": "h3",
+     "docY": 767,
+     "x": 633
+    },
+    {
+     "t": "下单热门街区",
+     "cls": "period_title",
+     "docY": 1200,
+     "x": 66
+    },
+    {
+     "t": "下单热门街区",
+     "cls": "h3",
+     "docY": 1200,
+     "x": 66
+    }
+   ],
+   "sels": [
+    {
+     "docY": 800,
+     "x": 120,
+     "val": "商圈同行均值"
+    },
+    {
+     "docY": 800,
+     "x": 687,
+     "val": "商圈同行均值"
+    },
+    {
+     "docY": 800,
+     "x": 1090,
+     "val": "近7日"
+    },
+    {
+     "docY": 1201,
+     "x": 1090,
+     "val": "近7日"
+    },
+    {
+     "docY": 1242,
+     "x": 463,
+     "val": "商圈同行均值"
+    }
+   ],
+   "radios": []
+  },
+  {
+   "cls": "customer_feature",
+   "docY": 1905,
+   "h": 437,
+   "titles": [
+    {
+     "t": "顾客画像",
+     "cls": "h3",
+     "docY": 1979,
+     "x": 633
+    }
+   ],
+   "sels": [
+    {
+     "docY": 2012,
+     "x": 1090,
+     "val": "近7日"
+    }
+   ],
+   "radios": []
+  },
+  {
+   "cls": "interactive_behavior",
+   "docY": 1962,
+   "h": 363,
+   "titles": [],
+   "sels": [],
+   "radios": []
+  },
+  {
+   "cls": "customer_portrait",
+   "docY": 1962,
+   "h": 362,
+   "titles": [
+    {
+     "t": "顾客画像",
+     "cls": "h3",
+     "docY": 1979,
+     "x": 633
+    }
+   ],
+   "sels": [
+    {
+     "docY": 2012,
+     "x": 1090,
+     "val": "近7日"
+    }
+   ],
+   "radios": []
+  },
+  {
+   "cls": "customer_dynamics",
+   "docY": 2358,
+   "h": 298,
+   "titles": [
+    {
+     "t": "顾客流向如何",
+     "cls": "period_title",
+     "docY": 2432,
+     "x": 66
+    },
+    {
+     "t": "顾客流向如何",
+     "cls": "h3",
+     "docY": 2432,
+     "x": 66
+    }
+   ],
+   "sels": [
+    {
+     "docY": 2433,
+     "x": 1090,
+     "val": "近7日"
+    }
+   ],
+   "radios": []
+  }
+ ],
+ "hits": [
+  {
+   "txt": "下单热门街区",
+   "docY": 1200,
+   "path": "h3<period_title<filter<order_behavior<customer_distribution"
+  }
+ ]
+}

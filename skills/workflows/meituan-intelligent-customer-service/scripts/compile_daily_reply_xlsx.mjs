@@ -6,7 +6,7 @@ import { execFileSync } from "node:child_process";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { FileBlob, SpreadsheetFile, Workbook } from "/Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/@oai/artifact-tool/dist/artifact_tool.mjs";
+import { FileBlob, SpreadsheetFile, Workbook } from "@oai/artifact-tool";
 
 const baseDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 function localDate() {

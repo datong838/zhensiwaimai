@@ -85,7 +85,7 @@ AUTHORIZED_REPAIR_CANDIDATE_SHA256 = {
     "mobile_sender": "8f85da5818c94d60b3eb54c5f598a15218ca052a082f439852b2f666edcc26a9",
 }
 AUTHORIZED_SHARED_LOCATOR_PATH = (
-    "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/"
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/legacy-app-controler/"
     "wechat-desktop-control/scripts/wechat_desktop.py"
 )
 AUTHORIZED_SHARED_LOCATOR_SHA256 = (
@@ -96,7 +96,7 @@ AUTHORIZED_SHARED_LOCATOR_SHA256 = (
     "4b8d95a1c998edb89976774ff041c6907034e4d3bcc4517a60e8b02122dd12b8"
 )
 AUTHORIZED_SHARED_SENDER_PATH = (
-    "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/"
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/legacy-app-controler/"
     "wechat-desktop-control/scripts/desktop_sender.py"
 )
 AUTHORIZED_SHARED_SENDER_SHA256 = (
@@ -118,7 +118,7 @@ AUTHORIZED_ZERO_SEND_DRAFT_DRIFT = {
     "workflow_executor", "maintenance_executor",
 }
 AUTHORIZED_ZERO_SEND_DRAFT_PATHS = {
-    "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/"
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/legacy-app-controler/"
     "wechat-desktop-control/scripts/desktop_sender.py",
     "scripts/desktop_adapter.py", "scripts/workflow_bridge.py",
     "scripts/workflow_preflight.py", "scripts/dependency_maintenance.py",

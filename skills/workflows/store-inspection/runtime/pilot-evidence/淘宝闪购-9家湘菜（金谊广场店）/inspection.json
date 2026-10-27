@@ -1,0 +1,34 @@
+{
+  "platform": "淘宝闪购",
+  "city": "上海市",
+  "rosterStoreName": "9家湘菜(金谊广场店)",
+  "storeName": "9家湘菜（金谊广场店）",
+  "inspectionDate": "2026-09-09",
+  "identityEvidence": "01-search-result.png、06-merchant.png",
+  "conclusion": "高销量、高评分且经营信息完整；当前主要风险集中在包装防洒和个别餐品稳定性。",
+  "conclusionEvidence": "01-search-result.png、04-reviews.png、05-negative-reviews.png、06-merchant.png",
+  "facts": [
+    {"label":"搜索页表现","value":"5.0分，月售1000+，20分钟内，免配送费，接受10:00开始配送预订","evidence":"01-search-result.png"},
+    {"label":"商品结构","value":"可见热销、优惠、精选推荐、招牌必点、烟火小炒、地道湖南等分类；代表商品包括腊八豆炒荷包蛋、生炒走地鸡、28秒鲜炒黄牛肉","evidence":"02-store-home.png、03-products-scroll.png"},
+    {"label":"评价概况","value":"评价647，商品质量5.0、服务体验5.0；页面展示近期差评7条","evidence":"04-reviews.png、05-negative-reviews.png"},
+    {"label":"商家信息","value":"上海市浦东新区上南路4467弄73号405室、406室-1铺、407室-1铺、408室-1铺；周一至周日10:00-21:00；页面显示经营11年","evidence":"06-merchant.png"}
+  ],
+  "issues": [
+    {"priority":"P1","issue":"包装防洒稳定性","fact":"近期差评显示“包装可以再好些，都撒了”，包装3星，商家已回复","recommendation":"复核汤汁类封口、餐盒卡扣和骑手取餐前二次检查；连续一周抽查差评关键词","evidence":"05-negative-reviews.png"},
+    {"priority":"P1","issue":"个别餐品质量感知风险","fact":"另一条近期差评为味道2星、包装2星，并写“太可怕了，不敢评，看图吧”","recommendation":"按差评订单回溯出品批次与图片，核查原料、火候、装盘和配送后形态","evidence":"05-negative-reviews.png"},
+    {"priority":"P2","issue":"预订时段信息需保持一致","fact":"搜索页和店内均提示10:00开始配送","recommendation":"每日开档前核对营业时间、预订时间和实际接单状态","evidence":"01-search-result.png、06-merchant.png"}
+  ],
+  "evidence": [
+    {"node":"搜索结果","fact":"完整店名、商圈、评分、月售、配送与起送信息","file":"01-search-result.png"},
+    {"node":"商品首页","fact":"分类、代表商品、价格与优惠","file":"02-store-home.png"},
+    {"node":"商品下翻","fact":"更多分类和商品覆盖","file":"03-products-scroll.png"},
+    {"node":"评价","fact":"评分、评价量、评价维度与商家回复","file":"04-reviews.png"},
+    {"node":"近期差评","fact":"包装撒漏和餐品质量负面反馈","file":"05-negative-reviews.png"},
+    {"node":"商家","fact":"地址、营业时间、经营年限和服务标签","file":"06-merchant.png"}
+  ],
+  "gaps": [
+    {"field":"退款率/客诉率","status":"UNKNOWN","reason":"消费者端不展示经营后台指标","next":"需商家后台验证"},
+    {"field":"活动补贴承担","status":"UNKNOWN","reason":"消费者端仅展示到手价，无法拆分平台与商家承担","next":"需营销或财务后台验证"},
+    {"field":"复购率","status":"UNKNOWN","reason":"消费者端只有人群/榜单描述，无统一口径数值","next":"需数据中心验证"}
+  ]
+}

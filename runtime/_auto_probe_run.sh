@@ -2,8 +2,8 @@
 # 四岗位登录态保活探针（自动化 c89f6bc8 执行体）
 set +e
 ZJ=/Users/ddt/work/projects/ai_agent/zhensi_waimai_back
-GW=/Users/ddt/work/projects/ai_agent/wechat-windows-driver/gateway.json
-TOKFILE=/Users/ddt/work/projects/ai_agent/wechat-windows-driver/接入包/连接信息.txt
+GW=/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/archive/compat/wechat-windows-driver/gateway.json
+TOKFILE=/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/archive/compat/wechat-windows-driver/接入包/连接信息.txt
 NODE=/Users/ddt/.workbuddy/binaries/node/versions/22.22.2-2/bin/node
 PY=/usr/bin/python3
 

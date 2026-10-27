@@ -56,7 +56,19 @@ def preflight(folder):
     if task.get('lifetime') != 'owner-process' or owner_active(task['owner']) is not True:
         raise ValueError('native-ui-owner-not-active')
     # ensure_group already verified exact title + empty input on both paths.
-    resolved_group = ensure_group(task['request']['groupName'], task['owner'])
+    recovery_attempts = 0
+    try:
+        resolved_group = ensure_group(task['request']['groupName'], task['owner'])
+    except RuntimeError as error:
+        # A group-search preflight has no send permission. Retry only this exact
+        # transient focus failure, before any claim/intent, under the same owner.
+        if (not re.search(r'native-ui-focus-mismatch(?: \(-2700\))?\s*$', str(error))
+                or owner_active(task['owner']) is not True
+                or any((folder / name).exists() for name in
+                       ('claim.json', 'send-intent.json', 'response.json'))):
+            raise
+        recovery_attempts = 1
+        resolved_group = ensure_group(task['request']['groupName'], task['owner'])
     if owner_active(task['owner']) is not True:
         raise ValueError('native-ui-owner-not-active')
     claim = folder / 'claim.json'
@@ -65,7 +77,8 @@ def preflight(folder):
             json.dump({'worker': 'native-system-ui-post', 'pid': os.getpid(), 'at': time.time()}, f)
     reply = {'taskId': task['taskId'], 'binding': binding,
              'result': {'ok': True, 'resolvedGroup': resolved_group, 'inputEmpty': True,
-                        'backend': 'system-events-ui-tree', 'observedAt': time.time()}}
+                        'backend': 'system-events-ui-tree', 'observedAt': time.time(),
+                        'preflightRecoveryAttempts': recovery_attempts}}
     validate_response(task, reply)
     atomic_json(folder / 'response.json', reply)
     return reply

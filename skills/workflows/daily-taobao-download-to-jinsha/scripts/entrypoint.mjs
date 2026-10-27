@@ -4,9 +4,9 @@ import path from 'node:path';
 
 const SOURCE = '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-taobao-download-to-jinsha/scripts/background_browser_executor.mjs';
 const CANONICAL_ENTRYPOINT = '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-taobao-download-to-jinsha/scripts/entrypoint.mjs';
-const INSTALLED_ENTRYPOINT = '/Users/ddt/.codex/skills/daily-taobao-download-to-jinsha/scripts/entrypoint.mjs';
+const INSTALLED_ENTRYPOINT = '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/installed-taobao-skill/scripts/entrypoint.mjs';
 const CANONICAL_SKILL = '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-taobao-download-to-jinsha/SKILL.md';
-const INSTALLED_SKILL = '/Users/ddt/.codex/skills/daily-taobao-download-to-jinsha/SKILL.md';
+const INSTALLED_SKILL = '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/installed-taobao-skill/SKILL.md';
 // 2026-10-03 受控重绑：background_browser_executor.mjs 因重钉 session_guard 摘要而变更字节。
 // 2026-10-08 受控重绑（F11-3）：executor 修复「resume 跨轮继承已耗尽的恢复预算导致
 //   jinshaLogReload 预算(budget=1) 在本轮 claim 时立即耗尽 ⇒ recovery-budget-exhausted
@@ -43,15 +43,15 @@ const INSTALLED_SKILL = '/Users/ddt/.codex/skills/daily-taobao-download-to-jinsh
 //   实弹 uploadData↔realTimeData 往返验证通过）；金鲨序列 7 个点击点全部接入（恢复轨菜单/
 //   平台切换/主菜单/兜底菜单/tab 切换/上传按钮）。点击后原有 hash/语义/class 后验门全保留
 //   （fail-closed 不放松）。字节变更故重钉摘要。
-const EXECUTOR_SHA256 = '5a2955b755d0813f48e10e5c81c1b638abca821256402e2cb153889ba191c3bd';
+const EXECUTOR_SHA256 = '5f007ecea8361709e56cd8908e75c0144236ecf0b4ce939821aedbf388a63b6b';
 const WECHAT_SOURCE = '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-taobao-download-to-jinsha/scripts/desktop_wechat_evidence_sender.mjs';
 // 2026-10-03 受控重绑：desktop_wechat_evidence_sender.mjs 放宽发送等待窗口后字节变更。
 // 2026-10-03 受控重绑（大同授权「方案 B」）：sender 增加逐图已交付核验与只补缺失图路径。
-const WECHAT_SHA256 = 'da64f1b13e4f8f7557037e811763ed0c51fbfc1e0c64a84e815248567c4d80d5';
+const WECHAT_SHA256 = 'a83e8858e8d30a39f708f58fd89f485666abfb4373afa2c44f884216f023778d';
 const RECOVERY_SOURCE = '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-taobao-download-to-jinsha/scripts/scheduled_evidence_recovery.mjs';
 // 2026-10-03 受控重绑（大同授权「方案 B」）：recovery 改为逐图 union 语义（部分补发）。
-const RECOVERY_SHA256 = 'd3ffec2efd075817684a158c53a607f81d885a5f61e679f3f2c755b7865b481c';
-const EVIDENCE_ROOT = '/tmp/zhensi_daily_download/background-browser';
+const RECOVERY_SHA256 = '71e0a7eefb13a81ccfb715481f30e99c9968c5e15ed99b14c01e6d194508c310';
+const EVIDENCE_ROOT = "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/business-evidence/taobao-download/background-browser";
 const WECHAT_LEDGER = '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/taobao-jinsha-wechat-evidence-attempts';
 const CONTROL_POLICY_VERSION = 'daily-taobao-jinsha-code-enforced-2026-09-28';
 const MAX_SCHEDULED_WORKFLOW_ATTEMPTS = 3;
@@ -150,17 +150,21 @@ function yesterdayShanghai(now = new Date()) {
 async function loadCompletedReceipt(receiptFile) {
   if (typeof receiptFile !== 'string') throw new Error('receipt-path-required');
   const resolved = path.resolve(receiptFile);
-  if (!resolved.startsWith(`${EVIDENCE_ROOT}/`) || path.basename(resolved) !== 'receipt.json') throw new Error('receipt-path-out-of-scope');
+  const matchedEvidenceRoot = [EVIDENCE_ROOT, "/tmp/zhensi_daily_download/background-browser"].find(root => resolved.startsWith(`${root}/`));
+  if (!matchedEvidenceRoot || path.basename(resolved) !== 'receipt.json') throw new Error('receipt-path-out-of-scope');
   const receipt = JSON.parse(await fs.readFile(resolved, 'utf8'));
   if (receipt.ok !== true || receipt.stage !== 'completed' || receipt.phase !== 'completed' || receipt.cleanupStatus !== 'completed') throw new Error('receipt-not-completed');
   if (receipt.evidenceManifest?.runId !== receipt.runId || receipt.evidenceManifest?.businessDate !== receipt.businessDate) throw new Error('receipt-manifest-mismatch');
-  const expectedDir = path.join(EVIDENCE_ROOT, `${receipt.businessDate}-${receipt.runId}`);
+  const expectedDir = path.join(matchedEvidenceRoot, `${receipt.businessDate}-${receipt.runId}`);
   if (path.dirname(resolved) !== expectedDir) throw new Error('receipt-directory-mismatch');
   return receipt;
 }
 
 export async function preflight() {
   try {
+  const evidenceStorageHelper = "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/evidence_storage.mjs";
+  if (crypto.createHash('sha256').update(await fs.readFile(evidenceStorageHelper)).digest('hex') !== 'ba84c386010a0a887f0103da38d170bc145c50a5846caf6d8fe58d26efd758d2') throw Error('evidence-storage-helper-drift');
+  await (await import(`file://${evidenceStorageHelper}`)).ensureEvidenceAliases();
     const [canonicalSkill, installedSkill, canonicalEntry, installedEntry] = await Promise.all([
       fs.readFile(CANONICAL_SKILL),
       fs.readFile(INSTALLED_SKILL),
