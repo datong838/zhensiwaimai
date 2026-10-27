@@ -1,0 +1,231 @@
+{
+  "date": "2026-10-27",
+  "startedAt": "2026-10-27 22:02:41",
+  "kind": "2200-maintenance",
+  "maintenance2200Completed": false,
+  "allFourPostsComplete": false,
+  "productionActions": 0,
+  "credentialReads": 0,
+  "chromeRestarts": 0,
+  "leaseMethod": "original-director-group-and-original-post-module-in-native-owner-process",
+  "daemonBefore": {
+    "pid": 54029,
+    "startedAt": "2026-10-27T19:37:47",
+    "heartbeat": "2026-10-27T22:00:04",
+    "liveSteps": 0,
+    "groupLocks": 0
+  },
+  "posts": [
+    {
+      "port": 9230,
+      "status": "needs-login",
+      "checkedAt": "2026-10-27T14:02:45.061Z",
+      "leaseOwnerPid": 91106,
+      "originalPhysicalLeaseHeld": true,
+      "domain": "melody.shop.ele.me",
+      "path": "/login",
+      "hash": "",
+      "businessPagesBefore": 1,
+      "businessPagesAfter": 1,
+      "reloads": 1,
+      "reloadOk": true,
+      "reloadError": null,
+      "before": {
+        "bodyLength": 172,
+        "businessMarkers": [
+          "店铺",
+          "门店",
+          "首页"
+        ],
+        "login": false,
+        "verification": false,
+        "noPermission": false,
+        "visibleRiskModal": 0,
+        "visibleOverlayCount": 0
+      },
+      "after": {
+        "bodyLength": 77,
+        "businessMarkers": [],
+        "login": true,
+        "verification": false,
+        "noPermission": false,
+        "visibleRiskModal": 0,
+        "visibleOverlayCount": 0
+      },
+      "frames": [],
+      "externalCondition": "existing brand business page redirected to merchant login after one normal reload; manual login required"
+    },
+    {
+      "port": 9231,
+      "status": "healthy",
+      "checkedAt": "2026-10-27T14:03:28.503Z",
+      "leaseOwnerPid": 91260,
+      "originalPhysicalLeaseHeld": true,
+      "domain": "open.shop.ele.me",
+      "path": "/manager/base/home",
+      "hash": "",
+      "businessPagesBefore": 1,
+      "businessPagesAfter": 1,
+      "reloads": 1,
+      "reloadOk": true,
+      "reloadError": null,
+      "before": {
+        "bodyLength": 1673,
+        "businessMarkers": [
+          "收入",
+          "店铺",
+          "门店",
+          "经营",
+          "代运营",
+          "首页",
+          "淘宝"
+        ],
+        "login": false,
+        "verification": false,
+        "noPermission": false,
+        "visibleRiskModal": 0,
+        "visibleOverlayCount": 0
+      },
+      "after": {
+        "bodyLength": 1612,
+        "businessMarkers": [
+          "收入",
+          "店铺",
+          "门店",
+          "经营",
+          "代运营",
+          "首页",
+          "淘宝"
+        ],
+        "login": false,
+        "verification": false,
+        "noPermission": false,
+        "visibleRiskModal": 0,
+        "visibleOverlayCount": 0
+      },
+      "frames": []
+    },
+    {
+      "port": 9232,
+      "status": "healthy",
+      "checkedAt": "2026-10-27T14:03:48.166Z",
+      "leaseOwnerPid": 91334,
+      "originalPhysicalLeaseHeld": true,
+      "domain": "data.guoshuyufen.com",
+      "path": "/",
+      "hash": "#/businessData/realTimeData",
+      "businessPagesBefore": 2,
+      "businessPagesAfter": 2,
+      "reloads": 1,
+      "reloadOk": true,
+      "reloadError": null,
+      "before": {
+        "bodyLength": 141466,
+        "businessMarkers": [
+          "收入",
+          "店铺",
+          "门店",
+          "美团",
+          "淘宝"
+        ],
+        "login": false,
+        "verification": false,
+        "noPermission": false,
+        "visibleRiskModal": 0,
+        "visibleOverlayCount": 0
+      },
+      "after": {
+        "bodyLength": 141436,
+        "businessMarkers": [
+          "收入",
+          "店铺",
+          "门店",
+          "美团",
+          "淘宝"
+        ],
+        "login": false,
+        "verification": false,
+        "noPermission": false,
+        "visibleRiskModal": 0,
+        "visibleOverlayCount": 0
+      },
+      "frames": []
+    },
+    {
+      "port": 9233,
+      "status": "healthy",
+      "checkedAt": "2026-10-27T14:05:11.382Z",
+      "leaseOwnerPid": 91596,
+      "originalPhysicalLeaseHeld": true,
+      "resetAttempts": 1,
+      "sourceSha256": "b3e27be0826cec1ee28f204570860d49492510620f9a6cc2ce3797eab58e4d71",
+      "businessPagesBefore": 1,
+      "businessPagesAfter": 1,
+      "unrelatedPagesBefore": 20,
+      "unrelatedPagesAfter": 20,
+      "allUnrelatedPagesPreserved": true,
+      "before": {
+        "bodyLength": 10814,
+        "businessMarkers": [
+          "店铺",
+          "接待",
+          "会话",
+          "消息",
+          "客服",
+          "门店",
+          "美团"
+        ],
+        "login": false,
+        "verification": false,
+        "noPermission": false,
+        "visibleRiskModal": 0,
+        "visibleOverlayCount": 0
+      },
+      "resetResult": {
+        "ok": true,
+        "closed": 1,
+        "remainingIMPages": 1,
+        "initialHealth": {
+          "ok": true,
+          "url": "https://waimaie.meituan.com/imworkbench/home?appId=4&clientType=140006#/im/page/workbench/reception",
+          "textLength": 1018,
+          "hit": "顾客消息",
+          "blocked": false
+        },
+        "finalHealth": {
+          "ok": true,
+          "url": "https://waimaie.meituan.com/imworkbench/home?appId=4&clientType=140006#/im/page/workbench/reception",
+          "textLength": 1018,
+          "hit": "顾客消息",
+          "blocked": false
+        }
+      },
+      "after": {
+        "bodyLength": 1018,
+        "businessMarkers": [
+          "店铺",
+          "接待",
+          "会话",
+          "消息",
+          "客服",
+          "美团"
+        ],
+        "login": false,
+        "verification": false,
+        "noPermission": false,
+        "visibleRiskModal": 0,
+        "visibleOverlayCount": 0
+      }
+    }
+  ],
+  "imResetPassed": true,
+  "checkedAt": "2026-10-27T14:05:11.400Z",
+  "remaining": [
+    {
+      "port": 9230,
+      "action": "manual-login-in-existing-brand-profile",
+      "blocksTomorrowFirstDue": "08:00 brand Top10 and dependent brand flows"
+    }
+  ],
+  "imResetMustNotRepeat": true
+}
