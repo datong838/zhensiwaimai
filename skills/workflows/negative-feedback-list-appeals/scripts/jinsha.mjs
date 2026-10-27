@@ -180,14 +180,36 @@ export async function existingStatus(file) {
  * 单日账本（existingStatus）无法挡住跨日的重复申诉。任何历史日期里已是终态
  * （verified_submitted / blocked / unknown / submitted_once）的键都禁止再次提交。
  */
-export async function existingStatusAnyDate(key) {
+export async function existingRecordAnyDate(key, root = RECORDS) {
+  if (!/^[a-f0-9]{12}$/.test(key)) throw Error('feedback-record-key-invalid');
   try {
-    const dates = await fs.readdir(RECORDS);
+    const dates = await fs.readdir(root);
     for (const date of dates.sort().reverse()) {
-      const file = path.join(RECORDS, date, `${key}.md`);
-      const status = await existingStatus(file);
-      if (status) return status;
+      const dir = path.join(root, date);
+      const file = path.join(dir, `${key}.md`);
+      let text;
+      try {
+        if (!(await fs.stat(dir)).isDirectory()) continue;
+        if ((await fs.lstat(dir)).isSymbolicLink() || (await fs.lstat(file)).isSymbolicLink())
+          return { status: 'unknown', key, businessDate: null, sourcePath: file, reason: 'symlink-record-not-historical-proof' };
+        text = await fs.readFile(file, 'utf8');
+      } catch (error) { if (error.code === 'ENOENT') continue; throw error; }
+      const status = parseRecordStatus(text);
+      if (!status) continue;
+      const field = label => (text.match(new RegExp(`^- ${label}：([^\\n\\r]+)`, 'm')) || [])[1]?.trim() || '';
+      const platform = PLATFORMS.find(p => p.label === field('平台'))?.key;
+      const identity = { platform, store: field('门店'), date: field('评价日期'), orderNo: field('订单编号'), category: field('问题分类') };
+      const validDay = /^\d{4}-\d{2}-\d{2}$/.test(date)
+        && !Number.isNaN(Date.parse(date)) && new Date(date).toISOString().slice(0, 10) === date;
+      const bound = validDay && field('业务日期') === date && field('记录键') === key
+        && Object.values(identity).every(Boolean) && stableRecordKey(identity) === key;
+      return { status, key, businessDate: bound ? date : null, sourcePath: file,
+        sourceSha256: crypto.createHash('sha256').update(text).digest('hex') };
     }
   } catch (error) { if (error.code !== 'ENOENT') throw error; }
-  return '';
+  return null;
+}
+
+export async function existingStatusAnyDate(key) {
+  return (await existingRecordAnyDate(key))?.status || '';
 }

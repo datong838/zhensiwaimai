@@ -956,6 +956,11 @@
     {
       "kind": "runtime-platform-login-and-focus",
       "state": "must-fresh-check-before-due-no-credential-reading"
+    },
+    {
+      "kind": "negative-feedback-historical-unknown",
+      "state": "minimal-fix-installed-real-execution-pending",
+      "evidence": "runtime/state/negative-feedback-history-isolation-20261027/receipt.json"
     }
   ],
   "claim": "static-current-state-precheck-only-not-tomorrow-production-success",
@@ -970,5 +975,11 @@
     "maintenanceAcceptance": "desktop-wechat-shared-preflight",
     "sharedTextAcceptance": "wechat-messaging-desktop-text",
     "sharedMediaAcceptance": "not-required-by-text-only-merchant-workflow"
+  },
+  "brandLoginResolution": {
+    "resolvedAt": "2026-10-27T23:30:48+08:00",
+    "status": "user-restored-headless-business-iframe-healthy",
+    "evidence": "runtime/state/night-maintenance-2026-10-27/9230-final-health.json",
+    "mustRecheckBeforeDue": true
   }
 }

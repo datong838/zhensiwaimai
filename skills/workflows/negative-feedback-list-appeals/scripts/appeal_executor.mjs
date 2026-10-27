@@ -9,7 +9,7 @@
 // 跨日账本（existingStatusAnyDate）：淘宝「全部」视图不呈现申诉状态，所有卡片都带
 // 「立即申诉」，故必须用历史任意日期的本地记录去重，禁止对同订单重复提交。
 import {
-  PLATFORMS, RANGE_DAYS, RECORDS, atomicWrite, businessDate, clean, eligible, existingStatusAnyDate,
+  PLATFORMS, RANGE_DAYS, RECORDS, atomicWrite, businessDate, clean, eligible, existingRecordAnyDate,
   excerpt, now, parsePassRate, sleep, stableRecordKey,
 } from './jinsha.mjs';
 import { assertState, openFilteredPage, readState } from './page_state.mjs';
@@ -50,6 +50,25 @@ export function buildMarkdown(r) {
 }
 
 const recordFile = (business, key) => `${RECORDS}/${business}/${key}.md`;
+
+// Only bound older records are deferred. Current/undated unknown still stops.
+export function recordPriorOutcome(record, key, target, platformKey, business, receipt) {
+  if (!record) return 'new';
+  const prior = record.status;
+  const historical = prior === 'unknown' && record.key === key
+    && /^\d{4}-\d{2}-\d{2}$/.test(record.businessDate || '')
+    && record.businessDate < business && /^[a-f0-9]{64}$/.test(record.sourceSha256 || '');
+  if (historical) {
+    receipt.historicalUnknown.push({ key, state: 'unknown', businessDate: record.businessDate,
+      sourcePath: record.sourcePath, sourceSha256: record.sourceSha256, readOnly: true });
+  } else if (prior === 'unknown') receipt.unknown.push(key);
+  else if (prior === 'verified_submitted') receipt.verified_submitted.push(key);
+  else if (prior === 'blocked') receipt.blocked.push(key);
+  else receipt.skipped.push(key);
+  receipt.platforms[platformKey].candidates.push({ key, store: target.store, outcome: prior,
+    ...(historical ? { historicalDeferred: true } : {}) });
+  return prior === 'unknown' && !historical ? 'stop' : 'continue';
+}
 
 /** 定位目标卡片内的唯一可见 .appeal_btn 并点击（不按索引、不按坐标）。 */
 export async function clickAppeal(cdp, target) {
@@ -213,15 +232,11 @@ async function processPlatform(cdp, platformKey, window, receipt) {
       if (doneThisRun.has(key)) continue;
 
       // 既有记录只读复用；unknown保持未知，禁止自动再次提交。
-      const prior = await existingStatusAnyDate(key);
-      if (prior) {
-        if (prior === 'unknown') receipt.unknown.push(key);
-        else if (prior === 'verified_submitted') receipt.verified_submitted.push(key);
-        else if (prior === 'blocked') receipt.blocked.push(key);
-        else receipt.skipped.push(key); // submitted_once 等
-        receipt.platforms[platformKey].candidates.push({ key, store: target.store, outcome: prior });
+      const prior = await existingRecordAnyDate(key);
+      const disposition = recordPriorOutcome(prior, key, target, platformKey, business, receipt);
+      if (disposition !== 'new') {
         doneThisRun.add(key);
-        if (prior === 'unknown') break;
+        if (disposition === 'stop') break;
         continue;
       }
 
@@ -332,7 +347,7 @@ export async function execute({ platforms = DEFAULT_EXECUTION_PLATFORMS, window 
   const win = window || recentRange();
   const receipt = {
     ok: false, businessDate: businessDate(), window: win, endpoint: 'http://127.0.0.1:9232',
-    verified_submitted: [], skipped: [], blocked: [], unknown: [], warnings: [], platforms: excludedPlatforms(platforms),
+    verified_submitted: [], skipped: [], blocked: [], unknown: [], historicalUnknown: [], warnings: [], platforms: excludedPlatforms(platforms),
     runtimeModelDecisions: 0, startedAt: now(),
   };
   const cdp = await Cdp.open();
