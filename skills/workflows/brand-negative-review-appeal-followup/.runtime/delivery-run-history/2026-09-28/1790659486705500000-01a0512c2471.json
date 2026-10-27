@@ -1,0 +1,36 @@
+{
+  "ok": false,
+  "status": "blocked",
+  "businessDate": "2026-09-28",
+  "runtimeModelDecisions": 0,
+  "review": [
+    {
+      "stage": "读取并校验日报",
+      "status": "completed",
+      "elapsedMs": 0,
+      "pitfalls": []
+    }
+  ],
+  "events": [],
+  "reason": "ledger-payload-digest-conflict",
+  "elapsedMs": 2,
+  "completionReview": {
+    "codeEnforced": true,
+    "totalElapsedMs": 2,
+    "result": "blocked",
+    "reviewItems": [
+      {
+        "stage": "读取并校验日报",
+        "status": "completed",
+        "elapsedMs": 0,
+        "pitfalls": []
+      }
+    ],
+    "deliveryEvidenceCounts": null,
+    "businessWorkComplete": false,
+    "recoveredPitfalls": [],
+    "unresolvedPitfalls": []
+  },
+  "summaryPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/brand-negative-review-appeal-followup/.runtime/delivery-2026-09-28-workflow-summary.json",
+  "summaryArchivePath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/brand-negative-review-appeal-followup/.runtime/delivery-run-history/2026-09-28/1790659486705500000-01a0512c2471.json"
+}

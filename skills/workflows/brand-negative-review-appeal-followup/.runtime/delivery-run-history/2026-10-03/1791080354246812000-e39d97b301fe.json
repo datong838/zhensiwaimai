@@ -1,0 +1,146 @@
+{
+  "ok": false,
+  "status": "blocked",
+  "businessDate": "2026-10-03",
+  "runtimeModelDecisions": 0,
+  "review": [
+    {
+      "stage": "读取并校验日报",
+      "status": "completed",
+      "elapsedMs": 0,
+      "pitfalls": []
+    },
+    {
+      "stage": "冻结初始/续发请求",
+      "status": "completed",
+      "elapsedMs": 13,
+      "pitfalls": []
+    },
+    {
+      "stage": "精确请求策略登记",
+      "status": "completed",
+      "elapsedMs": 3,
+      "pitfalls": []
+    },
+    {
+      "stage": "总执行器执行:brand-negative-appeal-2026-10-03-all-outcomes-v1",
+      "status": "failed",
+      "elapsedMs": 3301,
+      "pitfalls": [
+        "windows-wechat-not-ready"
+      ]
+    },
+    {
+      "stage": "CSV回执状态投影",
+      "status": "completed",
+      "elapsedMs": 13,
+      "pitfalls": []
+    }
+  ],
+  "events": [
+    {
+      "eventId": "brand-negative-appeal-2026-10-03-all-outcomes-v1",
+      "requestDigest": "27ce5e5896ed9542ce22566259aef4d517f37f9a1748ca12fc8b722b53dc434c",
+      "result": {
+        "ok": false,
+        "status": "blocked",
+        "reason": "windows-wechat-not-ready",
+        "sendAttempts": -1,
+        "elapsedMs": 3299,
+        "returnCode": null,
+        "items": [],
+        "review": [
+          {
+            "stage": "Windows 传输执行:execute",
+            "status": "failed",
+            "pitfalls": [
+              "windows-wechat-not-ready"
+            ],
+            "elapsedMs": 3298
+          }
+        ]
+      }
+    }
+  ],
+  "reason": "windows-wechat-not-ready",
+  "csv": {
+    "ok": true,
+    "changed": 0,
+    "counts": {
+      "已发送": 0,
+      "核验未知": 0,
+      "未发送": 7
+    },
+    "evidenceCounts": {
+      "machineVerified": 0,
+      "humanConfirmedDelivered": 0,
+      "needsReconcile": 0,
+      "untouched": 7
+    }
+  },
+  "itemStates": {
+    "d3122ce12a0e38882085e387840e38b8754238fbbb689a68b0dd88d67b3fa047": "untouched",
+    "84d8a15bc951d2e4e84d1dcb549206a22799f45baca888eea9a5873dcff3be26": "untouched",
+    "16952137b2dd5bca5c75c2fcca1b81e9ad6b04c72ca698473ec1a1baf18e304d": "untouched",
+    "17c42044d67e09e9795866618f5ccf82f3eec4230a622e15a7a0ecb366b4d8f7": "untouched",
+    "793e235a6d05e438819f80db0ec028eabf10ce1a71c9aa0c59e31205f8928561": "untouched",
+    "6b9143c72dfe572a5d5c1a2d19164aaf1a6b0e3290da5d773701f62b10f31254": "untouched",
+    "8d8f7c1be999c01dde3fd3d59c1967a02fbd0b51f8523d86a37f18b27c19e9ef": "untouched"
+  },
+  "elapsedMs": 3353,
+  "completionReview": {
+    "codeEnforced": true,
+    "totalElapsedMs": 3353,
+    "result": "blocked",
+    "reviewItems": [
+      {
+        "stage": "读取并校验日报",
+        "status": "completed",
+        "elapsedMs": 0,
+        "pitfalls": []
+      },
+      {
+        "stage": "冻结初始/续发请求",
+        "status": "completed",
+        "elapsedMs": 13,
+        "pitfalls": []
+      },
+      {
+        "stage": "精确请求策略登记",
+        "status": "completed",
+        "elapsedMs": 3,
+        "pitfalls": []
+      },
+      {
+        "stage": "总执行器执行:brand-negative-appeal-2026-10-03-all-outcomes-v1",
+        "status": "failed",
+        "elapsedMs": 3301,
+        "pitfalls": [
+          "windows-wechat-not-ready"
+        ]
+      },
+      {
+        "stage": "CSV回执状态投影",
+        "status": "completed",
+        "elapsedMs": 13,
+        "pitfalls": []
+      }
+    ],
+    "deliveryEvidenceCounts": {
+      "machineVerified": 0,
+      "humanConfirmedDelivered": 0,
+      "needsReconcile": 0,
+      "untouched": 7
+    },
+    "businessWorkComplete": false,
+    "recoveredPitfalls": [],
+    "unresolvedPitfalls": [
+      {
+        "stage": "总执行器执行:brand-negative-appeal-2026-10-03-all-outcomes-v1",
+        "code": "windows-wechat-not-ready"
+      }
+    ]
+  },
+  "summaryPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/brand-negative-review-appeal-followup/.runtime/delivery-2026-10-03-workflow-summary.json",
+  "summaryArchivePath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/brand-negative-review-appeal-followup/.runtime/delivery-run-history/2026-10-03/1791080354246812000-e39d97b301fe.json"
+}

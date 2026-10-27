@@ -1,0 +1,118 @@
+{
+  "itemId": "appeal-bcdc44398f00ce4f3654",
+  "sha256": "c3f09c553527a34dc12bca62ccd30bd3104cdd8cc217398d397ff216ce509531",
+  "type": "text",
+  "status": "unknown",
+  "claimedAt": 1790474474.7868311,
+  "sendAttempts": 0,
+  "verificationLevel": "native-text-exact",
+  "reason": "desktop-reconcile-copied-text-mismatch",
+  "evidence": {
+    "ok": false,
+    "reason": "desktop-reconcile-copied-text-mismatch"
+  },
+  "transport": {
+    "ok": false,
+    "executor": "wechat-desktop-sender",
+    "channel": "desktop",
+    "groupName": "李老哈（品牌）💰臻肆外卖运营对接群",
+    "payloadType": "text",
+    "sendAttempts": 1,
+    "runtimeModelDecisions": 0,
+    "stage": "post_send_verify",
+    "stageMs": {
+      "locate_group": 720,
+      "verify_target_and_input": 1909,
+      "prepare_payload": 1737,
+      "claim_and_send": 3750,
+      "post_send_verify": 6224
+    },
+    "payloadIdentity": "1aa3c98a9649125106cdac2e8abfe8aad9d2d6a51ddc71359e3d6009e18f245a",
+    "payloads": [
+      {
+        "text": "--- 2026-09-26 中评申诉进度通知 ---\n李老哈·东北农家小院(成山路店)\n【美团】\n评价时间: 2026-09-26\n评价等级: 3星\n申诉结果：---差评免责---\n评价内容: ",
+        "sha256": "c3f09c553527a34dc12bca62ccd30bd3104cdd8cc217398d397ff216ce509531"
+      }
+    ],
+    "groupPreflight": {
+      "ok": true,
+      "reason": null,
+      "sendAttempts": 0,
+      "group": "李老哈（品牌）💰臻肆外卖运营对接群",
+      "header": "李老哈（品牌）💰臻肆外卖运营对接群(37)",
+      "note": "ax-current-group-fast-path",
+      "groupTypeVerified": true,
+      "groupTypeProof": "member-count-header",
+      "composerVerifiedEmpty": true,
+      "attempts": []
+    },
+    "textInputVerified": true,
+    "textWriteAttempts": 1,
+    "clipboardClearedBeforeTextWrite": true,
+    "preparedInputChangedPixels": 11816,
+    "preparedInputChangedRatio": 0.031989,
+    "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/e092a62f019965b05fc61c7001476d8701ce4d0627e1ac7e522aa114d9c2b812/9595e432d606f2ff690909a7ff2eff43c3a7bc7024711dbf253df5326fb9ecc8/transport-ledger/attempt.json",
+    "postSendInputCleared": [
+      true,
+      true
+    ],
+    "postSendFailureReason": "desktop-post-send-verification-unknown",
+    "reason": "desktop-post-send-verification-unknown",
+    "state": "unknown",
+    "elapsedMs": 14340,
+    "sendReview": [
+      {
+        "item": 1,
+        "stage": "locate_group",
+        "label": "精确定位目标群",
+        "elapsedMs": 720,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 2,
+        "stage": "verify_target_and_input",
+        "label": "复核目标群与输入框",
+        "elapsedMs": 1909,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 3,
+        "stage": "prepare_payload",
+        "label": "准备并复核发送载荷",
+        "elapsedMs": 1737,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 4,
+        "stage": "claim_and_send",
+        "label": "领取防重账本并单次发送",
+        "elapsedMs": 3750,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 5,
+        "stage": "post_send_verify",
+        "label": "发送后双帧复核",
+        "elapsedMs": 6224,
+        "status": "failed",
+        "pitfalls": [
+          {
+            "code": "send-failure",
+            "reason": "desktop-post-send-verification-unknown"
+          }
+        ]
+      }
+    ],
+    "reviewSummary": {
+      "totalElapsedMs": 14340,
+      "itemCount": 5,
+      "pitfallCount": 1,
+      "result": "failed"
+    }
+  },
+  "reconciled": true
+}

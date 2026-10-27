@@ -1,0 +1,58 @@
+{
+  "taskId": "7586e9bd-430c-46b2-833d-c8418204c048",
+  "stage": "send",
+  "request": {
+    "schemaVersion": 1,
+    "operation": "send",
+    "groupName": "临时测试群请忽略 💰发财精英荟💰",
+    "items": [
+      {
+        "itemId": "excel",
+        "type": "file",
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/outputs/01a1741c-81d1-73e0-812d-cda97f810171/NATIVE-20261026-T01.xlsx",
+        "name": "NATIVE-20261026-T01.xlsx",
+        "size": 4578,
+        "sha256": "5a75fbdf9b8446eb4bd0cf379c3cbca353bc52e2fe913cb326571320b571d279"
+      },
+      {
+        "itemId": "image",
+        "type": "image",
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/outputs/01a1741c-81d1-73e0-812d-cda97f810171/NATIVE-20261026-T01.png",
+        "name": "NATIVE-20261026-T01.png",
+        "size": 59418,
+        "sha256": "012956d33b72ae2662a4780a3b0bbb6d5107e7dd1a8f705e3c0c4746ec7f84c0"
+      },
+      {
+        "itemId": "text",
+        "type": "text",
+        "text": "【原生UI连续交付 NATIVE-20261026-T01】合成测试：Excel、图片、文字在同一调用内连续执行；无客户数据与商家标识。",
+        "sha256": "05beb59612dfef6c0c3e5cc52693b8cbc783650ff8cc610b31aecb9c20e45034"
+      }
+    ],
+    "context": {
+      "workflowId": "native-ui-acceptance-20261026",
+      "eventId": "NATIVE-20261026-T01",
+      "accountAlias": "main",
+      "channel": "desktop",
+      "deadlineAt": 1792951777.0
+    }
+  },
+  "item": {
+    "itemId": "excel",
+    "type": "file",
+    "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/native-ui-acceptance-2026-10-26/delivery-ledger/events/3c954c103ef43bc2432ea836396dbfd37ff09db5a7a2d2f804ec844f46ac8b10/ca294ba4350511d4d196726f7fb67df5417d44f2691b629ddd52b2c5cd5d3593/payload/NATIVE-20261026-T01.xlsx",
+    "name": "NATIVE-20261026-T01.xlsx",
+    "size": 4578,
+    "sha256": "5a75fbdf9b8446eb4bd0cf379c3cbca353bc52e2fe913cb326571320b571d279"
+  },
+  "deadlineAt": null,
+  "lifetime": "owner-process",
+  "owner": {
+    "pid": 27271,
+    "parentPid": 27261,
+    "identity": "Mon Oct 26 01:40:34 2026",
+    "parentIdentity": "Mon Oct 26 01:40:34 2026"
+  },
+  "expectedPresentation": "file-card",
+  "binding": "d4dae6b941a7a439e97a56b7254748f6bece95001346d9ae6e6a4a304d135f54"
+}

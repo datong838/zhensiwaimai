@@ -1,0 +1,103 @@
+{
+  "ok": false,
+  "executor": "wechat-desktop-sender",
+  "channel": "desktop",
+  "groupName": "李老哈（品牌）💰臻肆外卖运营对接群",
+  "payloadType": "text",
+  "sendAttempts": 1,
+  "runtimeModelDecisions": 0,
+  "stage": "post_send_verify",
+  "stageMs": {
+    "locate_group": 764,
+    "verify_target_and_input": 1908,
+    "prepare_payload": 1711,
+    "claim_and_send": 5252,
+    "post_send_verify": 6245
+  },
+  "payloadIdentity": "d5beb8f682340738e0e982025274b3261c181f5d9595e3dd41e669c63cec003f",
+  "payloads": [
+    {
+      "text": "--- 2026-09-22 差评申诉进度通知 ---\n李老哈·东北菜(三宸里店)\n【美团】\n评价时间: 2026-09-22\n评价等级: 1星\n申诉结果：---未申诉---\n评价内容: 菜少，价贵，最主要，点了六个菜，默认给了两双筷子。",
+      "sha256": "3435f32063fe8ca4d69c011844e98792db4e3dd475924dfcdceeb9f251b70488"
+    }
+  ],
+  "groupPreflight": {
+    "ok": true,
+    "reason": null,
+    "sendAttempts": 0,
+    "group": "李老哈（品牌）💰臻肆外卖运营对接群",
+    "header": "李老哈（品牌）💰臻肆外卖运营对接群(37)",
+    "note": "ax-current-group-fast-path",
+    "groupTypeVerified": true,
+    "groupTypeProof": "member-count-header",
+    "composerVerifiedEmpty": true,
+    "attempts": []
+  },
+  "textInputVerified": true,
+  "textWriteAttempts": 1,
+  "clipboardClearedBeforeTextWrite": true,
+  "preparedInputChangedPixels": 18980,
+  "preparedInputChangedRatio": 0.05116,
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/e9dc86174ebf0cc0829adeabd72c4d321dcac1badc98a67dcf795257cbae78e0/18c52b367a2850b1a5945be312d8fa107b75ae6c26d54cd7baca8e714da3791f/transport-ledger/attempt.json",
+  "postSendInputCleared": [
+    true,
+    true
+  ],
+  "postSendFailureReason": "desktop-post-send-verification-unknown",
+  "reason": "desktop-post-send-verification-unknown",
+  "state": "unknown",
+  "elapsedMs": 15882,
+  "sendReview": [
+    {
+      "item": 1,
+      "stage": "locate_group",
+      "label": "精确定位目标群",
+      "elapsedMs": 764,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 2,
+      "stage": "verify_target_and_input",
+      "label": "复核目标群与输入框",
+      "elapsedMs": 1908,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 3,
+      "stage": "prepare_payload",
+      "label": "准备并复核发送载荷",
+      "elapsedMs": 1711,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 4,
+      "stage": "claim_and_send",
+      "label": "领取防重账本并单次发送",
+      "elapsedMs": 5252,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 5,
+      "stage": "post_send_verify",
+      "label": "发送后双帧复核",
+      "elapsedMs": 6245,
+      "status": "failed",
+      "pitfalls": [
+        {
+          "code": "send-failure",
+          "reason": "desktop-post-send-verification-unknown"
+        }
+      ]
+    }
+  ],
+  "reviewSummary": {
+    "totalElapsedMs": 15882,
+    "itemCount": 5,
+    "pitfallCount": 1,
+    "result": "failed"
+  }
+}

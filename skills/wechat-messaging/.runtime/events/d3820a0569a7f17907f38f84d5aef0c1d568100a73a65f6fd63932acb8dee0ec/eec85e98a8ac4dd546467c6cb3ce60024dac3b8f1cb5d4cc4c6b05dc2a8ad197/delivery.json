@@ -1,0 +1,73 @@
+{
+  "itemId": "image",
+  "sha256": "db7443bfd67d1e638e57362d8db1c67d645020a8992a0482526b3dc4bba768d6",
+  "type": "image",
+  "status": "verified",
+  "claimedAt": 1789567007.651049,
+  "sendAttempts": 1,
+  "verificationLevel": "opened-image-content-match",
+  "evidence": {
+    "thumbnailObservations": [
+      {
+        "bestDistance": 9.919,
+        "secondDistance": 24.189,
+        "bestPoint": [
+          242,
+          246
+        ],
+        "screenshotSha256": "61b826291aa269d65a381dbcb645dc614907e97ce80588ef4702dcda74853a09",
+        "accepted": true
+      },
+      {
+        "bestDistance": 9.919,
+        "secondDistance": 24.189,
+        "bestPoint": [
+          242,
+          246
+        ],
+        "screenshotSha256": "0ba65fb56635d8df5a2763762940c941e1b858e30a2c4fb467f0f7023e43e51f",
+        "accepted": true
+      }
+    ],
+    "readbackEvents": [
+      {
+        "event": "page",
+        "page": "target-chat"
+      },
+      {
+        "event": "open",
+        "attempt": 1,
+        "point": [
+          650,
+          1816
+        ],
+        "distance": 1.137,
+        "screenshotSha256": "8647242d6cd4a42f512034e56d0bdc19a69041e48b44aeb6a4dbba2739dd2b5b"
+      },
+      {
+        "event": "page",
+        "page": "non-chat-unconfirmed"
+      }
+    ],
+    "viewerOpenAttempts": 1,
+    "sentBubbleDistance": 1.137,
+    "largeImage": {
+      "ok": true,
+      "distance": 0.011,
+      "matched": [],
+      "cropY": 753,
+      "page": "non-chat-unconfirmed"
+    },
+    "preview": {
+      "ok": true,
+      "distance": 1.034,
+      "matched": [],
+      "cropY": 693
+    },
+    "thumbnailDistance": 9.919,
+    "thumbnailMethod": "visual-unique",
+    "originalRequired": false
+  },
+  "deviceHash": "f2724cf436e9",
+  "userId": 0
+}

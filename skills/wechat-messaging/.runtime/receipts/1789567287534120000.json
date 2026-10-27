@@ -1,0 +1,46 @@
+{
+  "ok": false,
+  "status": "blocked",
+  "groupName": "臻肆测试群",
+  "channel": "mobile",
+  "requestDigest": "374a7fa022cd7840208548e163ef8bbcdcb7e1912aa0820c701e66a74c01671b",
+  "runtimeModelDecisions": 0,
+  "items": [],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:text",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:image",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "stage": "freeze:file",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "failed",
+      "pitfalls": [
+        "main-wechat-foreground-task-not-verified"
+      ],
+      "elapsedMs": 1903
+    }
+  ],
+  "reason": "main-wechat-foreground-task-not-verified",
+  "elapsedMs": 4332,
+  "eventKey": "111b7c453910046bcc43559b0c2de79facd3aeba3ed039551b57eed976af453f"
+}

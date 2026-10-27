@@ -1,0 +1,33 @@
+{
+  "group": "电销+直播攻坚组",
+  "text": "城市：淄博市  ；  联系人：刘，13176568333  ；  店铺：半亩地·米线  ；  地址：云涛生活区南服务网7号商铺  ；  商家ID：544340117",
+  "dry_run": false,
+  "modifiers_cleared": false,
+  "ts": "2026-10-23T17:16:12",
+  "steps": [
+    {
+      "navigate": "chat-area-evidence"
+    },
+    {
+      "write": true,
+      "info": "pos=(532.0, 716.0) attempt=1 len=82 head='城市：淄博市  ；  联系人：刘，131'"
+    },
+    {
+      "send_mode": "enter->cmd-enter->ctrl-enter"
+    }
+  ],
+  "wecom_activated": true,
+  "verify": {
+    "frame1": true,
+    "frame2_input_cleared": true,
+    "verified": true,
+    "tail1": [
+      "@所有人 ",
+      "由微信用户创建的外部群，含14位外部联系人 | 群主: 李知恒- AllenLi@微信",
+      "电销+直播攻坚组",
+      "250.0"
+    ]
+  },
+  "result": "verified",
+  "frontmost_restored": true
+}

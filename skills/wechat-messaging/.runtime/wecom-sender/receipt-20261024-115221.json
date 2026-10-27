@@ -1,0 +1,46 @@
+{
+  "group": "电销+直播攻坚组",
+  "text": "城市：丽江市  ；  联系人：李，19988788186  ；  店铺：罐里香·罐罐米线·罐罐饭  ；  地址：束河街道办事处艺海小吃城6号摊位武大郎烧饼旁  ；  商家ID：544101544",
+  "dry_run": false,
+  "modifiers_cleared": false,
+  "ts": "2026-10-24T11:51:47",
+  "steps": [
+    {
+      "navigate": "chat-title-verified:'电销+直播攻坚组'"
+    },
+    {
+      "title_gate": "电销+直播攻坚组"
+    },
+    {
+      "write": true,
+      "info": "pos=(310.0, 601.0) attempt=1 len=97 head='城市：丽江市  ；  联系人：李，199'"
+    },
+    {
+      "title_gate_final": "电销+直播攻坚组"
+    },
+    {
+      "send_mode": "enter-once",
+      "send_attempts": [
+        {
+          "try": "enter",
+          "input_clean": true
+        }
+      ]
+    }
+  ],
+  "wecom_activated": true,
+  "resolvedGroup": "电销+直播攻坚组",
+  "verify": {
+    "frame1": true,
+    "frame2_input_cleared": true,
+    "verified": true,
+    "tail1": [
+      "城市：连云港市  ；  联系人：老板，18400694193-4911 -，15151281177  ；  店铺：于炒炒爆炒浇头面  ；  地址：新安镇新东北路东侧(恒基广场四楼L4-35号商铺）  ；  商家ID：542631428",
+      "由微信用户创建的外部群，含14位外部联系人 | 群主: 李知恒- AllenLi@微信",
+      "电销+直播攻坚组",
+      "250.0"
+    ]
+  },
+  "result": "verified",
+  "frontmost_restored": true
+}

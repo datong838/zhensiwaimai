@@ -1,0 +1,130 @@
+{
+  "ok": true,
+  "status": "complete",
+  "businessDate": "2026-10-18",
+  "runtimeModelDecisions": 0,
+  "review": [
+    {
+      "stage": "读取并校验日报",
+      "status": "completed",
+      "elapsedMs": 1,
+      "pitfalls": []
+    },
+    {
+      "stage": "冻结初始/续发请求",
+      "status": "completed",
+      "elapsedMs": 278,
+      "pitfalls": []
+    },
+    {
+      "stage": "精确请求策略登记",
+      "status": "completed",
+      "elapsedMs": 18,
+      "pitfalls": []
+    },
+    {
+      "stage": "总执行器执行:brand-negative-appeal-2026-10-18-all-outcomes-v1",
+      "status": "completed",
+      "elapsedMs": 88003,
+      "pitfalls": []
+    },
+    {
+      "stage": "CSV回执状态投影",
+      "status": "completed",
+      "elapsedMs": 23,
+      "pitfalls": []
+    }
+  ],
+  "events": [
+    {
+      "eventId": "brand-negative-appeal-2026-10-18-all-outcomes-v1",
+      "requestDigest": "4346cdb04ac5a2e1433d8ef1e5e4c740993e8b46dca90c10025c370d5139b186",
+      "result": {
+        "ok": true,
+        "status": "verified",
+        "reason": null,
+        "sendAttempts": 1,
+        "elapsedMs": 88000,
+        "returnCode": null,
+        "items": [],
+        "review": [
+          {
+            "stage": "Windows 传输执行:execute",
+            "status": "completed",
+            "pitfalls": [],
+            "elapsedMs": 88000
+          }
+        ]
+      }
+    }
+  ],
+  "csv": {
+    "ok": true,
+    "changed": 3,
+    "counts": {
+      "已发送": 3,
+      "核验未知": 0,
+      "未发送": 0
+    },
+    "evidenceCounts": {
+      "machineVerified": 3,
+      "humanConfirmedDelivered": 0,
+      "needsReconcile": 0,
+      "untouched": 0
+    }
+  },
+  "itemStates": {
+    "bfbdfe190fd24a84c29006088e342249ebd425332588d993b03c8856dd497a7e": "verified",
+    "a03384bd9f1db3a87038c1b33d1beae57dff73bcccf1c07f620e81a9cd0f1670": "verified",
+    "8b0abc2f978284f1051c9a288f4dd2fc67917cfad102477180988fd432cb5ab4": "verified"
+  },
+  "elapsedMs": 88341,
+  "completionReview": {
+    "codeEnforced": true,
+    "totalElapsedMs": 88341,
+    "result": "complete",
+    "reviewItems": [
+      {
+        "stage": "读取并校验日报",
+        "status": "completed",
+        "elapsedMs": 1,
+        "pitfalls": []
+      },
+      {
+        "stage": "冻结初始/续发请求",
+        "status": "completed",
+        "elapsedMs": 278,
+        "pitfalls": []
+      },
+      {
+        "stage": "精确请求策略登记",
+        "status": "completed",
+        "elapsedMs": 18,
+        "pitfalls": []
+      },
+      {
+        "stage": "总执行器执行:brand-negative-appeal-2026-10-18-all-outcomes-v1",
+        "status": "completed",
+        "elapsedMs": 88003,
+        "pitfalls": []
+      },
+      {
+        "stage": "CSV回执状态投影",
+        "status": "completed",
+        "elapsedMs": 23,
+        "pitfalls": []
+      }
+    ],
+    "deliveryEvidenceCounts": {
+      "machineVerified": 3,
+      "humanConfirmedDelivered": 0,
+      "needsReconcile": 0,
+      "untouched": 0
+    },
+    "businessWorkComplete": true,
+    "recoveredPitfalls": [],
+    "unresolvedPitfalls": []
+  },
+  "summaryPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/brand-negative-review-appeal-followup/.runtime/delivery-2026-10-18-workflow-summary.json",
+  "summaryArchivePath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/brand-negative-review-appeal-followup/.runtime/delivery-run-history/2026-10-18/1792409839484877000-861c5314a884.json"
+}

@@ -1,0 +1,47 @@
+{
+  "ok": true,
+  "status": "skipped",
+  "businessDate": "2026-09-29",
+  "runtimeModelDecisions": 0,
+  "review": [
+    {
+      "stage": "读取并校验日报",
+      "status": "completed",
+      "elapsedMs": 0,
+      "pitfalls": []
+    }
+  ],
+  "events": [],
+  "reason": "prior-event-authorization-expired-event-closed",
+  "closedEvents": [
+    "brand-negative-appeal-2026-09-29-all-outcomes-v1",
+    "brand-negative-appeal-2026-09-29-image-v1"
+  ],
+  "itemStates": {
+    "9a4576c4f2a1b6cc0e45dc876e617afb13b1103495feabf7220dd08d15930a53": "unresolved",
+    "3306b10e19738d296853461cabc647709c33568806670eaea41989ed12e1563b": "verified",
+    "6bb67a74b7426ed8804deebc816eac9030116d8a01847095d9527867d4775033": "verified",
+    "cc646577f04d89c21ebfceab966acb5d00f783119c69e19cffdf9643a86fff40": "verified"
+  },
+  "sendAttempts": 0,
+  "elapsedMs": 15,
+  "completionReview": {
+    "codeEnforced": true,
+    "totalElapsedMs": 15,
+    "result": "skipped",
+    "reviewItems": [
+      {
+        "stage": "读取并校验日报",
+        "status": "completed",
+        "elapsedMs": 0,
+        "pitfalls": []
+      }
+    ],
+    "deliveryEvidenceCounts": null,
+    "businessWorkComplete": false,
+    "recoveredPitfalls": [],
+    "unresolvedPitfalls": []
+  },
+  "summaryPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/brand-negative-review-appeal-followup/.runtime/delivery-2026-09-29-workflow-summary.json",
+  "summaryArchivePath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/brand-negative-review-appeal-followup/.runtime/delivery-run-history/2026-09-29/1790761898981890000-54fc78cfe1f6.json"
+}

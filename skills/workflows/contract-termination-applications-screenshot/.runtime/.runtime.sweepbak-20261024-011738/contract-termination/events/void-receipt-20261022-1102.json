@@ -1,0 +1,15 @@
+{
+ "action": "void-unverified-unknown-marker",
+ "voidedAt": "20261022-1102",
+ "voidedFile": "2026-10-22-contract-termination-ops.json.voided-20261022-1102",
+ "reason": "prior-attempt state=unknown with sendAttempts=0; Windows driver rejected at open-chat (HTTP 500 打开会话失败, 当前标题='0:50'); windows-send/transport empty => no receipt, nothing entered the chat => safe to re-attempt with fresh payload",
+ "evidence": {
+  "priorState": "unknown",
+  "priorSendAttempts": 0,
+  "priorReason": "windows-send-rejected:HTTP 500: {\"ok\": false, \"error\": \"打开会话失败，当前标题='0:50'，目标='上海臻肆外卖运营-盯个盯-饭敢当'\"}",
+  "priorSha256": "5f1cb84dc7513946d51a7c8b67dc5510556292daa48a23b319f9efb47ca6c003",
+  "transportDirEmpty": true,
+  "runDir": "runs/2026-10-22-1792633180865984000"
+ },
+ "by": "supervisor (zhensi)"
+}

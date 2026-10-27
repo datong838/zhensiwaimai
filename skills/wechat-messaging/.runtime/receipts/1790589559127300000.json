@@ -1,0 +1,267 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "FEIBING NEO AI数字员工",
+  "channel": "desktop",
+  "requestDigest": "715b08a8007329ecac45d018874d1eea6adac8e7c07df3a1b1a16e4b63ca868d",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "new-stores",
+      "sha256": "164190d58b809cf39b5b5f0048768fcffe064779ab1b59059dd964cffcbcb5de",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1790589024.103915,
+      "sendAttempts": 0,
+      "verificationLevel": "native-text-exact",
+      "evidence": {
+        "ok": true,
+        "bubblePositions": [
+          [
+            2133.0,
+            982.0
+          ],
+          [
+            2133.0,
+            982.0
+          ]
+        ],
+        "copyMenuCount": 1,
+        "composerEmpty": true,
+        "copiedTextSha256": "164190d58b809cf39b5b5f0048768fcffe064779ab1b59059dd964cffcbcb5de",
+        "scrolls": [
+          {
+            "ok": true,
+            "messageList": {
+              "x": 345.0,
+              "y": 82.0,
+              "width": 924.0,
+              "height": 468.0
+            },
+            "scrollEvents": 12,
+            "frame": 1,
+            "recoveryCycle": 1
+          },
+          {
+            "ok": true,
+            "messageList": {
+              "x": 345.0,
+              "y": 82.0,
+              "width": 924.0,
+              "height": 468.0
+            },
+            "scrollEvents": 12,
+            "frame": 1,
+            "recoveryCycle": 1
+          },
+          {
+            "ok": true,
+            "messageList": {
+              "x": 345.0,
+              "y": 82.0,
+              "width": 924.0,
+              "height": 468.0
+            },
+            "scrollEvents": 12,
+            "frame": 1,
+            "recoveryCycle": 1
+          },
+          {
+            "ok": true,
+            "messageList": {
+              "x": 345.0,
+              "y": 82.0,
+              "width": 924.0,
+              "height": 468.0
+            },
+            "scrollEvents": 12,
+            "frame": 1,
+            "recoveryCycle": 1
+          }
+        ],
+        "frameAnchors": [
+          {
+            "ok": true,
+            "candidateCount": 1,
+            "x": 2133.0,
+            "y": 982.0,
+            "matchedLineIndexes": [
+              0
+            ],
+            "matchedAnchorCount": 1,
+            "linePositions": {
+              "0": [
+                2133.0,
+                982.0
+              ]
+            },
+            "headerCount": 1,
+            "ocrAttempts": 1,
+            "headerVerifiedByAX": true,
+            "recoveryCycle": 1
+          },
+          {
+            "ok": true,
+            "candidateCount": 1,
+            "x": 2133.0,
+            "y": 982.0,
+            "matchedLineIndexes": [
+              0
+            ],
+            "matchedAnchorCount": 1,
+            "linePositions": {
+              "0": [
+                2133.0,
+                982.0
+              ]
+            },
+            "headerCount": 1,
+            "ocrAttempts": 1,
+            "headerVerifiedByAX": true,
+            "recoveryCycle": 1
+          }
+        ],
+        "stableLineIndex": 0
+      },
+      "transport": {
+        "ok": false,
+        "executor": "wechat-desktop-sender",
+        "channel": "desktop",
+        "groupName": "FEIBING NEO AI数字员工",
+        "payloadType": "text",
+        "sendAttempts": 1,
+        "runtimeModelDecisions": 0,
+        "stage": "post_send_verify",
+        "stageMs": {
+          "locate_group": 768,
+          "verify_target_and_input": 1781,
+          "prepare_payload": 1560,
+          "claim_and_send": 3367,
+          "post_send_verify": 5668
+        },
+        "payloadIdentity": "a29cbd124dfa6d6a51f664bd05c1d65e35ac86da84f4f92b6aa0b6c24212f6d4",
+        "payloads": [
+          {
+            "text": "淘宝  伊戈塔可(雨花店)  3天",
+            "sha256": "164190d58b809cf39b5b5f0048768fcffe064779ab1b59059dd964cffcbcb5de"
+          }
+        ],
+        "groupPreflight": {
+          "ok": true,
+          "reason": null,
+          "sendAttempts": 0,
+          "group": "FEIBING NEO AI数字员工",
+          "header": "FEIBING NEO AI数字员工(19)",
+          "note": "ax-current-group-fast-path",
+          "groupTypeVerified": true,
+          "groupTypeProof": "member-count-header",
+          "composerVerifiedEmpty": true,
+          "attempts": []
+        },
+        "textInputVerified": true,
+        "textWriteAttempts": 1,
+        "clipboardClearedBeforeTextWrite": true,
+        "preparedInputChangedPixels": 7341,
+        "preparedInputChangedRatio": 0.01804,
+        "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/4e02a029284568853feb78c47203f191493eee1063b348777143eda370762a11/ea669ad26e0b027fac6c3c0ae5a731bbc2b4c99e2b4af6dc999b66e341f64c64/transport-ledger/attempt.json",
+        "postSendInputCleared": [
+          true,
+          true
+        ],
+        "postSendFailureReason": "desktop-post-send-verification-unknown",
+        "reason": "desktop-post-send-verification-unknown",
+        "state": "unknown",
+        "elapsedMs": 13144,
+        "sendReview": [
+          {
+            "item": 1,
+            "stage": "locate_group",
+            "label": "精确定位目标群",
+            "elapsedMs": 768,
+            "status": "completed",
+            "pitfalls": []
+          },
+          {
+            "item": 2,
+            "stage": "verify_target_and_input",
+            "label": "复核目标群与输入框",
+            "elapsedMs": 1781,
+            "status": "completed",
+            "pitfalls": []
+          },
+          {
+            "item": 3,
+            "stage": "prepare_payload",
+            "label": "准备并复核发送载荷",
+            "elapsedMs": 1560,
+            "status": "completed",
+            "pitfalls": []
+          },
+          {
+            "item": 4,
+            "stage": "claim_and_send",
+            "label": "领取防重账本并单次发送",
+            "elapsedMs": 3367,
+            "status": "completed",
+            "pitfalls": []
+          },
+          {
+            "item": 5,
+            "stage": "post_send_verify",
+            "label": "发送后双帧复核",
+            "elapsedMs": 5668,
+            "status": "failed",
+            "pitfalls": [
+              {
+                "code": "send-failure",
+                "reason": "desktop-post-send-verification-unknown"
+              }
+            ]
+          }
+        ],
+        "reviewSummary": {
+          "totalElapsedMs": 13144,
+          "itemCount": 5,
+          "pitfallCount": 1,
+          "result": "failed"
+        }
+      },
+      "reconciled": true
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:new-stores",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 1547
+    },
+    {
+      "stage": "reconcile:new-stores",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 12995
+    }
+  ],
+  "elapsedMs": 14543,
+  "eventKey": "4e02a029284568853feb78c47203f191493eee1063b348777143eda370762a11",
+  "reviewSummary": {
+    "totalElapsedMs": 14543,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}

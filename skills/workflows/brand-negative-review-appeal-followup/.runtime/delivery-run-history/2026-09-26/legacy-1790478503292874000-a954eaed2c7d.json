@@ -1,0 +1,78 @@
+{
+  "ok": true,
+  "status": "complete",
+  "businessDate": "2026-09-26",
+  "runtimeModelDecisions": 0,
+  "review": [
+    {
+      "stage": "读取并校验日报",
+      "status": "completed",
+      "elapsedMs": 0,
+      "pitfalls": []
+    },
+    {
+      "stage": "冻结初始/续发请求",
+      "status": "completed",
+      "elapsedMs": 1,
+      "pitfalls": []
+    },
+    {
+      "stage": "CSV回执状态投影",
+      "status": "completed",
+      "elapsedMs": 2,
+      "pitfalls": []
+    }
+  ],
+  "events": [],
+  "csv": {
+    "ok": true,
+    "changed": 0,
+    "counts": {
+      "已发送": 2,
+      "核验未知": 1,
+      "未发送": 0
+    },
+    "evidenceCounts": {
+      "machineVerified": 2,
+      "humanConfirmedDelivered": 1,
+      "needsReconcile": 0,
+      "untouched": 0
+    }
+  },
+  "reason": null,
+  "elapsedMs": 7,
+  "completionReview": {
+    "codeEnforced": true,
+    "totalElapsedMs": 7,
+    "result": "complete",
+    "reviewItems": [
+      {
+        "stage": "读取并校验日报",
+        "status": "completed",
+        "elapsedMs": 0,
+        "pitfalls": []
+      },
+      {
+        "stage": "冻结初始/续发请求",
+        "status": "completed",
+        "elapsedMs": 1,
+        "pitfalls": []
+      },
+      {
+        "stage": "CSV回执状态投影",
+        "status": "completed",
+        "elapsedMs": 2,
+        "pitfalls": []
+      }
+    ],
+    "deliveryEvidenceCounts": {
+      "machineVerified": 2,
+      "humanConfirmedDelivered": 1,
+      "needsReconcile": 0,
+      "untouched": 0
+    },
+    "businessWorkComplete": true,
+    "recoveredPitfalls": [],
+    "unresolvedPitfalls": []
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "ok": false,
+  "status": "blocked",
+  "groupName": "臻肆测试群",
+  "channel": "mobile",
+  "requestDigest": "a6cfae10bb625a25a18826807e484c088ac5fc77bee91de8b7207a22737e9cd2",
+  "runtimeModelDecisions": 0,
+  "items": [],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:text",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:image",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:file",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "failed",
+      "pitfalls": [
+        "group-result-count:0"
+      ],
+      "elapsedMs": 51459
+    }
+  ],
+  "reason": "group-result-count:0",
+  "elapsedMs": 53742,
+  "eventKey": "111b7c453910046bcc43559b0c2de79facd3aeba3ed039551b57eed976af453f"
+}

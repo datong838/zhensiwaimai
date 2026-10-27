@@ -1,0 +1,516 @@
+import fs from 'node:fs/promises';
+import crypto from 'node:crypto';
+import path from 'node:path';
+
+const SOURCE = '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/daily-taobao-download-to-jinsha/scripts/background_browser_executor.mjs';
+const CANONICAL_ENTRYPOINT = '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/daily-taobao-download-to-jinsha/scripts/entrypoint.mjs';
+const INSTALLED_ENTRYPOINT = '/Users/ddt/.codex/skills/daily-taobao-download-to-jinsha/scripts/entrypoint.mjs';
+const CANONICAL_SKILL = '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/daily-taobao-download-to-jinsha/SKILL.md';
+const INSTALLED_SKILL = '/Users/ddt/.codex/skills/daily-taobao-download-to-jinsha/SKILL.md';
+const EXECUTOR_SHA256 = 'd89131a8e0d3748b8d01d570c6f85b1ec1fab4ab584d0bd91df88456fc8e3809';
+const WECHAT_SOURCE = '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/daily-taobao-download-to-jinsha/scripts/desktop_wechat_evidence_sender.mjs';
+const WECHAT_SHA256 = '70bf3e4f9abf029858847a2b92ea7d394d84502d64c927e2526804a585aca0f6';
+const RECOVERY_SOURCE = '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/daily-taobao-download-to-jinsha/scripts/scheduled_evidence_recovery.mjs';
+const RECOVERY_SHA256 = '0190246e27bbef6c6708e172a4f45da6d4cdf49360064112be27711d2149ab24';
+const EVIDENCE_ROOT = '/tmp/zhensi_daily_download/background-browser';
+const WECHAT_LEDGER = '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/taobao-jinsha-wechat-evidence-attempts';
+const CONTROL_POLICY_VERSION = 'daily-taobao-jinsha-code-enforced-2026-09-28';
+const MAX_SCHEDULED_WORKFLOW_ATTEMPTS = 3;
+const HISTORICAL_EXPERIENCE_CASES = Object.freeze([
+  Object.freeze({
+    id: 'jinsha-stale-target-matching-marker',
+    reference: 'references/20260911-双浏览器执行方案.md#2026-09-20-历史-targetid-与既有-marker-一致性恢复',
+    match: ({ pitfalls }) => pitfalls.some((item) => item?.code === 'controller-target-rebound'
+      && /stale-target-id-(?:matching-controller-marker|completed-business-workflow-marker)/.test(String(item?.reason || ''))),
+    lesson: '固定9232唯一金鲨同源页且marker与控制器marker精确一致时，代码在profile_preflight重绑live targetId；其余候选不按标签顺序猜测。',
+    requiredEvidence: ['fixed-profile-and-port', 'single-jinsha-origin-page', 'exact-controller-marker-match'],
+    forbidden: ['guess-target-by-tab-order', 'switch-profile-or-channel', 'manual-page-recovery'],
+  }),
+  Object.freeze({
+    id: 'taobao-fixed-profile-stopped',
+    reference: 'references/20260911-双浏览器执行方案.md#2026-09-28-淘宝固定后台实例停止后的受控冷启动',
+    match: ({ pitfalls }) => pitfalls.some((item) => item?.code === 'fixed-profile-started'),
+    lesson: '仅固定 taobao-brand:9230 的既有 headless 状态 PID 已退出、专用启动器摘要正确且启动合同通过时，可在日报入口内用同一持久 Profile 受控冷启动；禁止新建/复制 Profile、改端口或切通道。',
+    requiredEvidence: ['existing-profile-state-path-and-mode', 'dead-state-pid', 'dedicated-port-free', 'launcher-and-session-guard-hashes', 'headless-start-cdp-ready'],
+    forbidden: ['create-or-copy-profile', 'visible-login-or-page-operation-outside-entrypoint', 'switch-profile-or-port', 'retry-external-effect'],
+  }),
+  Object.freeze({
+    id: 'taobao-activity-shell-auth-anchor',
+    reference: 'references/20260911-双浏览器执行方案.md#2026-10-01-淘宝认证锚点位于商家活动壳页面',
+    match: ({ pitfalls }) => pitfalls.some((item) => item?.code === 'auth-anchor-recovery'
+      && item?.reason === 'unique-taobao-activity-shell-shopid-matched-live-frames'),
+    lesson: '仅当固定 Profile 唯一活动壳主页面的 live frame 树同时证明 Napos、同 shopId 的 IM 和活动索引结构时，代码才可在同一页面导航固定淘宝首页并复核原认证结构；detached target 不作证据。',
+    requiredEvidence: ['fixed-taobao-profile-and-port', 'single-merchant-activity-page', 'live-napos-frame', 'shopid-matched-im-frame', 'live-activity-index-frame', 'post-navigation-auth-anchor'],
+    forbidden: ['use-detached-target-as-page-evidence', 'create-or-close-page', 'accept-arbitrary-shop-or-chain-route', 'read-or-inject-credentials', 'retry-upload-or-send'],
+  }),
+  Object.freeze({
+    id: 'wechat-dependency-drift-before-dispatch',
+    reference: '../wechat-messaging/references/plan-2026-09-18-dependency-resync.md#统一微信依赖维护器',
+    match: ({ reason, stage }) => stage === 'dependency_integrity_preflight'
+      && String(reason || '').startsWith('dependency-drift:'),
+    lesson: '先只读inspect，再由统一维护器执行全量测试、原子同步和回读；不手改依赖清单、不另建发送链路。',
+    requiredEvidence: ['exact-pre-dispatch-stage', 'explicit-sendAttempts-zero', 'maintenance-inspect-clean-after-prepare'],
+    forbidden: ['manual-dependencies-json-edit', 'direct-workflow-bridge-send', 'retry-when-attempt-count-unknown'],
+  }),
+  Object.freeze({
+    id: 'wechat-main-window-preflight-ambiguity',
+    reference: '../wechat-messaging/references/recovery.md#桌面',
+    match: ({ reason, stage }) => stage === 'preflight'
+      && String(reason || '') === 'wechat-main-window-count-not-one',
+    lesson: '先核对唯一主窗与当前群快速路径的历史证据；只有系统返回唯一身份且群名、群类型、空输入框均复核通过才可进入后续阶段。',
+    requiredEvidence: ['preflight-stage', 'exact-main-window-binding-evidence', 'exact-group-title', 'group-type-proof', 'empty-composer'],
+    forbidden: ['pick-window-by-order-or-appearance', 'close-or-restart-wechat', 'switch-channel', 'resend-without-zero-attempt-proof'],
+  }),
+  Object.freeze({
+    id: 'wechat-window-id-capture-failed-before-send',
+    reference: 'references/20260911-双浏览器执行方案.md#2026-09-28-微信窗口-id-截图失效与原事件续办方案',
+    match: ({ reason, stage }) => stage === 'preflight' && reason === 'wechat-window-capture-failed',
+    lesson: '先核对旧事件发送次数与截图哈希；窗口生命周期恢复后只从原完成收据和原 marker 继续，仍由统一微信查群并复核群标题。',
+    requiredEvidence: ['preflight-stage', 'blocked-sendAttempts-zero', 'same-original-payload-and-marker', 'unique-live-wechat-window-capture'],
+    forbidden: ['new-evidence-event', 'repeat-production-upload', 'manual-send', 'unknown-effect-resend'],
+  }),
+  Object.freeze({
+    id: 'wechat-preflight-timeout-unproven',
+    reference: '../wechat-messaging/references/recovery.md#桌面',
+    match: ({ reason, stage }) => stage === 'preflight' && String(reason || '') === 'deadline-expired',
+    lesson: '通用超时不能反推主窗歧义或 AXMain 分支；先查机器阶段证据与历史回执，缺少绑定细节时不宣称已验证恢复路径。',
+    requiredEvidence: ['preflight-stage', 'timeout-source-and-last-observed-state', 'send-attempt-boundary'],
+    forbidden: ['infer-window-ambiguity-from-generic-timeout', 'restart-wechat', 'switch-channel', 'resend-without-zero-attempt-proof'],
+  }),
+]);
+
+const sha256 = (value) => crypto.createHash('sha256').update(value).digest('hex');
+
+async function executor() {
+  const source = await fs.readFile(SOURCE);
+  const actual = sha256(source);
+  if (actual !== EXECUTOR_SHA256) throw new Error('executor-code-drift');
+  return import(`file://${SOURCE}?sha256=${actual}`);
+}
+
+async function wechatSender() {
+  const source = await fs.readFile(WECHAT_SOURCE);
+  const actual = sha256(source);
+  if (actual !== WECHAT_SHA256) throw new Error('wechat-sender-code-drift');
+  return import(`file://${WECHAT_SOURCE}?sha256=${actual}`);
+}
+
+async function evidenceRecovery() {
+  const source = await fs.readFile(RECOVERY_SOURCE);
+  const actual = sha256(source);
+  if (actual !== RECOVERY_SHA256) throw new Error('scheduled-evidence-recovery-code-drift');
+  return import(`file://${RECOVERY_SOURCE}?sha256=${actual}`);
+}
+
+function yesterdayShanghai(now = new Date()) {
+  const date = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Shanghai' }));
+  date.setDate(date.getDate() - 1);
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+}
+
+async function loadCompletedReceipt(receiptFile) {
+  if (typeof receiptFile !== 'string') throw new Error('receipt-path-required');
+  const resolved = path.resolve(receiptFile);
+  if (!resolved.startsWith(`${EVIDENCE_ROOT}/`) || path.basename(resolved) !== 'receipt.json') throw new Error('receipt-path-out-of-scope');
+  const receipt = JSON.parse(await fs.readFile(resolved, 'utf8'));
+  if (receipt.ok !== true || receipt.stage !== 'completed' || receipt.phase !== 'completed' || receipt.cleanupStatus !== 'completed') throw new Error('receipt-not-completed');
+  if (receipt.evidenceManifest?.runId !== receipt.runId || receipt.evidenceManifest?.businessDate !== receipt.businessDate) throw new Error('receipt-manifest-mismatch');
+  const expectedDir = path.join(EVIDENCE_ROOT, `${receipt.businessDate}-${receipt.runId}`);
+  if (path.dirname(resolved) !== expectedDir) throw new Error('receipt-directory-mismatch');
+  return receipt;
+}
+
+export async function preflight() {
+  try {
+    const [canonicalSkill, installedSkill, canonicalEntry, installedEntry] = await Promise.all([
+      fs.readFile(CANONICAL_SKILL),
+      fs.readFile(INSTALLED_SKILL),
+      fs.readFile(CANONICAL_ENTRYPOINT),
+      fs.readFile(INSTALLED_ENTRYPOINT),
+    ]);
+    const canonicalSkillSha256 = sha256(canonicalSkill);
+    const installedSkillSha256 = sha256(installedSkill);
+    if (canonicalSkillSha256 !== installedSkillSha256) throw new Error('installed-skill-drift');
+    const canonicalEntrySha256 = sha256(canonicalEntry);
+    const installedEntrySha256 = sha256(installedEntry);
+    if (canonicalEntrySha256 !== installedEntrySha256) throw new Error('installed-entrypoint-drift');
+    const experienceSelfTest = selfTestHistoricalExperience();
+    if (experienceSelfTest.ok !== true) throw new Error('historical-experience-self-test-failed');
+    const implementation = await executor();
+    const selfTest = implementation.selfTest();
+    if (selfTest.ok !== true) throw new Error('executor-self-test-failed');
+    const launcherDependencySelfTest = await implementation.dedicatedChromeLauncherSelfTest();
+    if (launcherDependencySelfTest.ok !== true) throw new Error('dedicated-chrome-launcher-self-test-failed');
+    const taobaoStartupSelfTest = await implementation.taobaoStartupSelfTest();
+    if (taobaoStartupSelfTest.ok !== true) throw new Error('taobao-startup-contract-self-test-failed');
+    const sender = await wechatSender();
+    const wechatSelfTest = sender.selfTest();
+    if (wechatSelfTest.ok !== true) throw new Error('wechat-sender-self-test-failed');
+    const recovery = await evidenceRecovery();
+    const pendingEvidence = await recovery.inspectPendingEvidence({
+      root: EVIDENCE_ROOT, ledger: WECHAT_LEDGER, businessDate: yesterdayShanghai(),
+      policyVersion: CONTROL_POLICY_VERSION,
+    });
+    return Object.freeze({
+      ok: true,
+      executor: SOURCE,
+      executorSha256: EXECUTOR_SHA256,
+      channel: 'control-background-dedicated-chrome',
+      fixedProfiles: selfTest.fixedProfiles,
+      desktopJinshaAllowed: false,
+      skillSync: true,
+      skillSha256: canonicalSkillSha256,
+      entrypointSync: true,
+      entrypointSha256: canonicalEntrySha256,
+      experienceSelfTest,
+      selfTest,
+      launcherDependencySelfTest,
+      taobaoStartupSelfTest,
+      wechatSelfTest,
+      pendingEvidence: { kind: pendingEvidence.kind, receiptFile: pendingEvidence.receiptFile || null,
+        reason: pendingEvidence.reason || null },
+    });
+  } catch (error) {
+    return { ok: false, executor: SOURCE, reason: String(error?.message ?? error) };
+  }
+}
+
+async function invokeFixed(exportName, args) {
+  if (args.length !== 0) throw new Error(`runtime-options-forbidden:${exportName}`);
+  const readiness = await preflight();
+  if (!readiness.ok) throw new Error(`daily-flow-environment-not-ready:${JSON.stringify(readiness)}`);
+  const implementation = await executor();
+  const action = implementation[exportName];
+  if (typeof action !== 'function') throw new Error(`fixed-entrypoint-missing:${exportName}`);
+  return action();
+}
+
+function codeDecision(action, code) {
+  return Object.freeze({ authority: 'executor-code-only', allowed: false, action, code });
+}
+
+function stopDecision(code) {
+  return codeDecision('stop', code);
+}
+
+export function classifyIncompleteDisposition(reason, externalEffectUnknown = false) {
+  const normalized = String(reason || '').toLowerCase();
+  const authenticationRequired = /(?:login|captcha|otp|verification-code|account-risk|risk-control|登录|验证码|账号风控)/.test(normalized);
+  if (authenticationRequired) {
+    return Object.freeze({
+      kind: 'await-user-authentication', mayEndTurn: true, retryExternalEffect: false,
+      requiredAction: 'user-authentication', reason: String(reason || 'authentication-required'),
+    });
+  }
+  if (externalEffectUnknown || /(?:upload-result-unknown|external-effect-not-verified|attempted|unknown)/.test(normalized)) {
+    return Object.freeze({
+      kind: 'reconcile-external-effect', mayEndTurn: false, retryExternalEffect: false,
+      requiredAction: 'code-owned-read-only-reconciliation', reason: String(reason || 'external-effect-unknown'),
+    });
+  }
+  return Object.freeze({
+    kind: 'repair-and-resume', mayEndTurn: false, retryExternalEffect: false,
+    requiredAction: 'update-plan-repair-test-pin-preflight-resume-same-entrypoint', reason: String(reason || 'non-login-failure'),
+  });
+}
+
+function effectBoundary(receipt) {
+  if (!Object.hasOwn(receipt || {}, 'sendAttempts') && receipt?.clickAttempts) return 'send-not-applicable-production-receipt';
+  if (receipt?.sendAttempts === 0
+      && (receipt.items || []).every((item) => item?.sendAttempts === 0
+        && !['attempted', 'unknown', 'partial'].includes(item?.status))) return 'proven-zero';
+  if (receipt?.sendAttempts > 0
+      || (receipt.items || []).some((item) => item?.sendAttempts > 0
+        || ['attempted', 'unknown', 'partial'].includes(item?.status))) return 'attempted-or-unknown';
+  return 'unknown';
+}
+
+export function lookupHistoricalExperience(receipt = {}) {
+  const reason = String(receipt?.reason || '');
+  const stage = String(receipt?.stage || '');
+  const pitfalls = Array.isArray(receipt?.pitfalls) ? receipt.pitfalls : [];
+  const input = { reason, stage, pitfalls };
+  const match = HISTORICAL_EXPERIENCE_CASES.find((item) => item.match(input));
+  return Object.freeze({
+    status: match ? 'matched' : 'unmatched',
+    caseId: match?.id || 'history-review-required',
+    reference: match?.reference || '先阅读本流程技术方案及相邻历史成功/失败收据，再提出新方案并为新案例补正反测试。',
+    lesson: match?.lesson || '没有精确历史案例命中；禁止按报错文案直接猜测修复。',
+    requiredEvidence: match?.requiredEvidence || ['read-project-plan', 'read-prior-success-receipts', 'add-case-and-regression-test'],
+    forbidden: match?.forbidden || ['ad-hoc-recovery', 'external-effect-retry-without-code-proof'],
+    effectBoundary: effectBoundary(receipt),
+    mayRetryExternalEffect: false,
+  });
+}
+
+function selfTestHistoricalExperience() {
+  const stale = lookupHistoricalExperience({ pitfalls: [{
+    code: 'controller-target-rebound', reason: 'stale-target-id-completed-business-workflow-marker',
+  }] });
+  const drift = lookupHistoricalExperience({ stage: 'dependency_integrity_preflight',
+    reason: 'dependency-drift:scripts/heartbeat_recovery.py', sendAttempts: 0, items: [] });
+  const ambiguous = lookupHistoricalExperience({ stage: 'preflight',
+    reason: 'wechat-main-window-count-not-one', sendAttempts: 0, items: [] });
+  const capture = lookupHistoricalExperience({ stage: 'preflight',
+    reason: 'wechat-window-capture-failed', sendAttempts: 0, items: [] });
+  const unknown = lookupHistoricalExperience({ stage: 'preflight',
+    reason: 'wechat-main-window-count-not-one', sendAttempts: null, items: [] });
+  const unmatched = lookupHistoricalExperience({ stage: 'preflight', reason: 'new-unseen-failure', sendAttempts: 0, items: [] });
+  if (stale.caseId !== 'jinsha-stale-target-matching-marker'
+      || drift.caseId !== 'wechat-dependency-drift-before-dispatch'
+      || drift.effectBoundary !== 'proven-zero'
+      || ambiguous.caseId !== 'wechat-main-window-preflight-ambiguity'
+      || capture.caseId !== 'wechat-window-id-capture-failed-before-send'
+      || capture.effectBoundary !== 'proven-zero'
+      || unknown.effectBoundary !== 'unknown' || unknown.mayRetryExternalEffect
+      || unmatched.status !== 'unmatched' || unmatched.mayRetryExternalEffect
+      || HISTORICAL_EXPERIENCE_CASES.length !== 7) return { ok: false, caseCount: HISTORICAL_EXPERIENCE_CASES.length };
+  const genericTimeout = lookupHistoricalExperience({ stage: 'preflight', reason: 'deadline-expired', sendAttempts: null, items: [] });
+  const taobaoColdStart = lookupHistoricalExperience({ stage: 'profile_preflight', clickAttempts: { download: { store: 0 } },
+    pitfalls: [{ code: 'fixed-profile-started', reason: 'stale-state-pid-restarted-same-dedicated-profile' }] });
+  if (genericTimeout.caseId !== 'wechat-preflight-timeout-unproven'
+      || genericTimeout.effectBoundary !== 'unknown'
+      || genericTimeout.mayRetryExternalEffect !== false) return { ok: false, caseCount: HISTORICAL_EXPERIENCE_CASES.length };
+  if (taobaoColdStart.caseId !== 'taobao-fixed-profile-stopped' || taobaoColdStart.mayRetryExternalEffect !== false
+      || HISTORICAL_EXPERIENCE_CASES.length !== 7) return { ok: false, caseCount: HISTORICAL_EXPERIENCE_CASES.length };
+  const taobaoActivityShell = lookupHistoricalExperience({ stage: 'taobao_task_open', clickAttempts: { download: { store: 0 } }, pitfalls: [{
+    code: 'auth-anchor-recovery', reason: 'unique-taobao-activity-shell-shopid-matched-live-frames',
+  }] });
+  if (taobaoActivityShell.caseId !== 'taobao-activity-shell-auth-anchor'
+      || taobaoActivityShell.effectBoundary !== 'send-not-applicable-production-receipt'
+      || taobaoActivityShell.mayRetryExternalEffect !== false) return { ok: false, caseCount: HISTORICAL_EXPERIENCE_CASES.length };
+  return { ok: true, caseCount: HISTORICAL_EXPERIENCE_CASES.length, tests: 14 };
+}
+
+function decisionForDisposition(disposition, code) {
+  const actions = {
+    'await-user-authentication': 'await-user',
+    'reconcile-external-effect': 'reconcile-only',
+    'repair-and-resume': 'repair-and-resume',
+  };
+  return codeDecision(actions[disposition.kind], code);
+}
+
+function workflowCompleted(receipt) {
+  return receipt?.ok === true
+    && receipt?.stage === 'completed'
+    && receipt?.phase === 'completed'
+    && receipt?.cleanupStatus === 'completed'
+    && Array.isArray(receipt?.runReview)
+    && receipt?.reviewSummary?.controlPolicyVersion === CONTROL_POLICY_VERSION;
+}
+
+function failedReview(stage, label, reason, elapsedMs) {
+  const row = Object.freeze({
+    item: 1, stage, label, elapsedMs, status: 'failed',
+    pitfalls: [Object.freeze({ code: 'run-failure', reason })],
+  });
+  return Object.freeze({
+    rows: Object.freeze([row]),
+    summary: Object.freeze({ totalElapsedMs: elapsedMs, itemCount: 1, pitfallCount: 1, result: 'failed' }),
+  });
+}
+
+function workflowExceptionReceipt(error, elapsedMs) {
+  const reason = String(error?.message ?? error);
+  const review = failedReview('entrypoint_preflight', '固定入口完整性预检', reason, elapsedMs);
+  return Object.freeze({
+    ok: false, executor: 'daily-taobao-installed-entrypoint', stage: 'entrypoint_preflight',
+    runtimeModelDecisions: 0, reason, elapsedMs, stageMs: { entrypoint_preflight: elapsedMs },
+    runReview: review.rows, reviewSummary: review.summary,
+  });
+}
+
+function sendExceptionResult(workflowReceipt, error, elapsedMs) {
+  const reason = String(error?.message ?? error);
+  const review = failedReview('sender_integrity_preflight', '微信发送器完整性预检', reason, elapsedMs);
+  const receipt = Object.freeze({
+    ok: false, executor: 'daily-taobao-scheduled-wechat-gate', channel: 'desktop',
+    groupName: workflowReceipt?.evidenceManifest?.groupName || null, payloadType: 'image',
+    sendAttempts: 0, runtimeModelDecisions: 0, stage: 'sender_integrity_preflight', reason,
+    elapsedMs, stageMs: { sender_integrity_preflight: elapsedMs },
+    sendReview: review.rows, reviewSummary: review.summary,
+  });
+  return Object.freeze({
+    ok: false, groupName: receipt.groupName,
+    imageSha256: (workflowReceipt?.evidenceManifest?.images || []).map((item) => item.sha256),
+    channel: 'desktop', authorizationMode: 'scheduled-standing',
+    resourceWaitAttempts: 0, resourceWaitMs: elapsedMs, receipt,
+  });
+}
+
+async function continuationDecision(receipt) {
+  const implementation = await executor();
+  const decision = implementation.scheduledContinuationDecision(receipt);
+  if (decision?.authority !== 'executor-code-only' || typeof decision?.allowed !== 'boolean') {
+    throw new Error('scheduled-continuation-decision-invalid');
+  }
+  return decision;
+}
+
+function workflowAttempt(attempt, receipt, decision) {
+  return Object.freeze({
+    attempt, ok: receipt?.ok === true, runId: receipt?.runId || null,
+    stage: receipt?.stage || null, receiptFile: receipt?.receiptFile || null,
+    runReview: receipt?.runReview || [], reviewSummary: receipt?.reviewSummary || null,
+    experienceReview: lookupHistoricalExperience(receipt),
+    continuationDecision: decision,
+  });
+}
+
+export async function run(...args) {
+  return invokeFixed('runProduction', args);
+}
+
+export async function runScheduled(...args) {
+  if (args.length !== 0) throw new Error('runtime-options-forbidden:runScheduled');
+  const workflowAttempts = [];
+  let workflowReceipt = null;
+  let pending;
+  try {
+    const readiness = await preflight();
+    if (!readiness.ok) throw new Error(`daily-flow-environment-not-ready:${JSON.stringify(readiness)}`);
+    const recovery = await evidenceRecovery();
+    pending = await recovery.inspectPendingEvidence({
+      root: EVIDENCE_ROOT, ledger: WECHAT_LEDGER, businessDate: yesterdayShanghai(),
+      policyVersion: CONTROL_POLICY_VERSION,
+    });
+  } catch (error) {
+    const failed = workflowExceptionReceipt(error, 0);
+    const completionDisposition = classifyIncompleteDisposition(failed.reason);
+    const decision = decisionForDisposition(completionDisposition, 'scheduled-evidence-recovery-preflight-failed');
+    workflowAttempts.push(workflowAttempt(1, failed, decision));
+    return Object.freeze({ ok: false, stage: 'workflow-incomplete', workflowReceipt: failed,
+      sendResult: null, workflowAttempts: Object.freeze(workflowAttempts), controlDecision: decision,
+      completionDisposition, runReview: failed.runReview, sendReview: [],
+      reviewSummary: { workflow: failed.reviewSummary, wechat: null } });
+  }
+  if (pending.kind === 'blocked') {
+    const failed = pending.receipt || workflowExceptionReceipt(new Error(pending.reason), 0);
+    const completionDisposition = classifyIncompleteDisposition(pending.reason, true);
+    const decision = decisionForDisposition(completionDisposition, 'scheduled-evidence-reconciliation-required');
+    workflowAttempts.push(workflowAttempt(1, failed, decision));
+    return Object.freeze({ ok: false, stage: 'wechat-send-failed', workflowReceipt: failed,
+      sendResult: pending.marker ? { ok: false, receipt: pending.marker } : null,
+      workflowAttempts: Object.freeze(workflowAttempts), controlDecision: decision,
+      completionDisposition, runReview: failed.runReview, sendReview: pending.marker?.sendReview || [],
+      reviewSummary: { workflow: failed.reviewSummary, wechat: pending.marker?.reviewSummary || null } });
+  }
+  if (pending.kind === 'resume' || pending.kind === 'completed') {
+    workflowReceipt = await loadCompletedReceipt(pending.receiptFile);
+    workflowAttempts.push(workflowAttempt(1, workflowReceipt,
+      stopDecision('original-completed-workflow-evidence-reused')));
+  }
+  if (pending.kind === 'completed') {
+    const completionDisposition = Object.freeze({ kind: 'completed', mayEndTurn: true,
+      retryExternalEffect: false, requiredAction: 'report-completion-review',
+      reason: 'scheduled-run-already-verified' });
+    return Object.freeze({ ok: true, stage: 'completed', workflowReceipt,
+      sendResult: { ok: true, receipt: pending.marker, reusedExisting: true, newSendAttempts: 0 },
+      workflowAttempts: Object.freeze(workflowAttempts),
+      controlDecision: codeDecision('complete', 'scheduled-run-already-verified'),
+      completionDisposition, runReview: workflowReceipt.runReview,
+      sendReview: pending.marker.sendReview || [],
+      reviewSummary: { workflow: workflowReceipt.reviewSummary, wechat: pending.marker.reviewSummary || null } });
+  }
+  for (let attempt = 1; !workflowReceipt && attempt <= MAX_SCHEDULED_WORKFLOW_ATTEMPTS; attempt += 1) {
+    const started = performance.now();
+    try {
+      workflowReceipt = await invokeFixed('runProduction', []);
+    } catch (error) {
+      workflowReceipt = workflowExceptionReceipt(error, Math.round(performance.now() - started));
+      const completionDisposition = classifyIncompleteDisposition(workflowReceipt.reason);
+      const decision = decisionForDisposition(completionDisposition, 'entrypoint-preflight-failed');
+      workflowAttempts.push(workflowAttempt(attempt, workflowReceipt, decision));
+      return Object.freeze({
+        ok: false, stage: 'workflow-incomplete', workflowReceipt, sendResult: null,
+        workflowAttempts: Object.freeze(workflowAttempts), controlDecision: decision, completionDisposition,
+        runReview: workflowReceipt.runReview, sendReview: [],
+        reviewSummary: { workflow: workflowReceipt.reviewSummary, wechat: null },
+      });
+    }
+    if (workflowCompleted(workflowReceipt)) {
+      const decision = stopDecision('workflow-completed');
+      workflowAttempts.push(workflowAttempt(attempt, workflowReceipt, decision));
+      break;
+    }
+    let decision;
+    try {
+      decision = await continuationDecision(workflowReceipt);
+    } catch (error) {
+      decision = stopDecision(`continuation-decision-failed:${String(error?.message ?? error)}`);
+    }
+    if (decision.allowed === true && attempt === MAX_SCHEDULED_WORKFLOW_ATTEMPTS) {
+      decision = stopDecision('scheduled-workflow-attempt-budget-exhausted');
+    }
+    workflowAttempts.push(workflowAttempt(attempt, workflowReceipt, decision));
+    if (decision.allowed !== true) {
+      const completionDisposition = classifyIncompleteDisposition(`${decision.code}:${workflowReceipt?.reason || ''}`);
+      decision = decisionForDisposition(completionDisposition, decision.code);
+      workflowAttempts[workflowAttempts.length - 1] = workflowAttempt(attempt, workflowReceipt, decision);
+      return Object.freeze({
+        ok: false, stage: 'workflow-incomplete', workflowReceipt, sendResult: null,
+        workflowAttempts: Object.freeze(workflowAttempts), controlDecision: decision, completionDisposition,
+        runReview: workflowReceipt.runReview || [], sendReview: [],
+        reviewSummary: { workflow: workflowReceipt.reviewSummary || null, wechat: null },
+      });
+    }
+  }
+  const sendStarted = performance.now();
+  let sendResult;
+  try {
+    sendResult = await sendScheduledEvidence(workflowReceipt.receiptFile);
+  } catch (error) {
+    sendResult = sendExceptionResult(workflowReceipt, error, Math.round(performance.now() - sendStarted));
+  }
+  const completed = sendResult.ok === true && sendResult.receipt?.verified === true;
+  const sendEffectUnknown = sendResult.receipt?.sendAttempts > 0 || sendResult.receipt?.state === 'unknown';
+  const completionDisposition = completed ? Object.freeze({
+    kind: 'completed', mayEndTurn: true, retryExternalEffect: false,
+    requiredAction: 'report-completion-review', reason: 'scheduled-run-completed',
+  }) : classifyIncompleteDisposition(sendResult.receipt?.reason, sendEffectUnknown);
+  const decision = completed
+    ? codeDecision('complete', 'scheduled-run-completed')
+    : decisionForDisposition(completionDisposition, sendEffectUnknown
+      ? 'wechat-external-effect-not-verified'
+      : 'wechat-failure-requires-executor-maintenance');
+  return Object.freeze({
+    ok: completed,
+    stage: completed ? 'completed' : 'wechat-send-failed',
+    workflowReceipt,
+    sendResult,
+    workflowAttempts: Object.freeze(workflowAttempts),
+    controlDecision: decision,
+    completionDisposition,
+    runReview: workflowReceipt.runReview,
+    sendReview: sendResult.receipt?.sendReview || [],
+    ...(completed ? {} : { experienceReview: lookupHistoricalExperience(sendResult.receipt) }),
+    reviewSummary: { workflow: workflowReceipt.reviewSummary, wechat: sendResult.receipt?.reviewSummary || null },
+  });
+}
+
+export async function verifyTodayCompleted(...args) {
+  return invokeFixed('verifyTodayCompleted', args);
+}
+
+export async function downloadAndVerifyWithoutUpload(...args) {
+  return invokeFixed('downloadAndVerifyWithoutUpload', args);
+}
+
+export async function prepareEvidenceAuthorization(receiptFile) {
+  const receipt = await loadCompletedReceipt(receiptFile);
+  const sender = await wechatSender();
+  return sender.buildAuthorizationChallenge(receipt.evidenceManifest);
+}
+
+export async function sendEvidence(receiptFile, authorization) {
+  const receipt = await loadCompletedReceipt(receiptFile);
+  const sender = await wechatSender();
+  return sender.sendDesktopWechatEvidence(receipt.evidenceManifest, authorization);
+}
+
+async function sendScheduledEvidence(receiptFile) {
+  const receipt = await loadCompletedReceipt(receiptFile);
+  const sender = await wechatSender();
+  return sender.sendScheduledDesktopWechatEvidence(receipt.evidenceManifest);
+}

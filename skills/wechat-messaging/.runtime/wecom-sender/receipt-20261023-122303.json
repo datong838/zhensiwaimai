@@ -1,0 +1,33 @@
+{
+  "group": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+  "text": "【企微通道验收】文本载荷测试，请忽略",
+  "dry_run": false,
+  "ts": "2026-10-23T12:21:52",
+  "steps": [
+    {
+      "navigate": "chat-area-evidence"
+    },
+    {
+      "write": true,
+      "info": "pos=(423.0, 816.0) focus_err=0 set_err=0 readback='【企微通道验收】文本载荷测试，请忽略'"
+    },
+    {
+      "send_mode": "enter(+ctrl-enter fallback)"
+    }
+  ],
+  "wecom_activated": true,
+  "verify": {
+    "frame1": false,
+    "frame2_input_cleared": false,
+    "verified": false,
+    "tail1": [
+      "王瑞: 没事哈老板",
+      "双-辽宁-佳元美食(花甲粉)",
+      "昨天",
+      "任梦瑶: 老板，炖汤是每天都有这两种吗"
+    ]
+  },
+  "result": "verify-fail",
+  "input_cleared": true,
+  "frontmost_restored": true
+}

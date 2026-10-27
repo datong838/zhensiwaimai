@@ -1,0 +1,144 @@
+{
+  "itemId": "file",
+  "sha256": "bb42b22386be25ed7ee95d1bd382c01b0ab67de09a2fb569092e802165da65b2",
+  "type": "file",
+  "status": "verified",
+  "claimedAt": 1789564515.699163,
+  "sendAttempts": 1,
+  "verificationLevel": "file-name-size-ui",
+  "reason": null,
+  "evidence": {
+    "ok": true,
+    "frames": [
+      {
+        "position": [
+          1696.0,
+          893.0
+        ],
+        "fullName": true,
+        "size": true,
+        "changed": 18.318424479166666,
+        "beforeCount": 0,
+        "afterCount": 1
+      },
+      {
+        "position": [
+          1696.0,
+          893.0
+        ],
+        "fullName": true,
+        "size": true,
+        "changed": 18.318424479166666,
+        "beforeCount": 0,
+        "afterCount": 1
+      }
+    ],
+    "reason": null,
+    "byteExact": false,
+    "completionFrames": [
+      "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/9a6097a04983af4323618dd4d4bd384a5a5460e03f473099f5c0159674e777f9/6a55e0d43c015c8878e4cf9cc6c926a7ddb5bc6b9d0d80d799420efb834c260c/transport/content-1-1.png",
+      "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/9a6097a04983af4323618dd4d4bd384a5a5460e03f473099f5c0159674e777f9/6a55e0d43c015c8878e4cf9cc6c926a7ddb5bc6b9d0d80d799420efb834c260c/transport/content-1-2.png"
+    ]
+  },
+  "transport": {
+    "ok": true,
+    "executor": "wechat-desktop-sender",
+    "channel": "desktop",
+    "groupName": "臻肆测试群",
+    "payloadType": "file",
+    "sendAttempts": 1,
+    "runtimeModelDecisions": 0,
+    "stage": "completed",
+    "stageMs": {
+      "locate_group": 289,
+      "verify_target_and_input": 2800,
+      "prepare_payload": 2050,
+      "claim_and_send": 3772,
+      "post_send_verify": 6150
+    },
+    "payloadIdentity": "190a66b92f2e237a8705c5333ecc1703b5e395c10aec944e3819cc9b36ba76a0",
+    "payloads": [
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/9a6097a04983af4323618dd4d4bd384a5a5460e03f473099f5c0159674e777f9/6a55e0d43c015c8878e4cf9cc6c926a7ddb5bc6b9d0d80d799420efb834c260c/payload/桌面验收.xlsx",
+        "name": "桌面验收.xlsx",
+        "size": 122277,
+        "sha256": "bb42b22386be25ed7ee95d1bd382c01b0ab67de09a2fb569092e802165da65b2"
+      }
+    ],
+    "groupPreflight": {
+      "ok": true,
+      "action": "open-group",
+      "group": "臻肆测试群",
+      "header": "臻肆测试群",
+      "note": "ax-current-header",
+      "reason": null,
+      "sendAttempts": 0,
+      "runtimeModelDecisions": 0,
+      "stageMs": {
+        "exact_group_preflight": 289
+      },
+      "artifacts": [],
+      "hardGate": false
+    },
+    "preparedInputChangedPixels": 52954,
+    "preparedInputChangedRatio": 0.14336,
+    "preparedFileObjectCount": 1,
+    "preparedFilePrefixesVerified": true,
+    "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/9a6097a04983af4323618dd4d4bd384a5a5460e03f473099f5c0159674e777f9/6a55e0d43c015c8878e4cf9cc6c926a7ddb5bc6b9d0d80d799420efb834c260c/transport-ledger/attempt.json",
+    "postSendInputCleared": [
+      true,
+      true
+    ],
+    "verified": true,
+    "state": "verified",
+    "elapsedMs": 15744,
+    "sendReview": [
+      {
+        "item": 1,
+        "stage": "locate_group",
+        "label": "精确定位目标群",
+        "elapsedMs": 289,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 2,
+        "stage": "verify_target_and_input",
+        "label": "复核目标群与输入框",
+        "elapsedMs": 2800,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 3,
+        "stage": "prepare_payload",
+        "label": "准备并复核发送载荷",
+        "elapsedMs": 2050,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 4,
+        "stage": "claim_and_send",
+        "label": "领取防重账本并单次发送",
+        "elapsedMs": 3772,
+        "status": "completed",
+        "pitfalls": []
+      },
+      {
+        "item": 5,
+        "stage": "post_send_verify",
+        "label": "发送后双帧复核",
+        "elapsedMs": 6150,
+        "status": "completed",
+        "pitfalls": []
+      }
+    ],
+    "reviewSummary": {
+      "totalElapsedMs": 15744,
+      "itemCount": 5,
+      "pitfallCount": 0,
+      "result": "success"
+    }
+  }
+}

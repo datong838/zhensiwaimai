@@ -1,0 +1,69 @@
+{
+  "ok": false,
+  "executor": "wechat-desktop-sender",
+  "channel": "desktop",
+  "groupName": "臻肆测试群",
+  "payloadType": "file",
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "stage": "verify_target_and_input",
+  "stageMs": {
+    "locate_group": 329,
+    "verify_target_and_input": 484
+  },
+  "payloadIdentity": "74a21cd8574ea729c7fa5621cb2044e911a8a92d0c3d46dacf71439a37f98852",
+  "payloads": [
+    {
+      "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/80b8e04ec7e4daf06850a2e6c80ab734fe9f8c6ba17071fd9da7e40f0593629c/4c82509e325b7b064cce89e4ed7b1ed7af070aca33a067b248a1be20bf0c3fe3/payload/桌面复验.xlsx",
+      "name": "桌面复验.xlsx",
+      "size": 122277,
+      "sha256": "bb42b22386be25ed7ee95d1bd382c01b0ab67de09a2fb569092e802165da65b2"
+    }
+  ],
+  "groupPreflight": {
+    "ok": true,
+    "action": "open-group",
+    "group": "臻肆测试群",
+    "header": "臻肆测试群",
+    "note": "ax-current-header",
+    "reason": null,
+    "sendAttempts": 0,
+    "runtimeModelDecisions": 0,
+    "stageMs": {
+      "exact_group_preflight": 329
+    },
+    "artifacts": [],
+    "hardGate": false
+  },
+  "reason": "wechat-window-capture-failed:could not create image from window:quartz-window-capture-invalid",
+  "elapsedMs": 814,
+  "sendReview": [
+    {
+      "item": 1,
+      "stage": "locate_group",
+      "label": "精确定位目标群",
+      "elapsedMs": 329,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 2,
+      "stage": "verify_target_and_input",
+      "label": "复核目标群与输入框",
+      "elapsedMs": 484,
+      "status": "failed",
+      "pitfalls": [
+        {
+          "code": "send-failure",
+          "reason": "wechat-window-capture-failed:could not create image from window:quartz-window-capture-invalid"
+        }
+      ]
+    }
+  ],
+  "reviewSummary": {
+    "totalElapsedMs": 814,
+    "itemCount": 2,
+    "pitfallCount": 1,
+    "result": "failed"
+  }
+}

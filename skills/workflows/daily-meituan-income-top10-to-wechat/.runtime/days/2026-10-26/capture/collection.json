@@ -1,0 +1,102 @@
+{
+  "ok": true,
+  "browserPort": 9233,
+  "taskId": "meituan-income-top10-fdef6c76-2156-4741-b60b-a837b7b440f5",
+  "targetId": "7BDA9AE4FD0D08761E17CE82D917358B",
+  "dataDate": "2026-10-25",
+  "collectedAt": "2026-10-26T08:53:57.957Z",
+  "sourceRoute": "https://waimaieapp.meituan.com/igate/bizdata/business",
+  "sortMetric": "订单收入/数值",
+  "sortDirection": "descending",
+  "sortEvidence": [
+    {
+      "path": "/gw/bizdata/chain/business/rank",
+      "status": 200,
+      "domStable": true
+    },
+    {
+      "path": "/gw/bizdata/chain/business/rank",
+      "status": 200,
+      "domStable": true
+    }
+  ],
+  "rows": [
+    {
+      "rank": 1,
+      "store": "味之绝美蛙鱼火锅（周浦万达店）",
+      "income": 6632.33
+    },
+    {
+      "rank": 2,
+      "store": "竹筷子·松江味（乐都路店）",
+      "income": 6039.13
+    },
+    {
+      "rank": 3,
+      "store": "味之绝·美蛙鱼火锅(五角场万达店)",
+      "income": 5832.32
+    },
+    {
+      "rank": 4,
+      "store": "渔味妙酸菜鱼•烤鱼（秀文路店）",
+      "income": 5659.92
+    },
+    {
+      "rank": 5,
+      "store": "溪雨观鲜活酸菜鱼·烤鱼（樱花路店）",
+      "income": 4714.83
+    },
+    {
+      "rank": 6,
+      "store": "味之绝美蛙鱼头火锅（长寿路亚新广场店）",
+      "income": 4284.44
+    },
+    {
+      "rank": 7,
+      "store": "竹筷子·松江味（仓汇路店）",
+      "income": 4223.2
+    },
+    {
+      "rank": 8,
+      "store": "甬潮·宁波小市（PLAYME新邻店）",
+      "income": 3794.63
+    },
+    {
+      "rank": 9,
+      "store": "味之绝美蛙鱼火锅（曹路店）",
+      "income": 3694.24
+    },
+    {
+      "rank": 10,
+      "store": "李艳玲认真土豆粉(杨浦店)",
+      "income": 3684.09
+    }
+  ],
+  "columns": [
+    "排名",
+    "门店名称",
+    "订单收入/数值",
+    "订单收入/涨跌",
+    "优惠前总额/数值",
+    "优惠前总额/涨跌",
+    "订单实付/数值",
+    "订单实付/涨跌",
+    "订单量/数值",
+    "订单量/涨跌",
+    "实付单均价/数值",
+    "实付单均价/涨跌"
+  ],
+  "incomeColumn": 2,
+  "file": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-meituan-income-top10-to-wechat/.runtime/days/2026-10-26/capture/2026-10-25-美团外卖门店收入top10.png",
+  "sha256": "14524c5d03ca4ffcb854a49ece71fa25e3d01483e1675e68953e4eb1a50507f3",
+  "width": 2400,
+  "height": 1612,
+  "clip": {
+    "x": 605,
+    "y": 918,
+    "width": 1200,
+    "height": 806
+  },
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0
+}

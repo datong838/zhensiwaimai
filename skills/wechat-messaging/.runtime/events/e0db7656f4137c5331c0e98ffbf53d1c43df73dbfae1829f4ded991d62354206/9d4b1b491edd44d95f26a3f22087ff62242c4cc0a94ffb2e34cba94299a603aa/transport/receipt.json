@@ -1,0 +1,103 @@
+{
+  "ok": false,
+  "executor": "wechat-desktop-sender",
+  "channel": "desktop",
+  "groupName": "李老哈（品牌）💰臻肆外卖运营对接群",
+  "payloadType": "text",
+  "sendAttempts": 1,
+  "runtimeModelDecisions": 0,
+  "stage": "post_send_verify",
+  "stageMs": {
+    "locate_group": 741,
+    "verify_target_and_input": 2055,
+    "prepare_payload": 1770,
+    "claim_and_send": 5295,
+    "post_send_verify": 6375
+  },
+  "payloadIdentity": "cc4b993d637eaa9fdaae1e70e32d57b85df8e4d6aaca83bd9543b03ac87e3905",
+  "payloads": [
+    {
+      "text": "--- 2026-09-23 中评申诉进度通知 ---\n李老哈·东北菜(长阳创谷店)\n【淘宝闪购】\n评价时间: 2026-09-23\n评价等级: 3星\n申诉结果：---未申诉---\n评价内容: 肉炸的很老了",
+      "sha256": "00c89f1bd598ed14e36acb0d42940b4982ceed13b8ff5149bfcd9cd7f9b11e4e"
+    }
+  ],
+  "groupPreflight": {
+    "ok": true,
+    "reason": null,
+    "sendAttempts": 0,
+    "group": "李老哈（品牌）💰臻肆外卖运营对接群",
+    "header": "李老哈（品牌）💰臻肆外卖运营对接群(37)",
+    "note": "ax-current-group-fast-path",
+    "groupTypeVerified": true,
+    "groupTypeProof": "member-count-header",
+    "composerVerifiedEmpty": true,
+    "attempts": []
+  },
+  "textInputVerified": true,
+  "textWriteAttempts": 1,
+  "clipboardClearedBeforeTextWrite": true,
+  "preparedInputChangedPixels": 14507,
+  "preparedInputChangedRatio": 0.039103,
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/e0db7656f4137c5331c0e98ffbf53d1c43df73dbfae1829f4ded991d62354206/9d4b1b491edd44d95f26a3f22087ff62242c4cc0a94ffb2e34cba94299a603aa/transport-ledger/attempt.json",
+  "postSendInputCleared": [
+    true,
+    true
+  ],
+  "postSendFailureReason": "desktop-post-send-verification-unknown",
+  "reason": "desktop-post-send-verification-unknown",
+  "state": "unknown",
+  "elapsedMs": 16237,
+  "sendReview": [
+    {
+      "item": 1,
+      "stage": "locate_group",
+      "label": "精确定位目标群",
+      "elapsedMs": 741,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 2,
+      "stage": "verify_target_and_input",
+      "label": "复核目标群与输入框",
+      "elapsedMs": 2055,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 3,
+      "stage": "prepare_payload",
+      "label": "准备并复核发送载荷",
+      "elapsedMs": 1770,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 4,
+      "stage": "claim_and_send",
+      "label": "领取防重账本并单次发送",
+      "elapsedMs": 5295,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 5,
+      "stage": "post_send_verify",
+      "label": "发送后双帧复核",
+      "elapsedMs": 6375,
+      "status": "failed",
+      "pitfalls": [
+        {
+          "code": "send-failure",
+          "reason": "desktop-post-send-verification-unknown"
+        }
+      ]
+    }
+  ],
+  "reviewSummary": {
+    "totalElapsedMs": 16237,
+    "itemCount": 5,
+    "pitfallCount": 1,
+    "result": "failed"
+  }
+}

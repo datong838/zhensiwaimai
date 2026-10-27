@@ -1,0 +1,60 @@
+{
+  "status": "verified",
+  "sendAttempts": 1,
+  "verificationLevel": "wecom-ui-text-anchor",
+  "reason": null,
+  "evidence": {
+    "frame1": true,
+    "frame2_input_cleared": true,
+    "verified": true,
+    "tail1": [
+      "【美团】242972（商户登录二次验证验证码）。工作人员不会向您索要，请勿向任何人泄露，以免造成账户或资金损失。",
+      "由微信用户创建的外部群，含45位外部联系人 | 群主: 李知恒- AllenLi@微信",
+      "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+      "250.0"
+    ]
+  },
+  "transport": {
+    "kind": "text",
+    "sendAttempts": 1,
+    "sent": true,
+    "receipt": {
+      "result": "verified",
+      "verify": {
+        "frame1": true,
+        "frame2_input_cleared": true,
+        "verified": true,
+        "tail1": [
+          "【美团】242972（商户登录二次验证验证码）。工作人员不会向您索要，请勿向任何人泄露，以免造成账户或资金损失。",
+          "由微信用户创建的外部群，含45位外部联系人 | 群主: 李知恒- AllenLi@微信",
+          "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+          "250.0"
+        ]
+      },
+      "steps": [
+        {
+          "navigate": "chat-title-verified:'上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰'"
+        },
+        {
+          "title_gate": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰"
+        },
+        {
+          "write": true,
+          "info": "pos=(310.0, 601.0) attempt=1 len=50 head='淘宝闪购     店铺：山城砂锅牛杂·鲜'"
+        },
+        {
+          "title_gate_final": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰"
+        },
+        {
+          "send_mode": "enter-once",
+          "send_attempts": [
+            {
+              "try": "enter",
+              "input_clean": true
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

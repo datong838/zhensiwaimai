@@ -1,0 +1,93 @@
+{
+  "ok": true,
+  "action": "prepare",
+  "status": "prepared",
+  "review": [
+    {
+      "label": "维护授权",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "授权有效期",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "读取依赖清单",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "计算候选摘要",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "授权范围",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "统一微信完整离线测试",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 4019
+    },
+    {
+      "label": "原子写入依赖清单",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "依赖清单回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 2
+    },
+    {
+      "label": "统一入口完整性回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 37
+    }
+  ],
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "authorization": "user-20260930-windows-adapter-driver-search-key-resync",
+  "expiresAt": "2026-10-05T12:00:00+08:00",
+  "userInstructionSha256": "dc69362163e11ad647e167583e41fdb329344de48c5f93b49bf0137cc9fbabc2",
+  "dependencyManifestPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/dependencies.json",
+  "dependencyManifestBeforeSha256": "284e71da18cdbac919a44303994aeb6c8f9feb68f6da179a78a2cd818ab3f7f5",
+  "dependencyManifestAfterSha256": "e2d1da48429213acefb34983174f02c5b4ff3b9f35af0b37b0a98854857fb95b",
+  "changes": [
+    {
+      "path": "scripts/dependency_maintenance.py",
+      "before": "b8cd4d238f351d94ecf6483170c08e1cce5bf2ac6c0688f605e268b152aa0878",
+      "after": "6e6a798f72a39f81c832a2b6b4da12432f56500e8f137b4ed6dfe680495c16d1"
+    },
+    {
+      "path": "scripts/windows_adapter.py",
+      "before": "4b54cb8d9de9f3219be444806f06d2d10586646c7d1d8ead1eeb3c68648cc4a5",
+      "after": "aa10412c3ce475468e5551373de1a760b422dc49a26b324d9f7177f51ee1dac0"
+    }
+  ],
+  "tests": {
+    "ok": true,
+    "elapsedMs": 4019,
+    "testCount": 197
+  },
+  "capabilityCheck": {
+    "ok": true,
+    "elapsedMs": 37,
+    "testCount": null
+  },
+  "candidateFileCount": 31,
+  "elapsedMs": 4060
+}

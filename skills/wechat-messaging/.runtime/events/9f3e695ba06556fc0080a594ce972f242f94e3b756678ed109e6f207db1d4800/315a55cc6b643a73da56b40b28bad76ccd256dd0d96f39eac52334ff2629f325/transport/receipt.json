@@ -1,0 +1,64 @@
+{
+  "ok": false,
+  "executor": "wechat-desktop-sender",
+  "channel": "desktop",
+  "groupName": "李老哈（品牌）💰臻肆外卖运营对接群",
+  "payloadType": "text",
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "stage": "verify_target_and_input",
+  "stageMs": {
+    "locate_group": 724,
+    "verify_target_and_input": 1000
+  },
+  "payloadIdentity": "a110cf1e036b1cccc8d59d4889f90ff74dd8fdaefbc7bee8c7cd6582411441a9",
+  "payloads": [
+    {
+      "text": "--- 2026-09-17 中评申诉进度通知 ---\n李老哈·东北农家小院（成山路店）\n【美团】\n评价时间: 2026-09-17\n评价等级: 3星\n申诉结果：---申诉中---\n评价内容: 肉丝太硬了而且水分太多不好吃#香辣肉丝#",
+      "sha256": "03e0252062b93b1082b5ee65695e2ae958f61e26c31b45f04ae7297513183877"
+    }
+  ],
+  "groupPreflight": {
+    "ok": true,
+    "reason": null,
+    "sendAttempts": 0,
+    "group": "李老哈（品牌）💰臻肆外卖运营对接群",
+    "header": "李老哈（品牌）💰臻肆外卖运营对接群(36)",
+    "note": "ax-current-group-fast-path",
+    "groupTypeVerified": true,
+    "groupTypeProof": "member-count-header",
+    "composerVerifiedEmpty": true,
+    "attempts": []
+  },
+  "reason": "desktop-group-title-not-unique:0",
+  "elapsedMs": 1724,
+  "sendReview": [
+    {
+      "item": 1,
+      "stage": "locate_group",
+      "label": "精确定位目标群",
+      "elapsedMs": 724,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 2,
+      "stage": "verify_target_and_input",
+      "label": "复核目标群与输入框",
+      "elapsedMs": 1000,
+      "status": "failed",
+      "pitfalls": [
+        {
+          "code": "send-failure",
+          "reason": "desktop-group-title-not-unique:0"
+        }
+      ]
+    }
+  ],
+  "reviewSummary": {
+    "totalElapsedMs": 1724,
+    "itemCount": 2,
+    "pitfallCount": 1,
+    "result": "failed"
+  }
+}

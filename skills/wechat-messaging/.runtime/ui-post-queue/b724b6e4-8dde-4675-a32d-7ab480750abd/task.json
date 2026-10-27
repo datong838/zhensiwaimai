@@ -1,0 +1,40 @@
+{
+  "taskId": "b724b6e4-8dde-4675-a32d-7ab480750abd",
+  "stage": "send",
+  "request": {
+    "schemaVersion": 1,
+    "operation": "send",
+    "groupName": "电销+直播攻坚组",
+    "items": [
+      {
+        "itemId": "0",
+        "type": "text",
+        "text": "当前无新增意向商家",
+        "sha256": "13785863a9b510209ae4ada2a13b85d721428f4adf293a925e45490c4577bb97"
+      }
+    ],
+    "context": {
+      "workflowId": "merchants",
+      "eventId": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/empty-202610271100.json",
+      "accountAlias": "main-wechat",
+      "channel": "desktop",
+      "deadlineAt": 1793070608.818667
+    }
+  },
+  "item": {
+    "itemId": "0",
+    "type": "text",
+    "text": "当前无新增意向商家",
+    "sha256": "13785863a9b510209ae4ada2a13b85d721428f4adf293a925e45490c4577bb97"
+  },
+  "deadlineAt": null,
+  "lifetime": "owner-process",
+  "owner": {
+    "pid": 33283,
+    "parentPid": 33240,
+    "identity": "Tue Oct 27 11:00:08 2026",
+    "parentIdentity": "Tue Oct 27 11:00:03 2026"
+  },
+  "expectedPresentation": "text-message",
+  "binding": "df0438bf5ea804c65d5d1388569aa69c7620d5716b3dd87043efbb8e871719b9"
+}

@@ -1,0 +1,694 @@
+{
+  "ok": false,
+  "status": "partial",
+  "groupName": "臻肆测试群",
+  "channel": "desktop",
+  "requestDigest": "27e7e55a133a0018e6013d65223480645f951beb8e61587d5546c8548d4068be",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "li-lao-ha-meituan-weifang-20260917-3star-v4",
+      "sha256": "c325c0b2fc5ca2f50cc4891d2c5c6bc3c6b8072688923e282a184a8d4b15417e",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1789736078.76976,
+      "sendAttempts": 1,
+      "verificationLevel": "native-text-exact",
+      "evidence": {
+        "ok": true,
+        "bubblePositions": [
+          [
+            1809.0,
+            740.0
+          ],
+          [
+            1809.0,
+            740.0
+          ]
+        ],
+        "copyMenuCount": 1,
+        "composerEmpty": true,
+        "copiedTextSha256": "c325c0b2fc5ca2f50cc4891d2c5c6bc3c6b8072688923e282a184a8d4b15417e",
+        "scrolls": [
+          {
+            "ok": true,
+            "messageList": {
+              "x": 330.0,
+              "y": 104.0,
+              "width": 810.0,
+              "height": 468.0
+            },
+            "scrollEvents": 12,
+            "frame": 1,
+            "recoveryCycle": 1
+          },
+          {
+            "ok": true,
+            "messageList": {
+              "x": 330.0,
+              "y": 104.0,
+              "width": 810.0,
+              "height": 468.0
+            },
+            "scrollEvents": 12,
+            "frame": 1,
+            "recoveryCycle": 1
+          },
+          {
+            "ok": true,
+            "messageList": {
+              "x": 330.0,
+              "y": 104.0,
+              "width": 810.0,
+              "height": 468.0
+            },
+            "scrollEvents": 12,
+            "frame": 1,
+            "recoveryCycle": 1
+          },
+          {
+            "ok": true,
+            "messageList": {
+              "x": 330.0,
+              "y": 104.0,
+              "width": 810.0,
+              "height": 468.0
+            },
+            "scrollEvents": 12,
+            "frame": 1,
+            "recoveryCycle": 1
+          }
+        ],
+        "frameAnchors": [
+          {
+            "ok": true,
+            "candidateCount": 2,
+            "x": 1753.0,
+            "y": 781.0,
+            "matchedLineIndexes": [
+              0,
+              1
+            ],
+            "matchedAnchorCount": 2,
+            "linePositions": {
+              "0": [
+                1809.0,
+                740.0
+              ],
+              "1": [
+                1753.0,
+                781.0
+              ]
+            },
+            "headerCount": 1,
+            "ocrAttempts": 1,
+            "headerVerifiedByAX": true,
+            "recoveryCycle": 1
+          },
+          {
+            "ok": true,
+            "candidateCount": 2,
+            "x": 1753.0,
+            "y": 781.0,
+            "matchedLineIndexes": [
+              0,
+              1
+            ],
+            "matchedAnchorCount": 2,
+            "linePositions": {
+              "0": [
+                1809.0,
+                740.0
+              ],
+              "1": [
+                1753.0,
+                781.0
+              ]
+            },
+            "headerCount": 1,
+            "ocrAttempts": 1,
+            "headerVerifiedByAX": true,
+            "recoveryCycle": 1
+          }
+        ],
+        "stableLineIndex": 0,
+        "newOutgoingEvidence": {
+          "ok": true,
+          "frames": [
+            {
+              "position": [
+                1807.0,
+                740.0
+              ],
+              "greenPixels": 6854,
+              "changed": 98.91175
+            },
+            {
+              "position": [
+                1807.0,
+                740.0
+              ],
+              "greenPixels": 6854,
+              "changed": 98.91175
+            }
+          ]
+        }
+      },
+      "transport": {
+        "ok": false,
+        "executor": "wechat-desktop-sender",
+        "channel": "desktop",
+        "groupName": "臻肆测试群",
+        "payloadType": "text",
+        "sendAttempts": 1,
+        "runtimeModelDecisions": 0,
+        "stage": "post_send_verify",
+        "stageMs": {
+          "locate_group": 8465,
+          "verify_target_and_input": 1907,
+          "prepare_payload": 1709,
+          "claim_and_send": 3708,
+          "post_send_verify": 6250
+        },
+        "payloadIdentity": "687fd02d8f7fead0f37373169b1eb47b1a940d485766b7f181c230c8c6ded918",
+        "payloads": [
+          {
+            "text": "--- 2026-09-17 中差评申诉进度通知 ---\n李老哈·东北农家小院（潍坊路店）\n【美团】\n评价时间: 2026-09-17\n评价等级: 3星\n申诉结果：---申诉中---\n评价内容: 不好吃，腥气#干煎带鱼#",
+            "sha256": "c325c0b2fc5ca2f50cc4891d2c5c6bc3c6b8072688923e282a184a8d4b15417e"
+          }
+        ],
+        "groupPreflight": {
+          "ok": true,
+          "action": "open-group",
+          "group": "臻肆测试群",
+          "header": "臻肆测试群",
+          "note": "exact-group-section-text-row",
+          "reason": null,
+          "sendAttempts": 0,
+          "runtimeModelDecisions": 0,
+          "searchGroup": "臻肆测试群",
+          "stageMs": {
+            "exact_group_preflight": 8465
+          },
+          "artifacts": [
+            "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/80a055dca8a905ac78a1be4622bbd978abb2064fa5fb6316c21cf33413c71328/78684b256bc6a46d5adea6ba441af38f12e344bb0282306aacee43a0a5dc94a7/transport/open_group_force_search.png",
+            "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/80a055dca8a905ac78a1be4622bbd978abb2064fa5fb6316c21cf33413c71328/78684b256bc6a46d5adea6ba441af38f12e344bb0282306aacee43a0a5dc94a7/transport/open_group_exact_after_ready.png"
+          ],
+          "hardGate": false
+        },
+        "textInputVerified": true,
+        "textWriteAttempts": 1,
+        "clipboardClearedBeforeTextWrite": true,
+        "preparedInputChangedPixels": 14301,
+        "preparedInputChangedRatio": 0.038717,
+        "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/80a055dca8a905ac78a1be4622bbd978abb2064fa5fb6316c21cf33413c71328/78684b256bc6a46d5adea6ba441af38f12e344bb0282306aacee43a0a5dc94a7/transport-ledger/attempt.json",
+        "postSendInputCleared": [
+          true,
+          true
+        ],
+        "postSendFailureReason": "desktop-post-send-verification-unknown",
+        "reason": "desktop-post-send-verification-unknown",
+        "state": "unknown",
+        "elapsedMs": 22040,
+        "sendReview": [
+          {
+            "item": 1,
+            "stage": "locate_group",
+            "label": "精确定位目标群",
+            "elapsedMs": 8465,
+            "status": "completed",
+            "pitfalls": []
+          },
+          {
+            "item": 2,
+            "stage": "verify_target_and_input",
+            "label": "复核目标群与输入框",
+            "elapsedMs": 1907,
+            "status": "completed",
+            "pitfalls": []
+          },
+          {
+            "item": 3,
+            "stage": "prepare_payload",
+            "label": "准备并复核发送载荷",
+            "elapsedMs": 1709,
+            "status": "completed",
+            "pitfalls": []
+          },
+          {
+            "item": 4,
+            "stage": "claim_and_send",
+            "label": "领取防重账本并单次发送",
+            "elapsedMs": 3708,
+            "status": "completed",
+            "pitfalls": []
+          },
+          {
+            "item": 5,
+            "stage": "post_send_verify",
+            "label": "发送后双帧复核",
+            "elapsedMs": 6250,
+            "status": "failed",
+            "pitfalls": [
+              {
+                "code": "send-failure",
+                "reason": "desktop-post-send-verification-unknown"
+              }
+            ]
+          }
+        ],
+        "reviewSummary": {
+          "totalElapsedMs": 22040,
+          "itemCount": 5,
+          "pitfallCount": 1,
+          "result": "failed"
+        }
+      }
+    },
+    {
+      "itemId": "li-lao-ha-meituan-changyang-20260917-1star-v4",
+      "sha256": "1ece230e191ed53aa5698fcc1df235d8911f7977099eb47b732685485ec426c0",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1789736123.9328718,
+      "sendAttempts": 1,
+      "verificationLevel": "native-text-exact",
+      "evidence": {
+        "ok": true,
+        "bubblePositions": [
+          [
+            1673.0,
+            942.0
+          ],
+          [
+            1673.0,
+            942.0
+          ]
+        ],
+        "copyMenuCount": 1,
+        "composerEmpty": true,
+        "copiedTextSha256": "1ece230e191ed53aa5698fcc1df235d8911f7977099eb47b732685485ec426c0",
+        "scrolls": [
+          {
+            "ok": true,
+            "messageList": {
+              "x": 330.0,
+              "y": 104.0,
+              "width": 810.0,
+              "height": 468.0
+            },
+            "scrollEvents": 12,
+            "frame": 1,
+            "recoveryCycle": 1
+          },
+          {
+            "ok": true,
+            "messageList": {
+              "x": 330.0,
+              "y": 104.0,
+              "width": 810.0,
+              "height": 468.0
+            },
+            "scrollEvents": 12,
+            "frame": 1,
+            "recoveryCycle": 1
+          },
+          {
+            "ok": true,
+            "messageList": {
+              "x": 330.0,
+              "y": 104.0,
+              "width": 810.0,
+              "height": 468.0
+            },
+            "scrollEvents": 12,
+            "frame": 1,
+            "recoveryCycle": 1
+          },
+          {
+            "ok": true,
+            "messageList": {
+              "x": 330.0,
+              "y": 104.0,
+              "width": 810.0,
+              "height": 468.0
+            },
+            "scrollEvents": 12,
+            "frame": 1,
+            "recoveryCycle": 1
+          }
+        ],
+        "frameAnchors": [
+          {
+            "ok": true,
+            "candidateCount": 3,
+            "x": 1673.0,
+            "y": 942.0,
+            "matchedLineIndexes": [
+              5
+            ],
+            "matchedAnchorCount": 1,
+            "linePositions": {
+              "5": [
+                1673.0,
+                942.0
+              ]
+            },
+            "headerCount": 1,
+            "ocrAttempts": 1,
+            "headerVerifiedByAX": true,
+            "recoveryCycle": 1
+          },
+          {
+            "ok": true,
+            "candidateCount": 3,
+            "x": 1673.0,
+            "y": 942.0,
+            "matchedLineIndexes": [
+              5
+            ],
+            "matchedAnchorCount": 1,
+            "linePositions": {
+              "5": [
+                1673.0,
+                942.0
+              ]
+            },
+            "headerCount": 1,
+            "ocrAttempts": 1,
+            "headerVerifiedByAX": true,
+            "recoveryCycle": 1
+          }
+        ],
+        "stableLineIndex": 5,
+        "newOutgoingEvidence": {
+          "ok": true,
+          "frames": [
+            {
+              "position": [
+                1673.0,
+                942.0
+              ],
+              "greenPixels": 7079,
+              "changed": 90.828625
+            },
+            {
+              "position": [
+                1673.0,
+                942.0
+              ],
+              "greenPixels": 7079,
+              "changed": 90.828625
+            }
+          ]
+        }
+      },
+      "transport": {
+        "ok": false,
+        "executor": "wechat-desktop-sender",
+        "channel": "desktop",
+        "groupName": "臻肆测试群",
+        "payloadType": "text",
+        "sendAttempts": 1,
+        "runtimeModelDecisions": 0,
+        "stage": "post_send_verify",
+        "stageMs": {
+          "locate_group": 12489,
+          "verify_target_and_input": 1861,
+          "prepare_payload": 1704,
+          "claim_and_send": 3837,
+          "post_send_verify": 6279
+        },
+        "payloadIdentity": "5166ac38f19c44886c23b1b346fbcc0509c22c1b87c326dbc833411081f5f7eb",
+        "payloads": [
+          {
+            "text": "--- 2026-09-17 中差评申诉进度通知 ---\n李老哈·东北菜（长阳创谷店）\n【美团】\n评价时间: 2026-09-17\n评价等级: 1星\n申诉结果：---申诉成功---\n评价内容: 对诉求毫无反映服务极差不会再来了",
+            "sha256": "1ece230e191ed53aa5698fcc1df235d8911f7977099eb47b732685485ec426c0"
+          }
+        ],
+        "groupPreflight": {
+          "ok": true,
+          "action": "open-group",
+          "group": "臻肆测试群",
+          "header": "臻肆测试群",
+          "note": "exact-group-section-text-row",
+          "reason": null,
+          "sendAttempts": 0,
+          "runtimeModelDecisions": 0,
+          "searchGroup": "臻肆测试群",
+          "stageMs": {
+            "exact_group_preflight": 12489
+          },
+          "artifacts": [
+            "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/80a055dca8a905ac78a1be4622bbd978abb2064fa5fb6316c21cf33413c71328/8a36441899efd849d38566736c695abadd3c919a5698dfab72a898c937617e5e/transport/open_group_force_search.png",
+            "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/80a055dca8a905ac78a1be4622bbd978abb2064fa5fb6316c21cf33413c71328/8a36441899efd849d38566736c695abadd3c919a5698dfab72a898c937617e5e/transport/open_group_exact_focus.png",
+            "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/80a055dca8a905ac78a1be4622bbd978abb2064fa5fb6316c21cf33413c71328/8a36441899efd849d38566736c695abadd3c919a5698dfab72a898c937617e5e/transport/open_group_exact_search.png",
+            "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/80a055dca8a905ac78a1be4622bbd978abb2064fa5fb6316c21cf33413c71328/8a36441899efd849d38566736c695abadd3c919a5698dfab72a898c937617e5e/transport/open_group_exact_after.png"
+          ],
+          "hardGate": false
+        },
+        "textInputVerified": true,
+        "textWriteAttempts": 1,
+        "clipboardClearedBeforeTextWrite": true,
+        "preparedInputChangedPixels": 16634,
+        "preparedInputChangedRatio": 0.045033,
+        "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/80a055dca8a905ac78a1be4622bbd978abb2064fa5fb6316c21cf33413c71328/8a36441899efd849d38566736c695abadd3c919a5698dfab72a898c937617e5e/transport-ledger/attempt.json",
+        "postSendInputCleared": [
+          true,
+          true
+        ],
+        "postSendFailureReason": "desktop-post-send-verification-unknown",
+        "reason": "desktop-post-send-verification-unknown",
+        "state": "unknown",
+        "elapsedMs": 26171,
+        "sendReview": [
+          {
+            "item": 1,
+            "stage": "locate_group",
+            "label": "精确定位目标群",
+            "elapsedMs": 12489,
+            "status": "completed",
+            "pitfalls": []
+          },
+          {
+            "item": 2,
+            "stage": "verify_target_and_input",
+            "label": "复核目标群与输入框",
+            "elapsedMs": 1861,
+            "status": "completed",
+            "pitfalls": []
+          },
+          {
+            "item": 3,
+            "stage": "prepare_payload",
+            "label": "准备并复核发送载荷",
+            "elapsedMs": 1704,
+            "status": "completed",
+            "pitfalls": []
+          },
+          {
+            "item": 4,
+            "stage": "claim_and_send",
+            "label": "领取防重账本并单次发送",
+            "elapsedMs": 3837,
+            "status": "completed",
+            "pitfalls": []
+          },
+          {
+            "item": 5,
+            "stage": "post_send_verify",
+            "label": "发送后双帧复核",
+            "elapsedMs": 6279,
+            "status": "failed",
+            "pitfalls": [
+              {
+                "code": "send-failure",
+                "reason": "desktop-post-send-verification-unknown"
+              }
+            ]
+          }
+        ],
+        "reviewSummary": {
+          "totalElapsedMs": 26171,
+          "itemCount": 5,
+          "pitfallCount": 1,
+          "result": "failed"
+        }
+      }
+    },
+    {
+      "itemId": "li-lao-ha-taobao-fengxian-20260917-2star-v4",
+      "sha256": "876a9e98e8a0c4c696e41f5ba3db5d08c9c28f398404aa0478e69d150901aa29",
+      "type": "text",
+      "status": "unknown",
+      "claimedAt": 1789736176.8748622,
+      "sendAttempts": 1,
+      "reason": "composer-not-proven-empty",
+      "transport": {
+        "ok": false,
+        "executor": "wechat-desktop-sender",
+        "channel": "desktop",
+        "groupName": "臻肆测试群",
+        "payloadType": "text",
+        "sendAttempts": 1,
+        "runtimeModelDecisions": 0,
+        "stage": "post_send_verify",
+        "stageMs": {
+          "locate_group": 12319,
+          "verify_target_and_input": 1886,
+          "prepare_payload": 1746,
+          "claim_and_send": 3596,
+          "post_send_verify": 7695
+        },
+        "payloadIdentity": "3828ecaba202a34b3fc17d4ec054a8ea470ab24da7ce50d34651ff7ee6a68444",
+        "payloads": [
+          {
+            "text": "--- 2026-09-17 中差评申诉进度通知 ---\n李老哈东北菜（奉贤宝龙店）\n【淘宝闪购】\n评价时间: 2026-09-17\n评价等级: 2星\n申诉结果：---申诉成功---\n评价内容: 难吃",
+            "sha256": "876a9e98e8a0c4c696e41f5ba3db5d08c9c28f398404aa0478e69d150901aa29"
+          }
+        ],
+        "groupPreflight": {
+          "ok": true,
+          "action": "open-group",
+          "group": "臻肆测试群",
+          "header": "臻肆测试群",
+          "note": "exact-group-section-text-row",
+          "reason": null,
+          "sendAttempts": 0,
+          "runtimeModelDecisions": 0,
+          "searchGroup": "臻肆测试群",
+          "stageMs": {
+            "exact_group_preflight": 12319
+          },
+          "artifacts": [
+            "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/80a055dca8a905ac78a1be4622bbd978abb2064fa5fb6316c21cf33413c71328/65a887af75c5e4fadaa1ed6f3272d9506b18c1952b591421ec779cd2bc2f5f8b/transport/open_group_force_search.png",
+            "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/80a055dca8a905ac78a1be4622bbd978abb2064fa5fb6316c21cf33413c71328/65a887af75c5e4fadaa1ed6f3272d9506b18c1952b591421ec779cd2bc2f5f8b/transport/open_group_exact_focus.png",
+            "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/80a055dca8a905ac78a1be4622bbd978abb2064fa5fb6316c21cf33413c71328/65a887af75c5e4fadaa1ed6f3272d9506b18c1952b591421ec779cd2bc2f5f8b/transport/open_group_exact_search.png",
+            "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/80a055dca8a905ac78a1be4622bbd978abb2064fa5fb6316c21cf33413c71328/65a887af75c5e4fadaa1ed6f3272d9506b18c1952b591421ec779cd2bc2f5f8b/transport/open_group_exact_after.png"
+          ],
+          "hardGate": false
+        },
+        "textInputVerified": true,
+        "textWriteAttempts": 1,
+        "clipboardClearedBeforeTextWrite": true,
+        "preparedInputChangedPixels": 12037,
+        "preparedInputChangedRatio": 0.032587,
+        "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/80a055dca8a905ac78a1be4622bbd978abb2064fa5fb6316c21cf33413c71328/65a887af75c5e4fadaa1ed6f3272d9506b18c1952b591421ec779cd2bc2f5f8b/transport-ledger/attempt.json",
+        "postSendInputCleared": [
+          false,
+          false
+        ],
+        "postSendFailureReason": "desktop-post-send-verification-unknown",
+        "reason": "desktop-post-send-verification-unknown",
+        "state": "unknown",
+        "elapsedMs": 27246,
+        "sendReview": [
+          {
+            "item": 1,
+            "stage": "locate_group",
+            "label": "精确定位目标群",
+            "elapsedMs": 12319,
+            "status": "completed",
+            "pitfalls": []
+          },
+          {
+            "item": 2,
+            "stage": "verify_target_and_input",
+            "label": "复核目标群与输入框",
+            "elapsedMs": 1886,
+            "status": "completed",
+            "pitfalls": []
+          },
+          {
+            "item": 3,
+            "stage": "prepare_payload",
+            "label": "准备并复核发送载荷",
+            "elapsedMs": 1746,
+            "status": "completed",
+            "pitfalls": []
+          },
+          {
+            "item": 4,
+            "stage": "claim_and_send",
+            "label": "领取防重账本并单次发送",
+            "elapsedMs": 3596,
+            "status": "completed",
+            "pitfalls": []
+          },
+          {
+            "item": 5,
+            "stage": "post_send_verify",
+            "label": "发送后双帧复核",
+            "elapsedMs": 7695,
+            "status": "failed",
+            "pitfalls": [
+              {
+                "code": "send-failure",
+                "reason": "desktop-post-send-verification-unknown"
+              }
+            ]
+          }
+        ],
+        "reviewSummary": {
+          "totalElapsedMs": 27246,
+          "itemCount": 5,
+          "pitfallCount": 1,
+          "result": "failed"
+        }
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:li-lao-ha-meituan-weifang-20260917-3star-v4",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:li-lao-ha-meituan-changyang-20260917-1star-v4",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:li-lao-ha-taobao-fengxian-20260917-2star-v4",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 981
+    },
+    {
+      "stage": "send:li-lao-ha-meituan-weifang-20260917-3star-v4",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 45161
+    },
+    {
+      "stage": "send:li-lao-ha-meituan-changyang-20260917-1star-v4",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 52941
+    },
+    {
+      "stage": "send:li-lao-ha-taobao-fengxian-20260917-2star-v4",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 27249
+    }
+  ],
+  "reason": "composer-not-proven-empty",
+  "elapsedMs": 126342,
+  "eventKey": "80a055dca8a905ac78a1be4622bbd978abb2064fa5fb6316c21cf33413c71328"
+}

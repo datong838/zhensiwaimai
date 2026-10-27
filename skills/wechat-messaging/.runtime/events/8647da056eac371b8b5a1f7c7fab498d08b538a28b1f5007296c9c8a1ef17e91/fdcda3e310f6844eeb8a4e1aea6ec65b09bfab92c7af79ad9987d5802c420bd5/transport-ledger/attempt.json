@@ -1,0 +1,111 @@
+{
+  "ok": false,
+  "executor": "wechat-desktop-sender",
+  "channel": "desktop",
+  "groupName": "臻肆测试群",
+  "payloadType": "text",
+  "sendAttempts": 1,
+  "runtimeModelDecisions": 0,
+  "stage": "post_send_verify",
+  "stageMs": {
+    "locate_group": 11693,
+    "verify_target_and_input": 1858,
+    "prepare_payload": 1779,
+    "claim_and_send": 3523,
+    "post_send_verify": 6461
+  },
+  "payloadIdentity": "df36da4df9191cdf8ae63e10b124a29fb712a5e295c31d2d3a309f8b02333335",
+  "payloads": [
+    {
+      "text": "--- 2026-09-17 中差评申诉进度通知 ---\n李老哈·东北农家小院（成山路店）\n【美团】\n评价时间: 2026-09-17\n评价等级: 3星\n申诉结果：【申诉中】\n评价内容: 肉丝太硬了而且水分太多不好吃#香辣肉丝#",
+      "sha256": "21965a0b82639524945680837aba78e24abb89396f55c5a47d21fae8364d2afb"
+    }
+  ],
+  "groupPreflight": {
+    "ok": true,
+    "action": "open-group",
+    "group": "臻肆测试群",
+    "header": "臻肆测试群",
+    "note": "exact-group-section-text-row",
+    "reason": null,
+    "sendAttempts": 0,
+    "runtimeModelDecisions": 0,
+    "searchGroup": "臻肆测试群",
+    "stageMs": {
+      "exact_group_preflight": 11693
+    },
+    "artifacts": [
+      "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/8647da056eac371b8b5a1f7c7fab498d08b538a28b1f5007296c9c8a1ef17e91/fdcda3e310f6844eeb8a4e1aea6ec65b09bfab92c7af79ad9987d5802c420bd5/transport/open_group_force_search.png",
+      "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/8647da056eac371b8b5a1f7c7fab498d08b538a28b1f5007296c9c8a1ef17e91/fdcda3e310f6844eeb8a4e1aea6ec65b09bfab92c7af79ad9987d5802c420bd5/transport/open_group_exact_focus.png",
+      "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/8647da056eac371b8b5a1f7c7fab498d08b538a28b1f5007296c9c8a1ef17e91/fdcda3e310f6844eeb8a4e1aea6ec65b09bfab92c7af79ad9987d5802c420bd5/transport/open_group_exact_search.png",
+      "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/8647da056eac371b8b5a1f7c7fab498d08b538a28b1f5007296c9c8a1ef17e91/fdcda3e310f6844eeb8a4e1aea6ec65b09bfab92c7af79ad9987d5802c420bd5/transport/open_group_exact_after.png"
+    ],
+    "hardGate": false
+  },
+  "textInputVerified": true,
+  "textWriteAttempts": 1,
+  "clipboardClearedBeforeTextWrite": true,
+  "preparedInputChangedPixels": 17047,
+  "preparedInputChangedRatio": 0.046151,
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/8647da056eac371b8b5a1f7c7fab498d08b538a28b1f5007296c9c8a1ef17e91/fdcda3e310f6844eeb8a4e1aea6ec65b09bfab92c7af79ad9987d5802c420bd5/transport-ledger/attempt.json",
+  "postSendInputCleared": [
+    true
+  ],
+  "postSendFailureReason": "wechat-composer-native-focus-failed",
+  "reason": "desktop-post-send-verification-unknown",
+  "state": "unknown",
+  "elapsedMs": 25315,
+  "sendReview": [
+    {
+      "item": 1,
+      "stage": "locate_group",
+      "label": "精确定位目标群",
+      "elapsedMs": 11693,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 2,
+      "stage": "verify_target_and_input",
+      "label": "复核目标群与输入框",
+      "elapsedMs": 1858,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 3,
+      "stage": "prepare_payload",
+      "label": "准备并复核发送载荷",
+      "elapsedMs": 1779,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 4,
+      "stage": "claim_and_send",
+      "label": "领取防重账本并单次发送",
+      "elapsedMs": 3523,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 5,
+      "stage": "post_send_verify",
+      "label": "发送后双帧复核",
+      "elapsedMs": 6461,
+      "status": "failed",
+      "pitfalls": [
+        {
+          "code": "send-failure",
+          "reason": "desktop-post-send-verification-unknown"
+        }
+      ]
+    }
+  ],
+  "reviewSummary": {
+    "totalElapsedMs": 25315,
+    "itemCount": 5,
+    "pitfallCount": 1,
+    "result": "failed"
+  }
+}

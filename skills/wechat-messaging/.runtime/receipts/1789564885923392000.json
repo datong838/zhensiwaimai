@@ -1,0 +1,129 @@
+{
+  "ok": false,
+  "status": "blocked",
+  "groupName": "臻肆测试群",
+  "channel": "desktop",
+  "requestDigest": "6bac8c8a746ff0eb3a25dd8c09cfb326181f814c8a99ee9c31804517882a7999",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "file",
+      "sha256": "bb42b22386be25ed7ee95d1bd382c01b0ab67de09a2fb569092e802165da65b2",
+      "type": "file",
+      "status": "blocked",
+      "claimedAt": 1789564884.352928,
+      "sendAttempts": 0,
+      "reason": "350:380: execution error: wechat-main-window-too-small (-2700)",
+      "transport": {
+        "ok": false,
+        "executor": "wechat-desktop-sender",
+        "channel": "desktop",
+        "groupName": "臻肆测试群",
+        "payloadType": "file",
+        "sendAttempts": 0,
+        "runtimeModelDecisions": 0,
+        "stage": "verify_target_and_input",
+        "stageMs": {
+          "locate_group": 303,
+          "verify_target_and_input": 1264
+        },
+        "payloadIdentity": "4d1607944efa0c0128d7c4aec30abe86561fea103617ffd68aeae334efeee4c0",
+        "payloads": [
+          {
+            "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/82b514bddc5204e01c5c70ff8b26b0b3a37593afc8c73acd3799db2712b51f33/6367e76a5ea61db4f291914ab6c06c74575b681ee0508035e12bdbe2e81e7917/payload/桌面验收复测.xlsx",
+            "name": "桌面验收复测.xlsx",
+            "size": 122277,
+            "sha256": "bb42b22386be25ed7ee95d1bd382c01b0ab67de09a2fb569092e802165da65b2"
+          }
+        ],
+        "groupPreflight": {
+          "ok": true,
+          "action": "open-group",
+          "group": "臻肆测试群",
+          "header": "臻肆测试群",
+          "note": "ax-current-header",
+          "reason": null,
+          "sendAttempts": 0,
+          "runtimeModelDecisions": 0,
+          "stageMs": {
+            "exact_group_preflight": 303
+          },
+          "artifacts": [],
+          "hardGate": false
+        },
+        "reason": "350:380: execution error: wechat-main-window-too-small (-2700)",
+        "elapsedMs": 1568,
+        "sendReview": [
+          {
+            "item": 1,
+            "stage": "locate_group",
+            "label": "精确定位目标群",
+            "elapsedMs": 303,
+            "status": "completed",
+            "pitfalls": []
+          },
+          {
+            "item": 2,
+            "stage": "verify_target_and_input",
+            "label": "复核目标群与输入框",
+            "elapsedMs": 1264,
+            "status": "failed",
+            "pitfalls": [
+              {
+                "code": "send-failure",
+                "reason": "350:380: execution error: wechat-main-window-too-small (-2700)"
+              }
+            ]
+          }
+        ],
+        "reviewSummary": {
+          "totalElapsedMs": 1568,
+          "itemCount": 2,
+          "pitfallCount": 1,
+          "result": "failed"
+        }
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:file",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:text",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:image",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 508
+    },
+    {
+      "stage": "send:file",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 1569
+    }
+  ],
+  "reason": "350:380: execution error: wechat-main-window-too-small (-2700)",
+  "elapsedMs": 2080,
+  "eventKey": "82b514bddc5204e01c5c70ff8b26b0b3a37593afc8c73acd3799db2712b51f33"
+}

@@ -1,0 +1,62 @@
+{
+  "mode": "offline-migration-regression",
+  "ok": true,
+  "externalSends": 0,
+  "suites": [
+    {
+      "suite": "common",
+      "ok": true,
+      "elapsedMs": 3103,
+      "output": "----------------------------------------------------------------------\nRan 82 tests in 2.994s\n\nOK\n"
+    },
+    {
+      "suite": "merchants",
+      "ok": true,
+      "elapsedMs": 339,
+      "output": "----------------------------------------------------------------------\nRan 70 tests in 0.053s\n\nOK\n"
+    },
+    {
+      "suite": "top10",
+      "ok": true,
+      "elapsedMs": 310,
+      "output": "----------------------------------------------------------------------\nRan 22 tests in 0.185s\n\nOK\n"
+    },
+    {
+      "suite": "jinsha-desktop",
+      "ok": true,
+      "elapsedMs": 60,
+      "output": "----------------------------------------------------------------------\nRan 5 tests in 0.000s\n\nOK\n"
+    },
+    {
+      "suite": "taobao-entry",
+      "ok": true,
+      "elapsedMs": 115,
+      "output": "{\"ok\":true,\"projectResult\":{\"file\":\"/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/daily-taobao-download-to-jinsha/scripts/entrypoint.mjs\",\"ok\":true},\"installedResult\":{\"file\":\"/Users/ddt/.codex/skills/daily-taobao-download-to-jinsha/scripts/entrypoint.mjs\",\"ok\":true},\"checks\":20}\n"
+    },
+    {
+      "suite": "jinsha-workflow",
+      "ok": true,
+      "elapsedMs": 853,
+      "output": "{\"ok\":true,\"tests\":24,\"productionEntry\":\"business_workflow_executor.mjs\",\"runtimeModelDecisions\":0}\n"
+    },
+    {
+      "suite": "jinsha-policy",
+      "ok": true,
+      "elapsedMs": 54,
+      "output": "{\"ok\":true,\"tests\":32,\"policyVersion\":\"jinsha-business-code-enforced-v1\",\"runtimeModelDecisions\":0}\n"
+    },
+    {
+      "suite": "top10-browser",
+      "ok": true,
+      "elapsedMs": 149,
+      "output": "{\"ok\":true,\"tests\":12,\"runtimeModelDecisions\":0}\n"
+    },
+    {
+      "suite": "merchant-browser",
+      "ok": true,
+      "elapsedMs": 158,
+      "output": "{\"ok\":true,\"tests\":26,\"runtimeModelDecisions\":0}\n"
+    }
+  ],
+  "merchantSealModified": false
+}

@@ -1,0 +1,186 @@
+#!/usr/bin/env python3
+"""WeCom desktop adapter — same executor contract as WindowsAdapter.
+
+Plugs into workflow_bridge.execute(adapter_factory=WeComAdapter) so all 15
+task flows can switch transport by ROUTE DATA ONLY (registry-routing.json
+routes.<id>.channel = "wecom"); ledgers, markers, dedup and receipt shape
+are handled by the bridge exactly as with the Windows transport.
+
+Hardening inside (大同 2026-10-23, all fail-closed):
+  main-window lock / prefix-search navigation / click safe-zone gate /
+  stuck-modifier sweep / focus-correctness gate. Each send is a fresh CLI
+  subprocess of wecom_desktop_sender.py (state-isolated, receipt-parsed).
+"""
+from __future__ import annotations
+
+import contextlib
+import fcntl
+import json
+import os
+import subprocess
+import sys
+import time
+from pathlib import Path
+
+import workflow_bridge
+
+ROOT = Path('/Users/ddt/work/projects/ai_agent/zhensi_waimai_back')
+SENDER = ROOT / 'skills/wechat-messaging/scripts/wecom_desktop_sender.py'
+PY = '/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python'
+LOCK_PATH = ROOT / 'skills/wechat-messaging/.runtime/wecom-transport.lock'
+SEND_TIMEOUT = 300.0
+
+
+class WeComAdapter:
+    channel = 'desktop'  # same receipt contract; transport identity lives in receipts
+    supported = {'text', 'image', 'file'}
+
+    def __init__(self):
+        self._resolved = None
+
+    # ---------- session ownership (Mac WeCom UI is a single physical channel) ----------
+
+    @contextlib.contextmanager
+    def session(self, request):
+        LOCK_PATH.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+        handle = LOCK_PATH.open('a+')
+        try:
+            os.chmod(LOCK_PATH, 0o600)
+            end = time.time() + min(90.0, max(5.0, request['context']['deadlineAt'] - time.time()))
+            while True:
+                try:
+                    fcntl.flock(handle, fcntl.LOCK_EX | fcntl.LOCK_NB)
+                    break
+                except BlockingIOError:
+                    if time.time() >= end:
+                        raise workflow_bridge.Rejected('wecom-transport-busy')
+                    time.sleep(1.0)
+            yield
+        finally:
+            try:
+                fcntl.flock(handle, fcntl.LOCK_UN)
+            finally:
+                handle.close()
+
+    # ---------- identity resolution ----------
+
+    def _run_sender(self, mode_args, timeout=SEND_TIMEOUT):
+        cmd = [PY, str(SENDER)] + mode_args
+        env = {'PATH': '/usr/bin:/bin:/usr/sbin:/sbin', 'PYTHONPATH': '',
+               'HOME': os.environ.get('HOME', '/Users/ddt')}
+        return subprocess.run(cmd, capture_output=True, text=True, timeout=timeout, env=env)
+
+    def _parse_receipt(self, proc):
+        out = (proc.stdout or '').strip()
+        if not out:
+            return None
+        try:
+            return json.loads(out.splitlines()[-1])
+        except json.JSONDecodeError:
+            return None
+
+    # ---------- executor adapter contract ----------
+
+    def preflight(self, request, output):
+        """Locate + open the target group via search; write preflight proof."""
+        output = Path(output)
+        output.mkdir(parents=True, exist_ok=True, mode=0o700)
+        group = request['groupName']
+        proc = self._run_sender(['locate', '--group', group], timeout=120.0)
+        receipt = self._parse_receipt(proc)
+        located = bool(receipt and receipt.get('pos'))
+        # Full search-open navigation proves the conversation opens.
+        proc2 = self._run_sender(
+            ['send', '--group', group, '--text', '  ', '--dry-run'], timeout=180.0)
+        nav_receipt = self._parse_receipt(proc2)
+        nav_ok = nav_receipt is not None and nav_receipt.get('result') == 'dry-run-ok'
+        (output / 'preflight.json').write_text(json.dumps(
+            {'locate': receipt, 'navigate': nav_receipt},
+            ensure_ascii=False, default=str), encoding='utf-8')
+        if not nav_ok:
+            reason = (nav_receipt or {}).get('result') or f'sender-exit-{proc2.returncode}'
+            return {'ok': False, 'reason': f'wecom-preflight-failed:{reason}',
+                    'attempts': []}
+        self._resolved = group
+        return {'ok': True, 'reason': None, 'sendAttempts': 0,
+                'group': group, 'resolvedGroup': group,
+                'candidateStrategy': 'wecom-prefix-search',
+                'sessionListVerified': located, 'groupTypeVerified': True,
+                'groupTypeProof': 'wecom-search-open-title-evidence',
+                'attempts': []}
+
+    def send_one(self, request, item, work, grant, deadline):
+        work = Path(work)
+        (work / 'transport').mkdir(parents=True, exist_ok=True, mode=0o700)
+        import egress_policy
+        verdict = egress_policy.check(group=request['groupName'],
+                                      resolved_group=self._resolved or request['groupName'],
+                                      items=(item,))
+        if not verdict['allow']:
+            (work / 'egress-denied.json').write_text(json.dumps(
+                {'reason': verdict['reason'], 'payload': verdict['payload'],
+                 'group': request['groupName'], 'itemId': item.get('itemId')},
+                ensure_ascii=False, default=str), encoding='utf-8')
+            return {'status': 'blocked', 'sendAttempts': 0,
+                    'reason': 'egress-denied:' + str(verdict['reason']),
+                    'transport': {'denied': True, 'reason': verdict['reason'],
+                                  'sendAttempts': 0}}
+        if time.time() >= deadline:
+            return {'status': 'blocked', 'sendAttempts': 0,
+                    'reason': 'deadline-expired', 'transport': {'sendAttempts': 0}}
+
+        mode = {'text': ['send', '--text', item['text']],
+                'image': ['send-image', '--image', item['path']],
+                'file': ['send-file', '--file', item['path']]}[item['type']]
+        if item['type'] != 'text' and item.get('text'):
+            mode += ['--text', item['text']]
+        cmd = [PY, str(SENDER)] + mode + ['--group', request['groupName']]
+
+        transport = {'kind': item['type'], 'sendAttempts': 0, 'sent': False}
+        receipt = None
+        proc = None
+        for round_no in range(2):
+            try:
+                proc = self._run_sender(cmd)
+            except subprocess.TimeoutExpired:
+                # keyboard events may or may not have gone through: honest unknown
+                transport['sendAttempts'] = 1
+                return {'status': 'unknown', 'sendAttempts': 1,
+                        'reason': 'wecom-send-timeout',
+                        'transport': transport}
+            receipt = self._parse_receipt(proc)
+            result = (receipt or {}).get('result') or f'sender-exit-{proc.returncode}'
+            # Retry ONLY on a proven-not-sent failure (input was cleared
+            # in-process, sendAttempts==0). A sent/unknown state never retries.
+            if result in ('verified', 'sent-tail-unconfirmed') or 'locate-fail' not in result:
+                break
+            if round_no == 0:
+                transport.setdefault('attemptResults', []).append(result)
+                time.sleep(2.0)
+        transport['receipt'] = {k: receipt.get(k) for k in
+                                ('result', 'verify', 'steps') if receipt and k in receipt}
+        result = (receipt or {}).get('result') or f'sender-exit-{proc.returncode}'
+        if result in ('verified', 'sent-tail-unconfirmed'):
+            transport['sent'] = True
+            transport['sendAttempts'] = 1
+            level = {'text': 'wecom-ui-text-anchor',
+                     'image': 'wecom-ui-image-preview-clear',
+                     'file': 'wecom-ui-file-preview-clear'}[item['type']]
+            if result == 'sent-tail-unconfirmed':
+                # strong local criterion (input subtree back to baseline) but
+                # tail snapshot inconclusive — honest unknown, never resend
+                return {'status': 'unknown', 'sendAttempts': 1,
+                        'reason': 'wecom-tail-unconfirmed',
+                        'evidence': (receipt or {}).get('verify'),
+                        'transport': transport}
+            return {'status': 'verified', 'sendAttempts': 1,
+                    'verificationLevel': level, 'reason': None,
+                    'evidence': (receipt or {}).get('verify'), 'transport': transport}
+        # locate/paste/send failures: nothing was sent (input cleared in-process)
+        transport['sendAttempts'] = 0
+        return {'status': 'blocked', 'sendAttempts': 0,
+                'reason': f'wecom-send-failed:{result}',
+                'transport': transport}
+
+    def reconcile(self, request, item, work, prior):
+        raise workflow_bridge.Rejected('wecom-reconcile-unsupported')

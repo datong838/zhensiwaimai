@@ -1,0 +1,71 @@
+{
+  "ok": false,
+  "status": "unknown",
+  "groupName": "FEIBING NEO AI数字员工",
+  "channel": "desktop",
+  "requestDigest": "115c524ec53939d862bc1e904bb4ec6c49069f15f8e088508d962b2d0841e471",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "ledger-text-20260921",
+      "sha256": "695f1863a570b8f2121a1699f52fdb47a22ae3c1c8c15f817b8b32dc93ceafcc",
+      "type": "text",
+      "status": "unknown",
+      "claimedAt": 1789992892.82433,
+      "reason": "wechat-unexpected-secondary-window",
+      "sendAttempts": null
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:ledger-text-20260921",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:ledger-file-20260921",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 902
+    },
+    {
+      "stage": "send:ledger-text-20260921",
+      "status": "failed",
+      "pitfalls": [
+        "wechat-unexpected-secondary-window"
+      ],
+      "elapsedMs": 14397
+    }
+  ],
+  "reason": "wechat-unexpected-secondary-window",
+  "elapsedMs": 15302,
+  "eventKey": "0d6b1630e736fc8444104260d91cc6c47670c0c5d0af81b678abc4a0eec5b077",
+  "reviewSummary": {
+    "totalElapsedMs": 15302,
+    "result": "unknown",
+    "stageCount": 5,
+    "completedStages": 4,
+    "failedStages": [
+      {
+        "stage": "send:ledger-text-20260921",
+        "status": "failed",
+        "pitfalls": [
+          "wechat-unexpected-secondary-window"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "ok": false,
+  "executor": "wechat-desktop-sender",
+  "channel": "desktop",
+  "groupName": "臻肆测试群",
+  "payloadType": "text",
+  "sendAttempts": 1,
+  "runtimeModelDecisions": 0,
+  "stage": "post_send_verify",
+  "stageMs": {
+    "locate_group": 12489,
+    "verify_target_and_input": 1861,
+    "prepare_payload": 1704,
+    "claim_and_send": 3837,
+    "post_send_verify": 6279
+  },
+  "payloadIdentity": "5166ac38f19c44886c23b1b346fbcc0509c22c1b87c326dbc833411081f5f7eb",
+  "payloads": [
+    {
+      "text": "--- 2026-09-17 中差评申诉进度通知 ---\n李老哈·东北菜（长阳创谷店）\n【美团】\n评价时间: 2026-09-17\n评价等级: 1星\n申诉结果：---申诉成功---\n评价内容: 对诉求毫无反映服务极差不会再来了",
+      "sha256": "1ece230e191ed53aa5698fcc1df235d8911f7977099eb47b732685485ec426c0"
+    }
+  ],
+  "groupPreflight": {
+    "ok": true,
+    "action": "open-group",
+    "group": "臻肆测试群",
+    "header": "臻肆测试群",
+    "note": "exact-group-section-text-row",
+    "reason": null,
+    "sendAttempts": 0,
+    "runtimeModelDecisions": 0,
+    "searchGroup": "臻肆测试群",
+    "stageMs": {
+      "exact_group_preflight": 12489
+    },
+    "artifacts": [
+      "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/80a055dca8a905ac78a1be4622bbd978abb2064fa5fb6316c21cf33413c71328/8a36441899efd849d38566736c695abadd3c919a5698dfab72a898c937617e5e/transport/open_group_force_search.png",
+      "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/80a055dca8a905ac78a1be4622bbd978abb2064fa5fb6316c21cf33413c71328/8a36441899efd849d38566736c695abadd3c919a5698dfab72a898c937617e5e/transport/open_group_exact_focus.png",
+      "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/80a055dca8a905ac78a1be4622bbd978abb2064fa5fb6316c21cf33413c71328/8a36441899efd849d38566736c695abadd3c919a5698dfab72a898c937617e5e/transport/open_group_exact_search.png",
+      "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/80a055dca8a905ac78a1be4622bbd978abb2064fa5fb6316c21cf33413c71328/8a36441899efd849d38566736c695abadd3c919a5698dfab72a898c937617e5e/transport/open_group_exact_after.png"
+    ],
+    "hardGate": false
+  },
+  "textInputVerified": true,
+  "textWriteAttempts": 1,
+  "clipboardClearedBeforeTextWrite": true,
+  "preparedInputChangedPixels": 16634,
+  "preparedInputChangedRatio": 0.045033,
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/80a055dca8a905ac78a1be4622bbd978abb2064fa5fb6316c21cf33413c71328/8a36441899efd849d38566736c695abadd3c919a5698dfab72a898c937617e5e/transport-ledger/attempt.json",
+  "postSendInputCleared": [
+    true,
+    true
+  ],
+  "postSendFailureReason": "desktop-post-send-verification-unknown",
+  "reason": "desktop-post-send-verification-unknown",
+  "state": "unknown",
+  "elapsedMs": 26171,
+  "sendReview": [
+    {
+      "item": 1,
+      "stage": "locate_group",
+      "label": "精确定位目标群",
+      "elapsedMs": 12489,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 2,
+      "stage": "verify_target_and_input",
+      "label": "复核目标群与输入框",
+      "elapsedMs": 1861,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 3,
+      "stage": "prepare_payload",
+      "label": "准备并复核发送载荷",
+      "elapsedMs": 1704,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 4,
+      "stage": "claim_and_send",
+      "label": "领取防重账本并单次发送",
+      "elapsedMs": 3837,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "item": 5,
+      "stage": "post_send_verify",
+      "label": "发送后双帧复核",
+      "elapsedMs": 6279,
+      "status": "failed",
+      "pitfalls": [
+        {
+          "code": "send-failure",
+          "reason": "desktop-post-send-verification-unknown"
+        }
+      ]
+    }
+  ],
+  "reviewSummary": {
+    "totalElapsedMs": 26171,
+    "itemCount": 5,
+    "pitfallCount": 1,
+    "result": "failed"
+  }
+}

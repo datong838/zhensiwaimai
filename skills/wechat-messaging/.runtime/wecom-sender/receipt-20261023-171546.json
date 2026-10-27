@@ -1,0 +1,33 @@
+{
+  "group": "电销+直播攻坚组",
+  "text": "城市：厦门市  ；  联系人：曹，18667000158  ；  店铺：雀勺江西菜  ；  地址：翔城国际鼓锣一里58-125号  ；  商家ID：1367119979",
+  "dry_run": false,
+  "modifiers_cleared": false,
+  "ts": "2026-10-23T17:15:20",
+  "steps": [
+    {
+      "navigate": "chat-area-evidence"
+    },
+    {
+      "write": true,
+      "info": "pos=(532.0, 716.0) attempt=1 len=84 head='城市：厦门市  ；  联系人：曹，186'"
+    },
+    {
+      "send_mode": "enter->cmd-enter->ctrl-enter"
+    }
+  ],
+  "wecom_activated": true,
+  "verify": {
+    "frame1": true,
+    "frame2_input_cleared": true,
+    "verified": true,
+    "tail1": [
+      "@所有人 ",
+      "由微信用户创建的外部群，含14位外部联系人 | 群主: 李知恒- AllenLi@微信",
+      "电销+直播攻坚组",
+      "250.0"
+    ]
+  },
+  "result": "verified",
+  "frontmost_restored": true
+}

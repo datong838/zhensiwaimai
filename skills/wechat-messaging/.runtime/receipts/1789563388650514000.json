@@ -1,0 +1,62 @@
+{
+  "ok": false,
+  "status": "unknown",
+  "groupName": "臻肆测试群",
+  "channel": "desktop",
+  "requestDigest": "6f3ab0d37487eeab75b1d0be532df33d114811c89d883bca4db11484a71686e8",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "file",
+      "sha256": "bb42b22386be25ed7ee95d1bd382c01b0ab67de09a2fb569092e802165da65b2",
+      "type": "file",
+      "status": "unknown",
+      "claimedAt": 1789563381.978708,
+      "reason": "owned-preview-filename-not-unique",
+      "sendAttempts": null
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:file",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:text",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:image",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 634
+    },
+    {
+      "stage": "send:file",
+      "status": "failed",
+      "pitfalls": [
+        "owned-preview-filename-not-unique"
+      ],
+      "elapsedMs": 6670
+    }
+  ],
+  "reason": "owned-preview-filename-not-unique",
+  "elapsedMs": 7308,
+  "eventKey": "99b366ab6d122eb442c8ca1f55f1b29032396f1b912ff10747906c52c236f68d"
+}

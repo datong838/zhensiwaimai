@@ -1,0 +1,108 @@
+{
+  "ok": true,
+  "action": "prepare",
+  "status": "prepared",
+  "review": [
+    {
+      "label": "维护授权",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "授权有效期",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "读取依赖清单",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "计算候选摘要",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 5
+    },
+    {
+      "label": "授权范围",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "统一微信完整离线测试",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 3867
+    },
+    {
+      "label": "原子写入依赖清单",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "依赖清单回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "统一入口完整性回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 34
+    }
+  ],
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "authorization": "user-20260928-daily-new-stores-wechat-gate-repair",
+  "expiresAt": "2026-09-28T10:45:17.954234+00:00",
+  "userInstructionSha256": "166a3fa4f25b630126b6b6acb02701beb4195e757f69dc97e8a06967a5aa7270",
+  "dependencyManifestPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/dependencies.json",
+  "dependencyManifestBeforeSha256": "c52fb555fb3bfcd171376e5e62d41490f4edc643073daa30db7f97dcbd7f5e9a",
+  "dependencyManifestAfterSha256": "cc7f4bafe9789bf615c3cbced4706af94c557159a2680913916669d30d4e628c",
+  "changes": [
+    {
+      "path": "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/wechat-desktop-control/scripts/desktop_sender.py",
+      "before": "b7d5c66f279056d0589b5202209a94334b533bb363d343d9e875eea561eed567",
+      "after": "507934aca54bac903fd2a41501b8e2fc5ba944dd04e7ff616ebf7a330ee931c1"
+    },
+    {
+      "path": "scripts/dependency_maintenance.py",
+      "before": "b5c8cce3004f0ca98832fd068ecd61af8afeef6fea8a00cb32d5d5ab2dd59761",
+      "after": "47940f791411e7bdb8fd85381c27cc2c1dd9e04f1e8cf0359695a84baf4a8d92"
+    },
+    {
+      "path": "scripts/desktop_adapter.py",
+      "before": "2f4f8428be7d3108ecde1c23cb6f5ab79c0e6e910e65b0dc2b572e32a5b5ada3",
+      "after": "9176e880572955f731a97ce367d39468ceb172d34359673dd96431bfc32d08a1"
+    },
+    {
+      "path": "scripts/workflow_bridge.py",
+      "before": "9bdf4cd64cc76b3adb5685429585f0473dc642fd80e9d1d7a4e962700fbf07e3",
+      "after": "26ed0feb549277b440f5390490bc70ce55d942160de6a89eda4764abbb60d20b"
+    },
+    {
+      "path": "scripts/workflow_preflight.py",
+      "before": "10720007663297cb61938e5a192bde2f15c902fbd18a187d2bd305e63f16b1ac",
+      "after": "6340a77b63f400216460ba1aaded0556238a77d54ff3e655b9cd87985c162d58"
+    }
+  ],
+  "tests": {
+    "ok": true,
+    "elapsedMs": 3867,
+    "testCount": 188
+  },
+  "capabilityCheck": {
+    "ok": true,
+    "elapsedMs": 34,
+    "testCount": null
+  },
+  "candidateFileCount": 29,
+  "elapsedMs": 3908
+}

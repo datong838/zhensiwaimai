@@ -1,0 +1,78 @@
+{
+  "ok": false,
+  "status": "blocked",
+  "groupName": "李老哈（品牌）💰臻肆外卖运营对接群",
+  "channel": "desktop",
+  "requestDigest": "f75c528e8cac57ee5605520022174ec52641f1c640e5fd296c8a98f142dd96d5",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "appeal-1c86da06ffaf5660c72c",
+      "sha256": "e3a695da64de8e8471002ae91ef835aa324c17b5da9480e6d7f6cdf62b21c433",
+      "type": "image",
+      "status": "blocked",
+      "claimedAt": 1792317963.155494,
+      "sendAttempts": 0,
+      "reason": "windows-send-rejected:HTTP 500: {\"ok\": false, \"error\": \"未出现『发送给』确认框或未找到『发送』按钮\"}",
+      "transport": {
+        "ok": false,
+        "error": "HTTP 500: {\"ok\": false, \"error\": \"未出现『发送给』确认框或未找到『发送』按钮\"}",
+        "route": "direct",
+        "sendAttempts": 0
+      },
+      "attemptErrors": [
+        "HTTP 500: {\"ok\": false, \"error\": \"未出现『发送给』确认框或未找到『发送』按钮\"}",
+        "HTTP 500: {\"ok\": false, \"error\": \"未出现『发送给』确认框或未找到『发送』按钮\"}",
+        "HTTP 500: {\"ok\": false, \"error\": \"未出现『发送给』确认框或未找到『发送』按钮\"}"
+      ]
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:appeal-1c86da06ffaf5660c72c",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:appeal-c30dfc415bc309aa0f8c",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:appeal-67662c75bb27a187480c",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 511
+    },
+    {
+      "stage": "send:appeal-1c86da06ffaf5660c72c",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 115060
+    }
+  ],
+  "reason": "windows-send-rejected:HTTP 500: {\"ok\": false, \"error\": \"未出现『发送给』确认框或未找到『发送』按钮\"}",
+  "elapsedMs": 115574,
+  "eventKey": "430f64a481acf1a49583f7beeacfde61696aa646c402380b2235710b66ba4e90",
+  "reviewSummary": {
+    "totalElapsedMs": 115574,
+    "result": "blocked",
+    "stageCount": 6,
+    "completedStages": 6,
+    "failedStages": []
+  }
+}

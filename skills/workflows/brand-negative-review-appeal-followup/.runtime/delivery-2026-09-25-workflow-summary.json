@@ -1,0 +1,213 @@
+{
+  "ok": true,
+  "status": "complete",
+  "businessDate": "2026-09-25",
+  "runtimeModelDecisions": 0,
+  "review": [
+    {
+      "stage": "读取并校验日报",
+      "status": "completed",
+      "elapsedMs": 0,
+      "pitfalls": []
+    },
+    {
+      "stage": "冻结初始/续发请求",
+      "status": "completed",
+      "elapsedMs": 1,
+      "pitfalls": []
+    },
+    {
+      "stage": "精确请求策略登记",
+      "status": "completed",
+      "elapsedMs": 1,
+      "pitfalls": []
+    },
+    {
+      "stage": "总执行器执行:brand-negative-appeal-2026-09-25-all-outcomes-v1",
+      "status": "failed",
+      "elapsedMs": 242705,
+      "pitfalls": [
+        "content-readback-incomplete"
+      ]
+    },
+    {
+      "stage": "只读对账:brand-negative-appeal-2026-09-25-all-outcomes-v1",
+      "status": "failed",
+      "elapsedMs": 14190,
+      "pitfalls": [
+        "reconcile-no-attempt"
+      ]
+    },
+    {
+      "stage": "CSV回执状态投影",
+      "status": "completed",
+      "elapsedMs": 4,
+      "pitfalls": []
+    },
+    {
+      "stage": "冻结初始/续发请求",
+      "status": "completed",
+      "elapsedMs": 2,
+      "pitfalls": []
+    },
+    {
+      "stage": "精确请求策略登记",
+      "status": "completed",
+      "elapsedMs": 1,
+      "pitfalls": []
+    },
+    {
+      "stage": "总执行器执行:brand-negative-appeal-2026-09-25-all-outcomes-continuation-e4c95bd8d7f7cc5d",
+      "status": "completed",
+      "elapsedMs": 34100,
+      "pitfalls": []
+    },
+    {
+      "stage": "CSV回执状态投影",
+      "status": "completed",
+      "elapsedMs": 4,
+      "pitfalls": []
+    }
+  ],
+  "events": [
+    {
+      "eventId": "brand-negative-appeal-2026-09-25-all-outcomes-v1",
+      "requestDigest": "f1d81fec36b6feac395acaf7637f6668acfdebcbadabbf775898a237f9b3bfac",
+      "result": {
+        "ok": false,
+        "status": "partial",
+        "reason": "reconcile-no-attempt",
+        "sendAttempts": -1,
+        "elapsedMs": 14190,
+        "returnCode": null,
+        "items": [],
+        "review": [
+          {
+            "stage": "总执行器首次运行",
+            "status": "failed",
+            "pitfalls": [
+              "reconcile-no-attempt"
+            ],
+            "elapsedMs": 14190
+          }
+        ]
+      }
+    },
+    {
+      "eventId": "brand-negative-appeal-2026-09-25-all-outcomes-continuation-e4c95bd8d7f7cc5d",
+      "requestDigest": "5bad0ac4296090d907cd969727d98b7642337e4614edbf32d5f3580d9efddca5",
+      "result": {
+        "ok": true,
+        "status": "verified",
+        "reason": null,
+        "sendAttempts": -1,
+        "elapsedMs": 34100,
+        "returnCode": null,
+        "items": [],
+        "review": [
+          {
+            "stage": "总执行器首次运行",
+            "status": "completed",
+            "pitfalls": [],
+            "elapsedMs": 34100
+          }
+        ]
+      }
+    }
+  ],
+  "csv": {
+    "ok": true,
+    "changed": 1,
+    "counts": {
+      "已发送": 8,
+      "核验未知": 0,
+      "未发送": 0
+    }
+  },
+  "itemStates": {
+    "4ce263e87e352e607120f4e20e1b99d7cb14394cde0d72b911322c504088e188": "verified",
+    "c5bc089078002300b95f3d1211dddd6f83c3e0234d7376047f20d413f67e769d": "verified",
+    "9292c7b86948017f8381469af229e66cf79a12ba8a89baa714d8232cce08349c": "verified",
+    "ffa34ec77ce5683c71b42df106c2f0d6914b510469bcfbe78cdbcb9109919cac": "verified",
+    "28e4aed88ba9e2a37c0df09d21e0de6d7c3f9312e3f67fac5be8b5a228188f06": "verified",
+    "9b0a6566779c9600356f39b99ff6a73eb3745c4f64b9bbe8bdc0c26afafff154": "verified",
+    "ad1a10919ba18f46bc8088ff2ace50db38574aa805596d64d63ecbfdbcde26b3": "verified",
+    "a1012f4e0eaa1e0d6755b479a498bca0ad4c0a9e066d24e4846d291d2af90493": "verified"
+  },
+  "elapsedMs": 291013,
+  "completionReview": {
+    "codeEnforced": true,
+    "totalElapsedMs": 291013,
+    "result": "complete",
+    "reviewItems": [
+      {
+        "stage": "读取并校验日报",
+        "status": "completed",
+        "elapsedMs": 0,
+        "pitfalls": []
+      },
+      {
+        "stage": "冻结初始/续发请求",
+        "status": "completed",
+        "elapsedMs": 1,
+        "pitfalls": []
+      },
+      {
+        "stage": "精确请求策略登记",
+        "status": "completed",
+        "elapsedMs": 1,
+        "pitfalls": []
+      },
+      {
+        "stage": "总执行器执行:brand-negative-appeal-2026-09-25-all-outcomes-v1",
+        "status": "failed",
+        "elapsedMs": 242705,
+        "pitfalls": [
+          "content-readback-incomplete"
+        ]
+      },
+      {
+        "stage": "只读对账:brand-negative-appeal-2026-09-25-all-outcomes-v1",
+        "status": "failed",
+        "elapsedMs": 14190,
+        "pitfalls": [
+          "reconcile-no-attempt"
+        ]
+      },
+      {
+        "stage": "CSV回执状态投影",
+        "status": "completed",
+        "elapsedMs": 4,
+        "pitfalls": []
+      },
+      {
+        "stage": "冻结初始/续发请求",
+        "status": "completed",
+        "elapsedMs": 2,
+        "pitfalls": []
+      },
+      {
+        "stage": "精确请求策略登记",
+        "status": "completed",
+        "elapsedMs": 1,
+        "pitfalls": []
+      },
+      {
+        "stage": "总执行器执行:brand-negative-appeal-2026-09-25-all-outcomes-continuation-e4c95bd8d7f7cc5d",
+        "status": "completed",
+        "elapsedMs": 34100,
+        "pitfalls": []
+      },
+      {
+        "stage": "CSV回执状态投影",
+        "status": "completed",
+        "elapsedMs": 4,
+        "pitfalls": []
+      }
+    ],
+    "pitfalls": [
+      "content-readback-incomplete",
+      "reconcile-no-attempt"
+    ]
+  }
+}

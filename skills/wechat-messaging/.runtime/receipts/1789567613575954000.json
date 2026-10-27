@@ -1,0 +1,69 @@
+{
+  "ok": false,
+  "status": "unknown",
+  "groupName": "臻肆测试群",
+  "channel": "mobile",
+  "requestDigest": "0b192622d0693ab055b7286afcee083e11c6f6b6a646031f88f60fd1dc127a26",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "text",
+      "sha256": "853018c4d39ada2e287657d138bcb3740285f41c78345c503009d5855367b1ee",
+      "type": "text",
+      "status": "unknown",
+      "claimedAt": 1789567569.363457,
+      "sendAttempts": 1,
+      "reason": "post-send-group-title-missing",
+      "deviceHash": "f2724cf436e9",
+      "failureEvidence": {
+        "foreground": {
+          "package": "com.tencent.mm",
+          "activity": ".ui.chatting.ChattingUI",
+          "pid": 15274
+        },
+        "screenshot": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/111b7c453910046bcc43559b0c2de79facd3aeba3ed039551b57eed976af453f/58d97646d631b23082df0ed9511baad0fe2689d89d4bdada11395eb016e58aab/failure.png"
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:text",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:image",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:file",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 44810
+    },
+    {
+      "stage": "send:text",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 44154
+    }
+  ],
+  "reason": "post-send-group-title-missing",
+  "elapsedMs": 92485,
+  "eventKey": "111b7c453910046bcc43559b0c2de79facd3aeba3ed039551b57eed976af453f"
+}

@@ -1,0 +1,56 @@
+{
+  "taskId": "f62b4cf7-9b01-49e2-9a10-930458192127",
+  "stage": "send",
+  "request": {
+    "schemaVersion": 1,
+    "operation": "send",
+    "groupName": "临时测试群请忽略 💰发财精英荟💰",
+    "items": [
+      {
+        "itemId": "excel",
+        "type": "file",
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/outputs/01a1741c-81d1-73e0-812d-cda97f810171/NATIVE-20261026-T01.xlsx",
+        "name": "NATIVE-20261026-T01.xlsx",
+        "size": 4578,
+        "sha256": "5a75fbdf9b8446eb4bd0cf379c3cbca353bc52e2fe913cb326571320b571d279"
+      },
+      {
+        "itemId": "image",
+        "type": "image",
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/outputs/01a1741c-81d1-73e0-812d-cda97f810171/NATIVE-20261026-T01.png",
+        "name": "NATIVE-20261026-T01.png",
+        "size": 59418,
+        "sha256": "012956d33b72ae2662a4780a3b0bbb6d5107e7dd1a8f705e3c0c4746ec7f84c0"
+      },
+      {
+        "itemId": "text",
+        "type": "text",
+        "text": "【原生UI连续交付 NATIVE-20261026-T01】合成测试：Excel、图片、文字在同一调用内连续执行；无客户数据与商家标识。",
+        "sha256": "05beb59612dfef6c0c3e5cc52693b8cbc783650ff8cc610b31aecb9c20e45034"
+      }
+    ],
+    "context": {
+      "workflowId": "native-ui-acceptance-20261026",
+      "eventId": "NATIVE-20261026-T01",
+      "accountAlias": "main",
+      "channel": "desktop",
+      "deadlineAt": 1792951777.0
+    }
+  },
+  "item": {
+    "itemId": "text",
+    "type": "text",
+    "text": "【原生UI连续交付 NATIVE-20261026-T01】合成测试：Excel、图片、文字在同一调用内连续执行；无客户数据与商家标识。",
+    "sha256": "05beb59612dfef6c0c3e5cc52693b8cbc783650ff8cc610b31aecb9c20e45034"
+  },
+  "deadlineAt": null,
+  "lifetime": "owner-process",
+  "owner": {
+    "pid": 27271,
+    "parentPid": 27261,
+    "identity": "Mon Oct 26 01:40:34 2026",
+    "parentIdentity": "Mon Oct 26 01:40:34 2026"
+  },
+  "expectedPresentation": "text-message",
+  "binding": "0a7ea5b0f5bc666859fdefc6cca24cd55bcfe2df06760e501b199146fe8f03b4"
+}

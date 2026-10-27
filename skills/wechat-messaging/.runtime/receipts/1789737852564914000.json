@@ -1,0 +1,130 @@
+{
+  "ok": false,
+  "status": "blocked",
+  "groupName": "李老哈（品牌）💰臻肆外卖运营对接群",
+  "channel": "desktop",
+  "requestDigest": "b2079ebaa6cee4838fb9cd564a5a23ebcdae9f245dc45dde23c3760c41db7ebd",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "li-lao-ha-meituan-chengshan-20260917-3star-production-v1",
+      "sha256": "03e0252062b93b1082b5ee65695e2ae958f61e26c31b45f04ae7297513183877",
+      "type": "text",
+      "status": "blocked",
+      "claimedAt": 1789737850.839384,
+      "sendAttempts": 0,
+      "reason": "desktop-group-title-not-unique:0",
+      "transport": {
+        "ok": false,
+        "executor": "wechat-desktop-sender",
+        "channel": "desktop",
+        "groupName": "李老哈（品牌）💰臻肆外卖运营对接群",
+        "payloadType": "text",
+        "sendAttempts": 0,
+        "runtimeModelDecisions": 0,
+        "stage": "verify_target_and_input",
+        "stageMs": {
+          "locate_group": 724,
+          "verify_target_and_input": 1000
+        },
+        "payloadIdentity": "a110cf1e036b1cccc8d59d4889f90ff74dd8fdaefbc7bee8c7cd6582411441a9",
+        "payloads": [
+          {
+            "text": "--- 2026-09-17 中评申诉进度通知 ---\n李老哈·东北农家小院（成山路店）\n【美团】\n评价时间: 2026-09-17\n评价等级: 3星\n申诉结果：---申诉中---\n评价内容: 肉丝太硬了而且水分太多不好吃#香辣肉丝#",
+            "sha256": "03e0252062b93b1082b5ee65695e2ae958f61e26c31b45f04ae7297513183877"
+          }
+        ],
+        "groupPreflight": {
+          "ok": true,
+          "reason": null,
+          "sendAttempts": 0,
+          "group": "李老哈（品牌）💰臻肆外卖运营对接群",
+          "header": "李老哈（品牌）💰臻肆外卖运营对接群(36)",
+          "note": "ax-current-group-fast-path",
+          "groupTypeVerified": true,
+          "groupTypeProof": "member-count-header",
+          "composerVerifiedEmpty": true,
+          "attempts": []
+        },
+        "reason": "desktop-group-title-not-unique:0",
+        "elapsedMs": 1724,
+        "sendReview": [
+          {
+            "item": 1,
+            "stage": "locate_group",
+            "label": "精确定位目标群",
+            "elapsedMs": 724,
+            "status": "completed",
+            "pitfalls": []
+          },
+          {
+            "item": 2,
+            "stage": "verify_target_and_input",
+            "label": "复核目标群与输入框",
+            "elapsedMs": 1000,
+            "status": "failed",
+            "pitfalls": [
+              {
+                "code": "send-failure",
+                "reason": "desktop-group-title-not-unique:0"
+              }
+            ]
+          }
+        ],
+        "reviewSummary": {
+          "totalElapsedMs": 1724,
+          "itemCount": 2,
+          "pitfallCount": 1,
+          "result": "failed"
+        }
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:li-lao-ha-meituan-chengshan-20260917-3star-production-v1",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:li-lao-ha-meituan-weifang-20260917-3star-production-v1",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:li-lao-ha-meituan-changyang-20260917-1star-production-v1",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:li-lao-ha-taobao-fengxian-20260917-2star-production-v1",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 923
+    },
+    {
+      "stage": "send:li-lao-ha-meituan-chengshan-20260917-3star-production-v1",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 1724
+    }
+  ],
+  "reason": "desktop-group-title-not-unique:0",
+  "elapsedMs": 2649,
+  "eventKey": "9f3e695ba06556fc0080a594ce972f242f94e3b756678ed109e6f207db1d4800"
+}

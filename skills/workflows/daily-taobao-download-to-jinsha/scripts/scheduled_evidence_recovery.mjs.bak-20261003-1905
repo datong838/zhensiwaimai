@@ -1,0 +1,112 @@
+import crypto from 'node:crypto';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+
+const RUN_ID = '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}';
+const GROUP = 'FEIBING NEO AI数字员工';
+const IMAGE_NAMES = ['jinsha-store-final.png', 'jinsha-review-final.png'];
+const sha256 = (bytes) => crypto.createHash('sha256').update(bytes).digest('hex');
+
+export function markerName(manifest) {
+  return `${sha256(`${manifest.groupName}\n${manifest.businessDate}\n${manifest.images.map((image) => image.sha256).join('\n')}`)}.json`;
+}
+
+async function payloadsMatch(receipt, marker, directory) {
+  const manifest = receipt.evidenceManifest;
+  if (marker?.bridgeVersion !== 1 || marker.groupName !== GROUP || marker.payloadType !== 'image'
+      || !Array.isArray(marker.payloads) || marker.payloads.length !== 2) return false;
+  const ownedDirectory = await fs.realpath(directory);
+  for (let index = 0; index < 2; index += 1) {
+    const image = manifest.images[index];
+    const payload = marker.payloads[index];
+    if (path.basename(image.path) !== IMAGE_NAMES[index] || payload?.name !== IMAGE_NAMES[index]
+        || !/^[a-f0-9]{64}$/.test(image.sha256 || '') || payload.sha256 !== image.sha256) return false;
+    const actualPath = await fs.realpath(image.path);
+    if (path.dirname(actualPath) !== ownedDirectory || await fs.realpath(payload.path) !== actualPath) return false;
+    const bytes = await fs.readFile(actualPath);
+    if (payload.size !== bytes.length || sha256(bytes) !== image.sha256) return false;
+  }
+  return true;
+}
+
+function completedReceipt(receipt, businessDate, policyVersion, directory) {
+  const manifest = receipt?.evidenceManifest;
+  return receipt?.ok === true && receipt.stage === 'completed' && receipt.phase === 'completed'
+    && receipt.cleanupStatus === 'completed' && Array.isArray(receipt.runReview)
+    && receipt.reviewSummary?.controlPolicyVersion === policyVersion
+    && receipt.businessDate === businessDate && manifest?.businessDate === businessDate
+    && receipt.runId === manifest.runId && manifest.groupName === GROUP
+    && manifest.executor === 'background-browser-executor'
+    && manifest.channel === 'control-background-dedicated-chrome'
+    && ['execute', 'verify-idempotency-only'].includes(manifest.mode)
+    && ['store', 'review'].every((kind) =>
+      ['uploaded-complete', 'skipped-existing-complete'].includes(manifest.uploadDecision?.[kind]))
+    && Array.isArray(manifest.images) && manifest.images.length === 2
+    && path.basename(directory) === `${businessDate}-${receipt.runId}`;
+}
+
+function blockedBeforeSend(marker) {
+  return marker.state === 'blocked' && marker.verified === false
+    && marker.sendAttempts === 0 && marker.newSendAttempts === 0
+    && marker.reason === 'wechat-window-capture-failed'
+    && marker.commonReceipt?.status === 'blocked'
+    && marker.commonReceipt?.reason === 'wechat-window-capture-failed'
+    && Array.isArray(marker.commonReceipt?.items) && marker.commonReceipt.items.length === 0
+    && marker.sendReview?.at(-1)?.stage === 'preflight'
+    && marker.sendReview.at(-1).status === 'failed';
+}
+
+function previouslyVerified(marker) {
+  return marker.state === 'verified' && marker.verified === true
+    && Number.isInteger(marker.sendAttempts) && marker.sendAttempts > 0
+    && marker.commonReceipt?.ok === true
+    && Array.isArray(marker.commonReceipt?.items)
+    && marker.commonReceipt.items.length === 2
+    && marker.commonReceipt.items.every((item) => item.status === 'verified');
+}
+
+export async function inspectPendingEvidence({ root, ledger, businessDate, policyVersion }) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(businessDate || '') || !root || !ledger || !policyVersion) {
+    throw new Error('scheduled-evidence-recovery-input-invalid');
+  }
+  const runDirectoryPattern = new RegExp(`^${businessDate}-${RUN_ID}$`);
+  let entries;
+  try {
+    entries = await fs.readdir(root, { withFileTypes: true });
+  } catch (error) {
+    if (error?.code === 'ENOENT') return { kind: 'none' };
+    throw error;
+  }
+  const matches = [];
+  for (const entry of entries) {
+    if (!entry.isDirectory() || !runDirectoryPattern.test(entry.name)) continue;
+    const directory = path.join(root, entry.name);
+    const receiptFile = path.join(directory, 'receipt.json');
+    let receipt;
+    try {
+      receipt = JSON.parse(await fs.readFile(receiptFile, 'utf8'));
+    } catch (error) {
+      if (error?.code === 'ENOENT') continue;
+      throw new Error(`scheduled-evidence-receipt-invalid:${entry.name}`);
+    }
+    if (!completedReceipt(receipt, businessDate, policyVersion, directory)) continue;
+    const markerFile = path.join(ledger, markerName(receipt.evidenceManifest));
+    let marker;
+    try {
+      marker = JSON.parse(await fs.readFile(markerFile, 'utf8'));
+    } catch (error) {
+      if (error?.code === 'ENOENT') continue;
+      throw new Error(`scheduled-evidence-marker-invalid:${entry.name}`);
+    }
+    if (marker.attemptMarker !== markerFile || !await payloadsMatch(receipt, marker, directory)) {
+      return { kind: 'blocked', reason: 'scheduled-evidence-original-payload-mismatch' };
+    }
+    matches.push({ receipt, receiptFile, marker, markerFile });
+  }
+  if (matches.length === 0) return { kind: 'none' };
+  if (matches.length !== 1) return { kind: 'blocked', reason: 'scheduled-evidence-original-event-not-unique' };
+  const match = matches[0];
+  if (blockedBeforeSend(match.marker)) return { kind: 'resume', ...match };
+  if (previouslyVerified(match.marker)) return { kind: 'completed', ...match };
+  return { kind: 'blocked', reason: 'scheduled-evidence-external-effect-reconcile-required', ...match };
+}

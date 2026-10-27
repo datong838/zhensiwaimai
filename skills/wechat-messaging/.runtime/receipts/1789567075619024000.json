@@ -1,0 +1,196 @@
+{
+  "ok": false,
+  "status": "partial",
+  "groupName": "臻肆测试群",
+  "channel": "mobile",
+  "requestDigest": "f11c6434f63633e97cca2283fff2aa43227d3c22b3e42ed6ec71fc295f150f09",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "text",
+      "sha256": "32924ee65432fc6fbbc85e871125d6fa5a0870c1f3e6d203b55b190e3f37206f",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1789566977.989866,
+      "sendAttempts": 1,
+      "verificationLevel": "native-text-exact",
+      "evidence": {
+        "input": {
+          "ok": true,
+          "inputMethod": "fastinput-clear-then-paste",
+          "chars": 23,
+          "fullTextVerified": true,
+          "copyReadback": {
+            "method": "wechat-copy-exact",
+            "chars": 23,
+            "sha256": "32924ee65432fc6fbbc85e871125d6fa5a0870c1f3e6d203b55b190e3f37206f"
+          }
+        },
+        "postSend": {
+          "ok": true,
+          "method": "new-bubble-wechat-copy-exact",
+          "screenshot": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/d3820a0569a7f17907f38f84d5aef0c1d568100a73a65f6fd63932acb8dee0ec/406e5b50e01693051d4bb144268e3ddec62c5105cc13f2ecfccbc05a512fbb0c/new-message-only.png",
+          "box": [
+            286,
+            1872,
+            930,
+            2042
+          ],
+          "fingerprint": "3a1e771ee10d7b52e17f3a5bcbe4495ff8146b8885873f557dd07fe60729b027",
+          "stable": true,
+          "copied": {
+            "method": "wechat-copy-exact",
+            "chars": 23,
+            "sha256": "32924ee65432fc6fbbc85e871125d6fa5a0870c1f3e6d203b55b190e3f37206f"
+          }
+        },
+        "stageMs": {
+          "input_and_verify": 10650,
+          "send_once": 423,
+          "new_bubble_stable": 5144,
+          "new_bubble_copy_readback": 3324,
+          "input_clear_check": 1714
+        },
+        "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/d3820a0569a7f17907f38f84d5aef0c1d568100a73a65f6fd63932acb8dee0ec/406e5b50e01693051d4bb144268e3ddec62c5105cc13f2ecfccbc05a512fbb0c/attempt.json"
+      },
+      "deviceHash": "f2724cf436e9",
+      "userId": 0
+    },
+    {
+      "itemId": "image",
+      "sha256": "db7443bfd67d1e638e57362d8db1c67d645020a8992a0482526b3dc4bba768d6",
+      "type": "image",
+      "status": "verified",
+      "claimedAt": 1789567007.651049,
+      "sendAttempts": 1,
+      "verificationLevel": "opened-image-content-match",
+      "evidence": {
+        "thumbnailObservations": [
+          {
+            "bestDistance": 9.919,
+            "secondDistance": 24.189,
+            "bestPoint": [
+              242,
+              246
+            ],
+            "screenshotSha256": "61b826291aa269d65a381dbcb645dc614907e97ce80588ef4702dcda74853a09",
+            "accepted": true
+          },
+          {
+            "bestDistance": 9.919,
+            "secondDistance": 24.189,
+            "bestPoint": [
+              242,
+              246
+            ],
+            "screenshotSha256": "0ba65fb56635d8df5a2763762940c941e1b858e30a2c4fb467f0f7023e43e51f",
+            "accepted": true
+          }
+        ],
+        "readbackEvents": [
+          {
+            "event": "page",
+            "page": "target-chat"
+          },
+          {
+            "event": "open",
+            "attempt": 1,
+            "point": [
+              650,
+              1816
+            ],
+            "distance": 1.137,
+            "screenshotSha256": "8647242d6cd4a42f512034e56d0bdc19a69041e48b44aeb6a4dbba2739dd2b5b"
+          },
+          {
+            "event": "page",
+            "page": "non-chat-unconfirmed"
+          }
+        ],
+        "viewerOpenAttempts": 1,
+        "sentBubbleDistance": 1.137,
+        "largeImage": {
+          "ok": true,
+          "distance": 0.011,
+          "matched": [],
+          "cropY": 753,
+          "page": "non-chat-unconfirmed"
+        },
+        "preview": {
+          "ok": true,
+          "distance": 1.034,
+          "matched": [],
+          "cropY": 693
+        },
+        "thumbnailDistance": 9.919,
+        "thumbnailMethod": "visual-unique",
+        "originalRequired": false
+      },
+      "deviceHash": "f2724cf436e9",
+      "userId": 0
+    },
+    {
+      "itemId": "file",
+      "sha256": "bb42b22386be25ed7ee95d1bd382c01b0ab67de09a2fb569092e802165da65b2",
+      "type": "file",
+      "status": "blocked",
+      "claimedAt": 1789567048.8719192,
+      "sendAttempts": 0,
+      "reason": "page-not-ready:storage-drawer-missing",
+      "deviceHash": "f2724cf436e9"
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:text",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:image",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "stage": "freeze:file",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 2
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 3960
+    },
+    {
+      "stage": "send:text",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 29660
+    },
+    {
+      "stage": "send:image",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 41220
+    },
+    {
+      "stage": "send:file",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 26636
+    }
+  ],
+  "reason": "page-not-ready:storage-drawer-missing",
+  "elapsedMs": 103316,
+  "eventKey": "d3820a0569a7f17907f38f84d5aef0c1d568100a73a65f6fd63932acb8dee0ec"
+}

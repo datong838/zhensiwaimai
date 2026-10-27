@@ -1,0 +1,49 @@
+{
+  "ok": false,
+  "status": "blocked",
+  "groupName": "李老哈（品牌）💰臻肆外卖运营对接群",
+  "channel": "desktop",
+  "requestDigest": "a9a0a055bd6b2da73024dce994fdc12e5fa748c2461dfe55f4fa393967ffb055",
+  "runtimeModelDecisions": 0,
+  "items": [],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:appeal-82a3da0a62a686a851f5",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "failed",
+      "pitfalls": [
+        "wechat-unexpected-secondary-window"
+      ],
+      "elapsedMs": 183
+    }
+  ],
+  "reason": "wechat-unexpected-secondary-window",
+  "elapsedMs": 184,
+  "eventKey": "22ec0bc186abd664397d0e264c8397fbeed51194c2226623088607938217b5fd",
+  "reviewSummary": {
+    "totalElapsedMs": 184,
+    "result": "blocked",
+    "stageCount": 3,
+    "completedStages": 2,
+    "failedStages": [
+      {
+        "stage": "preflight",
+        "status": "failed",
+        "pitfalls": [
+          "wechat-unexpected-secondary-window"
+        ]
+      }
+    ]
+  }
+}

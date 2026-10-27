@@ -1,0 +1,87 @@
+{
+  "ok": true,
+  "action": "prepare",
+  "status": "prepared",
+  "review": [
+    {
+      "label": "维护授权",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "授权有效期",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "读取依赖清单",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "计算候选摘要",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 4
+    },
+    {
+      "label": "统一微信完整离线测试",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 3140
+    },
+    {
+      "label": "原子写入依赖清单",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "依赖清单回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "统一入口完整性回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 32
+    }
+  ],
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "authorization": "user-20260918-code-maintenance",
+  "expiresAt": "2026-09-18T22:25:00+08:00",
+  "userInstructionSha256": "c91518a278b43dcab9835dbda5168b9a3adc188ce3c5c8b6d2c0e930a91ea974",
+  "dependencyManifestPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/dependencies.json",
+  "dependencyManifestBeforeSha256": "5d4d1bf62ed095fceb3dc7fc871f72e3ae4507f4a96d0aba7aebf29df5e52c28",
+  "dependencyManifestAfterSha256": "4a49b26e096d3fabefea8100d86d0bfbfa0f320580b14dd7f5e4b2e8bfdbc368",
+  "changes": [
+    {
+      "path": "scripts/desktop_adapter.py",
+      "before": "2c6940010f318f6bd3f68fac5998f5eda6b29ba52cbff50e01acfa03de50e608",
+      "after": "19ace9c844d120708b4eb0d5875dd056d6d094e878270c482b16543caaab1ed2"
+    },
+    {
+      "path": "scripts/desktop_text_readback.py",
+      "before": "e54903d100e9c4aef56d8354761199b6f48f0a1ab62b11ed1e9706ea693bd020",
+      "after": "d9e66790db43b47d1fbba501b79ca12ec2416d6267e6db1c270712c2827f60ba"
+    }
+  ],
+  "tests": {
+    "ok": true,
+    "elapsedMs": 3140,
+    "testCount": 124
+  },
+  "capabilityCheck": {
+    "ok": true,
+    "elapsedMs": 32,
+    "testCount": null
+  },
+  "candidateFileCount": 27,
+  "elapsedMs": 3178
+}

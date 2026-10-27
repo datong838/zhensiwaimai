@@ -1,0 +1,213 @@
+{
+  "ok": true,
+  "status": "already_verified",
+  "groupName": "臻肆测试群",
+  "channel": "mobile",
+  "requestDigest": "5031ab425779c58e5c82181a120dd26259caad439b545f9f5cdb173e159318e6",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "text",
+      "sha256": "ef80750ad0984e525374cf5fe22d50c13154f3e586304e5434fc05f332e786de",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1789567698.9304261,
+      "sendAttempts": 1,
+      "verificationLevel": "native-text-exact",
+      "evidence": {
+        "input": {
+          "ok": true,
+          "inputMethod": "fastinput-clear-then-paste",
+          "chars": 23,
+          "fullTextVerified": true,
+          "copyReadback": {
+            "method": "wechat-copy-exact",
+            "chars": 23,
+            "sha256": "ef80750ad0984e525374cf5fe22d50c13154f3e586304e5434fc05f332e786de"
+          }
+        },
+        "postSend": {
+          "ok": true,
+          "method": "new-bubble-wechat-copy-exact",
+          "screenshot": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/1f075573ff9e3eda261a8dfe32d34db8a252032a4d12022fde01e3c867ba1660/01fc3bf44c86974baee4749bdf9229bfc363476447440b520a6ee33afc619333/new-message-only.png",
+          "box": [
+            286,
+            1872,
+            930,
+            2042
+          ],
+          "fingerprint": "8e69267790f64acde3c4abceaf897e3a3de8c3f2392773d7eba1071ad95a3e19",
+          "stable": true,
+          "copied": {
+            "method": "wechat-copy-exact",
+            "chars": 23,
+            "sha256": "ef80750ad0984e525374cf5fe22d50c13154f3e586304e5434fc05f332e786de"
+          }
+        },
+        "stageMs": {
+          "input_and_verify": 11777,
+          "send_once": 795,
+          "new_bubble_stable": 7637,
+          "new_bubble_copy_readback": 3541,
+          "input_clear_check": 8141
+        },
+        "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/1f075573ff9e3eda261a8dfe32d34db8a252032a4d12022fde01e3c867ba1660/01fc3bf44c86974baee4749bdf9229bfc363476447440b520a6ee33afc619333/attempt.json"
+      },
+      "deviceHash": "f2724cf436e9",
+      "userId": 0
+    },
+    {
+      "itemId": "image",
+      "sha256": "db7443bfd67d1e638e57362d8db1c67d645020a8992a0482526b3dc4bba768d6",
+      "type": "image",
+      "status": "verified",
+      "claimedAt": 1789567743.059229,
+      "sendAttempts": 1,
+      "verificationLevel": "opened-image-content-match",
+      "evidence": {
+        "thumbnailObservations": [
+          {
+            "bestDistance": 9.919,
+            "secondDistance": 24.189,
+            "bestPoint": [
+              242,
+              246
+            ],
+            "screenshotSha256": "16da3e870595d67b2db77d64b2cbdeadb1e8db093dd9e4de7c9fcce1d7e8e7b7",
+            "accepted": true
+          },
+          {
+            "bestDistance": 9.919,
+            "secondDistance": 24.189,
+            "bestPoint": [
+              242,
+              246
+            ],
+            "screenshotSha256": "eb5801d52b589d49f705476212b69adcc6abb0086793b0a931e2d3c020ad00ea",
+            "accepted": true
+          }
+        ],
+        "readbackEvents": [
+          {
+            "event": "page",
+            "page": "target-chat"
+          },
+          {
+            "event": "open",
+            "attempt": 1,
+            "point": [
+              650,
+              856
+            ],
+            "distance": 1.115,
+            "screenshotSha256": "efdbbc2309d33f83db4f60ba1ac670765e84a8c064d4f704b5145fe04d00b015"
+          },
+          {
+            "event": "page",
+            "page": "non-chat-unconfirmed"
+          }
+        ],
+        "viewerOpenAttempts": 1,
+        "sentBubbleDistance": 1.115,
+        "largeImage": {
+          "ok": true,
+          "distance": 0.011,
+          "matched": [],
+          "cropY": 753,
+          "page": "non-chat-unconfirmed"
+        },
+        "preview": {
+          "ok": true,
+          "distance": 1.034,
+          "matched": [],
+          "cropY": 693
+        },
+        "thumbnailDistance": 9.919,
+        "thumbnailMethod": "visual-unique",
+        "originalRequired": false
+      },
+      "deviceHash": "f2724cf436e9",
+      "userId": 0
+    },
+    {
+      "itemId": "file",
+      "sha256": "bb42b22386be25ed7ee95d1bd382c01b0ab67de09a2fb569092e802165da65b2",
+      "type": "file",
+      "status": "verified",
+      "claimedAt": 1789567799.002667,
+      "sendAttempts": 1,
+      "verificationLevel": "file-name-size-ui",
+      "evidence": {
+        "frames": [
+          "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/1f075573ff9e3eda261a8dfe32d34db8a252032a4d12022fde01e3c867ba1660/b63e857c2f7c3060f40c0cc62b9e0728af3fc76eeb5a7c919f7ce8faacdfbf8f/file-after-1.png",
+          "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/1f075573ff9e3eda261a8dfe32d34db8a252032a4d12022fde01e3c867ba1660/b63e857c2f7c3060f40c0cc62b9e0728af3fc76eeb5a7c919f7ce8faacdfbf8f/file-after-2.png"
+        ],
+        "fullName": true,
+        "size": true,
+        "uploadComplete": true,
+        "selection": {
+          "name": "手机验收.xlsx",
+          "selector": "UI-tree-exact-text",
+          "bounds": {
+            "bottom": 704,
+            "left": 216,
+            "right": 500,
+            "top": 639
+          },
+          "sha256": "bb42b22386be25ed7ee95d1bd382c01b0ab67de09a2fb569092e802165da65b2",
+          "navigationRoute": "downloads-shortcut/report-folder"
+        },
+        "panel": {
+          "panelScreenshot": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/1f075573ff9e3eda261a8dfe32d34db8a252032a4d12022fde01e3c867ba1660/b63e857c2f7c3060f40c0cc62b9e0728af3fc76eeb5a7c919f7ce8faacdfbf8f/plus-panel-2b.png",
+          "entry": {
+            "x": 166,
+            "y": 2090,
+            "w": 68,
+            "h": 38,
+            "confidence": 1.0,
+            "text": "文件"
+          },
+          "music": {
+            "x": 414,
+            "y": 2090,
+            "w": 68,
+            "h": 38,
+            "confidence": 1.0,
+            "text": "音乐"
+          },
+          "method": "stable-ocr-structural"
+        }
+      },
+      "deviceHash": "f2724cf436e9",
+      "userId": 0
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:text",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:image",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:file",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    }
+  ],
+  "elapsedMs": 1,
+  "eventKey": "1f075573ff9e3eda261a8dfe32d34db8a252032a4d12022fde01e3c867ba1660"
+}

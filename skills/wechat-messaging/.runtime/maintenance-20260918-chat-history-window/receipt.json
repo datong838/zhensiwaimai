@@ -1,0 +1,82 @@
+{
+  "ok": true,
+  "action": "prepare",
+  "status": "prepared",
+  "review": [
+    {
+      "label": "维护授权",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "授权有效期",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "读取依赖清单",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "计算候选摘要",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 4
+    },
+    {
+      "label": "统一微信完整离线测试",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 3164
+    },
+    {
+      "label": "原子写入依赖清单",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "依赖清单回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "统一入口完整性回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 36
+    }
+  ],
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "authorization": "user-20260918-code-maintenance",
+  "expiresAt": "2026-09-18T21:41:47+08:00",
+  "userInstructionSha256": "c91518a278b43dcab9835dbda5168b9a3adc188ce3c5c8b6d2c0e930a91ea974",
+  "dependencyManifestPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/dependencies.json",
+  "dependencyManifestBeforeSha256": "f483bb3330c46e1c291bfd332c81c80cf8ae2e6ccbbbbd067c61a94603f73571",
+  "dependencyManifestAfterSha256": "380c9944d22ddec75faba242782bb863c13ada2c3b3cc6a6547c31713411f414",
+  "changes": [
+    {
+      "path": "scripts/desktop_input.py",
+      "before": "d598e41b9d9a88f8b0372f06e5c6218bc899279aede4c6812536086073abc69e",
+      "after": "50a6adb7b7eaab772a608f1ea26831d9264d32ff05429d5023259f9c4d671048"
+    }
+  ],
+  "tests": {
+    "ok": true,
+    "elapsedMs": 3164,
+    "testCount": 121
+  },
+  "capabilityCheck": {
+    "ok": true,
+    "elapsedMs": 36,
+    "testCount": null
+  },
+  "candidateFileCount": 27,
+  "elapsedMs": 3207
+}

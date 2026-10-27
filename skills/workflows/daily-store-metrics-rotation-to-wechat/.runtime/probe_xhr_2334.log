@@ -1,0 +1,68 @@
+NAVIGATE=https://melody.shop.ele.me/app/shop/694471/customerStats#app.shop.customerStats
+READY=true ready_ms=2163 wall_ms=2163
+
+=== XHR/Fetch（按响应字节降序，top 25）===
+200    66.8KB POST   /xtop/xtop.arena.adp.service.melodyShopSwitcher.queryShopTree/1.0
+200    18.9KB POST   /xtop/xtop.napos.keeper.permissionManager.getMenuTree/1.0
+200    10.2KB POST   /arena/invoke/?method=KeeperService.getKeeper
+200     3.0KB POST   /shop/invoke/?method=queryShop.getShopView
+200     1.3KB POST   /xtop/xtop.shop.shopBusinessQueryTop.queryShopStatusView/1.0
+200     1.3KB POST   /xtop/xtop.arena.message.reachDelivery.queryDeliveryRules/1.0
+200     1.3KB POST   /xtop/xtop.napos.keeper.melody.naposView.queryViewData/1.0
+200     1.0KB POST   /fulfill/weborder/grayMenuAppealCompensation2Gray/invoke/?method=GrayService.grayMenuAppealCompensation2Gray
+200     1.0KB GET    /restapi/eus/v2/current_user?info_raw={}
+200     0.9KB POST   /fulfill/device/controller/getAccsToken/?method=AuthCenterService.getToken
+200     0.9KB POST   /fulfill/weborder/queryAppealCenterMenuGray/invoke/?method=OrderWebService.queryAppealCenterMenuGray
+200     0.9KB POST   /fulfill/weborder/countMenuOrder/?method=OrderWebService.countMenuOrder
+200     0.9KB POST   /fulfill/weborder/countMenuOrder/?method=OrderWebService.countMenuOrder
+200     0.8KB GET    /gw/domain-config.json?h=melody.shop.ele.me
+200     0.8KB POST   /ugc/invoke/?method=shopRating.countNewShopRating
+200     0.8KB POST   /ugc/invoke/?method=shopRating.countNewShopRating
+200     0.8KB POST   /xtop/xtop.shop.shopBusinessQueryTop.queryShopUnCooperation/1.0
+200     0.7KB POST   /ugc/invoke/?method=ExportRatingTaskService.queryExportRatingTasks
+200     0.7KB POST   /stats/invoke/?method=DownloadDataService.queryHistoryList
+200     0.7KB POST   /xtop/xtop.arena.adp.service.gray.inGray/1.0
+200     0.7KB POST   /xtop/xtop.arena.adp.service.gray.inGray/1.0
+200     0.7KB POST   /delivery/invoke/?method=GrayControlService.getConfigV2
+200     0.7KB POST   /xtop/xtop.napos.keeper.shop.canManage/1.0
+200     0.7KB POST   /arena/invoke/?method=CrmOpenService.checkCrmEntry
+200     0.4KB POST   /gw/h5api/ele-waimai-merchant-task-center.TaskFacade.showNewShopTask?source=ELE
+XHR_TOTAL=25 BIG_OVER_8K=3
+
+=== 页面区块（证明同页含多指标）===
+{
+ "texts": [
+  "顾客分析\n商圈同行均值\n近7日",
+  "商圈同行均值\n近7日",
+  "下单顾客",
+  "比商圈同行",
+  "复购率",
+  "复购人数",
+  "下单新客",
+  "占比54.5%",
+  "下单老客",
+  "占比45.5%",
+  "下单顾客趋势",
+  "下单行为\n下单频次下单间隔单均实付",
+  "下单时段",
+  "下单热门街区",
+  "顾客评分 (截止昨日)",
+  "比前日",
+  "评价顾客",
+  "比前7日",
+  "未评价顾客",
+  "占下单人数",
+  "差评顾客",
+  "收藏顾客 (截止昨日)",
+  "比上周一",
+  "下单未收藏顾客",
+  "顾客画像\n会员占比性别占比年龄占比地点构成",
+  "顾客流向如何"
+ ],
+ "cardClassCount": 68,
+ "bodyLen": 1054,
+ "scrollH": 2739,
+ "viewportH": 1409
+}
+
+RESTORE=OK chain-home

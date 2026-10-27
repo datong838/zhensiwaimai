@@ -1,0 +1,438 @@
+{
+  "ok": false,
+  "status": "unknown",
+  "businessDate": "2026-10-17",
+  "runtimeModelDecisions": 0,
+  "review": [
+    {
+      "stage": "读取并校验日报",
+      "status": "completed",
+      "elapsedMs": 0,
+      "pitfalls": []
+    },
+    {
+      "stage": "原事件策略精确回登:brand-negative-appeal-2026-10-17-all-outcomes-v1",
+      "status": "completed",
+      "elapsedMs": 2,
+      "pitfalls": []
+    },
+    {
+      "stage": "原事件只读对账:brand-negative-appeal-2026-10-17-all-outcomes-v1",
+      "status": "failed",
+      "elapsedMs": 652,
+      "pitfalls": [
+        "reconcile-evidence-insufficient"
+      ]
+    },
+    {
+      "stage": "CSV回执状态投影",
+      "status": "completed",
+      "elapsedMs": 5,
+      "pitfalls": []
+    }
+  ],
+  "events": [
+    {
+      "eventId": "brand-negative-appeal-2026-10-17-all-outcomes-v1",
+      "requestDigest": null,
+      "reconcile": {
+        "ok": false,
+        "action": "reconcile",
+        "status": "partial",
+        "recoveryUsed": false,
+        "sendAttempts": 1,
+        "runtimeModelDecisions": 0,
+        "review": [
+          {
+            "stage": "Windows 传输执行:reconcile",
+            "status": "failed",
+            "pitfalls": [
+              "reconcile-evidence-insufficient"
+            ],
+            "elapsedMs": 649
+          }
+        ],
+        "transport": "windows-driver",
+        "initial": {
+          "ok": false,
+          "status": "partial",
+          "groupName": "李老哈（品牌）💰臻肆外卖运营对接群",
+          "channel": "desktop",
+          "requestDigest": "841718dbbd0978ca75af7639edfe27c98871ef1609a1180e3248ccbc8ceb0574",
+          "runtimeModelDecisions": 0,
+          "items": [
+            {
+              "itemId": "appeal-b66c77a6b61a0c565c0d",
+              "sha256": "3d550b6358f16ae2fcb0b17c12059d76592b9537d61efbdedf07606d8cfc0f76",
+              "type": "image",
+              "status": "verified",
+              "claimedAt": 1792317219.725211,
+              "sendAttempts": 1,
+              "verificationLevel": "windows-readback-file-card",
+              "evidence": {
+                "ok": true,
+                "resolvedGroup": "李老哈（品牌）💰臻肆外卖运营对接群",
+                "currentTitle": "李老哈（品牌）💰臻肆外卖运营对接群",
+                "messageCount": 34,
+                "anchor": "file-card",
+                "anchorValue": "[图片]",
+                "anchorInTrailingPosition": true,
+                "autoKind": "image",
+                "readbackAt": 1792317249.127459
+              },
+              "transport": {
+                "ok": true,
+                "data": {
+                  "sent": true,
+                  "who": "李老哈（品牌）",
+                  "path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\b66c77a6b61a0c565c0d6b923364c4314770b1c73d000c58d6a5619efa5e26aa.png",
+                  "kind": "image",
+                  "auto": "image",
+                  "uploaded_from": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/.runtime/events/4b5d4516efa8532a19cc286c8d2604c02b2d41de9dff2fb885a5b086230db5e5/d0c127b0bab08f9c2b039c2204946f842cb9eb85471a2f09e044327436b1253f/payload/b66c77a6b61a0c565c0d6b923364c4314770b1c73d000c58d6a5619efa5e26aa.png",
+                  "server_path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\b66c77a6b61a0c565c0d6b923364c4314770b1c73d000c58d6a5619efa5e26aa.png"
+                },
+                "route": "direct",
+                "sendAttempts": 1
+              }
+            },
+            {
+              "itemId": "appeal-15dbc085c8201c747c23",
+              "sha256": "6cae0383077c9128db1d9c6871857f0445181b5518366046df277c41b07ea777",
+              "type": "image",
+              "status": "verified",
+              "claimedAt": 1792317249.128675,
+              "sendAttempts": 1,
+              "verificationLevel": "windows-readback-file-card",
+              "evidence": {
+                "ok": true,
+                "resolvedGroup": "李老哈（品牌）💰臻肆外卖运营对接群",
+                "currentTitle": "李老哈（品牌）💰臻肆外卖运营对接群",
+                "messageCount": 34,
+                "anchor": "file-card",
+                "anchorValue": "[图片]",
+                "anchorInTrailingPosition": true,
+                "autoKind": "image",
+                "readbackAt": 1792317278.4212391
+              },
+              "transport": {
+                "ok": true,
+                "data": {
+                  "sent": true,
+                  "who": "李老哈（品牌）",
+                  "path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\15dbc085c8201c747c233c2e7c335a4c759f1fe52bbe08dc69bd463156a00613.png",
+                  "kind": "image",
+                  "auto": "image",
+                  "uploaded_from": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/.runtime/events/4b5d4516efa8532a19cc286c8d2604c02b2d41de9dff2fb885a5b086230db5e5/296651f9839b5ab76adefe4ac03ff68c04883fe2a3f219ab317384d2ebc33a86/payload/15dbc085c8201c747c233c2e7c335a4c759f1fe52bbe08dc69bd463156a00613.png",
+                  "server_path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\15dbc085c8201c747c233c2e7c335a4c759f1fe52bbe08dc69bd463156a00613.png"
+                },
+                "route": "direct",
+                "sendAttempts": 1
+              }
+            },
+            {
+              "itemId": "appeal-1c86da06ffaf5660c72c",
+              "sha256": "e3a695da64de8e8471002ae91ef835aa324c17b5da9480e6d7f6cdf62b21c433",
+              "type": "image",
+              "status": "unknown",
+              "claimedAt": 1792317278.422575,
+              "sendAttempts": 0,
+              "reason": "reconcile-evidence-insufficient",
+              "transport": {
+                "ok": false,
+                "error": "HTTP 500: {\"ok\": false, \"error\": \"未出现『发送给』确认框或未找到『发送』按钮\"}",
+                "route": "direct",
+                "sendAttempts": 0
+              },
+              "attemptErrors": [
+                "HTTP 500: {\"ok\": false, \"error\": \"未出现『发送给』确认框或未找到『发送』按钮\"}",
+                "HTTP 500: {\"ok\": false, \"error\": \"未出现『发送给』确认框或未找到『发送』按钮\"}",
+                "HTTP 500: {\"ok\": false, \"error\": \"未出现『发送给』确认框或未找到『发送』按钮\"}"
+              ]
+            }
+          ],
+          "review": [
+            {
+              "stage": "authorization",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0
+            },
+            {
+              "stage": "freeze:appeal-b66c77a6b61a0c565c0d",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0
+            },
+            {
+              "stage": "freeze:appeal-15dbc085c8201c747c23",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0
+            },
+            {
+              "stage": "freeze:appeal-1c86da06ffaf5660c72c",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0
+            },
+            {
+              "stage": "freeze:appeal-c30dfc415bc309aa0f8c",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 40
+            },
+            {
+              "stage": "freeze:appeal-67662c75bb27a187480c",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 40
+            },
+            {
+              "stage": "preflight",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 551
+            },
+            {
+              "stage": "reconcile:appeal-1c86da06ffaf5660c72c",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0
+            }
+          ],
+          "reason": "reconcile-evidence-insufficient",
+          "elapsedMs": 634,
+          "eventKey": "4b5d4516efa8532a19cc286c8d2604c02b2d41de9dff2fb885a5b086230db5e5",
+          "reviewSummary": {
+            "totalElapsedMs": 634,
+            "result": "partial",
+            "stageCount": 8,
+            "completedStages": 8,
+            "failedStages": []
+          }
+        },
+        "final": {
+          "ok": false,
+          "status": "partial",
+          "groupName": "李老哈（品牌）💰臻肆外卖运营对接群",
+          "channel": "desktop",
+          "requestDigest": "841718dbbd0978ca75af7639edfe27c98871ef1609a1180e3248ccbc8ceb0574",
+          "runtimeModelDecisions": 0,
+          "items": [
+            {
+              "itemId": "appeal-b66c77a6b61a0c565c0d",
+              "sha256": "3d550b6358f16ae2fcb0b17c12059d76592b9537d61efbdedf07606d8cfc0f76",
+              "type": "image",
+              "status": "verified",
+              "claimedAt": 1792317219.725211,
+              "sendAttempts": 1,
+              "verificationLevel": "windows-readback-file-card",
+              "evidence": {
+                "ok": true,
+                "resolvedGroup": "李老哈（品牌）💰臻肆外卖运营对接群",
+                "currentTitle": "李老哈（品牌）💰臻肆外卖运营对接群",
+                "messageCount": 34,
+                "anchor": "file-card",
+                "anchorValue": "[图片]",
+                "anchorInTrailingPosition": true,
+                "autoKind": "image",
+                "readbackAt": 1792317249.127459
+              },
+              "transport": {
+                "ok": true,
+                "data": {
+                  "sent": true,
+                  "who": "李老哈（品牌）",
+                  "path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\b66c77a6b61a0c565c0d6b923364c4314770b1c73d000c58d6a5619efa5e26aa.png",
+                  "kind": "image",
+                  "auto": "image",
+                  "uploaded_from": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/.runtime/events/4b5d4516efa8532a19cc286c8d2604c02b2d41de9dff2fb885a5b086230db5e5/d0c127b0bab08f9c2b039c2204946f842cb9eb85471a2f09e044327436b1253f/payload/b66c77a6b61a0c565c0d6b923364c4314770b1c73d000c58d6a5619efa5e26aa.png",
+                  "server_path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\b66c77a6b61a0c565c0d6b923364c4314770b1c73d000c58d6a5619efa5e26aa.png"
+                },
+                "route": "direct",
+                "sendAttempts": 1
+              }
+            },
+            {
+              "itemId": "appeal-15dbc085c8201c747c23",
+              "sha256": "6cae0383077c9128db1d9c6871857f0445181b5518366046df277c41b07ea777",
+              "type": "image",
+              "status": "verified",
+              "claimedAt": 1792317249.128675,
+              "sendAttempts": 1,
+              "verificationLevel": "windows-readback-file-card",
+              "evidence": {
+                "ok": true,
+                "resolvedGroup": "李老哈（品牌）💰臻肆外卖运营对接群",
+                "currentTitle": "李老哈（品牌）💰臻肆外卖运营对接群",
+                "messageCount": 34,
+                "anchor": "file-card",
+                "anchorValue": "[图片]",
+                "anchorInTrailingPosition": true,
+                "autoKind": "image",
+                "readbackAt": 1792317278.4212391
+              },
+              "transport": {
+                "ok": true,
+                "data": {
+                  "sent": true,
+                  "who": "李老哈（品牌）",
+                  "path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\15dbc085c8201c747c233c2e7c335a4c759f1fe52bbe08dc69bd463156a00613.png",
+                  "kind": "image",
+                  "auto": "image",
+                  "uploaded_from": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/.runtime/events/4b5d4516efa8532a19cc286c8d2604c02b2d41de9dff2fb885a5b086230db5e5/296651f9839b5ab76adefe4ac03ff68c04883fe2a3f219ab317384d2ebc33a86/payload/15dbc085c8201c747c233c2e7c335a4c759f1fe52bbe08dc69bd463156a00613.png",
+                  "server_path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\15dbc085c8201c747c233c2e7c335a4c759f1fe52bbe08dc69bd463156a00613.png"
+                },
+                "route": "direct",
+                "sendAttempts": 1
+              }
+            },
+            {
+              "itemId": "appeal-1c86da06ffaf5660c72c",
+              "sha256": "e3a695da64de8e8471002ae91ef835aa324c17b5da9480e6d7f6cdf62b21c433",
+              "type": "image",
+              "status": "unknown",
+              "claimedAt": 1792317278.422575,
+              "sendAttempts": 0,
+              "reason": "reconcile-evidence-insufficient",
+              "transport": {
+                "ok": false,
+                "error": "HTTP 500: {\"ok\": false, \"error\": \"未出现『发送给』确认框或未找到『发送』按钮\"}",
+                "route": "direct",
+                "sendAttempts": 0
+              },
+              "attemptErrors": [
+                "HTTP 500: {\"ok\": false, \"error\": \"未出现『发送给』确认框或未找到『发送』按钮\"}",
+                "HTTP 500: {\"ok\": false, \"error\": \"未出现『发送给』确认框或未找到『发送』按钮\"}",
+                "HTTP 500: {\"ok\": false, \"error\": \"未出现『发送给』确认框或未找到『发送』按钮\"}"
+              ]
+            }
+          ],
+          "review": [
+            {
+              "stage": "authorization",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0
+            },
+            {
+              "stage": "freeze:appeal-b66c77a6b61a0c565c0d",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0
+            },
+            {
+              "stage": "freeze:appeal-15dbc085c8201c747c23",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0
+            },
+            {
+              "stage": "freeze:appeal-1c86da06ffaf5660c72c",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0
+            },
+            {
+              "stage": "freeze:appeal-c30dfc415bc309aa0f8c",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 40
+            },
+            {
+              "stage": "freeze:appeal-67662c75bb27a187480c",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 40
+            },
+            {
+              "stage": "preflight",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 551
+            },
+            {
+              "stage": "reconcile:appeal-1c86da06ffaf5660c72c",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0
+            }
+          ],
+          "reason": "reconcile-evidence-insufficient",
+          "elapsedMs": 634,
+          "eventKey": "4b5d4516efa8532a19cc286c8d2604c02b2d41de9dff2fb885a5b086230db5e5",
+          "reviewSummary": {
+            "totalElapsedMs": 634,
+            "result": "partial",
+            "stageCount": 8,
+            "completedStages": 8,
+            "failedStages": []
+          }
+        },
+        "reason": "reconcile-evidence-insufficient",
+        "elapsedMs": 649,
+        "reviewSummary": {
+          "totalElapsedMs": 649,
+          "result": "partial",
+          "stageCount": 1,
+          "failedStages": [
+            "Windows 传输执行:reconcile"
+          ]
+        }
+      }
+    }
+  ],
+  "reason": "prior-attempt-still-unknown",
+  "itemStates": {
+    "b66c77a6b61a0c565c0d6b923364c4314770b1c73d000c58d6a5619efa5e26aa": "verified",
+    "15dbc085c8201c747c233c2e7c335a4c759f1fe52bbe08dc69bd463156a00613": "verified",
+    "1c86da06ffaf5660c72c254b947a25df9d6b615ff2cda96713494a0894234ed5": "unresolved",
+    "c30dfc415bc309aa0f8cee983d0c9c9adff14acdf9a2205c99bfafd36fb2a3e2": "untouched",
+    "67662c75bb27a187480ce59560721ae93585465b116f49e2a2282feb91904587": "untouched"
+  },
+  "elapsedMs": 683,
+  "completionReview": {
+    "codeEnforced": true,
+    "totalElapsedMs": 683,
+    "result": "unknown",
+    "reviewItems": [
+      {
+        "stage": "读取并校验日报",
+        "status": "completed",
+        "elapsedMs": 0,
+        "pitfalls": []
+      },
+      {
+        "stage": "原事件策略精确回登:brand-negative-appeal-2026-10-17-all-outcomes-v1",
+        "status": "completed",
+        "elapsedMs": 2,
+        "pitfalls": []
+      },
+      {
+        "stage": "原事件只读对账:brand-negative-appeal-2026-10-17-all-outcomes-v1",
+        "status": "failed",
+        "elapsedMs": 652,
+        "pitfalls": [
+          "reconcile-evidence-insufficient"
+        ]
+      },
+      {
+        "stage": "CSV回执状态投影",
+        "status": "completed",
+        "elapsedMs": 5,
+        "pitfalls": []
+      }
+    ],
+    "deliveryEvidenceCounts": null,
+    "businessWorkComplete": false,
+    "recoveredPitfalls": [],
+    "unresolvedPitfalls": [
+      {
+        "stage": "原事件只读对账:brand-negative-appeal-2026-10-17-all-outcomes-v1",
+        "code": "reconcile-evidence-insufficient"
+      }
+    ]
+  },
+  "summaryPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/brand-negative-review-appeal-followup/.runtime/delivery-2026-10-17-workflow-summary.json",
+  "summaryArchivePath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/brand-negative-review-appeal-followup/.runtime/delivery-run-history/2026-10-17/1792317640927756000-5a85b18a9fbb.json"
+}

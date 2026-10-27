@@ -1,0 +1,33 @@
+{
+  "group": "电销+直播攻坚组",
+  "text": "城市：江门市  ；  联系人：陈生，13426848124  ；  店铺：包鑫喜  ；  地址：台城街道办事处台东路557号102号商铺  ；  商家ID：1360809513",
+  "dry_run": false,
+  "modifiers_cleared": false,
+  "ts": "2026-10-23T18:02:37",
+  "steps": [
+    {
+      "navigate": "chat-area-evidence"
+    },
+    {
+      "write": true,
+      "info": "pos=(383.0, 716.0) attempt=1 len=88 head='城市：江门市  ；  联系人：陈生，13'"
+    },
+    {
+      "send_mode": "enter->cmd-enter->ctrl-enter"
+    }
+  ],
+  "wecom_activated": true,
+  "verify": {
+    "frame1": true,
+    "frame2_input_cleared": true,
+    "verified": true,
+    "tail1": [
+      "我后面这两个半小时前我就联系过了刚发出来不久",
+      "由微信用户创建的外部群，含14位外部联系人 | 群主: 李知恒- AllenLi@微信",
+      "电销+直播攻坚组",
+      "250.0"
+    ]
+  },
+  "result": "verified",
+  "frontmost_restored": true
+}

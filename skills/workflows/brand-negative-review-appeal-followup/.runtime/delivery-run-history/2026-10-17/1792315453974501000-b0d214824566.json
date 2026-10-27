@@ -1,0 +1,45 @@
+{
+  "ok": false,
+  "status": "blocked",
+  "businessDate": "2026-10-17",
+  "runtimeModelDecisions": 0,
+  "review": [
+    {
+      "stage": "读取并校验日报",
+      "status": "failed",
+      "elapsedMs": 0,
+      "pitfalls": [
+        "daily-record-key-duplicate"
+      ]
+    }
+  ],
+  "events": [],
+  "reason": "daily-record-key-duplicate",
+  "elapsedMs": 1,
+  "completionReview": {
+    "codeEnforced": true,
+    "totalElapsedMs": 1,
+    "result": "blocked",
+    "reviewItems": [
+      {
+        "stage": "读取并校验日报",
+        "status": "failed",
+        "elapsedMs": 0,
+        "pitfalls": [
+          "daily-record-key-duplicate"
+        ]
+      }
+    ],
+    "deliveryEvidenceCounts": null,
+    "businessWorkComplete": false,
+    "recoveredPitfalls": [],
+    "unresolvedPitfalls": [
+      {
+        "stage": "读取并校验日报",
+        "code": "daily-record-key-duplicate"
+      }
+    ]
+  },
+  "summaryPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/brand-negative-review-appeal-followup/.runtime/delivery-2026-10-17-workflow-summary.json",
+  "summaryArchivePath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/brand-negative-review-appeal-followup/.runtime/delivery-run-history/2026-10-17/1792315453974501000-b0d214824566.json"
+}

@@ -1,0 +1,25 @@
+{
+  "ok": false,
+  "action": "prepare-policy",
+  "status": "blocked",
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "review": [
+    {
+      "stage": "请求规范化",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "授权摘要核验",
+      "status": "failed",
+      "pitfalls": [
+        "authorization-or-request-expired"
+      ],
+      "elapsedMs": 0
+    }
+  ],
+  "reason": "authorization-or-request-expired",
+  "elapsedMs": 0
+}

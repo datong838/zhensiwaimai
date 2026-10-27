@@ -1,0 +1,163 @@
+{
+  "ok": false,
+  "status": "unknown",
+  "businessDate": "2026-09-29",
+  "runtimeModelDecisions": 0,
+  "review": [
+    {
+      "stage": "读取并校验日报",
+      "status": "completed",
+      "elapsedMs": 0,
+      "pitfalls": []
+    },
+    {
+      "stage": "冻结初始/续发请求",
+      "status": "completed",
+      "elapsedMs": 1,
+      "pitfalls": []
+    },
+    {
+      "stage": "精确请求策略登记",
+      "status": "completed",
+      "elapsedMs": 2,
+      "pitfalls": []
+    },
+    {
+      "stage": "总执行器执行:brand-negative-appeal-2026-09-29-all-outcomes-v1",
+      "status": "failed",
+      "elapsedMs": 33965,
+      "pitfalls": [
+        "windows-readback-anchor-not-trailing"
+      ]
+    },
+    {
+      "stage": "只读对账:brand-negative-appeal-2026-09-29-all-outcomes-v1",
+      "status": "failed",
+      "elapsedMs": 2297,
+      "pitfalls": [
+        "reconcile-anchor-missing"
+      ]
+    },
+    {
+      "stage": "CSV回执状态投影",
+      "status": "completed",
+      "elapsedMs": 2,
+      "pitfalls": []
+    }
+  ],
+  "events": [
+    {
+      "eventId": "brand-negative-appeal-2026-09-29-all-outcomes-v1",
+      "requestDigest": "a2dd477d397a8426e7098e4d428235289351e5930fd2725de1a1e5db46c3e78e",
+      "result": {
+        "ok": false,
+        "status": "unknown",
+        "reason": "reconcile-anchor-missing",
+        "sendAttempts": 0,
+        "elapsedMs": 2297,
+        "returnCode": null,
+        "items": [],
+        "review": [
+          {
+            "stage": "Windows 传输执行:reconcile",
+            "status": "failed",
+            "pitfalls": [
+              "reconcile-anchor-missing"
+            ],
+            "elapsedMs": 2297
+          }
+        ]
+      }
+    }
+  ],
+  "reason": "attempted-items-still-require-reconcile",
+  "csv": {
+    "ok": true,
+    "changed": 1,
+    "counts": {
+      "已发送": 0,
+      "核验未知": 1,
+      "未发送": 3
+    },
+    "evidenceCounts": {
+      "machineVerified": 0,
+      "humanConfirmedDelivered": 0,
+      "needsReconcile": 1,
+      "untouched": 3
+    }
+  },
+  "itemStates": {
+    "9a4576c4f2a1b6cc0e45dc876e617afb13b1103495feabf7220dd08d15930a53": "unresolved",
+    "3306b10e19738d296853461cabc647709c33568806670eaea41989ed12e1563b": "untouched",
+    "6bb67a74b7426ed8804deebc816eac9030116d8a01847095d9527867d4775033": "untouched",
+    "cc646577f04d89c21ebfceab966acb5d00f783119c69e19cffdf9643a86fff40": "untouched"
+  },
+  "elapsedMs": 36271,
+  "completionReview": {
+    "codeEnforced": true,
+    "totalElapsedMs": 36271,
+    "result": "unknown",
+    "reviewItems": [
+      {
+        "stage": "读取并校验日报",
+        "status": "completed",
+        "elapsedMs": 0,
+        "pitfalls": []
+      },
+      {
+        "stage": "冻结初始/续发请求",
+        "status": "completed",
+        "elapsedMs": 1,
+        "pitfalls": []
+      },
+      {
+        "stage": "精确请求策略登记",
+        "status": "completed",
+        "elapsedMs": 2,
+        "pitfalls": []
+      },
+      {
+        "stage": "总执行器执行:brand-negative-appeal-2026-09-29-all-outcomes-v1",
+        "status": "failed",
+        "elapsedMs": 33965,
+        "pitfalls": [
+          "windows-readback-anchor-not-trailing"
+        ]
+      },
+      {
+        "stage": "只读对账:brand-negative-appeal-2026-09-29-all-outcomes-v1",
+        "status": "failed",
+        "elapsedMs": 2297,
+        "pitfalls": [
+          "reconcile-anchor-missing"
+        ]
+      },
+      {
+        "stage": "CSV回执状态投影",
+        "status": "completed",
+        "elapsedMs": 2,
+        "pitfalls": []
+      }
+    ],
+    "deliveryEvidenceCounts": {
+      "machineVerified": 0,
+      "humanConfirmedDelivered": 0,
+      "needsReconcile": 1,
+      "untouched": 3
+    },
+    "businessWorkComplete": false,
+    "recoveredPitfalls": [],
+    "unresolvedPitfalls": [
+      {
+        "stage": "总执行器执行:brand-negative-appeal-2026-09-29-all-outcomes-v1",
+        "code": "windows-readback-anchor-not-trailing"
+      },
+      {
+        "stage": "只读对账:brand-negative-appeal-2026-09-29-all-outcomes-v1",
+        "code": "reconcile-anchor-missing"
+      }
+    ]
+  },
+  "summaryPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/brand-negative-review-appeal-followup/.runtime/delivery-2026-09-29-workflow-summary.json",
+  "summaryArchivePath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/brand-negative-review-appeal-followup/.runtime/delivery-run-history/2026-09-29/1790738927153862000-3e1f5697608a.json"
+}

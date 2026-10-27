@@ -1,0 +1,308 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "臻肆测试群",
+  "channel": "desktop",
+  "requestDigest": "c377f99b8c28d37c8da92e7ef8deac6148c3605a071d505cfcb38c2f28ac0550",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "merchant-current-text",
+      "sha256": "259784d8759f63f6d969dfcebcc007240be10f48da2a9d80a36e49dca8105cad",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1789607338.040373,
+      "sendAttempts": 1,
+      "verificationLevel": "native-text-exact",
+      "reason": null,
+      "evidence": {
+        "ok": true,
+        "bubblePositions": [
+          [
+            1874.0,
+            903.0
+          ],
+          [
+            1874.0,
+            903.0
+          ]
+        ],
+        "copyMenuCount": 1,
+        "composerEmpty": true,
+        "copiedTextSha256": "259784d8759f63f6d969dfcebcc007240be10f48da2a9d80a36e49dca8105cad",
+        "scrolls": [
+          {
+            "ok": true,
+            "messageList": {
+              "x": 330.0,
+              "y": 104.0,
+              "width": 810.0,
+              "height": 468.0
+            },
+            "scrollEvents": 12,
+            "frame": 1,
+            "recoveryCycle": 1
+          },
+          {
+            "ok": true,
+            "messageList": {
+              "x": 330.0,
+              "y": 104.0,
+              "width": 810.0,
+              "height": 468.0
+            },
+            "scrollEvents": 12,
+            "frame": 1,
+            "recoveryCycle": 1
+          },
+          {
+            "ok": true,
+            "messageList": {
+              "x": 330.0,
+              "y": 104.0,
+              "width": 810.0,
+              "height": 468.0
+            },
+            "scrollEvents": 12,
+            "frame": 1,
+            "recoveryCycle": 1
+          },
+          {
+            "ok": true,
+            "messageList": {
+              "x": 330.0,
+              "y": 104.0,
+              "width": 810.0,
+              "height": 468.0
+            },
+            "scrollEvents": 12,
+            "frame": 1,
+            "recoveryCycle": 1
+          }
+        ],
+        "frameAnchors": [
+          {
+            "ok": true,
+            "candidateCount": 1,
+            "x": 1833.0,
+            "y": 940.0,
+            "matchedLineIndexes": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "matchedAnchorCount": 4,
+            "linePositions": {
+              "0": [
+                1727.0,
+                860.0
+              ],
+              "1": [
+                1874.0,
+                903.0
+              ],
+              "2": [
+                1833.0,
+                940.0
+              ],
+              "3": [
+                1812.0,
+                981.0
+              ]
+            },
+            "headerCount": 1,
+            "ocrAttempts": 1,
+            "headerVerifiedByAX": true,
+            "recoveryCycle": 1
+          },
+          {
+            "ok": true,
+            "candidateCount": 1,
+            "x": 1833.0,
+            "y": 940.0,
+            "matchedLineIndexes": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "matchedAnchorCount": 4,
+            "linePositions": {
+              "0": [
+                1727.0,
+                860.0
+              ],
+              "1": [
+                1874.0,
+                903.0
+              ],
+              "2": [
+                1833.0,
+                940.0
+              ],
+              "3": [
+                1812.0,
+                981.0
+              ]
+            },
+            "headerCount": 1,
+            "ocrAttempts": 1,
+            "headerVerifiedByAX": true,
+            "recoveryCycle": 1
+          }
+        ],
+        "stableLineIndex": 1,
+        "newOutgoingEvidence": {
+          "ok": true,
+          "frames": [
+            {
+              "position": [
+                1874.0,
+                903.0
+              ],
+              "greenPixels": 6755,
+              "changed": 244.591375
+            },
+            {
+              "position": [
+                1874.0,
+                903.0
+              ],
+              "greenPixels": 6755,
+              "changed": 244.591375
+            }
+          ]
+        }
+      },
+      "transport": {
+        "ok": true,
+        "executor": "wechat-desktop-sender",
+        "channel": "desktop",
+        "groupName": "臻肆测试群",
+        "payloadType": "text",
+        "sendAttempts": 1,
+        "runtimeModelDecisions": 0,
+        "stage": "completed",
+        "stageMs": {
+          "locate_group": 297,
+          "verify_target_and_input": 2043,
+          "prepare_payload": 1667,
+          "claim_and_send": 3163,
+          "post_send_verify": 6134
+        },
+        "payloadIdentity": "5f88cdebf5e5b500d3f18a1baa675d6e51b54a0a3232687e68e748699f395669",
+        "payloads": [
+          {
+            "text": "上海市\n统一微信文字验收，20260917\n商户工作流当前版本验收\n臻肆测试群（仅测试）",
+            "sha256": "259784d8759f63f6d969dfcebcc007240be10f48da2a9d80a36e49dca8105cad"
+          }
+        ],
+        "groupPreflight": {
+          "ok": true,
+          "action": "open-group",
+          "group": "臻肆测试群",
+          "header": "臻肆测试群",
+          "note": "ax-current-header",
+          "reason": null,
+          "sendAttempts": 0,
+          "runtimeModelDecisions": 0,
+          "stageMs": {
+            "exact_group_preflight": 297
+          },
+          "artifacts": [],
+          "hardGate": false
+        },
+        "textInputVerified": true,
+        "textWriteAttempts": 1,
+        "clipboardClearedBeforeTextWrite": true,
+        "preparedInputChangedPixels": 15814,
+        "preparedInputChangedRatio": 0.042813,
+        "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/9800f6db2cf77ca8d795b79a281a924077997999bccedccff78b6f346449b1b4/890809c0a57d1f330e19e8f3531db00351640d29c323b9a337106a1001b02326/transport-ledger/attempt.json",
+        "postSendInputCleared": [
+          true,
+          true
+        ],
+        "verified": true,
+        "state": "verified",
+        "elapsedMs": 13306,
+        "sendReview": [
+          {
+            "item": 1,
+            "stage": "locate_group",
+            "label": "精确定位目标群",
+            "elapsedMs": 297,
+            "status": "completed",
+            "pitfalls": []
+          },
+          {
+            "item": 2,
+            "stage": "verify_target_and_input",
+            "label": "复核目标群与输入框",
+            "elapsedMs": 2043,
+            "status": "completed",
+            "pitfalls": []
+          },
+          {
+            "item": 3,
+            "stage": "prepare_payload",
+            "label": "准备并复核发送载荷",
+            "elapsedMs": 1667,
+            "status": "completed",
+            "pitfalls": []
+          },
+          {
+            "item": 4,
+            "stage": "claim_and_send",
+            "label": "领取防重账本并单次发送",
+            "elapsedMs": 3163,
+            "status": "completed",
+            "pitfalls": []
+          },
+          {
+            "item": 5,
+            "stage": "post_send_verify",
+            "label": "发送后双帧复核",
+            "elapsedMs": 6134,
+            "status": "completed",
+            "pitfalls": []
+          }
+        ],
+        "reviewSummary": {
+          "totalElapsedMs": 13306,
+          "itemCount": 5,
+          "pitfallCount": 0,
+          "result": "success"
+        }
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:merchant-current-text",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 7711
+    },
+    {
+      "stage": "send:merchant-current-text",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 28223
+    }
+  ],
+  "elapsedMs": 35937,
+  "eventKey": "9800f6db2cf77ca8d795b79a281a924077997999bccedccff78b6f346449b1b4"
+}

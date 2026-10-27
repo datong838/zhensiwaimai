@@ -1,0 +1,117 @@
+{
+  "ok": false,
+  "status": "partial",
+  "groupName": "臻肆测试群",
+  "channel": "mobile",
+  "requestDigest": "eac0b017992694ae80cc70ebeea06fb9eb540735d52d1b63b0b9a7d8af61008b",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "text",
+      "sha256": "9236246612de770096f1172e921835738c1d833be448581d754fb5857cb7e3ad",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1789566709.4821088,
+      "sendAttempts": 1,
+      "verificationLevel": "native-text-exact",
+      "evidence": {
+        "input": {
+          "ok": true,
+          "inputMethod": "fastinput-clear-then-paste",
+          "chars": 39,
+          "fullTextVerified": true,
+          "copyReadback": {
+            "method": "wechat-copy-exact",
+            "chars": 39,
+            "sha256": "9236246612de770096f1172e921835738c1d833be448581d754fb5857cb7e3ad"
+          }
+        },
+        "postSend": {
+          "ok": true,
+          "method": "new-bubble-wechat-copy-exact",
+          "screenshot": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/78fa0a00c7b00f2fdfc3aa06b810c05d6cb7b5c6120a6891763c36bf48f9a03d/474c3bc22e6f3e53ed0aab1ed7c1af19ddfecb9f55730114a57883dcbccba3fa/new-message-only.png",
+          "box": [
+            370,
+            1755,
+            930,
+            2042
+          ],
+          "fingerprint": "0e7f2346705f055380db7a1d38b78ac93a7e19a8325574ef385e0c449ddd1899",
+          "stable": true,
+          "copied": {
+            "method": "wechat-copy-exact",
+            "chars": 39,
+            "sha256": "9236246612de770096f1172e921835738c1d833be448581d754fb5857cb7e3ad"
+          }
+        },
+        "stageMs": {
+          "input_and_verify": 12658,
+          "send_once": 433,
+          "new_bubble_stable": 2772,
+          "new_bubble_copy_readback": 3656,
+          "input_clear_check": 1660
+        },
+        "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai/skills/wechat-messaging/.runtime/events/78fa0a00c7b00f2fdfc3aa06b810c05d6cb7b5c6120a6891763c36bf48f9a03d/474c3bc22e6f3e53ed0aab1ed7c1af19ddfecb9f55730114a57883dcbccba3fa/attempt.json"
+      },
+      "deviceHash": "f2724cf436e9",
+      "userId": 0
+    },
+    {
+      "itemId": "image",
+      "sha256": "db7443bfd67d1e638e57362d8db1c67d645020a8992a0482526b3dc4bba768d6",
+      "type": "image",
+      "status": "blocked",
+      "claimedAt": 1789566739.639035,
+      "sendAttempts": 0,
+      "reason": "mobile-one-image-not-selected",
+      "deviceHash": "f2724cf436e9"
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:text",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:image",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:file",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 35941
+    },
+    {
+      "stage": "send:text",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 30156
+    },
+    {
+      "stage": "send:image",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 20325
+    }
+  ],
+  "reason": "mobile-one-image-not-selected",
+  "elapsedMs": 89876,
+  "eventKey": "78fa0a00c7b00f2fdfc3aa06b810c05d6cb7b5c6120a6891763c36bf48f9a03d"
+}

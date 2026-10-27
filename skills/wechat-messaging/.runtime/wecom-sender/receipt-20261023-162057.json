@@ -1,0 +1,33 @@
+{
+  "group": "电销+直播攻坚组",
+  "text": "城市：广元市  ；  联系人：杨女士，15183966658  ；  店铺：蒋大厨居民楼菜馆  ；  地址：嘉陵街道东颖巷24号-26号  ；  商家ID：531545085",
+  "dry_run": false,
+  "modifiers_cleared": false,
+  "ts": "2026-10-23T16:19:11",
+  "steps": [
+    {
+      "navigate": "chat-area-evidence"
+    },
+    {
+      "write": true,
+      "info": "pos=(423.0, 816.0) focus_err=0 set_err=0 readback='城市：广元市  ；  联系人：杨女士，15183966658  ；  店铺：蒋大厨居民楼菜馆  ；  地址：嘉陵街道东颖巷24号-26号  ；  商家ID：531545085'"
+    },
+    {
+      "send_mode": "enter->cmd-enter->ctrl-enter"
+    }
+  ],
+  "wecom_activated": true,
+  "verify": {
+    "frame1": false,
+    "frame2_input_cleared": true,
+    "verified": false,
+    "tail1": [
+      "阿里王椒盐牛蛙（水产西路222店）💰臻肆外卖运营",
+      "昨天",
+      "李庆丽邀请你加入了外部群聊",
+      "饿-深圳-手撕烤鸭工厂外卖运营群"
+    ]
+  },
+  "result": "verify-fail",
+  "frontmost_restored": true
+}

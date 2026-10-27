@@ -1,0 +1,51 @@
+{
+  "ok": false,
+  "status": "blocked",
+  "groupName": "李老哈（品牌）💰臻肆外卖运营对接群",
+  "channel": "desktop",
+  "requestDigest": "7ab37936f8b44b256f30013a7bc61bc2d62aa3613d4337ac57fa01edc6aad268",
+  "runtimeModelDecisions": 0,
+  "items": [],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:appeal-2e65027f68875207722c",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:appeal-776533653a2694b237fc",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:appeal-3e18dfa58d566556843e",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 31276
+    }
+  ],
+  "reason": "windows-sessions-unavailable:HTTP 500: {\"ok\": false, \"error\": \"微信进程在运行，但主窗口未出现——通常意味着**尚未完成登录**（重启后需扫码登录）。请在服务端完成扫码登录后重试；也可用 /health 的 logged_in 字段或 wx.wait_ready() 等待就绪。\"}",
+  "elapsedMs": 31279,
+  "eventKey": "233120333932d677878c4200a5642c74f367650f7c46bcdaf47eb8b8b564e83e",
+  "reviewSummary": {
+    "totalElapsedMs": 31279,
+    "result": "blocked",
+    "stageCount": 5,
+    "completedStages": 5,
+    "failedStages": []
+  }
+}

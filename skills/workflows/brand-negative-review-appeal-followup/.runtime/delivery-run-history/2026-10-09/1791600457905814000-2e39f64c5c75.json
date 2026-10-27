@@ -1,0 +1,712 @@
+{
+  "ok": false,
+  "status": "unknown",
+  "businessDate": "2026-10-09",
+  "runtimeModelDecisions": 0,
+  "review": [
+    {
+      "stage": "读取并校验日报",
+      "status": "completed",
+      "elapsedMs": 1,
+      "pitfalls": []
+    },
+    {
+      "stage": "原事件策略精确回登:brand-negative-appeal-2026-10-09-all-outcomes-v1",
+      "status": "completed",
+      "elapsedMs": 10,
+      "pitfalls": []
+    },
+    {
+      "stage": "原事件只读对账:brand-negative-appeal-2026-10-09-all-outcomes-v1",
+      "status": "failed",
+      "elapsedMs": 2584,
+      "pitfalls": [
+        "windows-current-session-title-mismatch"
+      ]
+    },
+    {
+      "stage": "CSV回执状态投影",
+      "status": "completed",
+      "elapsedMs": 6,
+      "pitfalls": []
+    }
+  ],
+  "events": [
+    {
+      "eventId": "brand-negative-appeal-2026-10-09-all-outcomes-v1",
+      "requestDigest": null,
+      "reconcile": {
+        "ok": false,
+        "action": "reconcile",
+        "status": "partial",
+        "recoveryUsed": false,
+        "sendAttempts": 1,
+        "runtimeModelDecisions": 0,
+        "review": [
+          {
+            "stage": "Windows 传输执行:reconcile",
+            "status": "failed",
+            "pitfalls": [
+              "windows-current-session-title-mismatch"
+            ],
+            "elapsedMs": 2580
+          }
+        ],
+        "transport": "windows-driver",
+        "initial": {
+          "ok": false,
+          "status": "partial",
+          "groupName": "李老哈（品牌）💰臻肆外卖运营对接群",
+          "channel": "desktop",
+          "requestDigest": "c7fec3cfc5e53af1edd30fe04e5568b5d91b58d6219b628d52b712c94508a0ff",
+          "runtimeModelDecisions": 0,
+          "items": [
+            {
+              "itemId": "appeal-aadb89d24f5f38f7a4eb",
+              "sha256": "8da7aacace829d159f7716bafc3e77403b127c31112fd287a571c74bbcc7fdd1",
+              "type": "image",
+              "status": "verified",
+              "claimedAt": 1791595523.594286,
+              "sendAttempts": 1,
+              "verificationLevel": "windows-readback-file-card",
+              "evidence": {
+                "ok": true,
+                "resolvedGroup": "李老哈（品牌）💰臻肆外卖运营对接群",
+                "currentTitle": "李老哈（品牌）💰臻肆外卖运营对接群",
+                "messageCount": 35,
+                "anchor": "file-card",
+                "anchorValue": "[图片]",
+                "anchorInTrailingPosition": true,
+                "autoKind": "image",
+                "readbackAt": 1791595553.248585
+              },
+              "transport": {
+                "ok": true,
+                "data": {
+                  "sent": true,
+                  "who": "李老哈（品牌）",
+                  "path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\aadb89d24f5f38f7a4eb129afedefbc0dd09275d08978c109ecdd55b95d9af92.png",
+                  "kind": "image",
+                  "auto": "image",
+                  "uploaded_from": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/.runtime/events/f1e9a6a75ce5a54b4195a56e07d01b38fa75fb92596b357af0f18d19d7b72813/7b6bbdaf6ebdc7dd79b4707d92678b7a01362248a1c7cbf2751bcc59b3a6f998/payload/aadb89d24f5f38f7a4eb129afedefbc0dd09275d08978c109ecdd55b95d9af92.png",
+                  "server_path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\aadb89d24f5f38f7a4eb129afedefbc0dd09275d08978c109ecdd55b95d9af92.png"
+                },
+                "route": "relay",
+                "direct_error": "[Errno 65] No route to host",
+                "direct_local_network_blocked": true,
+                "sendAttempts": 1
+              }
+            },
+            {
+              "itemId": "appeal-d55b4e927eacb465944f",
+              "sha256": "94736a9c12326d4643387e564eae523a6a68ce54ee38d44021eb0385ad0ed0a4",
+              "type": "image",
+              "status": "verified",
+              "claimedAt": 1791595553.252416,
+              "sendAttempts": 1,
+              "verificationLevel": "windows-readback-file-card",
+              "evidence": {
+                "ok": true,
+                "resolvedGroup": "李老哈（品牌）💰臻肆外卖运营对接群",
+                "currentTitle": "李老哈（品牌）💰臻肆外卖运营对接群",
+                "messageCount": 35,
+                "anchor": "file-card",
+                "anchorValue": "[图片]",
+                "anchorInTrailingPosition": true,
+                "autoKind": "image",
+                "readbackAt": 1791595582.8615491
+              },
+              "transport": {
+                "ok": true,
+                "data": {
+                  "sent": true,
+                  "who": "李老哈（品牌）",
+                  "path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\d55b4e927eacb465944fd10d5ac7bed2d660861bf8282e4f5f9cdfadf55c300c.png",
+                  "kind": "image",
+                  "auto": "image",
+                  "uploaded_from": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/.runtime/events/f1e9a6a75ce5a54b4195a56e07d01b38fa75fb92596b357af0f18d19d7b72813/ecae2e9baa0fd3d8079c96b4f8e97e971aa62cc816ea2deaec65f020272c0048/payload/d55b4e927eacb465944fd10d5ac7bed2d660861bf8282e4f5f9cdfadf55c300c.png",
+                  "server_path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\d55b4e927eacb465944fd10d5ac7bed2d660861bf8282e4f5f9cdfadf55c300c.png"
+                },
+                "route": "relay",
+                "direct_error": "[Errno 65] No route to host",
+                "direct_local_network_blocked": true,
+                "sendAttempts": 1
+              }
+            },
+            {
+              "itemId": "appeal-9857ec3808bd255d5770",
+              "sha256": "57cf69567273ed0da579b2d505bc6d6e3b77ddd363494152aadb816fee8fb56d",
+              "type": "image",
+              "status": "verified",
+              "claimedAt": 1791595582.864437,
+              "sendAttempts": 1,
+              "verificationLevel": "windows-readback-file-card",
+              "evidence": {
+                "ok": true,
+                "resolvedGroup": "李老哈（品牌）💰臻肆外卖运营对接群",
+                "currentTitle": "李老哈（品牌）💰臻肆外卖运营对接群",
+                "messageCount": 35,
+                "anchor": "file-card",
+                "anchorValue": "[图片]",
+                "anchorInTrailingPosition": true,
+                "autoKind": "image",
+                "readbackAt": 1791595612.3446531
+              },
+              "transport": {
+                "ok": true,
+                "data": {
+                  "sent": true,
+                  "who": "李老哈（品牌）",
+                  "path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\9857ec3808bd255d577056f4ee56d0a0068f38117de8cf63d048cd94b318fba9.png",
+                  "kind": "image",
+                  "auto": "image",
+                  "uploaded_from": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/.runtime/events/f1e9a6a75ce5a54b4195a56e07d01b38fa75fb92596b357af0f18d19d7b72813/ec29ef07146ef98996614584686d54556194f9310263b49084639b63dc147b29/payload/9857ec3808bd255d577056f4ee56d0a0068f38117de8cf63d048cd94b318fba9.png",
+                  "server_path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\9857ec3808bd255d577056f4ee56d0a0068f38117de8cf63d048cd94b318fba9.png"
+                },
+                "route": "relay",
+                "direct_error": "[Errno 65] No route to host",
+                "direct_local_network_blocked": true,
+                "sendAttempts": 1
+              }
+            },
+            {
+              "itemId": "appeal-c60fb35977cb627f10d8",
+              "sha256": "46702b6945887d407366c28cf6b190312d289da39f7ad8c3e36cc5136c43b270",
+              "type": "image",
+              "status": "verified",
+              "claimedAt": 1791595612.3476548,
+              "sendAttempts": 1,
+              "verificationLevel": "windows-readback-file-card",
+              "evidence": {
+                "ok": true,
+                "resolvedGroup": "李老哈（品牌）💰臻肆外卖运营对接群",
+                "currentTitle": "李老哈（品牌）💰臻肆外卖运营对接群",
+                "messageCount": 34,
+                "anchor": "file-card",
+                "anchorValue": "[图片]",
+                "anchorInTrailingPosition": true,
+                "autoKind": "image",
+                "readbackAt": 1791595642.126378
+              },
+              "transport": {
+                "ok": true,
+                "data": {
+                  "sent": true,
+                  "who": "李老哈（品牌）",
+                  "path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\c60fb35977cb627f10d834b195b3ed58dffc5cfd616488befa74a3d04fbff425.png",
+                  "kind": "image",
+                  "auto": "image",
+                  "uploaded_from": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/.runtime/events/f1e9a6a75ce5a54b4195a56e07d01b38fa75fb92596b357af0f18d19d7b72813/33ddcaaeb27d2aebf60e2fed859d1a0043106419805935b594fee6f46a5e58fa/payload/c60fb35977cb627f10d834b195b3ed58dffc5cfd616488befa74a3d04fbff425.png",
+                  "server_path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\c60fb35977cb627f10d834b195b3ed58dffc5cfd616488befa74a3d04fbff425.png"
+                },
+                "route": "relay",
+                "direct_error": "[Errno 65] No route to host",
+                "direct_local_network_blocked": true,
+                "sendAttempts": 1
+              }
+            },
+            {
+              "itemId": "appeal-76f0924f14046e28fc2c",
+              "sha256": "e7b1895eb31efbd80746b844bcb361cdf74aa8d6bf7312f957ddebc184abe4b0",
+              "type": "image",
+              "status": "verified",
+              "claimedAt": 1791595642.1286101,
+              "sendAttempts": 1,
+              "verificationLevel": "windows-readback-file-card",
+              "evidence": {
+                "ok": true,
+                "resolvedGroup": "李老哈（品牌）💰臻肆外卖运营对接群",
+                "currentTitle": "李老哈（品牌）💰臻肆外卖运营对接群",
+                "messageCount": 34,
+                "anchor": "file-card",
+                "anchorValue": "[图片]",
+                "anchorInTrailingPosition": true,
+                "autoKind": "image",
+                "readbackAt": 1791595671.03534
+              },
+              "transport": {
+                "ok": true,
+                "data": {
+                  "sent": true,
+                  "who": "李老哈（品牌）",
+                  "path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\76f0924f14046e28fc2c008ace486ade9e00671151fcb03934688f3e307dc094.png",
+                  "kind": "image",
+                  "auto": "image",
+                  "uploaded_from": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/.runtime/events/f1e9a6a75ce5a54b4195a56e07d01b38fa75fb92596b357af0f18d19d7b72813/6069da145cc42f0caf206583541c69ef8005b464c8c4417b7c05a025c49f5c6b/payload/76f0924f14046e28fc2c008ace486ade9e00671151fcb03934688f3e307dc094.png",
+                  "server_path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\76f0924f14046e28fc2c008ace486ade9e00671151fcb03934688f3e307dc094.png"
+                },
+                "route": "relay",
+                "direct_error": "[Errno 65] No route to host",
+                "direct_local_network_blocked": true,
+                "sendAttempts": 1
+              }
+            },
+            {
+              "itemId": "appeal-b13d0964f950a96e2509",
+              "sha256": "b537b372ee7c3e6d7685450b4fa57e5a71b6a7c253b61760c6d2e3fcad47f282",
+              "type": "image",
+              "status": "unknown",
+              "claimedAt": 1791595671.0370922,
+              "sendAttempts": 0,
+              "reason": "windows-current-session-title-mismatch",
+              "evidence": {
+                "ok": false,
+                "resolvedGroup": "李老哈（品牌）💰臻肆外卖运营对接群",
+                "titleProven": true,
+                "reason": "windows-readback-anchor-not-trailing",
+                "polls": 4
+              },
+              "transport": {
+                "ok": true,
+                "data": {
+                  "sent": true,
+                  "who": "李老哈（品牌）",
+                  "path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\b13d0964f950a96e250934ea6eb5fc8d3a69c8847ccc3aaa031fd56a258cd018.png",
+                  "kind": "image",
+                  "auto": "image",
+                  "uploaded_from": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/.runtime/events/f1e9a6a75ce5a54b4195a56e07d01b38fa75fb92596b357af0f18d19d7b72813/20b6fde96b6368b38ac317c209d5156fe6e00bb70bcd6892eb6bf5fcae959e01/payload/b13d0964f950a96e250934ea6eb5fc8d3a69c8847ccc3aaa031fd56a258cd018.png",
+                  "server_path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\b13d0964f950a96e250934ea6eb5fc8d3a69c8847ccc3aaa031fd56a258cd018.png"
+                },
+                "route": "relay",
+                "direct_error": "[Errno 65] No route to host",
+                "direct_local_network_blocked": true,
+                "sendAttempts": 1
+              }
+            }
+          ],
+          "review": [
+            {
+              "stage": "authorization",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0
+            },
+            {
+              "stage": "freeze:appeal-aadb89d24f5f38f7a4eb",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0
+            },
+            {
+              "stage": "freeze:appeal-d55b4e927eacb465944f",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0
+            },
+            {
+              "stage": "freeze:appeal-9857ec3808bd255d5770",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0
+            },
+            {
+              "stage": "freeze:appeal-c60fb35977cb627f10d8",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0
+            },
+            {
+              "stage": "freeze:appeal-76f0924f14046e28fc2c",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0
+            },
+            {
+              "stage": "freeze:appeal-b13d0964f950a96e2509",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0
+            },
+            {
+              "stage": "freeze:appeal-ad2de094b5b8d59aa8ca",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 1
+            },
+            {
+              "stage": "preflight",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 1193
+            },
+            {
+              "stage": "reconcile:appeal-b13d0964f950a96e2509",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 1353
+            }
+          ],
+          "reason": "windows-current-session-title-mismatch",
+          "elapsedMs": 2555,
+          "eventKey": "f1e9a6a75ce5a54b4195a56e07d01b38fa75fb92596b357af0f18d19d7b72813",
+          "reviewSummary": {
+            "totalElapsedMs": 2555,
+            "result": "partial",
+            "stageCount": 10,
+            "completedStages": 10,
+            "failedStages": []
+          }
+        },
+        "final": {
+          "ok": false,
+          "status": "partial",
+          "groupName": "李老哈（品牌）💰臻肆外卖运营对接群",
+          "channel": "desktop",
+          "requestDigest": "c7fec3cfc5e53af1edd30fe04e5568b5d91b58d6219b628d52b712c94508a0ff",
+          "runtimeModelDecisions": 0,
+          "items": [
+            {
+              "itemId": "appeal-aadb89d24f5f38f7a4eb",
+              "sha256": "8da7aacace829d159f7716bafc3e77403b127c31112fd287a571c74bbcc7fdd1",
+              "type": "image",
+              "status": "verified",
+              "claimedAt": 1791595523.594286,
+              "sendAttempts": 1,
+              "verificationLevel": "windows-readback-file-card",
+              "evidence": {
+                "ok": true,
+                "resolvedGroup": "李老哈（品牌）💰臻肆外卖运营对接群",
+                "currentTitle": "李老哈（品牌）💰臻肆外卖运营对接群",
+                "messageCount": 35,
+                "anchor": "file-card",
+                "anchorValue": "[图片]",
+                "anchorInTrailingPosition": true,
+                "autoKind": "image",
+                "readbackAt": 1791595553.248585
+              },
+              "transport": {
+                "ok": true,
+                "data": {
+                  "sent": true,
+                  "who": "李老哈（品牌）",
+                  "path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\aadb89d24f5f38f7a4eb129afedefbc0dd09275d08978c109ecdd55b95d9af92.png",
+                  "kind": "image",
+                  "auto": "image",
+                  "uploaded_from": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/.runtime/events/f1e9a6a75ce5a54b4195a56e07d01b38fa75fb92596b357af0f18d19d7b72813/7b6bbdaf6ebdc7dd79b4707d92678b7a01362248a1c7cbf2751bcc59b3a6f998/payload/aadb89d24f5f38f7a4eb129afedefbc0dd09275d08978c109ecdd55b95d9af92.png",
+                  "server_path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\aadb89d24f5f38f7a4eb129afedefbc0dd09275d08978c109ecdd55b95d9af92.png"
+                },
+                "route": "relay",
+                "direct_error": "[Errno 65] No route to host",
+                "direct_local_network_blocked": true,
+                "sendAttempts": 1
+              }
+            },
+            {
+              "itemId": "appeal-d55b4e927eacb465944f",
+              "sha256": "94736a9c12326d4643387e564eae523a6a68ce54ee38d44021eb0385ad0ed0a4",
+              "type": "image",
+              "status": "verified",
+              "claimedAt": 1791595553.252416,
+              "sendAttempts": 1,
+              "verificationLevel": "windows-readback-file-card",
+              "evidence": {
+                "ok": true,
+                "resolvedGroup": "李老哈（品牌）💰臻肆外卖运营对接群",
+                "currentTitle": "李老哈（品牌）💰臻肆外卖运营对接群",
+                "messageCount": 35,
+                "anchor": "file-card",
+                "anchorValue": "[图片]",
+                "anchorInTrailingPosition": true,
+                "autoKind": "image",
+                "readbackAt": 1791595582.8615491
+              },
+              "transport": {
+                "ok": true,
+                "data": {
+                  "sent": true,
+                  "who": "李老哈（品牌）",
+                  "path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\d55b4e927eacb465944fd10d5ac7bed2d660861bf8282e4f5f9cdfadf55c300c.png",
+                  "kind": "image",
+                  "auto": "image",
+                  "uploaded_from": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/.runtime/events/f1e9a6a75ce5a54b4195a56e07d01b38fa75fb92596b357af0f18d19d7b72813/ecae2e9baa0fd3d8079c96b4f8e97e971aa62cc816ea2deaec65f020272c0048/payload/d55b4e927eacb465944fd10d5ac7bed2d660861bf8282e4f5f9cdfadf55c300c.png",
+                  "server_path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\d55b4e927eacb465944fd10d5ac7bed2d660861bf8282e4f5f9cdfadf55c300c.png"
+                },
+                "route": "relay",
+                "direct_error": "[Errno 65] No route to host",
+                "direct_local_network_blocked": true,
+                "sendAttempts": 1
+              }
+            },
+            {
+              "itemId": "appeal-9857ec3808bd255d5770",
+              "sha256": "57cf69567273ed0da579b2d505bc6d6e3b77ddd363494152aadb816fee8fb56d",
+              "type": "image",
+              "status": "verified",
+              "claimedAt": 1791595582.864437,
+              "sendAttempts": 1,
+              "verificationLevel": "windows-readback-file-card",
+              "evidence": {
+                "ok": true,
+                "resolvedGroup": "李老哈（品牌）💰臻肆外卖运营对接群",
+                "currentTitle": "李老哈（品牌）💰臻肆外卖运营对接群",
+                "messageCount": 35,
+                "anchor": "file-card",
+                "anchorValue": "[图片]",
+                "anchorInTrailingPosition": true,
+                "autoKind": "image",
+                "readbackAt": 1791595612.3446531
+              },
+              "transport": {
+                "ok": true,
+                "data": {
+                  "sent": true,
+                  "who": "李老哈（品牌）",
+                  "path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\9857ec3808bd255d577056f4ee56d0a0068f38117de8cf63d048cd94b318fba9.png",
+                  "kind": "image",
+                  "auto": "image",
+                  "uploaded_from": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/.runtime/events/f1e9a6a75ce5a54b4195a56e07d01b38fa75fb92596b357af0f18d19d7b72813/ec29ef07146ef98996614584686d54556194f9310263b49084639b63dc147b29/payload/9857ec3808bd255d577056f4ee56d0a0068f38117de8cf63d048cd94b318fba9.png",
+                  "server_path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\9857ec3808bd255d577056f4ee56d0a0068f38117de8cf63d048cd94b318fba9.png"
+                },
+                "route": "relay",
+                "direct_error": "[Errno 65] No route to host",
+                "direct_local_network_blocked": true,
+                "sendAttempts": 1
+              }
+            },
+            {
+              "itemId": "appeal-c60fb35977cb627f10d8",
+              "sha256": "46702b6945887d407366c28cf6b190312d289da39f7ad8c3e36cc5136c43b270",
+              "type": "image",
+              "status": "verified",
+              "claimedAt": 1791595612.3476548,
+              "sendAttempts": 1,
+              "verificationLevel": "windows-readback-file-card",
+              "evidence": {
+                "ok": true,
+                "resolvedGroup": "李老哈（品牌）💰臻肆外卖运营对接群",
+                "currentTitle": "李老哈（品牌）💰臻肆外卖运营对接群",
+                "messageCount": 34,
+                "anchor": "file-card",
+                "anchorValue": "[图片]",
+                "anchorInTrailingPosition": true,
+                "autoKind": "image",
+                "readbackAt": 1791595642.126378
+              },
+              "transport": {
+                "ok": true,
+                "data": {
+                  "sent": true,
+                  "who": "李老哈（品牌）",
+                  "path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\c60fb35977cb627f10d834b195b3ed58dffc5cfd616488befa74a3d04fbff425.png",
+                  "kind": "image",
+                  "auto": "image",
+                  "uploaded_from": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/.runtime/events/f1e9a6a75ce5a54b4195a56e07d01b38fa75fb92596b357af0f18d19d7b72813/33ddcaaeb27d2aebf60e2fed859d1a0043106419805935b594fee6f46a5e58fa/payload/c60fb35977cb627f10d834b195b3ed58dffc5cfd616488befa74a3d04fbff425.png",
+                  "server_path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\c60fb35977cb627f10d834b195b3ed58dffc5cfd616488befa74a3d04fbff425.png"
+                },
+                "route": "relay",
+                "direct_error": "[Errno 65] No route to host",
+                "direct_local_network_blocked": true,
+                "sendAttempts": 1
+              }
+            },
+            {
+              "itemId": "appeal-76f0924f14046e28fc2c",
+              "sha256": "e7b1895eb31efbd80746b844bcb361cdf74aa8d6bf7312f957ddebc184abe4b0",
+              "type": "image",
+              "status": "verified",
+              "claimedAt": 1791595642.1286101,
+              "sendAttempts": 1,
+              "verificationLevel": "windows-readback-file-card",
+              "evidence": {
+                "ok": true,
+                "resolvedGroup": "李老哈（品牌）💰臻肆外卖运营对接群",
+                "currentTitle": "李老哈（品牌）💰臻肆外卖运营对接群",
+                "messageCount": 34,
+                "anchor": "file-card",
+                "anchorValue": "[图片]",
+                "anchorInTrailingPosition": true,
+                "autoKind": "image",
+                "readbackAt": 1791595671.03534
+              },
+              "transport": {
+                "ok": true,
+                "data": {
+                  "sent": true,
+                  "who": "李老哈（品牌）",
+                  "path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\76f0924f14046e28fc2c008ace486ade9e00671151fcb03934688f3e307dc094.png",
+                  "kind": "image",
+                  "auto": "image",
+                  "uploaded_from": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/.runtime/events/f1e9a6a75ce5a54b4195a56e07d01b38fa75fb92596b357af0f18d19d7b72813/6069da145cc42f0caf206583541c69ef8005b464c8c4417b7c05a025c49f5c6b/payload/76f0924f14046e28fc2c008ace486ade9e00671151fcb03934688f3e307dc094.png",
+                  "server_path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\76f0924f14046e28fc2c008ace486ade9e00671151fcb03934688f3e307dc094.png"
+                },
+                "route": "relay",
+                "direct_error": "[Errno 65] No route to host",
+                "direct_local_network_blocked": true,
+                "sendAttempts": 1
+              }
+            },
+            {
+              "itemId": "appeal-b13d0964f950a96e2509",
+              "sha256": "b537b372ee7c3e6d7685450b4fa57e5a71b6a7c253b61760c6d2e3fcad47f282",
+              "type": "image",
+              "status": "unknown",
+              "claimedAt": 1791595671.0370922,
+              "sendAttempts": 0,
+              "reason": "windows-current-session-title-mismatch",
+              "evidence": {
+                "ok": false,
+                "resolvedGroup": "李老哈（品牌）💰臻肆外卖运营对接群",
+                "titleProven": true,
+                "reason": "windows-readback-anchor-not-trailing",
+                "polls": 4
+              },
+              "transport": {
+                "ok": true,
+                "data": {
+                  "sent": true,
+                  "who": "李老哈（品牌）",
+                  "path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\b13d0964f950a96e250934ea6eb5fc8d3a69c8847ccc3aaa031fd56a258cd018.png",
+                  "kind": "image",
+                  "auto": "image",
+                  "uploaded_from": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/.runtime/events/f1e9a6a75ce5a54b4195a56e07d01b38fa75fb92596b357af0f18d19d7b72813/20b6fde96b6368b38ac317c209d5156fe6e00bb70bcd6892eb6bf5fcae959e01/payload/b13d0964f950a96e250934ea6eb5fc8d3a69c8847ccc3aaa031fd56a258cd018.png",
+                  "server_path": "C:\\work\\projects\\ai_agents\\wechat-windows-driver\\inbox\\b13d0964f950a96e250934ea6eb5fc8d3a69c8847ccc3aaa031fd56a258cd018.png"
+                },
+                "route": "relay",
+                "direct_error": "[Errno 65] No route to host",
+                "direct_local_network_blocked": true,
+                "sendAttempts": 1
+              }
+            }
+          ],
+          "review": [
+            {
+              "stage": "authorization",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0
+            },
+            {
+              "stage": "freeze:appeal-aadb89d24f5f38f7a4eb",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0
+            },
+            {
+              "stage": "freeze:appeal-d55b4e927eacb465944f",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0
+            },
+            {
+              "stage": "freeze:appeal-9857ec3808bd255d5770",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0
+            },
+            {
+              "stage": "freeze:appeal-c60fb35977cb627f10d8",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0
+            },
+            {
+              "stage": "freeze:appeal-76f0924f14046e28fc2c",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0
+            },
+            {
+              "stage": "freeze:appeal-b13d0964f950a96e2509",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 0
+            },
+            {
+              "stage": "freeze:appeal-ad2de094b5b8d59aa8ca",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 1
+            },
+            {
+              "stage": "preflight",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 1193
+            },
+            {
+              "stage": "reconcile:appeal-b13d0964f950a96e2509",
+              "status": "completed",
+              "pitfalls": [],
+              "elapsedMs": 1353
+            }
+          ],
+          "reason": "windows-current-session-title-mismatch",
+          "elapsedMs": 2555,
+          "eventKey": "f1e9a6a75ce5a54b4195a56e07d01b38fa75fb92596b357af0f18d19d7b72813",
+          "reviewSummary": {
+            "totalElapsedMs": 2555,
+            "result": "partial",
+            "stageCount": 10,
+            "completedStages": 10,
+            "failedStages": []
+          }
+        },
+        "reason": "windows-current-session-title-mismatch",
+        "elapsedMs": 2580,
+        "reviewSummary": {
+          "totalElapsedMs": 2580,
+          "result": "partial",
+          "stageCount": 1,
+          "failedStages": [
+            "Windows 传输执行:reconcile"
+          ]
+        }
+      }
+    }
+  ],
+  "reason": "prior-attempt-still-unknown",
+  "itemStates": {
+    "aadb89d24f5f38f7a4eb129afedefbc0dd09275d08978c109ecdd55b95d9af92": "verified",
+    "d55b4e927eacb465944fd10d5ac7bed2d660861bf8282e4f5f9cdfadf55c300c": "verified",
+    "9857ec3808bd255d577056f4ee56d0a0068f38117de8cf63d048cd94b318fba9": "verified",
+    "c60fb35977cb627f10d834b195b3ed58dffc5cfd616488befa74a3d04fbff425": "verified",
+    "76f0924f14046e28fc2c008ace486ade9e00671151fcb03934688f3e307dc094": "verified",
+    "b13d0964f950a96e250934ea6eb5fc8d3a69c8847ccc3aaa031fd56a258cd018": "unresolved",
+    "ad2de094b5b8d59aa8ca80d33de48be720a536cfbe11b75cab894a73c59006db": "untouched"
+  },
+  "elapsedMs": 2652,
+  "completionReview": {
+    "codeEnforced": true,
+    "totalElapsedMs": 2652,
+    "result": "unknown",
+    "reviewItems": [
+      {
+        "stage": "读取并校验日报",
+        "status": "completed",
+        "elapsedMs": 1,
+        "pitfalls": []
+      },
+      {
+        "stage": "原事件策略精确回登:brand-negative-appeal-2026-10-09-all-outcomes-v1",
+        "status": "completed",
+        "elapsedMs": 10,
+        "pitfalls": []
+      },
+      {
+        "stage": "原事件只读对账:brand-negative-appeal-2026-10-09-all-outcomes-v1",
+        "status": "failed",
+        "elapsedMs": 2584,
+        "pitfalls": [
+          "windows-current-session-title-mismatch"
+        ]
+      },
+      {
+        "stage": "CSV回执状态投影",
+        "status": "completed",
+        "elapsedMs": 6,
+        "pitfalls": []
+      }
+    ],
+    "deliveryEvidenceCounts": null,
+    "businessWorkComplete": false,
+    "recoveredPitfalls": [],
+    "unresolvedPitfalls": [
+      {
+        "stage": "原事件只读对账:brand-negative-appeal-2026-10-09-all-outcomes-v1",
+        "code": "windows-current-session-title-mismatch"
+      }
+    ]
+  },
+  "summaryPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/brand-negative-review-appeal-followup/.runtime/delivery-2026-10-09-workflow-summary.json",
+  "summaryArchivePath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/brand-negative-review-appeal-followup/.runtime/delivery-run-history/2026-10-09/1791600457905814000-2e39f64c5c75.json"
+}

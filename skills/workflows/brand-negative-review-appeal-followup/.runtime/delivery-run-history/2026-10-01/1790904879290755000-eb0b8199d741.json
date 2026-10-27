@@ -1,0 +1,69 @@
+{
+  "ok": false,
+  "status": "blocked",
+  "businessDate": "2026-10-01",
+  "runtimeModelDecisions": 0,
+  "review": [
+    {
+      "stage": "读取并校验日报",
+      "status": "completed",
+      "elapsedMs": 0,
+      "pitfalls": []
+    },
+    {
+      "stage": "冻结初始/续发请求",
+      "status": "completed",
+      "elapsedMs": 12,
+      "pitfalls": []
+    },
+    {
+      "stage": "精确请求策略登记",
+      "status": "failed",
+      "elapsedMs": 1,
+      "pitfalls": [
+        "policy-scope-expiry-invalid"
+      ]
+    }
+  ],
+  "events": [],
+  "reason": "policy-scope-expiry-invalid",
+  "elapsedMs": 25,
+  "completionReview": {
+    "codeEnforced": true,
+    "totalElapsedMs": 25,
+    "result": "blocked",
+    "reviewItems": [
+      {
+        "stage": "读取并校验日报",
+        "status": "completed",
+        "elapsedMs": 0,
+        "pitfalls": []
+      },
+      {
+        "stage": "冻结初始/续发请求",
+        "status": "completed",
+        "elapsedMs": 12,
+        "pitfalls": []
+      },
+      {
+        "stage": "精确请求策略登记",
+        "status": "failed",
+        "elapsedMs": 1,
+        "pitfalls": [
+          "policy-scope-expiry-invalid"
+        ]
+      }
+    ],
+    "deliveryEvidenceCounts": null,
+    "businessWorkComplete": false,
+    "recoveredPitfalls": [],
+    "unresolvedPitfalls": [
+      {
+        "stage": "精确请求策略登记",
+        "code": "policy-scope-expiry-invalid"
+      }
+    ]
+  },
+  "summaryPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/brand-negative-review-appeal-followup/.runtime/delivery-2026-10-01-workflow-summary.json",
+  "summaryArchivePath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/brand-negative-review-appeal-followup/.runtime/delivery-run-history/2026-10-01/1790904879290755000-eb0b8199d741.json"
+}
