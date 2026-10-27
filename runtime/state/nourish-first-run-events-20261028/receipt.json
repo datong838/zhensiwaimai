@@ -1,0 +1,15 @@
+{
+  "at": "2026-10-28T02:44:14.581058+08:00",
+  "newTests": 4,
+  "originalReproduction": "4 tests,2 errors prove absent directory before first collect and invalid-directory path was not stopped before collect",
+  "source": "skills/workflows/daily-new-stores-not-nourished-ops-to-wechat/scripts/nourish_workflow.py",
+  "sha256": "f3604d776b749405b21f082083332bb6cdd22c84d53d9a51563182161529292a",
+  "productionActions": 0,
+  "messagesSent": 0,
+  "browserActions": 0,
+  "directorReloads": 0,
+  "directDeliverMissingDirectoryStillBlocked": true,
+  "realAcceptancePending": true,
+  "resume": "原主任11:40正常入口自然加载；原既有events目录/记录不变",
+  "scope": "仅正常入口在采集前创建固定EVENTS目录；原发送阶段拒发门、已发/未知/游标不变"
+}

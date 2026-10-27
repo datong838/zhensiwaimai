@@ -289,6 +289,8 @@ def main() -> None:
     day = datetime.now(LOCAL_TZ).date().isoformat()
     run_dir = RUNS / f"{day}-{time.time_ns()}"
     run_dir.mkdir(parents=True, mode=0o700)
+    # 初始化固定防重目录；deliver的运行期目录异常拒发门保持。
+    EVENTS.mkdir(parents=True, exist_ok=True, mode=0o700)
     try:
         collected = collect(run_dir)
         report = build_report(run_dir, day)

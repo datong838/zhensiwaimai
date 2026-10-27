@@ -1078,5 +1078,19 @@
     "originalDay27Rows": 2282,
     "sourceInstalled": true,
     "realNewDayAcceptancePending": true
+  },
+  "nourishFirstRunEvents": {
+    "sourceInstalled": true,
+    "testsPassed": 4,
+    "receipt": "runtime/state/nourish-first-run-events-20261028/receipt.json",
+    "realAcceptancePending": true
+  },
+  "middayThreeReportSourcesRead": {
+    "flows": [
+      "daily-store-basic-diagnosis-to-wechat",
+      "daily-new-stores-not-nourished-ops-to-wechat",
+      "daily-store-task-completion-ops-to-wechat"
+    ],
+    "scope": "daily+workflow+collector+stats_card全量现役源码；非真实新日数据验收"
   }
 }

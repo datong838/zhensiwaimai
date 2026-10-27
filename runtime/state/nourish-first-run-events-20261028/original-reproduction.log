@@ -1,0 +1,31 @@
+test_deliver_still_refuses_missing_directory (runtime.tests.test_nourish_first_run_events.NourishEventsTests.test_deliver_still_refuses_missing_directory) ... ok
+test_existing_markers_preserved (runtime.tests.test_nourish_first_run_events.NourishEventsTests.test_existing_markers_preserved) ... ok
+test_fresh_main_initializes_before_collect (runtime.tests.test_nourish_first_run_events.NourishEventsTests.test_fresh_main_initializes_before_collect) ... ERROR
+test_invalid_directory_does_not_collect (runtime.tests.test_nourish_first_run_events.NourishEventsTests.test_invalid_directory_does_not_collect) ... ERROR
+
+======================================================================
+ERROR: test_fresh_main_initializes_before_collect (runtime.tests.test_nourish_first_run_events.NourishEventsTests.test_fresh_main_initializes_before_collect)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/tests/test_nourish_first_run_events.py", line 34, in test_fresh_main_initializes_before_collect
+    with contextlib.redirect_stdout(io.StringIO()):flow.main()
+                                                   ^^^^^^^^^^^
+  File "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/nourish-first-run-events-20261028/original-workflow.py", line 307, in main
+    raise SystemExit(1)
+SystemExit: 1
+
+======================================================================
+ERROR: test_invalid_directory_does_not_collect (runtime.tests.test_nourish_first_run_events.NourishEventsTests.test_invalid_directory_does_not_collect)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/tests/test_nourish_first_run_events.py", line 45, in test_invalid_directory_does_not_collect
+    with contextlib.redirect_stdout(io.StringIO()), self.assertRaises(OSError):flow.main()
+                                                                               ^^^^^^^^^^^
+  File "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/nourish-first-run-events-20261028/original-workflow.py", line 307, in main
+    raise SystemExit(1)
+SystemExit: 1
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.005s
+
+FAILED (errors=2)
