@@ -2,6 +2,8 @@ import importlib.util
 import hashlib
 import json
 import pathlib
+import sys
+from datetime import datetime
 import tempfile
 import unittest
 from types import SimpleNamespace
@@ -12,6 +14,7 @@ SCRIPT = pathlib.Path(__file__).resolve().parents[1] / "scripts" / "workflow.py"
 SPEC = importlib.util.spec_from_file_location("daily_new_stores_workflow", SCRIPT)
 workflow = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(workflow)
+sys.path.insert(0,str(SCRIPT.parents[4]/'runtime'))
 
 
 def receipt():
@@ -28,6 +31,61 @@ def receipt():
 
 
 class WorkflowTests(unittest.TestCase):
+    def marker(self, root, day, state='unknown', **changes):
+        text=workflow.message_body(receipt()['hits']);sha=hashlib.sha256(text.encode()).hexdigest()
+        folder=root/'.runtime/new-stores-send-ledger';folder.mkdir(parents=True,exist_ok=True)
+        p=folder/f'{day}-{sha[:16]}.json'
+        data={'state':state,'verified':state=='verified','groupName':workflow.GROUP,
+              'payloads':[{'text':text,'sha256':sha}],'sendAttempts':None if state=='attempted' else 1}
+        data.update(changes);p.write_text(json.dumps(data));return p
+
+    def test_same_day_terminal_entry_never_collects_or_sends_again(self):
+        for state in ('verified','attempted','unknown'):
+            with self.subTest(state=state),tempfile.TemporaryDirectory() as folder:
+                root=pathlib.Path(folder);marker=self.marker(root,'2026-10-28',state);before=marker.read_bytes()
+                records=root/'records';records.mkdir();report=records/'2026-10-28_新开店铺识别.md';report.write_text('original report')
+                with patch.object(workflow,'SKILL',root),patch.object(workflow,'ROOT',root),patch.object(workflow,'RECORDS',records),patch.object(workflow,'RUNTIME',root/'runs'),patch.object(workflow,'now_local',return_value=datetime.fromisoformat('2026-10-28T10:00:00+08:00')),patch('authorized_supplement.load_grant',return_value=None),patch.object(workflow,'command_json') as collect,patch.object(workflow,'node_binary') as node,patch.object(workflow,'run_send') as send:
+                    result=workflow.run(True)
+                self.assertEqual(result['status'],'complete' if state=='verified' else 'blocked')
+                self.assertEqual(result['sendAttempts'],0);self.assertEqual(result['stage'],'existing-delivery-readonly')
+                collect.assert_not_called();node.assert_not_called();send.assert_not_called()
+                self.assertEqual(marker.read_bytes(),before);self.assertEqual(report.read_text(),'original report')
+
+    def test_old_day_does_not_block_new_and_collect_only_still_collects(self):
+        for day,execute in [('2026-10-27',True),('2026-10-28',False)]:
+            with self.subTest(day=day,execute=execute),tempfile.TemporaryDirectory() as folder:
+                root=pathlib.Path(folder);marker=self.marker(root,day);before=marker.read_bytes()
+                with patch.object(workflow,'SKILL',root),patch.object(workflow,'ROOT',root),patch.object(workflow,'RECORDS',root/'records'),patch.object(workflow,'RUNTIME',root/'runs'),patch.object(workflow,'now_local',return_value=datetime.fromisoformat('2026-10-28T10:00:00+08:00')),patch('authorized_supplement.load_grant',return_value=None),patch.object(workflow,'node_binary',return_value=pathlib.Path('/test/node')),patch.object(workflow,'command_json',side_effect=RuntimeError('fixture-stop-before-browser')) as collect:
+                    result=workflow.run(execute)
+                collect.assert_called_once();self.assertEqual(result['reason'],'fixture-stop-before-browser');self.assertEqual(marker.read_bytes(),before)
+
+    def test_effective_original_supplement_keeps_original_entry_path(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root=pathlib.Path(folder);self.marker(root,'2026-10-28')
+            with patch.object(workflow,'SKILL',root),patch.object(workflow,'ROOT',root),patch.object(workflow,'RECORDS',root/'records'),patch.object(workflow,'RUNTIME',root/'runs'),patch.object(workflow,'now_local',return_value=datetime.fromisoformat('2026-10-28T10:00:00+08:00')),patch('authorized_supplement.load_grant',return_value={'fixture':'already-authorized'}),patch.object(workflow,'node_binary',return_value=pathlib.Path('/test/node')),patch.object(workflow,'command_json',side_effect=RuntimeError('fixture-original-path')) as collect:
+                result=workflow.run(True)
+            collect.assert_called_once();self.assertEqual(result['reason'],'fixture-original-path')
+
+    def test_damaged_ambiguous_or_symlink_day_markers_cannot_authorize_success(self):
+        for change in ('group','sha','text','multiple','symlink','malformed'):
+            with self.subTest(change=change),tempfile.TemporaryDirectory() as folder:
+                root=pathlib.Path(folder);marker=self.marker(root,'2026-10-28','verified')
+                data=json.loads(marker.read_text())
+                if change=='group':data['groupName']='wrong'
+                elif change=='sha':data['payloads'][0]['sha256']='a'*64
+                elif change=='text':data['payloads'][0]['text']='changed'
+                marker.write_text(json.dumps(data))
+                if change=='multiple':marker.with_name('2026-10-28-other.json').write_text('{}')
+                elif change=='symlink':external=root/'outside.json';marker.rename(external);marker.symlink_to(external)
+                elif change=='malformed':marker.write_text('{')
+                with patch.object(workflow,'SKILL',root):result=workflow.prior_day_send('2026-10-28')
+                self.assertEqual(result['status'],'blocked');self.assertEqual(result['sendAttempts'],0)
+    def test_unreadable_ledger_is_not_mistaken_for_no_prior_event(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root=pathlib.Path(folder);self.marker(root,'2026-10-28')
+            with patch.object(workflow,'SKILL',root),patch.object(pathlib.Path,'iterdir',side_effect=PermissionError('fixture')):
+                result=workflow.prior_day_send('2026-10-28')
+            self.assertEqual(result['status'],'blocked');self.assertEqual(result['reason'],'prior-send-ledger-unreadable')
     def test_node_uses_director_config_and_checks_websocket_before_browser(self):
         with patch.object(workflow.os.environ,'get',return_value=None),patch.object(workflow.Path,'read_text',return_value=json.dumps({'interpreters':{'node':'/director/node'}})),patch.object(workflow.Path,'is_file',return_value=True),patch.object(workflow.shutil,'which',return_value=None),patch.object(workflow.subprocess,'run',return_value=SimpleNamespace(returncode=0,stdout='function')) as probe:
             self.assertEqual(workflow.node_binary(),pathlib.Path('/director/node'))

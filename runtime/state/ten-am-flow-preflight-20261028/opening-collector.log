@@ -1,0 +1,17 @@
+[collector] known-announcements 配置无效，回退内置白名单: Unexpected token 'o', "not-json{" is not valid JSON
+[collector] 公告命中记账失败（不影响主流程）: Unexpected token 'o', "not-json{" is not valid JSON
+✔ existing page selection preserves single-page routes and requires owner proof for ambiguity (0.578459ms)
+✔ only stores opened within three days qualify (0.124875ms)
+✔ pagination total must be explicit (0.092875ms)
+✔ loadKnownAnnouncements: 外置等价 / 兜底 / 非法回退 (2.611209ms)
+✔ recordAnnouncementHit: 命中计数原子更新且不改 items (0.784916ms)
+✔ recordAnnouncementHit: 配置异常时不抛出、不写坏文件 (0.918333ms)
+✔ duplicate evidence preserves both physical rows without treating another channel as a duplicate (0.109666ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 178.084084

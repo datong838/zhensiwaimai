@@ -276,6 +276,51 @@ def discover_mobile_device(run_dir: Path) -> tuple[Path, str]:
     return serial_file, expected_hash
 
 
+def prior_day_send(day: str, digest: str | None = None) -> dict | None:
+    """Read only canonical same-day text facts; never infer zero sends."""
+    ledger = SKILL / '.runtime' / 'new-stores-send-ledger'
+    channel = 'Windows 网关（main-wechat）'
+    def blocked(reason):
+        return {'status': 'blocked', 'reason': reason, 'sendAttempts': 0, 'channel': channel}
+    if ledger.is_symlink():
+        return blocked('prior-send-ledger-binding-mismatch')
+    try:
+        paths = sorted(p for p in ledger.iterdir() if p.name.startswith(day + '-') and p.suffix == '.json')
+    except FileNotFoundError:
+        return None
+    except OSError:
+        return blocked('prior-send-ledger-unreadable')
+    if not paths:
+        return None
+    if len(paths) != 1:
+        return blocked('same-day-payload-conflict-or-multiple-events')
+    marker = paths[0]
+    if marker.is_symlink():
+        return blocked('prior-send-ledger-binding-mismatch')
+    try:
+        prior = json.loads(marker.read_text(encoding='utf-8'))
+    except (OSError, ValueError):
+        return blocked('prior-send-ledger-unreadable')
+    if not isinstance(prior, dict):
+        return blocked('prior-send-ledger-binding-mismatch')
+    payloads = prior.get('payloads')
+    if (prior.get('groupName') != GROUP or not isinstance(payloads, list) or len(payloads) != 1
+            or not isinstance(payloads[0], dict) or not isinstance(payloads[0].get('text'), str)
+            or not payloads[0]['text']):
+        return blocked('prior-send-ledger-binding-mismatch')
+    actual = hashlib.sha256(payloads[0]['text'].encode('utf-8')).hexdigest()
+    if payloads[0].get('sha256') != actual or marker.name != f'{day}-{actual[:16]}.json':
+        return blocked('prior-send-ledger-binding-mismatch')
+    if digest is not None and digest != actual:
+        return blocked('same-day-payload-conflict-or-multiple-events')
+    if prior.get('verified') is True and prior.get('state') == 'verified':
+        return {'status': '既有发送已验证', 'sendAttempts': 0,
+                'priorSendAttempts': prior.get('sendAttempts'), 'channel': channel,
+                'eventKey': marker.name, 'policyRestored': True}
+    return {'status': 'unknown', 'reason': 'prior-attempt-requires-read-only-reconciliation',
+            'sendAttempts': 0, 'channel': channel, 'eventKey': marker.name}
+
+
 def run_send(hits: list[dict], day: str, run_dir: Path) -> dict:
     """Deliver the day's new-store hits to the FEIBING NEO AI数字员工 group via the
     Windows 10 driver gateway HTTP service (main-wechat desktop client on the Windows host).
@@ -300,28 +345,7 @@ def run_send(hits: list[dict], day: str, run_dir: Path) -> dict:
     channel_label = "Windows 网关（main-wechat）"
 
     def existing_day_result() -> dict | None:
-        prior_paths = sorted(ledger.glob(f"{day}-*.json"))
-        if not prior_paths:
-            return None
-        if len(prior_paths) != 1 or prior_paths[0] != marker:
-            return {"status": "blocked", "reason": "same-day-payload-conflict-or-multiple-events",
-                    "sendAttempts": 0, "channel": channel_label}
-        try:
-            prior = json.loads(marker.read_text(encoding="utf-8"))
-        except (OSError, ValueError):
-            return {"status": "blocked", "reason": "prior-send-ledger-unreadable",
-                    "sendAttempts": 0, "channel": channel_label}
-        payloads = prior.get("payloads")
-        if (prior.get("groupName") != GROUP or not isinstance(payloads, list) or len(payloads) != 1
-                or payloads[0].get("sha256") != digest):
-            return {"status": "blocked", "reason": "prior-send-ledger-binding-mismatch",
-                    "sendAttempts": 0, "channel": channel_label}
-        if prior.get("verified") is True and prior.get("state") == "verified":
-            return {"status": "既有发送已验证", "sendAttempts": 0,
-                    "priorSendAttempts": prior.get("sendAttempts"), "channel": channel_label,
-                    "eventKey": marker.name, "policyRestored": True}
-        return {"status": "unknown", "reason": "prior-attempt-requires-read-only-reconciliation",
-                "sendAttempts": 0, "channel": channel_label, "eventKey": marker.name}
+        return prior_day_send(day, digest)
 
     prior_result = existing_day_result()
     if prior_result is not None:
@@ -395,6 +419,19 @@ def run(execute: bool) -> dict:
     summary: dict = {"day": day, "status": "blocked", "sendAttempts": 0,
                      "runDir": str(run_dir), "reportPath": str(RECORDS / f"{day}_新开店铺识别.md")}
     try:
+        if execute:
+            runtime_path = str(ROOT / 'runtime')
+            if runtime_path not in sys.path:
+                sys.path.insert(0, runtime_path)
+            from authorized_supplement import load_grant
+            if load_grant(WORKFLOW_ID) is None:
+                prior = prior_day_send(day)
+                if prior is not None:
+                    summary.update(status='complete' if prior['status'] == '既有发送已验证' else 'blocked',
+                                   send=prior, reason=prior.get('reason'), stage='existing-delivery-readonly',
+                                   elapsedMs=round((time.monotonic() - started) * 1000))
+                    atomic_json(run_dir / 'workflow-summary.json', summary)
+                    return summary
         collection = command_json([str(node_binary()), str(SKILL / "scripts" / "collector.mjs"),
                                    str(receipt_path)], 360)
         if collection.get("status") != "complete":
