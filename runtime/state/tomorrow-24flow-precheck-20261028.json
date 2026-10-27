@@ -397,7 +397,7 @@
           "hashesChecked": 0,
           "drift": [],
           "status": "UNSEALED_ACCEPTANCE",
-          "allowedBusinessDate": "2026-10-26"
+          "allowedBusinessDate": "2026-10-27"
         },
         {
           "policy": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-negative-reviews/dependencies.json",
@@ -946,12 +946,15 @@
     },
     {
       "kind": "negative-review-business-day",
-      "state": "controlled-fix-installed-next-day-real-acceptance-pending",
-      "evidence": "runtime/state/negative-nextday-maintenance-20261027.json"
+      "state": "original-controlled-new-day-policy-prepared-real-execution-pending",
+      "evidence": "runtime/state/native-image-wait-20261028/negative-maintenance-output.json",
+      "allowedBusinessDate": "2026-10-27"
     },
     {
       "kind": "automatic-image-readback",
-      "state": "not-fixed-no-resend-no-fake-verified"
+      "state": "bounded-same-message-observation-installed-real-image-acceptance-pending",
+      "evidence": "runtime/state/native-image-wait-20261028/final-audit.json",
+      "fullAutomaticVerificationProven": false
     },
     {
       "kind": "runtime-platform-login-and-focus",
@@ -992,5 +995,6 @@
     "evidence": "runtime/state/night-maintenance-2026-10-27/9230-final-health.json",
     "mustRecheckBeforeDue": true
   },
-  "sourceBoundaryInventory": "runtime/state/tomorrow-flow-source-boundaries-20261028.json"
+  "sourceBoundaryInventory": "runtime/state/tomorrow-flow-source-boundaries-20261028.json",
+  "latestGateAudit": "runtime/state/native-image-wait-20261028/consumer-gate-audit.json"
 }

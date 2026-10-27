@@ -216,10 +216,18 @@ def ui_action(kind, path, expected, **extra):
     return {'type': kind, 'path': path, 'expected': expected, **extra}
 
 
-def media_observation(task, baseline_count):
+class NativeImageObservationPending(RuntimeError):
+    def __init__(self, reason, message_path):
+        super().__init__(reason)
+        self.message_path = list(message_path)
+
+
+def media_observation(task, baseline_count, *, expected_path=None):
     rows = message_rows()
     if len(rows) <= baseline_count:
         raise RuntimeError('native-ui-no-new-message-row')
+    if expected_path is not None and rows[-1] != expected_path:
+        raise RuntimeError('native-ui-image-row-changed-during-readback')
     tree = execute(root_path=rows[-1], max_depth=3)
     nodes = tree['nodes']
     _, state = read_anchors('conversationTitle', 'composer')
@@ -238,10 +246,44 @@ def media_observation(task, baseline_count):
         images = [n for n in nodes if n['role'] == 'AXImage' and
                   not (n.get('description') or '').startswith('file ')]
         if not images:
-            raise RuntimeError('native-ui-inline-image-not-exposed')
+            raise NativeImageObservationPending('native-ui-inline-image-not-exposed', rows[-1])
         result.update(presentation='inline-image', visibleImageContent=json.dumps(
             {'actualAXImages': images, 'pixelComparison': False}, ensure_ascii=False))
     return result
+
+
+def wait_image_observations(task, baseline_count, live, *, wait_seconds=15):
+    """Wait on one submitted candidate, without any UI action or new send."""
+    if task['item']['type'] != 'image' or type(wait_seconds) not in (int, float) or not 0 < wait_seconds <= 15:
+        raise ValueError('native-ui-image-observation-wait-scope-invalid')
+    stop = time.monotonic() + wait_seconds
+    expected_path = None
+    observations = []
+    pending = RuntimeError('native-ui-inline-image-two-observations-unavailable')
+    while True:
+        live()
+        try:
+            observed = media_observation(task, baseline_count, expected_path=expected_path)
+            if expected_path is None:
+                expected_path = list(observed['messagePath'])
+            observations.append(observed)
+            if len(observations) == 2:
+                return observations
+        except NativeImageObservationPending as error:
+            if expected_path is not None and error.message_path != expected_path:
+                raise RuntimeError('native-ui-image-row-changed-during-readback') from error
+            expected_path = error.message_path
+            observations.clear()
+            pending = error
+        except RuntimeError as error:
+            if str(error) != 'native-ui-no-new-message-row' or expected_path is not None:
+                raise
+            observations.clear()
+            pending = error
+        remaining = stop - time.monotonic()
+        if remaining <= 0:
+            raise pending
+        time.sleep(min(0.25, remaining))
 
 
 def send_media(folder):
@@ -318,7 +360,8 @@ def send_media(folder):
             live()
             submitted = True
             execute([composer_submit_action(task['request']['groupName'], '\ufffc')], max_depth=0)
-        observations = [media_observation(task, baseline_count), media_observation(task, baseline_count)]
+        observations = (wait_image_observations(task, baseline_count, live) if kind == 'image'
+                        else [media_observation(task, baseline_count), media_observation(task, baseline_count)])
         result = {'status': 'verified', 'sendAttempts': 1, 'resolvedGroup': title['value'],
                   'sha256': task['item']['sha256'], 'observations': observations,
                   'backend': 'system-events-ui-tree'}

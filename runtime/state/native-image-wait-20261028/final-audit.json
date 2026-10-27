@@ -1,0 +1,28 @@
+{
+  "checkedAt": "2026-10-28T00:17:54.760778+08:00",
+  "status": "bounded-readonly-image-observation-installed-real-image-acceptance-pending",
+  "sharedTests": {
+    "ok": true,
+    "elapsedMs": 4258,
+    "testCount": 428
+  },
+  "sharedRegisteredFiles": 34,
+  "newWaitTests": 8,
+  "newMaintenanceTests": 4,
+  "merchantTests": 148,
+  "top10RuntimeTests": 14,
+  "negativeReviewTests": "original 8 suites/self-test passed",
+  "all8ConsumerPoliciesNoDrift": true,
+  "oldImageTaskTriplesUnchanged": 10,
+  "merchantCursorAndHistoryUnchanged": true,
+  "uiActions": 0,
+  "sendAttempts": 0,
+  "previousUnknownsRewritten": 0,
+  "fullAutomaticImageVerificationProven": false,
+  "pending": "Next actual original image submission must expose sufficient content structure twice within observation budget; otherwise unknown remains, no resend.",
+  "installationNotes": [
+    "First scoped maintenance synchronized only maintenance source; final scoped maintenance explicitly registered native_ui_post.py and its exact reviewed hash.",
+    "Consumer-compatible clean shared receipt contains zero source changes; native source changes were authorized only by the new narrow profile.",
+    "Negative original controlled maintenance proved independent current day and set allowedBusinessDate=2026-10-27 after Shanghai rollover; old day evidence untouched."
+  ]
+}

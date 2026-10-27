@@ -257,5 +257,58 @@ class DependencyMaintenanceTests(unittest.TestCase):
         self.assertIn(maintenance.BUSINESS_STORAGE_KEY,candidate['files'])
 
 
+class NativeImageWaitMaintenanceTests(unittest.TestCase):
+    fixture = DependencyMaintenanceTests.fixture
+    clean_merchant_fixture = DependencyMaintenanceTests.clean_merchant_fixture
+    expiry = DependencyMaintenanceTests.expiry
+
+    def fixture_for_wait(self):
+        directory, root, manifest = self.clean_merchant_fixture()
+        self.addCleanup(directory.cleanup)
+        target = root / 'scripts/native_ui_post.py'
+        target.write_text('old-native-post')
+        data = json.loads(manifest.read_text())
+        data['files']['scripts/native_ui_post.py'] = maintenance.sha256(target)
+        manifest.write_text(json.dumps(data))
+        target.write_text('reviewed-native-post')
+        return root, manifest, target
+
+    def test_wait_authorization_accepts_only_exact_reviewed_post(self):
+        root, manifest, target = self.fixture_for_wait()
+        profile = dict(maintenance.MAINTENANCE_AUTHORIZATIONS['user-20261028-native-image-readback-wait'])
+        profile['allowedAfterSha256'] = {'scripts/native_ui_post.py': maintenance.sha256(target)}
+        with patch.dict(maintenance.MAINTENANCE_AUTHORIZATIONS, {'user-20261028-native-image-readback-wait': profile}):
+            result = maintenance.prepare('user-20261028-native-image-readback-wait', self.expiry(), root / 'out', manifest, root,
+                                         lambda *_: {'ok': True, 'testCount': 8})
+        self.assertTrue(result['ok'], result)
+
+    def test_wait_authorization_rejects_unreviewed_post_before_tests(self):
+        root, manifest, target = self.fixture_for_wait()
+        result = maintenance.prepare('user-20261028-native-image-readback-wait', self.expiry(), root / 'out', manifest, root,
+                                     lambda *_: self.fail('unreviewed source must not enter tests'))
+        self.assertFalse(result['ok'])
+        self.assertEqual(result['reason'], 'native-image-wait-unreviewed-dependency-bytes')
+
+    def test_wait_authorization_registers_exact_native_post_in_digest_gate(self):
+        root, manifest, target = self.fixture_for_wait()
+        data = json.loads(manifest.read_text())
+        data['files'].pop('scripts/native_ui_post.py')
+        manifest.write_text(json.dumps(data))
+        profile = dict(maintenance.MAINTENANCE_AUTHORIZATIONS['user-20261028-native-image-readback-wait'])
+        profile['allowedAfterSha256'] = {'scripts/native_ui_post.py': maintenance.sha256(target)}
+        with patch.dict(maintenance.MAINTENANCE_AUTHORIZATIONS, {'user-20261028-native-image-readback-wait': profile}):
+            result = maintenance.prepare('user-20261028-native-image-readback-wait', self.expiry(), root / 'out', manifest, root,
+                                         lambda *_: {'ok': True, 'testCount': 8})
+        self.assertTrue(result['ok'], result)
+        self.assertEqual(json.loads(manifest.read_text())['files']['scripts/native_ui_post.py'], maintenance.sha256(target))
+
+    def test_wait_authorization_rejects_other_source_change(self):
+        root, manifest, target = self.fixture_for_wait()
+        (root / 'scripts/target.py').write_text('unrelated-change')
+        result = maintenance.prepare('user-20261028-native-image-readback-wait', self.expiry(), root / 'out', manifest, root,
+                                     lambda *_: self.fail('out-of-scope source must not enter tests'))
+        self.assertEqual(result['reason'], 'maintenance-scope-disallows-dependency-changes')
+
+
 if __name__ == "__main__":
     unittest.main()
