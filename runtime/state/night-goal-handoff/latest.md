@@ -1,7 +1,7 @@
 # 最新夜间进度交接
 
-2026-10-28 00:18，原10月27完整Goal仍active；未完成、未清除。
+当前仍为原10月27完整Goal，active，未完成/未清除。
 
-完整objective、真实未完成项、代码/测试/部署/回滚及06点停止/官方清理边界见`runtime/state/night-goal-handoff/20261028-0018-progress.json`。
+最新完整objective和交接：runtime/state/night-goal-handoff/20261028-monthly-report-progress.json。
 
-图片同候选有界只读等待已安装且原8消费者门禁通过，真实图片验收仍待，不重发旧图。原主任和浏览器继续正常；不提前生产，不重建Goal；06/08/22自动化保持原样。
+巡店月表持续刷新接线已完成，三流保持停用；原scope/registry/源/正确工作簿未变。图片同消息只读等待已安装，仍待真实图片验收。其余未完成保持原范围；原主任/浏览器正常，不提前生产，不重发unknown。06点硬截止按官方清理SOP，08/22自动化不变。
