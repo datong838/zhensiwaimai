@@ -4,7 +4,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import {createRequire} from 'node:module';
 import {fileURLToPath,pathToFileURL} from 'node:url';
-const MODULES='/Users/ddt/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules';
+const MODULES=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../../../../vendor/node_modules');
 export async function buildReport(proofFile,output){
  const raw=await fs.readFile(proofFile),proof=JSON.parse(raw);const records=proof.records;
  if(!/^\d{4}-\d{2}-\d{2}$/.test(proof.day)||!Array.isArray(records)||records.some(r=>!r.name||!r.execution))throw Error('quality-report-source-invalid');

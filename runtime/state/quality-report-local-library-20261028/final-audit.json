@@ -1,0 +1,35 @@
+{
+  "at": "2026-10-28T16:46:26.203722+08:00",
+  "status": "installed-real1700-production-acceptance-pending",
+  "ownPolicy4AndSharedDependenciesPassed": true,
+  "verifiedLocalLibraries": [
+    "@img/colour",
+    "@img/sharp-darwin-arm64",
+    "@img/sharp-libvips-darwin-arm64",
+    "@oai/artifact-tool",
+    "detect-libc",
+    "semver",
+    "sharp"
+  ],
+  "isolatedWorkbookRows": 4,
+  "isolatedWholeRange": "A1:B5",
+  "allValuesAndShaVerified": true,
+  "previewVisuallyChecked": true,
+  "testCounts": {
+    "core": 77,
+    "readiness": 44,
+    "pythonDelivery": 42
+  },
+  "businessFilesUnchanged": 253,
+  "singleSourceShaChanged": "scripts/quality_report.mjs",
+  "otherThreeSourceHashesAndPolicyFieldsUnchanged": true,
+  "sdkResolution": "vendor/node_modules/@oai/artifact-tool/dist/artifact_tool.mjs",
+  "productionActions": 0,
+  "browserActions": 0,
+  "sendAttempts": 0,
+  "limitations": [
+    "Five previous installed guards did not cover this flow-specific host library constant.",
+    "Current isolated report test does not prove actual17:00 business execution or delivery.",
+    "Host Node/Python/apps and existing browser profiles remain external interfaces."
+  ]
+}
