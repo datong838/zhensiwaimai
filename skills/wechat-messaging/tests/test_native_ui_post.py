@@ -4,6 +4,20 @@ from unittest.mock import patch
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
 import native_ui_post as post
 class NativePostTests(unittest.TestCase):
+ def test_media_toolbar_tracks_composer_sibling_position(self):
+  for index in [2,5]:
+   anchors={'conversationTitle':{'path':[0,27,5],'expected':{'role':'AXTextField'}},
+            'composer':{'path':[0,27,9,0,index,0],'expected':{'role':'AXTextArea','description':'文本输入区'}}}
+   self.assertEqual(post.media_toolbar_path('image',anchors),[0,27,9,0,index+4])
+   self.assertEqual(post.media_toolbar_path('file',anchors),[0,27,9,0,index+6])
+ def test_media_toolbar_refuses_unbound_layout(self):
+  import copy
+  base={'conversationTitle':{'path':[0,27,5],'expected':{'role':'AXTextField'}},
+        'composer':{'path':[0,27,9,0,5,0],'expected':{'role':'AXTextArea','description':'文本输入区'}}}
+  for path in [[0,28,9,0,5,0],[0,27,9,0,5],[0,27,9,0,True,0],[0,27,9,0,1,0],[0,27,9,0,5,1]]:
+   anchors=copy.deepcopy(base);anchors['composer']['path']=path
+   with self.assertRaisesRegex(ValueError,'layout-invalid'):post.media_toolbar_path('image',anchors)
+  with self.assertRaisesRegex(ValueError,'kind-invalid'):post.media_toolbar_path('other',base)
  def test_final_submit_binds_exact_group_and_draft(self):
   action=post.composer_submit_action('完整目标群','完整正文')
   self.assertEqual(action['key'],'return');self.assertEqual(action['expected']['value'],'完整正文')

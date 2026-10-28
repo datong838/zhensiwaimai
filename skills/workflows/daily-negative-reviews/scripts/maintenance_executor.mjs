@@ -96,6 +96,50 @@ async function prepareUnsealedAcceptance(authorization,{now=new Date()}={}){
     return {ok:true,status:'prepared',allowedBusinessDate,sendAttempts:0,runtimeModelDecisions:0,totalElapsedMs:Date.now()-started,review};
   }catch(error){if(manifestWritten)await fs.writeFile(MANIFEST,originalManifest,{mode:0o600});await fs.writeFile(POLICY,originalPolicy,{mode:0o600});throw error;}
 }
-async function main(){const [action,authorization]=process.argv.slice(2);if(action!=='prepare-unsealed-acceptance'||!authorization)throw Error('usage: maintenance_executor.mjs prepare-unsealed-acceptance AUTHORIZATION');console.log(JSON.stringify(await prepareUnsealedAcceptance(authorization)));}
+const PUBLIC_RESYNC_TEST='scripts/test_public_dependency_resync.mjs';
+const APPROVED_PUBLIC_RECEIPT='ea6e61281e3e02de8b852e48354f5a41898a6778897449711d6cede1912d6896';
+function publicDependencyResyncCandidate({manifest,policy,receipt,publicHash,selfHash,testHash,businessDate,now}){
+  if(policy.status!=='UNSEALED_ACCEPTANCE'||policy.authorizationRef!==FIXED.authorization||policy.allowedBusinessDate!==businessDate)throw Error('public-resync-policy-scope');
+  if(receipt.ok!==true||receipt.status!=='prepared'||receipt.sendAttempts!==0||receipt.runtimeModelDecisions!==0||receipt.authorization!=='user-20261028-native-media-anchor-shift'||receipt.userInstructionSha256!=='dfa8a44d577f91e092bb92a7d8eac777012a9d863d7d8f4410f2f5d903626c45'||!Number.isFinite(Date.parse(receipt.expiresAt))||Date.parse(receipt.expiresAt)<=new Date(now).getTime()||receipt.tests?.ok!==true||receipt.tests?.testCount<432||receipt.capabilityCheck?.ok!==true)throw Error('public-resync-receipt-invalid');
+  if(receipt.dependencyManifestPath!==PUBLIC_MANIFEST||receipt.dependencyManifestBeforeSha256!==manifest.files?.[PUBLIC_MANIFEST]||receipt.dependencyManifestAfterSha256!==publicHash)throw Error('public-resync-receipt-binding');
+  if(!Array.isArray(receipt.changes)||receipt.changes.length!==2||new Set(receipt.changes.map(x=>x.path)).size!==2||receipt.changes.some(x=>!['scripts/dependency_maintenance.py','scripts/native_ui_post.py'].includes(x.path)))throw Error('public-resync-change-scope');
+  return {...manifest,files:{...manifest.files,[PUBLIC_MANIFEST]:publicHash,[SELF_KEY]:selfHash,[PUBLIC_RESYNC_TEST]:testHash}};
+}
+async function refreshPublicDependency(authorization,receiptFile){
+  if(authorization!==MAINTENANCE_AUTHORIZATION)throw Error('maintenance-authorization-mismatch');
+  const lock=await fs.open(POLICY+'.public-resync.lock','wx');
+  let written=false,originalManifest,originalPolicy;
+  try{
+    if((await fs.readdir(path.join(PROJECT_ROOT,'runtime/state/live_steps'))).length)throw Error('public-resync-director-busy');
+    originalManifest=await fs.readFile(MANIFEST);originalPolicy=await fs.readFile(POLICY);
+    const manifest=JSON.parse(originalManifest),policy=JSON.parse(originalPolicy),current=buildConfig();
+    if(policy.candidateDependencyDigest!==sha256(originalManifest))throw Error('public-resync-original-digest');
+    const receiptBytes=await fs.readFile(receiptFile);
+    if(sha256(receiptBytes)!==APPROVED_PUBLIC_RECEIPT)throw Error('public-resync-unapproved-receipt');
+    for(const [file,expected] of Object.entries(manifest.files)){
+      if(file===PUBLIC_MANIFEST||file===SELF_KEY)continue;
+      if(sha256(await fs.readFile(path.isAbsolute(file)?file:path.join(SKILL_DIR,file)))!==expected)throw Error('public-resync-local-drift:'+file);
+    }
+    const publicInspect=await publicManifestClean(),publicHash=sha256(await fs.readFile(PUBLIC_MANIFEST));
+    for(const bridge of [PUBLIC_BRIDGE,PUBLIC_DESKTOP_BRIDGE])if(publicInspect.manifest.files['scripts/'+path.basename(bridge)]!==manifest.files[bridge])throw Error('public-resync-bridge-drift');
+    const businessFiles=[current.state,current.sendReceipt,current.screenshotSendReceipt,path.join(FIXED.sendLedger,current.sendMarker),path.join(FIXED.summaryLedger,current.screenshotSendMarker)];
+    const snapshot=async()=>Object.fromEntries(await Promise.all(businessFiles.map(async file=>[file,await absent(file)?null:sha256(await fs.readFile(file))])));
+    const before=await snapshot(),candidate=publicDependencyResyncCandidate({manifest,policy,receipt:JSON.parse(receiptBytes),publicHash,selfHash:sha256(await fs.readFile(path.join(SKILL_DIR,SELF_KEY))),testHash:sha256(await fs.readFile(path.join(SKILL_DIR,PUBLIC_RESYNC_TEST))),businessDate:current.businessDate,now:new Date()});
+    const output=path.join(PROJECT_ROOT,'runtime/state/native-media-anchor-fix-20261028/negative-public-resync');await fs.mkdir(output,{recursive:true});
+    await fs.writeFile(path.join(output,'original-dependencies.json'),originalManifest,{flag:'wx'});await fs.writeFile(path.join(output,'original-policy.json'),originalPolicy,{flag:'wx'});
+    if(!originalManifest.equals(await fs.readFile(MANIFEST))||!originalPolicy.equals(await fs.readFile(POLICY)))throw Error('public-resync-concurrent-maintenance');
+    written=true;await atomicJson(MANIFEST,candidate);
+    await atomicJson(POLICY,{...policy,candidateDependencyDigest:sha256(await fs.readFile(MANIFEST))});
+    const extra=await run(FIXED.node,[path.join(SKILL_DIR,PUBLIC_RESYNC_TEST)]);if(!extra.ok)throw Error('public-resync-test-failed:'+extra.reason);
+    const tests=await runOfflineTests();
+    assert.deepEqual(await snapshot(),before);
+    const after=await readJson(POLICY);assert.deepEqual({...after,candidateDependencyDigest:policy.candidateDependencyDigest},policy);
+    const result={ok:true,action:'refresh-public-dependency',status:after.status,businessDate:current.businessDate,sendAttempts:0,runtimeModelDecisions:0,acceptedNewDelivery:false,tests,receiptSha256:APPROVED_PUBLIC_RECEIPT,businessFilesUnchanged:before,manifestBeforeSha256:sha256(originalManifest),manifestAfterSha256:sha256(await fs.readFile(MANIFEST)),policyStatusAndDatesPreserved:true};
+    await atomicJson(path.join(output,'receipt.json'),result);return result;
+  }catch(error){if(written){await fs.writeFile(MANIFEST,originalManifest);await fs.writeFile(POLICY,originalPolicy);}throw error;}
+  finally{await lock.close();await fs.unlink(POLICY+'.public-resync.lock');}
+}
+export {publicDependencyResyncCandidate,refreshPublicDependency};
+async function main(){const [action,authorization,receiptFile]=process.argv.slice(2);if(action==='refresh-public-dependency'&&authorization&&receiptFile){console.log(JSON.stringify(await refreshPublicDependency(authorization,receiptFile)));return;}if(action!=='prepare-unsealed-acceptance'||!authorization)throw Error('usage: maintenance_executor.mjs prepare-unsealed-acceptance AUTHORIZATION | refresh-public-dependency AUTHORIZATION RECEIPT');console.log(JSON.stringify(await prepareUnsealedAcceptance(authorization)));}
 export {unsealedAcceptanceRecord,assertAllocatedStatePreEffect,currentRunIsAllocatedPreEffect,MAINTENANCE_AUTHORIZATION,nextDailyBusinessDate,acceptanceBusinessDate,isZeroSendWechatPreflightBlocked,isZeroSendWechatRuntimeBlocked,isZeroSendWechatDriverBlocked,currentRunIsComplete,currentRunIsAbsentPreEffect,currentRunHasReusableDownload,prepareUnsealedAcceptance};
 if(fileURLToPath(import.meta.url)===path.resolve(process.argv[1]||''))main().catch(error=>{console.error(JSON.stringify({ok:false,status:'blocked',reason:String(error.message||error),sendAttempts:0,runtimeModelDecisions:0}));process.exitCode=1;});

@@ -1,0 +1,79 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-28",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 42,
+    "task_page": 350,
+    "navigation": 1336,
+    "date_filter": 1458,
+    "page_1_read": 363,
+    "selection_audit": 0
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS"
+  },
+  "messages": [],
+  "frontmostBefore": "com.openai.codex",
+  "createdAt": "2026-10-28T02:00:08.342Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-28",
+    "merchantName": "青穆坊牛肉拉面馆",
+    "merchantId": "545376966",
+    "recommendTime": "2026-10-28 00:53:02",
+    "tableOrder": 9,
+    "messageSha256": "eeb630e0d9351d53a4d84e3085a3299f6587bd7128c6d8191ac99ec149345928",
+    "sentAt": "2026-10-28T08:30:39+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-28",
+  "filterEndDate": "2026-10-28",
+  "dateFilter": "2026-10-28..2026-10-28",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 1,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 1,
+  "pendingRows": 1,
+  "targetCount": 0,
+  "selectionAudit": {
+    "totalRows": 1,
+    "pendingRows": 1,
+    "excludedAtOrBeforeCursor": 1,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 0,
+    "rows": [
+      {
+        "merchantId": "545376966",
+        "recommendTime": "2026-10-28 00:53:02",
+        "status": "待处理"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 3839,
+  "frontmostAfter": "com.openai.codex",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261028-100003/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261028-100003/output/collection-attempt-1.review.md"
+}

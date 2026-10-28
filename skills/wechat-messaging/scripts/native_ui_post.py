@@ -286,6 +286,21 @@ def wait_image_observations(task, baseline_count, live, *, wait_seconds=15):
         time.sleep(min(0.25, remaining))
 
 
+def media_toolbar_path(kind, anchors):
+    if kind not in ('file', 'image'):
+        raise ValueError('native-ui-media-kind-invalid')
+    title, composer = anchors['conversationTitle'], anchors['composer']
+    chat = title['path'][:-1]
+    region = chat + [9, 0]
+    path = composer['path']
+    if (title['expected'].get('role') != 'AXTextField'
+            or composer['expected'] != {'role': 'AXTextArea', 'description': '文本输入区'}
+            or len(path) != len(region) + 2 or path[:len(region)] != region
+            or path[-1] != 0 or type(path[-2]) is not int or not 2 <= path[-2] <= 16):
+        raise ValueError('native-ui-media-toolbar-layout-invalid')
+    return region + [path[-2] + (6 if kind == 'file' else 4)]
+
+
 def send_media(folder):
     folder = Path(folder).resolve()
     if folder.parent != QUEUE.resolve():
@@ -323,9 +338,13 @@ def send_media(folder):
         _, current = read_anchors('conversationTitle', 'composer')
         if current['conversationTitle']['value'] != task['request']['groupName'] or current['composer']['value'] != '':
             raise RuntimeError('native-ui-target-or-draft-mismatch')
-        chat_path = json.loads(SELECTORS.read_text())['anchors']['conversationTitle']['path'][:-1]
-        action(ui_action('click', chat_path + [9, 0, 8 if kind == 'file' else 6],
-                         {'role': 'AXButton', 'description': '按钮'}), max_depth=0)
+        anchors = json.loads(SELECTORS.read_text())['anchors']
+        action(ui_action('click', media_toolbar_path(kind, anchors),
+                         {'role': 'AXButton', 'description': '按钮'}, guards=[
+                             {'path': anchors['conversationTitle']['path'], 'expected':
+                              {'role': 'AXTextField', 'description': '文本栏', 'value': task['request']['groupName']}},
+                             {'path': anchors['composer']['path'], 'expected':
+                              {'role': 'AXTextArea', 'description': '文本输入区', 'value': ''}}]), max_depth=0)
         label = '选取文件' if kind == 'file' else '选取图片'
         sheet_path, select_path = wait_media_selector(label, live)
         action(ui_action('key', sheet_path, {'role': 'AXSheet', 'description': '打开'}, key='goto'), max_depth=0)

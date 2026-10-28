@@ -1,0 +1,23 @@
+{
+  "skill": "daily-new-stores-activity-audit-to-wechat",
+  "ledger_name": "淘宝新店活动缺项巡检与提醒（每日11:00）",
+  "schedule": "每日11:00",
+  "dev_state": "active",
+  "status": "FAILED",
+  "category": "UNKNOWN",
+  "detail": "reason=activity-collection-unknown:i_waimai_back/shared/browser_precise_ops/js/brand_page_selector.mjs:17:34) ⏎     at main (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-new-stores-activity-audit-to-wechat/scripts/activity_collector.mjs:300:18)\"} (receipt:reason) [note: 采集阶段失败（岗位后台 Chrome / CDP / 页面元素）。按铁律先「关页重开」复位再定性站点改版。]",
+  "next_action": "看护代理读日志定位根因后升级处理",
+  "attempts": 1,
+  "max_retries": 0,
+  "duration_seconds": 0.78,
+  "started_at": "2026-10-28T11:18:02",
+  "finished_at": "2026-10-28T11:18:02",
+  "triggered_by": "daemon",
+  "logs": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-28/daily-new-stores-activity-audit-to-wechat--20261028-111802--a1--s1.log"
+  ],
+  "fail_signal": {
+    "kind": "reason",
+    "code": "activity-collection-unknown:i_waimai_back/shared/browser_precise_ops/js/brand_page_selector.mjs:17:34) ⏎     at main (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-new-stores-activity-audit-to-wechat/scripts/activity_collector.mjs:300:18)\"}"
+  }
+}

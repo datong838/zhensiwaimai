@@ -1,0 +1,43 @@
+{
+  "ok": false,
+  "action": "refresh-unsealed-acceptance",
+  "status": "blocked",
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "review": [
+    {
+      "label": "维护授权",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "授权有效期",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "验收态回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "运行摘要稳定回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 5020
+    },
+    {
+      "label": "共享封印件依赖回执",
+      "status": "FAIL",
+      "pitfalls": [
+        "refresh-dependency-receipt-contract-mismatch"
+      ],
+      "elapsedMs": 1
+    }
+  ],
+  "reason": "refresh-dependency-receipt-contract-mismatch",
+  "elapsedMs": 5021
+}

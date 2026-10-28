@@ -4,7 +4,7 @@
   "phase": "sent",
   "status": "recoverable",
   "startedAt": 1793147442023,
-  "updatedAt": 1793151940229,
+  "updatedAt": 1793154988782,
   "reviewItems": [
     {
       "stage": "browser_validate",
@@ -129,6 +129,60 @@
       "label": "整表长图单次发送与回读校验",
       "attempts": 1,
       "elapsedMs": 1342,
+      "status": "failed",
+      "pitfalls": [
+        "image-submission-awaits-read-only-verification"
+      ]
+    },
+    {
+      "stage": "screenshot",
+      "label": "渲染整表长图",
+      "attempts": 1,
+      "elapsedMs": 1242,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "screenshot_send",
+      "label": "整表长图单次发送与回读校验",
+      "attempts": 1,
+      "elapsedMs": 1306,
+      "status": "failed",
+      "pitfalls": [
+        "image-submission-awaits-read-only-verification"
+      ]
+    },
+    {
+      "stage": "screenshot",
+      "label": "渲染整表长图",
+      "attempts": 1,
+      "elapsedMs": 1255,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "screenshot_send",
+      "label": "整表长图单次发送与回读校验",
+      "attempts": 1,
+      "elapsedMs": 1317,
+      "status": "failed",
+      "pitfalls": [
+        "image-submission-awaits-read-only-verification"
+      ]
+    },
+    {
+      "stage": "screenshot",
+      "label": "渲染整表长图",
+      "attempts": 1,
+      "elapsedMs": 1209,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "screenshot_send",
+      "label": "整表长图单次发送与回读校验",
+      "attempts": 1,
+      "elapsedMs": 1272,
       "status": "failed",
       "pitfalls": [
         "image-submission-awaits-read-only-verification"

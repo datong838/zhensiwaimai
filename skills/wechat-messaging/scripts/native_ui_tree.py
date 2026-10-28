@@ -106,11 +106,23 @@ def refresh_chat_cache():
     if len(candidates) != 1:
         raise RuntimeError('native-ui-anchor-changed:chat-container-not-unique')
     new = candidates[0]
-    for anchor in config['anchors'].values():
+    for name, anchor in config['anchors'].items():
         if anchor['path'][:len(old)] != old:
             continue
         anchor['path'] = new + anchor['path'][len(old):]
         node = execute(root_path=anchor['path'], max_depth=0)['nodes'][0]
+        if name == 'composer' and any(node.get(k) != v for k, v in anchor['expected'].items()):
+            region = new + [9, 0]
+            local = execute(root_path=region, max_depth=2)['nodes']
+            roles = {tuple(n.get('path', [])): n.get('role') for n in local}
+            inputs = [n for n in local if len(n.get('path', [])) == len(region) + 2
+                      and n['path'][:len(region)] == region
+                      and roles.get(tuple(n['path'][:-1])) == 'AXScrollArea'
+                      and all(n.get(k) == v for k, v in anchor['expected'].items())]
+            if len(inputs) != 1:
+                raise RuntimeError('native-ui-anchor-changed:composer-not-unique')
+            anchor['path'] = inputs[0]['path']
+            node = execute(root_path=anchor['path'], max_depth=0)['nodes'][0]
         if any(node.get(k) != v for k, v in anchor['expected'].items()):
             raise RuntimeError('native-ui-anchor-changed:local-cache-validation-failed')
     temporary = SELECTORS.with_suffix('.json.tmp')

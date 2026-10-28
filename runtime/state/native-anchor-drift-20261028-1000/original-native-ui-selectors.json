@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "appBundle": "com.tencent.WeWorkMac",
+  "mainWindowName": "企业微信",
+  "anchors": {
+    "main": {
+      "path": [],
+      "expected": {
+        "role": "AXWindow",
+        "name": "企业微信"
+      }
+    },
+    "search": {
+      "path": [
+        0,
+        27,
+        1
+      ],
+      "expected": {
+        "role": "AXTextField",
+        "description": "文本栏"
+      }
+    },
+    "conversationTitle": {
+      "path": [
+        0,
+        27,
+        5
+      ],
+      "expected": {
+        "role": "AXTextField",
+        "description": "文本栏"
+      }
+    },
+    "composer": {
+      "path": [
+        0,
+        27,
+        9,
+        0,
+        2,
+        0
+      ],
+      "expected": {
+        "role": "AXTextArea",
+        "description": "文本输入区"
+      }
+    },
+    "conversationList": {
+      "path": [
+        0,
+        27,
+        2,
+        0
+      ],
+      "expected": {
+        "role": "AXTable"
+      }
+    },
+    "messages": {
+      "path": [
+        0,
+        27,
+        9,
+        0,
+        0,
+        0
+      ],
+      "expected": {
+        "role": "AXTable"
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "skill": "daily-new-stores-opening-to-wechat",
+  "ledger_name": "新店开业识别与通知（每日10:00）",
+  "schedule": "每日10:00",
+  "dev_state": "active",
+  "status": "FAILED",
+  "category": "UNKNOWN",
+  "detail": "nested-reason=windows-execution-error:ui-post-preflight-not-verified (receipt:nested_reason)",
+  "next_action": "看护代理读日志定位根因后升级处理",
+  "attempts": 1,
+  "max_retries": 0,
+  "duration_seconds": 23.96,
+  "started_at": "2026-10-28T10:00:20",
+  "finished_at": "2026-10-28T10:00:44",
+  "triggered_by": "daemon",
+  "logs": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-28/daily-new-stores-opening-to-wechat--20261028-100020--a1--s1.log"
+  ],
+  "fail_signal": {
+    "kind": "nested_reason",
+    "code": "windows-execution-error:ui-post-preflight-not-verified"
+  }
+}

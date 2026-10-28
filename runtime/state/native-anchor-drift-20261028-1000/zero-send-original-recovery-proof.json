@@ -1,0 +1,34 @@
+{
+  "at": "2026-10-28T10:16:24.880129+08:00",
+  "reason": "original 10:00 queue preflight-only failures: 0 submits, no send stage/intent/outer event marker; native composer sibling shift repaired, exact group/empty composer revalidated",
+  "evidence": [
+    {
+      "taskId": "e00e9274-0451-4751-9fb6-f958797c0828",
+      "workflow": "daily-service-market-ranking-ops",
+      "event": "2026-10-28-service-market-ranking",
+      "taskSha256": "0c42a74eac7d8dab54226c0681cc84c45e302a538ab42a920ca967921a29c18c",
+      "responseSha256": "a6326874a00f073712c2b0a9babde92138698c95bba74670c8e7e80ab39986f2",
+      "stage": "preflight",
+      "sendAttempts": 0,
+      "sendIntentAbsent": true
+    },
+    {
+      "taskId": "dcd2b171-4f44-404e-98de-e567c7789019",
+      "workflow": "daily-new-stores-opening-to-wechat",
+      "event": "2026-10-28",
+      "taskSha256": "de3cf90592cf6792896ec7d0e9ce17052f90de418fbaff9e60c399c550ae555e",
+      "responseSha256": "b66242a43869bd2d109c0a7e05d76b0e5a02b4e9766d8d90f98e67254739cd1e",
+      "stage": "preflight",
+      "sendAttempts": 0,
+      "sendIntentAbsent": true
+    }
+  ],
+  "outerDeliveryMarkersAbsent": true,
+  "preservedOriginalReceipts": true,
+  "rankingFrozenSha256": "5890184496251a671c5a17fdcc09fe8b9c22bc720769e213ac84403e872dda8a",
+  "requestedOriginalFlows": [
+    "daily-new-stores-opening-to-wechat",
+    "daily-service-market-ranking-to-wechat"
+  ],
+  "manualSends": 0
+}

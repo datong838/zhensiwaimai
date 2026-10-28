@@ -47409,3 +47409,337 @@
 
 === 发送门判断 ===
 [warn] 未全绿（有失败/待适配）：仅落盘 + 告警，不发送 AI 员工群。
+[fixed_schedule] 到达固定排班时点，开始下一周期
+
+=== daemon 周期 2026-10-28 (force_all=False) ===
+
+▶ 执行 daily-agent-new-merchants-to-wechat (dev=active)
+  → status=SUCCESS category=SUCCESS attempts=1 next=无需动作
+[skip] negative-feedback-list-appeals-0930 当日已成功（cadence 内），本周期跳过
+[skip] negative-feedback-list-appeals-1230 当日已成功（cadence 内），本周期跳过
+[skip] meituan-intelligent-customer-service-12 not_due，本周期跳过
+[skip] meituan-intelligent-customer-service-15 not_due，本周期跳过
+[skip] meituan-intelligent-customer-service not_due，本周期跳过
+[skip] daily-quality-products-optimization not_due，本周期跳过
+[skip] meituan-waimai-negative-review-appeals-11 not_due，本周期跳过
+[skip] taobao-flash-sale-negative-review-appeals not_due，本周期跳过
+
+▶ 执行 daily-new-stores-opening-to-wechat (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] daily-new-stores-opening-to-wechat -> UNKNOWN : nested-reason=windows-execution-error:ui-post-preflight-not-verified (receipt:nested_reason)
+[skip] daily-new-stores-activity-audit-to-wechat not_due，本周期跳过
+[skip] daily-new-stores-decoration-audit-to-wechat not_due，本周期跳过
+[skip] daily-new-stores-not-nourished-ops-to-wechat not_due，本周期跳过
+[skip] daily-store-task-completion-ops-to-wechat not_due，本周期跳过
+[skip] daily-store-basic-diagnosis-to-wechat not_due，本周期跳过
+[skip] daily-taobao-download-to-jinsha not_due，本周期跳过
+
+▶ 执行 daily-service-market-ranking-to-wechat (dev=active)
+[FATAL] 桌面通道不可用：native-ui-read-unavailable:native-ui-anchor-changed:local-cache-validation-failed
+        这不是微信争用 —— 重试永远不会成功，桌面技能只会白等 60s+ 后报
+        wechat-search-region-contended，并拖垮后续技能。
+        修复：把微信主窗口拉到当前桌面（切 Space / 点 Dock 微信图标）后再跑；
+        注意「菜单栏显示微信」只说明谁是活跃 App，不说明窗口可见。
+        诊断详情：/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/screen_recording_gate.json
+[alert] __desktop_channel__ -> NEEDS_USER : native-ui-read-unavailable:native-ui-anchor-changed:local-cache-validation-failed
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] daily-service-market-ranking-to-wechat -> UNKNOWN : stage=stopped (receipt:stage)
+[skip] daily-top10-to-wechat-group delivery_verification_pending，本周期跳过
+
+▶ 执行 daily-meituan-income-top10-to-wechat (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] daily-meituan-income-top10-to-wechat -> UNKNOWN : reason=prior-attempt-requires-read-only-reconciliation (receipt:reason)
+
+▶ 执行 daily-negative-reviews (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] daily-negative-reviews -> UNKNOWN : reason=image-submission-awaits-read-only-verification (receipt:reason)
+
+▶ 执行 contract-termination-applications-screenshot (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] contract-termination-applications-screenshot -> UNKNOWN : reason=prior-attempt-requires-read-only-reconciliation (receipt:reason)
+[skip] daily-jinsha-reports-to-business-wechat not_due，本周期跳过
+[ok] 台账 xlsx 已生成: /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/work/2026-10-28臻肆工作台账.xlsx (active 3/22)
+
+=== 发送门判断 ===
+[warn] 未全绿（有失败/待适配）：仅落盘 + 告警，不发送 AI 员工群。
+[force_run_now] 立即补跑：['daily-new-stores-opening-to-wechat', 'daily-service-market-ranking-to-wechat']
+
+=== daemon 周期 2026-10-28 (force_all=False) ===
+[skip] daily-agent-new-merchants-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] negative-feedback-list-appeals-0930 当日已成功（cadence 内），本周期跳过
+[skip] negative-feedback-list-appeals-1230 当日已成功（cadence 内），本周期跳过
+[skip] meituan-intelligent-customer-service-12 not_due，本周期跳过
+[skip] meituan-intelligent-customer-service-15 not_due，本周期跳过
+[skip] meituan-intelligent-customer-service not_due，本周期跳过
+[skip] daily-quality-products-optimization not_due，本周期跳过
+[skip] meituan-waimai-negative-review-appeals-11 not_due，本周期跳过
+[skip] taobao-flash-sale-negative-review-appeals not_due，本周期跳过
+
+▶ 执行 daily-new-stores-opening-to-wechat (dev=active)
+  → status=SUCCESS category=SUCCESS attempts=1 next=无需动作
+[skip] daily-new-stores-activity-audit-to-wechat not_due，本周期跳过
+[skip] daily-new-stores-decoration-audit-to-wechat not_due，本周期跳过
+[skip] daily-new-stores-not-nourished-ops-to-wechat not_due，本周期跳过
+[skip] daily-store-task-completion-ops-to-wechat not_due，本周期跳过
+[skip] daily-store-basic-diagnosis-to-wechat not_due，本周期跳过
+[skip] daily-taobao-download-to-jinsha not_due，本周期跳过
+
+▶ 执行 daily-service-market-ranking-to-wechat (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] daily-service-market-ranking-to-wechat -> UNKNOWN : stage=delivery (receipt:stage)
+
+▶ 执行 daily-agent-new-merchants-to-wechat (dev=active)
+  → status=SUCCESS category=SUCCESS attempts=1 next=无需动作
+[skip] daily-top10-to-wechat-group delivery_verification_pending，本周期跳过
+
+▶ 执行 daily-meituan-income-top10-to-wechat (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] daily-meituan-income-top10-to-wechat -> UNKNOWN : reason=prior-attempt-requires-read-only-reconciliation (receipt:reason)
+
+▶ 执行 daily-negative-reviews (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] daily-negative-reviews -> UNKNOWN : reason=image-submission-awaits-read-only-verification (receipt:reason)
+
+▶ 执行 contract-termination-applications-screenshot (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] contract-termination-applications-screenshot -> UNKNOWN : reason=prior-attempt-requires-read-only-reconciliation (receipt:reason)
+[skip] daily-jinsha-reports-to-business-wechat not_due，本周期跳过
+[ok] 台账 xlsx 已生成: /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/work/2026-10-28臻肆工作台账.xlsx (active 4/22)
+
+=== 发送门判断 ===
+[warn] 未全绿（有失败/待适配）：仅落盘 + 告警，不发送 AI 员工群。
+[alerts] 老化归档 2 条已解决告警
+[fixed_schedule] 到达固定排班时点，开始下一周期
+
+=== daemon 周期 2026-10-28 (force_all=False) ===
+[skip] daily-agent-new-merchants-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] negative-feedback-list-appeals-0930 当日已成功（cadence 内），本周期跳过
+[skip] negative-feedback-list-appeals-1230 当日已成功（cadence 内），本周期跳过
+[skip] meituan-intelligent-customer-service-12 not_due，本周期跳过
+[skip] meituan-intelligent-customer-service-15 not_due，本周期跳过
+[skip] meituan-intelligent-customer-service not_due，本周期跳过
+[skip] daily-quality-products-optimization not_due，本周期跳过
+[skip] meituan-waimai-negative-review-appeals-11 not_due，本周期跳过
+[skip] taobao-flash-sale-negative-review-appeals not_due，本周期跳过
+[skip] daily-new-stores-opening-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-activity-audit-to-wechat not_due，本周期跳过
+[skip] daily-new-stores-decoration-audit-to-wechat not_due，本周期跳过
+[skip] daily-new-stores-not-nourished-ops-to-wechat not_due，本周期跳过
+[skip] daily-store-task-completion-ops-to-wechat not_due，本周期跳过
+[skip] daily-store-basic-diagnosis-to-wechat not_due，本周期跳过
+[skip] daily-taobao-download-to-jinsha not_due，本周期跳过
+
+▶ 执行 daily-service-market-ranking-to-wechat (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] daily-service-market-ranking-to-wechat -> UNKNOWN : reason=prior-attempt-requires-read-only-reconciliation (receipt:reason)
+[skip] daily-top10-to-wechat-group delivery_verification_pending，本周期跳过
+
+▶ 执行 daily-meituan-income-top10-to-wechat (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] daily-meituan-income-top10-to-wechat -> UNKNOWN : reason=prior-attempt-requires-read-only-reconciliation (receipt:reason)
+
+▶ 执行 daily-negative-reviews (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] daily-negative-reviews -> UNKNOWN : reason=image-submission-awaits-read-only-verification (receipt:reason)
+
+▶ 执行 contract-termination-applications-screenshot (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] contract-termination-applications-screenshot -> UNKNOWN : reason=prior-attempt-requires-read-only-reconciliation (receipt:reason)
+[skip] daily-jinsha-reports-to-business-wechat not_due，本周期跳过
+[ok] 台账 xlsx 已生成: /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/work/2026-10-28臻肆工作台账.xlsx (active 4/22)
+
+=== 发送门判断 ===
+[warn] 未全绿（有失败/待适配）：仅落盘 + 告警，不发送 AI 员工群。
+[fixed_schedule] 到达固定排班时点，开始下一周期
+
+=== daemon 周期 2026-10-28 (force_all=False) ===
+
+▶ 执行 daily-agent-new-merchants-to-wechat (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] daily-agent-new-merchants-to-wechat -> UNKNOWN : stage=executor_integrity (receipt:stage) [note: 执行器完整性校验失败（文件被篡改 / 未走封印流程）。红灯，须人工核。]
+[skip] negative-feedback-list-appeals-0930 当日已成功（cadence 内），本周期跳过
+[skip] negative-feedback-list-appeals-1230 当日已成功（cadence 内），本周期跳过
+[skip] meituan-intelligent-customer-service-12 not_due，本周期跳过
+[skip] meituan-intelligent-customer-service-15 not_due，本周期跳过
+[skip] meituan-intelligent-customer-service not_due，本周期跳过
+[skip] daily-quality-products-optimization not_due，本周期跳过
+[skip] meituan-waimai-negative-review-appeals-11 not_due，本周期跳过
+[skip] taobao-flash-sale-negative-review-appeals not_due，本周期跳过
+[skip] daily-new-stores-opening-to-wechat 当日已成功（cadence 内），本周期跳过
+
+▶ 执行 daily-new-stores-activity-audit-to-wechat (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] daily-new-stores-activity-audit-to-wechat -> UNKNOWN : reason=activity-collection-unknown:i_waimai_back/shared/browser_precise_ops/js/brand_page_selector.mjs:17:34) ⏎     at main (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-new-stores-activity-audit-to-wechat/scripts/activity_collector.mjs:300:18)"} (receipt:reason) [note: 采集阶段失败（岗位后台 Chrome / CDP / 页面元素）。按铁律先「关页重开」复位再定性站点改版。]
+[skip] daily-new-stores-decoration-audit-to-wechat not_due，本周期跳过
+[skip] daily-new-stores-not-nourished-ops-to-wechat not_due，本周期跳过
+[skip] daily-store-task-completion-ops-to-wechat not_due，本周期跳过
+[skip] daily-store-basic-diagnosis-to-wechat not_due，本周期跳过
+[skip] daily-taobao-download-to-jinsha not_due，本周期跳过
+
+▶ 执行 daily-service-market-ranking-to-wechat (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] daily-service-market-ranking-to-wechat -> UNKNOWN : reason=prior-attempt-requires-read-only-reconciliation (receipt:reason)
+[skip] daily-top10-to-wechat-group delivery_verification_pending，本周期跳过
+
+▶ 执行 daily-meituan-income-top10-to-wechat (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] daily-meituan-income-top10-to-wechat -> UNKNOWN : reason=prior-attempt-requires-read-only-reconciliation (receipt:reason)
+
+▶ 执行 daily-negative-reviews (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] daily-negative-reviews -> UNKNOWN : reason=dependency-hash-mismatch:/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/dependencies.json (receipt:reason)
+
+▶ 执行 contract-termination-applications-screenshot (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] contract-termination-applications-screenshot -> UNKNOWN : reason=prior-attempt-requires-read-only-reconciliation (receipt:reason)
+
+▶ 执行 daily-jinsha-reports-to-business-wechat (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] daily-jinsha-reports-to-business-wechat -> UNKNOWN : reason=prepare-stage-failed (receipt:reason)
+[ok] 台账 xlsx 已生成: /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/work/2026-10-28臻肆工作台账.xlsx (active 3/22)
+
+=== 发送门判断 ===
+[warn] 未全绿（有失败/待适配）：仅落盘 + 告警，不发送 AI 员工群。
+[force_run_now] 立即补跑：['daily-agent-new-merchants-to-wechat']
+
+=== daemon 周期 2026-10-28 (force_all=False) ===
+
+▶ 执行 daily-agent-new-merchants-to-wechat (dev=active)
+  → status=SUCCESS category=SUCCESS attempts=1 next=无需动作
+[skip] negative-feedback-list-appeals-0930 当日已成功（cadence 内），本周期跳过
+[skip] negative-feedback-list-appeals-1230 当日已成功（cadence 内），本周期跳过
+[skip] meituan-intelligent-customer-service-12 not_due，本周期跳过
+[skip] meituan-intelligent-customer-service-15 not_due，本周期跳过
+[skip] meituan-intelligent-customer-service not_due，本周期跳过
+[skip] daily-quality-products-optimization not_due，本周期跳过
+[skip] meituan-waimai-negative-review-appeals-11 not_due，本周期跳过
+[skip] taobao-flash-sale-negative-review-appeals not_due，本周期跳过
+[skip] daily-new-stores-opening-to-wechat 当日已成功（cadence 内），本周期跳过
+
+▶ 执行 daily-new-stores-activity-audit-to-wechat (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] daily-new-stores-activity-audit-to-wechat -> UNKNOWN : reason=activity-collection-unknown:i_waimai_back/shared/browser_precise_ops/js/brand_page_selector.mjs:17:34) ⏎     at main (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-new-stores-activity-audit-to-wechat/scripts/activity_collector.mjs:300:18)"} (receipt:reason) [note: 采集阶段失败（岗位后台 Chrome / CDP / 页面元素）。按铁律先「关页重开」复位再定性站点改版。]
+[skip] daily-new-stores-decoration-audit-to-wechat not_due，本周期跳过
+[skip] daily-new-stores-not-nourished-ops-to-wechat not_due，本周期跳过
+[skip] daily-store-task-completion-ops-to-wechat not_due，本周期跳过
+[skip] daily-store-basic-diagnosis-to-wechat not_due，本周期跳过
+[skip] daily-taobao-download-to-jinsha not_due，本周期跳过
+
+▶ 执行 daily-service-market-ranking-to-wechat (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] daily-service-market-ranking-to-wechat -> UNKNOWN : reason=prior-attempt-requires-read-only-reconciliation (receipt:reason)
+[skip] daily-top10-to-wechat-group delivery_verification_pending，本周期跳过
+
+▶ 执行 daily-meituan-income-top10-to-wechat (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] daily-meituan-income-top10-to-wechat -> UNKNOWN : reason=prior-attempt-requires-read-only-reconciliation (receipt:reason)
+
+▶ 执行 daily-negative-reviews (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] daily-negative-reviews -> UNKNOWN : reason=dependency-hash-mismatch:/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/dependencies.json (receipt:reason)
+
+▶ 执行 contract-termination-applications-screenshot (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] contract-termination-applications-screenshot -> UNKNOWN : reason=prior-attempt-requires-read-only-reconciliation (receipt:reason)
+
+▶ 执行 daily-jinsha-reports-to-business-wechat (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] daily-jinsha-reports-to-business-wechat -> UNKNOWN : reason=prepare-stage-failed (receipt:reason)
+[ok] 台账 xlsx 已生成: /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/work/2026-10-28臻肆工作台账.xlsx (active 4/22)
+
+=== 发送门判断 ===
+[warn] 未全绿（有失败/待适配）：仅落盘 + 告警，不发送 AI 员工群。
+[fixed_schedule] 到达固定排班时点，开始下一周期
+
+=== daemon 周期 2026-10-28 (force_all=False) ===
+[skip] daily-agent-new-merchants-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] negative-feedback-list-appeals-0930 当日已成功（cadence 内），本周期跳过
+[skip] negative-feedback-list-appeals-1230 当日已成功（cadence 内），本周期跳过
+[skip] meituan-intelligent-customer-service-12 not_due，本周期跳过
+[skip] meituan-intelligent-customer-service-15 not_due，本周期跳过
+[skip] meituan-intelligent-customer-service not_due，本周期跳过
+[skip] daily-quality-products-optimization not_due，本周期跳过
+[skip] meituan-waimai-negative-review-appeals-11 not_due，本周期跳过
+[skip] taobao-flash-sale-negative-review-appeals not_due，本周期跳过
+[skip] daily-new-stores-opening-to-wechat 当日已成功（cadence 内），本周期跳过
+
+▶ 执行 daily-new-stores-activity-audit-to-wechat (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] daily-new-stores-activity-audit-to-wechat -> UNKNOWN : reason=activity-collection-unknown:i_waimai_back/shared/browser_precise_ops/js/brand_page_selector.mjs:17:34) ⏎     at main (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-new-stores-activity-audit-to-wechat/scripts/activity_collector.mjs:300:18)"} (receipt:reason) [note: 采集阶段失败（岗位后台 Chrome / CDP / 页面元素）。按铁律先「关页重开」复位再定性站点改版。]
+[skip] daily-new-stores-decoration-audit-to-wechat not_due，本周期跳过
+[skip] daily-new-stores-not-nourished-ops-to-wechat not_due，本周期跳过
+[skip] daily-store-task-completion-ops-to-wechat not_due，本周期跳过
+
+▶ 执行 daily-store-basic-diagnosis-to-wechat (dev=active)
+  → status=SUCCESS category=SUCCESS attempts=1 next=无需动作
+[skip] daily-taobao-download-to-jinsha not_due，本周期跳过
+
+▶ 执行 daily-service-market-ranking-to-wechat (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] daily-service-market-ranking-to-wechat -> UNKNOWN : reason=prior-attempt-requires-read-only-reconciliation (receipt:reason)
+[skip] daily-top10-to-wechat-group delivery_verification_pending，本周期跳过
+
+▶ 执行 daily-meituan-income-top10-to-wechat (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] daily-meituan-income-top10-to-wechat -> UNKNOWN : reason=prior-attempt-requires-read-only-reconciliation (receipt:reason)
+
+▶ 执行 daily-negative-reviews (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] daily-negative-reviews -> UNKNOWN : reason=dependency-hash-mismatch:/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/dependencies.json (receipt:reason)
+
+▶ 执行 contract-termination-applications-screenshot (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] contract-termination-applications-screenshot -> UNKNOWN : reason=prior-attempt-requires-read-only-reconciliation (receipt:reason)
+
+▶ 执行 daily-jinsha-reports-to-business-wechat (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] daily-jinsha-reports-to-business-wechat -> UNKNOWN : reason=prepare-stage-failed (receipt:reason)
+[ok] 台账 xlsx 已生成: /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/work/2026-10-28臻肆工作台账.xlsx (active 5/22)
+
+=== 发送门判断 ===
+[warn] 未全绿（有失败/待适配）：仅落盘 + 告警，不发送 AI 员工群。
+[force_run_now] 立即补跑：['daily-new-stores-activity-audit-to-wechat', 'daily-jinsha-reports-to-business-wechat']
+
+=== daemon 周期 2026-10-28 (force_all=False) ===
+[skip] daily-agent-new-merchants-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] negative-feedback-list-appeals-0930 当日已成功（cadence 内），本周期跳过
+[skip] negative-feedback-list-appeals-1230 当日已成功（cadence 内），本周期跳过
+[skip] meituan-intelligent-customer-service-12 not_due，本周期跳过
+[skip] meituan-intelligent-customer-service-15 not_due，本周期跳过
+[skip] meituan-intelligent-customer-service not_due，本周期跳过
+[skip] daily-quality-products-optimization not_due，本周期跳过
+[skip] meituan-waimai-negative-review-appeals-11 not_due，本周期跳过
+[skip] taobao-flash-sale-negative-review-appeals not_due，本周期跳过
+[skip] daily-new-stores-opening-to-wechat 当日已成功（cadence 内），本周期跳过
+
+▶ 执行 daily-new-stores-activity-audit-to-wechat (dev=active)
+  → status=SUCCESS category=SUCCESS attempts=1 next=无需动作
+[skip] daily-new-stores-decoration-audit-to-wechat not_due，本周期跳过
+[skip] daily-new-stores-not-nourished-ops-to-wechat not_due，本周期跳过
+[skip] daily-store-task-completion-ops-to-wechat not_due，本周期跳过
+[skip] daily-store-basic-diagnosis-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-taobao-download-to-jinsha not_due，本周期跳过
+
+▶ 执行 daily-service-market-ranking-to-wechat (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] daily-service-market-ranking-to-wechat -> UNKNOWN : reason=prior-attempt-requires-read-only-reconciliation (receipt:reason)
+[skip] daily-top10-to-wechat-group delivery_verification_pending，本周期跳过
+
+▶ 执行 daily-meituan-income-top10-to-wechat (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] daily-meituan-income-top10-to-wechat -> UNKNOWN : reason=prior-attempt-requires-read-only-reconciliation (receipt:reason)
+
+▶ 执行 daily-negative-reviews (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] daily-negative-reviews -> UNKNOWN : reason=dependency-hash-mismatch:/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/dependencies.json (receipt:reason)
+
+▶ 执行 contract-termination-applications-screenshot (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] contract-termination-applications-screenshot -> UNKNOWN : reason=prior-attempt-requires-read-only-reconciliation (receipt:reason)
+
+▶ 执行 daily-jinsha-reports-to-business-wechat (dev=active)
+  → status=SUCCESS category=SUCCESS attempts=1 next=无需动作
+[ok] 台账 xlsx 已生成: /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/work/2026-10-28臻肆工作台账.xlsx (active 7/22)
+
+=== 发送门判断 ===
+[warn] 未全绿（有失败/待适配）：仅落盘 + 告警，不发送 AI 员工群。

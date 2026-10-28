@@ -18,6 +18,7 @@
 from __future__ import annotations
 
 import json
+import fcntl
 import os
 import subprocess
 import sys
@@ -29,6 +30,7 @@ CONTROL_FILE = REPO / "runtime" / "state" / "control.json"
 LOG_FILE = REPO / "runtime" / "logs" / "run_now_watcher.log"
 RUN_ALL = REPO / "runtime" / "run_all.py"
 PYTHON = sys.executable
+RUNNER_LOCK = REPO / 'runtime' / '.runner.lock'
 
 # UI delivery follows the original live process; elapsed time is not a failure.
 ONCE_TIMEOUT_SECONDS = None
@@ -100,7 +102,25 @@ def run_once(name: str) -> bool:
     return proc.returncode == 0
 
 
+def runner_lock_held() -> bool:
+    """Probe the original kernel lock without truncating, writing or creating it."""
+    try:
+        with RUNNER_LOCK.open('r') as stream:
+            try:
+                fcntl.flock(stream.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+            except OSError:
+                return True
+            fcntl.flock(stream.fileno(), fcntl.LOCK_UN)
+            return False
+    except FileNotFoundError:
+        return False
+    except OSError:
+        return True
+
+
 def process() -> int:
+    if runner_lock_held():
+        return 0  # The original daemon owns immediate control polling; do not steal it.
     names = pop_now_names()
     if not names:
         return 0

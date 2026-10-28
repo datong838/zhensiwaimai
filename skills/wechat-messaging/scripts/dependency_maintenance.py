@@ -483,6 +483,7 @@ CODE_CONSOLIDATION_ALLOWED_AFTER = {
     CODE_CONSOLIDATION_LOCK: "a70f0e947df2e993ac4aec50995c92582d4f15f9583138a9fcde450396ba3ea2",
 }
 MAINTENANCE_AUTHORIZATIONS = {
+    'user-20261028-native-media-anchor-shift': {'instructionSha256': 'dfa8a44d577f91e092bb92a7d8eac777012a9d863d7d8f4410f2f5d903626c45', 'allowedChangePaths': {SELF_KEY, 'scripts/native_ui_post.py'}, 'allowedAfterSha256': {'scripts/native_ui_post.py': 'd7f686a1d2815191ac69c580cdba642488de8bfe031521337dda7ee66a8a9555'}},
     'user-20261028-native-image-readback-wait': {'instructionSha256': '8fce75de5cce301189aca6e2b6f306f6bb41b3d95786802e42445c9913792441', 'allowedChangePaths': {SELF_KEY, 'scripts/native_ui_post.py'}, 'allowedAfterSha256': {'scripts/native_ui_post.py': 'cf85c5d4d9d65f82dd367118db1b1c40d70e5c44819fe3bde72124253965ff19'}},
     'user-20261025-pending-image-continue': {'instructionSha256': 'cb4e3f301ab836e49183049acc1da46992342dc41c3edc1c3514b32c0e336149', 'allowedChangePaths': {SELF_KEY, 'scripts/executor.py'}, 'allowedAfterSha256': {'scripts/executor.py': '8ac898329e252cf44b6ea96693f6c0eafa2efde9ac5fe8aff7b546a30c3a4522'}},
     'user-20261025-ui-no-wall-clock': {"instructionSha256": '6b18bd5262a9a9e0533d983c60dce4cbb755881a1333e3c630469199a891b5f5', "allowedChangePaths": {SELF_KEY, "scripts/contract.py", "scripts/executor.py"}, "allowedAfterSha256": {'scripts/contract.py': 'c37b410fb4d98ff9745dde3a95dc4098ae23e4d9913725ef5ca5e7c208cb7393', 'scripts/executor.py': '8a900b25e79aca47eb9ae077e94dc374f9c66a3358694c3fc5979399d4741461'}},
@@ -956,6 +957,10 @@ def prepare(authorization: str, expires_at: str, output_dir: Path,
                        change["after"] != approved.get(change["path"])
                        for change in changes):
                     raise MaintenanceError("code-consolidation-unreviewed-dependency-bytes")
+            if authorization == 'user-20261028-native-media-anchor-shift':
+                approved = authorization_profile['allowedAfterSha256']
+                if any(change['path'] != SELF_KEY and change['after'] != approved.get(change['path']) for change in changes):
+                    raise MaintenanceError('native-media-anchor-unreviewed-dependency-bytes')
             if authorization == 'user-20261028-native-image-readback-wait':
                 approved = authorization_profile['allowedAfterSha256']
                 if any(change['path'] != SELF_KEY and change['after'] != approved.get(change['path']) for change in changes):

@@ -45,11 +45,11 @@
     },
     "messaging_dependencies": {
       "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/dependencies.json",
-      "sha256": "1acbec641f160648b0420b87ec62440e44d91c90ba7ceb65a4a0b868fd3482fb"
+      "sha256": "c93a7f8849c63966bca5a940c4a91a0e212f08af6a76be4d5e8aa8fb9eb3ffef"
     },
     "messaging_dependency_maintenance": {
       "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/dependency_maintenance.py",
-      "sha256": "19f07346bc0160980ea8be043032e1c14e040a2602c6547ab15f4c805a46ffb4"
+      "sha256": "65d5864dfb0ab31e1592590f5beee7231757a99c3e663093a99f913f4d078a42"
     },
     "workflow_executor": {
       "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-agent-new-merchants-to-wechat/scripts/workflow_executor.py",
@@ -205,5 +205,16 @@
       },
       "reason": "2026-10-23 19:1x：offline_selftest 加一次重试 + 失败时把 rc/stdout/stderr 落进异常消息（daemon 内间歇性 elapsedMs~170 使 node 未起来，整档空转，当天连挂 4 档）；本机复现通过、重试分支已用假 collector 冒烟"
     }
-  ]
+  ],
+  "unsealedAcceptance": {
+    "authorization": "user-20260916-production-hardening",
+    "authorizedAt": "2026-10-27T23:12:58.918012+08:00",
+    "expiresAt": "2026-11-02T23:12:44+08:00",
+    "scope": "Code-owned maintenance candidate; next real nonempty merchant send; automatic reseal only",
+    "userInstruction": "允许新增代码化维护执行器，并将生产锁切换为验收态，等待下一家真实商家自动重新封板。",
+    "userInstructionSha256": "b671e190e7db45c601f3bc1221a84670af584ac31d7faf7bb9896e2e5ec704b1",
+    "maintenanceAuthorization": "user-20261005-sealed-dependency-resync",
+    "maintenanceReceiptPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/native-media-anchor-fix-20261028/merchant-resync-compatible/maintenance-receipt.json",
+    "maintenanceReceiptSha256": "1fef543b106a8ae7f597e120e00b7fed10f5b8f3eb3712b6832270af2d403ad3"
+  }
 }

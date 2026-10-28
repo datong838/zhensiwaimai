@@ -9,6 +9,47 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
 import native_ui_tree as ui
 
 class NativeTreeTests(unittest.TestCase):
+    def relocated_cache(self, old_index=2, new_index=5, *, count=1, parent_role='AXScrollArea', wrong_messages=False):
+        config={'anchors':{
+            'conversationTitle':{'path':[0,27,5],'expected':{'role':'AXTextField'}},
+            'composer':{'path':[0,27,9,0,old_index,0],'expected':{'role':'AXTextArea','description':'文本输入区'}},
+            'messages':{'path':[0,27,9,0,0,0],'expected':{'role':'AXTable'}}}}
+        region=[0,27,9,0]
+        def observe(*,root_path,max_depth):
+            if root_path==[0]:return {'nodes':[{'path':[0,27],'role':'AXSplitGroup'}]}
+            if root_path==[0,27]:return {'nodes':[{'path':[0,27,i],'role':r} for i,r in [(1,'AXTextField'),(5,'AXTextField'),(9,'AXSplitGroup')]]}
+            if root_path==region:
+                self.assertEqual(max_depth,2)
+                return {'nodes':[node for i in range(count) for node in [
+                    {'path':region+[new_index+i],'role':parent_role},
+                    {'path':region+[new_index+i,0],'role':'AXTextArea','description':'文本输入区','value':'保留用户草稿'}]]}
+            if root_path==region+[new_index,0]:return {'nodes':[{'role':'AXTextArea','description':'文本输入区','value':'保留用户草稿'}]}
+            if root_path==region+[0,0]:return {'nodes':[{'role':'AXButton' if wrong_messages else 'AXTable'}]}
+            return {'nodes':[{'role':'AXTextField' if root_path==[0,27,5] else None}]}
+        return config, observe
+
+    def test_composer_shift_and_return_use_unique_local_role_not_empty_value(self):
+        for old,new in [(2,5),(5,2)]:
+            with self.subTest(old=old,new=new),tempfile.TemporaryDirectory() as d:
+                selectors=Path(d)/'selectors.json';config,observe=self.relocated_cache(old,new)
+                selectors.write_text(json.dumps(config))
+                with patch.object(ui,'SELECTORS',selectors),patch.object(ui,'execute',side_effect=observe) as calls:
+                    ui.refresh_chat_cache()
+                updated=json.loads(selectors.read_text())
+                self.assertEqual(updated['anchors']['composer']['path'],[0,27,9,0,new,0])
+                self.assertEqual(updated['anchors']['composer']['expected'],config['anchors']['composer']['expected'])
+                self.assertTrue(all(c.kwargs['max_depth']<=2 for c in calls.call_args_list))
+                self.assertTrue(all(not c.args for c in calls.call_args_list))
+
+    def test_composer_missing_ambiguous_or_wrong_parent_preserves_cache(self):
+        for options in ({'count':0},{'count':2},{'parent_role':'AXGroup'},{'wrong_messages':True}):
+            with self.subTest(options=options),tempfile.TemporaryDirectory() as d:
+                selectors=Path(d)/'selectors.json';config,observe=self.relocated_cache(**options)
+                original=json.dumps(config);selectors.write_text(original)
+                with patch.object(ui,'SELECTORS',selectors),patch.object(ui,'execute',side_effect=observe):
+                    with self.assertRaisesRegex(RuntimeError,'anchor-changed'):ui.refresh_chat_cache()
+                self.assertEqual(selectors.read_text(),original)
+
     def test_value_wait_only_allows_exact_search_text_before_return(self):
         base={'type':'key','key':'return','path':[0],'expected':{'role':'AXTextField','value':'精确群名'},'waitForValue':True}
         for changes in ({'type':'paste'},{'key':'tab'},{'waitForValue':False},{'expected':{'role':'AXTextArea','value':'草稿'}},{'expected':{'role':'AXTextField'}}):

@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "status": "UNSEALED_ACCEPTANCE",
+  "authorizationRef": "zhensi-negative-review-main-wechat-shanghai-zhensi-operations-ding-fandang-v1-user-20260918",
+  "candidateDependencyDigest": "c1a96348584993ce677356b0c990273b88263c15fb94d7ce17e7ee2888a08a0b",
+  "allowedBusinessDate": "2026-10-27",
+  "preparedAt": "2026-10-27T16:14:24.090Z",
+  "maintenance": {
+    "authorization": "user-20260920-negative-review-dependency-maintenance",
+    "carryForward": {
+      "previousAllowedBusinessDate": "2026-10-26",
+      "allowedBusinessDate": "2026-10-27",
+      "runDay": "2026-10-28",
+      "basis": "independent-new-business-day",
+      "authorization": "user-20261027-history-must-not-block-new-day",
+      "checkedAbsentPaths": [
+        "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/daily-negative-reviews/20261027",
+        "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/outputs/yesterday-negative-20261027",
+        "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/negative-review-send-shanghai-zhensi-operations-ding-fandang-v1.desktop-attempts/negative-review-2026-10-27.json",
+        "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/negative-review-summary-send-shanghai-zhensi-operations-ding-fandang-v1.desktop-attempts/negative-review-summary-2026-10-27.json"
+      ],
+      "oldRecordsModified": false,
+      "oldDeliveryAccepted": false,
+      "technicalStatusPreserved": "unknown",
+      "newSendAttempts": 0
+    },
+    "publicManifestSha256": "1acbec641f160648b0420b87ec62440e44d91c90ba7ceb65a4a0b868fd3482fb",
+    "publicInspect": {
+      "candidateFileCount": 34,
+      "sendAttempts": 0,
+      "runtimeModelDecisions": 0
+    },
+    "tests": {
+      "tests": 8
+    },
+    "sendAttempts": 0,
+    "runtimeModelDecisions": 0
+  }
+}

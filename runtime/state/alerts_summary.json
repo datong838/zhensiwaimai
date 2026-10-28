@@ -19,11 +19,11 @@
   "category": "NEEDS_USER",
   "code": "uncoded",
   "first_ts": "2026-09-30T00:29:02",
-  "count": 116,
-  "consecutive": 5,
+  "count": 117,
+  "consecutive": 6,
   "resolved_at": null,
-  "last_ts": "2026-10-27T18:45:04",
-  "last_detail": "native-ui-window-or-draft-not-ready",
+  "last_ts": "2026-10-28T10:00:47",
+  "last_detail": "native-ui-read-unavailable:native-ui-anchor-changed:local-cache-validation-failed",
   "last_log": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/screen_recording_gate.json",
   "resolution_note": "gc-20261021: 基础设施历史孤例（TCC/废弃通道/测试键），均已不复发",
   "recurred_at": "2026-10-27T13:04:06",
@@ -105,14 +105,14 @@
   "category": "UNKNOWN",
   "code": "executor_integrity",
   "first_ts": "2026-10-19T00:13:39",
-  "count": 43,
+  "count": 44,
   "consecutive": 0,
-  "resolved_at": "2026-10-23T09:58:47",
-  "last_ts": "2026-10-23T09:29:23",
+  "resolved_at": "2026-10-28T11:16:03",
+  "last_ts": "2026-10-28T11:00:03",
   "last_detail": "stage=executor_integrity (receipt:stage) [note: 执行器完整性校验失败（文件被篡改 / 未走封印流程）。红灯，须人工核。]",
-  "last_log": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-23/daily-agent-new-merchants-to-wechat--20261023-092923--a1--s1.log",
-  "resolved_consecutive": 21,
-  "recurred_at": "2026-10-22T17:46:58"
+  "last_log": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-28/daily-agent-new-merchants-to-wechat--20261028-110002--a1--s1.log",
+  "resolved_consecutive": 1,
+  "recurred_at": "2026-10-28T11:00:03"
  },
  "daily-store-task-completion-ops-to-wechat|UNKNOWN|same-event-payload-conflict": {
   "skill": "daily-store-task-completion-ops-to-wechat",
@@ -169,32 +169,6 @@
   "last_log": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-26/contract-termination-applications-screenshot--20261026-093030--a1--s1.log",
   "resolved_consecutive": 34,
   "recurred_at": "2026-10-26T09:30:40"
- },
- "daily-top10-to-wechat-group|UNKNOWN|desktop-wechat:workflow-target-or-payload-mismatch": {
-  "skill": "daily-top10-to-wechat-group",
-  "category": "UNKNOWN",
-  "code": "desktop-wechat:workflow-target-or-payload-mismatch",
-  "first_ts": "2026-10-21T09:25:54",
-  "count": 2,
-  "consecutive": 0,
-  "resolved_at": "2026-10-21T10:53:10",
-  "last_ts": "2026-10-21T10:08:30",
-  "last_detail": "reason=desktop-wechat:workflow-target-or-payload-mismatch (receipt:reason)",
-  "last_log": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-21/daily-top10-to-wechat-group--20261021-100759--a1--s1.log",
-  "resolved_consecutive": 2
- },
- "contract-termination-applications-screenshot|UNKNOWN|target-group-not-exactly-listed": {
-  "skill": "contract-termination-applications-screenshot",
-  "category": "UNKNOWN",
-  "code": "target-group-not-exactly-listed",
-  "first_ts": "2026-10-21T10:08:57",
-  "count": 1,
-  "consecutive": 0,
-  "resolved_at": "2026-10-21T10:54:10",
-  "last_ts": "2026-10-21T10:08:57",
-  "last_detail": "reason=target-group-not-exactly-listed (receipt:reason)",
-  "last_log": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-21/contract-termination-applications-screenshot--20261021-100832--a1--s1.log",
-  "resolved_consecutive": 1
  },
  "daily-agent-new-merchants-to-wechat|UNKNOWN|legacy-exit--15": {
   "skill": "daily-agent-new-merchants-to-wechat",
@@ -556,13 +530,14 @@
   "category": "UNKNOWN",
   "code": "long-reason-92ad9d01",
   "first_ts": "2026-10-23T20:26:29",
-  "count": 1,
-  "consecutive": 0,
-  "resolved_at": "2026-10-24T13:58:12",
-  "last_ts": "2026-10-23T20:26:29",
+  "count": 5,
+  "consecutive": 4,
+  "resolved_at": null,
+  "last_ts": "2026-10-28T11:22:43",
   "last_detail": "reason=dependency-hash-mismatch:/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/dependencies.json (receipt:reason)",
-  "last_log": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-23/daily-negative-reviews--20261023-202628--a1--s1.log",
-  "resolved_consecutive": 1
+  "last_log": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-28/daily-negative-reviews--20261028-112243--a1--s1.log",
+  "resolved_consecutive": 1,
+  "recurred_at": "2026-10-28T11:00:09"
  },
  "daily-negative-reviews|UNKNOWN|acceptance-business-date-mismatch": {
   "skill": "daily-negative-reviews",
@@ -1443,12 +1418,12 @@
   "category": "UNKNOWN",
   "code": "image-submission-awaits-read-only-verification",
   "first_ts": "2026-10-26T08:32:51",
-  "count": 73,
-  "consecutive": 73,
+  "count": 76,
+  "consecutive": 76,
   "resolved_at": null,
-  "last_ts": "2026-10-28T09:45:40",
+  "last_ts": "2026-10-28T10:36:28",
   "last_detail": "reason=image-submission-awaits-read-only-verification (receipt:reason)",
-  "last_log": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-28/daily-negative-reviews--20261028-094538--a1--s1.log"
+  "last_log": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-28/daily-negative-reviews--20261028-103627--a1--s1.log"
  },
  "contract-termination-applications-screenshot|UNKNOWN|native-ui-inline-image-not-exposed": {
   "skill": "contract-termination-applications-screenshot",
@@ -1467,12 +1442,12 @@
   "category": "UNKNOWN",
   "code": "prior-attempt-requires-read-only-reconciliation",
   "first_ts": "2026-10-26T10:01:06",
-  "count": 67,
-  "consecutive": 67,
+  "count": 74,
+  "consecutive": 74,
   "resolved_at": null,
-  "last_ts": "2026-10-28T09:45:41",
+  "last_ts": "2026-10-28T11:22:44",
   "last_detail": "reason=prior-attempt-requires-read-only-reconciliation (receipt:reason)",
-  "last_log": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-28/contract-termination-applications-screenshot--20261028-094541--a1--s1.log"
+  "last_log": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-28/contract-termination-applications-screenshot--20261028-112244--a1--s1.log"
  },
  "daily-new-stores-activity-audit-to-wechat|UNKNOWN|long-reason-b6354f52": {
   "skill": "daily-new-stores-activity-audit-to-wechat",
@@ -1593,24 +1568,24 @@
   "category": "UNKNOWN",
   "code": "delivery",
   "first_ts": "2026-10-26T13:34:43",
-  "count": 2,
-  "consecutive": 2,
+  "count": 3,
+  "consecutive": 3,
   "resolved_at": null,
-  "last_ts": "2026-10-27T10:00:58",
+  "last_ts": "2026-10-28T10:35:43",
   "last_detail": "stage=delivery (receipt:stage)",
-  "last_log": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-27/daily-service-market-ranking-to-wechat--20261027-100027--a1--s1.log"
+  "last_log": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-28/daily-service-market-ranking-to-wechat--20261028-102539--a1--s1.log"
  },
  "daily-service-market-ranking-to-wechat|UNKNOWN|prior-attempt-requires-read-only-reconciliation": {
   "skill": "daily-service-market-ranking-to-wechat",
   "category": "UNKNOWN",
   "code": "prior-attempt-requires-read-only-reconciliation",
   "first_ts": "2026-10-26T14:01:10",
-  "count": 49,
-  "consecutive": 49,
+  "count": 54,
+  "consecutive": 54,
   "resolved_at": null,
-  "last_ts": "2026-10-27T18:55:17",
+  "last_ts": "2026-10-28T11:22:41",
   "last_detail": "reason=prior-attempt-requires-read-only-reconciliation (receipt:reason)",
-  "last_log": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-27/daily-service-market-ranking-to-wechat--20261027-185517--a1--s1.log"
+  "last_log": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-28/daily-service-market-ranking-to-wechat--20261028-112241--a1--s1.log"
  },
  "daily-store-task-completion-ops-to-wechat|UNKNOWN|ui-post-preflight-not-verified": {
   "skill": "daily-store-task-completion-ops-to-wechat",
@@ -1641,12 +1616,12 @@
   "category": "UNKNOWN",
   "code": "prior-attempt-requires-read-only-reconciliation",
   "first_ts": "2026-10-26T17:04:16",
-  "count": 71,
-  "consecutive": 71,
+  "count": 78,
+  "consecutive": 78,
   "resolved_at": null,
-  "last_ts": "2026-10-28T09:45:37",
+  "last_ts": "2026-10-28T11:22:42",
   "last_detail": "reason=prior-attempt-requires-read-only-reconciliation (receipt:reason)",
-  "last_log": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-28/daily-meituan-income-top10-to-wechat--20261028-094537--a1--s1.log"
+  "last_log": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-28/daily-meituan-income-top10-to-wechat--20261028-112242--a1--s1.log"
  },
  "meituan-waimai-negative-review-appeals-11|UNKNOWN|build": {
   "skill": "meituan-waimai-negative-review-appeals-11",
@@ -1814,5 +1789,56 @@
   "last_detail": "stage=stopped (receipt:stage)",
   "last_log": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-27/daily-quality-products-optimization--20261027-171553--a1--s1.log",
   "resolved_consecutive": 4
+ },
+ "daily-new-stores-opening-to-wechat|UNKNOWN|windows-execution-error:ui-post-preflight-not-verified": {
+  "skill": "daily-new-stores-opening-to-wechat",
+  "category": "UNKNOWN",
+  "code": "windows-execution-error:ui-post-preflight-not-verified",
+  "first_ts": "2026-10-28T10:00:44",
+  "count": 1,
+  "consecutive": 0,
+  "resolved_at": "2026-10-28T10:25:38",
+  "last_ts": "2026-10-28T10:00:44",
+  "last_detail": "nested-reason=windows-execution-error:ui-post-preflight-not-verified (receipt:nested_reason)",
+  "last_log": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-28/daily-new-stores-opening-to-wechat--20261028-100020--a1--s1.log",
+  "resolved_consecutive": 1
+ },
+ "daily-service-market-ranking-to-wechat|UNKNOWN|stopped": {
+  "skill": "daily-service-market-ranking-to-wechat",
+  "category": "UNKNOWN",
+  "code": "stopped",
+  "first_ts": "2026-10-28T10:00:51",
+  "count": 1,
+  "consecutive": 1,
+  "resolved_at": null,
+  "last_ts": "2026-10-28T10:00:51",
+  "last_detail": "stage=stopped (receipt:stage)",
+  "last_log": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-28/daily-service-market-ranking-to-wechat--20261028-100047--a1--s1.log"
+ },
+ "daily-new-stores-activity-audit-to-wechat|UNKNOWN|long-reason-cb6d2b47": {
+  "skill": "daily-new-stores-activity-audit-to-wechat",
+  "category": "UNKNOWN",
+  "code": "long-reason-cb6d2b47",
+  "first_ts": "2026-10-28T11:00:04",
+  "count": 3,
+  "consecutive": 0,
+  "resolved_at": "2026-10-28T11:22:40",
+  "last_ts": "2026-10-28T11:18:02",
+  "last_detail": "reason=activity-collection-unknown:i_waimai_back/shared/browser_precise_ops/js/brand_page_selector.mjs:17:34) ⏎     at main (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-new-stores-activity-audit-to-wechat/scripts/activity_collector.mjs:300:18)\"} (receipt:reason) [note: 采集阶段失败（岗位后台 Chrome / CDP / 页面元素）。按铁律先「关页重开」复位再定性站点改版。]",
+  "last_log": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-28/daily-new-stores-activity-audit-to-wechat--20261028-111802--a1--s1.log",
+  "resolved_consecutive": 3
+ },
+ "daily-jinsha-reports-to-business-wechat|UNKNOWN|prepare-stage-failed": {
+  "skill": "daily-jinsha-reports-to-business-wechat",
+  "category": "UNKNOWN",
+  "code": "prepare-stage-failed",
+  "first_ts": "2026-10-28T11:00:42",
+  "count": 3,
+  "consecutive": 0,
+  "resolved_at": "2026-10-28T11:24:07",
+  "last_ts": "2026-10-28T11:19:35",
+  "last_detail": "reason=prepare-stage-failed (receipt:reason)",
+  "last_log": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-28/daily-jinsha-reports-to-business-wechat--20261028-111913--a1--s1.log",
+  "resolved_consecutive": 3
  }
 }

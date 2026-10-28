@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-28T10:50:11.770898+08:00",
+  "source": "explicit-user-instruction",
+  "instruction": "美团授权失效门店 是业务问题 ，我们不用关心这个  这些店铺如果不符合条件 就不看了",
+  "policy": "Store authorization failure is a business eligibility state, not a supervisor technical repair requirement. Apply each existing workflow eligibility rule; do not inspect ineligible stores or request restoration of these 36 authorizations.",
+  "doNotChange": [
+    "historical records and sent evidence",
+    "original ledger/cursor/idempotency",
+    "eligibility of unrelated stores",
+    "full visible records already within a workflow source contract",
+    "paused monthly workflows"
+  ],
+  "distinction": "Whole-platform login expiry/CAPTCHA/risk and implementation failures remain operational blockers."
+}

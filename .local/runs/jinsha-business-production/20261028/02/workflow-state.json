@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "jinsha-business-code-enforced-v1",
+  "runId": "jinsha-business-production-20261028-02",
+  "businessDate": "2026-10-27",
+  "phase": "downloaded",
+  "status": "needs-maintenance",
+  "nextAction": null,
+  "runtimeModelDecisions": 0,
+  "attempts": {
+    "download": 1,
+    "send": 0,
+    "verify": 0
+  },
+  "events": [
+    {
+      "at": 1793157372549,
+      "type": "executor-start",
+      "phase": "created"
+    },
+    {
+      "at": 1793157372549,
+      "type": "attempt",
+      "stage": "download",
+      "number": 1
+    },
+    {
+      "at": 1793157393259,
+      "type": "decision",
+      "stage": "download",
+      "decision": "downloaded"
+    },
+    {
+      "at": 1793157393261,
+      "type": "transition",
+      "from": "created",
+      "to": "downloaded",
+      "evidence": {
+        "receipt": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/jinsha-business-production/20261028/02/download-ui.json"
+      }
+    },
+    {
+      "at": 1793157393261,
+      "type": "attempt",
+      "stage": "prepare",
+      "number": 1
+    },
+    {
+      "at": 1793157394629,
+      "type": "blocked",
+      "phase": "downloaded",
+      "reason": "prepare-stage-failed"
+    }
+  ],
+  "config": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/jinsha-business-production/20261028/02/config.json",
+  "createdAt": 1793157372544,
+  "updatedAt": 1793157394629
+}

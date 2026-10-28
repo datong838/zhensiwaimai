@@ -1,0 +1,297 @@
+{
+  "bridgeVersion": 1,
+  "ok": true,
+  "verified": true,
+  "payloadType": "text",
+  "state": "verified",
+  "groupName": "电销+直播攻坚组",
+  "payloads": [
+    {
+      "text": "城市：嘉兴市  ；  联系人：小刘，15167316579  ；  店铺：汉堡小子  ；  地址：南湖街道凌公塘路实验小学百盛路看台街A23号  ；  商家ID：1271448281",
+      "sha256": "124c398791e23cd2d16c98726bc019d8e6edc89d97c34ba6197bcb33d58cf071"
+    }
+  ],
+  "sendAttempts": 1,
+  "newSendAttempts": 1,
+  "reason": null,
+  "runtimeModelDecisions": 0,
+  "commonReceipt": {
+    "ok": true,
+    "status": "verified",
+    "groupName": "电销+直播攻坚组",
+    "channel": "desktop",
+    "requestDigest": "02c4206c9ca27bbcd57bcdcfd66816441d26676e2e2469f733d1ac00723fe6a6",
+    "runtimeModelDecisions": 0,
+    "items": [
+      {
+        "itemId": "0",
+        "sha256": "124c398791e23cd2d16c98726bc019d8e6edc89d97c34ba6197bcb33d58cf071",
+        "type": "text",
+        "status": "verified",
+        "claimedAt": 1793154963.304127,
+        "sendAttempts": 1,
+        "resolvedGroup": "电销+直播攻坚组",
+        "observations": [
+          {
+            "groupName": "电销+直播攻坚组",
+            "inputEmpty": true,
+            "newMessageVisible": true,
+            "observedAt": 1793154970.856971,
+            "visibleText": "城市：嘉兴市  ；  联系人：小刘，15167316579  ；  店铺：汉堡小子  ；  地址：南湖街道凌公塘路实验小学百盛路看台街A23号  ；  商家ID：1271448281",
+            "visibleTextSha256": "124c398791e23cd2d16c98726bc019d8e6edc89d97c34ba6197bcb33d58cf071",
+            "messagePath": [
+              0,
+              27,
+              9,
+              0,
+              0,
+              0,
+              20
+            ]
+          },
+          {
+            "groupName": "电销+直播攻坚组",
+            "inputEmpty": true,
+            "newMessageVisible": true,
+            "observedAt": 1793154972.8588018,
+            "visibleText": "城市：嘉兴市  ；  联系人：小刘，15167316579  ；  店铺：汉堡小子  ；  地址：南湖街道凌公塘路实验小学百盛路看台街A23号  ；  商家ID：1271448281",
+            "visibleTextSha256": "124c398791e23cd2d16c98726bc019d8e6edc89d97c34ba6197bcb33d58cf071",
+            "messagePath": [
+              0,
+              27,
+              9,
+              0,
+              0,
+              0,
+              20
+            ]
+          }
+        ],
+        "backend": "system-events-ui-tree",
+        "verificationLevel": "wecom-ui-tree-text",
+        "evidence": {
+          "method": "wecom-ui-tree-text",
+          "resolvedGroup": "电销+直播攻坚组",
+          "sha256": "124c398791e23cd2d16c98726bc019d8e6edc89d97c34ba6197bcb33d58cf071",
+          "observations": [
+            {
+              "groupName": "电销+直播攻坚组",
+              "inputEmpty": true,
+              "newMessageVisible": true,
+              "observedAt": 1793154970.856971,
+              "visibleText": "城市：嘉兴市  ；  联系人：小刘，15167316579  ；  店铺：汉堡小子  ；  地址：南湖街道凌公塘路实验小学百盛路看台街A23号  ；  商家ID：1271448281",
+              "visibleTextSha256": "124c398791e23cd2d16c98726bc019d8e6edc89d97c34ba6197bcb33d58cf071",
+              "messagePath": [
+                0,
+                27,
+                9,
+                0,
+                0,
+                0,
+                20
+              ]
+            },
+            {
+              "groupName": "电销+直播攻坚组",
+              "inputEmpty": true,
+              "newMessageVisible": true,
+              "observedAt": 1793154972.8588018,
+              "visibleText": "城市：嘉兴市  ；  联系人：小刘，15167316579  ；  店铺：汉堡小子  ；  地址：南湖街道凌公塘路实验小学百盛路看台街A23号  ；  商家ID：1271448281",
+              "visibleTextSha256": "124c398791e23cd2d16c98726bc019d8e6edc89d97c34ba6197bcb33d58cf071",
+              "messagePath": [
+                0,
+                27,
+                9,
+                0,
+                0,
+                0,
+                20
+              ]
+            }
+          ]
+        },
+        "transport": {
+          "kind": "text",
+          "sendAttempts": 1,
+          "sent": true,
+          "postSendInputCleared": [
+            true,
+            true
+          ],
+          "stage": "post_send_verify"
+        }
+      }
+    ],
+    "review": [
+      {
+        "stage": "authorization",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "freeze:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 0
+      },
+      {
+        "stage": "preflight",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 716
+      },
+      {
+        "stage": "send:0",
+        "status": "completed",
+        "pitfalls": [],
+        "elapsedMs": 9583
+      }
+    ],
+    "elapsedMs": 10303,
+    "eventKey": "60f0568a869b8e562338075257e7c09ba7ba7fd1df383350da211d0aa5be9ac7",
+    "reviewSummary": {
+      "totalElapsedMs": 10303,
+      "result": "verified",
+      "stageCount": 4,
+      "completedStages": 4,
+      "failedStages": []
+    }
+  },
+  "attemptMarker": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/state/taobao-agent-new-merchants/send-attempts/7f0b0e3bda41f6c17e0d2ebaba77ff3504020f870bf8ca38ef9dcb40e19ced98.json",
+  "sendReview": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 1,
+      "label": "authorization"
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0,
+      "item": 2,
+      "label": "freeze:0"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 716,
+      "item": 3,
+      "label": "preflight"
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 9583,
+      "item": 4,
+      "label": "send:0"
+    }
+  ],
+  "elapsedMs": 10303,
+  "reviewSummary": {
+    "totalElapsedMs": 10303,
+    "itemCount": 4,
+    "pitfallCount": 0,
+    "result": "success"
+  },
+  "copyReadback": {
+    "method": "wecom-ui-tree-text",
+    "resolvedGroup": "电销+直播攻坚组",
+    "sha256": "124c398791e23cd2d16c98726bc019d8e6edc89d97c34ba6197bcb33d58cf071",
+    "observations": [
+      {
+        "groupName": "电销+直播攻坚组",
+        "inputEmpty": true,
+        "newMessageVisible": true,
+        "observedAt": 1793154970.856971,
+        "visibleText": "城市：嘉兴市  ；  联系人：小刘，15167316579  ；  店铺：汉堡小子  ；  地址：南湖街道凌公塘路实验小学百盛路看台街A23号  ；  商家ID：1271448281",
+        "visibleTextSha256": "124c398791e23cd2d16c98726bc019d8e6edc89d97c34ba6197bcb33d58cf071",
+        "messagePath": [
+          0,
+          27,
+          9,
+          0,
+          0,
+          0,
+          20
+        ]
+      },
+      {
+        "groupName": "电销+直播攻坚组",
+        "inputEmpty": true,
+        "newMessageVisible": true,
+        "observedAt": 1793154972.8588018,
+        "visibleText": "城市：嘉兴市  ；  联系人：小刘，15167316579  ；  店铺：汉堡小子  ；  地址：南湖街道凌公塘路实验小学百盛路看台街A23号  ；  商家ID：1271448281",
+        "visibleTextSha256": "124c398791e23cd2d16c98726bc019d8e6edc89d97c34ba6197bcb33d58cf071",
+        "messagePath": [
+          0,
+          27,
+          9,
+          0,
+          0,
+          0,
+          20
+        ]
+      }
+    ]
+  },
+  "physicalSendAttempts": 1,
+  "postSendInputCleared": [
+    true,
+    true
+  ],
+  "stage": "post_send_verify",
+  "reconciledWithoutSend": false,
+  "attemptReviews": [
+    {
+      "attempt": 1,
+      "elapsedMs": 10392,
+      "ok": true,
+      "reason": null,
+      "sendAttempts": 1,
+      "sendReview": [
+        {
+          "stage": "authorization",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 1,
+          "label": "authorization"
+        },
+        {
+          "stage": "freeze:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 0,
+          "item": 2,
+          "label": "freeze:0"
+        },
+        {
+          "stage": "preflight",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 716,
+          "item": 3,
+          "label": "preflight"
+        },
+        {
+          "stage": "send:0",
+          "status": "completed",
+          "pitfalls": [],
+          "elapsedMs": 9583,
+          "item": 4,
+          "label": "send:0"
+        }
+      ]
+    }
+  ],
+  "contentionRetries": 0,
+  "contentionWaitMs": 0,
+  "contentionEvents": []
+}
