@@ -170,19 +170,6 @@
   "resolved_consecutive": 34,
   "recurred_at": "2026-10-26T09:30:40"
  },
- "daily-top10-to-wechat-group|UNKNOWN|windows-wechat:windows-driver-local-network-blocked": {
-  "skill": "daily-top10-to-wechat-group",
-  "category": "UNKNOWN",
-  "code": "windows-wechat:windows-driver-local-network-blocked",
-  "first_ts": "2026-10-21T08:01:02",
-  "count": 2,
-  "consecutive": 0,
-  "resolved_at": "2026-10-21T10:53:10",
-  "last_ts": "2026-10-21T08:43:17",
-  "last_detail": "reason=windows-wechat:windows-driver-local-network-blocked (receipt:reason) [note: 本机→Windows 网关被 macOS「本地网络」权限拦（launchd 上下文必然如此，正解是经中继 127.0.0.1:8732 出去）。若中继也不可达，daemon 无法自愈，须看护代理在 GUI 会话执行 relay-up.sh。]",
-  "last_log": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-21/daily-top10-to-wechat-group--20261021-084307--a1--s1.log",
-  "resolved_consecutive": 2
- },
  "daily-top10-to-wechat-group|UNKNOWN|desktop-wechat:workflow-target-or-payload-mismatch": {
   "skill": "daily-top10-to-wechat-group",
   "category": "UNKNOWN",
@@ -1469,12 +1456,12 @@
   "category": "UNKNOWN",
   "code": "image-submission-awaits-read-only-verification",
   "first_ts": "2026-10-26T08:32:51",
-  "count": 70,
-  "consecutive": 70,
+  "count": 71,
+  "consecutive": 71,
   "resolved_at": null,
-  "last_ts": "2026-10-28T08:31:56",
+  "last_ts": "2026-10-28T09:00:29",
   "last_detail": "reason=image-submission-awaits-read-only-verification (receipt:reason)",
-  "last_log": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-28/daily-negative-reviews--20261028-083041--a1--s1.log"
+  "last_log": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-28/daily-negative-reviews--20261028-090028--a1--s1.log"
  },
  "contract-termination-applications-screenshot|UNKNOWN|native-ui-inline-image-not-exposed": {
   "skill": "contract-termination-applications-screenshot",
@@ -1667,12 +1654,12 @@
   "category": "UNKNOWN",
   "code": "prior-attempt-requires-read-only-reconciliation",
   "first_ts": "2026-10-26T17:04:16",
-  "count": 68,
-  "consecutive": 68,
+  "count": 69,
+  "consecutive": 69,
   "resolved_at": null,
-  "last_ts": "2026-10-28T08:30:40",
+  "last_ts": "2026-10-28T09:00:26",
   "last_detail": "reason=prior-attempt-requires-read-only-reconciliation (receipt:reason)",
-  "last_log": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-28/daily-meituan-income-top10-to-wechat--20261028-083040--a1--s1.log"
+  "last_log": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-28/daily-meituan-income-top10-to-wechat--20261028-090026--a1--s1.log"
  },
  "meituan-waimai-negative-review-appeals-11|UNKNOWN|build": {
   "skill": "meituan-waimai-negative-review-appeals-11",
@@ -1769,12 +1756,12 @@
   "category": "UNKNOWN",
   "code": "image-submission-awaits-read-only-verification",
   "first_ts": "2026-10-27T09:01:02",
-  "count": 1,
-  "consecutive": 1,
+  "count": 2,
+  "consecutive": 2,
   "resolved_at": null,
-  "last_ts": "2026-10-27T09:01:02",
+  "last_ts": "2026-10-28T09:01:18",
   "last_detail": "reason=image-submission-awaits-read-only-verification (receipt:reason)",
-  "last_log": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-27/contract-termination-applications-screenshot--20261027-090028--a1--s1.log"
+  "last_log": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-28/contract-termination-applications-screenshot--20261028-090030--a1--s1.log"
  },
  "daily-new-stores-opening-to-wechat|UNKNOWN|WebSocket is not defined": {
   "skill": "daily-new-stores-opening-to-wechat",

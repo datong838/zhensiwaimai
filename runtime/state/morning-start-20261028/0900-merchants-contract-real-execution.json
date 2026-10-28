@@ -1,0 +1,66 @@
+{
+  "checkedAt": "2026-10-28T09:02:00+08:00",
+  "originalDirectorPid": 55035,
+  "businessDate": "2026-10-28",
+  "merchant": {
+    "run": "runtime/state/runs/daily-agent-new-merchants-to-wechat/20261028-090002/output",
+    "state": "verified",
+    "sourceRows": 1,
+    "paginationComplete": true,
+    "newMerchants": 0,
+    "notice": "当前无新增意向商家",
+    "group": "电销+直播攻坚组",
+    "sendAttempts": 1,
+    "observations": 2,
+    "executorState": "SEALED"
+  },
+  "contract": {
+    "run": "skills/workflows/contract-termination-applications-screenshot/.runtime/contract-termination/runs/2026-10-28-1793149230764379000",
+    "captureComplete": true,
+    "rows": 3,
+    "pages": 1,
+    "reset": "https://open.shop.ele.me/manager/base/home",
+    "sourceImages": [
+      {
+        "path": "skills/workflows/contract-termination-applications-screenshot/.runtime/contract-termination/runs/2026-10-28-1793149230764379000/shot-out/2026-10-28/2026-10-28_合同解约申请_处理中_p1.png",
+        "sha256": "f38dd8ce2baffee9a7146bf00d3aabf90b9037d6fb868a978b8cd94857bac0df",
+        "size": 196938
+      }
+    ],
+    "originalSummary": {
+      "status": "unknown",
+      "reason": "image-submission-awaits-read-only-verification",
+      "sendAttempts": 1,
+      "event": "2026-10-28-contract-termination-ops",
+      "executionComplete": true,
+      "verificationPending": [
+        "contract-termination-p1"
+      ],
+      "day": "2026-10-28",
+      "runDir": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/contract-termination-applications-screenshot/.runtime/contract-termination/runs/2026-10-28-1793149230764379000",
+      "armState": {
+        "armed": true,
+        "mode": "default-auto"
+      },
+      "images": [
+        "2026-10-28_合同解约申请_处理中_p1.png"
+      ],
+      "rows": 3,
+      "pages": 1,
+      "warnings": [],
+      "header": {
+        "pending": 3,
+        "overdue": 2
+      }
+    },
+    "originalMarkerState": "unknown",
+    "sendAttempts": 1,
+    "resolvedGroup": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+    "inputEmpty": true,
+    "sourceBoundaryRealAcceptance": "PASS",
+    "imageContentVerification": "pending - native UI does not expose inline image",
+    "resendAllowed": false
+  },
+  "supervisorProductionActions": 0,
+  "manualLedgerChanges": 0
+}
