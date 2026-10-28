@@ -1,0 +1,69 @@
+{
+  "ok": true,
+  "action": "refresh-unsealed-acceptance",
+  "status": "SEALED",
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "review": [
+    {
+      "label": "维护授权",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "授权有效期",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "验收态回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "运行摘要稳定回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 5013
+    },
+    {
+      "label": "共享封印件依赖回执",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 3
+    },
+    {
+      "label": "商户完整离线测试",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 10800
+    },
+    {
+      "label": "新维护收据固化",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "验收态摘要刷新",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "刷新后门禁回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 6
+    }
+  ],
+  "repairType": "sealed-shared-dependency-resync",
+  "refreshedFileCount": 19,
+  "maintenanceReceiptPath": "runtime/state/wecom-ui-closure-20261028/merchant/maintenance-receipt.json",
+  "maintenanceReceiptSha256": "8c23661d59dbf8c7968986261b32255e66045092679f6e3b4363f869e5b3b59a",
+  "dependencyReceiptPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/wecom-ui-closure-20261028/shared/receipt.json",
+  "elapsedMs": 15824
+}

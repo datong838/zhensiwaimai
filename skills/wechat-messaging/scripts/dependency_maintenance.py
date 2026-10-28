@@ -482,7 +482,31 @@ CODE_CONSOLIDATION_ALLOWED_AFTER = {
     "scripts/windows_adapter.py": "098bf4f0d8ab2bb7f6cbb4f5885ffd3515c32316e23c1b74ca042d6e6cc06e9b",
     CODE_CONSOLIDATION_LOCK: "a70f0e947df2e993ac4aec50995c92582d4f15f9583138a9fcde450396ba3ea2",
 }
+UI_EXECUTION_CLOSURE_AUTHORIZATION = "user-20261028-ui-execution-closure"
+UI_EXECUTION_CLOSURE_INSTRUCTION = (
+    "任何非登录可恢复阻碍在原授权内先完善方案、最小修复、自测、原门禁核验，经原主任接续推动成功；"
+    "业务积压优先于代码完善，不等无人值守审批、不放松原门。"
+)
+UI_EXECUTION_CLOSURE_INSTRUCTION_SHA256 = hashlib.sha256(
+    UI_EXECUTION_CLOSURE_INSTRUCTION.encode("utf-8")
+).hexdigest()
+UI_EXECUTION_CLOSURE_ALLOWED_AFTER = {
+    "scripts/file_size_policy.py": "bbee1269d339bd21583b626451ef4772a1d5a4222ca5abb892bd4ab0f9173299",
+    "scripts/native_ui_tree.py": "89d6e21e6f3303eca512154994ae03ffc7716908ffd1f4b3476a45b5dd4b66a7",
+    "scripts/presentation_policy.py": "cea830bd3ac88a90a34932e1b3c80a1557de5c63c3724cdf9f56111d5129c507",
+    "scripts/registered_ui_routes.py": "154fa6fb7dba37822f39c6b2d23920403ba635bbb46b9d365757b26dd3a9c010",
+    "scripts/wecom_adapter.py": "d14448385606c83a58b96f640300049a4001db693e6a3d3a4a5884f6bb6aebd1",
+    "scripts/wecom_ui_queue.py": "5ceb7ae15972a4b2564471c72eac6a94fb8d41bcc51adfffa9e14e9cdbc1e9ba",
+    "config/ui-execution-policy.json": "5332b773fbf5c1044f47da9867e08c58ab122908e66582219734bf4171017351",
+    "config/native-ui-selectors.json": "04d0bf97e3e1a6a743400dd8c82a06171ab921824ee7f598f6891dbf118747f9",
+    "scripts/native_ui_tree.jxa": "bba531ba0fed9b84f82f57146dae4dee70afea75b30f1d467c0a359fe2d9b8e6",
+}
 MAINTENANCE_AUTHORIZATIONS = {
+    UI_EXECUTION_CLOSURE_AUTHORIZATION: {
+        "instructionSha256": UI_EXECUTION_CLOSURE_INSTRUCTION_SHA256,
+        "allowedChangePaths": {SELF_KEY, *UI_EXECUTION_CLOSURE_ALLOWED_AFTER},
+        "allowedAfterSha256": UI_EXECUTION_CLOSURE_ALLOWED_AFTER,
+    },
     'user-20261028-native-image-copy-error-detail': {'instructionSha256': '8fce75de5cce301189aca6e2b6f306f6bb41b3d95786802e42445c9913792441', 'allowedChangePaths': {SELF_KEY, 'scripts/native_image_content_driver.py'}, 'allowedAfterSha256': {'scripts/native_image_content_driver.py': 'eabd427dee5caed32a7bcc2b6487b601618a7b5058a8cbfe06a00d7af892387b'}},
     'user-20261028-native-image-content-copy': {'instructionSha256': '8fce75de5cce301189aca6e2b6f306f6bb41b3d95786802e42445c9913792441', 'allowedChangePaths': {'scripts/native_image_content.jxa', 'scripts/native_ui_post.py', 'scripts/native_image_content_hook.py', 'scripts/native_image_content_driver.py', 'scripts/dependency_maintenance.py', 'scripts/native_image_content.py'}, 'allowedAfterSha256': {'scripts/native_image_content_hook.py': '3b432103936415c94485f2b2ad017d0b1e2fabcfd79bd3165cd71573392c7dad', 'scripts/native_image_content.py': '53e53e8c9c96550970374f99e8e1c37af71c95d3c6b7f46eaa383217e53ebedc', 'scripts/native_image_content_driver.py': 'e2d66dcde00b4f14084c4b0fe480f71c86f896e4cf6c7bdc57bd2d2df3cf91ef', 'scripts/native_image_content.jxa': '6c812071ded7d68f035fd2e41a1c5205e5fecca765c0a10a4dc3c176c1c3660b', 'scripts/native_ui_post.py': 'e59ebe38f6685888cb6f1465ab2647dc1fe39bbb75dc75a622d1832e6ee41407'}},
     'user-20261028-native-media-anchor-shift': {'instructionSha256': 'dfa8a44d577f91e092bb92a7d8eac777012a9d863d7d8f4410f2f5d903626c45', 'allowedChangePaths': {SELF_KEY, 'scripts/native_ui_post.py'}, 'allowedAfterSha256': {'scripts/native_ui_post.py': 'd7f686a1d2815191ac69c580cdba642488de8bfe031521337dda7ee66a8a9555'}},
@@ -683,7 +707,8 @@ def _validate_expiry(value: str, now: datetime | None = None) -> datetime:
 def _candidate(manifest: dict, root: Path = ROOT, *,
                include_business_storage: bool = False,
                include_native_image_wait: bool = False,
-               include_native_image_content: bool = False) -> tuple[dict, list[dict]]:
+               include_native_image_content: bool = False,
+               include_ui_execution_closure: bool = False) -> tuple[dict, list[dict]]:
     candidate = copy.deepcopy(manifest)
     files = candidate["files"]
     for legacy_key, current_key in WORKFLOWS_KEY_MIGRATIONS.items():
@@ -715,6 +740,9 @@ def _candidate(manifest: dict, root: Path = ROOT, *,
     if include_native_image_content:
         for key in MAINTENANCE_AUTHORIZATIONS['user-20261028-native-image-content-copy']['allowedAfterSha256']:
             files.setdefault(key, '0' * 64)
+    if include_ui_execution_closure:
+        for key in UI_EXECUTION_CLOSURE_ALLOWED_AFTER:
+            files.setdefault(key, "0" * 64)
     changes = []
     for name in sorted(files):
         expected = files[name]
@@ -818,6 +846,7 @@ def prepare(authorization: str, expires_at: str, output_dir: Path,
             include_business_storage=authorization == BUSINESS_STORAGE_BRIDGE_AUTHORIZATION,
             include_native_image_wait=authorization == 'user-20261028-native-image-readback-wait',
             include_native_image_content=authorization == 'user-20261028-native-image-content-copy',
+            include_ui_execution_closure=authorization == UI_EXECUTION_CLOSURE_AUTHORIZATION,
         ))
         def validate_change_scope():
             allowed = authorization_profile["allowedChangePaths"]
@@ -826,6 +855,15 @@ def prepare(authorization: str, expires_at: str, output_dir: Path,
             changed_paths = {change["path"] for change in changes}
             if not changed_paths <= allowed:
                 raise MaintenanceError("maintenance-scope-disallows-dependency-changes")
+            if authorization == UI_EXECUTION_CLOSURE_AUTHORIZATION:
+                required = {SELF_KEY, *UI_EXECUTION_CLOSURE_ALLOWED_AFTER}
+                if changed_paths != required:
+                    raise MaintenanceError("ui-execution-closure-change-set-mismatch")
+                approved = authorization_profile["allowedAfterSha256"]
+                if any(change["path"] != SELF_KEY and
+                       change["after"] != approved.get(change["path"])
+                       for change in changes):
+                    raise MaintenanceError("ui-execution-closure-unreviewed-dependency-bytes")
             if authorization == PATH_MIGRATION_AUTHORIZATION:
                 approved = authorization_profile.get("allowedAfterSha256") or {}
                 if any(change["path"] != SELF_KEY and

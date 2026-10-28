@@ -162,6 +162,22 @@ CODE_CONSOLIDATION_ALLOWED_CHANGES = {
     "scripts/windows_adapter.py",
     "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/legacy-app-controler/wechat-desktop-control/scripts/wechat_interaction_lock.py",
 }
+UI_EXECUTION_CLOSURE_AUTHORIZATION = "user-20261028-ui-execution-closure"
+UI_EXECUTION_CLOSURE_INSTRUCTION_SHA256 = (
+    "ad3ab4f8a8bd21f9a84a2c17242733036a90c489ba95eaf5b7208e4d60e33ce3"
+)
+UI_EXECUTION_CLOSURE_ALLOWED_CHANGES = {
+    "scripts/dependency_maintenance.py",
+    "scripts/file_size_policy.py",
+    "scripts/native_ui_tree.py",
+    "scripts/presentation_policy.py",
+    "scripts/registered_ui_routes.py",
+    "scripts/wecom_adapter.py",
+    "scripts/wecom_ui_queue.py",
+    "config/ui-execution-policy.json",
+    "config/native-ui-selectors.json",
+    "scripts/native_ui_tree.jxa",
+}
 CODE_CONSOLIDATION_LEGACY_LOCATOR = (
     "/Users/ddt/work/projects/ai_agent/skills/skills/app-controler/"
     "wechat-desktop-control/scripts/wechat_desktop.py")
@@ -361,7 +377,9 @@ def _validate_dependency_maintenance_receipt(path: Path | None, expected_sha256:
         else BUSINESS_STORAGE_BRIDGE_INSTRUCTION_SHA256
         if receipt_authorization == BUSINESS_STORAGE_BRIDGE_AUTHORIZATION
         else CODE_CONSOLIDATION_INSTRUCTION_SHA256
-        if receipt_authorization == CODE_CONSOLIDATION_AUTHORIZATION else None)
+        if receipt_authorization == CODE_CONSOLIDATION_AUTHORIZATION
+        else UI_EXECUTION_CLOSURE_INSTRUCTION_SHA256
+        if receipt_authorization == UI_EXECUTION_CLOSURE_AUTHORIZATION else None)
     checks = (
         receipt.get("action") == "prepare",
         receipt.get("status") == "prepared",
@@ -369,7 +387,8 @@ def _validate_dependency_maintenance_receipt(path: Path | None, expected_sha256:
                                   ZERO_SEND_DRAFT_AUTHORIZATION,
                                   PATH_MIGRATION_AUTHORIZATION,
                                   BUSINESS_STORAGE_BRIDGE_AUTHORIZATION,
-                                  CODE_CONSOLIDATION_AUTHORIZATION),
+                                  CODE_CONSOLIDATION_AUTHORIZATION,
+                                  UI_EXECUTION_CLOSURE_AUTHORIZATION),
         receipt.get("userInstructionSha256") == expected_instruction_hash,
         receipt.get("sendAttempts") == 0,
         receipt.get("runtimeModelDecisions") == 0,
@@ -440,6 +459,8 @@ def _validate_dependency_maintenance_receipt(path: Path | None, expected_sha256:
         allowed = BUSINESS_STORAGE_BRIDGE_ALLOWED_CHANGES
     elif receipt_authorization == CODE_CONSOLIDATION_AUTHORIZATION:
         allowed = CODE_CONSOLIDATION_ALLOWED_CHANGES
+    elif receipt_authorization == UI_EXECUTION_CLOSURE_AUTHORIZATION:
+        allowed = UI_EXECUTION_CLOSURE_ALLOWED_CHANGES
     else:
         allowed = AUTHORIZED_ZERO_SEND_DRAFT_PATHS
     if set(by_path) - allowed:

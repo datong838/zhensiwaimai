@@ -256,6 +256,65 @@ class DependencyMaintenanceTests(unittest.TestCase):
         candidate,_=maintenance._candidate(manifest,include_business_storage=True)
         self.assertIn(maintenance.BUSINESS_STORAGE_KEY,candidate['files'])
 
+    def test_ui_execution_closure_adds_only_exact_reviewed_dependencies(self):
+        directory, root, manifest = self.clean_merchant_fixture(); self.addCleanup(directory.cleanup)
+        reviewed = {}
+        for index, name in enumerate(maintenance.UI_EXECUTION_CLOSURE_ALLOWED_AFTER):
+            target = root / name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text(f"reviewed-{index}", encoding="utf-8")
+            reviewed[name] = maintenance.sha256(target)
+        value = json.loads(manifest.read_text(encoding="utf-8"))
+        value["files"][maintenance.SELF_KEY] = "0" * 64
+        manifest.write_text(json.dumps(value), encoding="utf-8")
+        profile = {
+            "instructionSha256": maintenance.UI_EXECUTION_CLOSURE_INSTRUCTION_SHA256,
+            "allowedChangePaths": {maintenance.SELF_KEY, *reviewed},
+            "allowedAfterSha256": reviewed,
+        }
+        with patch.object(maintenance, "UI_EXECUTION_CLOSURE_ALLOWED_AFTER", reviewed), \
+             patch.dict(maintenance.MAINTENANCE_AUTHORIZATIONS,
+                        {maintenance.UI_EXECUTION_CLOSURE_AUTHORIZATION: profile}):
+            result = maintenance.prepare(
+                maintenance.UI_EXECUTION_CLOSURE_AUTHORIZATION, self.expiry(), root / "out",
+                manifest, root, lambda *_: {"ok": True, "elapsedMs": 1, "testCount": 9})
+        self.assertTrue(result["ok"], result)
+        self.assertEqual(
+            {item["path"] for item in result["changes"]},
+            {maintenance.SELF_KEY, *reviewed},
+        )
+        stored = json.loads(manifest.read_text(encoding="utf-8"))["files"]
+        self.assertTrue(all(stored[name] == digest for name, digest in reviewed.items()))
+
+    def test_ui_execution_closure_rejects_incomplete_change_set(self):
+        directory, root, manifest = self.clean_merchant_fixture(); self.addCleanup(directory.cleanup)
+        reviewed = {}
+        for index, name in enumerate(maintenance.UI_EXECUTION_CLOSURE_ALLOWED_AFTER):
+            target = root / name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text(f"reviewed-{index}", encoding="utf-8")
+            reviewed[name] = maintenance.sha256(target)
+        first = next(iter(reviewed))
+        value = json.loads(manifest.read_text(encoding="utf-8"))
+        value["files"][first] = reviewed[first]
+        value["files"][maintenance.SELF_KEY] = "0" * 64
+        manifest.write_text(json.dumps(value), encoding="utf-8")
+        before = manifest.read_bytes()
+        profile = {
+            "instructionSha256": maintenance.UI_EXECUTION_CLOSURE_INSTRUCTION_SHA256,
+            "allowedChangePaths": {maintenance.SELF_KEY, *reviewed},
+            "allowedAfterSha256": reviewed,
+        }
+        with patch.object(maintenance, "UI_EXECUTION_CLOSURE_ALLOWED_AFTER", reviewed), \
+             patch.dict(maintenance.MAINTENANCE_AUTHORIZATIONS,
+                        {maintenance.UI_EXECUTION_CLOSURE_AUTHORIZATION: profile}):
+            result = maintenance.prepare(
+                maintenance.UI_EXECUTION_CLOSURE_AUTHORIZATION, self.expiry(), root / "out",
+                manifest, root, lambda *_: self.fail("incomplete scope must stop before tests"))
+        self.assertFalse(result["ok"])
+        self.assertEqual(result["reason"], "ui-execution-closure-change-set-mismatch")
+        self.assertEqual(manifest.read_bytes(), before)
+
 
 class NativeCopyErrorMaintenanceTests(unittest.TestCase):
     fixture = DependencyMaintenanceTests.fixture

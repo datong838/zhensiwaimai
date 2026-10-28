@@ -1,0 +1,133 @@
+{
+  "ok": true,
+  "action": "prepare",
+  "status": "prepared",
+  "review": [
+    {
+      "label": "维护授权",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "授权有效期",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "读取依赖清单",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "计算候选摘要",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 9
+    },
+    {
+      "label": "授权范围",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "统一微信完整离线测试",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 4297
+    },
+    {
+      "label": "原子写入依赖清单",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "依赖清单回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 2
+    },
+    {
+      "label": "统一入口完整性回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 37
+    }
+  ],
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "authorization": "user-20261028-ui-execution-closure",
+  "expiresAt": "2026-10-28T23:55:00+08:00",
+  "userInstructionSha256": "ad3ab4f8a8bd21f9a84a2c17242733036a90c489ba95eaf5b7208e4d60e33ce3",
+  "dependencyManifestPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/dependencies.json",
+  "dependencyManifestBeforeSha256": "2f905f78072ce89d84c09ef6083f07413511f579c6561ad14cbf2eea267eaac7",
+  "dependencyManifestAfterSha256": "786afa09248a826bd91b9f53a4b76f129527b902c46fc5af316e99cdca887242",
+  "changes": [
+    {
+      "path": "config/native-ui-selectors.json",
+      "before": "0000000000000000000000000000000000000000000000000000000000000000",
+      "after": "04d0bf97e3e1a6a743400dd8c82a06171ab921824ee7f598f6891dbf118747f9"
+    },
+    {
+      "path": "config/ui-execution-policy.json",
+      "before": "0000000000000000000000000000000000000000000000000000000000000000",
+      "after": "5332b773fbf5c1044f47da9867e08c58ab122908e66582219734bf4171017351"
+    },
+    {
+      "path": "scripts/dependency_maintenance.py",
+      "before": "92b9f7c27bf0766598b6546cab894680001b0aedce17eeddce877fa85c23dae9",
+      "after": "560c1b3babef6c4f41015406ab8bbe2a5b88aa30cebe62f9790f732ea27d7a89"
+    },
+    {
+      "path": "scripts/file_size_policy.py",
+      "before": "0000000000000000000000000000000000000000000000000000000000000000",
+      "after": "bbee1269d339bd21583b626451ef4772a1d5a4222ca5abb892bd4ab0f9173299"
+    },
+    {
+      "path": "scripts/native_ui_tree.jxa",
+      "before": "0000000000000000000000000000000000000000000000000000000000000000",
+      "after": "bba531ba0fed9b84f82f57146dae4dee70afea75b30f1d467c0a359fe2d9b8e6"
+    },
+    {
+      "path": "scripts/native_ui_tree.py",
+      "before": "0000000000000000000000000000000000000000000000000000000000000000",
+      "after": "89d6e21e6f3303eca512154994ae03ffc7716908ffd1f4b3476a45b5dd4b66a7"
+    },
+    {
+      "path": "scripts/presentation_policy.py",
+      "before": "0000000000000000000000000000000000000000000000000000000000000000",
+      "after": "cea830bd3ac88a90a34932e1b3c80a1557de5c63c3724cdf9f56111d5129c507"
+    },
+    {
+      "path": "scripts/registered_ui_routes.py",
+      "before": "0000000000000000000000000000000000000000000000000000000000000000",
+      "after": "154fa6fb7dba37822f39c6b2d23920403ba635bbb46b9d365757b26dd3a9c010"
+    },
+    {
+      "path": "scripts/wecom_adapter.py",
+      "before": "0000000000000000000000000000000000000000000000000000000000000000",
+      "after": "d14448385606c83a58b96f640300049a4001db693e6a3d3a4a5884f6bb6aebd1"
+    },
+    {
+      "path": "scripts/wecom_ui_queue.py",
+      "before": "0000000000000000000000000000000000000000000000000000000000000000",
+      "after": "5ceb7ae15972a4b2564471c72eac6a94fb8d41bcc51adfffa9e14e9cdbc1e9ba"
+    }
+  ],
+  "tests": {
+    "ok": true,
+    "elapsedMs": 4297,
+    "testCount": 466
+  },
+  "capabilityCheck": {
+    "ok": true,
+    "elapsedMs": 37,
+    "testCount": null
+  },
+  "candidateFileCount": 47,
+  "elapsedMs": 4348
+}

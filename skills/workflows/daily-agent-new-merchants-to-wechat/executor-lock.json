@@ -45,11 +45,11 @@
     },
     "messaging_dependencies": {
       "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/dependencies.json",
-      "sha256": "2f905f78072ce89d84c09ef6083f07413511f579c6561ad14cbf2eea267eaac7"
+      "sha256": "786afa09248a826bd91b9f53a4b76f129527b902c46fc5af316e99cdca887242"
     },
     "messaging_dependency_maintenance": {
       "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/dependency_maintenance.py",
-      "sha256": "92b9f7c27bf0766598b6546cab894680001b0aedce17eeddce877fa85c23dae9"
+      "sha256": "560c1b3babef6c4f41015406ab8bbe2a5b88aa30cebe62f9790f732ea27d7a89"
     },
     "workflow_executor": {
       "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-agent-new-merchants-to-wechat/scripts/workflow_executor.py",
@@ -57,7 +57,7 @@
     },
     "maintenance_executor": {
       "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-agent-new-merchants-to-wechat/scripts/maintenance_executor.py",
-      "sha256": "be0367e37d0add8da39ddc032a62a5705e65185962b5c531100b9c3d63bc1e61"
+      "sha256": "11b218ae042adb4271f7d5c69d09837be24c5e6e02c3036d7cf92eecd6aa4c29"
     },
     "integrity_gate": {
       "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-agent-new-merchants-to-wechat/scripts/executor_integrity.py",
@@ -209,12 +209,12 @@
   "unsealedAcceptance": {
     "authorization": "user-20260916-production-hardening",
     "authorizedAt": "2026-10-27T23:12:58.918012+08:00",
-    "expiresAt": "2026-10-28T20:00:00+08:00",
+    "expiresAt": "2026-10-28T23:55:00+08:00",
     "scope": "Code-owned maintenance candidate; next real nonempty merchant send; automatic reseal only",
     "userInstruction": "允许新增代码化维护执行器，并将生产锁切换为验收态，等待下一家真实商家自动重新封板。",
     "userInstructionSha256": "b671e190e7db45c601f3bc1221a84670af584ac31d7faf7bb9896e2e5ec704b1",
     "maintenanceAuthorization": "user-20261005-sealed-dependency-resync",
-    "maintenanceReceiptPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/native-image-content-live-failure-20261028/merchant-error-detail-sync/maintenance-receipt.json",
-    "maintenanceReceiptSha256": "29564a915a16e06fa99471e186b7cc615503a851b8773225e967c28996eb545f"
+    "maintenanceReceiptPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/wecom-ui-closure-20261028/merchant/maintenance-receipt.json",
+    "maintenanceReceiptSha256": "8c23661d59dbf8c7968986261b32255e66045092679f6e3b4363f869e5b3b59a"
   }
 }

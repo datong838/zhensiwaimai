@@ -25,3 +25,21 @@ const errorFrozen=structuredClone(errorInput),errorResult=publicDependencyResync
 for(const mutation of [{tests:{ok:true,testCount:462}},{authorization:'other'},{userInstructionSha256:'wrong'},{sendAttempts:1},{expiresAt:'2026-10-28T18:00:00+08:00'}])assert.throws(()=>publicDependencyResyncCandidate({...errorInput,receipt:{...errorInput.receipt,...mutation}}),/receipt-invalid/);
 for(const changes of [errorInput.receipt.changes.slice(1),[...errorInput.receipt.changes,{path:'scripts/native_ui_post.py',after:'x'}],errorInput.receipt.changes.map((c,i)=>i===0?{...c,after:'wrong'}:c),errorInput.receipt.changes.map((c,i)=>i===1?{...c,after:'wrong'}:c)])assert.throws(()=>publicDependencyResyncCandidate({...errorInput,receipt:{...errorInput.receipt,changes}}),/change-scope/);
 assert.deepEqual(errorInput,errorFrozen);console.log(JSON.stringify({ok:true,errorDetailTests:11,sendAttempts:0,businessStateModified:false}));
+
+const uiAfter={
+  'scripts/file_size_policy.py':'bbee1269d339bd21583b626451ef4772a1d5a4222ca5abb892bd4ab0f9173299',
+  'scripts/native_ui_tree.py':'89d6e21e6f3303eca512154994ae03ffc7716908ffd1f4b3476a45b5dd4b66a7',
+  'scripts/presentation_policy.py':'cea830bd3ac88a90a34932e1b3c80a1557de5c63c3724cdf9f56111d5129c507',
+  'scripts/registered_ui_routes.py':'154fa6fb7dba37822f39c6b2d23920403ba635bbb46b9d365757b26dd3a9c010',
+  'scripts/wecom_adapter.py':'d14448385606c83a58b96f640300049a4001db693e6a3d3a4a5884f6bb6aebd1',
+  'scripts/wecom_ui_queue.py':'5ceb7ae15972a4b2564471c72eac6a94fb8d41bcc51adfffa9e14e9cdbc1e9ba',
+  'config/ui-execution-policy.json':'5332b773fbf5c1044f47da9867e08c58ab122908e66582219734bf4171017351',
+  'config/native-ui-selectors.json':'04d0bf97e3e1a6a743400dd8c82a06171ab921824ee7f598f6891dbf118747f9',
+  'scripts/native_ui_tree.jxa':'bba531ba0fed9b84f82f57146dae4dee70afea75b30f1d467c0a359fe2d9b8e6'
+};
+const uiReceipt={ok:true,action:'prepare',status:'prepared',sendAttempts:0,runtimeModelDecisions:0,authorization:'user-20261028-ui-execution-closure',userInstructionSha256:'ad3ab4f8a8bd21f9a84a2c17242733036a90c489ba95eaf5b7208e4d60e33ce3',expiresAt:'2026-10-28T23:59:00+08:00',tests:{ok:true,testCount:1},capabilityCheck:{ok:true},dependencyManifestPath:publicPath,dependencyManifestBeforeSha256:'before-ui',dependencyManifestAfterSha256:'after-ui',changes:[{path:'scripts/dependency_maintenance.py',before:'0'.repeat(64),after:'1'.repeat(64)},...Object.entries(uiAfter).map(([path,after])=>({path,before:'0'.repeat(64),after}))]};
+const uiInput={...input,manifest:{...input.manifest,files:{...input.manifest.files,[publicPath]:'before-ui'}},receipt:uiReceipt,publicHash:'after-ui',now:'2026-10-28T22:00:00+08:00'};
+const uiFrozen=structuredClone(uiInput),uiResult=publicDependencyResyncCandidate(uiInput);assert.equal(uiResult.files[publicPath],'after-ui');assert.deepEqual(uiInput,uiFrozen);
+for(const changes of [uiReceipt.changes.slice(1),uiReceipt.changes.map((entry,index)=>index===1?{...entry,after:'f'.repeat(64)}:entry)])assert.throws(()=>publicDependencyResyncCandidate({...uiInput,receipt:{...uiReceipt,changes}}),/change-scope/);
+for(const mutation of [{authorization:'other'},{userInstructionSha256:'wrong'},{sendAttempts:1},{expiresAt:'2026-10-28T21:00:00+08:00'}])assert.throws(()=>publicDependencyResyncCandidate({...uiInput,receipt:{...uiReceipt,...mutation}}),/receipt-invalid/);
+console.log(JSON.stringify({ok:true,uiClosureTests:7,sendAttempts:0,businessStateModified:false}));

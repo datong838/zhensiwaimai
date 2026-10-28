@@ -356,6 +356,57 @@ class MaintenanceExecutorTests(unittest.TestCase):
             "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/legacy-app-controler/wechat-desktop-control/scripts/wechat_interaction_lock.py",
         })
 
+    def test_ui_execution_closure_receipt_is_exactly_scoped(self):
+        directory = tempfile.TemporaryDirectory(); self.addCleanup(directory.cleanup)
+        root = Path(directory.name); locator = root / "desktop.py"; locator.write_text("locator")
+        dependency = root / "dependencies.json"
+        files = {str(locator): maintenance.sha256(locator)}
+        for index, name in enumerate(maintenance.UI_EXECUTION_CLOSURE_ALLOWED_CHANGES):
+            target = root / name; target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text(f"ui-{index}")
+            files[name] = maintenance.sha256(target)
+        dependency.write_text(json.dumps({"schemaVersion": 1, "files": files}))
+        before = "1" * 64
+        lock_manifest = {"files": {
+            "shared_desktop_locator": {"path": str(locator), "sha256": maintenance.sha256(locator)},
+            "messaging_dependencies": {"path": str(dependency.resolve()), "sha256": before},
+        }}
+        receipt = root / "receipt.json"
+        changes = [{"path": name, "before": "0" * 64, "after": digest}
+                   for name, digest in files.items() if name != str(locator)]
+        receipt.write_text(json.dumps({
+            "action": "prepare", "status": "prepared",
+            "authorization": maintenance.UI_EXECUTION_CLOSURE_AUTHORIZATION,
+            "userInstructionSha256": maintenance.UI_EXECUTION_CLOSURE_INSTRUCTION_SHA256,
+            "dependencyManifestPath": str(dependency.resolve()),
+            "dependencyManifestBeforeSha256": before,
+            "dependencyManifestAfterSha256": maintenance.sha256(dependency),
+            "changes": changes, "tests": {"ok": True, "testCount": 1},
+            "capabilityCheck": {"ok": True}, "sendAttempts": 0,
+            "runtimeModelDecisions": 0,
+        }))
+        candidate = {"shared_desktop_locator": {"path": str(locator),
+                     "sha256": maintenance.sha256(locator)}}
+        shared_maint = root / "scripts/dependency_maintenance.py"
+        with patch.object(maintenance, "WECHAT_ROOT", root), \
+             patch.object(maintenance, "DEPENDENCY_MANIFEST", dependency), \
+             patch.object(maintenance, "DEPENDENCY_MAINTENANCE", shared_maint), \
+             patch.object(maintenance, "AUTHORIZED_SHARED_LOCATOR_PATH", str(locator)), \
+             patch.object(maintenance.executor_integrity, "RUNTIME_FILES",
+                          {"shared_desktop_locator": locator}):
+            verified = maintenance._validate_dependency_maintenance_receipt(
+                receipt, maintenance.sha256(receipt), lock_manifest, candidate)
+            self.assertEqual({row["path"] for row in verified["changes"]},
+                             maintenance.UI_EXECUTION_CLOSURE_ALLOWED_CHANGES)
+            altered = json.loads(receipt.read_text())
+            altered["changes"].append({"path": "scripts/extra.py", "before": "0" * 64,
+                                       "after": "f" * 64})
+            receipt.write_text(json.dumps(altered))
+            with self.assertRaisesRegex(maintenance.MaintenanceError,
+                                        "change-scope-mismatch"):
+                maintenance._validate_dependency_maintenance_receipt(
+                    receipt, maintenance.sha256(receipt), lock_manifest, candidate)
+
     def test_zero_send_recovery_binds_clean_receipt_to_registered_manifest_path(self):
         directory = tempfile.TemporaryDirectory(); self.addCleanup(directory.cleanup)
         root = Path(directory.name); locator = root / "desktop.py"; locator.write_text("current")

@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "scope": "wechat-native-ui-execution-dependency-closure-and-three-consumer-resync",
+  "authorization": "user-20261028-ui-execution-closure",
+  "userInstructionSha256": "ad3ab4f8a8bd21f9a84a2c17242733036a90c489ba95eaf5b7208e4d60e33ce3",
+  "observedAt": "2026-10-28T22:36:38+08:00",
+  "shared": {
+    "beforeSha256": "2f905f78072ce89d84c09ef6083f07413511f579c6561ad14cbf2eea267eaac7",
+    "afterSha256": "786afa09248a826bd91b9f53a4b76f129527b902c46fc5af316e99cdca887242",
+    "candidateFileCount": 47,
+    "inspectStatus": "clean",
+    "receiptPath": "runtime/state/wecom-ui-closure-20261028/shared/receipt.json",
+    "receiptSha256": "585ef6404e2cf78917be31905e7a3b12c050d8311e987f1a18ae23a555eb79ef",
+    "registeredUiClosureFileCount": 9,
+    "registryRoutingExternalized": true
+  },
+  "consumers": {
+    "daily-top10-to-wechat-group": {
+      "sharedManifestSha256": "786afa09248a826bd91b9f53a4b76f129527b902c46fc5af316e99cdca887242",
+      "receiptPath": "runtime/state/wecom-ui-closure-20261028/top10/receipt.json",
+      "receiptSha256": "5cc13643245c2d35c8c1d527921e2c9f000b44d3b6cdaab819d3084eaaba2fbb",
+      "sendAttempts": 0
+    },
+    "daily-negative-reviews": {
+      "sharedManifestSha256": "786afa09248a826bd91b9f53a4b76f129527b902c46fc5af316e99cdca887242",
+      "status": "UNSEALED_ACCEPTANCE",
+      "allowedBusinessDate": "2026-10-27",
+      "receiptPath": "runtime/state/native-image-content-install-20261028/negative-public-resync-585ef6404e2c/receipt.json",
+      "receiptSha256": "6936753e6b1ab2103d2a588bf60c0bb2d43e79c97c32fd3906cc8d5a0deebf16",
+      "businessFilesUnchanged": true,
+      "sendAttempts": 0
+    },
+    "daily-agent-new-merchants-to-wechat": {
+      "sharedManifestSha256": "786afa09248a826bd91b9f53a4b76f129527b902c46fc5af316e99cdca887242",
+      "status": "SEALED",
+      "acceptanceMerchantId": "545376966",
+      "acceptanceReceiptSha256": "e0d129c65a22b7943ada1bf443d846e8443c2d9e7169444ce4817fcfbd6ea553",
+      "acceptanceMessageSha256": "eeb630e0d9351d53a4d84e3085a3299f6587bd7128c6d8191ac99ec149345928",
+      "receiptPath": "runtime/state/wecom-ui-closure-20261028/merchant/maintenance-receipt.json",
+      "receiptSha256": "8c23661d59dbf8c7968986261b32255e66045092679f6e3b4363f869e5b3b59a",
+      "sendAttempts": 0
+    }
+  },
+  "tests": {
+    "wechatMessaging": 466,
+    "top10Python": 34,
+    "top10NodeScenarios": 54,
+    "negativeReviewNodeGroups": 8,
+    "negativeReviewPython": 4,
+    "newMerchant": 149
+  },
+  "runtime": {
+    "directorPid": 24510,
+    "directorCycleAt": "2026-10-28T22:35:05+08:00",
+    "directorAllGreen": true,
+    "chromePids": {
+      "9230": 12961,
+      "9231": 3212,
+      "9232": 89873,
+      "9233": 7155
+    },
+    "liveSteps": [],
+    "newUiQueueFilesAfterMaintenanceStart": [],
+    "browserRestarts": 0,
+    "productionSends": 0,
+    "runtimeModelDecisions": 0
+  },
+  "preserved": {
+    "attemptedUnknownRewritten": false,
+    "businessLedgerOrCursorModified": false,
+    "newBusinessAcceptanceClaimed": false,
+    "imageTechnicalUnknownPromoted": false,
+    "nightMaintenanceRepeated": false
+  }
+}
