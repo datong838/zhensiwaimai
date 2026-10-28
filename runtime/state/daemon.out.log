@@ -47805,3 +47805,29 @@
 [skip] daily-new-stores-decoration-audit-to-wechat 当日已成功（cadence 内），本周期跳过
 
 ▶ 执行 daily-new-stores-not-nourished-ops-to-wechat (dev=active)
+  → status=SUCCESS category=SUCCESS attempts=1 next=无需动作
+[skip] daily-store-task-completion-ops-to-wechat not_due，本周期跳过
+[skip] daily-store-basic-diagnosis-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-taobao-download-to-jinsha not_due，本周期跳过
+
+▶ 执行 daily-service-market-ranking-to-wechat (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] daily-service-market-ranking-to-wechat -> UNKNOWN : reason=prior-attempt-requires-read-only-reconciliation (receipt:reason)
+[skip] daily-top10-to-wechat-group delivery_verification_pending，本周期跳过
+
+▶ 执行 daily-meituan-income-top10-to-wechat (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] daily-meituan-income-top10-to-wechat -> UNKNOWN : reason=prior-attempt-requires-read-only-reconciliation (receipt:reason)
+
+▶ 执行 daily-negative-reviews (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] daily-negative-reviews -> UNKNOWN : reason=image-submission-awaits-read-only-verification (receipt:reason)
+
+▶ 执行 contract-termination-applications-screenshot (dev=active)
+  → status=FAILED category=UNKNOWN attempts=1 next=看护代理读日志定位根因后升级处理
+[alert] contract-termination-applications-screenshot -> UNKNOWN : reason=prior-attempt-requires-read-only-reconciliation (receipt:reason)
+[skip] daily-jinsha-reports-to-business-wechat 当日已成功（cadence 内），本周期跳过
+[ok] 台账 xlsx 已生成: /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/work/2026-10-28臻肆工作台账.xlsx (active 9/22)
+
+=== 发送门判断 ===
+[warn] 未全绿（有失败/待适配）：仅落盘 + 告警，不发送 AI 员工群。
