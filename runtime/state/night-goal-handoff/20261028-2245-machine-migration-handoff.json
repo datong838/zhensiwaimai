@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-28T22:45:00+08:00",
+  "purpose": "new-machine-readonly-handoff-before-explicit-cutover",
+  "repositoryPathPolicy": {
+    "base": "repository-root",
+    "instruction": "All paths in this handoff are repository-relative. Resolve them from the repository root on the new machine.",
+    "oldMachineAbsolutePathReusable": false,
+    "historicalSnapshotsMayContainOldPaths": true,
+    "historicalPathRule": "Historical absolute paths are evidence only and must not be copied into new-machine configuration."
+  },
+  "source": {
+    "threadId": "01a18298-0a79-7481-b24a-0b1743a38edf",
+    "goalStatus": "active",
+    "goalObservedAt": "2026-10-28T22:41:09+08:00",
+    "originalObjectivePath": "runtime/state/night-goal-handoff/20261028-evening-original-goal.json",
+    "originalObjectiveFileSha256": "dcded41ff8d12c789e34853a7261822af55e0d8f0311646e4f9b2fec1f195e30",
+    "objectiveExactMatchWithCurrentGoal": true,
+    "goalMustRemainActiveForThisDocumentationUpdate": true
+  },
+  "code": {
+    "branch": "main",
+    "head": "8e875481a60ec6e29607508b6172c0e96dee315b",
+    "originMain": "8e875481a60ec6e29607508b6172c0e96dee315b",
+    "verifiedAt": "2026-10-28T22:41:09+08:00",
+    "migrationRule": "Use this revision or a later reviewed main revision; verify local HEAD equals the intended remote revision before starting services."
+  },
+  "completed": [
+    {
+      "item": "2026-10-28 customer ledger",
+      "result": "24 of 24 complete and the original ledger delivery is verified once",
+      "evidence": "runtime/state/night-goal-handoff/20261028-evening-full-handoff.json",
+      "mustNotRepeat": true
+    },
+    {
+      "item": "22:00 four-post browser maintenance",
+      "result": "success; all four posts complete; original Chrome processes unchanged; zero production sends",
+      "evidence": "runtime/state/night-maintenance-2026-10-28/2200-receipt.json",
+      "mustNotRepeat": true
+    },
+    {
+      "item": "WeCom native UI shared dependency closure",
+      "result": "47-file shared manifest clean; Top10, negative review and new-merchant consumers synchronized with zero sends",
+      "evidence": "runtime/state/wecom-ui-closure-20261028/final-audit.json",
+      "commit": "8e875481a60ec6e29607508b6172c0e96dee315b",
+      "mustNotRepeat": true
+    },
+    {
+      "item": "new-merchant acceptance",
+      "result": "SEALED with original real non-empty acceptance for merchant 545376966",
+      "mustNotDowngrade": true
+    }
+  ],
+  "currentOldMachineSnapshot": {
+    "snapshotOnly": true,
+    "notNewMachineAuthority": true,
+    "director": {
+      "service": "com.zhensi.waimai.careloop",
+      "state": "running",
+      "pid": 24510,
+      "startedAt": "2026-10-28T21:27:37+08:00",
+      "lastCycleAt": "2026-10-28T22:40:05+08:00",
+      "allGreen": true
+    },
+    "browserPids": {
+      "9230": 12961,
+      "9231": 3212,
+      "9232": 89873,
+      "9233": 7155
+    },
+    "liveSteps": [],
+    "warning": "Do not reuse these PIDs, locks, profiles or login state on the new machine."
+  },
+  "unfinished": [
+    {
+      "priority": "P1",
+      "item": "normal-production inline image pixel readback",
+      "state": "needs the next legitimate image task for real validation",
+      "boundary": "Do not send a test image and do not resend any attempted or unknown event."
+    },
+    {
+      "priority": "P1",
+      "item": "product list identity, ordering and SSO return diagnosis",
+      "state": "precise list response is fixed; full source identity and SSO routing still require zero-send diagnosis",
+      "boundary": "Do not guess permissions or rerun production."
+    },
+    {
+      "priority": "P1",
+      "item": "strict registry-routing schema and change audit",
+      "state": "registry-routing.json remains intentionally external to the shared code seal",
+      "boundary": "Do not mix it directly into the code seal."
+    },
+    {
+      "priority": "P1-external",
+      "item": "2026-10-29 remote three-flow summary",
+      "state": "not yet provided; missing is non-blocking for this machine's 24-flow work",
+      "boundary": "Do not inspect, modify or take over the other machine's three flows."
+    },
+    {
+      "priority": "P1-natural-validation",
+      "item": "2026-10-29 fresh data and normal shift receipts",
+      "state": "must be revalidated at the real schedule on the new business date",
+      "boundary": "Static GREEN and old-machine receipts do not replace new-date delivery."
+    }
+  ],
+  "authoritativeDocuments": [
+    "skills/mechanisms/zhensi-supervisor-patrol/SKILL.md",
+    "skills/wechat-messaging/SKILL.md",
+    "docs/operations/每日0800监理启动与持续值守.md",
+    "docs/operations/20261024-企业微信UI岗位执行约定.md",
+    "docs/operations/20261024-机制运行规范与客户迁移交接.md",
+    "docs/operations/客户机器迁移前检查.md",
+    "docs/operations/每日2000台账后收口与新对话交接制度.md",
+    "docs/operations/20261028-台账后遗留与明日预检.md",
+    "runtime/skills_manifest.json"
+  ],
+  "automation": {
+    "count": 5,
+    "ids": [
+      "02-goal-10-27",
+      "06-goal-10-27",
+      "automation",
+      "20",
+      "22-im"
+    ],
+    "authoritativeCurrentSnapshot": "runtime/state/night-goal-handoff/automation-transfer-20261028.json",
+    "preTransferSnapshot": "runtime/state/next-day-preflight/2026-10-29/automation-before-transfer.json",
+    "notTransferredByThisUpdate": true,
+    "cutoverRule": "Transfer only after the new machine and receiving chat pass read-only acceptance and the old production control channel has been fenced. Preserve schedule, status and notification settings; replace target ownership and any embedded old thread identifier."
+  },
+  "newMachineSequence": [
+    "Clone or update the repository and resolve every path from the repository root.",
+    "Verify the intended main revision and read every authoritative document before changing configuration.",
+    "Install local interpreters, browser-post dependencies, WeCom native UI provider and the four isolated browser posts without copying credentials or session stores.",
+    "Keep the old machine as the sole production owner while running offline checks and synthetic non-production validation.",
+    "At an explicit cutover window, verify no live step or production lock, fence the old scheduler, then transfer Goal and all five automations exactly once.",
+    "Recreate login state through normal user login when required; recheck business text, risk overlays, queues, ledgers and anti-duplication identity on the new machine.",
+    "Use normal scheduled business runs to obtain new-machine real receipts before declaring migration accepted."
+  ],
+  "hardStops": [
+    "Do not copy Cookie, localStorage, keychain, browser profile credentials or authentication API material.",
+    "Do not run old and new production schedulers at the same time.",
+    "Do not reset ledgers, cursors or anti-duplication state.",
+    "Do not resend attempted, unknown or already verified business events.",
+    "Do not restart or stop the old machine as part of this documentation-only update.",
+    "Do not claim migration completion from documentation, tests or old-machine health."
+  ],
+  "handoffPrompt": "docs/operations/20261028-新机器监理接续交接词.md",
+  "latestEntry": "runtime/state/night-goal-handoff/latest.md",
+  "migrationState": "documentation-ready-cutover-not-started"
+}

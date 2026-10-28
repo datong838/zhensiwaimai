@@ -1,9 +1,13 @@
-# 2026-10-28 晚间正式接班完成
+# 2026-10-28 新机器迁移前最新交接
 
-接班聊天：01a18298-0a79-7481-b24a-0b1743a38edf。源聊天01a17923-bee5-7660-9206-86c007d01918已停止业务施工，官方Goal回读严格null；新聊天Goal已active，完整objective逐字匹配。02/06/08/20/22五项定时均已迁入接班聊天，时间/启停/通知保留，06点嵌入ID已替换，08点旧21流措辞已改最新口径。
+当前接班聊天为 `01a18298-0a79-7481-b24a-0b1743a38edf`，Goal 仍为 `active`，完整原 objective 保存在仓库内 `runtime/state/night-goal-handoff/20261028-evening-original-goal.json`，该原件不改写。当前机器可读交接为 `runtime/state/night-goal-handoff/20261028-2245-machine-migration-handoff.json`，可直接使用的交接词为 `docs/operations/20261028-新机器监理接续交接词.md`。
 
-完整交接：20261028-evening-full-handoff.json；完整原objective：20261028-evening-original-goal.json；官方Goal核验：20261028-evening-official-goal-transfer-verified.json；定时迁移前后：automation-transfer-20261028.json。遗留与明日预检：docs/operations/20261028-台账后遗留与明日预检.md。
+所有交接路径均从仓库根解析。不得把历史材料中的旧机器绝对路径复制到新机器。旧机 PID、锁、浏览器和登录状态只是快照，不是新机验收或所有权凭证；凭据、Cookie、localStorage、钥匙串和浏览器 profile 不迁移。
 
-今日24流业务完成且台账20:47原队列verified一次，不能重发。长期图片政策无日期截止、无需每日人工确认，技术unknown仅内部备注。另一机三流不接管，明日全局27摘要汇合不能阻断本机24流。主任PID58654的旧模块缓存尚待安全生效，自动图片回读、完整动态预检、商品身份/SSO和UI摘要覆盖及22维护继续由新聊天推进。不能把交接成功当成全部工作完成，不伪complete。
+交接记录时，本地 `HEAD` 与 `origin/main` 均为 `8e875481a60ec6e29607508b6172c0e96dee315b`。2026-10-28 的 24 行客户台账、22:00 四岗维护、企业微信 UI 共享依赖闭环均已完成并有原证据，禁止重复发送或重复维护。原主任 22:40 周期 `all_green=true`，但这只证明旧机当时健康。
 
-源聊天仅最终提交迁移收据并发开工信号，新聊天随后连续工作。原主任/浏览器/排班不停止；原06硬截止/08启动/22维护职责和时间保持。旧0606/1904/1937材料为历史证据，冲突以最新用户覆盖和本次真实证据优先。
+仍须接续：下一正常图片任务的真实像素回读；商品列表身份/排序/SSO 零发送诊断；外置 `registry-routing.json` 严格 schema 与变更审计；2026-10-29 另一机器三流摘要；新业务日真实数据、权限、release 和班次回执。另一机器三流不接管，摘要缺失不阻断本机 24 流。
+
+02/06/08/20/22 五项定时的完整历史配置保存在仓库内 `runtime/state/night-goal-handoff/automation-transfer-20261028.json` 和 `runtime/state/next-day-preflight/2026-10-29/automation-before-transfer.json`。本次只更新交接资料，尚未切换机器、Goal 或定时归属。正式切换必须先完成新机只读核收，确认无在途任务并封住旧机调度入口，再一次性迁移；任何时刻只允许一个生产控制通道。
+
+历史晚间完整交接仍保存在 `runtime/state/night-goal-handoff/20261028-evening-full-handoff.json`，与本页冲突时，以最新用户指令、本次机器迁移交接及实时证据为准。不能把资料齐全、测试通过或旧机健康当作新机迁移完成。
