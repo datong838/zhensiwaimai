@@ -1,0 +1,139 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-28",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 49,
+    "task_page": 293,
+    "navigation": 1497,
+    "date_filter": 1109,
+    "page_1_read": 367,
+    "selection_audit": 0,
+    "detail_1365408044": 847,
+    "detail_1364157790": 2500
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_1365408044": "PASS",
+    "detail_1364157790": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "1365408044",
+      "merchantName": "WE LUCKY咖啡·果茶（重庆巴南店）",
+      "recommendTime": "2026-10-28 14:43:39",
+      "city": "重庆市",
+      "status": "待处理",
+      "rowIndex": 1,
+      "sourcePage": 1,
+      "tableOrder": 5,
+      "address": "鱼洞街道鱼轻路1号附8号",
+      "contact": "赖，17382339266",
+      "detailVerified": true,
+      "text": "城市：重庆市  ；  联系人：赖，17382339266  ；  店铺：WE LUCKY咖啡·果茶（重庆巴南店）  ；  地址：鱼洞街道鱼轻路1号附8号  ；  商家ID：1365408044",
+      "sha256": "df0a96faecde92124765c0070cefbca2043c2ea80c6264dabc8a6bcde97890b2"
+    },
+    {
+      "merchantId": "1364157790",
+      "merchantName": "丫妞青花椒炒鸡.砂锅.冒菜",
+      "recommendTime": "2026-10-28 14:46:49",
+      "city": "济南市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 6,
+      "address": "唐景路绿地城一区3号楼1-105二楼01室(一址多照)",
+      "contact": "15562671570，15562671570",
+      "detailVerified": true,
+      "text": "城市：济南市  ；  联系人：15562671570，15562671570  ；  店铺：丫妞青花椒炒鸡.砂锅.冒菜  ；  地址：唐景路绿地城一区3号楼1-105二楼01室(一址多照)  ；  商家ID：1364157790",
+      "sha256": "23f2acc357c407e3d849577c5dedd82985ae05121ff30eb8a9ee0cd45178d05f"
+    }
+  ],
+  "frontmostBefore": "com.openai.codex",
+  "createdAt": "2026-10-28T07:00:10.492Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-28",
+    "merchantName": "三餐四季",
+    "merchantId": "547236519",
+    "recommendTime": "2026-10-28 11:33:02",
+    "tableOrder": 4,
+    "messageSha256": "dd831ce7772dcf4e097fddeefcc68741b29f8af6781a8d52b417cc2178087f52",
+    "sentAt": "2026-10-28T12:00:26+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-28",
+  "filterEndDate": "2026-10-28",
+  "dateFilter": "2026-10-28..2026-10-28",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 6,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 6,
+  "pendingRows": 6,
+  "targetCount": 2,
+  "selectionAudit": {
+    "totalRows": 6,
+    "pendingRows": 6,
+    "excludedAtOrBeforeCursor": 4,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 2,
+    "rows": [
+      {
+        "merchantId": "1364157790",
+        "recommendTime": "2026-10-28 14:46:49",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1365408044",
+        "recommendTime": "2026-10-28 14:43:39",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "547236519",
+        "recommendTime": "2026-10-28 11:33:02",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1346148036",
+        "recommendTime": "2026-10-28 10:39:18",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1271448281",
+        "recommendTime": "2026-10-28 10:32:32",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "545376966",
+        "recommendTime": "2026-10-28 00:53:02",
+        "status": "待处理"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 7186,
+  "frontmostAfter": "com.openai.codex",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261028-150002/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261028-150002/output/collection-attempt-1.review.md"
+}
