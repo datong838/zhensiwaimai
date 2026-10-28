@@ -26,6 +26,25 @@ export function noExecutableSuggestions(snapshot){
  return snapshot.products.every(product=>product.hasSuggestion===false);
 }
 export function optimizationDisposition(snapshot,action){
+ if(snapshot?.imageOnly!==undefined){
+  const image=snapshot.imageOnly;
+  if(!Number.isSafeInteger(snapshot.total)||snapshot.total<=0||snapshot.loading!==false
+    ||snapshot.page!==1||snapshot.hasNext!==false||!Array.isArray(snapshot.products)
+    ||snapshot.products.length!==snapshot.total||action?.count!==0||action.disabled!==null
+    ||image?.rowStructureValid!==true||image.buttonCount!==0
+    ||!Number.isSafeInteger(image.hiddenTabOverflowCount)||image.hiddenTabOverflowCount<0||image.hiddenTabOverflowCount>1
+    ||!Array.isArray(image.tabs)||image.tabs.length!==1||image.tabs[0]?.selected!==true
+    ||image.tabs[0].text!==`图片问题(${snapshot.total})`
+    ||JSON.stringify(image.headers)!==JSON.stringify(['商品名称','图片问题','建议内容','操作'])
+    ||!Array.isArray(image.operatorTexts)||image.operatorTexts.length!==snapshot.total
+    ||image.operatorTexts.some(text=>compact(text)!=='手动优化申诉'))throw Error('quality-product-image-only-incomplete');
+  validateProducts(snapshot);
+  if(snapshot.products.some(product=>typeof product.taskId!=='string'||typeof product.name!=='string'||!product.name.trim()
+    ||product.hasSuggestion!==false||product.issues.some(issue=>!issue||
+    typeof issue.kind!=='string'||!issue.kind.trim()||issue.current!==''||issue.suggestion!=='暂无建议')))
+   throw Error('quality-product-image-only-incomplete');
+  return {action:'skip',reason:'image-only-no-automatic-suggestions'};
+ }
  if(!Number.isSafeInteger(snapshot?.total)||snapshot.total<0||snapshot.loading!==false
    ||!Number.isSafeInteger(snapshot.page)||snapshot.page<1||typeof snapshot.hasNext!=='boolean'
    ||!Array.isArray(snapshot.products)||snapshot.products.length>snapshot.total
@@ -64,18 +83,20 @@ export function recordedUnknown(store,day){
   &&Number.isSafeInteger(rec.currentTotal)&&rec.currentTotal>=0;
 }
 export const SINGLE_PASS='single-pass-per-day-v1';
-export function singlePassNotice(handled,unconfirmed=0,failed=0,rowErrors=0){
+export function singlePassNotice(handled,unconfirmed=0,failed=0,rowErrors=0,imageOnly=0){
+ if(imageOnly)return `淘宝闪购 优质商品率低 门店整改流程已按顺序执行完毕（今日记录了 ${handled} 家门店；${imageOnly} 家仅有图片问题且平台无自动建议，${failed} 家未能执行，${unconfirmed} 家结果未确认，另有 ${rowErrors} 条访问异常，详见Excel）`;
  if(failed||rowErrors)return `淘宝闪购 优质商品率低 门店整改流程已按顺序执行完毕（今日记录了 ${handled} 家门店；${failed} 家未能执行，${unconfirmed} 家结果未确认，另有 ${rowErrors} 条访问异常，详见Excel）`;
  return executionNotice(handled,unconfirmed);
 }
 export function singlePassSummary(state){
  const stores=state.stores||[],optimized=stores.filter(s=>s.state==='completed'&&['confirmed','popoverClosed','uiStable'].every(k=>s.operation?.[k]===true)).length;
  const checked=stores.filter(s=>s.state==='checked_no_action').length;
+ const imageOnly=stores.filter(s=>s.state==='checked_no_action'&&s.reason==='image-only-no-automatic-suggestions').length;
  const unconfirmed=stores.filter(s=>['unknown','attempted'].includes(s.state)&&s.submission?.day===state.day&&s.submission?.shopId===s.shopId&&s.submission?.eventId===state.day+'-quality-'+s.shopId).length;
  const failed=stores.length-optimized-checked-unconfirmed,rowErrors=(state.rowErrors||[]).length;
  return {ok:state.scopeFinished===true,total:stores.length,completed:optimized,optimized,checkedNoAction:checked,attemptedUnconfirmed:unconfirmed,failed,rowErrorCount:rowErrors,
   handled:stores.length,recordRows:stores.length+rowErrors,pending:state.scopeFinished?0:1,unknown:unconfirmed,errors:failed+rowErrors,round:1,
-  observedPlatformTotal:state.latestTotal??null,text:state.scopeFinished?singlePassNotice(stores.length,unconfirmed,failed,rowErrors):null};
+  observedPlatformTotal:state.latestTotal??null,text:state.scopeFinished?singlePassNotice(stores.length,unconfirmed,failed,rowErrors,imageOnly):null};
 }
 export function finishSinglePass(state,current){
  if(state.executionPolicy!==SINGLE_PASS||state.cursor?.round!==1||current.hasNext!==false||current.page!==state.cursor.page||state.cursor.row<current.rows.length)return false;

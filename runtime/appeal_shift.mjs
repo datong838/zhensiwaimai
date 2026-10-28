@@ -3,6 +3,8 @@ import {execFile} from 'node:child_process';
 import {promisify} from 'node:util';
 import {fileURLToPath} from 'node:url';
 import path from 'node:path';
+import fs from 'node:fs/promises';
+import {businessPath} from './business_storage.mjs';
 const exec=promisify(execFile);
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const flows={
@@ -38,8 +40,37 @@ async function originalCli(step) {
     throw error;
   }
 }
-export async function runShift(platform,{date=new Date(),runner=originalCli}={}) {
+export function closingReadOnlyDecision(excel,image){
+  const group='上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰';
+  if(excel?.groupName!==group||excel.payloadType!=='file'||excel.ok!==true||excel.verified!==true||excel.state!=='verified'
+    ||!Number.isSafeInteger(excel.sendAttempts)||excel.sendAttempts<1||image?.groupName!==group||image.payloadType!=='image')return null;
+  if(image.ok===true&&image.verified===true&&image.state==='verified'&&Number.isSafeInteger(image.sendAttempts)&&image.sendAttempts>=1)return {complete:true};
+  if(['unknown','attempted'].includes(image.state)||image.sendAttempts!==0)return {complete:false};
+  return null;
+}
+export function closingBusinessDate(date=new Date()){
+  const format=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit'});
+  const day=format.format(date);return format.format(new Date(Date.parse(day+'T12:00:00+08:00')-86400000));
+}
+export async function readOriginalClosing(platform,date=new Date()){
+  if(!Object.hasOwn(flows,platform))throw Error('unsupported-appeal-platform');
+  const businessDate=closingBusinessDate(date);
+  const prefix=platform==='meituan'?'meituan-waimai-appeals':'taobao-flash-appeals';
+  const base=businessPath(platform==='meituan'?'meituan-appeals':'taobao-appeals');
+  async function read(file){try{return JSON.parse(await fs.readFile(file,'utf8'));}catch(error){if(error.code==='ENOENT')return null;throw error;}}
+  const excel=await read(path.join(base,'wechat-attempts',prefix+'-'+businessDate+'.json'));
+  const image=await read(path.join(base,'summary-attempts',prefix+'-summary-'+businessDate+'.json'));
+  const decision=closingReadOnlyDecision(excel,image);
+  return decision?{...decision,businessDate}:null;
+}
+export async function runShift(platform,{date=new Date(),runner=originalCli,readClosing=readOriginalClosing}={}) {
   const plan=shiftPlan(platform,date),results=[];
+  if(plan.slot==='18:30'){
+    let prior;
+    try{prior=await readClosing(platform,date);}catch(error){return {ok:false,platform,slot:plan.slot,stage:'deliver',reason:'closing-prior-evidence-unreadable:'+String(error.message||error),results,sendAttempts:0};}
+    if(prior)return {ok:prior.complete,platform,slot:plan.slot,stage:'deliver',status:prior.complete?'closing-already-verified':'closing-verification-pending',
+      ...(prior.complete?{}:{reason:'closing-prior-submission-readonly-reconciliation-required'}),businessDate:prior.businessDate,results,sendAttempts:0,newSendAttempts:0,runtimeModelDecisions:0};
+  }
   for (const step of plan.steps) {
     let receipt;
     try { receipt=await runner(step); }

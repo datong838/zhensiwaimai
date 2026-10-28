@@ -23,22 +23,33 @@ export function merchantDom(){
 }
 export function productDom(){
  const text=e=>e?.textContent?.trim()||'';
+ const tabs=[...document.querySelectorAll('[role=tab]')].map(e=>({text:text(e),selected:e.getAttribute('aria-selected')==='true'}));
+ const imageTab=tabs.length===1&&tabs[0].selected&&/^图片问题\(\d+\)$/.test(tabs[0].text)?tabs[0]:null;
  const tab=[...document.querySelectorAll('[role=tab][aria-selected=true]')].find(e=>text(e).startsWith('类目详情问题'));
- const total=Number((text(tab).match(/类目详情问题\((\d+)\)/)||[])[1]);
+ const total=Number((imageTab?imageTab.text.match(/^图片问题\((\d+)\)$/):text(tab).match(/类目详情问题\((\d+)\)/))?.[1]);
+ const headers=[...document.querySelectorAll('thead th')].map(text);
+ const buttons=[...document.querySelectorAll('button')];
+ const hiddenTabOverflow=buttons.filter(button=>button.className==='ant-tabs-nav-more'
+  &&button.getAttribute('aria-hidden')==='true'&&button.getAttribute('aria-haspopup')==='listbox'
+  &&text(button)===''&&getComputedStyle(button).visibility==='hidden');
+ const imageOnly=imageTab?{tabs,headers,buttonCount:buttons.length-hiddenTabOverflow.length,
+  hiddenTabOverflowCount:hiddenTabOverflow.length,operatorTexts:[],rowStructureValid:true}:undefined;
  const products=[];let item;
  for(const row of document.querySelectorAll('tbody tr.ant-table-row')){
   const cells=[...row.querySelectorAll('td')];
   const start=row.querySelector('td.goodInfoTd');
   if(start){
    const operator=row.querySelector('td.operatorSingleTd');
+   if(imageOnly){imageOnly.operatorTexts.push(text(operator));if(!operator||row.querySelectorAll('td.goodInfoTd').length!==1||row.querySelectorAll('td.operatorSingleTd').length!==1)imageOnly.rowStructureValid=false;}
    const ids=[...new Set([...operator?.querySelectorAll('[data-ltracker-datalist]')||[]].map(e=>(e.getAttribute('data-ltracker-datalist').match(/(?:^|[&;,\s])commodity_taskid=(\d+)/)||[])[1]).filter(Boolean))];
    item={taskId:ids.length===1?ids[0]:'',name:text(start.querySelector('p[class*=name]')),hasSuggestion:[...operator?.querySelectorAll('button')||[]].some(b=>text(b)==='采纳建议'&&!b.disabled),issues:[]};products.push(item);
   }
-  if(item){const content=cells.filter(c=>!c.classList.contains('goodInfoTd')&&!c.classList.contains('operatorSingleTd'));if(content.length===3)item.issues.push({kind:text(content[0]),current:text(content[1]),suggestion:text(content[2])});}
+  if(item){const content=cells.filter(c=>!c.classList.contains('goodInfoTd')&&!c.classList.contains('operatorSingleTd'));if(imageOnly){if(content.length!==2)imageOnly.rowStructureValid=false;else item.issues.push({kind:text(content[0]),current:'',suggestion:text(content[1])});}else if(content.length===3)item.issues.push({kind:text(content[0]),current:text(content[1]),suggestion:text(content[2])});}
+  else if(imageOnly)imageOnly.rowStructureValid=false;
  }
  return {total,products,page:Number(text(document.querySelector('ul.ant-pagination .ant-pagination-item-active')))||1,
   hasNext:!!document.querySelector('ul.ant-pagination li.ant-pagination-next:not(.ant-pagination-disabled)'),loading:!!document.querySelector('.ant-spin-spinning'),
-  headers:[...document.querySelectorAll('thead th')].map(text),empty:[...document.querySelectorAll('.ant-empty-description')].map(text)};
+  headers,empty:[...document.querySelectorAll('.ant-empty-description')].map(text),...(imageOnly?{imageOnly}:{})};
 }
 async function integrity(){
  let codeVersion;
@@ -370,6 +381,7 @@ export async function runSegment({execute=false}={}){
     try{const prior=JSON.parse(await fs.readFile(intentFile,'utf8'));if(prior.day!==day||prior.shopId!==store.shopId)throw Error('quality-day-intent-conflict');store.submission=prior;store.state='unknown';store.reason='same-day-prior-intent-read-only';continue;}catch(e){if(e.code!=='ENOENT')throw e;}
     store.attemptCount=(store.attemptCount||0)+1;store.attemptsForVersion=store.lastAttemptVersion===codeVersion?(store.attemptsForVersion||0)+1:1;store.lastAttemptVersion=codeVersion;
     await noModal(frame);const {before,disposition}=await readyOptimization(frame,Math.min(storeDeadline,Date.now()+10000));store.before={total:before.total,visibleProducts:before.products.length};
+    if(before.imageOnly)store.before.imageOnlyEvidence={...before.imageOnly,products:before.products};
     const action=frame.getByRole('button',{name:'一键优化类目详情',exact:true});
     if(disposition.action==='skip'){store.state='checked_no_action';store.reason=disposition.reason;store.completedAt=new Date().toISOString();continue;}
     store.selectionNote=await prepareSelection(frame,storeDeadline);

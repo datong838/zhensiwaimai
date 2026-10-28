@@ -87,7 +87,9 @@ def _quality_single_pass_allowed(folder,day,items,proof,state,report,raw):
     optimized=[s for s in stores if s.get('state')=='completed' and all(s.get('operation',{}).get(k) is True for k in ['confirmed','popoverClosed','uiStable'])]
     checked=[s for s in stores if s.get('state')=='checked_no_action'];unknown=[s for s in stores if s.get('state') in ('unknown','attempted') and real_intent(s)]
     failed=len(stores)-len(optimized)-len(checked)-len(unknown);handled=len(stores)
-    if failed or errors:text=f'淘宝闪购 优质商品率低 门店整改流程已按顺序执行完毕（今日记录了 {handled} 家门店；{failed} 家未能执行，{len(unknown)} 家结果未确认，另有 {len(errors)} 条访问异常，详见Excel）'
+    image_only=sum(s.get('reason')=='image-only-no-automatic-suggestions' for s in checked)
+    if image_only:text=f'淘宝闪购 优质商品率低 门店整改流程已按顺序执行完毕（今日记录了 {handled} 家门店；{image_only} 家仅有图片问题且平台无自动建议，{failed} 家未能执行，{len(unknown)} 家结果未确认，另有 {len(errors)} 条访问异常，详见Excel）'
+    elif failed or errors:text=f'淘宝闪购 优质商品率低 门店整改流程已按顺序执行完毕（今日记录了 {handled} 家门店；{failed} 家未能执行，{len(unknown)} 家结果未确认，另有 {len(errors)} 条访问异常，详见Excel）'
     elif unknown:text=f'淘宝闪购 优质商品率低 门店整改流程已按顺序执行完毕（今日执行了 {handled} 家；其中 {len(unknown)} 家结果未确认，详见Excel）'
     else:text=f'淘宝闪购 优质商品率低 店铺全部店铺优化完成 （今日执行了 {handled} 家）'
     if not (proof.get('executionPolicy')==state.get('executionPolicy')=='single-pass-per-day-v1' and proof['day']==state['day']==day
@@ -99,6 +101,9 @@ def _quality_single_pass_allowed(folder,day,items,proof,state,report,raw):
             and proof['recordRows']==len(proof['records'])==handled+len(errors) and proof['handledShopIds']==[s['shopId'] for s in stores]
             and len(set(proof['handledShopIds']))==handled and proof['completedShopIds']==[s['shopId'] for s in optimized] and proof['text']==text):return False
     if [r['name'] for r in proof['records'][:handled]]!=[s.get('name') or '门店名称未读取' for s in stores]:return False
+    for store,record in zip(stores,proof['records']):
+        if store.get('state')=='checked_no_action' and store.get('reason')=='image-only-no-automatic-suggestions':
+            if not record.get('execution','').startswith('已检查：仅图片问题，平台暂无自动优化建议；未修改图片'):return False
     for index,error in enumerate(errors):
         if error.get('name') and proof['records'][handled+index]['name']!=error['name']:return False
         if proof['records'][handled+index].get('shopId') is not None:return False

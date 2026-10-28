@@ -28,6 +28,7 @@ try{
   catch(error){result.readinessError=String(error.message).slice(0,1500);}
   result.samples=samples;
   result.last=await frame.evaluate(productDom);
+  result.allButtons=await frame.locator('button').evaluateAll(es=>es.map(e=>({text:e.textContent?.trim(),className:e.className,ariaLabel:e.getAttribute('aria-label'),title:e.getAttribute('title'),disabled:e.disabled,display:getComputedStyle(e).display,visibility:getComputedStyle(e).visibility,width:e.getBoundingClientRect().width,height:e.getBoundingClientRect().height,html:e.outerHTML.slice(0,1000)})));
   result.structure=await frame.evaluate(()=>({
    tabs:[...document.querySelectorAll('[role="tab"]')].map(e=>({text:e.textContent?.trim(),selected:e.getAttribute('aria-selected')})),
    pagination:[...document.querySelectorAll('ul.ant-pagination')].map(e=>e.textContent?.trim()),

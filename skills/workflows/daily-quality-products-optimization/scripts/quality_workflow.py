@@ -73,7 +73,8 @@ def recorded_unknown(store,day,folder):
 SINGLE_PASS='single-pass-per-day-v1'
 
 
-def single_pass_notice(handled,unconfirmed=0,failed=0,row_errors=0):
+def single_pass_notice(handled,unconfirmed=0,failed=0,row_errors=0,image_only=0):
+    if image_only:return f'淘宝闪购 优质商品率低 门店整改流程已按顺序执行完毕（今日记录了 {handled} 家门店；{image_only} 家仅有图片问题且平台无自动建议，{failed} 家未能执行，{unconfirmed} 家结果未确认，另有 {row_errors} 条访问异常，详见Excel）'
     if failed or row_errors:return f'淘宝闪购 优质商品率低 门店整改流程已按顺序执行完毕（今日记录了 {handled} 家门店；{failed} 家未能执行，{unconfirmed} 家结果未确认，另有 {row_errors} 条访问异常，详见Excel）'
     return notice(handled,unconfirmed)
 
@@ -91,7 +92,9 @@ def single_pass_records(state,day,folder):
     for store in state.get('stores',[]):
         if store.get('state')=='completed' and all(store.get('operation',{}).get(k) is True for k in ['confirmed','popoverClosed','uiStable']):
             optimized.append(store);label='已优化类目详情'
-        elif store.get('state')=='checked_no_action':checked.append(store);label='已检查，无可优化项目'
+        elif store.get('state')=='checked_no_action':
+            checked.append(store)
+            label=('已检查：仅图片问题，平台暂无自动优化建议；未修改图片' if store.get('reason')=='image-only-no-automatic-suggestions' else '已检查，无可优化项目')
         elif store.get('state') in ('unknown','attempted') and real_daily_intent(store,day,folder):unconfirmed.append(store);label='已发起优化，结果未确认；今日未重复提交'
         else:
             failed.append(store);label=('商品整改页面未能加载，未执行优化' if 'loading-timeout' in store.get('reason','') else '本次操作未能完成，今日未重复尝试')
@@ -114,7 +117,7 @@ def single_pass_completion(day,folder,result,state):
              'checkedNoAction':len(checked),'attemptedUnconfirmed':len(unconfirmed),'failed':len(failed),'rowErrorCount':len(state.get('rowErrors',[])),
              'handled':len(stores),'recordRows':len(records),'stateSha256':hashlib.sha256((folder/'state.json').read_bytes()).hexdigest(),
              'completedShopIds':[s['shopId'] for s in optimized],'handledShopIds':[s['shopId'] for s in stores],'records':records,
-             'text':single_pass_notice(len(stores),len(unconfirmed),len(failed),len(state.get('rowErrors',[]))),'observedAt':datetime.now(ZoneInfo('Asia/Shanghai')).isoformat()}
+             'text':single_pass_notice(len(stores),len(unconfirmed),len(failed),len(state.get('rowErrors',[])),sum(s.get('reason')=='image-only-no-automatic-suggestions' for s in checked)),'observedAt':datetime.now(ZoneInfo('Asia/Shanghai')).isoformat()}
     target=folder/'completion.json'
     if target.exists():
         saved=json.loads(target.read_text())

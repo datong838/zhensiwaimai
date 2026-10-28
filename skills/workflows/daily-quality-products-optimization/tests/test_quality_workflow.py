@@ -64,6 +64,22 @@ class Tests(unittest.TestCase):
         state['rowErrors']=[{'name':'打开前可见门店名称','page':12,'row':3,'reason':'click-timeout'}];self.write(state)
         a=Adapter();self.assertTrue(self.run_flow(a)['ok']);proof=json.loads((self.folder/'completion.json').read_text());self.assertEqual((proof['optimized'],proof['failed'],proof['rowErrorCount'],proof['handled'],proof['recordRows']),(1,1,1,2,3));self.assertEqual(len(proof['records']),3);self.assertEqual(proof['records'][2]['name'],'打开前可见门店名称');self.assertIsNone(proof['records'][2]['shopId']);self.assertIn('未执行优化',proof['records'][2]['execution']);self.assertNotIn('全部店铺优化完成',a.calls[-1]['text'])
         request=json.loads((self.folder/'request.json').read_text());self.assertTrue(quality_optimization_allowed(request,root=self.root,day='2026-10-26'))
+    def test_image_only_no_automatic_suggestion_has_honest_record_and_route(self):
+        state=self.single_pass_state();store=state['stores'][0]
+        store.update(state='checked_no_action',reason='image-only-no-automatic-suggestions')
+        self.write(state);self.optimizer.return_value={'ok':True,'summary':{'completed':0}}
+        a=Adapter();self.assertTrue(self.run_flow(a)['ok'])
+        proof=json.loads((self.folder/'completion.json').read_text())
+        self.assertTrue(proof['records'][0]['execution'].startswith('已检查：仅图片问题，平台暂无自动优化建议；未修改图片'))
+        self.assertIn('当日重复记录已跳过',proof['records'][0]['execution'])
+        self.assertEqual((proof['optimized'],proof['checkedNoAction'],proof['failed']),(0,1,0))
+        self.assertIn('1 家仅有图片问题且平台无自动建议',proof['text'])
+        self.assertNotIn('全部店铺优化完成',proof['text'])
+        request=json.loads((self.folder/'request.json').read_text())
+        self.assertTrue(quality_optimization_allowed(request,root=self.root,day='2026-10-26'))
+        wrong=copy.deepcopy(request);wrong['items'][-1]['text']=w.notice(1)
+        wrong['items'][-1]['sha256']=hashlib.sha256(wrong['items'][-1]['text'].encode()).hexdigest()
+        self.assertFalse(quality_optimization_allowed(wrong,root=self.root,day='2026-10-26'))
     def test_single_pass_attempt_does_not_require_reconciliation_or_fake_success(self):
         state=self.single_pass_state();store=state['stores'][0];store['state']='unknown';store['submission']={'day':'2026-10-26','shopId':store['shopId'],'eventId':'2026-10-26-quality-'+store['shopId'],'state':'attempted'}
         (self.folder/'intents').mkdir();intent=self.folder/'intents'/(store['shopId']+'.json');intent.write_text(json.dumps(store['submission']));self.write(state);self.optimizer.return_value={'ok':True,'summary':{'completed':0}}
