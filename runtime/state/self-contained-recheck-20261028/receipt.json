@@ -1,0 +1,83 @@
+{
+  "observedAt": "2026-10-28T16:07:36.868199+08:00",
+  "sourceCommit": "803ed1f6c8b4e884e9be629f6951773119ee4587",
+  "activeGuardsPassed": [
+    "shared-inspect",
+    "merchant-policy",
+    "top10-policy",
+    "negative-policy",
+    "business-data-roots"
+  ],
+  "activeCoverage": {
+    "ok": true,
+    "activeExternalReferences": [],
+    "unmappedReferences": [],
+    "opaqueCode": [],
+    "frozenReferences": [
+      {
+        "path": "skills/.daily-jinsha-reports-core/scripts/build_reports.mjs",
+        "line": 11,
+        "reference": "/Users/ddt/work/臻肆/报表/客户表最新.xlsx",
+        "category": "frozen-opaque-default",
+        "covered": true,
+        "resolution": "active-wrapper-options-override"
+      },
+      {
+        "path": "skills/.daily-jinsha-reports-core/scripts/build_reports.mjs",
+        "line": 12,
+        "reference": "/Users/ddt/work/臻肆/报表/美团全部_2026-08-25至2026-08-25.xlsx",
+        "category": "frozen-opaque-default",
+        "covered": true,
+        "resolution": "active-wrapper-options-override"
+      },
+      {
+        "path": "skills/.daily-jinsha-reports-core/scripts/build_reports.mjs",
+        "line": 13,
+        "reference": "/Users/ddt/work/臻肆/报表/淘宝闪购_模版2026-08-24至2026-08-24.xlsx",
+        "category": "frozen-opaque-default",
+        "covered": true,
+        "resolution": "active-wrapper-options-override"
+      },
+      {
+        "path": "skills/.daily-jinsha-reports-core/scripts/build_reports.mjs",
+        "line": 14,
+        "reference": "/Users/ddt/work/臻肆/报表",
+        "category": "frozen-opaque-default",
+        "covered": true,
+        "resolution": "active-wrapper-options-override"
+      }
+    ],
+    "unexpectedCoreBuildCallers": [],
+    "frozenResolutionScope": "current-business-wrapper-only; legacy direct core CLI is not activated",
+    "frozenFileCount": 30
+  },
+  "internalBusinessRoots": {
+    "meituan-appeals": "state/shared/meituan-waimai-negative-review-appeals",
+    "taobao-appeals": "state/shared/taobao-flash-sale-negative-review-appeals",
+    "negative-feedback": "state/shared/negative-feedback-list-appeals",
+    "jinsha-reports": "data/reports/jinsha",
+    "video-assets": "data/video"
+  },
+  "dependencyChecks": 22,
+  "currentHostDependenciesPassed": true,
+  "newHostEndToEndAcceptanceProven": false,
+  "externalInterfacesKept": [
+    "configured Node/Python host runtimes",
+    "independent browser shared components",
+    "original Chrome profiles and physical-resource locks",
+    "System Events and WeWorkMac permissions"
+  ],
+  "historicalAosReference": {
+    "path": "skills/workflows/store-inspection/runtime/meituan-silent-probe-2026-09-14/probe.mjs",
+    "scope": "historical probe, not a current manifest production entry; retained unchanged, not deployed or executed"
+  },
+  "noBusinessDataMoved": true,
+  "browserActions": 0,
+  "sendAttempts": 0,
+  "directorRestarted": false,
+  "limitations": [
+    "Read-only installed guards are not proof of all workflow business semantics or future source availability.",
+    "Different-host full installation and library/platform acceptance remain unproven.",
+    "Current-host absolute activation proof cannot simply be relabeled as a different-host acceptance."
+  ]
+}
