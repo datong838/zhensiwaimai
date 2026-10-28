@@ -1,0 +1,187 @@
+{
+ "patrol_at": "2026-10-28T20:51:24",
+ "phase": "business",
+ "verdict": "YELLOW",
+ "findings": [
+  {
+   "level": "YELLOW",
+   "area": "flows",
+   "code": "cycle-non-success",
+   "detail": "守护最近周期非 SUCCESS：{\"meituan-intelligent-customer-service-12\": \"PENDING\", \"meituan-intelligent-customer-service-15\": \"PENDING\", \"meituan-waimai-negative-review-appeals-11\": \"PENDING\", \"taobao-flash-sale-negative-review-",
+   "suggest": "看对应 run 的 step1.log 定失败码，别按报错文案直接猜修"
+  },
+  {
+   "level": "YELLOW",
+   "area": "chrome",
+   "code": "duplicate-page:9232",
+   "detail": "jinsha-business(:9232) 同域存在多页（尚未判定归属）：{\"https://data.guoshuyufen.com/\": 2}",
+   "suggest": "先核对原流程回执、当前监听PID/启动时刻及精确页面归属；同域多页不构成清理许可，禁止清window.name或批量关页；岗位忙则跳过。"
+  },
+  {
+   "level": "YELLOW",
+   "area": "marker",
+   "code": "marker-stuck-no-evidence",
+   "detail": "13:05:39 taobao-jinsha-wechat-evidence-attempts marker state=unknown 无发出证据（上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰 image-submission-awaits-read-only-verification）",
+   "suggest": "先读回取证定性；禁盲 resume/重跑（防重复外发，10-08 事故）"
+  },
+  {
+   "level": "YELLOW",
+   "area": "marker",
+   "code": "marker-stuck-no-evidence",
+   "detail": "08:31:56 negative-review-summary-send-shanghai-zh marker state=unknown 无发出证据（上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰 image-submission-awaits-read-only-verification）",
+   "suggest": "先读回取证定性；禁盲 resume/重跑（防重复外发，10-08 事故）"
+  }
+ ],
+ "snapshot": {
+  "check_business_assets": {
+   "files": [
+    {
+     "path": "data/reports/jinsha/客户表最新.xlsx",
+     "status": "valid",
+     "size": 59224,
+     "sha256": "469e9bccaa42ba29c77e32190b939e66a84b1d94aa132fcf3bc217fdd32ecaae"
+    },
+    {
+     "path": "data/reports/jinsha/美团全部_2026-08-25至2026-08-25.xlsx",
+     "status": "valid",
+     "size": 132344,
+     "sha256": "80f79cbcf4a269ace4ade1715a4f7f15d73dbef627d74a3931de8448387f3177"
+    },
+    {
+     "path": "data/reports/jinsha/淘宝闪购_模版2026-08-24至2026-08-24.xlsx",
+     "status": "valid",
+     "size": 166925,
+     "sha256": "00cf7c170349e739b61e59e9aadb35922df51adcf3109a65ca6978d4e4016da4"
+    }
+   ]
+  },
+  "check_daemon": {
+   "daemon": {
+    "pid": 58654,
+    "started_at": "2026-10-28T09:45:35",
+    "last_cycle_at": "2026-10-28T20:50:01",
+    "status": "running",
+    "next_cycle_at": "2026-10-28T21:20:01"
+   },
+   "daemon_pid_alive": true,
+   "daemon_lag_min": 1.4,
+   "next_cycle_at": "2026-10-28T21:20:01"
+  },
+  "check_flows": {
+   "all_green": true,
+   "date": "2026-10-28",
+   "pending_count": 0,
+   "pending": []
+  },
+  "check_last_cycle": {
+   "all_green": false,
+   "checked_at": "2026-10-28T20:50:02",
+   "non_success": {
+    "meituan-intelligent-customer-service-12": "PENDING",
+    "meituan-intelligent-customer-service-15": "PENDING",
+    "meituan-waimai-negative-review-appeals-11": "PENDING",
+    "taobao-flash-sale-negative-review-appeals": "PENDING",
+    "daily-store-task-completion-ops-to-wechat": "PENDING",
+    "daily-taobao-download-to-jinsha": "PENDING",
+    "daily-service-market-ranking-to-wechat": "PENDING",
+    "daily-top10-to-wechat-group": "PENDING",
+    "daily-meituan-income-top10-to-wechat": "PENDING",
+    "daily-negative-reviews": "PENDING",
+    "contract-termination-applications-screenshot": "PENDING"
+   }
+  },
+  "check_chrome": {
+   "ports": {
+    "9230": {
+     "name": "taobao-brand",
+     "page_count": 1,
+     "login_pages": 0,
+     "error": null,
+     "urls": [
+      "https://melody.shop.ele.me/app/chain/95708808/stats__center#app.chainshop.stats.center"
+     ]
+    },
+    "9231": {
+     "name": "taobao-agent-service",
+     "page_count": 1,
+     "login_pages": 0,
+     "error": null,
+     "urls": [
+      "https://open.shop.ele.me/manager/base/home"
+     ]
+    },
+    "9232": {
+     "name": "jinsha-business",
+     "page_count": 2,
+     "login_pages": 0,
+     "error": null,
+     "urls": [
+      "https://data.guoshuyufen.com/#/businessData/realTimeData",
+      "https://data.guoshuyufen.com/#/businessData/realTimeData"
+     ]
+    },
+    "9233": {
+     "name": "meituan-im",
+     "page_count": 21,
+     "login_pages": 0,
+     "error": null,
+     "urls": [
+      "https://waimaie.meituan.com/imworkbench/home?appId=4&clientType=140006#/im/page/workbench/reception",
+      "https://www.workbuddy.cn/login/?platform=workbuddy&state=a1378283-7a97-4b26-83ad-dfc66b245e6c&versio",
+      "https://www.workbuddy.cn/login/?platform=workbuddy&state=b9a06eb9-1749-4a45-abf8-4bcf90d0a76c&versio",
+      "https://www.workbuddy.cn/login/?platform=workbuddy&state=4649c046-c024-4616-ad3b-0a80317a8025&versio",
+      "https://www.workbuddy.cn/login/?platform=workbuddy&state=d460a5bb-1bdd-46d7-84db-e824c9483567&versio",
+      "https://www.workbuddy.cn/login/?platform=workbuddy&state=a79d1c5d-baa4-4619-a858-b39cca636e32&versio"
+     ],
+     "ignored_non_business_login_pages": 15
+    }
+   }
+  },
+  "check_outbound": {
+   "by_type": {
+    "file": {
+     "verified": 2
+    },
+    "image": {
+     "unknown": 2
+    }
+   },
+   "attempted_unverified": []
+  },
+  "check_marker_deadlocks": {
+   "scanned": 2,
+   "stuck": [
+    {
+     "dir": "taobao-jinsha-wechat-evidence-attempts",
+     "at": "13:05:39",
+     "state": "unknown",
+     "sentEvidence": false,
+     "group": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+     "reason": "image-submission-awaits-read-only-verification"
+    },
+    {
+     "dir": "negative-review-summary-send-shanghai-zhensi-operations-ding-fandang-v1.desktop-attempts",
+     "at": "08:31:56",
+     "state": "unknown",
+     "sentEvidence": false,
+     "group": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+     "reason": "image-submission-awaits-read-only-verification"
+    }
+   ]
+  },
+  "check_popup": {
+   "checked": true,
+   "port": 9232,
+   "overlays": 0,
+   "unknown": [],
+   "skipped": null
+  },
+  "check_alerts": {
+   "today_total": 228,
+   "by_category": {
+    "UNKNOWN": 227,
+    "NEEDS_USER": 1
+   }
+  }
+ }
+}

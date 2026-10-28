@@ -1,0 +1,1007 @@
+{
+  "at": "2026-10-28T20:53:25.455374+08:00",
+  "targetDate": "2026-10-29",
+  "previousDayData": "2026-10-28",
+  "customerLedgerCount": 27,
+  "localLedgerIdentities": 24,
+  "localEnabledEntries": 22,
+  "remoteFlows": [
+    {
+      "name": "daily-store-metrics-rotation-to-wechat",
+      "owner": "另一台电脑",
+      "localInspectionOrExecution": false
+    },
+    {
+      "name": "coupon-issue-task-flow",
+      "owner": "另一台电脑",
+      "localInspectionOrExecution": false
+    },
+    {
+      "name": "store-inspection",
+      "owner": "另一台电脑",
+      "localInspectionOrExecution": false
+    }
+  ],
+  "scope": "static entry existence, registered SHA, schedule boundaries only; no future live-data acceptance",
+  "productionActions": 0,
+  "flows": [
+    {
+      "flow": "daily-top10-to-wechat-group",
+      "schedule": "每日08:00",
+      "scheduleTimes": [
+        "08:00"
+      ],
+      "earliestHour": 8,
+      "latestHour": 18,
+      "cadenceHours": 24,
+      "dependencies": [],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/scripts/workflow_executor.py",
+          "exists": true,
+          "sha256": "7bcdda2f87a011e8262075e55b41fea5cf22f13d6cebb53fc69bdba1a22b4251"
+        }
+      ],
+      "policies": [
+        {
+          "path": "skills/workflows/daily-top10-to-wechat-group/runtime-policy.json",
+          "sha256": "1d9bb1c655c8f77ef51fe1c0db39205c3ec6838ae0238dcd579f435cd58a6676",
+          "status": null,
+          "allowedBusinessDate": null,
+          "checks": [
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/scripts/runtime_guard.py",
+              "matches": true
+            },
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/scripts/workflow_executor.py",
+              "matches": true
+            },
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/scripts/desktop_background_executor.mjs",
+              "matches": true
+            },
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/workflow_bridge_windows.py",
+              "matches": true
+            },
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/workflow_preflight.py",
+              "matches": true
+            },
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/legacy-app-controler/wechat-desktop-control/scripts/wechat_interaction_lock.py",
+              "matches": true
+            },
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/dependencies.json",
+              "matches": true
+            },
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/scripts/phone_executor.py",
+              "matches": true
+            }
+          ]
+        }
+      ],
+      "firstBoundary": "2026-10-29 08:00:00",
+      "firstBoundaryGate": [
+        false,
+        ""
+      ],
+      "runtimeAcceptance": "requires-original-next-day-live-data-and-receipts"
+    },
+    {
+      "flow": "daily-negative-reviews",
+      "schedule": "每日08:30",
+      "scheduleTimes": [
+        "08:30"
+      ],
+      "earliestHour": 8,
+      "latestHour": 18,
+      "cadenceHours": 24,
+      "dependencies": [],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-negative-reviews/scripts/workflow_executor.mjs",
+          "exists": true,
+          "sha256": "9b286a97caa463320009592573c92350598ba381eecd46f3df881d4f05320f86"
+        }
+      ],
+      "policies": [
+        {
+          "path": "skills/workflows/daily-negative-reviews/runtime-policy.json",
+          "sha256": "6fec238e9f5cab1db372f79aa68c9c4701feb8f8659fff1ab991b8a4ffa98a65",
+          "status": "UNSEALED_ACCEPTANCE",
+          "allowedBusinessDate": "2026-10-27",
+          "checks": []
+        },
+        {
+          "path": "skills/workflows/daily-negative-reviews/dependencies.json",
+          "sha256": "275fae8b35d696dce1ba0e370ef47e5cfb4c0af4192ec5967dc207e1c7e39f3a",
+          "status": null,
+          "allowedBusinessDate": null,
+          "checks": [
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-negative-reviews/scripts/workflow_policy.mjs",
+              "matches": true
+            },
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-negative-reviews/scripts/browser_collect.mjs",
+              "matches": true
+            },
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-negative-reviews/scripts/reconcile.py",
+              "matches": true
+            },
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-negative-reviews/scripts/build_report.mjs",
+              "matches": true
+            },
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-negative-reviews/scripts/workflow_executor.mjs",
+              "matches": true
+            },
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/dependencies.json",
+              "matches": true
+            },
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/workflow_bridge.py",
+              "matches": true
+            },
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-negative-reviews/scripts/maintenance_executor.mjs",
+              "matches": true
+            },
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-negative-reviews/scripts/test_browser_policy.mjs",
+              "matches": true
+            },
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-negative-reviews/scripts/test_workflow_policy.mjs",
+              "matches": true
+            },
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-negative-reviews/scripts/test_maintenance_executor.mjs",
+              "matches": true
+            },
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/workflow_bridge_windows.py",
+              "matches": true
+            },
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-negative-reviews/scripts/test_build_report.mjs",
+              "matches": true
+            },
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-negative-reviews/scripts/screenshot_report.py",
+              "matches": true
+            },
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-negative-reviews/scripts/ui_delivery_evidence.mjs",
+              "matches": true
+            },
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-negative-reviews/scripts/test_ui_delivery_evidence.mjs",
+              "matches": true
+            },
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-negative-reviews/scripts/fixtures/dated-acceptance-20261025.json",
+              "matches": true
+            },
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-negative-reviews/scripts/dated_acceptance_evidence.mjs",
+              "matches": true
+            },
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-negative-reviews/scripts/test_dated_acceptance_evidence.mjs",
+              "matches": true
+            },
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-negative-reviews/scripts/test_public_dependency_resync.mjs",
+              "matches": true
+            }
+          ]
+        }
+      ],
+      "firstBoundary": "2026-10-29 08:30:00",
+      "firstBoundaryGate": [
+        false,
+        ""
+      ],
+      "runtimeAcceptance": "requires-original-next-day-live-data-and-receipts"
+    },
+    {
+      "flow": "contract-termination-applications-screenshot",
+      "schedule": "每日09:00",
+      "scheduleTimes": [
+        "09:00"
+      ],
+      "earliestHour": 9,
+      "latestHour": 18,
+      "cadenceHours": 24,
+      "dependencies": [],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/contract-termination-applications-screenshot/scripts/contract_termination_daily.py",
+          "exists": true,
+          "sha256": "8aab35cddb8ea2baca503ed59d681892f345179a4d2462498abcd72cdc9925f4"
+        }
+      ],
+      "policies": [
+        {
+          "path": "skills/workflows/contract-termination-applications-screenshot/runtime-policy.json",
+          "sha256": "375597e80d840ec45030c03b6c25b108ad2d246756139cc73759fc12096abff7",
+          "status": null,
+          "allowedBusinessDate": null,
+          "checks": [
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/contract-termination-applications-screenshot/scripts/contract_termination_shot.mjs",
+              "exists": true,
+              "sha256": "319c170cb1ff60eb481a1a51e8864b94531645d94a429d7bfec9a53dd2f159f2",
+              "registeredHashRequired": false,
+              "reason": "original lightweight policy registers repo-relative entry paths without sealed SHA"
+            },
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/contract-termination-applications-screenshot/scripts/contract_termination_workflow.py",
+              "exists": true,
+              "sha256": "c99866bc594eb391c5fcce137edbeab25b3be422f56b73d12caa64be008d31c7",
+              "registeredHashRequired": false,
+              "reason": "original lightweight policy registers repo-relative entry paths without sealed SHA"
+            },
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/contract-termination-applications-screenshot/scripts/contract_termination_daily.py",
+              "exists": true,
+              "sha256": "8aab35cddb8ea2baca503ed59d681892f345179a4d2462498abcd72cdc9925f4",
+              "registeredHashRequired": false,
+              "reason": "original lightweight policy registers repo-relative entry paths without sealed SHA"
+            },
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/contract-termination-applications-screenshot/scripts/contract_capture_receipt.py",
+              "exists": true,
+              "sha256": "bd545088bc890d13a3ec107da559898fe4c3e65828a9045b44a3a5a22512207e",
+              "registeredHashRequired": false,
+              "reason": "original lightweight policy registers repo-relative entry paths without sealed SHA"
+            }
+          ]
+        }
+      ],
+      "firstBoundary": "2026-10-29 09:00:00",
+      "firstBoundaryGate": [
+        false,
+        ""
+      ],
+      "runtimeAcceptance": "requires-original-next-day-live-data-and-receipts"
+    },
+    {
+      "flow": "daily-jinsha-reports-to-business-wechat",
+      "schedule": "每日11:00",
+      "scheduleTimes": null,
+      "earliestHour": 11,
+      "latestHour": 18,
+      "cadenceHours": 24,
+      "dependencies": [],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-jinsha-reports-to-business-wechat/scripts/business_workflow_executor.mjs",
+          "exists": true,
+          "sha256": "0ef60163882972aa08f5cdd89f417d408e222a7c6c5b9439238cfb65e2e73a3a"
+        }
+      ],
+      "policies": [],
+      "firstBoundary": "2026-10-29 11:00:00",
+      "firstBoundaryGate": "cadence gate must be evaluated by original director",
+      "runtimeAcceptance": "requires-original-next-day-live-data-and-receipts"
+    },
+    {
+      "flow": "daily-taobao-download-to-jinsha",
+      "schedule": "每日13:00",
+      "scheduleTimes": null,
+      "earliestHour": 13,
+      "latestHour": 18,
+      "cadenceHours": 24,
+      "dependencies": [],
+      "entries": [],
+      "policies": [],
+      "firstBoundary": "2026-10-29 13:00:00",
+      "firstBoundaryGate": "cadence gate must be evaluated by original director",
+      "runtimeAcceptance": "requires-original-next-day-live-data-and-receipts"
+    },
+    {
+      "flow": "daily-agent-new-merchants-to-wechat",
+      "schedule": "每30分钟 08:30–18:30；19:00停止；有新增发商家信息，无新增发当前无新增意向商家",
+      "scheduleTimes": [
+        "08:30",
+        "09:00",
+        "09:30",
+        "10:00",
+        "10:30",
+        "11:00",
+        "11:30",
+        "12:00",
+        "12:30",
+        "13:00",
+        "13:30",
+        "14:00",
+        "14:30",
+        "15:00",
+        "15:30",
+        "16:00",
+        "16:30",
+        "17:00",
+        "17:30",
+        "18:00",
+        "18:30"
+      ],
+      "earliestHour": 8,
+      "latestHour": 19,
+      "cadenceHours": 0.5,
+      "dependencies": [],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-agent-new-merchants-to-wechat/scripts/workflow_executor.py",
+          "exists": true,
+          "sha256": "f7b97aea3878da11d06b667130eeebe9121c98fe0131552c9f598891805ca735"
+        }
+      ],
+      "policies": [],
+      "firstBoundary": "2026-10-29 08:30:00",
+      "firstBoundaryGate": [
+        false,
+        ""
+      ],
+      "runtimeAcceptance": "requires-original-next-day-live-data-and-receipts"
+    },
+    {
+      "flow": "meituan-intelligent-customer-service-12",
+      "schedule": "每日12:00",
+      "scheduleTimes": null,
+      "earliestHour": 12,
+      "latestHour": 18,
+      "cadenceHours": 24,
+      "dependencies": [],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-intelligent-customer-service/scripts/ensure_unanswered_queue.mjs",
+          "exists": true,
+          "sha256": "de72df8fe8744b0a10e69821b860399a22cf7646dbb06ffcb3b158a915dd8d40"
+        },
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-intelligent-customer-service/scripts/reply_unanswered_sessions.mjs",
+          "exists": true,
+          "sha256": "00bd2b18f4a55258653c2d8230ffed6a280ea7254c1a6a664d37eb01d010d5e9"
+        },
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-intelligent-customer-service/scripts/compile_daily_reply_xlsx.mjs",
+          "exists": true,
+          "sha256": "11677ca65f59db27a4590930fd291963160b487f6037eea4f3ec6ddac84e9700"
+        },
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-intelligent-customer-service/scripts/send_daily_reply_xlsx_to_wechat.mjs",
+          "exists": true,
+          "sha256": "4ea46bc2354d5e92ff1f2c3b435e6efe600936e7f407daa6441819da61b197a5"
+        }
+      ],
+      "policies": [],
+      "firstBoundary": "2026-10-29 12:00:00",
+      "firstBoundaryGate": "cadence gate must be evaluated by original director",
+      "runtimeAcceptance": "requires-original-next-day-live-data-and-receipts"
+    },
+    {
+      "flow": "meituan-intelligent-customer-service-15",
+      "schedule": "每日15:00",
+      "scheduleTimes": null,
+      "earliestHour": 15,
+      "latestHour": 18,
+      "cadenceHours": 24,
+      "dependencies": [],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-intelligent-customer-service/scripts/ensure_unanswered_queue.mjs",
+          "exists": true,
+          "sha256": "de72df8fe8744b0a10e69821b860399a22cf7646dbb06ffcb3b158a915dd8d40"
+        },
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-intelligent-customer-service/scripts/reply_unanswered_sessions.mjs",
+          "exists": true,
+          "sha256": "00bd2b18f4a55258653c2d8230ffed6a280ea7254c1a6a664d37eb01d010d5e9"
+        },
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-intelligent-customer-service/scripts/compile_daily_reply_xlsx.mjs",
+          "exists": true,
+          "sha256": "11677ca65f59db27a4590930fd291963160b487f6037eea4f3ec6ddac84e9700"
+        },
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-intelligent-customer-service/scripts/send_daily_reply_xlsx_to_wechat.mjs",
+          "exists": true,
+          "sha256": "4ea46bc2354d5e92ff1f2c3b435e6efe600936e7f407daa6441819da61b197a5"
+        }
+      ],
+      "policies": [],
+      "firstBoundary": "2026-10-29 15:00:00",
+      "firstBoundaryGate": "cadence gate must be evaluated by original director",
+      "runtimeAcceptance": "requires-original-next-day-live-data-and-receipts"
+    },
+    {
+      "flow": "meituan-intelligent-customer-service",
+      "schedule": "每日17:00（17:00结束后准备发文档）",
+      "scheduleTimes": null,
+      "earliestHour": 17,
+      "latestHour": 18,
+      "cadenceHours": 24,
+      "dependencies": [],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-intelligent-customer-service/scripts/ensure_unanswered_queue.mjs",
+          "exists": true,
+          "sha256": "de72df8fe8744b0a10e69821b860399a22cf7646dbb06ffcb3b158a915dd8d40"
+        },
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-intelligent-customer-service/scripts/reply_unanswered_sessions.mjs",
+          "exists": true,
+          "sha256": "00bd2b18f4a55258653c2d8230ffed6a280ea7254c1a6a664d37eb01d010d5e9"
+        },
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-intelligent-customer-service/scripts/compile_daily_reply_xlsx.mjs",
+          "exists": true,
+          "sha256": "11677ca65f59db27a4590930fd291963160b487f6037eea4f3ec6ddac84e9700"
+        },
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-intelligent-customer-service/scripts/send_daily_reply_xlsx_to_wechat.mjs",
+          "exists": true,
+          "sha256": "4ea46bc2354d5e92ff1f2c3b435e6efe600936e7f407daa6441819da61b197a5"
+        }
+      ],
+      "policies": [],
+      "firstBoundary": "2026-10-29 17:00:00",
+      "firstBoundaryGate": "cadence gate must be evaluated by original director",
+      "runtimeAcceptance": "requires-original-next-day-live-data-and-receipts"
+    },
+    {
+      "flow": "taobao-flash-sale-negative-review-appeals",
+      "schedule": "每日13:00/15:00/17:00申诉；18:30收口汇总",
+      "scheduleTimes": [
+        "13:00",
+        "15:00",
+        "17:00",
+        "18:30"
+      ],
+      "earliestHour": 13,
+      "latestHour": 19,
+      "cadenceHours": 24,
+      "dependencies": [],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/taobao-flash-sale-negative-review-appeals/../../../runtime/appeal_shift.mjs",
+          "exists": true,
+          "sha256": "452024f7fa9c03dff65aa56b1e6af3c99c573ead0eb6298a941f471549ae14f5"
+        }
+      ],
+      "policies": [],
+      "firstBoundary": "2026-10-29 13:00:00",
+      "firstBoundaryGate": [
+        false,
+        ""
+      ],
+      "runtimeAcceptance": "requires-original-next-day-live-data-and-receipts"
+    },
+    {
+      "flow": "daily-new-stores-opening-to-wechat",
+      "schedule": "每日10:00",
+      "scheduleTimes": null,
+      "earliestHour": 10,
+      "latestHour": 18,
+      "cadenceHours": 24,
+      "dependencies": [],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-new-stores-opening-to-wechat/scripts/workflow.py",
+          "exists": true,
+          "sha256": "b3e1030122024e0155d842089dde9f79df628ee6399bc52bd48236a71567d513"
+        }
+      ],
+      "policies": [],
+      "firstBoundary": "2026-10-29 10:00:00",
+      "firstBoundaryGate": "cadence gate must be evaluated by original director",
+      "runtimeAcceptance": "requires-original-next-day-live-data-and-receipts"
+    },
+    {
+      "flow": "daily-new-stores-activity-audit-to-wechat",
+      "schedule": "每日11:00",
+      "scheduleTimes": null,
+      "earliestHour": 11,
+      "latestHour": 18,
+      "cadenceHours": 24,
+      "dependencies": [],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-new-stores-activity-audit-to-wechat/scripts/activity_daily.py",
+          "exists": true,
+          "sha256": "f7e2dc3da9374dce7cf4e0a9ce4eaa96bd2cc82548d86ba0c4b196dd56c2734d"
+        }
+      ],
+      "policies": [],
+      "firstBoundary": "2026-10-29 11:00:00",
+      "firstBoundaryGate": "cadence gate must be evaluated by original director",
+      "runtimeAcceptance": "requires-original-next-day-live-data-and-receipts"
+    },
+    {
+      "flow": "meituan-waimai-negative-review-appeals-11",
+      "schedule": "每日13:00/15:00/17:00申诉；18:30收口汇总",
+      "scheduleTimes": [
+        "13:00",
+        "15:00",
+        "17:00",
+        "18:30"
+      ],
+      "earliestHour": 13,
+      "latestHour": 19,
+      "cadenceHours": 24,
+      "dependencies": [],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-waimai-negative-review-appeals/../../../runtime/appeal_shift.mjs",
+          "exists": true,
+          "sha256": "452024f7fa9c03dff65aa56b1e6af3c99c573ead0eb6298a941f471549ae14f5"
+        }
+      ],
+      "policies": [],
+      "firstBoundary": "2026-10-29 13:00:00",
+      "firstBoundaryGate": [
+        false,
+        ""
+      ],
+      "runtimeAcceptance": "requires-original-next-day-live-data-and-receipts"
+    },
+    {
+      "flow": "negative-feedback-list-appeals-0930",
+      "schedule": "每日08:20执行，08:30前交付",
+      "scheduleTimes": [
+        "08:20"
+      ],
+      "earliestHour": 8,
+      "latestHour": 18,
+      "cadenceHours": 24,
+      "dependencies": [],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/negative-feedback-list-appeals/scripts/appeal_executor.mjs",
+          "exists": true,
+          "sha256": "826c0426dd358c6d483d34166078d7e31144060483a99c739791562af3fa259f"
+        }
+      ],
+      "policies": [],
+      "firstBoundary": "2026-10-29 08:20:00",
+      "firstBoundaryGate": [
+        false,
+        ""
+      ],
+      "runtimeAcceptance": "requires-original-next-day-live-data-and-receipts"
+    },
+    {
+      "flow": "negative-feedback-list-appeals-1230",
+      "schedule": "每日08:20执行，08:30前交付",
+      "scheduleTimes": [
+        "08:20"
+      ],
+      "earliestHour": 8,
+      "latestHour": 18,
+      "cadenceHours": 24,
+      "dependencies": [
+        "negative-feedback-list-appeals-0930"
+      ],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/negative-feedback-list-appeals/scripts/build_report.mjs",
+          "exists": true,
+          "sha256": "07ca4fdfb8b90aa8c838a94985f5ec320a7ad0e8c3d78623686c4fb5a5d70e16"
+        },
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/negative-feedback-list-appeals/scripts/deliver_batch.mjs",
+          "exists": true,
+          "sha256": "d4b278e1e713aca2553efad71172c6cdb9a2bb013f9647535a762d46c2ada463"
+        }
+      ],
+      "policies": [],
+      "firstBoundary": "2026-10-29 08:20:00",
+      "firstBoundaryGate": [
+        false,
+        ""
+      ],
+      "runtimeAcceptance": "requires-original-next-day-live-data-and-receipts"
+    },
+    {
+      "flow": "daily-new-stores-decoration-audit-to-wechat",
+      "schedule": "每日11:30",
+      "scheduleTimes": [
+        "11:30"
+      ],
+      "earliestHour": 11,
+      "latestHour": 18,
+      "cadenceHours": 24,
+      "dependencies": [],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-new-stores-decoration-audit-to-wechat/scripts/decoration_daily.py",
+          "exists": true,
+          "sha256": "bb8f7e3f9515bbe31843c4bf1d72e8527b2f08134220bb002e6804687c51b945"
+        }
+      ],
+      "policies": [],
+      "firstBoundary": "2026-10-29 11:30:00",
+      "firstBoundaryGate": [
+        false,
+        ""
+      ],
+      "runtimeAcceptance": "requires-original-next-day-live-data-and-receipts"
+    },
+    {
+      "flow": "daily-new-stores-not-nourished-ops-to-wechat",
+      "schedule": "每日11:40",
+      "scheduleTimes": [
+        "11:40"
+      ],
+      "earliestHour": 11,
+      "latestHour": 18,
+      "cadenceHours": 24,
+      "dependencies": [],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-new-stores-not-nourished-ops-to-wechat/scripts/nourish_daily.py",
+          "exists": true,
+          "sha256": "2539a3208ff8f9de2f74293fa43abd661a6b804ae0a067f0bc2fa9b7bfd864ed"
+        }
+      ],
+      "policies": [],
+      "firstBoundary": "2026-10-29 11:40:00",
+      "firstBoundaryGate": [
+        false,
+        ""
+      ],
+      "runtimeAcceptance": "requires-original-next-day-live-data-and-receipts"
+    },
+    {
+      "flow": "daily-store-task-completion-ops-to-wechat",
+      "schedule": "每日12:00",
+      "scheduleTimes": null,
+      "earliestHour": 12,
+      "latestHour": 18,
+      "cadenceHours": 24,
+      "dependencies": [],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-store-task-completion-ops-to-wechat/scripts/task_daily.py",
+          "exists": true,
+          "sha256": "9fe8dc6ce78cf2f6aa3dfe9c204cae3394f003327642f546bdbcee5f7fbfb982"
+        }
+      ],
+      "policies": [],
+      "firstBoundary": "2026-10-29 12:00:00",
+      "firstBoundaryGate": "cadence gate must be evaluated by original director",
+      "runtimeAcceptance": "requires-original-next-day-live-data-and-receipts"
+    },
+    {
+      "flow": "daily-store-basic-diagnosis-to-wechat",
+      "schedule": "每日11:18",
+      "scheduleTimes": [
+        "11:18"
+      ],
+      "earliestHour": 11,
+      "latestHour": 18,
+      "cadenceHours": 24,
+      "dependencies": [],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/basic_diag_daily.py",
+          "exists": true,
+          "sha256": "4cbe919cccf356454f6c3ba65992a5dae46a8f31f7c5be16b318bc26102975cb"
+        }
+      ],
+      "policies": [],
+      "firstBoundary": "2026-10-29 11:18:00",
+      "firstBoundaryGate": [
+        false,
+        ""
+      ],
+      "runtimeAcceptance": "requires-original-next-day-live-data-and-receipts"
+    },
+    {
+      "flow": "daily-service-market-ranking-to-wechat",
+      "schedule": "每日10:00（首次上线当日补执行一次）",
+      "scheduleTimes": [
+        "10:00"
+      ],
+      "earliestHour": 10,
+      "latestHour": 19,
+      "cadenceHours": 24,
+      "dependencies": [],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-service-market-ranking-to-wechat/scripts/ranking_workflow.py",
+          "exists": true,
+          "sha256": "1a666774e2fc66249ddbd45c2e6a6d3099c673543bf7c217316062d53b8b7ca0"
+        }
+      ],
+      "policies": [
+        {
+          "path": "skills/workflows/daily-service-market-ranking-to-wechat/runtime-policy.json",
+          "sha256": "ddda4a6fb9a4ffb5cb5faca90bcaab3867ed1ffbcd426df2dfc2833b53b6d8d8",
+          "status": null,
+          "allowedBusinessDate": null,
+          "checks": [
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-service-market-ranking-to-wechat/scripts/ranking_collector.mjs",
+              "matches": true
+            },
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-service-market-ranking-to-wechat/scripts/ranking_workflow.py",
+              "matches": true
+            }
+          ]
+        }
+      ],
+      "firstBoundary": "2026-10-29 10:00:00",
+      "firstBoundaryGate": [
+        false,
+        ""
+      ],
+      "runtimeAcceptance": "requires-original-next-day-live-data-and-receipts"
+    },
+    {
+      "flow": "daily-meituan-income-top10-to-wechat",
+      "schedule": "每日08:00，与淘宝Top10串行",
+      "scheduleTimes": [
+        "08:00"
+      ],
+      "earliestHour": 8,
+      "latestHour": 19,
+      "cadenceHours": 24,
+      "dependencies": [],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-meituan-income-top10-to-wechat/scripts/income_workflow.py",
+          "exists": true,
+          "sha256": "1510659359c81268c419d1708e3d9710a4f72326168cf17798bc64e26077d92e"
+        }
+      ],
+      "policies": [
+        {
+          "path": "skills/workflows/daily-meituan-income-top10-to-wechat/runtime-policy.json",
+          "sha256": "a312d1d83dc6bf736a6de24e184a4a28d677284845b025ff8f14f92c8485bc2d",
+          "status": null,
+          "allowedBusinessDate": null,
+          "checks": [
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-meituan-income-top10-to-wechat/scripts/income_collector.mjs",
+              "matches": true
+            },
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-meituan-income-top10-to-wechat/scripts/income_workflow.py",
+              "matches": true
+            }
+          ]
+        }
+      ],
+      "firstBoundary": "2026-10-29 08:00:00",
+      "firstBoundaryGate": [
+        false,
+        ""
+      ],
+      "runtimeAcceptance": "requires-original-next-day-live-data-and-receipts"
+    },
+    {
+      "flow": "daily-quality-products-optimization",
+      "schedule": "每日17:00，美团17点客服后串行；未完成安全分段接续",
+      "scheduleTimes": [
+        "17:00"
+      ],
+      "earliestHour": 17,
+      "latestHour": 24,
+      "cadenceHours": 24,
+      "dependencies": [],
+      "entries": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-quality-products-optimization/scripts/quality_workflow.py",
+          "exists": true,
+          "sha256": "280442aaee11822febcae8816f27e35b88061dae961ecc73e7b7181baefa8795"
+        }
+      ],
+      "policies": [
+        {
+          "path": "skills/workflows/daily-quality-products-optimization/runtime-policy.json",
+          "sha256": "443166b545c0a442a55dbdb53def7b1cd6540a2552ed27879186104f132baf1a",
+          "status": null,
+          "allowedBusinessDate": null,
+          "checks": [
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-quality-products-optimization/scripts/quality_core.mjs",
+              "matches": true
+            },
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-quality-products-optimization/scripts/quality_optimizer.mjs",
+              "matches": true
+            },
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-quality-products-optimization/scripts/quality_workflow.py",
+              "matches": true
+            },
+            {
+              "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-quality-products-optimization/scripts/quality_report.mjs",
+              "matches": true
+            }
+          ]
+        }
+      ],
+      "firstBoundary": "2026-10-29 17:00:00",
+      "firstBoundaryGate": [
+        false,
+        ""
+      ],
+      "runtimeAcceptance": "requires-original-next-day-live-data-and-receipts"
+    }
+  ],
+  "sharedMessaging": {
+    "path": "skills/wechat-messaging/dependencies.json",
+    "sha256": "2f905f78072ce89d84c09ef6083f07413511f579c6561ad14cbf2eea267eaac7",
+    "status": null,
+    "allowedBusinessDate": null,
+    "checks": [
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/desktop_text_readback.py",
+        "matches": true
+      },
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/ledger.py",
+        "matches": true
+      },
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/mobile_readiness.py",
+        "matches": true
+      },
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/desktop_adapter.py",
+        "matches": true
+      },
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/contract.py",
+        "matches": true
+      },
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/evidence.py",
+        "matches": true
+      },
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/executor.py",
+        "matches": true
+      },
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/history_verify.py",
+        "matches": true
+      },
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/desktop_headers.py",
+        "matches": true
+      },
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/desktop_input.py",
+        "matches": true
+      },
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/desktop_image.py",
+        "matches": true
+      },
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/mobile_helpers.py",
+        "matches": true
+      },
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/mobile_text.py",
+        "matches": true
+      },
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/mobile_files.py",
+        "matches": true
+      },
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/mobile_adapter.py",
+        "matches": true
+      },
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/workflow_bridge.py",
+        "matches": true
+      },
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/workflow_preflight.py",
+        "matches": true
+      },
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/dependency_maintenance.py",
+        "matches": true
+      },
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/heartbeat_recovery.py",
+        "matches": true
+      },
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/policy_registration.py",
+        "matches": true
+      },
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/windows_adapter.py",
+        "matches": true
+      },
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/workflow_bridge_windows.py",
+        "matches": true
+      },
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/egress_policy.py",
+        "matches": true
+      },
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/scripts/ocr_vision",
+        "matches": true
+      },
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-agent-new-merchants-to-wechat/.runtime/ocr_control_label",
+        "matches": true
+      },
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/../../runtime/business_storage.py",
+        "matches": true
+      },
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/legacy-app-controler/wechat-desktop-control/scripts/desktop_sender.py",
+        "matches": true
+      },
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/legacy-app-controler/wechat-desktop-control/scripts/desktop_preflight.py",
+        "matches": true
+      },
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/legacy-app-controler/wechat-desktop-control/scripts/wechat_desktop.py",
+        "matches": true
+      },
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/legacy-app-controler/wechat-desktop-control/scripts/wechat_interaction_lock.py",
+        "matches": true
+      },
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/legacy-app-controler/wechat-desktop-control/scripts/cgevent_click_bin",
+        "matches": true
+      },
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/legacy-app-controler/wechat-desktop-control/scripts/cgevent_key_bin",
+        "matches": true
+      },
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/legacy-app-controler/wechat-desktop-control/scripts/ocr_vision_bin",
+        "matches": true
+      },
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/native_ui_post.py",
+        "matches": true
+      },
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/native_image_content_hook.py",
+        "matches": true
+      },
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/native_image_content.py",
+        "matches": true
+      },
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/native_image_content_driver.py",
+        "matches": true
+      },
+      {
+        "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/native_image_content.jxa",
+        "matches": true
+      }
+    ]
+  },
+  "issues": [],
+  "manifestSha256": "21917feccec65a33e71a44c9cc3b817a9318173a10e63d85bc981cff6996b9dd",
+  "auditCorrection": "Contract lightweight policy uses repo-root paths and no required hashes; verified actual registered paths exist, not a production drift."
+}

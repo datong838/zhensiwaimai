@@ -1,0 +1,332 @@
+{
+ "date": "2026-10-28",
+ "checkedAt": "20:28:39",
+ "verdict": "GO",
+ "A_no_success_all_day": [],
+ "B_failed_needs_triage": [
+  {
+   "skill": "daily-agent-new-merchants-to-wechat",
+   "time": "11:00",
+   "code": "executor_integrity"
+  },
+  {
+   "skill": "daily-quality-products-optimization",
+   "time": "17:04",
+   "code": "无收据; exit=1 未命中已知分类"
+  },
+  {
+   "skill": "daily-quality-products-optimization",
+   "time": "17:07",
+   "code": "无收据; exit=1 未命中已知分类"
+  },
+  {
+   "skill": "daily-quality-products-optimization",
+   "time": "17:10",
+   "code": "无收据; exit=1 未命中已知分类"
+  },
+  {
+   "skill": "daily-quality-products-optimization",
+   "time": "17:12",
+   "code": "无收据; exit=1 未命中已知分类"
+  },
+  {
+   "skill": "daily-new-stores-opening-to-wechat",
+   "time": "10:00",
+   "code": "windows-execution-error:ui-post-preflight-not-verified"
+  },
+  {
+   "skill": "daily-new-stores-activity-audit-to-wechat",
+   "time": "11:00",
+   "code": "activity-collection-unknown:i_waimai_back/shared/browser_precise_ops/js/brand_page_selector.mjs:17:34) ⏎     at main (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-new-stores-activity-audit-to-wechat/scripts/activity_collector.mjs:300:18)\"}"
+  },
+  {
+   "skill": "daily-new-stores-activity-audit-to-wechat",
+   "time": "11:16",
+   "code": "activity-collection-unknown:i_waimai_back/shared/browser_precise_ops/js/brand_page_selector.mjs:17:34) ⏎     at main (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-new-stores-activity-audit-to-wechat/scripts/activity_collector.mjs:300:18)\"}"
+  },
+  {
+   "skill": "daily-new-stores-activity-audit-to-wechat",
+   "time": "11:18",
+   "code": "activity-collection-unknown:i_waimai_back/shared/browser_precise_ops/js/brand_page_selector.mjs:17:34) ⏎     at main (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-new-stores-activity-audit-to-wechat/scripts/activity_collector.mjs:300:18)\"}"
+  },
+  {
+   "skill": "daily-jinsha-reports-to-business-wechat",
+   "time": "11:00",
+   "code": "prepare-stage-failed"
+  },
+  {
+   "skill": "daily-jinsha-reports-to-business-wechat",
+   "time": "11:16",
+   "code": "prepare-stage-failed"
+  },
+  {
+   "skill": "daily-jinsha-reports-to-business-wechat",
+   "time": "11:19",
+   "code": "prepare-stage-failed"
+  }
+ ],
+ "C_ok": [
+  {
+   "skill": "daily-agent-new-merchants-to-wechat",
+   "runs": 22,
+   "via_e5_idempotent_evidence": null
+  },
+  {
+   "skill": "negative-feedback-list-appeals-0930",
+   "runs": 1,
+   "via_e5_idempotent_evidence": null
+  },
+  {
+   "skill": "negative-feedback-list-appeals-1230",
+   "runs": 1,
+   "via_e5_idempotent_evidence": null
+  },
+  {
+   "skill": "meituan-intelligent-customer-service",
+   "runs": 1,
+   "via_e5_idempotent_evidence": null
+  },
+  {
+   "skill": "daily-quality-products-optimization",
+   "runs": 5,
+   "via_e5_idempotent_evidence": null
+  },
+  {
+   "skill": "meituan-waimai-negative-review-appeals-11",
+   "runs": 9,
+   "via_e5_idempotent_evidence": null
+  },
+  {
+   "skill": "taobao-flash-sale-negative-review-appeals",
+   "runs": 10,
+   "via_e5_idempotent_evidence": null
+  },
+  {
+   "skill": "daily-new-stores-opening-to-wechat",
+   "runs": 2,
+   "via_e5_idempotent_evidence": null
+  },
+  {
+   "skill": "daily-new-stores-activity-audit-to-wechat",
+   "runs": 4,
+   "via_e5_idempotent_evidence": null
+  },
+  {
+   "skill": "daily-new-stores-decoration-audit-to-wechat",
+   "runs": 1,
+   "via_e5_idempotent_evidence": null
+  },
+  {
+   "skill": "daily-new-stores-not-nourished-ops-to-wechat",
+   "runs": 1,
+   "via_e5_idempotent_evidence": null
+  },
+  {
+   "skill": "daily-store-task-completion-ops-to-wechat",
+   "runs": 24,
+   "via_e5_idempotent_evidence": null
+  },
+  {
+   "skill": "daily-store-basic-diagnosis-to-wechat",
+   "runs": 1,
+   "via_e5_idempotent_evidence": null
+  },
+  {
+   "skill": "daily-taobao-download-to-jinsha",
+   "runs": 22,
+   "via_e5_idempotent_evidence": null
+  },
+  {
+   "skill": "daily-service-market-ranking-to-wechat",
+   "runs": 44,
+   "via_e5_idempotent_evidence": null
+  },
+  {
+   "skill": "daily-top10-to-wechat-group",
+   "runs": 2,
+   "via_e5_idempotent_evidence": null
+  },
+  {
+   "skill": "daily-meituan-income-top10-to-wechat",
+   "runs": 57,
+   "via_e5_idempotent_evidence": null
+  },
+  {
+   "skill": "daily-negative-reviews",
+   "runs": 39,
+   "via_e5_idempotent_evidence": null
+  },
+  {
+   "skill": "contract-termination-applications-screenshot",
+   "runs": 37,
+   "via_e5_idempotent_evidence": null
+  },
+  {
+   "skill": "daily-jinsha-reports-to-business-wechat",
+   "runs": 4,
+   "via_e5_idempotent_evidence": null
+  }
+ ],
+ "customer_user_acceptances": [],
+ "business_delivery_facts": [
+  {
+   "skill": "meituan-waimai-negative-review-appeals-11",
+   "runs": 9,
+   "businessDeliveryFact": {
+    "businessDelivered": true,
+    "basis": "bound-single-submission-standing-user-policy",
+    "source": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/policies/submitted-image-business-policy.json",
+    "taskIds": [
+     "d2c2c671-02b4-4be7-83c3-15e5617c1466"
+    ],
+    "technicalStatusPreserved": "unknown",
+    "newSendAttempts": 0,
+    "humanConfirmationRequired": false,
+    "internalNote": "原图片已单次提交，内容回执待核；不重发"
+   },
+   "technicalUnknownPreserved": true
+  },
+  {
+   "skill": "taobao-flash-sale-negative-review-appeals",
+   "runs": 10,
+   "businessDeliveryFact": {
+    "businessDelivered": true,
+    "basis": "bound-single-submission-standing-user-policy",
+    "source": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/policies/submitted-image-business-policy.json",
+    "taskIds": [
+     "6834c9ae-cc48-47bd-b931-6000977e9fcc"
+    ],
+    "technicalStatusPreserved": "unknown",
+    "newSendAttempts": 0,
+    "humanConfirmationRequired": false,
+    "internalNote": "原图片已单次提交，内容回执待核；不重发"
+   },
+   "technicalUnknownPreserved": true
+  },
+  {
+   "skill": "daily-store-task-completion-ops-to-wechat",
+   "runs": 24,
+   "businessDeliveryFact": {
+    "businessDelivered": true,
+    "basis": "bound-single-submission-standing-user-policy",
+    "source": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/policies/submitted-image-business-policy.json",
+    "taskIds": [
+     "554fef18-0346-4c82-861e-3f5cc1578160"
+    ],
+    "technicalStatusPreserved": "unknown",
+    "newSendAttempts": 0,
+    "humanConfirmationRequired": false,
+    "internalNote": "原图片已单次提交，内容回执待核；不重发"
+   },
+   "technicalUnknownPreserved": true
+  },
+  {
+   "skill": "daily-taobao-download-to-jinsha",
+   "runs": 22,
+   "businessDeliveryFact": {
+    "businessDelivered": true,
+    "basis": "bound-single-submission-standing-user-policy",
+    "source": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/policies/submitted-image-business-policy.json",
+    "taskIds": [
+     "b5126e38-ebb6-4695-842e-ee65a5d1bc1c",
+     "8edd1438-7120-454d-876a-9d354a0fc755"
+    ],
+    "technicalStatusPreserved": "unknown",
+    "newSendAttempts": 0,
+    "humanConfirmationRequired": false,
+    "internalNote": "原图片已单次提交，内容回执待核；不重发"
+   },
+   "technicalUnknownPreserved": true
+  },
+  {
+   "skill": "daily-service-market-ranking-to-wechat",
+   "runs": 44,
+   "businessDeliveryFact": {
+    "businessDelivered": true,
+    "basis": "bound-single-submission-standing-user-policy",
+    "source": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/policies/submitted-image-business-policy.json",
+    "taskIds": [
+     "de442f98-d1df-4870-9223-523f410b57d5"
+    ],
+    "technicalStatusPreserved": "unknown",
+    "newSendAttempts": 0,
+    "humanConfirmationRequired": false,
+    "internalNote": "原图片已单次提交，内容回执待核；不重发"
+   },
+   "technicalUnknownPreserved": true
+  },
+  {
+   "skill": "daily-top10-to-wechat-group",
+   "runs": 2,
+   "businessDeliveryFact": {
+    "businessDelivered": true,
+    "basis": "bound-single-submission-standing-user-policy",
+    "source": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/policies/submitted-image-business-policy.json",
+    "taskIds": [
+     "4cb21048-cbc8-4ae9-9291-444196ea62b6"
+    ],
+    "technicalStatusPreserved": "unknown",
+    "newSendAttempts": 0,
+    "humanConfirmationRequired": false,
+    "internalNote": "原图片已单次提交，内容回执待核；不重发"
+   },
+   "technicalUnknownPreserved": true
+  },
+  {
+   "skill": "daily-meituan-income-top10-to-wechat",
+   "runs": 57,
+   "businessDeliveryFact": {
+    "businessDelivered": true,
+    "basis": "bound-single-submission-standing-user-policy",
+    "source": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/policies/submitted-image-business-policy.json",
+    "taskIds": [
+     "eb3e3c46-cf7c-4939-94ad-bfa6ad8321a6"
+    ],
+    "technicalStatusPreserved": "unknown",
+    "newSendAttempts": 0,
+    "humanConfirmationRequired": false,
+    "internalNote": "原图片已单次提交，内容回执待核；不重发"
+   },
+   "technicalUnknownPreserved": true
+  },
+  {
+   "skill": "daily-negative-reviews",
+   "runs": 39,
+   "businessDeliveryFact": {
+    "businessDelivered": true,
+    "basis": "bound-single-submission-standing-user-policy",
+    "source": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/policies/submitted-image-business-policy.json",
+    "taskIds": [
+     "194c307e-bc5a-4f01-b8fe-6f315b437780"
+    ],
+    "technicalStatusPreserved": "unknown",
+    "newSendAttempts": 0,
+    "humanConfirmationRequired": false,
+    "internalNote": "原图片已单次提交，内容回执待核；不重发"
+   },
+   "technicalUnknownPreserved": true
+  },
+  {
+   "skill": "contract-termination-applications-screenshot",
+   "runs": 37,
+   "businessDeliveryFact": {
+    "businessDelivered": true,
+    "basis": "bound-single-submission-standing-user-policy",
+    "source": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/policies/submitted-image-business-policy.json",
+    "taskIds": [
+     "7b64a2bb-4230-4d5e-bdb0-8801f9562565"
+    ],
+    "technicalStatusPreserved": "unknown",
+    "newSendAttempts": 0,
+    "humanConfirmationRequired": false,
+    "internalNote": "原图片已单次提交，内容回执待核；不重发"
+   },
+   "technicalUnknownPreserved": true
+  }
+ ],
+ "D_nonenabled_records": [
+  "meituan-intelligent-customer-service-12",
+  "meituan-intelligent-customer-service-15"
+ ],
+ "rule": "A 非空→不发台账；B 逐条定性（防重拦截/真故障）后才可发"
+}
