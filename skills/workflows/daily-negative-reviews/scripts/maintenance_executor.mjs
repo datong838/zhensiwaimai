@@ -100,14 +100,17 @@ const PUBLIC_RESYNC_TEST='scripts/test_public_dependency_resync.mjs';
 const APPROVED_PUBLIC_RECEIPT='ea6e61281e3e02de8b852e48354f5a41898a6778897449711d6cede1912d6896';
 const APPROVED_CONTENT_COPY_RECEIPT='7ceb51e9fb06a4b84c0dd746826e46a3f65f2c3ac554d0e05254ee8f91c55db6';
 const CONTENT_COPY_AFTER={"scripts/dependency_maintenance.py":"ed258407aa7275d4fbced64efbd87d89aaaf43ba366a415f881f88ddfd31dd17","scripts/native_image_content.jxa":"6c812071ded7d68f035fd2e41a1c5205e5fecca765c0a10a4dc3c176c1c3660b","scripts/native_image_content.py":"53e53e8c9c96550970374f99e8e1c37af71c95d3c6b7f46eaa383217e53ebedc","scripts/native_image_content_driver.py":"e2d66dcde00b4f14084c4b0fe480f71c86f896e4cf6c7bdc57bd2d2df3cf91ef","scripts/native_image_content_hook.py":"3b432103936415c94485f2b2ad017d0b1e2fabcfd79bd3165cd71573392c7dad","scripts/native_ui_post.py":"e59ebe38f6685888cb6f1465ab2647dc1fe39bbb75dc75a622d1832e6ee41407"};
+const APPROVED_ERROR_DETAIL_RECEIPT='2c6f12f44913201f233feb8ff1da0ea8ece14f0f63149b03a42d3648f31d4f11';
+const ERROR_DETAIL_AFTER={"scripts/dependency_maintenance.py":"92b9f7c27bf0766598b6546cab894680001b0aedce17eeddce877fa85c23dae9","scripts/native_image_content_driver.py":"eabd427dee5caed32a7bcc2b6487b601618a7b5058a8cbfe06a00d7af892387b"};
 function publicDependencyResyncCandidate({manifest,policy,receipt,publicHash,selfHash,testHash,businessDate,now}){
   if(policy.status!=='UNSEALED_ACCEPTANCE'||policy.authorizationRef!==FIXED.authorization||policy.allowedBusinessDate!==businessDate)throw Error('public-resync-policy-scope');
   const contentCopy=receipt.authorization==='user-20261028-native-image-content-copy';
-  const expectedInstruction=contentCopy?'8fce75de5cce301189aca6e2b6f306f6bb41b3d95786802e42445c9913792441':'dfa8a44d577f91e092bb92a7d8eac777012a9d863d7d8f4410f2f5d903626c45';
-  if(receipt.ok!==true||receipt.status!=='prepared'||receipt.sendAttempts!==0||receipt.runtimeModelDecisions!==0||(!contentCopy&&receipt.authorization!=='user-20261028-native-media-anchor-shift')||receipt.userInstructionSha256!==expectedInstruction||!Number.isFinite(Date.parse(receipt.expiresAt))||Date.parse(receipt.expiresAt)<=new Date(now).getTime()||receipt.tests?.ok!==true||receipt.tests?.testCount<(contentCopy?459:432)||receipt.capabilityCheck?.ok!==true)throw Error('public-resync-receipt-invalid');
+  const errorDetail=receipt.authorization==='user-20261028-native-image-copy-error-detail';
+  const expectedInstruction=(contentCopy||errorDetail)?'8fce75de5cce301189aca6e2b6f306f6bb41b3d95786802e42445c9913792441':'dfa8a44d577f91e092bb92a7d8eac777012a9d863d7d8f4410f2f5d903626c45';
+  if(receipt.ok!==true||receipt.status!=='prepared'||receipt.sendAttempts!==0||receipt.runtimeModelDecisions!==0||(!contentCopy&&!errorDetail&&receipt.authorization!=='user-20261028-native-media-anchor-shift')||receipt.userInstructionSha256!==expectedInstruction||!Number.isFinite(Date.parse(receipt.expiresAt))||Date.parse(receipt.expiresAt)<=new Date(now).getTime()||receipt.tests?.ok!==true||receipt.tests?.testCount<(errorDetail?463:contentCopy?459:432)||receipt.capabilityCheck?.ok!==true)throw Error('public-resync-receipt-invalid');
   if(receipt.dependencyManifestPath!==PUBLIC_MANIFEST||receipt.dependencyManifestBeforeSha256!==manifest.files?.[PUBLIC_MANIFEST]||receipt.dependencyManifestAfterSha256!==publicHash)throw Error('public-resync-receipt-binding');
-  const expectedPaths=contentCopy?Object.keys(CONTENT_COPY_AFTER):['scripts/dependency_maintenance.py','scripts/native_ui_post.py'];
-  if(!Array.isArray(receipt.changes)||receipt.changes.length!==expectedPaths.length||new Set(receipt.changes.map(x=>x.path)).size!==expectedPaths.length||receipt.changes.some(x=>!expectedPaths.includes(x.path)||(contentCopy&&x.after!==CONTENT_COPY_AFTER[x.path])))throw Error('public-resync-change-scope');
+  const expectedPaths=errorDetail?Object.keys(ERROR_DETAIL_AFTER):contentCopy?Object.keys(CONTENT_COPY_AFTER):['scripts/dependency_maintenance.py','scripts/native_ui_post.py'];
+  if(!Array.isArray(receipt.changes)||receipt.changes.length!==expectedPaths.length||new Set(receipt.changes.map(x=>x.path)).size!==expectedPaths.length||receipt.changes.some(x=>!expectedPaths.includes(x.path)||((contentCopy||errorDetail)&&x.after!==(errorDetail?ERROR_DETAIL_AFTER:CONTENT_COPY_AFTER)[x.path])))throw Error('public-resync-change-scope');
   return {...manifest,files:{...manifest.files,[PUBLIC_MANIFEST]:publicHash,[SELF_KEY]:selfHash,[PUBLIC_RESYNC_TEST]:testHash}};
 }
 async function refreshPublicDependency(authorization,receiptFile){
@@ -120,8 +123,9 @@ async function refreshPublicDependency(authorization,receiptFile){
     const manifest=JSON.parse(originalManifest),policy=JSON.parse(originalPolicy),current=buildConfig();
     if(policy.candidateDependencyDigest!==sha256(originalManifest))throw Error('public-resync-original-digest');
     const receiptBytes=await fs.readFile(receiptFile);
-    if(![APPROVED_PUBLIC_RECEIPT,APPROVED_CONTENT_COPY_RECEIPT].includes(sha256(receiptBytes)))throw Error('public-resync-unapproved-receipt');
+    if(![APPROVED_PUBLIC_RECEIPT,APPROVED_CONTENT_COPY_RECEIPT,APPROVED_ERROR_DETAIL_RECEIPT].includes(sha256(receiptBytes)))throw Error('public-resync-unapproved-receipt');
     for(const [file,expected] of Object.entries(manifest.files)){
+      if(file===PUBLIC_RESYNC_TEST&&sha256(receiptBytes)===APPROVED_ERROR_DETAIL_RECEIPT){if(sha256(await fs.readFile(path.join(SKILL_DIR,file)))!=='84f695e84a299ec9946ef71821fcdd8f9d71ee4373da33e57238a586d3c305ca')throw Error('public-resync-unapproved-error-detail-test');continue;}
       if(file===PUBLIC_RESYNC_TEST&&sha256(receiptBytes)===APPROVED_CONTENT_COPY_RECEIPT){if(sha256(await fs.readFile(path.join(SKILL_DIR,file)))!=='61b1329e3b186cbebf57fa9304cd430b8d5ffbaa4a271a08ad1056d7729450b0')throw Error('public-resync-unapproved-content-test');continue;}
       if(file===PUBLIC_MANIFEST||file===SELF_KEY)continue;
       if(sha256(await fs.readFile(path.isAbsolute(file)?file:path.join(SKILL_DIR,file)))!==expected)throw Error('public-resync-local-drift:'+file);

@@ -1,4 +1,5 @@
 import json
+import subprocess
 from pathlib import Path
 import tempfile
 from types import SimpleNamespace
@@ -67,6 +68,24 @@ class DriverTests(unittest.TestCase):
         self.assertEqual(self.pb.reads, [])
         self.assertEqual(self.calls, 0)
         self.assertEqual(self.pb.count, 0)
+    def test_copy_error_retains_bounded_detail_without_retry_or_clipboard_read(self):
+        for stderr in ('execution error: candidate-visible-copy-unavailable (-2700)',
+                       b'bad-ui-path', '', 'x' * 3000):
+            with self.subTest(stderr=str(stderr)[:40]):
+                calls = []
+                def fail(*args, **kwargs):
+                    calls.append((args, kwargs))
+                    raise subprocess.CalledProcessError(1, ['osascript'], stderr=stderr)
+                self.driver.runner = fail
+                self.driver.seed_count = 5
+                with self.assertRaisesRegex(RuntimeError, 'candidate-copy-ui-failed:exit=1:stderr=') as caught:
+                    self.driver.copy_image([0, 1], '精确群')
+                self.assertLessEqual(len(str(caught.exception)), 1050)
+                self.assertFalse(self.driver.copy_confirmed)
+                self.assertEqual(len(calls), 1)
+                self.assertTrue(calls[0][1]['check'])
+                self.assertEqual(self.pb.reads, [])
+                self.assertEqual(self.pb.count, 0)
     def test_original_intent_claim_task_and_owner_must_all_match(self):
         for field in ('taskId', 'binding', 'sha256', 'backend'):
             bad = dict(self.intent, **{field: 'wrong'})

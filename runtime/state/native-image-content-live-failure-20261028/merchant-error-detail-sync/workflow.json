@@ -1,0 +1,69 @@
+{
+  "ok": true,
+  "action": "refresh-unsealed-acceptance",
+  "status": "SEALED",
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "review": [
+    {
+      "label": "维护授权",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "授权有效期",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "验收态回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "运行摘要稳定回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 5008
+    },
+    {
+      "label": "共享封印件依赖回执",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "商户完整离线测试",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 10698
+    },
+    {
+      "label": "新维护收据固化",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "label": "验收态摘要刷新",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 1
+    },
+    {
+      "label": "刷新后门禁回读",
+      "status": "PASS",
+      "pitfalls": [],
+      "elapsedMs": 5
+    }
+  ],
+  "repairType": "sealed-shared-dependency-resync",
+  "refreshedFileCount": 19,
+  "maintenanceReceiptPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/native-image-content-live-failure-20261028/merchant-error-detail-sync/maintenance-receipt.json",
+  "maintenanceReceiptSha256": "29564a915a16e06fa99471e186b7cc615503a851b8773225e967c28996eb545f",
+  "dependencyReceiptPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/native-image-content-live-failure-20261028/shared-compatible-clean/receipt.json",
+  "elapsedMs": 15715
+}

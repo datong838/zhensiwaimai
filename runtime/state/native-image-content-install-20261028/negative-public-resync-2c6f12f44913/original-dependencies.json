@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "files": {
+    "scripts/workflow_policy.mjs": "19da3cf017d2d71bac00a0cab5d814fd24456c5d60c6300379adc57b93f65756",
+    "scripts/browser_collect.mjs": "e65686049c6ecb368e2f176cfe10c6ecb7d8845ac38cb5a6093ffd1ea3fc09d1",
+    "scripts/reconcile.py": "476abb110b2da055acddc1b57b4d1cbdb259c313f7354aadfa5908ee238072b1",
+    "scripts/build_report.mjs": "0427321fd4d855495b078b5cb15959a2f33524f857dea46087753714f3801489",
+    "scripts/workflow_executor.mjs": "9b286a97caa463320009592573c92350598ba381eecd46f3df881d4f05320f86",
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/dependencies.json": "bf06cc23be37206f520a089aa592c4c766f85b79c4c5d60e75e57b69b8162306",
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/workflow_bridge.py": "d2f92dc26761edc1bfceff5c22b04da9d419eb87353b3fa9c7a2ceec82e65b44",
+    "scripts/maintenance_executor.mjs": "637bf9c5d14666191af264df5bfd03db3880b20ee834842e932a2ca55e36c65e",
+    "scripts/test_browser_policy.mjs": "587eddf5e3009a2c239a7e9f5cad9a9ca87d6a2203b897c4681e6f0add5ed7d4",
+    "scripts/test_workflow_policy.mjs": "57ce509c40ba49676f8a79582e24616d6ad8e88d8fdff2945f8382bfa7550ac4",
+    "scripts/test_maintenance_executor.mjs": "360e46f59532397d27cf856132f106e4b20a33c12e9014c304178dc400a8a0b1",
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/workflow_bridge_windows.py": "f7d843eeca265edc12e9c9475fdd996114d29f68953c10e56b5dc3323319da4d",
+    "scripts/test_build_report.mjs": "b1d8f1433ad5665c22b393e4baae467f9aec94739ac3a90ff3042c50bb9c85e9",
+    "scripts/screenshot_report.py": "32e952913e5afd743bf04bef89ccdaaf40718a1c7e6d41920f48c23c6cb6e3e9",
+    "scripts/ui_delivery_evidence.mjs": "c37005154d6e12eb668ac2a25eb52c655eec7b2d7d607e42a9e2f2f486b081f5",
+    "scripts/test_ui_delivery_evidence.mjs": "f2b0239097f6b5e1cc265979ca283fc4c5666fa92c90cf389f05ae3e4067a69a",
+    "scripts/fixtures/dated-acceptance-20261025.json": "76ee91db848edc423658afe3b8943f167e1a12d2788f986bad85f14b72a2dab8",
+    "scripts/dated_acceptance_evidence.mjs": "4fd825c2964a24c55e51d1dd2c8ad7cb955863605059d6e49d62fc1f3667efa8",
+    "scripts/test_dated_acceptance_evidence.mjs": "f2534aae6af82d21008ae85cc3bfdc20b912842c9e095b86961a5e91790a31b0",
+    "scripts/test_public_dependency_resync.mjs": "61b1329e3b186cbebf57fa9304cd430b8d5ffbaa4a271a08ad1056d7729450b0"
+  },
+  "sealedAt": "2026-10-05T15:45+08:00",
+  "rebindHistory": [
+    {
+      "at": "2026-10-23T13:05:30+08:00",
+      "file": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/workflow_bridge_windows.py",
+      "reason": "windows桥加channel=wecom分流（15流切企微通道，大同13:04指令）",
+      "oldSha256": "6fa054e0a8d2d77051ca0ad141a4384794f0d2836f5dbfd799ca3c20abba9a39",
+      "newSha256": "f7d843eeca265edc12e9c9475fdd996114d29f68953c10e56b5dc3323319da4d"
+    },
+    {
+      "at": "2026-10-24T01:31:06+08:00",
+      "file": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/scripts/workflow_bridge.py",
+      "reason": "受控再封印：企微测试群扫描所需的 fail-safe 单点翻转（WECHAT_TEST_GROUP 测试群覆盖 + WECOM_AUTOSWEEP 焦点锁定守卫 + WECOM_TEST_ROOT 标记林隔离）均为运行期环境变量驱动、无环境变量时行为与原版完全一致；本重绑仅刷新摘要，不改动运行期语义。另含 10-23 企微通道迁移后未同步的既有漂移补绑。",
+      "oldSha256": "a597b0037c9107dc46b6d8a7b3fe045acf425025591778cf6777f99b329a5242",
+      "newSha256": "b439c9a4974f82e52a9e4f1f2ede4a7095400575c61628b55d37e2fc54f95329"
+    }
+  ]
+}

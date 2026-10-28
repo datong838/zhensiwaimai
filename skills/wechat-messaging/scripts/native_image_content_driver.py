@@ -108,9 +108,17 @@ class CopyDriver:
             raise RuntimeError('candidate-copy-sequence-invalid')
         payload = {**self.paths, 'rowPath': row, 'groupName': group}
         script = Path(__file__).with_name('native_image_content.jxa')
-        result = self.runner(['/usr/bin/osascript', '-l', 'JavaScript', str(script),
-                              json.dumps(payload, ensure_ascii=False)],
-                             capture_output=True, text=True, check=True, timeout=15)
+        try:
+            result = self.runner(['/usr/bin/osascript', '-l', 'JavaScript', str(script),
+                                  json.dumps(payload, ensure_ascii=False)],
+                                 capture_output=True, text=True, check=True, timeout=15)
+        except subprocess.CalledProcessError as error:
+            detail = error.stderr or ''
+            if isinstance(detail, bytes):
+                detail = detail.decode('utf-8', errors='replace')
+            detail = ' '.join(str(detail).split())[:1000]
+            raise RuntimeError('candidate-copy-ui-failed:exit=%s:stderr=%s' %
+                               (error.returncode, detail or 'unavailable')) from error
         action = json.loads(result.stdout)
         self.guard()
         self.copy_confirmed = (action.get('copied') is True

@@ -257,6 +257,51 @@ class DependencyMaintenanceTests(unittest.TestCase):
         self.assertIn(maintenance.BUSINESS_STORAGE_KEY,candidate['files'])
 
 
+class NativeCopyErrorMaintenanceTests(unittest.TestCase):
+    fixture = DependencyMaintenanceTests.fixture
+    clean_merchant_fixture = DependencyMaintenanceTests.clean_merchant_fixture
+    expiry = DependencyMaintenanceTests.expiry
+    authorization = 'user-20261028-native-image-copy-error-detail'
+
+    def driver_fixture(self):
+        directory, root, manifest = self.clean_merchant_fixture()
+        self.addCleanup(directory.cleanup)
+        target = root / 'scripts/native_image_content_driver.py'
+        target.write_text('old-driver')
+        value = json.loads(manifest.read_text())
+        value['files']['scripts/native_image_content_driver.py'] = maintenance.sha256(target)
+        manifest.write_text(json.dumps(value))
+        target.write_text('reviewed-error-detail-only')
+        return root, manifest, target
+
+    def test_exact_error_detail_driver_is_accepted(self):
+        root, manifest, target = self.driver_fixture()
+        profile = dict(maintenance.MAINTENANCE_AUTHORIZATIONS[self.authorization])
+        profile['allowedAfterSha256'] = {'scripts/native_image_content_driver.py': maintenance.sha256(target)}
+        with patch.dict(maintenance.MAINTENANCE_AUTHORIZATIONS, {self.authorization: profile}):
+            result = maintenance.prepare(self.authorization, self.expiry(), root / 'out', manifest, root,
+                                         lambda *_: {'ok': True, 'testCount': 8})
+        self.assertTrue(result['ok'], result)
+
+    def test_wrong_driver_bytes_do_not_update_manifest(self):
+        root, manifest, _ = self.driver_fixture()
+        original = manifest.read_bytes()
+        result = maintenance.prepare(self.authorization, self.expiry(), root / 'out', manifest, root,
+                                     lambda *_: {'ok': True, 'testCount': 8})
+        self.assertFalse(result['ok'])
+        self.assertEqual(result['reason'], 'native-image-copy-error-unreviewed-dependency-bytes')
+        self.assertEqual(manifest.read_bytes(), original)
+
+    def test_other_shared_path_is_rejected(self):
+        root, manifest, _ = self.driver_fixture()
+        (root / 'scripts/target.py').write_text('unapproved')
+        original = manifest.read_bytes()
+        result = maintenance.prepare(self.authorization, self.expiry(), root / 'out', manifest, root,
+                                     lambda *_: {'ok': True, 'testCount': 8})
+        self.assertEqual(result['reason'], 'maintenance-scope-disallows-dependency-changes')
+        self.assertEqual(manifest.read_bytes(), original)
+
+
 class NativeImageWaitMaintenanceTests(unittest.TestCase):
     fixture = DependencyMaintenanceTests.fixture
     clean_merchant_fixture = DependencyMaintenanceTests.clean_merchant_fixture

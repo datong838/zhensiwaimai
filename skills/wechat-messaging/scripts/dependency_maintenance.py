@@ -483,6 +483,7 @@ CODE_CONSOLIDATION_ALLOWED_AFTER = {
     CODE_CONSOLIDATION_LOCK: "a70f0e947df2e993ac4aec50995c92582d4f15f9583138a9fcde450396ba3ea2",
 }
 MAINTENANCE_AUTHORIZATIONS = {
+    'user-20261028-native-image-copy-error-detail': {'instructionSha256': '8fce75de5cce301189aca6e2b6f306f6bb41b3d95786802e42445c9913792441', 'allowedChangePaths': {SELF_KEY, 'scripts/native_image_content_driver.py'}, 'allowedAfterSha256': {'scripts/native_image_content_driver.py': 'eabd427dee5caed32a7bcc2b6487b601618a7b5058a8cbfe06a00d7af892387b'}},
     'user-20261028-native-image-content-copy': {'instructionSha256': '8fce75de5cce301189aca6e2b6f306f6bb41b3d95786802e42445c9913792441', 'allowedChangePaths': {'scripts/native_image_content.jxa', 'scripts/native_ui_post.py', 'scripts/native_image_content_hook.py', 'scripts/native_image_content_driver.py', 'scripts/dependency_maintenance.py', 'scripts/native_image_content.py'}, 'allowedAfterSha256': {'scripts/native_image_content_hook.py': '3b432103936415c94485f2b2ad017d0b1e2fabcfd79bd3165cd71573392c7dad', 'scripts/native_image_content.py': '53e53e8c9c96550970374f99e8e1c37af71c95d3c6b7f46eaa383217e53ebedc', 'scripts/native_image_content_driver.py': 'e2d66dcde00b4f14084c4b0fe480f71c86f896e4cf6c7bdc57bd2d2df3cf91ef', 'scripts/native_image_content.jxa': '6c812071ded7d68f035fd2e41a1c5205e5fecca765c0a10a4dc3c176c1c3660b', 'scripts/native_ui_post.py': 'e59ebe38f6685888cb6f1465ab2647dc1fe39bbb75dc75a622d1832e6ee41407'}},
     'user-20261028-native-media-anchor-shift': {'instructionSha256': 'dfa8a44d577f91e092bb92a7d8eac777012a9d863d7d8f4410f2f5d903626c45', 'allowedChangePaths': {SELF_KEY, 'scripts/native_ui_post.py'}, 'allowedAfterSha256': {'scripts/native_ui_post.py': 'd7f686a1d2815191ac69c580cdba642488de8bfe031521337dda7ee66a8a9555'}},
     'user-20261028-native-image-readback-wait': {'instructionSha256': '8fce75de5cce301189aca6e2b6f306f6bb41b3d95786802e42445c9913792441', 'allowedChangePaths': {SELF_KEY, 'scripts/native_ui_post.py'}, 'allowedAfterSha256': {'scripts/native_ui_post.py': 'cf85c5d4d9d65f82dd367118db1b1c40d70e5c44819fe3bde72124253965ff19'}},
@@ -967,6 +968,10 @@ def prepare(authorization: str, expires_at: str, output_dir: Path,
                 approved = authorization_profile['allowedAfterSha256']
                 if any(change['path'] != SELF_KEY and change['after'] != approved.get(change['path']) for change in changes):
                     raise MaintenanceError('native-media-anchor-unreviewed-dependency-bytes')
+            if authorization == 'user-20261028-native-image-copy-error-detail':
+                approved = authorization_profile['allowedAfterSha256']
+                if any(change['path'] != SELF_KEY and change['after'] != approved.get(change['path']) for change in changes):
+                    raise MaintenanceError('native-image-copy-error-unreviewed-dependency-bytes')
             if authorization == 'user-20261028-native-image-content-copy':
                 approved = authorization_profile['allowedAfterSha256']
                 if any(change['path'] != SELF_KEY and change['after'] != approved.get(change['path']) for change in changes):
