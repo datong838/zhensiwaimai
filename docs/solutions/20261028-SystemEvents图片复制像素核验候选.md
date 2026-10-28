@@ -7,3 +7,9 @@
 原worker持原UI租约时才调用：System Events选中该确切AXCell，读取原编辑→复制菜单C/修饰0与enabled属性，通过后仅点击可见菜单复制，不试探控制键。不激活抢回用户焦点，失焦或菜单不可用就保持pending。每帧先写随机文本nonce（不读取/备份原剪贴板数据），记录changeCount，原可见复制后只读取允许的PNG/TIFF数据，要求changeCount增长、源宽高/RGBA SHA完全一致。两帧来自同一消息行，期间群/空框/owner/源字节不变，才形成content proof；不是靠图标/新空白行/时间verified。拒绝文件卡文字与会议图标替代。实际证明不足仍unknown，不放宽门禁。
 
 候选以依赖注入单测验证新鲜性、错图、错群、旧剪贴板、失焦、行变化、owner退出、文件漂移均失败；不启动候选实际UI操作。正式接入仍必须原共享受控授权/全回归/全部消费者摘要同步/原真实图片验收。不得把离线通过视作已上线或内容已验证；旧marker不回写、未来只读stage另立原协议后才能核验历史图。
+
+## 原worker驱动补齐
+
+新增同目录 `native_image_copy_driver.py` 和 `test_native_image_copy_driver.py`。驱动没有CLI，构造不触碰UI或剪贴板；原worker在同一发送任务尚未写response时传入原队列目录。每次动作前复核原task完整绑定、目录taskId、owner-process、原claim worker及send-intent三项身份；已有response一律拒绝，不能借活owner回读旧任务。原UI树仅浅层读取当前尾行与精确标题/空框，文件卡文字不作为图片候选。复制继续调用候选JXA，禁止激活或按键。
+
+剪贴板驱动惰性加载AppKit，先清空并写nonce后才可发出原生复制；仅复制确认后且changeCount增长才读取PNG/TIFF，读取前后count不变才交像素比较，不读取原文字/旧类型列表、不保存原剪贴板。构造与隔离单测不调用真实UI。此批只补候选驱动，不修改共享摘要、生产任务、发送器或旧证据。正式接入仍待原worker受控安装和真实一次图片验收。
