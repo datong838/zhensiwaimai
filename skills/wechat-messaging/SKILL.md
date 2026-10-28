@@ -40,3 +40,9 @@ description: 统一已授权微信群的文字、图片和文件交付，核对�
 ## 2026-10-28图片提交后只读观察
 
 唯一图片提交后有最多15秒观察预算，绑定首个新消息候选行，须同一行两次连续实际inline结构、完整群及空框才通过。只对该行内容尚未暴露或尚无新行等异步状态等待；候选行/群/草稿/owner改变立即退出。全部观察不输入、不点击、不再次发送。观察仍无内容时保留unknown；不把等待或离线测试当作真实图片验收。旧unknown仍不得重发。
+
+## 2026-10-28原worker图片像素核验接入
+
+13:38已受控接入 `scripts/native_image_content.py`、`native_image_content_driver.py`、`native_image_content_hook.py` 和 `native_image_content.jxa`。原15秒观察明确停在同一新消息内容未暴露时，只允许仍持原同步发送任务/claim/send-intent、且owner.pid就是当前进程的原worker，对该精确消息经System Events可见“编辑→复制”核验；不激活抢焦点、不按键探测、不再发送。每帧先只写nonce，复制后仅取新鲜PNG/TIFF，源图宽高及RGBA像素SHA必须两次完全相同，期间群/空框/消息路径/owner/源文件不变。任一条件不足仍unknown。
+
+该能力没有历史readback CLI，不复用已终态任务，不重写旧unknown，不读取或备份原用户剪贴板内容。共享459测试、商家148、Top10 14及差评原8组通过；这证明受控安装与回归，尚未完成真实图片像素验收。实际验收须由原主任下一次正常图片任务完成。

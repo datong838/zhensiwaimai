@@ -11,6 +11,7 @@ from ledger import atomic_json
 from native_ui_tree import (read_anchor, read_anchors, execute, named_action,
                             SELECTORS, NativeUIActionRejected)
 from wecom_ui_queue import QUEUE, owner_active, validate_response
+from native_image_content_hook import submitted_image_observations
 
 
 def ensure_group(group, owner=None):
@@ -379,7 +380,7 @@ def send_media(folder):
             live()
             submitted = True
             execute([composer_submit_action(task['request']['groupName'], '\ufffc')], max_depth=0)
-        observations = (wait_image_observations(task, baseline_count, live) if kind == 'image'
+        observations = (submitted_image_observations(task, folder, baseline_count, live, original_wait=wait_image_observations, pending_type=NativeImageObservationPending, native=sys.modules['native_ui_tree'], queue=QUEUE, owner_check=owner_active) if kind == 'image'
                         else [media_observation(task, baseline_count), media_observation(task, baseline_count)])
         result = {'status': 'verified', 'sendAttempts': 1, 'resolvedGroup': title['value'],
                   'sha256': task['item']['sha256'], 'observations': observations,

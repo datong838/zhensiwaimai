@@ -17,3 +17,19 @@
 候选接入函数放同目录 `native_image_copy_hook.py`：原15秒观察成功直接复用；仅捕获原 `NativeImageObservationPending` 的精确内容未暴露原因，且冻结异常内原候选message_path后才进入复制。后续每帧必须仍是此路径，不允许观察期结束后改绑另一条新消息。无新行、群/草稿变化、owner退出及其他异常不触发复制。新增hook单测及原发送器内存接入回归，不改磁盘现役发送器或摘要。
 
 原nativeDispatch在 `wecom_adapter.session` 的 `wecom-transport.lock` 内同步调用，task.owner.pid即当前发送Python进程。候选进一步硬核对owner.pid必须等于本驱动进程PID，活着的别的进程也不能借原任务复制；无CLI，不另起worker、不抢原锁。真实接入仅允许此同步原调用栈，不给历史任务开放外部诊断入口。
+
+## 正式安装范围与顺序
+
+正式模块为 `skills/wechat-messaging/scripts/native_image_content.py`、`native_image_content_driver.py`、`native_image_content_hook.py`、`native_image_content.jxa`；原 `native_ui_post.py` 只增加hook导入并在既有唯一提交之后调用hook。安装前先在 `runtime/state/native-image-content-install-20261028/stage/` 形成同名候选，核对原完整共享回归与候选测试。
+
+受控维护另涉及 `skills/wechat-messaging/scripts/dependency_maintenance.py` 的精确路径/候选SHA授权及新模块摘要登记、共享 `dependencies.json`，原商家 `executor-lock.json`、Top10 `runtime-policy.json`、差评 `dependencies.json`/`runtime-policy.json` 的原维护同步。授权引用用户要求修复每天图片unknown及全部非登录阻碍；不沿用旧授权的候选字节，不修改业务授权/群/日期/防重事实。所有原文件先保存SHA与字节，任何步骤失败立即恢复本批代码与摘要/消费者policy原字节并核对clean，不启动生产补跑。
+
+安装仅空闲窗口且留足下一新商家档时间；如不能在13:30前完成全部消费者原门核验则推迟到该档真实送达之后，不让部分安装跨过排班。共享维护器完整测试、capabilities与clean回读后，经原消费者维护入口同步；原发送事实/游标/旧unknown保持。真实验收只随下一原主任图片任务发生，不创建测试消息、不重发当日旧图。
+
+13:34首轮安装已完整回滚：共享459测试及商家SEALED同步通过，但差评通用重验入口按原当前提交范围拒绝，不能用通用重验绕过原unknown。后续只扩展现有窄 `refresh-public-dependency` 入口：文件 `skills/workflows/daily-negative-reviews/scripts/maintenance_executor.mjs` 与 `test_public_dependency_resync.mjs`，增加本次固定共享维护收据SHA、6个精确变更路径及各自after SHA；保留旧分支、业务日期/status/验收事实/5个业务文件SHA，不能重新验收已提交载荷。输出目录改为收据SHA后缀的新独立目录，避免覆盖旧维护证据。重新安装时将这两个维护文件纳入原字节备份，任一步失败仍全部回滚。
+
+## 实施结果
+
+13:38第二轮安装完成。共享完整459测试与capabilities通过，维护器inspect为clean（38个登记文件）；商家原148测试及19文件SEALED门通过，Top10原14测试/8文件门通过；差评窄同步原24+新增8测试及原8组回归通过，原allowedBusinessDate/status不变、5个业务文件SHA不变、acceptedNewDelivery=false。8份消费者policy无漂移，0199ccb39630原unknown MD SHA不变。JXA编译通过，真实复制次数0、额外发送0，仍待下一原主任正常图片任务实证。
+
+证据均在 `runtime/state/native-image-content-install-20261028/`：首轮 `rollback-receipt.json`、第二轮 `shared-install-2/receipt.json`、`merchant-sync-2/maintenance-receipt.json`、`top10-sync-2.json`、`negative-public-output.json` 和 `final-audit.json`。不把隔离测试或安装成功写成真实图片验收完成。

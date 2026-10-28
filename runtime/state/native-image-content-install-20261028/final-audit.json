@@ -1,0 +1,97 @@
+{
+  "at": "2026-10-28T13:38:26.600276+08:00",
+  "status": "installed-real-image-acceptance-pending",
+  "sharedTests": 459,
+  "candidateTests": 27,
+  "maintenanceScopeTests": 4,
+  "negativePublicSyncTests": 32,
+  "negativeOriginalSuites": 8,
+  "merchantOriginalTests": 148,
+  "top10Tests": 14,
+  "jxaCompilePassed": true,
+  "allConsumerPoliciesNoDrift": [
+    {
+      "policy": "skills/workflows/daily-top10-to-wechat-group/runtime-policy.json",
+      "hashesChecked": 8,
+      "drift": [],
+      "status": null,
+      "allowedBusinessDate": null
+    },
+    {
+      "policy": "skills/workflows/daily-negative-reviews/runtime-policy.json",
+      "hashesChecked": 0,
+      "drift": [],
+      "status": "UNSEALED_ACCEPTANCE",
+      "allowedBusinessDate": "2026-10-27"
+    },
+    {
+      "policy": "skills/workflows/daily-negative-reviews/dependencies.json",
+      "hashesChecked": 20,
+      "drift": [],
+      "status": null,
+      "allowedBusinessDate": null
+    },
+    {
+      "policy": "skills/workflows/contract-termination-applications-screenshot/runtime-policy.json",
+      "hashesChecked": 0,
+      "drift": [],
+      "status": null,
+      "allowedBusinessDate": null
+    },
+    {
+      "policy": "skills/workflows/daily-agent-new-merchants-to-wechat/executor-lock.json",
+      "hashesChecked": 19,
+      "drift": [],
+      "status": "SEALED",
+      "allowedBusinessDate": null
+    },
+    {
+      "policy": "skills/workflows/daily-service-market-ranking-to-wechat/runtime-policy.json",
+      "hashesChecked": 2,
+      "drift": [],
+      "status": null,
+      "allowedBusinessDate": null
+    },
+    {
+      "policy": "skills/workflows/daily-meituan-income-top10-to-wechat/runtime-policy.json",
+      "hashesChecked": 2,
+      "drift": [],
+      "status": null,
+      "allowedBusinessDate": null
+    },
+    {
+      "policy": "skills/workflows/daily-quality-products-optimization/runtime-policy.json",
+      "hashesChecked": 4,
+      "drift": [],
+      "status": null,
+      "allowedBusinessDate": null
+    }
+  ],
+  "merchantGate": {
+    "ok": true,
+    "status": "SEALED",
+    "manifestSha256": "1eb88e6c0f0fbd2b4ceac6a6d108f241f6f44ed2b166edaeedb9ec8c4f673100",
+    "fileCount": 19,
+    "acceptanceMerchantId": "545376966",
+    "acceptanceMessageSha256": "eeb630e0d9351d53a4d84e3085a3299f6587bd7128c6d8191ac99ec149345928",
+    "runtimeModelDecisions": 0,
+    "maintenanceAcceptance": "desktop-wechat-shared-preflight",
+    "sharedTextAcceptance": "wechat-messaging-desktop-text",
+    "sharedMediaAcceptance": "not-required-by-text-only-merchant-workflow"
+  },
+  "negativePolicyStatusAndDatesUnchanged": true,
+  "negativeFiveBusinessFilesUnchanged": {
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/daily-negative-reviews/20261027/workflow-state.json": "7a64a133e7731413ae8e51ab17bed4a2a3770e2f81b21e95239ed0f46d8f6e3e",
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/daily-negative-reviews/20261027/wechat-send/receipt.json": "4d81346cde64e31ffe05af65f2002005ea1819d6b8fd124588faf219f636909a",
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/runs/daily-negative-reviews/20261027/wechat-screenshot-send/receipt.json": "d240826c0ab24f50e086dc9712c858475d34db4491a29ae8363426d762529158",
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/negative-review-send-shanghai-zhensi-operations-ding-fandang-v1.desktop-attempts/negative-review-2026-10-27.json": "4d81346cde64e31ffe05af65f2002005ea1819d6b8fd124588faf219f636909a",
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/.local/state/negative-review-summary-send-shanghai-zhensi-operations-ding-fandang-v1.desktop-attempts/negative-review-summary-2026-10-27.json": "d240826c0ab24f50e086dc9712c858475d34db4491a29ae8363426d762529158"
+  },
+  "originalTaobaoUnknownShaUnchanged": "927822ce2616787a8eebb0b76844aa5f3d4a75e4d4eb5ec918c66812659d0683",
+  "sendAttempts": 0,
+  "liveCopyAttempts": 0,
+  "oldUnknownsRewritten": 0,
+  "realImageAcceptanceProven": false,
+  "firstAttemptRollback": "rollback-receipt.json",
+  "remaining": "Wait for next original-owner image submission; no historical terminal task reuse or image resend"
+}
