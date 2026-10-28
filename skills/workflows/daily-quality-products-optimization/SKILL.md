@@ -13,3 +13,5 @@ description: 淘宝闪购低优质商品的全部门店商品整改优化；每�
 完成后官方@oai/artifact-tool生成两列Excel“门店名称、执行记录”，包括优化、无需操作、已发起未确认、未能执行及访问异常；原群原WeCom原生队列同批file→text，冻结日路径/SHA/size，逐项unknown不重发。文案诚实报告实际数量与异常分项，存在未确认/失败时不称全优化成功。历史旧日schema与原交付凭据只保留兼容，不作为新日复扫条件。监理只处理异常和维护，不手动代点确认或发送。
 
 完整稳定商品页明确无可采纳建议时，前置记录“已检查、无可执行建议”，不创建优化intent、不点确认；须全量身份/schema/数量通过、无下一页、非加载且所有hasSuggestion严格false。局部或身份不明不能据此跳过。新规则只作用新日当轮未尝试项，不回改旧unknown或返扫。
+
+2026-10-28通知恢复：新一轮send_one只在唯一原native send任务/response与完整群/当日事件/冻结载荷一致、sendAttempts严格整数0且无send-intent时，记schemaVersion=2的blocked恢复态。恢复复验原证据、request/completion/report SHA及原verified前件，跳过优化器和重新制表，仅发送尚未提交项；Excel已verified则只续文字，同一稳定事件。原request文件及载荷保持，仅本次实际调用更新deadline预算；newSendAttempts不含旧前件。旧unknown/attempted、有发送意图或计数不明仍只读，不迁移旧事实。42项Python及原Node回归通过，17点真实执行尚待。
