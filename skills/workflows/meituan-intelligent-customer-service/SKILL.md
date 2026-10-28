@@ -66,3 +66,8 @@ description: 在美团商家端隔离客服工作台中筛选超时未人工回�
 ## 2026-10-28回复一次提交
 
 回复动作仅一次原按钮提交，未回显不补按Enter。卡片按真实19位DOM id唯一匹配，缺失/重复即不发送；输入框原来必须为空，输入后完整回复相等。新提交前原程序独占写records/reply-submissions下哈希绑定意图；同会话同末条诉求已有attempted/unknown/verified均只读，不借新轮次或日期重发，不回填历史意图。自己先前完整兜底话术也视为已回复，不因小美昵称重复。回显需新增完整正文；技术待核单列verificationPending，executionComplete与verificationComplete分别核对，不能以正常CLI退出认定真实送达全部完成。原资格、租约、两视图、MD记录与附件链不扩大；12点真实运行验收待。方案见仓内docs/solutions/20261028-客服回复一次提交与跨轮防重.md。
+
+
+## 2026-10-28严重事项分诊
+
+原judge对明确食品安全、人身损害、支付异常、疑似诈骗事项设置manual-review-required，qualify=false且不生成回复。原processCards只记脱敏escalationRequired和last-scan独立计数，不输入、不创建回复意图、不发送，不把转人工需要记成已解决，不自动转接或新增群通知。已真人接管仍沿原排除。普通少漏餐、退款、配送及原超时/无人工回复/一次提交门保留；医院作为普通配送地点不单独触发严重事项门。关键词覆盖不等于语义全覆盖，真实12点验收仍待。方案docs/solutions/20261028-客服严重事项转人工门.md。

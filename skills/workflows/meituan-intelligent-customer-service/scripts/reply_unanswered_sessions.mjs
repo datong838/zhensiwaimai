@@ -41,6 +41,9 @@ const REPLY_DELIVERY_NOTE =
 const EXCLUDE_RE = /加微信|加下我|加个微信|微信号|加V|薇信|威信|V信|联系方式|打给我|来电|电话\s*\d|广告|推广|招聘|兼职|刷单|贷款|引流|http|www\.|秀信|私信/;
 const DELIVERY_NOTE_RE = /放前台|放门口|放驿站|放快递柜|代收点|送达时备注|放在前台|放在门口/;
 const QUALIFY_RE = /少送|漏送|漏放|没放|错送|送错|发错|没送到|未送到|没收到|未收到|还没收到|洒了|撒了|漏了|凉了|冷了|退款|退单|取消|补送|补发|赔付|发票|开票|配送|骑手|超时|等太久|没餐|缺餐|分量|餐具|异物|头发|虫子|变质|过期|异味|卫生|催单|改地址|送错地址/;
+// Existing policy requires human review for these explicit serious matters.
+// This gate cannot authorize a transfer, compensation, or an automatic reply.
+const ESCALATE_RE = /异物|头发|虫子|蟑螂|变质|过期|异味|不卫生|卫生问题|食品安全|食物中毒|中毒|吃坏|拉肚子|腹泻|呕吐|过敏|就医|住院|受伤|人身损害|威胁|支付异常|重复扣款|盗刷|诈骗|被骗/;
 const AUTO_RIGHT_RE = /自动回复|系统提示|已向顾客发起|已接单|骑手已|退款成功|已退款|平台客服|机器人|处理中|订单已完成|已送达|已取消|优惠券|红包已|评价邀请|温馨提示/;
 const ROBOT_RIGHT_RE = /\[AI客服\]|总部商家客服|商家客服小|小慧/;
 // 顾客侧的「非诉求」消息：订单咨询卡片模板、平台系统通知（含发票任务催促）。命中即不回。
@@ -72,6 +75,7 @@ export function judge(cardText, messages, now) {
   const human = rightTexts.find((x) => [REPLY_DEFAULT, REPLY_DELIVERY_NOTE].some(reply => norm(x.text).includes(norm(reply)))
     || (!AUTO_RIGHT_RE.test(norm(x.text)) && !ROBOT_RIGHT_RE.test(norm(x.text)) && !norm(x.nick).includes("小美")));
   if (human) return { ...base, reason: `owner-human-reply-present[right="${norm(human.text).slice(0, 40)}" nick=${norm(human.nick).slice(0, 20)}]` };
+  if (ESCALATE_RE.test(text)) return { ...base, escalate: true, reason: "manual-review-required(食品安全/人身/支付/诈骗等严重事项)" };
   if (!QUALIFY_RE.test(text)) return { ...base, reason: "not-catering-request(保守不回)" };
   // 超时：优先顾客最后一条消息内的时间，其次卡片预览时间；都没有 → 不作超时结论
   let tm = text.match(TIME_RE);
@@ -211,6 +215,10 @@ export async function processCards(page, identities, receipt, now, done, view = 
     const decision = judge(identity, messages, now);
     decision.session = maskSession(identity);
     receipt.decisions.push(decision);
+    if (decision.escalate) {
+      receipt.escalationRequired ??= [];
+      receipt.escalationRequired.push({ session: decision.session, question: decision.customerText, reason: decision.reason });
+    }
     if (!decision.qualify || DRY) continue;
 
     const customerText = norm(messages.filter(x => x.side === "left" && norm(x.text)).at(-1)?.text);
@@ -403,6 +411,8 @@ async function main() {
         date: now.date, scanned: receipt.scanned, candidateCount: receipt.candidateCount,
         ledgerRows: receipt.sent.length, unverifiedCount: receipt.sent.filter((s) => !s.verifiedBy).length,
         verificationPendingCount: receipt.verificationPending.length, verificationComplete: receipt.verificationComplete,
+        escalationRequiredCount: receipt.escalationRequired?.length ?? 0,
+        escalationRequired: receipt.escalationRequired ?? [],
         views: receipt.views, ts: Date.now(),
       })).catch(() => {});
     }

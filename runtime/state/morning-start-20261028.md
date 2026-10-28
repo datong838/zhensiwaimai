@@ -258,3 +258,8 @@ posts仅追加两申诉主名和12/15客服别名，22现役均能解析原互�
 
 
 11:44 原13点淘宝下载上传入口preflight重新核验通过（仅preflight，未调用run/runScheduled）：仓内安装映射与入口同步、冻结执行器/发送器/恢复器摘要、自测与历史pending检查通过；pendingEvidence none。该证据仅代表提前依赖门，13点实际业务仍待，不提前下载、上传或发送。原收据runtime/state/thirteen-preflight-20261028/taobao-entrypoint.json。
+
+
+## 11:50客服严重事项政策修复
+
+纯原judge复现虫子/异物食品安全投诉会生成普通兜底，与现行政策停止一般建议冲突。已增加严重事项人工分诊门，原人工接管优先，命中后不生成回复、不输入/写发送意图/提交，只在原收据和last-scan独立列escalationRequired；不自动转接或告警发群，不把事项假解决。普通配送至医院等对照继续原资格门。新增4测试条目（20严重案例/6普通与超时对照/已有人工/实际processCards零输入零意图零提交分支）与原一次提交/队列/风险/附件合计26 Node条目通过，原post7依赖clean，原records字节全部不变。未生产预演，12点原主任真实验收待；时间来源/虚拟列表全量与语义全覆盖仍审查，不能宣称客服全链闭环完成。证据runtime/state/customer-policy-escalation-20261028/final-audit.json。
