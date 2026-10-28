@@ -1,0 +1,142 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-28",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 52,
+    "task_page": 599,
+    "navigation": 1091,
+    "date_filter": 1400,
+    "page_1_read": 438,
+    "selection_audit": 0,
+    "detail_1349165988": 821
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_1349165988": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "1349165988",
+      "merchantName": "喜赞·轻食健康餐",
+      "recommendTime": "2026-10-28 17:44:50",
+      "city": "上海市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 10,
+      "address": "东长治路339号B2-K05室",
+      "contact": "rainie，18800204660",
+      "detailVerified": true,
+      "text": "城市：上海市  ；  联系人：rainie，18800204660  ；  店铺：喜赞·轻食健康餐  ；  地址：东长治路339号B2-K05室  ；  商家ID：1349165988",
+      "sha256": "bb443d95cfd1943f92901fccb4ca37d63832075ecd7f6c6c3fceb5d14e535979"
+    }
+  ],
+  "frontmostBefore": "com.openai.codex",
+  "createdAt": "2026-10-28T10:00:09.535Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-28",
+    "merchantName": "澳门专送餐厅",
+    "merchantId": "154365660",
+    "recommendTime": "2026-10-28 16:40:57",
+    "tableOrder": 8,
+    "messageSha256": "8ed0b1bac554ae60e180c35779a91435233527fa78c8ecab42cb709867a596b5",
+    "sentAt": "2026-10-28T17:00:28+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-28",
+  "filterEndDate": "2026-10-28",
+  "dateFilter": "2026-10-28..2026-10-28",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 10,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 10,
+  "pendingRows": 9,
+  "targetCount": 1,
+  "selectionAudit": {
+    "totalRows": 10,
+    "pendingRows": 9,
+    "excludedAtOrBeforeCursor": 8,
+    "excludedAfterCursorNotPending": 1,
+    "targetCount": 1,
+    "rows": [
+      {
+        "merchantId": "1349165988",
+        "recommendTime": "2026-10-28 17:44:50",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "154365660",
+        "recommendTime": "2026-10-28 16:40:57",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1359308645",
+        "recommendTime": "2026-10-28 15:26:46",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1364157790",
+        "recommendTime": "2026-10-28 14:46:49",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1365408044",
+        "recommendTime": "2026-10-28 14:43:39",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "547236519",
+        "recommendTime": "2026-10-28 11:33:02",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1346148036",
+        "recommendTime": "2026-10-28 10:39:18",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1271448281",
+        "recommendTime": "2026-10-28 10:32:32",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "545376966",
+        "recommendTime": "2026-10-28 00:53:02",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546122889",
+        "recommendTime": "2026-10-28 17:10:34",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 4792,
+  "frontmostAfter": "com.openai.codex",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261028-180003/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261028-180003/output/collection-attempt-1.review.md"
+}

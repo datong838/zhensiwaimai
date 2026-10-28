@@ -1,0 +1,23 @@
+{
+  "skill": "daily-meituan-income-top10-to-wechat",
+  "ledger_name": "美团外卖昨日门店收入Top10",
+  "schedule": "每日08:00，与淘宝Top10串行",
+  "dev_state": "active",
+  "status": "FAILED",
+  "category": "UNKNOWN",
+  "detail": "reason=prior-attempt-requires-read-only-reconciliation (receipt:reason)",
+  "next_action": "看护代理读日志定位根因后升级处理",
+  "attempts": 1,
+  "max_retries": 0,
+  "duration_seconds": 0.12,
+  "started_at": "2026-10-28T17:55:08",
+  "finished_at": "2026-10-28T17:55:08",
+  "triggered_by": "daemon",
+  "logs": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-28/daily-meituan-income-top10-to-wechat--20261028-175508--a1--s1.log"
+  ],
+  "fail_signal": {
+    "kind": "reason",
+    "code": "prior-attempt-requires-read-only-reconciliation"
+  }
+}

@@ -22,9 +22,11 @@ def local_now():
 
 def readiness(now=None):
     """Read actual runs, never promote an unknown or a skipped-clock record."""
+    now = now or local_now()
+    if user_send_held(now):
+        return False, ['daily-ledger-user-hold']
     import fixed_schedule
     from business_delivery_facts import read_fact
-    now = now or local_now()
     if (now.hour, now.minute) < (18, 30):
         return False, ['final-slot-not-due']
     manifest = json.loads((ROOT / 'runtime/skills_manifest.json').read_text())
@@ -66,6 +68,14 @@ def readiness(now=None):
 
 def directory(now):
     return ROOT / 'runtime/state/daily-ledger-delivery' / now.strftime('%Y-%m-%d')
+
+
+def user_send_held(now=None, *, root=None):
+    """A daily explicit user hold survives scheduler ticks until explicitly released."""
+    now = now or local_now()
+    folder = directory(now) if root is None else Path(root) / 'runtime/state/daily-ledger-delivery' / now.strftime('%Y-%m-%d')
+    marker = folder / 'user-send-hold.json'
+    return marker.exists() or marker.is_symlink()
 
 
 def request_enabled(request, now=None):

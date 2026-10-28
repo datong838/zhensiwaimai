@@ -20,6 +20,10 @@ def table():
 def load_grant(workflow):
     if workflow not in ALLOWED:
         return None
+    if workflow == 'daily-work-ledger':
+        from daily_ledger_delivery import user_send_held
+        if user_send_held(datetime.now(ZoneInfo('Asia/Shanghai')), root=ROOT):
+            return None
     try:
         data = json.loads(table().read_text(encoding='utf-8'))
     except FileNotFoundError:
