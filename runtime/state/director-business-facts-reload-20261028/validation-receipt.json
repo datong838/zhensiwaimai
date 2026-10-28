@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-28",
+  "result": "verified",
+  "service": "gui/501/com.zhensi.waimai.careloop",
+  "oldPid": 58654,
+  "newPid": 24510,
+  "reloadCount": 1,
+  "productionJobsRequested": 0,
+  "newSendAttempts": 0,
+  "queueTaskOrReceiptChanges": 0,
+  "chromePidsUnchanged": true,
+  "protectedFilesUnchanged": true,
+  "technicalUnknownPreserved": true,
+  "lastCyclePendingPreserved": true,
+  "businessDeliveryObservedCount": 9,
+  "enabledGateCount": 22,
+  "enabledNotSkippedCount": 0,
+  "tests": {
+    "python": "/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python",
+    "modules": [
+      "runtime.test_business_delivery_facts",
+      "runtime.test_executed_image_acceptance",
+      "runtime.test_ledger_delivery",
+      "runtime.test_daily_progress_slots"
+    ],
+    "ran": 67,
+    "passed": 67,
+    "failed": 0
+  },
+  "nonProductIssues": [
+    "The first repository-root invocation omitted PYTHONPATH=runtime and did not load the test modules.",
+    "The second invocation used system Python, where one Excel assertion could not start because openpyxl was absent; 66 other tests passed.",
+    "The final invocation used the director production Python environment and passed all 67 tests without dependency changes."
+  ],
+  "evidence": [
+    "activation-before.json",
+    "activation-attempt.json",
+    "activation-result.json",
+    "activation-after.json",
+    "director-cycle.log"
+  ]
+}
