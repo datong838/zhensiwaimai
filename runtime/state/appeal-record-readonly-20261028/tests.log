@@ -1,0 +1,46 @@
+✔ prepared, auto skip=false preserves original bytes (5.889333ms)
+✔ ready_for_confirmation, auto skip=false preserves original bytes (1.271ms)
+✔ submitted_once, auto skip=false preserves original bytes (1.5075ms)
+✔ verified_submitted, auto skip=false preserves original bytes (1.131625ms)
+✔ skipped, auto skip=false preserves original bytes (0.997958ms)
+✔ blocked, auto skip=false preserves original bytes (0.990125ms)
+✔ unknown, auto skip=false preserves original bytes (0.791958ms)
+✔ prepared, auto skip=true preserves original bytes (1.181583ms)
+✔ ready_for_confirmation, auto skip=true preserves original bytes (0.889209ms)
+✔ submitted_once, auto skip=true preserves original bytes (0.887375ms)
+✔ verified_submitted, auto skip=true preserves original bytes (0.842583ms)
+✔ skipped, auto skip=true preserves original bytes (0.666875ms)
+✔ blocked, auto skip=true preserves original bytes (0.698417ms)
+✔ unknown, auto skip=true preserves original bytes (0.836833ms)
+✔ missing file alone may proceed; malformed/duplicate/future states stay read-only (1.955792ms)
+✔ symlink and directory are existing uncertain evidence, never treated as missing (0.643459ms)
+✔ old actual auto-enabled branch reproduces overwrite of unknown (2.398333ms)
+✔ new actual auto-enabled branch never overwrites unknown (1.16325ms)
+✔ new actual auto-enabled branch never overwrites submitted_once (1.370416ms)
+✔ new actual auto-enabled branch never overwrites verified_submitted (1.088042ms)
+✔ new actual auto-enabled branch never overwrites blocked (1.484125ms)
+{"ok":true,"tests":31,"sendAttempts":0}
+✔ runtime/test_appeal_shift.mjs (48.83325ms)
+✔ acquire precedes operation; original owner released exactly once (1.006333ms)
+✔ busy=throw never calls operation or release (0.219292ms)
+✔ busy=null never calls operation or release (0.05725ms)
+✔ operation exception still releases once; release error never retries operation (0.118959ms)
+✔ meituan execute cannot reach CDP when busy (0.077125ms)
+✔ meituan inspect cannot reach CDP when busy (0.059042ms)
+✔ taobao execute cannot reach CDP when busy (0.051ms)
+✔ taobao inspect cannot reach CDP when busy (0.044208ms)
+✔ meituan full collector validates then cannot reach CDP while busy (0.166959ms)
+✔ taobao full collector validates then cannot reach CDP while busy (0.11925ms)
+✔ original real lease excludes another process throughout operation, then permits it (258.684666ms)
+{"ok":true,"tests":18,"runtimeModelDecisions":0}
+✔ skills/workflows/taobao-flash-sale-negative-review-appeals/scripts/test_appeal_executor.mjs (42.8885ms)
+PASS: 12 candidate cases; no browser or submission
+✔ skills/workflows/taobao-flash-sale-negative-review-appeals/scripts/test_immediate_candidate.mjs (42.332ms)
+ℹ tests 35
+ℹ suites 0
+ℹ pass 35
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 319.802458

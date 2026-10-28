@@ -10,6 +10,7 @@ import {selectExistingJinshaTarget,assertSelectedJinshaTarget} from '../../../po
 //   prepared → ready_for_confirmation → submitted_once → 点击确认 → 权威回读（条目移除且未申诉总数减少）
 // 回读失败标 unknown 并停止批次（防重），绝不重发。
 import {withJinshaOperationLease} from '../../../../runtime/jinsha_operation_lease.mjs';
+import {readAppealRecord,applyPriorAppealRecord} from '../../../../runtime/appeal_record_guard.mjs';
 import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -82,7 +83,7 @@ class Cdp {
 
 async function navigate(cdp, url, waitMs = 3500) { await cdp.call('Page.enable'); await cdp.call('Page.navigate', { url }); await sleep(waitMs); }
 async function atomicWrite(file, text) { await fs.mkdir(path.dirname(file), { recursive: true }); const temp = `${file}.${process.pid}.tmp`; await fs.writeFile(temp, text, { mode: 0o600 }); await fs.rename(temp, file); if (await fs.readFile(file, 'utf8') !== text) throw Error('record-readback-mismatch'); }
-async function existingStatus(file) { try { return parseRecordStatus(await fs.readFile(file, 'utf8')); } catch (error) { if (error.code === 'ENOENT') return ''; throw error; } }
+
 
 const CARD_SCRIPT = `(()=>[...document.querySelectorAll('.cryptonym')].filter(card=>card.offsetParent!==null).map(card=>{const lines=card.innerText.split('\\n').map(x=>x.trim()).filter(Boolean);const date=(card.innerText.match(/\\d{4}-\\d{2}-\\d{2}/)||[])[0]||'';const dateIndex=lines.indexOf(date);const orderIndex=lines.findIndex((x,i)=>i>dateIndex&&x.startsWith('订单详情：'));const comment=dateIndex>=0&&orderIndex>dateIndex?lines.slice(dateIndex+1,orderIndex).join(' '):'';const appealButtons=[...card.querySelectorAll('.btn')].filter(x=>x.offsetParent!==null&&x.innerText.trim()==='立即申诉');return {store:card.querySelector('.shopName')?.innerText.trim()||'',score:(([...card.querySelectorAll('.pointLi')].map(x=>x.innerText.trim()).find(x=>/^总分\\d/.test(x))||'').match(/\\d/)||[])[0]||'',date,comment,auto:(card.innerText.match(/自动申诉已(?:开启|关闭)/)||[])[0]||'',remaining:(card.innerText.match(/本周剩余申诉次数[:：]?[^\\n]*/)||[])[0]||'',hasAppeal:appealButtons.length===1};}))()`;
 
@@ -174,24 +175,23 @@ async function executeUnlocked() {
     receipt.closedCandidates = state.cards.filter(eligible).length;
     receipt.autoEnabled = state.cards.filter(x => x.auto === '自动申诉已开启').length;
     for (const initial of state.cards.filter(x => x.auto === '自动申诉已开启')) {
-      const file = path.join(RECORDS, businessDate, `${initial.key}.md`), status = await existingStatus(file);
-      if (status === 'skipped') { receipt.skipped.push(initial.key); continue; }
+      const file = path.join(RECORDS, businessDate, `${initial.key}.md`);
+      const prior = applyPriorAppealRecord(await readAppealRecord(file), receipt, initial.key, {autoEnabledSkip:true});
+      if (prior === 'stop') break;
+      if (prior === 'read-only') continue;
       const createdAt = now();
       await atomicWrite(file, buildMarkdown({ businessDate, key: initial.key, store: initial.store, date: initial.date, score: initial.score, commentExcerpt: excerpt(initial.comment), pageState: `${LABEL} / 昨日 / 未申诉；页面共 ${state.totalNumber} 条。`, auto: '已开启', verification: '条目明确显示“自动申诉已开启”，按规则跳过；未点击“立即申诉”。', status: 'skipped', createdAt, verifiedAt: createdAt }));
       receipt.skipped.push(initial.key);
     }
-    for (const initial of state.cards.filter(eligible)) {
+    for (const initial of (receipt.unknown.length ? [] : state.cards.filter(eligible))) {
       state = await readState(cdp, businessDate);
       const target = state.cards.find(x => x.key === initial.key);
       if (!target) { receipt.warnings.push(`candidate-no-longer-unappealed:${initial.key}`); continue; }
       if (!eligible(target)) throw Error(`candidate-state-drift:${initial.key}`);
-      const file = path.join(RECORDS, businessDate, `${target.key}.md`), prior = await existingStatus(file);
-      if (['verified_submitted', 'unknown', 'blocked'].includes(prior)) { receipt[prior].push(target.key); continue; }
-      if (prior === 'submitted_once') {
-        const createdAt = now();
-        await atomicWrite(file, buildMarkdown({ businessDate, key: target.key, store: target.store, date: target.date, score: target.score, commentExcerpt: excerpt(target.comment), pageState: `${LABEL} / 昨日 / 未申诉；页面共 ${state.totalNumber} 条。`, auto: '已关闭', verification: '检测到上次记录已进入 submitted_once，无法排除确认动作已发生。', status: 'unknown', createdAt, error: '防重门禁：禁止再次确认申诉。' }));
-        receipt.unknown.push(target.key); break;
-      }
+      const file = path.join(RECORDS, businessDate, `${target.key}.md`);
+      const prior = applyPriorAppealRecord(await readAppealRecord(file), receipt, target.key);
+      if (prior === 'stop') break;
+      if (prior === 'read-only') continue;
       const createdAt = now(), base = { businessDate, key: target.key, store: target.store, date: target.date, score: target.score, commentExcerpt: excerpt(target.comment), pageState: `${LABEL} / 昨日 / 未申诉；页面共 ${state.totalNumber} 条。`, auto: '已关闭', createdAt };
       await atomicWrite(file, buildMarkdown({ ...base, verification: '已创建临时记录，尚未打开申诉弹窗。', status: 'prepared' }));
       await clickCandidate(cdp, target);
