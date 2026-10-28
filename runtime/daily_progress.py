@@ -15,6 +15,7 @@ from __future__ import annotations
 import fixed_schedule
 import datetime as dt
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -33,17 +34,13 @@ def _load(p: Path, default):
 
 
 # 真实外发证据标记（**只收正向证据**：出现即代表确实对外交付过）。
-# 注意：不能用 sendAttempts / messageCount —— 失败回执里也有这些字段，会造成假阳性
+# 注意：不能单独用 sendAttempts / messageCount —— 失败回执里也有这些字段，会造成假阳性
 # （13:00 档那次 wechat-send-failed 的日志里就有 sendAttempts，实际一张都没发出去）。
 # 注意：比对前会把文本里的 ": " 统一成 ":"，所以这里的标记一律写成**无空格**形式。
-DELIVER_MARKERS = (
-    "windows-readback",           # 回读锚点（text-anchor / file-card 等）；注：此标记名虽旧称"桌面微信回读"，实际指 Windows 网关回读，Mac 桌面微信已于 2026-09-30 停用
-    '"verified":true',
-    '"sent":true',
-    '"stage":"verified"',         # jinsha 验收回执的终态
-    '"status":"verified"',        # 新店开业/品牌等流的回读终态
-    "verificationLevel",          # 回读锚点等级（windows-readback-* 的伴生字段）
-)
+DELIVERY_LEVELS = frozenset(('wecom-ui-tree-text', 'wecom-ui-tree-file-name-size',
+    'wecom-ui-tree-inline-image', 'wecom-ui-tree-image-content',
+    'windows-readback-text-anchor', 'windows-readback-file-card', 'windows-readback-inline-image',
+    'desktop-bubble-copy-exact-two-frame'))
 EXTRA_EVIDENCE_GLOBS = {
     # 金鲨日报：发送+回读的终态写在 exam-receipt.json（"stage": "verified"）
     "daily-jinsha-reports-to-business-wechat":
@@ -62,9 +59,84 @@ EXTRA_EVIDENCE_GLOBS = {
          "taskrate/events/{YYYY-MM-DD}-taobao-store-task-detail.json",
          "skills/workflows/daily-store-task-completion-ops-to-wechat/.runtime/"
          "taskrate/events/{YYYY-MM-DD}-taobao-store-task-stats.json"],
+    "daily-new-stores-activity-audit-to-wechat":
+        ["skills/workflows/daily-new-stores-activity-audit-to-wechat/.runtime/activity/events/{YYYY-MM-DD}-*.json"],
+    "daily-new-stores-decoration-audit-to-wechat":
+        ["skills/workflows/daily-new-stores-decoration-audit-to-wechat/.runtime/decoration/events/{YYYY-MM-DD}-*.json"],
+    "daily-new-stores-not-nourished-ops-to-wechat":
+        ["skills/workflows/daily-new-stores-not-nourished-ops-to-wechat/.runtime/nourish/events/{YYYY-MM-DD}-*.json"],
+    "daily-store-basic-diagnosis-to-wechat":
+        ["skills/workflows/daily-store-basic-diagnosis-to-wechat/.runtime/basic-diag/events/{YYYY-MM-DD}-*.json"],
 }
 # run_history 之外也扫 daemon 为每步留的自包含日志（部分流的外发证据只落在这里）
 RUNS_DIR = ROOT / "runtime" / "state" / "runs"
+
+
+def _json_receipts(text: str):
+    """Decode line-start JSON objects, including pretty JSON after tool warnings."""
+    decoder = json.JSONDecoder()
+    offset = 0
+    while offset < len(text):
+        start = offset
+        while start < len(text) and text[start] in ' \t\r':
+            start += 1
+        if start < len(text) and text[start] in '{[':
+            try:
+                value, end = decoder.raw_decode(text, start)
+                if isinstance(value, dict):
+                    yield value
+                offset = end
+                if offset < len(text) and text[offset] != '\n':
+                    offset = text.find('\n', offset)
+                    if offset < 0:
+                        break
+                continue
+            except ValueError:
+                pass
+        end = text.find('\n', offset)
+        if end < 0:
+            break
+        offset = end + 1
+
+
+def _structured_delivery(value: dict, day: str, target: str, inherited_group=None) -> bool:
+    if not isinstance(value, dict):
+        return False
+    declared = [value[k] for k in ('groupName', 'resolvedGroup') if value.get(k)]
+    if len(declared) > 1 and declared[0] != declared[1]:
+        return False
+    group = declared[0] if declared else inherited_group
+    verified = (value.get('state') == 'verified' or value.get('status') == 'verified'
+                or value.get('verified') is True)
+    uncertain = value.get('state') in ('unknown', 'attempted', 'blocked') or value.get('status') in ('unknown', 'attempted', 'blocked')
+    if group == target and target and verified and not uncertain and value.get('ok') is not False:
+        if value.get('verificationLevel') in DELIVERY_LEVELS:
+            return True
+        if (value.get('state') == 'verified' and isinstance(value.get('event'), str)
+                and value['event'].startswith(day + '-') and isinstance(value.get('sha256'), str)
+                and re.fullmatch(r'[0-9a-f]{64}', value['sha256'])):
+            return True
+    if (target and isinstance(value.get('runId'), str) and value['runId'].startswith('jinsha-business-production-' + day.replace('-', '') + '-')
+            and value.get('ok') is True and value.get('stage') == 'verified'
+            and group == target and value.get('deliveryTarget') == target
+            and value.get('businessCompleted') is True and isinstance(value.get('sent'), list)
+            and len(value['sent']) == 2 and {x.get('platform') for x in value['sent'] if isinstance(x, dict)} == {'meituan', 'taobao'}):
+        return True
+    # The merchant executor's complete cursor contract is distinct from self-test acceptance.
+    merchant = value.get('wechat')
+    dispatch, cursor = value.get('dayDispatch'), value.get('finalCursor')
+    if (target and value.get('stage') == 'complete' and value.get('ok') is True
+            and isinstance(dispatch, dict) and isinstance(cursor, dict)
+            and dispatch.get('groupName') == target and dispatch.get('businessDate') == day
+            and cursor.get('verified') is True and isinstance(merchant, dict)
+            and merchant.get('verified') is True and type(merchant.get('sent')) is int and merchant['sent'] > 0):
+        return True
+    for key in ('wechat', 'send', 'delivery', 'commonReceipt', 'transport', 'items', 'emptyNotice', 'deliveryReceipt'):
+        child = value.get(key)
+        children = child if isinstance(child, list) else [child]
+        if any(_structured_delivery(item, day, target, group) for item in children if isinstance(item, dict)):
+            return True
+    return False
 
 
 def _has_delivery_evidence(name: str, day: str, ts: str | None = None) -> bool:
@@ -73,6 +145,8 @@ def _has_delivery_evidence(name: str, day: str, ts: str | None = None) -> bool:
     扫全天而非只扫最后一次：像 hourly 的 agent-new-merchants，某次可能 0 发送，
     但当天早些时候确实发过 —— 老板要看的是"今天有没有发出去"。
     """
+    manifest = _load(MANIFEST, {})
+    target = next((s.get('target_group') for s in manifest.get('skills', []) if s.get('name') == name), None)
     files = _evidence_files(name, day)
     for p in sorted(files):
         try:
@@ -80,7 +154,7 @@ def _has_delivery_evidence(name: str, day: str, ts: str | None = None) -> bool:
         except Exception:
             continue
         # JSON 可能是 "verified": true（带空格）也可能是 "verified":true，统一去空格再比对
-        if any(mk in txt.replace(": ", ":") for mk in DELIVER_MARKERS):
+        if any(_structured_delivery(value, day, target) for value in _json_receipts(txt)):
             return True
     return False
 

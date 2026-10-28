@@ -282,3 +282,8 @@ posts仅追加两申诉主名和12/15客服别名，22现役均能解析原互�
 ## 12:24完成率前置原事件门
 
 确认原unknown后每次总入口仍重采制表、可能旧明细配新图；已将两原事件完整绑定检查前移，unknown/attempted不再新采集/产物/发送，两verified直接复用；可靠零发送或未尝试部分只走匹配同日冻结双件原run，缺件/歧义拒绝、原summary不覆盖、原顺序和防重不变。新8+原55共63离线测试通过。真实今日原事件只读返回unknown/newSendAttempts0，原marker及verified-snapshot全部SHA不变；未为验收生产补跑，原12:30周期自然验证该门。证据runtime/state/taskrate-precollection-gate-20261028/final-audit.json。
+
+
+## 12:29进度展示送达依据收紧
+
+原_has_delivery_evidence把unknown中的verificationLevel当已外发已纯fixture复现。现只解析JSON收据并沿明确投递分支核对原目标群、verified终态及真实投递回读等级/原canonical event SHA；不读字符串内伪verified、不遍历selftest/授权/采集/历史验收。补四流canonical当日events路径，保留原金鲨双报固定合同及商家真实新发/游标完成合同。8新增+38原排班/业务事实共46测试通过，今日九条真实投递正向仍存在，未知等级fixture返回false。原done/班表/账本/原用户业务确认及发送机制不改；展示当日存在投递不是整批或当天完成。证据runtime/state/delivery-evidence-keyword-audit-20261028/final-audit.json。
