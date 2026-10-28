@@ -14,6 +14,9 @@
     "goalStatusAtEvidenceCapture": "active",
     "goalStatusAfterPublishingThisHandoff": "paused",
     "sourceMustStopGoalWorkAfterPause": true,
+    "sourceDaemonStopped": true,
+    "sourceAutomationsStopped": true,
+    "sourceStopReceipt": "runtime/state/night-goal-handoff/20261028-2330-source-machine-stop-receipt.json",
     "newMachineMayStartOnlyOneProductionControlChannel": true,
     "parallelOldAndNewProductionForbidden": true
   },
@@ -167,9 +170,24 @@
       "22-im"
     ],
     "currentEvidence": "runtime/state/night-goal-handoff/automation-transfer-20261028.json",
+    "fullOriginalPromptAndTransferHistory": "runtime/state/night-goal-handoff/automation-transfer-20261028.json",
     "preTransferEvidence": "runtime/state/next-day-preflight/2026-10-29/automation-before-transfer.json",
     "sourcePausedDoesNotAutomaticallyTransferAutomations": true,
-    "newMachineRule": "Discover and verify current ownership before updating. Preserve name, schedule, status, notification and prompt; replace target ownership and embedded old thread ID, especially the 06:00 clear target. Update each automation exactly once and read it back."
+    "sourceFinalState": {
+      "02-goal-10-27": "PAUSED",
+      "06-goal-10-27": "PAUSED",
+      "automation": "PAUSED",
+      "20": "DELETED",
+      "22-im": "DELETED"
+    },
+    "taskPurpose": {
+      "02-goal-10-27": "02:00-06:00 previous-night Goal check and bounded continuation; never resume an explicitly paused Goal",
+      "06-goal-10-27": "06:00 hard cutoff, save full handoff and clear the old Goal through the supported interface before 08:00",
+      "automation": "08:00 create or reuse the full daily Goal and immediately start early-shift readiness and supervision",
+      "20": "20:00 after verified ledger delivery, close remaining work, preflight the next day and transfer ownership",
+      "22-im": "22:00 read-only four-post health and at most one safe 9233 IM reset when same-day maintenance is not already complete"
+    },
+    "newMachineRule": "The source schedules are stopped. Do not recreate duplicates from old IDs. Discover and verify new-machine ownership first, preserve exactly one owner for each required schedule, and read back every change. Use automation-transfer-20261028.json for the complete original prompts and historical ownership."
   },
   "stateAndData": {
     "doNotReset": [
@@ -194,7 +212,7 @@
   "newMachineStartupSequence": [
     "Pull the latest reviewed origin/main and resolve all paths from the new repository root.",
     "Read the authoritative documents and complete objective in the stated order.",
-    "Confirm the source Goal is paused and determine the single intended production owner before starting any scheduler.",
+    "Confirm the source Goal is paused, the source daemon is absent and source automations are stopped; then determine the single intended production owner before starting any scheduler.",
     "Install and verify interpreters, repository-contained dependencies, four isolated browser posts and the WeCom native UI provider without copying session credentials.",
     "Run read-only repository integrity, dependency and release checks; run only isolated synthetic tests that cannot reach production events or groups.",
     "Revalidate the four posts by real business domain and visible business text, including login, captcha and risk overlays; do not infer health from process or URL alone.",
@@ -219,5 +237,6 @@
   ],
   "handoffPrompt": "docs/operations/20261028-新机器监理接续交接词.md",
   "latestEntry": "runtime/state/night-goal-handoff/latest.md",
-  "migrationState": "source-pause-requested-detailed-handoff-ready-cutover-not-yet-verified"
+  "sourceShutdownReceipt": "runtime/state/night-goal-handoff/20261028-2330-source-machine-stop-receipt.json",
+  "migrationState": "source-goal-paused-daemon-stopped-automations-stopped-new-machine-owner"
 }

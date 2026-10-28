@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-28T23:30:10+08:00",
+  "reason": "user confirmed the new machine has taken over and explicitly requested stopping source-machine automations and daemon",
+  "sourceThreadId": "01a18298-0a79-7481-b24a-0b1743a38edf",
+  "goal": {
+    "status": "paused",
+    "objectivePreserved": true,
+    "cleared": false,
+    "completed": false
+  },
+  "automations": {
+    "fullOriginalPromptAndTransferHistory": "runtime/state/night-goal-handoff/automation-transfer-20261028.json",
+    "sourceFinalState": [
+      {
+        "id": "02-goal-10-27",
+        "name": "臻肆02点夜间Goal检查与接续",
+        "schedule": "daily 02:00 Asia/Shanghai",
+        "finalState": "PAUSED",
+        "purpose": "check the previous-night Goal and continue only within 02:00-06:00; do not resume an explicitly paused Goal"
+      },
+      {
+        "id": "06-goal-10-27",
+        "name": "臻肆06点夜间Goal硬截止收口",
+        "schedule": "daily 06:00 Asia/Shanghai",
+        "finalState": "PAUSED",
+        "purpose": "save the complete handoff, stop night work and clear the old Goal through the supported Goal interface before the 08:00 Goal"
+      },
+      {
+        "id": "automation",
+        "name": "臻肆监理·08点启动当日Goal",
+        "schedule": "daily 08:00 Asia/Shanghai",
+        "finalState": "PAUSED",
+        "purpose": "create or reuse the complete daily Goal and immediately perform early-shift readiness and scheduled supervision"
+      },
+      {
+        "id": "20",
+        "name": "臻肆20点台账后遗留收口与明日全流程预检",
+        "schedule": "daily 20:00 Asia/Shanghai",
+        "finalState": "DELETED",
+        "purpose": "after verified ledger delivery, close remaining work, preflight the next day, prepare handoff and transfer ownership"
+      },
+      {
+        "id": "22-im",
+        "name": "臻肆22点四浏览器保活与IM复位",
+        "schedule": "daily 22:00 Asia/Shanghai",
+        "finalState": "DELETED",
+        "purpose": "read-only four-post health and at most one safe 9233 IM reset when same-day maintenance has not already completed"
+      }
+    ],
+    "newMachineRule": "Do not recreate duplicate schedules from this receipt. First discover current new-machine automation ownership, then preserve exactly one owner for each required schedule."
+  },
+  "daemon": {
+    "service": "com.zhensi.waimai.careloop",
+    "stopMethod": "launchctl bootout from the source user's GUI domain",
+    "previousPid": 24510,
+    "previousLastCycleAt": "2026-10-28T23:25:01+08:00",
+    "previousLastCycleAllGreen": true,
+    "liveStepsBeforeStop": [],
+    "businessChildProcessesBeforeStop": [],
+    "finalLaunchctlState": "service-not-found",
+    "finalLaunchctlReadbackCode": 113,
+    "previousPidStillExists": false,
+    "runnerLockHeldAfterStop": false,
+    "stopped": true,
+    "staleSnapshotWarning": "runtime/state/daemon.json is the last daemon-written snapshot and may still say running; launchctl and process readback in this receipt are authoritative for the stopped source machine."
+  },
+  "preservedBrowsers": [
+    {
+      "port": 9230,
+      "pid": 12961,
+      "aliveAfterDaemonStop": true
+    },
+    {
+      "port": 9231,
+      "pid": 3212,
+      "aliveAfterDaemonStop": true
+    },
+    {
+      "port": 9232,
+      "pid": 89873,
+      "aliveAfterDaemonStop": true
+    },
+    {
+      "port": 9233,
+      "pid": 7155,
+      "aliveAfterDaemonStop": true
+    }
+  ],
+  "noEffects": {
+    "browserProcessesStopped": 0,
+    "messagesSent": 0,
+    "productionRunsStarted": 0,
+    "ledgersCursorsOrDedupReset": false,
+    "credentialsOrSessionDataRead": false
+  },
+  "sourceMachineProductionState": "stopped-and-fenced"
+}
