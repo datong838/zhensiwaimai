@@ -1,0 +1,14 @@
+import fs from 'node:fs/promises';
+import crypto from 'node:crypto';
+import {collectAllAppeals} from '../../../skills/posts/jinsha-post/scripts/appeal_collector.mjs';
+const md='records/taobao-flash-sale-negative-review-appeals/2026-10-27/0199ccb39630.md';
+const bytes=await fs.readFile(md),text=bytes.toString();
+if(!text.includes('- 记录状态：unknown'))throw Error('original-unknown-record-required');
+const field=label=>(text.match(new RegExp('^- '+label+'：([^\\n\\r]*)','m'))||[])[1]?.trim()||'';
+const snapshot=await collectAllAppeals({businessDate:'2026-10-27',platformValue:'2',channelLabel:'淘宝闪购',contextLabel:'淘宝'});
+const norm=s=>String(s||'').replace(/\s+/g,' ').trim();
+const sha=x=>crypto.createHash('sha256').update(x).digest('hex');
+const rows=snapshot.rows.filter(x=>x.key==='0199ccb39630');
+const result={at:new Date().toISOString(),readOnly:true,originalRecord:md,originalRecordSha256:sha(bytes),recordUnchanged:sha(await fs.readFile(md))===sha(bytes),businessDate:snapshot.businessDate,channel:snapshot.channelLabel,total:snapshot.total,counts:snapshot.counts,matchedRows:rows.length,originalSubmittedAt:field('提交时间'),rows:rows.map(x=>({key:x.key,store:x.store,date:x.date,auto:x.auto,appealMethod:x.appealMethod,appealTime:x.appealTime,appealContentSha256:sha(norm(x.appealContent)),originalSuggestionSha256:sha(norm(field('平台建议回复'))),suggestionEqual:norm(x.appealContent)===norm(field('平台建议回复'))})),newAppeals:0,newSendAttempts:0,originalTechnicalState:'unknown'};
+if(!result.recordUnchanged)throw Error('original-record-changed');
+await fs.writeFile('runtime/state/taobao-appeal-readonly-20261028-1300/proof.json',JSON.stringify(result,null,2));console.log(JSON.stringify(result));

@@ -1,0 +1,143 @@
+{
+  "ok": true,
+  "status": "verified",
+  "groupName": "电销+直播攻坚组",
+  "channel": "desktop",
+  "requestDigest": "930ebbb3a93b7343476e5b41c3b4f47a8665073223330fcc2c832175ff039cb9",
+  "runtimeModelDecisions": 0,
+  "items": [
+    {
+      "itemId": "0",
+      "sha256": "13785863a9b510209ae4ada2a13b85d721428f4adf293a925e45490c4577bb97",
+      "type": "text",
+      "status": "verified",
+      "claimedAt": 1793163612.0916119,
+      "sendAttempts": 1,
+      "resolvedGroup": "电销+直播攻坚组",
+      "observations": [
+        {
+          "groupName": "电销+直播攻坚组",
+          "inputEmpty": true,
+          "newMessageVisible": true,
+          "observedAt": 1793163620.1002162,
+          "visibleText": "当前无新增意向商家",
+          "visibleTextSha256": "13785863a9b510209ae4ada2a13b85d721428f4adf293a925e45490c4577bb97",
+          "messagePath": [
+            0,
+            27,
+            9,
+            0,
+            0,
+            0,
+            21
+          ]
+        },
+        {
+          "groupName": "电销+直播攻坚组",
+          "inputEmpty": true,
+          "newMessageVisible": true,
+          "observedAt": 1793163622.2526898,
+          "visibleText": "当前无新增意向商家",
+          "visibleTextSha256": "13785863a9b510209ae4ada2a13b85d721428f4adf293a925e45490c4577bb97",
+          "messagePath": [
+            0,
+            27,
+            9,
+            0,
+            0,
+            0,
+            21
+          ]
+        }
+      ],
+      "backend": "system-events-ui-tree",
+      "verificationLevel": "wecom-ui-tree-text",
+      "evidence": {
+        "method": "wecom-ui-tree-text",
+        "resolvedGroup": "电销+直播攻坚组",
+        "sha256": "13785863a9b510209ae4ada2a13b85d721428f4adf293a925e45490c4577bb97",
+        "observations": [
+          {
+            "groupName": "电销+直播攻坚组",
+            "inputEmpty": true,
+            "newMessageVisible": true,
+            "observedAt": 1793163620.1002162,
+            "visibleText": "当前无新增意向商家",
+            "visibleTextSha256": "13785863a9b510209ae4ada2a13b85d721428f4adf293a925e45490c4577bb97",
+            "messagePath": [
+              0,
+              27,
+              9,
+              0,
+              0,
+              0,
+              21
+            ]
+          },
+          {
+            "groupName": "电销+直播攻坚组",
+            "inputEmpty": true,
+            "newMessageVisible": true,
+            "observedAt": 1793163622.2526898,
+            "visibleText": "当前无新增意向商家",
+            "visibleTextSha256": "13785863a9b510209ae4ada2a13b85d721428f4adf293a925e45490c4577bb97",
+            "messagePath": [
+              0,
+              27,
+              9,
+              0,
+              0,
+              0,
+              21
+            ]
+          }
+        ]
+      },
+      "transport": {
+        "kind": "text",
+        "sendAttempts": 1,
+        "sent": true,
+        "postSendInputCleared": [
+          true,
+          true
+        ],
+        "stage": "post_send_verify"
+      }
+    }
+  ],
+  "review": [
+    {
+      "stage": "authorization",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "freeze:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 0
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 763
+    },
+    {
+      "stage": "send:0",
+      "status": "completed",
+      "pitfalls": [],
+      "elapsedMs": 10184
+    }
+  ],
+  "elapsedMs": 10951,
+  "eventKey": "405e5378aa1b69232d0b1449d8a013ca6ef530bea1dc2ae116f07c510a175156",
+  "reviewSummary": {
+    "totalElapsedMs": 10951,
+    "result": "verified",
+    "stageCount": 4,
+    "completedStages": 4,
+    "failedStages": []
+  }
+}
