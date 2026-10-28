@@ -1,0 +1,63 @@
+{
+  "observedAt": "2026-10-28T16:37:49.613964+08:00",
+  "scope": "cross-source planning evidence only; no original Jinsha source field or eligibility rewritten",
+  "records": [
+    {
+      "platform": "淘宝闪购",
+      "row": 727,
+      "date": "2026-10-27",
+      "name": "陈氏三鲜豆皮(天门店)",
+      "shopId": "502455991",
+      "province": "湖北",
+      "city": "天门",
+      "reportCityCell": "G727",
+      "reportIdentityCells": "B727:C727",
+      "reportSha256": "ee01373b9545068ccaaf3d68ea6d6e46ed3ab5f0ab9d3ed07a7f933e07b8d87b",
+      "brandIdentityUnique": true,
+      "planningCityResolved": true,
+      "jinshaExactIdProven": true,
+      "jinshaSourceCityRemainsEmpty": true,
+      "originalRosterEntry": {
+        "platform": "淘宝闪购",
+        "name": "陈氏三鲜豆皮(天门店)",
+        "city": ""
+      },
+      "executionEligibilityReleased": false
+    },
+    {
+      "platform": "淘宝闪购",
+      "row": 1270,
+      "date": "2026-10-27",
+      "name": "贵福味遵义羊肉粉(玉翠店)",
+      "shopId": "545805367",
+      "province": "广东",
+      "city": "深圳",
+      "reportCityCell": "G1270",
+      "reportIdentityCells": "B1270:C1270",
+      "reportSha256": "ee01373b9545068ccaaf3d68ea6d6e46ed3ab5f0ab9d3ed07a7f933e07b8d87b",
+      "brandIdentityUnique": true,
+      "planningCityResolved": true,
+      "jinshaEligibilityProven": false,
+      "addedToInspectionRoster": false,
+      "executionEligibilityReleased": false
+    }
+  ],
+  "originalSourceSha256": {
+    "skills/workflows/store-inspection/.runtime/monthly/2026-10/jinsha-roster.json.incomplete.json": "886067a8a42a8554d814816d9541de6fc2525b696cf8b6f778b077f9d611839e",
+    "skills/workflows/daily-store-metrics-rotation-to-wechat/.runtime/monthly/2026-10/brand-roster.json": "88ec8f60f857843cc506ce2a934d7b9a05bb6d11ca4a362a5f8493d98f7327f4",
+    "runtime/state/inspection-missing-city-detail-20261027.json": "eddbb4a5cf2e52942249429abfcabe61aa2db780811c054bd98e86c3ccb84894",
+    "runtime/state/business-evidence/taobao-download/background-browser/2026-10-27-ba5f469d-3791-45d7-a7f9-54092adeb7e3/门店下载_20261027至20261027_全部门店_5296218123_20261028130303234.xlsx": "ee01373b9545068ccaaf3d68ea6d6e46ed3ab5f0ab9d3ed07a7f933e07b8d87b"
+  },
+  "originalRosterComplete": false,
+  "originalRosterCount": 1096,
+  "publishedExecutableRegistry": false,
+  "allThreeFlowsRemainPaused": true,
+  "browserActions": 0,
+  "sendAttempts": 0,
+  "workbooksModified": 0,
+  "limitations": [
+    "Jinsha source still has one blank city; original strict complete-roster gate unchanged.",
+    "YuCui appears in Taobao report but is absent from Jinsha qualified-source snapshot; do not add by name or city alone.",
+    "Source city values remain original Tianmen/Shenzhen strings; no city suffix inferred."
+  ]
+}
