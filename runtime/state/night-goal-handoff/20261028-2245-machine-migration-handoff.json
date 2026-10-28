@@ -20,10 +20,9 @@
   },
   "code": {
     "branch": "main",
-    "head": "8e875481a60ec6e29607508b6172c0e96dee315b",
-    "originMain": "8e875481a60ec6e29607508b6172c0e96dee315b",
-    "verifiedAt": "2026-10-28T22:41:09+08:00",
-    "migrationRule": "Use this revision or a later reviewed main revision; verify local HEAD equals the intended remote revision before starting services."
+    "businessImplementationBaseline": "8e875481a60ec6e29607508b6172c0e96dee315b",
+    "handoffDocumentationBaseCommit": "c6aace87",
+    "migrationRule": "Use the latest reviewed origin/main and verify that it contains handoff documentation commit c6aace87 or a descendant before starting services. Do not check out the older business baseline by itself."
   },
   "completed": [
     {
