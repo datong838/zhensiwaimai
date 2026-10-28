@@ -59,4 +59,23 @@ class LatestSlotTests(unittest.TestCase):
             self.assertTrue(self.row('2026-10-24T18:55',None,False)['done'])
             self.assertFalse(self.row('2026-10-25T18:55',None,False)['done'])
 
+    def test_remote_summary_scope_never_changes_local_completion(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            skill = {'name':'example','dev_state':'active','enabled':True,'earliest_hour':13}
+            (root/'manifest.json').write_text(json.dumps({'skills':[skill]}))
+            (root/'last_success.json').write_text(json.dumps({'example':'2026-10-29T13:10:00'}))
+            remote = {
+                'business_date':'2026-10-29','effective':True,'global_total':27,
+                'local_ledger_identities':24,'remote_flow_count':3,'remote_done':0,
+                'remote_state':'missing_nonblocking','nonblocking_local_execution':True,
+                'source':'','errors':[],'rows':[]}
+            with patch.object(progress,'MANIFEST',root/'manifest.json'), \
+                 patch.object(progress,'STATE',root), patch.object(progress,'RUN_HISTORY',root), \
+                 patch('remote_flow_summary.read_customer_scope', return_value=remote):
+                result = progress.build(dt.datetime.fromisoformat('2026-10-29T18:55:00'))
+        self.assertTrue(result['all_green'])
+        self.assertEqual(result['total_active'],1)
+        self.assertEqual(result['customer_scope']['global_total'],27)
+
 if __name__=='__main__': unittest.main()

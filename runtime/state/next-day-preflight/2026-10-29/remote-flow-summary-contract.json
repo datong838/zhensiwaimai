@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "targetDate": "2026-10-29",
+  "globalCustomerFlowCount": 27,
+  "localLedgerIdentities": 24,
+  "localEnabledEntries": 22,
+  "remoteFlowCount": 3,
+  "summaryPath": "runtime/state/remote-flow-summary/2026-10-29.json",
+  "summaryState": "missing_nonblocking",
+  "summaryProvided": false,
+  "localExecutionBlocked": false,
+  "remoteFlows": [
+    "daily-store-metrics-rotation-to-wechat",
+    "coupon-issue-task-flow",
+    "store-inspection"
+  ],
+  "owner": "另一台电脑",
+  "localInspectionOrExecution": false,
+  "productionActions": 0,
+  "implementation": {
+    "reader": "runtime/remote_flow_summary.py",
+    "displayConsumer": "runtime/daily_progress.py",
+    "manifestChanged": false,
+    "directorChanged": false,
+    "ledgerReadinessChanged": false,
+    "remoteFlowFilesChanged": false
+  },
+  "validation": {
+    "testsRun": 56,
+    "testsPassed": 56,
+    "protectedFilesUnchanged": true,
+    "productionActions": 0,
+    "messagesSent": 0
+  },
+  "rule": "Only consume an explicitly provided valid summary. Missing or invalid summary leaves all three remote results unknown and never blocks the local 24-flow schedule."
+}

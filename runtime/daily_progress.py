@@ -218,6 +218,7 @@ def _latest_record(name: str, day: str):
 def build(now: dt.datetime | None = None) -> dict:
     from business_coverage import read_daily_coverage
     from business_delivery_facts import read_fact
+    from remote_flow_summary import read_customer_scope
     now = now or dt.datetime.now()
     day = now.strftime("%Y-%m-%d")
     m = _load(MANIFEST, {})
@@ -319,6 +320,7 @@ def build(now: dt.datetime | None = None) -> dict:
         "done": done_n,
         "all_green": done_n == total,
         "rows": rows,
+        "customer_scope": read_customer_scope(day, ROOT),
     }
 
 
@@ -351,6 +353,19 @@ def render_md(d: dict) -> str:
                     rec.get("detail")))
             out.append("  - 下钻：`runtime/run_history/%s/%s--*--record.json`"
                        % (d["date"], r["name"]))
+    scope = d.get("customer_scope") or {}
+    if scope.get("effective"):
+        out.append("")
+        out.append("### 客户全局口径：%d 流（本机 %d + 异机 %d）" % (
+            scope["global_total"], scope["local_ledger_identities"], scope["remote_flow_count"]))
+        out.append("")
+        out.append("异机摘要状态：`%s`；摘要缺失或无效不阻断本机24流到点执行。" % scope["remote_state"])
+        out.append("")
+        out.append("| 异机状态 | 工作流 | 归属 | 摘要 |")
+        out.append("|---|---|---|---|")
+        for row in scope["rows"]:
+            out.append("| %s %s | %s | %s | %s |" % (
+                row["mark"], row["state"], row["ledger_name"], row["owner"], row["reason"]))
     return "\n".join(out)
 
 
