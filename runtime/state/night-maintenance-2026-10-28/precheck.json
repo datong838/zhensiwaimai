@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "at": "2026-10-28T21:44:07+08:00",
+  "stage": "precheck-only-not-2200-receipt",
+  "maintenance2200Completed": false,
+  "sameDayReceiptExisted": false,
+  "director": {
+    "service": "gui/501/com.zhensi.waimai.careloop",
+    "state": "running",
+    "pid": 24510,
+    "startedAt": "2026-10-28T21:27:37",
+    "lastCycleAt": "2026-10-28T21:40:00",
+    "nextCycleAt": "2026-10-28T22:10:00",
+    "children": [
+      "caffeinate"
+    ]
+  },
+  "safety": {
+    "liveSteps": [],
+    "groupLocks": [],
+    "physicalLocks": [],
+    "navigationActions": 0,
+    "reloadActions": 0,
+    "createdPages": 0,
+    "closedPages": 0,
+    "messagesSent": 0,
+    "chromeRestarts": 0,
+    "credentialOrSessionStorageReads": 0
+  },
+  "browsers": [
+    {
+      "port": 9230,
+      "pid": 12961,
+      "role": "taobao-brand",
+      "matchingPages": 1,
+      "healthyPages": 1,
+      "businessMarker": "商家首页",
+      "loginBlocked": false,
+      "noPermission": false,
+      "visibleRisk": false
+    },
+    {
+      "port": 9231,
+      "pid": 3212,
+      "role": "taobao-agent-service",
+      "matchingPages": 1,
+      "healthyPages": 1,
+      "businessMarker": "服务商",
+      "loginBlocked": false,
+      "noPermission": false,
+      "visibleRisk": false
+    },
+    {
+      "port": 9232,
+      "pid": 89873,
+      "role": "jinsha-business",
+      "matchingPages": 2,
+      "healthyPages": 2,
+      "businessMarker": "数据总览",
+      "loginBlocked": false,
+      "noPermission": false,
+      "visibleRisk": false,
+      "note": "两个同域页只记录；未证明其中任一页属于本维护任务，不关闭"
+    },
+    {
+      "port": 9233,
+      "pid": 7155,
+      "role": "meituan-im",
+      "matchingPages": 1,
+      "healthyPages": 1,
+      "businessMarker": "顾客消息",
+      "receptionRoute": true,
+      "loginBlocked": false,
+      "noPermission": false,
+      "visibleRisk": false
+    }
+  ],
+  "result": "four-roles-readonly-healthy-before-window",
+  "next": "At or after 22:00, recheck locks and live ownership. This precheck cannot be promoted to the formal 2200 receipt."
+}
