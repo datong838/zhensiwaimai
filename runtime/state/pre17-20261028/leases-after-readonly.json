@@ -1,0 +1,68 @@
+{
+  "at": "2026-10-28T16:13:35.004996+08:00",
+  "authoritativeGroupLockDirectory": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/locks",
+  "checks": [
+    {
+      "post": "taobao-brand",
+      "paths": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/locks/taobao-brand-9230.lock",
+          "exists": false
+        },
+        {
+          "path": "/tmp/zhensi-post-9230.lock",
+          "exists": false
+        }
+      ]
+    },
+    {
+      "post": "taobao-agent-service",
+      "paths": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/locks/taobao-svc-9231.lock",
+          "exists": false
+        },
+        {
+          "path": "/tmp/zhensi-post-9231.lock",
+          "exists": false
+        }
+      ]
+    },
+    {
+      "post": "jinsha-business",
+      "paths": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/locks/jinsha-9232.lock",
+          "exists": false
+        },
+        {
+          "path": "/tmp/zhensi-jinsha-cua-exam.lock",
+          "exists": false
+        }
+      ]
+    },
+    {
+      "post": "meituan-merchant",
+      "paths": [
+        {
+          "path": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/locks/meituan-9233.lock",
+          "exists": false
+        },
+        {
+          "path": "/tmp/zhensi-post-9233.lock",
+          "exists": false
+        }
+      ]
+    }
+  ],
+  "liveSteps": [],
+  "portListenerPids": {
+    "9230": 12961,
+    "9231": 3212,
+    "9232": 89873,
+    "9233": 7155
+  },
+  "navigationCalls": 0,
+  "browserRestarts": 0,
+  "supervisorSendAttempts": 0
+}
