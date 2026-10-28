@@ -1,0 +1,94 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-28",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 55,
+    "task_page": 300,
+    "navigation": 1233,
+    "date_filter": 1493,
+    "page_1_read": 335,
+    "selection_audit": 0
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS"
+  },
+  "messages": [],
+  "frontmostBefore": "com.openai.codex",
+  "createdAt": "2026-10-28T06:30:07.772Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-28",
+    "merchantName": "三餐四季",
+    "merchantId": "547236519",
+    "recommendTime": "2026-10-28 11:33:02",
+    "tableOrder": 4,
+    "messageSha256": "dd831ce7772dcf4e097fddeefcc68741b29f8af6781a8d52b417cc2178087f52",
+    "sentAt": "2026-10-28T12:00:26+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-28",
+  "filterEndDate": "2026-10-28",
+  "dateFilter": "2026-10-28..2026-10-28",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 4,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 4,
+  "pendingRows": 4,
+  "targetCount": 0,
+  "selectionAudit": {
+    "totalRows": 4,
+    "pendingRows": 4,
+    "excludedAtOrBeforeCursor": 4,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 0,
+    "rows": [
+      {
+        "merchantId": "547236519",
+        "recommendTime": "2026-10-28 11:33:02",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1346148036",
+        "recommendTime": "2026-10-28 10:39:18",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1271448281",
+        "recommendTime": "2026-10-28 10:32:32",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "545376966",
+        "recommendTime": "2026-10-28 00:53:02",
+        "status": "待处理"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 3773,
+  "frontmostAfter": "com.openai.codex",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261028-143003/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261028-143003/output/collection-attempt-1.review.md"
+}
