@@ -40,6 +40,26 @@ async function knownNotice(page){
  if(!text.startsWith('会话疑似存在欺诈风险')||!text.includes('请勿脱离平台交易或向未核实身份者转账')||await modal.locator('.danger-notice-modal').count()!==1)throw Error('meituan-unknown-modal');
  const button=modal.getByRole('button',{name:'我知道了',exact:true});if(await button.count()!==1)throw Error('meituan-notice-close-not-unique');await button.click({timeout:4000});return true;
 }
+// Same owned page, same URL; one recovery inside the original 30s budget.
+export async function gotoHomeWithRecovery(page,url,{timeoutMs=30000,clock=()=>performance.now()}={}){
+  const target=new URL(url);
+  if(target.protocol!=='https:'||target.username||target.password||!Number.isInteger(timeoutMs)||timeoutMs<1||timeoutMs>30000)throw Error('home-navigation-arguments-invalid');
+  const started=clock(),deadline=started+timeoutMs,errors=[];
+  const audit=attempts=>({attempts,recovered:attempts===2,elapsedMs:Math.max(0,Math.round(clock()-started)),errors:[...errors]});
+  for(let attempt=1;attempt<=2;attempt++){
+    const remaining=Math.min(timeoutMs,Math.floor(deadline-clock()));
+    if(!Number.isFinite(remaining)||remaining<1)throw Error('home-navigation-budget-exhausted');
+    if(page.isClosed())throw Error('home-navigation-page-closed');
+    try{await page.goto(url,{waitUntil:'domcontentloaded',timeout:remaining});return audit(attempt);}
+    catch(error){
+      const closed=String(error?.message||'').split('\n')[0].trim()===`page.goto: net::ERR_CONNECTION_CLOSED at ${url}`;
+      errors.push({attempt,code:closed?'ERR_CONNECTION_CLOSED':'OTHER'});
+      try{error.homeNavigationRecovery={...audit(attempt),recovered:false};}catch{}
+      if(!closed||attempt===2||page.isClosed()||deadline-clock()<1)throw error;
+    }
+  }
+}
+
 export async function collect(output){
  await postIntegrity();
  const {acquirePostLease,releasePostLease}=await import(path.join(POST,'scripts/lease.mjs'));
@@ -52,7 +72,8 @@ export async function collect(output){
   session=await connection.context.newCDPSession(page);targetId=(await session.send('Target.getTargetInfo')).targetInfo.targetId;
   await session.send('Emulation.setDeviceMetricsOverride',{width:2200,height:1800,deviceScaleFactor:2,mobile:false});
   // Never set window.name: this site owns iframe names such as J-imframe.
-  await page.goto(ROOT_ORIGIN+'/?time='+Date.now()+'&ignoreSetRouterProxy=true',{waitUntil:'domcontentloaded',timeout:30000});
+  const homeUrl=ROOT_ORIGIN+'/?time='+Date.now()+'&ignoreSetRouterProxy=true';
+  const homeNavigation=await gotoHomeWithRecovery(page,homeUrl);
   await page.getByText('经营分析',{exact:true}).waitFor({state:'visible',timeout:20000});assertOrigin(page.url());assertAuthenticated(await page.locator('body').innerText());
   let noticeClosed=await knownNotice(page);
   try{await page.getByText('经营分析',{exact:true}).click({timeout:5000});}catch(error){if(!noticeClosed&&await knownNotice(page)){noticeClosed=true;await page.getByText('经营分析',{exact:true}).click({timeout:5000});}else throw error;}await page.getByText('经营数据',{exact:true}).click({timeout:5000});
@@ -79,12 +100,12 @@ export async function collect(output){
   await fs.mkdir(output,{recursive:true,mode:0o700});const file=path.join(output,dataDate+'-美团外卖门店收入top10.png');
   const capture=await session.send('Page.captureScreenshot',{format:'png',fromSurface:true,captureBeyondViewport:false,clip:{...clip,scale:1}});const bytes=Buffer.from(capture.data,'base64');await fs.writeFile(file,bytes,{mode:0o600});
   if(JSON.stringify(await panel.evaluate(rankSnapshot))!==JSON.stringify(snapshot)||!await verifyDate())throw Error('meituan-data-changed-during-capture');
-  result={ok:true,browserPort:9233,taskId,targetId,dataDate,collectedAt:new Date().toISOString(),sourceRoute:'https://waimaieapp.meituan.com/igate/bizdata/business',sortMetric:'订单收入/数值',sortDirection:'descending',sortEvidence,...parsed,file,sha256:crypto.createHash('sha256').update(bytes).digest('hex'),width:bytes.readUInt32BE(16),height:bytes.readUInt32BE(20),clip,sendAttempts:0,runtimeModelDecisions:0};
+  result={ok:true,homeNavigation,browserPort:9233,taskId,targetId,dataDate,collectedAt:new Date().toISOString(),sourceRoute:'https://waimaieapp.meituan.com/igate/bizdata/business',sortMetric:'订单收入/数值',sortDirection:'descending',sortEvidence,...parsed,file,sha256:crypto.createHash('sha256').update(bytes).digest('hex'),width:bytes.readUInt32BE(16),height:bytes.readUInt32BE(20),clip,sendAttempts:0,runtimeModelDecisions:0};
  }finally{
   try{if(page&&session&&!page.isClosed()&&(await session.send('Target.getTargetInfo')).targetInfo.targetId===targetId)await page.close();}finally{if(browser)await browser.close();await releasePostLease(lease);}
  }
  await fs.writeFile(path.join(output,'collection.json'),JSON.stringify(result,null,2),{mode:0o600});return result;
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
- try{if(process.argv.length!==4||process.argv[2]!=='--output')throw Error('usage: --output DIRECTORY');console.log(JSON.stringify(await collect(path.resolve(process.argv[3]))));}catch(error){console.log(JSON.stringify({ok:false,reason:String(error.message||error).slice(0,500),sendAttempts:0}));process.exitCode=1;}
+ try{if(process.argv.length!==4||process.argv[2]!=='--output')throw Error('usage: --output DIRECTORY');console.log(JSON.stringify(await collect(path.resolve(process.argv[3]))));}catch(error){console.log(JSON.stringify({ok:false,reason:String(error.message||error).slice(0,500),sendAttempts:0,...(error.homeNavigationRecovery?{homeNavigationRecovery:error.homeNavigationRecovery}:{})}));process.exitCode=1;}
 }

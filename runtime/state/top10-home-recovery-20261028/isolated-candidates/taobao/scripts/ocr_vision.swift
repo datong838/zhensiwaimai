@@ -1,0 +1,1 @@
+/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/scripts/ocr_vision.swift

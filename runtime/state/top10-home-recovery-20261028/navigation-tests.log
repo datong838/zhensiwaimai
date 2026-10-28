@@ -1,0 +1,40 @@
+✔ taobao normal path stays one navigation (0.590792ms)
+✔ taobao one exact connection close recovers same page and URL (0.4505ms)
+✔ taobao second failure is final and original exception retained (0.199875ms)
+✔ taobao other failure never retried: page.goto: Timeout 30000ms exceeded (2.140208ms)
+✔ taobao other failure never retried: page.goto: net::ERR_NAME_NOT_RESOLVED (0.100541ms)
+✔ taobao other failure never retried: page.goto: net::ERR_CONNECTION_REFUSED (0.058166ms)
+✔ taobao other failure never retried: login-required (0.058375ms)
+✔ taobao other failure never retried: captcha-required (0.060375ms)
+✔ taobao other failure never retried: page.goto: Target page has been closed (0.080209ms)
+✔ taobao connection close at another URL not eligible (0.13575ms)
+✔ taobao closed page not retried (0.084625ms)
+✔ taobao exhausted original budget never gains another 30 seconds (0.072708ms)
+✔ taobao remaining one millisecond is finite (0.054917ms)
+✔ taobao invalid timeout rejected before touching browser (0.122125ms)
+✔ taobao insecure or credentialed URL rejected before browser (0.0515ms)
+✔ taobao post-navigation business error does not trigger navigation retry (0.057167ms)
+✔ meituan normal path stays one navigation (0.354583ms)
+✔ meituan one exact connection close recovers same page and URL (0.068083ms)
+✔ meituan second failure is final and original exception retained (0.066667ms)
+✔ meituan other failure never retried: page.goto: Timeout 30000ms exceeded (0.034416ms)
+✔ meituan other failure never retried: page.goto: net::ERR_NAME_NOT_RESOLVED (0.030083ms)
+✔ meituan other failure never retried: page.goto: net::ERR_CONNECTION_REFUSED (0.02925ms)
+✔ meituan other failure never retried: login-required (0.038958ms)
+✔ meituan other failure never retried: captcha-required (0.031917ms)
+✔ meituan other failure never retried: page.goto: Target page has been closed (0.039834ms)
+✔ meituan connection close at another URL not eligible (0.032917ms)
+✔ meituan closed page not retried (0.025584ms)
+✔ meituan exhausted original budget never gains another 30 seconds (0.024292ms)
+✔ meituan remaining one millisecond is finite (0.024417ms)
+✔ meituan invalid timeout rejected before touching browser (0.055792ms)
+✔ meituan insecure or credentialed URL rejected before browser (0.026792ms)
+✔ meituan post-navigation business error does not trigger navigation retry (0.019833ms)
+ℹ tests 32
+ℹ suites 0
+ℹ pass 32
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 189.575834

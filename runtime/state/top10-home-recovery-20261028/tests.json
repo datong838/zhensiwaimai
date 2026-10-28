@@ -1,0 +1,109 @@
+{
+  "passed": true,
+  "binding": {
+    "taobao": "4360c16db1337aee7224331b3ea4d206ce8a322b4999fec00270735167197f1f",
+    "meituan": "ea39ad318ee98109ece85e88757503fbdf3bf6a88ced3ea29d575bf0abf4a4be",
+    "runtime/maintain_top10_home_recovery_20261028.py": "d731feba9efe73e877f2e1769f9b0346056662276a7233261ed1c3e32b3af77d",
+    "runtime/tests/top10_home_recovery.test.mjs": "1e8ffa20f1dac96f363902a7e928bdc5dd063b28aec2b57fceec9016bf3e5b3e",
+    "runtime/tests/test_top10_home_recovery_maintenance.py": "9eae84f5044322dccf947808ed34c2013db4ddeb635615c67c6f4c0227236ff1"
+  },
+  "results": [
+    {
+      "name": "navigation",
+      "returncode": 0,
+      "argv": [
+        "/Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--test",
+        "runtime/tests/top10_home_recovery.test.mjs"
+      ]
+    },
+    {
+      "name": "maintenance",
+      "returncode": 0,
+      "argv": [
+        "/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python",
+        "-m",
+        "unittest",
+        "runtime.tests.test_top10_home_recovery_maintenance",
+        "-v"
+      ]
+    },
+    {
+      "name": "original-node-0",
+      "returncode": 0,
+      "argv": [
+        "/Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/top10-home-recovery-20261028/isolated-candidates/taobao/scripts/test_background_desktop.mjs"
+      ]
+    },
+    {
+      "name": "original-node-1",
+      "returncode": 0,
+      "argv": [
+        "/Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/top10-home-recovery-20261028/isolated-candidates/taobao/scripts/test_income_sort.mjs"
+      ]
+    },
+    {
+      "name": "original-node-2",
+      "returncode": 0,
+      "argv": [
+        "/Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/top10-home-recovery-20261028/isolated-candidates/taobao/scripts/test_task_page_cleanup.mjs"
+      ]
+    },
+    {
+      "name": "original-node-3",
+      "returncode": 0,
+      "argv": [
+        "/Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/top10-home-recovery-20261028/isolated-candidates/meituan/tests/test_income_collector.mjs"
+      ]
+    },
+    {
+      "name": "tao-runtime",
+      "returncode": 0,
+      "argv": [
+        "/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/scripts",
+        "-p",
+        "test_runtime_guard.py",
+        "-v"
+      ]
+    },
+    {
+      "name": "tao-label",
+      "returncode": 0,
+      "argv": [
+        "/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/scripts",
+        "-p",
+        "test_income_label.py",
+        "-v"
+      ]
+    },
+    {
+      "name": "mt-workflow",
+      "returncode": 0,
+      "argv": [
+        "/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-meituan-income-top10-to-wechat/tests",
+        "-p",
+        "test_income_workflow.py",
+        "-v"
+      ]
+    }
+  ]
+}

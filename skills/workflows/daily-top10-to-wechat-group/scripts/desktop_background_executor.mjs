@@ -129,6 +129,26 @@ export function selfTest(){
   return {ok:true,tests:7,runtimeModelDecisions:0};
 }
 
+// Same owned page, same URL; one recovery inside the original 30s budget.
+export async function gotoHomeWithRecovery(page,url,{timeoutMs=30000,clock=()=>performance.now()}={}){
+  const target=new URL(url);
+  if(target.protocol!=='https:'||target.username||target.password||!Number.isInteger(timeoutMs)||timeoutMs<1||timeoutMs>30000)throw Error('home-navigation-arguments-invalid');
+  const started=clock(),deadline=started+timeoutMs,errors=[];
+  const audit=attempts=>({attempts,recovered:attempts===2,elapsedMs:Math.max(0,Math.round(clock()-started)),errors:[...errors]});
+  for(let attempt=1;attempt<=2;attempt++){
+    const remaining=Math.min(timeoutMs,Math.floor(deadline-clock()));
+    if(!Number.isFinite(remaining)||remaining<1)throw Error('home-navigation-budget-exhausted');
+    if(page.isClosed())throw Error('home-navigation-page-closed');
+    try{await page.goto(url,{waitUntil:'domcontentloaded',timeout:remaining});return audit(attempt);}
+    catch(error){
+      const closed=String(error?.message||'').split('\n')[0].trim()===`page.goto: net::ERR_CONNECTION_CLOSED at ${url}`;
+      errors.push({attempt,code:closed?'ERR_CONNECTION_CLOSED':'OTHER'});
+      try{error.homeNavigationRecovery={...audit(attempt),recovered:false};}catch{}
+      if(!closed||attempt===2||page.isClosed()||deadline-clock()<1)throw error;
+    }
+  }
+}
+
 export async function runBackgroundDesktop({profile='taobao-brand',port=9230,outputRoot=path.resolve(dir,'../../../../runtime/state/business-evidence/top10'),runId=crypto.randomUUID()}={}){
   assertCanonicalBrowser(profile,port);
   const evidenceStorageHelper = "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/evidence_storage.mjs";
@@ -156,7 +176,7 @@ export async function runBackgroundDesktop({profile='taobao-brand',port=9230,out
       const context=browser.contexts()[0];page=await context.newPage();await page.setViewportSize({width:2200,height:1800});
       cdpSession=await context.newCDPSession(page);await cdpSession.send('Emulation.setDeviceMetricsOverride',{width:2200,height:1800,deviceScaleFactor:2,mobile:false});receipt.deviceScaleFactor=2;
       await page.addInitScript(id=>{window.name=`aos-background-task:${id}`;},taskId);
-      await page.goto(HOME_URL,{waitUntil:'domcontentloaded',timeout:30000});await page.evaluate(id=>{window.name=`aos-background-task:${id}`;},taskId);
+      receipt.homeNavigation=await gotoHomeWithRecovery(page,HOME_URL);await page.evaluate(id=>{window.name=`aos-background-task:${id}`;},taskId);
       await waitUntil(async()=>{if(!page.url().startsWith(URL_PREFIX))throw Error('unexpected-page-url');const assessment=loginAssessment(await allFrameText(page));if(assessment.loginPage.length)throw Error('login-required');return assessment.authenticated?assessment:null;},12000,page,'merchant-home-not-ready');
       receipt.homeUrl=page.url();
     });
@@ -253,7 +273,7 @@ export async function runBackgroundDesktop({profile='taobao-brand',port=9230,out
       Object.assign(receipt,{file,...size,sha256:crypto.createHash('sha256').update(await fs.readFile(file)).digest('hex'),stores:rows.map(x=>x.store),incomes:rows.map(x=>x.income),revenues:rows.map(x=>x.revenue),page:1,pageSize:10,layout:'background-table-and-pagination',capture:clip});
     });
     receipt.ok=true;
-  }catch(error){receipt.reason=error.message;}
+  }catch(error){receipt.reason=error.message;if(error.homeNavigationRecovery)receipt.homeNavigation=error.homeNavigationRecovery;}
   finally{
     if(page){try{if(ownsTaskMarker(await page.evaluate(()=>window.name),taskId)){await page.close();receipt.cleanupStatus='completed';}else receipt.cleanupStatus='preserved-marker-mismatch';}catch(error){receipt.cleanupStatus='failed';receipt.cleanupReason=String(error.message||error);}}
     if(browser)try{await browser.close();}catch{}
