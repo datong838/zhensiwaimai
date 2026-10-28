@@ -1,0 +1,57 @@
+{
+  "at": "2026-10-28T08:22:04.568675+08:00",
+  "runDay": "2026-10-28",
+  "window": [
+    "2026-10-21",
+    "2026-10-27"
+  ],
+  "actualNewAppeals": 0,
+  "reason": "original meituan unappealed list total0; successful inspection is not an appeal submission",
+  "taobaoSubmitted": false,
+  "taobaoReason": "user-20261025-no-taobao-feedback-submit-entry",
+  "originalRecordPaths": {
+    "negative-feedback-list-appeals-0930": "runtime/run_history/2026-10-28/negative-feedback-list-appeals-0930--20261028-082002--record.json",
+    "negative-feedback-list-appeals-1230": "runtime/run_history/2026-10-28/negative-feedback-list-appeals-1230--20261028-082014--record.json"
+  },
+  "finishedAt": "2026-10-28T08:21:20",
+  "reports": [
+    {
+      "file": "outputs/negative-feedback-list-appeals-20261028/负反馈申诉汇总_美团外卖_2026-10-28.xlsx",
+      "size": 12243,
+      "sha256": "188b410383f064e4ed2af6933a2c575df67a681840c8b7dc78cdb8134cb84592",
+      "sheets": [
+        {
+          "name": "美团外卖负反馈申诉",
+          "rows": null,
+          "columns": null
+        }
+      ],
+      "verified": true,
+      "sendAttempts": 1,
+      "verificationLevel": "wecom-ui-tree-file-name-size"
+    },
+    {
+      "file": "outputs/negative-feedback-list-appeals-20261028/负反馈申诉汇总_淘宝闪购_2026-10-28.xlsx",
+      "size": 23423,
+      "sha256": "7354bfb6d238e9ae85625e75b517780e8fed3f49765e64ea1813b2133bb70473",
+      "sheets": [
+        {
+          "name": "淘宝闪购负反馈申诉",
+          "rows": null,
+          "columns": null
+        }
+      ],
+      "verified": true,
+      "sendAttempts": 1,
+      "verificationLevel": "wecom-ui-tree-file-name-size"
+    }
+  ],
+  "reportedRows": {
+    "meituan": 41,
+    "taobao": 107
+  },
+  "originalMarkersMutatedBySupervisor": false,
+  "productionInvokedBySupervisorDirectly": false,
+  "nextCriticalSlot": "08:30 original merchant + negative analysis",
+  "wholeDayComplete": false
+}
