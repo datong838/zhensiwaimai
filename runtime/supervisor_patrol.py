@@ -303,9 +303,9 @@ def check_chrome(phase: str) -> tuple[dict, list]:
         dup = {k: v for k, v in biz.items() if v > 1}
         if dup:
             out.append(finding("YELLOW", "chrome", f"duplicate-page:{port}",
-                               f"{name}(:{port}) 业务页重复："
+                               f"{name}(:{port}) 同域存在多页（尚未判定归属）："
                                f"{json.dumps({k[:70]: v for k, v in dup.items()}, ensure_ascii=False)[:200]}",
-                               "多开页会残留 task marker/占资源；清 window.name 并关掉多余页（勿新开页排查）"))
+                               "先核对原流程回执、当前监听PID/启动时刻及精确页面归属；同域多页不构成清理许可，禁止清window.name或批量关页；岗位忙则跳过。"))
     return snap, out
 
 

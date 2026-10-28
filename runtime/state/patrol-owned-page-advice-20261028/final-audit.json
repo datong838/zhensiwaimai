@@ -1,0 +1,22 @@
+{
+  "at": "2026-10-28T16:17:57.174815+08:00",
+  "sourceSha256": "0deb81e9ec983978b2887ac6df655c1e7ada1e721ea452c37057602350abd14a",
+  "onlyTwoMessageStringsChanged": true,
+  "duplicates": [
+    {
+      "level": "YELLOW",
+      "area": "chrome",
+      "code": "duplicate-page:9232",
+      "detail": "jinsha-business(:9232) 同域存在多页（尚未判定归属）：{\"https://data.guoshuyufen.com/\": 2}",
+      "suggest": "先核对原流程回执、当前监听PID/启动时刻及精确页面归属；同域多页不构成清理许可，禁止清window.name或批量关页；岗位忙则跳过。"
+    }
+  ],
+  "originalChromeTests": 6,
+  "originalBusinessAssetTests": 6,
+  "sameWarningLevelAndCodes": true,
+  "browserMutations": 0,
+  "sendAttempts": 0,
+  "runtimePolicyChanges": 0,
+  "originalPageOwnershipPreserved": true,
+  "scope": "monitor advisory wording only; no duplicate page cleanup authorized or performed"
+}
