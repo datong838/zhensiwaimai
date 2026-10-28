@@ -3,7 +3,7 @@ import path from 'node:path';
 import { SpreadsheetFile, Workbook } from '@oai/artifact-tool';
 import { collectAllAppeals } from '../../../posts/jinsha-post/scripts/appeal_collector.mjs';
 
-const statuses = ['全部', '申诉成功', '申诉失败', '申诉中', '未申诉（开启自动申诉）'];
+const statuses = ['全部', '申诉成功', '申诉失败', '申诉中', '未申诉'];
 const field = (text, label) => (text.match(new RegExp(`^- ${label}：([^\\n\\r]*)`, 'm')) || [])[1]?.trim() || '';
 
 async function localFacts(recordDir) {
@@ -40,7 +40,7 @@ export async function buildFullAppealReport(config, { collect = collectAllAppeal
   if (missingVerifiedKeys.length && snapshotLooksAlive) console.warn(`[appeal_report_builder] ${missingVerifiedKeys.length} 条 verified_submitted 记录已不在平台快照中（申诉成功后被平台移除，视为合法终态，跳过）: ${missingVerifiedKeys.join(', ')}`);
   const rows = snapshot.rows.map(item => {
     const fact = facts.get(item.key) || {};
-    return [item.key, item.store, new Date(`${item.date}T00:00:00+08:00`), item.score, item.comment, item.appealMethod || '未申诉（开启自动申诉）', item.appealTime || '未读取', item.auto || '页面未提供', item.appealContent || fact.suggestion || '未读取', fact.appealType || '未读取', fact.verification || '页面未提供'];
+    return [item.key, item.store, new Date(`${item.date}T00:00:00+08:00`), item.score, item.comment, item.appealMethod || '页面未提供', item.appealTime || '未读取', item.auto || '页面未提供', item.appealContent || fact.suggestion || '未读取', fact.appealType || '未读取', fact.verification || '页面未提供'];
   });
   if (rows.length !== snapshot.total) throw Error('full-appeal-report-row-count-mismatch');
 
@@ -51,7 +51,7 @@ export async function buildFullAppealReport(config, { collect = collectAllAppeal
   sheet.getRange('A2').values = [[`${channelLabel}差评申诉汇总`]];
   sheet.getRange('A2').format = { font: { name: 'Arial', size: 14, bold: true, color: '#1F2937' }, verticalAlignment: 'center' };
   sheet.getRange('A3:K3').merge();
-  sheet.getRange('A3').values = [[`业务日期：${businessDate}；范围：${channelLabel}、全部状态；明细 ${snapshot.total} 条。注：「未申诉（开启自动申诉）」＝已开启平台自动申诉、由平台代为处理，并非漏申`]];
+  sheet.getRange('A3').values = [[`业务日期：${businessDate}；范围：${channelLabel}、全部状态；明细 ${snapshot.total} 条。注：「未申诉」为平台当前状态；自动申诉开关以明细「自动申诉状态」列为准，不代表已提交`]];
   sheet.getRange('A3').format = { font: { name: 'Arial', size: 10, italic: true, color: '#4B5563' } };
   sheet.getRange('A5:J5').values = [[statuses[0], Number(snapshot.counts.全部 || 0), statuses[1], Number(snapshot.counts.申诉成功 || 0), statuses[2], Number(snapshot.counts.申诉失败 || 0), statuses[3], Number(snapshot.counts.申诉中 || 0), statuses[4], Number(snapshot.counts.未申诉 || 0)]];
   sheet.getRange('A5:J5').format = { font: { name: 'Arial', size: 10, bold: true }, fill: '#E8F1FB', horizontalAlignment: 'center' };

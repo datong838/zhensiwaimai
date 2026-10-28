@@ -1,0 +1,29 @@
+/* Uninstalled candidate. Only original task-bound native visible image copy. */
+function run(argv) {
+ const c=JSON.parse(argv[0]);
+ for(const k of ['rowPath','messagesPath','titlePath','composerPath'])
+  if(!Array.isArray(c[k])||c[k].some(x=>!Number.isInteger(x)||x<0))throw Error('candidate-path-invalid');
+ if(!c.groupName||c.rowPath.length!==c.messagesPath.length+1||
+    JSON.stringify(c.rowPath.slice(0,-1))!==JSON.stringify(c.messagesPath))throw Error('candidate-row-binding-invalid');
+ const p=Application('System Events').processes.byName('企业微信');
+ if(p.bundleIdentifier()!=='com.tencent.WeWorkMac')throw Error('candidate-app-mismatch');
+ const se=Application('System Events');
+ function at(path){let e=p.windows.byName('企业微信');for(const i of path)e=e.uiElements[i];return e;}
+ function check(){
+  if(!p.frontmost())throw Error('candidate-focus-lost');
+  const t=at(c.titlePath),v=at(c.composerPath);
+  if(t.role()!=='AXTextField'||t.value()!==c.groupName||v.role()!=='AXTextArea'||v.value()!=='')throw Error('candidate-group-or-draft-changed');
+  const row=at(c.rowPath),cell=at(c.rowPath.concat(0));
+  if(row.role()!=='AXRow'||cell.role()!=='AXCell')throw Error('candidate-row-changed');
+  return cell;
+ }
+ check();se.click(check());delay(0.1);check();
+ const edit=p.menuBars[0].menuBarItems.byName('编辑'),menu=edit.menus[0],copy=menu.menuItems.byName('复制');
+ if(!copy.exists()||!copy.enabled()||copy.attributes.byName('AXMenuItemCmdChar').value()!=='C'||
+    copy.attributes.byName('AXMenuItemCmdModifiers').value()!==0)throw Error('candidate-visible-copy-unavailable');
+ let opened=false,done=false;
+ try{check();se.click(edit);opened=true;check();if(!copy.enabled())throw Error('candidate-copy-disabled');
+  se.click(copy);done=true;
+ }finally{if(opened&&!done){try{check();if(menu.visible())se.click(edit);}catch(_){}}}
+ return JSON.stringify({backend:'system-events-ui-tree',copied:true,rowPath:c.rowPath,menuShortcut:'C',menuModifiers:0,sendAttempts:0});
+}

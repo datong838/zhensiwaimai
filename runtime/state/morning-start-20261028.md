@@ -292,3 +292,12 @@ posts仅追加两申诉主名和12/15客服别名，22现役均能解析原互�
 ## 12:31原主任验证
 
 12:30商家完整采集无新增，固定通知一次verified。12:30:25完成率原入口实际collectionSkipped=true、sendAttempts/newSendAttempts均0，原41个marker/快照SHA不变，无新run产生；采集前未决门真实生效，但图内容仍待核，不把此视为整流verified。代码上批d2e8d1ab/1d37e296已推main。13点商家、双平台申诉及淘宝下载上传保持原班表，图自动内容回读与其他目标遗留继续，Goal active。
+
+
+## 12:54原13点门禁与末档预防修复
+
+四岗位逐岗原mutexGroup与物理租约只读：业务页均正文响应、无登录失效/可见验证遮罩；四Chrome PID未变。9232两页实际原完成收据3f6c12c0...绑定89873进程，原ownedJinshaPageDecision及真实selectExistingJinshaTarget均唯一选27341...，17归属场景通过，不关闭/重标任何页。不是只按页数判断故障，13点原入口仍需实证。
+
+发现18:30编排仅build/deliver，与现行查漏后汇总合同缺一环；现各档先原appeal_executor，18:30成功才build/deliver，13/15/17仅原appeal不变。原unknown/已提交保护不放宽，33编排场景通过，末档真实验收待18:30。两个builder取消“未申诉必为自动开启/代处理”的推断，统计写原未申诉，缺方法写页面未提供，自动开关列独立按页面。两实际离线fixtureXLSX生成后I5/A3/F9/H9读回通过，原两执行器6+6自检及业务MD SHA不变。证据runtime/state/appeal-closing-sequence-20261028/final-audit.json。
+
+图片自动核验继续：旧CUA复制像素证据仅可作方法参考，不复用旧交互和全剪贴板备份。隔离候选work/native-image-copy-candidate-20261028完成两fresh nonce/原群空框/原owner意图/新同尾行/PNG-TIFF完全RGBA匹配协议，9纯单测及JXA编译通过；没有实际UI复制、未安装、原共享摘要不改。还缺正式原worker驱动、受控接入/全部消费者同步/真实图片验收，不能当已解决。
