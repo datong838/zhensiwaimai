@@ -1,0 +1,133 @@
+{
+  "at": "2026-10-28T21:20:33.351225+08:00",
+  "oldThreadId": "01a17923-bee5-7660-9206-86c007d01918",
+  "newThreadId": "01a18298-0a79-7481-b24a-0b1743a38edf",
+  "allOfficialViewsSucceeded": true,
+  "allFiveReadbackVerified": true,
+  "sourceRemaining": [],
+  "before": [
+    {
+      "version": 1,
+      "id": "02-goal-10-27",
+      "kind": "heartbeat",
+      "name": "臻肆02点夜间Goal检查与接续",
+      "prompt": "每天北京时间02:00，在本聊天检查前夜Goal是否真实完成。先核对Asia/Shanghai当前时间：本次工作仅限当日02:00至06:00前；到06:00立即停止夜间施工，交给06点清理任务，不创建或恢复Goal。读取本聊天最新交接、/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/night-goal-handoff/内最新证据（如有）、现行监理Skill和最新用户约束，再调用get_goal。若真实complete，安静结束；若active且未完成，复用原完整Goal继续未完成工作，不等用户再次说开始，不缩小目标，不并发创建、不清除。用户明确暂停/停止的Goal不恢复。若为null，只有明确证据证明前夜完整目标因外部中止、仍未完成且不存在父线程迁移或其他执行者Goal时，才从最近有效交接的完整objective原文用create_goal恢复，不设置token_budget；旧日期或来源不明的目标不得重建，未知创建结果先回读。优先解决接下来08:00至10:00关键任务的排班、依赖、业务日期、release policy及故障让行，避免积压。维护先方案、最小更改、自测与原门禁；生产仅原主任/control/适配器/队列/账本，企微仅System Events原生UI树与可见操作；attempted/unknown只读对账不重发、不伪verified。持续核对时钟，不启动不能在06:00前安全结束的操作；06:00前保存进度、完整objective、未完成项和安全恢复步骤，既有子agent保存交付停止夜间施工，保持原主任和浏览器正常。无变化安静，不发群消息，不改变06点清理、08点启动和22点维护任务。",
+      "status": "ACTIVE",
+      "rrule": "FREQ=DAILY;BYHOUR=2;BYMINUTE=0;BYSECOND=0",
+      "target_thread_id": "01a17923-bee5-7660-9206-86c007d01918",
+      "created_at": 1793032471580,
+      "updated_at": 1793033846997
+    },
+    {
+      "version": 1,
+      "id": "06-goal-10-27",
+      "kind": "heartbeat",
+      "name": "臻肆06点夜间Goal硬截止收口",
+      "prompt": "每天北京时间06:00，必须清理本聊天在该时刻存在的Goal，让08:00可以创建全新当日Goal。这是用户明确授权的每日硬截止，不能因为未完成而保留Goal继续运行，也不能因状态complete而省略清理；如果goal是 活动中 先停掉goal再执行清理：只有get_goal严格返回null时才无需清理。先核对Asia/Shanghai时间；若本次唤醒已到08:00或以后，不清理可能新建的白天Goal，立即报告错过06点清理。正常06:00至08:00前，先get_goal：非null时保存完整objective、真实status、已完成/未完成项、代码/测试/部署/回滚状态和恢复步骤到 /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/night-goal-handoff/ 按当日日期保存的交接证据并更新latest交接；通知本线程既有子agent保存交付停止夜间施工。随后立即使用受支持官方Goal清理接口；本机实现为 codex app-server --listen stdio://，公开JSON-RPC依次 initialize（capabilities.experimentalApi=true）、initialized、thread/goal/clear（threadId=01a17923-bee5-7660-9206-86c007d01918，origin=user）、thread/goal/get。必须核验最终goal严格为null，才可报告清理成功。未完成事项留在交接供08点新Goal接续，06点后不得继续前夜施工或重建前夜Goal。严禁update_goal伪造complete代替清理，严禁修改私有数据库/锁或删除聊天历史，严禁改业务数据/账本/游标。不要停止原业务主任或浏览器，不改变正常工作流排班。若官方clear失败，只读回读一次确认真实状态，立即报告具体失败及08点新Goal受阻风险，不能声称已清理，不能循环重试或私改状态。无正常变化保持安静，不发群消息；每日08点启动和22点维护自动化保持原样。",
+      "status": "ACTIVE",
+      "rrule": "FREQ=DAILY;BYHOUR=6;BYMINUTE=0;BYSECOND=0",
+      "target_thread_id": "01a17923-bee5-7660-9206-86c007d01918",
+      "created_at": 1793032471698,
+      "updated_at": 1793033847144
+    },
+    {
+      "version": 1,
+      "id": "20",
+      "kind": "heartbeat",
+      "name": "臻肆20点台账后遗留收口与明日全流程预检",
+      "prompt": "每天北京时间20:00，在本聊天按顺序执行 /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/docs/operations/每日2000台账后收口与新对话交接制度.md。先完整读取仓内监理Skill、企业微信UI岗位约定、最新用户约束和当日交接。不得调换下面的顺序。\n\n1）先核实当日原工作台账已经真实送达；未发时记待前置，不擅自发台账或越过前置。若当日台账晚发，由本聊天现有Goal在送达后顺延接续，不等次日20点、不创建重复定时。\n2）完整梳理今日遗留清单：证据、根因/未知点、影响、优先级、已修/待修/待真实验收和下一步。用户业务确认与技术证据分开留痕，不改原unknown。原图片合规实际单次提交且同日群/载荷/绑定/数量/空框证据完整时，按长期授权记客户业务完成，技术回执缺失仅内部备注，不再每日人工确认、不设日期白名单，且不重发；未尝试、零提交、真实失败或错群错图仍不能算完成。\n3）完善和修复：先方案、最小修改、自测、一致性/风险与原门核验，及时全部commit/push。不仅记录失败，不放松原授权、防重和真实验收条件。\n4）明日全流程预检：逐流核对最新排班/依赖、业务日期和数据范围、全量来源/分页/字段/模板、解释器/共享库/release policy、新日事件/旧unknown隔离、原主任/真实锁/四岗登录与业务正文/原企微队列/目录和有界恢复，优先08至10点。2026-10-28当日24流、2026-10-29起27流，后续以最新用户口径和班表为准。尚未产生的数据列到点新鲜度核验，不用旧日样本伪通过，不提前明日生产。商家经营指标、优惠券、巡店三流由另一台电脑执行，本机只记归属和已提供摘要，不采集其数据、不修改其代码/状态/排班、不接管或重复执行。\n5）按 docs/operations/监理新对话交接模板.md 保存全部工作与证据：完整原Goal objective和真实status、最新覆盖约束、所有已完成/未完成/待真实验收项、源数据/状态/队列/账本/游标/防重、代码/测试/部署/回滚/远端、运行环境、全部定时清单与下一行动。写当日交接和目标日期runtime/state/next-day-preflight，更新latest并push。不能只让接班者看旧聊天，也不能遗漏待办。\n6）最后每天用create_thread新建当前项目的干净新聊天，不fork巨大历史。先list_projects确定当前仓库；新聊天只读核收完整交接，未获接班信号不创建Goal、不生产。收到核收后，用户已明确授权Goal迁移：原active未完成Goal保存完整objective并停止本聊天施工，通过官方app-server thread/goal/clear（实际旧threadId、origin=user）及thread/goal/get核验旧Goal严格null；再发信号让新聊天以完整原objective创建Goal、不设token_budget，未知结果先回读。核验新Goal真实active、旧Goal仍null，不伪complete、不用私有DB或锁、不双执行。明确暂停Goal不得借迁移恢复，null/complete原目标不重建为未完成。\n7）新聊天接续确认后，用automation_update把本监理拥有的全部定时任务迁到新threadId，包括本20点任务自身；每日完整发现归属项，当前02/06/08/20/22共5项，不遗漏其他本监理项。保持所有时间/时区/启停/通知/其他设置，替换targetThreadId及prompt内旧threadId，尤其06点Goal清理对象；逐一回读保存映射。不能移动无关或另一电脑任务、不能激活历史暂停项或新增重复排班。新聊天带全部工作继续执行，不等用户再次说开始；旧聊天仅核验交接，不再并行施工。操作失败如实留证，不宣称已接班。\n\n全程生产只原主任/control/适配器/队列/账本；企微仅System Events原生UI树及可见操作，禁止共享/截图坐标/注入/AXValue/隐藏发送/试探控制键；attempted或unknown只读不重发、不换事件、不伪verified。不读凭据/Cookie/localStorage或认证API，不重启Chrome、不抢活锁、不发群告警。真实扫码/验证码/账号风险等只在本聊天说明，独立授权工作继续。待未来数据、自然真实验收或外部条件的事项完整携带交接，不能因未修完而漏掉每日新聊天，也不能伪造修复完成。原22维护/06硬截止/08启动职责和时刻保持，06前留足交接时间，06后不继续前夜施工。无变化保持安静，只报告有意义进展、真实失败或必要用户动作。",
+      "status": "ACTIVE",
+      "rrule": "FREQ=DAILY;BYHOUR=20;BYMINUTE=0;BYSECOND=0",
+      "target_thread_id": "01a17923-bee5-7660-9206-86c007d01918",
+      "created_at": 1793188130116,
+      "updated_at": 1793191692440
+    },
+    {
+      "version": 1,
+      "id": "22-im",
+      "kind": "heartbeat",
+      "name": "臻肆22点四浏览器保活与IM复位",
+      "prompt": "每天北京时间22:00，在本聊天执行 /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/docs/operations/每日2200浏览器保活与IM复位.md，并先完整读取监理Skill。先检查launchctl、daemon、live_steps和真实锁进程；岗位忙则跳过，不抢锁。同日2200收据已明确完成时只读复核，不重复复位。\n\n逐岗检查9230/9231/9232/9233真实业务域、页面响应、登录/验证码/可见遮罩；不读取凭据、Cookie或localStorage，不用认证API，不重启Chrome。9233仅在无任务、持原meituan-post租约且无验证阻碍时按先建后关：打开完整reception新页，内容级确认业务文本、无noPermission/登录失效/可见riskControlModal，再只关闭原美团域精确旧IM页，确认仅一个健康IM页。失败保留旧页，一轮最多一次，不关无关页，不把WorkBuddy登录页误判为美团掉线。\n\n写本地逐岗维护收据。禁止生产补跑、发送消息、回复客户、改账本或登录数据。正常无变化保持安静；扫码、验证码或无法安全解决的外部阻碍只在本聊天说明。",
+      "status": "ACTIVE",
+      "rrule": "FREQ=DAILY;BYHOUR=22;BYMINUTE=0;BYSECOND=0",
+      "target_thread_id": "01a17923-bee5-7660-9206-86c007d01918",
+      "created_at": 1792850741742,
+      "updated_at": 1793033847440
+    },
+    {
+      "version": 1,
+      "id": "automation",
+      "kind": "heartbeat",
+      "name": "臻肆监理·08点启动当日Goal",
+      "prompt": "每天北京时间08:00，在本聊天启动臻肆当日监理持续Goal。先完整读取 /Users/ddt/.workbuddy/skills/zhensi-supervisor-patrol/SKILL.md、/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/docs/operations/每日0800监理启动与持续值守.md、企业微信UI岗位执行约定、最新排班与本聊天最新用户约束，并以Asia/Shanghai当天日期为准。\n\n首先调用get_goal：仅当返回null时才create_goal创建当天持续目标，不设置token_budget；若已有active Goal则复用并继续，若状态异常则如实核对，不擅自清除、伪complete或用新Goal覆盖未完成事项。06:00收口任务负责用户明确授权的前夜未完成Goal清理，08:00不得重复清理。创建或复用后立即执行，不等待用户再次说开始。\n\n08:00至08:20核对launchctl权威状态、daemon心跳、原control、真实锁进程、9230/9231/9232/9233业务域与登录态、本地企业微信原生UI岗位、原队列、业务日期、依赖与release policy；08:00 Top10按原排班执行，08:20负反馈及双Excel串行启动并在08:30前交付，08:30差评分析Excel与同数据长图按原流程执行，09:00合同流按新业务日期运行。新商家仅发“电销+直播攻坚组”，08:30至18:30每30分钟，有新增发商家信息，无新增固定发“当前无新增意向商家”，19:00停止。其他任务读取现行班表，不硬编码旧排班。\n\n一切生产动作只走原车间主任/control/适配器/队列/账本；企微仅用System Events原生UI树和可见操作，禁止共享、截图坐标、注入、隐藏发送、AXValue写入及试探控制键。attempted/unknown只读对账，已发或未知不重发，不改账本、游标、防重或旧日证据。客服只执行当前最新全量档，不逐档追历史。非登录态等可恢复问题当轮处理并盯收口；仅扫码、验证码、账号风险等真人障碍请求用户。当天末档、21流台账及真实送达回执全部核验后才可complete；未到点、静态测试、配置GREEN或暂无任务都不算完成。无变化保持安静。",
+      "status": "ACTIVE",
+      "rrule": "FREQ=DAILY;BYHOUR=8;BYMINUTE=0;BYSECOND=0",
+      "target_thread_id": "01a17923-bee5-7660-9206-86c007d01918",
+      "created_at": 1792802952319,
+      "updated_at": 1793033847264
+    }
+  ],
+  "after": [
+    {
+      "version": 1,
+      "id": "02-goal-10-27",
+      "kind": "heartbeat",
+      "name": "臻肆02点夜间Goal检查与接续",
+      "prompt": "每天北京时间02:00，在本聊天检查前夜Goal是否真实完成。先核对Asia/Shanghai当前时间：本次工作仅限当日02:00至06:00前；到06:00立即停止夜间施工，交给06点清理任务，不创建或恢复Goal。读取本聊天最新交接、/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/night-goal-handoff/内最新证据（如有）、现行监理Skill和最新用户约束，再调用get_goal。若真实complete，安静结束；若active且未完成，复用原完整Goal继续未完成工作，不等用户再次说开始，不缩小目标，不并发创建、不清除。用户明确暂停/停止的Goal不恢复。若为null，只有明确证据证明前夜完整目标因外部中止、仍未完成且不存在父线程迁移或其他执行者Goal时，才从最近有效交接的完整objective原文用create_goal恢复，不设置token_budget；旧日期或来源不明的目标不得重建，未知创建结果先回读。优先解决接下来08:00至10:00关键任务的排班、依赖、业务日期、release policy及故障让行，避免积压。维护先方案、最小更改、自测与原门禁；生产仅原主任/control/适配器/队列/账本，企微仅System Events原生UI树与可见操作；attempted/unknown只读对账不重发、不伪verified。持续核对时钟，不启动不能在06:00前安全结束的操作；06:00前保存进度、完整objective、未完成项和安全恢复步骤，既有子agent保存交付停止夜间施工，保持原主任和浏览器正常。无变化安静，不发群消息，不改变06点清理、08点启动和22点维护任务。",
+      "status": "ACTIVE",
+      "rrule": "FREQ=DAILY;BYHOUR=2;BYMINUTE=0;BYSECOND=0",
+      "target_thread_id": "01a18298-0a79-7481-b24a-0b1743a38edf",
+      "created_at": 1793032471580,
+      "updated_at": 1793193582817
+    },
+    {
+      "version": 1,
+      "id": "06-goal-10-27",
+      "kind": "heartbeat",
+      "name": "臻肆06点夜间Goal硬截止收口",
+      "prompt": "每天北京时间06:00，必须清理本聊天在该时刻存在的Goal，让08:00可以创建全新当日Goal。这是用户明确授权的每日硬截止，不能因为未完成而保留Goal继续运行，也不能因状态complete而省略清理；如果goal是 活动中 先停掉goal再执行清理：只有get_goal严格返回null时才无需清理。先核对Asia/Shanghai时间；若本次唤醒已到08:00或以后，不清理可能新建的白天Goal，立即报告错过06点清理。正常06:00至08:00前，先get_goal：非null时保存完整objective、真实status、已完成/未完成项、代码/测试/部署/回滚状态和恢复步骤到 /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/night-goal-handoff/ 按当日日期保存的交接证据并更新latest交接；通知本线程既有子agent保存交付停止夜间施工。随后立即使用受支持官方Goal清理接口；本机实现为 codex app-server --listen stdio://，公开JSON-RPC依次 initialize（capabilities.experimentalApi=true）、initialized、thread/goal/clear（threadId=01a18298-0a79-7481-b24a-0b1743a38edf，origin=user）、thread/goal/get。必须核验最终goal严格为null，才可报告清理成功。未完成事项留在交接供08点新Goal接续，06点后不得继续前夜施工或重建前夜Goal。严禁update_goal伪造complete代替清理，严禁修改私有数据库/锁或删除聊天历史，严禁改业务数据/账本/游标。不要停止原业务主任或浏览器，不改变正常工作流排班。若官方clear失败，只读回读一次确认真实状态，立即报告具体失败及08点新Goal受阻风险，不能声称已清理，不能循环重试或私改状态。无正常变化保持安静，不发群消息；每日08点启动和22点维护自动化保持原样。",
+      "status": "ACTIVE",
+      "rrule": "FREQ=DAILY;BYHOUR=6;BYMINUTE=0;BYSECOND=0",
+      "target_thread_id": "01a18298-0a79-7481-b24a-0b1743a38edf",
+      "created_at": 1793032471698,
+      "updated_at": 1793193583045
+    },
+    {
+      "version": 1,
+      "id": "20",
+      "kind": "heartbeat",
+      "name": "臻肆20点台账后遗留收口与明日全流程预检",
+      "prompt": "每天北京时间20:00，在本聊天按顺序执行 /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/docs/operations/每日2000台账后收口与新对话交接制度.md。先完整读取仓内监理Skill、企业微信UI岗位约定、最新用户约束和当日交接。不得调换下面的顺序。\n\n1）先核实当日原工作台账已经真实送达；未发时记待前置，不擅自发台账或越过前置。若当日台账晚发，由本聊天现有Goal在送达后顺延接续，不等次日20点、不创建重复定时。\n2）完整梳理今日遗留清单：证据、根因/未知点、影响、优先级、已修/待修/待真实验收和下一步。用户业务确认与技术证据分开留痕，不改原unknown。原图片合规实际单次提交且同日群/载荷/绑定/数量/空框证据完整时，按长期授权记客户业务完成，技术回执缺失仅内部备注，不再每日人工确认、不设日期白名单，且不重发；未尝试、零提交、真实失败或错群错图仍不能算完成。\n3）完善和修复：先方案、最小修改、自测、一致性/风险与原门核验，及时全部commit/push。不仅记录失败，不放松原授权、防重和真实验收条件。\n4）明日全流程预检：逐流核对最新排班/依赖、业务日期和数据范围、全量来源/分页/字段/模板、解释器/共享库/release policy、新日事件/旧unknown隔离、原主任/真实锁/四岗登录与业务正文/原企微队列/目录和有界恢复，优先08至10点。2026-10-28当日24流、2026-10-29起27流，后续以最新用户口径和班表为准。尚未产生的数据列到点新鲜度核验，不用旧日样本伪通过，不提前明日生产。商家经营指标、优惠券、巡店三流由另一台电脑执行，本机只记归属和已提供摘要，不采集其数据、不修改其代码/状态/排班、不接管或重复执行。\n5）按 docs/operations/监理新对话交接模板.md 保存全部工作与证据：完整原Goal objective和真实status、最新覆盖约束、所有已完成/未完成/待真实验收项、源数据/状态/队列/账本/游标/防重、代码/测试/部署/回滚/远端、运行环境、全部定时清单与下一行动。写当日交接和目标日期runtime/state/next-day-preflight，更新latest并push。不能只让接班者看旧聊天，也不能遗漏待办。\n6）最后每天用create_thread新建当前项目的干净新聊天，不fork巨大历史。先list_projects确定当前仓库；新聊天只读核收完整交接，未获接班信号不创建Goal、不生产。收到核收后，用户已明确授权Goal迁移：原active未完成Goal保存完整objective并停止本聊天施工，通过官方app-server thread/goal/clear（实际旧threadId、origin=user）及thread/goal/get核验旧Goal严格null；再发信号让新聊天以完整原objective创建Goal、不设token_budget，未知结果先回读。核验新Goal真实active、旧Goal仍null，不伪complete、不用私有DB或锁、不双执行。明确暂停Goal不得借迁移恢复，null/complete原目标不重建为未完成。\n7）新聊天接续确认后，用automation_update把本监理拥有的全部定时任务迁到新threadId，包括本20点任务自身；每日完整发现归属项，当前02/06/08/20/22共5项，不遗漏其他本监理项。保持所有时间/时区/启停/通知/其他设置，替换targetThreadId及prompt内旧threadId，尤其06点Goal清理对象；逐一回读保存映射。不能移动无关或另一电脑任务、不能激活历史暂停项或新增重复排班。新聊天带全部工作继续执行，不等用户再次说开始；旧聊天仅核验交接，不再并行施工。操作失败如实留证，不宣称已接班。\n\n全程生产只原主任/control/适配器/队列/账本；企微仅System Events原生UI树及可见操作，禁止共享/截图坐标/注入/AXValue/隐藏发送/试探控制键；attempted或unknown只读不重发、不换事件、不伪verified。不读凭据/Cookie/localStorage或认证API，不重启Chrome、不抢活锁、不发群告警。真实扫码/验证码/账号风险等只在本聊天说明，独立授权工作继续。待未来数据、自然真实验收或外部条件的事项完整携带交接，不能因未修完而漏掉每日新聊天，也不能伪造修复完成。原22维护/06硬截止/08启动职责和时刻保持，06前留足交接时间，06后不继续前夜施工。无变化保持安静，只报告有意义进展、真实失败或必要用户动作。",
+      "status": "ACTIVE",
+      "rrule": "FREQ=DAILY;BYHOUR=20;BYMINUTE=0;BYSECOND=0",
+      "target_thread_id": "01a18298-0a79-7481-b24a-0b1743a38edf",
+      "created_at": 1793188130116,
+      "updated_at": 1793193583279
+    },
+    {
+      "version": 1,
+      "id": "22-im",
+      "kind": "heartbeat",
+      "name": "臻肆22点四浏览器保活与IM复位",
+      "prompt": "每天北京时间22:00，在本聊天执行 /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/docs/operations/每日2200浏览器保活与IM复位.md，并先完整读取监理Skill。先检查launchctl、daemon、live_steps和真实锁进程；岗位忙则跳过，不抢锁。同日2200收据已明确完成时只读复核，不重复复位。\n\n逐岗检查9230/9231/9232/9233真实业务域、页面响应、登录/验证码/可见遮罩；不读取凭据、Cookie或localStorage，不用认证API，不重启Chrome。9233仅在无任务、持原meituan-post租约且无验证阻碍时按先建后关：打开完整reception新页，内容级确认业务文本、无noPermission/登录失效/可见riskControlModal，再只关闭原美团域精确旧IM页，确认仅一个健康IM页。失败保留旧页，一轮最多一次，不关无关页，不把WorkBuddy登录页误判为美团掉线。\n\n写本地逐岗维护收据。禁止生产补跑、发送消息、回复客户、改账本或登录数据。正常无变化保持安静；扫码、验证码或无法安全解决的外部阻碍只在本聊天说明。",
+      "status": "ACTIVE",
+      "rrule": "FREQ=DAILY;BYHOUR=22;BYMINUTE=0;BYSECOND=0",
+      "target_thread_id": "01a18298-0a79-7481-b24a-0b1743a38edf",
+      "created_at": 1792850741742,
+      "updated_at": 1793193583509
+    },
+    {
+      "version": 1,
+      "id": "automation",
+      "kind": "heartbeat",
+      "name": "臻肆监理·08点启动当日Goal",
+      "prompt": "每天北京时间08:00，在本聊天启动臻肆当日监理持续Goal。先完整读取 /Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/mechanisms/zhensi-supervisor-patrol/SKILL.md、/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/docs/operations/每日0800监理启动与持续值守.md、企业微信UI岗位执行约定、最新排班与本聊天最新用户约束，并以Asia/Shanghai当天日期为准。\n\n首先调用get_goal：仅当返回null时才create_goal创建当天持续目标，不设置token_budget；若已有active Goal则复用并继续，若状态异常则如实核对，不擅自清除、伪complete或用新Goal覆盖未完成事项。06:00收口任务负责用户明确授权的前夜未完成Goal清理，08:00不得重复清理。创建或复用后立即执行，不等待用户再次说开始。\n\n08:00至08:20核对launchctl权威状态、daemon心跳、原control、真实锁进程、9230/9231/9232/9233业务域与登录态、本地企业微信原生UI岗位、原队列、业务日期、依赖与release policy；08:00 Top10按原排班执行，08:20负反馈及双Excel串行启动并在08:30前交付，08:30差评分析Excel与同数据长图按原流程执行，09:00合同流按新业务日期运行。新商家仅发“电销+直播攻坚组”，08:30至18:30每30分钟，有新增发商家信息，无新增固定发“当前无新增意向商家”，19:00停止。其他任务读取现行班表，不硬编码旧排班。\n\n一切生产动作只走原车间主任/control/适配器/队列/账本；企微仅用System Events原生UI树和可见操作，禁止共享、截图坐标、注入、隐藏发送、AXValue写入及试探控制键。attempted/unknown只读对账，已发或未知不重发，不改账本、游标、防重或旧日证据。客服只执行当前最新全量档，不逐档追历史。非登录态等可恢复问题当轮处理并盯收口；仅扫码、验证码、账号风险等真人障碍请求用户。当天末档、按最新用户口径与班表的全量台账及原发送证据全部核验后，且完整Goal其他要求都已完成才可complete；未到点、静态测试、配置GREEN或暂无任务都不算完成。无变化保持安静。\n\n最新长期规则：原图片已合规实际单次提交，且同日群/载荷/绑定/数量及空框证据完整时，客户业务按完成展示，无需每日人工确认、不设日期白名单；技术unknown仅内部备注、原件不改、不重发。零提交、未尝试、真实失败或错群错图不算完成。2026-10-28为24流、29日起全局27，后续按最新用户与班表；本机原24身份22现役，商家经营指标/优惠券/巡店三流由另一台电脑负责，只汇合已提供摘要，不检查源码/采集数据/修改状态排班或接管，跨机摘要缺失不阻断本机到点流。美团失效授权店按业务资格跳过，不负责恢复账号。完整遗留持续接续，20点按台账后制度完整交接到新聊天。",
+      "status": "ACTIVE",
+      "rrule": "FREQ=DAILY;BYHOUR=8;BYMINUTE=0;BYSECOND=0",
+      "target_thread_id": "01a18298-0a79-7481-b24a-0b1743a38edf",
+      "created_at": 1792802952319,
+      "updated_at": 1793193583966
+    }
+  ],
+  "promptChanges": "target ownership and embedded 06 ID; canonical warehouse Skill path; 08 dynamic ledger count and latest standing policy/remote ownership; schedule/status/notifications preserved"
+}
