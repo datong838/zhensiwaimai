@@ -13,3 +13,7 @@
 新增同目录 `native_image_copy_driver.py` 和 `test_native_image_copy_driver.py`。驱动没有CLI，构造不触碰UI或剪贴板；原worker在同一发送任务尚未写response时传入原队列目录。每次动作前复核原task完整绑定、目录taskId、owner-process、原claim worker及send-intent三项身份；已有response一律拒绝，不能借活owner回读旧任务。原UI树仅浅层读取当前尾行与精确标题/空框，文件卡文字不作为图片候选。复制继续调用候选JXA，禁止激活或按键。
 
 剪贴板驱动惰性加载AppKit，先清空并写nonce后才可发出原生复制；仅复制确认后且changeCount增长才读取PNG/TIFF，读取前后count不变才交像素比较，不读取原文字/旧类型列表、不保存原剪贴板。构造与隔离单测不调用真实UI。此批只补候选驱动，不修改共享摘要、生产任务、发送器或旧证据。正式接入仍待原worker受控安装和真实一次图片验收。
+
+候选接入函数放同目录 `native_image_copy_hook.py`：原15秒观察成功直接复用；仅捕获原 `NativeImageObservationPending` 的精确内容未暴露原因，且冻结异常内原候选message_path后才进入复制。后续每帧必须仍是此路径，不允许观察期结束后改绑另一条新消息。无新行、群/草稿变化、owner退出及其他异常不触发复制。新增hook单测及原发送器内存接入回归，不改磁盘现役发送器或摘要。
+
+原nativeDispatch在 `wecom_adapter.session` 的 `wecom-transport.lock` 内同步调用，task.owner.pid即当前发送Python进程。候选进一步硬核对owner.pid必须等于本驱动进程PID，活着的别的进程也不能借原任务复制；无CLI，不另起worker、不抢原锁。真实接入仅允许此同步原调用栈，不给历史任务开放外部诊断入口。

@@ -1,13 +1,14 @@
 """Uninstalled original-worker driver. No CLI, send, or ledger writer."""
 import hashlib
 import json
+import os
 from pathlib import Path
 import subprocess
 
 
 class CopyDriver:
     def __init__(self, folder, task, *, queue, native, owner_check, pasteboard=None,
-                 runner=subprocess.run):
+                 runner=subprocess.run, worker_pid=None):
         self.folder = Path(folder).resolve()
         self.queue = Path(queue).resolve()
         self.task = json.loads(json.dumps(task))
@@ -15,6 +16,7 @@ class CopyDriver:
         self.owner_check = owner_check
         self._pasteboard = pasteboard
         self.runner = runner
+        self.worker_pid = os.getpid() if worker_pid is None else worker_pid
         self.seed_count = None
         self.copy_confirmed = False
 
@@ -26,6 +28,7 @@ class CopyDriver:
             if (self.folder.parent != self.queue or self.folder.name != task_id
                     or self.task.get('taskId') != task_id
                     or self.task.get('lifetime') != 'owner-process'
+                    or self.task.get('owner', {}).get('pid') != self.worker_pid
                     or self.owner_active(self.task['owner']) is not True
                     or (self.folder / 'response.json').exists()):
                 return False

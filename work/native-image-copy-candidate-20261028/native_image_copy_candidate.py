@@ -21,7 +21,7 @@ def pixels(data):
         return {'width': rgba.width, 'height': rgba.height, 'rgbaSha256': sha(rgba.tobytes())}
 
 
-def verify_copies(task, original, baseline_count, driver):
+def verify_copies(task, original, baseline_count, driver, *, expected_path=None):
     bare = {k: v for k, v in task.items() if k != 'binding'}
     binding = sha(json.dumps(bare, sort_keys=True, ensure_ascii=False).encode())
     item = task.get('item', {})
@@ -32,7 +32,10 @@ def verify_copies(task, original, baseline_count, driver):
         raise ValueError('candidate-image-task-or-source-invalid')
     source_pixels = pixels(original)
     group = task['request']['groupName']
-    expected_row = None
+    if expected_path is not None and (not isinstance(expected_path, list) or not expected_path
+            or any(type(i) is not int or i < 0 for i in expected_path)):
+        raise ValueError('candidate-original-image-row-invalid')
+    expected_row = list(expected_path) if expected_path is not None else None
 
     def check():
         nonlocal expected_row

@@ -1,0 +1,52 @@
+{
+  "at": "2026-10-28T13:22:46.032981+08:00",
+  "installed": false,
+  "sendAttempts": 0,
+  "liveCopyAttempts": 0,
+  "ledgerModified": false,
+  "candidateTests": 27,
+  "sharedOriginalTests": 432,
+  "originalMediaIntegration": "same original send_media in memory; one composer submission; two pixel frames; original validate_response passed; all UI mocked",
+  "newGates": [
+    "fixed pending message_path before fallback; later tail row cannot replace it",
+    "owner.pid must equal current original Python worker; active other owner cannot be borrowed"
+  ],
+  "originalFiles": [
+    {
+      "path": "skills/wechat-messaging/scripts/native_ui_post.py",
+      "sha256": "d7f686a1d2815191ac69c580cdba642488de8bfe031521337dda7ee66a8a9555",
+      "unchanged": true
+    },
+    {
+      "path": "skills/wechat-messaging/scripts/native_ui_tree.py",
+      "sha256": "89d6e21e6f3303eca512154994ae03ffc7716908ffd1f4b3476a45b5dd4b66a7",
+      "unchanged": true
+    },
+    {
+      "path": "skills/wechat-messaging/scripts/native_ui_tree.jxa",
+      "sha256": "bba531ba0fed9b84f82f57146dae4dee70afea75b30f1d467c0a359fe2d9b8e6",
+      "unchanged": true
+    },
+    {
+      "path": "skills/wechat-messaging/dependencies.json",
+      "sha256": "c93a7f8849c63966bca5a940c4a91a0e212f08af6a76be4d5e8aa8fb9eb3ffef",
+      "unchanged": true
+    },
+    {
+      "path": "skills/workflows/daily-agent-new-merchants-to-wechat/executor-lock.json",
+      "sha256": "f4a4033d3af42fa7c48ff004a5f4a2729d028757384bdc9daef750c618c68bde",
+      "unchanged": true
+    },
+    {
+      "path": "skills/workflows/daily-top10-to-wechat-group/runtime-policy.json",
+      "sha256": "ea540c7232434882244b15a87e6aec47340634068f20eef22184039ce9d0725a",
+      "unchanged": true
+    },
+    {
+      "path": "skills/workflows/daily-negative-reviews/runtime-policy.json",
+      "sha256": "421cc83a744af2d68dce68821a0646223b23c575027cb23fe511f103a59b93bb",
+      "unchanged": true
+    }
+  ],
+  "next": "controlled shared install and all consumers digest sync followed by real original image acceptance; never use historical terminal tasks"
+}

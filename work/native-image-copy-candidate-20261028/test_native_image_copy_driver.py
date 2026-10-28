@@ -56,7 +56,7 @@ class DriverTests(unittest.TestCase):
             return SimpleNamespace(stdout=json.dumps({'backend': 'system-events-ui-tree',
                 'copied': True, 'rowPath': payload['rowPath'], 'menuShortcut': 'C', 'menuModifiers': 0}))
         self.driver = CopyDriver(self.folder, self.task, queue=self.queue, native=None,
-            owner_check=lambda _: self.active, pasteboard=self.pb, runner=runner)
+            owner_check=lambda _: self.active, pasteboard=self.pb, runner=runner, worker_pid=1)
         self.driver.paths = {'messagesPath': [0], 'titlePath': [1], 'composerPath': [2]}
     def write(self, name, value):
         (self.folder / name).write_text(json.dumps(value))
@@ -141,6 +141,12 @@ class DriverTests(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, 'intent-mismatch'):
             self.driver.snapshot()
         self.assertEqual(self.calls, 0)
+    def test_other_process_cannot_borrow_even_live_original_owner(self):
+        self.driver.worker_pid = 2
+        self.assertFalse(self.matches())
+        with self.assertRaisesRegex(RuntimeError, 'intent-mismatch'):
+            self.driver.seed_nonce('zhensi-image-readback-test')
+        self.assertEqual(self.pb.count, 0)
 
 
 if __name__ == '__main__':
