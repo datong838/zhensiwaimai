@@ -160,28 +160,49 @@ export async function collectAllCards(page) {
     const seen = new Set();
     const order = [];
     const collect = () => {
+      const visibleIds = [];
       for (const el of document.querySelectorAll("[class*='sessionListItemContainer']")) {
         const t = norm(el.innerText);
         const sessionId = el.id;
         if (!/^\d{19}$/.test(sessionId)) throw Error("customer-session-id-unavailable");
+        visibleIds.push(sessionId);
         if (t && !seen.has(sessionId)) { seen.add(sessionId); order.push({ sessionId, text: t }); }
       }
+      return visibleIds.join('|');
     };
-    collect();
     if (sc) {
       const startTop = sc.scrollTop;
       let guard = 0;
-      const step = Math.max(200, Math.floor(sc.clientHeight * 0.8));
-      while (sc.scrollTop + sc.clientHeight < sc.scrollHeight - 5 && guard < 300) {
-        sc.scrollTop = Math.min(sc.scrollTop + step, sc.scrollHeight);
+      if (!Number.isFinite(sc.clientHeight) || sc.clientHeight <= 0) throw Error("customer-list-viewport-unavailable");
+      const step = Math.max(1, Math.floor(sc.clientHeight * 0.8));
+      let complete = false;
+      const atBottom = () => sc.scrollTop + sc.clientHeight >= sc.scrollHeight - 5;
+      try {
+        sc.scrollTop = 0;
         await new Promise((r) => setTimeout(r, 300));
+        if (sc.scrollTop !== 0) throw Error("customer-list-start-not-top");
         collect();
-        guard++;
+        while (guard < 300) {
+          guard++;
+          if (atBottom()) {
+            const height = sc.scrollHeight;
+            const signature = collect();
+            await new Promise((r) => setTimeout(r, 500));
+            const after = collect();
+            if (atBottom() && sc.scrollHeight === height && after === signature) { complete = true; break; }
+          } else {
+            const previousTop = sc.scrollTop;
+            sc.scrollTop = Math.min(sc.scrollTop + step, sc.scrollHeight);
+            await new Promise((r) => setTimeout(r, 300));
+            collect();
+            if (sc.scrollTop <= previousTop && !atBottom()) throw Error("customer-list-scroll-stalled");
+          }
+        }
+        if (!complete) throw Error("customer-list-scan-incomplete");
+      } finally {
+        sc.scrollTop = startTop; // Restore the original viewport even after a failed scan.
       }
-      await new Promise((r) => setTimeout(r, 500));
-      collect();
-      sc.scrollTop = startTop; // 复位视点，避免留下滚动副作用
-    }
+    } else collect();
     return order;
   });
 }
