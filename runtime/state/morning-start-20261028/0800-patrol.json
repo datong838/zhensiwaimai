@@ -1,0 +1,239 @@
+{
+ "patrol_at": "2026-10-28T08:01:18",
+ "phase": "business",
+ "verdict": "YELLOW",
+ "findings": [
+  {
+   "level": "YELLOW",
+   "area": "flows",
+   "code": "flows-not-green",
+   "detail": "当日未全绿，未完成 22 条：contract-termination-applications-screenshot, daily-agent-new-merchants-to-wechat, daily-jinsha-reports-to-business-wechat, daily-meituan-income-top10-to-wechat, daily-negative-reviews, daily-new-stor",
+   "suggest": "逐条定性（是否在 cadence 内、是否已排下一档），真故障才上报车间"
+  },
+  {
+   "level": "YELLOW",
+   "area": "flows",
+   "code": "cycle-non-success",
+   "detail": "守护最近周期非 SUCCESS：{\"daily-agent-new-merchants-to-wechat\": \"PENDING\", \"negative-feedback-list-appeals-0930\": \"PENDING\", \"negative-feedback-list-appeals-1230\": \"PENDING\", \"meituan-intelligent-customer-service-12\": \"PENDI",
+   "suggest": "看对应 run 的 step1.log 定失败码，别按报错文案直接猜修"
+  },
+  {
+   "level": "YELLOW",
+   "area": "chrome",
+   "code": "duplicate-page:9230",
+   "detail": "taobao-brand(:9230) 业务页重复：{\"https://melody.shop.ele.me/app/chain/95708808/dashboard\": 2}",
+   "suggest": "多开页会残留 task marker/占资源；清 window.name 并关掉多余页（勿新开页排查）"
+  },
+  {
+   "level": "YELLOW",
+   "area": "chrome",
+   "code": "duplicate-page:9232",
+   "detail": "jinsha-business(:9232) 业务页重复：{\"https://data.guoshuyufen.com/\": 2}",
+   "suggest": "多开页会残留 task marker/占资源；清 window.name 并关掉多余页（勿新开页排查）"
+  }
+ ],
+ "snapshot": {
+  "check_daemon": {
+   "daemon": {
+    "pid": 55035,
+    "started_at": "2026-10-28T02:33:38",
+    "last_cycle_at": "2026-10-28T08:00:02",
+    "status": "running",
+    "next_cycle_at": "2026-10-28T08:30:02"
+   },
+   "daemon_pid_alive": true,
+   "daemon_lag_min": 1.3,
+   "next_cycle_at": "2026-10-28T08:30:02"
+  },
+  "check_flows": {
+   "all_green": false,
+   "date": "2026-10-28",
+   "pending_count": 22,
+   "pending": [
+    {
+     "name": "daily-agent-new-merchants-to-wechat",
+     "reason": "排班未到点"
+    },
+    {
+     "name": "negative-feedback-list-appeals-0930",
+     "reason": "排班未到点"
+    },
+    {
+     "name": "negative-feedback-list-appeals-1230",
+     "reason": "排班未到点"
+    },
+    {
+     "name": "meituan-intelligent-customer-service-12",
+     "reason": "排班未到点"
+    },
+    {
+     "name": "meituan-intelligent-customer-service-15",
+     "reason": "排班未到点"
+    },
+    {
+     "name": "meituan-intelligent-customer-service",
+     "reason": "排班未到点"
+    },
+    {
+     "name": "daily-quality-products-optimization",
+     "reason": "排班未到点"
+    },
+    {
+     "name": "meituan-waimai-negative-review-appeals-11",
+     "reason": "排班未到点"
+    },
+    {
+     "name": "taobao-flash-sale-negative-review-appeals",
+     "reason": "排班未到点"
+    },
+    {
+     "name": "daily-new-stores-opening-to-wechat",
+     "reason": "排班未到点"
+    },
+    {
+     "name": "daily-new-stores-activity-audit-to-wechat",
+     "reason": "排班未到点"
+    },
+    {
+     "name": "daily-new-stores-decoration-audit-to-wechat",
+     "reason": "排班未到点"
+    },
+    {
+     "name": "daily-new-stores-not-nourished-ops-to-wechat",
+     "reason": "排班未到点"
+    },
+    {
+     "name": "daily-store-task-completion-ops-to-wechat",
+     "reason": "排班未到点"
+    },
+    {
+     "name": "daily-store-basic-diagnosis-to-wechat",
+     "reason": "排班未到点"
+    },
+    {
+     "name": "daily-taobao-download-to-jinsha",
+     "reason": "排班未到点"
+    },
+    {
+     "name": "daily-service-market-ranking-to-wechat",
+     "reason": "排班未到点"
+    },
+    {
+     "name": "daily-meituan-income-top10-to-wechat",
+     "reason": "RECOVERABLE"
+    },
+    {
+     "name": "daily-top10-to-wechat-group",
+     "reason": "RECOVERABLE"
+    },
+    {
+     "name": "daily-negative-reviews",
+     "reason": "排班未到点"
+    },
+    {
+     "name": "contract-termination-applications-screenshot",
+     "reason": "排班未到点"
+    },
+    {
+     "name": "daily-jinsha-reports-to-business-wechat",
+     "reason": "排班未到点"
+    }
+   ]
+  },
+  "check_last_cycle": {
+   "all_green": false,
+   "checked_at": "2026-10-28T08:00:34",
+   "non_success": {
+    "daily-agent-new-merchants-to-wechat": "PENDING",
+    "negative-feedback-list-appeals-0930": "PENDING",
+    "negative-feedback-list-appeals-1230": "PENDING",
+    "meituan-intelligent-customer-service-12": "PENDING",
+    "meituan-intelligent-customer-service-15": "PENDING",
+    "meituan-intelligent-customer-service": "PENDING",
+    "daily-quality-products-optimization": "PENDING",
+    "meituan-waimai-negative-review-appeals-11": "PENDING",
+    "taobao-flash-sale-negative-review-appeals": "PENDING",
+    "daily-new-stores-opening-to-wechat": "PENDING",
+    "daily-new-stores-activity-audit-to-wechat": "PENDING",
+    "daily-new-stores-decoration-audit-to-wechat": "PENDING",
+    "daily-new-stores-not-nourished-ops-to-wechat": "PENDING",
+    "daily-store-task-completion-ops-to-wechat": "PENDING",
+    "daily-store-basic-diagnosis-to-wechat": "PENDING",
+    "daily-taobao-download-to-jinsha": "PENDING",
+    "daily-service-market-ranking-to-wechat": "PENDING",
+    "daily-top10-to-wechat-group": "RECOVERABLE",
+    "daily-meituan-income-top10-to-wechat": "RECOVERABLE",
+    "daily-negative-reviews": "PENDING",
+    "contract-termination-applications-screenshot": "PENDING",
+    "daily-jinsha-reports-to-business-wechat": "PENDING"
+   }
+  },
+  "check_chrome": {
+   "ports": {
+    "9230": {
+     "name": "taobao-brand",
+     "page_count": 2,
+     "login_pages": 0,
+     "error": null,
+     "urls": [
+      "https://melody.shop.ele.me/app/chain/95708808/dashboard#app.chainshop.dashboard",
+      "https://melody.shop.ele.me/app/chain/95708808/dashboard#app.chainshop.dashboard"
+     ]
+    },
+    "9231": {
+     "name": "taobao-agent-service",
+     "page_count": 1,
+     "login_pages": 0,
+     "error": null,
+     "urls": [
+      "https://open.shop.ele.me/manager/base/home"
+     ]
+    },
+    "9232": {
+     "name": "jinsha-business",
+     "page_count": 2,
+     "login_pages": 0,
+     "error": null,
+     "urls": [
+      "https://data.guoshuyufen.com/#/businessData/realTimeData",
+      "https://data.guoshuyufen.com/#/negativeAnalyse"
+     ]
+    },
+    "9233": {
+     "name": "meituan-im",
+     "page_count": 21,
+     "login_pages": 0,
+     "error": null,
+     "urls": [
+      "https://waimaie.meituan.com/imworkbench/home?appId=4&clientType=140006#/im/page/workbench/reception",
+      "https://www.workbuddy.cn/login/?platform=workbuddy&state=a1378283-7a97-4b26-83ad-dfc66b245e6c&versio",
+      "https://www.workbuddy.cn/login/?platform=workbuddy&state=b9a06eb9-1749-4a45-abf8-4bcf90d0a76c&versio",
+      "https://www.workbuddy.cn/login/?platform=workbuddy&state=4649c046-c024-4616-ad3b-0a80317a8025&versio",
+      "https://www.workbuddy.cn/login/?platform=workbuddy&state=d460a5bb-1bdd-46d7-84db-e824c9483567&versio",
+      "https://www.workbuddy.cn/login/?platform=workbuddy&state=a79d1c5d-baa4-4619-a858-b39cca636e32&versio"
+     ],
+     "ignored_non_business_login_pages": 15
+    }
+   }
+  },
+  "check_outbound": {
+   "by_type": {},
+   "attempted_unverified": []
+  },
+  "check_marker_deadlocks": {
+   "scanned": 0,
+   "stuck": []
+  },
+  "check_popup": {
+   "checked": true,
+   "port": 9232,
+   "overlays": 0,
+   "unknown": [],
+   "skipped": null
+  },
+  "check_alerts": {
+   "today_total": 0,
+   "by_category": {}
+  }
+ }
+}

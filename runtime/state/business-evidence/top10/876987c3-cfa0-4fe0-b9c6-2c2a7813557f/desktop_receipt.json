@@ -1,0 +1,131 @@
+{
+  "ok": true,
+  "executor": "desktop",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-brand",
+  "port": 9230,
+  "taskId": "top10-876987c3-cfa0-4fe0-b9c6-2c2a7813557f",
+  "runId": "876987c3-cfa0-4fe0-b9c6-2c2a7813557f",
+  "stageMs": {
+    "background_preflight": 101,
+    "open_home": 1188,
+    "dismiss_known_notice": 494,
+    "navigate_store_analysis": 495,
+    "select_yesterday": 339,
+    "ensure_income_metric": 1144,
+    "verify_sort": 650,
+    "capture_self_check": 2973
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "open_home": "PASS",
+    "dismiss_known_notice": "PASS",
+    "navigate_store_analysis": "PASS",
+    "select_yesterday": "PASS",
+    "ensure_income_metric": "PASS",
+    "verify_sort": "PASS",
+    "capture_self_check": "PASS"
+  },
+  "retryCount": 1,
+  "sendAttempts": 0,
+  "runtimeModelDecisions": 0,
+  "receiptFile": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/business-evidence/top10/876987c3-cfa0-4fe0-b9c6-2c2a7813557f/desktop_receipt.json",
+  "stage": "capture_self_check",
+  "startedAt": 1793145838268,
+  "deadlineAt": 1793146018268,
+  "dataDate": "2026-10-27",
+  "deviceScaleFactor": 2,
+  "homeUrl": "https://melody.shop.ele.me/app/chain/95708808/dashboard#app.chainshop.dashboard",
+  "knownNotice": "DISMISSED",
+  "storeUrl": "https://melody.shop.ele.me/app/chain/95708808/store-analysis#app.chainshop.store-analysis?path=1&dateType=realTime&orderCol=valid_ord_amt&orderType=DESC",
+  "incomeMetricSelection": "ADDED_INCOME_ONLY",
+  "incomeHeader": "收入",
+  "sortMetric": "income-amount",
+  "sortDirection": "descending",
+  "incomeVisibility": {
+    "ok": true,
+    "left": 1204.921875,
+    "right": 1311.71875,
+    "visible": {
+      "left": 621,
+      "right": 1328
+    },
+    "scrollLeft": 54
+  },
+  "captureGeometry": {
+    "viewport": {
+      "width": 2200,
+      "height": 1800
+    },
+    "tableBox": {
+      "x": 652,
+      "y": 621.421875,
+      "width": 1120,
+      "height": 822.40625
+    },
+    "pagerBox": {
+      "x": 1188.296875,
+      "y": 1459.828125,
+      "width": 583.703125,
+      "height": 32
+    },
+    "clip": {
+      "x": 652,
+      "y": 621,
+      "width": 1120,
+      "height": 878
+    }
+  },
+  "captureScale": 1,
+  "file": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/business-evidence/top10/876987c3-cfa0-4fe0-b9c6-2c2a7813557f/2026-10-27_top10seller.png",
+  "width": 2240,
+  "height": 1756,
+  "sha256": "cf23c48ee56557e61c00c3b2f1afba221b802a3c3a2aa5d9c672dd0ef19e1718",
+  "stores": [
+    "味之绝·美蛙鱼头火锅(亚新广场店)",
+    "味之绝美蛙鱼火锅(周浦万达店)",
+    "味之绝热血美蛙鱼头火锅(五角场万达店)",
+    "文兴酒家(久光百货店)",
+    "甬潮·宁波小市(静安大融城店)",
+    "毛家湘菜馆(人民广场店)",
+    "严二嬢鲜鱼火锅(北蔡店)",
+    "繁花肴(缤谷广场店)",
+    "湘味小厨(活力城店)",
+    "甬潮·宁波小市(新邻店)"
+  ],
+  "incomes": [
+    5156.86,
+    3768.13,
+    3563.42,
+    3512.34,
+    3446.76,
+    3441.67,
+    2985.41,
+    2940.91,
+    2939.4,
+    2806.72
+  ],
+  "revenues": [
+    11958.4,
+    9835.2,
+    7825.2,
+    5837.9,
+    5666,
+    10073.14,
+    5919.4,
+    5418.8,
+    6634.21,
+    4638
+  ],
+  "page": 1,
+  "pageSize": 10,
+  "layout": "background-table-and-pagination",
+  "capture": {
+    "x": 652,
+    "y": 621,
+    "width": 1120,
+    "height": 878
+  },
+  "cleanupStatus": "completed",
+  "elapsedMs": 7308
+}

@@ -1,0 +1,67 @@
+{
+  "ok": false,
+  "executor": "workflow",
+  "runId": "f31f781c-f033-4af8-bcba-9ad0f60cf798",
+  "sendAttempts": 0,
+  "preflightMs": 5914,
+  "runtimeModelDecisions": 0,
+  "receiptFile": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-top10-to-wechat-group/.runtime/workflow-runs/f31f781c-f033-4af8-bcba-9ad0f60cf798/workflow_receipt.json",
+  "runtimePolicy": {
+    "policyId": "daily-top10-desktop-v1",
+    "browserProfile": "taobao-brand",
+    "browserPort": 9230,
+    "wechatChannel": "desktop",
+    "validatedFileCount": 8
+  },
+  "mode": "execute",
+  "windowsWechatPreflight": {
+    "ok": true,
+    "reason": null,
+    "candidateStrategy": null,
+    "resolvedGroup": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰"
+  },
+  "wechatGuard": {
+    "lockPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/legacy-app-controler/wechat-desktop-control/.runtime/wechat-ui-interaction.lock",
+    "lockWaitMs": 1,
+    "lockWaitCycles": 0,
+    "contentionWaitMs": 5000,
+    "contentionChecks": 2,
+    "stableChecksRequired": 2,
+    "acquired": true,
+    "released": true
+  },
+  "wechatChannel": "desktop",
+  "desktopRunId": "cd427b47-cb07-4742-9d12-f7c553a1fad8",
+  "desktop": {
+    "ok": false,
+    "executor": "desktop",
+    "browserController": "control-background-dedicated-chrome",
+    "profile": "taobao-brand",
+    "port": 9230,
+    "taskId": "top10-cd427b47-cb07-4742-9d12-f7c553a1fad8",
+    "runId": "cd427b47-cb07-4742-9d12-f7c553a1fad8",
+    "stageMs": {
+      "background_preflight": 101,
+      "open_home": 10321
+    },
+    "stageResults": {
+      "background_preflight": "PASS",
+      "open_home": "FAIL"
+    },
+    "retryCount": 0,
+    "sendAttempts": 0,
+    "runtimeModelDecisions": 0,
+    "receiptFile": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/business-evidence/top10/cd427b47-cb07-4742-9d12-f7c553a1fad8/desktop_receipt.json",
+    "stage": "open_home",
+    "startedAt": 1793145611733,
+    "deadlineAt": 1793145791733,
+    "dataDate": "2026-10-27",
+    "deviceScaleFactor": 2,
+    "reason": "page.goto: net::ERR_CONNECTION_CLOSED at https://melody.shop.ele.me/app/chain/95708808/dashboard#app.chainshop.dashboard\nCall log:\n  - navigating to \"https://melody.shop.ele.me/app/chain/95708808/dashboard#app.chainshop.dashboard\", waiting until \"domcontentloaded\"\n",
+    "cleanupStatus": "failed",
+    "cleanupReason": "page.evaluate: Execution context was destroyed, most likely because of a navigation",
+    "elapsedMs": 10374
+  },
+  "reason": "desktop:page.goto: net::ERR_CONNECTION_CLOSED at https://melody.shop.ele.me/app/chain/95708808/dashboard#app.chainshop.dashboard\nCall log:\n  - navigating to \"https://melody.shop.ele.me/app/chain/95708808/dashboard#app.chainshop.dashboard\", waiting until \"domcontentloaded\"\n",
+  "wallMs": 16738
+}
