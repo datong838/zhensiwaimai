@@ -1,0 +1,15 @@
+{
+  "targetRunDay": "2026-10-29",
+  "negativeReviewBusinessDay": "2026-10-28",
+  "currentNegativeReviewAllowedDate": "2026-10-27",
+  "negativeReviewStatus": "UNSEALED_ACCEPTANCE",
+  "negativeReviewCarryForward": "original executor execute() invokes original maintenance only for a new business day after absence checks; do not prewrite future date",
+  "merchantStatus": "SEALED",
+  "merchantOldAcceptanceExpiryIsNotActiveGate": true,
+  "merchantOriginalVerify": "new-merchant-original-integrity.json",
+  "businessPolicyDateWhitelist": false,
+  "businessPolicyDailyHumanConfirmationRequired": false,
+  "futureDataPrepared": false,
+  "productionActions": 0,
+  "remaining": "original release checks and new-day dynamic source acceptance remain; current static checks do not guarantee future success"
+}
