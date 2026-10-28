@@ -1,0 +1,705 @@
+{
+  "observedAt": "2026-10-28T15:43:06.160971+08:00",
+  "scope": "read-only source and declared file hash audit; not full business logic review or release authorization",
+  "manifestSha256": "21917feccec65a33e71a44c9cc3b817a9318173a10e63d85bc981cff6996b9dd",
+  "ledger": [
+    {
+      "row": 1,
+      "skill": "daily-agent-new-merchants-to-wechat",
+      "enabled": true,
+      "consolidatedInto": null,
+      "schedule": "每30分钟 08:30–18:30；19:00停止；有新增发商家信息，无新增发当前无新增意向商家",
+      "cwdExists": true
+    },
+    {
+      "row": 2,
+      "skill": "daily-top10-to-wechat-group",
+      "enabled": true,
+      "consolidatedInto": null,
+      "schedule": "每日08:00",
+      "cwdExists": true
+    },
+    {
+      "row": 3,
+      "skill": "negative-feedback-list-appeals-0930",
+      "enabled": true,
+      "consolidatedInto": null,
+      "schedule": "每日08:20执行，08:30前交付",
+      "cwdExists": true
+    },
+    {
+      "row": 4,
+      "skill": "negative-feedback-list-appeals-1230",
+      "enabled": true,
+      "consolidatedInto": null,
+      "schedule": "每日08:20执行，08:30前交付",
+      "cwdExists": true
+    },
+    {
+      "row": 5,
+      "skill": "daily-negative-reviews",
+      "enabled": true,
+      "consolidatedInto": null,
+      "schedule": "每日08:30",
+      "cwdExists": true
+    },
+    {
+      "row": 6,
+      "skill": "contract-termination-applications-screenshot",
+      "enabled": true,
+      "consolidatedInto": null,
+      "schedule": "每日09:00",
+      "cwdExists": true
+    },
+    {
+      "row": 7,
+      "skill": "daily-new-stores-opening-to-wechat",
+      "enabled": true,
+      "consolidatedInto": null,
+      "schedule": "每日10:00",
+      "cwdExists": true
+    },
+    {
+      "row": 8,
+      "skill": "daily-jinsha-reports-to-business-wechat",
+      "enabled": true,
+      "consolidatedInto": null,
+      "schedule": "每日11:00",
+      "cwdExists": true
+    },
+    {
+      "row": 9,
+      "skill": "daily-new-stores-activity-audit-to-wechat",
+      "enabled": true,
+      "consolidatedInto": null,
+      "schedule": "每日11:00",
+      "cwdExists": true
+    },
+    {
+      "row": 10,
+      "skill": "daily-store-basic-diagnosis-to-wechat",
+      "enabled": true,
+      "consolidatedInto": null,
+      "schedule": "每日11:18",
+      "cwdExists": true
+    },
+    {
+      "row": 11,
+      "skill": "taobao-shangou-negative-review-appeals",
+      "enabled": false,
+      "consolidatedInto": "taobao-flash-sale-negative-review-appeals",
+      "schedule": "已合并到下午四档，不单独排班",
+      "cwdExists": true
+    },
+    {
+      "row": 12,
+      "skill": "daily-new-stores-decoration-audit-to-wechat",
+      "enabled": true,
+      "consolidatedInto": null,
+      "schedule": "每日11:30",
+      "cwdExists": true
+    },
+    {
+      "row": 13,
+      "skill": "daily-new-stores-not-nourished-ops-to-wechat",
+      "enabled": true,
+      "consolidatedInto": null,
+      "schedule": "每日11:40",
+      "cwdExists": true
+    },
+    {
+      "row": 14,
+      "skill": "daily-store-task-completion-ops-to-wechat",
+      "enabled": true,
+      "consolidatedInto": null,
+      "schedule": "每日12:00",
+      "cwdExists": true
+    },
+    {
+      "row": 15,
+      "skill": "meituan-intelligent-customer-service-12",
+      "enabled": true,
+      "consolidatedInto": null,
+      "schedule": "每日12:00",
+      "cwdExists": true
+    },
+    {
+      "row": 16,
+      "skill": "taobao-flash-sale-negative-review-appeals",
+      "enabled": true,
+      "consolidatedInto": null,
+      "schedule": "每日13:00/15:00/17:00申诉；18:30收口汇总",
+      "cwdExists": true
+    },
+    {
+      "row": 17,
+      "skill": "daily-taobao-download-to-jinsha",
+      "enabled": true,
+      "consolidatedInto": null,
+      "schedule": "每日13:00",
+      "cwdExists": true
+    },
+    {
+      "row": 18,
+      "skill": "meituan-waimai-negative-review-appeals-11",
+      "enabled": true,
+      "consolidatedInto": null,
+      "schedule": "每日13:00/15:00/17:00申诉；18:30收口汇总",
+      "cwdExists": true
+    },
+    {
+      "row": 19,
+      "skill": "meituan-waimai-negative-review-appeals-1425",
+      "enabled": false,
+      "consolidatedInto": "meituan-waimai-negative-review-appeals-11",
+      "schedule": "已合并到下午四档，不单独排班",
+      "cwdExists": true
+    },
+    {
+      "row": 20,
+      "skill": "meituan-intelligent-customer-service-15",
+      "enabled": true,
+      "consolidatedInto": null,
+      "schedule": "每日15:00",
+      "cwdExists": true
+    },
+    {
+      "row": 21,
+      "skill": "meituan-intelligent-customer-service",
+      "enabled": true,
+      "consolidatedInto": null,
+      "schedule": "每日17:00（17:00结束后准备发文档）",
+      "cwdExists": true
+    },
+    {
+      "row": 22,
+      "skill": "daily-service-market-ranking-to-wechat",
+      "enabled": true,
+      "consolidatedInto": null,
+      "schedule": "每日10:00（首次上线当日补执行一次）",
+      "cwdExists": true
+    },
+    {
+      "row": 23,
+      "skill": "daily-meituan-income-top10-to-wechat",
+      "enabled": true,
+      "consolidatedInto": null,
+      "schedule": "每日08:00，与淘宝Top10串行",
+      "cwdExists": true
+    },
+    {
+      "row": 24,
+      "skill": "daily-quality-products-optimization",
+      "enabled": true,
+      "consolidatedInto": null,
+      "schedule": "每日17:00，美团17点客服后串行；未完成安全分段接续",
+      "cwdExists": true
+    }
+  ],
+  "sourceComparisons": [
+    {
+      "flow": "daily-top10-to-wechat-group",
+      "sourceChecks": [
+        {
+          "path": "skills/workflows/daily-top10-to-wechat-group/scripts/workflow_executor.py",
+          "previousSha256": "7bcdda2f87a011e8262075e55b41fea5cf22f13d6cebb53fc69bdba1a22b4251",
+          "currentSha256": "7bcdda2f87a011e8262075e55b41fea5cf22f13d6cebb53fc69bdba1a22b4251",
+          "changedSincePriorAudit": false
+        }
+      ]
+    },
+    {
+      "flow": "daily-negative-reviews",
+      "sourceChecks": [
+        {
+          "path": "skills/workflows/daily-negative-reviews/scripts/workflow_executor.mjs",
+          "previousSha256": "9b286a97caa463320009592573c92350598ba381eecd46f3df881d4f05320f86",
+          "currentSha256": "9b286a97caa463320009592573c92350598ba381eecd46f3df881d4f05320f86",
+          "changedSincePriorAudit": false
+        }
+      ]
+    },
+    {
+      "flow": "contract-termination-applications-screenshot",
+      "sourceChecks": [
+        {
+          "path": "skills/workflows/contract-termination-applications-screenshot/scripts/contract_termination_daily.py",
+          "previousSha256": "8aab35cddb8ea2baca503ed59d681892f345179a4d2462498abcd72cdc9925f4",
+          "currentSha256": "8aab35cddb8ea2baca503ed59d681892f345179a4d2462498abcd72cdc9925f4",
+          "changedSincePriorAudit": false
+        },
+        {
+          "path": "skills/workflows/contract-termination-applications-screenshot/scripts/contract_termination_workflow.py",
+          "previousSha256": "0462bbb45c34315394ff9b79afba1cb5ca7cf8f3599de8fb50fb8fd4228793a5",
+          "currentSha256": "c99866bc594eb391c5fcce137edbeab25b3be422f56b73d12caa64be008d31c7",
+          "changedSincePriorAudit": true,
+          "latestCommit": "c20a17c89803f88492d392923b029208d3e34b36 fix: require complete current-day contract capture before delivery"
+        }
+      ]
+    },
+    {
+      "flow": "daily-jinsha-reports-to-business-wechat",
+      "sourceChecks": [
+        {
+          "path": "skills/workflows/daily-jinsha-reports-to-business-wechat/scripts/business_workflow_executor.mjs",
+          "previousSha256": "0ef60163882972aa08f5cdd89f417d408e222a7c6c5b9439238cfb65e2e73a3a",
+          "currentSha256": "0ef60163882972aa08f5cdd89f417d408e222a7c6c5b9439238cfb65e2e73a3a",
+          "changedSincePriorAudit": false
+        }
+      ]
+    },
+    {
+      "flow": "daily-taobao-download-to-jinsha",
+      "sourceChecks": [
+        {
+          "path": "skills/workflows/daily-taobao-download-to-jinsha/scripts/entrypoint.mjs",
+          "previousSha256": "463ef5b34ea49d9e748c38231882791c84ee98ed31d7154c607b1850b54496a6",
+          "currentSha256": "463ef5b34ea49d9e748c38231882791c84ee98ed31d7154c607b1850b54496a6",
+          "changedSincePriorAudit": false
+        }
+      ]
+    },
+    {
+      "flow": "daily-agent-new-merchants-to-wechat",
+      "sourceChecks": [
+        {
+          "path": "skills/workflows/daily-agent-new-merchants-to-wechat/scripts/workflow_executor.py",
+          "previousSha256": "f7b97aea3878da11d06b667130eeebe9121c98fe0131552c9f598891805ca735",
+          "currentSha256": "f7b97aea3878da11d06b667130eeebe9121c98fe0131552c9f598891805ca735",
+          "changedSincePriorAudit": false
+        }
+      ]
+    },
+    {
+      "flow": "meituan-intelligent-customer-service-12",
+      "sourceChecks": [
+        {
+          "path": "skills/workflows/meituan-intelligent-customer-service/scripts/ensure_unanswered_queue.mjs",
+          "previousSha256": "de72df8fe8744b0a10e69821b860399a22cf7646dbb06ffcb3b158a915dd8d40",
+          "currentSha256": "de72df8fe8744b0a10e69821b860399a22cf7646dbb06ffcb3b158a915dd8d40",
+          "changedSincePriorAudit": false
+        },
+        {
+          "path": "skills/workflows/meituan-intelligent-customer-service/scripts/reply_unanswered_sessions.mjs",
+          "previousSha256": "65b45cdb3051b49bc1c42cdccf00cd5b5656f143313444756cc5f92829e62a8e",
+          "currentSha256": "00bd2b18f4a55258653c2d8230ffed6a280ea7254c1a6a664d37eb01d010d5e9",
+          "changedSincePriorAudit": true,
+          "latestCommit": "d53905df761fd96533daad6346df95fdf1e25821 修复客服虚拟列表屏幕外卡片漏检与完成状态"
+        },
+        {
+          "path": "skills/workflows/meituan-intelligent-customer-service/scripts/compile_daily_reply_xlsx.mjs",
+          "previousSha256": "11677ca65f59db27a4590930fd291963160b487f6037eea4f3ec6ddac84e9700",
+          "currentSha256": "11677ca65f59db27a4590930fd291963160b487f6037eea4f3ec6ddac84e9700",
+          "changedSincePriorAudit": false
+        },
+        {
+          "path": "skills/workflows/meituan-intelligent-customer-service/scripts/send_daily_reply_xlsx_to_wechat.mjs",
+          "previousSha256": "4ea46bc2354d5e92ff1f2c3b435e6efe600936e7f407daa6441819da61b197a5",
+          "currentSha256": "4ea46bc2354d5e92ff1f2c3b435e6efe600936e7f407daa6441819da61b197a5",
+          "changedSincePriorAudit": false
+        }
+      ]
+    },
+    {
+      "flow": "meituan-intelligent-customer-service-15",
+      "sourceChecks": [
+        {
+          "path": "skills/workflows/meituan-intelligent-customer-service/scripts/ensure_unanswered_queue.mjs",
+          "previousSha256": "de72df8fe8744b0a10e69821b860399a22cf7646dbb06ffcb3b158a915dd8d40",
+          "currentSha256": "de72df8fe8744b0a10e69821b860399a22cf7646dbb06ffcb3b158a915dd8d40",
+          "changedSincePriorAudit": false
+        },
+        {
+          "path": "skills/workflows/meituan-intelligent-customer-service/scripts/reply_unanswered_sessions.mjs",
+          "previousSha256": "65b45cdb3051b49bc1c42cdccf00cd5b5656f143313444756cc5f92829e62a8e",
+          "currentSha256": "00bd2b18f4a55258653c2d8230ffed6a280ea7254c1a6a664d37eb01d010d5e9",
+          "changedSincePriorAudit": true
+        },
+        {
+          "path": "skills/workflows/meituan-intelligent-customer-service/scripts/compile_daily_reply_xlsx.mjs",
+          "previousSha256": "11677ca65f59db27a4590930fd291963160b487f6037eea4f3ec6ddac84e9700",
+          "currentSha256": "11677ca65f59db27a4590930fd291963160b487f6037eea4f3ec6ddac84e9700",
+          "changedSincePriorAudit": false
+        },
+        {
+          "path": "skills/workflows/meituan-intelligent-customer-service/scripts/send_daily_reply_xlsx_to_wechat.mjs",
+          "previousSha256": "4ea46bc2354d5e92ff1f2c3b435e6efe600936e7f407daa6441819da61b197a5",
+          "currentSha256": "4ea46bc2354d5e92ff1f2c3b435e6efe600936e7f407daa6441819da61b197a5",
+          "changedSincePriorAudit": false
+        }
+      ]
+    },
+    {
+      "flow": "meituan-intelligent-customer-service",
+      "sourceChecks": [
+        {
+          "path": "skills/workflows/meituan-intelligent-customer-service/scripts/ensure_unanswered_queue.mjs",
+          "previousSha256": "de72df8fe8744b0a10e69821b860399a22cf7646dbb06ffcb3b158a915dd8d40",
+          "currentSha256": "de72df8fe8744b0a10e69821b860399a22cf7646dbb06ffcb3b158a915dd8d40",
+          "changedSincePriorAudit": false
+        },
+        {
+          "path": "skills/workflows/meituan-intelligent-customer-service/scripts/reply_unanswered_sessions.mjs",
+          "previousSha256": "65b45cdb3051b49bc1c42cdccf00cd5b5656f143313444756cc5f92829e62a8e",
+          "currentSha256": "00bd2b18f4a55258653c2d8230ffed6a280ea7254c1a6a664d37eb01d010d5e9",
+          "changedSincePriorAudit": true
+        },
+        {
+          "path": "skills/workflows/meituan-intelligent-customer-service/scripts/compile_daily_reply_xlsx.mjs",
+          "previousSha256": "11677ca65f59db27a4590930fd291963160b487f6037eea4f3ec6ddac84e9700",
+          "currentSha256": "11677ca65f59db27a4590930fd291963160b487f6037eea4f3ec6ddac84e9700",
+          "changedSincePriorAudit": false
+        },
+        {
+          "path": "skills/workflows/meituan-intelligent-customer-service/scripts/send_daily_reply_xlsx_to_wechat.mjs",
+          "previousSha256": "4ea46bc2354d5e92ff1f2c3b435e6efe600936e7f407daa6441819da61b197a5",
+          "currentSha256": "4ea46bc2354d5e92ff1f2c3b435e6efe600936e7f407daa6441819da61b197a5",
+          "changedSincePriorAudit": false
+        }
+      ]
+    },
+    {
+      "flow": "taobao-flash-sale-negative-review-appeals",
+      "sourceChecks": [
+        {
+          "path": "runtime/appeal_shift.mjs",
+          "previousSha256": "aa6c3078c68024b0339dbc200fe5bce29f6090e9907bf48908b408c055483f66",
+          "currentSha256": "e6bf9e0104f1847032879712e883ddd9bcca5a19bab8de1e43216864dd356f6f",
+          "changedSincePriorAudit": true,
+          "latestCommit": "f72fab222ba63a1935e8b15553abe49f786f86a0 补齐申诉末档查漏并纠正报表自动申诉推断"
+        }
+      ]
+    },
+    {
+      "flow": "daily-new-stores-opening-to-wechat",
+      "sourceChecks": [
+        {
+          "path": "skills/workflows/daily-new-stores-opening-to-wechat/scripts/workflow.py",
+          "previousSha256": "94ac6883230ce099fd6f0884d70863d84ed895d2dc282537c5edbb73645af3dd",
+          "currentSha256": "b3e1030122024e0155d842089dde9f79df628ee6399bc52bd48236a71567d513",
+          "changedSincePriorAudit": true,
+          "latestCommit": "2229575b0b1173c8cd7d65d59dd6e2309cdebf04 fix: inspect same-day new-store delivery before collecting again"
+        }
+      ]
+    },
+    {
+      "flow": "daily-new-stores-activity-audit-to-wechat",
+      "sourceChecks": [
+        {
+          "path": "skills/workflows/daily-new-stores-activity-audit-to-wechat/scripts/activity_daily.py",
+          "previousSha256": "ab3b24e8ccb8f2109d08f6746addabffcdf82644ea12e8b3224474038087c9dc",
+          "currentSha256": "f7e2dc3da9374dce7cf4e0a9ce4eaa96bd2cc82548d86ba0c4b196dd56c2734d",
+          "changedSincePriorAudit": true,
+          "latestCommit": "c67941e60a64387004462ee267ef99dc4853adae fix: recover inspection search once and keep busy work incomplete"
+        }
+      ]
+    },
+    {
+      "flow": "meituan-waimai-negative-review-appeals-11",
+      "sourceChecks": [
+        {
+          "path": "runtime/appeal_shift.mjs",
+          "previousSha256": "aa6c3078c68024b0339dbc200fe5bce29f6090e9907bf48908b408c055483f66",
+          "currentSha256": "e6bf9e0104f1847032879712e883ddd9bcca5a19bab8de1e43216864dd356f6f",
+          "changedSincePriorAudit": true
+        }
+      ]
+    },
+    {
+      "flow": "negative-feedback-list-appeals-0930",
+      "sourceChecks": [
+        {
+          "path": "skills/workflows/negative-feedback-list-appeals/scripts/appeal_executor.mjs",
+          "previousSha256": "826c0426dd358c6d483d34166078d7e31144060483a99c739791562af3fa259f",
+          "currentSha256": "826c0426dd358c6d483d34166078d7e31144060483a99c739791562af3fa259f",
+          "changedSincePriorAudit": false
+        }
+      ]
+    },
+    {
+      "flow": "negative-feedback-list-appeals-1230",
+      "sourceChecks": [
+        {
+          "path": "skills/workflows/negative-feedback-list-appeals/scripts/build_report.mjs",
+          "previousSha256": "07ca4fdfb8b90aa8c838a94985f5ec320a7ad0e8c3d78623686c4fb5a5d70e16",
+          "currentSha256": "07ca4fdfb8b90aa8c838a94985f5ec320a7ad0e8c3d78623686c4fb5a5d70e16",
+          "changedSincePriorAudit": false
+        },
+        {
+          "path": "skills/workflows/negative-feedback-list-appeals/scripts/deliver_batch.mjs",
+          "previousSha256": "d4b278e1e713aca2553efad71172c6cdb9a2bb013f9647535a762d46c2ada463",
+          "currentSha256": "d4b278e1e713aca2553efad71172c6cdb9a2bb013f9647535a762d46c2ada463",
+          "changedSincePriorAudit": false
+        }
+      ]
+    },
+    {
+      "flow": "daily-new-stores-decoration-audit-to-wechat",
+      "sourceChecks": [
+        {
+          "path": "skills/workflows/daily-new-stores-decoration-audit-to-wechat/scripts/decoration_daily.py",
+          "previousSha256": "9c632c49cb69aced2681bc692f09a294aaf6a289b2934ef3bbe8874756fc273a",
+          "currentSha256": "bb8f7e3f9515bbe31843c4bf1d72e8527b2f08134220bb002e6804687c51b945",
+          "changedSincePriorAudit": true,
+          "latestCommit": "c67941e60a64387004462ee267ef99dc4853adae fix: recover inspection search once and keep busy work incomplete"
+        }
+      ]
+    },
+    {
+      "flow": "daily-new-stores-not-nourished-ops-to-wechat",
+      "sourceChecks": [
+        {
+          "path": "skills/workflows/daily-new-stores-not-nourished-ops-to-wechat/scripts/nourish_daily.py",
+          "previousSha256": "2539a3208ff8f9de2f74293fa43abd661a6b804ae0a067f0bc2fa9b7bfd864ed",
+          "currentSha256": "2539a3208ff8f9de2f74293fa43abd661a6b804ae0a067f0bc2fa9b7bfd864ed",
+          "changedSincePriorAudit": false
+        },
+        {
+          "path": "skills/workflows/daily-new-stores-not-nourished-ops-to-wechat/scripts/nourish_workflow.py",
+          "previousSha256": "c239d3cd00d9ec9999f093f2b91000976d5dea353b0a3d3f5d7620422cc13c8b",
+          "currentSha256": "f3604d776b749405b21f082083332bb6cdd22c84d53d9a51563182161529292a",
+          "changedSincePriorAudit": true,
+          "latestCommit": "e56bc883b92079fbfe3cddb2b3f3ac0f390abfe2 fix: initialize original nourish event directory before first collection"
+        }
+      ]
+    },
+    {
+      "flow": "daily-store-task-completion-ops-to-wechat",
+      "sourceChecks": [
+        {
+          "path": "skills/workflows/daily-store-task-completion-ops-to-wechat/scripts/task_daily.py",
+          "previousSha256": "9fe8dc6ce78cf2f6aa3dfe9c204cae3394f003327642f546bdbcee5f7fbfb982",
+          "currentSha256": "9fe8dc6ce78cf2f6aa3dfe9c204cae3394f003327642f546bdbcee5f7fbfb982",
+          "changedSincePriorAudit": false
+        },
+        {
+          "path": "skills/workflows/daily-store-task-completion-ops-to-wechat/scripts/task_workflow.py",
+          "previousSha256": "574282053543ea170f593323f13e6327bcae8f8815ee31c242b8f841de3d96b2",
+          "currentSha256": "7f57f3f62636270b264f4560b4f2649959234e8bb4a20c123af52b65dc3233c7",
+          "changedSincePriorAudit": true,
+          "latestCommit": "d2e8d1ab50b7009419b81c8cd515c6945db9b856 完成率采集前保护原事件并复用冻结双件续传"
+        }
+      ]
+    },
+    {
+      "flow": "daily-store-basic-diagnosis-to-wechat",
+      "sourceChecks": [
+        {
+          "path": "skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/basic_diag_daily.py",
+          "previousSha256": "4cbe919cccf356454f6c3ba65992a5dae46a8f31f7c5be16b318bc26102975cb",
+          "currentSha256": "4cbe919cccf356454f6c3ba65992a5dae46a8f31f7c5be16b318bc26102975cb",
+          "changedSincePriorAudit": false
+        },
+        {
+          "path": "skills/workflows/daily-store-basic-diagnosis-to-wechat/scripts/basic_diag_workflow.py",
+          "previousSha256": "3d068712c0e4641e44cb64ee28dd103aaa54d71fdaea331e2d660d34946699a2",
+          "currentSha256": "3d068712c0e4641e44cb64ee28dd103aaa54d71fdaea331e2d660d34946699a2",
+          "changedSincePriorAudit": false
+        }
+      ]
+    },
+    {
+      "flow": "daily-service-market-ranking-to-wechat",
+      "sourceChecks": [
+        {
+          "path": "skills/workflows/daily-service-market-ranking-to-wechat/scripts/ranking_workflow.py",
+          "previousSha256": "1a666774e2fc66249ddbd45c2e6a6d3099c673543bf7c217316062d53b8b7ca0",
+          "currentSha256": "1a666774e2fc66249ddbd45c2e6a6d3099c673543bf7c217316062d53b8b7ca0",
+          "changedSincePriorAudit": false
+        }
+      ]
+    },
+    {
+      "flow": "daily-meituan-income-top10-to-wechat",
+      "sourceChecks": [
+        {
+          "path": "skills/workflows/daily-meituan-income-top10-to-wechat/scripts/income_workflow.py",
+          "previousSha256": "1510659359c81268c419d1708e3d9710a4f72326168cf17798bc64e26077d92e",
+          "currentSha256": "1510659359c81268c419d1708e3d9710a4f72326168cf17798bc64e26077d92e",
+          "changedSincePriorAudit": false
+        }
+      ]
+    },
+    {
+      "flow": "daily-quality-products-optimization",
+      "sourceChecks": [
+        {
+          "path": "skills/workflows/daily-quality-products-optimization/scripts/quality_workflow.py",
+          "previousSha256": "c6bb3950277b0f6a12bc580e4c8b0de6896844896cc5e35b17f184fb3b19c9b0",
+          "currentSha256": "606d3c40ceb20fc98e196fe54a382a5ddafb8a15514f289721380188754f2c1b",
+          "changedSincePriorAudit": true,
+          "latestCommit": "2b2c47cde1473df21c17b5a162cef1cf035bbe0f 修复商品整改通知原生零发送恢复与分件续传"
+        }
+      ]
+    }
+  ],
+  "declaredHashes": [
+    {
+      "policy": "skills/wechat-messaging/dependencies.json",
+      "checked": 38,
+      "unparsed": [],
+      "mismatches": [],
+      "status": null,
+      "allowedBusinessDate": null
+    },
+    {
+      "policy": "skills/posts/taobao-brand-post/dependencies.json",
+      "checked": 8,
+      "unparsed": [],
+      "mismatches": [],
+      "status": null,
+      "allowedBusinessDate": null
+    },
+    {
+      "policy": "skills/posts/taobao-svc-post/dependencies.json",
+      "checked": 7,
+      "unparsed": [],
+      "mismatches": [],
+      "status": null,
+      "allowedBusinessDate": null
+    },
+    {
+      "policy": "skills/posts/jinsha-post/dependencies.json",
+      "checked": 7,
+      "unparsed": [],
+      "mismatches": [],
+      "status": null,
+      "allowedBusinessDate": null
+    },
+    {
+      "policy": "skills/posts/meituan-post/dependencies.json",
+      "checked": 7,
+      "unparsed": [],
+      "mismatches": [],
+      "status": null,
+      "allowedBusinessDate": null
+    },
+    {
+      "policy": "skills/workflows/daily-top10-to-wechat-group/runtime-policy.json",
+      "checked": 8,
+      "unparsed": [],
+      "mismatches": [],
+      "status": null,
+      "allowedBusinessDate": null
+    },
+    {
+      "policy": "skills/workflows/daily-negative-reviews/runtime-policy.json",
+      "checked": 0,
+      "unparsed": [],
+      "mismatches": [],
+      "status": "UNSEALED_ACCEPTANCE",
+      "allowedBusinessDate": "2026-10-27"
+    },
+    {
+      "policy": "skills/workflows/daily-negative-reviews/dependencies.json",
+      "checked": 20,
+      "unparsed": [],
+      "mismatches": [],
+      "status": null,
+      "allowedBusinessDate": null
+    },
+    {
+      "policy": "skills/workflows/contract-termination-applications-screenshot/runtime-policy.json",
+      "checked": 0,
+      "unparsed": [],
+      "mismatches": [],
+      "status": null,
+      "allowedBusinessDate": null,
+      "pathOnlyChecks": [
+        {
+          "label": "shot",
+          "path": "skills/workflows/contract-termination-applications-screenshot/scripts/contract_termination_shot.mjs",
+          "exists": true
+        },
+        {
+          "label": "workflow",
+          "path": "skills/workflows/contract-termination-applications-screenshot/scripts/contract_termination_workflow.py",
+          "exists": true
+        },
+        {
+          "label": "entry",
+          "path": "skills/workflows/contract-termination-applications-screenshot/scripts/contract_termination_daily.py",
+          "exists": true
+        },
+        {
+          "label": "captureReceipt",
+          "path": "skills/workflows/contract-termination-applications-screenshot/scripts/contract_capture_receipt.py",
+          "exists": true
+        }
+      ],
+      "scope": "Original lightweight policy declares paths only, no SHA seal; existence checked separately, not counted as hash-verified."
+    },
+    {
+      "policy": "skills/workflows/daily-agent-new-merchants-to-wechat/executor-lock.json",
+      "checked": 19,
+      "unparsed": [],
+      "mismatches": [],
+      "status": "SEALED",
+      "allowedBusinessDate": null
+    },
+    {
+      "policy": "skills/workflows/daily-service-market-ranking-to-wechat/runtime-policy.json",
+      "checked": 2,
+      "unparsed": [],
+      "mismatches": [],
+      "status": null,
+      "allowedBusinessDate": null
+    },
+    {
+      "policy": "skills/workflows/daily-meituan-income-top10-to-wechat/runtime-policy.json",
+      "checked": 2,
+      "unparsed": [],
+      "mismatches": [],
+      "status": null,
+      "allowedBusinessDate": null
+    },
+    {
+      "policy": "skills/workflows/daily-quality-products-optimization/runtime-policy.json",
+      "checked": 4,
+      "unparsed": [],
+      "mismatches": [],
+      "status": null,
+      "allowedBusinessDate": null
+    }
+  ],
+  "paused": {
+    "daily-store-metrics-rotation-to-wechat": false,
+    "coupon-issue-task-flow": false,
+    "store-inspection": false
+  },
+  "productionActions": 0,
+  "sendAttempts": 0,
+  "limitations": [
+    "Declared file hashes alone do not prove dynamic source completeness, runtime permissions or future delivery.",
+    "Changed sources require their current change-specific validation receipts; previous audit cannot certify them.",
+    "Original image unknowns and appeal unknown remain unchanged."
+  ],
+  "nextOriginalDue": "2026-10-28T16:00:03+08:00",
+  "eveningValidationEvidence": [
+    {
+      "path": "runtime/state/quality-delivery-preflight-20261028/final-audit.json",
+      "exists": true,
+      "sha256": "f6de9cfd16e8aec371b6b4600d35f780fda04262f13d20ae58f0bb813eb003e2"
+    },
+    {
+      "path": "runtime/state/customer-card-location-20261028/receipt.json",
+      "exists": true,
+      "sha256": "b82973e1d5b955ac85088a6cd53f4b6f2adce60cc651f4d871c91615877306d6"
+    },
+    {
+      "path": "runtime/state/appeal-closing-sequence-20261028/final-audit.json",
+      "exists": true,
+      "sha256": "5450a9bcbcadc3968f9320713982985cee2f3fbba436f950f57e5f49e1b3a72e"
+    }
+  ],
+  "classification": {
+    "declaredHashDrift": 0,
+    "pendingLiveAcceptance": [
+      "17:00 latest customer full class and quality one-pass original execution",
+      "18:30 appeal-first closing and original report/image verification",
+      "22:00 original browser maintenance"
+    ],
+    "businessDataAndUnknownRecordsModifiedByAudit": false,
+    "duplicate9232Pages": "Preserved; same-domain multiplicity is not permission to clear task markers or close pages."
+  }
+}
