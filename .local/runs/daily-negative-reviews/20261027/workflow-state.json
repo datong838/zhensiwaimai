@@ -1,0 +1,92 @@
+{
+  "policyVersion": "daily-negative-reviews-code-enforced-v1",
+  "businessDate": "2026-10-27",
+  "phase": "sent",
+  "status": "recoverable",
+  "startedAt": 1793147442023,
+  "updatedAt": 1793147516686,
+  "reviewItems": [
+    {
+      "stage": "browser_validate",
+      "label": "连接并唯一定位金鲨页面",
+      "attempts": 1,
+      "elapsedMs": 4778,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "route_and_date",
+      "label": "核验淘宝外卖入口并设置昨日日期",
+      "attempts": 1,
+      "elapsedMs": 1224,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "download",
+      "label": "下载全部平台差评",
+      "attempts": 1,
+      "elapsedMs": 3500,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "extract_platforms",
+      "label": "读取三平台页面列表",
+      "attempts": 1,
+      "elapsedMs": 7325,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "reconcile",
+      "label": "下载与页面逐条对账",
+      "attempts": 1,
+      "elapsedMs": 558,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "build_report",
+      "label": "生成并验收固定格式Excel",
+      "attempts": 1,
+      "elapsedMs": 1021,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "wechat_send",
+      "label": "唯一群定位、单次发送与双帧校验",
+      "attempts": 1,
+      "elapsedMs": 23729,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "screenshot",
+      "label": "渲染整表长图",
+      "attempts": 1,
+      "elapsedMs": 1294,
+      "status": "completed",
+      "pitfalls": []
+    },
+    {
+      "stage": "screenshot_send",
+      "label": "整表长图单次发送与回读校验",
+      "attempts": 1,
+      "elapsedMs": 32194,
+      "status": "failed",
+      "pitfalls": [
+        "image-submission-awaits-read-only-verification"
+      ]
+    }
+  ],
+  "runtimeModelDecisions": 0,
+  "lastRecovery": {
+    "allowed": true,
+    "stage": "wechat_send",
+    "priorFailures": 0,
+    "nextAttempt": 1
+  },
+  "reason": "image-submission-awaits-read-only-verification"
+}

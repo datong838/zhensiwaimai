@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "status": "UNSEALED_ACCEPTANCE",
-  "sealedAt": "2026-10-24T18:21:16.175447+08:00",
+  "status": "SEALED",
+  "sealedAt": "2026-10-28T08:30:39.406828+08:00",
   "acceptance": {
-    "receiptPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261024-181557/output/desktop-wechat/546957114/acceptance-receipt.json",
-    "receiptSha256": "d4f9f4cf6b2a2017bb69c5380e2770f6e2e23191968401f21b984057bf467a03",
-    "merchantId": "546957114",
-    "messageSha256": "c03553fa2c26fcae4234a7a22bfa6578adf6db5a11f03293ac3ee2460c97b330",
+    "receiptPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261028-083004/output/desktop-wechat/545376966/acceptance-receipt.json",
+    "receiptSha256": "e0d129c65a22b7943ada1bf443d846e8443c2d9e7169444ce4817fcfbd6ea553",
+    "merchantId": "545376966",
+    "messageSha256": "eeb630e0d9351d53a4d84e3085a3299f6587bd7128c6d8191ac99ec149345928",
     "verification": "wecom-ui-tree-text"
   },
   "maintenanceAcceptance": {
@@ -19,10 +19,10 @@
     "runtimeModelDecisions": 0
   },
   "latestRealSend": {
-    "receiptPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261024-181557/output/desktop-wechat/546957114/acceptance-receipt.json",
-    "receiptSha256": "d4f9f4cf6b2a2017bb69c5380e2770f6e2e23191968401f21b984057bf467a03",
-    "merchantId": "546957114",
-    "messageSha256": "c03553fa2c26fcae4234a7a22bfa6578adf6db5a11f03293ac3ee2460c97b330",
+    "receiptPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261028-083004/output/desktop-wechat/545376966/acceptance-receipt.json",
+    "receiptSha256": "e0d129c65a22b7943ada1bf443d846e8443c2d9e7169444ce4817fcfbd6ea553",
+    "merchantId": "545376966",
+    "messageSha256": "eeb630e0d9351d53a4d84e3085a3299f6587bd7128c6d8191ac99ec149345928",
     "verification": "wecom-ui-tree-text"
   },
   "latestDeterministicReconcile": {
@@ -114,14 +114,14 @@
   },
   "lastUnsealedAcceptance": {
     "authorization": "user-20260916-production-hardening",
-    "authorizedAt": "2026-10-24T14:14:09.846682+08:00",
-    "expiresAt": "2026-10-24T19:00:00+08:00",
+    "authorizedAt": "2026-10-27T23:12:58.918012+08:00",
+    "expiresAt": "2026-11-02T23:12:44+08:00",
     "scope": "Code-owned maintenance candidate; next real nonempty merchant send; automatic reseal only",
     "userInstruction": "允许新增代码化维护执行器，并将生产锁切换为验收态，等待下一家真实商家自动重新封板。",
     "userInstructionSha256": "c91518a278b43dcab9835dbda5168b9a3adc188ce3c5c8b6d2c0e930a91ea974",
     "maintenanceAuthorization": "user-20260918-code-maintenance",
-    "maintenanceReceiptPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/merchant-ui-seal-contract-maintenance-20261024-r2/maintenance-receipt.json",
-    "maintenanceReceiptSha256": "6347c3746ba6c67b1cb73ee1cbe362bba132ed29b6568978e1986788e444ec65"
+    "maintenanceReceiptPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/native-image-wait-20261028/merchant-refresh/maintenance-receipt.json",
+    "maintenanceReceiptSha256": "71e23635516a929d9466209e021971b7621154eb02799b8dd6007040f9519cb8"
   },
   "sharedTextAcceptance": {
     "type": "wechat-messaging-desktop-text",
@@ -205,16 +205,5 @@
       },
       "reason": "2026-10-23 19:1x：offline_selftest 加一次重试 + 失败时把 rc/stdout/stderr 落进异常消息（daemon 内间歇性 elapsedMs~170 使 node 未起来，整档空转，当天连挂 4 档）；本机复现通过、重试分支已用假 collector 冒烟"
     }
-  ],
-  "unsealedAcceptance": {
-    "authorization": "user-20260916-production-hardening",
-    "authorizedAt": "2026-10-27T23:12:58.918012+08:00",
-    "expiresAt": "2026-11-02T23:12:44+08:00",
-    "scope": "Code-owned maintenance candidate; next real nonempty merchant send; automatic reseal only",
-    "userInstruction": "允许新增代码化维护执行器，并将生产锁切换为验收态，等待下一家真实商家自动重新封板。",
-    "userInstructionSha256": "c91518a278b43dcab9835dbda5168b9a3adc188ce3c5c8b6d2c0e930a91ea974",
-    "maintenanceAuthorization": "user-20260918-code-maintenance",
-    "maintenanceReceiptPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/native-image-wait-20261028/merchant-refresh/maintenance-receipt.json",
-    "maintenanceReceiptSha256": "71e23635516a929d9466209e021971b7621154eb02799b8dd6007040f9519cb8"
-  }
+  ]
 }

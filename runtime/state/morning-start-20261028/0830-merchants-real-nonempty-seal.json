@@ -1,0 +1,48 @@
+{
+  "originalRun": "runtime/state/runs/daily-agent-new-merchants-to-wechat/20261028-083004/output",
+  "runId": "bffe8d22-92f3-4d06-ba37-08799531e06a",
+  "businessDate": "2026-10-28",
+  "groupName": "电销+直播攻坚组",
+  "collectedRows": 9,
+  "paginationComplete": true,
+  "targets": 2,
+  "sent": 2,
+  "merchants": [
+    {
+      "merchantId": "538440216",
+      "merchantName": "粉可道汤粉",
+      "sendAttempts": 1
+    },
+    {
+      "merchantId": "545376966",
+      "merchantName": "青穆坊牛肉拉面馆",
+      "sendAttempts": 1
+    }
+  ],
+  "originalCursorAndHistoryUpdatedByOriginalExecutor": true,
+  "supervisorManualCursorWrites": 0,
+  "sealedAt": "2026-10-28T08:30:39.406828+08:00",
+  "manifestState": "SEALED",
+  "manifestSha256": "e4bd7e01e81251065a0f6432fa9a0dbb554e2eda542e9f21cf9b9cd94363601e",
+  "acceptance": {
+    "receiptPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261028-083004/output/desktop-wechat/545376966/acceptance-receipt.json",
+    "receiptSha256": "e0d129c65a22b7943ada1bf443d846e8443c2d9e7169444ce4817fcfbd6ea553",
+    "merchantId": "545376966",
+    "messageSha256": "eeb630e0d9351d53a4d84e3085a3299f6587bd7128c6d8191ac99ec149345928",
+    "verification": "wecom-ui-tree-text"
+  },
+  "originalGateAfterSeal": {
+    "ok": true,
+    "status": "SEALED",
+    "manifestSha256": "e4bd7e01e81251065a0f6432fa9a0dbb554e2eda542e9f21cf9b9cd94363601e",
+    "fileCount": 19,
+    "acceptanceMerchantId": "545376966",
+    "acceptanceMessageSha256": "eeb630e0d9351d53a4d84e3085a3299f6587bd7128c6d8191ac99ec149345928",
+    "runtimeModelDecisions": 0,
+    "maintenanceAcceptance": "desktop-wechat-shared-preflight",
+    "sharedTextAcceptance": "wechat-messaging-desktop-text",
+    "sharedMediaAcceptance": "not-required-by-text-only-merchant-workflow"
+  },
+  "nonemptyAcceptanceVerified": true,
+  "dayComplete": false
+}

@@ -1,0 +1,154 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-28",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 57,
+    "task_page": 215,
+    "navigation": 2665,
+    "date_filter": 1436,
+    "page_1_read": 331,
+    "selection_audit": 0,
+    "detail_538440216": 753,
+    "detail_545376966": 979
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS",
+    "detail_538440216": "PASS",
+    "detail_545376966": "PASS"
+  },
+  "messages": [
+    {
+      "merchantId": "538440216",
+      "merchantName": "粉可道汤粉",
+      "recommendTime": "2026-10-27 22:43:34",
+      "city": "中山市",
+      "status": "待处理",
+      "rowIndex": 1,
+      "sourcePage": 1,
+      "tableOrder": 8,
+      "address": "南宝大街144号一层第九卡",
+      "contact": "邓，13609631270",
+      "detailVerified": true,
+      "text": "城市：中山市  ；  联系人：邓，13609631270  ；  店铺：粉可道汤粉  ；  地址：南宝大街144号一层第九卡  ；  商家ID：538440216",
+      "sha256": "a2866eeeb331fc3243befdeca1bbe1367871355243f06bc04cde8c2c0d3e2446"
+    },
+    {
+      "merchantId": "545376966",
+      "merchantName": "青穆坊牛肉拉面馆",
+      "recommendTime": "2026-10-28 00:53:02",
+      "city": "徐州市",
+      "status": "待处理",
+      "rowIndex": 0,
+      "sourcePage": 1,
+      "tableOrder": 9,
+      "address": "铜山街道上海路104号一101铺",
+      "contact": "王林，17697612070",
+      "detailVerified": true,
+      "text": "城市：徐州市  ；  联系人：王林，17697612070  ；  店铺：青穆坊牛肉拉面馆  ；  地址：铜山街道上海路104号一101铺  ；  商家ID：545376966",
+      "sha256": "eeb630e0d9351d53a4d84e3085a3299f6587bd7128c6d8191ac99ec149345928"
+    }
+  ],
+  "frontmostBefore": "com.tencent.WeWorkMac",
+  "createdAt": "2026-10-28T00:30:12.960Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-27",
+    "merchantName": "金橙手抓饼",
+    "merchantId": "157493476",
+    "recommendTime": "2026-10-27 16:44:31",
+    "tableOrder": 8,
+    "messageSha256": "e2076f3ee28739da21f9a17bf8bf97fcb53369a9cad136b91b0cd1630fc871b1",
+    "sentAt": "2026-10-27T16:50:32+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-27",
+  "filterEndDate": "2026-10-28",
+  "dateFilter": "2026-10-27..2026-10-28",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 9,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 9,
+  "pendingRows": 6,
+  "targetCount": 2,
+  "selectionAudit": {
+    "totalRows": 9,
+    "pendingRows": 6,
+    "excludedAtOrBeforeCursor": 7,
+    "excludedAfterCursorNotPending": 0,
+    "targetCount": 2,
+    "rows": [
+      {
+        "merchantId": "545376966",
+        "recommendTime": "2026-10-28 00:53:02",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "538440216",
+        "recommendTime": "2026-10-27 22:43:34",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "157493476",
+        "recommendTime": "2026-10-27 16:44:31",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1366726036",
+        "recommendTime": "2026-10-27 11:10:27",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "544654530",
+        "recommendTime": "2026-10-27 11:00:44",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1366725839",
+        "recommendTime": "2026-10-27 08:06:10",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1362270458",
+        "recommendTime": "2026-10-27 14:08:52",
+        "status": "完成"
+      },
+      {
+        "merchantId": "543895790",
+        "recommendTime": "2026-10-27 11:28:11",
+        "status": "完成"
+      },
+      {
+        "merchantId": "546901789",
+        "recommendTime": "2026-10-27 10:59:27",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 6850,
+  "frontmostAfter": "com.tencent.WeWorkMac",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261028-083004/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261028-083004/output/collection-attempt-1.review.md"
+}

@@ -166,3 +166,12 @@
 ## 08:20实际验收
 
 原主任08:20:00固定唤醒，08:20:02申诉检查至08:20:13 SUCCESS；美团未申诉列表0项、无新提交、无unknown，淘宝not_requested/submitted=false。原汇总依赖满足后08:20:14采集41美团/107淘宝近7日全量，窗口10月21..27；08:21:20两Excel均verified、每件sendAttempts=1、各两次真实完整群/文件名/大小/空框观察，实际文件SHA/大小及工作簿回读通过。原原件与未知不改。证据morning-start-20261028/0820-feedback-real-delivery.json；不是当天全量任务完成，08:30商家/差评及09合同继续。
+
+
+## 08:30真实执行与非空封板
+
+新商家08:30:04原主任执行、完整采集9行/无下一页，2个新增目标详情与日期门通过，电销+直播攻坚组2条各1次真实文字送达并推进原历史/游标。原程序08:30:39.406828凭真实非空acceptance自动SEALED，原19文件门再次通过；关闭此前UNSEALED_ACCEPTANCE待非空验收项，旧未知不改。证据morning-start-20261028/0830-merchants-real-nonempty-seal.json。
+
+差评分析08:30:41原主任启动，业务日期10月27；原源98条，按原<=3星口径排除1条后97行（美团65/淘宝32），9项缺文由原UI补齐，1项仍无原文如实保留。Excel97行原收据verified一次；同数据97行长图生成并一次提交，原回执仍verificationPending，原状态sent/recoverable不改不重发，不把本批视作整流complete。证据morning-start-20261028/0830-negative-analysis-delivery.json。
+
+08:26两处金鲨业务页新鲜提示当前36家美团授权失败（此前37）；尚未核对具体恢复店铺，旧名单不改、不擅排客户。新鲜提示保留于jinsha-auth-banner-readonly.json，差评原browser/analysis收据亦保留36家警告。09点合同与商家档继续原班表。双Top10重复首页连接关闭已先写预防方案docs/solutions/20261028-双Top10首页连接关闭一次恢复.md，目前仅方案、未改现役源或摘要；待关键流空闲按受控门实现，不重发今日图片。
