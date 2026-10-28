@@ -10,7 +10,6 @@ from ledger import atomic_json
 
 QUEUE = Path(__file__).resolve().parents[1] / '.runtime/ui-post-queue'
 EXECUTION_POLICY = Path(__file__).resolve().parents[1] / 'config/ui-execution-policy.json'
-ALLOWED = {'negative-reviews-summary'}
 NO_RESEND_STATE = Path(__file__).resolve().parents[3] / 'runtime/state'
 
 def user_no_resend_today(workflow, *, now=None, state=None):
@@ -61,8 +60,6 @@ def enabled(request):
         if str(runtime) not in sys.path: sys.path.insert(0, str(runtime))
         from daily_ledger_delivery import request_enabled
         return request_enabled(request)
-    if context.get('workflowId') in ALLOWED:
-        return True
     from registered_ui_routes import allowed as registered_route_allowed, allowed_direct
     if registered_route_allowed(request) or allowed_direct(request):
         return True

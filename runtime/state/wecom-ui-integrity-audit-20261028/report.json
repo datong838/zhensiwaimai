@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "auditedAt": "2026-10-28T22:15:12+08:00",
+  "effects": 0,
+  "messagesSent": 0,
+  "registryRouteCount": 14,
+  "registryCoverage": {
+    "registeredContract": [
+      "jinsha-reports",
+      "meituan-waimai-appeals",
+      "meituan-waimai-appeals-summary",
+      "negative-feedback-appeals",
+      "negative-reviews",
+      "taobao-evidence",
+      "taobao-flash-appeals",
+      "taobao-flash-appeals-summary",
+      "top10"
+    ],
+    "queueExplicitContract": [
+      "meituan-customer-reply-daily",
+      "merchants"
+    ],
+    "unconditionalQueueBypassBeforeFix": [
+      "negative-reviews-summary"
+    ],
+    "historicalRepairDenied": [
+      "jinsha-reports-taobao-repair-20260917",
+      "jinsha-reports-taobao-repair-20261023"
+    ]
+  },
+  "dependencyInspect": {
+    "status": "clean",
+    "candidateFileCount": 38,
+    "meaning": "registered-files-clean-only"
+  },
+  "localPythonClosureCount": 26,
+  "unboundActiveDependencies": [
+    "scripts/file_size_policy.py",
+    "scripts/native_ui_tree.py",
+    "scripts/presentation_policy.py",
+    "scripts/registered_ui_routes.py",
+    "scripts/wecom_adapter.py",
+    "scripts/wecom_ui_queue.py",
+    "config/ui-execution-policy.json",
+    "config/native-ui-selectors.json",
+    "scripts/native_ui_tree.jxa"
+  ],
+  "externalizedRouteData": {
+    "path": "config/registry-routing.json",
+    "bound": false,
+    "policy": "strict-schema-and-change-audit-required-separately"
+  },
+  "currentFinding": "shared-summary-incomplete",
+  "routeBypassFix": {
+    "workflowId": "negative-reviews-summary",
+    "unconditionalAllowRemoved": true,
+    "registeredContractEnabled": true,
+    "validRequestPreserved": true,
+    "wrongGroupRejected": true,
+    "emptyItemsRejected": true,
+    "wrongLedgerEventRejected": true
+  },
+  "tests": {
+    "targeted": {
+      "passed": 30,
+      "failed": 0
+    },
+    "wechatMessagingFull": {
+      "passed": 464,
+      "failed": 0
+    }
+  },
+  "productionAcceptanceClaimed": false,
+  "next": "controlled-shared-summary-expansion-and-downstream-resync"
+}

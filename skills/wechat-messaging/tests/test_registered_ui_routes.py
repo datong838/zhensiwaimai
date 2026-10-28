@@ -32,6 +32,12 @@ class RegisteredRoutes(unittest.TestCase):
             request = copy.deepcopy(requests[workflow + '-summary'])
             request['context']['eventId'] = requests[workflow]['context']['eventId']
             self.assertFalse(allowed(request))
+    def test_negative_review_summary_uses_full_registered_contract(self):
+        request=next(r for r in self.requests() if r['context']['workflowId']=='negative-reviews-summary')
+        self.assertTrue(allowed(request))
+        for change in ({'groupName':'wrong'}, {'items':[]},
+                       {'context':request['context']|{'eventId':'/tmp/wrong-ledger.json'}}):
+            self.assertFalse(allowed(request|change))
     def test_adapter_preflight_uses_ui_only(self):
         for request in self.requests():
             with patch('wecom_ui_queue.exchange',return_value={'ok':True,'resolvedGroup':request['groupName'],'inputEmpty':True}) as queue,patch.object(WeComAdapter,'_run_sender',side_effect=AssertionError('legacy')):

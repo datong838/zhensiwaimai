@@ -20,7 +20,14 @@ class QueueTests(unittest.TestCase):
   self.assertTrue(validate_response(task,self.reply({'ok':True,'resolvedGroup':'target','inputEmpty':True}))['ok'])
   with self.assertRaises(ValueError):validate_response(task,self.reply({'ok':True,'resolvedGroup':'target','inputEmpty':False}))
  def test_scope(self):
-  self.assertTrue(enabled({'context':{'workflowId':'negative-reviews-summary'}}))
+  from workflow_bridge import REGISTRY
+  group,kind,count,_,ledger=REGISTRY['negative-reviews-summary']
+  request={'groupName':group,'context':{'workflowId':'negative-reviews-summary','eventId':str(ledger.resolve()/'test-only.json')},
+           'items':[{'type':kind,'path':'/fixture/summary.png'}]}
+  self.assertTrue(enabled(request))
+  for change in ({'groupName':'wrong'}, {'items':[]},
+                 {'context':request['context']|{'eventId':'/tmp/wrong-ledger.json'}}):
+   self.assertFalse(enabled(request|change))
   self.assertFalse(enabled({'context':{'workflowId':'merchants'}}))
 class EmptyNoticeQueueTests(unittest.TestCase):
  def test_only_fixed_empty_notice_is_enabled(self):
@@ -39,8 +46,11 @@ class AdapterTests(unittest.TestCase):
  def test_ui_preflight_uses_queue_only(self):
   from unittest.mock import patch
   from wecom_adapter import WeComAdapter
-  request={'groupName':'target','context':{'workflowId':'negative-reviews-summary'}}
-  with patch('wecom_ui_queue.exchange',return_value={'ok':True,'resolvedGroup':'target','inputEmpty':True}) as queued, patch.object(WeComAdapter,'_run_sender',side_effect=AssertionError('legacy sender invoked')):
+  from workflow_bridge import REGISTRY
+  group,kind,_,_,ledger=REGISTRY['negative-reviews-summary']
+  request={'groupName':group,'context':{'workflowId':'negative-reviews-summary','eventId':str(ledger.resolve()/'test-only.json')},
+           'items':[{'type':kind,'path':'/fixture/summary.png'}]}
+  with patch('wecom_ui_queue.exchange',return_value={'ok':True,'resolvedGroup':group,'inputEmpty':True}) as queued, patch.object(WeComAdapter,'_run_sender',side_effect=AssertionError('legacy sender invoked')):
    self.assertTrue(WeComAdapter().preflight(request,'unused')['ok']);queued.assert_called_once()
 if __name__=='__main__':unittest.main()
 

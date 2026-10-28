@@ -7,13 +7,16 @@ from pathlib import Path
 from unittest.mock import patch
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
 from wecom_adapter import WeComAdapter
+from workflow_bridge import REGISTRY
 
 class ImageBindingTests(unittest.TestCase):
     def setUp(self):
         self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup)
         self.root=Path(self.tmp.name);self.image=self.root/'image.png';self.image.write_bytes(b'image fixture')
         self.item={'type':'image','path':str(self.image)}
-        self.request={'groupName':'test','context':{'workflowId':'negative-reviews-summary'},'items':[self.item]}
+        group,_,_,_,ledger=REGISTRY['negative-reviews-summary']
+        self.request={'groupName':group,'context':{'workflowId':'negative-reviews-summary',
+                      'eventId':str(ledger.resolve()/'test-only.json')},'items':[self.item]}
     def send(self,item):
         with patch('egress_policy.check',return_value={'allow':True}), patch('wecom_ui_queue.exchange',return_value={'status':'verified'}) as queued, patch('wecom_adapter.ui_tree_only_required',return_value=True), patch.object(WeComAdapter,'_run_sender',side_effect=AssertionError('legacy transport')):
             result=WeComAdapter()._send_one(self.request,item,self.root/'work',{},time.time()+100)
