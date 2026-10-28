@@ -11,6 +11,8 @@ import fs from "node:fs/promises";
 import { connectToPost } from "../../../posts/meituan-post/scripts/connect.mjs";
 import { acquirePostLease, releasePostLease } from "../../../posts/meituan-post/scripts/lease.mjs";
 import { runWithUnansweredQueue, dismissFraudAcknowledgement } from "./ensure_unanswered_queue.mjs";
+import { replyBinding, inspectReplySubmission, submitReplyOnce, assertReplyDraft } from "./reply_submission.mjs";
+const SUBMISSIONS = new URL("../records/reply-submissions/", import.meta.url).pathname;
 
 const TARGET_HOST = "waimaie.meituan.com";
 const TARGET_PATH = "/imworkbench/";
@@ -55,7 +57,7 @@ function shanghaiNow() {
 
 function norm(t) { return String(t ?? "").replace(/\s+/g, " ").trim(); }
 
-function judge(cardText, messages, now) {
+export function judge(cardText, messages, now) {
   const leftMsgs = messages.filter((x) => x.side === "left" && norm(x.text));
   const rightTexts = messages.filter((x) => x.side === "right" && norm(x.text));
   const lastCustomer = leftMsgs.length ? leftMsgs[leftMsgs.length - 1] : null;
@@ -67,7 +69,8 @@ function judge(cardText, messages, now) {
   // 店主人工回复检查：右侧任何非自动/非系统/非机器人文本消息都视为人工接管
   //（政策：自动回复、机器人回复、平台卡片不算店主人工回复；[AI客服]与总部商家客服(小慧)均为机器人，9-28 先例同口径）。
   // 我们自己上一轮的兜底回复不含这些标记，仍会被正确视为人工回复 → 天然防同会话重复回复。
-  const human = rightTexts.find((x) => !AUTO_RIGHT_RE.test(norm(x.text)) && !ROBOT_RIGHT_RE.test(norm(x.text)) && !norm(x.nick).includes("小美"));
+  const human = rightTexts.find((x) => [REPLY_DEFAULT, REPLY_DELIVERY_NOTE].some(reply => norm(x.text).includes(norm(reply)))
+    || (!AUTO_RIGHT_RE.test(norm(x.text)) && !ROBOT_RIGHT_RE.test(norm(x.text)) && !norm(x.nick).includes("小美")));
   if (human) return { ...base, reason: `owner-human-reply-present[right="${norm(human.text).slice(0, 40)}" nick=${norm(human.nick).slice(0, 20)}]` };
   if (!QUALIFY_RE.test(text)) return { ...base, reason: "not-catering-request(保守不回)" };
   // 超时：优先顾客最后一条消息内的时间，其次卡片预览时间；都没有 → 不作超时结论
@@ -141,7 +144,7 @@ async function readConversation(page) {
 
 // 全量收集当前视图的会话卡片：滚动到底逐屏收集并去重。
 // 适配两视图：未回复 / 正在接待 的列表容器 class 名不同，需通用定位可滚动祖先。
-async function collectAllCards(page) {
+export async function collectAllCards(page) {
   return page.evaluate(async () => {
     const norm = (t) => String(t ?? "").replace(/\s+/g, " ").trim().slice(0, 120);
     const firstCard = document.querySelector("[class*='sessionListItemContainer']");
@@ -155,7 +158,9 @@ async function collectAllCards(page) {
     const collect = () => {
       for (const el of document.querySelectorAll("[class*='sessionListItemContainer']")) {
         const t = norm(el.innerText);
-        if (t && !seen.has(t)) { seen.add(t); order.push(t); }
+        const sessionId = el.id;
+        if (!/^\d{19}$/.test(sessionId)) throw Error("customer-session-id-unavailable");
+        if (t && !seen.has(sessionId)) { seen.add(sessionId); order.push({ sessionId, text: t }); }
       }
     };
     collect();
@@ -178,16 +183,20 @@ async function collectAllCards(page) {
 }
 
 // 逐条处理一个视图内的全部会话（全量；MAX_SESSIONS 仅作失控护栏，缺省不限）。
-async function processCards(page, identities, receipt, now, done, view = "未回复") {
+export async function processCards(page, identities, receipt, now, done, view = "未回复", options = {}) {
+  const submissions = options.submissions ?? SUBMISSIONS;
+  const writeLedger = options.appendLedger ?? appendLedger;
   let checked = 0;
-  for (const identity of identities) {
-    if (done.has(identity)) continue;
+  for (const entry of identities) {
+    const { sessionId, text: identity } = entry;
+    if (!/^\d{19}$/.test(sessionId)) throw Error("customer-session-id-unavailable");
+    if (done.has(sessionId)) continue;
     if (done.size >= MAX_SESSIONS) break;
-    done.add(identity);
+    done.add(sessionId);
     checked++;
     receipt.scanned++;
-    const key = identity.slice(0, 18);
-    const card = page.locator("[class*='sessionListItemContainer']").filter({ hasText: key }).first();
+    const card = page.locator(`[class*='sessionListItemContainer'][id="${sessionId}"]`);
+    if ((await card.count()) > 1) throw Error("customer-session-id-not-unique");
     if ((await card.count()) === 0) {
       receipt.decisions.push({ card: identity, qualify: false, reason: "card-vanished-from-filter(可能已读/已回)" });
       continue;
@@ -204,27 +213,23 @@ async function processCards(page, identities, receipt, now, done, view = "未回
     receipt.decisions.push(decision);
     if (!decision.qualify || DRY) continue;
 
-    // 真实回复：聚焦 → 真实键盘输入（触发受控组件 onChange）→ 输入自检 → 发送 → 回显核验（含 Enter 兜底）。
+    const customerText = norm(messages.filter(x => x.side === "left" && norm(x.text)).at(-1)?.text);
+    const binding = replyBinding({ sessionId, customerText, reply: decision.reply });
+    const prior = await inspectReplySubmission(submissions, binding);
+    if (prior) {
+      receipt.replySubmissionReadbacks ??= [];
+      receipt.replySubmissionReadbacks.push({ session: decision.session, ...prior, newSubmitCalls: 0 });
+      if (prior.state !== "verified") receipt.verificationPending.push({ session: decision.session, reason: prior.reason });
+      continue;
+    }
     const ta = page.locator("textarea[class*='chatInputTextarea']");
     if ((await ta.count()) !== 1) throw new Error("composer-textarea-not-unique");
+    assertReplyDraft(await ta.inputValue(), "");
     await ta.click({ timeout: 5000 });
-    // 1) 首选：真实键盘逐字输入，确保 React 受控组件收到 onChange（fill 不触发，按钮会保持 disabled）。
     await ta.pressSequentially(decision.reply, { delay: 25 });
     await page.waitForTimeout(400);
-    // 2) 输入自检：读 textarea 实际值，若未含回复前 20 字，用原生 setter + dispatch input 事件兜底（React 受控组件最可靠触发手法）。
-    let inputVal = (await ta.inputValue().catch(() => "")) || "";
-    if (!norm(inputVal).includes(norm(decision.reply).slice(0, 20))) {
-      await page.evaluate((text) => {
-        const el = document.querySelector("textarea[class*='chatInputTextarea']");
-        if (!el) return;
-        const setter = Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype, "value").set;
-        setter.call(el, text);
-        el.dispatchEvent(new Event("input", { bubbles: true }));
-        el.dispatchEvent(new Event("change", { bubbles: true }));
-      }, decision.reply);
-      await page.waitForTimeout(400);
-      inputVal = (await ta.inputValue().catch(() => "")) || "";
-    }
+    const inputVal = await ta.inputValue();
+    assertReplyDraft(inputVal, decision.reply);
     // 3) 选主发送按钮：文本精确「发送」、可见且 enabled；排除快捷回复/推荐语面板内的按钮，多匹配取与输入框几何最近。
     // 2026-10-17：美团前端组件库升级（roo-*），发送按钮 class 由 btn-send 变为 roo-btn roo-btn-brand roo-btn-normal，
     // 原 button.btn-send 定位归零致 send-button-not-enabled（15:00/17:00 档误报，页面本身正常）。
@@ -246,41 +251,58 @@ async function processCards(page, identities, receipt, now, done, view = "未回
     if (candidates.length === 0) throw new Error("send-button-not-enabled");
     const dist = (b) => Math.hypot(b.x + b.width / 2 - (taBox.x + taBox.width / 2), b.y + b.height / 2 - (taBox.y + taBox.height / 2));
     candidates.sort((a, b) => dist(a.box) - dist(b.box));
-    await candidates[0].el.click({ timeout: 5000 });
-    const rightAfterClick = (await readConversation(page)).filter((x) => x.side === "right").slice(-1)[0]?.text || null;
-    // 4) 回显核验（最多 ~10s）；匹配前 12 字 + 去标点版本，容错美团渲染/富文本差异。
-    const probe = norm(decision.reply).slice(0, 12);
+    let rightAfterClick = null, rightAfterPoll = null;
+    let submitDispatched = false;
+    const probe = norm(decision.reply);
+    const priorEchoCount = messages.filter(x => x.side === 'right' && norm(x.text).includes(probe)).length;
+    const submission = await submitReplyOnce(submissions, { sessionId, customerText, reply: decision.reply }, async () => {
+      assertReplyDraft(await ta.inputValue(), decision.reply);
+      if (await card.count() !== 1) throw Error("customer-session-id-changed-before-submit");
+      submitDispatched = true;
+      await candidates[0].el.click({ timeout: 5000 });
+    }, async () => {
+      rightAfterClick = (await readConversation(page)).filter((x) => x.side === "right").slice(-1)[0]?.text || null;
+    // 只读回显核验：整条回复正文或去标点全文；不再用前缀冒充完整回复。
     const strip = (s) => norm(s).replace(/[，。、！？；：,.!?;:\s]/g, "");
-    const probePlain = strip(decision.reply).slice(0, 12);
-    const echoHit = (after) => after.some((x) => x.side === "right" && (norm(x.text).includes(probe) || strip(x.text).includes(probePlain)));
+    const probePlain = strip(decision.reply);
+    const echoHit = (after) => after.filter((x) => x.side === "right" && (norm(x.text).includes(probe) || strip(x.text).includes(probePlain))).length > priorEchoCount;
     let echoed = false;
     for (let t = 0; t < 12 && !echoed; t++) {
       await page.waitForTimeout(800);
       echoed = echoHit(await readConversation(page));
     }
-    // 5) Enter 兜底：点按钮未回显时，对输入框按 Enter 再核验一轮（部分 IM 需回车触发提交）。
-    if (!echoed) {
-      await ta.press("Enter");
-      for (let t = 0; t < 6 && !echoed; t++) {
-        await page.waitForTimeout(800);
-        echoed = echoHit(await readConversation(page));
-      }
-    }
-    const rightAfterPoll = (await readConversation(page)).filter((x) => x.side === "right").slice(-1)[0]?.text || null;
+      rightAfterPoll = (await readConversation(page)).filter((x) => x.side === "right").slice(-1)[0]?.text || null;
     // 信号2（大同 2026-10-04 铁律：任何迹象探查到发送成功就算成功）：
     // 回显未逐字命中时，检查会话是否已从「未回复」列表消失——实测打开会话不移出队列、
     // 只有回复成功才移出 ⇒ 消失即「已回复」的平台铁证，与回显等价判成功。
     let verifiedBy = echoed ? "echo" : null;
     if (!echoed && view === "未回复") {
       const idToken = (decision.session.match(/[^\s（(]{1,6}\*\*/) || [""])[0];
-      const storeToken = (decision.session.match(/[（(]([^（）()]{2,30})[）)]\s*$/) || ["", ""])[1];
       for (let t = 0; t < 3 && !verifiedBy && idToken; t++) {
         await page.waitForTimeout(1500);
         try {
+          const state = await createPlaywrightDriver(page).readState();
+          if (state?.activeMainTabs?.join('|') !== '全部顾客消息' || state?.activeFilters?.join('|') !== '未回复') break;
           const cards = await collectAllCards(page);
-          if (!cards.some((c) => c.includes(idToken) && (!storeToken || c.includes(storeToken)))) verifiedBy = "list-gone";
+          if (!cards.some((c) => c.sessionId === sessionId)) verifiedBy = "list-gone";
         } catch {}
       }
+    }
+      return verifiedBy;
+    });
+    receipt.replySubmissions ??= [];
+    receipt.replySubmissions.push({ session: decision.session, state: submission.state,
+      file: submission.file, newSubmitCalls: submission.newSubmitCalls, reason: submission.reason });
+    if (submission.newSubmitCalls !== 1) {
+      if (submission.state !== "verified") receipt.verificationPending.push({session: decision.session, reason: submission.reason});
+      continue;
+    }
+    const verifiedBy = submission.verifiedBy;
+    const echoed = verifiedBy === "echo";
+    if (!verifiedBy) receipt.verificationPending.push({ session: decision.session, reason: submission.reason });
+    if (!submitDispatched) {
+      receipt.failed.push({ session: decision.session, reason: "reply-pre-submit-binding-changed", newSubmitCalls: 0 });
+      continue;
     }
     const sentAt = shanghaiNow();
     // 铁律（2026-10-04 用户明确）：一旦点击发送就必须记账 md——核验只是二次自检，
@@ -291,7 +313,7 @@ async function processCards(page, identities, receipt, now, done, view = "未回
       : verifiedBy === "list-gone"
         ? "已发送；会话已移出待回复列表（回复成功的平台铁证），回显未逐字命中"
         : "已点击发送；回显与列表消失信号均未探查到，需人工在美团后台确认是否真实发出";
-    await appendLedger({
+    await writeLedger({
       date: receipt.date, sentAt: sentAt.clock,
       session: decision.session, store: decision.session.split("（")[1]?.replace("）", "") || "未知门店",
       question: decision.customerText || norm(decision.card).slice(0, 60), reply: decision.reply,
@@ -338,7 +360,7 @@ async function main() {
     console.log(JSON.stringify({ ok: false, skipped: true, reason: "post-lease-busy", dryRun: DRY }));
     return;
   }
-  const receipt = { ok: true, dryRun: DRY, date: now.date, gate: null, views: [], scanned: 0, candidateCount: 0, decisions: [], sent: [], failed: [] };
+  const receipt = { ok: true, dryRun: DRY, date: now.date, gate: null, views: [], scanned: 0, candidateCount: 0, decisions: [], sent: [], failed: [], verificationPending: [] };
   try {
     const { browser } = await connectToPost();
     const pages = browser.contexts().flatMap((c) => c.pages());
@@ -370,6 +392,8 @@ async function main() {
       const checked = await processCards(page, identities, receipt, now, done, view);
       receipt.views.push({ view, total: identities.length, checked });
     }
+    receipt.executionComplete = !receipt.views.some(v => v.error);
+    receipt.verificationComplete = receipt.verificationPending.length === 0 && receipt.failed.length === 0;
     // 真实候选计数（已核验待回复 = qualify 数）落盘，供 step3 矛盾检测：
     // 候选>0 却无记账（ledgerRows=0）→ 当轮 FAIL + CRITICAL（方案 §52②）。
     receipt.candidateCount = receipt.decisions.filter((d) => d.qualify).length;
@@ -377,7 +401,9 @@ async function main() {
       const scanPath = new URL(`../records/.last-scan-${now.date}.json`, import.meta.url);
       await fs.writeFile(scanPath, JSON.stringify({
         date: now.date, scanned: receipt.scanned, candidateCount: receipt.candidateCount,
-        ledgerRows: receipt.sent.length, unverifiedCount: receipt.sent.filter((s) => !s.verifiedBy).length, views: receipt.views, ts: Date.now(),
+        ledgerRows: receipt.sent.length, unverifiedCount: receipt.sent.filter((s) => !s.verifiedBy).length,
+        verificationPendingCount: receipt.verificationPending.length, verificationComplete: receipt.verificationComplete,
+        views: receipt.views, ts: Date.now(),
       })).catch(() => {});
     }
     // 队列门禁复位到「未回复」视角，保持工作台状态一致（只点已活动的标签，幂等）
@@ -392,7 +418,7 @@ async function main() {
   }
 }
 
-main().catch((e) => {
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) main().catch((e) => {
   console.error(JSON.stringify({ ok: false, reason: String(e?.message || e).slice(0, 300) }));
   process.exit(1);
 });

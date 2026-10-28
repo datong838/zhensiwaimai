@@ -1,0 +1,24 @@
+✔ full draft contract preserves user text and rejects prefix-only draft (0.525667ms)
+✔ exact session ID and bounded original text required (0.15425ms)
+✔ one submit, proof=echo (23.835875ms)
+✔ one submit, proof=list-gone (11.617083ms)
+✔ one submit, proof=null (9.480916ms)
+✔ one submit, proof=weak-prefix (10.056375ms)
+✔ submission exception is unknown and never invokes second send (10.914458ms)
+✔ verification exception remains unknown after exactly one send (9.548834ms)
+✔ two concurrent claimers have one physical submission call (23.000292ms)
+✔ crash after durable intent is read-only; no date/run-key bypass (1.3325ms)
+✔ bad prior record, changed reply and source collision cannot create new attempt (8.68875ms)
+✔ different session or real distinct customer message is independent (27.905542ms)
+✔ original processCards one submit with echo=false (13.001458ms)
+✔ original processCards one submit with echo=true (11.085083ms)
+✔ existing user draft stops before typing, intent or send (1.162833ms)
+✔ ambiguous session cards stop before opening or sending (0.532291ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 361.49325

@@ -197,3 +197,10 @@
 原两处store-inspection解析链接已由宿主库切仓内vendor相对路径；补齐sharp及其五个独立运行依赖，共125文件19,730,995字节，逐文件与原包SHA一致，许可证随包保存，未搬智能体引擎。原419份已登记库/三流业务资料/manifest/posts/control不变；三个流保持停用。链接维护7项（缺失新机、幂等、外来链接、真实目录、忙、启用、漂移及部分失败回滚场景）、四项原合同回归通过，原44行模板含空项输出及真实四图拼图验证通过，22项当前依赖基线通过。旧首店测试所需09月facts-final.json原已不存在，保留失败日志，不复造已清理业务资料、不写通过。
 
 新增runtime/maintain_store_inspection_dependencies.py只读/显式--apply维护本流两链接；仅精确原链接或缺失可恢复，原主任忙或三流启用拒绝。native库仅darwin-arm64实证，其他平台及异机完整安装未验收。无生产/浏览器/手机/发送/主任重启，不能据此认定巡店已上线或完整Goal完成。方案docs/solutions/20261028-暂停巡店图片库归仓方案.md；证据runtime/state/inspection-library-consolidation-20261028/final-audit.json。
+
+
+## 10月28日09:28客服一次提交预防修复
+
+原执行器存在按钮提交后无回显再按Enter分支，已移除；采用真实卡片19位DOM id精确定位，原输入必须空、回复全文一致，禁止setter补写和前缀代替全文。新增程序内回复意图：会话ID与顾客末条文本哈希绑定，不含轮次/日期；提交前独占创建，已有attempted/unknown/verified或坏记录仅只读，未知不重发；自己先前完整兜底回复即使昵称小美也按已回复排除。回显改为新增全文，旧列表消失信号只读且需原未回复队列仍选中、精确id消失；原资格/话术/班表/附件不扩大。
+
+19新增含原processCards假页面真实调用链、并发/旧意图/跨日/异常/草稿/前缀/唯一ID等，原队列/风控/附件3套共22个Node测试条目通过，原岗位认证2条及共享摘要通过；131份原记录/manifest/posts/control SHA不变，真实回复/新生产意图/浏览器改动/主任重载0。新增executionComplete/verificationComplete/verificationPending只分开执行与核验，CLI退出不证明全部送达；12点原主任实际验收待到点。旧客户历史不重建，资格时刻/严重事项与虚拟列表全量仍继续审查，不能据本批称客服全链已验收。方案docs/solutions/20261028-客服回复一次提交与跨轮防重.md；证据runtime/state/customer-reply-single-submit-20261028/final-audit.json。

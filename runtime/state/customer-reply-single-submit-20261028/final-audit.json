@@ -1,0 +1,27 @@
+{
+  "at": "2026-10-28T09:28:21.955078+08:00",
+  "originalRecordsUnchanged": 131,
+  "originalRecordsSha256Unchanged": true,
+  "newTests": 19,
+  "originalTestSuites": 3,
+  "nodeTestCasesPassed": 22,
+  "sharedDependencies": "PASS",
+  "postDependencies": "PASS",
+  "sourceSha256": {
+    "skills/workflows/meituan-intelligent-customer-service/scripts/reply_unanswered_sessions.mjs": "f57d019d822651dca0ed1a843d476ca6db9bc31d2d003d75bc02a03a61afc22a",
+    "skills/workflows/meituan-intelligent-customer-service/scripts/reply_submission.mjs": "cb6e4ff92d0bd956fdf3595491e4560e65b341d168ee5dc43128569d057ec346",
+    "skills/workflows/meituan-intelligent-customer-service/scripts/test_reply_submission.mjs": "d28dc59f5101b1e8710e6cb6ea6c039677d69341768f3247f91c13a1506fcfb9"
+  },
+  "oldReplySourceSha256": "65b45cdb3051b49bc1c42cdccf00cd5b5656f143313444756cc5f92829e62a8e",
+  "newProductionReplyIntentFiles": 0,
+  "productionReplies": 0,
+  "browserMutations": 0,
+  "originalQueueOrLedgerChanges": 0,
+  "directorRestarted": false,
+  "acceptance": "await original 12:00 real scheduled run; no early customer action",
+  "remainingScope": [
+    "existing historical customer submissions not reconstructed",
+    "qualification time/serious-risk semantics and full virtual-list coverage remain under review",
+    "real reply and original ledger/file delivery not yet accepted by this offline test"
+  ]
+}
