@@ -1,0 +1,42 @@
+{
+  "at": "2026-10-28T17:48:23.707167+08:00",
+  "status": "known-update-mask-fixed-other-page-failures-remain-under-investigation",
+  "rootCause": "exact branding upgrade announcement intercepted pointer events; visible/enabled button was not clickable",
+  "isolatedTests": {
+    "upgradeNotice": 31,
+    "core": 77,
+    "readiness": 44,
+    "pythonDelivery": 42
+  },
+  "realZeroSubmitValidation": {
+    "at": "2026-10-28T09:46:24.048Z",
+    "ok": true,
+    "shopId": "1365714960",
+    "before": 1,
+    "notice": {
+      "dismissed": true,
+      "basis": "exact-known-brand-upgrade-image-and-controls"
+    },
+    "after": 0,
+    "trial": "passed-no-click",
+    "productSubmissions": 0,
+    "sendAttempts": 0
+  },
+  "originalBusinessFilesUnchanged": 264,
+  "sourceShaUpdate": {
+    "path": "scripts/quality_optimizer.mjs",
+    "before": "1dfb5d0532c11acd6fe0a53354b0bb0c3c2b7a8c6bd48e8383cac4ef47115cf5",
+    "after": "1f49cf670ab072a520de0a44cdd4f8ec961d504e7945b8c1ee3e4c0f8dd3f12b"
+  },
+  "other3SourceHashesAndPolicyFieldsUnchanged": true,
+  "own4AndSharedGatePassed": true,
+  "initialTestFixtureFailure": "Existing fake detail lacked locator for new no-notice check. Added zero-count locator stub only; original77 expectations unchanged.",
+  "maintenanceProductSubmissions": 0,
+  "maintenanceSendAttempts": 0,
+  "oldStateCursorAndReportModified": false,
+  "remaining": [
+    "Classify other readiness/stage timeout errors separately; this one live notice proof does not prove them solved.",
+    "Today original single traversal and already-delivered failed records preserved; no cursor rewind, failure reclassification or replay.",
+    "Future natural original task must prove actual optimization/receipt after this code change."
+  ]
+}

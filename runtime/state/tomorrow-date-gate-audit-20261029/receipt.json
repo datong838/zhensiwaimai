@@ -1,0 +1,51 @@
+{
+  "observedAt": "2026-10-28T16:58:31.461026+08:00",
+  "forecastRunDate": "2026-10-29",
+  "forecastDataDate": "2026-10-28",
+  "scope": "static review and original isolated date-guard suite; not a future production receipt or release authorization",
+  "currentPolicyStatus": "UNSEALED_ACCEPTANCE",
+  "currentAllowedBusinessDate": "2026-10-27",
+  "currentPolicySha256": "d8d1369d7b3ad6d148b2111351198fae3713957b6c2b6f088e8257fc05aab947",
+  "reviewFindings": [
+    "execute detects a later business date before allocation and invokes original prepareUnsealedAcceptance.",
+    "original maintainer uses generic inspectIndependentBusinessDay and rechecks absence before policy transition.",
+    "historic fixed25-to26 helper is not the generic new-day path; no fake user acceptance or old unknown resolution is needed."
+  ],
+  "originalSuiteResults": {
+    "datedNegativeCases": 32,
+    "independentBusinessDayScenarios": 12,
+    "includesMonthBoundary": true,
+    "productionActions": 0
+  },
+  "forecastPaths": [
+    {
+      "path": ".local/runs/daily-negative-reviews/20261028",
+      "exists": false
+    },
+    {
+      "path": "outputs/yesterday-negative-20261028",
+      "exists": false
+    },
+    {
+      "path": ".local/state/negative-review-send-shanghai-zhensi-operations-ding-fandang-v1.desktop-attempts/negative-review-2026-10-28.json",
+      "exists": false
+    },
+    {
+      "path": ".local/state/negative-review-summary-send-shanghai-zhensi-operations-ding-fandang-v1.desktop-attempts/negative-review-summary-2026-10-28.json",
+      "exists": false
+    }
+  ],
+  "sourceSha256": {
+    "skills/workflows/daily-negative-reviews/scripts/workflow_executor.mjs": "9b286a97caa463320009592573c92350598ba381eecd46f3df881d4f05320f86",
+    "skills/workflows/daily-negative-reviews/scripts/maintenance_executor.mjs": "637bf9c5d14666191af264df5bfd03db3880b20ee834842e932a2ca55e36c65e",
+    "skills/workflows/daily-negative-reviews/scripts/dated_acceptance_evidence.mjs": "4fd825c2964a24c55e51d1dd2c8ad7cb955863605059d6e49d62fc1f3667efa8",
+    "skills/workflows/daily-negative-reviews/scripts/test_dated_acceptance_evidence.mjs": "f2534aae6af82d21008ae85cc3bfdc20b912842c9e095b86961a5e91790a31b0"
+  },
+  "policyModified": false,
+  "futureProductionCreated": false,
+  "sendAttempts": 0,
+  "limitations": [
+    "Only this negative-analysis date gate is covered here; not all24 next-day dynamic blockers.",
+    "Actual next-day source/auth/delivery and original guard results must be checked at the real date."
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "skill": "daily-taobao-download-to-jinsha",
+  "ledger_name": "淘宝昨日报表下载上传金鲨（每日13:00）",
+  "schedule": "每日13:00",
+  "dev_state": "active",
+  "status": "FAILED",
+  "category": "RECOVERABLE",
+  "detail": "stage=wechat-send-failed (receipt:stage) phase_last=completed [policy-retry: 认知层白名单允许自动重试] [note: 微信发送阶段失败，结合 phase_last 定位具体子步骤。]",
+  "next_action": "重试预算耗尽：看护代理读日志决定再等冷却重跑或跳过",
+  "attempts": 1,
+  "max_retries": 0,
+  "duration_seconds": 0.32,
+  "started_at": "2026-10-28T17:45:04",
+  "finished_at": "2026-10-28T17:45:05",
+  "triggered_by": "daemon",
+  "logs": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-28/daily-taobao-download-to-jinsha--20261028-174504--a1--s1.log"
+  ],
+  "fail_signal": {
+    "kind": "stage",
+    "code": "wechat-send-failed",
+    "phase_last": "completed"
+  }
+}

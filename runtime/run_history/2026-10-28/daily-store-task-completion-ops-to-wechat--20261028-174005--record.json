@@ -1,0 +1,23 @@
+{
+  "skill": "daily-store-task-completion-ops-to-wechat",
+  "ledger_name": "淘宝闪购门店经营任务完成率小组统计（每日12:00）",
+  "schedule": "每日12:00",
+  "dev_state": "active",
+  "status": "FAILED",
+  "category": "UNKNOWN",
+  "detail": "reason=prior-attempt-requires-read-only-reconciliation (receipt:reason)",
+  "next_action": "看护代理读日志定位根因后升级处理",
+  "attempts": 1,
+  "max_retries": 0,
+  "duration_seconds": 0.13,
+  "started_at": "2026-10-28T17:40:05",
+  "finished_at": "2026-10-28T17:40:05",
+  "triggered_by": "daemon",
+  "logs": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-28/daily-store-task-completion-ops-to-wechat--20261028-174005--a1--s1.log"
+  ],
+  "fail_signal": {
+    "kind": "reason",
+    "code": "prior-attempt-requires-read-only-reconciliation"
+  }
+}

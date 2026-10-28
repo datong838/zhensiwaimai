@@ -30,7 +30,7 @@ select=selectionFrame({unavailable:true});assert.equal((await prepareSelection(s
 console.log(JSON.stringify({ok:true,allTests:tests,selectionTests:4,browserActions:0,sendAttempts:0}));
 const {productFrame}=await import('../scripts/quality_optimizer.mjs');
 var titleReads=0,readyChecks=0;const actualFrame={url:()=> 'https://r.ele.me/napos-goods-quality-pc/rectify/home',getByText:()=>({waitFor:async()=>{readyChecks++;if(readyChecks===1)throw Error('slow initial frame')}})};
-const detail={url:()=> 'https://melody.shop.ele.me/app/shop/1356051667/food-rectify',frames:()=>[actualFrame],title:async()=>{titleReads++;return titleReads===1?'商家版':'已变化的新门店名称'}};
+const detail={url:()=> 'https://melody.shop.ele.me/app/shop/1356051667/food-rectify',frames:()=>[actualFrame],title:async()=>{titleReads++;return titleReads===1?'商家版':'已变化的新门店名称'},locator:selector=>{assert.equal(selector,'[class^="updateModalWrapper__"]:visible');return {count:async()=>0};}};
 var identity={name:'点击前行名称'};assert.equal(await productFrame(detail,identity,Date.now()+5000),actualFrame);assert.equal(identity.shopId,'1356051667');assert.equal(identity.name,'已变化的新门店名称');assert.equal(identity.clickedRowName,'点击前行名称');assert.ok(readyChecks>1);tests++;
 const wrongOrigin={...detail,url:()=> 'https://outside.example/app/shop/1356051667/food-rectify'};await assert.rejects(()=>productFrame(wrongOrigin,{name:'门店'},Date.now()+250),/loading-timeout/);tests++;
 console.log(JSON.stringify({ok:true,allTests:tests,dynamicStoreNameTests:2,browserActions:0,sendAttempts:0}));

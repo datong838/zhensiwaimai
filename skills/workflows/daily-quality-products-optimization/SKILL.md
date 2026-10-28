@@ -18,4 +18,6 @@ description: 淘宝闪购低优质商品的全部门店商品整改优化；每�
 
 商品页总数、当前分页及可见商品schema先验证就绪；加载中、数量未读到、空白商品行或优化按钮缺失/重复，均不能直接记为“已检查、无可优化项”。在原商品读取预算内有界等待；有效零商品、完整无建议或唯一按钮明确disabled才可无需操作。预算耗尽诚实记录未能执行，原单轮不返扫。
 
+已绑定正确单店ID/稳定标题及商品整改frame后，原productFrame可处理已识别的品牌升级公告。仅精确公告背景图、唯一wrapper/mask/modal/updateBtn、无额外文本/原生控件的结构，允许可见“我知道了”节点点击一次并核实隐藏；未知素材/结构、重复或重现拒绝，不删除遮罩、不强制点击、不使用截图坐标。真实零提交验证已证明该公告会拦截优化按钮，关闭后trial可操作；这不等于商品优化已执行，也不授权回退当天cursor或重跑旧失败/unknown。
+
 2026-10-28通知恢复：新一轮send_one只在唯一原native send任务/response与完整群/当日事件/冻结载荷一致、sendAttempts严格整数0且无send-intent时，记schemaVersion=2的blocked恢复态。恢复复验原证据、request/completion/report SHA及原verified前件，跳过优化器和重新制表，仅发送尚未提交项；Excel已verified则只续文字，同一稳定事件。原request文件及载荷保持，仅本次实际调用更新deadline预算；newSendAttempts不含旧前件。旧unknown/attempted、有发送意图或计数不明仍只读，不迁移旧事实。42项Python及原Node回归通过，17点真实执行尚待。

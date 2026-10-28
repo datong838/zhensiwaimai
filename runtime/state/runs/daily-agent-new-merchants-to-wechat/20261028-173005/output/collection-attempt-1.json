@@ -1,0 +1,119 @@
+{
+  "ok": true,
+  "executor": "merchant-collector",
+  "browserController": "control-background-dedicated-chrome",
+  "profile": "taobao-agent-service",
+  "port": 9231,
+  "groupName": "电销+直播攻坚组",
+  "businessDate": "2026-10-28",
+  "runtimeModelDecisions": 0,
+  "stageMs": {
+    "background_preflight": 54,
+    "task_page": 233,
+    "navigation": 1198,
+    "date_filter": 1395,
+    "page_1_read": 404,
+    "selection_audit": 0
+  },
+  "stageResults": {
+    "background_preflight": "PASS",
+    "task_page": "PASS",
+    "navigation": "PASS",
+    "date_filter": "PASS",
+    "page_1_read": "PASS",
+    "selection_audit": "PASS"
+  },
+  "messages": [],
+  "frontmostBefore": "com.openai.codex",
+  "createdAt": "2026-10-28T09:30:10.483Z",
+  "cursor": {
+    "schemaVersion": 1,
+    "groupName": "电销+直播攻坚组",
+    "mode": "production",
+    "businessDate": "2026-10-28",
+    "merchantName": "澳门专送餐厅",
+    "merchantId": "154365660",
+    "recommendTime": "2026-10-28 16:40:57",
+    "tableOrder": 8,
+    "messageSha256": "8ed0b1bac554ae60e180c35779a91435233527fa78c8ecab42cb709867a596b5",
+    "sentAt": "2026-10-28T17:00:28+0800",
+    "verified": true
+  },
+  "cursorSource": "verified-history",
+  "filterStartDate": "2026-10-28",
+  "filterEndDate": "2026-10-28",
+  "dateFilter": "2026-10-28..2026-10-28",
+  "dateFilterVerified": true,
+  "pages": [
+    {
+      "page": 1,
+      "rowCount": 9,
+      "nextEnabled": false
+    }
+  ],
+  "paginationComplete": true,
+  "totalRows": 9,
+  "pendingRows": 8,
+  "targetCount": 0,
+  "selectionAudit": {
+    "totalRows": 9,
+    "pendingRows": 8,
+    "excludedAtOrBeforeCursor": 8,
+    "excludedAfterCursorNotPending": 1,
+    "targetCount": 0,
+    "rows": [
+      {
+        "merchantId": "154365660",
+        "recommendTime": "2026-10-28 16:40:57",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1359308645",
+        "recommendTime": "2026-10-28 15:26:46",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1364157790",
+        "recommendTime": "2026-10-28 14:46:49",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1365408044",
+        "recommendTime": "2026-10-28 14:43:39",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "547236519",
+        "recommendTime": "2026-10-28 11:33:02",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1346148036",
+        "recommendTime": "2026-10-28 10:39:18",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "1271448281",
+        "recommendTime": "2026-10-28 10:32:32",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "545376966",
+        "recommendTime": "2026-10-28 00:53:02",
+        "status": "待处理"
+      },
+      {
+        "merchantId": "546122889",
+        "recommendTime": "2026-10-28 17:10:34",
+        "status": "完成"
+      }
+    ]
+  },
+  "ascending": true,
+  "detailsVerified": true,
+  "url": "https://open.shop.ele.me/manager/agent/home",
+  "elapsedMs": 3607,
+  "frontmostAfter": "com.openai.codex",
+  "reviewPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261028-173005/output/collection-attempt-1.review.json",
+  "reviewMarkdownPath": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/runs/daily-agent-new-merchants-to-wechat/20261028-173005/output/collection-attempt-1.review.md"
+}

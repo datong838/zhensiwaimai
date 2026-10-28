@@ -1,0 +1,514 @@
+{
+  "schemaVersion": 3,
+  "executionPolicy": "single-pass-per-day-v1",
+  "day": "2026-10-28",
+  "workflowId": "daily-quality-products-optimization",
+  "stores": [
+    {
+      "shopId": "1365714960",
+      "name": "罐罐食咖·米线·饮品(顺屹店)",
+      "clickedRowName": "罐罐食咖·米线·饮品(顺屹店)",
+      "state": "blocked",
+      "firstSeenAt": "2026-10-28T09:02:07.386Z",
+      "attemptCount": 1,
+      "attemptsForVersion": 1,
+      "lastAttemptVersion": "7ec50439dce460090ec801386809d135c96e64078735141fb297147565fa355b",
+      "before": {
+        "total": 1,
+        "visibleProducts": 1
+      },
+      "selectionNote": {
+        "mode": "all-store-confirmation-required",
+        "note": "page-selection-control-unavailable"
+      },
+      "reason": "locator.click: Timeout 8000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: '一键优化类目详情', exact: true })\n    - locator resolved to <button type=\"button\" data-aspm-expo=\"true\" data-expo-sent=\"true\" class=\"ant-btn ant-btn-primary\" data-",
+      "errors": [
+        {
+          "at": "2026-10-28T09:02:18.714Z",
+          "reason": "locator.click: Timeout 8000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: '一键优化类目详情', exact: true })\n    - locator resolved to <button type=\"button\" data-aspm-expo=\"true\" data-expo-sent=\"true\" class=\"ant-btn ant-btn-primary\" data-",
+          "attempt": 1,
+          "codeVersion": "7ec50439dce460090ec801386809d135c96e64078735141fb297147565fa355b"
+        }
+      ]
+    },
+    {
+      "shopId": "546901789",
+      "name": "南稻是鲜碾米铺米乳(茶山里店)",
+      "clickedRowName": "南稻是鲜碾米铺米乳(茶山里店)",
+      "state": "blocked",
+      "firstSeenAt": "2026-10-28T09:02:21.342Z",
+      "attemptCount": 1,
+      "attemptsForVersion": 1,
+      "lastAttemptVersion": "7ec50439dce460090ec801386809d135c96e64078735141fb297147565fa355b",
+      "before": {
+        "total": 2,
+        "visibleProducts": 2
+      },
+      "selectionNote": {
+        "mode": "all-store-confirmation-required",
+        "note": "page-selection-control-unavailable"
+      },
+      "reason": "locator.click: Timeout 8000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: '一键优化类目详情', exact: true })\n    - locator resolved to <button type=\"button\" data-aspm-expo=\"true\" data-expo-sent=\"true\" class=\"ant-btn ant-btn-primary\" data-",
+      "errors": [
+        {
+          "at": "2026-10-28T09:02:32.885Z",
+          "reason": "locator.click: Timeout 8000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: '一键优化类目详情', exact: true })\n    - locator resolved to <button type=\"button\" data-aspm-expo=\"true\" data-expo-sent=\"true\" class=\"ant-btn ant-btn-primary\" data-",
+          "attempt": 1,
+          "codeVersion": "7ec50439dce460090ec801386809d135c96e64078735141fb297147565fa355b"
+        }
+      ]
+    },
+    {
+      "shopId": "543107652",
+      "name": "慕巴夫鲜花主题蛋糕(长城南路46号店)",
+      "clickedRowName": "慕巴夫鲜花主题蛋糕(长城南路46号店)",
+      "state": "blocked",
+      "firstSeenAt": "2026-10-28T09:02:35.642Z",
+      "attemptCount": 1,
+      "attemptsForVersion": 1,
+      "lastAttemptVersion": "7ec50439dce460090ec801386809d135c96e64078735141fb297147565fa355b",
+      "reason": "quality-ui-stage-timeout",
+      "errors": [
+        {
+          "at": "2026-10-28T09:02:45.760Z",
+          "reason": "quality-ui-stage-timeout",
+          "attempt": 1,
+          "codeVersion": "7ec50439dce460090ec801386809d135c96e64078735141fb297147565fa355b"
+        }
+      ],
+      "skipCount": 1
+    },
+    {
+      "shopId": "547086971",
+      "name": "海上三小姐·甜品·下午茶(前滩店)",
+      "clickedRowName": "海上三小姐·甜品·下午茶(前滩店)",
+      "state": "checked_no_action",
+      "firstSeenAt": "2026-10-28T09:02:48.418Z",
+      "attemptCount": 1,
+      "attemptsForVersion": 1,
+      "lastAttemptVersion": "7ec50439dce460090ec801386809d135c96e64078735141fb297147565fa355b",
+      "before": {
+        "total": 1,
+        "visibleProducts": 1
+      },
+      "reason": "no-executable-platform-suggestions",
+      "completedAt": "2026-10-28T09:02:48.944Z",
+      "skipCount": 2
+    },
+    {
+      "shopId": "514926680",
+      "name": "慕巴夫鲜花主题蛋糕(聚仁观澜店)",
+      "clickedRowName": "慕巴夫鲜花主题蛋糕(聚仁观澜店)",
+      "state": "blocked",
+      "firstSeenAt": "2026-10-28T09:02:51.569Z",
+      "attemptCount": 1,
+      "attemptsForVersion": 1,
+      "lastAttemptVersion": "7ec50439dce460090ec801386809d135c96e64078735141fb297147565fa355b",
+      "reason": "quality-ui-stage-timeout",
+      "errors": [
+        {
+          "at": "2026-10-28T09:03:01.595Z",
+          "reason": "quality-ui-stage-timeout",
+          "attempt": 1,
+          "codeVersion": "7ec50439dce460090ec801386809d135c96e64078735141fb297147565fa355b"
+        }
+      ]
+    },
+    {
+      "shopId": "1317834534",
+      "name": "皇冠蛋糕(坪洲店)",
+      "clickedRowName": "皇冠蛋糕(坪洲店)",
+      "state": "blocked",
+      "firstSeenAt": "2026-10-28T09:03:04.069Z",
+      "attemptCount": 1,
+      "attemptsForVersion": 1,
+      "lastAttemptVersion": "7ec50439dce460090ec801386809d135c96e64078735141fb297147565fa355b",
+      "reason": "quality-product-readiness-invalid",
+      "errors": [
+        {
+          "at": "2026-10-28T09:03:14.073Z",
+          "reason": "quality-product-readiness-invalid",
+          "attempt": 1,
+          "codeVersion": "7ec50439dce460090ec801386809d135c96e64078735141fb297147565fa355b"
+        }
+      ],
+      "skipCount": 2
+    },
+    {
+      "shopId": "1268164934",
+      "name": "老东家苏州汤包馆家常炒菜(共和新路店)",
+      "clickedRowName": "老东家苏州汤包馆家常炒菜(共和新路店)",
+      "state": "blocked",
+      "firstSeenAt": "2026-10-28T09:03:16.719Z",
+      "attemptCount": 1,
+      "attemptsForVersion": 1,
+      "lastAttemptVersion": "7ec50439dce460090ec801386809d135c96e64078735141fb297147565fa355b",
+      "reason": "quality-ui-stage-timeout",
+      "errors": [
+        {
+          "at": "2026-10-28T09:03:26.785Z",
+          "reason": "quality-ui-stage-timeout",
+          "attempt": 1,
+          "codeVersion": "7ec50439dce460090ec801386809d135c96e64078735141fb297147565fa355b"
+        }
+      ]
+    },
+    {
+      "shopId": "1346917204",
+      "name": "金永红·早餐铺",
+      "clickedRowName": "金永红·早餐铺",
+      "state": "blocked",
+      "firstSeenAt": "2026-10-28T09:03:29.333Z",
+      "attemptCount": 1,
+      "attemptsForVersion": 1,
+      "lastAttemptVersion": "7ec50439dce460090ec801386809d135c96e64078735141fb297147565fa355b",
+      "reason": "quality-ui-stage-timeout",
+      "errors": [
+        {
+          "at": "2026-10-28T09:03:39.429Z",
+          "reason": "quality-ui-stage-timeout",
+          "attempt": 1,
+          "codeVersion": "7ec50439dce460090ec801386809d135c96e64078735141fb297147565fa355b"
+        }
+      ],
+      "skipCount": 3
+    },
+    {
+      "shopId": "513021543",
+      "name": "三好·乐山凉拌菜(高新店·卤味·凉菜)(高新店)",
+      "clickedRowName": "三好·乐山凉拌菜(高新店·卤味·凉菜)(高新店)",
+      "state": "blocked",
+      "firstSeenAt": "2026-10-28T09:06:02.891Z",
+      "attemptCount": 1,
+      "attemptsForVersion": 1,
+      "lastAttemptVersion": "7ec50439dce460090ec801386809d135c96e64078735141fb297147565fa355b",
+      "reason": "quality-ui-stage-timeout",
+      "errors": [
+        {
+          "at": "2026-10-28T09:06:12.953Z",
+          "reason": "quality-ui-stage-timeout",
+          "attempt": 1,
+          "codeVersion": "7ec50439dce460090ec801386809d135c96e64078735141fb297147565fa355b"
+        }
+      ]
+    },
+    {
+      "shopId": "1356051667",
+      "name": "哈尔滨东北烧烤(黄泥磅店)",
+      "clickedRowName": "哈尔滨东北烧烤(黄泥磅店)",
+      "state": "checked_no_action",
+      "firstSeenAt": "2026-10-28T09:06:15.292Z",
+      "attemptCount": 1,
+      "attemptsForVersion": 1,
+      "lastAttemptVersion": "7ec50439dce460090ec801386809d135c96e64078735141fb297147565fa355b",
+      "before": {
+        "total": 1,
+        "visibleProducts": 1
+      },
+      "reason": "no-executable-platform-suggestions",
+      "completedAt": "2026-10-28T09:06:15.818Z",
+      "skipCount": 1
+    },
+    {
+      "shopId": "1344934717",
+      "name": "歪胖子·贵州酸汤牛肉米线(颛桥万达店)",
+      "clickedRowName": "歪胖子·贵州酸汤牛肉米线(颛桥万达店)",
+      "state": "blocked",
+      "firstSeenAt": "2026-10-28T09:06:18.949Z",
+      "attemptCount": 1,
+      "attemptsForVersion": 1,
+      "lastAttemptVersion": "7ec50439dce460090ec801386809d135c96e64078735141fb297147565fa355b",
+      "reason": "quality-ui-stage-timeout",
+      "errors": [
+        {
+          "at": "2026-10-28T09:06:28.970Z",
+          "reason": "quality-ui-stage-timeout",
+          "attempt": 1,
+          "codeVersion": "7ec50439dce460090ec801386809d135c96e64078735141fb297147565fa355b"
+        }
+      ]
+    },
+    {
+      "shopId": "1196584841",
+      "name": "南里山房淮扬菜(上海环宇城MAX店)",
+      "clickedRowName": "南里山房淮扬菜(上海环宇城MAX店)",
+      "state": "blocked",
+      "firstSeenAt": "2026-10-28T09:06:31.576Z",
+      "attemptCount": 1,
+      "attemptsForVersion": 1,
+      "lastAttemptVersion": "7ec50439dce460090ec801386809d135c96e64078735141fb297147565fa355b",
+      "before": {
+        "total": 3,
+        "visibleProducts": 3
+      },
+      "selectionNote": {
+        "mode": "all-store-confirmation-required",
+        "note": "page-selection-control-unavailable"
+      },
+      "reason": "locator.click: Timeout 8000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: '一键优化类目详情', exact: true })\n    - locator resolved to <button type=\"button\" data-aspm-expo=\"true\" class=\"ant-btn ant-btn-primary\" data-aspm-click=\"cx165347.d",
+      "errors": [
+        {
+          "at": "2026-10-28T09:06:43.116Z",
+          "reason": "locator.click: Timeout 8000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: '一键优化类目详情', exact: true })\n    - locator resolved to <button type=\"button\" data-aspm-expo=\"true\" class=\"ant-btn ant-btn-primary\" data-aspm-click=\"cx165347.d",
+          "attempt": 1,
+          "codeVersion": "7ec50439dce460090ec801386809d135c96e64078735141fb297147565fa355b"
+        }
+      ],
+      "skipCount": 1
+    },
+    {
+      "shopId": "542598222",
+      "name": "以记·化州香油鸡(石排店)",
+      "clickedRowName": "以记·化州香油鸡(石排店)",
+      "state": "blocked",
+      "firstSeenAt": "2026-10-28T09:07:46.963Z",
+      "attemptCount": 1,
+      "attemptsForVersion": 1,
+      "lastAttemptVersion": "7ec50439dce460090ec801386809d135c96e64078735141fb297147565fa355b",
+      "before": {
+        "total": 6,
+        "visibleProducts": 6
+      },
+      "selectionNote": {
+        "mode": "all-store-confirmation-required",
+        "note": "page-selection-control-unavailable"
+      },
+      "reason": "locator.click: Timeout 8000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: '一键优化类目详情', exact: true })\n    - locator resolved to <button type=\"button\" data-aspm-expo=\"true\" class=\"ant-btn ant-btn-primary\" data-aspm-click=\"cx165347.d",
+      "errors": [
+        {
+          "at": "2026-10-28T09:07:58.767Z",
+          "reason": "locator.click: Timeout 8000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: '一键优化类目详情', exact: true })\n    - locator resolved to <button type=\"button\" data-aspm-expo=\"true\" class=\"ant-btn ant-btn-primary\" data-aspm-click=\"cx165347.d",
+          "attempt": 1,
+          "codeVersion": "7ec50439dce460090ec801386809d135c96e64078735141fb297147565fa355b"
+        }
+      ],
+      "skipCount": 1
+    },
+    {
+      "shopId": "546721968",
+      "name": "张记老上海馄饨铺(德悦路店)",
+      "clickedRowName": "张记老上海馄饨铺",
+      "state": "checked_no_action",
+      "firstSeenAt": "2026-10-28T09:08:23.439Z",
+      "attemptCount": 1,
+      "attemptsForVersion": 1,
+      "lastAttemptVersion": "7ec50439dce460090ec801386809d135c96e64078735141fb297147565fa355b",
+      "before": {
+        "total": 1,
+        "visibleProducts": 1
+      },
+      "reason": "no-executable-platform-suggestions",
+      "completedAt": "2026-10-28T09:08:23.957Z"
+    },
+    {
+      "shopId": "1361665955",
+      "name": "笨手笨脚蛋炒饭·广式生滚粥",
+      "clickedRowName": "笨手笨脚蛋炒饭·广式生滚粥",
+      "state": "blocked",
+      "firstSeenAt": "2026-10-28T09:09:27.616Z",
+      "attemptCount": 1,
+      "attemptsForVersion": 1,
+      "lastAttemptVersion": "7ec50439dce460090ec801386809d135c96e64078735141fb297147565fa355b",
+      "before": {
+        "total": 5,
+        "visibleProducts": 5
+      },
+      "selectionNote": {
+        "mode": "all-store-confirmation-required",
+        "note": "page-selection-control-unavailable"
+      },
+      "reason": "locator.click: Timeout 8000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: '一键优化类目详情', exact: true })\n    - locator resolved to <button type=\"button\" data-aspm-expo=\"true\" class=\"ant-btn ant-btn-primary\" data-aspm-click=\"cx165347.d",
+      "errors": [
+        {
+          "at": "2026-10-28T09:09:38.914Z",
+          "reason": "locator.click: Timeout 8000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: '一键优化类目详情', exact: true })\n    - locator resolved to <button type=\"button\" data-aspm-expo=\"true\" class=\"ant-btn ant-btn-primary\" data-aspm-click=\"cx165347.d",
+          "attempt": 1,
+          "codeVersion": "7ec50439dce460090ec801386809d135c96e64078735141fb297147565fa355b"
+        }
+      ]
+    },
+    {
+      "shopId": "1346243073",
+      "name": "湘赣李大厨(中冶祥腾店)",
+      "clickedRowName": "湘赣李大厨(中冶祥腾店)",
+      "state": "checked_no_action",
+      "firstSeenAt": "2026-10-28T09:09:41.472Z",
+      "attemptCount": 1,
+      "attemptsForVersion": 1,
+      "lastAttemptVersion": "7ec50439dce460090ec801386809d135c96e64078735141fb297147565fa355b",
+      "before": {
+        "total": 2,
+        "visibleProducts": 2
+      },
+      "reason": "no-executable-platform-suggestions",
+      "completedAt": "2026-10-28T09:09:41.994Z"
+    },
+    {
+      "shopId": "546071810",
+      "name": "佳姑娘·地道湖南菜·长沙大排档(虹漕南路店)",
+      "clickedRowName": "佳姑娘·地道湖南菜·长沙大排档(虹漕南路店)",
+      "state": "blocked",
+      "firstSeenAt": "2026-10-28T09:09:45.387Z",
+      "attemptCount": 1,
+      "attemptsForVersion": 1,
+      "lastAttemptVersion": "7ec50439dce460090ec801386809d135c96e64078735141fb297147565fa355b",
+      "reason": "quality-product-readiness-invalid",
+      "errors": [
+        {
+          "at": "2026-10-28T09:09:55.391Z",
+          "reason": "quality-product-readiness-invalid",
+          "attempt": 1,
+          "codeVersion": "7ec50439dce460090ec801386809d135c96e64078735141fb297147565fa355b"
+        }
+      ],
+      "skipCount": 1
+    },
+    {
+      "shopId": "1358910856",
+      "name": "见味花甲(深圳印力中心店)",
+      "clickedRowName": "见味花甲(深圳印力中心店)",
+      "state": "blocked",
+      "firstSeenAt": "2026-10-28T09:10:01.499Z",
+      "attemptCount": 1,
+      "attemptsForVersion": 1,
+      "lastAttemptVersion": "7ec50439dce460090ec801386809d135c96e64078735141fb297147565fa355b",
+      "before": {
+        "total": 1,
+        "visibleProducts": 1
+      },
+      "selectionNote": {
+        "mode": "all-store-confirmation-required",
+        "note": "page-selection-control-unavailable"
+      },
+      "reason": "locator.click: Timeout 8000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: '一键优化类目详情', exact: true })\n    - locator resolved to <button type=\"button\" data-aspm-expo=\"true\" data-expo-sent=\"true\" class=\"ant-btn ant-btn-primary\" data-",
+      "errors": [
+        {
+          "at": "2026-10-28T09:10:13.051Z",
+          "reason": "locator.click: Timeout 8000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: '一键优化类目详情', exact: true })\n    - locator resolved to <button type=\"button\" data-aspm-expo=\"true\" data-expo-sent=\"true\" class=\"ant-btn ant-btn-primary\" data-",
+          "attempt": 1,
+          "codeVersion": "7ec50439dce460090ec801386809d135c96e64078735141fb297147565fa355b"
+        }
+      ]
+    },
+    {
+      "shopId": "1315239573",
+      "name": "御尚馒头 手工包子(八士店)",
+      "clickedRowName": "御尚馒头 手工包子(八士店)",
+      "state": "blocked",
+      "firstSeenAt": "2026-10-28T09:10:36.436Z",
+      "attemptCount": 1,
+      "attemptsForVersion": 1,
+      "lastAttemptVersion": "7ec50439dce460090ec801386809d135c96e64078735141fb297147565fa355b",
+      "reason": "quality-ui-stage-timeout",
+      "errors": [
+        {
+          "at": "2026-10-28T09:10:46.479Z",
+          "reason": "quality-ui-stage-timeout",
+          "attempt": 1,
+          "codeVersion": "7ec50439dce460090ec801386809d135c96e64078735141fb297147565fa355b"
+        }
+      ]
+    }
+  ],
+  "scopeFinished": true,
+  "cursor": {
+    "round": 1,
+    "page": 4,
+    "row": 6,
+    "newShops": 19,
+    "rowsVisited": 36
+  },
+  "accountLabel": "zhangyanru188:全部门店",
+  "lastSegmentTiming": {
+    "startedAt": "2026-10-28T09:13:07.648Z",
+    "navigationMs": 2988,
+    "pageRestoreMs": 938,
+    "processedRows": 1,
+    "elapsedMs": 4929
+  },
+  "lastPageRestore": {
+    "requestedPage": 4,
+    "jumps": [
+      {
+        "from": 1,
+        "to": 4,
+        "via": "visible-number"
+      }
+    ],
+    "durationMs": 938,
+    "fromPage": 1,
+    "toPage": 4
+  },
+  "latestTotal": 36,
+  "firstTotal": 36,
+  "rowErrors": [
+    {
+      "name": "慕巴夫鲜花主题蛋糕(凤凰壹品店)",
+      "round": 1,
+      "page": 1,
+      "row": 8,
+      "reason": "quality-store-rectify-loading-timeout",
+      "at": "2026-10-28T09:04:39.654Z"
+    },
+    {
+      "name": "慕巴夫鲜花主题蛋糕(凤凰壹品店)",
+      "round": 1,
+      "page": 2,
+      "row": 6,
+      "reason": "quality-store-rectify-loading-timeout",
+      "at": "2026-10-28T09:07:44.300Z"
+    },
+    {
+      "name": "慕巴夫鲜花主题蛋糕(华强国际公馆店)",
+      "round": 1,
+      "page": 2,
+      "row": 9,
+      "reason": "quality-store-rectify-loading-timeout",
+      "at": "2026-10-28T09:09:24.066Z"
+    },
+    {
+      "name": "湘霸王·湖南土菜·老坛剁椒鱼头(国顺东路店)",
+      "round": 1,
+      "page": 4,
+      "row": 1,
+      "reason": "quality-store-rectify-loading-timeout",
+      "at": "2026-10-28T09:11:48.249Z"
+    },
+    {
+      "name": "湘霸王·湖南土菜·老坛剁椒鱼头(本溪路店)",
+      "round": 1,
+      "page": 4,
+      "row": 4,
+      "reason": "quality-store-rectify-loading-timeout",
+      "at": "2026-10-28T09:12:50.427Z"
+    }
+  ],
+  "rounds": [
+    {
+      "round": 1,
+      "fromPage": 1,
+      "lastPage": 4,
+      "lastPageHasNext": false,
+      "rowsVisited": 36,
+      "platformTotal": 36,
+      "newShops": 19,
+      "rowErrors": 5,
+      "independentStores": 19,
+      "finishedAt": "2026-10-28T09:13:12.575Z"
+    }
+  ],
+  "finishedAt": "2026-10-28T09:13:12.575Z",
+  "scopeFinishBasis": {
+    "kind": "single-sequential-pass-reached-last-page",
+    "round": 1,
+    "fromPage": 1,
+    "lastPage": 4,
+    "lastPageHasNext": false,
+    "rowsVisited": 36,
+    "platformTotal": 36,
+    "newShops": 19,
+    "rowErrors": 5,
+    "independentStores": 19,
+    "finishedAt": "2026-10-28T09:13:12.575Z"
+  }
+}

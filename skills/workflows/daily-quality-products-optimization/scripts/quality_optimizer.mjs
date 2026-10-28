@@ -178,6 +178,7 @@ export async function productFrame(detail,store,deadline){
     const title=(await bounded(detail.title(),Math.min(deadline,Date.now()+3000))).trim();
     if(title&&title===previousTitle&&!['饿了么商家版','淘宝闪购商家版','商家版'].includes(title)){
      if(store.shopId&&store.shopId!==id)throw Error('quality-store-id-changed');
+     await dismissKnownBrandUpgrade(detail,deadline,id);
      store.clickedRowName=store.clickedRowName||store.name;store.shopId=id;store.name=title;return frames[0];
     }
     previousTitle=title;
@@ -186,6 +187,36 @@ export async function productFrame(detail,store,deadline){
   await new Promise(r=>setTimeout(r,200));
  }
  throw Error('quality-store-rectify-loading-timeout');
+}
+export const BRAND_UPGRADE_ASSET='https://gw.alicdn.com/imgextra/i1/O1CN01uJTrS61SuCQXOcnXz_!!6000000002306-2-tps-1032-554.png';
+const acknowledgedBrandUpgrade=new WeakSet();
+export function knownBrandUpgrade(value){
+ return value?.tag==='DIV'&&value.className?.startsWith('updateModalWrapper__')
+  &&value.descendants===3&&value.maskCount===1&&value.modalCount===1&&value.buttonCount===1
+  &&value.buttonTag==='DIV'&&value.buttonVisible===true&&value.nativeControls===0
+  &&typeof value.text==='string'&&value.text.trim()===''
+  &&value.image===`url("${BRAND_UPGRADE_ASSET}")`;
+}
+export async function dismissKnownBrandUpgrade(page,deadline,shopId){
+ const before=page.url();
+ if(!/^\d+$/.test(String(shopId))||new URL(before).origin!=='https://melody.shop.ele.me'
+   ||new URL(before).pathname!=='/app/shop/'+shopId+'/food-rectify')throw Error('quality-upgrade-page-invalid');
+ const wrapper=page.locator('[class^="updateModalWrapper__"]:visible'),count=await wrapper.count();
+ if(count===0)return {dismissed:false};
+ if(count!==1||acknowledgedBrandUpgrade.has(page))throw Error('quality-upgrade-notice-not-unique-or-reappeared');
+ const evidence=await wrapper.evaluate(e=>{
+  const modal=e.querySelectorAll('[class^="updateModal__"]'),buttons=e.querySelectorAll('[class^="updateBtn__"]'),button=buttons[0],rect=button?.getBoundingClientRect();
+  return {tag:e.tagName,className:e.className,descendants:e.querySelectorAll('*').length,
+   maskCount:e.querySelectorAll('[class^="updateModalMask__"]').length,modalCount:modal.length,
+   buttonCount:buttons.length,buttonTag:button?.tagName,buttonVisible:!!rect&&rect.width>0&&rect.height>0&&getComputedStyle(button).pointerEvents!=='none',
+   nativeControls:e.querySelectorAll('button,input,a,[role="button"]').length,text:e.innerText,
+   image:modal.length===1?getComputedStyle(modal[0]).backgroundImage:null};
+ });
+ if(!knownBrandUpgrade(evidence)||page.url()!==before)throw Error('quality-upgrade-notice-unrecognized');
+ acknowledgedBrandUpgrade.add(page);
+ await wrapper.locator('[class^="updateBtn__"]').click({timeout:budget(deadline,4000)});
+ await wrapper.waitFor({state:'hidden',timeout:budget(deadline,4000)});
+ return {dismissed:true,basis:'exact-known-brand-upgrade-image-and-controls'};
 }
 async function noModal(frame){if(await frame.locator('.ant-modal:visible,.ant-popover:visible').count())throw Error('quality-unrecognized-modal');}
 export async function readyOptimization(frame,deadline){
