@@ -1,0 +1,24 @@
+{
+  "skill": "meituan-intelligent-customer-service-12",
+  "ledger_name": "美团商家中心智能客服（12:00）",
+  "schedule": "每日12:00",
+  "dev_state": "active",
+  "status": "FAILED",
+  "category": "UNKNOWN",
+  "detail": "reason=page.evaluate: Error: customer-session-id-unavailable\n    at collect (eval at evaluate (:311:30), <anonymous>:16:48)\n    at eval (eval at evaluate (:311:30), <anonymous>:33:9)\n    at async <anonymous>:337:30 (receipt:reason)",
+  "next_action": "看护代理读日志定位根因后升级处理",
+  "attempts": 1,
+  "max_retries": 0,
+  "duration_seconds": 3.98,
+  "started_at": "2026-10-28T12:00:27",
+  "finished_at": "2026-10-28T12:00:31",
+  "triggered_by": "daemon",
+  "logs": [
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-28/meituan-intelligent-customer-service-12--20261028-120027--a1--s1.log",
+    "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/run_history/2026-10-28/meituan-intelligent-customer-service-12--20261028-120027--a1--s2.log"
+  ],
+  "fail_signal": {
+    "kind": "reason",
+    "code": "page.evaluate: Error: customer-session-id-unavailable\n    at collect (eval at evaluate (:311:30), <anonymous>:16:48)\n    at eval (eval at evaluate (:311:30), <anonymous>:33:9)\n    at async <anonymous>:337:30"
+  }
+}

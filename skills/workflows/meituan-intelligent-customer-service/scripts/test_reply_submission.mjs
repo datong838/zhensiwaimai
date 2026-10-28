@@ -159,7 +159,7 @@ test('card discovery keeps distinct exact IDs even when preview text is equal', 
   try {
     const result = await collectAllCards({ evaluate: callback => callback() });
     assert.equal(result.length, 2); assert.notEqual(result[0].sessionId, result[1].sessionId);
-    cards[1].id = '';
+    cards[1].id = 'invalid-nonempty-id';
     await assert.rejects(collectAllCards({ evaluate: callback => callback() }), /session-id-unavailable/);
   } finally { globalThis.document = previous; }
 });

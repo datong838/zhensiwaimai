@@ -164,7 +164,14 @@ export async function collectAllCards(page) {
       for (const el of document.querySelectorAll("[class*='sessionListItemContainer']")) {
         const t = norm(el.innerText);
         const sessionId = el.id;
-        if (!/^\d{19}$/.test(sessionId)) throw Error("customer-session-id-unavailable");
+        if (!/^\d{19}$/.test(sessionId)) {
+          if (sessionId !== '') throw Error("customer-session-id-unavailable");
+          const key = 'identity-unavailable:' + t;
+          visibleIds.push(key);
+          if (t && !seen.has(key)) { seen.add(key); order.push({sessionId:'',text:t,identityUnavailable:true,
+            textComplete:String(el.innerText ?? '').replace(/\s+/g,' ').trim().length <= 120}); }
+          continue;
+        }
         visibleIds.push(sessionId);
         if (t && !seen.has(sessionId)) { seen.add(sessionId); order.push({ sessionId, text: t }); }
       }
@@ -214,6 +221,40 @@ export async function processCards(page, identities, receipt, now, done, view = 
   let checked = 0;
   for (const entry of identities) {
     const { sessionId, text: identity } = entry;
+    if (entry.identityUnavailable === true && sessionId === '') {
+      receipt.scanned++;
+      let decision = null;
+      if (entry.textComplete === true) {
+        const unidentified = page.locator("[class*='sessionListItemContainer']:not([id]), [class*='sessionListItemContainer'][id='']");
+        const exact = [];
+        for (let i=0;i<await unidentified.count();i++) {
+          const item=unidentified.nth(i);
+          if (norm(await item.innerText())===identity) exact.push(item);
+        }
+        if (exact.length===1) {
+          await exact[0].click({timeout:5000});
+          await page.waitForTimeout(1000);
+          if (await dismissFraudAcknowledgement(page)) decision={qualify:false,reason:'platform-fraud-warning'};
+          else decision=judge(identity,await readConversation(page),now);
+        }
+      }
+      if (decision) {
+        decision.session=maskSession(identity);
+        decision.readOnlyMissingIdentity=true;
+        receipt.decisions.push(decision);
+        checked++;
+        if (decision.escalate) {
+          receipt.escalationRequired ??= [];
+          receipt.escalationRequired.push({session:decision.session,question:decision.customerText,reason:decision.reason});
+        }
+      }
+      if (!decision || decision.qualify) {
+        receipt.identityPending ??= [];
+        receipt.identityPending.push({session:maskSession(identity),reason:'platform-session-id-missing',newSubmitCalls:0});
+      }
+      // Never use a preview-derived identity to authorize a submission.
+      continue;
+    }
     if (!/^\d{19}$/.test(sessionId)) throw Error("customer-session-id-unavailable");
     if (done.has(sessionId)) continue;
     if (done.size >= MAX_SESSIONS) break;
@@ -421,7 +462,8 @@ async function main() {
       const checked = await processCards(page, identities, receipt, now, done, view);
       receipt.views.push({ view, total: identities.length, checked });
     }
-    receipt.executionComplete = !receipt.views.some(v => v.error);
+    receipt.executionComplete = !receipt.views.some(v => v.error) && !receipt.identityPending?.length;
+    receipt.ok = receipt.executionComplete;
     receipt.verificationComplete = receipt.verificationPending.length === 0 && receipt.failed.length === 0;
     // 真实候选计数（已核验待回复 = qualify 数）落盘，供 step3 矛盾检测：
     // 候选>0 却无记账（ledgerRows=0）→ 当轮 FAIL + CRITICAL（方案 §52②）。
@@ -434,6 +476,8 @@ async function main() {
         verificationPendingCount: receipt.verificationPending.length, verificationComplete: receipt.verificationComplete,
         escalationRequiredCount: receipt.escalationRequired?.length ?? 0,
         escalationRequired: receipt.escalationRequired ?? [],
+        executionComplete: receipt.executionComplete,
+        identityPending: receipt.identityPending ?? [],
         views: receipt.views, ts: Date.now(),
       })).catch(() => {});
     }
@@ -442,7 +486,7 @@ async function main() {
     // 先释放租约再显式退出：CDP 长连接会让事件循环挂着不退出，
     // daemon 步骤会一直等到 timeout（1800s），必须显式收口。
     await releasePostLease(lease).catch(() => {});
-    process.stdout.write(`${JSON.stringify(receipt)}\n`, () => process.exit(0));
+    process.stdout.write(`${JSON.stringify(receipt)}\n`, () => process.exit(receipt.executionComplete ? 0 : 1));
   } finally {
     // 兜底：异常路径仍在此释放；成功路径已释放，此处为幂等 no-op。
     await releasePostLease(lease).catch(() => {});

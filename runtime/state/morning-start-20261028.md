@@ -268,3 +268,12 @@ posts仅追加两申诉主名和12/15客服别名，22现役均能解析原互�
 ## 11:57客服列表完整性预防修复
 
 原扫描300轮后未到底仍返回部分列表，纯假DOM已复现。现从顶部开始，按有效视口80%滚动，到底后高度/可见ID稳定才返回，尾部新加载沿剩余预算继续；卡住/无视口/无法回顶部/耗尽预算均明确未完成，正常异常均复位原位置。原300预算与业务资格/发送不变。新6场景含小视口不跳行、非零起点恢复、延迟增量、卡住、持续增长预算拒绝、坏身份/无视口，连原26共32 Node条目通过；原post clean，128原record字节不变，浏览器/真实回复0。12点原主任验收待；实际诉求时间来源和虚拟化卡片复位定位仍独立审查，不把本批当客服全链完成。证据runtime/state/customer-list-coverage-20261028/final-audit.json。
+
+
+## 12:14午间实际执行与客服同班恢复
+
+12:00新商家原主任真实新发1条verified。完成率原全量908/908匹配，明细Excel一次verified，统计图一次提交unknown（native-ui-inline-image-not-exposed）不重发；原52?组统计以summary真实groups为准，不从旧表补值。
+
+客服12:00第一轮因一张10/27平台卡无公开会话ID，在扫描前失败，回复0。先隔离身份缺失保留pending，12:07恢复39真实ID卡+1待处理，但原stdout ok=false退出0仍记SUCCESS；保留旧收据不重写。进一步增加仅对完整可见文字精确唯一无ID卡的只读打开、原judge不合格可完成检查，合格仍缺ID只记pending不输入/不提交；CLI未完整退出1。37 Node条目通过、原post clean。12:12:12原主任再次接续当前最新12班，未回复51/正在接待13，去重54全部检查，候选0/发送0/身份pending0/executionComplete及verificationComplete均true，12:13:24 SUCCESS；无ID旧卡原实际只读结果no-customer-message，未生成回复，不以卡片文本代替发送身份。证据runtime/state/customer-list-coverage-20261028/1200-real-acceptance.json。12点本班完成，15/17点和非空单次提交实证仍待，不宣称当天客服完成。
+
+另已纯fixture复现daily_progress仅关键词verificationLevel也可视为已外发，属于展示依据过弱；原生产防重未受影响。下一批在最终台账前修复结构化证据识别，证据runtime/state/delivery-evidence-keyword-audit-20261028/counterexample.json。完成率在强制其他流周期又重采，未重发未知图；需前置原未决事件只读门，避免无谓重采/产物冲突。
