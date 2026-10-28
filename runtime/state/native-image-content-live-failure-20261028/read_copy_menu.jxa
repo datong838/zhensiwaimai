@@ -1,0 +1,16 @@
+/* Read only. No click, activation, key event, clipboard or historical task use. */
+function run() {
+ const p=Application('System Events').processes.byName('企业微信');
+ if(!p.exists()||p.bundleIdentifier()!=='com.tencent.WeWorkMac')throw Error('diagnostic-app-mismatch');
+ const result={frontmost:p.frontmost(),uiActions:0,sendAttempts:0,clipboardReads:0};
+ const edit=p.menuBars[0].menuBarItems.byName('编辑');
+ result.editExists=edit.exists();
+ if(!result.editExists)return JSON.stringify(result);
+ const menu=edit.menus[0],copy=menu.menuItems.byName('复制');
+ result.copyExists=copy.exists();
+ if(result.copyExists){
+  for(const name of ['role','enabled','name']){try{result[name]=copy[name]();}catch(error){result[name+'Error']=String(error);}}
+  for(const name of ['AXMenuItemCmdChar','AXMenuItemCmdModifiers']){try{result[name]=copy.attributes.byName(name).value();}catch(error){result[name+'Error']=String(error);}}
+ }
+ return JSON.stringify(result);
+}
