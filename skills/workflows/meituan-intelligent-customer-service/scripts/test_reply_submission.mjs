@@ -31,7 +31,7 @@ test('exact session ID and bounded original text required', () => {
 test('own prior fallback is a reply even when nickname contains 小美', () => {
   const fallback = '您好，理解这件事给您带来的不便，抱歉让您久等了。我会尽快联系商家核实处理；具体处理方式需要以门店确认的实际情况为准，您也可以直接联系门店，以便更快处理。';
   const decision = judge('甲** 11:00', [{ side: 'left', text: '少送米饭11:00' },
-    { side: 'right', nick: '商家总客服小美', text: fallback }], { h: 12, m: 0 });
+    { side: 'right', nick: '商家总客服小美', text: fallback }], { date: '2026-10-28', h: 12, m: 0 });
   assert.equal(decision.qualify, false); assert.match(decision.reason, /owner-human-reply-present/);
 });
 
@@ -121,7 +121,7 @@ function fakePage({ echo = false, draft = '', cardCount = 1 } = {}) {
     if (selector === 'button') return { filter: () => ({ count: async () => 1, nth: () => button }) };
     throw Error('unexpected locator:' + selector);
   }, evaluate: async callback => callback.toString().includes('.message-item')
-    ? [{ side: 'left', text: request.customerText }, ...(echo && state.sends ? [{ side: 'right', text: echo === 'prefix' ? state.reply.slice(0, 12) : state.reply }] : [])]
+    ? [{ side: 'left', text: request.customerText, timeSource: 'message-formattime', timeLabel: '10-28 11:00:00' }, ...(echo && state.sends ? [{ side: 'right', text: echo === 'prefix' ? state.reply.slice(0, 12) : state.reply }] : [])]
     : entries } };
 }
 
@@ -130,23 +130,23 @@ function receipt() { return { date: '2026-10-28', scanned: 0, decisions: [], sen
 for (const echo of [false, true, 'prefix']) test('original processCards one submit with echo=' + echo, async t => {
   const root = await temporary(t); const mock = fakePage({ echo }); let ledger = 0;
   const options = { submissions: root, appendLedger: async () => ledger++ };
-  const first = receipt(); await processCards(mock.page, mock.entries, first, { h: 12, m: 0 }, new Set(), '未回复', options);
+  const first = receipt(); await processCards(mock.page, mock.entries, first, { date: '2026-10-28', h: 12, m: 0 }, new Set(), '未回复', options);
   assert.equal(mock.state.sends, 1); assert.equal(mock.state.enters, 0); assert.equal(ledger, 1);
   assert.equal(first.verificationPending.length, echo === true ? 0 : 1);
-  const second = receipt(); await processCards(mock.page, mock.entries, second, { h: 15, m: 0 }, new Set(), '未回复', options);
+  const second = receipt(); await processCards(mock.page, mock.entries, second, { date: '2026-10-28', h: 15, m: 0 }, new Set(), '未回复', options);
   assert.equal(mock.state.sends, 1); assert.equal(mock.state.types, 1); assert.equal(ledger, 1);
 });
 
 test('existing user draft stops before typing, intent or send', async t => {
   const root = await temporary(t); const mock = fakePage({ draft: '用户草稿' });
-  await assert.rejects(processCards(mock.page, mock.entries, receipt(), { h: 12, m: 0 }, new Set(), '未回复',
+  await assert.rejects(processCards(mock.page, mock.entries, receipt(), { date: '2026-10-28', h: 12, m: 0 }, new Set(), '未回复',
     { submissions: root, appendLedger: async () => assert.fail('no ledger') }), /not-empty/);
   assert.equal(mock.state.types, 0); assert.equal(mock.state.sends, 0); assert.deepEqual(await fs.readdir(root), []);
 });
 
 test('ambiguous session cards stop before opening or sending', async t => {
   const root = await temporary(t); const mock = fakePage({ cardCount: 2 });
-  await assert.rejects(processCards(mock.page, mock.entries, receipt(), { h: 12, m: 0 }, new Set(), '未回复',
+  await assert.rejects(processCards(mock.page, mock.entries, receipt(), { date: '2026-10-28', h: 12, m: 0 }, new Set(), '未回复',
     { submissions: root }), /not-unique/);
   assert.equal(mock.state.sends, 0);
 });

@@ -1,0 +1,153 @@
+✔ small viewport scan covers every exact ID without 200px gaps (0.875625ms)
+✔ bottom delayed height growth is collected within the same original budget (0.448833ms)
+✔ nonzero starting viewport still scans prefix and restores original position (0.395667ms)
+✔ stalled scroll rejects partial list and restores viewport (0.106625ms)
+✔ continuous growth ends as incomplete at budget, never partial success (1.204625ms)
+✔ invalid card identity fails before any reply and invalid viewport is not complete (0.136042ms)
+✔ missing external identity is isolated without input or submission (0.361708ms)
+✔ whole discovery retains identifiable cards plus explicit missing-identity entry (0.478333ms)
+✔ unique full missing-ID card inspected read-only: 我不喜欢给差评，我也不想给差评，看怎么处理吧。 (10.37ms)
+✖ unique full missing-ID card inspected read-only: 少送米饭 11:00 (0.970375ms)
+✔ ambiguous missing-ID preview remains pending and is never opened (0.158333ms)
+{"ok":true,"tests":19,"sendAttempts":0,"productionWrites":0}
+✔ skills/workflows/meituan-intelligent-customer-service/scripts/test_daily_attachment_guard.mjs (75.047417ms)
+queue guard tests passed (7 cases)
+✔ skills/workflows/meituan-intelligent-customer-service/scripts/test_ensure_unanswered_queue.mjs (238.007667ms)
+PASS: notice whitelist, verification rejection, unique acknowledgement; no browser or sends
+✔ skills/workflows/meituan-intelligent-customer-service/scripts/test_fraud_acknowledgement.mjs (238.159334ms)
+✔ full draft contract preserves user text and rejects prefix-only draft (0.553959ms)
+✔ exact session ID and bounded original text required (0.156709ms)
+✔ own prior fallback is a reply even when nickname contains 小美 (0.312625ms)
+✔ one submit, proof=echo (28.250875ms)
+✔ one submit, proof=list-gone (12.311125ms)
+✔ one submit, proof=null (11.246041ms)
+✔ one submit, proof=weak-prefix (10.481208ms)
+✔ submission exception is unknown and never invokes second send (9.540292ms)
+✔ verification exception remains unknown after exactly one send (8.954208ms)
+✔ two concurrent claimers have one physical submission call (19.998958ms)
+✔ crash after durable intent is read-only; no date/run-key bypass (1.248208ms)
+✔ bad prior record, changed reply and source collision cannot create new attempt (8.931583ms)
+✔ different session or real distinct customer message is independent (23.861042ms)
+✖ original processCards one submit with echo=false (2.539709ms)
+✖ original processCards one submit with echo=true (1.035958ms)
+✖ original processCards one submit with echo=prefix (0.6285ms)
+✖ existing user draft stops before typing, intent or send (0.683875ms)
+✔ ambiguous session cards stop before opening or sending (0.520084ms)
+✔ card discovery keeps distinct exact IDs even when preview text is equal (0.3255ms)
+✔ explicit serious food, personal, payment and fraud cases never get generic fallback (0.814167ms)
+✖ ordinary eligible requests keep original path and timeout gates (1.092417ms)
+✔ existing human response still excludes without a new escalation (0.189208ms)
+✔ real processCards serious branch never locates input or creates intent or ledger (8.783833ms)
+ℹ tests 37
+ℹ suites 0
+ℹ pass 31
+ℹ fail 6
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 390.551708
+
+✖ failing tests:
+
+test at skills/workflows/meituan-intelligent-customer-service/scripts/test_conversation_list_coverage.mjs:56:90
+✖ unique full missing-ID card inspected read-only: 少送米饭 11:00 (0.970375ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-intelligent-customer-service/scripts/test_conversation_list_coverage.mjs:69:9)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at skills/workflows/meituan-intelligent-customer-service/scripts/test_reply_submission.mjs:130:45
+✖ original processCards one submit with echo=false (2.539709ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 1
+  
+      at TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-intelligent-customer-service/scripts/test_reply_submission.mjs:134:10)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at skills/workflows/meituan-intelligent-customer-service/scripts/test_reply_submission.mjs:130:45
+✖ original processCards one submit with echo=true (1.035958ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 1
+  
+      at TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-intelligent-customer-service/scripts/test_reply_submission.mjs:134:10)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at skills/workflows/meituan-intelligent-customer-service/scripts/test_reply_submission.mjs:130:45
+✖ original processCards one submit with echo=prefix (0.6285ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 1
+  
+      at TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-intelligent-customer-service/scripts/test_reply_submission.mjs:134:10)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at skills/workflows/meituan-intelligent-customer-service/scripts/test_reply_submission.mjs:140:1
+✖ existing user draft stops before typing, intent or send (0.683875ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-intelligent-customer-service/scripts/test_reply_submission.mjs:142:3)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /not-empty/,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at skills/workflows/meituan-intelligent-customer-service/scripts/test_serious_matter_policy.mjs:15:1
+✖ ordinary eligible requests keep original path and timeout gates (1.092417ms)
+  AssertionError [ERR_ASSERTION]: 少送一份米饭
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/meituan-intelligent-customer-service/scripts/test_serious_matter_policy.mjs:17:42)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

@@ -12,6 +12,7 @@ import { connectToPost } from "../../../posts/meituan-post/scripts/connect.mjs";
 import { acquirePostLease, releasePostLease } from "../../../posts/meituan-post/scripts/lease.mjs";
 import { runWithUnansweredQueue, dismissFraudAcknowledgement } from "./ensure_unanswered_queue.mjs";
 import { replyBinding, inspectReplySubmission, submitReplyOnce, assertReplyDraft } from "./reply_submission.mjs";
+import {latestCustomer, recentMetadata} from './message_time.mjs';
 const SUBMISSIONS = new URL("../records/reply-submissions/", import.meta.url).pathname;
 
 const TARGET_HOST = "waimaie.meituan.com";
@@ -48,7 +49,6 @@ const AUTO_RIGHT_RE = /自动回复|系统提示|已向顾客发起|已接单|�
 const ROBOT_RIGHT_RE = /\[AI客服\]|总部商家客服|商家客服小|小慧/;
 // 顾客侧的「非诉求」消息：订单咨询卡片模板、平台系统通知（含发票任务催促）。命中即不回。
 const NOTICE_LEFT_RE = /您收到一条|请及时点击|切勿直接在对话|下单时间|订单编号[:：]|我要咨询以下订单|以上是订单|订单详情/;
-const TIME_RE = /(\d{1,2}):(\d{2})/;
 
 function shanghaiNow() {
   const parts = new Intl.DateTimeFormat("en-CA", {
@@ -61,9 +61,8 @@ function shanghaiNow() {
 function norm(t) { return String(t ?? "").replace(/\s+/g, " ").trim(); }
 
 export function judge(cardText, messages, now) {
-  const leftMsgs = messages.filter((x) => x.side === "left" && norm(x.text));
   const rightTexts = messages.filter((x) => x.side === "right" && norm(x.text));
-  const lastCustomer = leftMsgs.length ? leftMsgs[leftMsgs.length - 1] : null;
+  const latest = latestCustomer(messages, now), lastCustomer = latest.message;
   const base = { card: norm(cardText).slice(0, 90), qualify: false, reason: "", reply: "", customerText: norm(lastCustomer?.text).slice(0, 80) };
   if (!lastCustomer) return { ...base, reason: "no-customer-message" };
   const text = norm(lastCustomer.text);
@@ -77,15 +76,10 @@ export function judge(cardText, messages, now) {
   if (human) return { ...base, reason: `owner-human-reply-present[right="${norm(human.text).slice(0, 40)}" nick=${norm(human.nick).slice(0, 20)}]` };
   if (ESCALATE_RE.test(text)) return { ...base, escalate: true, reason: "manual-review-required(食品安全/人身/支付/诈骗等严重事项)" };
   if (!QUALIFY_RE.test(text)) return { ...base, reason: "not-catering-request(保守不回)" };
-  // 超时：优先顾客最后一条消息内的时间，其次卡片预览时间；都没有 → 不作超时结论
-  let tm = text.match(TIME_RE);
-  if (!tm) tm = norm(cardText).match(TIME_RE);
-  if (!tm) return { ...base, reason: "no-parseable-time(不作超时结论)" };
-  const then = Number(tm[1]) * 60 + Number(tm[2]);
-  const nowMin = now.h * 60 + now.m;
-  if (nowMin - then < 10) return { ...base, reason: `not-yet-10min(${tm[0]})` };
+  if (latest.uncertain || latest.elapsedMs === null) return { ...base, reason: "no-parseable-message-time(不作超时结论)" };
+  if (latest.elapsedMs <= 10 * 60 * 1000) return { ...base, reason: `not-yet-over-10min(${lastCustomer.timeLabel})` };
   const reply = DELIVERY_NOTE_RE.test(text) ? REPLY_DELIVERY_NOTE : REPLY_DEFAULT;
-  return { ...base, qualify: true, reason: `qualified(${tm[0]}诉求超10min,无人工接管)`, reply };
+  return { ...base, qualify: true, reason: `qualified(${lastCustomer.timeLabel}诉求超10min,无人工接管)`, reply };
 }
 
 function createPlaywrightDriver(page) {
@@ -132,18 +126,37 @@ function createPlaywrightDriver(page) {
   };
 }
 
-async function readConversation(page) {
-  return page.evaluate(() => {
+export async function readConversation(page, now = shanghaiNow()) {
+  const metadata = await page.evaluate(() => [...document.querySelectorAll('.message-item')].flatMap((el, index) => {
+    const w = el.querySelector('.message-wrapper');
+    if (!w) return [];
+    const labels = [...w.querySelectorAll('.message-formattime')];
+    return [{index, id: el.id || el.querySelector('[data-message-id]')?.getAttribute('data-message-id') || '',
+      side: String(w.className).includes('right-message') ? 'right' : 'left',
+      timeLabel: labels.length === 1 ? (labels[0].textContent || '').trim() : ''}];
+  }));
+  const {selected, uncertain} = recentMetadata(metadata, now);
+  return page.evaluate(({metadata, selected, uncertain}) => {
     const n = (v) => String(v ?? "").replace(/\s+/g, " ").trim();
-    const items = [...document.querySelectorAll(".message-item")].slice(-40).map((el) => {
+    const all = [...document.querySelectorAll('.message-item')];
+    const current = all.flatMap((el, index) => {
+      const w = el.querySelector('.message-wrapper'); if (!w) return [];
+      const labels = [...w.querySelectorAll('.message-formattime')];
+      return [{index, id: el.id || el.querySelector('[data-message-id]')?.getAttribute('data-message-id') || '',
+        side: String(w.className).includes('right-message') ? 'right' : 'left',
+        timeLabel: labels.length === 1 ? (labels[0].textContent || '').trim() : ''}];
+    });
+    if (JSON.stringify(current) !== JSON.stringify(metadata)) throw Error('customer-message-time-snapshot-drift');
+    const items = selected.map(meta => {
+      const el = all[meta.index];
       const w = el.querySelector(".message-wrapper");
-      const side = w ? (String(w.className).includes("right-message") ? "right" : "left") : "unknown";
       const nick = n(w?.querySelector(".sender-nickname")?.innerText).slice(0, 40);
-      return { side, nick, text: n(el.innerText).slice(0, 400) };
+      return { side: meta.side, nick, text: n(el.innerText).slice(0, 400),
+        timeSource: 'message-formattime', timeLabel: meta.timeLabel, timeContextUncertain: uncertain };
     });
     // message-item 嵌套去重：保留相邻不重复项
-    return items.filter((x, i) => i === 0 || x.text !== items[i - 1].text || x.side !== items[i - 1].side);
-  });
+    return items.filter((x, i) => i === 0 || x.text !== items[i - 1].text || x.side !== items[i - 1].side || x.timeLabel !== items[i - 1].timeLabel);
+  }, {metadata, selected, uncertain});
 }
 
 // 全量收集当前视图的会话卡片：滚动到底逐屏收集并去重。
@@ -283,7 +296,7 @@ export async function processCards(page, identities, receipt, now, done, view = 
     }
     if (!decision.qualify || DRY) continue;
 
-    const customerText = norm(messages.filter(x => x.side === "left" && norm(x.text)).at(-1)?.text);
+    const customerText = norm(latestCustomer(messages, now).message?.text);
     const binding = replyBinding({ sessionId, customerText, reply: decision.reply });
     const prior = await inspectReplySubmission(submissions, binding);
     if (prior) {

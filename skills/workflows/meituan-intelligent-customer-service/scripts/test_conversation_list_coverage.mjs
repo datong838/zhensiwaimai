@@ -42,7 +42,7 @@ test('invalid card identity fails before any reply and invalid viewport is not c
 
 test('missing external identity is isolated without input or submission',async()=>{
  const receipt={scanned:0,decisions:[],sent:[],failed:[],verificationPending:[]};
- await processCards({locator(){assert.fail('missing-ID must not access controls')}},[{sessionId:'',text:'旧会话摘要',identityUnavailable:true}],receipt,{h:12,m:0},new Set());
+ await processCards({locator(){assert.fail('missing-ID must not access controls')}},[{sessionId:'',text:'旧会话摘要',identityUnavailable:true}],receipt,{date:'2026-10-28',h:12,m:0},new Set());
  assert.equal(receipt.identityPending.length,1);assert.equal(receipt.identityPending[0].newSubmitCalls,0);assert.equal(receipt.sent.length,0);
 });
 
@@ -62,9 +62,9 @@ for(const [question,pending] of [['我不喜欢给差评，我也不想给差评
    if(selector.includes(':not([id])'))return list;
    if(selector.startsWith('.roo-modal-dialog'))return {filter:()=>({count:async()=>0})};
    forbidden++;throw Error('missing ID must never access input or send');
- },waitForTimeout:async()=>{},evaluate:async()=>[{side:'left',text:question}]};
+ },waitForTimeout:async()=>{},evaluate:async()=>[{side:'left',text:question,timeSource:'message-formattime',timeLabel:'10-28 11:00:00'}]};
  const receipt={scanned:0,decisions:[],sent:[],failed:[],verificationPending:[]};
- await processCards(page,[{sessionId:'',text:identity,identityUnavailable:true,textComplete:true}],receipt,{h:12,m:0},new Set());
+ await processCards(page,[{sessionId:'',text:identity,identityUnavailable:true,textComplete:true}],receipt,{date:'2026-10-28',h:12,m:0},new Set());
  assert.equal(clicks,1);assert.equal(forbidden,0);assert.equal(receipt.sent.length,0);
  assert.equal(!!receipt.identityPending?.length,pending);assert.equal(receipt.decisions[0].readOnlyMissingIdentity,true);
 });
@@ -74,6 +74,6 @@ test('ambiguous missing-ID preview remains pending and is never opened',async()=
  const item={innerText:async()=>'同一预览',click:async()=>clicks++};
  const page={locator:()=>({count:async()=>2,nth:()=>item})};
  const receipt={scanned:0,decisions:[],sent:[],failed:[],verificationPending:[]};
- await processCards(page,[{sessionId:'',text:'同一预览',identityUnavailable:true,textComplete:true}],receipt,{h:12,m:0},new Set());
+ await processCards(page,[{sessionId:'',text:'同一预览',identityUnavailable:true,textComplete:true}],receipt,{date:'2026-10-28',h:12,m:0},new Set());
  assert.equal(clicks,0);assert.equal(receipt.identityPending.length,1);
 });
