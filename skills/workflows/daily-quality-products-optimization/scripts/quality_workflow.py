@@ -94,7 +94,8 @@ def single_pass_records(state,day,folder):
             optimized.append(store);label='已优化类目详情'
         elif store.get('state')=='checked_no_action':
             checked.append(store)
-            label=('已检查：仅图片问题，平台暂无自动优化建议；未修改图片' if store.get('reason')=='image-only-no-automatic-suggestions' else '已检查，无可优化项目')
+            label=('已检查：仅图片问题，平台暂无自动优化建议；未修改图片' if store.get('reason')=='image-only-no-automatic-suggestions'
+                   else '已检查：平台明确无问题商品' if store.get('reason')=='platform-explicit-no-problem-products' else '已检查，无可优化项目')
         elif store.get('state') in ('unknown','attempted') and real_daily_intent(store,day,folder):unconfirmed.append(store);label='已发起优化，结果未确认；今日未重复提交'
         else:
             failed.append(store);label=('商品整改页面未能加载，未执行优化' if 'loading-timeout' in store.get('reason','') else '本次操作未能完成，今日未重复尝试')

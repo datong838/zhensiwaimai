@@ -19,7 +19,9 @@ try{
  if(selected.length!==1)throw Error('exact-maintenance-page-not-unique');
  const page=selected[0],notice=await dismissKnownBrandUpgrade(page,Date.now()+10000,shopId);
  const frames=page.frames().filter(f=>{try{const u=new URL(f.url());return u.origin==='https://r.ele.me'&&u.pathname==='/napos-goods-quality-pc/rectify/home';}catch{return false;}});
- const result={at:new Date().toISOString(),shopId,notice,frameCount:frames.length,productSubmissions:0,sendAttempts:0};
+ const mainText=await page.locator('body').innerText({timeout:3000});
+ const result={at:new Date().toISOString(),shopId,notice,frameCount:frames.length,productSubmissions:0,sendAttempts:0,
+  title:await page.title(),mainSignals:['扫码登录','账号登录','验证码','没有权限','无效店铺','当前账号无法访问','商品整改','加载失败','加载中','网络异常'].filter(word=>mainText.includes(word))};
  if(frames.length===1){
   const frame=frames[0],samples=[];
   const observed={evaluate:async fn=>{const v=await frame.evaluate(fn);samples.push({total:v.total,page:v.page,hasNext:v.hasNext,loading:v.loading,

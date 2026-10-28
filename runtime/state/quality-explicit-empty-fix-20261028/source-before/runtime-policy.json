@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "workflowId": "daily-quality-products-optimization",
+  "browserPort": 9231,
+  "accountName": "zhangyanru188",
+  "scope": "all-stores",
+  "groupName": "上海臻肆外卖运营-盯个盯-饭敢当 💰发财精英荟💰",
+  "authorizationRef": "user-20261026-quality-products-all-stores-optimization-and-notice",
+  "runtimeModelDecisions": 0,
+  "files": {
+    "scripts/quality_core.mjs": "a207601abd6aeeabb58756d57c41516088d0279bafec38bcf91d4d3d71305e30",
+    "scripts/quality_optimizer.mjs": "193ba6013ee115dd19459cf4f942aea2ab33b145597718c04890fd428dc4ca3a",
+    "scripts/quality_workflow.py": "0efcc8320b16ca9620435b5d3ab09707f7aa7d6f29241179701a00b2272bdd72",
+    "scripts/quality_report.mjs": "0dc2bca01e1ccb981ef318006e9fdaac6ba8e71faaeb17b98921590fca58b8d7"
+  },
+  "validation": "single pass per day; stop at last page; errors recorded honestly; legacy verified delivery returns zero actions",
+  "executionPolicy": "single-pass-per-day-v1"
+}

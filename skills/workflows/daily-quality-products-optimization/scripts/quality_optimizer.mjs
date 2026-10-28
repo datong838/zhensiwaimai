@@ -26,7 +26,7 @@ export function productDom(){
  const tabs=[...document.querySelectorAll('[role=tab]')].map(e=>({text:text(e),selected:e.getAttribute('aria-selected')==='true'}));
  const imageTab=tabs.length===1&&tabs[0].selected&&/^图片问题\(\d+\)$/.test(tabs[0].text)?tabs[0]:null;
  const tab=[...document.querySelectorAll('[role=tab][aria-selected=true]')].find(e=>text(e).startsWith('类目详情问题'));
- const total=Number((imageTab?imageTab.text.match(/^图片问题\((\d+)\)$/):text(tab).match(/类目详情问题\((\d+)\)/))?.[1]);
+ let total=Number((imageTab?imageTab.text.match(/^图片问题\((\d+)\)$/):text(tab).match(/类目详情问题\((\d+)\)/))?.[1]);
  const headers=[...document.querySelectorAll('thead th')].map(text);
  const buttons=[...document.querySelectorAll('button')];
  const hiddenTabOverflow=buttons.filter(button=>button.className==='ant-tabs-nav-more'
@@ -47,9 +47,20 @@ export function productDom(){
   if(item){const content=cells.filter(c=>!c.classList.contains('goodInfoTd')&&!c.classList.contains('operatorSingleTd'));if(imageOnly){if(content.length!==2)imageOnly.rowStructureValid=false;else item.issues.push({kind:text(content[0]),current:'',suggestion:text(content[1])});}else if(content.length===3)item.issues.push({kind:text(content[0]),current:text(content[1]),suggestion:text(content[2])});}
   else if(imageOnly)imageOnly.rowStructureValid=false;
  }
+ const descriptions=[...document.querySelectorAll('.ant-empty-description')],empty=descriptions.map(text);
+ const explicitEmpty='很好，没有任何问题商品，请继续保持当有问题商品时，这里会展示问题详情、平台建议，您可以快速优化';
+ let emptyState;
+ if(empty.length===1&&empty[0]===explicitEmpty&&tabs.length===0&&headers.length===0&&products.length===0
+   &&document.querySelectorAll('tbody tr.ant-table-row').length===0){
+  const element=descriptions[0],rect=element.getBoundingClientRect();let visible=rect.width>0&&rect.height>0;
+  for(let node=element;node;node=node.parentElement){const style=getComputedStyle(node);if(style.display==='none'||style.visibility==='hidden'||style.opacity==='0')visible=false;}
+  emptyState={description:explicitEmpty,descriptionCount:descriptions.length,visible,tabCount:tabs.length,
+   rowCount:document.querySelectorAll('tbody tr.ant-table-row').length,headerCount:headers.length,buttonCount:buttons.length};
+  total=0;
+ }
  return {total,products,page:Number(text(document.querySelector('ul.ant-pagination .ant-pagination-item-active')))||1,
   hasNext:!!document.querySelector('ul.ant-pagination li.ant-pagination-next:not(.ant-pagination-disabled)'),loading:!!document.querySelector('.ant-spin-spinning'),
-  headers,empty:[...document.querySelectorAll('.ant-empty-description')].map(text),...(imageOnly?{imageOnly}:{})};
+  headers,empty,...(imageOnly?{imageOnly}:{}),...(emptyState?{emptyState}:{})};
 }
 async function integrity(){
  let codeVersion;
@@ -382,6 +393,7 @@ export async function runSegment({execute=false}={}){
     store.attemptCount=(store.attemptCount||0)+1;store.attemptsForVersion=store.lastAttemptVersion===codeVersion?(store.attemptsForVersion||0)+1:1;store.lastAttemptVersion=codeVersion;
     await noModal(frame);const {before,disposition}=await readyOptimization(frame,Math.min(storeDeadline,Date.now()+10000));store.before={total:before.total,visibleProducts:before.products.length};
     if(before.imageOnly)store.before.imageOnlyEvidence={...before.imageOnly,products:before.products};
+    if(before.emptyState)store.before.emptyStateEvidence=before.emptyState;
     const action=frame.getByRole('button',{name:'一键优化类目详情',exact:true});
     if(disposition.action==='skip'){store.state='checked_no_action';store.reason=disposition.reason;store.completedAt=new Date().toISOString();continue;}
     store.selectionNote=await prepareSelection(frame,storeDeadline);

@@ -80,6 +80,15 @@ class Tests(unittest.TestCase):
         wrong=copy.deepcopy(request);wrong['items'][-1]['text']=w.notice(1)
         wrong['items'][-1]['sha256']=hashlib.sha256(wrong['items'][-1]['text'].encode()).hexdigest()
         self.assertFalse(quality_optimization_allowed(wrong,root=self.root,day='2026-10-26'))
+    def test_explicit_platform_empty_is_checked_without_claiming_product_modification(self):
+        state=self.single_pass_state();state['stores'][0].update(state='checked_no_action',reason='platform-explicit-no-problem-products')
+        self.write(state);self.optimizer.return_value={'ok':True,'summary':{'completed':0}}
+        a=Adapter();self.assertTrue(self.run_flow(a)['ok'])
+        proof=json.loads((self.folder/'completion.json').read_text())
+        self.assertTrue(proof['records'][0]['execution'].startswith('已检查：平台明确无问题商品'))
+        self.assertEqual((proof['optimized'],proof['checkedNoAction'],proof['failed']),(0,1,0))
+        request=json.loads((self.folder/'request.json').read_text())
+        self.assertTrue(quality_optimization_allowed(request,root=self.root,day='2026-10-26'))
     def test_single_pass_attempt_does_not_require_reconciliation_or_fake_success(self):
         state=self.single_pass_state();store=state['stores'][0];store['state']='unknown';store['submission']={'day':'2026-10-26','shopId':store['shopId'],'eventId':'2026-10-26-quality-'+store['shopId'],'state':'attempted'}
         (self.folder/'intents').mkdir();intent=self.folder/'intents'/(store['shopId']+'.json');intent.write_text(json.dumps(store['submission']));self.write(state);self.optimizer.return_value={'ok':True,'summary':{'completed':0}}

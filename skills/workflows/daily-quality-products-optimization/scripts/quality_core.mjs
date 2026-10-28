@@ -25,7 +25,18 @@ export function noExecutableSuggestions(snapshot){
  try{validateProducts(snapshot);}catch{return false;}
  return snapshot.products.every(product=>product.hasSuggestion===false);
 }
+export const EXPLICIT_EMPTY_DESCRIPTION='很好，没有任何问题商品，请继续保持当有问题商品时，这里会展示问题详情、平台建议，您可以快速优化';
 export function optimizationDisposition(snapshot,action){
+ if(snapshot?.emptyState!==undefined){
+  const empty=snapshot.emptyState;
+  if(snapshot.total!==0||snapshot.loading!==false||snapshot.page!==1||snapshot.hasNext!==false
+    ||!Array.isArray(snapshot.products)||snapshot.products.length!==0||snapshot.imageOnly!==undefined
+    ||action?.count!==0||action.disabled!==null||empty?.description!==EXPLICIT_EMPTY_DESCRIPTION
+    ||empty.descriptionCount!==1||empty.visible!==true||empty.tabCount!==0||empty.rowCount!==0
+    ||empty.headerCount!==0||empty.buttonCount!==0||JSON.stringify(snapshot.headers)!=='[]'
+    ||JSON.stringify(snapshot.empty)!==JSON.stringify([EXPLICIT_EMPTY_DESCRIPTION]))throw Error('quality-product-explicit-empty-incomplete');
+  return {action:'skip',reason:'platform-explicit-no-problem-products'};
+ }
  if(snapshot?.imageOnly!==undefined){
   const image=snapshot.imageOnly;
   if(!Number.isSafeInteger(snapshot.total)||snapshot.total<=0||snapshot.loading!==false
