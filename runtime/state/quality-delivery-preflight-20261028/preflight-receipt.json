@@ -1,0 +1,20 @@
+{
+  "at": "2026-10-28T14:25:51.271990+08:00",
+  "scope": "original 17:00 quality workflow source/read-only gates and isolated delivery recovery reproduction",
+  "originalSourceFilesRead": [
+    "quality_workflow.py",
+    "quality_optimizer.mjs",
+    "quality_core.mjs",
+    "quality_report.mjs"
+  ],
+  "originalPythonTests": 25,
+  "nodeOriginalLog": "original-node-tests.log",
+  "qualityFourFilesAndShared38Gate": "PASS",
+  "productionExecute": false,
+  "productionSendAttempts": 0,
+  "verifiedDefect": "zero-send blocked item is flattened into outer unknown, preventing both initial recovery and remaining-text-only continuation",
+  "reproduction": "zero-send-reproduction.json",
+  "plan": "docs/solutions/20261028-商品整改通知零发送与分件续传.md",
+  "repairStatus": "planned-not-installed",
+  "next": "implement only newly proven blocked-zero native task recovery; never rewrite old unknown/attempted; test frozen verified prefix and same event continuation before 17:00"
+}
