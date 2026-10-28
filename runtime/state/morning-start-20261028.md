@@ -287,3 +287,8 @@ posts仅追加两申诉主名和12/15客服别名，22现役均能解析原互�
 ## 12:29进度展示送达依据收紧
 
 原_has_delivery_evidence把unknown中的verificationLevel当已外发已纯fixture复现。现只解析JSON收据并沿明确投递分支核对原目标群、verified终态及真实投递回读等级/原canonical event SHA；不读字符串内伪verified、不遍历selftest/授权/采集/历史验收。补四流canonical当日events路径，保留原金鲨双报固定合同及商家真实新发/游标完成合同。8新增+38原排班/业务事实共46测试通过，今日九条真实投递正向仍存在，未知等级fixture返回false。原done/班表/账本/原用户业务确认及发送机制不改；展示当日存在投递不是整批或当天完成。证据runtime/state/delivery-evidence-keyword-audit-20261028/final-audit.json。
+
+
+## 12:31原主任验证
+
+12:30商家完整采集无新增，固定通知一次verified。12:30:25完成率原入口实际collectionSkipped=true、sendAttempts/newSendAttempts均0，原41个marker/快照SHA不变，无新run产生；采集前未决门真实生效，但图内容仍待核，不把此视为整流verified。代码上批d2e8d1ab/1d37e296已推main。13点商家、双平台申诉及淘宝下载上传保持原班表，图自动内容回读与其他目标遗留继续，Goal active。

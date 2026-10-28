@@ -7,7 +7,7 @@
   "runtimeModelDecisions": 0,
   "completionReview": {
     "codeEnforced": true,
-    "totalElapsedMs": 104618,
+    "totalElapsedMs": 107225,
     "reviewItems": [
       {
         "item": 1,
@@ -76,8 +76,8 @@
         "item": 8,
         "stage": "screenshot",
         "label": "渲染整表长图",
-        "attempts": 12,
-        "elapsedMs": 15380,
+        "attempts": 13,
+        "elapsedMs": 16652,
         "status": "completed",
         "pitfalls": []
       },
@@ -85,10 +85,11 @@
         "item": 9,
         "stage": "screenshot_send",
         "label": "整表长图单次发送与回读校验",
-        "attempts": 12,
-        "elapsedMs": 47103,
+        "attempts": 13,
+        "elapsedMs": 48438,
         "status": "failed",
         "pitfalls": [
+          "image-submission-awaits-read-only-verification",
           "image-submission-awaits-read-only-verification",
           "image-submission-awaits-read-only-verification",
           "image-submission-awaits-read-only-verification",
@@ -105,6 +106,7 @@
       }
     ],
     "pitfalls": [
+      "image-submission-awaits-read-only-verification",
       "image-submission-awaits-read-only-verification",
       "image-submission-awaits-read-only-verification",
       "image-submission-awaits-read-only-verification",
