@@ -272,7 +272,7 @@ posts仅追加两申诉主名和12/15客服别名，22现役均能解析原互�
 
 ## 12:14午间实际执行与客服同班恢复
 
-12:00新商家原主任真实新发1条verified。完成率原全量908/908匹配，明细Excel一次verified，统计图一次提交unknown（native-ui-inline-image-not-exposed）不重发；原52?组统计以summary真实groups为准，不从旧表补值。
+12:00新商家原主任真实新发1条verified。完成率原全量908/908匹配，明细Excel一次verified，统计图一次提交unknown（native-ui-inline-image-not-exposed）不重发；分组以当轮summary真实groups为准，不从旧表补值。
 
 客服12:00第一轮因一张10/27平台卡无公开会话ID，在扫描前失败，回复0。先隔离身份缺失保留pending，12:07恢复39真实ID卡+1待处理，但原stdout ok=false退出0仍记SUCCESS；保留旧收据不重写。进一步增加仅对完整可见文字精确唯一无ID卡的只读打开、原judge不合格可完成检查，合格仍缺ID只记pending不输入/不提交；CLI未完整退出1。37 Node条目通过、原post clean。12:12:12原主任再次接续当前最新12班，未回复51/正在接待13，去重54全部检查，候选0/发送0/身份pending0/executionComplete及verificationComplete均true，12:13:24 SUCCESS；无ID旧卡原实际只读结果no-customer-message，未生成回复，不以卡片文本代替发送身份。证据runtime/state/customer-list-coverage-20261028/1200-real-acceptance.json。12点本班完成，15/17点和非空单次提交实证仍待，不宣称当天客服完成。
 
