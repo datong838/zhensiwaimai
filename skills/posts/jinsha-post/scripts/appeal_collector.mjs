@@ -1,3 +1,4 @@
+import {withJinshaOperationLease} from '../../../../runtime/jinsha_operation_lease.mjs';
 import {selectExistingJinshaTarget,assertSelectedJinshaTarget} from './existing_owned_target.mjs';
 import crypto from 'node:crypto';
 
@@ -148,7 +149,7 @@ async function collectStatus(cdp, expectedDate, expectedPlatform, expectedContex
   }
 }
 
-export async function collectAllAppeals({ businessDate, platformValue, channelLabel, contextLabel }) {
+async function collectAllAppealsUnlocked({ businessDate, platformValue, channelLabel, contextLabel }) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(businessDate) || !['1', '2'].includes(platformValue) || !channelLabel || !['美团', '淘宝'].includes(contextLabel)) throw Error('appeal-collector-config-invalid');
   const cdp = await Cdp.open();
   try {
@@ -182,4 +183,10 @@ export async function collectAllAppeals({ businessDate, platformValue, channelLa
     assertSnapshot(snapshot);
     return snapshot;
   } finally { try { await navigate(cdp, HOME, 700); } catch {} cdp.close(); }
+}
+
+export function collectAllAppeals(config, {leaseGuard = withJinshaOperationLease} = {}) {
+  const {businessDate, platformValue, channelLabel, contextLabel} = config;
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(businessDate) || !['1', '2'].includes(platformValue) || !channelLabel || !['美团', '淘宝'].includes(contextLabel)) throw Error('appeal-collector-config-invalid');
+  return leaseGuard(() => collectAllAppealsUnlocked(config));
 }

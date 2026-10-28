@@ -1,0 +1,19 @@
+✔ acquire precedes operation; original owner released exactly once (0.797792ms)
+✔ busy=throw never calls operation or release (0.175833ms)
+✔ busy=null never calls operation or release (0.045833ms)
+✔ operation exception still releases once; release error never retries operation (0.116959ms)
+✔ meituan execute cannot reach CDP when busy (0.072667ms)
+✔ meituan inspect cannot reach CDP when busy (0.059917ms)
+✔ taobao execute cannot reach CDP when busy (0.050833ms)
+✔ taobao inspect cannot reach CDP when busy (0.044834ms)
+✔ meituan full collector validates then cannot reach CDP while busy (0.155958ms)
+✔ taobao full collector validates then cannot reach CDP while busy (0.106292ms)
+✔ original real lease excludes another process throughout operation, then permits it (214.555583ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 260.475083

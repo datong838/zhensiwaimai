@@ -15,6 +15,7 @@ import {selectExistingJinshaTarget,assertSelectedJinshaTarget} from '../../../po
 // 契约：进入差评页后，对"自动申诉已关闭 + 存在唯一立即申诉"的条目，依次写入
 //   prepared → ready_for_confirmation → submitted_once → 点击确认 → 权威回读（条目移除且未申诉总数减少）
 // 回读失败标 unknown 并停止批次（防重），绝不重发。
+import {withJinshaOperationLease} from '../../../../runtime/jinsha_operation_lease.mjs';
 import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -186,7 +187,7 @@ async function confirmOnce(cdp) {
   if (clicked !== 1) throw Error('confirm-click-count');
 }
 
-async function execute() {
+async function executeUnlocked() {
   const businessDate = yesterday(), startedAt = now(), receipt = { ok: false, businessDate, startedAt, endpoint: ENDPOINT, runtimeModelDecisions: 0, verified_submitted: [], skipped: [], blocked: [], unknown: [], warnings: [] };
   const cdp = await Cdp.open();
   try {
@@ -247,7 +248,7 @@ async function execute() {
   }
 }
 
-async function inspect() {
+async function inspectUnlocked() {
   const businessDate = yesterday(), cdp = await Cdp.open();
   try {
     const state = await preparePage(cdp, businessDate);
@@ -256,6 +257,13 @@ async function inspect() {
     try { await navigate(cdp, HOME, 1200); } catch {}
     cdp.close();
   }
+}
+
+export function execute({leaseGuard = withJinshaOperationLease} = {}) {
+  return leaseGuard(executeUnlocked);
+}
+export function inspect({leaseGuard = withJinshaOperationLease} = {}) {
+  return leaseGuard(inspectUnlocked);
 }
 
 function selfTest() {

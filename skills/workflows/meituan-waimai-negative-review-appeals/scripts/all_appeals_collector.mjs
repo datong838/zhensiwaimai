@@ -1,3 +1,4 @@
+import {withJinshaOperationLease} from '../../../../runtime/jinsha_operation_lease.mjs';
 // 本地化副本 · 供 meituan-waimai-negative-review-appeals 独立工作流使用
 // 2026-10-05 大同要求：工作流独立、不跨 skill 耦合。源 = negative-review-appeal-reporting/scripts/all_appeals_collector.mjs
 // 该采集器按 businessDate/platformValue/contextLabel 参数化，美团('美团'/'1') 与 淘宝('淘宝'/'2') 通用。
@@ -155,7 +156,7 @@ async function collectStatus(cdp, expectedDate, expectedPlatform, expectedContex
   }
 }
 
-export async function collectAllAppeals({ businessDate, platformValue, channelLabel, contextLabel }) {
+async function collectAllAppealsUnlocked({ businessDate, platformValue, channelLabel, contextLabel }) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(businessDate) || !['1', '2'].includes(platformValue) || !channelLabel || !['美团', '淘宝'].includes(contextLabel)) throw Error('appeal-collector-config-invalid');
   const cdp = await Cdp.open();
   try {
@@ -189,4 +190,10 @@ export async function collectAllAppeals({ businessDate, platformValue, channelLa
     assertSnapshot(snapshot);
     return snapshot;
   } finally { try { await navigate(cdp, HOME, 700); } catch {} cdp.close(); }
+}
+
+export function collectAllAppeals(config, {leaseGuard = withJinshaOperationLease} = {}) {
+  const {businessDate, platformValue, channelLabel, contextLabel} = config;
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(businessDate) || !['1', '2'].includes(platformValue) || !channelLabel || !['美团', '淘宝'].includes(contextLabel)) throw Error('appeal-collector-config-invalid');
+  return leaseGuard(() => collectAllAppealsUnlocked(config));
 }

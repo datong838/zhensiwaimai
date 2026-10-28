@@ -204,3 +204,10 @@
 原执行器存在按钮提交后无回显再按Enter分支，已移除；采用真实卡片19位DOM id精确定位，原输入必须空、回复全文一致，禁止setter补写和前缀代替全文。新增程序内回复意图：会话ID与顾客末条文本哈希绑定，不含轮次/日期；提交前独占创建，已有attempted/unknown/verified或坏记录仅只读，未知不重发；自己先前完整兜底回复即使昵称小美也按已回复排除。回显改为新增全文，旧列表消失信号只读且需原未回复队列仍选中、精确id消失；原资格/话术/班表/附件不扩大。
 
 19新增含原processCards假页面真实调用链、并发/旧意图/跨日/异常/草稿/前缀/唯一ID等，原队列/风控/附件3套共22个Node测试条目通过，原岗位认证2条及共享摘要通过；131份原记录/manifest/posts/control SHA不变，真实回复/新生产意图/浏览器改动/主任重载0。新增executionComplete/verificationComplete/verificationPending只分开执行与核验，CLI退出不证明全部送达；12点原主任实际验收待到点。旧客户历史不重建，资格时刻/严重事项与虚拟列表全量仍继续审查，不能据本批称客服全链已验收。方案docs/solutions/20261028-客服回复一次提交与跨轮防重.md；证据runtime/state/customer-reply-single-submit-20261028/final-audit.json。
+
+
+## 09:45申诉入口原租约与主任登记生效
+
+双平台申诉execute/inspect及两个全量采集器现以原acquireJinshaLease/releaseJinshaLease包住完整原CDP生命周期，忙不进入浏览器、结束/异常释放，不另建锁域。四个原业务函数体逐字还原比对一致；11新租约/六忙入口场景及原Node回归22测试条目、80原主任Python、13原报表、两原申诉6+6自检通过。一个旧测试与用户自动申诉开启也受理裁定相反，仅改该预期、原12候选矩阵保持，首失败留证。1346原记录/门禁SHA不变，原post核心摘要未改。
+
+posts仅追加两申诉主名和12/15客服别名，22现役均能解析原互斥组。09:45:35原主任空闲一次受控重载55035→58654，四Chrome不变，原队列无新增；启动周期仅三项既有未知的原只读回看，无生产请求/确认/发送。heartbeat下一普通周期10:15，但原fixed boundary仍为10:00并会提前唤醒，不能据heartbeat误判排班延迟。13点和18:30真实验收待；另发现美团自动开启分支可能覆盖旧unknown及submitted_once转换旧记录，已列为13点前下一维修项，不据本批宣称申诉全逻辑审查完成。方案docs/solutions/20261028-申诉浏览器入口原租约补齐.md；证据runtime/state/appeal-post-lease-20261028/final-audit.json。

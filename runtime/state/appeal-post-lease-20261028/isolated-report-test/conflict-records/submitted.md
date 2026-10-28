@@ -1,0 +1,2 @@
+- 记录键：submitted-key
+- 记录状态：verified_submitted

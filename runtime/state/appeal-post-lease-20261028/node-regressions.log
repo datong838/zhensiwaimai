@@ -1,0 +1,36 @@
+{"ok":true,"tests":31,"sendAttempts":0}
+✔ runtime/test_appeal_shift.mjs (50.772375ms)
+✔ acquire precedes operation; original owner released exactly once (1.031375ms)
+✔ busy=throw never calls operation or release (0.244833ms)
+✔ busy=null never calls operation or release (0.055334ms)
+✔ operation exception still releases once; release error never retries operation (0.117875ms)
+✔ meituan execute cannot reach CDP when busy (0.076625ms)
+✔ meituan inspect cannot reach CDP when busy (0.061583ms)
+✔ taobao execute cannot reach CDP when busy (0.0575ms)
+✔ taobao inspect cannot reach CDP when busy (0.046542ms)
+✔ meituan full collector validates then cannot reach CDP while busy (0.172541ms)
+✔ taobao full collector validates then cannot reach CDP while busy (0.227583ms)
+✔ original real lease excludes another process throughout operation, then permits it (233.804916ms)
+{"ok":true,"tests":13,"runtimeModelDecisions":0}
+✔ skills/posts/jinsha-post/scripts/test_appeal_collector.mjs (46.697333ms)
+✔ 租约：首次获取成功，owner 匹配可释放 (64.465709ms)
+✔ 租约：占用中第二次获取 → jinsha-lease-busy (57.527958ms)
+✔ 租约：owner 不符释放 → jinsha-lease-owner-mismatch (86.523875ms)
+✔ origin 断言：金鲨 origin 放行，其它拒绝 (0.243959ms)
+✔ 分页稳定：mock page 四方一致稳定两次放行 (301.924334ms)
+{"ok":true,"tests":21,"browserActions":0,"sendAttempts":0}
+✔ skills/posts/jinsha-post/scripts/test_existing_owned_target.mjs (42.777958ms)
+{"ok":true,"tests":18,"runtimeModelDecisions":0}
+✔ skills/workflows/taobao-flash-sale-negative-review-appeals/scripts/test_appeal_executor.mjs (44.3175ms)
+{"ok":true,"tests":24,"sendAttempts":0}
+✔ skills/workflows/taobao-flash-sale-negative-review-appeals/scripts/test_delivery_completion.mjs (63.125959ms)
+PASS: 12 candidate cases; no browser or submission
+✔ skills/workflows/taobao-flash-sale-negative-review-appeals/scripts/test_immediate_candidate.mjs (44.274458ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 22
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 708.345334

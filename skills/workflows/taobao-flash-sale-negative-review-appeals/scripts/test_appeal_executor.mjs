@@ -5,7 +5,8 @@ const base={store:'门店A',date:'2026-09-21',score:'1',comment:'差评内容',a
 assert.equal(stableRecordKey(base),stableRecordKey({...base,score:'3'}));
 assert.notEqual(stableRecordKey(base),stableRecordKey({...base,comment:'另一条差评'}));
 assert.equal(eligible(base),true);
-assert.equal(eligible({...base,auto:'自动申诉已开启'}),false);
+// 2026-10-22/24用户裁定：淘宝有唯一立即申诉按钮时，自动申诉开启也受理。
+assert.equal(eligible({...base,auto:'自动申诉已开启'}),true);
 assert.equal(eligible({...base,hasAppeal:false}),false);
 assert.equal(shouldRetryEmptyList(0,1),true);
 assert.equal(shouldRetryEmptyList(1,1),false);

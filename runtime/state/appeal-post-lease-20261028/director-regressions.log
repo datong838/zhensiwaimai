@@ -1,0 +1,734 @@
+................[alert] t-selftest -> UNKNOWN : detail
+=== dry-run：将按序执行的 enabled skill（含 cadence 门控预览）===
+
+● #1 [run] s-active (dev=active)
+    step1: cwd=.
+            echo hi
+
+● #2 [run] s-blocked (dev=blocked)
+
+● #3 [run] s-dev (dev=developing)
+=== dry-run：将按序执行的 enabled skill（含 cadence 门控预览）===
+（无 enabled skill）
+=== skills_manifest（4 条目）===
+  [ON ] #1  s-active                                   dev=active     cad=24h@08 adapter=- grp=jinsha-9232
+  [ON ] #2  s-blocked                                  dev=blocked    cad=24h@08 adapter=Y grp=-
+  [ON ] #3  s-dev                                      dev=developing cad=24h@08 adapter=- grp=-
+  [off] #4  s-pending                                  dev=pending    cad=24h@08 adapter=- grp=-
+
+=== ledger_template（4 行客户台账）===
+   1 | active | s-active | 活跃流程
+   2 | blocked | s-blocked | 阻塞流程
+   3 | developing | s-dev | 开发流程
+   4 | pending | (无skill) | 待开发流程
+=== selftest：失败分类 ===
+  [OK] exit0      -> SUCCESS (expect SUCCESS)
+  [OK] timeout    -> RECOVERABLE (expect RECOVERABLE)
+  [OK] login      -> NEEDS_LOGIN (expect NEEDS_LOGIN)
+  [OK] connreset  -> RECOVERABLE (expect RECOVERABLE)
+  [OK] unknown    -> UNKNOWN (expect UNKNOWN)
+
+=== selftest：RunnerLock 互斥 ===
+  [INFO] 首次 acquire = True
+
+=== selftest：prune_history（临时目录）===
+  [INFO] 删除过期文件数 = 1（expect 1）
+
+=== selftest：manifest 加载（含 v1.1 编排字段）===
+  [INFO] 加载 30 skills OK
+  [INFO] 全部 skill 含 order/cadence_hours/earliest_hour
+
+=== selftest：岗位互斥组锁 (W2) ===
+  [INFO] daily-negative-reviews -> 互斥组 jinsha-9232 (expect jinsha-9232)
+  [INFO] acquire/busy/release/stale-override 全部通过
+
+=== selftest：现场维护（取代原熔断 W4 —— 已废除停排）===
+  [INFO] 累计/永不熔断/清零/SKIPPED_BUSY中性 全部通过
+
+=== selftest：只认当天成功（反虚高 SUCCESS）===
+  [INFO] 昨日成功→重跑 / 当日成功→跳过 / 未到点→PENDING / 凌晨成功不顶当日档 全部通过
+
+=== selftest：E5 当日完成类别（SUCCESS + 证据化 SKIPPED 同等待遇）===
+  [INFO] 完成类别判据 7 例执行完毕（SUCCESS/SKIPPED=完成，其余=未完成）
+
+=== selftest：login_health_gate 门控 ===
+  [OK] 非巡检小时调用为 no-op（未写 marker）
+
+=== selftest：P0-1 收据优先 / P0-1c 下钻 / E3 认知层（note+分档+默认零行为）===
+  [OK] 顶层stage stage=wechat-send-failed (receipt:stage) phase_last=b [policy-retry: 认知层白名单允许自动重试] [note: 微信发送阶段失败，结合 phase_last 定位具体子步骤。]
+  [OK] 顶层reason reason=daily-record-key-duplicate (receipt:reason)
+  [OK] 嵌套reason nested-reason=windows-transport-anomaly (receipt:nested_reason)
+  [OK] 收据命中登录态 reason=merchant login required, please re-auth (receipt:reason)
+  [OK] 文本Error码 error-code=channel-context-readback-mismatch (text)
+  [OK] 负例-嵌套反转不得判SUCCESS stage=wechat-send-failed (receipt:stage) [policy-retry: 认知层白名单允许自动重试] [note: 微信发送阶段失败，结合 phase_last 定位具体子步骤。]
+  [OK] 负例-超长单行JSON stage=send:0 (receipt:stage)
+  [OK] 顶层取最后整行JSON 
+  [OK] P0-1c 包装层下钻真码 embedded-reason=windows-driver-local-network-blocked (receipt:embedded_reason) [note: 本机→Windows 网关被
+  [OK] P0-1c 认知层处置提示注入 acOS「本地网络」权限拦（launchd 上下文必然如此）。正解：经中继 127.0.0.1:8732 出去；中继也不可达则须看护在 GUI 会话执行 relay-up.sh。]
+  [OK] P0-1c 负例-有效reason不被覆盖 reason=business-real-code (receipt:reason)
+  [OK] P0-1c 负例-无嵌入时退回包装文案(语义保持) reason=Command failed: python x.py --execute (receipt:reason)
+  [OK] P0-1c 负例-未知码无note 
+  [OK] E3 已知码有 note 
+  [OK] E3 命名空间前缀可查（windows-wechat:...） 
+  [OK] E3 真实码 payload-file-missing 有 note 
+  [OK] E3 分档：瞬时类标 auto-retry-candidate 
+  [OK] E3 分档：封印类标 never-silence 
+  [OK] E3 残余：未入名单的码不许静音 
+  [OK] E3 残余：未入名单的码不许自动重试 
+  [OK] E3 不变量：never-silence 永不放行 
+  [OK] E3b 重试臂：windows-driver-unreachable 已放行 
+  [OK] E3b 静音臂：lock 已放行 
+  [OK] E3b 重试臂生效：UNKNOWN 码升 RECOVERABLE（带 policy-retry 标记） RECOVERABLE|reason=windows-driver-unreachable (receipt:reason) [policy-r
+  [OK] E3b 边界：lock 只静音不重试（分类仍 UNKNOWN） 
+  [OK] E3b 边界：never-silence 档分类不受影响 
+  [INFO] 收据解析用例执行完毕
+
+=== selftest：P0-3 告警聚合/治愈/老化/历史重建 ===
+  [OK] 同键聚合计数 
+  [OK] 不同码分行 
+  [OK] 成功治愈 
+  [OK] 治愈后复发重开 
+  [OK] 老化归档 aged=2
+  [OK] 历史重建可读化 {"total": 1, "readable": 1, "keys": 1, "skills": 1}
+  [OK] 命令行码归一聚合 code=command-failed:taobao-flash-appeals
+  [OK] 不同 workflow-id 分行 
+  [OK] 超长码哈希归一 code=long-reason-94218caa
+  [OK] 空码兜底 
+[alert-suppressed] s3 -> UNKNOWN : reason=lock (receipt:reason) (code=lock)
+  [OK] E3b 静音：lock 不写 alerts.jsonl 
+  [OK] E3b 静音：审计流留痕（suppressed=true） 
+[alert] s3 -> UNKNOWN : reason=windows-driver-unreachable (receipt:reason)
+  [OK] E3b 边界：只重试不静音的码照常告警 
+  [OK] E3b 边界：审计流未被误写第二条 
+[alert] s4 -> UNKNOWN : 无码失败
+  [OK] E3b 边界：无码照常告警（fail-closed） 
+  [INFO] 告警聚合用例执行完毕
+
+=== selftest：看护断言（流程排序判据 / 岗位页匹配判据）===
+  [OK] 正例-顺序成立 ⇒ ALL PASS
+  [OK] 负例-顺序回归 ⇒ FAIL order-regression (brand 未排在全部申诉流之后 ⇒ 违反「先申诉→后汇报」)
+  [OK] 负例-brand缺失 ⇒ FAIL brand-flow-absent (manifest 里找不到 brand-negative-review-appeal-followup，排班被删/改名 ⇒ 无法保证时序)
+assert-flow-order selftest: ALL PASS
+  [OK] 正例-命中目标页
+  [OK] 负例-标题对URL不对
+  [OK] 负例-登录页不误判
+  [OK] 负例-非数组
+  [OK] 负例-空列表
+  [OK] page_titles 只列page
+assert-post-pages selftest: ALL PASS
+
+ALL PASS
+=== selftest：失败分类 ===
+  [OK] exit0      -> SUCCESS (expect SUCCESS)
+  [OK] timeout    -> RECOVERABLE (expect RECOVERABLE)
+  [OK] login      -> NEEDS_LOGIN (expect NEEDS_LOGIN)
+  [OK] connreset  -> RECOVERABLE (expect RECOVERABLE)
+  [OK] unknown    -> UNKNOWN (expect UNKNOWN)
+
+=== selftest：RunnerLock 互斥 ===
+  [INFO] 首次 acquire = True
+
+=== selftest：prune_history（临时目录）===
+  [INFO] 删除过期文件数 = 1（expect 1）
+
+=== selftest：manifest 加载（含 v1.1 编排字段）===
+  [FAIL] manifest 加载异常: RuntimeError('boom')
+
+=== selftest：岗位互斥组锁 (W2) ===
+  [INFO] daily-negative-reviews -> 互斥组 jinsha-9232 (expect jinsha-9232)
+  [INFO] acquire/busy/release/stale-override 全部通过
+
+=== selftest：现场维护（取代原熔断 W4 —— 已废除停排）===
+  [INFO] 累计/永不熔断/清零/SKIPPED_BUSY中性 全部通过
+
+=== selftest：只认当天成功（反虚高 SUCCESS）===
+  [INFO] 昨日成功→重跑 / 当日成功→跳过 / 未到点→PENDING / 凌晨成功不顶当日档 全部通过
+
+=== selftest：E5 当日完成类别（SUCCESS + 证据化 SKIPPED 同等待遇）===
+  [INFO] 完成类别判据 7 例执行完毕（SUCCESS/SKIPPED=完成，其余=未完成）
+
+=== selftest：login_health_gate 门控 ===
+  [OK] 非巡检小时调用为 no-op（未写 marker）
+
+=== selftest：P0-1 收据优先 / P0-1c 下钻 / E3 认知层（note+分档+默认零行为）===
+  [INFO] 收据解析用例执行完毕
+
+=== selftest：P0-3 告警聚合/治愈/老化/历史重建 ===
+  [INFO] 告警聚合用例执行完毕
+
+=== selftest：看护断言（流程排序判据 / 岗位页匹配判据）===
+
+HAS FAILURE
+
+=== daemon 周期 2026-10-28 (force_all=True) ===
+[alert] k -> NEEDS_HUMAN : d........../opt/homebrew/Cellar/python@3.12/3.12.13_4/Frameworks/Python.framework/Versions/3.12/lib/python3.12/subprocess.py:1127: ResourceWarning: subprocess 51909 is still running
+  _warn("subprocess %s is still running" % self.pid,
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+......
+[skip] s-blocked 无 steps（lib/纯库），不执行
+[skip] s-dev 无 steps（lib/纯库），不执行
+
+=== daemon 周期 2026-10-28 (force_all=True) ===
+
+▶ 执行 s-active (dev=active)
+  → status=SUCCESS category=SUCCESS attempts=1 next=none
+[skip] s-blocked 无 steps（lib/纯库），不执行
+[skip] s-dev 无 steps（lib/纯库），不执行
+
+=== daemon 周期 2026-10-28 (force_all=False) ===
+
+▶ 执行 s-active (dev=active)
+  → status=SUCCESS category=SUCCESS attempts=1 next=none
+[skip] s-blocked 当日已成功（cadence 内），本周期跳过
+[ledger] 已落盘 done_today 成功记录：s-blocked--20261028-094123--record.json
+[skip] s-dev 无 steps（lib/纯库），不执行
+
+=== daemon 周期 2026-10-28 (force_all=True) ===
+[maintenance] 已清空失败计数：s-active
+
+▶ 执行 s-active (dev=active)
+  → status=SUCCESS category=SUCCESS attempts=1 next=none
+[skip] s-blocked 无 steps（lib/纯库），不执行
+[skip] s-dev 无 steps（lib/纯库），不执行
+[ok] caffeinate 已启动，看护期间 Mac 不会睡眠（防 ADB/微信/浏览器会话被掐断）
+[warn] 未找到 caffeinate，跳过防睡（非 macOS 或环境缺失）
+[FATAL] 桌面通道不可用：no-tcc
+        这不是微信争用 —— 重试永远不会成功，桌面技能只会白等 60s+ 后报
+        wechat-search-region-contended，并拖垮后续技能。
+        修复：给守护进程的解释器授予「屏幕录制」（系统设置 > 隐私与安全性），
+        或临时在有截屏权限的上下文里单跑：
+          launchctl disable gui/501/com.zhensi.waimai.careloop   # 但 KeepAlive 仍会复活，须配合杀
+          <python> runtime/manual_run_once.py <skill>
+          launchctl enable gui/501/com.zhensi.waimai.careloop
+        诊断详情：/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/ra-cov-f9uw_wg3/state/screen_recording_gate.json
+[FATAL] 桌面通道不可用：unknown
+        这不是微信争用 —— 重试永远不会成功，桌面技能只会白等 60s+ 后报
+        wechat-search-region-contended，并拖垮后续技能。
+        修复：把微信主窗口拉到当前桌面（切 Space / 点 Dock 微信图标）后再跑；
+        注意「菜单栏显示微信」只说明谁是活跃 App，不说明窗口可见。
+        诊断详情：/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/ra-cov-f9uw_wg3/state/screen_recording_gate.json
+[alert] __desktop_channel__ -> NEEDS_USER : unknown
+[FATAL] 桌面通道不可用：no-tcc
+        这不是微信争用 —— 重试永远不会成功，桌面技能只会白等 60s+ 后报
+        wechat-search-region-contended，并拖垮后续技能。
+        修复：给守护进程的解释器授予「屏幕录制」（系统设置 > 隐私与安全性），
+        或临时在有截屏权限的上下文里单跑：
+          launchctl disable gui/501/com.zhensi.waimai.careloop   # 但 KeepAlive 仍会复活，须配合杀
+          <python> runtime/manual_run_once.py <skill>
+          launchctl enable gui/501/com.zhensi.waimai.careloop
+        诊断详情：/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/ra-cov-f9uw_wg3/state/screen_recording_gate.json
+[FATAL] 桌面通道不可用：pixel
+        这不是微信争用 —— 重试永远不会成功，桌面技能只会白等 60s+ 后报
+        wechat-search-region-contended，并拖垮后续技能。
+        修复：把微信主窗口拉到当前桌面（切 Space / 点 Dock 微信图标）后再跑；
+        注意「菜单栏显示微信」只说明谁是活跃 App，不说明窗口可见。
+        诊断详情：/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/ra-cov-f9uw_wg3/state/screen_recording_gate.json
+[ok] caffeinate 已启动，看护期间 Mac 不会睡眠（防 ADB/微信/浏览器会话被掐断）
+=== 看护一轮 2026-10-28（强制全部 enabled）===
+
+▶ 执行 s-active (dev=active)
+  → status=SUCCESS category=SUCCESS attempts=1 next=none
+[skip] s-blocked 无 steps（lib/纯库），不执行
+[skip] s-dev 无 steps（lib/纯库），不执行
+[login-check] 2026-10-28T09:41:23 全部正常（微信+4专用浏览器）
+[login-check] 2026-10-28T09:41:23 全部正常（微信+4专用浏览器）
+=== selftest：失败分类 ===
+  [OK] exit0      -> SUCCESS (expect SUCCESS)
+  [OK] timeout    -> RECOVERABLE (expect RECOVERABLE)
+  [OK] login      -> NEEDS_LOGIN (expect NEEDS_LOGIN)
+  [OK] connreset  -> RECOVERABLE (expect RECOVERABLE)
+  [OK] unknown    -> UNKNOWN (expect UNKNOWN)
+
+=== selftest：RunnerLock 互斥 ===
+  [INFO] 首次 acquire = True
+
+=== selftest：prune_history（临时目录）===
+  [INFO] 删除过期文件数 = 1（expect 1）
+
+=== selftest：manifest 加载（含 v1.1 编排字段）===
+  [INFO] 加载 30 skills OK
+  [INFO] 全部 skill 含 order/cadence_hours/earliest_hour
+
+=== selftest：岗位互斥组锁 (W2) ===
+  [INFO] daily-negative-reviews -> 互斥组 jinsha-9232 (expect jinsha-9232)
+  [INFO] acquire/busy/release/stale-override 全部通过
+
+=== selftest：现场维护（取代原熔断 W4 —— 已废除停排）===
+  [INFO] 累计/永不熔断/清零/SKIPPED_BUSY中性 全部通过
+
+=== selftest：只认当天成功（反虚高 SUCCESS）===
+  [INFO] 昨日成功→重跑 / 当日成功→跳过 / 未到点→PENDING / 凌晨成功不顶当日档 全部通过
+
+=== selftest：E5 当日完成类别（SUCCESS + 证据化 SKIPPED 同等待遇）===
+  [INFO] 完成类别判据 7 例执行完毕（SUCCESS/SKIPPED=完成，其余=未完成）
+
+=== selftest：login_health_gate 门控 ===
+  [OK] 非巡检小时调用为 no-op（未写 marker）
+
+=== selftest：P0-1 收据优先 / P0-1c 下钻 / E3 认知层（note+分档+默认零行为）===
+  [OK] 顶层stage stage=wechat-send-failed (receipt:stage) phase_last=b [policy-retry: 认知层白名单允许自动重试] [note: 微信发送阶段失败，结合 phase_last 定位具体子步骤。]
+  [OK] 顶层reason reason=daily-record-key-duplicate (receipt:reason)
+  [OK] 嵌套reason nested-reason=windows-transport-anomaly (receipt:nested_reason)
+  [OK] 收据命中登录态 reason=merchant login required, please re-auth (receipt:reason)
+  [OK] 文本Error码 error-code=channel-context-readback-mismatch (text)
+  [OK] 负例-嵌套反转不得判SUCCESS stage=wechat-send-failed (receipt:stage) [policy-retry: 认知层白名单允许自动重试] [note: 微信发送阶段失败，结合 phase_last 定位具体子步骤。]
+  [OK] 负例-超长单行JSON stage=send:0 (receipt:stage)
+  [OK] 顶层取最后整行JSON 
+  [OK] P0-1c 包装层下钻真码 embedded-reason=windows-driver-local-network-blocked (receipt:embedded_reason) [note: 本机→Windows 网关被
+  [OK] P0-1c 认知层处置提示注入 acOS「本地网络」权限拦（launchd 上下文必然如此）。正解：经中继 127.0.0.1:8732 出去；中继也不可达则须看护在 GUI 会话执行 relay-up.sh。]
+  [OK] P0-1c 负例-有效reason不被覆盖 reason=business-real-code (receipt:reason)
+  [OK] P0-1c 负例-无嵌入时退回包装文案(语义保持) reason=Command failed: python x.py --execute (receipt:reason)
+  [OK] P0-1c 负例-未知码无note 
+  [OK] E3 已知码有 note 
+  [OK] E3 命名空间前缀可查（windows-wechat:...） 
+  [OK] E3 真实码 payload-file-missing 有 note 
+  [OK] E3 分档：瞬时类标 auto-retry-candidate 
+  [OK] E3 分档：封印类标 never-silence 
+  [OK] E3 残余：未入名单的码不许静音 
+  [OK] E3 残余：未入名单的码不许自动重试 
+  [OK] E3 不变量：never-silence 永不放行 
+  [OK] E3b 重试臂：windows-driver-unreachable 已放行 
+  [OK] E3b 静音臂：lock 已放行 
+  [OK] E3b 重试臂生效：UNKNOWN 码升 RECOVERABLE（带 policy-retry 标记） RECOVERABLE|reason=windows-driver-unreachable (receipt:reason) [policy-r
+  [OK] E3b 边界：lock 只静音不重试（分类仍 UNKNOWN） 
+  [OK] E3b 边界：never-silence 档分类不受影响 
+  [INFO] 收据解析用例执行完毕
+
+=== selftest：P0-3 告警聚合/治愈/老化/历史重建 ===
+  [OK] 同键聚合计数 
+  [OK] 不同码分行 
+  [OK] 成功治愈 
+  [OK] 治愈后复发重开 
+  [OK] 老化归档 aged=2
+  [OK] 历史重建可读化 {"total": 1, "readable": 1, "keys": 1, "skills": 1}
+  [OK] 命令行码归一聚合 code=command-failed:taobao-flash-appeals
+  [OK] 不同 workflow-id 分行 
+  [OK] 超长码哈希归一 code=long-reason-94218caa
+  [OK] 空码兜底 
+[alert-suppressed] s3 -> UNKNOWN : reason=lock (receipt:reason) (code=lock)
+  [OK] E3b 静音：lock 不写 alerts.jsonl 
+  [OK] E3b 静音：审计流留痕（suppressed=true） 
+[alert] s3 -> UNKNOWN : reason=windows-driver-unreachable (receipt:reason)
+  [OK] E3b 边界：只重试不静音的码照常告警 
+  [OK] E3b 边界：审计流未被误写第二条 
+[alert] s4 -> UNKNOWN : 无码失败
+  [OK] E3b 边界：无码照常告警（fail-closed） 
+  [INFO] 告警聚合用例执行完毕
+
+=== selftest：看护断言（流程排序判据 / 岗位页匹配判据）===
+  [OK] 正例-顺序成立 ⇒ ALL PASS
+  [OK] 负例-顺序回归 ⇒ FAIL order-regression (brand 未排在全部申诉流之后 ⇒ 违反「先申诉→后汇报」)
+  [OK] 负例-brand缺失 ⇒ FAIL brand-flow-absent (manifest 里找不到 brand-negative-review-appeal-followup，排班被删/改名 ⇒ 无法保证时序)
+assert-flow-order selftest: ALL PASS
+  [OK] 正例-命中目标页
+  [OK] 负例-标题对URL不对
+  [OK] 负例-登录页不误判
+  [OK] 负例-非数组
+  [OK] 负例-空列表
+  [OK] page_titles 只列page
+assert-post-pages selftest: ALL PASS
+
+ALL PASS
+=== skills_manifest（30 条目）===
+  [ON ] #-1000 daily-agent-new-merchants-to-wechat        dev=active     cad=0.5h@08 adapter=- grp=-
+  [ON ] #-300 negative-feedback-list-appeals-0930        dev=active     cad=24h@08 adapter=- grp=-
+  [ON ] #-299 negative-feedback-list-appeals-1230        dev=active     cad=24h@08 adapter=- grp=-
+  [ON ] #-98 meituan-intelligent-customer-service-12    dev=active     cad=24h@12 adapter=- grp=-
+  [ON ] #-97 meituan-intelligent-customer-service-15    dev=active     cad=24h@15 adapter=- grp=-
+  [ON ] #-96 meituan-intelligent-customer-service       dev=active     cad=24h@17 adapter=- grp=-
+  [ON ] #-95 daily-quality-products-optimization        dev=active     cad=24h@17 adapter=- grp=-
+  [ON ] #-95 meituan-waimai-negative-review-appeals-11  dev=active     cad=24h@13 adapter=- grp=-
+  [off] #-94 meituan-waimai-negative-review-appeals-1425 dev=active     cad=24h@14 adapter=- grp=-
+  [ON ] #-93 taobao-flash-sale-negative-review-appeals  dev=active     cad=24h@13 adapter=- grp=-
+  [off] #-92 taobao-shangou-negative-review-appeals     dev=active     cad=24h@11 adapter=- grp=-
+  [ON ] #-91 daily-new-stores-opening-to-wechat         dev=active     cad=24h@10 adapter=- grp=-
+  [ON ] #-90 daily-new-stores-activity-audit-to-wechat  dev=active     cad=24h@11 adapter=- grp=-
+  [ON ] #-89 daily-new-stores-decoration-audit-to-wechat dev=active     cad=24h@11 adapter=- grp=-
+  [ON ] #-88 daily-new-stores-not-nourished-ops-to-wechat dev=active     cad=24h@11 adapter=- grp=-
+  [ON ] #-87 daily-store-task-completion-ops-to-wechat  dev=active     cad=24h@12 adapter=- grp=-
+  [ON ] #-86 daily-store-basic-diagnosis-to-wechat      dev=active     cad=24h@11 adapter=- grp=-
+  [ON ] #-80 daily-taobao-download-to-jinsha            dev=active     cad=24h@13 adapter=- grp=-
+  [ON ] #-79 daily-service-market-ranking-to-wechat     dev=active     cad=24h@10 adapter=- grp=-
+  [off] #0  wechat-messaging                           dev=lib        cad=0h@00 adapter=- grp=-
+  [ON ] #1  daily-top10-to-wechat-group                dev=active     cad=24h@08 adapter=- grp=-
+  [ON ] #1  daily-meituan-income-top10-to-wechat       dev=active     cad=24h@08 adapter=- grp=-
+  [ON ] #2  daily-negative-reviews                     dev=active     cad=24h@08 adapter=- grp=jinsha-9232
+  [ON ] #3  contract-termination-applications-screenshot dev=active     cad=24h@09 adapter=- grp=-
+  [ON ] #4  daily-jinsha-reports-to-business-wechat    dev=active     cad=24h@11 adapter=- grp=-
+  [off] #10 daily-wechat-video-publish                 dev=blocked    cad=24h@00 adapter=- grp=-
+  [off] #11 store-inspection                           dev=blocked    cad=168h@00 adapter=- grp=-
+  [off] #19 brand-negative-review-appeal-followup      dev=paused     cad=24h@17 adapter=- grp=-
+  [off] #30 daily-store-metrics-rotation-to-wechat     dev=pending    cad=24h@10 adapter=- grp=-
+  [off] #31 coupon-issue-task-flow                     dev=pending    cad=24h@10 adapter=- grp=-
+
+=== ledger_template（24 行客户台账）===
+   1 | active | daily-agent-new-merchants-to-wechat | 淘宝新增商家增量通知（每30分钟）
+   2 | active | daily-top10-to-wechat-group | 昨日门店Top10截图发运营群（每日08:00）
+   3 | active | negative-feedback-list-appeals-0930 | 负反馈列表申诉·双平台执行（每日08:30）
+   4 | active | negative-feedback-list-appeals-1230 | 负反馈列表申诉·双平台 Excel 汇总发群（每日08:30·申诉后即发）
+   5 | active | daily-negative-reviews | 昨日差评分析（每日08:30）
+   6 | active | contract-termination-applications-screenshot | 合同解约申请·处理中任务列表截图（每日09:00）
+   7 | active | daily-new-stores-opening-to-wechat | 新店开业识别与通知（每日10:00）
+   8 | active | daily-jinsha-reports-to-business-wechat | 金鲨昨日双平台日报发运营群（每日11:00）
+   9 | active | daily-new-stores-activity-audit-to-wechat | 淘宝新店活动缺项巡检与提醒（每日11:00）
+  10 | active | daily-store-basic-diagnosis-to-wechat | 门店商户运营问题诊断（每日11:18）
+  11 | active | taobao-shangou-negative-review-appeals | 淘宝闪购差评申诉（每日11:20）
+  12 | active | daily-new-stores-decoration-audit-to-wechat | 淘宝新店装修缺失巡检与提醒（每日11:30）
+  13 | active | daily-new-stores-not-nourished-ops-to-wechat | 淘宝新店未养活运营分配（每日11:40）
+  14 | active | daily-store-task-completion-ops-to-wechat | 淘宝闪购门店经营任务完成率小组统计（每日12:00）
+  15 | active | meituan-intelligent-customer-service-12 | 美团商家中心智能客服（12:00）
+  16 | active | taobao-flash-sale-negative-review-appeals | 淘宝闪购自动差评申诉并企微反馈（每2小时·13:00起）
+  17 | active | daily-taobao-download-to-jinsha | 淘宝昨日报表下载上传金鲨（每日13:00）
+  18 | active | meituan-waimai-negative-review-appeals-11 | 金鲨美团外卖差评申诉（每日13:08）
+  19 | active | meituan-waimai-negative-review-appeals-1425 | 金鲨美团外卖差评申诉（每日14:25）
+  20 | active | meituan-intelligent-customer-service-15 | 美团商家中心智能客服（15:00）
+  21 | active | meituan-intelligent-customer-service | 美团商家中心智能客服（17:00·备发文档）
+  22 | active | daily-service-market-ranking-to-wechat | 淘宝闪购服务市场排名与本月考核指标
+  23 | active | daily-meituan-income-top10-to-wechat | 美团外卖昨日门店收入Top10
+  24 | active | daily-quality-products-optimization | 淘宝闪购低优质商品的全部门店商品整改优化
+=== dry-run：将按序执行的 enabled skill（含 cadence 门控预览）===
+
+● #-1000 [skip:done_today] daily-agent-new-merchants-to-wechat (dev=active)
+    step1: cwd=skills/workflows/daily-agent-new-merchants-to-wechat
+            /Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python scripts/workflow_executor.py --standing-authorization user-20260915-production-hourly --unsealed-acceptance-authorization user-20260916-production-hardening --output-dir {run_dir}/output
+
+● #-300 [skip:done_today] negative-feedback-list-appeals-0930 (dev=active)
+    step1: cwd=skills/workflows/negative-feedback-list-appeals
+            /Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/appeal_executor.mjs --execute
+
+● #-299 [skip:done_today] negative-feedback-list-appeals-1230 (dev=active)
+    step1: cwd=skills/workflows/negative-feedback-list-appeals
+            /Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/build_report.mjs
+    step2: cwd=skills/workflows/negative-feedback-list-appeals
+            /Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/deliver_batch.mjs --execute..
+
+● #-98 [skip:not_due] meituan-intelligent-customer-service-12 (dev=active)
+    step1: cwd=skills/workflows/meituan-intelligent-customer-service
+            /Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/ensure_unanswered_queue.mjs
+    step2: cwd=skills/workflows/meituan-intelligent-customer-service
+            /Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/reply_unanswered_sessions.mjs
+    step3: cwd=skills/workflows/meituan-intelligent-customer-service
+            /Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/compile_daily_reply_xlsx.mjs
+    step4: cwd=skills/workflows/meituan-intelligent-customer-service
+            /Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/send_daily_reply_xlsx_to_wechat.mjs
+
+● #-97 [skip:not_due] meituan-intelligent-customer-service-15 (dev=active)
+    step1: cwd=skills/workflows/meituan-intelligent-customer-service
+            /Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/ensure_unanswered_queue.mjs
+    step2: cwd=skills/workflows/meituan-intelligent-customer-service
+            /Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/reply_unanswered_sessions.mjs
+    step3: cwd=skills/workflows/meituan-intelligent-customer-service
+            /Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/compile_daily_reply_xlsx.mjs
+    step4: cwd=skills/workflows/meituan-intelligent-customer-service
+            /Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/send_daily_reply_xlsx_to_wechat.mjs
+
+● #-96 [skip:not_due] meituan-intelligent-customer-service (dev=active)
+    step1: cwd=skills/workflows/meituan-intelligent-customer-service
+            /Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/ensure_unanswered_queue.mjs
+    step2: cwd=skills/workflows/meituan-intelligent-customer-service
+            /Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/reply_unanswered_sessions.mjs
+    step3: cwd=skills/workflows/meituan-intelligent-customer-service
+            /Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/compile_daily_reply_xlsx.mjs
+    step4: cwd=skills/workflows/meituan-intelligent-customer-service
+            /Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/send_daily_reply_xlsx_to_wechat.mjs
+
+● #-95 [skip:not_due] daily-quality-products-optimization (dev=active)
+    step1: cwd=skills/workflows/daily-quality-products-optimization
+            /Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python scripts/quality_workflow.py --execute
+
+● #-95 [skip:not_due] meituan-waimai-negative-review-appeals-11 (dev=active)
+    step1: cwd=skills/workflows/meituan-waimai-negative-review-appeals
+            /Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/bin/node ../../../runtime/appeal_shift.mjs --platform meituan --execute
+
+● #-93 [skip:not_due] taobao-flash-sale-negative-review-appeals (dev=active)
+    step1: cwd=skills/workflows/taobao-flash-sale-negative-review-appeals
+            /Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/bin/node ../../../runtime/appeal_shift.mjs --platform taobao --execute
+
+● #-91 [skip:not_due] daily-new-stores-opening-to-wechat (dev=active)
+    step1: cwd=skills/workflows/daily-new-stores-opening-to-wechat
+            /Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python scripts/workflow.py --execute
+
+● #-90 [skip:not_due] daily-new-stores-activity-audit-to-wechat (dev=active)
+    step1: cwd=skills/workflows/daily-new-stores-activity-audit-to-wechat
+            /Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python scripts/activity_daily.py --execute
+
+● #-89 [skip:not_due] daily-new-stores-decoration-audit-to-wechat (dev=active)
+    step1: cwd=skills/workflows/daily-new-stores-decoration-audit-to-wechat
+            /Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python scripts/decoration_daily.py --execute
+
+● #-88 [skip:not_due] daily-new-stores-not-nourished-ops-to-wechat (dev=active)
+    step1: cwd=skills/workflows/daily-new-stores-not-nourished-ops-to-wechat
+            /Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python scripts/nourish_daily.py --execute
+
+● #-87 [skip:not_due] daily-store-task-completion-ops-to-wechat (dev=active)
+    step1: cwd=skills/workflows/daily-store-task-completion-ops-to-wechat
+            /Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python scripts/task_daily.py --execute
+
+● #-86 [skip:not_due] daily-store-basic-diagnosis-to-wechat (dev=active)
+    step1: cwd=skills/workflows/daily-store-basic-diagnosis-to-wechat
+            /Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python scripts/basic_diag_daily.py --execute
+
+● #-80 [skip:not_due] daily-taobao-download-to-jinsha (dev=active)
+    step1: cwd=skills/workflows/daily-taobao-download-to-jinsha
+            /Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/bin/node -e import('./scripts/entrypoint.mjs').then(m=>m.runScheduled()).then(r=>{const o=JSON.stringify(r);console.log(o);if(!r||r.ok!==true){console.error('[runScheduled-not-ok] '+o);process.exit(1);}}).catch(e=>{console.error('[runScheduled-throw] '+(e&&(e.stack||e.message||e)));process.exit(1);})
+
+● #-79 [skip:not_due] daily-service-market-ranking-to-wechat (dev=active)
+    step1: cwd=skills/workflows/daily-service-market-ranking-to-wechat
+            /Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python scripts/ranking_workflow.py --execute
+
+● #1 [run] daily-top10-to-wechat-group (dev=active)
+    step1: cwd=skills/workflows/daily-top10-to-wechat-group
+            /Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python scripts/workflow_executor.py --execute --standing-authorization zhensi-feibing-neo-ai-main-wechat-top10-v1
+
+● #1 [run] daily-meituan-income-top10-to-wechat (dev=active)
+    step1: cwd=skills/workflows/daily-meituan-income-top10-to-wechat
+            /Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python scripts/income_workflow.py --execute
+
+● #2 [run] daily-negative-reviews (dev=active)
+    step1: cwd=skills/workflows/daily-negative-reviews
+            /Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/workflow_executor.mjs --execute
+
+● #3 [run] contract-termination-applications-screenshot (dev=active)
+    step1: cwd=skills/workflows/contract-termination-applications-screenshot
+            /Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python scripts/contract_termination_daily.py --execute
+
+● #4 [skip:not_due] daily-jinsha-reports-to-business-wechat (dev=active)
+    step1: cwd=skills/workflows/daily-jinsha-reports-to-business-wechat
+            /Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/business_workflow_executor.mjs --execute
+=== 当天状态快照（7 条 record）===
+  contract-termination-applications-screenshot FAILED/UNKNOWN
+  daily-agent-new-merchants-to-wechat        SUCCESS/SUCCESS
+  daily-meituan-income-top10-to-wechat       FAILED/UNKNOWN
+  daily-negative-reviews                     FAILED/UNKNOWN
+  daily-top10-to-wechat-group                FAILED/UNKNOWN
+  negative-feedback-list-appeals-0930        SUCCESS/SUCCESS
+  negative-feedback-list-appeals-1230        SUCCESS/SUCCESS
+
+=== daemon 状态（state/daemon.json）===
+  (无常驻进程状态文件)
+=== 当天状态快照（0 条 record）===
+
+=== daemon 状态（state/daemon.json）===
+  {"state":"running"}
+=== 当天状态快照（0 条 record）===
+
+=== daemon 状态（state/daemon.json）===
+  (无法读取)
+=== 当天状态快照（0 条 record）===
+
+=== daemon 状态（state/daemon.json）===
+  (无常驻进程状态文件)
+
+=== 发送门判断 ===
+[warn] 未全绿（有失败/待适配）：仅落盘 + 告警，不发送 AI 员工群。..............................
+
+=== 发送门判断 ===
+[info] 今日已发送台账，跳过重复发送。
+
+=== 发送门判断 ===
+
+=== 发送门判断 ===
+[info] active 全绿，但未加 --send：仅落盘，发送待代理确认。
+
+=== 发送门判断 ===
+
+=== 发送门判断 ===
+[info] active 全绿，但未加 --send：仅落盘，发送待代理确认。
+[warmup] adb 状态: device
+[warmup] adb connect emulator-5554 -> offline
+[warn] preflight_warmup adb 检查失败(非致命): RuntimeError('boom')
+[warn] 微信前台探针未完成（不影响本轮）：RuntimeError('boom')
+
+▶ 执行 s-active (dev=active)
+  → status=SUCCESS category=SUCCESS attempts=1 next=none
+[skip] lib-only 无 steps（lib/纯库），不执行
+
+▶ 执行 s-active (dev=active)
+  → status=FAIL category=RECOVERABLE attempts=1 next=retry
+[skip-busy] s-active 互斥组 jinsha-9232 被同组流水线新鲜占用，本轮跳过（SKIPPED_BUSY）
+
+▶ 执行 s-active (dev=active)
+  → status=SUCCESS category=SUCCESS attempts=1 next=none
+
+▶ 执行 s-active (dev=active)
+  → status=FAIL category=UNKNOWN attempts=1 next=retry
+=== selftest：失败分类 ===
+  [FAIL] exit0      -> WRONG (expect SUCCESS)
+  [FAIL] timeout    -> WRONG (expect RECOVERABLE)
+  [FAIL] login      -> WRONG (expect NEEDS_LOGIN)
+  [FAIL] connreset  -> WRONG (expect RECOVERABLE)
+  [FAIL] unknown    -> WRONG (expect UNKNOWN)
+
+=== selftest：RunnerLock 互斥 ===
+  [INFO] 首次 acquire = True
+
+=== selftest：prune_history（临时目录）===
+  [INFO] 删除过期文件数 = 1（expect 1）
+
+=== selftest：manifest 加载（含 v1.1 编排字段）===
+  [INFO] 加载 30 skills OK
+  [INFO] 全部 skill 含 order/cadence_hours/earliest_hour
+
+=== selftest：岗位互斥组锁 (W2) ===
+  [INFO] daily-negative-reviews -> 互斥组 jinsha-9232 (expect jinsha-9232)
+  [INFO] acquire/busy/release/stale-override 全部通过
+
+=== selftest：现场维护（取代原熔断 W4 —— 已废除停排）===
+  [INFO] 累计/永不熔断/清零/SKIPPED_BUSY中性 全部通过
+
+=== selftest：只认当天成功（反虚高 SUCCESS）===
+  [INFO] 昨日成功→重跑 / 当日成功→跳过 / 未到点→PENDING / 凌晨成功不顶当日档 全部通过
+
+=== selftest：E5 当日完成类别（SUCCESS + 证据化 SKIPPED 同等待遇）===
+  [INFO] 完成类别判据 7 例执行完毕（SUCCESS/SKIPPED=完成，其余=未完成）
+
+=== selftest：login_health_gate 门控 ===
+  [OK] 非巡检小时调用为 no-op（未写 marker）
+
+=== selftest：P0-1 收据优先 / P0-1c 下钻 / E3 认知层（note+分档+默认零行为）===
+  [INFO] 收据解析用例执行完毕
+
+=== selftest：P0-3 告警聚合/治愈/老化/历史重建 ===
+  [INFO] 告警聚合用例执行完毕
+
+=== selftest：看护断言（流程排序判据 / 岗位页匹配判据）===
+
+HAS FAILURE
+=== selftest：失败分类 ===
+  [OK] exit0      -> SUCCESS (expect SUCCESS)
+  [OK] timeout    -> RECOVERABLE (expect RECOVERABLE)
+  [OK] login      -> NEEDS_LOGIN (expect NEEDS_LOGIN)
+  [OK] connreset  -> RECOVERABLE (expect RECOVERABLE)
+  [OK] unknown    -> UNKNOWN (expect UNKNOWN)
+
+=== selftest：RunnerLock 互斥 ===
+  [INFO] 首次 acquire = True
+
+=== selftest：prune_history（临时目录）===
+  [INFO] 删除过期文件数 = 1（expect 1）
+
+=== selftest：manifest 加载（含 v1.1 编排字段）===
+  [INFO] 加载 30 skills OK
+  [INFO] 全部 skill 含 order/cadence_hours/earliest_hour
+
+=== selftest：岗位互斥组锁 (W2) ===
+  [INFO] daily-negative-reviews -> 互斥组 jinsha-9232 (expect jinsha-9232)
+  [INFO] acquire/busy/release/stale-override 全部通过
+
+=== selftest：现场维护（取代原熔断 W4 —— 已废除停排）===
+  [INFO] 累计/永不熔断/清零/SKIPPED_BUSY中性 全部通过
+
+=== selftest：只认当天成功（反虚高 SUCCESS）===
+  [INFO] 昨日成功→重跑 / 当日成功→跳过 / 未到点→PENDING / 凌晨成功不顶当日档 全部通过
+
+=== selftest：E5 当日完成类别（SUCCESS + 证据化 SKIPPED 同等待遇）===
+  [INFO] 完成类别判据 7 例执行完毕（SUCCESS/SKIPPED=完成，其余=未完成）
+
+=== selftest：login_health_gate 门控 ===
+  [FAIL] login_health_gate: RuntimeError('boom')
+
+=== selftest：P0-1 收据优先 / P0-1c 下钻 / E3 认知层（note+分档+默认零行为）===
+  [INFO] 收据解析用例执行完毕
+
+=== selftest：P0-3 告警聚合/治愈/老化/历史重建 ===
+  [INFO] 告警聚合用例执行完毕
+
+=== selftest：看护断言（流程排序判据 / 岗位页匹配判据）===
+
+HAS FAILURE
+=== selftest：失败分类 ===
+  [OK] exit0      -> SUCCESS (expect SUCCESS)
+  [OK] timeout    -> RECOVERABLE (expect RECOVERABLE)
+  [OK] login      -> NEEDS_LOGIN (expect NEEDS_LOGIN)
+  [OK] connreset  -> RECOVERABLE (expect RECOVERABLE)
+  [OK] unknown    -> UNKNOWN (expect UNKNOWN)
+
+=== selftest：RunnerLock 互斥 ===
+  [INFO] 首次 acquire = True
+
+=== selftest：prune_history（临时目录）===
+  [INFO] 删除过期文件数 = 1（expect 1）
+
+=== selftest：manifest 加载（含 v1.1 编排字段）===
+  [INFO] 加载 30 skills OK
+  [INFO] 全部 skill 含 order/cadence_hours/earliest_hour
+
+=== selftest：岗位互斥组锁 (W2) ===
+  [INFO] daily-negative-reviews -> 互斥组 jinsha-9232 (expect jinsha-9232)
+  [INFO] acquire/busy/release/stale-override 全部通过
+
+=== selftest：现场维护（取代原熔断 W4 —— 已废除停排）===
+  [FAIL] 现场维护: RuntimeError('boom')
+
+=== selftest：只认当天成功（反虚高 SUCCESS）===
+  [INFO] 昨日成功→重跑 / 当日成功→跳过 / 未到点→PENDING / 凌晨成功不顶当日档 全部通过
+
+=== selftest：E5 当日完成类别（SUCCESS + 证据化 SKIPPED 同等待遇）===
+  [INFO] 完成类别判据 7 例执行完毕（SUCCESS/SKIPPED=完成，其余=未完成）
+
+=== selftest：login_health_gate 门控 ===
+  [OK] 非巡检小时调用为 no-op（未写 marker）
+
+=== selftest：P0-1 收据优先 / P0-1c 下钻 / E3 认知层（note+分档+默认零行为）===
+  [INFO] 收据解析用例执行完毕
+
+=== selftest：P0-3 告警聚合/治愈/老化/历史重建 ===
+  [INFO] 告警聚合用例执行完毕
+
+=== selftest：看护断言（流程排序判据 / 岗位页匹配判据）===
+
+HAS FAILURE
+=== selftest：失败分类 ===
+  [OK] exit0      -> SUCCESS (expect SUCCESS)
+  [OK] timeout    -> RECOVERABLE (expect RECOVERABLE)
+  [OK] login      -> NEEDS_LOGIN (expect NEEDS_LOGIN)
+  [OK] connreset  -> RECOVERABLE (expect RECOVERABLE)
+  [OK] unknown    -> UNKNOWN (expect UNKNOWN)
+
+=== selftest：RunnerLock 互斥 ===
+  [INFO] 首次 acquire = True
+
+=== selftest：prune_history（临时目录）===
+  [INFO] 删除过期文件数 = 1（expect 1）
+
+=== selftest：manifest 加载（含 v1.1 编排字段）===
+  [INFO] 加载 30 skills OK
+  [INFO] 全部 skill 含 order/cadence_hours/earliest_hour
+
+=== selftest：岗位互斥组锁 (W2) ===
+  [INFO] daily-negative-reviews -> 互斥组 jinsha-9232 (expect jinsha-9232)
+  [FAIL] 互斥组锁: RuntimeError('boom')
+
+=== selftest：现场维护（取代原熔断 W4 —— 已废除停排）===
+  [INFO] 累计/永不熔断/清零/SKIPPED_BUSY中性 全部通过
+
+=== selftest：只认当天成功（反虚高 SUCCESS）===
+  [INFO] 昨日成功→重跑 / 当日成功→跳过 / 未到点→PENDING / 凌晨成功不顶当日档 全部通过
+
+=== selftest：E5 当日完成类别（SUCCESS + 证据化 SKIPPED 同等待遇）===
+  [INFO] 完成类别判据 7 例执行完毕（SUCCESS/SKIPPED=完成，其余=未完成）
+
+=== selftest：login_health_gate 门控 ===
+  [OK] 非巡检小时调用为 no-op（未写 marker）
+
+=== selftest：P0-1 收据优先 / P0-1c 下钻 / E3 认知层（note+分档+默认零行为）===
+  [INFO] 收据解析用例执行完毕
+
+=== selftest：P0-3 告警聚合/治愈/老化/历史重建 ===
+  [INFO] 告警聚合用例执行完毕
+
+=== selftest：看护断言（流程排序判据 / 岗位页匹配判据）===
+
+HAS FAILURE
+[error] 已有 run_all 实例持有全局锁（daemon 或另一次看护），拒绝并发。
+        如需强制单跑某技能，请写 runtime/state/control.json：{"force_run":"<name>"}，daemon 下个周期会采纳。................
+----------------------------------------------------------------------
+Ran 80 tests in 0.306s
+
+OK
+
+[ok] 台账 csv 已生成: /var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/ra-cov-f9uw_wg3/ledger.csv (active 1/1)
+[warn] openpyxl 未安装，降级写 csv：/var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/ra-cov-f9uw_wg3/ledger-fallback.csv
+[ok] 台账 csv 已生成: /var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/ra-cov-f9uw_wg3/ledger-fallback.csv (active 0/1)
+[ok] 台账 xlsx 已生成: /var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/ra-cov-f9uw_wg3/ledger-neg.xlsx (active 0/1)
+[ok] 台账 xlsx 已生成: /var/folders/xw/rbrhth3s0jj8pygcx6knfs8c0000gn/T/ra-cov-f9uw_wg3/ledger.xlsx (active 1/1)
