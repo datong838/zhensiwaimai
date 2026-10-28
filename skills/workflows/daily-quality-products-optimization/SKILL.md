@@ -14,4 +14,6 @@ description: 淘宝闪购低优质商品的全部门店商品整改优化；每�
 
 完整稳定商品页明确无可采纳建议时，前置记录“已检查、无可执行建议”，不创建优化intent、不点确认；须全量身份/schema/数量通过、无下一页、非加载且所有hasSuggestion严格false。局部或身份不明不能据此跳过。新规则只作用新日当轮未尝试项，不回改旧unknown或返扫。
 
+商品页总数、当前分页及可见商品schema先验证就绪；加载中、数量未读到、空白商品行或优化按钮缺失/重复，均不能直接记为“已检查、无可优化项”。在原商品读取预算内有界等待；有效零商品、完整无建议或唯一按钮明确disabled才可无需操作。预算耗尽诚实记录未能执行，原单轮不返扫。
+
 2026-10-28通知恢复：新一轮send_one只在唯一原native send任务/response与完整群/当日事件/冻结载荷一致、sendAttempts严格整数0且无send-intent时，记schemaVersion=2的blocked恢复态。恢复复验原证据、request/completion/report SHA及原verified前件，跳过优化器和重新制表，仅发送尚未提交项；Excel已verified则只续文字，同一稳定事件。原request文件及载荷保持，仅本次实际调用更新deadline预算；newSendAttempts不含旧前件。旧unknown/attempted、有发送意图或计数不明仍只读，不迁移旧事实。42项Python及原Node回归通过，17点真实执行尚待。

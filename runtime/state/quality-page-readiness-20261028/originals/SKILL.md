@@ -1,0 +1,17 @@
+---
+name: daily-quality-products-optimization
+description: 淘宝闪购低优质商品的全部门店商品整改优化；每日17点客服后只按序执行一轮，到最后一页结束，异常如实记录并交付两列Excel与说明。
+---
+
+永久规则：一天一次一轮，到最后一页立刻结束，不凑面板统计、不复扫。
+原主任唯一入口scripts/quality_workflow.py --execute；正常runtimeModelDecisions=0。新业务日从第一页按当前可见行顺序走到末页hasNext=false，末行处理或异常记账后即scopeFinished。分段180秒、外层210秒，仅保存cursor.page,row并直达恢复记录页，不回第一页重走，不开round2。原半小时让路及9231岗位租约保持，整改不持企微锁。
+
+每段通过可见账号中心核验zhangyanru188、全部门店，进入经营任务→基础诊断→优质商品率低、未完成、门店空筛选。当前行正常去完成后取真实shopId，当天已处理/已attempted/异常已记录者直接跳过；未知不再确认，不为对账返扫。明天新日期新事件从第一页重新一轮。旧已verified通知入口直接零浏览器/零发送返回，今天原state/proof/receipt/Excel不改、不重发。
+
+新店等待唯一商品整改frame与稳定真实店名。标准label选择可用则选择，唯一“一键优化类目详情”及精确全部问题确认框是授权范围；intent先落盘再确认一次。正常提交反馈记已优化，不能优化记已检查；平台失败、未能执行、未知如实记笔记，继续后店，当天不返扫重试。没拿到shopId的失败行记录当时可见店名、页行与原因，不猜ID。到末页时170独立店与面板251不同仍按170报告，不再补齐或复核。
+
+完成后官方@oai/artifact-tool生成两列Excel“门店名称、执行记录”，包括优化、无需操作、已发起未确认、未能执行及访问异常；原群原WeCom原生队列同批file→text，冻结日路径/SHA/size，逐项unknown不重发。文案诚实报告实际数量与异常分项，存在未确认/失败时不称全优化成功。历史旧日schema与原交付凭据只保留兼容，不作为新日复扫条件。监理只处理异常和维护，不手动代点确认或发送。
+
+完整稳定商品页明确无可采纳建议时，前置记录“已检查、无可执行建议”，不创建优化intent、不点确认；须全量身份/schema/数量通过、无下一页、非加载且所有hasSuggestion严格false。局部或身份不明不能据此跳过。新规则只作用新日当轮未尝试项，不回改旧unknown或返扫。
+
+2026-10-28通知恢复：新一轮send_one只在唯一原native send任务/response与完整群/当日事件/冻结载荷一致、sendAttempts严格整数0且无send-intent时，记schemaVersion=2的blocked恢复态。恢复复验原证据、request/completion/report SHA及原verified前件，跳过优化器和重新制表，仅发送尚未提交项；Excel已verified则只续文字，同一稳定事件。原request文件及载荷保持，仅本次实际调用更新deadline预算；newSendAttempts不含旧前件。旧unknown/attempted、有发送意图或计数不明仍只读，不迁移旧事实。42项Python及原Node回归通过，17点真实执行尚待。

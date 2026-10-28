@@ -25,6 +25,21 @@ export function noExecutableSuggestions(snapshot){
  try{validateProducts(snapshot);}catch{return false;}
  return snapshot.products.every(product=>product.hasSuggestion===false);
 }
+export function optimizationDisposition(snapshot,action){
+ if(!Number.isSafeInteger(snapshot?.total)||snapshot.total<0||snapshot.loading!==false
+   ||!Number.isSafeInteger(snapshot.page)||snapshot.page<1||typeof snapshot.hasNext!=='boolean'
+   ||!Array.isArray(snapshot.products)||snapshot.products.length>snapshot.total
+   ||(snapshot.total>0&&snapshot.products.length===0)
+   ||(snapshot.total===0&&(snapshot.products.length!==0||snapshot.hasNext))
+   ||(snapshot.page===1&&!snapshot.hasNext&&snapshot.products.length!==snapshot.total))throw Error('quality-product-readiness-invalid');
+ validateProducts({total:snapshot.products.length,products:snapshot.products});
+ if(!Number.isSafeInteger(action?.count)||action.count<0||(action.count===1&&typeof action.disabled!=='boolean'))throw Error('quality-product-action-not-ready');
+ if(snapshot.total===0)return {action:'skip',reason:'no-available-platform-optimization'};
+ if(noExecutableSuggestions(snapshot))return {action:'skip',reason:'no-executable-platform-suggestions'};
+ if(action.count!==1)throw Error('quality-product-action-not-ready');
+ if(action.disabled)return {action:'skip',reason:'no-available-platform-optimization'};
+ return {action:'submit'};
+}
 export function submissionKey(shopId,products){
  if(!/^\d+$/.test(shopId))throw Error('quality-shop-id-invalid');validateProducts(products);
  return digest({shopId,taskIds:products.products.map(p=>p.taskId).sort(),scope:'all-category-details'});
