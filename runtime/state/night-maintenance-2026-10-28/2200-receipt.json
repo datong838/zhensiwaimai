@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "businessDate": "2026-10-28",
+  "startedAt": "2026-10-28T22:01:42.890+08:00",
+  "completedAt": "2026-10-28T22:04:02.430+08:00",
+  "maintenance2200Completed": true,
+  "allFourPostsComplete": true,
+  "result": "success",
+  "mustNotRepeatSameDay": true,
+  "director": {
+    "service": "gui/501/com.zhensi.waimai.careloop",
+    "state": "running",
+    "pid": 24510,
+    "startedAt": "2026-10-28T21:27:37",
+    "lastCycleAt": "2026-10-28T22:00:03",
+    "nextCycleAt": "2026-10-28T22:30:03",
+    "lastExitCode": 0
+  },
+  "gates": {
+    "sameDayReceiptAbsentBeforeRun": true,
+    "sameDayAttemptAbsentBeforeRun": true,
+    "liveStepsBeforeRun": 0,
+    "groupLocksBeforeRun": 0,
+    "physicalLocksBeforeRun": 0,
+    "controlForceOrResetPending": false,
+    "chromePidsMatchedPrecheck": true
+  },
+  "safety": {
+    "productionActions": 0,
+    "messagesSent": 0,
+    "queueWrites": 0,
+    "chromeRestarts": 0,
+    "credentialCookieLocalStorageOrAuthApiReads": 0,
+    "post9230NavigationReloadCreateClose": 0,
+    "post9231NavigationReloadCreateClose": 0,
+    "post9232NavigationReloadCreateClose": 0,
+    "imMaintenanceCreatedPages": 1,
+    "imMaintenanceClosedExactOldPages": 1,
+    "imResetAttempts": 1,
+    "leasesReleasedAfterRun": true
+  },
+  "lease": {
+    "outer": "runtime/roster_post_lease.py::original_post_lease(meituan-merchant)",
+    "physical": "skills/posts/meituan-post/scripts/lease.mjs",
+    "physicalPath": "/tmp/zhensi-post-9233.lock",
+    "attemptMarkerCreatedAfterBothLeasesAndBeforeBrowserMutation": true
+  },
+  "imReset": {
+    "passed": true,
+    "source": "runtime/im_env_reset_20261008.mjs::resetIM",
+    "attemptMarker": "runtime/state/night-maintenance-2026-10-28/2200-attempt.json",
+    "resultEvidence": "runtime/state/night-maintenance-2026-10-28/im-reset-result.json",
+    "oldExactImPages": 1,
+    "newPageCreatedBeforeOldPageClosed": true,
+    "newPageContentVerifiedBeforeOldPageClosed": true,
+    "closedExactOldImPages": 1,
+    "remainingExactImPages": 1,
+    "finalMarker": "顾客消息",
+    "finalTextLengthAtReset": 1430,
+    "finalRoute": "#/im/page/workbench/reception",
+    "blocked": false,
+    "unrelatedPageCountUnchanged": "not-asserted-without-before-count",
+    "imResetMustNotRepeat": true
+  },
+  "browsers": [
+    {
+      "port": 9230,
+      "pid": 12961,
+      "role": "taobao-brand",
+      "host": "melody.shop.ele.me",
+      "totalPages": 1,
+      "matchingPages": 1,
+      "healthyPages": 1,
+      "businessMarker": "商家首页",
+      "loginBlocked": false,
+      "noPermission": false,
+      "visibleRisk": false
+    },
+    {
+      "port": 9231,
+      "pid": 3212,
+      "role": "taobao-agent-service",
+      "host": "open.shop.ele.me",
+      "totalPages": 1,
+      "matchingPages": 1,
+      "healthyPages": 1,
+      "businessMarker": "服务商",
+      "loginBlocked": false,
+      "noPermission": false,
+      "visibleRisk": false,
+      "note": "页面内的淘宝闪购商家登录是服务商首页右上角跨平台入口按钮，不是登录阻断页；未发现登录容器或验证码。"
+    },
+    {
+      "port": 9232,
+      "pid": 89873,
+      "role": "jinsha-business",
+      "host": "data.guoshuyufen.com",
+      "totalPages": 2,
+      "matchingPages": 2,
+      "healthyPages": 2,
+      "businessMarker": "数据总览",
+      "loginBlocked": false,
+      "noPermission": false,
+      "visibleRisk": false,
+      "note": "两个同域页均只读记录，未关闭。"
+    },
+    {
+      "port": 9233,
+      "pid": 7155,
+      "role": "meituan-im",
+      "host": "waimaie.meituan.com",
+      "totalPages": 21,
+      "matchingPages": 1,
+      "healthyPages": 1,
+      "businessMarker": "顾客消息",
+      "receptionRoute": true,
+      "loginBlocked": false,
+      "noPermission": false,
+      "visibleRisk": false
+    }
+  ],
+  "evidence": {
+    "precheck": "runtime/state/night-maintenance-2026-10-28/precheck.json",
+    "solution": "docs/solutions/20261028-2200四岗位维护单次执行方案.md",
+    "formalReadonlyValidationAt": "2026-10-28T22:04:02.430+08:00"
+  }
+}
