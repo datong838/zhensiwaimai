@@ -578,6 +578,72 @@ def deliver(report: dict, run_dir: Path, day: str, adapter=None) -> dict:
 
 # ---------------------------------------------------------------- 入口
 
+def inspect_day_delivery(day: str) -> dict | None:
+    """Read original events before collecting; never rewrite an uncertain event."""
+    markers = {}
+    for kind, name in [('detail', f'{day}运营-店铺经营任务完成率明细.xlsx'),
+                       ('stats', f'{day}运营-店铺经营任务完成率.png')]:
+        event = f'{day}-taobao-store-task-{kind}'
+        file = EVENTS / f'{event}.json'
+        if not file.exists() and not file.is_symlink():
+            continue
+        try:
+            if not file.is_file() or file.is_symlink():
+                raise ValueError('marker-not-regular')
+            prior = json.loads(file.read_text())
+            if (not isinstance(prior, dict) or prior.get('event') != event or prior.get('groupName') != GROUP
+                    or prior.get('name') != name or not isinstance(prior.get('sha256'), str)
+                    or not re.fullmatch(r'[0-9a-f]{64}', prior['sha256'])):
+                raise ValueError('marker-binding-invalid')
+            state = prior.get('state')
+            if state not in ('verified', 'unknown', 'attempted', 'blocked'):
+                raise ValueError('marker-state-invalid')
+            if state == 'blocked' and (type(prior.get('sendAttempts')) is not int or prior['sendAttempts'] != 0):
+                raise ValueError('marker-zero-send-not-proven')
+            markers[kind] = prior
+        except (ValueError, TypeError, OSError) as error:
+            return {'status': 'blocked', 'reason': f'original-event-invalid:{error}', 'sendAttempts': 0, 'event': event}
+    if not markers:
+        return None
+    if any(m['state'] in ('unknown', 'attempted') for m in markers.values()):
+        return {'status': 'unknown', 'reason': 'prior-attempt-requires-read-only-reconciliation',
+                'sendAttempts': 0, 'newSendAttempts': 0, 'originalEvents': [m['event'] for m in markers.values()]}
+    if markers.get('stats', {}).get('state') == 'verified' and markers.get('detail', {}).get('state') != 'verified':
+        return {'status': 'blocked', 'reason': 'original-order-evidence-conflict', 'sendAttempts': 0}
+    if len(markers) == 2 and all(m['state'] == 'verified' for m in markers.values()):
+        return {'status': 'already_verified', 'sendAttempts': 0, 'newSendAttempts': 0}
+    return {'status': 'resume-frozen', 'sendAttempts': 0, 'markers': markers}
+
+
+def frozen_day_run(day: str, markers: dict) -> Path:
+    candidates = []
+    for run in sorted(RUNS.glob(f'{day}-*')):
+        if not run.is_dir() or run.is_symlink():
+            continue
+        try:
+            summary = json.loads((run / 'summary.json').read_text())
+            if not isinstance(summary, dict) or summary.get('day') != day:
+                continue
+            files = {'detail': run / f'{day}运营-店铺经营任务完成率明细.xlsx',
+                     'stats': run / f'{day}运营-店铺经营任务完成率.png'}
+            if any(not file.is_file() or file.is_symlink() for file in files.values()):
+                continue
+            if (Path(summary.get('reportPath', '')).resolve() != files['detail'].resolve()
+                    or Path(summary.get('statsPath', '')).resolve() != files['stats'].resolve()):
+                continue
+            hashes = {kind: hashlib.sha256(file.read_bytes()).hexdigest() for kind, file in files.items()}
+            if any(hashes[kind] != marker['sha256'] for kind, marker in markers.items()):
+                continue
+            candidates.append((run, tuple(hashes.items())))
+        except (OSError, ValueError, TypeError):
+            continue
+    if not candidates:
+        raise ValueError('original-frozen-pair-unavailable')
+    if len({hashes for _, hashes in candidates}) != 1:
+        raise ValueError('original-frozen-pair-ambiguous')
+    return candidates[0][0]
+
+
 def main() -> None:
     import argparse
     parser = argparse.ArgumentParser()
@@ -604,16 +670,37 @@ def main() -> None:
         return
     day = datetime.now(LOCAL_TZ).date().isoformat()
     run_dir = RUNS / f"{day}-{time.time_ns()}"
+    resuming = False
+    if args.deliver_run:
+        run_dir = Path(args.deliver_run).resolve()
+        day = run_dir.name[:10]
+        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", day):
+            raise ValueError(f"cannot-derive-day-from-run-dir:{run_dir.name}")
+    prior = inspect_day_delivery(day)
+    if prior and prior['status'] != 'resume-frozen':
+        print(json.dumps({**prior, 'day': day, 'collectionSkipped': True}, ensure_ascii=False))
+        if prior['status'] != 'already_verified':
+            raise SystemExit(1)
+        return
+    if prior:
+        try:
+            run_dir = frozen_day_run(day, prior['markers'])
+            resuming = True
+        except ValueError as error:
+            print(json.dumps({'status': 'blocked', 'reason': str(error), 'sendAttempts': 0,
+                              'day': day, 'collectionSkipped': True}, ensure_ascii=False))
+            raise SystemExit(1)
     try:
-        if args.deliver_run:
+        if args.deliver_run or resuming:
             # 补发模式：复用已下载的真实数据重建（确定性：同输入同输出），只走发送。
-            run_dir = Path(args.deliver_run).resolve()
+            run_dir = run_dir if resuming else Path(args.deliver_run).resolve()
             day = run_dir.name[:10]
             if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", day):
                 raise ValueError(f"cannot-derive-day-from-run-dir:{run_dir.name}")
             collected: dict = {}
             report = build_report(run_dir, day)
-            result = deliver(report, run_dir, day)
+            result = (deliver(report, run_dir, day) if args.execute or args.deliver_run
+                      else {'status': 'ready', 'sendAttempts': 0})
         else:
             run_dir.mkdir(parents=True, mode=0o700)
             collected = collect(run_dir)
@@ -631,8 +718,8 @@ def main() -> None:
                        "shops": s["shops"], "counted": s["counted"], "missing": s["missing"]}
                       for s in (report.get("stats") or [])],
             "runDir": str(run_dir), "armState": arm_state(),
-            "mode": "deliver-run" if args.deliver_run else "collect",
-            "collected": (None if args.deliver_run else
+            "mode": "resume-frozen" if resuming else "deliver-run" if args.deliver_run else "collect",
+            "collected": (None if args.deliver_run or resuming else
                           {"effect": collected.get("effect", {}).get("size"),
                            "effectRows": collected.get("effect", {}).get("tableTotal"),
                            "alloc": collected.get("alloc", {}).get("size"),
@@ -641,7 +728,7 @@ def main() -> None:
     except Exception as error:  # noqa: BLE001
         result = {"status": "unknown", "reason": str(error), "sendAttempts": 0,
                   "runDir": str(run_dir), "day": day}
-    atomic_json(run_dir / "summary.json", result)
+    atomic_json(run_dir / (f"resume-{time.time_ns()}.json" if resuming else "summary.json"), result)
     print(json.dumps(result, ensure_ascii=False))
     if result["status"] not in ("verified", "already_verified", "ready", "no-report"):
         raise SystemExit(1)

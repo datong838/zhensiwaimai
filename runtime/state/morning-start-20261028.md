@@ -277,3 +277,8 @@ posts仅追加两申诉主名和12/15客服别名，22现役均能解析原互�
 客服12:00第一轮因一张10/27平台卡无公开会话ID，在扫描前失败，回复0。先隔离身份缺失保留pending，12:07恢复39真实ID卡+1待处理，但原stdout ok=false退出0仍记SUCCESS；保留旧收据不重写。进一步增加仅对完整可见文字精确唯一无ID卡的只读打开、原judge不合格可完成检查，合格仍缺ID只记pending不输入/不提交；CLI未完整退出1。37 Node条目通过、原post clean。12:12:12原主任再次接续当前最新12班，未回复51/正在接待13，去重54全部检查，候选0/发送0/身份pending0/executionComplete及verificationComplete均true，12:13:24 SUCCESS；无ID旧卡原实际只读结果no-customer-message，未生成回复，不以卡片文本代替发送身份。证据runtime/state/customer-list-coverage-20261028/1200-real-acceptance.json。12点本班完成，15/17点和非空单次提交实证仍待，不宣称当天客服完成。
 
 另已纯fixture复现daily_progress仅关键词verificationLevel也可视为已外发，属于展示依据过弱；原生产防重未受影响。下一批在最终台账前修复结构化证据识别，证据runtime/state/delivery-evidence-keyword-audit-20261028/counterexample.json。完成率在强制其他流周期又重采，未重发未知图；需前置原未决事件只读门，避免无谓重采/产物冲突。
+
+
+## 12:24完成率前置原事件门
+
+确认原unknown后每次总入口仍重采制表、可能旧明细配新图；已将两原事件完整绑定检查前移，unknown/attempted不再新采集/产物/发送，两verified直接复用；可靠零发送或未尝试部分只走匹配同日冻结双件原run，缺件/歧义拒绝、原summary不覆盖、原顺序和防重不变。新8+原55共63离线测试通过。真实今日原事件只读返回unknown/newSendAttempts0，原marker及verified-snapshot全部SHA不变；未为验收生产补跑，原12:30周期自然验证该门。证据runtime/state/taskrate-precollection-gate-20261028/final-audit.json。

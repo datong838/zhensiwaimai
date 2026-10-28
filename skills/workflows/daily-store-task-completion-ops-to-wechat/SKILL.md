@@ -98,3 +98,7 @@ $PY -m unittest discover -s tests -v     # 在本工作流目录下，49 项
 - `runtime/posts.json`：`taobao-agent-service(9231).usedBy` 已加本流名 → daemon 取得互斥组 `taobao-svc-9231`（与 `daily-agent-new-merchants-to-wechat`、`daily-new-stores-not-nourished-ops-to-wechat` 三方互斥）。
 - 改 manifest 后必须 `launchctl kickstart -k gui/$(id -u)/com.zhensi.waimai.careloop` 重载（manifest 不热加载）。
 - **★ 10-13 收口时未重载**：重载会立即跑一轮 due 的流，其中 `meituan-waimai-negative-review-appeals-1425` 与 `taobao-flash-sale-negative-review-appeals` 会**真发群**——监理不替大同触发他人生产流，重载待大同放行后一并做。
+
+## 2026-10-28采集前原事件检查
+
+原main在创建run、采集和制表前先核对当日两事件。已attempted/unknown只读返回待核，零新采集/产物/发送；两件verified直接already_verified。坏记录、错绑定或不明次数不当缺失处理。只有可靠零发送或未尝试剩余件可复用同日双文件原件，已有marker SHA、同run两个固定文件、summary路径须一致，歧义/缺件不回退新采集；原Excel先、图后及同事件防重保留。恢复写独立resume收据，不覆盖原summary。当前图已提交待核不重发；详情见docs/solutions/20261028-完成率原事件前置与冻结续传.md。
