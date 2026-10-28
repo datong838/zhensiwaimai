@@ -1,0 +1,78 @@
+test_different_day_uses_different_event_id (test_delivery.AntiDoubleSend.test_different_day_uses_different_event_id) ... ok
+test_disarmed_never_touches_adapter (test_delivery.AntiDoubleSend.test_disarmed_never_touches_adapter) ... ok
+test_markers_record_verified_receipt (test_delivery.AntiDoubleSend.test_markers_record_verified_receipt) ... ok
+test_missing_events_dir_is_auto_created (test_delivery.AntiDoubleSend.test_missing_events_dir_is_auto_created)
+首跑 events 目录不存在是正常现象：自动补建后照常发送（曾在此误闸 blocked）。 ... ok
+test_prior_attempted_unknown_does_not_resend (test_delivery.AntiDoubleSend.test_prior_attempted_unknown_does_not_resend)
+上一次发出去了但收据不明 ⇒ 只读对账，绝不重发。 ... ok
+test_same_day_payload_change_is_hard_blocked (test_delivery.AntiDoubleSend.test_same_day_payload_change_is_hard_blocked)
+同日同事件但内容变了（sha 不符）⇒ 阻断，绝不覆盖旧 marker、绝不发。 ... ok
+test_second_run_sends_nothing (test_delivery.AntiDoubleSend.test_second_run_sends_nothing) ... ok
+test_sha_mismatch_with_snapshot_recovers (test_delivery.AntiDoubleSend.test_sha_mismatch_with_snapshot_recovers)
+★ 2026-10-19 部分送达续传死锁修复：同日重生成字节必变（xlsx 内嵌时间戳）， ... ok
+test_sha_mismatch_without_snapshot_still_blocks (test_delivery.AntiDoubleSend.test_sha_mismatch_without_snapshot_still_blocks)
+无快照（或快照 sha 也对不上）才是真·payload 冲突：维持硬阻断。 ... ok
+test_verified_send_snapshots_artifact (test_delivery.AntiDoubleSend.test_verified_send_snapshots_artifact)
+送达即快照：verified 后快照区留有原字节，供同日 sha 失配续传回退。 ... ok
+test_blocked_is_not_recorded_as_unknown (test_delivery.OrderAndStop.test_blocked_is_not_recorded_as_unknown)
+「确定没发」与「可能发过」必须分开记账，否则干净失败会被永久卡死。 ... ok
+test_blocked_marker_may_be_retried_next_round (test_delivery.OrderAndStop.test_blocked_marker_may_be_retried_next_round)
+blocked = 确定没发 ⇒ 下轮允许安全重试（与 unknown 的禁令正相反）。 ... ok
+test_detail_blocked_means_image_never_sent (test_delivery.OrderAndStop.test_detail_blocked_means_image_never_sent)
+★ 顺序铁律：明细没落群，统计图一次都不能发。 ... ok
+test_detail_first_then_image (test_delivery.OrderAndStop.test_detail_first_then_image) ... ok
+test_detail_recheck_fails_blocks_image_and_marks_unknown (test_delivery.OrderAndStop.test_detail_recheck_fails_blocks_image_and_marks_unknown)
+★ 2026-10-19 假 verified 防御：明细复核不过 ⇒ unknown + 绝不发图。 ... ok
+test_detail_recheck_passes_continues_to_image (test_delivery.OrderAndStop.test_detail_recheck_passes_continues_to_image)
+复核通过 ⇒ 正常继续发图（防御层不误伤正常路径）。 ... ok
+test_detail_verified_image_blocked_reports_image_failure (test_delivery.OrderAndStop.test_detail_verified_image_blocked_reports_image_failure) ... ok
+test_image_is_file_item_and_detail_is_file_item (test_delivery.OrderAndStop.test_image_is_file_item_and_detail_is_file_item) ... ok
+test_stats_window_degraded_retro_downgrades_detail (test_delivery.OrderAndStop.test_stats_window_degraded_retro_downgrades_detail)
+★ 同窗劣化回溯：明细刚 verified、图因「主窗口未出现」被拒 ⇒ 明细降 unknown。 ... ok
+test_driver_unreachable_blocks_everything (test_delivery.PreflightGate.test_driver_unreachable_blocks_everything) ... ok
+test_group_not_exactly_listed_blocks_everything (test_delivery.PreflightGate.test_group_not_exactly_listed_blocks_everything) ... ok
+test_preflight_ok_false_short_circuits_before_any_send (test_delivery.PreflightGate.test_preflight_ok_false_short_circuits_before_any_send) ... ok
+test_empty_coverage_means_no_tail_line (test_task_report.CoverageNotes.test_empty_coverage_means_no_tail_line) ... ok
+test_format_matches_sample (test_task_report.CoverageNotes.test_format_matches_sample) ... ok
+test_render_notes_append_visible_tail (test_task_report.CoverageNotes.test_render_notes_append_visible_tail)
+带提示行时：图变高、且底部区域有墨迹（无提示行时底部应是纯白）。 ... ok
+test_uses_raw_name_not_cleaned_display (test_task_report.CoverageNotes.test_uses_raw_name_not_cleaned_display)
+★ 必须用原始运营人：清洗会把「雷洁老师」压成「雷洁」，和图里的「雷洁2」难分。 ... ok
+test_zero_shop_entry_is_skipped (test_task_report.CoverageNotes.test_zero_shop_entry_is_skipped) ... ok
+test_alloc_without_owner_blocked (test_task_report.MissingColumns.test_alloc_without_owner_blocked) ... ok
+test_effect_without_rate_column_blocked (test_task_report.MissingColumns.test_effect_without_rate_column_blocked) ... ok
+test_effect_without_shop_id_blocked (test_task_report.MissingColumns.test_effect_without_shop_id_blocked) ... ok
+test_empty_column_has_no_scale_crash (test_task_report.RateScale.test_empty_column_has_no_scale_crash) ... ok
+test_fraction_column_becomes_percent (test_task_report.RateScale.test_fraction_column_becomes_percent) ... ok
+test_mixed_column_uses_percent (test_task_report.RateScale.test_mixed_column_uses_percent)
+整列只要有一个 >1，就按百分数处理（避免小数/百分数混算）。 ... ok
+test_parse_rate_handles_text_and_junk (test_task_report.RateScale.test_parse_rate_handles_text_and_junk) ... ok
+test_percent_column_stays_percent (test_task_report.RateScale.test_percent_column_stays_percent) ... ok
+test_blank_rate_excluded_from_average_but_group_kept (test_task_report.ReportBuilding.test_blank_rate_excluded_from_average_but_group_kept) ... ok
+test_coverage_reports_alloc_only_owners (test_task_report.ReportBuilding.test_coverage_reports_alloc_only_owners)
+雷洁老师式盲区：有分配、无效果数据 ⇒ 必须显式上报，不能静默消失。 ... ok
+test_fraction_rates_are_scaled_in_stats (test_task_report.ReportBuilding.test_fraction_rates_are_scaled_in_stats) ... ok
+test_group_without_any_value_is_dropped_from_card (test_task_report.ReportBuilding.test_group_without_any_value_is_dropped_from_card) ... ok
+test_unmatched_shop_marked_and_reported (test_task_report.ReportBuilding.test_unmatched_shop_marked_and_reported) ... ok
+test_vlookup_inserts_owner_after_shop_name (test_task_report.ReportBuilding.test_vlookup_inserts_owner_after_shop_name) ... ok
+test_zip_effect_download_is_unpacked (test_task_report.ReportBuilding.test_zip_effect_download_is_unpacked) ... ok
+test_collision_falls_back_to_raw_name (test_task_report.StatsCard.test_collision_falls_back_to_raw_name)
+清洗后撞名的两个原始运营人，各自独立成行、用原始值显示，绝不合并。 ... ok
+test_color_thresholds (test_task_report.StatsCard.test_color_thresholds) ... ok
+test_display_name_cleaning (test_task_report.StatsCard.test_display_name_cleaning) ... ok
+test_display_name_never_blank (test_task_report.StatsCard.test_display_name_never_blank) ... ok
+test_distinct_owners_never_merge_even_with_same_display_name (test_task_report.StatsCard.test_distinct_owners_never_merge_even_with_same_display_name)
+★ 防回归（10-13 真实事故）：曾把「雷洁老师」和「雷洁2」都清洗成「雷洁」， ... ok
+test_lei_teacher_display_name_stays_distinct_from_lei2 (test_task_report.StatsCard.test_lei_teacher_display_name_stays_distinct_from_lei2) ... ok
+test_number_format_matches_sample (test_task_report.StatsCard.test_number_format_matches_sample) ... ok
+test_render_writes_white_background_png (test_task_report.StatsCard.test_render_writes_white_background_png) ... ok
+test_sort_is_descending (test_task_report.StatsCard.test_sort_is_descending) ... ok
+test_two_char_name_padded_to_three_cells (test_task_report.StatsCard.test_two_char_name_padded_to_three_cells) ... ok
+test_disarmed_blocks_before_touching_gateway (test_task_report.ZeroHardGate.test_disarmed_blocks_before_touching_gateway) ... ok
+test_zero_rows_is_no_report (test_task_report.ZeroHardGate.test_zero_rows_is_no_report) ... ok
+test_zero_stats_is_no_report (test_task_report.ZeroHardGate.test_zero_stats_is_no_report) ... ok
+
+----------------------------------------------------------------------
+Ran 55 tests in 0.248s
+
+OK

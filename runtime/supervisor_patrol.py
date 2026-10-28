@@ -23,6 +23,7 @@ from __future__ import annotations
 
 import argparse
 import glob
+import hashlib
 import json
 import os
 import shutil
@@ -30,6 +31,7 @@ import subprocess
 import sys
 import time
 import urllib.request
+import zipfile
 from datetime import datetime, timedelta
 from pathlib import Path
 from urllib.parse import urlsplit
@@ -55,6 +57,16 @@ CHROME_PORTS = {
 
 DAEMON_STALE_MIN = 45          # daemon 周期落后超过该值 => RED（夜间另算）
 NIGHT_HOURS = (23, 0, 1, 2, 3, 4, 5)
+
+# These historical filenames are live report-format inputs, not disposable history.
+# The customer roster remains mutable business data; fixed formats bind Git c310f639.
+BUSINESS_ASSETS = {
+    "data/reports/jinsha/客户表最新.xlsx": None,
+    "data/reports/jinsha/美团全部_2026-08-25至2026-08-25.xlsx":
+        "80f79cbcf4a269ace4ade1715a4f7f15d73dbef627d74a3931de8448387f3177",
+    "data/reports/jinsha/淘宝闪购_模版2026-08-24至2026-08-24.xlsx":
+        "00cf7c170349e739b61e59e9aadb35922df51adcf3109a65ca6978d4e4016da4",
+}
 
 
 # ---------------------------------------------------------------- helpers
@@ -123,6 +135,39 @@ def finding(level: str, area: str, code: str, detail: str, suggest: str = "") ->
 
 
 # ---------------------------------------------------------------- checks
+def check_business_assets(phase: str) -> tuple[dict, list]:
+    """Check local live inputs in daytime and at night without reading cell values."""
+    snapshot, findings = {"files": []}, []
+    for relative, expected in BUSINESS_ASSETS.items():
+        file = ROOT / relative
+        item = {"path": relative, "status": "invalid"}
+        try:
+            if not file.resolve().is_relative_to(ROOT.resolve()):
+                raise ValueError("path-outside-repository")
+            if not file.is_file():
+                raise ValueError("required-file-missing-or-not-file")
+            content = file.read_bytes()
+            if not content:
+                raise ValueError("required-file-empty")
+            digest = hashlib.sha256(content).hexdigest()
+            item.update(size=len(content), sha256=digest)
+            if expected and digest != expected:
+                raise ValueError("fixed-template-digest-mismatch")
+            with zipfile.ZipFile(file) as archive:
+                if not {"[Content_Types].xml", "xl/workbook.xml"}.issubset(archive.namelist()):
+                    raise ValueError("xlsx-required-parts-missing")
+                if archive.testzip() is not None:
+                    raise ValueError("xlsx-crc-invalid")
+            item["status"] = "valid"
+        except (OSError, ValueError, zipfile.BadZipFile, RuntimeError) as error:
+            item["reason"] = str(error)
+            findings.append(finding("RED", "business-assets", "required-input-invalid",
+                                    f"{relative}: {error}",
+                                    "原制表入口必需资料；先按原件核验恢复，不能用旧日报替代当日数据"))
+        snapshot["files"].append(item)
+    return snapshot, findings
+
+
 def check_daemon(phase: str) -> tuple[dict, list]:
     out: list = []
     snap: dict = {}
@@ -446,7 +491,7 @@ def patrol() -> dict:
     p = phase_of(now())
     findings: list = []
     snap: dict = {}
-    for fn in (check_daemon, check_flows, check_last_cycle, check_chrome,
+    for fn in (check_business_assets, check_daemon, check_flows, check_last_cycle, check_chrome,
                check_outbound, check_marker_deadlocks, check_popup, check_alerts):
         try:
             sub, items = fn(p) if fn.__code__.co_argcount else fn()

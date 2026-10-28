@@ -47788,3 +47788,20 @@
 
 === 发送门判断 ===
 [warn] 未全绿（有失败/待适配）：仅落盘 + 告警，不发送 AI 员工群。
+[fixed_schedule] 到达固定排班时点，开始下一周期
+
+=== daemon 周期 2026-10-28 (force_all=False) ===
+[skip] daily-agent-new-merchants-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] negative-feedback-list-appeals-0930 当日已成功（cadence 内），本周期跳过
+[skip] negative-feedback-list-appeals-1230 当日已成功（cadence 内），本周期跳过
+[skip] meituan-intelligent-customer-service-12 not_due，本周期跳过
+[skip] meituan-intelligent-customer-service-15 not_due，本周期跳过
+[skip] meituan-intelligent-customer-service not_due，本周期跳过
+[skip] daily-quality-products-optimization not_due，本周期跳过
+[skip] meituan-waimai-negative-review-appeals-11 not_due，本周期跳过
+[skip] taobao-flash-sale-negative-review-appeals not_due，本周期跳过
+[skip] daily-new-stores-opening-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-activity-audit-to-wechat 当日已成功（cadence 内），本周期跳过
+[skip] daily-new-stores-decoration-audit-to-wechat 当日已成功（cadence 内），本周期跳过
+
+▶ 执行 daily-new-stores-not-nourished-ops-to-wechat (dev=active)

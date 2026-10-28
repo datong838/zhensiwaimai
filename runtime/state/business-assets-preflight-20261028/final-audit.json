@@ -1,0 +1,28 @@
+{
+  "at": "2026-10-28T11:40:13.066183+08:00",
+  "sourceChanges": [
+    "runtime/supervisor_patrol.py",
+    "runtime/tests/test_required_business_assets.py",
+    "docs/operations/每日0800监理启动与持续值守.md"
+  ],
+  "tests": {
+    "newRequiredAssets": 6,
+    "originalSupervisor": 6,
+    "nourishFirstRun": 4,
+    "taskrateOriginal": 55
+  },
+  "liveAssets": "receipt.json",
+  "customerServiceReadonly": "customer-service-1200-readonly.json",
+  "sendAttempts": 0,
+  "productionCodeOrDataModified": false,
+  "limitations": [
+    "本地资料完整不替代11:40/12:00真实运行验收",
+    "模板登记覆盖现役经营日报三份输入，不代表全24流固定资料审查已完成",
+    "巡检只读发现问题，不自行恢复或发送"
+  ],
+  "nextActions": [
+    "11:40未养活原主任真实来源及文件交付验收",
+    "12:00完成率与客服真实任务验收",
+    "维护租约调用统一从posts.json读取mutexGroup；此前品牌商回收物理原租约有效、live_steps空，外层调用使用别名，需补标准化防止维护调用另起组名"
+  ]
+}
