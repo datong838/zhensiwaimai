@@ -1,0 +1,51 @@
+{
+  "ok": true,
+  "executor": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/workflows/daily-taobao-download-to-jinsha/scripts/background_browser_executor.mjs",
+  "executorSha256": "5f007ecea8361709e56cd8908e75c0144236ecf0b4ce939821aedbf388a63b6b",
+  "channel": "control-background-dedicated-chrome",
+  "fixedProfiles": {
+    "taobao": "taobao-brand:9230",
+    "jinsha": "jinsha-business:9232"
+  },
+  "desktopJinshaAllowed": false,
+  "skillSync": true,
+  "skillSha256": "d89f5d9598f5b532224d6b6c410f5149a610bf4b73be300473bf332501873f83",
+  "entrypointSync": true,
+  "entrypointSha256": "463ef5b34ea49d9e748c38231882791c84ee98ed31d7154c607b1850b54496a6",
+  "experienceSelfTest": {
+    "ok": true,
+    "caseCount": 7,
+    "tests": 14
+  },
+  "selfTest": {
+    "ok": true,
+    "tests": 87,
+    "controlPolicyVersion": "daily-taobao-jinsha-code-enforced-2026-09-28",
+    "fixedProfiles": {
+      "taobao": "taobao-brand:9230",
+      "jinsha": "jinsha-business:9232"
+    },
+    "desktopJinshaAllowed": false
+  },
+  "launcherDependencySelfTest": {
+    "ok": true,
+    "launcherSha256": "e805e95a3c0f2f1d0be35317a76433bbf4cd618e32b978fc172ac85f64fa26d1",
+    "sessionGuardSha256": "07dbd017f32c00d0041546c6bb249b0febe90fbd9648579d75b2a9571632ec2c"
+  },
+  "taobaoStartupSelfTest": {
+    "ok": true,
+    "tests": 4
+  },
+  "wechatSelfTest": {
+    "ok": true,
+    "tests": 15,
+    "scheduledPolicyId": "user-approved-unattended-daily-2026-09-12",
+    "publicSenderSha256": "f7d843eeca265edc12e9c9475fdd996114d29f68953c10e56b5dc3323319da4d",
+    "dependencyAuthority": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/skills/wechat-messaging/dependencies.json"
+  },
+  "pendingEvidence": {
+    "kind": "none",
+    "receiptFile": null,
+    "reason": null
+  }
+}

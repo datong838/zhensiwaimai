@@ -255,3 +255,6 @@ posts仅追加两申诉主名和12/15客服别名，22现役均能解析原互�
 11:40:03原主任未养活来源采集成功，根角色门店分配912，未养活9/9关联，Excel一次verified，原文件名/大小双观察核验通过，首跑events修复已真实验收。原daemon58654不变，下一fixed12点仍会早于心跳普通next12:10唤醒。
 
 维护roster_post_lease现先读原posts注册，将岗位key或唯一mutexGroup统一到标准外层组，再精确绑定四岗物理路径；未知/歧义/错路径/非法端口在创建锁前拒绝。原真实owner检查和主任acquire/release保留，原物理post源码不改。7新增隔离测试+13原group租约测试通过，四实际登记别名/标准组映射核验一致；未触浏览器/生产锁/队列/账本，也未重复旧回收。证据runtime/state/business-assets-preflight-20261028/maintenance-binding-audit.json。12点真实任务与13点原申诉仍待。
+
+
+11:44 原13点淘宝下载上传入口preflight重新核验通过（仅preflight，未调用run/runScheduled）：仓内安装映射与入口同步、冻结执行器/发送器/恢复器摘要、自测与历史pending检查通过；pendingEvidence none。该证据仅代表提前依赖门，13点实际业务仍待，不提前下载、上传或发送。原收据runtime/state/thirteen-preflight-20261028/taobao-entrypoint.json。
