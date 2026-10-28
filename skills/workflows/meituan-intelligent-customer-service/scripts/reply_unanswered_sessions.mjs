@@ -8,11 +8,13 @@
 import { pathToFileURL } from "node:url";
 import { resolve } from "node:path";
 import fs from "node:fs/promises";
+import {createHash} from 'node:crypto';
 import { connectToPost } from "../../../posts/meituan-post/scripts/connect.mjs";
 import { acquirePostLease, releasePostLease } from "../../../posts/meituan-post/scripts/lease.mjs";
 import { runWithUnansweredQueue, dismissFraudAcknowledgement } from "./ensure_unanswered_queue.mjs";
 import { replyBinding, inspectReplySubmission, submitReplyOnce, assertReplyDraft } from "./reply_submission.mjs";
 import {latestCustomer, recentMetadata} from './message_time.mjs';
+import {revealSessionCard} from './session_card_locator.mjs';
 const SUBMISSIONS = new URL("../records/reply-submissions/", import.meta.url).pathname;
 
 const TARGET_HOST = "waimaie.meituan.com";
@@ -233,6 +235,8 @@ export async function processCards(page, identities, receipt, now, done, view = 
   const writeLedger = options.appendLedger ?? appendLedger;
   let checked = 0;
   for (const entry of identities) {
+    let revealed = null;
+    try {
     const { sessionId, text: identity } = entry;
     if (entry.identityUnavailable === true && sessionId === '') {
       receipt.scanned++;
@@ -271,16 +275,26 @@ export async function processCards(page, identities, receipt, now, done, view = 
     if (!/^\d{19}$/.test(sessionId)) throw Error("customer-session-id-unavailable");
     if (done.has(sessionId)) continue;
     if (done.size >= MAX_SESSIONS) break;
-    done.add(sessionId);
-    checked++;
     receipt.scanned++;
     const card = page.locator(`[class*='sessionListItemContainer'][id="${sessionId}"]`);
     if ((await card.count()) > 1) throw Error("customer-session-id-not-unique");
     if ((await card.count()) === 0) {
-      receipt.decisions.push({ card: identity, qualify: false, reason: "card-vanished-from-filter(可能已读/已回)" });
-      continue;
+      revealed = await (options.revealCard ?? revealSessionCard)(page, sessionId);
+      const count = await card.count();
+      if (count > 1) throw Error('customer-session-id-not-unique');
+      if (!revealed.found || count !== 1) {
+        receipt.locatePending ??= [];
+        const sessionKey = createHash('sha256').update(sessionId).digest('hex');
+        if (!receipt.locatePending.some(x => x.sessionKey === sessionKey))
+          receipt.locatePending.push({sessionKey, session:maskSession(identity), reason:'exact-session-not-located',newSubmitCalls:0});
+        continue;
+      }
     }
     await card.click({ timeout: 5000 });
+    done.add(sessionId);
+    checked++;
+    const sessionKey = createHash('sha256').update(sessionId).digest('hex');
+    receipt.locatePending = (receipt.locatePending ?? []).filter(x => x.sessionKey !== sessionKey);
     await page.waitForTimeout(1000);
     if (await dismissFraudAcknowledgement(page)) {
       receipt.decisions.push({session:maskSession(identity),qualify:false,reason:"platform-fraud-warning"});
@@ -411,6 +425,9 @@ export async function processCards(page, identities, receipt, now, done, view = 
       // 该条已记账进 sent（ledgerRows 含它），failed 仅作为「需人工确认」的红灯标记，不再是丢账的理由。
       receipt.failed.push({ session: decision.session, reason: "echo-unverified-needs-manual-check", inputValueLen: inputVal.length, replyProbe: probe, rightAfterClick: rightAfterClick ? rightAfterClick.slice(0, 60) : null, rightAfterPoll: rightAfterPoll ? rightAfterPoll.slice(0, 60) : null });
     }
+    } finally {
+      if (revealed?.restore) await revealed.restore();
+    }
   }
   return checked;
 }
@@ -475,7 +492,7 @@ async function main() {
       const checked = await processCards(page, identities, receipt, now, done, view);
       receipt.views.push({ view, total: identities.length, checked });
     }
-    receipt.executionComplete = !receipt.views.some(v => v.error) && !receipt.identityPending?.length;
+    receipt.executionComplete = !receipt.views.some(v => v.error) && !receipt.identityPending?.length && !receipt.locatePending?.length;
     receipt.ok = receipt.executionComplete;
     receipt.verificationComplete = receipt.verificationPending.length === 0 && receipt.failed.length === 0;
     // 真实候选计数（已核验待回复 = qualify 数）落盘，供 step3 矛盾检测：
@@ -491,6 +508,7 @@ async function main() {
         escalationRequired: receipt.escalationRequired ?? [],
         executionComplete: receipt.executionComplete,
         identityPending: receipt.identityPending ?? [],
+        locatePending: receipt.locatePending ?? [],
         views: receipt.views, ts: Date.now(),
       })).catch(() => {});
     }
