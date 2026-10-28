@@ -190,3 +190,10 @@
 ## 09:00原主任真实执行
 
 新商家09:00:02原主任执行，当日来源1行、完整末页，原历史排除已处理行后新增0；固定当前无新增意向商家仅发电销+直播攻坚组1次，2次原生文字回读verified，原19文件SEALED通过。合同09:00:30原主任执行，当日处理中3条/1页，completePages、状态一致性、原复位及3行PNG路径/大小校验通过；发送1次，完整运营群/空框通过，executionComplete=true，仍verificationPending，不重发、不伪verified。此前合同当日完整来源修复已通过今日真实3行验收，图片内容回读仍未闭环。证据morning-start-20261028/0900-merchants-contract-real-execution.json。
+
+
+## 10月28日09:09暂停巡店库归仓补齐
+
+原两处store-inspection解析链接已由宿主库切仓内vendor相对路径；补齐sharp及其五个独立运行依赖，共125文件19,730,995字节，逐文件与原包SHA一致，许可证随包保存，未搬智能体引擎。原419份已登记库/三流业务资料/manifest/posts/control不变；三个流保持停用。链接维护7项（缺失新机、幂等、外来链接、真实目录、忙、启用、漂移及部分失败回滚场景）、四项原合同回归通过，原44行模板含空项输出及真实四图拼图验证通过，22项当前依赖基线通过。旧首店测试所需09月facts-final.json原已不存在，保留失败日志，不复造已清理业务资料、不写通过。
+
+新增runtime/maintain_store_inspection_dependencies.py只读/显式--apply维护本流两链接；仅精确原链接或缺失可恢复，原主任忙或三流启用拒绝。native库仅darwin-arm64实证，其他平台及异机完整安装未验收。无生产/浏览器/手机/发送/主任重启，不能据此认定巡店已上线或完整Goal完成。方案docs/solutions/20261028-暂停巡店图片库归仓方案.md；证据runtime/state/inspection-library-consolidation-20261028/final-audit.json。

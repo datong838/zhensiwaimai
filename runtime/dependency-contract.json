@@ -67,11 +67,17 @@
     "observed": {
       "playwright": "1.62.1",
       "playwright-core": "1.62.1",
-      "@oai/artifact-tool": "2.8.99"
+      "@oai/artifact-tool": "2.8.99",
+      "sharp": "0.35.5",
+      "@img/colour": "1.1.0",
+      "detect-libc": "2.1.2",
+      "semver": "7.8.5",
+      "@img/sharp-darwin-arm64": "0.35.5",
+      "@img/sharp-libvips-darwin-arm64": "1.3.4"
     },
     "currentRoot": "/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/vendor/node_modules",
-    "ownership": "two library packages vendored locally; playwright-core uses independent shared browser component; no intelligent-agent engine copied",
-    "deploymentLimit": "vendored libraries are gitignored local assets; exact file SHA manifest retained for backup; host Node/Python/apps still external"
+    "ownership": "independent library packages vendored in repository; playwright-core remains the independent shared browser component; no intelligent-agent engine copied",
+    "deploymentLimit": "vendored library files are tracked by Git and exact SHA lock; host Node/Python/apps remain external; sharp native payload verified only on darwin-arm64"
   },
   "externalApplications": [
     "Google Chrome dedicated original profiles 9230/9231/9232/9233",
@@ -95,9 +101,16 @@
   },
   "deploymentGuide": "docs/operations/运行依赖与部署边界.md",
   "nodeLibraryManifest": "runtime/state/node-library-consolidation-20261027.json",
-  "nonActiveLegacyLinks": [
-    "skills/workflows/store-inspection/node_modules",
-    "skills/workflows/store-inspection/scripts/node_modules"
-  ],
-  "nodeLibraryLock": "runtime/node-libraries.lock.json"
+  "nonActiveLegacyLinks": [],
+  "nodeLibraryLock": "runtime/node-libraries.lock.json",
+  "inspectionLibraryLinks": {
+    "paths": [
+      "skills/workflows/store-inspection/node_modules",
+      "skills/workflows/store-inspection/scripts/node_modules"
+    ],
+    "target": "vendor/node_modules",
+    "restoreCommand": "configured business Python runtime/maintain_store_inspection_dependencies.py --apply",
+    "guard": "all three monthly workflows disabled; original director idle; exact library lock; foreign links refused",
+    "platform": "darwin-arm64"
+  }
 }

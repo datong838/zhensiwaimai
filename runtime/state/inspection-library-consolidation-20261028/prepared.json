@@ -1,0 +1,979 @@
+{
+  "copiedPackages": [
+    {
+      "name": "sharp",
+      "version": "0.35.5",
+      "relativeRoot": "vendor/node_modules/sharp",
+      "bytes": 962168,
+      "files": [
+        {
+          "path": "LICENSE",
+          "sha256": "73ba74dfaa520b49a401b5d21459a8523a146f3b7518a833eea5efa85130bf68"
+        },
+        {
+          "path": "README.md",
+          "sha256": "89772961fcf195b976573874555f2902bfe04a3e57be61af261ac65ce9348735"
+        },
+        {
+          "path": "dist/channel.cjs",
+          "sha256": "7445567e8001f4be3126374e4c17e282777ed14c718acca875c91bec69a2d7a1"
+        },
+        {
+          "path": "dist/channel.mjs",
+          "sha256": "6067b0ba5ebcc9682a01d0b450a12b54849a95c8ed017f8485bddb5fd0b9db91"
+        },
+        {
+          "path": "dist/colour.cjs",
+          "sha256": "da760186e75d4fd8b6da0a617ecf122deec2fa6d95fdcc194bbee0cb1c5e4605"
+        },
+        {
+          "path": "dist/colour.mjs",
+          "sha256": "760e7fa8161432a9cc97f0a3d9f3e0b757e66089c967e6b36f3131c9fdafa1b5"
+        },
+        {
+          "path": "dist/composite.cjs",
+          "sha256": "6e0837309d25c2b642d42b557f3e1292c2b057af09746647a3a6d54de772a157"
+        },
+        {
+          "path": "dist/composite.mjs",
+          "sha256": "16eadc26ba57417e90e4bb73aff1116b56ad26766088793ab0b7c4bbdd2bc9fc"
+        },
+        {
+          "path": "dist/constructor.cjs",
+          "sha256": "6b8978e0f1614d83a219cbbd455e3eed7922bc4212a5b3b99c5d37c3af3b3226"
+        },
+        {
+          "path": "dist/constructor.mjs",
+          "sha256": "8be8da679d2a028d0f53b02ce52f07f295134a297caf3068944cd8d0b57ab3d1"
+        },
+        {
+          "path": "dist/index.cjs",
+          "sha256": "d69f275bc49fcd2a6188b26b35c986d4db32a1b008653fef88adb4598688232a"
+        },
+        {
+          "path": "dist/index.d.cts",
+          "sha256": "24adc1ebbf6b05fc1434083b899b9ffd7edda0aa85ac0123d7ddb4ff860e5884"
+        },
+        {
+          "path": "dist/index.d.mts",
+          "sha256": "b837d41bb8d39398690458f45cc445160dad36ec0db5ba0463d114e560d49d85"
+        },
+        {
+          "path": "dist/index.mjs",
+          "sha256": "0e8f955c68a1b0bccf0ba5343c924dbfa6a46a76a0d491ec27fe6b328311363e"
+        },
+        {
+          "path": "dist/input.cjs",
+          "sha256": "e5eb5c891c0893098dbe8bc0358a2f2c7e800581018923a7956732fe1a5ddf8f"
+        },
+        {
+          "path": "dist/input.mjs",
+          "sha256": "4b0a51e678f9022cec06a1ffb34e17ea3498cfb707492b54de87541ccac54125"
+        },
+        {
+          "path": "dist/is.cjs",
+          "sha256": "46fa32e93964d8a31d6e851dc3bb7f3ec36935f9e8323b59603ff6cd84a7faa7"
+        },
+        {
+          "path": "dist/is.mjs",
+          "sha256": "96a3b1b82d389b7b57569332fed93e46cf9b5aa79f2babb82cbb15fe1581a409"
+        },
+        {
+          "path": "dist/libvips.cjs",
+          "sha256": "3419f6cb4303feaf4a76abe122ce1caf5dc755f9f17fa013afd5561827b61062"
+        },
+        {
+          "path": "dist/libvips.mjs",
+          "sha256": "d9984601b0aafe44c393b29ce4b0712b1c40890c3d740d4fda49842a4ea5873d"
+        },
+        {
+          "path": "dist/operation.cjs",
+          "sha256": "11eb4921f37e4e06c0b349f55e186852cdd094203cc3c5651681801eea5d80f8"
+        },
+        {
+          "path": "dist/operation.mjs",
+          "sha256": "a3b14c3a13305dbe8fde48a263d13b0a104dcb97afc65fe5f55b8e556d054be1"
+        },
+        {
+          "path": "dist/output.cjs",
+          "sha256": "4c2878241a264095b661fb321accf86fa9be033bfe541d5a70ac2f8d80150893"
+        },
+        {
+          "path": "dist/output.mjs",
+          "sha256": "d1be82aace2d7f96bfc29e6e76538521fc8dfe6d4e90f7eda71a8f4c2a1597ba"
+        },
+        {
+          "path": "dist/resize.cjs",
+          "sha256": "e03dce87aaee233fecf191ec3c713a9f856e13d0d9ccd7b0a7dbf35b65e36538"
+        },
+        {
+          "path": "dist/resize.mjs",
+          "sha256": "e3d26f31cf391e28f3f96e708ccb96745cf016e18f8ef4486c837e5efcb3c922"
+        },
+        {
+          "path": "dist/sharp.cjs",
+          "sha256": "76120d3971051fcc469c0bfa36e7b23d3c388b6a2f5785bf1491bbdb90ff0176"
+        },
+        {
+          "path": "dist/sharp.mjs",
+          "sha256": "d0c3ce3837636a140e8363850823e3b8dc2b000928303664cc9fc1aa2ba326ee"
+        },
+        {
+          "path": "dist/utility.cjs",
+          "sha256": "0f7a14858dfa8ebd01b2c6c2272297f7a34c4af3d84f0c0b926146c49a2655b1"
+        },
+        {
+          "path": "dist/utility.mjs",
+          "sha256": "761566e165bc1fc90bc6dd67a3b560c1a63e6cfe98009b726d35288606d629b9"
+        },
+        {
+          "path": "install/build.js",
+          "sha256": "fea92e0d55cce8692413c479021173aa1512304e1b849039949cbee9d6ceb1de"
+        },
+        {
+          "path": "lib/index.d.ts",
+          "sha256": "24adc1ebbf6b05fc1434083b899b9ffd7edda0aa85ac0123d7ddb4ff860e5884"
+        },
+        {
+          "path": "package.json",
+          "sha256": "ad4a2535d72eb638053a38867b1abf43c328cd1c1dbae5cf4172d498365a8b97"
+        },
+        {
+          "path": "src/binding.gyp",
+          "sha256": "aa0750bba07e0de556ccdf1463e148a21e373ea43ac0ee622d23ad287890e658"
+        },
+        {
+          "path": "src/common.cc",
+          "sha256": "c3c56a37bb780dfd97ee53d3556d9ba3d674b1b9cf7d57caf94248f982207a75"
+        },
+        {
+          "path": "src/common.h",
+          "sha256": "70a4f13f5e56a956edd8340066240865e39d3039157bd511930de2bf5aa17ba9"
+        },
+        {
+          "path": "src/metadata.cc",
+          "sha256": "a127c134c9e537db9c63962ff1aa1d0762a8d517d746a844e6b43b299e11a581"
+        },
+        {
+          "path": "src/metadata.h",
+          "sha256": "5e02c25ec821a525b0caf31161b1e8675ff32cfd098c17cda0b888440362b057"
+        },
+        {
+          "path": "src/operations.cc",
+          "sha256": "a61e6545cde7d2f2ae508b4eceeeec9db9ef711211d5cba1ed470f9325f914fb"
+        },
+        {
+          "path": "src/operations.h",
+          "sha256": "6f41d329634471dff8e093d12e38ff356293079e2aeecc5b922fc23ba99799e6"
+        },
+        {
+          "path": "src/pipeline.cc",
+          "sha256": "445ed9aa726806dc01188cf13a2866ee47ccd38504cddd049e4e639703edc0e9"
+        },
+        {
+          "path": "src/pipeline.h",
+          "sha256": "e09c3dbd873071a373e6d95679b470a6fe1be5fc2ef781b00fd87958b5ab5e98"
+        },
+        {
+          "path": "src/sharp.cc",
+          "sha256": "9f407b50bb2d02e5eb711b769f05d3e6659028430e055c4271e5ab1593f5a257"
+        },
+        {
+          "path": "src/stats.cc",
+          "sha256": "72f8f2ad0e4315951c88b115511eb96741fd0479385ed094141f7bd254739791"
+        },
+        {
+          "path": "src/stats.h",
+          "sha256": "db854f0c3c4a0db1751021ed676413c6d5ca00becc08bdc13258b29047450b8c"
+        },
+        {
+          "path": "src/utilities.cc",
+          "sha256": "91c164bb740529156e15dedbfcb4236dd2b5fbf94c7a3a4f1639929d034f700e"
+        },
+        {
+          "path": "src/utilities.h",
+          "sha256": "0b126ab63cf1aedf8e71e6cb8179899d3ef02c46419100e847b2ca4284b8901b"
+        }
+      ]
+    },
+    {
+      "name": "@img/colour",
+      "version": "1.1.0",
+      "relativeRoot": "vendor/node_modules/@img/colour",
+      "bytes": 73264,
+      "files": [
+        {
+          "path": "LICENSE.md",
+          "sha256": "e2eaa4603c14cb26f301e88648c12a853fa3f0f5da6d4b0972958c666e7f2ab8"
+        },
+        {
+          "path": "README.md",
+          "sha256": "be7edf3bc6467f761168cef3bb2b9b3def2532c98a86249848376ea00338ad1d"
+        },
+        {
+          "path": "color.cjs",
+          "sha256": "f7c3efcf482624007f2019fffee3e1dec56b8cb893faa9a420b2832805888dce"
+        },
+        {
+          "path": "index.cjs",
+          "sha256": "e6e93e7fb209420a20fdf2ec676e9c67413be8d5ace99eec64f9468480f0368d"
+        },
+        {
+          "path": "index.d.ts",
+          "sha256": "2467b00d963828f540f4acd7910f4c04cfe4b489550e6bb682212f65583bca5b"
+        },
+        {
+          "path": "package.json",
+          "sha256": "bc38c5097693ed53b91c32f35fb0a52569736c7854ba2eb6d080f3252071f75c"
+        }
+      ]
+    },
+    {
+      "name": "detect-libc",
+      "version": "2.1.2",
+      "relativeRoot": "vendor/node_modules/detect-libc",
+      "bytes": 26437,
+      "files": [
+        {
+          "path": "LICENSE",
+          "sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1"
+        },
+        {
+          "path": "README.md",
+          "sha256": "51a97449c443889155bc872522e6de5a91a5fa73edeffa03d749e186bf0eebca"
+        },
+        {
+          "path": "index.d.ts",
+          "sha256": "9500090533aafe039c41d8d368a44959f04482bb75636d96bc843c06f3d6a348"
+        },
+        {
+          "path": "lib/detect-libc.js",
+          "sha256": "5de6a1c1abec8bba5ea1261cf819d83a73c92ebe72b879ae48c59ca12320a462"
+        },
+        {
+          "path": "lib/elf.js",
+          "sha256": "0e8820f00ee11d179d94894d4f97a6e87c34ab59e5dd4d3a571dfabcecf043af"
+        },
+        {
+          "path": "lib/filesystem.js",
+          "sha256": "5c98fb66b559d0b4fa82c7a3e39d9ab6840f022c4c73e6b1a73ac6d16ec13fd7"
+        },
+        {
+          "path": "lib/process.js",
+          "sha256": "f37dd0ead9f70b50c6f5529c600e1cdf076e3c3bc8e6b4a0a9820a8d65244628"
+        },
+        {
+          "path": "package.json",
+          "sha256": "ee88e5b954fdf3a8480b1d01ef767d68d8ca2c6da269f58c5cf1c5550e9aa2a7"
+        }
+      ]
+    },
+    {
+      "name": "semver",
+      "version": "7.8.5",
+      "relativeRoot": "vendor/node_modules/semver",
+      "bytes": 101065,
+      "files": [
+        {
+          "path": "LICENSE",
+          "sha256": "4ec3d4c66cd87f5c8d8ad911b10f99bf27cb00cdfcff82621956e379186b016b"
+        },
+        {
+          "path": "README.md",
+          "sha256": "f1a789dcec285150be24db2ea04dd3175031554fa9834ec92fab83fb5e025a57"
+        },
+        {
+          "path": "bin/semver.js",
+          "sha256": "bd6c871026985937dc945011fc54b74b47f5998154216d7b8d40d5ed782e4402"
+        },
+        {
+          "path": "classes/comparator.js",
+          "sha256": "054202956430d63d5ff4599fae09760ce465b489e4f0b5ef5ce7cc7ac21157ac"
+        },
+        {
+          "path": "classes/index.js",
+          "sha256": "3bb69280c2a788d0eb16f915bb9df4dbe812075182024c753dca2283bcea1b17"
+        },
+        {
+          "path": "classes/range.js",
+          "sha256": "a6544485aa8575aa9854c67e2caa67726815de18a482d0ceb8a1003244de3bc1"
+        },
+        {
+          "path": "classes/semver.js",
+          "sha256": "813b2c185512d30c9b931c2fed8140889d9d7490ceeeedc370da30337dc8ca57"
+        },
+        {
+          "path": "functions/clean.js",
+          "sha256": "4eadb0892844cf3ae295121a86163a66c73f89acd1b7f0b114ec115b4539512f"
+        },
+        {
+          "path": "functions/cmp.js",
+          "sha256": "a63d74e87b73788e78e9ce0a4892b5333d6b809c0de88b31e4ed76cbf17f94b3"
+        },
+        {
+          "path": "functions/coerce.js",
+          "sha256": "28a251c5ab210ddf9e97551b9f37a53329fcce91f0c3943dcbc02de1a1de915a"
+        },
+        {
+          "path": "functions/compare-build.js",
+          "sha256": "5ab651d5b40af289bd85c645a92b6d8cfe1a986dc413c797cfcc8d623d7c844c"
+        },
+        {
+          "path": "functions/compare-loose.js",
+          "sha256": "07b6a3a1db0a5210ceb784c1708bd4679f3a94fc73a9c9eb349349e7070a6f78"
+        },
+        {
+          "path": "functions/compare.js",
+          "sha256": "d404b5aa48aaddc8a654c5da8fb7d4443404b7948589b21ac4b045d1cee4e34c"
+        },
+        {
+          "path": "functions/diff.js",
+          "sha256": "7a11fd39b987cdf06c65e928cb1aca49bec583feb86fb5c8fe47a6fd61d7de31"
+        },
+        {
+          "path": "functions/eq.js",
+          "sha256": "b6e30a7168e52723216fc163d300e2bbabf92ec0251f9ac5438bb6ccf57c8936"
+        },
+        {
+          "path": "functions/gt.js",
+          "sha256": "135523704aa48cd98834dd170ee9f74f0e68043b379f32d021db11e6304c5c93"
+        },
+        {
+          "path": "functions/gte.js",
+          "sha256": "991c5bbe48ecb210a562646872f05862ad9fc0d42186d85aa60bdc6fa323eb9d"
+        },
+        {
+          "path": "functions/inc.js",
+          "sha256": "952069fc8690b7d3af0fe9d55f7c54fe2ac067b48c5e74f6a54f9ce19a334493"
+        },
+        {
+          "path": "functions/lt.js",
+          "sha256": "1c897a9bc849320e2e9dc0f6c09555c01ee3ddf30734515d717b88ad7740ea25"
+        },
+        {
+          "path": "functions/lte.js",
+          "sha256": "3a8d0b1d00423f60cc7cb810b36ab77b61330831ad237dbe73eb5cecfa412800"
+        },
+        {
+          "path": "functions/major.js",
+          "sha256": "5c678480d882f511200fed2c16ec3847dfedb08a1d70328dc2f031d35d825276"
+        },
+        {
+          "path": "functions/minor.js",
+          "sha256": "1b051794f1713adec2a236517196691687c35f82e0b596ff3316a78b3cc10ae6"
+        },
+        {
+          "path": "functions/neq.js",
+          "sha256": "a662883751918822c162183b46b9e20d09489132f82686c92ab78bee67f3a127"
+        },
+        {
+          "path": "functions/parse.js",
+          "sha256": "29a69e15b6d02fe381d573f861881a89590e9d0f0f0ca740c5f85eaf0234c4ad"
+        },
+        {
+          "path": "functions/patch.js",
+          "sha256": "f02d3c1b059fe3d96ce124886f7eef321d381a95638fd3c4a8d5ccd8e76ffadd"
+        },
+        {
+          "path": "functions/prerelease.js",
+          "sha256": "baedbf503d5610ad041bfb56071efa48feb331ca278295c399537d35d3ffb593"
+        },
+        {
+          "path": "functions/rcompare.js",
+          "sha256": "84fa5e88adf08d15c993cac8cdec6d1a65045b7e95a9c55184230a7f807f4dc0"
+        },
+        {
+          "path": "functions/rsort.js",
+          "sha256": "6ec659ce3b6c2b173c719286caab04409adba046c0917874ec3b5e36ddfbc7e3"
+        },
+        {
+          "path": "functions/satisfies.js",
+          "sha256": "8cf5e122b757251671ed6c9d9680904b71cd375845853f05312e608cf2cc2946"
+        },
+        {
+          "path": "functions/sort.js",
+          "sha256": "c2fe2d3ed0be8a4e9de8f02abdfd5d9c0d3bcc510d88e87af84185592882c4b8"
+        },
+        {
+          "path": "functions/truncate.js",
+          "sha256": "e145833a250311927c92f424f56498c52f1b7bb1271ce6afbf006db87773ff43"
+        },
+        {
+          "path": "functions/valid.js",
+          "sha256": "0de7ea736cb7807179d46dfac09c830a9338e02b6a07db12d7040cde2def6025"
+        },
+        {
+          "path": "index.js",
+          "sha256": "4b3e57d3d40e29e0706002eba113d09f35aea593578376bbeec83b777b9912ab"
+        },
+        {
+          "path": "internal/constants.js",
+          "sha256": "38a112baf27ceca0260082ff26ac2fd7a9861cab1af12dd65e720277f68e6ce9"
+        },
+        {
+          "path": "internal/debug.js",
+          "sha256": "8a9f420572260f3cf944463b5090d62a60f0730589dc23a7ec4ca25e2ee41bb3"
+        },
+        {
+          "path": "internal/identifiers.js",
+          "sha256": "b4916b09dc7869ae0eb05e71c855c942a3a7365f7e6e89185d59a9e45a2451d7"
+        },
+        {
+          "path": "internal/lrucache.js",
+          "sha256": "14d087c87da87b6f5c36fc4cdd7d2d14077874b14a68e20fce5b6138fa2ca34f"
+        },
+        {
+          "path": "internal/parse-options.js",
+          "sha256": "fdf51d0de8d5442c35a997ef58cd530d239ce206f961d14c5121354451b01d01"
+        },
+        {
+          "path": "internal/re.js",
+          "sha256": "5833262888e2b5d843a69193f83c05e374818dbe55379b497819b5bf58e48cd8"
+        },
+        {
+          "path": "package.json",
+          "sha256": "7c94cb7f2a53c27b20d76386ec144c062894dbcc909cfabd0f728c37874b1776"
+        },
+        {
+          "path": "preload.js",
+          "sha256": "edb6808911bebcb324b2df57e5c9935149e56984ff083b74c6cfe215f5b710ba"
+        },
+        {
+          "path": "range.bnf",
+          "sha256": "15d0baf9b7b98e6d862c0cb9e822d2533d2bc23e136bb75314d802ca1fcb0392"
+        },
+        {
+          "path": "ranges/gtr.js",
+          "sha256": "8fadad28e36d28e93d498ac7ac20badba2a407312845eabc18e82e90a0732b19"
+        },
+        {
+          "path": "ranges/intersects.js",
+          "sha256": "fe87ac5d3020010ad3ec00636dadbf0c669ff07d0f57e0a8165a8264f79a676f"
+        },
+        {
+          "path": "ranges/ltr.js",
+          "sha256": "e5186fcc03018acf9be6d968755d4c49727aeb0d981d179eb568ae5fbe983038"
+        },
+        {
+          "path": "ranges/max-satisfying.js",
+          "sha256": "e1a2c0d6144cc772cd20bbc8ecb9e8a3a4074e9172a3d8e794838b591cdeb416"
+        },
+        {
+          "path": "ranges/min-satisfying.js",
+          "sha256": "2681abf54098aa670f12826b76a6ec77a2441186ae4243afde3be8ae4908f7ca"
+        },
+        {
+          "path": "ranges/min-version.js",
+          "sha256": "fefba0a88c2bf74d5cede504b5ae50a8dc3edfd69cf0174a491e2cf3e442614b"
+        },
+        {
+          "path": "ranges/outside.js",
+          "sha256": "3a2b0b23593d2f49419c06af2af75450cab103b0c25d665d48fe5bca495a21ca"
+        },
+        {
+          "path": "ranges/simplify.js",
+          "sha256": "7b78581c13322bc68ece2088685386b2a9b51c15b94d0a2063bdf2546bd41934"
+        },
+        {
+          "path": "ranges/subset.js",
+          "sha256": "ceb9eb6ed5bfc6c7ac7af7f47e5c3535444a4e66a0e2b58cdad4bd02a35d454d"
+        },
+        {
+          "path": "ranges/to-comparators.js",
+          "sha256": "6c5e966210cff270fa2850668aaf8460fac7759f8d99f282521ef7a78f4564e9"
+        },
+        {
+          "path": "ranges/valid.js",
+          "sha256": "5ef6f995af801868925940cf8df5735d565ebabb090b068695cae65218bcd3ac"
+        }
+      ]
+    },
+    {
+      "name": "@img/sharp-darwin-arm64",
+      "version": "0.35.5",
+      "relativeRoot": "vendor/node_modules/@img/sharp-darwin-arm64",
+      "bytes": 308343,
+      "files": [
+        {
+          "path": "LICENSE",
+          "sha256": "73ba74dfaa520b49a401b5d21459a8523a146f3b7518a833eea5efa85130bf68"
+        },
+        {
+          "path": "README.md",
+          "sha256": "ef448bf7ac130f0c6b51dbfbadc617b046a200d082de8648ab090784c5db0c3d"
+        },
+        {
+          "path": "index.cjs",
+          "sha256": "779fece1ac73b7136281d9767b90267f19d3a296e850ecf474d9c89a8ef1968c"
+        },
+        {
+          "path": "lib/sharp-darwin-arm64-0.35.5.node",
+          "sha256": "a113103e8f2cc32a84af1a3ada76f75660c97d0d43179d6c277d1efa9cf13ea1"
+        },
+        {
+          "path": "package.json",
+          "sha256": "157996706c751e9a3608f35811f156238fa4ad1f367abfd4facec30883747f5e"
+        }
+      ]
+    },
+    {
+      "name": "@img/sharp-libvips-darwin-arm64",
+      "version": "1.3.4",
+      "relativeRoot": "vendor/node_modules/@img/sharp-libvips-darwin-arm64",
+      "bytes": 18259718,
+      "files": [
+        {
+          "path": "README.md",
+          "sha256": "5dd6d3c034f925604681d49b7bedc71bd08dcf3d0cfc6d16b9f0569497d700dc"
+        },
+        {
+          "path": "lib/glib-2.0/include/glibconfig.h",
+          "sha256": "52dc7deb43d9ee5306df7489f305cc1ee4426dab443bb328f45b4fe58dff2dff"
+        },
+        {
+          "path": "lib/index.js",
+          "sha256": "516a08c06660cddb50d5f30ccac29a0514b05724956a11e8a7e6b799f2e1ab72"
+        },
+        {
+          "path": "lib/libvips-cpp.8.18.7.dylib",
+          "sha256": "e24254e87746a149cea7ae4ba8d1a1c7d3a84de13879f55837d12df730710217"
+        },
+        {
+          "path": "package.json",
+          "sha256": "394ecfe4e823ebf6ddc9f9b7155046aad1f0492300920323ddfb84cae85dbac0"
+        },
+        {
+          "path": "versions.json",
+          "sha256": "e2611d5d854815a8b33c8a3d2ec649511a9596ccf16844e8eae7cf81e79881c4"
+        }
+      ]
+    }
+  ],
+  "originalFileSha256": {
+    "vendor/node_modules/@oai/artifact-tool/LICENSE.md": "33b7187aac5eb2ffb838a414d50883cdd5e1728de4af778751c253378c4aa3d8",
+    "vendor/node_modules/@oai/artifact-tool/oai_js_emf.wasm": "94142c99b07f8cb10b07e2c688808f3a36c4ba6da0bfc877d9e59573f35ef362",
+    "vendor/node_modules/@oai/artifact-tool/package.json": "451900f287ab522d815ff2c5cf96a8adf91dfe693ae3c5e0528a841cce8dcd53",
+    "vendor/node_modules/@oai/artifact-tool/pnpm-workspace.yaml": "7a1d2c9f5681a8d9619e0d32f4c0856434f72cce6aacbcd5221d955ea6e7d8ed",
+    "vendor/node_modules/@oai/artifact-tool/dist/embedded_font_decoder.wasm": "0b3c26afa4348b785a41c240a3ef2b5b865ae8695092305bbcf0a5ef28ca2618",
+    "vendor/node_modules/@oai/artifact-tool/dist/artifact_tool.mjs": "57f1314ae1a6f9a41c8d3475805673426e5d1620d372dfe24e99ed82f886135a",
+    "vendor/node_modules/@oai/artifact-tool/dist/presentation-jsx/jsx-runtime.mjs": "7b28e0dbf84e27045361d2ddff108d050048dbe1f6cc239e8830aad9144d995e",
+    "vendor/node_modules/@oai/artifact-tool/dist/presentation-jsx/index.mjs": "4e8e555667374f4c209769f5a1d24c6c807c26a52203f7d3bcc0f854962924da",
+    "vendor/node_modules/@oai/artifact-tool/dist/presentation-jsx/jsx-dev-runtime.mjs": "85936581e81b4130dcf30519e662de3a340003fc02054f117252c1363a0d7012",
+    "vendor/node_modules/@oai/artifact-tool/dist/artifact-session-mcp/worker.mjs": "7f4ae870c77a88de4493237ae2682ccb3a0b58b2c6d89b72ce626dd4e88e9c84",
+    "vendor/node_modules/@oai/artifact-tool/dist/artifact-session-mcp/server.mjs": "af33172225f86354c7442a20b601b4034dd7b826ce4dd68d4aef5d33f7109a4e",
+    "vendor/node_modules/@oai/artifact-tool/dist/artifact-session/host-client.mjs": "a869656c25673b7940820ceaf66dfafd4829965c25ee56a1961a439043172268",
+    "vendor/node_modules/@oai/artifact-tool/dist/artifact-session/index.mjs": "46e1dafe6a1b6a505345f24b5a88ce9ed75c07f787f40f7dbec8c0b5ee361605",
+    "vendor/node_modules/@oai/artifact-tool/dist/artifact-session/host-daemon.mjs": "f0c829aa03f2a500a2ece1582c583e9777fdc6cd1549331b0ee62fbac7b27a9a",
+    "vendor/node_modules/@oai/artifact-tool/dist/artifact-session/service.mjs": "32f8e31926d1826573e09002e432f6ca886f5f0989208e8f25fd21c8878ddbde",
+    "vendor/node_modules/@oai/artifact-tool/dist/artifact-session/prepare.mjs": "e151898c4874513431c2f6f517904aa551e9c99229a3cce596c4a931ff56fa17",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/.package-map.json": "89ce4e0ce04e5a3046c86d050ef03217bdb0d74b4c16968f239a8dea9f9855cb",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/.pnpm-workspace-state-v1.json": "08698fc46f959e69cee375757cdc0e63ab78837ec2bb8c7b5fb7c0dfa6aeea79",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/agent-base/LICENSE": "8d8c55319c7729d57be811c747452636688d54f19701ee0752b6b15ad3771d9a",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/agent-base/README.md": "dc8148b1d0bbb80f812f1d8c00700e9242a010e7463aee2da415476a45f37a9e",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/agent-base/package.json": "7a08cb2fe1d2b788e0a7bf6a9b7597dbeeeae804698c2fbd15de786d284d327c",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/agent-base/dist/index.js": "c6503bd5e007db8b73fedf07b6eaaf4a94d5541953f0d06c8a17d1644c29a0c5",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/agent-base/dist/helpers.js.map": "232164f309b02945f8f49b1f0f6d04f546de10b6d5d0151f140892f4550a55c9",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/agent-base/dist/helpers.d.ts.map": "314ccebf6dbf85ff055681fdc0291008afa38036f665c857578b2e47e17ad165",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/agent-base/dist/helpers.js": "6043c5c1bb76491992f6c56f65895e2e9167ae10122fef4d58d6638ebac4ba05",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/agent-base/dist/index.js.map": "3ba2c1244801b32c7dfc0a71d50b2316a2d178c666287b5c43887539354aebcb",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/agent-base/dist/helpers.d.ts": "d159a1bf12aed961258abcb9bc26ceaa615db573662be64f7e9ce136db1fb265",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/agent-base/dist/index.d.ts": "86cc3effc64d89018e0615a7026f9298c17d162cde9bce65b9c4b5b2aebdb40a",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/agent-base/dist/index.d.ts.map": "9cd18cdd433a41bd7b2151461db479f59f7823ee46a7ee123a3464981147a29c",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/ms/license.md": "1662fae9b5314d11cf51284e2dcd1f006a354f7343f08712a730fcff9a359801",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/ms/index.js": "e5f0b6a946a9b2b356a28557728410717df54ea2f599edb619f9839df6b7b0e9",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/ms/readme.md": "8bf6c4f414b123ea2a9375b91982882d01d8561ce7d12e3bb4f448c23359f040",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/ms/package.json": "1a6b4d9739790c0b94ab96c8cc0507e281c164c311ff4fbf5e57fb8d26290b40",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/detect-libc/LICENSE": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/detect-libc/README.md": "51a97449c443889155bc872522e6de5a91a5fa73edeffa03d749e186bf0eebca",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/detect-libc/package.json": "ee88e5b954fdf3a8480b1d01ef767d68d8ca2c6da269f58c5cf1c5550e9aa2a7",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/detect-libc/index.d.ts": "9500090533aafe039c41d8d368a44959f04482bb75636d96bc843c06f3d6a348",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/detect-libc/lib/filesystem.js": "5c98fb66b559d0b4fa82c7a3e39d9ab6840f022c4c73e6b1a73ac6d16ec13fd7",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/detect-libc/lib/detect-libc.js": "5de6a1c1abec8bba5ea1261cf819d83a73c92ebe72b879ae48c59ca12320a462",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/detect-libc/lib/process.js": "f37dd0ead9f70b50c6f5529c600e1cdf076e3c3bc8e6b4a0a9820a8d65244628",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/detect-libc/lib/elf.js": "0e8820f00ee11d179d94894d4f97a6e87c34ab59e5dd4d3a571dfabcecf043af",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/string-split-by/test.js": "c032c2340f0b2e26f6c7abcaf1435b6d82ff7498c163f8c229622ae9e7cd7276",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/string-split-by/index.js": "39846ac9b141adc761f4c8264d11b35bdf486c93a004d39eb364823b03aa337d",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/string-split-by/readme.md": "cfb9fa8129e7e5b1b545fc5d6360c1be6e42ec01c61e29ae25c12e72344421d1",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/string-split-by/package.json": "6b4e7626d2526a56240497de670dc3f236eecc0e991d3621ccaac5606f66a95b",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/string-split-by/.travis.yml": "0eae45792621b556f17a72c2fc1cf50ccc460ce1923510a02a0a2dbd0c8fc782",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/string-split-by/.eslintrc.json": "a4d6a04ab08c2be3c434f78da393916610809f0dec4c36858cb9fdfa2396b639",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/package.json": "e6065644f56467e82ca1792692182d8fd012a98f48ec0b748d0ad8f0f3b60d15",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.Runtime.InteropServices.JavaScript.xm2bnzk819.wasm": "19051eb6067919b711d1ca85be9ad675a114036251cfcd9d29937ec63b1e99ed",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/dotnet.native.eo4fgjki7v.wasm": "6ec1bff061f7b4e50c3750027a822db6bd60a257d14d7f1d10cccafb1fa7fef1",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/blazor.boot.json": "662ed938c69f76618ab285825f55339bc2b9fa8db63d1dfc23da91b4e3ec4e51",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.Memory.dpsprk5qb3.wasm": "91f80f7d9302f3ba75d487ef6cf8f2a85b140dc1bd7af7e1d269305d3b773d03",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.3qa0pzb5pz.wasm": "4b4b2750f589bc2f50ddcd853c1d1234dafd1035739383fd37c4bc0974f9c9e3",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/Walnut.zttx9qec5l.wasm": "b9b9b53ccdf558e3ba2d6c002d8fe83109e6f1b66a293796b175b77ffe46f204",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.Private.CoreLib.41tlitrjgg.wasm": "38dc46a8911804f46f4f2b518bd384208d0872bf490b3e86116094a5d7d012de",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.Xml.Linq.qr4we8he82.wasm": "265e4a82ea2739dd5ae74409df261854ddad17ac5a99f48475a12613b39939d4",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.Net.Http.zupxtzwknu.wasm": "2baa812b8c3dbf7e5c068c5706d175afa2303302288b67e0353981dc46d9bc55",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.Text.RegularExpressions.bt13wwk3q4.wasm": "efcb5c25e48ba071306d6cf884fccfed7080997dd33b4e6ab1a8b3103ebac505",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.ComponentModel.tr3nhyjgfo.wasm": "27e4d0da13d56de1fc788608cbba16d3782e6cc8dbd5f25e62bb41e6ae11d955",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.Collections.0xmhlyf6db.wasm": "44fb2069fe1465ad52d432a52b5a94876c0d5f8b8d30f7ff71afb0565a6f466d",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.ComponentModel.Primitives.epp48tqwe7.wasm": "22977ef294327a296677f45ae2499dbc76cd47c277d967f028ab51eea939d00e",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.Collections.Specialized.skmzfr7q2r.wasm": "0c0853fb9db5d42871443e3ce9fe91559c1ef13b485f73b7dbd4c1d637308a44",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/dotnet.d.ts": "7673172e8eb61d1dec64fade6111cf604511c383cf483183fd8119ef5465914b",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.Linq.58dklie5yi.wasm": "0ba3b3f7bab30dfdf16bb943d9fdb308441be5ef6bb252a36b5c74a356e1ea90",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.Diagnostics.DiagnosticSource.9byrgbs8lv.wasm": "75c2fbe1dc4567257dfd9a404d715c122ce5f44403245ec48d2cc4e4e17aeba5",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.Private.Uri.nqcj28clyh.wasm": "3f296cf75dac418b52cde245366ed99fbbe2ad65b6d91199824e532bd6dd1afd",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/Google.Protobuf.egf249xeaj.wasm": "be9206ec4a46c8dd6866ef6e14e119aeb22edc808a6ec39888288f0778a384fc",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.Private.Xml.oi8e739omb.wasm": "60fa22250347bf77d6c2467f050b9088b98a90e937bed1368c07b20a386c5219",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.IO.Compression.vfr580ovx8.wasm": "d59d9aa1805ba97eafc9051b1962e76f447672f9948b5edc8729a98e1a494190",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.Collections.Concurrent.t5ij5yvddi.wasm": "4f00c7286f04d95b952550b9b2488a5989a89d0cce8fcae85718f5d273d91bf6",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.Private.Xml.Linq.szr4ih00qr.wasm": "486374d26ca24f09baa4fc6935280b6429e1c102ad3f963290f86fcb6de2746d",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.Net.Primitives.j63a9tvkuw.wasm": "65a4df95a244773fac3443a7fc3bab34452b591fb2be683385a3bd91820fafcc",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.ObjectModel.2bth0mnmyg.wasm": "6249d320737f680ac6d0b39b1a82671a0966b0b3960483411e1bd9c4d594b295",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.Security.Cryptography.fyn2sl3z39.wasm": "c7e545fa32e4ab8c380bef1c0e2b8c08c1b92e41ba5c99e98e61861f3b057633",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.Linq.Expressions.skwmjvpng3.wasm": "9492420a342b8c16934e8054cbc6ea583a9b1cf48d52466e03930016ade4c393",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.IO.Packaging.jxrjoyre60.wasm": "2724e30f6283983f1133dae4f0cf1a1f17ee073b00503cd314e643944cdbb4e9",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/dotnet.js": "bab7059763f789bf475b53cdbbf4ff68373545cfb58401864abc6755f15b8954",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/DocumentFormat.OpenXml.Framework.obipk572ei.wasm": "04e173cb87209668340fb319368072bdb4a425ebc750af5400bc4b8071c1a190",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/dotnet.native.98eh12v8gk.js": "493b60ae031035020d41537bdd711bf2bb9d9c0aebaa466b3501584bc52d685b",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.Console.10kugecufk.wasm": "c108849d17ff78a909802cef49a56f05f8758c8549458881d1dee9112be763c9",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/dotnet.runtime.sv8x6wte7f.js": "c8be9aaf8bc1f00acac54fd59c6fe327591317bff9a8eed736659d0d4d7b926d",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.Collections.NonGeneric.jh0i1nqhnd.wasm": "f70fe0008d7cc41244284c56efd096767d2e4891896e5949c4d361afd1c84dfa",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.ComponentModel.TypeConverter.83u9zxbtnf.wasm": "6ce8f2fcb6f61d66ee8db37aafea928b4737f78e02be8713a9308dfdd7993f97",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/DocumentFormat.OpenXml.730tiacv0d.wasm": "4d20f1b662ee9934b8a67712fd10b61d71a4c576b5d8fdb7af7f91e5fba1ed1e",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/https-proxy-agent/LICENSE": "8d8c55319c7729d57be811c747452636688d54f19701ee0752b6b15ad3771d9a",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/https-proxy-agent/README.md": "462697a398c1bbbfd771bf58829aba65a1c620b072749a76a6ab1c25f62e9edc",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/https-proxy-agent/package.json": "b08c1977d38f14f4be7fb5be33aab545e3e5a6e2e12100733a6ad97dec995206",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/https-proxy-agent/dist/parse-proxy-response.d.ts.map": "1267b18f3c8f2dc5306010da3d4124deba040f8118e92b04e791765a8b581db5",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/https-proxy-agent/dist/index.js": "30165586fac3becbc9dbf2b7b5bdaa802a77ac34af9926208f6e94a3bd87ef31",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/https-proxy-agent/dist/parse-proxy-response.js": "36a30ebcd66060fa8e3aba8295854757afbd60f2643d8992814727f249c5eba0",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/https-proxy-agent/dist/index.js.map": "8c0c9b0f8b34966e0e8ad5158bba82a8a54901713516ab0ca77c9dd54f645c82",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/https-proxy-agent/dist/parse-proxy-response.js.map": "05da2a26a5ecca3c3f3e40b849467e096d747a5a317cfb1b9aa625ad29200747",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/https-proxy-agent/dist/parse-proxy-response.d.ts": "44e22bce546cb7d17dc205a8374d80d7c64e42883b87ef63621bae7485f26ca7",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/https-proxy-agent/dist/index.d.ts": "00e87b6148eab98378cb1daf51383be23a0c9ad59f5ed4afdb859212773115d4",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/https-proxy-agent/dist/index.d.ts.map": "78df96e77c748b4b4a5a00826f8f8541b488bd6ff1d087dfb2e0c8f729322ba4",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/follow-redirects/LICENSE": "bfa8a54bb952ccda79f0f1889721d108f5b605babbb2b8a3705ffb52f4132eb7",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/follow-redirects/https.js": "7a28e323ffd91094e083a8954fe027839c06d948603d7f2719ed17c446885272",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/follow-redirects/index.js": "bdd5d91f6f088a3b73a8703e6fcf09fe92c5f24e5ad8b6b5aff5b26a95a2ace3",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/follow-redirects/README.md": "190b2c4cce3593592f9661d1bff3ab398317e195425ef3f23758d1f52c42f6af",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/follow-redirects/package.json": "42d8d50f86a6a8ab62f2c9d9d69532fc51de63becfd1a96681812e479443960c",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/follow-redirects/http.js": "754c0078c57625db7b55b4c3fb30ff5c207fc49284a5022742e81d0c595403c5",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/follow-redirects/debug.js": "8dbf7e71a9292be180e3469a6b7a164171d3c39dec79e5dbc4aa1c9f09509faf",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/skia-canvas/LICENSE": "a3a2b68ce8e3427393ddd66cdbaae510fcb19f9d8c29517c12771d2f15f020d1",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/skia-canvas/README.md": "b2ffe136e6bbd4a19379d2991f29674e69129235cd5909948f78361e7d2803d3",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/skia-canvas/package.json": "c4efc6b1f6335a8da219c9cdab4c3c5d9d4c260a3bbf59582693c63a15023b0e",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/skia-canvas/lib/prebuild.mjs": "29c34abf5fe1c118c4fee274606770b289b0ca82673642304a48d0a4c7ed6be4",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/skia-canvas/lib/index.js": "37605cb3a110bbb9607f6043e1bc05cc01275e9abeab9a6698b9cb4c21fdd774",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/skia-canvas/lib/urls.js": "230c44287164c1d96191ed16809cba2cf72633556a97157ba5a4ffe2a268bb27",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/skia-canvas/lib/index.mjs": "ea2c78d64595337b4c76657296e8e029f7f6128a859105323cf8d67046bd41bd",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/skia-canvas/lib/index.d.ts": "0a88fd39428b0f90211858695f23baa2a3736ad6fd4806235791622e68ff74db",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/skia-canvas/lib/skia.node": "f6cb0abff36754bd8ac6ad132e9d20d1d698597ff8f9a4a7e2c096614ab55ff5",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/skia-canvas/lib/browser.js": "348ed39aef5a21aff9676bfa329f5aa3268df1be307685b9c38f992e9a0991c9",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/skia-canvas/lib/classes/typography.js": "79dedc1f73fe4305bc950562727cc615fcc3d963bb74b7ba97d25817157e5607",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/skia-canvas/lib/classes/neon.js": "2d5c938d398eb53102b314298c111e200853cdad5e9ad64db402ad48df95d6b5",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/skia-canvas/lib/classes/canvas.js": "451a4f0be6407f8a5592a378d4a8241f8b4b70de1466832f8061c14fe2e732ea",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/skia-canvas/lib/classes/gui.js": "8abab419be19fb62994fc7d8f68d3008dea87a99aa76a7b110ff6bfa975c9087",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/skia-canvas/lib/classes/imagery.js": "03715f8afb501b2d3c431b966db49dfe7505d25710231ef6bb5dab3137fc29a5",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/skia-canvas/lib/classes/path.js": "718ac5505c4eb6cc8f3979403301a2a94843a8f7d516d47d77eaa5a2f307f1ff",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/skia-canvas/lib/classes/context.js": "db4fffc093d839a333b0c9c0400170885363b23bbad6f35928c08dbaed8b584e",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/skia-canvas/lib/classes/css.js": "b23e59044f4cfc5615c983f2c35c4b773e4cf80bd2482d10a0a0c9824daf8115",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/skia-canvas/lib/classes/geometry.js": "f604c9b5efc7cdda44b3f257337c86aad69ce79b0c206f388efea437c7e59c2d",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/skia-canvas/lib/fonts/fonts.conf": "5985a7bcd5b65d0db7c6dc160b68ed012d9b13d306f46e7ca4ddf9a2210a4778",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/debug/LICENSE": "3a61c6c96caf5c1d9b623fb9b04c822b783dfcb78aa7e49c76a3f643e6ed7f95",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/debug/README.md": "486cb669048bd5014adf9ea117e27a45c4e61b0e668f464c724273beb8170797",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/debug/package.json": "ea8e33d63fe5f3a4c36609b6c3df8e2ef1f8b8ba2fc3a2e1e53cb27291f384af",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/debug/src/index.js": "aa127ff1752b7d9c7415c5c7bb6994d9aa722b81bcbcab4bd48316b013d23bf3",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/debug/src/node.js": "d7b26d7c92f8ea7794b77ce11f3c11cd18c9084df7c357e3c7025344fa28aac6",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/debug/src/common.js": "dbe83d2bb5837f3c4d7fe537b8004c585987270eceed5b06b8e078deb0ae214a",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/debug/src/browser.js": "19920671f5902f64ad8ea11767fa50ea9d7a71ae0b7dff7ba5693c0075afc763",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/parenthesis/LICENSE": "80dd594f7950d51ed7d4315248a9866f80507f02e92ee4eabdc12b89b476a539",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/parenthesis/index.js": "1ef13311eaace0b0707c18f8bbb1ba1646fcadea2e373aaa85c72f729f9e7f0a",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/parenthesis/README.md": "511a51a99c801cf79605688012c562f0fcc3ba889357feb147b130a8d811d26e",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/parenthesis/package.json": "a524e1ab08dca8bd262772bc6c39171a14d3656a5abc8fb81e3bbebaa8907f6b",
+    "vendor/node_modules/@oai/artifact-tool/node_modules/parenthesis/index.d.ts": "232e884fb571bb4d50563983bcfdffd786e70f84e5af50570a7c2ac52c5b3045",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/API_QUICK_START.md": "d012a51f999b48ea85c88cd29c0d950ec9b3351f7662a4f7aeccff092970b499",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/references/styles.spec.md": "ffce6ccd1365d020844863e554c855e990ad4f9c75bc5ecd12c85e670ef03e25",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/references/defined-names.spec.md": "088ae2855cb97019fcf8877a6d87ba4ba3afe2c578745bde5bb9ca32b2e75608",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/references/comments.md": "3232ba2b04aa3ed66bcb4e07603c9368804fb6275b12b77e160b4dad3f35c812",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/references/drawings.spec.md": "25d78257dfac11ceeabba1c5e1fdd9cf8314bdc3f5564819ffff6a81a8b6fc18",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/references/images.spec.md": "27fbe2704ff0a091edd2d69218721e31aa04f9d83cedaf4cc1db46cef2054714",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/references/tables.spec.md": "552fc166d6bdb2f357cbb35b4ffb7940a3fd0842d2582235d71bd08077cbbf3d",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/references/data-validations.spec.md": "145ccd483e9133fae701464879ab549a830473241a2146e857d30604499ef75c",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/references/enums.md": "25e0bf5b30fd829c52b3e564af039db4af1e34f92cfc034c5d51d8d35aada3b4",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/references/workbook.spec.md": "5ee9e77ce6215ea9fc43b3e832231bafc520baaf54460ebadd17b226a3b1e05b",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/references/data-tables.spec.md": "d5d38dc1cab4d63394b65581cd8522caa482a314097f1055e6d372f1ec1f5d51",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/references/ranges.spec.md": "e109cfa010b9a6109c20e87f574c0aeab9273a5b0391e86d02e1eb6b4719dac0",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/references/conditional-formatting.spec.md": "79b16558a2d46d08fdd98aa82a8f68ac94e1416e7948485d03bd2762428d78aa",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/references/ops/shape.md": "10ee57ba435ff25bcdb12790d8d14a6a3ecb23d12a3b4a993994990834bba491",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/references/ops/sparkline.md": "3806a26f3a0000d634100114f79fd3f4a8a755fb529de4d567a2f273d13f4515",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/references/ops/names.md": "ec1a7f26dad28c8485150739255d679e11c2f52da28b4e7928ad4ec78849524d",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/references/ops/sheet.md": "fbd9808a9bfb1032125cdfe76e06da54b5d2bb7bf0a5fd79fd5d5d3acd72feb1",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/references/ops/datavalidation.md": "a04958ddfc05526e2caa11448a370cbc91ccc93e660bed7e0e219a0a3e450996",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/references/ops/image.md": "714b22ed45aceb5663fb14ac8c91d3274e7901bcb327428c686af91adade5f6e",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/references/ops/comments.md": "abc0439a2550b3b82787939c173ceec4a6d5ebef9afad5a5e383c9535a58402b",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/references/ops/table.md": "6e9a8d990c4df486458f6260cd4f6a49e816d0a5fa693665b30d5a3af055bbe0",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/references/ops/thread.md": "f62a03b3c3e23e946080fa6c1783d1dcac0c867ef5cd65c33f6eaf44e6f1c28b",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/references/ops/conditionalformat.md": "0998627dafabe9446bda4db137352da2073ace803344d5b79742518d59b0f36b",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/references/ops/chart.md": "bcc162d1bf010939d157291ffa5d6e2c0d070063f9e2fcb5eb339f0ba20de244",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/references/ops/range.md": "fed930c37708ad183ec2f8e46535375966511234590dd83b9e6104dcf8d30f3c",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/examples/chart_suggestions.ts": "ffba12b53f41de1aff3e3660f97655338922310b3eaccf5603f5b06cdf5d34d9",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/examples/quick_start_example.ts": "a0e23ee3e8d26215abe8c9f891be85133da96eac385824d5f71ed9284c50f688",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/examples/inspect_existing_workbooks.ts": "1daf6dab3769301960290b17e9821e1f554a4896d531111b83a8f758c5c0f2bc",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/examples/formula_trace_and_help.ts": "c1d6767c52f5ce45d3d0b9d0b12aac16d71d93823efa5852e798b0b6b9ce0e39",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/api/API_DOCS.md": "1ca96fcb01b60a5839c0d9232f978076f66d5f66022a3ba2396e0ef8e2d377b0",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/api/references/inspect-help.md": "0b9139521adfc81992ba62e3be0ce43792a5e52b45ae9712a1f8b8634105c9f2",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/api/references/formulas.spec.md": "ed970466fba88fd8748d8d75d3ecebe01e87566bd36a33011a2387bad43c09d0",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/api/references/tables.spec.md": "c2e076950df5cc1bc3931f01433b6a699029eef4cbaba447b6db6daee30c6fc6",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/api/references/comments-notes-names.spec.md": "58767a0e1460b6157aaf16ce9ebf24db7f2e9c91ae6bb70c9d0c2f2114b6047b",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/api/references/pivot-tables.spec.md": "647d0658db9bc0d18bd884364240f2df691618c1f9353d808fe0ccf3b014efe7",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/api/references/worksheets.spec.md": "2bec0c94ff7a0cd1921a921eea90250d7860fa6e350396501fbf2227acfcfaba",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/api/references/charts-drawings.spec.md": "f58a52022566008e099dde154761e86bfd4fcb2e6da9cebfc7018d604e12c164",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/api/references/inspect.schema.json": "b243705b5456314834ce800c27b9f378593782e2be15bd74ccb68dd1cd2db8fb",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/api/references/workbook.spec.md": "a5fef13a65e7558bda452629418e2f408d15884c712240932a263cb1dafa9530",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/api/references/ranges.spec.md": "be3cfc29ecb4f015c57d09a7861e740459257023eb3668db3ecf360112a1c87c",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/api/references/import-export.md": "4c7911b0cf94d8c680f60f03316d48f583d69dcb92fac34a1d43a02830f212e4",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/api/references/formatting.spec.md": "276e1a2b7128adaeded506a386cb57152ec5d2b490392dfcac3c5b69e244b70b",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/artifact_tool_docs/SPARKLINES.md": "d3926fac25653829837c03136124126e1d1be192de6d62bf1f77e29300d97c1f",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/formulas/text.md": "c92fbcfec1e8b2407f8618fdf61bc602a6e50ff8fa040ebdb5689c6e22b20e4d",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/formulas/date-time.md": "afbcd76848edebb47aaf980dda326f8ee02bf9f6b3aaed29e3eac7cc0ac98e21",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/formulas/engineering.md": "5694b05715bfabf7dc9cf819edf1237d62cd7059af6fb469d9025117c479be2c",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/formulas/math-trig.md": "bb13bd03018234f37d024e58bcf276179f0a30ada01d7373f061aa900acc937c",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/formulas/information.md": "378ae765bff52f81dcee4229c2c3c83c52aafd22b228e1d2811154c069306632",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/formulas/logical.md": "83829c39c20805676244d206d112cde4a9ca7a68534496c949e07b996c6b8eab",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/formulas/statistical.md": "ed2bf93edad916d8bea7b8c38e1088fb238c571609be4c6cd6e1f6137fd9c3ef",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/formulas/lookup-reference.md": "abf4923e7a553cdce36085df6062f521d049c907e9ad238b2b8ab40a983e5894",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/formulas/financial.md": "94ec433f2d11023b45ace9dc76314f0321dd751479d08248dd1fb604724ed192",
+    "vendor/node_modules/@oai/artifact-tool/docs/spreadsheets/formulas/database.md": "43c8f57654b669cf198d1e8fecf69776a1e239ae0e97b2fb03f66a5b17893076",
+    "vendor/node_modules/@oai/artifact-tool/docs/presentations/API_QUICK_START.md": "4b3db22fe28498301d0abc3da51ba92b7fa0f7e3add55018a8584c37de95dfd0",
+    "vendor/node_modules/@oai/artifact-tool/docs/presentations/api/API_DOCS.md": "0fc20baab1aedbafea55929c998e463106e9de5e083bebc8d5dc98ef74fa2faa",
+    "vendor/node_modules/@oai/artifact-tool/docs/presentations/api/references/speaker-notes.spec.md": "108e90560cf5d7f6b13144401d5018f7f2c4b93896bb2d89f41c4ce62aa13b50",
+    "vendor/node_modules/@oai/artifact-tool/docs/presentations/api/references/inspect.md": "b6f72fd0a1695e4f4eeed690d1fb85c6fc4387fb48a4f51eb9193728c41bc9c9",
+    "vendor/node_modules/@oai/artifact-tool/docs/presentations/api/references/styles.spec.md": "c27a25f32184d65466d6051256afd8e29144bc87eccc04e486fb845758518f8e",
+    "vendor/node_modules/@oai/artifact-tool/docs/presentations/api/references/fill.spec.md": "2a7555458d00535919655c1e2c29be458f669dcff9b5f4681aa65ed99c8ba706",
+    "vendor/node_modules/@oai/artifact-tool/docs/presentations/api/references/master.spec.md": "67c5e656698aade9c569e2226e2ee06b7f7f9a5baa221cc67b37773bf2bb38be",
+    "vendor/node_modules/@oai/artifact-tool/docs/presentations/api/references/shapes.spec.md": "6639653c6cbf80aed2070155dc71dda876729eef04eac87770dde028181752b3",
+    "vendor/node_modules/@oai/artifact-tool/docs/presentations/api/references/slide.spec.md": "faa9b759550bad7f4dc47ee8c24ec128db6ec7925396310b3d81d3d458bae285",
+    "vendor/node_modules/@oai/artifact-tool/docs/presentations/api/references/comments.md": "a5944dec341f5433945714bc8bab2e5b2eed4c6c95e5f50b3379dc63d9286c09",
+    "vendor/node_modules/@oai/artifact-tool/docs/presentations/api/references/images.spec.md": "103551987c527e4faba5a6742f3a201c4d9ac0c392da72b71355320254e08df1",
+    "vendor/node_modules/@oai/artifact-tool/docs/presentations/api/references/tables.spec.md": "53fe41ba21dc24a55ea2de65df5336de27485f522bc8c27065c3cf4f47225d6e",
+    "vendor/node_modules/@oai/artifact-tool/docs/presentations/api/references/help.md": "02e887d69bb30b8ad91737dc721655ecb7ba9cb90a18c761057a229dc1d6f679",
+    "vendor/node_modules/@oai/artifact-tool/docs/presentations/api/references/rich-text.spec.md": "9775d551a44056456341a113f4970e7745ee1f68524ad76e28e3336cc6416abb",
+    "vendor/node_modules/@oai/artifact-tool/docs/presentations/api/references/auto-layout.spec.md": "1158c8d99e36490083667300874be6c6feee53164228d89e6aa04c8f4e973d0f",
+    "vendor/node_modules/@oai/artifact-tool/docs/presentations/api/references/connectors.md": "8ee993691da5b5072dfcd526e61c7f7150bc09ed6b999fd84418ccdedd5494a5",
+    "vendor/node_modules/@oai/artifact-tool/docs/presentations/api/references/inspect.schema.json": "63d85c90b18a8d5bff734abc6980cdbdb52d767299dca925f73e0da71d05fcc2",
+    "vendor/node_modules/@oai/artifact-tool/docs/presentations/api/references/theme.spec.md": "3dfae5c2973cd197c47daeae042872ad90a033f2df64758b4006591694e2045c",
+    "vendor/node_modules/@oai/artifact-tool/docs/presentations/api/references/charts.spec.md": "b38acc44e9eda9a0b91bd5f02fa83bbf080efb129de32f83973e4693a45a2f8b",
+    "vendor/node_modules/@oai/artifact-tool/docs/presentations/api/references/presentation.spec.md": "a1afb34da0dbc6803439dfd5509c1af15f7d07017311005b11b0e467a2703f1d",
+    "vendor/node_modules/@oai/artifact-tool/docs/presentations/api/references/tokens.md": "55326b4322f942a16d02caa79aebd60c2c97156008fd3eb69012bda327bbcc96",
+    "vendor/node_modules/@oai/artifact-tool/docs/presentations/api/references/jsx.md": "f8b225db2ae54134b5d4f947c8fc8efb3c1811b880ebaeaf1ef7cb81adf6cca2",
+    "vendor/node_modules/@oai/artifact-tool/docs/presentations/api/references/layout.spec.md": "a63ffee900cbb41256d73df92660176e4933420cbcd781756c823436b215b63d",
+    "vendor/node_modules/@oai/artifact-tool/docs/presentations/api/references/cookbook/imported-deck.md": "695088dd67aeff5e0582939e35142e8c7e0c7e64dbddcfdd40db3d714fe87968",
+    "vendor/node_modules/@oai/artifact-tool/docs/presentations/api/references/cookbook/layout.md": "35b0bd469fa5f78672f151bd920c3027bfd765f112906e89c95278aa5aed52ef",
+    "vendor/node_modules/playwright/test.mjs": "1deb265617d0e87b6d05bf8b3d5bf73cd4b788665c249c609a01b94ceff2eea1",
+    "vendor/node_modules/playwright/jsx-runtime.mjs": "a6ae8df3a36f154f433b01fe1592170500f5fbe7798f6dacdfea5b492f31d1a6",
+    "vendor/node_modules/playwright/ThirdPartyNotices.txt": "b17ac0bd6f4b8207e440639cc8e0ba1bf1d9eaf9b12236764ab93b346c7abd8e",
+    "vendor/node_modules/playwright/test.js": "b97fa53a6ab864f51c9c48b5e4647d0acae45ba2948c5d78e38bfeb56755d974",
+    "vendor/node_modules/playwright/LICENSE": "45873d00a0dd243596deb4aa23b2493b3d1f0671921bf2538ea431d7380220eb",
+    "vendor/node_modules/playwright/jsx-runtime.js": "2fefb7ec3a42dcf1cea35ca7e3eb107507c4d80821b1d6abf6cfc9bca36498f0",
+    "vendor/node_modules/playwright/test.d.ts": "3f00324f263189b385c3a9383b1f4dae6237697bcf0801f96aa35c340512d79c",
+    "vendor/node_modules/playwright/index.js": "4e98f65f0a9d9bcab8cffc0c5cfdd87fd3f5b0be74fc494ff166a466b204cd44",
+    "vendor/node_modules/playwright/NOTICE": "6d602191187b35b9b01d2cffa01c8469c2c8d9de8a96f1bf868e0f264f51c81d",
+    "vendor/node_modules/playwright/README.md": "b141b40be2abbbb6b111c5c270c674ac11af9122b8c438abb34484f5e8614c98",
+    "vendor/node_modules/playwright/package.json": "ca170ec143a88ed3043ac953eb3b2377b2b97304104f4e1e23316684ce2c35af",
+    "vendor/node_modules/playwright/index.mjs": "a0f5715ea22354f922791a9c53dc012d5d5c067ff9cc4cd35ffb7cd272071a9f",
+    "vendor/node_modules/playwright/cli.js": "5e79302a6aad7d835d92d5ae6b4244c91cf61b28e94d7917279090e6c231f7a1",
+    "vendor/node_modules/playwright/index.d.ts": "b07f64ff6ec710998a62b07377fbda0ab4c313ba1f0055bfe9faa22cffedd47c",
+    "vendor/node_modules/playwright/types/test.d.ts": "138c4489023da880e7219a31b8049ef9cba13d90c5d7cf9538148001d7066f50",
+    "vendor/node_modules/playwright/types/testReporter.d.ts": "cc31504f31abcd7263a1daed018ef8109fa255464b0c0b962f39ab3548787f9e",
+    "vendor/node_modules/playwright/node_modules/fsevents/fsevents.node": "5cede02a4000ae632fe09d9c4f54a74d624f491118d8b08b30a431b0385c9817",
+    "vendor/node_modules/playwright/node_modules/fsevents/LICENSE": "2a8a5d6197bb97a018b8a190dd3ed853d750ca87c8e80c17aad41d6c6ff448e1",
+    "vendor/node_modules/playwright/node_modules/fsevents/fsevents.js": "f51b1bd9058d7a989c595e806fedbbd16a3bb34da5209c2804f97ab84050902a",
+    "vendor/node_modules/playwright/node_modules/fsevents/fsevents.d.ts": "5c246116b08ff4de6926ed0d5d065249857b256fb45ef3681b46a4bdc03412ec",
+    "vendor/node_modules/playwright/node_modules/fsevents/README.md": "7be285dd5b0f38dad41f7d9601c438c0e2e564f50e4f7d8f8b68cc97b9295f5e",
+    "vendor/node_modules/playwright/node_modules/fsevents/package.json": "80914b12dba592ca926d9e6aae0bf6fdc35d871f756a9b34804b98944fac4506",
+    "vendor/node_modules/playwright/lib/globals.js": "f5922eb1fb6051900157492eb9c218e62d07378eed135bca4b2f173ed1184d1c",
+    "vendor/node_modules/playwright/lib/util.js": "874c55495773da8c5a2ec46551c2265937bf08446231c09a8b5966e8bea2b1f7",
+    "vendor/node_modules/playwright/lib/isomorphic.js": "3d61508f951aa9518adb4bf6594d61dfd1099c95a1a4f0af809a58ccebc59025",
+    "vendor/node_modules/playwright/lib/errorContext.js": "ffc1843cebb3e90e1674c07ee2607a4a63152eff609e5f9865bbb2f9eb02e9a1",
+    "vendor/node_modules/playwright/lib/package.js": "544a18417ea51dd4c8a9f3dbc4e2b47e46c80f452e0cd23d55e9b3680bc6241e",
+    "vendor/node_modules/playwright/lib/index.js": "cb793062d359fd495f10e0916523f52c76a47fd0b6c4195451dabcd48638e862",
+    "vendor/node_modules/playwright/lib/isomorphic.js.txt": "36c16ae5721dfe8ac2555e84d26b5895b7ca113e7304bd3735a16d56b5a71b3c",
+    "vendor/node_modules/playwright/lib/program.js": "d453e49272d33d592cac3c55e06536e5451bec135fa8d80d6b134fd5e072c88b",
+    "vendor/node_modules/playwright/lib/runner/index.js.txt": "26875e6a0ad15371cb3c5dc79a8b1cb5a3388ca6d70458f2d44f6a52b105558c",
+    "vendor/node_modules/playwright/lib/runner/index.js": "6dcf135a144b0f243848128bb68e0a25898b8ad764a34326f36ab45d9a9e1685",
+    "vendor/node_modules/playwright/lib/agents/agentParser.js": "a2f630c1c2c9eafa0a3ca9cdbeaa26e74801615bc572e3fce226acb662ceb0eb",
+    "vendor/node_modules/playwright/lib/agents/generateAgents.js": "3bae7bde1d05c0fbaaa1a82ce7a39732ff52904de575fe88e69c391a6c41478e",
+    "vendor/node_modules/playwright/lib/agents/playwright-test-plan.prompt.md": "6ce2c51b356b4e89ac1e3c2b8b3ff0a390c7b518c1d4d24f019f9eb179cd6669",
+    "vendor/node_modules/playwright/lib/agents/playwright-test-planner.agent.md": "bf4baa68205aa04c4512a80bcc6a5362d3aaa76ae9165f05a9d5a29e1d34c0fd",
+    "vendor/node_modules/playwright/lib/agents/copilot-setup-steps.yml": "7483c252e2225d90cf7b66b461772a9e16e189cd45f689f48519872571e1a345",
+    "vendor/node_modules/playwright/lib/agents/playwright-test-healer.agent.md": "b3e1d85219df5ead7e3ef0dc69959b0263cc16e885f71d5b64bafdf97e6f9215",
+    "vendor/node_modules/playwright/lib/agents/playwright-test-generator.agent.md": "0a61b313ff2573198fc89c7ab5b7e7db1c557193a470104ac90b2d6a0332be80",
+    "vendor/node_modules/playwright/lib/agents/playwright-test-generate.prompt.md": "6031c3eacf1e55d527a0397066b64d134d9f925fd7286bcc78646e714611da10",
+    "vendor/node_modules/playwright/lib/agents/playwright-test-coverage.prompt.md": "8e8a32e98c7069c8af29a088a91999c81dafbeb09a144b143ebe888b48b94355",
+    "vendor/node_modules/playwright/lib/agents/playwright-test-heal.prompt.md": "19f2bea9648ddac89b90b40a3f87b50c276d416677f8bb2fbcdac894cdb6946b",
+    "vendor/node_modules/playwright/lib/mcp/test/testBackend.js": "dcd8d09366617f13213ce544efb5fe47df5a87258ae93545d4d0738623f43ad1",
+    "vendor/node_modules/playwright/lib/mcp/test/testTool.js": "2a8f17d0a61ccb8a4ca9c52a3255d624deca989c0b06281d579629c664f8cc8e",
+    "vendor/node_modules/playwright/lib/mcp/test/generatorTools.js": "3c53feaeb9fc2ff728f334cb31f9b7211e65b20c692c7585459c3c97bdd13a12",
+    "vendor/node_modules/playwright/lib/mcp/test/streams.js": "8affc240a6a90ee2dbdedcde9927018efe426ec0d390bcd1ee4f0464e75adc0f",
+    "vendor/node_modules/playwright/lib/mcp/test/testContext.js": "74ff4273ea12e6353d4860c9452387b643d7d8899fbd4951389ba94d18df5e37",
+    "vendor/node_modules/playwright/lib/mcp/test/seed.js": "f36f7fb76d4ed33225e80be208cccc9757d363a9d1527cf560736c0f1e5edd31",
+    "vendor/node_modules/playwright/lib/mcp/test/testTools.js": "14710b5f34246005d974762b83a2a50e5cc17130af841cd3bc447811d69c6af7",
+    "vendor/node_modules/playwright/lib/mcp/test/browserBackend.js": "7143473e53c8b76720e42efab95f55227807590d2818104223d5df6ac46b681e",
+    "vendor/node_modules/playwright/lib/mcp/test/plannerTools.js": "715abc888d9ea30b532b75c6f09aa34101ab15c1eeb959c50cf9dedcf3a459ac",
+    "vendor/node_modules/playwright/lib/cli/testActions.js": "44a4770714406134d1135b77d3b4388b557a7decb7f24094e637b6a5d517dd48",
+    "vendor/node_modules/playwright/lib/cli/reportActions.js": "4eeceedf9588d69a153f018aa548e00b73e5f61cb39bb05f0fc87c06131af2b3",
+    "vendor/node_modules/playwright/lib/common/index.js.txt": "8527825c8efc985a83f7a2b9baaac44d20c39aa19ead2cc6d574cdedb758aa91",
+    "vendor/node_modules/playwright/lib/common/index.js": "8f2588ccdb7ce2d245fdbe3222ba67817293799dff1ba2e58303f0d558b6526f",
+    "vendor/node_modules/playwright/lib/loader/loaderProcessEntry.js.txt": "0fc4ad550d17a23e9f1cbc78f646e57461f4feb22253dd5220034ef44091005c",
+    "vendor/node_modules/playwright/lib/loader/loaderProcessEntry.js": "45681332f4178770c204b33e5b8dcbba940baf3bc6fc86506bab24027cb513f3",
+    "vendor/node_modules/playwright/lib/matchers/expect.js.txt": "33ffab6ebe6e66e7c056060f80e50e517efabeabd39d092f5d3497f02a28cf44",
+    "vendor/node_modules/playwright/lib/matchers/expect.js.LICENSE": "78b2f60563d28cb3f9ea17e4cdc0657681e641e2f72766771d9e2da9ca94c065",
+    "vendor/node_modules/playwright/lib/matchers/expect.js": "b22e4f194830dceb0eb67ceb44523f49bbf49f96fba50cc097b677e94ef360d7",
+    "vendor/node_modules/playwright/lib/worker/workerProcessEntry.js": "cc8274565200e5f5aeecc80aef9518526ff82a32c36e2a2b06e445c238cebcc6",
+    "vendor/node_modules/playwright/lib/worker/workerProcessEntry.js.txt": "8503383c20eca96b7f79a65c33f2cf8c08a739c5e67ca10e3f04a6b53b31ea47",
+    "vendor/node_modules/playwright/lib/transform/babelBundle.js": "01511e45db7646e2a12890de8d7866caa0754c8799db6407a6345236f4bed0c4",
+    "vendor/node_modules/playwright/lib/transform/esmLoader.js.txt": "94d16740d422f0b5a7c99fe7f38d6f6a5b35348ef6903ef662f1e019e42a4557",
+    "vendor/node_modules/playwright/lib/transform/babelBundle.js.txt": "558b7f01e0e090114e1e0aee9a5b913cd22185add68c508b3ea8234e129dd7c8",
+    "vendor/node_modules/playwright/lib/transform/esmLoader.js": "f4e708ea08083676777a7699c82417d16fa08113f197fbc070ccffb9e8db2beb",
+    "vendor/node_modules/playwright/lib/transform/babelBundle.js.LICENSE": "6e396aded640f0bd2671d57442575ce8172aa1371b2dece6c5d4048f2f38f34c",
+    "vendor/node_modules/playwright/lib/transform/esmLoader.js.LICENSE": "3cec0c446526a449e4613b0defee0adb585f88f1d7fdba919421226d69be078e",
+    "runtime/skills_manifest.json": "21917feccec65a33e71a44c9cc3b817a9318173a10e63d85bc981cff6996b9dd",
+    "runtime/posts.json": "d723aa967c0959478b767bf6b0e187d097138903e6ffc37e8f6e42a17de56db8",
+    "runtime/state/control.json": "ee8b520e3ad90c05f5d239c219f860b545462e493ec80d18154444014c723eb5",
+    "skills/workflows/store-inspection/runtime/门店自检表(框架+模板).xlsx": "768f7d095656d569ed517492b9cbd740815428d934fbf8c40cca908d59daa271",
+    "skills/workflows/store-inspection/runtime/2026-09-第2周-roster.json": "0ea2941dd8925bde55226bdf949acb8832e4ad113e110965a0f308149a263ac2",
+    "skills/workflows/store-inspection/runtime/hybrid-meituan-reinspection-2026-09-14/wechat-ready": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "skills/workflows/store-inspection/runtime/results/.DS_Store": "6ddf3b80fb88bbfe612727d6b8c2b0013be285c123858c8b692ecbfb23336f85",
+    "skills/workflows/store-inspection/runtime/meituan-silent-probe-2026-09-14/probe.mjs": "4fd7f3233bfe471fd4bae65b7777d77dddfb0d141cb470fb6bdd65ef93250046",
+    "skills/workflows/store-inspection/runtime/meituan-silent-probe-2026-09-14/probe-receipt.json": "50eea1c0520918bd35ccb8540040b04755ae70bb062cb063be55aee9c9084487",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/taobao-city-select.xml": "1e1f18850e63899b04083fab0c342295ccff7b5b076196115706c09e7dbb6db1",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/taobao-flash-home.xml": "bab7e492d1191efffcf2163daa4d893ea8dfc06a8eb70129e7f3a44a43d36956",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/taobao-city-search-bazhou.xml": "c4d395a0471ff12ca4898d15cd9dde3326093e19483eda80d9f2987157cdd6f2",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/taobao-flash-ready.xml": "05b862adbe00150c584d8cc8915e760b67b97e951676b4efc2bee419afdaa8f7",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/taobao-city-list.xml": "a87a41e0cc12258cfeb8a75e33ff2291a35684d0b073e997bac50677ec6bd3c3",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/taobao-home.xml": "30d212d40e66913dc00f8b047bcc3b3d500800ca7d49dcdc184f08cac7dd803b",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/taobao-start.xml": "67920737cae1d69318678d7e5d263cb47e61a26180c2ecb05332a0a9cc7336dc",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/taobao-location-panel.xml": "509bc165e5905b1339966d7faae578bc27bd308d6cb2f41ab76d04d8451d91f7",
+    "skills/workflows/store-inspection/runtime/jinsha-recheck-2026-09-14/open-receipt.json": "7816e96aad116903d21b674f96f96f8fe20c65101ac700fea00e03dc508c44cb",
+    "skills/workflows/store-inspection/runtime/hybrid-final-2026-09-12/淘宝闪购-9家湘菜（金谊广场店）/service-overrides.json": "a558fc0ec86e3c2fcd658e9033dda01975638afa16140e2d80156e40253075d9",
+    "skills/workflows/store-inspection/runtime/hybrid-meituan-reinspection-2026-09-14/device-before/page-state.json": "d9aa78776d960837261ca078964ebc5e0656e098a09dfbae291686580c772ba9",
+    "skills/workflows/store-inspection/runtime/hybrid-meituan-reinspection-2026-09-14/美团外卖-9家湘菜（金谊广场店）/plan.json": "11231bea10816ba7b907417d830f6c11f597dbf4e81cea04f3709b1ef31ae368",
+    "skills/workflows/store-inspection/runtime/hybrid-meituan-reinspection-2026-09-14/美团外卖-9家湘菜（金谊广场店）/plan-input.json": "7e6aaace608271601ba68d5c371342face6c2d5abc6afd37946329ea9e9f9f61",
+    "skills/workflows/store-inspection/runtime/hybrid-meituan-reinspection-2026-09-14/system-manager-block/page-state.json": "98d795f1dc7bda4986778fa84b75ce3d6fc5c274eaf69fbb6bef2b401a957b63",
+    "skills/workflows/store-inspection/runtime/hybrid-meituan-reinspection-2026-09-14/美团外卖-9家湘菜（金谊广场店）/device-unlocked/page-state.json": "11d1e087f7f92b30ed526744ff0d282d8dccbec9ef882c49976b572b3d8060ba",
+    "skills/workflows/store-inspection/runtime/hybrid-meituan-reinspection-2026-09-14/美团外卖-9家湘菜（金谊广场店）/backend/delivery.json": "239bcb3399c0792b4e77699434cc9420cb85db1ef85b33e1c78b4b0313f59bd7",
+    "skills/workflows/store-inspection/runtime/hybrid-meituan-reinspection-2026-09-14/美团外卖-9家湘菜（金谊广场店）/backend/delivery.receipt.json": "e9e4ba73212e38ef0dc02d305bcfc925dea69f29ecafc42f6f76a2c8f2ac250e",
+    "skills/workflows/store-inspection/runtime/hybrid-reinspection-2026-09-12/淘宝闪购-9家湘菜（金谊广场店）/07-city-selector.png": "9c85844619fe760e9a990e89e96aa7ffb860924e6c92dfd6240008f1e8ebb6d6",
+    "skills/workflows/store-inspection/runtime/hybrid-reinspection-2026-09-12/淘宝闪购-9家湘菜（金谊广场店）/08-city-selector.ocr.txt": "589277aebe2f34cadda597fc85833a06bcebb93955238e646721b3932dc2304a",
+    "skills/workflows/store-inspection/runtime/hybrid-reinspection-2026-09-12/淘宝闪购-9家湘菜（金谊广场店）/08-city-selector.png": "a40dd5dc5a6e178044732527d8d802c6b7a55ddbb76103c2515b671e9b270e6a",
+    "skills/workflows/store-inspection/runtime/hybrid-reinspection-2026-09-12/淘宝闪购-9家湘菜（金谊广场店）/07-city-selector.ocr.txt": "0bd1124ad825da11420fcdf2efec46642b98019bb1080ff18e1b1bf8387d7d14",
+    "skills/workflows/store-inspection/runtime/hybrid-reinspection-2026-09-12/device-state-location/page-state.json": "892c1fe0158d43508eb200f86f590e2c7430d0250a288bf6ef8f995634d1cbb6",
+    "skills/workflows/store-inspection/runtime/hybrid-reinspection-2026-09-12/淘宝闪购-9家湘菜（金谊广场店）/previews/新方案来源汇报.png": "2bc0eb43e196f645a8a7de2d70ad16d91e535a0fe9855f29edb8f2c3f52f5f05",
+    "skills/workflows/store-inspection/runtime/results/2026-09-第2周/hybrid-reinspection-2026-09-12/淘宝闪购-上海市-9家湘菜（金谊广场店）-新方案复巡结果.xlsx.inspect.ndjson": "85f7cb27f7c93c419a34f1198ae5bddb4bd05786e66fa5242d77f1ad81f3254f",
+    "skills/workflows/store-inspection/runtime/results/2026-09-第2周/hybrid-reinspection-2026-09-12/淘宝闪购-上海市-9家湘菜（金谊广场店）-新方案复巡结果.xlsx": "eda0cb20d63abbd01362ee259afee456e3f4437ba97ec511e5f8a0029b029e7e",
+    "skills/workflows/store-inspection/runtime/results/2026-09-第2周/hybrid-reinspection-2026-09-12/淘宝闪购-上海市-9家湘菜（金谊广场店）-新方案来源汇报.xlsx": "750d23472f8fcb1d65920c7e7b8b95f2fc14c76f7970d4bf4ac0bb8347cd1c00",
+    "skills/workflows/store-inspection/runtime/results/2026-09-第2周/hybrid-reinspection-2026-09-12/淘宝闪购-上海市-9家湘菜（金谊广场店）-新方案来源汇报.xlsx.inspect.ndjson": "71c4f7be4231cdec937e2b794a86e9cd7d8c545e294cfecab6d33bfb1abdbe02",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/美团外卖-陶姥姥砂锅菜（金谊广场店）/01-search-result.ocr.txt": "726f58dcdfaf925759cb90b6739c998cd765ff650c387e0973c938ab55324d56",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/美团外卖-陶姥姥砂锅菜（金谊广场店）/02-store-home.ocr.txt": "7947f226895099562b4cb8cef662a543b5c1954ff58166f805d532d3825f0607",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/美团外卖-陶姥姥砂锅菜（金谊广场店）/06-merchant.ocr.txt": "32303a7a040c255a0331333f6c361cf73500b92874eedb3f9ee1ccee2c99acef",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/美团外卖-陶姥姥砂锅菜（金谊广场店）/04-reviews.ocr.txt": "6afbd17308fd73a7a9a260937e559757da869c00ef774ffec08eaf8bd8c90eb0",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/美团外卖-陶姥姥砂锅菜（金谊广场店）/03-products-scroll.ocr.txt": "267e6c55142817739ad4d2c9ad75c91dff07df5c73dc922dd29c424df6ac2b05",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/美团外卖-陶姥姥砂锅菜（金谊广场店）/05-negative-reviews.ocr.txt": "4f1b450d85ec6733773394e6fbf474af50f95b5cd9e7188503dc2ed50468cc9b",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/淘宝闪购-9家湘菜（金谊广场店）/01-search-result.ocr.txt": "2f6ccbbb71c6c228cc0d2e2abd2c0e171a351655521e7b19b6d0801bbad9dd56",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/淘宝闪购-9家湘菜（金谊广场店）/02-store-home.ocr.txt": "460a940a7380e8f2c35d2ec7fea16b67bcacdaa660693869015ba426329cff8b",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/淘宝闪购-9家湘菜（金谊广场店）/06-merchant.ocr.txt": "e4934851d1e28a2139291d1ca46d8401dc1996289f104cb905bca505adae13c3",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/淘宝闪购-9家湘菜（金谊广场店）/04-reviews.ocr.txt": "73ee8bb9d1dfd54634e156f72d348f216a03e3b9ca7c6f710bbe1ed6df1b80bc",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/淘宝闪购-9家湘菜（金谊广场店）/03-products-scroll.ocr.txt": "81fe07756c3604fba94c3f88af05999387ca13b92259762049bbd93f6a9aa4c5",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/淘宝闪购-9家湘菜（金谊广场店）/05-negative-reviews.ocr.txt": "7199e1312270dfc20387c5ed0246c6171afee64e8d7a43309898b20499209af3",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/美团外卖-9家湘菜（金谊广场店）/01-search-result.ocr.txt": "2a258d6a527c54e2924ca29d0ffb4b138a49888bbc8dec234d82b32d4103e6fc",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/美团外卖-9家湘菜（金谊广场店）/02-store-home.ocr.txt": "5a16f326d53a41324c98e0937614bf52ba70a6718e86d86af02980ddc202a2cf",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/美团外卖-9家湘菜（金谊广场店）/06-merchant.ocr.txt": "680a29ce779f8ab4a7936ddf3ea008ae2d59f686db6e6c339743b882c10837a7",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/美团外卖-9家湘菜（金谊广场店）/04-reviews.ocr.txt": "0d43b697cfbe85b53046b4a75b48c2af7614f4675ad4dc17c0f84fbbead3f333",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/美团外卖-9家湘菜（金谊广场店）/03-products-scroll.ocr.txt": "d7086b3449e3a855e3041306abe99243cbbec773445f131117a13085bf47b702",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/美团外卖-9家湘菜（金谊广场店）/05-negative-reviews.ocr.txt": "61df08aa3a3d607a1acc1ede3e300f91573fee04b083e9c44a814d28c7ca3cc7",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/淘宝闪购-阿达西烤肉（银霄路店）/01-search-result.png": "0fca38002baa9e17262e56f7cbc2e4d95cc3ae0895d7124c9c12a3611edab7bf",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/淘宝闪购-阿达西烤肉（银霄路店）/01-search-result.ocr.txt": "42ef9f6f3d33bc5838cd1b06b54877017cb9e1d07bd7f87d42ef6e94c746ae1d",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/淘宝闪购-阿达西烤肉（银霄路店）/02-store-home.ocr.txt": "81e09c6ca13031db639c5e0b38934b4a6f5bdb6cf419cd8e94c126f26736b1e2",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/淘宝闪购-阿达西烤肉（银霄路店）/02-store-home.png": "19589442a352b6b6574d2784a0e2be42f3231cea41c68ef181141dd9df8a0d62",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/淘宝闪购-陶姥姥砂锅·广式啫啫煲（金谊广场店）/01-search-result.ocr.txt": "586999474e085365796378de4e96ee9d9b7e7effbcb4bc039d604de342a67447",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/淘宝闪购-陶姥姥砂锅·广式啫啫煲（金谊广场店）/02-store-home.ocr.txt": "a049074e418789a802bfd99c80fe63ecc0b32f1b9b14f548ef927a13d76303a0",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/淘宝闪购-陶姥姥砂锅·广式啫啫煲（金谊广场店）/06-merchant.ocr.txt": "6d800b8fb37ad0342b25656ffb2b0791a5d214be828119f7d3bf10b05d47fed8",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/淘宝闪购-陶姥姥砂锅·广式啫啫煲（金谊广场店）/04-reviews.ocr.txt": "9545d55eb000819ff0793cda8fa87c223f6be0891de3549cfb876a068ae92aa8",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/淘宝闪购-陶姥姥砂锅·广式啫啫煲（金谊广场店）/03-products-scroll.ocr.txt": "b5db6cb3bc6d94879ae43b179fe078645c609dd36bf14e24bfde4bf1181fcaa8",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/淘宝闪购-陶姥姥砂锅·广式啫啫煲（金谊广场店）/05-negative-reviews.ocr.txt": "8f094f4ae57059679f510540769949dd04cbabee821838ee507e46df48a2da70",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/淘宝闪购-9家湘菜/location-panel-current2.xml": "a5ca1153a47b1326fdc9911427efdfd4cda5468acc771bf8e3791f3e763d94a6",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/淘宝闪购-9家湘菜/location-panel-current2.png": "af59cc082b63dfe118fde5600bf028945ff09a4628476179e6eeedea3f709c29",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/淘宝闪购-9家湘菜/search.xml": "8051a2bbb89151f0822df6d5f87fa3bbfc749948dcbbc2605d3c9274c7d7195e",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/淘宝闪购-9家湘菜/search.png": "78828c1c190ec9689aba3f13a789638119313f2ca363e541a54ebd32bd22ab8f",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/淘宝闪购-9家湘菜/location-panel3.png": "6fda8f9517f38c49bca905e78857733208a62aa35f1ba580bab309feb06755f0",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/淘宝闪购-9家湘菜/location-panel3.xml": "ad59f884e1be6b0a3d6858bf50feb9df965f8dcff8b35225417827a489a4b097",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/淘宝闪购-9家湘菜/location-panel-current.png": "178a3c9d0642bb2e52b817aef0ef7029e62c1ac4eeb03769c78288d43d793183",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/淘宝闪购-9家湘菜/location-panel4.png": "9dfa626d1c1d076a3014b4735cf36a509a90717c41628ce64978fe956adca392",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/淘宝闪购-9家湘菜/location-panel-current.xml": "419a30724265726223f59ed5a02840b8f5321296f2e6620433f744462d3a915b",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/淘宝闪购-9家湘菜/search-scroll-4.png": "8afe1851eedb35ba28f857d3961d5465936f208968e7f59ec34d01d627661637",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/淘宝闪购-9家湘菜/search-scroll-3.png": "4ec4beaf69b8df59c590c0fd8bbaa2aff2778f9910085073eff74fe81c046ea7",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/淘宝闪购-9家湘菜/search-scroll-2.png": "27e10ed19436499e4b4ca986b3291297a7ee7e083a7ca83127363c1fe727fe28",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/淘宝闪购-9家湘菜/location-panel.png": "a73e47afb39305b9e2270b1bed85c10e174dee5565f98bf4f5986dd5456b1680",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/淘宝闪购-9家湘菜/location-panel.xml": "efd4ed5c32b8a9181ba5a88cd7aa1fe4d5742eb8498ca92adee943c598d66538",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/淘宝闪购-9家湘菜/search-scroll-1.png": "5fac110d72f6317078b5a72a54f1d96442a9a3811238aa54a1e47c0a883675d5",
+    "skills/workflows/store-inspection/runtime/pilot-evidence/restart-recovery/current.png": "aea4b72bbfe31ba7bb5e18f59602d8ab8155d394215515955b2872e0f0c50ef6",
+    "skills/workflows/store-inspection/.runtime/monthly/2026-10/monthly-scope.json": "f7141d3bb407fb558185d59f979b5f1429ba90bc775e64003adbbff9d65984d9",
+    "skills/workflows/store-inspection/.runtime/monthly/2026-10/jinsha-roster.json.incomplete.json": "886067a8a42a8554d814816d9541de6fc2525b696cf8b6f778b077f9d611839e",
+    "skills/workflows/store-inspection/docs/MONTHLY-PLAN-2026-10.md": "560f985fc25d72774d224040fac9cdf213f1f72bd02e26100865898a26de69b1",
+    "skills/workflows/daily-store-metrics-rotation-to-wechat/.runtime/collect_brand_v2.log": "e4ce598da39c03056dbe496804f3cf080fd0a8a9071fa03256f3cfe3ff1338b8",
+    "skills/workflows/daily-store-metrics-rotation-to-wechat/.runtime/probe_xhr_2334.log": "d29de5717f776078ff78ffd571f00ddd1879bcf9a39b9132dda62d06a107f31e",
+    "skills/workflows/daily-store-metrics-rotation-to-wechat/.runtime/group_map.json": "b25eb748bdf67228d24bff06312c4c1e970b8baf5cae271c91fd9271e2562dd7",
+    "skills/workflows/daily-store-metrics-rotation-to-wechat/.runtime/q_i_cross_org_result.json": "dc65a57e3245cb1e0fea807f37bc9033baf71ab150823f5e5ccff2b8e223a892",
+    "skills/workflows/daily-store-metrics-rotation-to-wechat/.runtime/collect_brand.log": "c01df60f54e701fa6a6e46c2d328849fdf757d9d32bfb8fa2433043234bd0fd5",
+    "skills/workflows/daily-store-metrics-rotation-to-wechat/.runtime/captures/_invalid/M03_shop694471_20261020101837.png": "0058cd92e293b5ae23543b0194054987f5d11d0ed494a3093f208ec62ad532a9",
+    "skills/workflows/daily-store-metrics-rotation-to-wechat/.runtime/captures/_invalid/M04_shop26319_20261020100609.png": "346c47530e131d3e72af484361ca9ab5625a510cfcc9b18f80434175dec6fb14",
+    "skills/workflows/daily-store-metrics-rotation-to-wechat/.runtime/captures/_invalid/M05_shop694471_20261020101849.png": "4b05195dabdc9f782d5cade95e1fcdceacb401e3201c151a3d2bbe2a14799a8f",
+    "skills/workflows/daily-store-metrics-rotation-to-wechat/.runtime/monthly/2026-10/latest.json": "12709d4561b4b859f056791ba99ec9f85ab65dfd48c7cca58869e55b1247173d",
+    "skills/workflows/daily-store-metrics-rotation-to-wechat/.runtime/monthly/2026-10/brand-roster.json.partial.json": "6741339471d74b2c27dcfca1c2c34c81972eb96422a084d7380e2973caed35aa",
+    "skills/workflows/daily-store-metrics-rotation-to-wechat/.runtime/monthly/2026-10/maintenance.lock": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "skills/workflows/daily-store-metrics-rotation-to-wechat/.runtime/monthly/2026-10/brand-roster.json": "88ec8f60f857843cc506ce2a934d7b9a05bb6d11ca4a362a5f8493d98f7327f4",
+    "skills/workflows/daily-store-metrics-rotation-to-wechat/.runtime/monthly/2026-10/968fb6d22bea46f18a49ec4b189cd454/registry.json": "e1821c551714bc43ab92ff18a423d1df14029a6e4b5cec847184f0f8ebdb3c01",
+    "skills/workflows/daily-store-metrics-rotation-to-wechat/.runtime/monthly/2026-10/968fb6d22bea46f18a49ec4b189cd454/source.json": "6398f93b90f3118c25f47b360c12c078b84a72dbb855b06df85e786dfdd7b692",
+    "skills/workflows/daily-store-metrics-rotation-to-wechat/.runtime/monthly/2026-10/968fb6d22bea46f18a49ec4b189cd454/current-roster.json": "a5545d4efc5dcb32405eb4f71b54d40925a99a45183e6f55707c54bf619eae04",
+    "skills/workflows/daily-store-metrics-rotation-to-wechat/.runtime/monthly/2026-10/968fb6d22bea46f18a49ec4b189cd454/manifest.json": "d16641f91e0a757fab29098601cd77cfe7fab63221398150c4fd040e64169e12",
+    "skills/workflows/daily-store-metrics-rotation-to-wechat/.runtime/monthly/2026-10/968fb6d22bea46f18a49ec4b189cd454/daily-plan.json": "5fa6de6e0ac3a81ccc3945e533c097e57ff17037f08ab74b909e747aaf45ed9c",
+    "skills/workflows/daily-store-metrics-rotation-to-wechat/.runtime/monthly/2026-10/1edf1617f49b478e8431950d2bf8cddc/registry.json": "08a1164524e542710ae5b0629f1d7cb2a1ea81cd3a9c91b5de12df35eb0bd1a1",
+    "skills/workflows/daily-store-metrics-rotation-to-wechat/.runtime/monthly/2026-10/1edf1617f49b478e8431950d2bf8cddc/source.json": "6398f93b90f3118c25f47b360c12c078b84a72dbb855b06df85e786dfdd7b692",
+    "skills/workflows/daily-store-metrics-rotation-to-wechat/.runtime/monthly/2026-10/1edf1617f49b478e8431950d2bf8cddc/current-roster.json": "a5545d4efc5dcb32405eb4f71b54d40925a99a45183e6f55707c54bf619eae04",
+    "skills/workflows/daily-store-metrics-rotation-to-wechat/.runtime/monthly/2026-10/1edf1617f49b478e8431950d2bf8cddc/manifest.json": "0be87bd774058d7b66bd771f36e4ca32a489e1881545cbbc858cb090cb9b62a7",
+    "skills/workflows/daily-store-metrics-rotation-to-wechat/.runtime/monthly/2026-10/1edf1617f49b478e8431950d2bf8cddc/daily-plan.json": "e5d5768a973086fbb560255d8bbcd772a45e61b8694781a6ed0fc8b895e7ffcb",
+    "skills/workflows/daily-store-metrics-rotation-to-wechat/.runtime/monthly/2026-10/e7596f55e97a4c2ebbf7b91d7d42003b/registry.json": "28f17c45d5bb4214ad4a5da55537e39196af79c0c0be3af1a82bf77c20a2f12c",
+    "skills/workflows/daily-store-metrics-rotation-to-wechat/.runtime/monthly/2026-10/e7596f55e97a4c2ebbf7b91d7d42003b/source.json": "6398f93b90f3118c25f47b360c12c078b84a72dbb855b06df85e786dfdd7b692",
+    "skills/workflows/daily-store-metrics-rotation-to-wechat/.runtime/monthly/2026-10/e7596f55e97a4c2ebbf7b91d7d42003b/manifest.json": "339dbf48743f553b706ea2e17336d624037ba5cc2b39bc817b8c8444fb603674",
+    "skills/workflows/daily-store-metrics-rotation-to-wechat/.runtime/monthly/2026-10/e7596f55e97a4c2ebbf7b91d7d42003b/daily-plan.json": "e5d5768a973086fbb560255d8bbcd772a45e61b8694781a6ed0fc8b895e7ffcb",
+    "skills/workflows/daily-store-metrics-rotation-to-wechat/docs/IMPLEMENTATION.md": "fd4fd3f74d7d12c4526c2b43e4d1e4f246dea7c6cc601412d6f19a7aeb989aef",
+    "skills/workflows/daily-store-metrics-rotation-to-wechat/docs/.bak_20261020_6sheets_当月.xlsx": "c8a71ed2c7ad6d1588a69f96133fb5a7c81fd239d09bddd3c9242db7337a6edd",
+    "skills/workflows/daily-store-metrics-rotation-to-wechat/docs/MONTHLY-PLAN-2026-10.md": "6e280ca601a14abe69ad9938c53f943cb158368d793193bbe2e3f0cd271fb6ff",
+    "skills/workflows/daily-store-metrics-rotation-to-wechat/docs/.bak_20261020_6sheets_模板.xlsx": "a14c6f80ae12196229df793d2285c18ba30aad206ee3862e95f00c5c0d46b4a1",
+    "skills/workflows/daily-store-metrics-rotation-to-wechat/docs/metrics_catalog.json": "3c9f47ab64962aa815b99ed0414937a4ab59cfe6f5357a8ed17423d98357b19d",
+    "skills/workflows/daily-store-metrics-rotation-to-wechat/docs/DEVELOPMENT-ACCEPTANCE.md": "ca7cda557f77ae5a5d321d0c8839dfbf3b83e313868360751d1681fe6fdcefda",
+    "skills/workflows/daily-store-metrics-rotation-to-wechat/docs/全店铺运营指标商家反馈台账_2026-10.xlsx": "72955cb2ca24906a3d86487146564407777427fc45372eb73c1e907a19cc343f",
+    "skills/workflows/daily-store-metrics-rotation-to-wechat/docs/.bak_20261020_prerules_模板.xlsx": "eee37aff1fa038a1339ee5709b3cbc25f860c3b52d884b0114b834700e95be3c",
+    "skills/workflows/daily-store-metrics-rotation-to-wechat/docs/REAL-CAPTURE-ACCEPTANCE-20261021.md": "a24400d20472b3769cfbaad4c4134c297b7abffe73b1acc617944faaf7a07be3",
+    "skills/workflows/daily-store-metrics-rotation-to-wechat/docs/店铺群映射_待填_2026-10.xlsx": "925e7abba523722428fae3dfb1c744949c2c2be70759cf38b564b00e4ed08a8c",
+    "skills/workflows/daily-store-metrics-rotation-to-wechat/docs/.bak_20261020_prerules_当月.xlsx": "4f5bfcafa749c8b0a2bc82abe665861d9b87770458d03a89ec741e3a8974cf0a",
+    "skills/workflows/daily-store-metrics-rotation-to-wechat/docs/全店铺运营指标商家反馈台账_模板.xlsx": "fe3b4fe2572de5a73fd267cd3eb6393bc363ed33bbcf1fdf3bb58da159c34e8c",
+    "skills/workflows/coupon-issue-task-flow/.runtime/monthly/2026-10/latest.json": "c992b2bca8ad26d19cdddadb471a26ad15768e2f914821b08105387ba05619bc",
+    "skills/workflows/coupon-issue-task-flow/.runtime/monthly/2026-10/maintenance.lock": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "skills/workflows/coupon-issue-task-flow/.runtime/monthly/2026-10/93011b996d97454c990e3f5d1b68f8a0/registry.json": "6150e230b7d4e97f23823e9d9f620c7df564f3c9bdd9e7d295336b2025c6bc74",
+    "skills/workflows/coupon-issue-task-flow/.runtime/monthly/2026-10/93011b996d97454c990e3f5d1b68f8a0/source.json": "6398f93b90f3118c25f47b360c12c078b84a72dbb855b06df85e786dfdd7b692",
+    "skills/workflows/coupon-issue-task-flow/.runtime/monthly/2026-10/93011b996d97454c990e3f5d1b68f8a0/current-roster.json": "a5545d4efc5dcb32405eb4f71b54d40925a99a45183e6f55707c54bf619eae04",
+    "skills/workflows/coupon-issue-task-flow/.runtime/monthly/2026-10/93011b996d97454c990e3f5d1b68f8a0/manifest.json": "9535d4117dacf93518e50b1a841e0689d91101ec66e569eea2250d19501f592a",
+    "skills/workflows/coupon-issue-task-flow/.runtime/monthly/2026-10/93011b996d97454c990e3f5d1b68f8a0/daily-plan.json": "e5d5768a973086fbb560255d8bbcd772a45e61b8694781a6ed0fc8b895e7ffcb",
+    "skills/workflows/coupon-issue-task-flow/.runtime/monthly/2026-10/5e68b131893a4df086d5ce77ce009c51/registry.json": "b6f63c50b9aebb0c0949f935b3008462554fd11d9a6e5e500e33055702300529",
+    "skills/workflows/coupon-issue-task-flow/.runtime/monthly/2026-10/5e68b131893a4df086d5ce77ce009c51/source.json": "6398f93b90f3118c25f47b360c12c078b84a72dbb855b06df85e786dfdd7b692",
+    "skills/workflows/coupon-issue-task-flow/.runtime/monthly/2026-10/5e68b131893a4df086d5ce77ce009c51/current-roster.json": "a5545d4efc5dcb32405eb4f71b54d40925a99a45183e6f55707c54bf619eae04",
+    "skills/workflows/coupon-issue-task-flow/.runtime/monthly/2026-10/5e68b131893a4df086d5ce77ce009c51/manifest.json": "3814766e9a4e5486e60e1238c9e89d232ba39879c5eea40442aaab739fc40333",
+    "skills/workflows/coupon-issue-task-flow/.runtime/monthly/2026-10/5e68b131893a4df086d5ce77ce009c51/daily-plan.json": "f75a6579dfa060d289956fc5b674a26ee6f3986a4f293764b64d2d0ab0b6fa92",
+    "skills/workflows/coupon-issue-task-flow/.runtime/monthly/2026-10/33ef99bb84ec4252922b596a7f92cf71/registry.json": "fe1cd24660afaa159ffab74698ea6d0827b2f6616dd8c85e3402ffb73eeceb92",
+    "skills/workflows/coupon-issue-task-flow/.runtime/monthly/2026-10/33ef99bb84ec4252922b596a7f92cf71/source.json": "6398f93b90f3118c25f47b360c12c078b84a72dbb855b06df85e786dfdd7b692",
+    "skills/workflows/coupon-issue-task-flow/.runtime/monthly/2026-10/33ef99bb84ec4252922b596a7f92cf71/manifest.json": "4921f99306c2d652c3718d2a73a6db3698c4ea4635aa67743b2691c144d26805",
+    "skills/workflows/coupon-issue-task-flow/.runtime/monthly/2026-10/33ef99bb84ec4252922b596a7f92cf71/daily-plan.json": "e5d5768a973086fbb560255d8bbcd772a45e61b8694781a6ed0fc8b895e7ffcb",
+    "skills/workflows/coupon-issue-task-flow/docs/MONTHLY-PLAN-2026-10.md": "15563dc7cff05234d4103c4e9f6d1aaa9617010f79a81b97b90996220c8c1bcc",
+    "skills/workflows/coupon-issue-task-flow/docs/metrics_catalog.json": "2beeb68b7956a92257c093d11e8918b6a7545e03f64c448d4af7da124e73a483"
+  },
+  "originalLinks": {
+    "skills/workflows/store-inspection/node_modules": "/Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/node_modules",
+    "skills/workflows/store-inspection/scripts/node_modules": "/Users/ddt/.codex-runtimes/codex-primary-runtime/dependencies/node/node_modules"
+  },
+  "platform": "darwin-arm64",
+  "productionActions": 0
+}

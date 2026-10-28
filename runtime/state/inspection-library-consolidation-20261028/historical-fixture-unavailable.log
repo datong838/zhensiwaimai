@@ -1,0 +1,39 @@
+node:internal/fs/promises:697
+  return new FileHandle(await PromisePrototypeThen(
+                        ^
+
+Error: ENOENT: no such file or directory, open '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/inspection-library-consolidation-20261028/isolated-inspection/runtime/hybrid-final-2026-09-12/淘宝闪购-9家湘菜（金谊广场店）/facts-final.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async Object.readFile (node:internal/fs/promises:1348:14)
+    at async Promise.all (index 0)
+    at async file:///Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/inspection-library-consolidation-20261028/isolated-inspection/scripts/test_hybrid_first_store.mjs:10:51 {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/runtime/state/inspection-library-consolidation-20261028/isolated-inspection/runtime/hybrid-final-2026-09-12/淘宝闪购-9家湘菜（金谊广场店）/facts-final.json'
+}
+
+Node.js v24.19.0
+✖ runtime/state/inspection-library-consolidation-20261028/isolated-inspection/scripts/test_hybrid_first_store.mjs (30.238833ms)
+{"ok":true,"queueStores":1000,"checks":44,"sourceRows":44,"hybridPlanMobileRows":25}
+✔ runtime/state/inspection-library-consolidation-20261028/isolated-inspection/scripts/test_hybrid_inspection.mjs (441.719125ms)
+{"ok":true,"facts":14,"rows":[5,6,10,11,12,13,14,15,16,17,22,31,36,44]}
+✔ runtime/state/inspection-library-consolidation-20261028/isolated-inspection/scripts/test_jinsha_mapping.mjs (37.879833ms)
+{"ok":true,"contractRows":25,"mappedRows":25}
+✔ runtime/state/inspection-library-consolidation-20261028/isolated-inspection/scripts/test_meituan_backend_mapping.mjs (37.5225ms)
+weekly-roster-self-test:ok
+✔ runtime/state/inspection-library-consolidation-20261028/isolated-inspection/scripts/test_weekly_roster.mjs (419.890416ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 4
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 447.932167
+
+✖ failing tests:
+
+test at runtime/state/inspection-library-consolidation-20261028/isolated-inspection/scripts/test_hybrid_first_store.mjs:1:1
+✖ runtime/state/inspection-library-consolidation-20261028/isolated-inspection/scripts/test_hybrid_first_store.mjs (30.238833ms)
+  'test failed'
