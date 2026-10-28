@@ -86,11 +86,22 @@ async function stable(subject,fn,deadline,{previousPage=null,previousSignature=n
  }
  throw Error('quality-ui-stage-timeout');
 }
+export function merchantListRequest(request,frame){
+ try{
+  const url=new URL(request.url());
+  return !!frame&&request.frame()===frame&&url.origin==='https://lsycm.alibaba.com'
+   &&url.pathname==='/api/oShopOpTask/open/general/pageQueryOpenTaskMerchantList';
+ }catch{return false;}
+}
 export async function changePage(subject,locator,fn,deadline,before){
  const owner=typeof subject.page==='function'?subject.page():subject;
  const frame=owner===subject?owner.mainFrame():subject;
- const responseP=owner.waitForResponse(response=>{
-  if(fn===merchantDom)return response.url().includes('pageQueryOpenTaskMerchantList');
+ let responseP;
+ if(fn===merchantDom){
+  const requestP=owner.waitForRequest(request=>merchantListRequest(request,frame),{timeout:budget(deadline,15000)});
+  requestP.catch(()=>{});
+  responseP=requestP.then(async request=>{const response=await request.response();if(!response)throw Error('quality-pagination-response-missing');return response;});
+ }else responseP=owner.waitForResponse(response=>{
   try{
    const request=response.request(),url=new URL(response.url());
    return request.frame()===frame&&['xhr','fetch'].includes(request.resourceType())

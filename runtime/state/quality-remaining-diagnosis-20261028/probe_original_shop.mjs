@@ -1,5 +1,5 @@
 // A read-only maintenance export. The caller supplies the original lease and persistent CDP client.
-export async function probeOriginalShop(deps,exactName){
+export async function probeOriginalShop(deps,exactName,{allowOriginalRouteRestore=false}={}){
  const {withPost,post,pw,fs,child,repo}=deps;
  const day=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Shanghai'}).format(new Date());
  const state=JSON.parse(await fs.readFile(repo+'/skills/workflows/daily-quality-products-optimization/.runtime/days/'+day+'/state.json','utf8'));
@@ -70,7 +70,20 @@ export async function probeOriginalShop(deps,exactName){
      if(settled.origin!=='https://melody.shop.ele.me'||settled.pathname!=='/app/shop/'+observedId+'/food-rectify'){
       const controls=detail.getByText('商品整改',{exact:true});result.rectifyControlCount=await controls.count();
       if(result.rectifyControlCount<=4)result.rectifyControls=await controls.evaluateAll(es=>es.map(e=>({tag:e.tagName,role:e.getAttribute('role'),href:e.getAttribute('href'),className:e.className,parentTag:e.parentElement?.tagName,parentRole:e.parentElement?.getAttribute('role'),parentHref:e.parentElement?.getAttribute('href'),visible:!!(e.getBoundingClientRect().width&&e.getBoundingClientRect().height)&&getComputedStyle(e).visibility!=='hidden'})));
-      result.outcome='original-sso-left-product-route';return result;
+      const safePath=['evaluate-group-buy','customer-receipt','customerStats'].some(module=>settled.pathname==='/app/shop/'+observedId+'/'+module);
+      const titleMatches=result.settledTitle.replace(/\s+/g,'')===exactName.replace(/\s+/g,'');
+      const blocked=result.settledSignals.some(word=>word!=='商品整改');
+      const overlays=await detail.locator('.riskControlModal:visible,.ant-modal:visible,[role="dialog"]:visible,[class^="updateModalWrapper__"]:visible').count();
+      if(!allowOriginalRouteRestore||!rowError||settled.origin!=='https://melody.shop.ele.me'||!safePath||!titleMatches||blocked||overlays){
+       result.outcome='original-sso-left-product-route';return result;
+      }
+      result.originalRouteRestore={attempts:1,from:result.settledPath,shopId:observedId,matchedOriginalSso:true};
+      await detail.goto('https://melody.shop.ele.me/app/shop/'+observedId+'/food-rectify',{waitUntil:'domcontentloaded',timeout:12000});
+      await detail.waitForTimeout(7000);
+      const restored=new URL(detail.url());result.originalRouteRestore.finalOrigin=restored.origin;result.originalRouteRestore.finalPath=restored.pathname;
+      if(restored.origin!=='https://melody.shop.ele.me'||restored.pathname!=='/app/shop/'+observedId+'/food-rectify'){
+       result.outcome='same-sso-original-route-restore-did-not-stay';return result;
+      }
      }
      const session=await detail.context().newCDPSession(detail);
      let target;try{target=(await session.send('Target.getTargetInfo')).targetInfo.targetId;}finally{await session.detach();}
@@ -93,9 +106,8 @@ export async function probeOriginalShop(deps,exactName){
    return result;
   }finally{
    result.elapsedMs=Date.now()-started;
-   if(detail&&!detail.isClosed())await detail.close();
-   if(page&&!page.isClosed())await page.close();
-   await browser.close();
+   try{if(detail&&!detail.isClosed())await detail.close();}
+   finally{try{if(page&&!page.isClosed())await page.close();}finally{await browser.close();}}
   }
  });
 }

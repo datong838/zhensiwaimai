@@ -4,6 +4,8 @@ description: 淘宝闪购低优质商品的全部门店商品整改优化；每�
 ---
 
 永久规则：一天一次一轮，到最后一页立刻结束，不凑面板统计、不复扫。
+
+经营任务分页只等待原界面新发起的https://lsycm.alibaba.com/api/oShopOpTask/open/general/pageQueryOpenTaskMerchantList精确主frame请求及其自身200/finished响应；fourier.taobao.com/ts携带同名方法的埋点和旧在途响应不能触发。随后仍核对当前页/行变化及稳定帧，不额外调用API或改原单轮范围。
 原主任唯一入口scripts/quality_workflow.py --execute；正常runtimeModelDecisions=0。新业务日从第一页按当前可见行顺序走到末页hasNext=false，末行处理或异常记账后即scopeFinished。分段180秒、外层210秒，仅保存cursor.page,row并直达恢复记录页，不回第一页重走，不开round2。原半小时让路及9231岗位租约保持，整改不持企微锁。
 
 每段通过可见账号中心核验zhangyanru188、全部门店，进入经营任务→基础诊断→优质商品率低、未完成、门店空筛选。当前行正常去完成后取真实shopId，当天已处理/已attempted/异常已记录者直接跳过；未知不再确认，不为对账返扫。明天新日期新事件从第一页重新一轮。旧已verified通知入口直接零浏览器/零发送返回，今天原state/proof/receipt/Excel不改、不重发。
