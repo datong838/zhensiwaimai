@@ -98,7 +98,7 @@ def request_enabled(request, now=None):
         return False
 
 
-def deliver_once(path, *, adapter=None, now=None):
+def deliver_once(path, *, adapter=None, now=None, expected_sha256=None):
     now = now or local_now()
     ready, pending = readiness(now)
     if not ready:
@@ -107,6 +107,8 @@ def deliver_once(path, *, adapter=None, now=None):
     expected = ROOT / 'work' / (now.strftime('%Y-%m-%d') + '臻肆工作台账.xlsx')
     if path != expected.resolve() or not path.is_file():
         return {'status': 'blocked', 'sendAttempts': 0, 'reason': 'daily-ledger-path-invalid'}
+    if expected_sha256 is not None and hashlib.sha256(path.read_bytes()).hexdigest()!=expected_sha256:
+        return {'status':'blocked','sendAttempts':0,'reason':'daily-ledger-source-proof-mismatch'}
     sys.path.insert(0, str(ROOT / 'skills/wechat-messaging/scripts'))
     from ledger import atomic_json
     from wecom_adapter import WeComAdapter
@@ -134,6 +136,8 @@ def deliver_once(path, *, adapter=None, now=None):
                                    'dailyLedgerContract': CONTRACT, 'accountAlias': 'main-wechat',
                                    'channel': 'desktop', 'deadlineAt': midnight}}
             atomic_json(request_path, request)
+        if expected_sha256 is not None and (len(request.get('items',[]))!=1 or request['items'][0].get('sha256')!=expected_sha256):
+            return {'status':'blocked','sendAttempts':0,'reason':'daily-ledger-frozen-proof-mismatch'}
         if not request_enabled(request, now):
             return {'status': 'blocked', 'sendAttempts': 0, 'reason': 'daily-ledger-frozen-binding-invalid'}
         transport = adapter or WeComAdapter()

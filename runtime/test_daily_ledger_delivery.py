@@ -1,4 +1,5 @@
 import contextlib
+import hashlib
 import json
 import tempfile
 import sys
@@ -77,6 +78,27 @@ class DailyLedgerTests(unittest.TestCase):
         self.assertEqual(daily.deliver_once(self.file,adapter=adapter,now=self.now)['status'],'verified')
         self.assertEqual(daily.deliver_once(self.file,adapter=adapter,now=self.now)['status'],'already_verified')
         self.assertEqual(adapter.calls,1)
+    def test_expected_client_snapshot_sha_rejects_changed_source_before_ui(self):
+        adapter=Adapter();result=daily.deliver_once(self.file,adapter=adapter,now=self.now,expected_sha256='0'*64)
+        self.assertEqual(result['reason'],'daily-ledger-source-proof-mismatch');self.assertEqual(adapter.calls,0)
+        self.assertFalse((daily.directory(self.now)/'delivery-journal.json').exists())
+    def test_expected_snapshot_is_checked_again_after_freezing(self):
+        expected=hashlib.sha256(self.file.read_bytes()).hexdigest();original=Path.read_bytes;reads=0
+        def changing(path):
+            nonlocal reads
+            if path.resolve()==self.file.resolve():
+                reads+=1
+                if reads>1:return b'background-replaced-file'
+            return original(path)
+        adapter=Adapter()
+        with patch.object(Path,'read_bytes',changing):
+            result=daily.deliver_once(self.file,adapter=adapter,now=self.now,expected_sha256=expected)
+        self.assertEqual(result['reason'],'daily-ledger-frozen-proof-mismatch');self.assertEqual(adapter.calls,0)
+        self.assertFalse((daily.directory(self.now)/'delivery-journal.json').exists())
+    def test_matching_expected_snapshot_keeps_original_one_send_protocol(self):
+        adapter=Adapter();expected=hashlib.sha256(self.file.read_bytes()).hexdigest()
+        result=daily.deliver_once(self.file,adapter=adapter,now=self.now,expected_sha256=expected)
+        self.assertEqual(result['status'],'verified');self.assertEqual(adapter.calls,1)
     def test_unknown_never_retries(self):
         adapter=Adapter('unknown')
         self.assertEqual(daily.deliver_once(self.file,adapter=adapter,now=self.now)['status'],'unknown')

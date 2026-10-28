@@ -17,7 +17,7 @@ CLOSING = {'meituan-waimai-negative-review-appeals-11': ('meituan', 'meituan-wai
 TAOBAO_CLOSING_QUOTE = '美团外卖差评申诉的台账 图片 没见发出来 ，淘宝闪购的 已经发了'
 
 
-def _image_original(folder, name, sha, now, workflow='taobao-evidence'):
+def _image_original(folder, name, sha, now, workflow='taobao-evidence', allowed_statuses=('unknown',)):
     folder = Path(folder).resolve()
     if folder.parent != (ROOT / 'skills/wechat-messaging/.runtime/ui-post-queue').resolve():
         raise ValueError('image-task-out-of-scope')
@@ -35,7 +35,7 @@ def _image_original(folder, name, sha, now, workflow='taobao-evidence'):
             and item['type']=='image' and item['name']==name
             and sha==item['sha256']==intent['sha256']
             and hashlib.sha256(Path(item['path']).read_bytes()).hexdigest()==sha
-            and reply['result']['status']=='unknown' and reply['result']['sendAttempts']==1
+            and reply['result']['status'] in allowed_statuses and reply['result']['sendAttempts']==1
             and observed_day==now.date() and intent['at']<=now.timestamp()):
         raise ValueError('image-original-binding-invalid')
     return task
@@ -336,8 +336,83 @@ def _executed_images_user_fact(flow, now):
         return None
 
 
+SUBMITTED_IMAGE_POLICY_QUOTE='后续不需要人工确认，你发送后 可能没有回执 你仅仅备注下即可  因为长期的观察发现 都是执行成功的，你是没解决回执问题 不代表业务没走成功 ，是给客户看的台账'
+
+
+def _standing_submitted_image_fact(flow, now):
+    """Business policy for original single submissions; never changes transport records."""
+    if now.tzinfo is None:
+        now=now.replace(tzinfo=ZoneInfo('Asia/Shanghai'))
+    else:
+        now=now.astimezone(ZoneInfo('Asia/Shanghai'))
+    routes=dict(EXECUTED_IMAGE_FLOWS)
+    routes.update({SERVICE_RANKING:('daily-service-market-ranking-ops',1),
+                   'taobao-flash-sale-negative-review-appeals':('taobao-flash-appeals-summary',1),
+                   'meituan-waimai-negative-review-appeals-11':('meituan-waimai-appeals-summary',1)})
+    if flow not in routes:return None
+    policy_path=ROOT/'runtime/policies/submitted-image-business-policy.json'
+    try:
+        policy=json.loads(policy_path.read_text())
+        effective=datetime.fromisoformat(policy['recordedAt'])
+        if not (policy['source']=='explicit-user-standing-instruction' and policy['userQuote']==SUBMITTED_IMAGE_POLICY_QUOTE
+                and policy['businessCompleteOnBoundSingleSubmission'] is True and policy['preserveTechnicalStatus'] is True
+                and policy['noResend'] is True and policy['clientTechnicalDetails'] is False
+                and effective.tzinfo is not None and effective<=now and now.date()>=effective.astimezone(now.tzinfo).date()):return None
+        route,count=routes[flow];day=now.strftime('%Y-%m-%d');previous=(now-timedelta(days=1)).strftime('%Y-%m-%d')
+        names={
+            'top10':{previous+'_top10seller.png'},
+            'negative-reviews-summary':{f'差评分析长图_{previous}_{previous}.jpg'},
+            'daily-store-task-completion-ops':{day+'运营-店铺经营任务完成率.png'},
+            'contract-termination-ops':{day+'_合同解约申请_处理中_p1.png'},
+            'taobao-evidence':{'jinsha-store-final.png','jinsha-review-final.png'},
+            'daily-meituan-income-top10-ops':{previous+'-美团外卖门店收入top10.png'},
+            'daily-service-market-ranking-ops':{day+'-服务市场排名与考核指标.png'},
+            'taobao-flash-appeals-summary':{'淘宝闪购差评申诉台账-'+previous+'.png'},
+            'meituan-waimai-appeals-summary':{'美团外卖差评申诉台账-'+previous+'.png'},
+        }[route]
+        queue=ROOT/'skills/wechat-messaging/.runtime/ui-post-queue';selected=[];statuses=[]
+        for task_file in queue.glob('*/task.json'):
+            try:
+                intent_file=task_file.parent/'send-intent.json';reply_file=task_file.parent/'response.json'
+                if not intent_file.is_file() or not reply_file.is_file():continue
+                intent=json.loads(intent_file.read_text());stamp=intent.get('at')
+                if type(stamp) not in (int,float) or datetime.fromtimestamp(stamp,now.tzinfo).date()!=now.date():continue
+                task=json.loads(task_file.read_text())
+            except (OSError,ValueError,KeyError,TypeError):continue
+            if task.get('stage')!='send' or task.get('request',{}).get('context',{}).get('workflowId')!=route or task.get('item',{}).get('type')!='image':continue
+            try:
+                result=json.loads(reply_file.read_text())['result']
+                if type(result.get('sendAttempts')) is not int:return None
+                if result['sendAttempts']==0:continue
+                item=task['item'];original=_image_original(task_file.parent,item['name'],item['sha256'],now,workflow=route,allowed_statuses=('unknown','verified'))
+                if result.get('backend')!='system-events-ui-tree':return None
+                if result['status']=='unknown' and result.get('inputEmpty') is not True:return None
+                if result['status']=='verified' and (result.get('sha256')!=item['sha256'] or len(result.get('observations',[]))!=2
+                    or any(o.get('groupName')!=GROUP or o.get('inputEmpty') is not True for o in result['observations'])):return None
+                if sum(_request_image_matches(candidate,item) for candidate in original['request']['items'])!=1:return None
+                selected.append(original)
+                statuses.append(result['status'])
+            except (OSError,ValueError,KeyError,TypeError,IndexError):
+                return None
+        if len(selected)!=count or len({t['taskId'] for t in selected})!=count or {t['item']['name'] for t in selected}!=names:return None
+        if flow=='daily-meituan-income-top10-to-wechat':
+            base=ROOT/'skills/workflows/daily-meituan-income-top10-to-wechat/.runtime/days'/day
+            marker=json.loads((base/'delivery.json').read_text());frozen=json.loads((base/'frozen.json').read_text());task=selected[0]
+            if not (marker['state']=='unknown' and marker['eventId']==day+'-meituan-income-top10' and marker['groupName']==GROUP
+                    and marker['sha256']==task['item']['sha256'] and frozen['day']==day and frozen['collection']['dataDate']==previous
+                    and frozen['item']==task['item'] and len(task['request']['items'])==2
+                    and task['request']['items'][0]['text']=='美团外卖门店收入top10'
+                    and marker['deliveries'][0]['itemId']=='meituan-income-label' and marker['deliveries'][0]['receipt']['status']=='verified'):return None
+        return {'businessDelivered':True,'basis':'bound-single-submission-standing-user-policy','source':str(policy_path),
+                'taskIds':[t['taskId']for t in selected],'technicalStatusPreserved':'unknown' if 'unknown' in statuses else 'verified','newSendAttempts':0,
+                'humanConfirmationRequired':False,'internalNote':'原图片已单次提交，内容回执待核；不重发'}
+    except (OSError,ValueError,KeyError,TypeError,IndexError):return None
+
+
 def read_fact(flow, now=None):
     now = now or datetime.now(ZoneInfo('Asia/Shanghai'))
+    submitted=_standing_submitted_image_fact(flow,now)
+    if submitted:return submitted
     accepted = _executed_images_user_fact(flow, now)
     if accepted:
         return accepted
