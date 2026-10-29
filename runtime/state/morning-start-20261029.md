@@ -21,6 +21,10 @@
 
 ## 下一步
 
+09:00班次已由同一主任自动唤醒并执行。合同原采集收据 `skills/workflows/contract-termination-applications-screenshot/.runtime/contract-termination/runs/2026-10-29-1793235650719674000/shot-out/2026-10-29/2026-10-29_contract-termination_run-0900.json`：处理中4条、1页、completePages=true、状态列无异常，原PNG已生成；同run summary为unknown、sendAttempts=0、ui-post-preflight-not-verified。保留unknown原件，恢复前仍须核对原事件和send-intent，不仅据计数直接重发。
+
+09点轮后只读核对双Excel当前文件：各自SHA与原marker的两项payloads均一致，marker仍blocked/0。早前生成版本的摘要不能替代当前冻结字节。企微浅层只读树仍无法读到真实主窗（role/name/description为空），没有激活、输入、点击或发送。
+
 - 由当前原主任在09:00固定排班继续合同流及其他已到点任务，不能把心跳next_cycle_at的30分钟上界误读为固定班次必须等09:27；daemon_loop已实现fixed_schedule.next_boundary唤醒。
 - 取得Windows实际部署driver.py/server.py及其直接驱动模块，补齐真实空框与载荷绑定回执，再实现并验证统一双向通道选择、维护封印和真实正常任务。不能用本仓旧4-action骨架覆盖线上真身，不启用HTTP失败重试或媒体占位符判成功。
 - 当前在途步骤以真实PID和live_steps核查；不得用本页快照抢锁、重启在途任务或重复发送。
