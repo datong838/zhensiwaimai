@@ -1,6 +1,6 @@
 # 2026-10-28 22:56 新机器启动前最新交接
 
-当前接班聊天为 `01a18298-0a79-7481-b24a-0b1743a38edf`。用户已确认新机器接手；源 Goal 为 `paused`，旧机daemon已停止，源机定时任务已暂停或删除。暂停不代表Goal complete、blocked或被缩小。完整原 objective 保存在仓库内 `runtime/state/night-goal-handoff/20261028-evening-original-goal.json`，SHA-256 为 `dcded41ff8d12c789e34853a7261822af55e0d8f0311646e4f9b2fec1f195e30`，原件不改写。最新机器交接为 `runtime/state/night-goal-handoff/20261028-2256-new-machine-detailed-handoff.json`，源机停机收据为 `runtime/state/night-goal-handoff/20261028-2330-source-machine-stop-receipt.json`，最新交接词为 `docs/operations/20261028-新机器监理接续交接词.md`。
+当前接班聊天为 `01a18298-0a79-7481-b24a-0b1743a38edf`。用户已确认新机器接手；源 Goal 为 `paused`，旧机daemon已停止，源机定时任务已暂停或删除。暂停不代表Goal complete、blocked或被缩小。完整原 objective 保存在仓库内 `runtime/state/night-goal-handoff/20261028-evening-original-goal.json`，原 `objective`、历史状态和计数未改；按用户最新指令已追加独立的 `handoffLifecycleProcedure` 字段，保存Goal clear、新聊天创建、双向核验与失败停止过程。当前文件 SHA-256 为 `c762b9982c3498b1b884f514fe562fc3c0f8f8dcb09327f96995b2d7af888b11`。最新机器交接为 `runtime/state/night-goal-handoff/20261028-2256-new-machine-detailed-handoff.json`，源机停机收据为 `runtime/state/night-goal-handoff/20261028-2330-source-machine-stop-receipt.json`，最新交接词为 `docs/operations/20261028-新机器监理接续交接词.md`。
 
 所有交接路径均从仓库根解析。不得把历史材料中的旧机器绝对路径复制到新机器。旧机 PID、锁、浏览器和登录状态只是快照，不是新机验收或所有权凭证；凭据、Cookie、localStorage、钥匙串和浏览器 profile 不迁移。
 

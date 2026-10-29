@@ -5,5 +5,50 @@
   "tokensUsed": 3772745,
   "timeUsedSeconds": 46469,
   "createdAt": 1793145678,
-  "updatedAt": 1793192147
+  "updatedAt": 1793192147,
+  "handoffLifecycleProcedure": {
+    "addedByLatestUserInstruction": true,
+    "purpose": "保存机器迁移时Goal clear与新聊天创建Goal的受控过程；本字段不改写、不缩小原objective，也不代表已实际执行clear或create。",
+    "snapshotStatusNote": "本文件顶层status=active是2026-10-28原Goal快照状态；当前机器迁移交接中的源Goal真实状态为paused。用户明确暂停的Goal不得借迁移自动恢复。",
+    "authoritativeAutomationDetailPath": "runtime/state/night-goal-handoff/automation-transfer-20261028.json",
+    "preClear": [
+      "在旧聊天调用get_goal并记录完整objective、真实status、完成项、未完成项、待真实验收项、代码测试部署回滚状态、队列账本游标防重状态和安全恢复步骤。",
+      "核验本文件及其最新SHA-256；迁移时只使用本文件objective字段原文，不得用摘要替代、删减约束或缩小目标。",
+      "停止旧聊天施工，确认没有其他聊天或机器并行执行同一Goal；不改业务数据、账本、游标、防重或旧unknown。",
+      "若Goal为paused，保持暂停；没有用户明确恢复指令时，不得clear后在新聊天自动创建active Goal。"
+    ],
+    "clearOldGoal": {
+      "supportedSequence": [
+        "启动codex app-server --listen stdio://。",
+        "依次调用initialize并启用capabilities.experimentalApi=true，然后发送initialized。",
+        "调用thread/goal/clear，threadId使用实际旧聊天ID，origin=user。",
+        "对同一旧聊天调用thread/goal/get；只有goal严格为null才算清理成功。"
+      ],
+      "successCondition": "thread/goal/get对旧聊天返回goal严格为null，且没有其他执行者继续同一Goal。",
+      "failurePolicy": "clear失败、超时或结果未知时只读回读一次thread/goal/get；仍非null就如实记录失败并阻止新建。禁止循环clear、伪造complete、修改私有数据库或锁、删除聊天历史。"
+    },
+    "createInNewThread": {
+      "preconditions": [
+        "新聊天已只读核收仓库版本、本文件最新SHA、最新交接、已完成禁重项、全部未完成项、定时唯一归属和唯一生产控制通道。",
+        "旧聊天Goal已经严格为null。",
+        "原Goal确属active未完成，或用户已明确授权恢复paused Goal。",
+        "不存在其他聊天或机器执行同一Goal。"
+      ],
+      "createCall": "在新聊天使用本文件objective字段完整原文调用create_goal，不设置token_budget。",
+      "unknownResultPolicy": "创建返回超时或未知时不得再次创建；先调用get_goal回读真实状态。",
+      "verification": [
+        "新聊天get_goal返回Goal存在且status=active。",
+        "新Goal objective与本文件objective字段完整一致，且没有意外token_budget。",
+        "再次回读旧聊天，确认旧Goal仍严格为null。",
+        "最终必须满足旧聊天goal=null、新聊天goal.status=active、仅新聊天一个执行者，才可宣称迁移完成。"
+      ]
+    },
+    "postCreate": [
+      "Goal双向核验成功后才迁移本监理拥有的定时任务。",
+      "逐项更新targetThreadId及提示词内旧threadId，尤其06点Goal清理对象；保持时间、时区、启停、通知和其他设置。",
+      "逐项回读并保存映射，不创建重复排班、不激活历史暂停项、不移动无关或另一机器任务。",
+      "新聊天成为唯一执行者；旧聊天仅核验交接，不再并行施工。"
+    ],
+    "currentMigrationFence": "截至本字段写入时，源Goal为paused，旧机daemon已停止，源机02/06/08定时已暂停、20/22已删除。因此本字段只记录操作过程，不授权当前聊天或新机器自动恢复Goal。"
+  }
 }
