@@ -103,10 +103,10 @@ windows-readback-text-anchor` + `evidence` + `sendAttempts=1` + `merchantId`/`me
 ### 5.1 死结复发时的处置流程（照此执行，别自由发挥）
 
 ```bash
-cd /Users/ddt/work/projects/ai_agent/zhensi_waimai_back
+cd "$(git rev-parse --show-toplevel)"
 
 # ① 发现（看护 G 段每小时也会跑）
-PY=/Users/ddt/work/projects/ai_agent/.venvs/harmonyos3-phone-control/bin/python
+PY=../.venvs/harmonyos3-phone-control/bin/python
 env -u PYTHONPATH $PY runtime/scan_attempt_deadlocks.py
 #    期望末行 `attempt-deadlock-scan: CLEAN`；FOUND n ⇒ 进入 ②
 

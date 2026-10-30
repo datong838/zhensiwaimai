@@ -13,7 +13,7 @@
 
 读 `skills/daily-taobao-download-to-jinsha/scripts/entrypoint.mjs:1–14` 发现：
 
-1. **硬编码不止 `.codex`，还有原目录**：`SOURCE`(行5)/`CANONICAL_ENTRYPOINT`(行6)/`CANONICAL_SKILL`(行8)/`WECHAT_SOURCE`(行11)/`RECOVERY_SOURCE`(行13) 全部指向 **`/Users/ddt/work/projects/ai_agent/zhensi_waimai_back/...`**（原目录，非 `_back`）。即复制到 `_back` 后这些路径仍读已废弃的原目录——语义错误。
+1. **硬编码不止 `.codex`，还有原目录**：`SOURCE`(行5)/`CANONICAL_ENTRYPOINT`(行6)/`CANONICAL_SKILL`(行8)/`WECHAT_SOURCE`(行11)/`RECOVERY_SOURCE`(行13) 全部指向 **`zhensi_waimai_back/...`**（原目录，非 `_back`）。即复制到 `_back` 后这些路径仍读已废弃的原目录——语义错误。
 2. **sha256 自锁强约束**：`EXECUTOR_SHA256`(行10)/`WECHAT_SHA256`(行12)/`RECOVERY_SHA256`(行14) 是文件内容哈希；`executor()`/`wechatSender()`/`evidenceRecovery()`(行75–94) 读文件算哈希比对，不符即抛 `*-code-drift`。**任何改动 #6 文件都会触发自锁失败**，须同步更新哈希或解自锁。
 3. `INSTALLED_*`(行7/9) 指向 `.codex/skills/...`，`preflight()`(行114–127) 校验 `canonical == installed` 哈希一致；codex 已非触发器，该基准需重定（保留校验语义但基准随仓库走，或移除）。
 
